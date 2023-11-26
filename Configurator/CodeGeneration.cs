@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.11.2023 20:56:54
+ * Дата конфігурації: 26.11.2023 10:54:25
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2001,7 +2001,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Організації_Triggers.BeforeSave(this);
+            
+                await Організації_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
             base.FieldValue["col_a3"] = НазваПовна;
@@ -2015,7 +2016,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Організації_Triggers.AfterSave(this);
+                
+                    await Організації_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі });
             }
             return result;
@@ -2023,16 +2025,19 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Організації_Objest> Copy(bool copyTableParts = false)
         {
-            Організації_Objest copy = new Організації_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.НазваПовна = НазваПовна;
-            copy.НазваСкорочена = НазваСкорочена;
-            copy.ДатаРеєстрації = ДатаРеєстрації;
-            copy.КраїнаРеєстрації = КраїнаРеєстрації;
-            copy.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер;
-            copy.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі;
-            copy.Холдинг = Холдинг;
+            Організації_Objest copy = new Організації_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                НазваПовна = НазваПовна,
+                НазваСкорочена = НазваСкорочена,
+                ДатаРеєстрації = ДатаРеєстрації,
+                КраїнаРеєстрації = КраїнаРеєстрації,
+                СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер,
+                СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі,
+                Холдинг = Холдинг,
+                
+            };
             
             if (copyTableParts)
             {
@@ -2385,7 +2390,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Номенклатура_Triggers.BeforeSave(this);
+            
+                await Номенклатура_Triggers.BeforeSave(this);
             base.FieldValue["col_b1"] = Назва;
             base.FieldValue["col_b2"] = Код;
             base.FieldValue["col_b4"] = НазваПовна;
@@ -2401,7 +2407,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Номенклатура_Triggers.AfterSave(this);
+                
+                    await Номенклатура_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, Опис, Артикул });
             }
             return result;
@@ -2409,18 +2416,21 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Номенклатура_Objest> Copy(bool copyTableParts = false)
         {
-            Номенклатура_Objest copy = new Номенклатура_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.НазваПовна = НазваПовна;
-            copy.Опис = Опис;
-            copy.Артикул = Артикул;
-            copy.ТипНоменклатури = ТипНоменклатури;
-            copy.Виробник = Виробник;
-            copy.ВидНоменклатури = ВидНоменклатури;
-            copy.ОдиницяВиміру = ОдиницяВиміру;
-            copy.Папка = Папка;
-            copy.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл;
+            Номенклатура_Objest copy = new Номенклатура_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                НазваПовна = НазваПовна,
+                Опис = Опис,
+                Артикул = Артикул,
+                ТипНоменклатури = ТипНоменклатури,
+                Виробник = Виробник,
+                ВидНоменклатури = ВидНоменклатури,
+                ОдиницяВиміру = ОдиницяВиміру,
+                Папка = Папка,
+                ОсновнаКартинкаФайл = ОсновнаКартинкаФайл,
+                
+            };
             
             if (copyTableParts)
             {
@@ -2721,14 +2731,16 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Виробники_Triggers.BeforeSave(this);
+            
+                await Виробники_Triggers.BeforeSave(this);
             base.FieldValue["col_b6"] = Назва;
             base.FieldValue["col_b7"] = Код;
             
             bool result = await BaseSave();
             if (result)
             {
-                Виробники_Triggers.AfterSave(this);
+                
+                    await Виробники_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -2736,9 +2748,12 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Виробники_Objest> Copy(bool copyTableParts = false)
         {
-            Виробники_Objest copy = new Виробники_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
+            Виробники_Objest copy = new Виробники_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                
+            };
             
 
             await copy.New();
@@ -2945,7 +2960,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ВидиНоменклатури_Triggers.BeforeSave(this);
+            
+                await ВидиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_b8"] = Назва;
             base.FieldValue["col_b9"] = Код;
             base.FieldValue["col_a2"] = Опис;
@@ -2955,7 +2971,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ВидиНоменклатури_Triggers.AfterSave(this);
+                
+                    await ВидиНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
             }
             return result;
@@ -2963,12 +2980,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ВидиНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
-            ВидиНоменклатури_Objest copy = new ВидиНоменклатури_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Опис = Опис;
-            copy.ТипНоменклатури = ТипНоменклатури;
-            copy.ОдиницяВиміру = ОдиницяВиміру;
+            ВидиНоменклатури_Objest copy = new ВидиНоменклатури_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Опис = Опис,
+                ТипНоменклатури = ТипНоменклатури,
+                ОдиницяВиміру = ОдиницяВиміру,
+                
+            };
             
 
             await copy.New();
@@ -3175,7 +3195,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ПакуванняОдиниціВиміру_Triggers.BeforeSave(this);
+            
+                await ПакуванняОдиниціВиміру_Triggers.BeforeSave(this);
             base.FieldValue["col_c1"] = Назва;
             base.FieldValue["col_c2"] = Код;
             base.FieldValue["col_c3"] = НазваПовна;
@@ -3184,7 +3205,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ПакуванняОдиниціВиміру_Triggers.AfterSave(this);
+                
+                    await ПакуванняОдиниціВиміру_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
             }
             return result;
@@ -3192,11 +3214,14 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ПакуванняОдиниціВиміру_Objest> Copy(bool copyTableParts = false)
         {
-            ПакуванняОдиниціВиміру_Objest copy = new ПакуванняОдиниціВиміру_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.НазваПовна = НазваПовна;
-            copy.КількістьУпаковок = КількістьУпаковок;
+            ПакуванняОдиниціВиміру_Objest copy = new ПакуванняОдиниціВиміру_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                НазваПовна = НазваПовна,
+                КількістьУпаковок = КількістьУпаковок,
+                
+            };
             
 
             await copy.New();
@@ -3405,7 +3430,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Валюти_Triggers.BeforeSave(this);
+            
+                await Валюти_Triggers.BeforeSave(this);
             base.FieldValue["col_c5"] = Назва;
             base.FieldValue["col_a2"] = КороткаНазва;
             base.FieldValue["col_c6"] = Код;
@@ -3415,7 +3441,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Валюти_Triggers.AfterSave(this);
+                
+                    await Валюти_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КороткаНазва, Код_R030 });
             }
             return result;
@@ -3423,12 +3450,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Валюти_Objest> Copy(bool copyTableParts = false)
         {
-            Валюти_Objest copy = new Валюти_Objest();
-            copy.Назва = Назва;
-            copy.КороткаНазва = КороткаНазва;
-            copy.Код = Код;
-            copy.Код_R030 = Код_R030;
-            copy.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову;
+            Валюти_Objest copy = new Валюти_Objest()
+            {
+                Назва = Назва,
+                КороткаНазва = КороткаНазва,
+                Код = Код,
+                Код_R030 = Код_R030,
+                ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову,
+                
+            };
             
 
             await copy.New();
@@ -3648,7 +3678,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Контрагенти_Triggers.BeforeSave(this);
+            
+                await Контрагенти_Triggers.BeforeSave(this);
             base.FieldValue["col_c7"] = Назва;
             base.FieldValue["col_c8"] = Код;
             base.FieldValue["col_c9"] = НазваПовна;
@@ -3660,7 +3691,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Контрагенти_Triggers.AfterSave(this);
+                
+                    await Контрагенти_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку });
             }
             return result;
@@ -3668,14 +3700,17 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Контрагенти_Objest> Copy(bool copyTableParts = false)
         {
-            Контрагенти_Objest copy = new Контрагенти_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.НазваПовна = НазваПовна;
-            copy.РеєстраційнийНомер = РеєстраційнийНомер;
-            copy.Папка = Папка;
-            copy.Опис = Опис;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            Контрагенти_Objest copy = new Контрагенти_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                НазваПовна = НазваПовна,
+                РеєстраційнийНомер = РеєстраційнийНомер,
+                Папка = Папка,
+                Опис = Опис,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -4100,7 +4135,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Склади_Triggers.BeforeSave(this);
+            
+                await Склади_Triggers.BeforeSave(this);
             base.FieldValue["col_d9"] = Назва;
             base.FieldValue["col_e1"] = Код;
             base.FieldValue["col_a1"] = (int)ТипСкладу;
@@ -4113,7 +4149,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Склади_Triggers.AfterSave(this);
+                
+                    await Склади_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -4121,15 +4158,18 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Склади_Objest> Copy(bool copyTableParts = false)
         {
-            Склади_Objest copy = new Склади_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.ТипСкладу = ТипСкладу;
-            copy.Відповідальний = Відповідальний;
-            copy.ВидЦін = ВидЦін;
-            copy.Підрозділ = Підрозділ;
-            copy.Папка = Папка;
-            copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
+            Склади_Objest copy = new Склади_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                ТипСкладу = ТипСкладу,
+                Відповідальний = Відповідальний,
+                ВидЦін = ВидЦін,
+                Підрозділ = Підрозділ,
+                Папка = Папка,
+                НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання,
+                
+            };
             
             if (copyTableParts)
             {
@@ -4454,7 +4494,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ВидиЦін_Triggers.BeforeSave(this);
+            
+                await ВидиЦін_Triggers.BeforeSave(this);
             base.FieldValue["col_e9"] = Назва;
             base.FieldValue["col_f1"] = Код;
             base.FieldValue["col_f2"] = Валюта.UnigueID.UGuid;
@@ -4462,7 +4503,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ВидиЦін_Triggers.AfterSave(this);
+                
+                    await ВидиЦін_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -4470,10 +4512,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ВидиЦін_Objest> Copy(bool copyTableParts = false)
         {
-            ВидиЦін_Objest copy = new ВидиЦін_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Валюта = Валюта;
+            ВидиЦін_Objest copy = new ВидиЦін_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Валюта = Валюта,
+                
+            };
             
 
             await copy.New();
@@ -4675,7 +4720,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ВидиЦінПостачальників_Triggers.BeforeSave(this);
+            
+                await ВидиЦінПостачальників_Triggers.BeforeSave(this);
             base.FieldValue["col_f3"] = Назва;
             base.FieldValue["col_f4"] = Код;
             base.FieldValue["col_f5"] = Валюта.UnigueID.UGuid;
@@ -4683,7 +4729,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ВидиЦінПостачальників_Triggers.AfterSave(this);
+                
+                    await ВидиЦінПостачальників_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -4691,10 +4738,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ВидиЦінПостачальників_Objest> Copy(bool copyTableParts = false)
         {
-            ВидиЦінПостачальників_Objest copy = new ВидиЦінПостачальників_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Валюта = Валюта;
+            ВидиЦінПостачальників_Objest copy = new ВидиЦінПостачальників_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Валюта = Валюта,
+                
+            };
             
 
             await copy.New();
@@ -4905,7 +4955,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Користувачі_Triggers.BeforeSave(this);
+            
+                await Користувачі_Triggers.BeforeSave(this);
             base.FieldValue["col_f6"] = Назва;
             base.FieldValue["col_f7"] = Код;
             base.FieldValue["col_a1"] = ФізичнаОсоба.UnigueID.UGuid;
@@ -4915,7 +4966,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Користувачі_Triggers.AfterSave(this);
+                
+                    await Користувачі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
             }
             return result;
@@ -4923,12 +4975,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Користувачі_Objest> Copy(bool copyTableParts = false)
         {
-            Користувачі_Objest copy = new Користувачі_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.ФізичнаОсоба = ФізичнаОсоба;
-            copy.Коментар = Коментар;
-            copy.КодВСпеціальнійТаблиці = КодВСпеціальнійТаблиці;
+            Користувачі_Objest copy = new Користувачі_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                ФізичнаОсоба = ФізичнаОсоба,
+                Коментар = Коментар,
+                КодВСпеціальнійТаблиці = КодВСпеціальнійТаблиці,
+                
+            };
             
             if (copyTableParts)
             {
@@ -5255,7 +5310,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ФізичніОсоби_Triggers.BeforeSave(this);
+            
+                await ФізичніОсоби_Triggers.BeforeSave(this);
             base.FieldValue["col_g7"] = Назва;
             base.FieldValue["col_g8"] = Код;
             base.FieldValue["col_g9"] = ДатаНародження;
@@ -5265,7 +5321,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ФізичніОсоби_Triggers.AfterSave(this);
+                
+                    await ФізичніОсоби_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, ІПН });
             }
             return result;
@@ -5273,12 +5330,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ФізичніОсоби_Objest> Copy(bool copyTableParts = false)
         {
-            ФізичніОсоби_Objest copy = new ФізичніОсоби_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.ДатаНародження = ДатаНародження;
-            copy.Стать = Стать;
-            copy.ІПН = ІПН;
+            ФізичніОсоби_Objest copy = new ФізичніОсоби_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                ДатаНародження = ДатаНародження,
+                Стать = Стать,
+                ІПН = ІПН,
+                
+            };
             
             if (copyTableParts)
             {
@@ -5596,7 +5656,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            СтруктураПідприємства_Triggers.BeforeSave(this);
+            
+                await СтруктураПідприємства_Triggers.BeforeSave(this);
             base.FieldValue["col_h8"] = Назва;
             base.FieldValue["col_h9"] = Код;
             base.FieldValue["col_i1"] = Керівник.UnigueID.UGuid;
@@ -5604,7 +5665,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                СтруктураПідприємства_Triggers.AfterSave(this);
+                
+                    await СтруктураПідприємства_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -5612,10 +5674,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<СтруктураПідприємства_Objest> Copy(bool copyTableParts = false)
         {
-            СтруктураПідприємства_Objest copy = new СтруктураПідприємства_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Керівник = Керівник;
+            СтруктураПідприємства_Objest copy = new СтруктураПідприємства_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Керівник = Керівник,
+                
+            };
             
 
             await copy.New();
@@ -5814,14 +5879,16 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            КраїниСвіту_Triggers.BeforeSave(this);
+            
+                await КраїниСвіту_Triggers.BeforeSave(this);
             base.FieldValue["col_i2"] = Назва;
             base.FieldValue["col_i3"] = Код;
             
             bool result = await BaseSave();
             if (result)
             {
-                КраїниСвіту_Triggers.AfterSave(this);
+                
+                    await КраїниСвіту_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -5829,9 +5896,12 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<КраїниСвіту_Objest> Copy(bool copyTableParts = false)
         {
-            КраїниСвіту_Objest copy = new КраїниСвіту_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
+            КраїниСвіту_Objest copy = new КраїниСвіту_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                
+            };
             
 
             await copy.New();
@@ -6041,7 +6111,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Файли_Triggers.BeforeSave(this);
+            
+                await Файли_Triggers.BeforeSave(this);
             base.FieldValue["col_i6"] = Код;
             base.FieldValue["col_i5"] = Назва;
             base.FieldValue["col_a2"] = НазваФайлу;
@@ -6052,7 +6123,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Файли_Triggers.AfterSave(this);
+                
+                    await Файли_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваФайлу });
             }
             return result;
@@ -6060,13 +6132,16 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Файли_Objest> Copy(bool copyTableParts = false)
         {
-            Файли_Objest copy = new Файли_Objest();
-            copy.Код = Код;
-            copy.Назва = Назва;
-            copy.НазваФайлу = НазваФайлу;
-            copy.БінарніДані = БінарніДані;
-            copy.Розмір = Розмір;
-            copy.ДатаСтворення = ДатаСтворення;
+            Файли_Objest copy = new Файли_Objest()
+            {
+                Код = Код,
+                Назва = Назва,
+                НазваФайлу = НазваФайлу,
+                БінарніДані = БінарніДані,
+                Розмір = Розмір,
+                ДатаСтворення = ДатаСтворення,
+                
+            };
             
 
             await copy.New();
@@ -6274,7 +6349,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ХарактеристикиНоменклатури_Triggers.BeforeSave(this);
+            
+                await ХарактеристикиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
             base.FieldValue["col_i8"] = Код;
             base.FieldValue["col_i9"] = НазваПовна;
@@ -6283,7 +6359,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ХарактеристикиНоменклатури_Triggers.AfterSave(this);
+                
+                    await ХарактеристикиНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваПовна });
             }
             return result;
@@ -6291,11 +6368,14 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ХарактеристикиНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
-            ХарактеристикиНоменклатури_Objest copy = new ХарактеристикиНоменклатури_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.НазваПовна = НазваПовна;
-            copy.Номенклатура = Номенклатура;
+            ХарактеристикиНоменклатури_Objest copy = new ХарактеристикиНоменклатури_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                НазваПовна = НазваПовна,
+                Номенклатура = Номенклатура,
+                
+            };
             
 
             await copy.New();
@@ -6498,7 +6578,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Номенклатура_Папки_Triggers.BeforeSave(this);
+            
+                await Номенклатура_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
@@ -6506,7 +6587,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Номенклатура_Папки_Triggers.AfterSave(this);
+                
+                    await Номенклатура_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -6514,10 +6596,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Номенклатура_Папки_Objest> Copy(bool copyTableParts = false)
         {
-            Номенклатура_Папки_Objest copy = new Номенклатура_Папки_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Родич = Родич;
+            Номенклатура_Папки_Objest copy = new Номенклатура_Папки_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Родич = Родич,
+                
+            };
             
 
             await copy.New();
@@ -6719,7 +6804,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Контрагенти_Папки_Triggers.BeforeSave(this);
+            
+                await Контрагенти_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j4"] = Назва;
             base.FieldValue["col_j5"] = Код;
             base.FieldValue["col_j6"] = Родич.UnigueID.UGuid;
@@ -6727,7 +6813,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Контрагенти_Папки_Triggers.AfterSave(this);
+                
+                    await Контрагенти_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -6735,10 +6822,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Контрагенти_Папки_Objest> Copy(bool copyTableParts = false)
         {
-            Контрагенти_Папки_Objest copy = new Контрагенти_Папки_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Родич = Родич;
+            Контрагенти_Папки_Objest copy = new Контрагенти_Папки_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Родич = Родич,
+                
+            };
             
 
             await copy.New();
@@ -6940,7 +7030,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Склади_Папки_Triggers.BeforeSave(this);
+            
+                await Склади_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j7"] = Назва;
             base.FieldValue["col_j8"] = Код;
             base.FieldValue["col_a1"] = Родич.UnigueID.UGuid;
@@ -6948,7 +7039,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Склади_Папки_Triggers.AfterSave(this);
+                
+                    await Склади_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -6956,10 +7048,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Склади_Папки_Objest> Copy(bool copyTableParts = false)
         {
-            Склади_Папки_Objest copy = new Склади_Папки_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Родич = Родич;
+            Склади_Папки_Objest copy = new Склади_Папки_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Родич = Родич,
+                
+            };
             
 
             await copy.New();
@@ -7164,7 +7259,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Каси_Triggers.BeforeSave(this);
+            
+                await Каси_Triggers.BeforeSave(this);
             base.FieldValue["col_k8"] = Назва;
             base.FieldValue["col_k9"] = Код;
             base.FieldValue["col_a2"] = Валюта.UnigueID.UGuid;
@@ -7173,7 +7269,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Каси_Triggers.AfterSave(this);
+                
+                    await Каси_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -7181,11 +7278,14 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Каси_Objest> Copy(bool copyTableParts = false)
         {
-            Каси_Objest copy = new Каси_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Валюта = Валюта;
-            copy.Підрозділ = Підрозділ;
+            Каси_Objest copy = new Каси_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Валюта = Валюта,
+                Підрозділ = Підрозділ,
+                
+            };
             
 
             await copy.New();
@@ -7418,7 +7518,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            БанківськіРахункиОрганізацій_Triggers.BeforeSave(this);
+            
+                await БанківськіРахункиОрганізацій_Triggers.BeforeSave(this);
             base.FieldValue["col_l1"] = Назва;
             base.FieldValue["col_l2"] = Код;
             base.FieldValue["col_l3"] = Валюта.UnigueID.UGuid;
@@ -7436,7 +7537,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                БанківськіРахункиОрганізацій_Triggers.AfterSave(this);
+                
+                    await БанківськіРахункиОрганізацій_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку });
             }
             return result;
@@ -7444,20 +7546,23 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<БанківськіРахункиОрганізацій_Objest> Copy(bool copyTableParts = false)
         {
-            БанківськіРахункиОрганізацій_Objest copy = new БанківськіРахункиОрганізацій_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Валюта = Валюта;
-            copy.Банк = Банк;
-            copy.Підрозділ = Підрозділ;
-            copy.НазваБанку = НазваБанку;
-            copy.НомерРахунку = НомерРахунку;
-            copy.АдресаБанку = АдресаБанку;
-            copy.МістоБанку = МістоБанку;
-            copy.КореспонденськийРахунокБанку = КореспонденськийРахунокБанку;
-            copy.ТелефониБанку = ТелефониБанку;
-            copy.Закритий = Закритий;
-            copy.Організація = Організація;
+            БанківськіРахункиОрганізацій_Objest copy = new БанківськіРахункиОрганізацій_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Валюта = Валюта,
+                Банк = Банк,
+                Підрозділ = Підрозділ,
+                НазваБанку = НазваБанку,
+                НомерРахунку = НомерРахунку,
+                АдресаБанку = АдресаБанку,
+                МістоБанку = МістоБанку,
+                КореспонденськийРахунокБанку = КореспонденськийРахунокБанку,
+                ТелефониБанку = ТелефониБанку,
+                Закритий = Закритий,
+                Організація = Організація,
+                
+            };
             
 
             await copy.New();
@@ -7720,7 +7825,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ДоговориКонтрагентів_Triggers.BeforeSave(this);
+            
+                await ДоговориКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n4"] = Назва;
             base.FieldValue["col_n5"] = Код;
             base.FieldValue["col_n6"] = БанківськийРахунок.UnigueID.UGuid;
@@ -7745,7 +7851,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ДоговориКонтрагентів_Triggers.AfterSave(this);
+                
+                    await ДоговориКонтрагентів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Коментар });
             }
             return result;
@@ -7753,27 +7860,30 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ДоговориКонтрагентів_Objest> Copy(bool copyTableParts = false)
         {
-            ДоговориКонтрагентів_Objest copy = new ДоговориКонтрагентів_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.БанківськийРахунок = БанківськийРахунок;
-            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-            copy.ВалютаВзаєморозрахунків = ВалютаВзаєморозрахунків;
-            copy.ДатаПочаткуДії = ДатаПочаткуДії;
-            copy.ДатаЗакінченняДії = ДатаЗакінченняДії;
-            copy.Організація = Організація;
-            copy.Контрагент = Контрагент;
-            copy.Дата = Дата;
-            copy.Номер = Номер;
-            copy.Підрозділ = Підрозділ;
-            copy.Узгоджений = Узгоджений;
-            copy.Статус = Статус;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.ТипДоговору = ТипДоговору;
-            copy.ТипДоговоруПредставлення = ТипДоговоруПредставлення;
-            copy.ДопустимаСумаЗаборгованості = ДопустимаСумаЗаборгованості;
-            copy.Сума = Сума;
-            copy.Коментар = Коментар;
+            ДоговориКонтрагентів_Objest copy = new ДоговориКонтрагентів_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                БанківськийРахунок = БанківськийРахунок,
+                БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента,
+                ВалютаВзаєморозрахунків = ВалютаВзаєморозрахунків,
+                ДатаПочаткуДії = ДатаПочаткуДії,
+                ДатаЗакінченняДії = ДатаЗакінченняДії,
+                Організація = Організація,
+                Контрагент = Контрагент,
+                Дата = Дата,
+                Номер = Номер,
+                Підрозділ = Підрозділ,
+                Узгоджений = Узгоджений,
+                Статус = Статус,
+                ГосподарськаОперація = ГосподарськаОперація,
+                ТипДоговору = ТипДоговору,
+                ТипДоговоруПредставлення = ТипДоговоруПредставлення,
+                ДопустимаСумаЗаборгованості = ДопустимаСумаЗаборгованості,
+                Сума = Сума,
+                Коментар = Коментар,
+                
+            };
             
 
             await copy.New();
@@ -8028,7 +8138,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            БанківськіРахункиКонтрагентів_Triggers.BeforeSave(this);
+            
+                await БанківськіРахункиКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n7"] = Назва;
             base.FieldValue["col_n8"] = Код;
             base.FieldValue["col_n9"] = НомерРахунку;
@@ -8048,7 +8159,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                БанківськіРахункиКонтрагентів_Triggers.AfterSave(this);
+                
+                    await БанківськіРахункиКонтрагентів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку });
             }
             return result;
@@ -8056,22 +8168,25 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<БанківськіРахункиКонтрагентів_Objest> Copy(bool copyTableParts = false)
         {
-            БанківськіРахункиКонтрагентів_Objest copy = new БанківськіРахункиКонтрагентів_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.НомерРахунку = НомерРахунку;
-            copy.Банк = Банк;
-            copy.БанкДляРозрахунків = БанкДляРозрахунків;
-            copy.ТекстКореспондента = ТекстКореспондента;
-            copy.ТекстПризначення = ТекстПризначення;
-            copy.Валюта = Валюта;
-            copy.НазваБанку = НазваБанку;
-            copy.КорРахунокБанку = КорРахунокБанку;
-            copy.МістоБанку = МістоБанку;
-            copy.АдресаБанку = АдресаБанку;
-            copy.ТелефониБанку = ТелефониБанку;
-            copy.Закрито = Закрито;
-            copy.Контрагент = Контрагент;
+            БанківськіРахункиКонтрагентів_Objest copy = new БанківськіРахункиКонтрагентів_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                НомерРахунку = НомерРахунку,
+                Банк = Банк,
+                БанкДляРозрахунків = БанкДляРозрахунків,
+                ТекстКореспондента = ТекстКореспондента,
+                ТекстПризначення = ТекстПризначення,
+                Валюта = Валюта,
+                НазваБанку = НазваБанку,
+                КорРахунокБанку = КорРахунокБанку,
+                МістоБанку = МістоБанку,
+                АдресаБанку = АдресаБанку,
+                ТелефониБанку = ТелефониБанку,
+                Закрито = Закрито,
+                Контрагент = Контрагент,
+                
+            };
             
 
             await copy.New();
@@ -8294,7 +8409,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            СтаттяРухуКоштів_Triggers.BeforeSave(this);
+            
+                await СтаттяРухуКоштів_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
             base.FieldValue["col_i8"] = Код;
             base.FieldValue["col_i9"] = КореспондуючийРахунок;
@@ -8304,7 +8420,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                СтаттяРухуКоштів_Triggers.AfterSave(this);
+                
+                    await СтаттяРухуКоштів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
             }
             return result;
@@ -8312,12 +8429,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<СтаттяРухуКоштів_Objest> Copy(bool copyTableParts = false)
         {
-            СтаттяРухуКоштів_Objest copy = new СтаттяРухуКоштів_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.КореспондуючийРахунок = КореспондуючийРахунок;
-            copy.ВидРухуКоштів = ВидРухуКоштів;
-            copy.Опис = Опис;
+            СтаттяРухуКоштів_Objest copy = new СтаттяРухуКоштів_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                КореспондуючийРахунок = КореспондуючийРахунок,
+                ВидРухуКоштів = ВидРухуКоштів,
+                Опис = Опис,
+                
+            };
             
             if (copyTableParts)
             {
@@ -8611,7 +8731,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            СеріїНоменклатури_Triggers.BeforeSave(this);
+            
+                await СеріїНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_a3"] = Номер;
             base.FieldValue["col_a1"] = Коментар;
             base.FieldValue["col_a2"] = ДатаСтворення;
@@ -8619,7 +8740,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                СеріїНоменклатури_Triggers.AfterSave(this);
+                
+                    await СеріїНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Номер, Коментар });
             }
             return result;
@@ -8627,10 +8749,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<СеріїНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
-            СеріїНоменклатури_Objest copy = new СеріїНоменклатури_Objest();
-            copy.Номер = Номер;
-            copy.Коментар = Коментар;
-            copy.ДатаСтворення = ДатаСтворення;
+            СеріїНоменклатури_Objest copy = new СеріїНоменклатури_Objest()
+            {
+                Номер = Номер,
+                Коментар = Коментар,
+                ДатаСтворення = ДатаСтворення,
+                
+            };
             
 
             await copy.New();
@@ -8841,7 +8966,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ПартіяТоварівКомпозит_Triggers.BeforeSave(this);
+            
+                await ПартіяТоварівКомпозит_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Дата;
             base.FieldValue["col_a3"] = (int)ТипДокументу;
@@ -8852,7 +8978,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ПартіяТоварівКомпозит_Triggers.AfterSave(this);
+                
+                    await ПартіяТоварівКомпозит_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -8860,13 +8987,16 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ПартіяТоварівКомпозит_Objest> Copy(bool copyTableParts = false)
         {
-            ПартіяТоварівКомпозит_Objest copy = new ПартіяТоварівКомпозит_Objest();
-            copy.Назва = Назва;
-            copy.Дата = Дата;
-            copy.ТипДокументу = ТипДокументу;
-            copy.ДокументКлюч = ДокументКлюч;
-            copy.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг;
-            copy.ВведенняЗалишків = ВведенняЗалишків;
+            ПартіяТоварівКомпозит_Objest copy = new ПартіяТоварівКомпозит_Objest()
+            {
+                Назва = Назва,
+                Дата = Дата,
+                ТипДокументу = ТипДокументу,
+                ДокументКлюч = ДокументКлюч,
+                ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг,
+                ВведенняЗалишків = ВведенняЗалишків,
+                
+            };
             
 
             await copy.New();
@@ -9083,7 +9213,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ВидиЗапасів_Triggers.BeforeSave(this);
+            
+                await ВидиЗапасів_Triggers.BeforeSave(this);
             base.FieldValue["col_a5"] = Назва;
             base.FieldValue["col_b3"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a7"] = (int)ТипЗапасів;
@@ -9095,7 +9226,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ВидиЗапасів_Triggers.AfterSave(this);
+                
+                    await ВидиЗапасів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -9103,14 +9235,17 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ВидиЗапасів_Objest> Copy(bool copyTableParts = false)
         {
-            ВидиЗапасів_Objest copy = new ВидиЗапасів_Objest();
-            copy.Назва = Назва;
-            copy.Організація = Організація;
-            copy.ТипЗапасів = ТипЗапасів;
-            copy.Валюта = Валюта;
-            copy.Контрагент = Контрагент;
-            copy.Договір = Договір;
-            copy.Код = Код;
+            ВидиЗапасів_Objest copy = new ВидиЗапасів_Objest()
+            {
+                Назва = Назва,
+                Організація = Організація,
+                ТипЗапасів = ТипЗапасів,
+                Валюта = Валюта,
+                Контрагент = Контрагент,
+                Договір = Договір,
+                Код = Код,
+                
+            };
             
 
             await copy.New();
@@ -9391,7 +9526,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Банки_Triggers.BeforeSave(this);
+            
+                await Банки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_b4"] = ТипНаселеногоПункту;
@@ -9424,7 +9560,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Банки_Triggers.AfterSave(this);
+                
+                    await Банки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса });
             }
             return result;
@@ -9432,35 +9569,38 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Банки_Objest> Copy(bool copyTableParts = false)
         {
-            Банки_Objest copy = new Банки_Objest();
-            copy.Код = Код;
-            copy.Назва = Назва;
-            copy.ТипНаселеногоПункту = ТипНаселеногоПункту;
-            copy.КодМФО = КодМФО;
-            copy.НазваГоловноїУстановиАнг = НазваГоловноїУстановиАнг;
-            copy.КодЄДРПОУ = КодЄДРПОУ;
-            copy.ПовнаНазва = ПовнаНазва;
-            copy.УнікальнийКодБанку = УнікальнийКодБанку;
-            copy.КодОбластіОпераційноїДіяльності = КодОбластіОпераційноїДіяльності;
-            copy.НазваОбластіОпераційноїДіяльності = НазваОбластіОпераційноїДіяльності;
-            copy.КодОбластіЗгідноСтатуту = КодОбластіЗгідноСтатуту;
-            copy.НазваОбластіЗгідноСтатуту = НазваОбластіЗгідноСтатуту;
-            copy.ПоштовийІндекс = ПоштовийІндекс;
-            copy.НазваНаселеногоПункту = НазваНаселеногоПункту;
-            copy.Адреса = Адреса;
-            copy.КодТелефонногоЗвязку = КодТелефонногоЗвязку;
-            copy.НомерТелефону = НомерТелефону;
-            copy.ЧисловийКодСтануУстанови = ЧисловийКодСтануУстанови;
-            copy.НазваСтануУстанови = НазваСтануУстанови;
-            copy.ДатаЗміниСтану = ДатаЗміниСтану;
-            copy.ДатаВідкриттяУстанови = ДатаВідкриттяУстанови;
-            copy.ДатаЗакриттяУстанови = ДатаЗакриттяУстанови;
-            copy.КодНБУ = КодНБУ;
-            copy.НомерЛіцензії = НомерЛіцензії;
-            copy.ДатаЛіцензії = ДатаЛіцензії;
-            copy.КодСтатусу = КодСтатусу;
-            copy.Статус = Статус;
-            copy.ДатаЗапису = ДатаЗапису;
+            Банки_Objest copy = new Банки_Objest()
+            {
+                Код = Код,
+                Назва = Назва,
+                ТипНаселеногоПункту = ТипНаселеногоПункту,
+                КодМФО = КодМФО,
+                НазваГоловноїУстановиАнг = НазваГоловноїУстановиАнг,
+                КодЄДРПОУ = КодЄДРПОУ,
+                ПовнаНазва = ПовнаНазва,
+                УнікальнийКодБанку = УнікальнийКодБанку,
+                КодОбластіОпераційноїДіяльності = КодОбластіОпераційноїДіяльності,
+                НазваОбластіОпераційноїДіяльності = НазваОбластіОпераційноїДіяльності,
+                КодОбластіЗгідноСтатуту = КодОбластіЗгідноСтатуту,
+                НазваОбластіЗгідноСтатуту = НазваОбластіЗгідноСтатуту,
+                ПоштовийІндекс = ПоштовийІндекс,
+                НазваНаселеногоПункту = НазваНаселеногоПункту,
+                Адреса = Адреса,
+                КодТелефонногоЗвязку = КодТелефонногоЗвязку,
+                НомерТелефону = НомерТелефону,
+                ЧисловийКодСтануУстанови = ЧисловийКодСтануУстанови,
+                НазваСтануУстанови = НазваСтануУстанови,
+                ДатаЗміниСтану = ДатаЗміниСтану,
+                ДатаВідкриттяУстанови = ДатаВідкриттяУстанови,
+                ДатаЗакриттяУстанови = ДатаЗакриттяУстанови,
+                КодНБУ = КодНБУ,
+                НомерЛіцензії = НомерЛіцензії,
+                ДатаЛіцензії = ДатаЛіцензії,
+                КодСтатусу = КодСтатусу,
+                Статус = Статус,
+                ДатаЗапису = ДатаЗапису,
+                
+            };
             
 
             await copy.New();
@@ -9687,7 +9827,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            СкладськіПриміщення_Triggers.BeforeSave(this);
+            
+                await СкладськіПриміщення_Triggers.BeforeSave(this);
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = (int)НалаштуванняАдресногоЗберігання;
             base.FieldValue["col_a1"] = Склад.UnigueID.UGuid;
@@ -9695,7 +9836,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                СкладськіПриміщення_Triggers.AfterSave(this);
+                
+                    await СкладськіПриміщення_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -9703,10 +9845,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<СкладськіПриміщення_Objest> Copy(bool copyTableParts = false)
         {
-            СкладськіПриміщення_Objest copy = new СкладськіПриміщення_Objest();
-            copy.Назва = Назва;
-            copy.НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання;
-            copy.Склад = Склад;
+            СкладськіПриміщення_Objest copy = new СкладськіПриміщення_Objest()
+            {
+                Назва = Назва,
+                НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання,
+                Склад = Склад,
+                
+            };
             
 
             await copy.New();
@@ -9929,7 +10074,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            СкладськіКомірки_Triggers.BeforeSave(this);
+            
+                await СкладськіКомірки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = ОбластьЗберігання.UnigueID.UGuid;
@@ -9944,7 +10090,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                СкладськіКомірки_Triggers.AfterSave(this);
+                
+                    await СкладськіКомірки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -9952,17 +10099,20 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<СкладськіКомірки_Objest> Copy(bool copyTableParts = false)
         {
-            СкладськіКомірки_Objest copy = new СкладськіКомірки_Objest();
-            copy.Папка = Папка;
-            copy.Назва = Назва;
-            copy.ОбластьЗберігання = ОбластьЗберігання;
-            copy.Лінія = Лінія;
-            copy.Позиція = Позиція;
-            copy.Приміщення = Приміщення;
-            copy.Стелаж = Стелаж;
-            copy.Ярус = Ярус;
-            copy.ТипСкладськоїКомірки = ТипСкладськоїКомірки;
-            copy.Типорозмір = Типорозмір;
+            СкладськіКомірки_Objest copy = new СкладськіКомірки_Objest()
+            {
+                Папка = Папка,
+                Назва = Назва,
+                ОбластьЗберігання = ОбластьЗберігання,
+                Лінія = Лінія,
+                Позиція = Позиція,
+                Приміщення = Приміщення,
+                Стелаж = Стелаж,
+                Ярус = Ярус,
+                ТипСкладськоїКомірки = ТипСкладськоїКомірки,
+                Типорозмір = Типорозмір,
+                
+            };
             
 
             await copy.New();
@@ -10186,10 +10336,13 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ОбластьЗберігання_Objest> Copy(bool copyTableParts = false)
         {
-            ОбластьЗберігання_Objest copy = new ОбластьЗберігання_Objest();
-            copy.Назва = Назва;
-            copy.Опис = Опис;
-            copy.Приміщення = Приміщення;
+            ОбластьЗберігання_Objest copy = new ОбластьЗберігання_Objest()
+            {
+                Назва = Назва,
+                Опис = Опис,
+                Приміщення = Приміщення,
+                
+            };
             
 
             await copy.New();
@@ -10395,7 +10548,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            ТипорозміриКомірок_Triggers.BeforeSave(this);
+            
+                await ТипорозміриКомірок_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Висота;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = Глибина;
@@ -10406,7 +10560,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                ТипорозміриКомірок_Triggers.AfterSave(this);
+                
+                    await ТипорозміриКомірок_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -10414,13 +10569,16 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<ТипорозміриКомірок_Objest> Copy(bool copyTableParts = false)
         {
-            ТипорозміриКомірок_Objest copy = new ТипорозміриКомірок_Objest();
-            copy.Висота = Висота;
-            copy.Назва = Назва;
-            copy.Глибина = Глибина;
-            copy.Вантажопідйомність = Вантажопідйомність;
-            copy.Обєм = Обєм;
-            copy.Ширина = Ширина;
+            ТипорозміриКомірок_Objest copy = new ТипорозміриКомірок_Objest()
+            {
+                Висота = Висота,
+                Назва = Назва,
+                Глибина = Глибина,
+                Вантажопідйомність = Вантажопідйомність,
+                Обєм = Обєм,
+                Ширина = Ширина,
+                
+            };
             
 
             await copy.New();
@@ -10628,7 +10786,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            СкладськіКомірки_Папки_Triggers.BeforeSave(this);
+            
+                await СкладськіКомірки_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
@@ -10637,7 +10796,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                СкладськіКомірки_Папки_Triggers.AfterSave(this);
+                
+                    await СкладськіКомірки_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва });
             }
             return result;
@@ -10645,11 +10805,14 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<СкладськіКомірки_Папки_Objest> Copy(bool copyTableParts = false)
         {
-            СкладськіКомірки_Папки_Objest copy = new СкладськіКомірки_Папки_Objest();
-            copy.Назва = Назва;
-            copy.Код = Код;
-            copy.Родич = Родич;
-            copy.Власник = Власник;
+            СкладськіКомірки_Папки_Objest copy = new СкладськіКомірки_Папки_Objest()
+            {
+                Назва = Назва,
+                Код = Код,
+                Родич = Родич,
+                Власник = Власник,
+                
+            };
             
 
             await copy.New();
@@ -10858,7 +11021,8 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            Блокнот_Triggers.BeforeSave(this);
+            
+                await Блокнот_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = ДатаЗапису;
@@ -10868,7 +11032,8 @@ namespace StorageAndTrade_1_0.Довідники
             bool result = await BaseSave();
             if (result)
             {
-                Блокнот_Triggers.AfterSave(this);
+                
+                    await Блокнот_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Опис });
             }
             return result;
@@ -10876,12 +11041,15 @@ namespace StorageAndTrade_1_0.Довідники
 
         public async ValueTask<Блокнот_Objest> Copy(bool copyTableParts = false)
         {
-            Блокнот_Objest copy = new Блокнот_Objest();
-            copy.Код = Код;
-            copy.Назва = Назва;
-            copy.ДатаЗапису = ДатаЗапису;
-            copy.Опис = Опис;
-            copy.Лінк = Лінк;
+            Блокнот_Objest copy = new Блокнот_Objest()
+            {
+                Код = Код,
+                Назва = Назва,
+                ДатаЗапису = ДатаЗапису,
+                Опис = Опис,
+                Лінк = Лінк,
+                
+            };
             
 
             await copy.New();
@@ -12873,7 +13041,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ЗамовленняПостачальнику_Triggers.BeforeSave(this);
+            
+                await ЗамовленняПостачальнику_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -12906,7 +13075,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ЗамовленняПостачальнику_Triggers.AfterSave(this);
+                
+                    await ЗамовленняПостачальнику_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -12935,34 +13105,37 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ЗамовленняПостачальнику_Objest> Copy(bool copyTableParts = false)
         {
-            ЗамовленняПостачальнику_Objest copy = new ЗамовленняПостачальнику_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Контрагент = Контрагент;
-            copy.Організація = Організація;
-            copy.Склад = Склад;
-            copy.Валюта = Валюта;
-            copy.СумаДокументу = СумаДокументу;
-            copy.Каса = Каса;
-            copy.БанківськийРахунок = БанківськийРахунок;
-            copy.Підрозділ = Підрозділ;
-            copy.Договір = Договір;
-            copy.Автор = Автор;
-            copy.ДатаПоступлення = ДатаПоступлення;
-            copy.АдресаДоставкиДляПостачальника = АдресаДоставкиДляПостачальника;
-            copy.ПовернутиТару = ПовернутиТару;
-            copy.СпосібДоставки = СпосібДоставки;
-            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-            copy.ЧасДоставкиДо = ЧасДоставкиДо;
-            copy.АдресаДоставки = АдресаДоставки;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Статус = Статус;
-            copy.ФормаОплати = ФормаОплати;
-            copy.Менеджер = Менеджер;
-            copy.Основа = Основа;
-            copy.Коментар = Коментар;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ЗамовленняПостачальнику_Objest copy = new ЗамовленняПостачальнику_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Контрагент = Контрагент,
+                Організація = Організація,
+                Склад = Склад,
+                Валюта = Валюта,
+                СумаДокументу = СумаДокументу,
+                Каса = Каса,
+                БанківськийРахунок = БанківськийРахунок,
+                Підрозділ = Підрозділ,
+                Договір = Договір,
+                Автор = Автор,
+                ДатаПоступлення = ДатаПоступлення,
+                АдресаДоставкиДляПостачальника = АдресаДоставкиДляПостачальника,
+                ПовернутиТару = ПовернутиТару,
+                СпосібДоставки = СпосібДоставки,
+                ЧасДоставкиЗ = ЧасДоставкиЗ,
+                ЧасДоставкиДо = ЧасДоставкиДо,
+                АдресаДоставки = АдресаДоставки,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Статус = Статус,
+                ФормаОплати = ФормаОплати,
+                Менеджер = Менеджер,
+                Основа = Основа,
+                Коментар = Коментар,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -12983,7 +13156,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗамовленняПостачальнику_Triggers.SetDeletionLabel(this, label);
+            
+                await ЗамовленняПостачальнику_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -12993,7 +13167,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
+            
+                await ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a30" });
         }
@@ -13084,7 +13259,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ЗамовленняПостачальнику_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ЗамовленняПостачальнику_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -13789,7 +13965,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПоступленняТоварівТаПослуг_Triggers.BeforeSave(this);
+            
+                await ПоступленняТоварівТаПослуг_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -13828,7 +14005,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПоступленняТоварівТаПослуг_Triggers.AfterSave(this);
+                
+                    await ПоступленняТоварівТаПослуг_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -13857,40 +14035,43 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПоступленняТоварівТаПослуг_Objest> Copy(bool copyTableParts = false)
         {
-            ПоступленняТоварівТаПослуг_Objest copy = new ПоступленняТоварівТаПослуг_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Валюта = Валюта;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Підрозділ = Підрозділ;
-            copy.Склад = Склад;
-            copy.Контрагент = Контрагент;
-            copy.СумаДокументу = СумаДокументу;
-            copy.ЗамовленняПостачальнику = ЗамовленняПостачальнику;
-            copy.ДатаОплати = ДатаОплати;
-            copy.ФормаОплати = ФормаОплати;
-            copy.Узгоджений = Узгоджений;
-            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-            copy.НомерВхідногоДокументу = НомерВхідногоДокументу;
-            copy.ДатаВхідногоДокументу = ДатаВхідногоДокументу;
-            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-            copy.Договір = Договір;
-            copy.Автор = Автор;
-            copy.ПовернутиТару = ПовернутиТару;
-            copy.ДатаПоверненняТари = ДатаПоверненняТари;
-            copy.СпосібДоставки = СпосібДоставки;
-            copy.Організація = Організація;
-            copy.Курс = Курс;
-            copy.Кратність = Кратність;
-            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-            copy.ЧасДоставкиДо = ЧасДоставкиДо;
-            copy.Менеджер = Менеджер;
-            copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
-            copy.Каса = Каса;
-            copy.Основа = Основа;
-            copy.Коментар = Коментар;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ПоступленняТоварівТаПослуг_Objest copy = new ПоступленняТоварівТаПослуг_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Валюта = Валюта,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Підрозділ = Підрозділ,
+                Склад = Склад,
+                Контрагент = Контрагент,
+                СумаДокументу = СумаДокументу,
+                ЗамовленняПостачальнику = ЗамовленняПостачальнику,
+                ДатаОплати = ДатаОплати,
+                ФормаОплати = ФормаОплати,
+                Узгоджений = Узгоджений,
+                БанківськийРахунокОрганізації = БанківськийРахунокОрганізації,
+                НомерВхідногоДокументу = НомерВхідногоДокументу,
+                ДатаВхідногоДокументу = ДатаВхідногоДокументу,
+                БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента,
+                Договір = Договір,
+                Автор = Автор,
+                ПовернутиТару = ПовернутиТару,
+                ДатаПоверненняТари = ДатаПоверненняТари,
+                СпосібДоставки = СпосібДоставки,
+                Організація = Організація,
+                Курс = Курс,
+                Кратність = Кратність,
+                ЧасДоставкиЗ = ЧасДоставкиЗ,
+                ЧасДоставкиДо = ЧасДоставкиДо,
+                Менеджер = Менеджер,
+                СтаттяРухуКоштів = СтаттяРухуКоштів,
+                Каса = Каса,
+                Основа = Основа,
+                Коментар = Коментар,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -13911,7 +14092,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
+            
+                await ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -13921,7 +14103,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
+            
+                await ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a33" });
         }
@@ -14018,7 +14201,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -14678,7 +14862,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ЗамовленняКлієнта_Triggers.BeforeSave(this);
+            
+                await ЗамовленняКлієнта_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -14714,7 +14899,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ЗамовленняКлієнта_Triggers.AfterSave(this);
+                
+                    await ЗамовленняКлієнта_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -14743,37 +14929,40 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ЗамовленняКлієнта_Objest> Copy(bool copyTableParts = false)
         {
-            ЗамовленняКлієнта_Objest copy = new ЗамовленняКлієнта_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Контрагент = Контрагент;
-            copy.Організація = Організація;
-            copy.Валюта = Валюта;
-            copy.СумаДокументу = СумаДокументу;
-            copy.Склад = Склад;
-            copy.Статус = Статус;
-            copy.Узгоджений = Узгоджений;
-            copy.ФормаОплати = ФормаОплати;
-            copy.БанківськийРахунок = БанківськийРахунок;
-            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-            copy.Каса = Каса;
-            copy.СумаАвансуДоЗабезпечення = СумаАвансуДоЗабезпечення;
-            copy.СумаПередоплатиДоВідгрузки = СумаПередоплатиДоВідгрузки;
-            copy.ДатаВідгрузки = ДатаВідгрузки;
-            copy.АдресаДоставки = АдресаДоставки;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Договір = Договір;
-            copy.Підрозділ = Підрозділ;
-            copy.Автор = Автор;
-            copy.СпосібДоставки = СпосібДоставки;
-            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-            copy.ЧасДоставкиДо = ЧасДоставкиДо;
-            copy.ПовернутиТару = ПовернутиТару;
-            copy.ДатаПоверненняТари = ДатаПоверненняТари;
-            copy.Коментар = Коментар;
-            copy.Менеджер = Менеджер;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ЗамовленняКлієнта_Objest copy = new ЗамовленняКлієнта_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Контрагент = Контрагент,
+                Організація = Організація,
+                Валюта = Валюта,
+                СумаДокументу = СумаДокументу,
+                Склад = Склад,
+                Статус = Статус,
+                Узгоджений = Узгоджений,
+                ФормаОплати = ФормаОплати,
+                БанківськийРахунок = БанківськийРахунок,
+                БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента,
+                Каса = Каса,
+                СумаАвансуДоЗабезпечення = СумаАвансуДоЗабезпечення,
+                СумаПередоплатиДоВідгрузки = СумаПередоплатиДоВідгрузки,
+                ДатаВідгрузки = ДатаВідгрузки,
+                АдресаДоставки = АдресаДоставки,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Договір = Договір,
+                Підрозділ = Підрозділ,
+                Автор = Автор,
+                СпосібДоставки = СпосібДоставки,
+                ЧасДоставкиЗ = ЧасДоставкиЗ,
+                ЧасДоставкиДо = ЧасДоставкиДо,
+                ПовернутиТару = ПовернутиТару,
+                ДатаПоверненняТари = ДатаПоверненняТари,
+                Коментар = Коментар,
+                Менеджер = Менеджер,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -14794,7 +14983,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗамовленняКлієнта_Triggers.SetDeletionLabel(this, label);
+            
+                await ЗамовленняКлієнта_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -14804,7 +14994,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ЗамовленняКлієнта_Triggers.BeforeDelete(this);
+            
+                await ЗамовленняКлієнта_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a35" });
         }
@@ -14898,7 +15089,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ЗамовленняКлієнта_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ЗамовленняКлієнта_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -15598,7 +15790,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            РеалізаціяТоварівТаПослуг_Triggers.BeforeSave(this);
+            
+                await РеалізаціяТоварівТаПослуг_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -15636,7 +15829,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                РеалізаціяТоварівТаПослуг_Triggers.AfterSave(this);
+                
+                    await РеалізаціяТоварівТаПослуг_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -15665,39 +15859,42 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<РеалізаціяТоварівТаПослуг_Objest> Copy(bool copyTableParts = false)
         {
-            РеалізаціяТоварівТаПослуг_Objest copy = new РеалізаціяТоварівТаПослуг_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Валюта = Валюта;
-            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-            copy.ДатаОплати = ДатаОплати;
-            copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
-            copy.Контрагент = Контрагент;
-            copy.СумаДокументу = СумаДокументу;
-            copy.Підрозділ = Підрозділ;
-            copy.Склад = Склад;
-            copy.ФормаОплати = ФормаОплати;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Каса = Каса;
-            copy.Договір = Договір;
-            copy.Основа = Основа;
-            copy.Статус = Статус;
-            copy.Автор = Автор;
-            copy.СумаПередоплати = СумаПередоплати;
-            copy.СумаПередоплатиЗаТару = СумаПередоплатиЗаТару;
-            copy.СпосібДоставки = СпосібДоставки;
-            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-            copy.ЧасДоставкиДо = ЧасДоставкиДо;
-            copy.ПовернутиТару = ПовернутиТару;
-            copy.ДатаПоверненняТари = ДатаПоверненняТари;
-            copy.Курс = Курс;
-            copy.Кратність = Кратність;
-            copy.Коментар = Коментар;
-            copy.Менеджер = Менеджер;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            РеалізаціяТоварівТаПослуг_Objest copy = new РеалізаціяТоварівТаПослуг_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Валюта = Валюта,
+                БанківськийРахунокОрганізації = БанківськийРахунокОрганізації,
+                БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента,
+                ДатаОплати = ДатаОплати,
+                ЗамовленняКлієнта = ЗамовленняКлієнта,
+                Контрагент = Контрагент,
+                СумаДокументу = СумаДокументу,
+                Підрозділ = Підрозділ,
+                Склад = Склад,
+                ФормаОплати = ФормаОплати,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Каса = Каса,
+                Договір = Договір,
+                Основа = Основа,
+                Статус = Статус,
+                Автор = Автор,
+                СумаПередоплати = СумаПередоплати,
+                СумаПередоплатиЗаТару = СумаПередоплатиЗаТару,
+                СпосібДоставки = СпосібДоставки,
+                ЧасДоставкиЗ = ЧасДоставкиЗ,
+                ЧасДоставкиДо = ЧасДоставкиДо,
+                ПовернутиТару = ПовернутиТару,
+                ДатаПоверненняТари = ДатаПоверненняТари,
+                Курс = Курс,
+                Кратність = Кратність,
+                Коментар = Коментар,
+                Менеджер = Менеджер,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -15718,7 +15915,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
+            
+                await РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -15728,7 +15926,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
+            
+                await РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a37" });
         }
@@ -15824,7 +16023,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
+                
+                    await РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -16245,7 +16445,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ВстановленняЦінНоменклатури_Triggers.BeforeSave(this);
+            
+                await ВстановленняЦінНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -16260,7 +16461,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ВстановленняЦінНоменклатури_Triggers.AfterSave(this);
+                
+                    await ВстановленняЦінНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -16289,16 +16491,19 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ВстановленняЦінНоменклатури_Objest> Copy(bool copyTableParts = false)
         {
-            ВстановленняЦінНоменклатури_Objest copy = new ВстановленняЦінНоменклатури_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Валюта = Валюта;
-            copy.ВидЦіни = ВидЦіни;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ВстановленняЦінНоменклатури_Objest copy = new ВстановленняЦінНоменклатури_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Валюта = Валюта,
+                ВидЦіни = ВидЦіни,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -16319,7 +16524,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(this, label);
+            
+                await ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -16329,7 +16535,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
+            
+                await ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a43" });
         }
@@ -16402,7 +16609,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -16878,7 +17086,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПрихіднийКасовийОрдер_Triggers.BeforeSave(this);
+            
+                await ПрихіднийКасовийОрдер_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -16902,7 +17111,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПрихіднийКасовийОрдер_Triggers.AfterSave(this);
+                
+                    await ПрихіднийКасовийОрдер_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -16931,25 +17141,28 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПрихіднийКасовийОрдер_Objest> Copy(bool copyTableParts = false)
         {
-            ПрихіднийКасовийОрдер_Objest copy = new ПрихіднийКасовийОрдер_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Каса = Каса;
-            copy.СумаДокументу = СумаДокументу;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Основа = Основа;
-            copy.Контрагент = Контрагент;
-            copy.Договір = Договір;
-            copy.БанківськийРахунок = БанківськийРахунок;
-            copy.Валюта = Валюта;
-            copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
-            copy.КасаВідправник = КасаВідправник;
-            copy.Курс = Курс;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ПрихіднийКасовийОрдер_Objest copy = new ПрихіднийКасовийОрдер_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Каса = Каса,
+                СумаДокументу = СумаДокументу,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Основа = Основа,
+                Контрагент = Контрагент,
+                Договір = Договір,
+                БанківськийРахунок = БанківськийРахунок,
+                Валюта = Валюта,
+                СтаттяРухуКоштів = СтаттяРухуКоштів,
+                КасаВідправник = КасаВідправник,
+                Курс = Курс,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -16970,7 +17183,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
+            
+                await ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -16980,7 +17194,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            
+                await ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a47" });
         }
@@ -17062,7 +17277,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -17564,7 +17780,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            РозхіднийКасовийОрдер_Triggers.BeforeSave(this);
+            
+                await РозхіднийКасовийОрдер_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -17590,7 +17807,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                РозхіднийКасовийОрдер_Triggers.AfterSave(this);
+                
+                    await РозхіднийКасовийОрдер_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, КлючовіСловаДляПошуку });
             }
 
@@ -17619,27 +17837,30 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<РозхіднийКасовийОрдер_Objest> Copy(bool copyTableParts = false)
         {
-            РозхіднийКасовийОрдер_Objest copy = new РозхіднийКасовийОрдер_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Каса = Каса;
-            copy.СумаДокументу = СумаДокументу;
-            copy.СумаДокументуПоКурсу = СумаДокументуПоКурсу;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.ОрганізаціяОтримувач = ОрганізаціяОтримувач;
-            copy.Контрагент = Контрагент;
-            copy.Договір = Договір;
-            copy.БанківськийРахунок = БанківськийРахунок;
-            copy.Валюта = Валюта;
-            copy.СтаттяРухуКоштів = СтаттяРухуКоштів;
-            copy.КасаОтримувач = КасаОтримувач;
-            copy.Курс = Курс;
-            copy.Основа = Основа;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            РозхіднийКасовийОрдер_Objest copy = new РозхіднийКасовийОрдер_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Каса = Каса,
+                СумаДокументу = СумаДокументу,
+                СумаДокументуПоКурсу = СумаДокументуПоКурсу,
+                ГосподарськаОперація = ГосподарськаОперація,
+                ОрганізаціяОтримувач = ОрганізаціяОтримувач,
+                Контрагент = Контрагент,
+                Договір = Договір,
+                БанківськийРахунок = БанківськийРахунок,
+                Валюта = Валюта,
+                СтаттяРухуКоштів = СтаттяРухуКоштів,
+                КасаОтримувач = КасаОтримувач,
+                Курс = Курс,
+                Основа = Основа,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -17660,7 +17881,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
+            
+                await РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -17670,7 +17892,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
+            
+                await РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a49" });
         }
@@ -17754,7 +17977,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
+                
+                    await РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -18281,7 +18505,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПереміщенняТоварів_Triggers.BeforeSave(this);
+            
+                await ПереміщенняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -18308,7 +18533,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПереміщенняТоварів_Triggers.AfterSave(this);
+                
+                    await ПереміщенняТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -18337,28 +18563,31 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПереміщенняТоварів_Objest> Copy(bool copyTableParts = false)
         {
-            ПереміщенняТоварів_Objest copy = new ПереміщенняТоварів_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-            copy.ВидЦіни = ВидЦіни;
-            copy.ОрганізаціяОтримувач = ОрганізаціяОтримувач;
-            copy.Відповідальний = Відповідальний;
-            copy.Підрозділ = Підрозділ;
-            copy.СкладВідправник = СкладВідправник;
-            copy.СкладОтримувач = СкладОтримувач;
-            copy.Статус = Статус;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.СпосібДоставки = СпосібДоставки;
-            copy.АдресДоставки = АдресДоставки;
-            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-            copy.ЧасДоставкиДо = ЧасДоставкиДо;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.Основа = Основа;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ПереміщенняТоварів_Objest copy = new ПереміщенняТоварів_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                БанківськийРахунокОрганізації = БанківськийРахунокОрганізації,
+                ВидЦіни = ВидЦіни,
+                ОрганізаціяОтримувач = ОрганізаціяОтримувач,
+                Відповідальний = Відповідальний,
+                Підрозділ = Підрозділ,
+                СкладВідправник = СкладВідправник,
+                СкладОтримувач = СкладОтримувач,
+                Статус = Статус,
+                ГосподарськаОперація = ГосподарськаОперація,
+                СпосібДоставки = СпосібДоставки,
+                АдресДоставки = АдресДоставки,
+                ЧасДоставкиЗ = ЧасДоставкиЗ,
+                ЧасДоставкиДо = ЧасДоставкиДо,
+                Коментар = Коментар,
+                Автор = Автор,
+                Основа = Основа,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -18379,7 +18608,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварів_Triggers.SetDeletionLabel(this, label);
+            
+                await ПереміщенняТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -18389,7 +18619,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПереміщенняТоварів_Triggers.BeforeDelete(this);
+            
+                await ПереміщенняТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a50" });
         }
@@ -18474,7 +18705,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПереміщенняТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПереміщенняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -19037,7 +19269,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПоверненняТоварівПостачальнику_Triggers.BeforeSave(this);
+            
+                await ПоверненняТоварівПостачальнику_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -19066,7 +19299,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПоверненняТоварівПостачальнику_Triggers.AfterSave(this);
+                
+                    await ПоверненняТоварівПостачальнику_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -19095,30 +19329,33 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПоверненняТоварівПостачальнику_Objest> Copy(bool copyTableParts = false)
         {
-            ПоверненняТоварівПостачальнику_Objest copy = new ПоверненняТоварівПостачальнику_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Контрагент = Контрагент;
-            copy.Підрозділ = Підрозділ;
-            copy.Валюта = Валюта;
-            copy.Склад = Склад;
-            copy.СумаДокументу = СумаДокументу;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.БанківськийРахунокОрганізації = БанківськийРахунокОрганізації;
-            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-            copy.Договір = Договір;
-            copy.СпосібДоставки = СпосібДоставки;
-            copy.АдресДоставки = АдресДоставки;
-            copy.ЧасДоставкиЗ = ЧасДоставкиЗ;
-            copy.ЧасДоставкиДо = ЧасДоставкиДо;
-            copy.Каса = Каса;
-            copy.Основа = Основа;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.Менеджер = Менеджер;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ПоверненняТоварівПостачальнику_Objest copy = new ПоверненняТоварівПостачальнику_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Контрагент = Контрагент,
+                Підрозділ = Підрозділ,
+                Валюта = Валюта,
+                Склад = Склад,
+                СумаДокументу = СумаДокументу,
+                ГосподарськаОперація = ГосподарськаОперація,
+                БанківськийРахунокОрганізації = БанківськийРахунокОрганізації,
+                БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента,
+                Договір = Договір,
+                СпосібДоставки = СпосібДоставки,
+                АдресДоставки = АдресДоставки,
+                ЧасДоставкиЗ = ЧасДоставкиЗ,
+                ЧасДоставкиДо = ЧасДоставкиДо,
+                Каса = Каса,
+                Основа = Основа,
+                Коментар = Коментар,
+                Автор = Автор,
+                Менеджер = Менеджер,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -19139,7 +19376,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(this, label);
+            
+                await ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -19149,7 +19387,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
+            
+                await ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a52" });
         }
@@ -19236,7 +19475,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -19773,7 +20013,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПоверненняТоварівВідКлієнта_Triggers.BeforeSave(this);
+            
+                await ПоверненняТоварівВідКлієнта_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -19798,7 +20039,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПоверненняТоварівВідКлієнта_Triggers.AfterSave(this);
+                
+                    await ПоверненняТоварівВідКлієнта_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -19827,26 +20069,29 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПоверненняТоварівВідКлієнта_Objest> Copy(bool copyTableParts = false)
         {
-            ПоверненняТоварівВідКлієнта_Objest copy = new ПоверненняТоварівВідКлієнта_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Валюта = Валюта;
-            copy.СумаДокументу = СумаДокументу;
-            copy.Склад = Склад;
-            copy.Підрозділ = Підрозділ;
-            copy.Менеджер = Менеджер;
-            copy.ДокументПродажу = ДокументПродажу;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Договір = Договір;
-            copy.ПричинаПовернення = ПричинаПовернення;
-            copy.Контрагент = Контрагент;
-            copy.Каса = Каса;
-            copy.Основа = Основа;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ПоверненняТоварівВідКлієнта_Objest copy = new ПоверненняТоварівВідКлієнта_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Валюта = Валюта,
+                СумаДокументу = СумаДокументу,
+                Склад = Склад,
+                Підрозділ = Підрозділ,
+                Менеджер = Менеджер,
+                ДокументПродажу = ДокументПродажу,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Договір = Договір,
+                ПричинаПовернення = ПричинаПовернення,
+                Контрагент = Контрагент,
+                Каса = Каса,
+                Основа = Основа,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -19867,7 +20112,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(this, label);
+            
+                await ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -19877,7 +20123,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
+            
+                await ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a54" });
         }
@@ -19960,7 +20207,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -20447,7 +20695,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            АктВиконанихРобіт_Triggers.BeforeSave(this);
+            
+                await АктВиконанихРобіт_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -20470,7 +20719,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                АктВиконанихРобіт_Triggers.AfterSave(this);
+                
+                    await АктВиконанихРобіт_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -20499,24 +20749,27 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<АктВиконанихРобіт_Objest> Copy(bool copyTableParts = false)
         {
-            АктВиконанихРобіт_Objest copy = new АктВиконанихРобіт_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Валюта = Валюта;
-            copy.ЗамовленняКлієнта = ЗамовленняКлієнта;
-            copy.Каса = Каса;
-            copy.Контрагент = Контрагент;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.СумаДокументу = СумаДокументу;
-            copy.ФормаОплати = ФормаОплати;
-            copy.Договір = Договір;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.Менеджер = Менеджер;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            АктВиконанихРобіт_Objest copy = new АктВиконанихРобіт_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Валюта = Валюта,
+                ЗамовленняКлієнта = ЗамовленняКлієнта,
+                Каса = Каса,
+                Контрагент = Контрагент,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                СумаДокументу = СумаДокументу,
+                ФормаОплати = ФормаОплати,
+                Договір = Договір,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Коментар = Коментар,
+                Автор = Автор,
+                Менеджер = Менеджер,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -20537,7 +20790,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            АктВиконанихРобіт_Triggers.SetDeletionLabel(this, label);
+            
+                await АктВиконанихРобіт_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -20547,7 +20801,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            АктВиконанихРобіт_Triggers.BeforeDelete(this);
+            
+                await АктВиконанихРобіт_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a82" });
         }
@@ -20628,7 +20883,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                АктВиконанихРобіт_Triggers.SetDeletionLabel(obj, label);
+                
+                    await АктВиконанихРобіт_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -21196,7 +21452,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ВведенняЗалишків_Triggers.BeforeSave(this);
+            
+                await ВведенняЗалишків_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -21215,7 +21472,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ВведенняЗалишків_Triggers.AfterSave(this);
+                
+                    await ВведенняЗалишків_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -21244,20 +21502,23 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ВведенняЗалишків_Objest> Copy(bool copyTableParts = false)
         {
-            ВведенняЗалишків_Objest copy = new ВведенняЗалишків_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.Склад = Склад;
-            copy.Валюта = Валюта;
-            copy.Контрагент = Контрагент;
-            copy.Договір = Договір;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ВведенняЗалишків_Objest copy = new ВведенняЗалишків_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                Склад = Склад,
+                Валюта = Валюта,
+                Контрагент = Контрагент,
+                Договір = Договір,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -21290,7 +21551,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВведенняЗалишків_Triggers.SetDeletionLabel(this, label);
+            
+                await ВведенняЗалишків_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -21300,7 +21562,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ВведенняЗалишків_Triggers.BeforeDelete(this);
+            
+                await ВведенняЗалишків_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a84", "tab_a85", "tab_a86", "tab_a87" });
         }
@@ -21380,7 +21643,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВведенняЗалишків_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ВведенняЗалишків_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ВведенняЗалишків_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -22085,17 +22349,20 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<НадлишкиТоварів_Objest> Copy(bool copyTableParts = false)
         {
-            НадлишкиТоварів_Objest copy = new НадлишкиТоварів_Objest();
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.Склад = Склад;
-            copy.ВидЦіни = ВидЦіни;
-            copy.Коментар = Коментар;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Назва = Назва;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            НадлишкиТоварів_Objest copy = new НадлишкиТоварів_Objest()
+            {
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                Склад = Склад,
+                ВидЦіни = ВидЦіни,
+                Коментар = Коментар,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Назва = Назва,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -22613,17 +22880,20 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПересортицяТоварів_Objest> Copy(bool copyTableParts = false)
         {
-            ПересортицяТоварів_Objest copy = new ПересортицяТоварів_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.Склад = Склад;
-            copy.ВидЦіни = ВидЦіни;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ПересортицяТоварів_Objest copy = new ПересортицяТоварів_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                Склад = Склад,
+                ВидЦіни = ВидЦіни,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -23126,7 +23396,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПерерахунокТоварів_Triggers.BeforeSave(this);
+            
+                await ПерерахунокТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -23142,7 +23413,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПерерахунокТоварів_Triggers.AfterSave(this);
+                
+                    await ПерерахунокТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { КлючовіСловаДляПошуку });
             }
 
@@ -23171,17 +23443,20 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПерерахунокТоварів_Objest> Copy(bool copyTableParts = false)
         {
-            ПерерахунокТоварів_Objest copy = new ПерерахунокТоварів_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Склад = Склад;
-            copy.Відповідальний = Відповідальний;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
+            ПерерахунокТоварів_Objest copy = new ПерерахунокТоварів_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Склад = Склад,
+                Відповідальний = Відповідальний,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                
+            };
             
             if (copyTableParts)
             {
@@ -23202,7 +23477,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПерерахунокТоварів_Triggers.SetDeletionLabel(this, label);
+            
+                await ПерерахунокТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -23212,7 +23488,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПерерахунокТоварів_Triggers.BeforeDelete(this);
+            
+                await ПерерахунокТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a93" });
         }
@@ -23286,7 +23563,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПерерахунокТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПерерахунокТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -23736,7 +24014,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПсуванняТоварів_Triggers.BeforeSave(this);
+            
+                await ПсуванняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -23754,7 +24033,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПсуванняТоварів_Triggers.AfterSave(this);
+                
+                    await ПсуванняТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, Причина, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -23783,19 +24063,22 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПсуванняТоварів_Objest> Copy(bool copyTableParts = false)
         {
-            ПсуванняТоварів_Objest copy = new ПсуванняТоварів_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.Склад = Склад;
-            copy.Причина = Причина;
-            copy.СумаДокументу = СумаДокументу;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
-            copy.Основа = Основа;
+            ПсуванняТоварів_Objest copy = new ПсуванняТоварів_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                Склад = Склад,
+                Причина = Причина,
+                СумаДокументу = СумаДокументу,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                Основа = Основа,
+                
+            };
             
             if (copyTableParts)
             {
@@ -23816,7 +24099,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПсуванняТоварів_Triggers.SetDeletionLabel(this, label);
+            
+                await ПсуванняТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -23826,7 +24110,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПсуванняТоварів_Triggers.BeforeDelete(this);
+            
+                await ПсуванняТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a95" });
         }
@@ -23902,7 +24187,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПсуванняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПсуванняТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПсуванняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -24369,7 +24655,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ВнутрішнєСпоживанняТоварів_Triggers.BeforeSave(this);
+            
+                await ВнутрішнєСпоживанняТоварів_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -24388,7 +24675,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ВнутрішнєСпоживанняТоварів_Triggers.AfterSave(this);
+                
+                    await ВнутрішнєСпоживанняТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -24417,20 +24705,23 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ВнутрішнєСпоживанняТоварів_Objest> Copy(bool copyTableParts = false)
         {
-            ВнутрішнєСпоживанняТоварів_Objest copy = new ВнутрішнєСпоживанняТоварів_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Склад = Склад;
-            copy.Валюта = Валюта;
-            copy.Підрозділ = Підрозділ;
-            copy.СумаДокументу = СумаДокументу;
-            copy.Основа = Основа;
-            copy.Автор = Автор;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Коментар = Коментар;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ВнутрішнєСпоживанняТоварів_Objest copy = new ВнутрішнєСпоживанняТоварів_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Склад = Склад,
+                Валюта = Валюта,
+                Підрозділ = Підрозділ,
+                СумаДокументу = СумаДокументу,
+                Основа = Основа,
+                Автор = Автор,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Коментар = Коментар,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -24451,7 +24742,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(this, label);
+            
+                await ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -24461,7 +24753,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
+            
+                await ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b08" });
         }
@@ -24538,7 +24831,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -25090,7 +25384,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            РахунокФактура_Triggers.BeforeSave(this);
+            
+                await РахунокФактура_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -25116,7 +25411,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                РахунокФактура_Triggers.AfterSave(this);
+                
+                    await РахунокФактура_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -25145,27 +25441,30 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<РахунокФактура_Objest> Copy(bool copyTableParts = false)
         {
-            РахунокФактура_Objest copy = new РахунокФактура_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Контрагент = Контрагент;
-            copy.Організація = Організація;
-            copy.Валюта = Валюта;
-            copy.СумаДокументу = СумаДокументу;
-            copy.Склад = Склад;
-            copy.Статус = Статус;
-            copy.ФормаОплати = ФормаОплати;
-            copy.БанківськийРахунок = БанківськийРахунок;
-            copy.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента;
-            copy.Каса = Каса;
-            copy.ГосподарськаОперація = ГосподарськаОперація;
-            copy.Договір = Договір;
-            copy.Підрозділ = Підрозділ;
-            copy.Автор = Автор;
-            copy.Коментар = Коментар;
-            copy.Менеджер = Менеджер;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            РахунокФактура_Objest copy = new РахунокФактура_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Контрагент = Контрагент,
+                Організація = Організація,
+                Валюта = Валюта,
+                СумаДокументу = СумаДокументу,
+                Склад = Склад,
+                Статус = Статус,
+                ФормаОплати = ФормаОплати,
+                БанківськийРахунок = БанківськийРахунок,
+                БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента,
+                Каса = Каса,
+                ГосподарськаОперація = ГосподарськаОперація,
+                Договір = Договір,
+                Підрозділ = Підрозділ,
+                Автор = Автор,
+                Коментар = Коментар,
+                Менеджер = Менеджер,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -25186,7 +25485,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РахунокФактура_Triggers.SetDeletionLabel(this, label);
+            
+                await РахунокФактура_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -25196,7 +25496,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            РахунокФактура_Triggers.BeforeDelete(this);
+            
+                await РахунокФактура_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b11" });
         }
@@ -25280,7 +25581,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             РахунокФактура_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                РахунокФактура_Triggers.SetDeletionLabel(obj, label);
+                
+                    await РахунокФактура_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -25719,7 +26021,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            РозміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
+            
+                await РозміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
@@ -25736,7 +26039,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                РозміщенняТоварівНаСкладі_Triggers.AfterSave(this);
+                
+                    await РозміщенняТоварівНаСкладі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -25765,18 +26069,21 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<РозміщенняТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
-            РозміщенняТоварівНаСкладі_Objest copy = new РозміщенняТоварівНаСкладі_Objest();
-            copy.Назва = Назва;
-            copy.ДатаДок = ДатаДок;
-            copy.НомерДок = НомерДок;
-            copy.Коментар = Коментар;
-            copy.Основа = Основа;
-            copy.Склад = Склад;
-            copy.Автор = Автор;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.ДокументПоступлення = ДокументПоступлення;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            РозміщенняТоварівНаСкладі_Objest copy = new РозміщенняТоварівНаСкладі_Objest()
+            {
+                Назва = Назва,
+                ДатаДок = ДатаДок,
+                НомерДок = НомерДок,
+                Коментар = Коментар,
+                Основа = Основа,
+                Склад = Склад,
+                Автор = Автор,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                ДокументПоступлення = ДокументПоступлення,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -25797,7 +26104,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
+            
+                await РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -25807,7 +26115,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            
+                await РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a68" });
         }
@@ -25882,7 +26191,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
+                
+                    await РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -26306,7 +26616,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ПереміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
+            
+                await ПереміщенняТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
@@ -26322,7 +26633,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ПереміщенняТоварівНаСкладі_Triggers.AfterSave(this);
+                
+                    await ПереміщенняТоварівНаСкладі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -26351,17 +26663,20 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ПереміщенняТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
-            ПереміщенняТоварівНаСкладі_Objest copy = new ПереміщенняТоварівНаСкладі_Objest();
-            copy.Назва = Назва;
-            copy.ДатаДок = ДатаДок;
-            copy.НомерДок = НомерДок;
-            copy.Коментар = Коментар;
-            copy.Основа = Основа;
-            copy.Склад = Склад;
-            copy.Автор = Автор;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ПереміщенняТоварівНаСкладі_Objest copy = new ПереміщенняТоварівНаСкладі_Objest()
+            {
+                Назва = Назва,
+                ДатаДок = ДатаДок,
+                НомерДок = НомерДок,
+                Коментар = Коментар,
+                Основа = Основа,
+                Склад = Склад,
+                Автор = Автор,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -26382,7 +26697,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
+            
+                await ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -26392,7 +26708,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
+            
+                await ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b26" });
         }
@@ -26466,7 +26783,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -26897,7 +27215,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            ЗбіркаТоварівНаСкладі_Triggers.BeforeSave(this);
+            
+                await ЗбіркаТоварівНаСкладі_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["docnomer"] = НомерДок;
@@ -26914,7 +27233,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                ЗбіркаТоварівНаСкладі_Triggers.AfterSave(this);
+                
+                    await ЗбіркаТоварівНаСкладі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -26943,18 +27263,21 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<ЗбіркаТоварівНаСкладі_Objest> Copy(bool copyTableParts = false)
         {
-            ЗбіркаТоварівНаСкладі_Objest copy = new ЗбіркаТоварівНаСкладі_Objest();
-            copy.Назва = Назва;
-            copy.ДатаДок = ДатаДок;
-            copy.НомерДок = НомерДок;
-            copy.Коментар = Коментар;
-            copy.Основа = Основа;
-            copy.Склад = Склад;
-            copy.Автор = Автор;
-            copy.Організація = Організація;
-            copy.Підрозділ = Підрозділ;
-            copy.ДокументРеалізації = ДокументРеалізації;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            ЗбіркаТоварівНаСкладі_Objest copy = new ЗбіркаТоварівНаСкладі_Objest()
+            {
+                Назва = Назва,
+                ДатаДок = ДатаДок,
+                НомерДок = НомерДок,
+                Коментар = Коментар,
+                Основа = Основа,
+                Склад = Склад,
+                Автор = Автор,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                ДокументРеалізації = ДокументРеалізації,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -26975,7 +27298,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
+            
+                await ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -26985,7 +27309,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
+            
+                await ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b28" });
         }
@@ -27060,7 +27385,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
+                
+                    await ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -27448,7 +27774,8 @@ namespace StorageAndTrade_1_0.Документи
         
         public async Task<bool> Save()
         {
-            РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeSave(this);
+            
+                await РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeSave(this);
             base.FieldValue["docname"] = Назва;
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
@@ -27464,7 +27791,8 @@ namespace StorageAndTrade_1_0.Документи
             
             if (result)
             {
-                РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave(this);
+                
+                    await РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), new string[] { Назва, НомерДок, Коментар, КлючовіСловаДляПошуку });
             }
 
@@ -27493,17 +27821,20 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Objest> Copy(bool copyTableParts = false)
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest copy = new РозміщенняНоменклатуриПоКоміркам_Objest();
-            copy.Назва = Назва;
-            copy.НомерДок = НомерДок;
-            copy.ДатаДок = ДатаДок;
-            copy.Організація = Організація;
-            copy.Склад = Склад;
-            copy.Коментар = Коментар;
-            copy.Автор = Автор;
-            copy.Підрозділ = Підрозділ;
-            copy.Основа = Основа;
-            copy.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку;
+            РозміщенняНоменклатуриПоКоміркам_Objest copy = new РозміщенняНоменклатуриПоКоміркам_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Склад = Склад,
+                Коментар = Коментар,
+                Автор = Автор,
+                Підрозділ = Підрозділ,
+                Основа = Основа,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
             
             if (copyTableParts)
             {
@@ -27524,7 +27855,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(this, label);
+            
+                await РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -27534,7 +27866,8 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask Delete()
         {
-            РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
+            
+                await РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b32" });
         }
@@ -27608,7 +27941,8 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(obj, label);
+                
+                    await РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -27940,16 +28274,17 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
         public ЦіниНоменклатури_Objest Copy()
         {
-            ЦіниНоменклатури_Objest copy = new ЦіниНоменклатури_Objest();
-            copy.Period = Period; /* Базове поле */
-            
-            copy.Номенклатура = Номенклатура;
-            copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
-            copy.ВидЦіни = ВидЦіни;
-            copy.Ціна = Ціна;
-            copy.Пакування = Пакування;
-            copy.Валюта = Валюта;
-            
+            ЦіниНоменклатури_Objest copy = new ЦіниНоменклатури_Objest()
+            {
+                Period = Period, /* Базове поле */
+                Номенклатура = Номенклатура,
+                ХарактеристикаНоменклатури = ХарактеристикаНоменклатури,
+                ВидЦіни = ВидЦіни,
+                Ціна = Ціна,
+                Пакування = Пакування,
+                Валюта = Валюта,
+                
+            };
             copy.New();
             return copy;
         }
@@ -28080,13 +28415,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
         public КурсиВалют_Objest Copy()
         {
-            КурсиВалют_Objest copy = new КурсиВалют_Objest();
-            copy.Period = Period; /* Базове поле */
-            
-            copy.Валюта = Валюта;
-            copy.Курс = Курс;
-            copy.Кратність = Кратність;
-            
+            КурсиВалют_Objest copy = new КурсиВалют_Objest()
+            {
+                Period = Period, /* Базове поле */
+                Валюта = Валюта,
+                Курс = Курс,
+                Кратність = Кратність,
+                
+            };
             copy.New();
             return copy;
         }
@@ -28221,14 +28557,15 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
         public ШтрихкодиНоменклатури_Objest Copy()
         {
-            ШтрихкодиНоменклатури_Objest copy = new ШтрихкодиНоменклатури_Objest();
-            copy.Period = Period; /* Базове поле */
-            
-            copy.Штрихкод = Штрихкод;
-            copy.Номенклатура = Номенклатура;
-            copy.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури;
-            copy.Пакування = Пакування;
-            
+            ШтрихкодиНоменклатури_Objest copy = new ШтрихкодиНоменклатури_Objest()
+            {
+                Period = Period, /* Базове поле */
+                Штрихкод = Штрихкод,
+                Номенклатура = Номенклатура,
+                ХарактеристикаНоменклатури = ХарактеристикаНоменклатури,
+                Пакування = Пакування,
+                
+            };
             copy.New();
             return copy;
         }
@@ -28343,11 +28680,12 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
         public ФайлиДокументів_Objest Copy()
         {
-            ФайлиДокументів_Objest copy = new ФайлиДокументів_Objest();
-            copy.Period = Period; /* Базове поле */
-            
-            copy.Файл = Файл;
-            
+            ФайлиДокументів_Objest copy = new ФайлиДокументів_Objest()
+            {
+                Period = Period, /* Базове поле */
+                Файл = Файл,
+                
+            };
             copy.New();
             return copy;
         }
@@ -28480,14 +28818,15 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
         public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest Copy()
         {
-            РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest copy = new РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest();
-            copy.Period = Period; /* Базове поле */
-            
-            copy.Номенклатура = Номенклатура;
-            copy.Склад = Склад;
-            copy.Приміщення = Приміщення;
-            copy.Комірка = Комірка;
-            
+            РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest copy = new РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest()
+            {
+                Period = Period, /* Базове поле */
+                Номенклатура = Номенклатура,
+                Склад = Склад,
+                Приміщення = Приміщення,
+                Комірка = Комірка,
+                
+            };
             copy.New();
             return copy;
         }
@@ -28826,9 +29165,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -28845,7 +29182,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -28915,7 +29251,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -28931,17 +29266,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -28956,7 +29287,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -29006,7 +29336,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29026,17 +29355,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -29055,7 +29380,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -29104,7 +29428,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29119,17 +29442,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -29143,7 +29462,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -29195,9 +29513,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29214,7 +29530,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -29284,7 +29599,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29300,17 +29614,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -29325,7 +29635,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -29375,9 +29684,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29391,7 +29698,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -29452,7 +29758,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29465,17 +29770,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -29487,7 +29788,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -29529,7 +29829,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29544,17 +29843,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -29568,7 +29863,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -29623,9 +29917,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29645,7 +29937,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -29724,7 +30015,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29743,17 +30033,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -29771,7 +30057,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -29828,9 +30113,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29848,7 +30131,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -29920,7 +30202,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -29936,17 +30217,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -29961,7 +30238,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30013,9 +30289,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30031,7 +30305,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -30098,7 +30371,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30113,17 +30385,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -30137,7 +30405,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30186,9 +30453,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30202,7 +30467,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -30263,7 +30527,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30276,17 +30539,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -30298,7 +30557,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30340,7 +30598,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30355,17 +30612,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -30379,7 +30632,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30429,9 +30681,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30446,7 +30696,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -30510,7 +30759,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30524,17 +30772,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -30547,7 +30791,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30591,7 +30834,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30607,17 +30849,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -30632,7 +30870,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30675,7 +30912,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30688,17 +30924,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -30710,7 +30942,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30764,9 +30995,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30787,7 +31016,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -30868,7 +31096,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30887,17 +31114,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -30915,7 +31138,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -30971,7 +31193,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -30994,17 +31215,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -31026,7 +31243,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -31079,7 +31295,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -31095,17 +31310,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -31120,7 +31331,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -31177,9 +31387,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -31200,7 +31408,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -31282,7 +31489,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -31302,17 +31508,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -31331,7 +31533,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -31388,9 +31589,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public async ValueTask Read()
         {
             Records.Clear();
-            
             await base.BaseRead();
-            
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -31407,7 +31606,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
@@ -31479,7 +31677,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -31497,17 +31694,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -31524,7 +31717,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -31572,7 +31764,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -31588,17 +31779,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -31613,7 +31800,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
@@ -31658,7 +31844,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         {
             Records.Clear();
             await base.BaseRead();
-
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -31673,17 +31858,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 Records.Add(record);
             }
-        
             base.BaseClear();
         }
     
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
             await base.BaseBeginTransaction();
-            
-            if (clear_all_before_save)
-                await base.BaseDelete();
-
+            if (clear_all_before_save) await base.BaseDelete();
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
@@ -31697,7 +31878,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
-            
             await base.BaseCommitTransaction();
         }
     
