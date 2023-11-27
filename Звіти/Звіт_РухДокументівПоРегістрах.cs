@@ -37,7 +37,7 @@ namespace StorageAndTrade
 
         public async void CreateReport(DocumentPointer ДокументВказівник)
         {
-            List<string> allowRegisterAccumulation = Config.Kernel!.Conf.Documents[ДокументВказівник.TypeDocument].AllowRegisterAccumulation;
+            List<string> allowRegisterAccumulation = Config.Kernel.Conf.Documents[ДокументВказівник.TypeDocument].AllowRegisterAccumulation;
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
             {

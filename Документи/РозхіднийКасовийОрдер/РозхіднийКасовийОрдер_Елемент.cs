@@ -71,7 +71,7 @@ namespace StorageAndTrade
         void FillComboBoxes()
         {
             //1
-            ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel!.Conf.Enums["ГосподарськіОперації"];
+            ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
 
             ГосподарськаОперація.Append(
                 Перелічення.ГосподарськіОперації.ОплатаПостачальнику.ToString(),

@@ -29,19 +29,52 @@ namespace StorageAndTrade
 {
     public abstract class ДовідникЖурнал : VBox
     {
+        /// <summary>
+        /// Елемент на який треба спозиціонувати список при обновленні
+        /// </summary>
         public UnigueID? SelectPointerItem { get; set; }
-        public UnigueID? DirectoryPointerItem { get; set; }
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
+        /// <summary>
+        /// Елемент на який треба спозиціонувати список при виборі
+        /// </summary>
+        public UnigueID? DirectoryPointerItem { get; set; }
+
+        /// <summary>
+        /// Функція зворотнього виклику при виборі
+        /// </summary>
+        public Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+
+        /// <summary>
+        /// Верхній набір меню
+        /// </summary>
         protected Toolbar ToolbarTop = new Toolbar();
+
+        /// <summary>
+        /// Верхній горизонтальний бокс.
+        /// можна додаткові кнопки і різні лінки добавляти
+        /// </summary>
         protected HBox HBoxTop = new HBox();
+
+        /// <summary>
+        /// Панелька яка містить одну область за замовчуванням і туди добавляється список
+        /// У випадку якщо потрібно можна додати ще одну область, це використовується для ієрархічних довідників
+        /// </summary>
         protected HPaned HPanedTable = new HPaned();
+
+        /// <summary>
+        /// Дерево
+        /// </summary>
         protected TreeView TreeViewGrid = new TreeView();
+
+        /// <summary>
+        /// Пошук
+        /// </summary>
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
+        /// <summary>
+        /// Текст для діалогів
+        /// </summary>
         protected string MessageRequestText { get; set; } = "Встановити або зняти помітку на видалення?";
-
-        //private readonly TargetEntry[] targets = [new TargetEntry("GTK_TREE_MODEL_ROW", TargetFlags.Widget, 0)];
 
         public ДовідникЖурнал() : base()
         {
@@ -67,11 +100,6 @@ namespace StorageAndTrade
             TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
             //TreeViewGrid.KeyPressEvent += OnKeyPressEvent;
-            // TreeViewGrid.EnableModelDragSource(Gdk.ModifierType.ModifierMask, targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
-            // TreeViewGrid.EnableModelDragDest(targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
-
-            // TreeViewGrid.DragBegin += OnDragBegin;
-            // TreeViewGrid.DragEnd += OnDragEnd;
 
             scrollTree.Add(TreeViewGrid);
 
@@ -81,15 +109,6 @@ namespace StorageAndTrade
 
             ShowAll();
         }
-
-        // void OnDragBegin(object sender, DragBeginArgs args)
-        // {
-        //     Console.WriteLine("OnDragBegin");
-        // }
-        // void OnDragEnd(object sender, DragEndArgs args)
-        // {
-        //     Console.WriteLine("OnDragEnd");
-        // }
 
         #region Toolbar & Menu
 
@@ -133,17 +152,17 @@ namespace StorageAndTrade
 
         #endregion
 
-        #region Virtual Function
+        #region Virtual & Abstract Function
 
-        public virtual ValueTask LoadRecords() { return new ValueTask(); }
+        public abstract ValueTask LoadRecords();
 
-        protected virtual ValueTask LoadRecords_OnSearch(string searchText) { return new ValueTask(); }
+        protected abstract ValueTask LoadRecords_OnSearch(string searchText);
 
-        protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
+        protected abstract void OpenPageElement(bool IsNew, UnigueID? unigueID = null);
 
-        protected virtual ValueTask SetDeletionLabel(UnigueID unigueID) { return new ValueTask(); }
+        protected abstract ValueTask SetDeletionLabel(UnigueID unigueID);
 
-        protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
+        protected abstract ValueTask<UnigueID?> Copy(UnigueID unigueID);
 
         public virtual async void CallBack_LoadRecords(UnigueID? selectPointer)
         {

@@ -108,10 +108,10 @@ namespace StorageAndTrade
 
         void FillComboBoxes()
         {
-            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["ТипПеріодуДляЖурналівДокументів"].Fields.Values)
+            foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ТипПеріодуДляЖурналівДокументів"].Fields.Values)
                 ОсновнийТипПеріоду_ДляЖурналівДокументів.Append(field.Name, field.Desc);
 
-            foreach (ConfigurationEnumField field in Config.Kernel!.Conf.Enums["МетодиСписанняПартій"].Fields.Values)
+            foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["МетодиСписанняПартій"].Fields.Values)
                 МетодиСписанняПартій.Append(field.Name, field.Desc);
         }
 

@@ -42,7 +42,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Функція вибору
         /// </summary>
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+        public Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
         /// <summary>
         /// Верхній горизонтальний блок

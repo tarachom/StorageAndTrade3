@@ -66,7 +66,7 @@ namespace StorageAndTrade
 
                 vBoxAll.PackStart(scrollList, false, false, 2);
 
-                foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel!.Conf.Documents)
+                foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel.Conf.Documents)
                 {
                     string title = string.IsNullOrEmpty(documents.Value.FullName) ? documents.Value.Name : documents.Value.FullName;
 

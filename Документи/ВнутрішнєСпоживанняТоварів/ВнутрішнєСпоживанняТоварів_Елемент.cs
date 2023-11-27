@@ -67,17 +67,14 @@ namespace StorageAndTrade
 
         void FillComboBoxes()
         {
-            if (Config.Kernel != null)
-            {
-                //1
-                ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
+            //1
+            ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
 
-                ГосподарськаОперація.Append(
-                    Перелічення.ГосподарськіОперації.ВнутрішнєСпоживанняТоварів.ToString(),
-                    Конфігурація_ГосподарськіОперації.Fields["ВнутрішнєСпоживанняТоварів"].Desc);
+            ГосподарськаОперація.Append(
+                Перелічення.ГосподарськіОперації.ВнутрішнєСпоживанняТоварів.ToString(),
+                Конфігурація_ГосподарськіОперації.Fields["ВнутрішнєСпоживанняТоварів"].Desc);
 
-                ГосподарськаОперація.Active = 0;
-            }
+            ГосподарськаОперація.Active = 0;
         }
 
         protected override void CreateContainer1(VBox vBox)

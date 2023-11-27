@@ -37,13 +37,13 @@ namespace StorageAndTrade
         /// <summary>
         /// Функція зворотнього виклику для перевантаження списку
         /// </summary>
-        public System.Action<UnigueID?>? CallBack_LoadRecords { get; set; }
+        public Action<UnigueID?>? CallBack_LoadRecords { get; set; }
 
         /// <summary>
         /// Функція зворотнього виклику для вибору елементу
         /// Використовується коли потрібно новий елемент зразу вибрати
         /// </summary>
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+        public Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
         /// <summary>
         /// ІД елементу
@@ -247,12 +247,12 @@ namespace StorageAndTrade
         /// <summary>
         /// Присвоєння значень
         /// </summary>
-        public virtual void SetValue() { }
+        public abstract void SetValue();
 
         /// <summary>
         /// Зчитування значень
         /// </summary>
-        protected virtual void GetValue() { }
+        protected abstract void GetValue();
 
         /// <summary>
         /// Функція обробки перед збереження та після збереження
@@ -284,13 +284,13 @@ namespace StorageAndTrade
         /// <summary>
         /// Збереження
         /// </summary>
-        protected virtual ValueTask<bool> Save() { return new ValueTask<bool>(); }
+        protected abstract ValueTask<bool> Save();
 
         /// <summary>
         /// Проведення
         /// </summary>
         /// <param name="spendDoc">Провести</param>
-        protected virtual ValueTask<bool> SpendTheDocument(bool spendDoc) { return new ValueTask<bool>(); }
+        protected abstract ValueTask<bool> SpendTheDocument(bool spendDoc);
 
         /// <summary>
         /// Записати повідомлення про помилку і вивести меседж

@@ -38,9 +38,9 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіКомірки_Папки_Записи.AddColumns(TreeViewGrid);
         }
 
-        public override void LoadTree()
+        public override async void LoadTree()
         {
-            ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
+            await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);

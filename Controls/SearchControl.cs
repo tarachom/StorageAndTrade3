@@ -110,7 +110,7 @@ namespace StorageAndTrade
                 { "like_param", "%" + findText.ToLower().Trim() + "%" }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(queryFind, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(queryFind, paramQuery);
 
             if (recordResult.Result)
                 if (recordResult.ListRow.Count > 0)

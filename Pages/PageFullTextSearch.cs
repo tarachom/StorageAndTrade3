@@ -69,7 +69,7 @@ namespace StorageAndTrade
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 
-            var recordResult = await Config.Kernel!.DataBase.SpetialTableFullTextSearchSelect(findtext, offset);
+            var recordResult = await Config.Kernel.DataBase.SpetialTableFullTextSearchSelect(findtext, offset);
             if (recordResult != null)
             {
                 count = recordResult.ListRow.Count;

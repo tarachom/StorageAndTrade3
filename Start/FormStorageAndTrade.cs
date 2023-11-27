@@ -98,8 +98,8 @@ namespace StorageAndTrade
 
         public async void SetCurrentUser()
         {
-            KernelUser = Config.Kernel!.User;
-            KernelSession = Config.Kernel!.Session;
+            KernelUser = Config.Kernel.User;
+            KernelSession = Config.Kernel.Session;
 
             Користувачі_Pointer ЗнайденийКористувач = await new Користувачі_Select().FindByField(Користувачі_Const.КодВСпеціальнійТаблиці, KernelUser);
 
@@ -107,7 +107,7 @@ namespace StorageAndTrade
             {
                 Користувачі_Objest НовийКористувач = new Користувачі_Objest
                 {
-                    КодВСпеціальнійТаблиці = Config.Kernel!.User,
+                    КодВСпеціальнійТаблиці = Config.Kernel.User,
                     Назва = await Config.Kernel.DataBase.SpetialTableUsersGetFullName(KernelUser)
                 };
 
@@ -208,7 +208,7 @@ namespace StorageAndTrade
                 if (!Системні.ЗупинитиФоновіЗадачі_Const)
                 {
                     //Виконання обчислень
-                    await Config.Kernel!.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
+                    await Config.Kernel.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
                          VirtualTablesСalculation.Execute, VirtualTablesСalculation.ExecuteFinalCalculation);
                 }
 
@@ -217,13 +217,13 @@ namespace StorageAndTrade
             }
 
             //Закрити поточну сесію
-            //await Config.Kernel!.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
+            //await Config.Kernel.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
             //Console.WriteLine("CloseSession");
         }
 
         async void UpdateSession()
         {
-            if (!await Config.Kernel!.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession))
+            if (!await Config.Kernel.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession))
             {
                 // Log Off
             }

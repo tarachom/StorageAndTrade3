@@ -484,7 +484,7 @@ ORDER BY Номенклатура_Назва
 
             if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
             {
-                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
+                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
 
                 foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
@@ -560,7 +560,7 @@ ORDER BY
 
             if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
             {
-                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
+                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
 
                 foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {

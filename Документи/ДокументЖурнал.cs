@@ -33,15 +33,49 @@ namespace StorageAndTrade
 {
     public abstract class ДокументЖурнал : VBox
     {
+        /// <summary>
+        /// Для позиціювання в списку
+        /// </summary>
         public UnigueID? SelectPointerItem { get; set; }
+
+        /// <summary>
+        /// Для вибору і позиціювання
+        /// </summary>
         public UnigueID? DocumentPointerItem { get; set; }
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+
+        /// <summary>
+        /// Функція зворотнього виклику при виборі
+        /// </summary>
+        public Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+
+        /// <summary>
+        /// Період для журналу
+        /// </summary>
         public Перелічення.ТипПеріодуДляЖурналівДокументів PeriodWhere { get; set; } = 0;
 
+        /// <summary>
+        /// Верхній набір меню
+        /// </summary>
         protected Toolbar ToolbarTop = new Toolbar();
+
+        /// <summary>
+        /// Верхній бок для додаткових кнопок
+        /// </summary>
         protected HBox HBoxTop = new HBox();
+
+        /// <summary>
+        /// Дерево
+        /// </summary>
         protected TreeView TreeViewGrid = new TreeView();
+
+        /// <summary>
+        /// Набір варіантів періодів
+        /// </summary>
         protected ComboBoxText ComboBoxPeriodWhere = new ComboBoxText();
+
+        /// <summary>
+        /// Пошук
+        /// </summary>
         SearchControl2 ПошукПовнотекстовий = new SearchControl2();
 
         public ДокументЖурнал() : base()
@@ -214,19 +248,19 @@ namespace StorageAndTrade
 
         #endregion
 
-        #region Virtual Function
+        #region Virtual & Abstract Function
 
         protected virtual Menu? ToolbarNaOsnoviSubMenu() { return null; }
 
-        public virtual void LoadRecords() { }
+        public abstract void LoadRecords();
 
-        protected virtual void LoadRecords_OnSearch(string searchText) { }
+        protected abstract void LoadRecords_OnSearch(string searchText);
 
-        protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
+        protected abstract void OpenPageElement(bool IsNew, UnigueID? unigueID = null);
 
-        protected virtual ValueTask SetDeletionLabel(UnigueID unigueID) { return new ValueTask(); }
+        protected abstract ValueTask SetDeletionLabel(UnigueID unigueID);
 
-        protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
+        protected abstract ValueTask<UnigueID?> Copy(UnigueID unigueID);
 
         public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
         {
@@ -234,11 +268,11 @@ namespace StorageAndTrade
             LoadRecords();
         }
 
-        protected virtual void PeriodWhereChanged() { }
+        protected abstract void PeriodWhereChanged();
 
-        protected virtual ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc) { return new ValueTask(); }
+        protected abstract ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc);
 
-        protected virtual DocumentPointer? ReportSpendTheDocument(UnigueID unigueID) { return null; }
+        protected abstract DocumentPointer? ReportSpendTheDocument(UnigueID unigueID);
 
         protected virtual void ExportXML(UnigueID unigueID) { }
 

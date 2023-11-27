@@ -37,13 +37,13 @@ namespace StorageAndTrade
         /// <summary>
         /// Функція зворотнього виклику для перевантаження списку
         /// </summary>
-        public System.Action<UnigueID?>? CallBack_LoadRecords { get; set; }
+        public Action<UnigueID?>? CallBack_LoadRecords { get; set; }
 
         /// <summary>
         /// Функція зворотнього виклику для вибору елементу
         /// Використовується коли потрібно новий елемент зразу вибрати
         /// </summary>
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+        public Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
         /// <summary>
         /// ІД елементу
@@ -52,7 +52,7 @@ namespace StorageAndTrade
 
         /// <summary>
         /// Назва         
-        /// /// </summary>
+        /// </summary>
         public string Caption { get; set; } = "";
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace StorageAndTrade
         protected HBox HBoxTop = new HBox();
 
         /// <summary>
-        /// Панель з двох колонок
+        /// Панель з двох колонок для полів
         /// </summary>
         protected HPaned HPanedTop = new HPaned() { BorderWidth = 5, Position = 500 };
 
@@ -92,6 +92,8 @@ namespace StorageAndTrade
             ShowAll();
         }
 
+        #region Virtual Function
+
         /// <summary>
         /// Лівий Блок
         /// </summary>
@@ -101,6 +103,8 @@ namespace StorageAndTrade
         /// Правий Блок
         /// </summary>
         protected virtual void CreatePack2(VBox vBox) { }
+
+        #endregion
 
         #region Create Field
 
@@ -183,20 +187,24 @@ namespace StorageAndTrade
 
         #endregion
 
+        #region Abstract Function
+
         /// <summary>
         /// Присвоєння значень
         /// </summary>
-        public virtual void SetValue() { }
+        public abstract void SetValue();
 
         /// <summary>
         /// Зчитування значень
         /// </summary>
-        protected virtual void GetValue() { }
+        protected abstract void GetValue();
 
         /// <summary>
         /// Збереження
         /// </summary>
-        protected virtual ValueTask Save() { return new ValueTask(); }
+        protected abstract ValueTask Save();
+
+        #endregion
 
         /// <summary>
         /// Функція обробки перед збереження та після збереження

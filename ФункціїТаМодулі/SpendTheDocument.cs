@@ -170,7 +170,7 @@ UNION ALL
                 { "period_end", OwnerDateDoc }, { "Кількість", Кількість }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -221,7 +221,7 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -275,7 +275,7 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -334,7 +334,7 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -383,7 +383,7 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -439,7 +439,7 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -490,7 +490,7 @@ FROM
                 { "period_end", OwnerDateDoc }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -1682,7 +1682,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 { "Склад", ДокументОбєкт.Склад.UnigueID.UGuid }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }
@@ -1949,7 +1949,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 { "Склад", ДокументОбєкт.Склад.UnigueID.UGuid }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             return recordResult.ListRow;
         }

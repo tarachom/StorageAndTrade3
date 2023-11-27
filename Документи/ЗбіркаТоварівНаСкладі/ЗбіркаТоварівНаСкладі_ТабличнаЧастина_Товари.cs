@@ -639,7 +639,7 @@ HAVING
 
                 bool єЗміниВЗаписі = false;
 
-                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
                 foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {

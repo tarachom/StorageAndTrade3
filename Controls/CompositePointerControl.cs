@@ -199,7 +199,7 @@ namespace StorageAndTrade
 
                 vBox.PackStart(scrollList, false, false, 2);
 
-                foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel!.Conf.Directories)
+                foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel.Conf.Directories)
                 {
                     ListBoxRow row = new ListBoxRow() { Name = directories.Key };
                     row.Add(new Label(directories.Value.FullName) { Halign = Align.Start });
@@ -229,7 +229,7 @@ namespace StorageAndTrade
 
                 vBox.PackStart(scrollList, false, false, 2);
 
-                foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel!.Conf.Documents)
+                foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel.Conf.Documents)
                 {
                     ListBoxRow row = new ListBoxRow() { Name = documents.Key };
                     row.Add(new Label(documents.Value.FullName) { Halign = Align.Start });

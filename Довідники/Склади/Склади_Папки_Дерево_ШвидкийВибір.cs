@@ -79,9 +79,9 @@ namespace StorageAndTrade
             }
         }
 
-        public void LoadTree()
+        public async void LoadTree()
         {
-            ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem);
+            await ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);

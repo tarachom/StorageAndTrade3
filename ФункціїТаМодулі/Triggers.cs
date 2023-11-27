@@ -33,7 +33,6 @@ limitations under the License.
 
 using AccountingSoftware;
 using StorageAndTrade;
-using Конфа = StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 
@@ -144,7 +143,7 @@ WHERE
                 { "Номенклатура", ДовідникОбєкт.UnigueID.UGuid }
             };
 
-            await Конфа.Config.Kernel!.DataBase.ExecuteSQL(query, paramQuery);
+            await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
 
             //
             //Очистка характеристик
@@ -314,7 +313,7 @@ WHERE
                 { "Валюта", ДовідникОбєкт.UnigueID.UGuid }
             };
 
-            await Конфа.Config.Kernel!.DataBase.ExecuteSQL(query, paramQuery);
+            await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
         }
     }
 
@@ -1127,7 +1126,7 @@ WHERE
         public static async ValueTask BeforeSave(ДоговориКонтрагентів_Objest ДовідникОбєкт)
         {
             string НазваПереліченняЗКонфігурації =
-                Конфа.Config.Kernel!.Conf.Enums["ТипДоговорів"].Fields[ДовідникОбєкт.ТипДоговору.ToString()].Desc;
+                Config.Kernel.Conf.Enums["ТипДоговорів"].Fields[ДовідникОбєкт.ТипДоговору.ToString()].Desc;
 
             ДовідникОбєкт.ТипДоговоруПредставлення = НазваПереліченняЗКонфігурації;
 

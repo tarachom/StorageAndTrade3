@@ -55,14 +55,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
     /* ТАБЛИЦЯ */
     public class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
     {
-        string Image 
-        {
-            get
-            {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
-            }
-        }
-
+        string Image { get { return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png"); } }
         bool DeletionLabel = false;
         string ID = "";
         <xsl:for-each select="Fields/Field">
@@ -70,17 +63,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID
-            /* */ <xsl:for-each select="Fields/Field">
-              <xsl:text>, </xsl:text>
+            return new object[] { new Gdk.Pixbuf(Image), ID,
+            <xsl:for-each select="Fields/Field">
               <xsl:value-of select="Name"/>
+              <xsl:text>, </xsl:text>
             </xsl:for-each> };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
-            <xsl:for-each select="Fields/Field">
-              <xsl:text>, typeof(string)</xsl:text> /* <xsl:value-of select="Name"/> */
-            </xsl:for-each>);
+        public static ListStore Store = new ListStore([/*Image*/ typeof(Gdk.Pixbuf), /*ID*/ typeof(string),
+            <xsl:for-each select="Fields/Field">/*<xsl:value-of select="Name"/>*/ typeof(string), </xsl:for-each>]);
 
         public static void AddColumns(TreeView treeView)
         {
@@ -104,7 +95,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static List&lt;Where&gt; Where { get; set; } = new List&lt;Where&gt;();
+        public static List&lt;Where&gt; Where { get; set; } = [];
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
@@ -119,16 +110,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
 
             Довідники.<xsl:value-of select="$DirectoryName"/>_Select <xsl:value-of select="$DirectoryName"/>_Select = new Довідники.<xsl:value-of select="$DirectoryName"/>_Select();
             <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Field.AddRange(
-                new string[]
-                { "deletion_label" /*Помітка на видалення*/
-                    <xsl:for-each select="Fields/Field[Type != 'pointer']">
-                        <xsl:text>, </xsl:text>
-                        <xsl:text>Довідники.</xsl:text>
-                        <xsl:value-of select="$DirectoryName"/>
-                        <xsl:text>_Const.</xsl:text>
-                        <xsl:value-of select="Name"/> /* <xsl:value-of select="position()"/> */
-                    </xsl:for-each>
-                });
+                ["deletion_label",
+                  <xsl:for-each select="Fields/Field[Type != 'pointer']">
+                      <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
+                      <xsl:text>Довідники.</xsl:text>
+                      <xsl:value-of select="$DirectoryName"/>
+                      <xsl:text>_Const.</xsl:text>
+                      <xsl:value-of select="Name"/>,
+                  </xsl:for-each>
+                ]);
 
             /* Where */
             <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Where = Where;
@@ -173,10 +163,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
                           <xsl:variable name="CountAlias" select="count(FieldAndAlias)"/>
                           <xsl:for-each select="FieldAndAlias">
                             <xsl:if test="position() &gt; 1"> + " " + </xsl:if>
-                            <xsl:text>cur.Fields?[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"]?.ToString()</xsl:text>
+                            <xsl:text>cur.Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
                             <xsl:if test="$CountAlias = 1"> ?? ""</xsl:if>
                           </xsl:for-each>
-                          <xsl:if test="$CountNotPointer != 0 or position() != $CountPointer">,</xsl:if> /**/
+                          <xsl:if test="$CountNotPointer != 0 or position() != $CountPointer">,</xsl:if> /*<xsl:value-of select="Name"/>*/
                         </xsl:for-each>
                         <xsl:for-each select="Fields/Field[Type != 'pointer']">
                           <xsl:value-of select="Name"/>
@@ -190,33 +180,33 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
                               <xsl:text>((</xsl:text>
                               <xsl:value-of select="Pointer"/>
                               <xsl:text>)</xsl:text>
-                              <xsl:text>(cur.Fields?[</xsl:text>
+                              <xsl:text>(cur.Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! != DBNull.Value ? cur.Fields?[</xsl:text>
+                              <xsl:text>]! != DBNull.Value ? cur.Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
                               <xsl:text>]! : 0)) )</xsl:text>
                             </xsl:when>
                             <xsl:when test="Type = 'boolean'">
-                              <xsl:text>(cur.Fields?[</xsl:text>
+                              <xsl:text>(cur.Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! != DBNull.Value ? (bool)cur.Fields?[</xsl:text>
+                              <xsl:text>]! != DBNull.Value ? (bool)cur.Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
                               <xsl:text>]! : false) ? "Так" : ""</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                              <xsl:text>cur.Fields?[</xsl:text>
+                              <xsl:text>cur.Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]?.ToString() ?? ""</xsl:text>
+                              <xsl:text>].ToString() ?? ""</xsl:text>
                             </xsl:otherwise>
                           </xsl:choose>
                           <xsl:if test="position() != $CountNotPointer">,</xsl:if> /**/
@@ -248,14 +238,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
     /* ДЕРЕВО */
     public class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
     {
-        string Image 
-        {
-            get
-            {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png");
-            }
-        }
-
+        string Image { get{ return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png"); }}
         bool DeletionLabel = false;
         string ID = "";
         string Назва = "";
@@ -291,8 +274,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.Т
         selectPointer - елемент на який потрібно спозиціонуватися
         owner - Власник (якщо таке поле є в табличному списку)
         */
-        public static void LoadTree(UnigueID? openFolder, UnigueID? selectPointer
-        <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">, UnigueID? owner</xsl:if>)
+        public static async ValueTask LoadTree(UnigueID? openFolder, UnigueID? selectPointer <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">, UnigueID? owner</xsl:if>)
         {
             Store.Clear();
             RootPath = SelectPath = null;
@@ -352,8 +334,8 @@ WITH RECURSIVE r AS (
 )
 SELECT 
     uid, 
-    {<xsl:value-of select="$DirectoryName"/>_Const.Назва}, 
-    {<xsl:value-of select="$DirectoryName"/>_Const.Родич}, 
+    {<xsl:value-of select="$DirectoryName"/>_Const.Назва} AS Назва, 
+    {<xsl:value-of select="$DirectoryName"/>_Const.Родич} AS Родич, 
     level,
     deletion_label
 FROM r
@@ -362,21 +344,18 @@ ORDER BY level, {<xsl:value-of select="$DirectoryName"/>_Const.Назва} ASC
 
             #endregion
 
-            string[] columnsName;
-            List&lt;object[]&gt;? listRow = null;
-
-            Config.Kernel?.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
 
             Dictionary&lt;string, TreeIter&gt; nodeDictionary = new Dictionary&lt;string, TreeIter&gt;();
 
-            if (listRow != null)
-                foreach (object[] row in listRow)
+            if (recordResult.Result)
+                foreach (var row in recordResult.ListRow)
                 {
-                    string uid = row[0]?.ToString() ?? Guid.Empty.ToString();
-                    string fieldName = (row[1]?.ToString() ?? "");
-                    string fieldParent = row[2]?.ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row[3];
-                    bool deletionLabel = (bool)row[4];
+                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
+                    string fieldName = (row["Назва"].ToString() ?? "");
+                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
+                    int level = (int)row["level"];
+                    bool deletionLabel = (bool)row["deletion_label"];
 
                     <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
                     {
@@ -483,14 +462,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
         <xsl:variable name="TabularListName" select="Name"/>
     public class <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
     {
-        string Image 
-        {
-            get
-            {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
-            }
-        }
-
+        string Image { get { return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png"); }}
         bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
@@ -499,17 +471,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Spend /*Проведений документ*/
-            /* */ <xsl:for-each select="Fields/Field">
-              <xsl:text>, </xsl:text>
-              <xsl:value-of select="Name"/>
+            return new object[] { new Gdk.Pixbuf(Image), ID, /*Проведений документ*/ Spend, 
+            <xsl:for-each select="Fields/Field">
+              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
             </xsl:for-each> };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(bool) /* Spend Проведений документ*/
+        public static ListStore Store = new ListStore([/*Image*/ typeof(Gdk.Pixbuf), /*ID*/ typeof(string), /*Spend Проведений документ*/ typeof(bool),
             <xsl:for-each select="Fields/Field">
-              <xsl:text>, typeof(string)</xsl:text> /* <xsl:value-of select="Name"/> */
-            </xsl:for-each>);
+              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),  
+            </xsl:for-each>]);
 
         public static void AddColumns(TreeView treeView)
         {
@@ -533,7 +504,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static List&lt;Where&gt; Where { get; set; } = new List&lt;Where&gt;();
+        public static List&lt;Where&gt; Where { get; set; } = [];
 
         public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
@@ -554,17 +525,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
 
             Документи.<xsl:value-of select="$DocumentName"/>_Select <xsl:value-of select="$DocumentName"/>_Select = new Документи.<xsl:value-of select="$DocumentName"/>_Select();
             <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Field.AddRange(
-                new string[]
-                { "deletion_label" /*Помітка на видалення*/,
-                  "spend" /*Проведений документ*/
-                    <xsl:for-each select="Fields/Field[Type != 'pointer']">
-                        <xsl:text>, </xsl:text>
-                        <xsl:text>Документи.</xsl:text>
-                        <xsl:value-of select="$DocumentName"/>
-                        <xsl:text>_Const.</xsl:text>
-                        <xsl:value-of select="Name"/> /* <xsl:value-of select="position()"/> */
-                    </xsl:for-each>
-                });
+                [/*Помітка на видалення*/ "deletion_label",
+                 /*Проведений документ*/ "spend",
+                <xsl:for-each select="Fields/Field[Type != 'pointer']">
+                    <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
+                    <xsl:text>Документи.</xsl:text>
+                    <xsl:value-of select="$DocumentName"/>
+                    <xsl:text>_Const.</xsl:text>
+                    <xsl:value-of select="Name"/>,
+                </xsl:for-each>
+                ]);
 
             /* Where */
             <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Where = Where;
@@ -610,7 +580,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                           <xsl:variable name="CountAlias" select="count(FieldAndAlias)"/>
                           <xsl:for-each select="FieldAndAlias">
                             <xsl:if test="position() &gt; 1"> + " " + </xsl:if>
-                            <xsl:text>cur.Fields?[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"]?.ToString()</xsl:text>
+                            <xsl:text>cur.Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
                             <xsl:if test="$CountAlias = 1"> ?? ""</xsl:if>
                           </xsl:for-each>
                           <xsl:if test="$CountNotPointer != 0 or position() != $CountPointer">,</xsl:if> /**/
@@ -627,18 +597,18 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                               <xsl:text>((</xsl:text>
                               <xsl:value-of select="Pointer"/>
                               <xsl:text>)</xsl:text>
-                              <xsl:text>(cur.Fields?[</xsl:text>
+                              <xsl:text>(cur.Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! != DBNull.Value ? cur.Fields?[</xsl:text>
+                              <xsl:text>]! != DBNull.Value ? cur.Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
                               <xsl:text>]! : 0)) )</xsl:text>
                             </xsl:when>
                             <xsl:when test="Type = 'boolean'">
-                              <xsl:text>(cur.Fields?[</xsl:text>
+                              <xsl:text>(cur.Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
@@ -649,11 +619,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                               <xsl:text>]! : false) ? "Так" : ""</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                              <xsl:text>cur.Fields?[</xsl:text>
+                              <xsl:text>cur.Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]?.ToString() ?? ""</xsl:text>
+                              <xsl:text>].ToString() ?? ""</xsl:text>
                             </xsl:otherwise>
                           </xsl:choose>
                           <xsl:if test="position() != $CountNotPointer">,</xsl:if> /**/
@@ -692,14 +662,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
     
     public class Журнали_<xsl:value-of select="$JournalName"/>
     {
-        string Image 
-        {
-            get
-            {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
-            }
-        }
-
+        string Image { get { return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png"); }}
         bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
@@ -710,22 +673,23 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
         // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Type, Spend /*Проведений документ*/
-            /* */ <xsl:for-each select="Fields/Field">
-              <xsl:text>, </xsl:text>
+            return new object[] { new Gdk.Pixbuf(Image), ID, Type, /*Проведений документ*/ Spend,
+            <xsl:for-each select="Fields/Field">
+              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
               <xsl:value-of select="Name"/>
+              <xsl:text>, </xsl:text>
             </xsl:for-each> };
         }
 
         // Джерело даних для списку
-        public static ListStore Store = new ListStore(
-          typeof(Gdk.Pixbuf) /* Image */, 
-          typeof(string) /* ID */, 
-          typeof(string) /* Type */, 
-          typeof(bool) /* Spend Проведений документ*/
-            <xsl:for-each select="Fields/Field">
-              <xsl:text>, typeof(string)</xsl:text> /* <xsl:value-of select="Name"/> */
-            </xsl:for-each>);
+        public static ListStore Store = new ListStore([
+          typeof(Gdk.Pixbuf), /* Image */
+          typeof(string), /* ID */
+          typeof(string), /* Type */
+          typeof(bool), /* Spend Проведений документ */
+          <xsl:for-each select="Fields/Field">
+              <xsl:text>typeof(string), </xsl:text>/*<xsl:value-of select="Name"/>*/
+          </xsl:for-each>]);
 
         // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
@@ -769,11 +733,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
         // Список документів які входять в журнал
         public static Dictionary&lt;string, string&gt; AllowDocument()
         {
-            Dictionary&lt;string, string&gt; allowDoc = new Dictionary&lt;string, string&gt;();
-            <xsl:for-each select="$AllowDocument/Item">
-                <xsl:text>allowDoc.Add("</xsl:text>
-                <xsl:value-of select="Name"/>", "<xsl:value-of select="normalize-space(FullName)"/>");
-            </xsl:for-each>
+            Dictionary&lt;string, string&gt; allowDoc = new Dictionary&lt;string, string&gt;()
+            {
+                <xsl:for-each select="$AllowDocument/Item">
+                    <xsl:text>{"</xsl:text><xsl:value-of select="Name"/>", "<xsl:value-of select="normalize-space(FullName)"/>"},
+                </xsl:for-each>
+            };
             return allowDoc;
         }
 
@@ -860,21 +825,18 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
                 </xsl:for-each>
                 <xsl:text>";</xsl:text>
             </xsl:if>
-          
-            //string[] columnsName;
-            //List&lt;Dictionary&lt;string, object&gt;&gt; listRow;
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
             foreach (Dictionary&lt;string, object&gt; row in recordResult.ListRow)
             {
                 Журнали_<xsl:value-of select="$JournalName"/> record = new Журнали_<xsl:value-of select="$JournalName"/>();
-                record.ID = row["uid"]?.ToString() ?? "";
-                record.Type = row["type"]?.ToString() ?? "";
+                record.ID = row["uid"].ToString() ?? "";
+                record.Type = row["type"].ToString() ?? "";
                 record.DeletionLabel = (bool)row["deletion_label"];
                 record.Spend = (bool)row["spend"];
                 <xsl:for-each select="Fields/Field">
-                    record.<xsl:value-of select="Name"/> = row["<xsl:value-of select="Name"/>"] != DBNull.Value ? (row["<xsl:value-of select="Name"/>"]?.ToString() ?? "") : "";
+                    record.<xsl:value-of select="Name"/> = row["<xsl:value-of select="Name"/>"] != DBNull.Value ? (row["<xsl:value-of select="Name"/>"].ToString() ?? "") : "";
                 </xsl:for-each>
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
@@ -911,17 +873,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Період
-            /* */ <xsl:for-each select="Fields/Field">
-              <xsl:text>, </xsl:text>
-              <xsl:value-of select="Name"/>
+            return new object[] { new Gdk.Pixbuf(Image), ID, Період,
+            <xsl:for-each select="Fields/Field">
+              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text><xsl:value-of select="Name"/>,
             </xsl:for-each> };
         }
 
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */, typeof(string) /* Період */
+        public static ListStore Store = new ListStore([/*Image*/ typeof(Gdk.Pixbuf), /*ID*/ typeof(string), /*Період*/ typeof(string),
             <xsl:for-each select="Fields/Field">
-              <xsl:text>, typeof(string)</xsl:text> /* <xsl:value-of select="Name"/> */
-            </xsl:for-each>);
+                <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),
+            </xsl:for-each>]);
 
         public static void AddColumns(TreeView treeView)
         {
@@ -946,7 +907,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static List&lt;Where&gt; Where { get; set; } = new List&lt;Where&gt;();
+        public static List&lt;Where&gt; Where { get; set; } = [];
 
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;

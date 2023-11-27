@@ -80,9 +80,9 @@ namespace StorageAndTrade
             }
         }
 
-        public void LoadTree()
+        public async void LoadTree()
         {
-            ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
+            await ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);

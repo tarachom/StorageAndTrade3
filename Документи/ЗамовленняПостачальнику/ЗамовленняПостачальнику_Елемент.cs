@@ -78,29 +78,26 @@ namespace StorageAndTrade
 
         void FillComboBoxes()
         {
-            if (Config.Kernel != null)
-            {
-                //1
-                ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
+            //1
+            ConfigurationEnums Конфігурація_ГосподарськіОперації = Config.Kernel.Conf.Enums["ГосподарськіОперації"];
 
-                ГосподарськаОперація.Append(
-                    Перелічення.ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику.ToString(),
-                    Конфігурація_ГосподарськіОперації.Fields["ПлануванняПоЗамовленнямПостачальнику"].Desc);
+            ГосподарськаОперація.Append(
+                Перелічення.ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику.ToString(),
+                Конфігурація_ГосподарськіОперації.Fields["ПлануванняПоЗамовленнямПостачальнику"].Desc);
 
-                ГосподарськаОперація.Active = 0;
+            ГосподарськаОперація.Active = 0;
 
-                //2
-                foreach (var field in Перелічення.ПсевдонімиПерелічення.ФормаОплати_List())
-                    ФормаОплати.Append(field.Value.ToString(), field.Name);
+            //2
+            foreach (var field in Перелічення.ПсевдонімиПерелічення.ФормаОплати_List())
+                ФормаОплати.Append(field.Value.ToString(), field.Name);
 
-                ФормаОплати.ActiveId = Перелічення.ФормаОплати.Готівка.ToString();
+            ФормаОплати.ActiveId = Перелічення.ФормаОплати.Готівка.ToString();
 
-                //3
-                foreach (var field in Перелічення.ПсевдонімиПерелічення.СпособиДоставки_List())
-                    СпосібДоставки.Append(field.Value.ToString(), field.Name);
+            //3
+            foreach (var field in Перелічення.ПсевдонімиПерелічення.СпособиДоставки_List())
+                СпосібДоставки.Append(field.Value.ToString(), field.Name);
 
-                СпосібДоставки.ActiveId = Перелічення.СпособиДоставки.Самовивіз.ToString();
-            }
+            СпосібДоставки.ActiveId = Перелічення.СпособиДоставки.Самовивіз.ToString();
         }
 
         protected override void CreateContainer1(VBox vBox)

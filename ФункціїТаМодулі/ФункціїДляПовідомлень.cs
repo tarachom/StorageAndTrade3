@@ -58,7 +58,7 @@ namespace StorageAndTrade
             string query = $@"
 DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}";
 
-            await Конфа.Config.Kernel!.DataBase.ExecuteSQL(query);
+            await Конфа.Config.Kernel.DataBase.ExecuteSQL(query);
         }
 
         public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилку()
@@ -75,7 +75,7 @@ FROM
     {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE} AS Помилки
 ORDER BY Дата DESC
 ";
-            return await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query);
+            return await Конфа.Config.Kernel.DataBase.SelectRequestAsync(query);
         }
 
         public static async void ВідкритиТермінал()

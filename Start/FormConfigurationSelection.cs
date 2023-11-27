@@ -26,7 +26,7 @@ using Gtk;
 using AccountingSoftware;
 using Configurator;
 
-using Конфа = StorageAndTrade_1_0;
+using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -59,10 +59,10 @@ namespace StorageAndTrade
 
             string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Confa.xml");
 
-            Конфа.Config.Kernel = new Kernel();
+            Config.Kernel = new Kernel();
 
             //Підключення до бази даних та завантаження конфігурації
-            bool result = await Конфа.Config.Kernel.Open(
+            bool result = await Config.Kernel.Open(
                 PathToConfXML,
                 OpenConfigurationParam.DataBaseServer,
                 OpenConfigurationParam.DataBaseLogin,
@@ -73,7 +73,7 @@ namespace StorageAndTrade
 
             if (!result)
             {
-                Message.Error(this, "Error: " + Конфа.Config.Kernel.Exception?.Message);
+                Message.Error(this, "Error: " + Config.Kernel.Exception?.Message);
                 return;
             }
 
@@ -100,13 +100,13 @@ namespace StorageAndTrade
 
             if (ModalResult == ResponseType.Cancel)
             {
-                Конфа.Config.Kernel.Close();
+                Config.Kernel.Close();
                 return;
             }
 
-            if (await Конфа.Config.Kernel.DataBase.IfExistsTable("tab_constants"))
+            if (await Config.Kernel.DataBase.IfExistsTable("tab_constants"))
             {
-                await Конфа.Config.ReadAllConstants();
+                await Config.ReadAllConstants();
 
                 //Значення констант за замовчуванням
                 if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)

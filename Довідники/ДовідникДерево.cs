@@ -55,11 +55,17 @@ namespace StorageAndTrade
         /// <summary>
         /// Функція вибору
         /// </summary>
-        public System.Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
+        public Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
 
+        /// <summary>
+        /// Верхній набір меню
+        /// </summary>
         protected Toolbar ToolbarTop = new Toolbar();
+
+        /// <summary>
+        /// Дерево
+        /// </summary>
         protected TreeView TreeViewGrid = new TreeView();
-        //private readonly TargetEntry[] targets = [new TargetEntry("GTK_TREE_MODEL_ROW", TargetFlags.Widget, 0)];
 
         public ДовідникДерево() : base()
         {
@@ -75,27 +81,12 @@ namespace StorageAndTrade
             TreeViewGrid.RowActivated += OnRowActivated;
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
 
-            // TreeViewGrid.EnableModelDragSource(Gdk.ModifierType.ModifierMask, targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
-            // TreeViewGrid.EnableModelDragDest(targets, /*Gdk.DragAction.Copy | */Gdk.DragAction.Move);
-
-            // TreeViewGrid.DragBegin += OnDragBegin;
-            // TreeViewGrid.DragEnd += OnDragEnd;
-
             scrollTree.Add(TreeViewGrid);
 
             PackStart(scrollTree, true, true, 0);
 
             ShowAll();
         }
-
-        // void OnDragBegin(object sender, DragBeginArgs args)
-        // {
-        //     Console.WriteLine("OnDragBegin");
-        // }
-        // void OnDragEnd(object sender, DragEndArgs args)
-        // {
-        //     Console.WriteLine("OnDragEnd");
-        // }
 
         #region Toolbar & Menu
 
@@ -139,21 +130,21 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected void CallBack_LoadTree(UnigueID? selectPointer)
+        #region Virtual & Abstract Function
+
+        public abstract void LoadTree();
+
+        protected abstract void OpenPageElement(bool IsNew, UnigueID? unigueID = null);
+
+        protected abstract ValueTask SetDeletionLabel(UnigueID unigueID);
+
+        protected abstract ValueTask<UnigueID?> Copy(UnigueID unigueID);
+
+        protected virtual void CallBack_LoadTree(UnigueID? selectPointer)
         {
             DirectoryPointerItem = selectPointer;
             LoadTree();
         }
-
-        #region Virtual Function
-
-        public virtual void LoadTree() { }
-
-        protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
-
-        protected virtual ValueTask SetDeletionLabel(UnigueID unigueID) { return new ValueTask(); }
-
-        protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
         #endregion
 

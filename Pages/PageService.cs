@@ -174,8 +174,6 @@ namespace StorageAndTrade
 
         async ValueTask ClearDeletionLabel()
         {
-            if (Config.Kernel == null) return;
-
             ButtonSensitive(false);
             ClearMessage();
 
@@ -233,7 +231,7 @@ namespace StorageAndTrade
             CreateMessage(TypeMessage.None, "\n");
             CreateMessage(TypeMessage.Info, "Обробка документів:");
 
-            foreach (ConfigurationDocuments configurationDocuments in Config.Kernel!.Conf.Documents.Values)
+            foreach (ConfigurationDocuments configurationDocuments in Config.Kernel.Conf.Documents.Values)
             {
                 if (CancellationTokenPageService!.IsCancellationRequested)
                     break;
@@ -306,7 +304,7 @@ namespace StorageAndTrade
                     else if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart)
                         query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid LIMIT 5";
 
-                    var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+                    var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
                     if (recordResult.ListRow.Count > 0)
                     {

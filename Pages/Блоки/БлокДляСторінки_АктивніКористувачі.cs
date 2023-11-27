@@ -99,7 +99,7 @@ namespace StorageAndTrade
 
         async ValueTask LoadRecords()
         {
-            var recordResult = await Config.Kernel!.DataBase.SpetialTableActiveUsersSelect();
+            var recordResult = await Config.Kernel.DataBase.SpetialTableActiveUsersSelect();
 
             Store.Clear();
             foreach (Dictionary<string, object> record in recordResult.ListRow)

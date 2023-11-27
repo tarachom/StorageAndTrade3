@@ -67,7 +67,7 @@ namespace StorageAndTrade
 
                 vBoxAll.PackStart(scrollList, false, false, 2);
 
-                foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel!.Conf.Directories)
+                foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel.Conf.Directories)
                 {
                     string title = string.IsNullOrEmpty(directories.Value.FullName) ? directories.Value.Name : directories.Value.FullName;
 

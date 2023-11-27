@@ -425,7 +425,7 @@ ORDER BY Номенклатура_Назва
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>();
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
             ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
@@ -714,7 +714,7 @@ ORDER BY Номенклатура_Назва, ХарактеристикаНом
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
             ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
@@ -966,7 +966,7 @@ ORDER BY period ASC
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
 
             ListStore listStore;
             ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);

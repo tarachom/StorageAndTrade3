@@ -72,32 +72,24 @@ namespace StorageAndTrade
 
         public async ValueTask SetValue()
         {
-            if (Config.Kernel != null)
-            {
-                Dictionary<string, string> allUsers = await Config.Kernel.DataBase.SpetialTableUsersShortSelect();
+            Dictionary<string, string> allUsers = await Config.Kernel.DataBase.SpetialTableUsersShortSelect();
 
-                foreach (KeyValuePair<string, string> user in allUsers)
-                    comboBoxAllUsers.Append(user.Key, user.Value);
+            foreach (KeyValuePair<string, string> user in allUsers)
+                comboBoxAllUsers.Append(user.Key, user.Value);
 
-                comboBoxAllUsers.Active = 0;
-                bLogIn.Sensitive = true;
-            }
+            comboBoxAllUsers.Active = 0;
+            bLogIn.Sensitive = true;
         }
 
         async void OnLogIn(object? sender, EventArgs args)
         {
-            if (Config.Kernel != null)
+            if (await Config.Kernel.UserLogIn(comboBoxAllUsers.ActiveId, passwordUser.Text))
             {
-                if (await Config.Kernel.UserLogIn(comboBoxAllUsers.ActiveId, passwordUser.Text))
-                {
-                    ModalResult = ResponseType.Ok;
-                    ThisClose();
-                }
-                else
-                    Message.Error(this, "Невірний пароль");
+                ModalResult = ResponseType.Ok;
+                ThisClose();
             }
             else
-                ModalResult = ResponseType.Cancel;
+                Message.Error(this, "Невірний пароль");
         }
 
         void OnCancel(object? sender, EventArgs args)

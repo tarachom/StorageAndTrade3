@@ -72,7 +72,7 @@ WHERE {Константи.ЗавантаженняДанихІзСайтів.З�
                 { "Дата", DateTime.Now.AddDays(-7) }
             };
 
-            await Конфа.Config.Kernel!.DataBase.ExecuteSQL(query, paramQuery);
+            await Конфа.Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
         }
 
         public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗаписиЗІсторіїЗавантаженняКурсуВалют(int КількістьЗаписів = 50)
@@ -92,7 +92,7 @@ FROM
 ORDER BY Дата DESC
 LIMIT {КількістьЗаписів}
 ";
-            return await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query);
+            return await Конфа.Config.Kernel.DataBase.SelectRequestAsync(query);
         }
 
         public static async ValueTask<DateTime?> ОтриматиДатуОстанньогоЗавантаженняКурсуВалют()
@@ -106,7 +106,7 @@ ORDER BY Дата DESC
 LIMIT 1
 ";
 
-            var recordResult = await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query);
+            var recordResult = await Конфа.Config.Kernel.DataBase.SelectRequestAsync(query);
 
             if (recordResult.Result)
             {
@@ -146,7 +146,7 @@ SELECT
 FROM
     Валюти";
 
-            return await Конфа.Config.Kernel!.DataBase.SelectRequestAsync(query);
+            return await Конфа.Config.Kernel.DataBase.SelectRequestAsync(query);
         }
     }
 }

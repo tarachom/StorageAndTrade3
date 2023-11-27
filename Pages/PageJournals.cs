@@ -65,7 +65,7 @@ namespace StorageAndTrade
 
                 vBoxAll.PackStart(scrollList, false, false, 2);
 
-                foreach (KeyValuePair<string, ConfigurationJournals> journal in Config.Kernel!.Conf.Journals)
+                foreach (KeyValuePair<string, ConfigurationJournals> journal in Config.Kernel.Conf.Journals)
                 {
                     string title = journal.Value.Name;
 

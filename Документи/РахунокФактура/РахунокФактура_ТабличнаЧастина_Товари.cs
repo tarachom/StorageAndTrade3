@@ -200,7 +200,7 @@ ORDER BY
     ЦіниНоменклатури.period DESC 
 LIMIT 1
 ";
-                var recordResult = await Config.Kernel!.DataBase.SelectRequestAsync(query);
+                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
                 if (recordResult.Result)
                     foreach (Dictionary<string, object> row in recordResult.ListRow)
                     {
@@ -530,7 +530,6 @@ LIMIT 1
                 case Columns.Характеристика:
                     {
                         ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Характеристика.UnigueID };
-
                         page.НоменклатураВласник.Pointer = запис.Номенклатура;
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
