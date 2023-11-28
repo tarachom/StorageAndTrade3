@@ -98,7 +98,7 @@ namespace StorageAndTrade
             Контакти.LoadRecords();
 
             Файли.Контрагенти_Objest = Контрагенти_Objest;
-            Файли.LoadRecords();
+            await Файли.LoadRecords();
         }
 
         protected override void GetValue()

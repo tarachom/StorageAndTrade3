@@ -43,7 +43,7 @@ limitations under the License.
 using Gtk;
 using AccountingSoftware;
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники.ТабличніСписки
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Довідники.ТабличніСписки
 {
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
@@ -387,7 +387,7 @@ ORDER BY level, {<xsl:value-of select="$DirectoryName"/>_Const.Назва} ASC
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.ТабличніСписки
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Документи.ТабличніСписки
 {
     public static class Інтерфейс
     {
@@ -855,7 +855,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи.Т
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВідомостей.ТабличніСписки
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриВідомостей.ТабличніСписки
 {
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
       <xsl:variable name="RegisterName" select="Name"/>

@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
   <Name>Зберігання та Торгівля 3.0</Name>
-  <NameSpace>StorageAndTrade_1_0</NameSpace>
+  <NameSpaceGenerationCode>StorageAndTrade_1_0</NameSpaceGenerationCode>
+  <NameSpace>StorageAndTrade</NameSpace>
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>27.11.2023 14:47:58</DateTimeSave>
+  <DateTimeSave>28.11.2023 15:57:26</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>

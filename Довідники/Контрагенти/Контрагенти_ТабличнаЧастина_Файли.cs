@@ -29,7 +29,7 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class Контрагенти_ТабличнаЧастина_Файли : VBox
+    class Контрагенти_ТабличнаЧастина_Файли : ДовідникТабличнаЧастина
     {
         public Контрагенти_Objest? Контрагенти_Objest { get; set; }
 
@@ -83,86 +83,13 @@ namespace StorageAndTrade
 
         #endregion
 
-        TreeView TreeViewGrid;
-
         public Контрагенти_ТабличнаЧастина_Файли() : base()
         {
-            CreateToolbar();
-
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 200 };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-
-            TreeViewGrid = new TreeView(Store);
+            TreeViewGrid.Model = Store;
             AddColumn();
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-            TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
-
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, false, 0);
-
-            ShowAll();
         }
 
-        async void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
-        {
-            if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
-            {
-                TreePath itemPath;
-                TreeViewColumn treeColumn;
-
-                TreeViewGrid.GetCursor(out itemPath, out treeColumn);
-
-                if (treeColumn.Data.ContainsKey("Column"))
-                {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
-                    int rowNumber = int.Parse(itemPath.ToString());
-                    Запис запис = Записи[rowNumber];
-
-                    switch ((Columns)treeColumn.Data["Column"]!)
-                    {
-                        case Columns.Файл:
-                            {
-                                Файли page = new Файли
-                                {
-                                    DirectoryPointerItem = запис.Файл.UnigueID,
-                                    CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                                    {
-                                        запис.Файл = new Файли_Pointer(selectPointer);
-                                        await Запис.ПісляЗміни_Файл(запис);
-                                        Store.SetValues(iter, запис.ToArray());
-                                    }
-                                };
-
-                                await page.LoadRecords();
-
-                                Program.GeneralForm?.CreateNotebookPage("Вибір - Довідник: Файли", () => { return page; }, true);
-                                break;
-                            }
-                    }
-                }
-            }
-        }
-
-        void CreateToolbar()
-        {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
-
-            ToolButton upButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
-            upButton.Clicked += OnAddClick;
-            toolbar.Add(upButton);
-
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
-        }
-
-        public async void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             Store.Clear();
             Записи.Clear();
@@ -198,7 +125,7 @@ namespace StorageAndTrade
             }
         }
 
-        public async ValueTask SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (Контрагенти_Objest != null)
             {
@@ -224,43 +151,93 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
 
             //Файл
-            TreeViewColumn Файл = new TreeViewColumn("Файл", new CellRendererText(), "text", (int)Columns.Файл) { MinWidth = 300 };
-            Файл.Data.Add("Column", Columns.Файл);
+            {
+                TreeViewColumn Файл = new TreeViewColumn("Файл", new CellRendererText(), "text", (int)Columns.Файл) { MinWidth = 300 };
+                Файл.Data.Add("Column", Columns.Файл);
 
-            TreeViewGrid.AppendColumn(Файл);
+                TreeViewGrid.AppendColumn(Файл);
+            }
+
+            //Колонка пустишка для заповнення вільного простору
+            TreeViewGrid.AppendColumn(new TreeViewColumn());
+        }
+
+        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        {
+            Запис запис = Записи[rowNumber];
+
+            switch ((Columns)colNumber)
+            {
+                case Columns.Файл:
+                    {
+                        Файли_ШвидкийВибір page = new Файли_ШвидкийВибір
+                        {
+                            PopoverParent = popoverSmallSelect,
+                            DirectoryPointerItem = запис.Файл.UnigueID,
+                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                            {
+                                запис.Файл = new Файли_Pointer(selectPointer);
+                                await Запис.ПісляЗміни_Файл(запис);
+                                Store.SetValues(iter, запис.ToArray());
+                            }
+                        };
+
+                        popoverSmallSelect.Add(page);
+                        popoverSmallSelect.ShowAll();
+
+                        await page.LoadRecords();
+                        break;
+                    }
+            }
+        }
+
+        protected override void ButtonPopupClear(TreeIter iter, int rowNumber, int colNumber)
+        {
+            Запис запис = Записи[rowNumber];
+
+            switch ((Columns)colNumber)
+            {
+                case Columns.Файл:
+                    {
+                        запис.Файл.Clear();
+                        break;
+                    }
+            }
+
+            Store.SetValues(iter, запис.ToArray());
         }
 
         #endregion
 
         #region ToolBar
 
-        void OnAddClick(object? sender, EventArgs args)
+        protected override void AddRecord()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
 
-            Store.AppendValues(запис.ToArray());
+            TreeIter iter = Store.AppendValues(запис.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        protected override void CopyRecord(int rowNumber)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-                for (int i = selectionRows.Length - 1; i >= 0; i--)
-                {
-                    TreePath itemPath = selectionRows[i];
+            Запис запис = Записи[rowNumber];
 
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+            Запис записНовий = Запис.Clone(запис);
 
-                    int rowNumber = int.Parse(itemPath.ToString());
-                    Запис запис = Записи[rowNumber];
+            Записи.Add(записНовий);
 
-                    Записи.Remove(запис);
-                    Store.Remove(ref iter);
-                }
-            }
+            TreeIter iter = Store.AppendValues(записНовий.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+        }
+
+        protected override void DeleteRecord(TreeIter iter, int rowNumber)
+        {
+            Запис запис = Записи[rowNumber];
+
+            Записи.Remove(запис);
+            Store.Remove(ref iter);
         }
 
         #endregion

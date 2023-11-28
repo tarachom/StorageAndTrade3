@@ -162,7 +162,7 @@ namespace StorageAndTrade
                 ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
 
             Файли.Номенклатура_Objest = Номенклатура_Objest;
-            Файли.LoadRecords();
+            await Файли.LoadRecords();
 
             if (ОсновнаКартинкаФайл.AfterSelectFunc != null)
                 ОсновнаКартинкаФайл.AfterSelectFunc.Invoke();

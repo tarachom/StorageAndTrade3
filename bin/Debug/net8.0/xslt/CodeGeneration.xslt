@@ -323,7 +323,7 @@ limitations under the License.
 using AccountingSoftware;
 using System.Xml;
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
 {
     public static class Config
     {
@@ -404,7 +404,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     }
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Константи
 {
     <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
 	  #region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
@@ -582,7 +582,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Довідники
 {
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
@@ -990,7 +990,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Перелічення
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Перелічення
 {
     <xsl:for-each select="Configuration/Enums/Enum">
     #region ENUM "<xsl:value-of select="Name"/>"
@@ -1081,7 +1081,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Переліченн�
     }
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Документи
 {
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
@@ -1634,7 +1634,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Журнали
 {
     #region Journal
     public class Journal_Select: JournalSelect
@@ -1674,7 +1674,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
 -->
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВідомостей
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриВідомостей
 {
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
        <xsl:variable name="RegisterName" select="Name"/>
@@ -1848,7 +1848,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
   </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНакопичення
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриНакопичення
 {
     public static class VirtualTablesСalculation
     {
