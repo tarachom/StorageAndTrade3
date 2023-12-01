@@ -315,7 +315,7 @@ namespace StorageAndTrade
                 int rowNumber = int.Parse(args.Path);
                 Запис запис = Записи[rowNumber];
 
-                switch ((Columns)cellRender.Data["Column"]!)
+                switch ((Columns)ColumnNum)
                 {
                     case Columns.Сума:
                         {

@@ -1635,7 +1635,7 @@ namespace StorageAndTrade_1_0.Документи
         public static async ValueTask New(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ЗамовленняПостачальнику_Const).ToString("D8");
-            ДокументОбєкт.ДатаДок = System.DateTime.Now;
+            ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
 
@@ -1677,7 +1677,7 @@ namespace StorageAndTrade_1_0.Документи
         public static async ValueTask New(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПоступленняТоварівТаПослуг_Const).ToString("D8");
-            ДокументОбєкт.ДатаДок = System.DateTime.Now;
+            ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
 
@@ -1734,7 +1734,7 @@ namespace StorageAndTrade_1_0.Документи
         public static async ValueTask New(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ЗамовленняКлієнта_Const).ToString("D8");
-            ДокументОбєкт.ДатаДок = System.DateTime.Now;
+            ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
             ДокументОбєкт.Менеджер = Program.Користувач;
 
@@ -1859,7 +1859,7 @@ namespace StorageAndTrade_1_0.Документи
         public static async ValueTask New(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.ПрихіднийКасовийОрдер_Const).ToString("D8");
-            ДокументОбєкт.ДатаДок = System.DateTime.Now;
+            ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
 
             await ValueTask.FromResult(true);
