@@ -113,7 +113,7 @@ namespace StorageAndTrade
                 Config.StartBackgroundTask();
 
                 //Значення констант за замовчуванням
-                if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
+                if (Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
                     Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
 
                 Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = OpenConfigurationParam };
