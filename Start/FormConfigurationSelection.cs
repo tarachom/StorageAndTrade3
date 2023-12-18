@@ -106,6 +106,7 @@ namespace StorageAndTrade
 
             if (await Config.Kernel.DataBase.IfExistsTable("tab_constants"))
             {
+                //Зчитування констант
                 await Config.ReadAllConstants();
 
                 //Запуск фонових задач
