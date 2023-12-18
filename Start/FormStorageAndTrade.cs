@@ -33,7 +33,6 @@ namespace StorageAndTrade
     class FormStorageAndTrade : Window
     {
         public Configurator.ConfigurationParam? OpenConfigurationParam { get; set; }
-        CancellationTokenSource? CancellationTokenBackgroundTask;
         Guid KernelUser { get; set; } = Guid.Empty;
         Guid KernelSession { get; set; } = Guid.Empty;
 
@@ -164,69 +163,6 @@ namespace StorageAndTrade
 
             PopoverFind.Add(entryFullTextSearch);
             PopoverFind.ShowAll();
-        }
-
-        #endregion
-
-        #region BackgroundTask
-
-        public void StartBackgroundTask()
-        {
-            //Токен для зупинки процесу обчислення (для випадку коли буде потреба зупинити фонові обчислення)
-            CancellationTokenBackgroundTask = new CancellationTokenSource();
-
-            //Обчислення віртуальних залишків по регістрах
-            CalculationVirtualBalances();
-        }
-
-        /*
-
-        Схема роботи:
-
-        1. В процесі запису в регістр залишків - додається запис у таблицю тригерів.
-           Запис в таблицю тригерів містить дату запису в регістр, назву регістру.
-
-        2. Раз на 5 сек викликається процедура SpetialTableRegAccumTrigerExecute і
-           відбувається розрахунок віртуальних таблиць регістрів залишків.
-
-           Розраховуються тільки змінені регістри на дату проведення документу і
-           додатково на дату якщо змінена дата документу і документ уже був проведений.
-
-           Додатково розраховуються підсумки в кінці всіх розрахунків.
-
-        */
-
-        async void CalculationVirtualBalances()
-        {
-            while (!CancellationTokenBackgroundTask?.IsCancellationRequested ?? false)
-            {
-                //Обновлення сесії
-                UpdateSession();
-
-                //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
-                //провести всі документ, а тоді вже розраховувати регістри
-                if (!Системні.ЗупинитиФоновіЗадачі_Const)
-                {
-                    //Виконання обчислень
-                    await Config.Kernel.DataBase.SpetialTableRegAccumTrigerExecute(KernelSession,
-                         VirtualTablesСalculation.Execute, VirtualTablesСalculation.ExecuteFinalCalculation);
-                }
-
-                //Затримка на 5 сек
-                await Task.Delay(5000);
-            }
-
-            //Закрити поточну сесію
-            //await Config.Kernel.DataBase.SpetialTableActiveUsersCloseSession(KernelSession);
-            //Console.WriteLine("CloseSession");
-        }
-
-        async void UpdateSession()
-        {
-            if (!await Config.Kernel.DataBase.SpetialTableActiveUsersUpdateSession(KernelSession))
-            {
-                // Log Off
-            }
         }
 
         #endregion

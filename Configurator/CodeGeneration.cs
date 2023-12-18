@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.11.2023 15:57:26
+ * Дата конфігурації: 18.12.2023 14:17:53
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -53,6 +53,48 @@ namespace StorageAndTrade_1_0
             await Константи.ЗавантаженняДанихІзСайтів.ReadAll();
             await Константи.ПриЗапускуПрограми.ReadAll();
             
+        }
+
+        public static async void StartBackgroundTask()
+        {
+            /*
+            Схема роботи:
+
+            1. В процесі запису в регістр залишків - додається запис у таблицю тригерів.
+              Запис в таблицю тригерів містить дату запису в регістр, назву регістру.
+
+            2. Раз на 5 сек викликається процедура SpetialTableRegAccumTrigerExecute і
+              відбувається розрахунок віртуальних таблиць регістрів залишків.
+
+              Розраховуються тільки змінені регістри на дату проведення документу і
+              додатково на дату якщо змінена дата документу і документ уже був проведений.
+
+              Додатково розраховуються підсумки в кінці всіх розрахунків.
+            */
+
+            if (Kernel.Session == Guid.Empty)
+                throw new Exception("Порожні сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
+
+            while (true)
+            {
+                await Константи.Системні.ReadAll();
+                
+                //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
+                //провести всі документ, а тоді вже розраховувати регістри
+                if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
+                {
+                    //Виконання обчислень
+                    await Kernel.DataBase.SpetialTableRegAccumTrigerExecute
+                    (
+                        Kernel.Session,
+                        РегістриНакопичення.VirtualTablesСalculation.Execute, 
+                        РегістриНакопичення.VirtualTablesСalculation.ExecuteFinalCalculation
+                    );
+                }
+
+                //Затримка на 5 сек
+                await Task.Delay(5000);
+            }
         }
     }
 
@@ -1927,9 +1969,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Організації_Const
     {
         public const string TABLE = "tab_a01";
-        public const string POINTER = "Довідники.Організації";
-        public const string FULLNAME = "Організації";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Організації"; /* Повна назва вказівника */
+        public const string FULLNAME = "Організації"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_a1";
         public const string Код = "col_a2";
@@ -2310,9 +2352,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Номенклатура_Const
     {
         public const string TABLE = "tab_a03";
-        public const string POINTER = "Довідники.Номенклатура";
-        public const string FULLNAME = "Номенклатура";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Номенклатура"; /* Повна назва вказівника */
+        public const string FULLNAME = "Номенклатура"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_b1";
         public const string Код = "col_b2";
@@ -2681,9 +2723,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Виробники_Const
     {
         public const string TABLE = "tab_a04";
-        public const string POINTER = "Довідники.Виробники";
-        public const string FULLNAME = "Виробники";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Виробники"; /* Повна назва вказівника */
+        public const string FULLNAME = "Виробники"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_b6";
         public const string Код = "col_b7";
@@ -2901,9 +2943,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиНоменклатури_Const
     {
         public const string TABLE = "tab_a05";
-        public const string POINTER = "Довідники.ВидиНоменклатури";
-        public const string FULLNAME = "Види номенклатури";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ВидиНоменклатури"; /* Повна назва вказівника */
+        public const string FULLNAME = "Види номенклатури"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_b8";
         public const string Код = "col_b9";
@@ -3139,9 +3181,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ПакуванняОдиниціВиміру_Const
     {
         public const string TABLE = "tab_a06";
-        public const string POINTER = "Довідники.ПакуванняОдиниціВиміру";
-        public const string FULLNAME = "Одиниці виміру";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ПакуванняОдиниціВиміру"; /* Повна назва вказівника */
+        public const string FULLNAME = "Одиниці виміру"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_c1";
         public const string Код = "col_c2";
@@ -3371,9 +3413,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Валюти_Const
     {
         public const string TABLE = "tab_a07";
-        public const string POINTER = "Довідники.Валюти";
-        public const string FULLNAME = "Валюти";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Валюти"; /* Повна назва вказівника */
+        public const string FULLNAME = "Валюти"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_c5";
         public const string КороткаНазва = "col_a2";
@@ -3609,9 +3651,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Контрагенти_Const
     {
         public const string TABLE = "tab_a08";
-        public const string POINTER = "Довідники.Контрагенти";
-        public const string FULLNAME = "Контрагенти";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Контрагенти"; /* Повна назва вказівника */
+        public const string FULLNAME = "Контрагенти"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_c7";
         public const string Код = "col_c8";
@@ -4064,9 +4106,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Склади_Const
     {
         public const string TABLE = "tab_a10";
-        public const string POINTER = "Довідники.Склади";
-        public const string FULLNAME = "Склади";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Склади"; /* Повна назва вказівника */
+        public const string FULLNAME = "Склади"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_d9";
         public const string Код = "col_e1";
@@ -4441,9 +4483,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЦін_Const
     {
         public const string TABLE = "tab_a12";
-        public const string POINTER = "Довідники.ВидиЦін";
-        public const string FULLNAME = "Види цін";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ВидиЦін"; /* Повна назва вказівника */
+        public const string FULLNAME = "Види цін"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_e9";
         public const string Код = "col_f1";
@@ -4667,9 +4709,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЦінПостачальників_Const
     {
         public const string TABLE = "tab_a13";
-        public const string POINTER = "Довідники.ВидиЦінПостачальників";
-        public const string FULLNAME = "Види цін постачальників";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ВидиЦінПостачальників"; /* Повна назва вказівника */
+        public const string FULLNAME = "Види цін постачальників"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_f3";
         public const string Код = "col_f4";
@@ -4893,9 +4935,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Користувачі_Const
     {
         public const string TABLE = "tab_a14";
-        public const string POINTER = "Довідники.Користувачі";
-        public const string FULLNAME = "Користувачі";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Користувачі"; /* Повна назва вказівника */
+        public const string FULLNAME = "Користувачі"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_f6";
         public const string Код = "col_f7";
@@ -5248,9 +5290,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ФізичніОсоби_Const
     {
         public const string TABLE = "tab_a16";
-        public const string POINTER = "Довідники.ФізичніОсоби";
-        public const string FULLNAME = "Фізичні особи";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ФізичніОсоби"; /* Повна назва вказівника */
+        public const string FULLNAME = "Фізичні особи"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_g7";
         public const string Код = "col_g8";
@@ -5603,9 +5645,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СтруктураПідприємства_Const
     {
         public const string TABLE = "tab_a18";
-        public const string POINTER = "Довідники.СтруктураПідприємства";
-        public const string FULLNAME = "Структура підприємства";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.СтруктураПідприємства"; /* Повна назва вказівника */
+        public const string FULLNAME = "Структура підприємства"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_h8";
         public const string Код = "col_h9";
@@ -5829,9 +5871,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class КраїниСвіту_Const
     {
         public const string TABLE = "tab_a19";
-        public const string POINTER = "Довідники.КраїниСвіту";
-        public const string FULLNAME = "Країни світу";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.КраїниСвіту"; /* Повна назва вказівника */
+        public const string FULLNAME = "Країни світу"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_i2";
         public const string Код = "col_i3";
@@ -6049,9 +6091,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Файли_Const
     {
         public const string TABLE = "tab_a20";
-        public const string POINTER = "Довідники.Файли";
-        public const string FULLNAME = "Файли";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Файли"; /* Повна назва вказівника */
+        public const string FULLNAME = "Файли"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Код = "col_i6";
         public const string Назва = "col_i5";
@@ -6293,9 +6335,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ХарактеристикиНоменклатури_Const
     {
         public const string TABLE = "tab_a21";
-        public const string POINTER = "Довідники.ХарактеристикиНоменклатури";
-        public const string FULLNAME = "Характеристики";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ХарактеристикиНоменклатури"; /* Повна назва вказівника */
+        public const string FULLNAME = "Характеристики"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_i7";
         public const string Код = "col_i8";
@@ -6525,9 +6567,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Номенклатура_Папки_Const
     {
         public const string TABLE = "tab_a22";
-        public const string POINTER = "Довідники.Номенклатура_Папки";
-        public const string FULLNAME = "Номенклатура папки";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Номенклатура_Папки"; /* Повна назва вказівника */
+        public const string FULLNAME = "Номенклатура папки"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_j1";
         public const string Код = "col_j2";
@@ -6751,9 +6793,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Контрагенти_Папки_Const
     {
         public const string TABLE = "tab_a23";
-        public const string POINTER = "Довідники.Контрагенти_Папки";
-        public const string FULLNAME = "Контрагенти папки";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Контрагенти_Папки"; /* Повна назва вказівника */
+        public const string FULLNAME = "Контрагенти папки"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_j4";
         public const string Код = "col_j5";
@@ -6977,9 +7019,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Склади_Папки_Const
     {
         public const string TABLE = "tab_a24";
-        public const string POINTER = "Довідники.Склади_Папки";
-        public const string FULLNAME = "Склади папки";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Склади_Папки"; /* Повна назва вказівника */
+        public const string FULLNAME = "Склади папки"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_j7";
         public const string Код = "col_j8";
@@ -7203,9 +7245,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Каси_Const
     {
         public const string TABLE = "tab_a26";
-        public const string POINTER = "Довідники.Каси";
-        public const string FULLNAME = "Каси";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Каси"; /* Повна назва вказівника */
+        public const string FULLNAME = "Каси"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_k8";
         public const string Код = "col_k9";
@@ -7435,9 +7477,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class БанківськіРахункиОрганізацій_Const
     {
         public const string TABLE = "tab_a27";
-        public const string POINTER = "Довідники.БанківськіРахункиОрганізацій";
-        public const string FULLNAME = "Банківські рахунки організацій";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.БанківськіРахункиОрганізацій"; /* Повна назва вказівника */
+        public const string FULLNAME = "Банківські рахунки організацій"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_l1";
         public const string Код = "col_l2";
@@ -7721,9 +7763,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ДоговориКонтрагентів_Const
     {
         public const string TABLE = "tab_a28";
-        public const string POINTER = "Довідники.ДоговориКонтрагентів";
-        public const string FULLNAME = "Договори";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ДоговориКонтрагентів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Договори"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_n4";
         public const string Код = "col_n5";
@@ -8049,9 +8091,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class БанківськіРахункиКонтрагентів_Const
     {
         public const string TABLE = "tab_a29";
-        public const string POINTER = "Довідники.БанківськіРахункиКонтрагентів";
-        public const string FULLNAME = "Банківські рахунки контрагентів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.БанківськіРахункиКонтрагентів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Банківські рахунки контрагентів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_n7";
         public const string Код = "col_n8";
@@ -8347,9 +8389,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СтаттяРухуКоштів_Const
     {
         public const string TABLE = "tab_a45";
-        public const string POINTER = "Довідники.СтаттяРухуКоштів";
-        public const string FULLNAME = "Стаття руху коштів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.СтаттяРухуКоштів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Стаття руху коштів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_i7";
         public const string Код = "col_i8";
@@ -8678,9 +8720,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СеріїНоменклатури_Const
     {
         public const string TABLE = "tab_b02";
-        public const string POINTER = "Довідники.СеріїНоменклатури";
-        public const string FULLNAME = "Серії";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.СеріїНоменклатури"; /* Повна назва вказівника */
+        public const string FULLNAME = "Серії"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Номер = "col_a3";
         public const string Коментар = "col_a1";
@@ -8904,9 +8946,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ПартіяТоварівКомпозит_Const
     {
         public const string TABLE = "tab_b06";
-        public const string POINTER = "Довідники.ПартіяТоварівКомпозит";
-        public const string FULLNAME = "Партія товарів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ПартіяТоварівКомпозит"; /* Повна назва вказівника */
+        public const string FULLNAME = "Партія товарів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_a1";
         public const string Дата = "col_a2";
@@ -9148,9 +9190,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЗапасів_Const
     {
         public const string TABLE = "tab_b13";
-        public const string POINTER = "Довідники.ВидиЗапасів";
-        public const string FULLNAME = "Види запасів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ВидиЗапасів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Види запасів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_a5";
         public const string Організація = "col_b3";
@@ -9398,9 +9440,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Банки_Const
     {
         public const string TABLE = "tab_a39";
-        public const string POINTER = "Довідники.Банки";
-        public const string FULLNAME = "Банки";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Банки"; /* Повна назва вказівника */
+        public const string FULLNAME = "Банки"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Код = "col_a1";
         public const string Назва = "col_a2";
@@ -9774,9 +9816,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіПриміщення_Const
     {
         public const string TABLE = "tab_a71";
-        public const string POINTER = "Довідники.СкладськіПриміщення";
-        public const string FULLNAME = "Складські приміщення";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.СкладськіПриміщення"; /* Повна назва вказівника */
+        public const string FULLNAME = "Складські приміщення"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_a2";
         public const string НалаштуванняАдресногоЗберігання = "col_a3";
@@ -10000,9 +10042,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіКомірки_Const
     {
         public const string TABLE = "tab_a72";
-        public const string POINTER = "Довідники.СкладськіКомірки";
-        public const string FULLNAME = "Складські комірки";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.СкладськіКомірки"; /* Повна назва вказівника */
+        public const string FULLNAME = "Складські комірки"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Папка = "col_a1";
         public const string Назва = "col_a2";
@@ -10268,9 +10310,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ОбластьЗберігання_Const
     {
         public const string TABLE = "tab_a73";
-        public const string POINTER = "Довідники.ОбластьЗберігання";
-        public const string FULLNAME = "Область зберігання";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ОбластьЗберігання"; /* Повна назва вказівника */
+        public const string FULLNAME = "Область зберігання"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_a2";
         public const string Опис = "col_a3";
@@ -10486,9 +10528,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ТипорозміриКомірок_Const
     {
         public const string TABLE = "tab_a75";
-        public const string POINTER = "Довідники.ТипорозміриКомірок";
-        public const string FULLNAME = "Типорозміри комірок";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.ТипорозміриКомірок"; /* Повна назва вказівника */
+        public const string FULLNAME = "Типорозміри комірок"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Висота = "col_a1";
         public const string Назва = "col_a2";
@@ -10730,9 +10772,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіКомірки_Папки_Const
     {
         public const string TABLE = "tab_a76";
-        public const string POINTER = "Довідники.СкладськіКомірки_Папки";
-        public const string FULLNAME = "Складські комірки папки";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.СкладськіКомірки_Папки"; /* Повна назва вказівника */
+        public const string FULLNAME = "Складські комірки папки"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_j1";
         public const string Код = "col_j2";
@@ -10962,9 +11004,9 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Блокнот_Const
     {
         public const string TABLE = "tab_a41";
-        public const string POINTER = "Довідники.Блокнот";
-        public const string FULLNAME = "Блокнот";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.Блокнот"; /* Повна назва вказівника */
+        public const string FULLNAME = "Блокнот"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Код = "col_a1";
         public const string Назва = "col_a2";
@@ -12592,9 +12634,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗамовленняПостачальнику_Const
     {
         public const string TABLE = "tab_a25";
-        public const string POINTER = "Документи.ЗамовленняПостачальнику";
-        public const string FULLNAME = "Замовлення постачальнику";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ЗамовленняПостачальнику"; /* Повна назва вказівника */
+        public const string FULLNAME = "Замовлення постачальнику"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -13440,9 +13484,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоступленняТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a32";
-        public const string POINTER = "Документи.ПоступленняТоварівТаПослуг";
-        public const string FULLNAME = "Поступлення товарів та послуг";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПоступленняТоварівТаПослуг"; /* Повна назва вказівника */
+        public const string FULLNAME = "Поступлення товарів та послуг"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -14390,9 +14436,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗамовленняКлієнта_Const
     {
         public const string TABLE = "tab_a34";
-        public const string POINTER = "Документи.ЗамовленняКлієнта";
-        public const string FULLNAME = "Замовлення клієнта";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ЗамовленняКлієнта"; /* Повна назва вказівника */
+        public const string FULLNAME = "Замовлення клієнта"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -15266,9 +15314,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class РеалізаціяТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a36";
-        public const string POINTER = "Документи.РеалізаціяТоварівТаПослуг";
-        public const string FULLNAME = "Реалізація товарів та послуг";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.РеалізаціяТоварівТаПослуг"; /* Повна назва вказівника */
+        public const string FULLNAME = "Реалізація товарів та послуг"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -16216,9 +16266,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВстановленняЦінНоменклатури_Const
     {
         public const string TABLE = "tab_a42";
-        public const string POINTER = "Документи.ВстановленняЦінНоменклатури";
-        public const string FULLNAME = "Встановлення цін номенклатури";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ВстановленняЦінНоменклатури"; /* Повна назва вказівника */
+        public const string FULLNAME = "Встановлення цін номенклатури"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -16766,9 +16818,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПрихіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a44";
-        public const string POINTER = "Документи.ПрихіднийКасовийОрдер";
-        public const string FULLNAME = "Прихідний касовий ордер";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПрихіднийКасовийОрдер"; /* Повна назва вказівника */
+        public const string FULLNAME = "Прихідний касовий ордер"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -17434,9 +17488,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозхіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a48";
-        public const string POINTER = "Документи.РозхіднийКасовийОрдер";
-        public const string FULLNAME = "Розхідний касовий ордер";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.РозхіднийКасовийОрдер"; /* Повна назва вказівника */
+        public const string FULLNAME = "Розхідний касовий ордер"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -18138,9 +18194,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПереміщенняТоварів_Const
     {
         public const string TABLE = "tab_a31";
-        public const string POINTER = "Документи.ПереміщенняТоварів";
-        public const string FULLNAME = "Переміщення товарів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПереміщенняТоварів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Переміщення товарів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -18870,9 +18928,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоверненняТоварівПостачальнику_Const
     {
         public const string TABLE = "tab_a51";
-        public const string POINTER = "Документи.ПоверненняТоварівПостачальнику";
-        public const string FULLNAME = "Повернення товарів постачальнику";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПоверненняТоварівПостачальнику"; /* Повна назва вказівника */
+        public const string FULLNAME = "Повернення товарів постачальнику"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -19648,9 +19708,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоверненняТоварівВідКлієнта_Const
     {
         public const string TABLE = "tab_a53";
-        public const string POINTER = "Документи.ПоверненняТоварівВідКлієнта";
-        public const string FULLNAME = "Повернення товарів від клієнта";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПоверненняТоварівВідКлієнта"; /* Повна назва вказівника */
+        public const string FULLNAME = "Повернення товарів від клієнта"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -20384,9 +20446,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class АктВиконанихРобіт_Const
     {
         public const string TABLE = "tab_a81";
-        public const string POINTER = "Документи.АктВиконанихРобіт";
-        public const string FULLNAME = "Акт виконаних робіт";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.АктВиконанихРобіт"; /* Повна назва вказівника */
+        public const string FULLNAME = "Акт виконаних робіт"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -21040,9 +21104,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВведенняЗалишків_Const
     {
         public const string TABLE = "tab_a83";
-        public const string POINTER = "Документи.ВведенняЗалишків";
-        public const string FULLNAME = "Введення залишків";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ВведенняЗалишків"; /* Повна назва вказівника */
+        public const string FULLNAME = "Введення залишків"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -22078,9 +22144,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class НадлишкиТоварів_Const
     {
         public const string TABLE = "tab_a88";
-        public const string POINTER = "Документи.НадлишкиТоварів";
-        public const string FULLNAME = "Надлишки товарів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.НадлишкиТоварів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Надлишки товарів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Організація = "col_f6";
@@ -22609,9 +22677,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПересортицяТоварів_Const
     {
         public const string TABLE = "tab_a90";
-        public const string POINTER = "Документи.ПересортицяТоварів";
-        public const string FULLNAME = "Пересортиця товарів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПересортицяТоварів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Пересортиця товарів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -23140,9 +23210,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПерерахунокТоварів_Const
     {
         public const string TABLE = "tab_a92";
-        public const string POINTER = "Документи.ПерерахунокТоварів";
-        public const string FULLNAME = "Перерахунок товарів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПерерахунокТоварів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Перерахунок товарів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -23732,9 +23804,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПсуванняТоварів_Const
     {
         public const string TABLE = "tab_a94";
-        public const string POINTER = "Документи.ПсуванняТоварів";
-        public const string FULLNAME = "Псування товарів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПсуванняТоварів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Псування товарів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -24360,9 +24434,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВнутрішнєСпоживанняТоварів_Const
     {
         public const string TABLE = "tab_b07";
-        public const string POINTER = "Документи.ВнутрішнєСпоживанняТоварів";
-        public const string FULLNAME = "Внутрішнє споживання товарів";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ВнутрішнєСпоживанняТоварів"; /* Повна назва вказівника */
+        public const string FULLNAME = "Внутрішнє споживання товарів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -25004,9 +25080,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class РахунокФактура_Const
     {
         public const string TABLE = "tab_b10";
-        public const string POINTER = "Документи.РахунокФактура";
-        public const string FULLNAME = "Рахунок фактура";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.РахунокФактура"; /* Повна назва вказівника */
+        public const string FULLNAME = "Рахунок фактура"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -25758,9 +25836,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_a64";
-        public const string POINTER = "Документи.РозміщенняТоварівНаСкладі";
-        public const string FULLNAME = "Розміщення товарів на складі";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.РозміщенняТоварівНаСкладі"; /* Повна назва вказівника */
+        public const string FULLNAME = "Розміщення товарів на складі"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -26356,9 +26436,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПереміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b09";
-        public const string POINTER = "Документи.ПереміщенняТоварівНаСкладі";
-        public const string FULLNAME = "Переміщення товарів на складі";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ПереміщенняТоварівНаСкладі"; /* Повна назва вказівника */
+        public const string FULLNAME = "Переміщення товарів на складі"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -26952,9 +27034,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗбіркаТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b27";
-        public const string POINTER = "Документи.ЗбіркаТоварівНаСкладі";
-        public const string FULLNAME = "Збірка товарів на складі";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.ЗбіркаТоварівНаСкладі"; /* Повна назва вказівника */
+        public const string FULLNAME = "Збірка товарів на складі"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";
@@ -27550,9 +27634,11 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозміщенняНоменклатуриПоКоміркам_Const
     {
         public const string TABLE = "tab_b29";
-        public const string POINTER = "Документи.РозміщенняНоменклатуриПоКоміркам";
-        public const string FULLNAME = "Розміщення номенклатури по коміркам";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.РозміщенняНоменклатуриПоКоміркам"; /* Повна назва вказівника */
+        public const string FULLNAME = "Розміщення номенклатури по коміркам"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         
         public const string Назва = "docname";

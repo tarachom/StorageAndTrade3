@@ -35,8 +35,6 @@ namespace StorageAndTrade
 {
     class БлокДляСторінки_АктивніКористувачі : VBox
     {
-        CancellationTokenSource? CancellationTokenSourceItem;
-
         enum Columns
         {
             UID,
@@ -82,13 +80,12 @@ namespace StorageAndTrade
 
         public void AutoRefreshRun()
         {
-            CancellationTokenSourceItem = new CancellationTokenSource();
             LoadRecordsAsync();
         }
 
         public async void LoadRecordsAsync()
         {
-            while (!CancellationTokenSourceItem!.IsCancellationRequested)
+            while (true)
             {
                 await LoadRecords();
 

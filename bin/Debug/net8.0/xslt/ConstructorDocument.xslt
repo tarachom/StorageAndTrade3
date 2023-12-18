@@ -29,6 +29,10 @@ limitations under the License.
     <!-- Файл -->
     <xsl:param name="File" />
 
+    <!-- Простори імен -->
+    <xsl:param name="NameSpaceGenerationCode" />
+    <xsl:param name="NameSpace" />
+
     <xsl:template match="root">
 
         <xsl:choose>
@@ -68,13 +72,13 @@ using Gtk;
 
 using AccountingSoftware;
 
-using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Константи;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Перелічення;
 
-namespace StorageAndTrade
+namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$DocumentName"/>_Елемент : ДокументЕлемент
     {
@@ -381,11 +385,11 @@ using Gtk;
 
 using AccountingSoftware;
 
-using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
-using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
+using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи.ТабличніСписки;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Перелічення;
 
-namespace StorageAndTrade
+namespace <xsl:value-of select="$NameSpace"/>
 {
     public class <xsl:value-of select="$DocumentName"/> : ДокументЖурнал
     {
@@ -408,8 +412,6 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.CurrentPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
         }
 
         protected override async void LoadRecords_OnSearch(string searchText)
@@ -431,8 +433,6 @@ namespace StorageAndTrade
 
             if (ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.FirstPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
         }
 
         protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -558,9 +558,9 @@ namespace StorageAndTrade
 */
 
 using AccountingSoftware;
-using StorageAndTrade_1_0.Документи;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
 
-namespace StorageAndTrade
+namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerControl
     {

@@ -108,6 +108,9 @@ namespace StorageAndTrade
             {
                 await Config.ReadAllConstants();
 
+                //Запуск фонових задач
+                Config.StartBackgroundTask();
+
                 //Значення констант за замовчуванням
                 if ((int)Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
                     Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
@@ -117,9 +120,6 @@ namespace StorageAndTrade
 
                 //Присвоєння користувача
                 Program.GeneralForm.SetCurrentUser();
-
-                //Запуск фонових задач
-                Program.GeneralForm.StartBackgroundTask();
 
                 //Відкрити перші сторінки
                 Program.GeneralForm.OpenFirstPages();

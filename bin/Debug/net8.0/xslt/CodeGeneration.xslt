@@ -335,6 +335,48 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
                   <xsl:text>await Константи.</xsl:text><xsl:value-of select="Name"/>.ReadAll();
             </xsl:for-each>
         }
+
+        public static async void StartBackgroundTask()
+        {
+            /*
+            Схема роботи:
+
+            1. В процесі запису в регістр залишків - додається запис у таблицю тригерів.
+              Запис в таблицю тригерів містить дату запису в регістр, назву регістру.
+
+            2. Раз на 5 сек викликається процедура SpetialTableRegAccumTrigerExecute і
+              відбувається розрахунок віртуальних таблиць регістрів залишків.
+
+              Розраховуються тільки змінені регістри на дату проведення документу і
+              додатково на дату якщо змінена дата документу і документ уже був проведений.
+
+              Додатково розраховуються підсумки в кінці всіх розрахунків.
+            */
+
+            if (Kernel.Session == Guid.Empty)
+                throw new Exception("Порожні сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
+
+            while (true)
+            {
+                await Константи.Системні.ReadAll();
+                
+                //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
+                //провести всі документ, а тоді вже розраховувати регістри
+                if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
+                {
+                    //Виконання обчислень
+                    await Kernel.DataBase.SpetialTableRegAccumTrigerExecute
+                    (
+                        Kernel.Session,
+                        РегістриНакопичення.VirtualTablesСalculation.Execute, 
+                        РегістриНакопичення.VirtualTablesСalculation.ExecuteFinalCalculation
+                    );
+                }
+
+                //Затримка на 5 сек
+                await Task.Delay(5000);
+            }
+        }
     }
 
     public class Functions
@@ -590,9 +632,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
-        public const string POINTER = "Довідники.<xsl:value-of select="$DirectoryName"/>";
-        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Довідники.<xsl:value-of select="$DirectoryName"/>"; /* Повна назва вказівника */
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
@@ -1089,9 +1131,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
-        public const string POINTER = "Документи.<xsl:value-of select="$DocumentName"/>";
-        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
-        public const string DELETION_LABEL = "deletion_label";
+        public const string POINTER = "Документи.<xsl:value-of select="$DocumentName"/>"; /* Повна назва вказівника */
+        public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
         
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
