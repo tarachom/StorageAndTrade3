@@ -124,10 +124,10 @@ namespace StorageAndTrade
             DateTime? ДатуОстанньогоЗавантаження = await ФункціїДляФоновихЗавдань.ОтриматиДатуОстанньогоЗавантаженняКурсуВалют();
             lbDateLastDownload.Text = "Оновлення: " + (ДатуОстанньогоЗавантаження != null ? ДатуОстанньогоЗавантаження.ToString() : "...");
 
+            var recordResult = await ФункціїДляФоновихЗавдань.ОтриматиКурсиВалютДляСтартовоїСторінки();
+
             foreach (Widget child in vBoxCursyValut.Children)
                 vBoxCursyValut.Remove(child);
-
-            var recordResult = await ФункціїДляФоновихЗавдань.ОтриматиКурсиВалютДляСтартовоїСторінки();
 
             foreach (Dictionary<string, object> Row in recordResult.ListRow)
             {
@@ -149,7 +149,6 @@ namespace StorageAndTrade
             {
                 //Завантаження кожного разу при запуску
                 Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
-
                 page.OnDownload(null, new EventArgs());
 
                 //Завантаження один раз на день

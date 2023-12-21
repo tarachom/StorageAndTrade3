@@ -127,9 +127,17 @@ namespace StorageAndTrade
             //Активні користувачі
             page.АктивніКористувачі.AutoRefreshRun();
 
-            //Блок курсів валют
-            page.БлокКурсиВалют.StartDesktop();
-            page.БлокКурсиВалют.StartAutoWork();
+            //Останні завантажені курси валют
+            Task.Run(() =>
+            {
+                page.БлокКурсиВалют.StartDesktop();
+            });
+
+            //Автоматично завантажити нові курси валют
+            Task.Run(() =>
+            {
+                page.БлокКурсиВалют.StartAutoWork();
+            });
 
             //
             // Перевірка констант
