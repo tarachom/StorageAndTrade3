@@ -245,6 +245,7 @@ WHERE
 
         public static async ValueTask BeforeSave(ПакуванняОдиниціВиміру_Objest ДовідникОбєкт)
         {
+            if (ДовідникОбєкт.КількістьУпаковок <= 0) ДовідникОбєкт.КількістьУпаковок = 1;
             await ValueTask.FromResult(true);
         }
 

@@ -60,12 +60,12 @@ namespace StorageAndTrade
 
             public object[] ToArray()
             {
-                return new object[]
-                {
+                return
+                [
                     НомерРядка,
                     БанківськийРахунок.Назва,
                     (float)Сума
-                };
+                ];
             }
 
             public static Запис Clone(Запис запис)

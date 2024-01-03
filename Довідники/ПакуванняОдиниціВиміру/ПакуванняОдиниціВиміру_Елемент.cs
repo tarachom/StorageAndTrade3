@@ -50,7 +50,7 @@ namespace StorageAndTrade
             CreateField(vBox, "Назва повна:", НазваПовна);
 
             //КількістьУпаковок
-            CreateField(vBox, "Кількість упаковок:", КількістьУпаковок);
+            CreateField(vBox, "Коєфіціент:", КількістьУпаковок);
         }
 
         #region Присвоєння / зчитування значень

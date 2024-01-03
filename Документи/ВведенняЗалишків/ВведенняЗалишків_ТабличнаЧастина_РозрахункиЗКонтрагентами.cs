@@ -67,14 +67,14 @@ namespace StorageAndTrade
 
             public object[] ToArray()
             {
-                return new object[]
-                {
+                return
+                [
                     НомерРядка,
                     ПсевдонімиПерелічення.ТипиКонтрагентів_Alias(ТипКонтрагента),
                     Контрагент.Назва,
                     Валюта.Назва,
                     (float)Сума
-                };
+                ];
             }
 
             public static Запис Clone(Запис запис)

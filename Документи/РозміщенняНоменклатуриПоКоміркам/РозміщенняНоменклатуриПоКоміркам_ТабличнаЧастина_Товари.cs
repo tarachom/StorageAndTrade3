@@ -66,13 +66,13 @@ namespace StorageAndTrade
 
             public object[] ToArray()
             {
-                return new object[]
-                {
+                return
+                [
                     НомерРядка,
                     Номенклатура.Назва,
                     Пакування.Назва,
                     Комірка.Назва
-                };
+                ];
             }
 
             public static Запис Clone(Запис запис)

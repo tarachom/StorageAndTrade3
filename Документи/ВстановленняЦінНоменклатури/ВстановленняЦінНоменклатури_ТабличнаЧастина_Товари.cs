@@ -74,15 +74,15 @@ namespace StorageAndTrade
 
             public object[] ToArray()
             {
-                return new object[]
-                {
+                return
+                [
                     НомерРядка,
                     Номенклатура.Назва,
                     Характеристика.Назва,
                     Пакування.Назва,
                     ВидЦіни.Назва,
                     (float)Ціна
-                };
+                ];
             }
 
             public static Запис Clone(Запис запис)
@@ -135,6 +135,7 @@ namespace StorageAndTrade
             {
                 new Separator(Orientation.Horizontal)
             };
+            
             ToolbarTop.Add(toolItemSeparator);
 
             ToolButton fillDirectoryButton = new ToolButton(Stock.Add) { Label = "Заповнити товарами", IsImportant = true };
@@ -274,8 +275,13 @@ namespace StorageAndTrade
 
             //Характеристика
             {
-                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { Resizable = true, MinWidth = 200 };
-                Характеристика.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
+                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика)
+                {
+                    Resizable = true,
+                    MinWidth = 200,
+                    Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const
+                };
+                
                 Характеристика.Data.Add("Column", Columns.Характеристика);
 
                 TreeViewGrid.AppendColumn(Характеристика);

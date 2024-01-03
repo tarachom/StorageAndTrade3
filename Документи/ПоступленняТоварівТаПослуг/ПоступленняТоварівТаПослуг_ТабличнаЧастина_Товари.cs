@@ -48,6 +48,7 @@ namespace StorageAndTrade
             КількістьУпаковок,
             Пакування,
             Кількість,
+            КількістьФакт,
             ВидЦіни,
             Ціна,
             Сума,
@@ -64,6 +65,7 @@ namespace StorageAndTrade
             typeof(int),      //КількістьУпаковок
             typeof(string),   //Пакування
             typeof(float),    //Кількість
+            typeof(float),    //КількістьФакт
             typeof(string),   //ВидЦіни
             typeof(float),    //Ціна
             typeof(float),    //Сума
@@ -84,6 +86,7 @@ namespace StorageAndTrade
             public int КількістьУпаковок { get; set; } = 1;
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public decimal Кількість { get; set; } = 1;
+            public decimal КількістьФакт { get; set; } = 1;
             public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
             public decimal Ціна { get; set; }
             public decimal Сума { get; set; }
@@ -93,8 +96,8 @@ namespace StorageAndTrade
 
             public object[] ToArray()
             {
-                return new object[]
-                {
+                return
+                [
                     НомерРядка,
                     Номенклатура.Назва,
                     Характеристика.Назва,
@@ -102,13 +105,14 @@ namespace StorageAndTrade
                     КількістьУпаковок,
                     Пакування.Назва,
                     (float)Кількість,
+                    (float)КількістьФакт,
                     ВидЦіни.Назва,
                     (float)Ціна,
                     (float)Сума,
                     (float)Скидка,
                     Склад.Назва,
                     ЗамовленняПостачальнику.Назва
-                };
+                ];
             }
 
             public static Запис Clone(Запис запис)
@@ -122,6 +126,7 @@ namespace StorageAndTrade
                     КількістьУпаковок = запис.КількістьУпаковок,
                     Пакування = запис.Пакування.Copy(),
                     Кількість = запис.Кількість,
+                    КількістьФакт = запис.КількістьФакт,
                     ВидЦіни = запис.ВидЦіни.Copy(),
                     Ціна = запис.Ціна,
                     Сума = запис.Сума,
@@ -146,15 +151,6 @@ namespace StorageAndTrade
                     запис.Пакування = номенклатура_Objest.ОдиницяВиміру;
                     await Запис.ПісляЗміни_Пакування(запис);
                 }
-
-                if (!запис.Пакування.IsEmpty())
-                {
-                    ПакуванняОдиниціВиміру_Objest? пакуванняОдиниціВиміру_Objest = await запис.Пакування.GetDirectoryObject();
-                    if (пакуванняОдиниціВиміру_Objest != null)
-                        запис.КількістьУпаковок = пакуванняОдиниціВиміру_Objest.КількістьУпаковок;
-                    else
-                        запис.КількістьУпаковок = 1;
-                }
             }
             public static async ValueTask ПісляЗміни_Характеристика(Запис запис)
             {
@@ -167,6 +163,17 @@ namespace StorageAndTrade
             public static async ValueTask ПісляЗміни_Пакування(Запис запис)
             {
                 await запис.Пакування.GetPresentation();
+
+                if (!запис.Пакування.IsEmpty())
+                {
+                    ПакуванняОдиниціВиміру_Objest? пакуванняОдиниціВиміру_Objest = await запис.Пакування.GetDirectoryObject();
+                    if (пакуванняОдиниціВиміру_Objest != null)
+                        запис.КількістьУпаковок = (пакуванняОдиниціВиміру_Objest.КількістьУпаковок > 0) ? пакуванняОдиниціВиміру_Objest.КількістьУпаковок : 1;
+                    else
+                        запис.КількістьУпаковок = 1;
+                }
+
+                Запис.ПісляЗміни_КількістьАбоЦіна(запис);
             }
             public static async ValueTask ПісляЗміни_ВидЦіни(Запис запис)
             {
@@ -182,6 +189,7 @@ namespace StorageAndTrade
             }
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
+                запис.КількістьФакт = запис.Кількість * запис.КількістьУпаковок;
                 запис.Сума = запис.Кількість * запис.Ціна;
             }
             public static async ValueTask ОтриматиЦіну(Запис запис)
@@ -357,6 +365,7 @@ LIMIT 1
                         КількістьУпаковок = record.КількістьУпаковок,
                         Пакування = record.Пакування,
                         Кількість = record.Кількість,
+                        КількістьФакт = record.Кількість * record.КількістьУпаковок,
                         ВидЦіни = record.ВидЦіни,
                         Ціна = record.Ціна,
                         Сума = record.Сума,
@@ -449,8 +458,13 @@ LIMIT 1
 
             //Характеристика
             {
-                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика) { Resizable = true, MinWidth = 200 };
-                Характеристика.Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const;
+                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика)
+                {
+                    Resizable = true,
+                    MinWidth = 200,
+                    Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const
+                };
+
                 Характеристика.Data.Add("Column", Columns.Характеристика);
 
                 TreeViewGrid.AppendColumn(Характеристика);
@@ -458,8 +472,13 @@ LIMIT 1
 
             //СеріяНазва
             {
-                TreeViewColumn СеріяНазва = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія) { Resizable = true, MinWidth = 100 };
-                СеріяНазва.Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const;
+                TreeViewColumn СеріяНазва = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія)
+                {
+                    Resizable = true,
+                    MinWidth = 100,
+                    Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const
+                };
+
                 СеріяНазва.Data.Add("Column", Columns.Серія);
 
                 TreeViewGrid.AppendColumn(СеріяНазва);
@@ -471,7 +490,7 @@ LIMIT 1
                 КількістьУпаковок.Edited += TextChanged;
                 КількістьУпаковок.Data.Add("Column", (int)Columns.КількістьУпаковок);
 
-                TreeViewColumn Column = new TreeViewColumn("Пак", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth = 50 };
+                TreeViewColumn Column = new TreeViewColumn("Коєфіціент", КількістьУпаковок, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth = 50 };
                 Column.SetCellDataFunc(КількістьУпаковок, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
             }
@@ -492,6 +511,16 @@ LIMIT 1
 
                 TreeViewColumn Column = new TreeViewColumn("Кількість", Кількість, "text", (int)Columns.Кількість) { Resizable = true, MinWidth = 100 };
                 Column.SetCellDataFunc(Кількість, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
+
+            //КількістьФакт
+            {
+                CellRendererText КількістьФакт = new CellRendererText() { Editable = false };
+                КількістьФакт.Data.Add("Column", Columns.КількістьФакт);
+
+                TreeViewColumn Column = new TreeViewColumn("Кільк.факт", КількістьФакт, "text", (int)Columns.КількістьФакт) { Resizable = true, MinWidth = 100 };
+                Column.SetCellDataFunc(КількістьФакт, new TreeCellDataFunc(NumericCellDataFunc));
                 TreeViewGrid.AppendColumn(Column);
             }
 
@@ -755,6 +784,11 @@ LIMIT 1
                             cellText.Text = запис.Кількість.ToString();
                             break;
                         }
+                    case Columns.КількістьФакт:
+                        {
+                            cellText.Text = запис.КількістьФакт.ToString();
+                            break;
+                        }
                     case Columns.Ціна:
                         {
                             cellText.Text = запис.Ціна.ToString();
@@ -794,8 +828,13 @@ LIMIT 1
                         {
                             var (check, value) = Validate.IsInt(args.NewText);
                             if (check)
-                                запис.КількістьУпаковок = value;
+                            {
+                                if (value <= 0) value = 1;
 
+                                запис.КількістьУпаковок = value;
+                                Запис.ПісляЗміни_КількістьАбоЦіна(запис);
+                            }
+                            
                             break;
                         }
                     case Columns.Кількість:
