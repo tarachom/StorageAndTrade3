@@ -174,7 +174,7 @@ limitations under the License.
     </xsl:choose>
   </xsl:template>
   
-  <!-- Для присвоєння значення полям -->
+  <!-- Для присвоєння значення полям. Для масиву полів-->
   <xsl:template name="ReadFieldValue">
      <xsl:param name="BaseFieldContainer" />
      
@@ -245,6 +245,82 @@ limitations under the License.
 		    <xsl:when test="Type = 'bytea'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(byte[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
+          <xsl:text> : new byte[] { }</xsl:text>
+        </xsl:when>
+     </xsl:choose>
+  </xsl:template>
+
+  <!-- Для присвоєння значення полям 2. Для одного значення без використання масиву полів-->
+  <xsl:template name="ReadFieldValue2">
+     <xsl:param name="BaseFieldContainer" />
+     
+     <xsl:choose>
+        <xsl:when test="Type = 'string'">
+          <xsl:value-of select="$BaseFieldContainer"/><xsl:text>.ToString() ?? ""</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'string[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : new string[] { }</xsl:text>
+        </xsl:when>
+       <xsl:when test="Type = 'integer'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : 0</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'integer[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : new int[] { }</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'numeric'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(decimal)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : 0</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'numeric[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : new decimal[] { }</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'boolean'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : false</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'time'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>TimeSpan.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString())</xsl:text>
+          <xsl:text> : DateTime.MinValue.TimeOfDay</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'date' or Type = 'datetime'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>DateTime.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>.ToString() ?? DateTime.MinValue.ToString())</xsl:text>
+          <xsl:text> : DateTime.MinValue</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'pointer'">
+          <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
+          <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>)</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'any_pointer'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(Guid)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : Guid.Empty</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'composite_pointer'">
+		    <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(UuidAndText)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : new UuidAndText()</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'enum'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>
+          <xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text> : 0</xsl:text>
+        </xsl:when>
+		    <xsl:when test="Type = 'bytea'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(byte[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
           <xsl:text> : new byte[] { }</xsl:text>
         </xsl:when>
      </xsl:choose>
@@ -328,14 +404,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
     public static class Config
     {
         public static Kernel Kernel { get; set; } = new Kernel();
-		
-        public static async ValueTask ReadAllConstants()
-        {
-            <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
-                  <xsl:text>await Константи.</xsl:text><xsl:value-of select="Name"/>.ReadAll();
-            </xsl:for-each>
-        }
-
         public static async void StartBackgroundTask()
         {
             /*
@@ -354,12 +422,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
             */
 
             if (Kernel.Session == Guid.Empty)
-                throw new Exception("Порожні сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
+                throw new Exception("Порожня сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
 
             while (true)
-            {
-                await Константи.Системні.ReadAll();
-                
+            {                
                 //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
                 //провести всі документ, а тоді вже розраховувати регістри
                 if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
@@ -451,38 +517,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Кон�
     <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
 	  #region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
     public static class <xsl:value-of select="Name"/>
-    {
-        public static async ValueTask ReadAll()
-        {
-            <xsl:variable name="Constants" select="Constants/Constant" />
-		        <xsl:if test="count($Constants) &gt; 0">
-            Dictionary&lt;string, object&gt; fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 <xsl:text>[</xsl:text>
-                 <xsl:for-each select="$Constants">
-                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-                 </xsl:for-each>], fieldValue);
-            
-            if (IsSelect)
-            {
-                <xsl:for-each select="$Constants">
-                  <xsl:text>m_</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:text>_Const = </xsl:text>
-                  <xsl:call-template name="ReadFieldValue">
-                    <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
-                  </xsl:call-template>;
-                </xsl:for-each>
-            }
-			      </xsl:if>
-        }
-        
+    {       
         <xsl:for-each select="Constants/Constant">
-        static <xsl:call-template name="FieldType" />
-        <xsl:text> m_</xsl:text>
-        <xsl:value-of select="Name"/>
-        <xsl:text>_Const = </xsl:text>
-        <xsl:call-template name="DefaultFieldValue" />;
         <xsl:text>public static </xsl:text>
         <xsl:call-template name="FieldType" />
         <xsl:text> </xsl:text>
@@ -490,14 +526,18 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Кон�
         {
             get 
             {
-                return m_<xsl:value-of select="Name"/><xsl:text>_Const</xsl:text>
+                var recordResult = Task.Run( async () =&gt; { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "<xsl:value-of select="NameInTable"/>"); } ).Result;
+                <xsl:text>var result = recordResult.Result ? (</xsl:text>
+                <xsl:call-template name="ReadFieldValue2">
+                  <xsl:with-param name="BaseFieldContainer">recordResult.Value</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text>) : </xsl:text>
+                <xsl:call-template name="DefaultFieldValue" />;
+                <xsl:text>return result</xsl:text>
                 <xsl:if test="Type = 'pointer'">
                 <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
                 <xsl:choose>
-                  <xsl:when test="$groupPointer = 'Довідники'">
-                    <xsl:text>.Copy()</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$groupPointer = 'Документи'">
+                  <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
                     <xsl:text>.Copy()</xsl:text>
                   </xsl:when>
                 </xsl:choose>
@@ -505,16 +545,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Кон�
             }
             set
             {
-                m_<xsl:value-of select="Name"/>_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "<xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "<xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
                 <xsl:choose>
                   <xsl:when test="Type = 'enum'">
                     <xsl:text>(int)</xsl:text>
                   </xsl:when>
                 </xsl:choose>
-                <xsl:text>m_</xsl:text>
-                <xsl:value-of select="Name"/>
-                <xsl:text>_Const</xsl:text>
+                <xsl:text>value</xsl:text>
                 <xsl:choose>
                   <xsl:when test="Type = 'pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -1934,6 +1971,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                         break;
             }
             </xsl:if>
+            <xsl:if test="$QueryAllCountCalculation = 0">
+                <xsl:text>await ValueTask.FromResult(true);</xsl:text>
+            </xsl:if>
         }
 
         /* Функція для обчислення підсумкових віртуальних таблиць */
@@ -1966,6 +2006,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                         default:
                             break;
                 }
+            </xsl:if>
+            <xsl:if test="$QueryAllCountCalculation = 0">
+                <xsl:text>await ValueTask.FromResult(true);</xsl:text>
             </xsl:if>
         }
     }

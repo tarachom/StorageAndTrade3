@@ -50,7 +50,7 @@ namespace StorageAndTrade_1_0.Документи
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <param name="Кількість">Кількість яку потрібно списати</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиСписокНаявнихПартій(
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиСписокНаявнихПартій(
             Організації_Pointer Організація,
             Номенклатура_Pointer Номенклатура,
             ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
@@ -165,14 +165,11 @@ UNION ALL
 	LIMIT 1
 )
 ";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
-                { "period_end", OwnerDateDoc }, { "Кількість", Кількість }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+                { "period_end", OwnerDateDoc },
+                { "Кількість", Кількість }
+            });
         }
 
         /// <summary>
@@ -185,7 +182,7 @@ UNION ALL
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗалишкиТоваруНаСкладі(
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗалишкиТоваруНаСкладі(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
             СеріїНоменклатури_Pointer Серія, Склади_Pointer Склад,
             UnigueID Owner, DateTime OwnerDateDoc)
@@ -215,15 +212,10 @@ SELECT
 FROM
     register
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "period_end", OwnerDateDoc }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         /// <summary>
@@ -237,7 +229,7 @@ FROM
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗалишкиТоваруВКомірці(
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗалишкиТоваруВКомірці(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
             ПакуванняОдиниціВиміру_Pointer Пакування, СкладськіКомірки_Pointer Комірка,
             СеріїНоменклатури_Pointer Серія,
@@ -269,15 +261,10 @@ SELECT
 FROM
     register
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "period_end", OwnerDateDoc }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         /// <summary>
@@ -289,7 +276,7 @@ FROM
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиРезервТоваруНаСкладі(
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиРезервТоваруНаСкладі(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -329,14 +316,10 @@ FROM
     register
 ";
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "period_end", OwnerDateDoc }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         /// <summary>
@@ -347,7 +330,7 @@ FROM
         /// <param name="Склад">Склад</param>
         /// <param name="Owner">Документ</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиРезервТоваруПоДокументу(
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиРезервТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ДокументРезерву, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -377,15 +360,10 @@ SELECT
 FROM
     register
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "period_end", OwnerDateDoc }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         /// <summary>
@@ -398,7 +376,7 @@ FROM
         /// <param name="Owner">Документ</param>
         /// <param name="OwnerDateDoc">Дата документу</param>
         /// <returns></returns>
-        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ЗамовленняКлієнта, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -433,15 +411,10 @@ SELECT
 FROM
     register
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "period_end", OwnerDateDoc }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         /// <summary>
@@ -454,7 +427,7 @@ FROM
         /// <param name="Owner">Документ</param>
         /// <param name="OwnerDateDoc">Дата документу</param>
         /// <returns></returns>
-        public static async ValueTask<List<Dictionary<string, object>>> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
+        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ЗамовленняПостачальнику, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -484,15 +457,10 @@ SELECT
 FROM
     register
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "period_end", OwnerDateDoc }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         /// <summary>
@@ -541,13 +509,15 @@ FROM
                         //Резерви та вільні залишки
                         //
 
-                        List<Dictionary<string, object>> Резерв = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-                            !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-                            ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                        var recordResult = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                             !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        if (Резерв.Count > 0)
+                        if (recordResult.Result)
                         {
+                            var Резерв = recordResult.ListRow;
+
                             decimal ВНаявності = (decimal)Резерв[0]["ВНаявності"];
                             decimal ВРезервіЗіСкладу = (decimal)Резерв[0]["ВРезервіЗіСкладу"];
 
@@ -684,13 +654,15 @@ FROM
                         //Резерви та вільні залишки
                         //
 
-                        List<Dictionary<string, object>> Резерв = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-                            !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-                            ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                        var recordResult = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                             !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        if (Резерв.Count > 0)
+                        if (recordResult.Result)
                         {
+                            var Резерв = recordResult.ListRow;
+
                             decimal ВНаявності = (decimal)Резерв[0]["ВНаявності"];
                             decimal ВРезервіЗіСкладу = (decimal)Резерв[0]["ВРезервіЗіСкладу"];
 
@@ -793,12 +765,12 @@ FROM
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        var recordResult = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВНаявності"] : 0);
 
                         if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
                         {
@@ -812,12 +784,12 @@ FROM
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-                            !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
-                            ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                            recordResult = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                                ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                                !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
+                                ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВРезервіЗіСкладу"] : 0);
 
                             //
                             // Перевірка резервів по документах
@@ -830,27 +802,27 @@ FROM
                                 // потрібно дізнатися скільки цей документ зарезервував товарів
                                 //
 
-                                List<Dictionary<string, object>> РезервЗамовленняКлієнта_Список = await СпільніФункції.ОтриматиРезервТоваруПоДокументу(
+                                recordResult = await СпільніФункції.ОтриматиРезервТоваруПоДокументу(
                                     ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                     !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                     ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                                if (РезервЗамовленняКлієнта_Список.Count > 0)
-                                    РезервЗамовлення.Add(ТовариРядок.НомерРядка, (decimal)РезервЗамовленняКлієнта_Список[0]["ВРезервіЗіСкладу"]);
+                                if (recordResult.Result)
+                                    РезервЗамовлення.Add(ТовариРядок.НомерРядка, (decimal)recordResult.ListRow[0]["ВРезервіЗіСкладу"]);
 
                                 //
                                 // Перевірити замовлення
                                 //
 
-                                List<Dictionary<string, object>> Замовлення_Список = await СпільніФункції.ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
+                                recordResult = await СпільніФункції.ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
                                     ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                     !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                     ТовариРядок.ЗамовленняКлієнта.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                                if (Замовлення_Список.Count > 0)
+                                if (recordResult.Result)
                                 {
-                                    ЗамволенняКлієнта.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Замовлено"]);
-                                    ЗамволенняКлієнтаСума.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Сума"]);
+                                    ЗамволенняКлієнта.Add(ТовариРядок.НомерРядка, (decimal)recordResult.ListRow[0]["Замовлено"]);
+                                    ЗамволенняКлієнтаСума.Add(ТовариРядок.НомерРядка, (decimal)recordResult.ListRow[0]["Сума"]);
 
                                     if (!(ЗамволенняКлієнта[ТовариРядок.НомерРядка] > 0))
                                     {
@@ -872,13 +844,13 @@ FROM
                                 // потрібно дізнатися скільки цей документ зарезервував товарів
                                 //
 
-                                List<Dictionary<string, object>> РезервРахункуФактури_Список = await СпільніФункції.ОтриматиРезервТоваруПоДокументу(
+                                recordResult = await СпільніФункції.ОтриматиРезервТоваруПоДокументу(
                                     ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                     !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                     ТовариРядок.РахунокФактура.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                                if (РезервРахункуФактури_Список.Count > 0)
-                                    РезервРахунку.Add(ТовариРядок.НомерРядка, (decimal)РезервРахункуФактури_Список[0]["ВРезервіЗіСкладу"]);
+                                if (recordResult.Result)
+                                    РезервРахунку.Add(ТовариРядок.НомерРядка, (decimal)recordResult.ListRow[0]["ВРезервіЗіСкладу"]);
                                 else
                                 {
                                     throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
@@ -1075,12 +1047,12 @@ FROM
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        var recordResult = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.Склад, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок,
                             ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок);
 
-                        if (listNameRow.Count == 0)
+                        if (!recordResult.Result)
                         {
                             throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                 $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
@@ -1088,7 +1060,7 @@ FROM
 
                         decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок;
 
-                        foreach (Dictionary<string, object> nameRow in listNameRow)
+                        foreach (Dictionary<string, object> nameRow in recordResult.ListRow)
                         {
                             decimal КількістьВПартії = (decimal)nameRow["Кількість"];
                             decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
@@ -1353,14 +1325,14 @@ FROM
                             // Перевірити замовлення
                             //
 
-                            List<Dictionary<string, object>> Замовлення_Список = await СпільніФункції.ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
+                            var recordResult = await СпільніФункції.ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
                                 ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                                 !ТовариРядок.Склад.IsEmpty() ? ТовариРядок.Склад : ДокументОбєкт.Склад,
                                 ТовариРядок.ЗамовленняПостачальнику.UnigueID, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                            if (Замовлення_Список.Count > 0)
+                            if (recordResult.Result)
                             {
-                                ЗамовленняПостачальнику.Add(ТовариРядок.НомерРядка, (decimal)Замовлення_Список[0]["Замовлено"]);
+                                ЗамовленняПостачальнику.Add(ТовариРядок.НомерРядка, (decimal)recordResult.ListRow[0]["Замовлено"]);
 
                                 if (!(ЗамовленняПостачальнику[ТовариРядок.НомерРядка] > 0))
                                 {
@@ -1661,7 +1633,7 @@ FROM
 
     class ПоверненняТоварівВідКлієнта_SpendTheDocument
     {
-        private static async ValueTask<List<Dictionary<string, object>>> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
+        private static async ValueTask<SelectRequestAsync_Record> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
             ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок)
         {
             string query = $@"
@@ -1688,8 +1660,7 @@ WHERE
 
 ORDER BY ПартіяТоварівКомпозит_Дата ASC
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "ДокументРеалізації", ТовариРядок.ДокументРеалізації.UnigueID.UGuid },
                 { "Організація", ДокументОбєкт.Організація.UnigueID.UGuid },
@@ -1697,11 +1668,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 { "Характеристика", ТовариРядок.ХарактеристикаНоменклатури.UnigueID.UGuid },
                 { "Серія", ТовариРядок.Серія.UnigueID.UGuid },
                 { "Склад", ДокументОбєкт.Склад.UnigueID.UGuid }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         public static async ValueTask<bool> Spend(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
@@ -1790,9 +1757,8 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = await ОтриматиПартіїТоваруЗДокументуРеалізації(ДокументОбєкт, ТовариРядок);
-
-                        if (listNameRow.Count == 0)
+                        var recordResult = await ОтриматиПартіїТоваруЗДокументуРеалізації(ДокументОбєкт, ТовариРядок);
+                        if (!recordResult.Result)
                         {
                             throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                 $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
@@ -1800,7 +1766,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                         decimal КількістьЯкуПотрібноПовернути = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок;
 
-                        foreach (Dictionary<string, object> nameRow in listNameRow)
+                        foreach (Dictionary<string, object> nameRow in recordResult.ListRow)
                         {
                             decimal КількістьВПартії = (decimal)nameRow["Кількість"];
                             decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
@@ -1844,6 +1810,8 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                             //Продажі
                             {
+                                decimal ЦінаЗаОдиницюОблікуНоменклатури = ТовариРядок.Ціна / ТовариРядок.КількістьУпаковок;
+
                                 Продажі_RecordsSet.Record record = new Продажі_RecordsSet.Record()
                                 {
                                     Owner = ДокументОбєкт.UnigueID.UGuid,
@@ -1854,8 +1822,8 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                                     Номенклатура = ТовариРядок.Номенклатура,
                                     ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури,
                                     Кількість = -КількістьЩоПовертається,
-                                    Сума = -((ТовариРядок.Ціна / ТовариРядок.КількістьУпаковок) * КількістьЩоПовертається),
-                                    Дохід = -((ТовариРядок.Ціна / ТовариРядок.КількістьУпаковок) * КількістьЩоПовертається - СобівартістьПартії * КількістьЩоПовертається),
+                                    Сума = -(ЦінаЗаОдиницюОблікуНоменклатури * КількістьЩоПовертається),
+                                    Дохід = -(ЦінаЗаОдиницюОблікуНоменклатури * КількістьЩоПовертається - СобівартістьПартії * КількістьЩоПовертається),
                                     Собівартість = СобівартістьПартії
                                 };
 
@@ -1932,7 +1900,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
     class ПоверненняТоварівПостачальнику_SpendTheDocument
     {
-        private static async ValueTask<List<Dictionary<string, object>>> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
+        private static async ValueTask<SelectRequestAsync_Record> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
             ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок)
         {
             string query = $@"
@@ -1958,8 +1926,7 @@ WHERE
 
 ORDER BY ПартіяТоварівКомпозит_Дата ASC
 ";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
             {
                 { "ДокументПоступлення", ТовариРядок.ДокументПоступлення.UnigueID.UGuid },
                 { "Організація", ДокументОбєкт.Організація.UnigueID.UGuid },
@@ -1967,11 +1934,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 { "Характеристика", ТовариРядок.ХарактеристикаНоменклатури.UnigueID.UGuid },
                 { "Серія", ТовариРядок.Серія.UnigueID.UGuid },
                 { "Склад", ДокументОбєкт.Склад.UnigueID.UGuid }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
-
-            return recordResult.ListRow;
+            });
         }
 
         public static async ValueTask<bool> Spend(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
@@ -2033,9 +1996,9 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = await ОтриматиПартіїТоваруЗДокументуПоступлення(ДокументОбєкт, ТовариРядок);
+                        var recordResult = await ОтриматиПартіїТоваруЗДокументуПоступлення(ДокументОбєкт, ТовариРядок);
 
-                        if (listNameRow.Count == 0)
+                        if (!recordResult.Result)
                         {
                             throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                 $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
@@ -2043,45 +2006,37 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                         decimal КількістьЯкуПотрібноПовернути = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок;
 
-                        if (listNameRow.Count > 0)
+                        Dictionary<string, object> nameRow = recordResult.ListRow[0];
+
+                        decimal КількістьВПартії = (decimal)nameRow["Кількість"];
+                        decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
+                        ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
+                        int Рядок = (int)nameRow["Рядок"];
+
+                        if (КількістьЯкуПотрібноПовернути <= КількістьВПартії)
                         {
-                            Dictionary<string, object> nameRow = listNameRow[0];
-
-                            decimal КількістьВПартії = (decimal)nameRow["Кількість"];
-                            decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
-                            ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = new ПартіяТоварівКомпозит_Pointer(nameRow["ПартіяТоварівКомпозит"]);
-                            int Рядок = (int)nameRow["Рядок"];
-
-                            if (КількістьЯкуПотрібноПовернути <= КількістьВПартії)
+                            ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record()
                             {
-                                ПартіїТоварів_RecordsSet.Record record = new ПартіїТоварів_RecordsSet.Record()
-                                {
-                                    Income = false,
-                                    Owner = ДокументОбєкт.UnigueID.UGuid,
-                                    Організація = ДокументОбєкт.Організація,
-                                    ПартіяТоварівКомпозит = ПартіяТоварівКомпозит,
-                                    Кількість = КількістьЯкуПотрібноПовернути,
-                                    Собівартість = КількістьЯкуПотрібноПовернути == КількістьВПартії ? СобівартістьПартії : 0,
-                                    СписанаСобівартість = СобівартістьПартії,
-                                    Номенклатура = ТовариРядок.Номенклатура,
-                                    ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури,
-                                    Серія = ТовариРядок.Серія,
-                                    Склад = ДокументОбєкт.Склад,
-                                    Рядок = Рядок
-                                };
+                                Income = false,
+                                Owner = ДокументОбєкт.UnigueID.UGuid,
+                                Організація = ДокументОбєкт.Організація,
+                                ПартіяТоварівКомпозит = ПартіяТоварівКомпозит,
+                                Кількість = КількістьЯкуПотрібноПовернути,
+                                Собівартість = КількістьЯкуПотрібноПовернути == КількістьВПартії ? СобівартістьПартії : 0,
+                                СписанаСобівартість = СобівартістьПартії,
+                                Номенклатура = ТовариРядок.Номенклатура,
+                                ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури,
+                                Серія = ТовариРядок.Серія,
+                                Склад = ДокументОбєкт.Склад,
+                                Рядок = Рядок
+                            };
 
-                                партіїТоварів_RecordsSet.Records.Add(record);
-                            }
-                            else
-                            {
-                                throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
-                                    $"Кількість в партії менша чим кількість яку повертають для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
-                            }
+                            партіїТоварів_RecordsSet.Records.Add(record);
                         }
                         else
                         {
                             throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
-                                $"Не знайдені партії для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
+                                $"Кількість в партії менша чим кількість яку повертають для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
                         }
                     }
                 }
@@ -2473,11 +2428,11 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        var recordResult = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВНаявності"] : 0);
 
                         if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
                         {
@@ -2491,11 +2446,11 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-                            ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                            recordResult = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                                ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                                ДокументОбєкт.СкладВідправник, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВРезервіЗіСкладу"] : 0);
 
                             if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
                             {
@@ -2620,12 +2575,12 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        var recordResult = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.СкладВідправник, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок,
                             ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок);
 
-                        if (listNameRow.Count == 0)
+                        if (!recordResult.Result)
                         {
                             throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                 $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
@@ -2633,7 +2588,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                         decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок;
 
-                        foreach (Dictionary<string, object> nameRow in listNameRow)
+                        foreach (Dictionary<string, object> nameRow in recordResult.ListRow)
                         {
                             decimal КількістьВПартії = (decimal)nameRow["Кількість"];
                             decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
@@ -3025,11 +2980,11 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        var recordResult = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВНаявності"] : 0);
 
                         if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
                         {
@@ -3043,11 +2998,11 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-                            ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                            recordResult = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                                ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                                ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВРезервіЗіСкладу"] : 0);
 
                             if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
                             {
@@ -3131,12 +3086,12 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        var recordResult = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.Склад, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок,
                             ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок);
 
-                        if (listNameRow.Count == 0)
+                        if (!recordResult.Result)
                         {
                             throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                 $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
@@ -3144,7 +3099,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                         decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок;
 
-                        foreach (Dictionary<string, object> nameRow in listNameRow)
+                        foreach (Dictionary<string, object> nameRow in recordResult.ListRow)
                         {
                             decimal КількістьВПартії = (decimal)nameRow["Кількість"];
                             decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
@@ -3254,11 +3209,11 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
+                        var recordResult = await СпільніФункції.ОтриматиЗалишкиТоваруНаСкладі(
                             ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Серія,
                             ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВНаявності"] : 0);
 
                         if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
                         {
@@ -3272,11 +3227,11 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             // Рахуємо всі резерви
                             //
 
-                            List<Dictionary<string, object>> Резерв_Список = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
-                            ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
+                            recordResult = await СпільніФункції.ОтриматиРезервТоваруНаСкладі(
+                                ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
+                                ДокументОбєкт.Склад, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, Резерв_Список.Count > 0 ? (decimal)Резерв_Список[0]["ВРезервіЗіСкладу"] : 0);
+                            РезервНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВРезервіЗіСкладу"] : 0);
 
                             if (РезервНоменклатури[ТовариРядок.НомерРядка] > 0)
                             {
@@ -3360,12 +3315,12 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
-                        List<Dictionary<string, object>> listNameRow = await СпільніФункції.ОтриматиСписокНаявнихПартій(
+                        var recordResult = await СпільніФункції.ОтриматиСписокНаявнихПартій(
                             ДокументОбєкт.Організація, ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури,
                             ТовариРядок.Серія, ДокументОбєкт.Склад, ТовариРядок.Партія, ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок,
                             ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок);
 
-                        if (listNameRow.Count == 0)
+                        if (!recordResult.Result)
                         {
                             throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                 $"Немає доступних партій для товару {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}");
@@ -3373,7 +3328,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                         decimal КількістьЯкуПотрібноСписати = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок;
 
-                        foreach (Dictionary<string, object> nameRow in listNameRow)
+                        foreach (Dictionary<string, object> nameRow in recordResult.ListRow)
                         {
                             decimal КількістьВПартії = (decimal)nameRow["Кількість"];
                             decimal СобівартістьПартії = (decimal)nameRow["Собівартість"];
@@ -3537,13 +3492,16 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
+                        //Одиниця виміру береться з номенклатури
+                        ПакуванняОдиниціВиміру_Pointer ОдиницяВиміруНоменклатури = СписокНоменклатури[ТовариРядок.НомерРядка].ОдиницяВиміру;
+
                         ТовариВКомірках_RecordsSet.Record record = new ТовариВКомірках_RecordsSet.Record()
                         {
                             Income = true,
                             Owner = ДокументОбєкт.UnigueID.UGuid,
                             Номенклатура = ТовариРядок.Номенклатура,
                             ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури,
-                            Пакування = ТовариРядок.Пакування,
+                            Пакування = ОдиницяВиміруНоменклатури,
                             Комірка = ТовариРядок.Комірка,
                             Серія = ТовариРядок.Серія,
                             ВНаявності = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок,
@@ -3601,16 +3559,19 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
+                        //Одиниця виміру береться з номенклатури
+                        ПакуванняОдиниціВиміру_Pointer ОдиницяВиміруНоменклатури = СписокНоменклатури[ТовариРядок.НомерРядка].ОдиницяВиміру;
+
                         //
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Пакування,
+                        var recordResult = await СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
+                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ОдиницяВиміруНоменклатури,
                             ТовариРядок.КоміркаВідправник, ТовариРядок.Серія,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВНаявності"] : 0);
 
                         if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
                         {
@@ -3618,9 +3579,9 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             {
                                 throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                     $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок}\n" +
-                                    $"Номенклатура {await ТовариРядок.Номенклатура.GetPresentation()}\n" +
+                                    $"Номенклатура {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}\n" +
                                     $"Характеристика {await ТовариРядок.ХарактеристикаНоменклатури.GetPresentation()}\n" +
-                                    $"Пакування {await ТовариРядок.Пакування.GetPresentation()}\n" +
+                                    $"Пакування {await ОдиницяВиміруНоменклатури.GetPresentation()}\n" +
                                     $"Комірка {await ТовариРядок.КоміркаВідправник.GetPresentation()}\n" +
                                     $"Серія {await ТовариРядок.Серія.GetPresentation()}\n");
                             }
@@ -3643,6 +3604,9 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
+                        //Одиниця виміру береться з номенклатури
+                        ПакуванняОдиниціВиміру_Pointer ОдиницяВиміруНоменклатури = СписокНоменклатури[ТовариРядок.НомерРядка].ОдиницяВиміру;
+
                         //КоміркаВідправник
                         {
                             ТовариВКомірках_RecordsSet.Record record = new ТовариВКомірках_RecordsSet.Record()
@@ -3651,7 +3615,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                                 Owner = ДокументОбєкт.UnigueID.UGuid,
                                 Номенклатура = ТовариРядок.Номенклатура,
                                 ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури,
-                                Пакування = ТовариРядок.Пакування,
+                                Пакування = ОдиницяВиміруНоменклатури,
                                 Комірка = ТовариРядок.КоміркаВідправник,
                                 Серія = ТовариРядок.Серія,
                                 ВНаявності = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок,
@@ -3668,7 +3632,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                                 Owner = ДокументОбєкт.UnigueID.UGuid,
                                 Номенклатура = ТовариРядок.Номенклатура,
                                 ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури,
-                                Пакування = ТовариРядок.Пакування,
+                                Пакування = ОдиницяВиміруНоменклатури,
                                 Комірка = ТовариРядок.КоміркаОтримувач,
                                 Серія = ТовариРядок.Серія,
                                 ВНаявності = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок,
@@ -3720,26 +3684,29 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     if (!(ТовариРядок.КількістьУпаковок > 0))
                         throw new Exception($"Рядок {ТовариРядок.НомерРядка}. Коєфіціент має бути 1 або більше");
 
-                    if (ТовариРядок.Комірка.IsEmpty())
-                        throw new Exception($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Комірка");
-
                     if (!(ТовариРядок.Кількість > 0))
                         throw new Exception($"Рядок {ТовариРядок.НомерРядка}. Кількість має бути більшою 0");
+
+                    if (ТовариРядок.Комірка.IsEmpty())
+                        throw new Exception($"Рядок {ТовариРядок.НомерРядка}. Не заповнене поле Комірка");
 
                     СписокНоменклатури.Add(ТовариРядок.НомерРядка, (await ТовариРядок.Номенклатура.GetDirectoryObject())!);
 
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
+                        //Одиниця виміру береться з номенклатури
+                        ПакуванняОдиниціВиміру_Pointer ОдиницяВиміруНоменклатури = СписокНоменклатури[ТовариРядок.НомерРядка].ОдиницяВиміру;
+
                         //
                         //Для товарів отримуємо залишки
                         //
 
-                        List<Dictionary<string, object>> Залишок_Список = await СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
-                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ТовариРядок.Пакування,
+                        var recordResult = await СпільніФункції.ОтриматиЗалишкиТоваруВКомірці(
+                            ТовариРядок.Номенклатура, ТовариРядок.ХарактеристикаНоменклатури, ОдиницяВиміруНоменклатури,
                             ТовариРядок.Комірка, ТовариРядок.Серія,
                             ДокументОбєкт.UnigueID, ДокументОбєкт.ДатаДок);
 
-                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, Залишок_Список.Count > 0 ? (decimal)Залишок_Список[0]["ВНаявності"] : 0);
+                        ЗалишокНоменклатури.Add(ТовариРядок.НомерРядка, recordResult.Result ? (decimal)recordResult.ListRow[0]["ВНаявності"] : 0);
 
                         if (ЗалишокНоменклатури[ТовариРядок.НомерРядка] > 0)
                         {
@@ -3747,9 +3714,9 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                             {
                                 throw new Exception($"Рядок {ТовариРядок.НомерРядка}. " +
                                     $"Залишок товару {ЗалишокНоменклатури[ТовариРядок.НомерРядка]}, потрібно {ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок}\n" +
-                                    $"Номенклатура: {await ТовариРядок.Номенклатура.GetPresentation()}\n" +
+                                    $"Номенклатура: {СписокНоменклатури[ТовариРядок.НомерРядка].Назва}\n" +
                                     $"Характеристика: {await ТовариРядок.ХарактеристикаНоменклатури.GetPresentation()}\n" +
-                                    $"Пакування: {await ТовариРядок.Пакування.GetPresentation()}\n" +
+                                    $"Пакування: {await ОдиницяВиміруНоменклатури.GetPresentation()}\n" +
                                     $"Комірка: {await ТовариРядок.Комірка.GetPresentation()}\n" +
                                     $"Серія: {await ТовариРядок.Серія.GetPresentation()}");
                             }
@@ -3772,13 +3739,16 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 {
                     if (СписокНоменклатури[ТовариРядок.НомерРядка].ТипНоменклатури == Перелічення.ТипиНоменклатури.Товар)
                     {
+                        //Одиниця виміру береться з номенклатури
+                        ПакуванняОдиниціВиміру_Pointer ОдиницяВиміруНоменклатури = СписокНоменклатури[ТовариРядок.НомерРядка].ОдиницяВиміру;
+
                         ТовариВКомірках_RecordsSet.Record record = new ТовариВКомірках_RecordsSet.Record()
                         {
                             Income = false,
                             Owner = ДокументОбєкт.UnigueID.UGuid,
                             Номенклатура = ТовариРядок.Номенклатура,
                             ХарактеристикаНоменклатури = ТовариРядок.ХарактеристикаНоменклатури,
-                            Пакування = ТовариРядок.Пакування,
+                            Пакування = ОдиницяВиміруНоменклатури,
                             Комірка = ТовариРядок.Комірка,
                             Серія = ТовариРядок.Серія,
                             ВНаявності = ТовариРядок.Кількість * ТовариРядок.КількістьУпаковок,

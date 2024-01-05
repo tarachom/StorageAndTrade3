@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 03.01.2024 08:22:45
+ * Дата конфігурації: 04.01.2024 11:49:35
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -41,20 +41,6 @@ namespace StorageAndTrade_1_0
     public static class Config
     {
         public static Kernel Kernel { get; set; } = new Kernel();
-		
-        public static async ValueTask ReadAllConstants()
-        {
-            await Константи.ЗначенняЗаЗамовчуванням.ReadAll();
-            await Константи.Системні.ReadAll();
-            await Константи.НумераціяДокументів.ReadAll();
-            await Константи.НумераціяДовідників.ReadAll();
-            await Константи.ЖурналиДокументів.ReadAll();
-            await Константи.ПартіїТоварів.ReadAll();
-            await Константи.ЗавантаженняДанихІзСайтів.ReadAll();
-            await Константи.ПриЗапускуПрограми.ReadAll();
-            
-        }
-
         public static async void StartBackgroundTask()
         {
             /*
@@ -73,12 +59,10 @@ namespace StorageAndTrade_1_0
             */
 
             if (Kernel.Session == Guid.Empty)
-                throw new Exception("Порожні сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
+                throw new Exception("Порожня сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
 
             while (true)
-            {
-                await Константи.Системні.ReadAll();
-                
+            {                
                 //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
                 //провести всі документ, а тоді вже розраховувати регістри
                 if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
@@ -268,199 +252,161 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "ЗначенняЗаЗамовчуванням"
     public static class ЗначенняЗаЗамовчуванням
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_g4", "col_g5", "col_g9", "col_i2", "col_c3", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_ОсновнаОрганізація_Const = new Довідники.Організації_Pointer(fieldValue["col_a1"]);
-                m_ОсновнийСклад_Const = new Довідники.Склади_Pointer(fieldValue["col_a2"]);
-                m_ОсновнаВалюта_Const = new Довідники.Валюти_Pointer(fieldValue["col_a3"]);
-                m_ОсновнийПостачальник_Const = new Довідники.Контрагенти_Pointer(fieldValue["col_a4"]);
-                m_ОсновнийПокупець_Const = new Довідники.Контрагенти_Pointer(fieldValue["col_a5"]);
-                m_ОсновнаКаса_Const = new Довідники.Каси_Pointer(fieldValue["col_a6"]);
-                m_ОсновнаОдиницяПакування_Const = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_a7"]);
-                m_ОсновнийПідрозділ_Const = new Довідники.СтруктураПідприємства_Pointer(fieldValue["col_g4"]);
-                m_ОсновнийБанківськийРахунок_Const = new Довідники.БанківськіРахункиОрганізацій_Pointer(fieldValue["col_g5"]);
-                m_ОсновнийВидЦіни_Const = new Довідники.ВидиЦін_Pointer(fieldValue["col_g9"]);
-                m_ОсновнийВидНоменклатури_Const = new Довідники.ВидиНоменклатури_Pointer(fieldValue["col_i2"]);
-                m_ОсновнийВидЦіниЗакупівлі_Const = new Довідники.ВидиЦін_Pointer(fieldValue["col_c3"]);
-                
-            }
-			      
-        }
-        
-        
-        static Довідники.Організації_Pointer m_ОсновнаОрганізація_Const = new Довідники.Організації_Pointer();
+    {       
         public static Довідники.Організації_Pointer ОсновнаОрганізація_Const
         {
             get 
             {
-                return m_ОсновнаОрганізація_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a1"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.Організації_Pointer(recordResult.Value)) : new Довідники.Організації_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнаОрганізація_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a1", m_ОсновнаОрганізація_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a1", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.Склади_Pointer m_ОсновнийСклад_Const = new Довідники.Склади_Pointer();
         public static Довідники.Склади_Pointer ОсновнийСклад_Const
         {
             get 
             {
-                return m_ОсновнийСклад_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a2"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.Склади_Pointer(recordResult.Value)) : new Довідники.Склади_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийСклад_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a2", m_ОсновнийСклад_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a2", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.Валюти_Pointer m_ОсновнаВалюта_Const = new Довідники.Валюти_Pointer();
         public static Довідники.Валюти_Pointer ОсновнаВалюта_Const
         {
             get 
             {
-                return m_ОсновнаВалюта_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a3"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.Валюти_Pointer(recordResult.Value)) : new Довідники.Валюти_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнаВалюта_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a3", m_ОсновнаВалюта_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a3", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.Контрагенти_Pointer m_ОсновнийПостачальник_Const = new Довідники.Контрагенти_Pointer();
         public static Довідники.Контрагенти_Pointer ОсновнийПостачальник_Const
         {
             get 
             {
-                return m_ОсновнийПостачальник_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a4"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.Контрагенти_Pointer(recordResult.Value)) : new Довідники.Контрагенти_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийПостачальник_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a4", m_ОсновнийПостачальник_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a4", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.Контрагенти_Pointer m_ОсновнийПокупець_Const = new Довідники.Контрагенти_Pointer();
         public static Довідники.Контрагенти_Pointer ОсновнийПокупець_Const
         {
             get 
             {
-                return m_ОсновнийПокупець_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a5"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.Контрагенти_Pointer(recordResult.Value)) : new Довідники.Контрагенти_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийПокупець_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a5", m_ОсновнийПокупець_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a5", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.Каси_Pointer m_ОсновнаКаса_Const = new Довідники.Каси_Pointer();
         public static Довідники.Каси_Pointer ОсновнаКаса_Const
         {
             get 
             {
-                return m_ОсновнаКаса_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a6"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.Каси_Pointer(recordResult.Value)) : new Довідники.Каси_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнаКаса_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a6", m_ОсновнаКаса_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a6", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.ПакуванняОдиниціВиміру_Pointer m_ОсновнаОдиницяПакування_Const = new Довідники.ПакуванняОдиниціВиміру_Pointer();
         public static Довідники.ПакуванняОдиниціВиміру_Pointer ОсновнаОдиницяПакування_Const
         {
             get 
             {
-                return m_ОсновнаОдиницяПакування_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a7"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.ПакуванняОдиниціВиміру_Pointer(recordResult.Value)) : new Довідники.ПакуванняОдиниціВиміру_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнаОдиницяПакування_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a7", m_ОсновнаОдиницяПакування_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a7", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.СтруктураПідприємства_Pointer m_ОсновнийПідрозділ_Const = new Довідники.СтруктураПідприємства_Pointer();
         public static Довідники.СтруктураПідприємства_Pointer ОсновнийПідрозділ_Const
         {
             get 
             {
-                return m_ОсновнийПідрозділ_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g4"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.СтруктураПідприємства_Pointer(recordResult.Value)) : new Довідники.СтруктураПідприємства_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийПідрозділ_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g4", m_ОсновнийПідрозділ_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g4", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.БанківськіРахункиОрганізацій_Pointer m_ОсновнийБанківськийРахунок_Const = new Довідники.БанківськіРахункиОрганізацій_Pointer();
         public static Довідники.БанківськіРахункиОрганізацій_Pointer ОсновнийБанківськийРахунок_Const
         {
             get 
             {
-                return m_ОсновнийБанківськийРахунок_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g5"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.БанківськіРахункиОрганізацій_Pointer(recordResult.Value)) : new Довідники.БанківськіРахункиОрганізацій_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийБанківськийРахунок_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g5", m_ОсновнийБанківськийРахунок_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g5", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.ВидиЦін_Pointer m_ОсновнийВидЦіни_Const = new Довідники.ВидиЦін_Pointer();
         public static Довідники.ВидиЦін_Pointer ОсновнийВидЦіни_Const
         {
             get 
             {
-                return m_ОсновнийВидЦіни_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g9"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.ВидиЦін_Pointer(recordResult.Value)) : new Довідники.ВидиЦін_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийВидЦіни_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g9", m_ОсновнийВидЦіни_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g9", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.ВидиНоменклатури_Pointer m_ОсновнийВидНоменклатури_Const = new Довідники.ВидиНоменклатури_Pointer();
         public static Довідники.ВидиНоменклатури_Pointer ОсновнийВидНоменклатури_Const
         {
             get 
             {
-                return m_ОсновнийВидНоменклатури_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i2"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.ВидиНоменклатури_Pointer(recordResult.Value)) : new Довідники.ВидиНоменклатури_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийВидНоменклатури_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_i2", m_ОсновнийВидНоменклатури_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i2", value.UnigueID.UGuid);
             }
         }
-        
-        static Довідники.ВидиЦін_Pointer m_ОсновнийВидЦіниЗакупівлі_Const = new Довідники.ВидиЦін_Pointer();
         public static Довідники.ВидиЦін_Pointer ОсновнийВидЦіниЗакупівлі_Const
         {
             get 
             {
-                return m_ОсновнийВидЦіниЗакупівлі_Const.Copy();
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c3"); } ).Result;
+                var result = recordResult.Result ? (new Довідники.ВидиЦін_Pointer(recordResult.Value)) : new Довідники.ВидиЦін_Pointer();
+                return result.Copy();
             }
             set
             {
-                m_ОсновнийВидЦіниЗакупівлі_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c3", m_ОсновнийВидЦіниЗакупівлі_Const.UnigueID.UGuid);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c3", value.UnigueID.UGuid);
             }
         }
              
@@ -469,124 +415,96 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "Системні"
     public static class Системні
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_a8", "col_a9", "col_g6", "col_g7", "col_h8", "col_h9", "col_i1", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_ЖурналРеєстрації_Const = fieldValue["col_a8"].ToString() ?? "";
-                m_ФоновіЗадачі_Const = fieldValue["col_a9"].ToString() ?? "";
-                m_ЗупинитиФоновіЗадачі_Const = (fieldValue["col_g6"] != DBNull.Value) ? (bool)fieldValue["col_g6"] : false;
-                m_ЗаблокованіОбєкти_Const = fieldValue["col_g7"].ToString() ?? "";
-                m_ПовідомленняТаПомилки_Const = fieldValue["col_h8"].ToString() ?? "";
-                m_ВестиОблікПоСеріяхНоменклатури_Const = (fieldValue["col_h9"] != DBNull.Value) ? (bool)fieldValue["col_h9"] : false;
-                m_ВестиОблікПоХарактеристикахНоменклатури_Const = (fieldValue["col_i1"] != DBNull.Value) ? (bool)fieldValue["col_i1"] : false;
-                
-            }
-			      
-        }
-        
-        
-        static string m_ЖурналРеєстрації_Const = "";
+    {       
         public static string ЖурналРеєстрації_Const
         {
             get 
             {
-                return m_ЖурналРеєстрації_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a8"); } ).Result;
+                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
+                return result;
             }
             set
             {
-                m_ЖурналРеєстрації_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a8", m_ЖурналРеєстрації_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a8", value);
             }
         }
-        
-        static string m_ФоновіЗадачі_Const = "";
         public static string ФоновіЗадачі_Const
         {
             get 
             {
-                return m_ФоновіЗадачі_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a9"); } ).Result;
+                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
+                return result;
             }
             set
             {
-                m_ФоновіЗадачі_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a9", m_ФоновіЗадачі_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_a9", value);
             }
         }
-        
-        static bool m_ЗупинитиФоновіЗадачі_Const = false;
         public static bool ЗупинитиФоновіЗадачі_Const
         {
             get 
             {
-                return m_ЗупинитиФоновіЗадачі_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g6"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
+                return result;
             }
             set
             {
-                m_ЗупинитиФоновіЗадачі_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g6", m_ЗупинитиФоновіЗадачі_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g6", value);
             }
         }
-        
-        static string m_ЗаблокованіОбєкти_Const = "";
         public static string ЗаблокованіОбєкти_Const
         {
             get 
             {
-                return m_ЗаблокованіОбєкти_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g7"); } ).Result;
+                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
+                return result;
             }
             set
             {
-                m_ЗаблокованіОбєкти_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g7", m_ЗаблокованіОбєкти_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g7", value);
             }
         }
-        
-        static string m_ПовідомленняТаПомилки_Const = "";
         public static string ПовідомленняТаПомилки_Const
         {
             get 
             {
-                return m_ПовідомленняТаПомилки_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h8"); } ).Result;
+                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
+                return result;
             }
             set
             {
-                m_ПовідомленняТаПомилки_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h8", m_ПовідомленняТаПомилки_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h8", value);
             }
         }
-        
-        static bool m_ВестиОблікПоСеріяхНоменклатури_Const = false;
         public static bool ВестиОблікПоСеріяхНоменклатури_Const
         {
             get 
             {
-                return m_ВестиОблікПоСеріяхНоменклатури_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h9"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
+                return result;
             }
             set
             {
-                m_ВестиОблікПоСеріяхНоменклатури_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h9", m_ВестиОблікПоСеріяхНоменклатури_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h9", value);
             }
         }
-        
-        static bool m_ВестиОблікПоХарактеристикахНоменклатури_Const = false;
         public static bool ВестиОблікПоХарактеристикахНоменклатури_Const
         {
             get 
             {
-                return m_ВестиОблікПоХарактеристикахНоменклатури_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
+                return result;
             }
             set
             {
-                m_ВестиОблікПоХарактеристикахНоменклатури_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_i1", m_ВестиОблікПоХарактеристикахНоменклатури_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i1", value);
             }
         }
         
@@ -907,349 +825,291 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "НумераціяДокументів"
     public static class НумераціяДокументів
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_b7", "col_b9", "col_c1", "col_c2", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_h1", "col_h2", "col_b2", "col_b3", "col_b4", "col_b5", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_ПоступленняТоварівТаПослуг_Const = (fieldValue["col_b7"] != DBNull.Value) ? (int)fieldValue["col_b7"] : 0;
-                m_ЗамовленняПостачальнику_Const = (fieldValue["col_b9"] != DBNull.Value) ? (int)fieldValue["col_b9"] : 0;
-                m_ЗамовленняКлієнта_Const = (fieldValue["col_c1"] != DBNull.Value) ? (int)fieldValue["col_c1"] : 0;
-                m_РеалізаціяТоварівТаПослуг_Const = (fieldValue["col_c2"] != DBNull.Value) ? (int)fieldValue["col_c2"] : 0;
-                m_ВстановленняЦінНоменклатури_Const = (fieldValue["col_c4"] != DBNull.Value) ? (int)fieldValue["col_c4"] : 0;
-                m_ПрихіднийКасовийОрдер_Const = (fieldValue["col_c5"] != DBNull.Value) ? (int)fieldValue["col_c5"] : 0;
-                m_РозхіднийКасовийОрдер_Const = (fieldValue["col_c6"] != DBNull.Value) ? (int)fieldValue["col_c6"] : 0;
-                m_ПереміщенняТоварів_Const = (fieldValue["col_c7"] != DBNull.Value) ? (int)fieldValue["col_c7"] : 0;
-                m_ПоверненняТоварівПостачальнику_Const = (fieldValue["col_c8"] != DBNull.Value) ? (int)fieldValue["col_c8"] : 0;
-                m_ПоверненняТоварівВідКлієнта_Const = (fieldValue["col_c9"] != DBNull.Value) ? (int)fieldValue["col_c9"] : 0;
-                m_АктВиконанихРобіт_Const = (fieldValue["col_f6"] != DBNull.Value) ? (int)fieldValue["col_f6"] : 0;
-                m_ВведенняЗалишків_Const = (fieldValue["col_f7"] != DBNull.Value) ? (int)fieldValue["col_f7"] : 0;
-                m_НадлишкиТоварів_Const = (fieldValue["col_f8"] != DBNull.Value) ? (int)fieldValue["col_f8"] : 0;
-                m_ПересортицяТоварів_Const = (fieldValue["col_f9"] != DBNull.Value) ? (int)fieldValue["col_f9"] : 0;
-                m_ПерерахунокТоварів_Const = (fieldValue["col_g1"] != DBNull.Value) ? (int)fieldValue["col_g1"] : 0;
-                m_ПсуванняТоварів_Const = (fieldValue["col_g2"] != DBNull.Value) ? (int)fieldValue["col_g2"] : 0;
-                m_ВнутрішнєСпоживанняТоварів_Const = (fieldValue["col_h1"] != DBNull.Value) ? (int)fieldValue["col_h1"] : 0;
-                m_РахунокФактура_Const = (fieldValue["col_h2"] != DBNull.Value) ? (int)fieldValue["col_h2"] : 0;
-                m_РозміщенняТоварівНаСкладі_Const = (fieldValue["col_b2"] != DBNull.Value) ? (int)fieldValue["col_b2"] : 0;
-                m_ПереміщенняТоварівНаСкладі_Const = (fieldValue["col_b3"] != DBNull.Value) ? (int)fieldValue["col_b3"] : 0;
-                m_ЗбіркаТоварівНаСкладі_Const = (fieldValue["col_b4"] != DBNull.Value) ? (int)fieldValue["col_b4"] : 0;
-                m_РозміщенняНоменклатуриПоКоміркам_Const = (fieldValue["col_b5"] != DBNull.Value) ? (int)fieldValue["col_b5"] : 0;
-                
-            }
-			      
-        }
-        
-        
-        static int m_ПоступленняТоварівТаПослуг_Const = 0;
+    {       
         public static int ПоступленняТоварівТаПослуг_Const
         {
             get 
             {
-                return m_ПоступленняТоварівТаПослуг_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b7"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПоступленняТоварівТаПослуг_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b7", m_ПоступленняТоварівТаПослуг_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b7", value);
             }
         }
-        
-        static int m_ЗамовленняПостачальнику_Const = 0;
         public static int ЗамовленняПостачальнику_Const
         {
             get 
             {
-                return m_ЗамовленняПостачальнику_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b9"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ЗамовленняПостачальнику_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b9", m_ЗамовленняПостачальнику_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b9", value);
             }
         }
-        
-        static int m_ЗамовленняКлієнта_Const = 0;
         public static int ЗамовленняКлієнта_Const
         {
             get 
             {
-                return m_ЗамовленняКлієнта_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ЗамовленняКлієнта_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c1", m_ЗамовленняКлієнта_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c1", value);
             }
         }
-        
-        static int m_РеалізаціяТоварівТаПослуг_Const = 0;
         public static int РеалізаціяТоварівТаПослуг_Const
         {
             get 
             {
-                return m_РеалізаціяТоварівТаПослуг_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c2"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_РеалізаціяТоварівТаПослуг_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c2", m_РеалізаціяТоварівТаПослуг_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c2", value);
             }
         }
-        
-        static int m_ВстановленняЦінНоменклатури_Const = 0;
         public static int ВстановленняЦінНоменклатури_Const
         {
             get 
             {
-                return m_ВстановленняЦінНоменклатури_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c4"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ВстановленняЦінНоменклатури_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c4", m_ВстановленняЦінНоменклатури_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c4", value);
             }
         }
-        
-        static int m_ПрихіднийКасовийОрдер_Const = 0;
         public static int ПрихіднийКасовийОрдер_Const
         {
             get 
             {
-                return m_ПрихіднийКасовийОрдер_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c5"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПрихіднийКасовийОрдер_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c5", m_ПрихіднийКасовийОрдер_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c5", value);
             }
         }
-        
-        static int m_РозхіднийКасовийОрдер_Const = 0;
         public static int РозхіднийКасовийОрдер_Const
         {
             get 
             {
-                return m_РозхіднийКасовийОрдер_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c6"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_РозхіднийКасовийОрдер_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c6", m_РозхіднийКасовийОрдер_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c6", value);
             }
         }
-        
-        static int m_ПереміщенняТоварів_Const = 0;
         public static int ПереміщенняТоварів_Const
         {
             get 
             {
-                return m_ПереміщенняТоварів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c7"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПереміщенняТоварів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c7", m_ПереміщенняТоварів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c7", value);
             }
         }
-        
-        static int m_ПоверненняТоварівПостачальнику_Const = 0;
         public static int ПоверненняТоварівПостачальнику_Const
         {
             get 
             {
-                return m_ПоверненняТоварівПостачальнику_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c8"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПоверненняТоварівПостачальнику_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c8", m_ПоверненняТоварівПостачальнику_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c8", value);
             }
         }
-        
-        static int m_ПоверненняТоварівВідКлієнта_Const = 0;
         public static int ПоверненняТоварівВідКлієнта_Const
         {
             get 
             {
-                return m_ПоверненняТоварівВідКлієнта_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c9"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПоверненняТоварівВідКлієнта_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_c9", m_ПоверненняТоварівВідКлієнта_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_c9", value);
             }
         }
-        
-        static int m_АктВиконанихРобіт_Const = 0;
         public static int АктВиконанихРобіт_Const
         {
             get 
             {
-                return m_АктВиконанихРобіт_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f6"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_АктВиконанихРобіт_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f6", m_АктВиконанихРобіт_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f6", value);
             }
         }
-        
-        static int m_ВведенняЗалишків_Const = 0;
         public static int ВведенняЗалишків_Const
         {
             get 
             {
-                return m_ВведенняЗалишків_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f7"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ВведенняЗалишків_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f7", m_ВведенняЗалишків_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f7", value);
             }
         }
-        
-        static int m_НадлишкиТоварів_Const = 0;
         public static int НадлишкиТоварів_Const
         {
             get 
             {
-                return m_НадлишкиТоварів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f8"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_НадлишкиТоварів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f8", m_НадлишкиТоварів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f8", value);
             }
         }
-        
-        static int m_ПересортицяТоварів_Const = 0;
         public static int ПересортицяТоварів_Const
         {
             get 
             {
-                return m_ПересортицяТоварів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f9"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПересортицяТоварів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f9", m_ПересортицяТоварів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f9", value);
             }
         }
-        
-        static int m_ПерерахунокТоварів_Const = 0;
         public static int ПерерахунокТоварів_Const
         {
             get 
             {
-                return m_ПерерахунокТоварів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПерерахунокТоварів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g1", m_ПерерахунокТоварів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g1", value);
             }
         }
-        
-        static int m_ПсуванняТоварів_Const = 0;
         public static int ПсуванняТоварів_Const
         {
             get 
             {
-                return m_ПсуванняТоварів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g2"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПсуванняТоварів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g2", m_ПсуванняТоварів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g2", value);
             }
         }
-        
-        static int m_ВнутрішнєСпоживанняТоварів_Const = 0;
         public static int ВнутрішнєСпоживанняТоварів_Const
         {
             get 
             {
-                return m_ВнутрішнєСпоживанняТоварів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ВнутрішнєСпоживанняТоварів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h1", m_ВнутрішнєСпоживанняТоварів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h1", value);
             }
         }
-        
-        static int m_РахунокФактура_Const = 0;
         public static int РахунокФактура_Const
         {
             get 
             {
-                return m_РахунокФактура_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h2"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_РахунокФактура_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h2", m_РахунокФактура_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h2", value);
             }
         }
-        
-        static int m_РозміщенняТоварівНаСкладі_Const = 0;
         public static int РозміщенняТоварівНаСкладі_Const
         {
             get 
             {
-                return m_РозміщенняТоварівНаСкладі_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b2"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_РозміщенняТоварівНаСкладі_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b2", m_РозміщенняТоварівНаСкладі_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b2", value);
             }
         }
-        
-        static int m_ПереміщенняТоварівНаСкладі_Const = 0;
         public static int ПереміщенняТоварівНаСкладі_Const
         {
             get 
             {
-                return m_ПереміщенняТоварівНаСкладі_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b3"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПереміщенняТоварівНаСкладі_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b3", m_ПереміщенняТоварівНаСкладі_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b3", value);
             }
         }
-        
-        static int m_ЗбіркаТоварівНаСкладі_Const = 0;
         public static int ЗбіркаТоварівНаСкладі_Const
         {
             get 
             {
-                return m_ЗбіркаТоварівНаСкладі_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b4"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ЗбіркаТоварівНаСкладі_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b4", m_ЗбіркаТоварівНаСкладі_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b4", value);
             }
         }
-        
-        static int m_РозміщенняНоменклатуриПоКоміркам_Const = 0;
         public static int РозміщенняНоменклатуриПоКоміркам_Const
         {
             get 
             {
-                return m_РозміщенняНоменклатуриПоКоміркам_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b5"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_РозміщенняНоменклатуриПоКоміркам_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b5", m_РозміщенняНоменклатуриПоКоміркам_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b5", value);
             }
         }
              
@@ -1258,439 +1118,369 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "НумераціяДовідників"
     public static class НумераціяДовідників
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_b8", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f4", "col_f5", "col_b1", "col_g8", "col_i3", "col_i4", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_Номенклатура_Const = (fieldValue["col_b8"] != DBNull.Value) ? (int)fieldValue["col_b8"] : 0;
-                m_Номенклатура_Папки_Const = (fieldValue["col_d1"] != DBNull.Value) ? (int)fieldValue["col_d1"] : 0;
-                m_Склади_Const = (fieldValue["col_d2"] != DBNull.Value) ? (int)fieldValue["col_d2"] : 0;
-                m_Склади_Папки_Const = (fieldValue["col_d3"] != DBNull.Value) ? (int)fieldValue["col_d3"] : 0;
-                m_Контрагенти_Const = (fieldValue["col_d4"] != DBNull.Value) ? (int)fieldValue["col_d4"] : 0;
-                m_Контрагенти_Папки_Const = (fieldValue["col_d5"] != DBNull.Value) ? (int)fieldValue["col_d5"] : 0;
-                m_ХарактеристикиНоменклатури_Const = (fieldValue["col_d6"] != DBNull.Value) ? (int)fieldValue["col_d6"] : 0;
-                m_Валюти_Const = (fieldValue["col_d7"] != DBNull.Value) ? (int)fieldValue["col_d7"] : 0;
-                m_Організації_Const = (fieldValue["col_d8"] != DBNull.Value) ? (int)fieldValue["col_d8"] : 0;
-                m_Виробники_Const = (fieldValue["col_d9"] != DBNull.Value) ? (int)fieldValue["col_d9"] : 0;
-                m_ВидиНоменклатури_Const = (fieldValue["col_e1"] != DBNull.Value) ? (int)fieldValue["col_e1"] : 0;
-                m_ПакуванняОдиниціВиміру_Const = (fieldValue["col_e2"] != DBNull.Value) ? (int)fieldValue["col_e2"] : 0;
-                m_ВидиЦін_Const = (fieldValue["col_e3"] != DBNull.Value) ? (int)fieldValue["col_e3"] : 0;
-                m_ВидиЦінПостачальників_Const = (fieldValue["col_e4"] != DBNull.Value) ? (int)fieldValue["col_e4"] : 0;
-                m_Користувачі_Const = (fieldValue["col_e5"] != DBNull.Value) ? (int)fieldValue["col_e5"] : 0;
-                m_ФізичніОсоби_Const = (fieldValue["col_e6"] != DBNull.Value) ? (int)fieldValue["col_e6"] : 0;
-                m_СтруктураПідприємства_Const = (fieldValue["col_e7"] != DBNull.Value) ? (int)fieldValue["col_e7"] : 0;
-                m_КраїниСвіту_Const = (fieldValue["col_e8"] != DBNull.Value) ? (int)fieldValue["col_e8"] : 0;
-                m_Файли_Const = (fieldValue["col_e9"] != DBNull.Value) ? (int)fieldValue["col_e9"] : 0;
-                m_Каси_Const = (fieldValue["col_f1"] != DBNull.Value) ? (int)fieldValue["col_f1"] : 0;
-                m_БанківськіРахункиОрганізацій_Const = (fieldValue["col_f2"] != DBNull.Value) ? (int)fieldValue["col_f2"] : 0;
-                m_ДоговориКонтрагентів_Const = (fieldValue["col_f3"] != DBNull.Value) ? (int)fieldValue["col_f3"] : 0;
-                m_БанківськіРахункиКонтрагентів_Const = (fieldValue["col_f4"] != DBNull.Value) ? (int)fieldValue["col_f4"] : 0;
-                m_СтаттяРухуКоштів_Const = (fieldValue["col_f5"] != DBNull.Value) ? (int)fieldValue["col_f5"] : 0;
-                m_СкладськіКомірки_Папки_Const = (fieldValue["col_b1"] != DBNull.Value) ? (int)fieldValue["col_b1"] : 0;
-                m_Банки_Const = (fieldValue["col_g8"] != DBNull.Value) ? (int)fieldValue["col_g8"] : 0;
-                m_Блокнот_Const = (fieldValue["col_i3"] != DBNull.Value) ? (int)fieldValue["col_i3"] : 0;
-                m_ВидиЗапасів_Const = (fieldValue["col_i4"] != DBNull.Value) ? (int)fieldValue["col_i4"] : 0;
-                
-            }
-			      
-        }
-        
-        
-        static int m_Номенклатура_Const = 0;
+    {       
         public static int Номенклатура_Const
         {
             get 
             {
-                return m_Номенклатура_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b8"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Номенклатура_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b8", m_Номенклатура_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b8", value);
             }
         }
-        
-        static int m_Номенклатура_Папки_Const = 0;
         public static int Номенклатура_Папки_Const
         {
             get 
             {
-                return m_Номенклатура_Папки_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Номенклатура_Папки_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d1", m_Номенклатура_Папки_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d1", value);
             }
         }
-        
-        static int m_Склади_Const = 0;
         public static int Склади_Const
         {
             get 
             {
-                return m_Склади_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d2"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Склади_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d2", m_Склади_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d2", value);
             }
         }
-        
-        static int m_Склади_Папки_Const = 0;
         public static int Склади_Папки_Const
         {
             get 
             {
-                return m_Склади_Папки_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d3"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Склади_Папки_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d3", m_Склади_Папки_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d3", value);
             }
         }
-        
-        static int m_Контрагенти_Const = 0;
         public static int Контрагенти_Const
         {
             get 
             {
-                return m_Контрагенти_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d4"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Контрагенти_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d4", m_Контрагенти_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d4", value);
             }
         }
-        
-        static int m_Контрагенти_Папки_Const = 0;
         public static int Контрагенти_Папки_Const
         {
             get 
             {
-                return m_Контрагенти_Папки_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d5"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Контрагенти_Папки_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d5", m_Контрагенти_Папки_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d5", value);
             }
         }
-        
-        static int m_ХарактеристикиНоменклатури_Const = 0;
         public static int ХарактеристикиНоменклатури_Const
         {
             get 
             {
-                return m_ХарактеристикиНоменклатури_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d6"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ХарактеристикиНоменклатури_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d6", m_ХарактеристикиНоменклатури_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d6", value);
             }
         }
-        
-        static int m_Валюти_Const = 0;
         public static int Валюти_Const
         {
             get 
             {
-                return m_Валюти_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d7"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Валюти_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d7", m_Валюти_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d7", value);
             }
         }
-        
-        static int m_Організації_Const = 0;
         public static int Організації_Const
         {
             get 
             {
-                return m_Організації_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d8"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Організації_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d8", m_Організації_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d8", value);
             }
         }
-        
-        static int m_Виробники_Const = 0;
         public static int Виробники_Const
         {
             get 
             {
-                return m_Виробники_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d9"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Виробники_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_d9", m_Виробники_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_d9", value);
             }
         }
-        
-        static int m_ВидиНоменклатури_Const = 0;
         public static int ВидиНоменклатури_Const
         {
             get 
             {
-                return m_ВидиНоменклатури_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ВидиНоменклатури_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e1", m_ВидиНоменклатури_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e1", value);
             }
         }
-        
-        static int m_ПакуванняОдиниціВиміру_Const = 0;
         public static int ПакуванняОдиниціВиміру_Const
         {
             get 
             {
-                return m_ПакуванняОдиниціВиміру_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e2"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ПакуванняОдиниціВиміру_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e2", m_ПакуванняОдиниціВиміру_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e2", value);
             }
         }
-        
-        static int m_ВидиЦін_Const = 0;
         public static int ВидиЦін_Const
         {
             get 
             {
-                return m_ВидиЦін_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e3"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ВидиЦін_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e3", m_ВидиЦін_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e3", value);
             }
         }
-        
-        static int m_ВидиЦінПостачальників_Const = 0;
         public static int ВидиЦінПостачальників_Const
         {
             get 
             {
-                return m_ВидиЦінПостачальників_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e4"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ВидиЦінПостачальників_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e4", m_ВидиЦінПостачальників_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e4", value);
             }
         }
-        
-        static int m_Користувачі_Const = 0;
         public static int Користувачі_Const
         {
             get 
             {
-                return m_Користувачі_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e5"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Користувачі_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e5", m_Користувачі_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e5", value);
             }
         }
-        
-        static int m_ФізичніОсоби_Const = 0;
         public static int ФізичніОсоби_Const
         {
             get 
             {
-                return m_ФізичніОсоби_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e6"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ФізичніОсоби_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e6", m_ФізичніОсоби_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e6", value);
             }
         }
-        
-        static int m_СтруктураПідприємства_Const = 0;
         public static int СтруктураПідприємства_Const
         {
             get 
             {
-                return m_СтруктураПідприємства_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e7"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_СтруктураПідприємства_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e7", m_СтруктураПідприємства_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e7", value);
             }
         }
-        
-        static int m_КраїниСвіту_Const = 0;
         public static int КраїниСвіту_Const
         {
             get 
             {
-                return m_КраїниСвіту_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e8"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_КраїниСвіту_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e8", m_КраїниСвіту_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e8", value);
             }
         }
-        
-        static int m_Файли_Const = 0;
         public static int Файли_Const
         {
             get 
             {
-                return m_Файли_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e9"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Файли_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_e9", m_Файли_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_e9", value);
             }
         }
-        
-        static int m_Каси_Const = 0;
         public static int Каси_Const
         {
             get 
             {
-                return m_Каси_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Каси_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f1", m_Каси_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f1", value);
             }
         }
-        
-        static int m_БанківськіРахункиОрганізацій_Const = 0;
         public static int БанківськіРахункиОрганізацій_Const
         {
             get 
             {
-                return m_БанківськіРахункиОрганізацій_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f2"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_БанківськіРахункиОрганізацій_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f2", m_БанківськіРахункиОрганізацій_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f2", value);
             }
         }
-        
-        static int m_ДоговориКонтрагентів_Const = 0;
         public static int ДоговориКонтрагентів_Const
         {
             get 
             {
-                return m_ДоговориКонтрагентів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f3"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ДоговориКонтрагентів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f3", m_ДоговориКонтрагентів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f3", value);
             }
         }
-        
-        static int m_БанківськіРахункиКонтрагентів_Const = 0;
         public static int БанківськіРахункиКонтрагентів_Const
         {
             get 
             {
-                return m_БанківськіРахункиКонтрагентів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f4"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_БанківськіРахункиКонтрагентів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f4", m_БанківськіРахункиКонтрагентів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f4", value);
             }
         }
-        
-        static int m_СтаттяРухуКоштів_Const = 0;
         public static int СтаттяРухуКоштів_Const
         {
             get 
             {
-                return m_СтаттяРухуКоштів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f5"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_СтаттяРухуКоштів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_f5", m_СтаттяРухуКоштів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_f5", value);
             }
         }
-        
-        static int m_СкладськіКомірки_Папки_Const = 0;
         public static int СкладськіКомірки_Папки_Const
         {
             get 
             {
-                return m_СкладськіКомірки_Папки_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b1"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_СкладськіКомірки_Папки_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b1", m_СкладськіКомірки_Папки_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b1", value);
             }
         }
-        
-        static int m_Банки_Const = 0;
         public static int Банки_Const
         {
             get 
             {
-                return m_Банки_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g8"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Банки_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g8", m_Банки_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g8", value);
             }
         }
-        
-        static int m_Блокнот_Const = 0;
         public static int Блокнот_Const
         {
             get 
             {
-                return m_Блокнот_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i3"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_Блокнот_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_i3", m_Блокнот_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i3", value);
             }
         }
-        
-        static int m_ВидиЗапасів_Const = 0;
         public static int ВидиЗапасів_Const
         {
             get 
             {
-                return m_ВидиЗапасів_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i4"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ВидиЗапасів_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_i4", m_ВидиЗапасів_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i4", value);
             }
         }
              
@@ -1699,34 +1489,18 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "ЖурналиДокументів"
     public static class ЖурналиДокументів
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_h3", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_ОсновнийТипПеріоду_Const = (fieldValue["col_h3"] != DBNull.Value) ? (Перелічення.ТипПеріодуДляЖурналівДокументів)fieldValue["col_h3"] : 0;
-                
-            }
-			      
-        }
-        
-        
-        static Перелічення.ТипПеріодуДляЖурналівДокументів m_ОсновнийТипПеріоду_Const = 0;
+    {       
         public static Перелічення.ТипПеріодуДляЖурналівДокументів ОсновнийТипПеріоду_Const
         {
             get 
             {
-                return m_ОсновнийТипПеріоду_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h3"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (Перелічення.ТипПеріодуДляЖурналівДокументів)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_ОсновнийТипПеріоду_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h3", (int)m_ОсновнийТипПеріоду_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h3", (int)value);
             }
         }
              
@@ -1735,34 +1509,18 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "ПартіїТоварів"
     public static class ПартіїТоварів
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_h4", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_МетодСписанняПартій_Const = (fieldValue["col_h4"] != DBNull.Value) ? (Перелічення.МетодиСписанняПартій)fieldValue["col_h4"] : 0;
-                
-            }
-			      
-        }
-        
-        
-        static Перелічення.МетодиСписанняПартій m_МетодСписанняПартій_Const = 0;
+    {       
         public static Перелічення.МетодиСписанняПартій МетодСписанняПартій_Const
         {
             get 
             {
-                return m_МетодСписанняПартій_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h4"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (Перелічення.МетодиСписанняПартій)recordResult.Value : 0) : 0;
+                return result;
             }
             set
             {
-                m_МетодСписанняПартій_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h4", (int)m_МетодСписанняПартій_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h4", (int)value);
             }
         }
              
@@ -1771,64 +1529,44 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "ЗавантаженняДанихІзСайтів"
     public static class ЗавантаженняДанихІзСайтів
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_h5", "col_b6", "col_g3", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_ЗавантаженняКурсівВалют_Const = fieldValue["col_h5"].ToString() ?? "";
-                m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = (fieldValue["col_b6"] != DBNull.Value) ? (bool)fieldValue["col_b6"] : false;
-                m_ЗавантаженняСпискуБанків_Const = fieldValue["col_g3"].ToString() ?? "";
-                
-            }
-			      
-        }
-        
-        
-        static string m_ЗавантаженняКурсівВалют_Const = "";
+    {       
         public static string ЗавантаженняКурсівВалют_Const
         {
             get 
             {
-                return m_ЗавантаженняКурсівВалют_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h5"); } ).Result;
+                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
+                return result;
             }
             set
             {
-                m_ЗавантаженняКурсівВалют_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h5", m_ЗавантаженняКурсівВалют_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h5", value);
             }
         }
-        
-        static bool m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = false;
         public static bool АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const
         {
             get 
             {
-                return m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b6"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
+                return result;
             }
             set
             {
-                m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b6", m_АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b6", value);
             }
         }
-        
-        static string m_ЗавантаженняСпискуБанків_Const = "";
         public static string ЗавантаженняСпискуБанків_Const
         {
             get 
             {
-                return m_ЗавантаженняСпискуБанків_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g3"); } ).Result;
+                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
+                return result;
             }
             set
             {
-                m_ЗавантаженняСпискуБанків_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_g3", m_ЗавантаженняСпискуБанків_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_g3", value);
             }
         }
         
@@ -1911,49 +1649,31 @@ namespace StorageAndTrade_1_0.Константи
     
 	  #region CONSTANTS BLOCK "ПриЗапускуПрограми"
     public static class ПриЗапускуПрограми
-    {
-        public static async ValueTask ReadAll()
-        {
-            
-            Dictionary<string, object> fieldValue = [];
-            bool IsSelect = await Config.Kernel.DataBase.SelectAllConstants("tab_constants",
-                 ["col_h7", "col_h6", ], fieldValue);
-            
-            if (IsSelect)
-            {
-                m_ПрограмаЗаповненаПочатковимиДаними_Const = (fieldValue["col_h7"] != DBNull.Value) ? (bool)fieldValue["col_h7"] : false;
-                m_ВідкриватиРобочийСтіл_Const = (fieldValue["col_h6"] != DBNull.Value) ? (bool)fieldValue["col_h6"] : false;
-                
-            }
-			      
-        }
-        
-        
-        static bool m_ПрограмаЗаповненаПочатковимиДаними_Const = false;
+    {       
         public static bool ПрограмаЗаповненаПочатковимиДаними_Const
         {
             get 
             {
-                return m_ПрограмаЗаповненаПочатковимиДаними_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h7"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
+                return result;
             }
             set
             {
-                m_ПрограмаЗаповненаПочатковимиДаними_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h7", m_ПрограмаЗаповненаПочатковимиДаними_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h7", value);
             }
         }
-        
-        static bool m_ВідкриватиРобочийСтіл_Const = false;
         public static bool ВідкриватиРобочийСтіл_Const
         {
             get 
             {
-                return m_ВідкриватиРобочийСтіл_Const;
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h6"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
+                return result;
             }
             set
             {
-                m_ВідкриватиРобочийСтіл_Const = value;
-                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_h6", m_ВідкриватиРобочийСтіл_Const);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h6", value);
             }
         }
              
