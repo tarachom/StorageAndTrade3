@@ -6,7 +6,8 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>04.01.2024 11:49:35</DateTimeSave>
+  <DateTimeSave>09.01.2024 11:40:05</DateTimeSave>
+  <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
