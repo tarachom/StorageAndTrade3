@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.01.2024 16:50:30
+ * Дата конфігурації: 15.01.2024 19:02:24
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1709,19 +1709,10 @@ namespace StorageAndTrade_1_0.Довідники
         public Організації_Objest() : base(Config.Kernel, "tab_a01",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", ]) 
         {
-            Назва = "";
-            Код = "";
-            НазваПовна = "";
-            НазваСкорочена = "";
-            ДатаРеєстрації = DateTime.MinValue;
-            КраїнаРеєстрації = "";
-            СвідоцтвоСеріяНомер = "";
-            СвідоцтвоДатаВидачі = "";
-            Холдинг = new Довідники.Організації_Pointer();
             
-            //Табличні частини
-            Контакти_TablePart = new Організації_Контакти_TablePart(this);
-            
+                //Табличні частини
+                Контакти_TablePart = new Організації_Контакти_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -1850,15 +1841,15 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string НазваПовна { get; set; }
-        public string НазваСкорочена { get; set; }
-        public DateTime ДатаРеєстрації { get; set; }
-        public string КраїнаРеєстрації { get; set; }
-        public string СвідоцтвоСеріяНомер { get; set; }
-        public string СвідоцтвоДатаВидачі { get; set; }
-        public Довідники.Організації_Pointer Холдинг { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string НазваПовна { get; set; } = "";
+        public string НазваСкорочена { get; set; } = "";
+        public DateTime ДатаРеєстрації { get; set; } = DateTime.MinValue;
+        public string КраїнаРеєстрації { get; set; } = "";
+        public string СвідоцтвоСеріяНомер { get; set; } = "";
+        public string СвідоцтвоДатаВидачі { get; set; } = "";
+        public Довідники.Організації_Pointer Холдинг { get; set; } = new Довідники.Організації_Pointer();
         
         //Табличні частини
         public Організації_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -2094,21 +2085,10 @@ namespace StorageAndTrade_1_0.Довідники
         public Номенклатура_Objest() : base(Config.Kernel, "tab_a03",
              ["col_b1", "col_b2", "col_b4", "col_a1", "col_b3", "col_b5", "col_a2", "col_a3", "col_a4", "col_a5", "col_a7", ]) 
         {
-            Назва = "";
-            Код = "";
-            НазваПовна = "";
-            Опис = "";
-            Артикул = "";
-            ТипНоменклатури = 0;
-            Виробник = new Довідники.Виробники_Pointer();
-            ВидНоменклатури = new Довідники.ВидиНоменклатури_Pointer();
-            ОдиницяВиміру = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-            Папка = new Довідники.Номенклатура_Папки_Pointer();
-            ОсновнаКартинкаФайл = new Довідники.Файли_Pointer();
             
-            //Табличні частини
-            Файли_TablePart = new Номенклатура_Файли_TablePart(this);
-            
+                //Табличні частини
+                Файли_TablePart = new Номенклатура_Файли_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -2243,17 +2223,17 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string НазваПовна { get; set; }
-        public string Опис { get; set; }
-        public string Артикул { get; set; }
-        public Перелічення.ТипиНоменклатури ТипНоменклатури { get; set; }
-        public Довідники.Виробники_Pointer Виробник { get; set; }
-        public Довідники.ВидиНоменклатури_Pointer ВидНоменклатури { get; set; }
-        public Довідники.ПакуванняОдиниціВиміру_Pointer ОдиницяВиміру { get; set; }
-        public Довідники.Номенклатура_Папки_Pointer Папка { get; set; }
-        public Довідники.Файли_Pointer ОсновнаКартинкаФайл { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string НазваПовна { get; set; } = "";
+        public string Опис { get; set; } = "";
+        public string Артикул { get; set; } = "";
+        public Перелічення.ТипиНоменклатури ТипНоменклатури { get; set; } = 0;
+        public Довідники.Виробники_Pointer Виробник { get; set; } = new Довідники.Виробники_Pointer();
+        public Довідники.ВидиНоменклатури_Pointer ВидНоменклатури { get; set; } = new Довідники.ВидиНоменклатури_Pointer();
+        public Довідники.ПакуванняОдиниціВиміру_Pointer ОдиницяВиміру { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+        public Довідники.Номенклатура_Папки_Pointer Папка { get; set; } = new Довідники.Номенклатура_Папки_Pointer();
+        public Довідники.Файли_Pointer ОсновнаКартинкаФайл { get; set; } = new Довідники.Файли_Pointer();
         
         //Табличні частини
         public Номенклатура_Файли_TablePart Файли_TablePart { get; set; }
@@ -2456,8 +2436,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Виробники_Objest() : base(Config.Kernel, "tab_a04",
              ["col_b6", "col_b7", ]) 
         {
-            Назва = "";
-            Код = "";
             
         }
         
@@ -2557,8 +2535,8 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
         
     }
 
@@ -2679,11 +2657,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиНоменклатури_Objest() : base(Config.Kernel, "tab_a05",
              ["col_b8", "col_b9", "col_a2", "col_a1", "col_a4", ]) 
         {
-            Назва = "";
-            Код = "";
-            Опис = "";
-            ТипНоменклатури = 0;
-            ОдиницяВиміру = new Довідники.ПакуванняОдиниціВиміру_Pointer();
             
         }
         
@@ -2792,11 +2765,11 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string Опис { get; set; }
-        public Перелічення.ТипиНоменклатури ТипНоменклатури { get; set; }
-        public Довідники.ПакуванняОдиниціВиміру_Pointer ОдиницяВиміру { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string Опис { get; set; } = "";
+        public Перелічення.ТипиНоменклатури ТипНоменклатури { get; set; } = 0;
+        public Довідники.ПакуванняОдиниціВиміру_Pointer ОдиницяВиміру { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
         
     }
 
@@ -2916,10 +2889,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ПакуванняОдиниціВиміру_Objest() : base(Config.Kernel, "tab_a06",
              ["col_c1", "col_c2", "col_c3", "col_c4", ]) 
         {
-            Назва = "";
-            Код = "";
-            НазваПовна = "";
-            КількістьУпаковок = 0;
             
         }
         
@@ -3025,10 +2994,10 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string НазваПовна { get; set; }
-        public int КількістьУпаковок { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string НазваПовна { get; set; } = "";
+        public int КількістьУпаковок { get; set; } = 0;
         
     }
 
@@ -3149,11 +3118,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Валюти_Objest() : base(Config.Kernel, "tab_a07",
              ["col_c5", "col_a2", "col_c6", "col_a1", "col_a3", ]) 
         {
-            Назва = "";
-            КороткаНазва = "";
-            Код = "";
-            Код_R030 = "";
-            ВиводитиКурсНаСтартову = false;
             
         }
         
@@ -3262,11 +3226,11 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string КороткаНазва { get; set; }
-        public string Код { get; set; }
-        public string Код_R030 { get; set; }
-        public bool ВиводитиКурсНаСтартову { get; set; }
+        public string Назва { get; set; } = "";
+        public string КороткаНазва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string Код_R030 { get; set; } = "";
+        public bool ВиводитиКурсНаСтартову { get; set; } = false;
         
     }
 
@@ -3389,18 +3353,11 @@ namespace StorageAndTrade_1_0.Довідники
         public Контрагенти_Objest() : base(Config.Kernel, "tab_a08",
              ["col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3", ]) 
         {
-            Назва = "";
-            Код = "";
-            НазваПовна = "";
-            РеєстраційнийНомер = "";
-            Папка = new Довідники.Контрагенти_Папки_Pointer();
-            Опис = "";
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Контакти_TablePart = new Контрагенти_Контакти_TablePart(this);
-            Файли_TablePart = new Контрагенти_Файли_TablePart(this);
-            
+                //Табличні частини
+                Контакти_TablePart = new Контрагенти_Контакти_TablePart(this);
+                Файли_TablePart = new Контрагенти_Файли_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -3527,13 +3484,13 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string НазваПовна { get; set; }
-        public string РеєстраційнийНомер { get; set; }
-        public Довідники.Контрагенти_Папки_Pointer Папка { get; set; }
-        public string Опис { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string НазваПовна { get; set; } = "";
+        public string РеєстраційнийНомер { get; set; } = "";
+        public Довідники.Контрагенти_Папки_Pointer Папка { get; set; } = new Довідники.Контрагенти_Папки_Pointer();
+        public string Опис { get; set; } = "";
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public Контрагенти_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -3845,18 +3802,10 @@ namespace StorageAndTrade_1_0.Довідники
         public Склади_Objest() : base(Config.Kernel, "tab_a10",
              ["col_d9", "col_e1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
         {
-            Назва = "";
-            Код = "";
-            ТипСкладу = 0;
-            Відповідальний = new Довідники.ФізичніОсоби_Pointer();
-            ВидЦін = new Довідники.ВидиЦін_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Папка = new Довідники.Склади_Папки_Pointer();
-            НалаштуванняАдресногоЗберігання = 0;
             
-            //Табличні частини
-            Контакти_TablePart = new Склади_Контакти_TablePart(this);
-            
+                //Табличні частини
+                Контакти_TablePart = new Склади_Контакти_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -3982,14 +3931,14 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Перелічення.ТипиСкладів ТипСкладу { get; set; }
-        public Довідники.ФізичніОсоби_Pointer Відповідальний { get; set; }
-        public Довідники.ВидиЦін_Pointer ВидЦін { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Папки_Pointer Папка { get; set; }
-        public Перелічення.НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Перелічення.ТипиСкладів ТипСкладу { get; set; } = 0;
+        public Довідники.ФізичніОсоби_Pointer Відповідальний { get; set; } = new Довідники.ФізичніОсоби_Pointer();
+        public Довідники.ВидиЦін_Pointer ВидЦін { get; set; } = new Довідники.ВидиЦін_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Папки_Pointer Папка { get; set; } = new Довідники.Склади_Папки_Pointer();
+        public Перелічення.НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання { get; set; } = 0;
         
         //Табличні частини
         public Склади_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -4217,9 +4166,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЦін_Objest() : base(Config.Kernel, "tab_a12",
              ["col_e9", "col_f1", "col_f2", ]) 
         {
-            Назва = "";
-            Код = "";
-            Валюта = new Довідники.Валюти_Pointer();
             
         }
         
@@ -4322,9 +4268,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
         
     }
 
@@ -4443,9 +4389,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЦінПостачальників_Objest() : base(Config.Kernel, "tab_a13",
              ["col_f3", "col_f4", "col_f5", ]) 
         {
-            Назва = "";
-            Код = "";
-            Валюта = new Довідники.Валюти_Pointer();
             
         }
         
@@ -4548,9 +4491,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
         
     }
 
@@ -4671,15 +4614,10 @@ namespace StorageAndTrade_1_0.Довідники
         public Користувачі_Objest() : base(Config.Kernel, "tab_a14",
              ["col_f6", "col_f7", "col_a1", "col_g6", "col_a2", ]) 
         {
-            Назва = "";
-            Код = "";
-            ФізичнаОсоба = new Довідники.ФізичніОсоби_Pointer();
-            Коментар = "";
-            КодВСпеціальнійТаблиці = new Guid();
             
-            //Табличні частини
-            Контакти_TablePart = new Користувачі_Контакти_TablePart(this);
-            
+                //Табличні частини
+                Контакти_TablePart = new Користувачі_Контакти_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -4796,11 +4734,11 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.ФізичніОсоби_Pointer ФізичнаОсоба { get; set; }
-        public string Коментар { get; set; }
-        public Guid КодВСпеціальнійТаблиці { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.ФізичніОсоби_Pointer ФізичнаОсоба { get; set; } = new Довідники.ФізичніОсоби_Pointer();
+        public string Коментар { get; set; } = "";
+        public Guid КодВСпеціальнійТаблиці { get; set; } = new Guid();
         
         //Табличні частини
         public Користувачі_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -5026,15 +4964,10 @@ namespace StorageAndTrade_1_0.Довідники
         public ФізичніОсоби_Objest() : base(Config.Kernel, "tab_a16",
              ["col_g7", "col_g8", "col_g9", "col_a1", "col_a2", ]) 
         {
-            Назва = "";
-            Код = "";
-            ДатаНародження = DateTime.MinValue;
-            Стать = 0;
-            ІПН = "";
             
-            //Табличні частини
-            Контакти_TablePart = new ФізичніОсоби_Контакти_TablePart(this);
-            
+                //Табличні частини
+                Контакти_TablePart = new ФізичніОсоби_Контакти_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -5151,11 +5084,11 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public DateTime ДатаНародження { get; set; }
-        public Перелічення.СтатьФізичноїОсоби Стать { get; set; }
-        public string ІПН { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public DateTime ДатаНародження { get; set; } = DateTime.MinValue;
+        public Перелічення.СтатьФізичноїОсоби Стать { get; set; } = 0;
+        public string ІПН { get; set; } = "";
         
         //Табличні частини
         public ФізичніОсоби_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -5379,9 +5312,6 @@ namespace StorageAndTrade_1_0.Довідники
         public СтруктураПідприємства_Objest() : base(Config.Kernel, "tab_a18",
              ["col_h8", "col_h9", "col_i1", ]) 
         {
-            Назва = "";
-            Код = "";
-            Керівник = new Довідники.ФізичніОсоби_Pointer();
             
         }
         
@@ -5484,9 +5414,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.ФізичніОсоби_Pointer Керівник { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.ФізичніОсоби_Pointer Керівник { get; set; } = new Довідники.ФізичніОсоби_Pointer();
         
     }
 
@@ -5604,8 +5534,6 @@ namespace StorageAndTrade_1_0.Довідники
         public КраїниСвіту_Objest() : base(Config.Kernel, "tab_a19",
              ["col_i2", "col_i3", ]) 
         {
-            Назва = "";
-            Код = "";
             
         }
         
@@ -5705,8 +5633,8 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
         
     }
 
@@ -5828,12 +5756,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Файли_Objest() : base(Config.Kernel, "tab_a20",
              ["col_i6", "col_i5", "col_a2", "col_a1", "col_a3", "col_a4", ]) 
         {
-            Код = "";
-            Назва = "";
-            НазваФайлу = "";
-            БінарніДані = [];
-            Розмір = "";
-            ДатаСтворення = DateTime.MinValue;
             
         }
         
@@ -5945,12 +5867,12 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Код { get; set; }
-        public string Назва { get; set; }
-        public string НазваФайлу { get; set; }
-        public byte[] БінарніДані { get; set; }
-        public string Розмір { get; set; }
-        public DateTime ДатаСтворення { get; set; }
+        public string Код { get; set; } = "";
+        public string Назва { get; set; } = "";
+        public string НазваФайлу { get; set; } = "";
+        public byte[] БінарніДані { get; set; } = [];
+        public string Розмір { get; set; } = "";
+        public DateTime ДатаСтворення { get; set; } = DateTime.MinValue;
         
     }
 
@@ -6070,10 +5992,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ХарактеристикиНоменклатури_Objest() : base(Config.Kernel, "tab_a21",
              ["col_i7", "col_i8", "col_i9", "col_a1", ]) 
         {
-            Назва = "";
-            Код = "";
-            НазваПовна = "";
-            Номенклатура = new Довідники.Номенклатура_Pointer();
             
         }
         
@@ -6179,10 +6097,10 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string НазваПовна { get; set; }
-        public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string НазваПовна { get; set; } = "";
+        public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
         
     }
 
@@ -6301,9 +6219,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Номенклатура_Папки_Objest() : base(Config.Kernel, "tab_a22",
              ["col_j1", "col_j2", "col_j3", ]) 
         {
-            Назва = "";
-            Код = "";
-            Родич = new Довідники.Номенклатура_Папки_Pointer();
             
         }
         
@@ -6406,9 +6321,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.Номенклатура_Папки_Pointer Родич { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.Номенклатура_Папки_Pointer Родич { get; set; } = new Довідники.Номенклатура_Папки_Pointer();
         
     }
 
@@ -6527,9 +6442,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Контрагенти_Папки_Objest() : base(Config.Kernel, "tab_a23",
              ["col_j4", "col_j5", "col_j6", ]) 
         {
-            Назва = "";
-            Код = "";
-            Родич = new Довідники.Контрагенти_Папки_Pointer();
             
         }
         
@@ -6632,9 +6544,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.Контрагенти_Папки_Pointer Родич { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.Контрагенти_Папки_Pointer Родич { get; set; } = new Довідники.Контрагенти_Папки_Pointer();
         
     }
 
@@ -6753,9 +6665,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Склади_Папки_Objest() : base(Config.Kernel, "tab_a24",
              ["col_j7", "col_j8", "col_a1", ]) 
         {
-            Назва = "";
-            Код = "";
-            Родич = new Довідники.Склади_Папки_Pointer();
             
         }
         
@@ -6858,9 +6767,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.Склади_Папки_Pointer Родич { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.Склади_Папки_Pointer Родич { get; set; } = new Довідники.Склади_Папки_Pointer();
         
     }
 
@@ -6980,10 +6889,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Каси_Objest() : base(Config.Kernel, "tab_a26",
              ["col_k8", "col_k9", "col_a2", "col_a1", ]) 
         {
-            Назва = "";
-            Код = "";
-            Валюта = new Довідники.Валюти_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             
         }
         
@@ -7089,10 +6994,10 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
         
     }
 
@@ -7221,19 +7126,6 @@ namespace StorageAndTrade_1_0.Довідники
         public БанківськіРахункиОрганізацій_Objest() : base(Config.Kernel, "tab_a27",
              ["col_l1", "col_l2", "col_l3", "col_l4", "col_l5", "col_l6", "col_l7", "col_l8", "col_l9", "col_n1", "col_n2", "col_n3", "col_a1", ]) 
         {
-            Назва = "";
-            Код = "";
-            Валюта = new Довідники.Валюти_Pointer();
-            Банк = "";
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            НазваБанку = "";
-            НомерРахунку = "";
-            АдресаБанку = "";
-            МістоБанку = "";
-            КореспонденськийРахунокБанку = "";
-            ТелефониБанку = "";
-            Закритий = false;
-            Організація = new Довідники.Організації_Pointer();
             
         }
         
@@ -7366,19 +7258,19 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public string Банк { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public string НазваБанку { get; set; }
-        public string НомерРахунку { get; set; }
-        public string АдресаБанку { get; set; }
-        public string МістоБанку { get; set; }
-        public string КореспонденськийРахунокБанку { get; set; }
-        public string ТелефониБанку { get; set; }
-        public bool Закритий { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public string Банк { get; set; } = "";
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public string НазваБанку { get; set; } = "";
+        public string НомерРахунку { get; set; } = "";
+        public string АдресаБанку { get; set; } = "";
+        public string МістоБанку { get; set; } = "";
+        public string КореспонденськийРахунокБанку { get; set; } = "";
+        public string ТелефониБанку { get; set; } = "";
+        public bool Закритий { get; set; } = false;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
         
     }
 
@@ -7514,26 +7406,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ДоговориКонтрагентів_Objest() : base(Config.Kernel, "tab_a28",
              ["col_n4", "col_n5", "col_n6", "col_a1", "col_a2", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b8", "col_b6", "col_b7", "col_a3", ]) 
         {
-            Назва = "";
-            Код = "";
-            БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
-            ВалютаВзаєморозрахунків = new Довідники.Валюти_Pointer();
-            ДатаПочаткуДії = DateTime.MinValue;
-            ДатаЗакінченняДії = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Дата = DateTime.MinValue;
-            Номер = "";
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Узгоджений = false;
-            Статус = 0;
-            ГосподарськаОперація = 0;
-            ТипДоговору = 0;
-            ТипДоговоруПредставлення = "";
-            ДопустимаСумаЗаборгованості = 0;
-            Сума = 0;
-            Коментар = "";
             
         }
         
@@ -7687,26 +7559,26 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; }
-        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
-        public Довідники.Валюти_Pointer ВалютаВзаєморозрахунків { get; set; }
-        public DateTime ДатаПочаткуДії { get; set; }
-        public DateTime ДатаЗакінченняДії { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public DateTime Дата { get; set; }
-        public string Номер { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public bool Узгоджений { get; set; }
-        public Перелічення.СтатусиДоговорівКонтрагентів Статус { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Перелічення.ТипДоговорів ТипДоговору { get; set; }
-        public string ТипДоговоруПредставлення { get; set; }
-        public decimal ДопустимаСумаЗаборгованості { get; set; }
-        public decimal Сума { get; set; }
-        public string Коментар { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; } = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
+        public Довідники.Валюти_Pointer ВалютаВзаєморозрахунків { get; set; } = new Довідники.Валюти_Pointer();
+        public DateTime ДатаПочаткуДії { get; set; } = DateTime.MinValue;
+        public DateTime ДатаЗакінченняДії { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public DateTime Дата { get; set; } = DateTime.MinValue;
+        public string Номер { get; set; } = "";
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public bool Узгоджений { get; set; } = false;
+        public Перелічення.СтатусиДоговорівКонтрагентів Статус { get; set; } = 0;
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Перелічення.ТипДоговорів ТипДоговору { get; set; } = 0;
+        public string ТипДоговоруПредставлення { get; set; } = "";
+        public decimal ДопустимаСумаЗаборгованості { get; set; } = 0;
+        public decimal Сума { get; set; } = 0;
+        public string Коментар { get; set; } = "";
         
     }
 
@@ -7837,21 +7709,6 @@ namespace StorageAndTrade_1_0.Довідники
         public БанківськіРахункиКонтрагентів_Objest() : base(Config.Kernel, "tab_a29",
              ["col_n7", "col_n8", "col_n9", "col_m1", "col_m2", "col_m3", "col_m4", "col_m5", "col_m6", "col_m7", "col_m8", "col_m9", "col_o1", "col_o2", "col_o3", ]) 
         {
-            Назва = "";
-            Код = "";
-            НомерРахунку = "";
-            Банк = "";
-            БанкДляРозрахунків = "";
-            ТекстКореспондента = "";
-            ТекстПризначення = "";
-            Валюта = new Довідники.Валюти_Pointer();
-            НазваБанку = "";
-            КорРахунокБанку = "";
-            МістоБанку = "";
-            АдресаБанку = "";
-            ТелефониБанку = "";
-            Закрито = false;
-            Контрагент = new Довідники.Контрагенти_Pointer();
             
         }
         
@@ -7990,21 +7847,21 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string НомерРахунку { get; set; }
-        public string Банк { get; set; }
-        public string БанкДляРозрахунків { get; set; }
-        public string ТекстКореспондента { get; set; }
-        public string ТекстПризначення { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public string НазваБанку { get; set; }
-        public string КорРахунокБанку { get; set; }
-        public string МістоБанку { get; set; }
-        public string АдресаБанку { get; set; }
-        public string ТелефониБанку { get; set; }
-        public bool Закрито { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string НомерРахунку { get; set; } = "";
+        public string Банк { get; set; } = "";
+        public string БанкДляРозрахунків { get; set; } = "";
+        public string ТекстКореспондента { get; set; } = "";
+        public string ТекстПризначення { get; set; } = "";
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public string НазваБанку { get; set; } = "";
+        public string КорРахунокБанку { get; set; } = "";
+        public string МістоБанку { get; set; } = "";
+        public string АдресаБанку { get; set; } = "";
+        public string ТелефониБанку { get; set; } = "";
+        public bool Закрито { get; set; } = false;
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
         
     }
 
@@ -8125,15 +7982,10 @@ namespace StorageAndTrade_1_0.Довідники
         public СтаттяРухуКоштів_Objest() : base(Config.Kernel, "tab_a45",
              ["col_i7", "col_i8", "col_i9", "col_j2", "col_j1", ]) 
         {
-            Назва = "";
-            Код = "";
-            КореспондуючийРахунок = "";
-            ВидРухуКоштів = 0;
-            Опис = "";
             
-            //Табличні частини
-            ГосподарськіОперації_TablePart = new СтаттяРухуКоштів_ГосподарськіОперації_TablePart(this);
-            
+                //Табличні частини
+                ГосподарськіОперації_TablePart = new СтаттяРухуКоштів_ГосподарськіОперації_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -8250,11 +8102,11 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string КореспондуючийРахунок { get; set; }
-        public Перелічення.ВидиРухуКоштів ВидРухуКоштів { get; set; }
-        public string Опис { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public string КореспондуючийРахунок { get; set; } = "";
+        public Перелічення.ВидиРухуКоштів ВидРухуКоштів { get; set; } = 0;
+        public string Опис { get; set; } = "";
         
         //Табличні частини
         public СтаттяРухуКоштів_ГосподарськіОперації_TablePart ГосподарськіОперації_TablePart { get; set; }
@@ -8454,9 +8306,6 @@ namespace StorageAndTrade_1_0.Довідники
         public СеріїНоменклатури_Objest() : base(Config.Kernel, "tab_b02",
              ["col_a3", "col_a1", "col_a2", ]) 
         {
-            Номер = "";
-            Коментар = "";
-            ДатаСтворення = DateTime.MinValue;
             
         }
         
@@ -8559,9 +8408,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Номер { get; set; }
-        public string Коментар { get; set; }
-        public DateTime ДатаСтворення { get; set; }
+        public string Номер { get; set; } = "";
+        public string Коментар { get; set; } = "";
+        public DateTime ДатаСтворення { get; set; } = DateTime.MinValue;
         
     }
 
@@ -8683,12 +8532,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ПартіяТоварівКомпозит_Objest() : base(Config.Kernel, "tab_b06",
              ["col_a1", "col_a2", "col_a3", "col_a6", "col_a4", "col_a5", ]) 
         {
-            Назва = "";
-            Дата = DateTime.MinValue;
-            ТипДокументу = 0;
-            ДокументКлюч = new Guid();
-            ПоступленняТоварівТаПослуг = new Документи.ПоступленняТоварівТаПослуг_Pointer();
-            ВведенняЗалишків = new Документи.ВведенняЗалишків_Pointer();
             
         }
         
@@ -8800,12 +8643,12 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public DateTime Дата { get; set; }
-        public Перелічення.ТипДокументуПартіяТоварівКомпозит ТипДокументу { get; set; }
-        public Guid ДокументКлюч { get; set; }
-        public Документи.ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг { get; set; }
-        public Документи.ВведенняЗалишків_Pointer ВведенняЗалишків { get; set; }
+        public string Назва { get; set; } = "";
+        public DateTime Дата { get; set; } = DateTime.MinValue;
+        public Перелічення.ТипДокументуПартіяТоварівКомпозит ТипДокументу { get; set; } = 0;
+        public Guid ДокументКлюч { get; set; } = new Guid();
+        public Документи.ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг { get; set; } = new Документи.ПоступленняТоварівТаПослуг_Pointer();
+        public Документи.ВведенняЗалишків_Pointer ВведенняЗалишків { get; set; } = new Документи.ВведенняЗалишків_Pointer();
         
     }
 
@@ -8928,13 +8771,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЗапасів_Objest() : base(Config.Kernel, "tab_b13",
              ["col_a5", "col_b3", "col_a7", "col_a9", "col_b1", "col_b2", "col_a1", ]) 
         {
-            Назва = "";
-            Організація = new Довідники.Організації_Pointer();
-            ТипЗапасів = 0;
-            Валюта = new Довідники.Валюти_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            Код = "";
             
         }
         
@@ -9049,13 +8885,13 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Перелічення.ТипЗапасів ТипЗапасів { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public string Код { get; set; }
+        public string Назва { get; set; } = "";
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Перелічення.ТипЗапасів ТипЗапасів { get; set; } = 0;
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public string Код { get; set; } = "";
         
     }
 
@@ -9199,34 +9035,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Банки_Objest() : base(Config.Kernel, "tab_a39",
              ["col_a1", "col_a2", "col_b4", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", ]) 
         {
-            Код = "";
-            Назва = "";
-            ТипНаселеногоПункту = "";
-            КодМФО = "";
-            НазваГоловноїУстановиАнг = "";
-            КодЄДРПОУ = "";
-            ПовнаНазва = "";
-            УнікальнийКодБанку = "";
-            КодОбластіОпераційноїДіяльності = "";
-            НазваОбластіОпераційноїДіяльності = "";
-            КодОбластіЗгідноСтатуту = "";
-            НазваОбластіЗгідноСтатуту = "";
-            ПоштовийІндекс = "";
-            НазваНаселеногоПункту = "";
-            Адреса = "";
-            КодТелефонногоЗвязку = "";
-            НомерТелефону = "";
-            ЧисловийКодСтануУстанови = "";
-            НазваСтануУстанови = "";
-            ДатаЗміниСтану = "";
-            ДатаВідкриттяУстанови = "";
-            ДатаЗакриттяУстанови = "";
-            КодНБУ = "";
-            НомерЛіцензії = "";
-            ДатаЛіцензії = "";
-            КодСтатусу = "";
-            Статус = "";
-            ДатаЗапису = "";
             
         }
         
@@ -9404,34 +9212,34 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Код { get; set; }
-        public string Назва { get; set; }
-        public string ТипНаселеногоПункту { get; set; }
-        public string КодМФО { get; set; }
-        public string НазваГоловноїУстановиАнг { get; set; }
-        public string КодЄДРПОУ { get; set; }
-        public string ПовнаНазва { get; set; }
-        public string УнікальнийКодБанку { get; set; }
-        public string КодОбластіОпераційноїДіяльності { get; set; }
-        public string НазваОбластіОпераційноїДіяльності { get; set; }
-        public string КодОбластіЗгідноСтатуту { get; set; }
-        public string НазваОбластіЗгідноСтатуту { get; set; }
-        public string ПоштовийІндекс { get; set; }
-        public string НазваНаселеногоПункту { get; set; }
-        public string Адреса { get; set; }
-        public string КодТелефонногоЗвязку { get; set; }
-        public string НомерТелефону { get; set; }
-        public string ЧисловийКодСтануУстанови { get; set; }
-        public string НазваСтануУстанови { get; set; }
-        public string ДатаЗміниСтану { get; set; }
-        public string ДатаВідкриттяУстанови { get; set; }
-        public string ДатаЗакриттяУстанови { get; set; }
-        public string КодНБУ { get; set; }
-        public string НомерЛіцензії { get; set; }
-        public string ДатаЛіцензії { get; set; }
-        public string КодСтатусу { get; set; }
-        public string Статус { get; set; }
-        public string ДатаЗапису { get; set; }
+        public string Код { get; set; } = "";
+        public string Назва { get; set; } = "";
+        public string ТипНаселеногоПункту { get; set; } = "";
+        public string КодМФО { get; set; } = "";
+        public string НазваГоловноїУстановиАнг { get; set; } = "";
+        public string КодЄДРПОУ { get; set; } = "";
+        public string ПовнаНазва { get; set; } = "";
+        public string УнікальнийКодБанку { get; set; } = "";
+        public string КодОбластіОпераційноїДіяльності { get; set; } = "";
+        public string НазваОбластіОпераційноїДіяльності { get; set; } = "";
+        public string КодОбластіЗгідноСтатуту { get; set; } = "";
+        public string НазваОбластіЗгідноСтатуту { get; set; } = "";
+        public string ПоштовийІндекс { get; set; } = "";
+        public string НазваНаселеногоПункту { get; set; } = "";
+        public string Адреса { get; set; } = "";
+        public string КодТелефонногоЗвязку { get; set; } = "";
+        public string НомерТелефону { get; set; } = "";
+        public string ЧисловийКодСтануУстанови { get; set; } = "";
+        public string НазваСтануУстанови { get; set; } = "";
+        public string ДатаЗміниСтану { get; set; } = "";
+        public string ДатаВідкриттяУстанови { get; set; } = "";
+        public string ДатаЗакриттяУстанови { get; set; } = "";
+        public string КодНБУ { get; set; } = "";
+        public string НомерЛіцензії { get; set; } = "";
+        public string ДатаЛіцензії { get; set; } = "";
+        public string КодСтатусу { get; set; } = "";
+        public string Статус { get; set; } = "";
+        public string ДатаЗапису { get; set; } = "";
         
     }
 
@@ -9550,9 +9358,6 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіПриміщення_Objest() : base(Config.Kernel, "tab_a71",
              ["col_a2", "col_a3", "col_a1", ]) 
         {
-            Назва = "";
-            НалаштуванняАдресногоЗберігання = 0;
-            Склад = new Довідники.Склади_Pointer();
             
         }
         
@@ -9655,9 +9460,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public Перелічення.НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
+        public string Назва { get; set; } = "";
+        public Перелічення.НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання { get; set; } = 0;
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
         
     }
 
@@ -9783,16 +9588,6 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіКомірки_Objest() : base(Config.Kernel, "tab_a72",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ]) 
         {
-            Папка = new Довідники.СкладськіКомірки_Папки_Pointer();
-            Назва = "";
-            ОбластьЗберігання = new Довідники.ОбластьЗберігання_Pointer();
-            Лінія = "";
-            Позиція = "";
-            Приміщення = new Довідники.СкладськіПриміщення_Pointer();
-            Стелаж = "";
-            Ярус = "";
-            ТипСкладськоїКомірки = 0;
-            Типорозмір = new Довідники.ТипорозміриКомірок_Pointer();
             
         }
         
@@ -9916,16 +9711,16 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public Довідники.СкладськіКомірки_Папки_Pointer Папка { get; set; }
-        public string Назва { get; set; }
-        public Довідники.ОбластьЗберігання_Pointer ОбластьЗберігання { get; set; }
-        public string Лінія { get; set; }
-        public string Позиція { get; set; }
-        public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
-        public string Стелаж { get; set; }
-        public string Ярус { get; set; }
-        public Перелічення.ТипиСкладськихКомірок ТипСкладськоїКомірки { get; set; }
-        public Довідники.ТипорозміриКомірок_Pointer Типорозмір { get; set; }
+        public Довідники.СкладськіКомірки_Папки_Pointer Папка { get; set; } = new Довідники.СкладськіКомірки_Папки_Pointer();
+        public string Назва { get; set; } = "";
+        public Довідники.ОбластьЗберігання_Pointer ОбластьЗберігання { get; set; } = new Довідники.ОбластьЗберігання_Pointer();
+        public string Лінія { get; set; } = "";
+        public string Позиція { get; set; } = "";
+        public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; } = new Довідники.СкладськіПриміщення_Pointer();
+        public string Стелаж { get; set; } = "";
+        public string Ярус { get; set; } = "";
+        public Перелічення.ТипиСкладськихКомірок ТипСкладськоїКомірки { get; set; } = 0;
+        public Довідники.ТипорозміриКомірок_Pointer Типорозмір { get; set; } = new Довідники.ТипорозміриКомірок_Pointer();
         
     }
 
@@ -10044,9 +9839,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ОбластьЗберігання_Objest() : base(Config.Kernel, "tab_a73",
              ["col_a2", "col_a3", "col_a4", ]) 
         {
-            Назва = "";
-            Опис = "";
-            Приміщення = new Довідники.СкладськіПриміщення_Pointer();
             
         }
         
@@ -10143,9 +9935,9 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Опис { get; set; }
-        public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
+        public string Назва { get; set; } = "";
+        public string Опис { get; set; } = "";
+        public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; } = new Довідники.СкладськіПриміщення_Pointer();
         
     }
 
@@ -10265,12 +10057,6 @@ namespace StorageAndTrade_1_0.Довідники
         public ТипорозміриКомірок_Objest() : base(Config.Kernel, "tab_a75",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
         {
-            Висота = "";
-            Назва = "";
-            Глибина = "";
-            Вантажопідйомність = "";
-            Обєм = "";
-            Ширина = "";
             
         }
         
@@ -10382,12 +10168,12 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Висота { get; set; }
-        public string Назва { get; set; }
-        public string Глибина { get; set; }
-        public string Вантажопідйомність { get; set; }
-        public string Обєм { get; set; }
-        public string Ширина { get; set; }
+        public string Висота { get; set; } = "";
+        public string Назва { get; set; } = "";
+        public string Глибина { get; set; } = "";
+        public string Вантажопідйомність { get; set; } = "";
+        public string Обєм { get; set; } = "";
+        public string Ширина { get; set; } = "";
         
     }
 
@@ -10507,10 +10293,6 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіКомірки_Папки_Objest() : base(Config.Kernel, "tab_a76",
              ["col_j1", "col_j2", "col_j3", "col_a1", ]) 
         {
-            Назва = "";
-            Код = "";
-            Родич = new Довідники.СкладськіКомірки_Папки_Pointer();
-            Власник = new Довідники.СкладськіПриміщення_Pointer();
             
         }
         
@@ -10616,10 +10398,10 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Довідники.СкладськіКомірки_Папки_Pointer Родич { get; set; }
-        public Довідники.СкладськіПриміщення_Pointer Власник { get; set; }
+        public string Назва { get; set; } = "";
+        public string Код { get; set; } = "";
+        public Довідники.СкладськіКомірки_Папки_Pointer Родич { get; set; } = new Довідники.СкладськіКомірки_Папки_Pointer();
+        public Довідники.СкладськіПриміщення_Pointer Власник { get; set; } = new Довідники.СкладськіПриміщення_Pointer();
         
     }
 
@@ -10740,11 +10522,6 @@ namespace StorageAndTrade_1_0.Довідники
         public Блокнот_Objest() : base(Config.Kernel, "tab_a41",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) 
         {
-            Код = "";
-            Назва = "";
-            ДатаЗапису = DateTime.MinValue;
-            Опис = "";
-            Лінк = "";
             
         }
         
@@ -10853,11 +10630,11 @@ namespace StorageAndTrade_1_0.Довідники
         /* синхронна функція для GetPresentation() */
         public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
         
-        public string Код { get; set; }
-        public string Назва { get; set; }
-        public DateTime ДатаЗапису { get; set; }
-        public string Опис { get; set; }
-        public string Лінк { get; set; }
+        public string Код { get; set; } = "";
+        public string Назва { get; set; } = "";
+        public DateTime ДатаЗапису { get; set; } = DateTime.MinValue;
+        public string Опис { get; set; } = "";
+        public string Лінк { get; set; } = "";
         
     }
 
@@ -12708,37 +12485,10 @@ namespace StorageAndTrade_1_0.Документи
         public ЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_a25", "ЗамовленняПостачальнику",
              ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_k4", "col_k5", "col_k6", "col_k7", "col_a1", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_a6", "col_b5", "col_b6", "col_b7", "col_b8", "col_a2", "col_b9", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Організація = new Довідники.Організації_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            СумаДокументу = 0;
-            Каса = new Довідники.Каси_Pointer();
-            БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            Автор = new Довідники.Користувачі_Pointer();
-            ДатаПоступлення = DateTime.MinValue;
-            АдресаДоставкиДляПостачальника = "";
-            ПовернутиТару = false;
-            СпосібДоставки = 0;
-            ЧасДоставкиЗ = DateTime.MinValue.TimeOfDay;
-            ЧасДоставкиДо = DateTime.MinValue.TimeOfDay;
-            АдресаДоставки = "";
-            ГосподарськаОперація = 0;
-            Статус = 0;
-            ФормаОплати = 0;
-            Менеджер = new Довідники.Користувачі_Pointer();
-            Основа = new UuidAndText();
-            Коментар = "";
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ЗамовленняПостачальнику_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ЗамовленняПостачальнику_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -12945,33 +12695,33 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ЗамовленняПостачальнику_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public DateTime ДатаПоступлення { get; set; }
-        public string АдресаДоставкиДляПостачальника { get; set; }
-        public bool ПовернутиТару { get; set; }
-        public Перелічення.СпособиДоставки СпосібДоставки { get; set; }
-        public TimeSpan ЧасДоставкиЗ { get; set; }
-        public TimeSpan ЧасДоставкиДо { get; set; }
-        public string АдресаДоставки { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Перелічення.СтатусиЗамовленьПостачальникам Статус { get; set; }
-        public Перелічення.ФормаОплати ФормаОплати { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public UuidAndText Основа { get; set; }
-        public string Коментар { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public DateTime ДатаПоступлення { get; set; } = DateTime.MinValue;
+        public string АдресаДоставкиДляПостачальника { get; set; } = "";
+        public bool ПовернутиТару { get; set; } = false;
+        public Перелічення.СпособиДоставки СпосібДоставки { get; set; } = 0;
+        public TimeSpan ЧасДоставкиЗ { get; set; } = DateTime.MinValue.TimeOfDay;
+        public TimeSpan ЧасДоставкиДо { get; set; } = DateTime.MinValue.TimeOfDay;
+        public string АдресаДоставки { get; set; } = "";
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Перелічення.СтатусиЗамовленьПостачальникам Статус { get; set; } = 0;
+        public Перелічення.ФормаОплати ФормаОплати { get; set; } = 0;
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public string Коментар { get; set; } = "";
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ЗамовленняПостачальнику_Товари_TablePart Товари_TablePart { get; set; }
@@ -13622,43 +13372,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПоступленняТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a32", "ПоступленняТоварівТаПослуг",
              ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_a1", "col_b1", "col_a2", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Валюта = new Довідники.Валюти_Pointer();
-            ГосподарськаОперація = 0;
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            СумаДокументу = 0;
-            ЗамовленняПостачальнику = new Документи.ЗамовленняПостачальнику_Pointer();
-            ДатаОплати = DateTime.MinValue;
-            ФормаОплати = 0;
-            Узгоджений = false;
-            БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            НомерВхідногоДокументу = "";
-            ДатаВхідногоДокументу = DateTime.MinValue;
-            БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            Автор = new Довідники.Користувачі_Pointer();
-            ПовернутиТару = false;
-            ДатаПоверненняТари = DateTime.MinValue;
-            СпосібДоставки = 0;
-            Організація = new Довідники.Організації_Pointer();
-            Курс = 0;
-            Кратність = 0;
-            ЧасДоставкиЗ = DateTime.MinValue.TimeOfDay;
-            ЧасДоставкиДо = DateTime.MinValue.TimeOfDay;
-            Менеджер = new Довідники.Користувачі_Pointer();
-            СтаттяРухуКоштів = new Довідники.СтаттяРухуКоштів_Pointer();
-            Каса = new Довідники.Каси_Pointer();
-            Основа = new UuidAndText();
-            Коментар = "";
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ПоступленняТоварівТаПослуг_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПоступленняТоварівТаПослуг_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -13883,39 +13600,39 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПоступленняТоварівТаПослуг_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; }
-        public DateTime ДатаОплати { get; set; }
-        public Перелічення.ФормаОплати ФормаОплати { get; set; }
-        public bool Узгоджений { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; }
-        public string НомерВхідногоДокументу { get; set; }
-        public DateTime ДатаВхідногоДокументу { get; set; }
-        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public bool ПовернутиТару { get; set; }
-        public DateTime ДатаПоверненняТари { get; set; }
-        public Перелічення.СпособиДоставки СпосібДоставки { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public decimal Курс { get; set; }
-        public int Кратність { get; set; }
-        public TimeSpan ЧасДоставкиЗ { get; set; }
-        public TimeSpan ЧасДоставкиДо { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public Довідники.СтаттяРухуКоштів_Pointer СтаттяРухуКоштів { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public UuidAndText Основа { get; set; }
-        public string Коментар { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Документи.ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; } = new Документи.ЗамовленняПостачальнику_Pointer();
+        public DateTime ДатаОплати { get; set; } = DateTime.MinValue;
+        public Перелічення.ФормаОплати ФормаОплати { get; set; } = 0;
+        public bool Узгоджений { get; set; } = false;
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public string НомерВхідногоДокументу { get; set; } = "";
+        public DateTime ДатаВхідногоДокументу { get; set; } = DateTime.MinValue;
+        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; } = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public bool ПовернутиТару { get; set; } = false;
+        public DateTime ДатаПоверненняТари { get; set; } = DateTime.MinValue;
+        public Перелічення.СпособиДоставки СпосібДоставки { get; set; } = 0;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public decimal Курс { get; set; } = 0;
+        public int Кратність { get; set; } = 0;
+        public TimeSpan ЧасДоставкиЗ { get; set; } = DateTime.MinValue.TimeOfDay;
+        public TimeSpan ЧасДоставкиДо { get; set; } = DateTime.MinValue.TimeOfDay;
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.СтаттяРухуКоштів_Pointer СтаттяРухуКоштів { get; set; } = new Довідники.СтаттяРухуКоштів_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public string Коментар { get; set; } = "";
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ПоступленняТоварівТаПослуг_Товари_TablePart Товари_TablePart { get; set; }
@@ -14527,40 +14244,10 @@ namespace StorageAndTrade_1_0.Документи
         public ЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a34", "ЗамовленняКлієнта",
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_a9", "col_b9", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_c1", "col_b2", "col_b3", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Організація = new Довідники.Організації_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            СумаДокументу = 0;
-            Склад = new Довідники.Склади_Pointer();
-            Статус = 0;
-            Узгоджений = false;
-            ФормаОплати = 0;
-            БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
-            Каса = new Довідники.Каси_Pointer();
-            СумаАвансуДоЗабезпечення = 0;
-            СумаПередоплатиДоВідгрузки = 0;
-            ДатаВідгрузки = DateTime.MinValue;
-            АдресаДоставки = "";
-            ГосподарськаОперація = 0;
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Автор = new Довідники.Користувачі_Pointer();
-            СпосібДоставки = 0;
-            ЧасДоставкиЗ = DateTime.MinValue.TimeOfDay;
-            ЧасДоставкиДо = DateTime.MinValue.TimeOfDay;
-            ПовернутиТару = false;
-            ДатаПоверненняТари = DateTime.MinValue;
-            Коментар = "";
-            Менеджер = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ЗамовленняКлієнта_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ЗамовленняКлієнта_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -14776,36 +14463,36 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ЗамовленняКлієнта_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Перелічення.СтатусиЗамовленьКлієнтів Статус { get; set; }
-        public bool Узгоджений { get; set; }
-        public Перелічення.ФормаОплати ФормаОплати { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; }
-        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public decimal СумаАвансуДоЗабезпечення { get; set; }
-        public decimal СумаПередоплатиДоВідгрузки { get; set; }
-        public DateTime ДатаВідгрузки { get; set; }
-        public string АдресаДоставки { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Перелічення.СпособиДоставки СпосібДоставки { get; set; }
-        public TimeSpan ЧасДоставкиЗ { get; set; }
-        public TimeSpan ЧасДоставкиДо { get; set; }
-        public bool ПовернутиТару { get; set; }
-        public DateTime ДатаПоверненняТари { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Перелічення.СтатусиЗамовленьКлієнтів Статус { get; set; } = 0;
+        public bool Узгоджений { get; set; } = false;
+        public Перелічення.ФормаОплати ФормаОплати { get; set; } = 0;
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; } = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public decimal СумаАвансуДоЗабезпечення { get; set; } = 0;
+        public decimal СумаПередоплатиДоВідгрузки { get; set; } = 0;
+        public DateTime ДатаВідгрузки { get; set; } = DateTime.MinValue;
+        public string АдресаДоставки { get; set; } = "";
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Перелічення.СпособиДоставки СпосібДоставки { get; set; } = 0;
+        public TimeSpan ЧасДоставкиЗ { get; set; } = DateTime.MinValue.TimeOfDay;
+        public TimeSpan ЧасДоставкиДо { get; set; } = DateTime.MinValue.TimeOfDay;
+        public bool ПовернутиТару { get; set; } = false;
+        public DateTime ДатаПоверненняТари { get; set; } = DateTime.MinValue;
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ЗамовленняКлієнта_Товари_TablePart Товари_TablePart { get; set; }
@@ -15453,42 +15140,10 @@ namespace StorageAndTrade_1_0.Документи
         public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a36", "РеалізаціяТоварівТаПослуг",
              ["docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9", "col_d1", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
-            ДатаОплати = DateTime.MinValue;
-            ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            СумаДокументу = 0;
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            ФормаОплати = 0;
-            ГосподарськаОперація = 0;
-            Каса = new Довідники.Каси_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            Основа = new UuidAndText();
-            Статус = 0;
-            Автор = new Довідники.Користувачі_Pointer();
-            СумаПередоплати = 0;
-            СумаПередоплатиЗаТару = 0;
-            СпосібДоставки = 0;
-            ЧасДоставкиЗ = DateTime.MinValue.TimeOfDay;
-            ЧасДоставкиДо = DateTime.MinValue.TimeOfDay;
-            ПовернутиТару = false;
-            ДатаПоверненняТари = DateTime.MinValue;
-            Курс = 0;
-            Кратність = 0;
-            Коментар = "";
-            Менеджер = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new РеалізаціяТоварівТаПослуг_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new РеалізаціяТоварівТаПослуг_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -15710,38 +15365,38 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РеалізаціяТоварівТаПослуг_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; }
-        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
-        public DateTime ДатаОплати { get; set; }
-        public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Перелічення.ФормаОплати ФормаОплати { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public UuidAndText Основа { get; set; }
-        public Перелічення.СтатусиРеалізаціїТоварівТаПослуг Статус { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public decimal СумаПередоплати { get; set; }
-        public decimal СумаПередоплатиЗаТару { get; set; }
-        public Перелічення.СпособиДоставки СпосібДоставки { get; set; }
-        public TimeSpan ЧасДоставкиЗ { get; set; }
-        public TimeSpan ЧасДоставкиДо { get; set; }
-        public bool ПовернутиТару { get; set; }
-        public DateTime ДатаПоверненняТари { get; set; }
-        public decimal Курс { get; set; }
-        public int Кратність { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; } = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
+        public DateTime ДатаОплати { get; set; } = DateTime.MinValue;
+        public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; } = new Документи.ЗамовленняКлієнта_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Перелічення.ФормаОплати ФормаОплати { get; set; } = 0;
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public Перелічення.СтатусиРеалізаціїТоварівТаПослуг Статус { get; set; } = 0;
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public decimal СумаПередоплати { get; set; } = 0;
+        public decimal СумаПередоплатиЗаТару { get; set; } = 0;
+        public Перелічення.СпособиДоставки СпосібДоставки { get; set; } = 0;
+        public TimeSpan ЧасДоставкиЗ { get; set; } = DateTime.MinValue.TimeOfDay;
+        public TimeSpan ЧасДоставкиДо { get; set; } = DateTime.MinValue.TimeOfDay;
+        public bool ПовернутиТару { get; set; } = false;
+        public DateTime ДатаПоверненняТари { get; set; } = DateTime.MinValue;
+        public decimal Курс { get; set; } = 0;
+        public int Кратність { get; set; } = 0;
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public РеалізаціяТоварівТаПослуг_Товари_TablePart Товари_TablePart { get; set; }
@@ -16156,19 +15811,10 @@ namespace StorageAndTrade_1_0.Документи
         public ВстановленняЦінНоменклатури_Objest() : base(Config.Kernel, "tab_a42", "ВстановленняЦінНоменклатури",
              ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_a3", "col_g9", "col_a4", "col_a5", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            ВидЦіни = new Довідники.ВидиЦін_Pointer();
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ВстановленняЦінНоменклатури_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ВстановленняЦінНоменклатури_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -16321,15 +15967,15 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ВстановленняЦінНоменклатури_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ВстановленняЦінНоменклатури_Товари_TablePart Товари_TablePart { get; set; }
@@ -16781,28 +16427,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a44", "ПрихіднийКасовийОрдер",
              ["docname", "docnomer", "docdate", "col_h8", "col_h9", "col_i1", "col_i2", "col_i3", "col_i4", "col_a6", "col_i5", "col_i6", "col_a1", "col_a2", "col_a4", "col_a3", "col_a5", "col_a7", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Каса = new Довідники.Каси_Pointer();
-            СумаДокументу = 0;
-            ГосподарськаОперація = 0;
-            Основа = new UuidAndText();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            СтаттяРухуКоштів = new Довідники.СтаттяРухуКоштів_Pointer();
-            КасаВідправник = new Довідники.Каси_Pointer();
-            Курс = 0;
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            РозшифруванняПлатежу_TablePart = new ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(this);
-            
+                //Табличні частини
+                РозшифруванняПлатежу_TablePart = new ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -16982,24 +16610,24 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПрихіднийКасовийОрдер_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public UuidAndText Основа { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.СтаттяРухуКоштів_Pointer СтаттяРухуКоштів { get; set; }
-        public Довідники.Каси_Pointer КасаВідправник { get; set; }
-        public decimal Курс { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.СтаттяРухуКоштів_Pointer СтаттяРухуКоштів { get; set; } = new Довідники.СтаттяРухуКоштів_Pointer();
+        public Довідники.Каси_Pointer КасаВідправник { get; set; } = new Довідники.Каси_Pointer();
+        public decimal Курс { get; set; } = 0;
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart РозшифруванняПлатежу_TablePart { get; set; }
@@ -17473,30 +17101,10 @@ namespace StorageAndTrade_1_0.Документи
         public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a48", "РозхіднийКасовийОрдер",
              ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_a3", "col_a5", "col_k5", "col_k4", "col_k7", "col_a4", "col_k8", "col_k9", "col_l2", "col_k6", "col_a2", "col_a1", "col_l1", "col_a6", "col_a7", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Каса = new Довідники.Каси_Pointer();
-            СумаДокументу = 0;
-            СумаДокументуПоКурсу = 0;
-            ГосподарськаОперація = 0;
-            ОрганізаціяОтримувач = new Довідники.Організації_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            СтаттяРухуКоштів = new Довідники.СтаттяРухуКоштів_Pointer();
-            КасаОтримувач = new Довідники.Каси_Pointer();
-            Курс = 0;
-            Основа = new UuidAndText();
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            РозшифруванняПлатежу_TablePart = new РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(this);
-            
+                //Табличні частини
+                РозшифруванняПлатежу_TablePart = new РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -17682,26 +17290,26 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РозхіднийКасовийОрдер_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public decimal СумаДокументуПоКурсу { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Довідники.Організації_Pointer ОрганізаціяОтримувач { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.СтаттяРухуКоштів_Pointer СтаттяРухуКоштів { get; set; }
-        public Довідники.Каси_Pointer КасаОтримувач { get; set; }
-        public decimal Курс { get; set; }
-        public UuidAndText Основа { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public decimal СумаДокументуПоКурсу { get; set; } = 0;
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Довідники.Організації_Pointer ОрганізаціяОтримувач { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.СтаттяРухуКоштів_Pointer СтаттяРухуКоштів { get; set; } = new Довідники.СтаттяРухуКоштів_Pointer();
+        public Довідники.Каси_Pointer КасаОтримувач { get; set; } = new Довідники.Каси_Pointer();
+        public decimal Курс { get; set; } = 0;
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart РозшифруванняПлатежу_TablePart { get; set; }
@@ -18198,31 +17806,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварів_Objest() : base(Config.Kernel, "tab_a31", "ПереміщенняТоварів",
              ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2", "col_b9", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            ВидЦіни = new Довідники.ВидиЦін_Pointer();
-            ОрганізаціяОтримувач = new Довідники.Організації_Pointer();
-            Відповідальний = new Довідники.Користувачі_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            СкладВідправник = new Довідники.Склади_Pointer();
-            СкладОтримувач = new Довідники.Склади_Pointer();
-            Статус = 0;
-            ГосподарськаОперація = 0;
-            СпосібДоставки = 0;
-            АдресДоставки = "";
-            ЧасДоставкиЗ = DateTime.MinValue.TimeOfDay;
-            ЧасДоставкиДо = DateTime.MinValue.TimeOfDay;
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            Основа = new UuidAndText();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ПереміщенняТоварів_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПереміщенняТоварів_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -18411,27 +17998,27 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварів_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; }
-        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-        public Довідники.Організації_Pointer ОрганізаціяОтримувач { get; set; }
-        public Довідники.Користувачі_Pointer Відповідальний { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Pointer СкладВідправник { get; set; }
-        public Довідники.Склади_Pointer СкладОтримувач { get; set; }
-        public Перелічення.СтатусиПереміщенняТоварів Статус { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Перелічення.СпособиДоставки СпосібДоставки { get; set; }
-        public string АдресДоставки { get; set; }
-        public TimeSpan ЧасДоставкиЗ { get; set; }
-        public TimeSpan ЧасДоставкиДо { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public UuidAndText Основа { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+        public Довідники.Організації_Pointer ОрганізаціяОтримувач { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Користувачі_Pointer Відповідальний { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Pointer СкладВідправник { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Склади_Pointer СкладОтримувач { get; set; } = new Довідники.Склади_Pointer();
+        public Перелічення.СтатусиПереміщенняТоварів Статус { get; set; } = 0;
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Перелічення.СпособиДоставки СпосібДоставки { get; set; } = 0;
+        public string АдресДоставки { get; set; } = "";
+        public TimeSpan ЧасДоставкиЗ { get; set; } = DateTime.MinValue.TimeOfDay;
+        public TimeSpan ЧасДоставкиДо { get; set; } = DateTime.MinValue.TimeOfDay;
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ПереміщенняТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -18960,33 +18547,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel, "tab_a51", "ПоверненняТоварівПостачальнику",
              ["docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4", "col_a5", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            СумаДокументу = 0;
-            ГосподарськаОперація = 0;
-            БанківськийРахунокОрганізації = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            СпосібДоставки = 0;
-            АдресДоставки = "";
-            ЧасДоставкиЗ = DateTime.MinValue.TimeOfDay;
-            ЧасДоставкиДо = DateTime.MinValue.TimeOfDay;
-            Каса = new Довідники.Каси_Pointer();
-            Основа = new UuidAndText();
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            Менеджер = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ПоверненняТоварівПостачальнику_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПоверненняТоварівПостачальнику_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -19181,29 +18745,29 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівПостачальнику_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; }
-        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Перелічення.СпособиДоставки СпосібДоставки { get; set; }
-        public string АдресДоставки { get; set; }
-        public TimeSpan ЧасДоставкиЗ { get; set; }
-        public TimeSpan ЧасДоставкиДо { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public UuidAndText Основа { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунокОрганізації { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; } = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Перелічення.СпособиДоставки СпосібДоставки { get; set; } = 0;
+        public string АдресДоставки { get; set; } = "";
+        public TimeSpan ЧасДоставкиЗ { get; set; } = DateTime.MinValue.TimeOfDay;
+        public TimeSpan ЧасДоставкиДо { get; set; } = DateTime.MinValue.TimeOfDay;
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ПоверненняТоварівПостачальнику_Товари_TablePart Товари_TablePart { get; set; }
@@ -19714,29 +19278,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПоверненняТоварівВідКлієнта_Objest() : base(Config.Kernel, "tab_a53", "ПоверненняТоварівВідКлієнта",
              ["docname", "docnomer", "docdate", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f5", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_a1", "col_a2", "col_f6", "col_a3", "col_a4", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            СумаДокументу = 0;
-            Склад = new Довідники.Склади_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Менеджер = new Довідники.Користувачі_Pointer();
-            ДокументПродажу = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
-            ГосподарськаОперація = 0;
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            ПричинаПовернення = "";
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Каса = new Довідники.Каси_Pointer();
-            Основа = new UuidAndText();
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ПоверненняТоварівВідКлієнта_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПоверненняТоварівВідКлієнта_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -19919,25 +19464,25 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівВідКлієнта_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументПродажу { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public string ПричинаПовернення { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public UuidAndText Основа { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументПродажу { get; set; } = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public string ПричинаПовернення { get; set; } = "";
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ПоверненняТоварівВідКлієнта_Товари_TablePart Товари_TablePart { get; set; }
@@ -20402,27 +19947,10 @@ namespace StorageAndTrade_1_0.Документи
         public АктВиконанихРобіт_Objest() : base(Config.Kernel, "tab_a81", "АктВиконанихРобіт",
              ["docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8", "col_a9", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Валюта = new Довідники.Валюти_Pointer();
-            ЗамовленняКлієнта = new Документи.ЗамовленняКлієнта_Pointer();
-            Каса = new Довідники.Каси_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            СумаДокументу = 0;
-            ФормаОплати = 0;
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            ГосподарськаОперація = 0;
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            Менеджер = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Послуги_TablePart = new АктВиконанихРобіт_Послуги_TablePart(this);
-            
+                //Табличні частини
+                Послуги_TablePart = new АктВиконанихРобіт_Послуги_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -20599,23 +20127,23 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, АктВиконанихРобіт_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Перелічення.ФормаОплати ФормаОплати { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Документи.ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; } = new Документи.ЗамовленняКлієнта_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Перелічення.ФормаОплати ФормаОплати { get; set; } = 0;
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public АктВиконанихРобіт_Послуги_TablePart Послуги_TablePart { get; set; }
@@ -21163,26 +20691,13 @@ namespace StorageAndTrade_1_0.Документи
         public ВведенняЗалишків_Objest() : base(Config.Kernel, "tab_a83", "ВведенняЗалишків",
              ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3", "col_a2", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            ГосподарськаОперація = 0;
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ВведенняЗалишків_Товари_TablePart(this);
-            Каси_TablePart = new ВведенняЗалишків_Каси_TablePart(this);
-            БанківськіРахунки_TablePart = new ВведенняЗалишків_БанківськіРахунки_TablePart(this);
-            РозрахункиЗКонтрагентами_TablePart = new ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ВведенняЗалишків_Товари_TablePart(this);
+                Каси_TablePart = new ВведенняЗалишків_Каси_TablePart(this);
+                БанківськіРахунки_TablePart = new ВведенняЗалишків_БанківськіРахунки_TablePart(this);
+                РозрахункиЗКонтрагентами_TablePart = new ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -21362,19 +20877,19 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ВведенняЗалишків_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ВведенняЗалишків_Товари_TablePart Товари_TablePart { get; set; }
@@ -22033,20 +21548,10 @@ namespace StorageAndTrade_1_0.Документи
         public НадлишкиТоварів_Objest() : base(Config.Kernel, "tab_a88", "НадлишкиТоварів",
              ["col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "docnomer", "docdate", "docname", "col_a1", "col_a2", ])
         {
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            ВидЦіни = new Довідники.ВидиЦін_Pointer();
-            Коментар = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Назва = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new НадлишкиТоварів_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new НадлишкиТоварів_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -22193,16 +21698,16 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, НадлишкиТоварів_Const.POINTER);
         }
         
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-        public string Коментар { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public string Назва { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+        public string Коментар { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public string Назва { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public НадлишкиТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -22566,20 +22071,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПересортицяТоварів_Objest() : base(Config.Kernel, "tab_a90", "ПересортицяТоварів",
              ["docname", "docnomer", "docdate", "col_h2", "col_h3", "col_h4", "col_h5", "col_h6", "col_a1", "col_a2", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            ВидЦіни = new Довідники.ВидиЦін_Pointer();
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ПересортицяТоварів_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПересортицяТоварів_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -22726,16 +22221,16 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПересортицяТоварів_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ПересортицяТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -23125,20 +22620,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПерерахунокТоварів_Objest() : base(Config.Kernel, "tab_a92", "ПерерахунокТоварів",
              ["docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2", "col_a3", "col_a4", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Склад = new Довідники.Склади_Pointer();
-            Відповідальний = new Довідники.ФізичніОсоби_Pointer();
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
             
-            //Табличні частини
-            Товари_TablePart = new ПерерахунокТоварів_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПерерахунокТоварів_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -23294,16 +22779,16 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПерерахунокТоварів_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.ФізичніОсоби_Pointer Відповідальний { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.ФізичніОсоби_Pointer Відповідальний { get; set; } = new Довідники.ФізичніОсоби_Pointer();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
         
         //Табличні частини
         public ПерерахунокТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -23741,22 +23226,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПсуванняТоварів_Objest() : base(Config.Kernel, "tab_a94", "ПсуванняТоварів",
              ["docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_a1", "col_a5", "col_a2", "col_a3", "col_b2", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            Причина = "";
-            СумаДокументу = 0;
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
-            Основа = new UuidAndText();
             
-            //Табличні частини
-            Товари_TablePart = new ПсуванняТоварів_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПсуванняТоварів_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -23918,18 +23391,18 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПсуванняТоварів_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public string Причина { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
-        public UuidAndText Основа { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public string Причина { get; set; } = "";
+        public decimal СумаДокументу { get; set; } = 0;
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
+        public UuidAndText Основа { get; set; } = new UuidAndText();
         
         //Табличні частини
         public ПсуванняТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -24382,23 +23855,10 @@ namespace StorageAndTrade_1_0.Документи
         public ВнутрішнєСпоживанняТоварів_Objest() : base(Config.Kernel, "tab_b07", "ВнутрішнєСпоживанняТоварів",
              ["docname", "docnomer", "docdate", "col_a1", "col_b1", "col_a2", "col_a9", "col_a8", "col_b7", "col_b9", "col_b4", "col_b2", "col_a3", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            СумаДокументу = 0;
-            Основа = new UuidAndText();
-            Автор = new Довідники.Користувачі_Pointer();
-            ГосподарськаОперація = 0;
-            Коментар = "";
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ВнутрішнєСпоживанняТоварів_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ВнутрішнєСпоживанняТоварів_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -24563,19 +24023,19 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ВнутрішнєСпоживанняТоварів_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public UuidAndText Основа { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public string Коментар { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public string Коментар { get; set; } = "";
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ВнутрішнєСпоживанняТоварів_Товари_TablePart Товари_TablePart { get; set; }
@@ -25099,30 +24559,10 @@ namespace StorageAndTrade_1_0.Документи
         public РахунокФактура_Objest() : base(Config.Kernel, "tab_b10", "РахунокФактура",
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a3", "col_a4", "col_a5", "col_a6", "col_b9", "col_c2", "col_c3", "col_c4", "col_c1", "col_a2", "col_a7", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Контрагент = new Довідники.Контрагенти_Pointer();
-            Організація = new Довідники.Організації_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            СумаДокументу = 0;
-            Склад = new Довідники.Склади_Pointer();
-            Статус = 0;
-            ФормаОплати = 0;
-            БанківськийРахунок = new Довідники.БанківськіРахункиОрганізацій_Pointer();
-            БанківськийРахунокКонтрагента = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
-            Каса = new Довідники.Каси_Pointer();
-            ГосподарськаОперація = 0;
-            Договір = new Довідники.ДоговориКонтрагентів_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Автор = new Довідники.Користувачі_Pointer();
-            Коментар = "";
-            Менеджер = new Довідники.Користувачі_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new РахунокФактура_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new РахунокФактура_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -25308,26 +24748,26 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РахунокФактура_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public decimal СумаДокументу { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Перелічення.СтатусиЗамовленьКлієнтів Статус { get; set; }
-        public Перелічення.ФормаОплати ФормаОплати { get; set; }
-        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; }
-        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; }
-        public Довідники.Каси_Pointer Каса { get; set; }
-        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; }
-        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Менеджер { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public decimal СумаДокументу { get; set; } = 0;
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Перелічення.СтатусиЗамовленьКлієнтів Статус { get; set; } = 0;
+        public Перелічення.ФормаОплати ФормаОплати { get; set; } = 0;
+        public Довідники.БанківськіРахункиОрганізацій_Pointer БанківськийРахунок { get; set; } = new Довідники.БанківськіРахункиОрганізацій_Pointer();
+        public Довідники.БанківськіРахункиКонтрагентів_Pointer БанківськийРахунокКонтрагента { get; set; } = new Довідники.БанківськіРахункиКонтрагентів_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public Перелічення.ГосподарськіОперації ГосподарськаОперація { get; set; } = 0;
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public РахунокФактура_Товари_TablePart Товари_TablePart { get; set; }
@@ -25756,21 +25196,10 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_a64", "РозміщенняТоварівНаСкладі",
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
         {
-            Назва = "";
-            ДатаДок = DateTime.MinValue;
-            НомерДок = "";
-            Коментар = "";
-            Основа = new UuidAndText();
-            Склад = new Довідники.Склади_Pointer();
-            Автор = new Довідники.Користувачі_Pointer();
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            ДокументПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new РозміщенняТоварівНаСкладі_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new РозміщенняТоварівНаСкладі_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -25929,17 +25358,17 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РозміщенняТоварівНаСкладі_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public string НомерДок { get; set; }
-        public string Коментар { get; set; }
-        public UuidAndText Основа { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Документи.ПоступленняТоварівТаПослуг_Pointer ДокументПоступлення { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public string НомерДок { get; set; } = "";
+        public string Коментар { get; set; } = "";
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Документи.ПоступленняТоварівТаПослуг_Pointer ДокументПоступлення { get; set; } = new Документи.ПоступленняТоварівТаПослуг_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public РозміщенняТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
@@ -26355,20 +25784,10 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b09", "ПереміщенняТоварівНаСкладі",
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ])
         {
-            Назва = "";
-            ДатаДок = DateTime.MinValue;
-            НомерДок = "";
-            Коментар = "";
-            Основа = new UuidAndText();
-            Склад = new Довідники.Склади_Pointer();
-            Автор = new Довідники.Користувачі_Pointer();
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ПереміщенняТоварівНаСкладі_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ПереміщенняТоварівНаСкладі_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -26524,16 +25943,16 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварівНаСкладі_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public string НомерДок { get; set; }
-        public string Коментар { get; set; }
-        public UuidAndText Основа { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public string НомерДок { get; set; } = "";
+        public string Коментар { get; set; } = "";
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ПереміщенняТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
@@ -26954,21 +26373,10 @@ namespace StorageAndTrade_1_0.Документи
         public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b27", "ЗбіркаТоварівНаСкладі",
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
         {
-            Назва = "";
-            ДатаДок = DateTime.MinValue;
-            НомерДок = "";
-            Коментар = "";
-            Основа = new UuidAndText();
-            Склад = new Довідники.Склади_Pointer();
-            Автор = new Довідники.Користувачі_Pointer();
-            Організація = new Довідники.Організації_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            ДокументРеалізації = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new ЗбіркаТоварівНаСкладі_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new ЗбіркаТоварівНаСкладі_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -27127,17 +26535,17 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, ЗбіркаТоварівНаСкладі_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public string НомерДок { get; set; }
-        public string Коментар { get; set; }
-        public UuidAndText Основа { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументРеалізації { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public string НомерДок { get; set; } = "";
+        public string Коментар { get; set; } = "";
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public Документи.РеалізаціяТоварівТаПослуг_Pointer ДокументРеалізації { get; set; } = new Документи.РеалізаціяТоварівТаПослуг_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public ЗбіркаТоварівНаСкладі_Товари_TablePart Товари_TablePart { get; set; }
@@ -27517,20 +26925,10 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel, "tab_b29", "РозміщенняНоменклатуриПоКоміркам",
              ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5", "col_a6", ])
         {
-            Назва = "";
-            НомерДок = "";
-            ДатаДок = DateTime.MinValue;
-            Організація = new Довідники.Організації_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            Коментар = "";
-            Автор = new Довідники.Користувачі_Pointer();
-            Підрозділ = new Довідники.СтруктураПідприємства_Pointer();
-            Основа = new UuidAndText();
-            КлючовіСловаДляПошуку = "";
             
-            //Табличні частини
-            Товари_TablePart = new РозміщенняНоменклатуриПоКоміркам_Товари_TablePart(this);
-            
+                //Табличні частини
+                Товари_TablePart = new РозміщенняНоменклатуриПоКоміркам_Товари_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -27686,16 +27084,16 @@ namespace StorageAndTrade_1_0.Документи
             return new UuidAndText(UnigueID.UGuid, РозміщенняНоменклатуриПоКоміркам_Const.POINTER);
         }
         
-        public string Назва { get; set; }
-        public string НомерДок { get; set; }
-        public DateTime ДатаДок { get; set; }
-        public Довідники.Організації_Pointer Організація { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public string Коментар { get; set; }
-        public Довідники.Користувачі_Pointer Автор { get; set; }
-        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; }
-        public UuidAndText Основа { get; set; }
-        public string КлючовіСловаДляПошуку { get; set; }
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public РозміщенняНоменклатуриПоКоміркам_Товари_TablePart Товари_TablePart { get; set; }
@@ -28030,16 +27428,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     public class ЦіниНоменклатури_Objest : RegisterInformationObject
     {
 		    public ЦіниНоменклатури_Objest() : base(Config.Kernel, "tab_a40",
-             ["col_f5", "col_f6", "col_f7", "col_f8", "col_f9", "col_g2", ]) 
-        {
-            Номенклатура = new Довідники.Номенклатура_Pointer();
-            ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-            ВидЦіни = new Довідники.ВидиЦін_Pointer();
-            Ціна = 0;
-            Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-            Валюта = new Довідники.Валюти_Pointer();
-            
-        }
+             ["col_f5", "col_f6", "col_f7", "col_f8", "col_f9", "col_g2", ]) { }
         
         public async ValueTask<bool> Read(UnigueID uid)
         {
@@ -28093,12 +27482,12 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 			      await base.BaseDelete();
         }
 
-        public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-        public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; }
-        public decimal Ціна { get; set; }
-        public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
+        public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+        public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+        public Довідники.ВидиЦін_Pointer ВидЦіни { get; set; } = new Довідники.ВидиЦін_Pointer();
+        public decimal Ціна { get; set; } = 0;
+        public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
         
     }
 	
@@ -28180,13 +27569,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     public class КурсиВалют_Objest : RegisterInformationObject
     {
 		    public КурсиВалют_Objest() : base(Config.Kernel, "tab_a59",
-             ["col_a1", "col_a2", "col_a3", ]) 
-        {
-            Валюта = new Довідники.Валюти_Pointer();
-            Курс = 0;
-            Кратність = 0;
-            
-        }
+             ["col_a1", "col_a2", "col_a3", ]) { }
         
         public async ValueTask<bool> Read(UnigueID uid)
         {
@@ -28231,9 +27614,9 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 			      await base.BaseDelete();
         }
 
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        public decimal Курс { get; set; }
-        public int Кратність { get; set; }
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public decimal Курс { get; set; } = 0;
+        public int Кратність { get; set; } = 0;
         
     }
 	
@@ -28319,14 +27702,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     public class ШтрихкодиНоменклатури_Objest : RegisterInformationObject
     {
 		    public ШтрихкодиНоменклатури_Objest() : base(Config.Kernel, "tab_b17",
-             ["col_a1", "col_a2", "col_a3", "col_a4", ]) 
-        {
-            Штрихкод = "";
-            Номенклатура = new Довідники.Номенклатура_Pointer();
-            ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer();
-            Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer();
-            
-        }
+             ["col_a1", "col_a2", "col_a3", "col_a4", ]) { }
         
         public async ValueTask<bool> Read(UnigueID uid)
         {
@@ -28374,10 +27750,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 			      await base.BaseDelete();
         }
 
-        public string Штрихкод { get; set; }
-        public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-        public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; }
-        public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; }
+        public string Штрихкод { get; set; } = "";
+        public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+        public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+        public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
         
     }
 	
@@ -28451,11 +27827,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     public class ФайлиДокументів_Objest : RegisterInformationObject
     {
 		    public ФайлиДокументів_Objest() : base(Config.Kernel, "tab_b23",
-             ["col_a1", ]) 
-        {
-            Файл = new Довідники.Файли_Pointer();
-            
-        }
+             ["col_a1", ]) { }
         
         public async ValueTask<bool> Read(UnigueID uid)
         {
@@ -28494,7 +27866,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 			      await base.BaseDelete();
         }
 
-        public Довідники.Файли_Pointer Файл { get; set; }
+        public Довідники.Файли_Pointer Файл { get; set; } = new Довідники.Файли_Pointer();
         
     }
 	
@@ -28580,14 +27952,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
     public class РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest : RegisterInformationObject
     {
 		    public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest() : base(Config.Kernel, "tab_a74",
-             ["col_a1", "col_a2", "col_a3", "col_a4", ]) 
-        {
-            Номенклатура = new Довідники.Номенклатура_Pointer();
-            Склад = new Довідники.Склади_Pointer();
-            Приміщення = new Довідники.СкладськіПриміщення_Pointer();
-            Комірка = new Довідники.СкладськіКомірки_Pointer();
-            
-        }
+             ["col_a1", "col_a2", "col_a3", "col_a4", ]) { }
         
         public async ValueTask<bool> Read(UnigueID uid)
         {
@@ -28635,10 +28000,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 			      await base.BaseDelete();
         }
 
-        public Довідники.Номенклатура_Pointer Номенклатура { get; set; }
-        public Довідники.Склади_Pointer Склад { get; set; }
-        public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; }
-        public Довідники.СкладськіКомірки_Pointer Комірка { get; set; }
+        public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Довідники.СкладськіПриміщення_Pointer Приміщення { get; set; } = new Довідники.СкладськіПриміщення_Pointer();
+        public Довідники.СкладськіКомірки_Pointer Комірка { get; set; } = new Довідники.СкладськіКомірки_Pointer();
         
     }
 	

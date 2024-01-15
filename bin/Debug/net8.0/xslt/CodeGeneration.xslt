@@ -684,19 +684,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
              </xsl:for-each>]) 
         {
-            <xsl:for-each select="Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text> = </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />;
-            </xsl:for-each>
             <xsl:if test="count(TabularParts/TablePart) &gt; 0">
-            //Табличні частини
+                //Табличні частини
+                <xsl:for-each select="TabularParts/TablePart">
+                    <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+                    <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
+                    <xsl:value-of select="concat($DirectoryName, '_', $TablePartName)"/><xsl:text>(this)</xsl:text>;
+                </xsl:for-each>
             </xsl:if>
-            <xsl:for-each select="TabularParts/TablePart">
-                <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
-                <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
-                <xsl:value-of select="concat($DirectoryName, '_', $TablePartName)"/><xsl:text>(this)</xsl:text>;
-            </xsl:for-each>
         }
         
         public async ValueTask New()
@@ -849,7 +844,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
           <xsl:call-template name="FieldType" />
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
-          <xsl:text> { get; set; </xsl:text>}
+          <xsl:text> { get; set; } = </xsl:text>
+          <xsl:call-template name="DefaultFieldValue" />;
         </xsl:for-each>
         <xsl:if test="count(TabularParts/TablePart) &gt; 0">
         //Табличні частини
@@ -1285,19 +1281,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
              </xsl:for-each>])
         {
-            <xsl:for-each select="Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text> = </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />;
-            </xsl:for-each>
             <xsl:if test="count(TabularParts/TablePart) &gt; 0">
-            //Табличні частини
+                //Табличні частини
+                <xsl:for-each select="TabularParts/TablePart">
+                    <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+                    <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
+                    <xsl:value-of select="concat($DocumentName, '_', $TablePartName)"/><xsl:text>(this)</xsl:text>;
+                </xsl:for-each>
             </xsl:if>
-            <xsl:for-each select="TabularParts/TablePart">
-                <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
-                <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
-                <xsl:value-of select="concat($DocumentName, '_', $TablePartName)"/><xsl:text>(this)</xsl:text>;
-            </xsl:for-each>
         }
         
         public async ValueTask New()
@@ -1481,7 +1472,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
           <xsl:call-template name="FieldType" />
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
-          <xsl:text> { get; set; </xsl:text>}
+          <xsl:text> { get; set; } = </xsl:text>
+          <xsl:call-template name="DefaultFieldValue" />;
         </xsl:for-each>
         <xsl:if test="count(TabularParts/TablePart) &gt; 0">
         //Табличні частини
@@ -1854,14 +1846,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
              <xsl:text>[</xsl:text>
              <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-             </xsl:for-each>]) 
-        {
-            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text> = </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />;
-            </xsl:for-each>
-        }
+             </xsl:for-each>]) { }
         
         public async ValueTask&lt;bool&gt; Read(UnigueID uid)
         {
@@ -1921,7 +1906,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
           <xsl:call-template name="FieldType" />
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
-          <xsl:text> { get; set; </xsl:text>}
+          <xsl:text> { get; set; } = </xsl:text>
+          <xsl:call-template name="DefaultFieldValue" />;
         </xsl:for-each>
     }
 	
