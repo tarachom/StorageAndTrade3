@@ -310,7 +310,8 @@ FROM
             #endregion
 
             query += $@"
-ORDER BY Контрагент_Назва
+ORDER BY 
+    Контрагент_Назва
 ";
 
             #endregion
