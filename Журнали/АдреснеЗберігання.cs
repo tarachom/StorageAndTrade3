@@ -32,7 +32,6 @@ namespace StorageAndTrade
     {
         public Журнал_АдреснеЗберігання() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.Журнали_АдреснеЗберігання.Store;
             ТабличніСписки.Журнали_АдреснеЗберігання.AddColumns(TreeViewGrid);
         }
 
@@ -40,7 +39,7 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Журнали_АдреснеЗберігання.SelectPointerItem = SelectPointerItem;
 
-            await ТабличніСписки.Журнали_АдреснеЗберігання.LoadRecords();
+            await ТабличніСписки.Журнали_АдреснеЗберігання.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Журнали_АдреснеЗберігання.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_АдреснеЗберігання.SelectPath, TreeViewGrid.Columns[0], false);
@@ -56,7 +55,7 @@ namespace StorageAndTrade
 
         public override void PeriodWhereChanged()
         {
-            ТабличніСписки.Журнали_АдреснеЗберігання.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.Журнали_АдреснеЗберігання.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
     }

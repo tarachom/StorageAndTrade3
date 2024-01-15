@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public КраїниСвіту() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.КраїниСвіту_Записи.Store;
             ТабличніСписки.КраїниСвіту_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.КраїниСвіту_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.КраїниСвіту_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.КраїниСвіту_Записи.Where.Clear();
+            ТабличніСписки.КраїниСвіту_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.КраїниСвіту_Записи.LoadRecords();
+            await ТабличніСписки.КраїниСвіту_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.КраїниСвіту_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.КраїниСвіту_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.КраїниСвіту_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.КраїниСвіту_Записи.ДодатиВідбір(TreeViewGrid, КраїниСвіту_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.КраїниСвіту_Записи.Where.Add(
-                new Where(КраїниСвіту_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.КраїниСвіту_Записи.LoadRecords();
+            await ТабличніСписки.КраїниСвіту_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.КраїниСвіту_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.КраїниСвіту_Записи.FirstPath, TreeViewGrid.Columns[0], false);

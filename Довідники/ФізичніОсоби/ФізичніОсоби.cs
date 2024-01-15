@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public ФізичніОсоби() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ФізичніОсоби_Записи.Store;
             ТабличніСписки.ФізичніОсоби_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.ФізичніОсоби_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ФізичніОсоби_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.ФізичніОсоби_Записи.Where.Clear();
+            ТабличніСписки.ФізичніОсоби_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.ФізичніОсоби_Записи.LoadRecords();
+            await ТабличніСписки.ФізичніОсоби_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ФізичніОсоби_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ФізичніОсоби_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ФізичніОсоби_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.ФізичніОсоби_Записи.ДодатиВідбір(TreeViewGrid, ФізичніОсоби_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.ФізичніОсоби_Записи.Where.Add(
-                new Where(ФізичніОсоби_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.ФізичніОсоби_Записи.LoadRecords();
+            await ТабличніСписки.ФізичніОсоби_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ФізичніОсоби_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ФізичніОсоби_Записи.FirstPath, TreeViewGrid.Columns[0], false);

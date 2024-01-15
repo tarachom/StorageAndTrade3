@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public ЗбіркаТоварівНаСкладі() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.Store;
             ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,7 +43,7 @@ namespace StorageAndTrade
             ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            await ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords();
+            await ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,11 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.Where.Clear();
-
             //Назва
-            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.Where.Add(
-                new Where(ЗбіркаТоварівНаСкладі_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(ЗбіркаТоварівНаСкладі_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            await ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords();
+            await ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -143,7 +140,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 

@@ -58,7 +58,6 @@ namespace StorageAndTrade
 
             HBoxTop.PackStart(linkButtonHar, false, false, 10);
 
-            TreeViewGrid.Model = ТабличніСписки.СкладськіПриміщення_Записи.Store;
             ТабличніСписки.СкладськіПриміщення_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -69,15 +68,15 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіПриміщення_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СкладськіПриміщення_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.СкладськіПриміщення_Записи.Where.Clear();
+            ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!СкладВласник.Pointer.UnigueID.IsEmpty())
             {
-                ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(
+                ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
+            await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.СкладськіПриміщення_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -92,13 +91,18 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.СкладськіПриміщення_Записи.Where.Clear();
+            ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            //Назва
-            ТабличніСписки.СкладськіПриміщення_Записи.Where.Add(
-                new Where(СкладськіПриміщення_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            if (!СкладВласник.Pointer.UnigueID.IsEmpty())
+            {
+                ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid,
+                    new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
+            }
 
-            await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords();
+            //Відбори
+            ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid, СкладськіПриміщення_ВідбориДляПошуку.Відбори(searchText));
+
+            await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.СкладськіПриміщення_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.FirstPath, TreeViewGrid.Columns[0], false);

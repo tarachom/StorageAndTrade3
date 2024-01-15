@@ -34,13 +34,12 @@ namespace StorageAndTrade
 
         public СкладськіКомірки_Папки_Дерево() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.СкладськіКомірки_Папки_Записи.Store;
             ТабличніСписки.СкладськіКомірки_Папки_Записи.AddColumns(TreeViewGrid);
         }
 
         public override async void LoadTree()
         {
-            await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
+            await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);

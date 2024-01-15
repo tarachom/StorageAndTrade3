@@ -35,7 +35,6 @@ namespace StorageAndTrade
     {
         public РахунокФактура() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.РахунокФактура_Записи.Store;
             ТабличніСписки.РахунокФактура_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -46,7 +45,7 @@ namespace StorageAndTrade
             ТабличніСписки.РахунокФактура_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РахунокФактура_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            await ТабличніСписки.РахунокФактура_Записи.LoadRecords();
+            await ТабличніСписки.РахунокФактура_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.РахунокФактура_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РахунокФактура_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -63,13 +62,11 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.РахунокФактура_Записи.Where.Clear();
-
             //Назва
-            ТабличніСписки.РахунокФактура_Записи.Where.Add(
-                new Where(РахунокФактура_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            ТабличніСписки.РахунокФактура_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(РахунокФактура_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            await ТабличніСписки.РахунокФактура_Записи.LoadRecords();
+            await ТабличніСписки.РахунокФактура_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.РахунокФактура_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РахунокФактура_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -145,7 +142,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.РахунокФактура_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.РахунокФактура_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 

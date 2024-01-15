@@ -49,7 +49,6 @@ namespace StorageAndTrade
                 HBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
             }
 
-            TreeViewGrid.Model = ТабличніСписки.Банки_Записи.Store;
             ТабличніСписки.Банки_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -60,9 +59,9 @@ namespace StorageAndTrade
             ТабличніСписки.Банки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Банки_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Банки_Записи.Where.Clear();
+            ТабличніСписки.Банки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Банки_Записи.LoadRecords();
+            await ТабличніСписки.Банки_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Банки_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Банки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -77,13 +76,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Банки_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.Банки_Записи.ДодатиВідбір(TreeViewGrid, Банки_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.Банки_Записи.Where.Add(
-                new Where(Банки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Банки_Записи.LoadRecords();
+            await ТабличніСписки.Банки_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Банки_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Банки_Записи.FirstPath, TreeViewGrid.Columns[0], false);

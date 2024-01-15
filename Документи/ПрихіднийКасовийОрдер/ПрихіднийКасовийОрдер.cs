@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public ПрихіднийКасовийОрдер() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ПрихіднийКасовийОрдер_Записи.Store;
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,7 +43,7 @@ namespace StorageAndTrade
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            await ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords();
+            await ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,11 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.Where.Clear();
-
             //Назва
-            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.Where.Add(
-                new Where(ПрихіднийКасовийОрдер_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(ПрихіднийКасовийОрдер_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            await ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords();
+            await ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПрихіднийКасовийОрдер_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПрихіднийКасовийОрдер_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -142,7 +139,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 

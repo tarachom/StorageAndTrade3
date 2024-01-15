@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public БанківськіРахункиОрганізацій() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.БанківськіРахункиОрганізацій_Записи.Store;
             ТабличніСписки.БанківськіРахункиОрганізацій_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.БанківськіРахункиОрганізацій_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.БанківськіРахункиОрганізацій_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.БанківськіРахункиОрганізацій_Записи.Where.Clear();
+            ТабличніСписки.БанківськіРахункиОрганізацій_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords();
+            await ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.БанківськіРахункиОрганізацій_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиОрганізацій_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.БанківськіРахункиОрганізацій_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.БанківськіРахункиОрганізацій_Записи.ДодатиВідбір(TreeViewGrid, БанківськіРахункиОрганізацій_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.БанківськіРахункиОрганізацій_Записи.Where.Add(
-                new Where(БанківськіРахункиОрганізацій_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords();
+            await ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.БанківськіРахункиОрганізацій_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.БанківськіРахункиОрганізацій_Записи.FirstPath, TreeViewGrid.Columns[0], false);

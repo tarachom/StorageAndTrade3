@@ -32,7 +32,6 @@ namespace StorageAndTrade
     {
         public Журнал_Каса() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.Журнали_Каса.Store;
             ТабличніСписки.Журнали_Каса.AddColumns(TreeViewGrid);
         }
 
@@ -40,7 +39,7 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Журнали_Каса.SelectPointerItem = SelectPointerItem;
 
-            await ТабличніСписки.Журнали_Каса.LoadRecords();
+            await ТабличніСписки.Журнали_Каса.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Журнали_Каса.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Каса.SelectPath, TreeViewGrid.Columns[0], false);
@@ -56,7 +55,7 @@ namespace StorageAndTrade
 
         public override void PeriodWhereChanged()
         {
-            ТабличніСписки.Журнали_Каса.ДодатиВідбірПоПеріоду(Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.Журнали_Каса.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
     }

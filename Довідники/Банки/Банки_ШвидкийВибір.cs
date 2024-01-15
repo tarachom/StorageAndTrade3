@@ -34,7 +34,6 @@ namespace StorageAndTrade
     {
         public Банки_ШвидкийВибір() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.Банки_ЗаписиШвидкийВибір.Store;
             ТабличніСписки.Банки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
@@ -80,9 +79,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Банки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Банки_ЗаписиШвидкийВибір.Where.Clear();
+            ТабличніСписки.Банки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Банки_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Банки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Банки_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Банки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
@@ -97,17 +96,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Банки_ЗаписиШвидкийВибір.Where.Clear();
+            //Відбори
+            ТабличніСписки.Банки_Записи.ДодатиВідбір(TreeViewGrid, Банки_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Код
-            ТабличніСписки.Банки_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Банки_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.Банки_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, Банки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Банки_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Банки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

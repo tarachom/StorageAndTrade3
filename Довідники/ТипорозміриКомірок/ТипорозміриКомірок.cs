@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public ТипорозміриКомірок() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ТипорозміриКомірок_Записи.Store;
             ТабличніСписки.ТипорозміриКомірок_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.ТипорозміриКомірок_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ТипорозміриКомірок_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.ТипорозміриКомірок_Записи.Where.Clear();
+            ТабличніСписки.ТипорозміриКомірок_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.ТипорозміриКомірок_Записи.LoadRecords();
+            await ТабличніСписки.ТипорозміриКомірок_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ТипорозміриКомірок_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ТипорозміриКомірок_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ТипорозміриКомірок_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.ТипорозміриКомірок_Записи.ДодатиВідбір(TreeViewGrid, ТипорозміриКомірок_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.ТипорозміриКомірок_Записи.Where.Add(
-                new Where(ТипорозміриКомірок_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.ТипорозміриКомірок_Записи.LoadRecords();
+            await ТабличніСписки.ТипорозміриКомірок_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ТипорозміриКомірок_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ТипорозміриКомірок_Записи.FirstPath, TreeViewGrid.Columns[0], false);

@@ -43,6 +43,75 @@ limitations under the License.
 using Gtk;
 using AccountingSoftware;
 
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Іконки
+{
+    public static class ДляТабличногоСписку
+    {
+        public static Gdk.Pixbuf Normal = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/doc.png");
+        public static Gdk.Pixbuf Delete = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/doc_delete.png");
+    }
+
+    public static class ДляДерева
+    {
+        public static Gdk.Pixbuf Normal = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/folder.png");
+        public static Gdk.Pixbuf Delete = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/folder_delete.png");
+    }
+}
+
+namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
+{
+    public abstract class ТабличнийСписок
+    {
+        public static void ДодатиВідбір(TreeView treeView, Where where, bool clear_all_before_add = false)
+        {
+            if (!treeView.Data.ContainsKey("Where"))
+                treeView.Data.Add("Where", new List&lt;Where&gt;() { where });
+            else
+            {
+                if (clear_all_before_add)
+                    treeView.Data["Where"] = new List&lt;Where&gt;() { where };
+                else
+                {
+                    object? value = treeView.Data["Where"];
+                    if (value == null)
+                        treeView.Data["Where"] = new List&lt;Where&gt;() { where };
+                    else
+                        ((List&lt;Where&gt;)value).Add(where);
+                }
+            }
+        }
+
+        public static void ДодатиВідбір(TreeView treeView, List&lt;Where&gt; where, bool clear_all_before_add = false)
+        {
+            if (!treeView.Data.ContainsKey("Where"))
+                treeView.Data.Add("Where", where);
+            else
+            {
+                if (clear_all_before_add)
+                    treeView.Data["Where"] = where;
+                else
+                {
+                    object? value = treeView.Data["Where"];
+                    if (value == null)
+                        treeView.Data["Where"] = where;
+                    else
+                    {
+                        var list = (List&lt;Where&gt;)value;
+                        foreach (Where item in where)
+                            list.Add(item);
+                    }
+                }
+            }
+        }
+
+        public static void ОчиститиВідбір(TreeView treeView)
+        {
+            if (treeView.Data.ContainsKey("Where"))
+                treeView.Data["Where"] = null;
+        }
+    }
+}
+
 namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Довідники.ТабличніСписки
 {
     <xsl:for-each select="Configuration/Directories/Directory">
@@ -53,9 +122,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
       <xsl:for-each select="TabularLists/TabularList[IsTree = '0']">
         <xsl:variable name="TabularListName" select="Name"/>
     /* ТАБЛИЦЯ */
-    public class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
+    public class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> : ТабличнийСписок
     {
-        string Image { get { return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png"); } }
         bool DeletionLabel = false;
         string ID = "";
         <xsl:for-each select="Fields/Field">
@@ -63,18 +131,27 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID,
-            <xsl:for-each select="Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text>, </xsl:text>
-            </xsl:for-each> };
+            return new object[] 
+            { 
+                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                ID,
+                <xsl:for-each select="Fields/Field">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
+                </xsl:for-each>
+            };
         }
-
-        public static ListStore Store = new ListStore([/*Image*/ typeof(Gdk.Pixbuf), /*ID*/ typeof(string),
-            <xsl:for-each select="Fields/Field">/*<xsl:value-of select="Name"/>*/ typeof(string), </xsl:for-each>]);
 
         public static void AddColumns(TreeView treeView)
         {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                <xsl:for-each select="Fields/Field">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),  
+                </xsl:for-each>
+            ]);
+
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
@@ -95,33 +172,35 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static List&lt;Where&gt; Where { get; set; } = [];
-
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords()
+        public static async ValueTask LoadRecords(TreeView treeView)
         {
-            Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.<xsl:value-of select="$DirectoryName"/>_Select <xsl:value-of select="$DirectoryName"/>_Select = new Довідники.<xsl:value-of select="$DirectoryName"/>_Select();
             <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Field.AddRange(
-                ["deletion_label",
-                  <xsl:for-each select="Fields/Field[Type != 'pointer']">
-                      <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
-                      <xsl:text>Довідники.</xsl:text>
-                      <xsl:value-of select="$DirectoryName"/>
-                      <xsl:text>_Const.</xsl:text>
-                      <xsl:value-of select="Name"/>,
-                  </xsl:for-each>
-                ]);
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                <xsl:for-each select="Fields/Field[Type != 'pointer']">
+                    <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
+                    <xsl:text>Довідники.</xsl:text>
+                    <xsl:value-of select="$DirectoryName"/>
+                    <xsl:text>_Const.</xsl:text>
+                    <xsl:value-of select="Name"/>,
+                </xsl:for-each>
+            ]);
 
             /* Where */
-            <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Where = Where;
+            if (treeView.Data.ContainsKey("Where"))
+            {
+                var where = treeView.Data["Where"];
+                if (where != null) <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Where = (List&lt;Where&gt;)where;
+            }
 
             <xsl:for-each select="Fields/Field[SortField = 'True' and Type != 'pointer']">
               /* ORDER */
@@ -145,16 +224,21 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
             /* SELECT */
             await <xsl:value-of select="$DirectoryName"/>_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
             while (<xsl:value-of select="$DirectoryName"/>_Select.MoveNext())
             {
                 Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? cur = <xsl:value-of select="$DirectoryName"/>_Select.Current;
 
                 if (cur != null)
                 {
+                    Dictionary&lt;string, object&gt; Fields = cur.Fields!;
                     <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
                     {
                         ID = cur.UnigueID.ToString(),
-                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         <xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
                         <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>
                         <xsl:for-each select="Fields/Field[Type = 'pointer']">
@@ -163,7 +247,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                           <xsl:variable name="CountAlias" select="count(FieldAndAlias)"/>
                           <xsl:for-each select="FieldAndAlias">
                             <xsl:if test="position() &gt; 1"> + " " + </xsl:if>
-                            <xsl:text>cur.Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
+                            <xsl:text>Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
                             <xsl:if test="$CountAlias = 1"> ?? ""</xsl:if>
                           </xsl:for-each>
                           <xsl:if test="$CountNotPointer != 0 or position() != $CountPointer">,</xsl:if> /*<xsl:value-of select="Name"/>*/
@@ -180,29 +264,29 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                               <xsl:text>((</xsl:text>
                               <xsl:value-of select="Pointer"/>
                               <xsl:text>)</xsl:text>
-                              <xsl:text>(cur.Fields[</xsl:text>
+                              <xsl:text>(Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! != DBNull.Value ? cur.Fields[</xsl:text>
+                              <xsl:text>] != DBNull.Value ? Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! : 0)) )</xsl:text>
+                              <xsl:text>] : 0)) )</xsl:text>
                             </xsl:when>
                             <xsl:when test="Type = 'boolean'">
-                              <xsl:text>(cur.Fields[</xsl:text>
+                              <xsl:text>(Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! != DBNull.Value ? (bool)cur.Fields[</xsl:text>
+                              <xsl:text>] != DBNull.Value ? (bool)Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! : false) ? "Так" : ""</xsl:text>
+                              <xsl:text>] : false) ? "Так" : ""</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                              <xsl:text>cur.Fields[</xsl:text>
+                              <xsl:text>Fields[</xsl:text>
                               <xsl:value-of select="$DirectoryName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
@@ -238,25 +322,29 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
     /* ДЕРЕВО */
     public class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
     {
-        string Image { get{ return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "folder_delete.png" : "folder.png"); }}
         bool DeletionLabel = false;
         string ID = "";
         string Назва = "";
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Назва };
+            return new object[] 
+            {
+                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                ID,
+                Назва
+            };
         }
-
-        public static TreeStore Store = new TreeStore
-        (
-            typeof(Gdk.Pixbuf) /* Image */, 
-            typeof(string)     /* ID */, 
-            typeof(string)     /* Назва */
-        );
 
         public static void AddColumns(TreeView treeView)
         {
+            treeView.Model = new TreeStore
+            (
+                typeof(Gdk.Pixbuf) /* Image */, 
+                typeof(string)     /* ID */, 
+                typeof(string)     /* Назва */
+            );
+
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
@@ -274,9 +362,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         selectPointer - елемент на який потрібно спозиціонуватися
         owner - Власник (якщо таке поле є в табличному списку)
         */
-        public static async ValueTask LoadTree(UnigueID? openFolder, UnigueID? selectPointer <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">, UnigueID? owner</xsl:if>)
+        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">, UnigueID? owner</xsl:if>)
         {
-            Store.Clear();
             RootPath = SelectPath = null;
 
             <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> rootRecord = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
@@ -284,9 +371,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 ID = Guid.Empty.ToString(),
                 Назва = " Дерево "
             };
-
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
-            RootPath = Store.GetPath(rootIter);
 
             #region SQL
 
@@ -348,11 +432,17 @@ ORDER BY level, {<xsl:value-of select="$DirectoryName"/>_Const.Назва} ASC
 
             Dictionary&lt;string, TreeIter&gt; nodeDictionary = new Dictionary&lt;string, TreeIter&gt;();
 
+            TreeStore Store = (TreeStore)treeView.Model;
+            Store.Clear();
+
+            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            RootPath = Store.GetPath(rootIter);
+
             if (recordResult.Result)
                 foreach (var row in recordResult.ListRow)
                 {
                     string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = (row["Назва"].ToString() ?? "");
+                    string fieldName = row["Назва"].ToString() ?? "";
                     string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
                     int level = (int)row["level"];
                     bool deletionLabel = (bool)row["deletion_label"];
@@ -408,48 +498,35 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             return сomboBox;
         }
 
-        public static void ДодатиВідбірПоПеріоду(List&lt;Where&gt; Where, string fieldWhere, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static Where? ВідбірПоПеріоду(string fieldWhere, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
             switch (типПеріоду)
             {
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку:
-                {
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, 1, 1)));
-                    break;
-                }
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, 1, 1));
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.Квартал:
                 {
                     DateTime ДатаТриМісцяНазад = DateTime.Now.AddMonths(-3);
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаТриМісцяНазад.Year, ДатаТриМісцяНазад.Month, 1)));
-                    break;
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаТриМісцяНазад.Year, ДатаТриМісцяНазад.Month, 1));
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця:
                 {
                     DateTime ДатаМісцьНазад = DateTime.Now.AddMonths(-1);
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаМісцьНазад.Year, ДатаМісцьНазад.Month, 1)));
-                    break;
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаМісцьНазад.Year, ДатаМісцьНазад.Month, 1));
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.Місяць:
-                {
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, DateTime.Now.AddMonths(-1)));
-                    break;
-                }
+                    return new Where(fieldWhere, Comparison.QT_EQ, DateTime.Now.AddMonths(-1));
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця:
-                {
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)));
-                    break;
-                }
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня:
                 {
                     DateTime СімДнівНазад = DateTime.Now.AddDays(-7);
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(СімДнівНазад.Year, СімДнівНазад.Month, СімДнівНазад.Day)));
-                    break;
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(СімДнівНазад.Year, СімДнівНазад.Month, СімДнівНазад.Day));
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ПоточнийДень:
-                {
-                    Where.Add(new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)));
-                    break;
-                }
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
+                default: 
+                    return null;
             }
         }
     }
@@ -460,9 +537,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     
       <xsl:for-each select="TabularLists/TabularList">
         <xsl:variable name="TabularListName" select="Name"/>
-    public class <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
+    public class <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/> : ТабличнийСписок
     {
-        string Image { get { return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png"); }}
         bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
@@ -471,19 +547,29 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, /*Проведений документ*/ Spend, 
-            <xsl:for-each select="Fields/Field">
-              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
-            </xsl:for-each> };
+            return new object[] 
+            { 
+                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                ID, 
+                /*Проведений документ*/ Spend, 
+                <xsl:for-each select="Fields/Field">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
+                </xsl:for-each>
+            };
         }
-
-        public static ListStore Store = new ListStore([/*Image*/ typeof(Gdk.Pixbuf), /*ID*/ typeof(string), /*Spend Проведений документ*/ typeof(bool),
-            <xsl:for-each select="Fields/Field">
-              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),  
-            </xsl:for-each>]);
 
         public static void AddColumns(TreeView treeView)
         {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Spend Проведений документ*/ typeof(bool),
+                <xsl:for-each select="Fields/Field">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),  
+                </xsl:for-each>
+            ]);
+
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
@@ -504,12 +590,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static List&lt;Where&gt; Where { get; set; } = [];
-
-        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
-            Where.Clear();
-            Інтерфейс.ДодатиВідбірПоПеріоду(Where, Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду);
+            ОчиститиВідбір(treeView);
+            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду);
+            if (where != null) ДодатиВідбір(treeView, where);               
         }
 
         public static UnigueID? DocumentPointerItem { get; set; }
@@ -518,15 +603,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords()
+        public static async ValueTask LoadRecords(TreeView treeView)
         {
-            Store.Clear();
             FirstPath = SelectPath = CurrentPath = null;
 
             Документи.<xsl:value-of select="$DocumentName"/>_Select <xsl:value-of select="$DocumentName"/>_Select = new Документи.<xsl:value-of select="$DocumentName"/>_Select();
             <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Field.AddRange(
-                [/*Помітка на видалення*/ "deletion_label",
-                 /*Проведений документ*/ "spend",
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Проведений документ*/ "spend",
                 <xsl:for-each select="Fields/Field[Type != 'pointer']">
                     <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
                     <xsl:text>Документи.</xsl:text>
@@ -534,10 +619,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                     <xsl:text>_Const.</xsl:text>
                     <xsl:value-of select="Name"/>,
                 </xsl:for-each>
-                ]);
+            ]);
 
             /* Where */
-            <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Where = Where;
+            if (treeView.Data.ContainsKey("Where"))
+            {
+                var where = treeView.Data["Where"];
+                if (where != null) <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Where = (List&lt;Where&gt;)where;
+            }
 
             <xsl:for-each select="Fields/Field[SortField = 'True' and Type != 'pointer']">
               /* ORDER */
@@ -561,17 +650,22 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
             /* SELECT */
             await <xsl:value-of select="$DocumentName"/>_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
             while (<xsl:value-of select="$DocumentName"/>_Select.MoveNext())
             {
                 Документи.<xsl:value-of select="$DocumentName"/>_Pointer? cur = <xsl:value-of select="$DocumentName"/>_Select.Current;
 
                 if (cur != null)
                 {
+                    Dictionary&lt;string, object&gt; Fields = cur.Fields!;
                     <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
                     {
                         ID = cur.UnigueID.ToString(),
-                        Spend = (bool)cur.Fields?["spend"]!, /*Проведений документ*/
-                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
+                        Spend = (bool)Fields["spend"], /*Проведений документ*/
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         <xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
                         <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>
                         <xsl:for-each select="Fields/Field[Type = 'pointer']">
@@ -580,7 +674,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                           <xsl:variable name="CountAlias" select="count(FieldAndAlias)"/>
                           <xsl:for-each select="FieldAndAlias">
                             <xsl:if test="position() &gt; 1"> + " " + </xsl:if>
-                            <xsl:text>cur.Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
+                            <xsl:text>Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
                             <xsl:if test="$CountAlias = 1"> ?? ""</xsl:if>
                           </xsl:for-each>
                           <xsl:if test="$CountNotPointer != 0 or position() != $CountPointer">,</xsl:if> /**/
@@ -597,29 +691,29 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                               <xsl:text>((</xsl:text>
                               <xsl:value-of select="Pointer"/>
                               <xsl:text>)</xsl:text>
-                              <xsl:text>(cur.Fields[</xsl:text>
+                              <xsl:text>(Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! != DBNull.Value ? cur.Fields[</xsl:text>
+                              <xsl:text>] != DBNull.Value ? Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! : 0)) )</xsl:text>
+                              <xsl:text>] : 0)) )</xsl:text>
                             </xsl:when>
                             <xsl:when test="Type = 'boolean'">
-                              <xsl:text>(cur.Fields[</xsl:text>
+                              <xsl:text>(Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! != DBNull.Value ? (bool)cur.Fields?[</xsl:text>
+                              <xsl:text>] != DBNull.Value ? (bool)Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
-                              <xsl:text>]! : false) ? "Так" : ""</xsl:text>
+                              <xsl:text>] : false) ? "Так" : ""</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                              <xsl:text>cur.Fields[</xsl:text>
+                              <xsl:text>Fields[</xsl:text>
                               <xsl:value-of select="$DocumentName"/>
                               <xsl:text>_Const.</xsl:text>
                               <xsl:value-of select="Name"/>
@@ -662,7 +756,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     
     public class Журнали_<xsl:value-of select="$JournalName"/>
     {
-        string Image { get { return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png"); }}
         bool DeletionLabel = false;
         bool Spend = false;
         string ID = "";
@@ -673,27 +766,34 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         // Масив для запису стрічки в Store
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Type, /*Проведений документ*/ Spend,
-            <xsl:for-each select="Fields/Field">
-              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
-              <xsl:value-of select="Name"/>
-              <xsl:text>, </xsl:text>
-            </xsl:for-each> };
+            return new object[] 
+            { 
+                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                ID, 
+                Type, 
+                /*Проведений документ*/ Spend,
+                <xsl:for-each select="Fields/Field">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
+                  <xsl:value-of select="Name"/>
+                  <xsl:text>, </xsl:text>
+                </xsl:for-each> 
+            };
         }
-
-        // Джерело даних для списку
-        public static ListStore Store = new ListStore([
-          typeof(Gdk.Pixbuf), /* Image */
-          typeof(string), /* ID */
-          typeof(string), /* Type */
-          typeof(bool), /* Spend Проведений документ */
-          <xsl:for-each select="Fields/Field">
-              <xsl:text>typeof(string), </xsl:text>/*<xsl:value-of select="Name"/>*/
-          </xsl:for-each>]);
 
         // Добавлення колонок в список
         public static void AddColumns(TreeView treeView)
         {
+            treeView.Model = new ListStore(
+            [
+                typeof(Gdk.Pixbuf), /* Image */
+                typeof(string), /* ID */
+                typeof(string), /* Type */
+                typeof(bool), /* Spend Проведений документ */
+                <xsl:for-each select="Fields/Field">
+                    <xsl:text>typeof(string), </xsl:text>/*<xsl:value-of select="Name"/>*/
+                </xsl:for-each>
+            ]);
+
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
             treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
@@ -710,36 +810,42 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        // Словник з відборами, ключ це Тип документу
-        public static Dictionary&lt;string, List&lt;Where&gt;&gt; Where { get; set; } = new Dictionary&lt;string, List&lt;Where&gt;&gt;();
-
-        // Добавляє відбір по періоду в словник відборів
-        public static void ДодатиВідбірПоПеріоду(Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
         {
-            Where.Clear();
+            Dictionary&lt;string, List&lt;Where&gt;&gt; WhereDict = [];
+            if (!treeView.Data.ContainsKey("Where"))
+                treeView.Data.Add("Where", WhereDict);
+            else
+                treeView.Data["Where"] = WhereDict;
             <xsl:for-each select="$AllowDocument/Item">
               <xsl:variable name="AllowName" select="Name"/>
               <xsl:variable name="DocField" select="../../TabularLists/TabularList[Name = $AllowName]/Fields/Field[WherePeriod = '1']/DocField" />
               <xsl:if test="normalize-space($DocField) != ''">
             {
-                List&lt;Where&gt; where = new List&lt;Where&gt;();
-                Where.Add("<xsl:value-of select="$AllowName"/>", where);
-                Інтерфейс.ДодатиВідбірПоПеріоду(where, <xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
+                List&lt;Where&gt; whereList = [];
+                WhereDict.Add("<xsl:value-of select="$AllowName"/>", whereList);
+                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.<xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
+                if (where != null) whereList.Add(where);
             }
               </xsl:if>
             </xsl:for-each>
         }
 
+        public static void ОчиститиВідбір(TreeView treeView)
+        {
+            if (treeView.Data.ContainsKey("Where"))
+                treeView.Data["Where"] = null;
+        }
+
         // Список документів які входять в журнал
         public static Dictionary&lt;string, string&gt; AllowDocument()
         {
-            Dictionary&lt;string, string&gt; allowDoc = new Dictionary&lt;string, string&gt;()
+            return new Dictionary&lt;string, string&gt;()
             {
                 <xsl:for-each select="$AllowDocument/Item">
                     <xsl:text>{"</xsl:text><xsl:value-of select="Name"/>", "<xsl:value-of select="normalize-space(FullName)"/>"},
                 </xsl:for-each>
             };
-            return allowDoc;
         }
 
         public static UnigueID? SelectPointerItem { get; set; }
@@ -747,12 +853,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public static TreePath? CurrentPath;
 
         // Завантаження даних
-        public static async ValueTask LoadRecords() 
+        public static async ValueTask LoadRecords(TreeView treeView) 
         {
-            Store.Clear();
             SelectPath = CurrentPath = null;
-            List&lt;string&gt; allQuery = new List&lt;string&gt;();
-            Dictionary&lt;string, object&gt; paramQuery = new Dictionary&lt;string, object&gt;();
+
+            List&lt;string&gt; allQuery = [];
+            Dictionary&lt;string, object&gt; paramQuery = [];
 
           <xsl:if test="count(TabularLists/TabularList) != 0">
             <xsl:for-each select="TabularLists/TabularList">
@@ -760,14 +866,24 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
               <xsl:variable name="Table" select="Table"/>
               
               <xsl:if test="count($AllowDocument/Item[Name = $DocumentName]) = 1">
+              //Документ: <xsl:value-of select="$DocumentName"/>
               {
                   Query query = new Query(Документи.<xsl:value-of select="$DocumentName"/>_Const.TABLE);
 
                   // Встановлення відбору для даного типу документу
-                  if (Where.ContainsKey("<xsl:value-of select="$DocumentName"/>") &amp;&amp; Where["<xsl:value-of select="$DocumentName"/>"].Count != 0) {
-                      query.Where = Where["<xsl:value-of select="$DocumentName"/>"];
-                      foreach(Where field in query.Where)
-                          paramQuery.Add(field.Alias, field.Value);
+                  if (treeView.Data.ContainsKey("Where"))
+                  {
+                      var where = treeView.Data["Where"];
+                      if (where != null)
+                      {
+                          var Where = (Dictionary&lt;string, List&lt;Where&gt;&gt;)where;
+                          if (Where.ContainsKey("<xsl:value-of select="$DocumentName"/>") &amp;&amp; Where["<xsl:value-of select="$DocumentName"/>"].Count != 0) 
+                          {
+                              query.Where = Where["<xsl:value-of select="$DocumentName"/>"];
+                              foreach(Where field in query.Where)
+                                  paramQuery.Add(field.Alias, field.Value);
+                          }
+                      }
                   }
 
                   query.FieldAndAlias.Add(new NameValue&lt;string&gt;("'<xsl:value-of select="$DocumentName"/>'", "type"));
@@ -828,16 +944,21 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
             var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
 
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
             foreach (Dictionary&lt;string, object&gt; row in recordResult.ListRow)
             {
-                Журнали_<xsl:value-of select="$JournalName"/> record = new Журнали_<xsl:value-of select="$JournalName"/>();
-                record.ID = row["uid"].ToString() ?? "";
-                record.Type = row["type"].ToString() ?? "";
-                record.DeletionLabel = (bool)row["deletion_label"];
-                record.Spend = (bool)row["spend"];
-                <xsl:for-each select="Fields/Field">
-                    record.<xsl:value-of select="Name"/> = row["<xsl:value-of select="Name"/>"] != DBNull.Value ? (row["<xsl:value-of select="Name"/>"].ToString() ?? "") : "";
-                </xsl:for-each>
+                Журнали_<xsl:value-of select="$JournalName"/> record = new Журнали_<xsl:value-of select="$JournalName"/>
+                {
+                    ID = row["uid"].ToString() ?? "",
+                    Type = row["type"].ToString() ?? "",
+                    DeletionLabel = (bool)row["deletion_label"],
+                    Spend = (bool)row["spend"],
+                    <xsl:for-each select="Fields/Field">
+                        <xsl:value-of select="Name"/> = row["<xsl:value-of select="Name"/>"] != DBNull.Value ? (row["<xsl:value-of select="Name"/>"].ToString() ?? "") : "",
+                    </xsl:for-each>
+                };
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
@@ -863,9 +984,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
     
       <xsl:for-each select="TabularLists/TabularList">
         <xsl:variable name="TabularListName" select="Name"/>
-    public class <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/>
+    public class <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/> : ТабличнийСписок
     {
-        string Image = AppContext.BaseDirectory + "images/doc.png";
         string ID = "";
         string Період = "";
         <xsl:for-each select="Fields/Field">
@@ -873,19 +993,29 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID, Період,
-            <xsl:for-each select="Fields/Field">
-              <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text><xsl:value-of select="Name"/>,
-            </xsl:for-each> };
+            return new object[] 
+            { 
+                Іконки.ДляТабличногоСписку.Normal, 
+                ID, 
+                Період,
+                <xsl:for-each select="Fields/Field">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text><xsl:value-of select="Name"/>,
+                </xsl:for-each> 
+            };
         }
-
-        public static ListStore Store = new ListStore([/*Image*/ typeof(Gdk.Pixbuf), /*ID*/ typeof(string), /*Період*/ typeof(string),
-            <xsl:for-each select="Fields/Field">
-                <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),
-            </xsl:for-each>]);
 
         public static void AddColumns(TreeView treeView)
         {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Період*/ typeof(string),
+                <xsl:for-each select="Fields/Field">
+                    <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),
+                </xsl:for-each>
+            ]);
+
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
@@ -907,21 +1037,22 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static List&lt;Where&gt; Where { get; set; } = [];
-
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords()
+        public static async ValueTask LoadRecords(TreeView treeView)
         {
-            Store.Clear();
             SelectPath = CurrentPath = null;
 
             РегістриВідомостей.<xsl:value-of select="$RegisterName"/>_RecordsSet <xsl:value-of select="$RegisterName"/>_RecordsSet = new РегістриВідомостей.<xsl:value-of select="$RegisterName"/>_RecordsSet();
 
             /* Where */
-            <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Where = Where;
+            if (treeView.Data.ContainsKey("Where"))
+            {
+                var where = treeView.Data["Where"];
+                if (where != null) <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Where = (List&lt;Where&gt;)where;
+            }
 
             /* DEFAULT ORDER */
             <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
@@ -948,6 +1079,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 
             /* Read */
             await <xsl:value-of select="$RegisterName"/>_RecordsSet.Read();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
             foreach (<xsl:value-of select="$RegisterName"/>_RecordsSet.Record record in <xsl:value-of select="$RegisterName"/>_RecordsSet.Records)
             {
                 <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/>

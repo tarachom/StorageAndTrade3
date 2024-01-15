@@ -43,7 +43,6 @@ namespace StorageAndTrade
                 await LoadRecords();
             };
 
-            TreeViewGrid.Model = ТабличніСписки.ДоговориКонтрагентів_Записи.Store;
             ТабличніСписки.ДоговориКонтрагентів_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -54,15 +53,15 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ДоговориКонтрагентів_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Clear();
+            ТабличніСписки.ДоговориКонтрагентів_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
             {
-                ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Add(
+                ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords();
+            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -77,19 +76,18 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Clear();
+            ТабличніСписки.ДоговориКонтрагентів_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
             {
-                ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Add(
+                ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
             }
 
-            //Назва
-            ТабличніСписки.ДоговориКонтрагентів_Записи.Where.Add(
-                new Where(Comparison.AND, ДоговориКонтрагентів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            //Відбори
+            ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_ВідбориДляПошуку.Відбори(searchText));
 
-            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords();
+            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ДоговориКонтрагентів_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.FirstPath, TreeViewGrid.Columns[0], false);

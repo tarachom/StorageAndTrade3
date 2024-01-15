@@ -34,7 +34,6 @@ namespace StorageAndTrade
     {
         public Блокнот_ШвидкийВибір() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.Store;
             ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
@@ -80,9 +79,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.Where.Clear();
+            ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
@@ -97,21 +96,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.Where.Clear();
+            //Відбори
+            ТабличніСписки.Блокнот_Записи.ДодатиВідбір(TreeViewGrid, Блокнот_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Код
-            ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Блокнот_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, Блокнот_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Опис
-            ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, Блокнот_Const.Опис, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Блокнот_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

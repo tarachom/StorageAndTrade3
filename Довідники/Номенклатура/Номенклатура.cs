@@ -88,7 +88,6 @@ namespace StorageAndTrade
 
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
-            TreeViewGrid.Model = ТабличніСписки.Номенклатура_Записи.Store;
             ТабличніСписки.Номенклатура_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -113,13 +112,13 @@ namespace StorageAndTrade
             ТабличніСписки.Номенклатура_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Номенклатура_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Номенклатура_Записи.Where.Clear();
+            ТабличніСписки.Номенклатура_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (checkButtonIsHierarchy.Active)
-                ТабличніСписки.Номенклатура_Записи.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ,
-                    ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
+                ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid,
+                    new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            await ТабличніСписки.Номенклатура_Записи.LoadRecords();
+            await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Номенклатура_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -135,17 +134,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Номенклатура_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid, Номенклатура_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Код
-            ТабличніСписки.Номенклатура_Записи.Where.Add(
-                new Where(Номенклатура_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.Номенклатура_Записи.Where.Add(
-                new Where(Comparison.OR, Номенклатура_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Номенклатура_Записи.LoadRecords();
+            await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Номенклатура_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.FirstPath, TreeViewGrid.Columns[0], false);

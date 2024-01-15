@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public СтаттяРухуКоштів() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.СтаттяРухуКоштів_Записи.Store;
             ТабличніСписки.СтаттяРухуКоштів_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.СтаттяРухуКоштів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СтаттяРухуКоштів_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.СтаттяРухуКоштів_Записи.Where.Clear();
+            ТабличніСписки.СтаттяРухуКоштів_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.СтаттяРухуКоштів_Записи.LoadRecords();
+            await ТабличніСписки.СтаттяРухуКоштів_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.СтаттяРухуКоштів_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СтаттяРухуКоштів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.СтаттяРухуКоштів_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.СтаттяРухуКоштів_Записи.ДодатиВідбір(TreeViewGrid, СтаттяРухуКоштів_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.СтаттяРухуКоштів_Записи.Where.Add(
-                new Where(СтаттяРухуКоштів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.СтаттяРухуКоштів_Записи.LoadRecords();
+            await ТабличніСписки.СтаттяРухуКоштів_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.СтаттяРухуКоштів_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СтаттяРухуКоштів_Записи.FirstPath, TreeViewGrid.Columns[0], false);

@@ -34,7 +34,6 @@ namespace StorageAndTrade
     {
         public ПакуванняОдиниціВиміру_ШвидкийВибір() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Store;
             ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
@@ -80,9 +79,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Clear();
+            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
@@ -97,17 +96,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Clear();
+            //Відбори
+            ТабличніСписки.ПакуванняОдиниціВиміру_Записи.ДодатиВідбір(TreeViewGrid, ПакуванняОдиниціВиміру_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Код
-            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Add(
-                new Where(ПакуванняОдиниціВиміру_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, ПакуванняОдиниціВиміру_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

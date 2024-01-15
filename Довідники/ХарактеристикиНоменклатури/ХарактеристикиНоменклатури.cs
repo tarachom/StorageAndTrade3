@@ -67,7 +67,6 @@ namespace StorageAndTrade
                 HBoxTop.PackStart(linkButtonShKody, false, false, 10);
             }
 
-            TreeViewGrid.Model = ТабличніСписки.ХарактеристикиНоменклатури_Записи.Store;
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -78,15 +77,15 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Clear();
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())
             {
-                ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Add(
+                ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -101,13 +100,18 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Clear();
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            //Назва
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Where.Add(
-                new Where(ХарактеристикиНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())
+            {
+                ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
+                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
+            }
 
-            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords();
+            //Відбори
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, ХарактеристикиНоменклатури_ВідбориДляПошуку.Відбори(searchText));
+
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ХарактеристикиНоменклатури_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);

@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public СеріїНоменклатури() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.СеріїНоменклатури_Записи.Store;
             ТабличніСписки.СеріїНоменклатури_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.СеріїНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СеріїНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.СеріїНоменклатури_Записи.Where.Clear();
+            ТабличніСписки.СеріїНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.СеріїНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.СеріїНоменклатури_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.СеріїНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, СеріїНоменклатури_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Номер
-            ТабличніСписки.СеріїНоменклатури_Записи.Where.Add(
-                new Where(СеріїНоменклатури_Const.Номер, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.СеріїНоменклатури_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.СеріїНоменклатури_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СеріїНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);

@@ -113,7 +113,11 @@ namespace StorageAndTrade
         {
             Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
             Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () => { return page; });
-            page.OnDownload(null, new EventArgs());
+
+            Task.Run(() =>
+            {
+                page.OnDownload(null, new EventArgs());
+            });
         }
 
         /// <summary>

@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public РозміщенняНоменклатуриПоКоміркам() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.Store;
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,7 +43,7 @@ namespace StorageAndTrade
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.DocumentPointerItem = DocumentPointerItem;
 
-            await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords();
+            await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,11 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.Where.Clear();
-
             //Назва
-            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.Where.Add(
-                new Where(РозміщенняНоменклатуриПоКоміркам_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(РозміщенняНоменклатуриПоКоміркам_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords();
+            await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.FirstPath, TreeViewGrid.Columns[0], false);
@@ -143,7 +140,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.ДодатиВідбірПоПеріоду(Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 

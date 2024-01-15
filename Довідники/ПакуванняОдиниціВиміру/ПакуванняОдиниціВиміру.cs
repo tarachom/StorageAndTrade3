@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public ПакуванняОдиниціВиміру() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ПакуванняОдиниціВиміру_Записи.Store;
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.ПакуванняОдиниціВиміру_Записи.Where.Clear();
+            ТабличніСписки.ПакуванняОдиниціВиміру_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords();
+            await ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПакуванняОдиниціВиміру_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПакуванняОдиниціВиміру_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ПакуванняОдиниціВиміру_Записи.Where.Clear();
-
-            //Назва
-            ТабличніСписки.ПакуванняОдиниціВиміру_Записи.Where.Add(
-                new Where(ПакуванняОдиниціВиміру_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords();
+            //Відбори
+            ТабличніСписки.ПакуванняОдиниціВиміру_Записи.ДодатиВідбір(TreeViewGrid, ПакуванняОдиниціВиміру_ВідбориДляПошуку.Відбори(searchText), true);
+            
+            await ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПакуванняОдиниціВиміру_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПакуванняОдиниціВиміру_Записи.FirstPath, TreeViewGrid.Columns[0], false);

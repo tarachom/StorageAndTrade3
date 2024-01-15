@@ -33,16 +33,8 @@ using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 {
-    public class Номенклатура_Записи
+    public class Номенклатура_Записи : ТабличнийСписок
     {
-        string Image
-        {
-            get
-            {
-                return AppContext.BaseDirectory + "images/" + (DeletionLabel ? "doc_delete.png" : "doc.png");
-            }
-        }
-
         bool DeletionLabel = false;
         string ID = "";
 
@@ -55,22 +47,35 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         Array ToArray()
         {
-            return new object[] { new Gdk.Pixbuf(Image), ID 
-            /* */ , Код, Назва, ОдиницяВиміру, ТипНоменклатури, Залишок, ЗалишокВКомірках };
+            return new object[]
+            {
+                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                ID,
+                /*Код*/ Код,
+                /*Назва*/ Назва,
+                /*ОдиницяВиміру*/ ОдиницяВиміру,
+                /*ТипНоменклатури*/ ТипНоменклатури,
+                Залишок,
+                ЗалишокВКомірках
+            };
         }
-
-        public static ListStore Store = new ListStore(typeof(Gdk.Pixbuf) /* Image */, typeof(string) /* ID */
-            , typeof(string) /* Код */
-            , typeof(string) /* Назва */
-            , typeof(string) /* ОдиницяВиміру */
-            , typeof(string) /* ТипНоменклатури */
-            , typeof(string)  /* Залишок */
-            , typeof(string)  /* ЗалишокВКомірках */
-            );
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf() { Ypad = 0 }, "pixbuf", 0));
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Код*/ typeof(string),  
+                /*Назва*/ typeof(string),  
+                /*ОдиницяВиміру*/ typeof(string),  
+                /*ТипНоменклатури*/ typeof(string),
+                /* Залишок */ typeof(string),
+                /* ЗалишокВКомірках */ typeof(string)
+
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             /* */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 }); /*Код*/
@@ -85,31 +90,32 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static List<Where> Where { get; set; } = new List<Where>();
-
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords()
+        public static async ValueTask LoadRecords(TreeView treeView)
         {
-            Store.Clear();
-            SelectPath = FirstPath = null;
+            FirstPath = SelectPath = CurrentPath = null;
 
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
-                new string[]
-                { "deletion_label" /*Помітка на видалення*/
-                    , Довідники.Номенклатура_Const.Код /* 1 */
-                    , Довідники.Номенклатура_Const.Назва /* 2 */
-                    , Довідники.Номенклатура_Const.ТипНоменклатури /* 3 */
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Код*/ Довідники.Номенклатура_Const.Код,
+                /*Назва*/ Довідники.Номенклатура_Const.Назва,
+                /*ТипНоменклатури*/ Довідники.Номенклатура_Const.ТипНоменклатури,
 
-                });
+            ]);
 
             /* Where */
-            Номенклатура_Select.QuerySelect.Where = Where;
+            if (treeView.Data.ContainsKey("Where"))
+            {
+                var where = treeView.Data["Where"];
+                if (where != null) Номенклатура_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
 
             /* ORDER */
@@ -173,22 +179,28 @@ END)
 
             /* SELECT */
             await Номенклатура_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
             while (Номенклатура_Select.MoveNext())
             {
                 Довідники.Номенклатура_Pointer? cur = Номенклатура_Select.Current;
 
                 if (cur != null)
                 {
+                    Dictionary<string, object> Fields = cur.Fields!;
                     Номенклатура_Записи Record = new Номенклатура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
-                        DeletionLabel = (bool)cur.Fields?["deletion_label"]!, /*Помітка на видалення*/
-                        ОдиницяВиміру = cur.Fields?["join_tab_1_field_1"]?.ToString() ?? "", /**/
-                        Код = cur.Fields?[Номенклатура_Const.Код]?.ToString() ?? "", /**/
-                        Назва = cur.Fields?[Номенклатура_Const.Назва]?.ToString() ?? "", /**/
-                        ТипНоменклатури = ((Перелічення.ТипиНоменклатури)(cur.Fields?[Номенклатура_Const.ТипНоменклатури]! != DBNull.Value ? cur.Fields?[Номенклатура_Const.ТипНоменклатури]! : 0)).ToString(), /**/
-                        Залишок = cur.Fields?["salishok"]?.ToString() ?? "", /**/
-                        ЗалишокВКомірках = cur.Fields?["salishok_v_komirkach"]?.ToString() ?? ""
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        ОдиницяВиміру = Fields["join_tab_1_field_1"].ToString() ?? "", /*ОдиницяВиміру*/
+                        Код = Fields[Номенклатура_Const.Код].ToString() ?? "", /**/
+                        Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "", /**/
+                        ТипНоменклатури = Перелічення.ПсевдонімиПерелічення.ТипиНоменклатури_Alias(((Перелічення.ТипиНоменклатури)(Fields[Номенклатура_Const.ТипНоменклатури] != DBNull.Value ? Fields[Номенклатура_Const.ТипНоменклатури] : 0))), /**/
+                        Залишок = Fields["salishok"].ToString() ?? "", /**/
+                        ЗалишокВКомірках = Fields["salishok_v_komirkach"].ToString() ?? ""
+
                     };
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());

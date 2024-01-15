@@ -66,7 +66,6 @@ namespace StorageAndTrade
             };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
-            TreeViewGrid.Model = ТабличніСписки.Склади_Записи.Store;
             ТабличніСписки.Склади_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -91,13 +90,13 @@ namespace StorageAndTrade
             ТабличніСписки.Склади_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Склади_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Склади_Записи.Where.Clear();
+            ТабличніСписки.Склади_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (checkButtonIsHierarchy.Active)
-                ТабличніСписки.Склади_Записи.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ,
-                    ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
+                ТабличніСписки.Склади_Записи.ДодатиВідбір(TreeViewGrid,
+                    new Where(Склади_Const.Папка, Comparison.EQ, ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            await ТабличніСписки.Склади_Записи.LoadRecords();
+            await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Склади_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -112,17 +111,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Склади_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.Склади_Записи.ДодатиВідбір(TreeViewGrid, Склади_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Код
-            ТабличніСписки.Склади_Записи.Where.Add(
-                new Where(Склади_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.Склади_Записи.Where.Add(
-                new Where(Comparison.OR, Склади_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Склади_Записи.LoadRecords();
+            await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Склади_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.FirstPath, TreeViewGrid.Columns[0], false);

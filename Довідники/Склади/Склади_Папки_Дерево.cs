@@ -32,13 +32,12 @@ namespace StorageAndTrade
     {
         public Склади_Папки_Дерево() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.Склади_Папки_Записи.Store;
             ТабличніСписки.Склади_Папки_Записи.AddColumns(TreeViewGrid);
         }
 
         public override async void LoadTree()
         {
-            await ТабличніСписки.Склади_Папки_Записи.LoadTree(OpenFolder, DirectoryPointerItem);
+            await ТабличніСписки.Склади_Папки_Записи.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.Склади_Папки_Записи.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.Склади_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);

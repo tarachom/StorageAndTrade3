@@ -67,7 +67,6 @@ namespace StorageAndTrade
                 HBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
             }
 
-            TreeViewGrid.Model = ТабличніСписки.Валюти_Записи.Store;
             ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
 
             MessageRequestText = "Встановити або зняти помітку на видалення?\n\nУВАГА!\nПри встановленні помітку на видалення, буде очищений регіст Курси Валют!";
@@ -80,9 +79,9 @@ namespace StorageAndTrade
             ТабличніСписки.Валюти_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Валюти_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Валюти_Записи.Where.Clear();
+            ТабличніСписки.Валюти_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Валюти_Записи.LoadRecords();
+            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Валюти_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -97,13 +96,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Валюти_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.Валюти_Записи.ДодатиВідбір(TreeViewGrid, Валюти_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.Валюти_Записи.Where.Add(
-                new Where(Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Валюти_Записи.LoadRecords();
+            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Валюти_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.FirstPath, TreeViewGrid.Columns[0], false);

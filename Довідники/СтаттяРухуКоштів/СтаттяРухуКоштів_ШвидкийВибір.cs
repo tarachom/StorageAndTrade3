@@ -34,7 +34,6 @@ namespace StorageAndTrade
     {
         public СтаттяРухуКоштів_ШвидкийВибір() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.Store;
             ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
@@ -80,9 +79,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.Where.Clear();
+            ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
@@ -97,13 +96,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.Where.Clear();
+            //Відбори
+            ТабличніСписки.СтаттяРухуКоштів_Записи.ДодатиВідбір(TreeViewGrid, СтаттяРухуКоштів_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.Where.Add(
-                new Where(СтаттяРухуКоштів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.СтаттяРухуКоштів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

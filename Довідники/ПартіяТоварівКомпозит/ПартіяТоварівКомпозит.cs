@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public ПартіяТоварівКомпозит() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ПартіяТоварівКомпозит_Записи.Store;
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.ПартіяТоварівКомпозит_Записи.Where.Clear();
+            ТабличніСписки.ПартіяТоварівКомпозит_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.ПартіяТоварівКомпозит_Записи.LoadRecords();
+            await ТабличніСписки.ПартіяТоварівКомпозит_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПартіяТоварівКомпозит_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПартіяТоварівКомпозит_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ПартіяТоварівКомпозит_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.ПартіяТоварівКомпозит_Записи.ДодатиВідбір(TreeViewGrid, ПартіяТоварівКомпозит_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.ПартіяТоварівКомпозит_Записи.Where.Add(
-                new Where(ПартіяТоварівКомпозит_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.ПартіяТоварівКомпозит_Записи.LoadRecords();
+            await ТабличніСписки.ПартіяТоварівКомпозит_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПартіяТоварівКомпозит_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ПартіяТоварівКомпозит_Записи.FirstPath, TreeViewGrid.Columns[0], false);

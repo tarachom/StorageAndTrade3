@@ -68,7 +68,6 @@ namespace StorageAndTrade
             };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
-            TreeViewGrid.Model = ТабличніСписки.Контрагенти_Записи.Store;
             ТабличніСписки.Контрагенти_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -93,13 +92,13 @@ namespace StorageAndTrade
             ТабличніСписки.Контрагенти_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Контрагенти_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Контрагенти_Записи.Where.Clear();
+            ТабличніСписки.Контрагенти_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (checkButtonIsHierarchy.Active)
-                ТабличніСписки.Контрагенти_Записи.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ,
-                    ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
+                ТабличніСписки.Контрагенти_Записи.ДодатиВідбір(TreeViewGrid,
+                    new Where(Контрагенти_Const.Папка, Comparison.EQ, ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            await ТабличніСписки.Контрагенти_Записи.LoadRecords();
+            await ТабличніСписки.Контрагенти_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Контрагенти_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -114,17 +113,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Контрагенти_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.Контрагенти_Записи.ДодатиВідбір(TreeViewGrid, Контрагенти_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Код
-            ТабличніСписки.Контрагенти_Записи.Where.Add(
-                new Where(Контрагенти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.Контрагенти_Записи.Where.Add(
-                new Where(Comparison.OR, Контрагенти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Контрагенти_Записи.LoadRecords();
+            await ТабличніСписки.Контрагенти_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Контрагенти_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.FirstPath, TreeViewGrid.Columns[0], false);

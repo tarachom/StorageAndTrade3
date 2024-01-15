@@ -33,7 +33,6 @@ namespace StorageAndTrade
     {
         public Каси() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.Каси_Записи.Store;
             ТабличніСписки.Каси_Записи.AddColumns(TreeViewGrid);
         }
 
@@ -44,9 +43,9 @@ namespace StorageAndTrade
             ТабличніСписки.Каси_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Каси_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Каси_Записи.Where.Clear();
+            ТабличніСписки.Каси_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Каси_Записи.LoadRecords();
+            await ТабличніСписки.Каси_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Каси_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Каси_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -61,13 +60,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Каси_Записи.Where.Clear();
+            //Відбори
+            ТабличніСписки.Каси_Записи.ДодатиВідбір(TreeViewGrid, Каси_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Назва
-            ТабличніСписки.Каси_Записи.Where.Add(
-                new Where(Каси_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Каси_Записи.LoadRecords();
+            await ТабличніСписки.Каси_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Каси_Записи.FirstPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Каси_Записи.FirstPath, TreeViewGrid.Columns[0], false);

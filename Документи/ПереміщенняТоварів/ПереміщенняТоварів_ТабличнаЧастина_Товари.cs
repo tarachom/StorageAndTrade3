@@ -140,10 +140,17 @@ namespace StorageAndTrade
                     else
                         запис.КількістьУпаковок = 1;
                 }
+
+                Запис.ПісляЗміни_Кількість(запис);
             }
             public static async ValueTask ПісляЗміни_Партія(Запис запис)
             {
                 await запис.Партія.GetPresentation();
+            }
+
+            public static void ПісляЗміни_Кількість(Запис запис)
+            {
+                запис.КількістьФакт = запис.Кількість * запис.КількістьУпаковок;
             }
         }
 
@@ -315,7 +322,7 @@ namespace StorageAndTrade
                     MinWidth = 200,
                     Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const
                 };
-                
+
                 Серія.Data.Add("Column", Columns.Серія);
 
                 TreeViewGrid.AppendColumn(Серія);
@@ -556,6 +563,7 @@ namespace StorageAndTrade
                                 if (value <= 0) value = 1;
 
                                 запис.КількістьУпаковок = value;
+                                Запис.ПісляЗміни_Кількість(запис);
                             }
 
                             break;
@@ -564,7 +572,10 @@ namespace StorageAndTrade
                         {
                             var (check, value) = Validate.IsDecimal(args.NewText);
                             if (check)
+                            {
                                 запис.Кількість = value;
+                                Запис.ПісляЗміни_Кількість(запис);
+                            }
 
                             break;
                         }

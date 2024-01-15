@@ -37,7 +37,6 @@ namespace StorageAndTrade
 
         public СкладськіКомірки_Папки_Дерево_ШвидкийВибір() : base(false)
         {
-            TreeViewGrid.Model = ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.Store;
             ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
@@ -82,7 +81,7 @@ namespace StorageAndTrade
 
         public async void LoadTree()
         {
-            await ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadTree(OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
+            await ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);

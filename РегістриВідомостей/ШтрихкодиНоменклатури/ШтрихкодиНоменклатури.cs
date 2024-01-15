@@ -34,7 +34,6 @@ namespace StorageAndTrade
 
         public ШтрихкодиНоменклатури() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.ШтрихкодиНоменклатури_Записи.Store;
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.AddColumns(TreeViewGrid);
 
             //Номенклатура Власник
@@ -64,21 +63,21 @@ namespace StorageAndTrade
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
 
-            ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Clear();
+            ТабличніСписки.ШтрихкодиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!НоменклатураВласник.Pointer.IsEmpty())
             {
-                ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(
+                ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
             }
 
             if (!ХарактеристикиНоменклатуриВласник.Pointer.IsEmpty())
             {
-                ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(
+                ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -95,24 +94,25 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Clear();
+            ТабличніСписки.ШтрихкодиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!НоменклатураВласник.Pointer.IsEmpty())
             {
-                ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(
+                ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
             }
 
             if (!ХарактеристикиНоменклатуриВласник.Pointer.IsEmpty())
             {
-                ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(
+                ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
             }
 
             //Штрихкод
-            ТабличніСписки.ШтрихкодиНоменклатури_Записи.Where.Add(new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.Штрихкод, Comparison.LIKE, searchText));
+            ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, 
+                new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.Штрихкод, Comparison.LIKE, searchText));
 
-            await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords();
+            await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
         protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)

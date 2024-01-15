@@ -33,7 +33,6 @@ namespace StorageAndTrade
 
         public КурсиВалют() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.КурсиВалют_Записи.Store;
             ТабличніСписки.КурсиВалют_Записи.AddColumns(TreeViewGrid);
 
             HBoxTop.PackStart(ВалютаВласник, false, false, 2);
@@ -51,15 +50,15 @@ namespace StorageAndTrade
 
             ТабличніСписки.КурсиВалют_Записи.SelectPointerItem = SelectPointerItem;
 
-            ТабличніСписки.КурсиВалют_Записи.Where.Clear();
+            ТабличніСписки.КурсиВалют_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
             {
-                ТабличніСписки.КурсиВалют_Записи.Where.Add(
+                ТабличніСписки.КурсиВалют_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.КурсиВалют_Записи.LoadRecords();
+            await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.КурсиВалют_Записи.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.SelectPath, TreeViewGrid.Columns[0], false);
@@ -79,16 +78,16 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.КурсиВалют_Записи.Where.Clear();
+            ТабличніСписки.КурсиВалют_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
             {
-                ТабличніСписки.КурсиВалют_Записи.Where.Add(
+                ТабличніСписки.КурсиВалют_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UnigueID.UGuid));
             }
 
             //period
-            ТабличніСписки.КурсиВалют_Записи.Where.Add(
+            ТабличніСписки.КурсиВалют_Записи.ДодатиВідбір(TreeViewGrid,
                 new Where(Comparison.AND, "period", Comparison.LIKE, searchText)
                 {
                     FuncToField = "to_char",
@@ -96,7 +95,7 @@ namespace StorageAndTrade
                 }
             );
 
-            await ТабличніСписки.КурсиВалют_Записи.LoadRecords();
+            await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
         }
 
         protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)

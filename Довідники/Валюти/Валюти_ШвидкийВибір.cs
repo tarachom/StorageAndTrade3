@@ -35,7 +35,6 @@ namespace StorageAndTrade
     {
         public Валюти_ШвидкийВибір() : base()
         {
-            TreeViewGrid.Model = ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Store;
             ТабличніСписки.Валюти_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
@@ -81,9 +80,9 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Валюти_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Clear();
+            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Валюти_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Валюти_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Валюти_ЗаписиШвидкийВибір.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
@@ -98,25 +97,10 @@ namespace StorageAndTrade
 
             searchText = "%" + searchText.Replace(" ", "%") + "%";
 
-            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Clear();
+            //Відбори
+            ТабличніСписки.Валюти_Записи.ДодатиВідбір(TreeViewGrid, Валюти_ВідбориДляПошуку.Відбори(searchText), true);
 
-            //Код
-            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Валюти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Назва
-            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //КороткаНазва
-            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, Валюти_Const.КороткаНазва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            //Код_R030
-            ТабличніСписки.Валюти_ЗаписиШвидкийВибір.Where.Add(
-                new Where(Comparison.OR, Валюти_Const.Код_R030, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
-
-            await ТабличніСписки.Валюти_ЗаписиШвидкийВибір.LoadRecords();
+            await ТабличніСписки.Валюти_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }
