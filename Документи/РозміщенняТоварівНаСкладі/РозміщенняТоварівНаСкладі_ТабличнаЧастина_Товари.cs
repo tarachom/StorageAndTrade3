@@ -174,7 +174,7 @@ namespace StorageAndTrade
             // Func
             //
 
-            ToolButton fillButton = new ToolButton(Stock.Convert) { Label = "Заповнити розміщення", IsImportant = true };
+            ToolButton fillButton = new ToolButton(new Image(Stock.Convert, IconSize.Menu), "Заповнити розміщення") { IsImportant = true };
             fillButton.Clicked += ЗаповнитиРозміщенняНоменклатуриПоКомірках;
             ToolbarTop.Add(fillButton);
         }

@@ -170,7 +170,7 @@ namespace StorageAndTrade
             };
             ToolbarTop.Add(toolItemSeparator);
 
-            ToolButton fillButton = new ToolButton(Stock.Convert) { Label = "Розприділити", IsImportant = true };
+            ToolButton fillButton = new ToolButton(new Image(Stock.Convert, IconSize.Menu), "Розприділити") { IsImportant = true };
             fillButton.Clicked += РозприділитиПоКоміркахВідповідноДоЗалишків;
             ToolbarTop.Add(fillButton);
         }
@@ -706,13 +706,13 @@ HAVING
                     if (ЗалишокВКомірці >= КількістьЯкуПотрібноРозприділити)
                     {
                         КількістьФакт = КількістьЯкуПотрібноРозприділити;
-                        
+
                         запис.Кількість = Math.Round(КількістьЯкуПотрібноРозприділити / запис.КількістьУпаковок, 2);
                         Запис.ПісляЗміни_Кількість(запис);
 
                         запис.Комірка = складськіКомірки_Pointer;
                         await Запис.ПісляЗміни_Комірка(запис);
-                        
+
                         єЗміниВЗаписі = true;
                         break;
                     }

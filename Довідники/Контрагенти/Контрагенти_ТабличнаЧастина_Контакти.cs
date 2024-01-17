@@ -84,11 +84,11 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
+            ToolButton upButton = new ToolButton(new Image(Stock.Add, IconSize.Menu), "Додати") { TooltipText = "Додати" };
             upButton.Clicked += OnAddClick;
             toolbar.Add(upButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
+            ToolButton deleteButton = new ToolButton(new Image(Stock.Delete, IconSize.Menu), "Видалити") { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
         }
