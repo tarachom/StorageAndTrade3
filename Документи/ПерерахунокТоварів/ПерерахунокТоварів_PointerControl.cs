@@ -47,7 +47,7 @@ namespace StorageAndTrade
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПерерахунокТоварів_Const.FULLNAME}", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПерерахунокТоварів_Const.FULLNAME}", () => { return page; });
 
             if (UseWherePeriod)
                 page.SetValue();

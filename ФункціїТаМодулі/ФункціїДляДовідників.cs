@@ -43,7 +43,7 @@ namespace StorageAndTrade
         /// </summary>
         /// <param name="typeDir">Тип</param>
         /// <param name="unigueID">Елемент для позиціонування</param>
-        public static void ВідкритиДовідникВідповідноДоВиду(string typeDir, UnigueID? unigueID, bool insertPage = true)
+        public static void ВідкритиДовідникВідповідноДоВиду(string typeDir, UnigueID? unigueID)
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -78,7 +78,7 @@ namespace StorageAndTrade
                         listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                 }
 
-                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; }, insertPage);
+                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; });
 
                 listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
             }

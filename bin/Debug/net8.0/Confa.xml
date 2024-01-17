@@ -6,8 +6,8 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>15.01.2024 19:02:24</DateTimeSave>
-  <DictTSearch>ukrainian</DictTSearch>
+  <DateTimeSave>16.01.2024 19:39:44</DateTimeSave>
+  <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -4004,7 +4004,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
     </Directory>
     <Directory>
       <Name>БанківськіРахункиОрганізацій</Name>
-      <FullName>Банківські рахунки організацій</FullName>
+      <FullName>Банківські рахунки</FullName>
       <Table>tab_a27</Table>
       <Desc>Банківські рахунки організацій</Desc>
       <AutoNum>0</AutoNum>

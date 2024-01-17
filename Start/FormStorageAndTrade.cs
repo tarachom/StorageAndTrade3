@@ -26,21 +26,18 @@ using Gtk;
 using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
     class FormStorageAndTrade : Window
     {
         public Configurator.ConfigurationParam? OpenConfigurationParam { get; set; }
-        Guid KernelUser { get; set; } = Guid.Empty;
-        Guid KernelSession { get; set; } = Guid.Empty;
 
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
         Statusbar statusBar = new Statusbar();
 
         //Список для збереження історії послідовності відкриття вкладок
-        List<string> historyNotebookSwitchList = new List<string>();
+        List<string> historyNotebookSwitchList = [];
 
         public FormStorageAndTrade() : base("")
         {
@@ -53,19 +50,26 @@ namespace StorageAndTrade
             if (File.Exists(Program.IcoFileName))
                 SetDefaultIconFromFile(Program.IcoFileName);
 
-            HeaderBar headerBar = new HeaderBar()
             {
-                Title = "\"Зберігання та Торгівля\" для України",
-                Subtitle = "Облік складу, торгівлі та фінансів",
-                ShowCloseButton = true
-            };
+                HeaderBar headerBar = new HeaderBar()
+                {
+                    Title = "\"Зберігання та Торгівля\" для України",
+                    Subtitle = "Облік складу, торгівлі та фінансів",
+                    ShowCloseButton = true
+                };
 
-            Titlebar = headerBar;
+                //Повнотекстовий пошук
+                Button buttonFind = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/find.png") };
+                buttonFind.Clicked += OnButtonFindClicked;
+                headerBar.PackStart(buttonFind);
 
-            //Повнотекстовий пошук
-            Button buttonFind = new Button() { { new Image(AppContext.BaseDirectory + "images/find.png") } };
-            buttonFind.Clicked += OnButtonFindClicked;
-            headerBar.PackEnd(buttonFind);
+                //Повідомлення
+                Button buttonTerminal = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/doc.png") };
+                //buttonTerminal.Clicked += OnButtonFindClicked;
+                headerBar.PackEnd(buttonTerminal);
+
+                Titlebar = headerBar;
+            }
 
             VBox vBox = new VBox();
             Add(vBox);
@@ -97,17 +101,14 @@ namespace StorageAndTrade
 
         public async void SetCurrentUser()
         {
-            KernelUser = Config.Kernel.User;
-            KernelSession = Config.Kernel.Session;
-
-            Користувачі_Pointer ЗнайденийКористувач = await new Користувачі_Select().FindByField(Користувачі_Const.КодВСпеціальнійТаблиці, KernelUser);
+            Користувачі_Pointer ЗнайденийКористувач = await new Користувачі_Select().FindByField(Користувачі_Const.КодВСпеціальнійТаблиці, Config.Kernel.User);
 
             if (ЗнайденийКористувач.IsEmpty())
             {
                 Користувачі_Objest НовийКористувач = new Користувачі_Objest
                 {
                     КодВСпеціальнійТаблиці = Config.Kernel.User,
-                    Назва = await Config.Kernel.DataBase.SpetialTableUsersGetFullName(KernelUser)
+                    Назва = await Config.Kernel.DataBase.SpetialTableUsersGetFullName(Config.Kernel.User)
                 };
 
                 await НовийКористувач.New();
@@ -128,28 +129,14 @@ namespace StorageAndTrade
             page.АктивніКористувачі.AutoRefreshRun();
 
             //Останні завантажені курси валют
-            Task.Run(() =>
-            {
-                page.БлокКурсиВалют.StartDesktop();
-            });
+            Task.Run(page.БлокКурсиВалют.StartDesktop);
 
             //Автоматично завантажити нові курси валют
-            Task.Run(() =>
-            {
-                page.БлокКурсиВалют.StartAutoWork();
-            });
+            Task.Run(page.БлокКурсиВалют.StartAutoWork);
 
-            //
-            // Перевірка констант
-            //
-
+            //Початкове заповнення
             if (!ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const)
-            {
-                CreateNotebookPage("Початкове заповнення", () =>
-                {
-                    return new Обробка_ПочатковеЗаповнення();
-                });
-            }
+                CreateNotebookPage("Початкове заповнення", () => { return new Обробка_ПочатковеЗаповнення(); });
         }
 
         #region FullTextSearch
@@ -200,7 +187,7 @@ namespace StorageAndTrade
             LinkButton lb = new LinkButton(name, name)
             {
                 Halign = Align.Start,
-                Image = new Image(AppContext.BaseDirectory + image),
+                Image = new Image($"{AppContext.BaseDirectory}{image}"),
                 AlwaysShowImage = true
             };
 
@@ -212,50 +199,30 @@ namespace StorageAndTrade
 
         void Документи(object? sender, EventArgs args)
         {
-            if (sender != null)
-            {
-                LinkButton lb = (LinkButton)sender;
-
-                Popover po = new Popover(lb) { Position = PositionType.Right };
-                po.Add(new PageDocuments());
-                po.ShowAll();
-            }
+            Popover po = new Popover((LinkButton)sender!) { Position = PositionType.Right };
+            po.Add(new PageDocuments());
+            po.ShowAll();
         }
 
         void Журнали(object? sender, EventArgs args)
         {
-            if (sender != null)
-            {
-                LinkButton lb = (LinkButton)sender;
-
-                Popover po = new Popover(lb) { Position = PositionType.Right };
-                po.Add(new PageJournals());
-                po.ShowAll();
-            }
+            Popover po = new Popover((LinkButton)sender!) { Position = PositionType.Right };
+            po.Add(new PageJournals());
+            po.ShowAll();
         }
 
         void Звіти(object? sender, EventArgs args)
         {
-            if (sender != null)
-            {
-                LinkButton lb = (LinkButton)sender;
-
-                Popover po = new Popover(lb) { Position = PositionType.Right };
-                po.Add(new PageReports());
-                po.ShowAll();
-            }
+            Popover po = new Popover((LinkButton)sender!) { Position = PositionType.Right };
+            po.Add(new PageReports());
+            po.ShowAll();
         }
 
         void Довідники(object? sender, EventArgs args)
         {
-            if (sender != null)
-            {
-                LinkButton lb = (LinkButton)sender;
-
-                Popover po = new Popover(lb) { Position = PositionType.Right };
-                po.Add(new PageDirectory());
-                po.ShowAll();
-            }
+            Popover po = new Popover((LinkButton)sender!) { Position = PositionType.Right };
+            po.Add(new PageDirectory());
+            po.ShowAll();
         }
 
         void Налаштування(object? sender, EventArgs args)

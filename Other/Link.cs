@@ -41,14 +41,14 @@ namespace StorageAndTrade
             if (clickAction != null)
             {
                 LinkButton lb = new LinkButton(name, " " + name);
-                vBox.PackStart(lb, false, false, 10);
+                vBox.PackStart(lb, false, false, 5);
 
                 lb.Clicked += clickAction;
             }
             else
             {
                 Label caption = new Label(name);
-                vBox.PackStart(caption, false, false, 10);
+                vBox.PackStart(caption, false, false, 5);
             }
         }
 
@@ -60,7 +60,7 @@ namespace StorageAndTrade
 
         public static void AddLink(VBox vbox, string uri, System.Action? clickAction = null)
         {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image($"{AppContext.BaseDirectory}images/doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)
@@ -72,7 +72,7 @@ namespace StorageAndTrade
 
         public static void AddLink(HBox hbox, string uri, System.Action? clickAction = null)
         {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image($"{AppContext.BaseDirectory}images/doc.png"), AlwaysShowImage = true };
             hbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)

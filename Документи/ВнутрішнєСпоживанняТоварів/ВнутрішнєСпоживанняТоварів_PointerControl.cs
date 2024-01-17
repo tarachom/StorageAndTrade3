@@ -63,7 +63,7 @@ namespace StorageAndTrade
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; });
 
             if (UseWherePeriod)
                 page.SetValue();

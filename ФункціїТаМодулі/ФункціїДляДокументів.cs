@@ -54,7 +54,7 @@ namespace StorageAndTrade
         /// <param name="unigueID">Елемент для позиціювання</param>
         /// <param name="periodWhere">Період</param>
         /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0, bool insertPage = true)
+        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0)
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -89,7 +89,7 @@ namespace StorageAndTrade
                         listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                 }
 
-                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; }, insertPage);
+                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; });
 
                 listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere != 0 ? periodWhere : Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод);
                 listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);

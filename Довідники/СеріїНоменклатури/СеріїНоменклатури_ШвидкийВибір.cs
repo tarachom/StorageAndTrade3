@@ -47,7 +47,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СеріїНоменклатури_Const.FULLNAME}", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СеріїНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     await page.LoadRecords();
                 };
@@ -66,7 +66,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME} *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME} *", () => { return page; });
 
                     page.SetValue();
                 };

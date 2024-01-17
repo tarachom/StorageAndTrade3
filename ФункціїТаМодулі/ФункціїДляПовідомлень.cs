@@ -81,7 +81,7 @@ ORDER BY Дата DESC
         public static async void ВідкритиТермінал()
         {
             СпільніФорми_ВивідПовідомленняПроПомилки page = new СпільніФорми_ВивідПовідомленняПроПомилки();
-            Program.GeneralForm?.CreateNotebookPage("Повідомлення", () => { return page; }, true);
+            Program.GeneralForm?.CreateNotebookPage("Повідомлення", () => { return page; });
 
             await page.LoadRecords();
         }

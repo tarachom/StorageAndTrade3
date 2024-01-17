@@ -52,7 +52,7 @@ namespace StorageAndTrade
 
                     page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник.Pointer;
 
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СкладськіКомірки_Const.FULLNAME}", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СкладськіКомірки_Const.FULLNAME}", () => { return page; });
 
                     await page.LoadRecords();
                 };
@@ -71,7 +71,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME} *", () => { return page; }, true);
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME} *", () => { return page; });
 
                     page.SetValue();
                 };

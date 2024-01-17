@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 15.01.2024 19:02:24
+ * Дата конфігурації: 16.01.2024 19:39:44
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -7103,7 +7103,7 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public const string TABLE = "tab_a27";
         public const string POINTER = "Довідники.БанківськіРахункиОрганізацій"; /* Повна назва вказівника */
-        public const string FULLNAME = "Банківські рахунки організацій"; /* Повна назва об'єкта */
+        public const string FULLNAME = "Банківські рахунки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
         
         public const string Назва = "col_l1";

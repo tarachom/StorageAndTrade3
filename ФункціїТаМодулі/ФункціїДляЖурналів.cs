@@ -46,7 +46,7 @@ namespace StorageAndTrade
         /// <param name="unigueID">Елемент для позиціювання</param>
         /// <param name="periodWhere">Період</param>
         /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиЖурналВідповідноДоВиду(string typeJournal, UnigueID? unigueID, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0, bool insertPage = true)
+        public static void ВідкритиЖурналВідповідноДоВиду(string typeJournal, UnigueID? unigueID, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0)
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -70,7 +70,7 @@ namespace StorageAndTrade
                 //Документ який потрібно виділити в списку
                 listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
 
-                Program.GeneralForm?.CreateNotebookPage(typeJournal, () => { return (Widget)listPage; }, insertPage);
+                Program.GeneralForm?.CreateNotebookPage(typeJournal, () => { return (Widget)listPage; });
 
                 if (periodWhere != 0)
                     listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);

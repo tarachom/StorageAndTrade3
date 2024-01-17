@@ -45,7 +45,7 @@ namespace StorageAndTrade
                         КурсиВалют page = new КурсиВалют();
                         page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem!);
 
-                        Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; }, true);
+                        Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; });
                         page.LoadRecords();
                     }
                 };
@@ -61,7 +61,7 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
                     {
                         return new Обробка_ЗавантаженняКурсівВалют();
-                    }, true);
+                    });
                 };
 
                 HBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
@@ -120,7 +120,7 @@ namespace StorageAndTrade
                     page.SetValue();
 
                     return page;
-                }, true);
+                });
             }
             else if (unigueID != null)
             {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                         page.SetValue();
 
                         return page;
-                    }, true);
+                    });
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

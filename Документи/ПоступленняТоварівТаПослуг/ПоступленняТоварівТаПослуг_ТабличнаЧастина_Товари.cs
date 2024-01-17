@@ -707,7 +707,7 @@ LIMIT 1
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення постачальнику", () => { return page; }, true);
+                        Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення постачальнику", () => { return page; });
 
                         page.LoadRecords();
 

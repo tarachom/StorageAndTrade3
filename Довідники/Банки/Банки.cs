@@ -43,7 +43,7 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage("Завантаження списку Банків", () =>
                     {
                         return new Обробка_ЗавантаженняБанків();
-                    }, true);
+                    });
                 };
 
                 HBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
@@ -100,7 +100,7 @@ namespace StorageAndTrade
                     page.SetValue();
 
                     return page;
-                }, true);
+                });
             }
             else if (unigueID != null)
             {
@@ -119,7 +119,7 @@ namespace StorageAndTrade
                         page.SetValue();
 
                         return page;
-                    }, true);
+                    });
                 }
                 else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

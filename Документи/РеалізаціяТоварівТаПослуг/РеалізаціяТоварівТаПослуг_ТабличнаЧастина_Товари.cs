@@ -743,7 +743,7 @@ LIMIT 1
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        Program.GeneralForm?.CreateNotebookPage($"Вибір - {ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; }, true);
+                        Program.GeneralForm?.CreateNotebookPage($"Вибір - {ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; });
 
                         page.LoadRecords();
 
@@ -759,7 +759,7 @@ LIMIT 1
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        Program.GeneralForm?.CreateNotebookPage($"Вибір - {РахунокФактура_Const.FULLNAME}", () => { return page; }, true);
+                        Program.GeneralForm?.CreateNotebookPage($"Вибір - {РахунокФактура_Const.FULLNAME}", () => { return page; });
 
                         page.LoadRecords();
 

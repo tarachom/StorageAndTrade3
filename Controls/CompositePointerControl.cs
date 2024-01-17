@@ -157,7 +157,7 @@ namespace StorageAndTrade
                             listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                     }
 
-                    Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; }, true);
+                    Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; });
 
                     if (PointerName == "Документи")
                         listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);

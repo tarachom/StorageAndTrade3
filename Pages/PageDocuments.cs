@@ -42,29 +42,29 @@ namespace StorageAndTrade
         {
             //Всі Документи
             {
-                HBox hBoxAll = new HBox(false, 0);
-                PackStart(hBoxAll, false, false, 10);
+                HBox hBox = new HBox(false, 0);
+                PackStart(hBox, false, false, 10);
 
-                Expander expanderAll = new Expander("Всі документи");
-                hBoxAll.PackStart(expanderAll, false, false, 5);
+                Expander expander = new Expander("Всі документи");
+                hBox.PackStart(expander, false, false, 5);
 
-                VBox vBoxAll = new VBox(false, 0);
-                expanderAll.Add(vBoxAll);
+                VBox vBox = new VBox(false, 0);
+                expander.Add(vBox);
 
-                vBoxAll.PackStart(new Label("Документи"), false, false, 2);
+                vBox.PackStart(new Label("Документи"), false, false, 2);
 
                 ListBox listBox = new ListBox();
                 listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
                 {
                     if (args.Event.Type == Gdk.EventType.DoubleButtonPress && listBox.SelectedRows.Length != 0)
-                        ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(listBox.SelectedRows[0].Name, new UnigueID(), 0, false);
+                        ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(listBox.SelectedRows[0].Name, new UnigueID(), 0);
                 };
 
                 ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 300, ShadowType = ShadowType.In };
                 scrollList.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
                 scrollList.Add(listBox);
 
-                vBoxAll.PackStart(scrollList, false, false, 2);
+                vBox.PackStart(scrollList, false, false, 2);
 
                 foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel.Conf.Documents)
                 {
@@ -239,6 +239,7 @@ namespace StorageAndTrade
                 });
             }
 
+            /*
             Link.AddCaption(vRight, "Налаштування адресного зберігання");
             {
                 Link.AddLink(vRight, $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () =>
@@ -248,6 +249,7 @@ namespace StorageAndTrade
                     page.SetValue();
                 });
             }
+            */
 
             PackStart(hBoxList, false, false, 10);
             ShowAll();

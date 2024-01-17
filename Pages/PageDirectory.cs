@@ -43,29 +43,29 @@ namespace StorageAndTrade
         {
             //Всі Довідники
             {
-                HBox hBoxAll = new HBox(false, 0);
-                PackStart(hBoxAll, false, false, 10);
+                HBox hBox = new HBox(false, 0);
+                PackStart(hBox, false, false, 10);
 
-                Expander expanderAll = new Expander("Всі довідники");
-                hBoxAll.PackStart(expanderAll, false, false, 5);
+                Expander expander = new Expander("Всі довідники");
+                hBox.PackStart(expander, false, false, 5);
 
-                VBox vBoxAll = new VBox(false, 0);
-                expanderAll.Add(vBoxAll);
+                VBox vBox = new VBox(false, 0);
+                expander.Add(vBox);
 
-                vBoxAll.PackStart(new Label("Довідники"), false, false, 2);
+                vBox.PackStart(new Label("Довідники"), false, false, 2);
 
                 ListBox listBox = new ListBox();
                 listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
                 {
                     if (args.Event.Type == Gdk.EventType.DoubleButtonPress && listBox.SelectedRows.Length != 0)
-                        ФункціїДляДовідників.ВідкритиДовідникВідповідноДоВиду(listBox.SelectedRows[0].Name, null, false);
+                        ФункціїДляДовідників.ВідкритиДовідникВідповідноДоВиду(listBox.SelectedRows[0].Name, null);
                 };
 
                 ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 300, ShadowType = ShadowType.In };
                 scrollList.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
                 scrollList.Add(listBox);
 
-                vBoxAll.PackStart(scrollList, false, false, 2);
+                vBox.PackStart(scrollList, false, false, 2);
 
                 foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel.Conf.Directories)
                 {
@@ -85,347 +85,237 @@ namespace StorageAndTrade
             VBox vLeft = new VBox(false, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            Link.AddCaption(vLeft, "Підприємство");
+            //Link.AddCaption(vLeft, "Основні");
             {
-                Link.AddLink(vLeft, $"{Організації_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{Контрагенти_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Організації_Const.FULLNAME}", () =>
-                    {
-                        Організації page = new Організації();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Контрагенти page = new Контрагенти();
+                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{Склади_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{Номенклатура_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME}", () =>
-                    {
-                        Склади page = new Склади();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Номенклатура page = new Номенклатура();
+                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{Валюти_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{Організації_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () =>
-                    {
-                        Валюти page = new Валюти();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Організації page = new Організації();
+                    Program.GeneralForm?.CreateNotebookPage($"{Організації_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{Каси_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{Склади_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Каси_Const.FULLNAME}", () =>
-                    {
-                        Каси page = new Каси();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Склади page = new Склади();
+                    Program.GeneralForm?.CreateNotebookPage($"{Склади_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{ВидиЦін_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{Валюти_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦін_Const.FULLNAME}", () =>
-                    {
-                        ВидиЦін page = new ВидиЦін();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Валюти page = new Валюти();
+                    Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{ВидиЦінПостачальників_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{Каси_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Const.FULLNAME}", () =>
-                    {
-                        ВидиЦінПостачальників page = new ВидиЦінПостачальників();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Каси page = new Каси();
+                    Program.GeneralForm?.CreateNotebookPage($"{Каси_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{БанківськіРахункиОрганізацій_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{Блокнот_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиОрганізацій_Const.FULLNAME}", () =>
-                    {
-                        БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Блокнот page = new Блокнот();
+                    Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{СтруктураПідприємства_Const.FULLNAME}", () =>
+                /*
+                Link.AddLink(vLeft, $"{ВидиЦін_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{СтруктураПідприємства_Const.FULLNAME}", () =>
-                    {
-                        СтруктураПідприємства page = new СтруктураПідприємства();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    ВидиЦін page = new ВидиЦін();
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦін_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
+
+                Link.AddLink(vLeft, $"{ВидиЦінПостачальників_Const.FULLNAME}", async () =>
+                {
+                    ВидиЦінПостачальників page = new ВидиЦінПостачальників();
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
+                });
+                
+                Link.AddLink(vLeft, $"{БанківськіРахункиОрганізацій_Const.FULLNAME}", async () =>
+                {
+                    БанківськіРахункиОрганізацій page = new БанківськіРахункиОрганізацій();
+                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиОрганізацій_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
+                });
+
+                Link.AddLink(vLeft, $"{СтруктураПідприємства_Const.FULLNAME}", async () =>
+                {
+                    СтруктураПідприємства page = new СтруктураПідприємства();
+                    Program.GeneralForm?.CreateNotebookPage($"{СтруктураПідприємства_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
+                });
+                */
             }
 
-            Link.AddCaption(vLeft, "Додаткові");
+            //Link.AddSeparator(hBoxList);
+
+            //VBox vRight = new VBox(false, 0);
+            //hBoxList.PackStart(vRight, false, false, 5);
+
+            /*Link.AddCaption(vRight, "Партнери");
             {
-                Link.AddLink(vLeft, $"{Банки_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ДоговориКонтрагентів_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Банки_Const.FULLNAME}", () =>
-                    {
-                        Банки page = new Банки();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    ДоговориКонтрагентів page = new ДоговориКонтрагентів();
+                    Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
+                });
+                
+                Link.AddLink(vRight, $"{БанківськіРахункиКонтрагентів_Const.FULLNAME}", async () =>
+                {
+                    БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
+                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
+                });
+            }*/
+
+            /*Link.AddCaption(vRight, "Товари та послуги");
+            {
+                Link.AddLink(vRight, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", async () =>
+                {
+                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{Користувачі_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ПакуванняОдиниціВиміру_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Const.FULLNAME}", () =>
-                    {
-                        Користувачі page = new Користувачі();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () => {return page; });
+                    await page.LoadRecords();
+                });
+                
+
+                Link.AddLink(vRight, $"{ВидиНоменклатури_Const.FULLNAME}", async () =>
+                {
+                    ВидиНоменклатури page = new ВидиНоменклатури();
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
+                });
+                
+                Link.AddLink(vRight, $"{ПартіяТоварівКомпозит_Const.FULLNAME}", async () =>
+                {
+                    ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
+                    Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Const.FULLNAME}", () => {return page;});
+                    await page.LoadRecords();
+                });
+                
+                Link.AddLink(vRight, $"{СеріїНоменклатури_Const.FULLNAME}", async () =>
+                {
+                    СеріїНоменклатури page = new СеріїНоменклатури();
+                    Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vLeft, $"{ФізичніОсоби_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{Виробники_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ФізичніОсоби_Const.FULLNAME}", () =>
-                    {
-                        ФізичніОсоби page = new ФізичніОсоби();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vLeft, $"{Файли_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{Файли_Const.FULLNAME}", () =>
-                    {
-                        Файли page = new Файли();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vLeft, $"{СтаттяРухуКоштів_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{СтаттяРухуКоштів_Const.FULLNAME}", () =>
-                    {
-                        СтаттяРухуКоштів page = new СтаттяРухуКоштів();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vLeft, $"{ВидиЗапасів_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Const.FULLNAME}", () =>
-                    {
-                        ВидиЗапасів page = new ВидиЗапасів();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vLeft, $"{КраїниСвіту_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Const.FULLNAME}", () =>
-                    {
-                        КраїниСвіту page = new КраїниСвіту();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Виробники page = new Виробники();
+                    Program.GeneralForm?.CreateNotebookPage($"{Виробники_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
             }
+            */
 
-            Link.AddSeparator(hBoxList);
-
-            VBox vRight = new VBox(false, 0);
-            hBoxList.PackStart(vRight, false, false, 5);
-
-            Link.AddCaption(vRight, "Партнери");
-            {
-                Link.AddLink(vRight, $"{Контрагенти_Const.FULLNAME}", () =>
+            //Link.AddCaption(vRight, "Додаткові");
+            //{
+                /*
+                Link.AddLink(vRight, $"{Банки_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME}", () =>
-                    {
-                        Контрагенти page = new Контрагенти();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Банки page = new Банки();
+                    Program.GeneralForm?.CreateNotebookPage($"{Банки_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vRight, $"{ДоговориКонтрагентів_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{Користувачі_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () =>
-                    {
-                        ДоговориКонтрагентів page = new ДоговориКонтрагентів();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Користувачі page = new Користувачі();
+                    Program.GeneralForm?.CreateNotebookPage($"{Користувачі_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vRight, $"{БанківськіРахункиКонтрагентів_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ФізичніОсоби_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Const.FULLNAME}", () =>
-                    {
-                        БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    ФізичніОсоби page = new ФізичніОсоби();
+                    Program.GeneralForm?.CreateNotebookPage($"{ФізичніОсоби_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
-            }
-
-            Link.AddCaption(vRight, "Товари та послуги");
-            {
-                Link.AddLink(vRight, $"{Номенклатура_Const.FULLNAME}", () =>
+                
+                Link.AddLink(vLeft, $"{Файли_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME}", () =>
-                    {
-                        Номенклатура page = new Номенклатура();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    Файли page = new Файли();
+                    Program.GeneralForm?.CreateNotebookPage($"{Файли_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vRight, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{СтаттяРухуКоштів_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () =>
-                    {
-                        ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    СтаттяРухуКоштів page = new СтаттяРухуКоштів();
+                    Program.GeneralForm?.CreateNotebookPage($"{СтаттяРухуКоштів_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vRight, $"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ВидиЗапасів_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ПакуванняОдиниціВиміру_Const.FULLNAME}", () =>
-                    {
-                        ПакуванняОдиниціВиміру page = new ПакуванняОдиниціВиміру();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    ВидиЗапасів page = new ВидиЗапасів();
+                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЗапасів_Const.FULLNAME}", () => { return page;s });
+                    await page.LoadRecords();
+                });
+                
+                Link.AddLink(vLeft, $"{КраїниСвіту_Const.FULLNAME}", async () =>
+                {
+                    КраїниСвіту page = new КраїниСвіту();
+                    Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
+                });
+                */
+            //}
+
+            //Link.AddCaption(vRight, "Адресне зберігання");
+            //{
+                /*
+                Link.AddLink(vRight, $"{СкладськіПриміщення_Const.FULLNAME}", async () =>
+                {
+                    СкладськіПриміщення page = new СкладськіПриміщення();
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vRight, $"{ВидиНоменклатури_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{СкладськіКомірки_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ВидиНоменклатури_Const.FULLNAME}", () =>
-                    {
-                        ВидиНоменклатури page = new ВидиНоменклатури();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    СкладськіКомірки page = new СкладськіКомірки();
+                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
 
-                Link.AddLink(vRight, $"{ПартіяТоварівКомпозит_Const.FULLNAME}", () =>
+               
+                Link.AddLink(vRight, $"{ТипорозміриКомірок_Const.FULLNAME}", async () =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Const.FULLNAME}", () =>
-                    {
-                        ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
+                    ТипорозміриКомірок page = new ТипорозміриКомірок();
+                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME}", () => { return page; });
+                    await page.LoadRecords();
                 });
-
-                Link.AddLink(vRight, $"{СеріїНоменклатури_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{СеріїНоменклатури_Const.FULLNAME}", () =>
-                    {
-                        СеріїНоменклатури page = new СеріїНоменклатури();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vRight, $"{Виробники_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{Виробники_Const.FULLNAME}", () =>
-                    {
-                        Виробники page = new Виробники();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-            }
-
-            Link.AddCaption(vRight, "Внутрішні");
-            {
-                Link.AddLink(vRight, $"{Блокнот_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME}", () =>
-                    {
-                        Блокнот page = new Блокнот();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-            }
-
-            Link.AddCaption(vRight, "Адресне зберігання");
-            {
-                Link.AddLink(vRight, $"{СкладськіПриміщення_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіПриміщення_Const.FULLNAME}", () =>
-                    {
-                        СкладськіПриміщення page = new СкладськіПриміщення();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vRight, $"{СкладськіКомірки_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Const.FULLNAME}", () =>
-                    {
-                        СкладськіКомірки page = new СкладськіКомірки();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-
-                Link.AddLink(vRight, $"{ТипорозміриКомірок_Const.FULLNAME}", () =>
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME}", () =>
-                    {
-                        ТипорозміриКомірок page = new ТипорозміриКомірок();
-                        System.Action asyncFunc = async () => { await page.LoadRecords(); };
-                        asyncFunc.Invoke();
-                        return page;
-                    });
-                });
-            }
+                */
+            //}
 
             ShowAll();
         }
