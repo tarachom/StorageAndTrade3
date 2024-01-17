@@ -129,23 +129,23 @@ namespace StorageAndTrade
         {
             PackStart(ToolbarTop, false, false, 0);
 
-            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
+            ToolButton addButton = new ToolButton(new Image(Stock.Add, IconSize.Menu), "Додати") { TooltipText = "Додати" };
             addButton.Clicked += OnAddClick;
             ToolbarTop.Add(addButton);
 
-            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
+            ToolButton upButton = new ToolButton(new Image(Stock.Edit, IconSize.Menu), "Редагувати") { TooltipText = "Редагувати" };
             upButton.Clicked += OnEditClick;
             ToolbarTop.Add(upButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
+            ToolButton copyButton = new ToolButton(new Image(Stock.Copy, IconSize.Menu), "Копіювати") { TooltipText = "Копіювати" };
             copyButton.Clicked += OnCopyClick;
             ToolbarTop.Add(copyButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
+            ToolButton deleteButton = new ToolButton(new Image(Stock.Delete, IconSize.Menu), "Видалити") { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             ToolbarTop.Add(deleteButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
+            ToolButton refreshButton = new ToolButton(new Image(Stock.Refresh, IconSize.Menu), "Обновити") { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             ToolbarTop.Add(refreshButton);
 
@@ -156,7 +156,7 @@ namespace StorageAndTrade
             };
             ToolbarTop.Add(toolItemSeparator);
 
-            MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
+            MenuToolButton provodkyButton = new MenuToolButton(new Image(Stock.Find, IconSize.Menu), "Проводки") { IsImportant = true };
             provodkyButton.Clicked += OnReportSpendTheDocumentClick;
             provodkyButton.Menu = ToolbarProvodkySubMenu();
             ToolbarTop.Add(provodkyButton);
@@ -164,19 +164,19 @@ namespace StorageAndTrade
             Menu? menuItem = ToolbarNaOsnoviSubMenu();
             if (menuItem != null)
             {
-                MenuToolButton naOsnoviButton = new MenuToolButton(Stock.New) { Label = "Ввести на основі", IsImportant = true };
+                MenuToolButton naOsnoviButton = new MenuToolButton(new Image(Stock.New, IconSize.Menu), "Ввести на основі") { IsImportant = true };
                 naOsnoviButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)sender!).Menu).Popup(); };
                 naOsnoviButton.Menu = menuItem;
                 ToolbarTop.Add(naOsnoviButton);
             }
 
-            MenuToolButton printingButton = new MenuToolButton(Stock.Print) { TooltipText = "Друк" };
+            MenuToolButton printingButton = new MenuToolButton(new Image(Stock.Print, IconSize.Menu), "Друк") { IsImportant = true };
             printingButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)sender!).Menu).Popup(); };
             printingButton.Menu = ToolbarPrintingSubMenu();
             ToolbarTop.Add(printingButton);
 
             //Експорт
-            MenuToolButton exportButton = new MenuToolButton(Stock.Convert) { Label = "Експорт", IsImportant = true };
+            MenuToolButton exportButton = new MenuToolButton(new Image(Stock.Convert, IconSize.Menu), "Експорт") { IsImportant = true };
             exportButton.Clicked += (object? sender, EventArgs arg) => { ((Menu)((MenuToolButton)sender!).Menu).Popup(); };
             exportButton.Menu = ToolbarExportSubMenu();
             ToolbarTop.Add(exportButton);

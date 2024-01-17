@@ -65,15 +65,15 @@ namespace StorageAndTrade
         {
             PackStart(ToolbarTop, false, false, 0);
 
-            ToolButton upButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
+            ToolButton upButton = new ToolButton(new Image(Stock.Add, IconSize.Menu), "Додати") { TooltipText = "Додати" };
             upButton.Clicked += OnAddClick;
             ToolbarTop.Add(upButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
+            ToolButton copyButton = new ToolButton(new Image(Stock.Copy, IconSize.Menu), "Копіювати") { TooltipText = "Копіювати" };
             copyButton.Clicked += OnCopyClick;
             ToolbarTop.Add(copyButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
+            ToolButton deleteButton = new ToolButton(new Image(Stock.Delete, IconSize.Menu), "Видалити") { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             ToolbarTop.Add(deleteButton);
         }

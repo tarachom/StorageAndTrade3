@@ -138,11 +138,11 @@ namespace StorageAndTrade
             
             ToolbarTop.Add(toolItemSeparator);
 
-            ToolButton fillDirectoryButton = new ToolButton(Stock.Add) { Label = "Заповнити товарами", IsImportant = true };
+            ToolButton fillDirectoryButton = new ToolButton(new Image(Stock.Add, IconSize.Menu), "Заповнити товарами") { IsImportant = true };
             fillDirectoryButton.Clicked += OnFillDirectory;
             ToolbarTop.Add(fillDirectoryButton);
 
-            ToolButton fillRegisterButton = new ToolButton(Stock.Add) { Label = "Заповнити товарами з цінами", IsImportant = true };
+            ToolButton fillRegisterButton = new ToolButton(new Image(Stock.Add, IconSize.Menu), "Заповнити товарами з цінами") { IsImportant = true };
             fillRegisterButton.Clicked += OnFillRegister;
             ToolbarTop.Add(fillRegisterButton);
         }

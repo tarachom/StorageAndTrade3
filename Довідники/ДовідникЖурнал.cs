@@ -116,23 +116,23 @@ namespace StorageAndTrade
         {
             PackStart(ToolbarTop, false, false, 0);
 
-            ToolButton addButton = new ToolButton(Stock.Add) { TooltipText = "Додати" };
+            ToolButton addButton = new ToolButton(new Image(Stock.Add, IconSize.Menu), "Додати") { TooltipText = "Додати" };
             addButton.Clicked += OnAddClick;
             ToolbarTop.Add(addButton);
 
-            ToolButton upButton = new ToolButton(Stock.Edit) { TooltipText = "Редагувати" };
+            ToolButton upButton = new ToolButton(new Image(Stock.Edit, IconSize.Menu), "Редагувати") { TooltipText = "Редагувати" };
             upButton.Clicked += OnEditClick;
             ToolbarTop.Add(upButton);
 
-            ToolButton copyButton = new ToolButton(Stock.Copy) { TooltipText = "Копіювати" };
+            ToolButton copyButton = new ToolButton(new Image(Stock.Copy, IconSize.Menu), "Копіювати") { TooltipText = "Копіювати" };
             copyButton.Clicked += OnCopyClick;
             ToolbarTop.Add(copyButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
+            ToolButton deleteButton = new ToolButton(new Image(Stock.Delete, IconSize.Menu), "Видалити") { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             ToolbarTop.Add(deleteButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
+            ToolButton refreshButton = new ToolButton(new Image(Stock.Refresh, IconSize.Menu), "Обновити") { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             ToolbarTop.Add(refreshButton);
         }

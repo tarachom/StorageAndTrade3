@@ -91,15 +91,15 @@ namespace StorageAndTrade
             Toolbar toolbar = new Toolbar();
             PackStart(toolbar, false, false, 0);
 
-            ToolButton findButton = new ToolButton(Stock.GoUp) { TooltipText = "Знайти в журналі" };
+            ToolButton findButton = new ToolButton(new Image(Stock.GoUp, IconSize.Menu), "Знайти в журналі") { TooltipText = "Знайти в журналі" };
             findButton.Clicked += OFindClick;
             toolbar.Add(findButton);
 
-            ToolButton refreshButton = new ToolButton(Stock.Refresh) { TooltipText = "Обновити" };
+            ToolButton refreshButton = new ToolButton(new Image(Stock.Refresh, IconSize.Menu), "Обновити") { TooltipText = "Обновити" };
             refreshButton.Clicked += OnRefreshClick;
             toolbar.Add(refreshButton);
 
-            ToolButton deleteButton = new ToolButton(Stock.Delete) { TooltipText = "Видалити" };
+            ToolButton deleteButton = new ToolButton(new Image(Stock.Delete, IconSize.Menu), "Видалити") { TooltipText = "Видалити" };
             deleteButton.Clicked += OnDeleteClick;
             toolbar.Add(deleteButton);
 
@@ -107,11 +107,11 @@ namespace StorageAndTrade
             ToolItem toolItemSeparator = new ToolItem { new Separator(Orientation.Horizontal) };
             toolbar.Add(toolItemSeparator);
 
-            TypeDocToolButton = new ToolButton(Stock.Index) { Label = "Документи", IsImportant = true };
+            TypeDocToolButton = new ToolButton(new Image(Stock.Index, IconSize.Menu), "Документи") { IsImportant = true };
             TypeDocToolButton.Clicked += OnTypeDocsClick;
             toolbar.Add(TypeDocToolButton);
 
-            MenuToolButton provodkyButton = new MenuToolButton(Stock.Find) { Label = "Проводки", IsImportant = true };
+            MenuToolButton provodkyButton = new MenuToolButton(new Image(Stock.Find, IconSize.Menu), "Проводки") { IsImportant = true };
             provodkyButton.Clicked += OnReportSpendTheDocumentClick;
             provodkyButton.Menu = ToolbarProvodkySubMenu();
             toolbar.Add(provodkyButton);

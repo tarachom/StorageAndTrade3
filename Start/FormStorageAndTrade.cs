@@ -58,12 +58,12 @@ namespace StorageAndTrade
                 };
 
                 //Повідомлення
-                Button buttonTerminal = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/doc.png"), TooltipText = "Повідомлення" };
+                Button buttonTerminal = new Button() { Image = new Image(Stock.Index, IconSize.Button), TooltipText = "Повідомлення" };
                 buttonTerminal.Clicked += (object? sender, EventArgs args) => { ФункціїДляПовідомлень.ВідкритиТермінал(); };
                 headerBar.PackEnd(buttonTerminal);
 
                 //Повнотекстовий пошук
-                Button buttonFind = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/find.png"), TooltipText = "Пошук" };
+                Button buttonFind = new Button() { Image = new Image(Stock.Find, IconSize.Button), TooltipText = "Пошук" };
                 buttonFind.Clicked += OnButtonFindClicked;
                 headerBar.PackEnd(buttonFind);
 
