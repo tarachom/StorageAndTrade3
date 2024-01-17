@@ -403,6 +403,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
 {
     public static class Config
     {
+        #region Const
+
+        //Простір імен згенерованого коду
+        public const string NameSpageCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGenerationCode"/>";
+
+        //Простір імен програми
+        public const string NameSpageProgram = "<xsl:value-of select="Configuration/NameSpace"/>";
+
+        #endregion
+        
         public static Kernel Kernel { get; set; } = new Kernel();
         public static async void StartBackgroundTask()
         {

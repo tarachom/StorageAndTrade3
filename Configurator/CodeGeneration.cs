@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.01.2024 19:39:44
+ * Дата конфігурації: 17.01.2024 14:41:37
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -40,6 +40,16 @@ namespace StorageAndTrade_1_0
 {
     public static class Config
     {
+        #region Const
+
+        //Простір імен згенерованого коду
+        public const string NameSpageCodeGeneration = "StorageAndTrade_1_0";
+
+        //Простір імен програми
+        public const string NameSpageProgram = "StorageAndTrade";
+
+        #endregion
+        
         public static Kernel Kernel { get; set; } = new Kernel();
         public static async void StartBackgroundTask()
         {

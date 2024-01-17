@@ -34,7 +34,7 @@ using Gtk;
 using System.Reflection;
 
 using AccountingSoftware;
-using Конфа = StorageAndTrade_1_0;
+using StorageAndTrade_1_0;
 using Довідники = StorageAndTrade_1_0.Довідники;
 using Документи = StorageAndTrade_1_0.Документи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
@@ -58,17 +58,11 @@ namespace StorageAndTrade
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
-            //Простір імен програми
-            string NameSpacePage = "StorageAndTrade";
-
-            //Простір імен конфігурації
-            string NameSpaceConfig = "StorageAndTrade_1_0.Документи";
-
             object? listPage;
 
             try
             {
-                listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.{typeDoc}");
+                listPage = ExecutingAssembly.CreateInstance($"{Config.NameSpageProgram}.{typeDoc}");
             }
             catch (Exception ex)
             {
@@ -84,7 +78,7 @@ namespace StorageAndTrade
                 //Заголовок журналу з константи конфігурації
                 string listName = "Список документів";
                 {
-                    Type? documentConst = Type.GetType($"{NameSpaceConfig}.{typeDoc}_Const");
+                    Type? documentConst = Type.GetType($"{Config.NameSpageCodeGeneration}.Документи.{typeDoc}_Const");
                     if (documentConst != null)
                         listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                 }
@@ -220,7 +214,7 @@ LIMIT 1
                 { "date_curs", new DateTime(ДатаКурсу.Year, ДатаКурсу.Month, ДатаКурсу.Day, 23, 59, 59) }
             };
 
-            var recordResult = await Конфа.Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
             if (recordResult.Result)
             {
                 Dictionary<string, object> Рядок = recordResult.ListRow[0];

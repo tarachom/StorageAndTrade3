@@ -33,6 +33,7 @@ using System.Reflection;
 
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
@@ -50,14 +51,11 @@ namespace StorageAndTrade
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
-            //Простір імен програми
-            string NameSpacePage = "StorageAndTrade";
-
             object? listPage;
 
             try
             {
-                listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.Журнал_{typeJournal}");
+                listPage = ExecutingAssembly.CreateInstance($"{Config.NameSpageProgram}.Журнал_{typeJournal}");
             }
             catch (Exception ex)
             {

@@ -29,6 +29,7 @@ using AccountingSoftware;
 using Довідники = StorageAndTrade_1_0.Довідники;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 using Константи = StorageAndTrade_1_0.Константи;
+using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -47,17 +48,11 @@ namespace StorageAndTrade
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
-            //Простір імен програми
-            string NameSpacePage = "StorageAndTrade";
-
-            //Простір імен конфігурації
-            string NameSpaceConfig = "StorageAndTrade_1_0.Довідники";
-
             object? listPage;
 
             try
             {
-                listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.{typeDir}");
+                listPage = ExecutingAssembly.CreateInstance($"{Config.NameSpageProgram}.{typeDir}");
             }
             catch (Exception ex)
             {
@@ -73,7 +68,7 @@ namespace StorageAndTrade
                 //Заголовок журналу з константи конфігурації
                 string listName = "Список документів";
                 {
-                    Type? documentConst = Type.GetType($"{NameSpaceConfig}.{typeDir}_Const");
+                    Type? documentConst = Type.GetType($"{Config.NameSpageCodeGeneration}.Довідники.{typeDir}_Const");
                     if (documentConst != null)
                         listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                 }
