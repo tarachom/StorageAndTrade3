@@ -35,9 +35,7 @@ namespace StorageAndTrade
 
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
         Statusbar statusBar = new Statusbar();
-
-        //Список для збереження історії послідовності відкриття вкладок
-        List<string> historyNotebookSwitchList = [];
+        List<string> historyNotebookSwitchList = []; //Список для збереження історії послідовності відкриття вкладок
 
         public FormStorageAndTrade() : base("")
         {
@@ -50,6 +48,7 @@ namespace StorageAndTrade
             if (File.Exists(Program.IcoFileName))
                 SetDefaultIconFromFile(Program.IcoFileName);
 
+            //Блок кнопок у шапці головного вікна
             {
                 HeaderBar headerBar = new HeaderBar()
                 {
@@ -58,15 +57,15 @@ namespace StorageAndTrade
                     ShowCloseButton = true
                 };
 
-                //Повнотекстовий пошук
-                Button buttonFind = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/find.png") };
-                buttonFind.Clicked += OnButtonFindClicked;
-                headerBar.PackStart(buttonFind);
-
                 //Повідомлення
-                Button buttonTerminal = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/doc.png") };
-                //buttonTerminal.Clicked += OnButtonFindClicked;
+                Button buttonTerminal = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/doc.png"), TooltipText = "Повідомлення" };
+                buttonTerminal.Clicked += (object? sender, EventArgs args) => { ФункціїДляПовідомлень.ВідкритиТермінал(); };
                 headerBar.PackEnd(buttonTerminal);
+
+                //Повнотекстовий пошук
+                Button buttonFind = new Button() { Image = new Image($"{AppContext.BaseDirectory}images/find.png"), TooltipText = "Пошук" };
+                buttonFind.Clicked += OnButtonFindClicked;
+                headerBar.PackEnd(buttonFind);
 
                 Titlebar = headerBar;
             }
@@ -83,7 +82,6 @@ namespace StorageAndTrade
             topNotebook.SwitchPage += OnSwitchPageTopNotebook;
 
             vBox.PackStart(statusBar, false, false, 0);
-
             ShowAll();
         }
 
@@ -97,6 +95,16 @@ namespace StorageAndTrade
 
             /* Поточна сторінка ставиться у кінець списку */
             historyNotebookSwitchList.Add(currPageUID);
+        }
+
+        public void SetStatusBar()
+        {
+            statusBar.Halign = Align.Start;
+            statusBar.Add(new Label($" Сервер: {OpenConfigurationParam?.DataBaseServer} "));
+            statusBar.Add(new Separator(Orientation.Vertical));
+            statusBar.Add(new Label($" База даних: {OpenConfigurationParam?.DataBaseBaseName} "));
+
+            statusBar.ShowAll();
         }
 
         public async void SetCurrentUser()

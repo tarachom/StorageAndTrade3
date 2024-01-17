@@ -42,13 +42,13 @@ namespace StorageAndTrade
         {
             //Всі Документи
             {
-                HBox hBox = new HBox(false, 0);
+                HBox hBox = new HBox();
                 PackStart(hBox, false, false, 10);
 
                 Expander expander = new Expander("Всі документи");
                 hBox.PackStart(expander, false, false, 5);
 
-                VBox vBox = new VBox(false, 0);
+                VBox vBox = new VBox();
                 expander.Add(vBox);
 
                 vBox.PackStart(new Label("Документи"), false, false, 2);
@@ -78,9 +78,9 @@ namespace StorageAndTrade
             }
 
             //Список
-            HBox hBoxList = new HBox(false, 0);
+            HBox hBoxList = new HBox();
 
-            VBox vLeft = new VBox(false, 0);
+            VBox vLeft = new VBox();
             hBoxList.PackStart(vLeft, false, false, 5);
 
             Link.AddCaption(vLeft, "Продажі", PageJournals.Продажі);
@@ -157,7 +157,7 @@ namespace StorageAndTrade
 
             Link.AddSeparator(hBoxList);
 
-            VBox vRight = new VBox(false, 0);
+            VBox vRight = new VBox();
             hBoxList.PackStart(vRight, false, false, 5);
 
             Link.AddCaption(vRight, "Каса", PageJournals.Каса);

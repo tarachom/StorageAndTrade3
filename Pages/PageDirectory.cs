@@ -43,13 +43,13 @@ namespace StorageAndTrade
         {
             //Всі Довідники
             {
-                HBox hBox = new HBox(false, 0);
+                HBox hBox = new HBox();
                 PackStart(hBox, false, false, 10);
 
                 Expander expander = new Expander("Всі довідники");
                 hBox.PackStart(expander, false, false, 5);
 
-                VBox vBox = new VBox(false, 0);
+                VBox vBox = new VBox();
                 expander.Add(vBox);
 
                 vBox.PackStart(new Label("Довідники"), false, false, 2);
@@ -79,10 +79,10 @@ namespace StorageAndTrade
             }
 
             //Список
-            HBox hBoxList = new HBox(false, 0);
+            HBox hBoxList = new HBox();
             PackStart(hBoxList, false, false, 10);
 
-            VBox vLeft = new VBox(false, 0);
+            VBox vLeft = new VBox();
             hBoxList.PackStart(vLeft, false, false, 5);
 
             //Link.AddCaption(vLeft, "Основні");

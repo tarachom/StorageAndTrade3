@@ -116,6 +116,9 @@ namespace StorageAndTrade
                 Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = OpenConfigurationParam };
                 Program.GeneralForm.Show();
 
+                //Вивід інформації в нижній StatusBar
+                Program.GeneralForm.SetStatusBar();
+
                 //Присвоєння користувача
                 Program.GeneralForm.SetCurrentUser();
 

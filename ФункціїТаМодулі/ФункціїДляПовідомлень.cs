@@ -61,7 +61,7 @@ DELETE FROM {Системні.ПовідомленняТаПомилки_Пом�
             await Конфа.Config.Kernel.DataBase.ExecuteSQL(query);
         }
 
-        public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилку()
+        public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилки()
         {
             string query = $@"
 SELECT
@@ -82,7 +82,6 @@ ORDER BY Дата DESC
         {
             СпільніФорми_ВивідПовідомленняПроПомилки page = new СпільніФорми_ВивідПовідомленняПроПомилки();
             Program.GeneralForm?.CreateNotebookPage("Повідомлення", () => { return page; });
-
             await page.LoadRecords();
         }
     }

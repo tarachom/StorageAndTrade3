@@ -36,9 +36,9 @@ namespace StorageAndTrade
         public PageReports() : base()
         {           
             //Список
-            HBox hBoxList = new HBox(false, 0);
+            HBox hBoxList = new HBox();
 
-            VBox vLeft = new VBox(false, 0);
+            VBox vLeft = new VBox();
             hBoxList.PackStart(vLeft, false, false, 5);
 
             AddLink(vLeft, "Товари на складах", ТовариНаСкладах);

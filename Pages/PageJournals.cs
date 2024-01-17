@@ -41,13 +41,13 @@ namespace StorageAndTrade
         {
             //Всі Журнали
             {
-                HBox hBoxAll = new HBox(false, 0);
+                HBox hBoxAll = new HBox();
                 PackStart(hBoxAll, false, false, 10);
 
                 Expander expanderAll = new Expander("Всі журнали");
                 hBoxAll.PackStart(expanderAll, false, false, 5);
 
-                VBox vBoxAll = new VBox(false, 0);
+                VBox vBoxAll = new VBox();
                 expanderAll.Add(vBoxAll);
 
                 vBoxAll.PackStart(new Label("Журнали"), false, false, 2);
@@ -77,10 +77,10 @@ namespace StorageAndTrade
             }
 
             //Список
-            HBox hBoxList = new HBox(false, 0);
+            HBox hBoxList = new HBox();
             PackStart(hBoxList, false, false, 10);
 
-            VBox vLeft = new VBox(false, 0);
+            VBox vLeft = new VBox();
             hBoxList.PackStart(vLeft, false, false, 5);
 
             Link.AddLink(vLeft, "Повний (всі документи)", () =>

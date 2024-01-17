@@ -55,7 +55,7 @@ namespace StorageAndTrade
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 
-            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
+            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки();
 
             foreach (Dictionary<string, object> row in record.ListRow)
                 CreateMessage(row);

@@ -134,7 +134,7 @@ namespace StorageAndTrade
                             ФункціїДляПовідомлень.ВідкритиТермінал();
 
                             //Додатково вивід у помилок у це вікно
-                            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилку();
+                            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки();
 
                             string msg = "";
                             foreach (Dictionary<string, object> row in record.ListRow)

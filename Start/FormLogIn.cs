@@ -45,7 +45,7 @@ namespace StorageAndTrade
 
             BorderWidth = 5;
 
-            VBox vBox = new VBox(false, 2);
+            VBox vBox = new VBox() { Spacing = 5 };
 
             HBox hBoxLogin = new HBox();
             hBoxLogin.PackStart(new Label("Користувач:"), false, false, 5);
