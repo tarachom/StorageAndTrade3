@@ -302,13 +302,16 @@ namespace StorageAndTrade
         {
             HBox hBoxLabel = new HBox();
 
+            //Ico
+            hBoxLabel.PackStart(new Image($"{AppContext.BaseDirectory}images/doc.png"), false, false, 2);
+
+            //Текст
             Label label = new Label { Text = SubstringPageName(caption), TooltipText = caption, Expand = false, Halign = Align.Start };
-            hBoxLabel.PackStart(label, false, false, 4);
+            hBoxLabel.PackStart(label, false, false, 2);
 
             //Лінк закриття сторінки
-            LinkButton lbClose = new LinkButton("Закрити", " ")
+            LinkButton lbClose = new LinkButton("Закрити", "")
             {
-                Halign = Align.Start,
                 Image = new Image(AppContext.BaseDirectory + "images/clean.png"),
                 AlwaysShowImage = true,
                 Name = codePage

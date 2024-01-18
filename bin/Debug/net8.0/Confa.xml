@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.01.2024 14:41:37</DateTimeSave>
+  <DateTimeSave>18.01.2024 14:05:36</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1420,6 +1420,60 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиНоменклатури</Pointer>
             </Field>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>Залишок</Name>
+              <Caption>Залишок</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Value>(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
+	(
+        WITH Залишки AS 
+        (
+            SELECT
+                ТовариНаСкладах.{ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариНаСкладах.{ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+            FROM
+                {ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
+            WHERE
+                ТовариНаСкладах.{ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВНаявності, 1) AS ВНаявності 
+        FROM 
+            Залишки
+    )
+END)</Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>False</Visible>
+              <Name>ЗалишокВКомірках</Name>
+              <Caption>В комірках</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Value>(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
+	(
+        WITH Залишки AS 
+        (
+            SELECT
+                ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+            FROM
+                {ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках
+            WHERE
+                ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВНаявності, 1) AS ВНаявності 
+        FROM 
+            Залишки
+    )
+END)</Value>
+            </AdditionalField>
           </Fields>
         </TabularList>
         <TabularList>
@@ -1752,16 +1806,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>
               </Pointer>
             </Field>
-            <Field>
-              <Name>КількістьУпаковок</Name>
-              <Caption>Коєфіціент</Caption>
-              <Size>0</Size>
-              <SortNum>3</SortNum>
-              <SortField>False</SortField>
-              <Type>integer</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
           </Fields>
         </TabularList>
         <TabularList>
@@ -1787,16 +1831,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-            <Field>
-              <Name>КількістьУпаковок</Name>
-              <Caption>Коєфіціент</Caption>
-              <Size>0</Size>
-              <SortNum>3</SortNum>
-              <SortField>False</SortField>
-              <Type>integer</Type>
               <Pointer>
               </Pointer>
             </Field>
