@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>18.01.2024 15:06:56</DateTimeSave>
+  <DateTimeSave>18.01.2024 17:56:13</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1427,9 +1427,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Size>0</Size>
               <SortNum>1</SortNum>
               <Type>string</Type>
-              <Value><![CDATA[(
-    CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
-    (
+              <Value><![CDATA[CASE WHEN 
+{Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
+THEN
+(
         WITH Залишки AS 
         (
             SELECT
@@ -1438,27 +1439,86 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             FROM
                 {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
             WHERE
-                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = 
+		{Довідники.Номенклатура_Const.TABLE}.uid
             GROUP BY Номенклатура
         )
         SELECT 
-            ROUND(ВНаявності, 1) AS ВНаявності 
+            ROUND(ВНаявності, 1)
         FROM 
             Залишки
-    )
-    END
-)]]></Value>
+)
+END]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезерві</Name>
+              <Caption>В резерві</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[CASE WHEN 
+{Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
+THEN
+(
+        WITH Залишки AS 
+        (
+            SELECT
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу
+            FROM
+                {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+            WHERE
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВРезервіЗіСкладу, 1)
+        FROM 
+            Залишки
+)
+END]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезервіПідЗамовлення</Name>
+              <Caption>Під замовлення</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[CASE WHEN 
+{Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
+THEN
+(
+        WITH Залишки AS 
+        (
+            SELECT
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення
+            FROM
+                {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+            WHERE
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВРезервіПідЗамовлення, 1)
+        FROM 
+            Залишки
+)
+END]]></Value>
             </AdditionalField>
             <AdditionalField>
               <Visible>True</Visible>
               <Name>ЗалишокВКомірках</Name>
               <Caption>В комірках</Caption>
               <Size>0</Size>
-              <SortNum>2</SortNum>
+              <SortNum>4</SortNum>
               <Type>string</Type>
-              <Value><![CDATA[(
-    CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
-	(
+              <Value><![CDATA[CASE WHEN 
+{Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар}
+THEN
+(
         WITH Залишки AS 
         (
             SELECT
@@ -1467,16 +1527,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             FROM
                 {РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках
             WHERE
-                ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+                ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} = 
+		{Довідники.Номенклатура_Const.TABLE}.uid
             GROUP BY Номенклатура
         )
         SELECT 
-            ROUND(ВНаявності, 1) AS ВНаявності 
+            ROUND(ВНаявності, 1) 
         FROM 
             Залишки
-    )
-    END
-)]]></Value>
+)
+END]]></Value>
             </AdditionalField>
           </Fields>
         </TabularList>
@@ -1506,6 +1566,112 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>
               </Pointer>
             </Field>
+            <Field>
+              <Name>ОдиницяВиміру</Name>
+              <Caption>Пакування</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <Join>
+                <table>Довідники.ПакуванняОдиниціВиміру_Const.TABLE</table>
+                <field>ОдиницяВиміру</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.ПакуванняОдиниціВиміру_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>Залишок</Name>
+              <Caption>Залишок</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[CASE WHEN 
+{Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
+THEN
+(
+        WITH Залишки AS 
+        (
+            SELECT
+                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+            FROM
+                {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
+            WHERE
+                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = 
+		{Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВНаявності, 1)
+        FROM 
+            Залишки
+)
+END]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезерві</Name>
+              <Caption>В резерві</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[CASE WHEN 
+{Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
+THEN
+(
+        WITH Залишки AS 
+        (
+            SELECT
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу
+            FROM
+                {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+            WHERE
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВРезервіЗіСкладу, 1)
+        FROM 
+            Залишки
+)
+END]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезервіПідЗамовлення</Name>
+              <Caption>Під замовлення</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[CASE WHEN 
+{Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
+THEN
+(
+        WITH Залишки AS 
+        (
+            SELECT
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення
+            FROM
+                {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+            WHERE
+                ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВРезервіПідЗамовлення, 1)
+        FROM 
+            Залишки
+)
+END]]></Value>
+            </AdditionalField>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -3633,6 +3799,84 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>
               </Pointer>
             </Field>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>Залишки</Name>
+              <Caption>Залишки</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[WITH Залишки AS
+(
+    SELECT
+        ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності}) AS ВНаявності
+    FROM
+        {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
+    WHERE
+        ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND
+        ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid
+    GROUP BY ХарактеристикаНоменклатури
+)
+SELECT
+    ROUND(ВНаявності, 1)
+FROM
+    Залишки]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезерві</Name>
+              <Caption>В резерві</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[WITH Залишки AS
+(
+    SELECT
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу}) AS ВРезервіЗіСкладу
+    FROM
+        {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+    WHERE
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid
+    GROUP BY ХарактеристикаНоменклатури
+)
+SELECT
+    ROUND(ВРезервіЗіСкладу, 1)
+FROM
+    Залишки]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезервіПідЗамовлення</Name>
+              <Caption>Під замовлення</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[WITH Залишки AS
+(
+    SELECT
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення}) AS ВРезервіПідЗамовлення
+    FROM
+        {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+    WHERE
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid
+    GROUP BY ХарактеристикаНоменклатури
+)
+SELECT
+    ROUND(ВРезервіПідЗамовлення, 1)
+FROM
+    Залишки]]></Value>
+            </AdditionalField>
           </Fields>
         </TabularList>
         <TabularList>
@@ -3679,6 +3923,84 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Pointer>
               </Pointer>
             </Field>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>Залишки</Name>
+              <Caption>Залишки</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[WITH Залишки AS
+(
+    SELECT
+        ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності}) AS ВНаявності
+    FROM
+        {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
+    WHERE
+        ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND
+        ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid
+    GROUP BY ХарактеристикаНоменклатури
+)
+SELECT
+    ROUND(ВНаявності, 1)
+FROM
+    Залишки]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезерві</Name>
+              <Caption>В резерві</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[WITH Залишки AS
+(
+    SELECT
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу}) AS ВРезервіЗіСкладу
+    FROM
+        {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+    WHERE
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid
+    GROUP BY ХарактеристикаНоменклатури
+)
+SELECT
+    ROUND(ВРезервіЗіСкладу, 1)
+FROM
+    Залишки]]></Value>
+            </AdditionalField>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>ВРезервіПідЗамовлення</Name>
+              <Caption>Під замовлення</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[WITH Залишки AS
+(
+    SELECT
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+        SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення}) AS ВРезервіПідЗамовлення
+    FROM
+        {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки
+    WHERE
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND
+        ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = 
+            {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid
+    GROUP BY ХарактеристикаНоменклатури
+)
+SELECT
+    ROUND(ВРезервіПідЗамовлення, 1)
+FROM
+    Залишки]]></Value>
+            </AdditionalField>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -3985,18 +4307,16 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <AdditionalField>
               <Visible>True</Visible>
               <Name>Залишок</Name>
-              <Caption>field</Caption>
+              <Caption>Залишок</Caption>
               <Size>0</Size>
               <SortNum>1</SortNum>
               <Type>string</Type>
-              <Value><![CDATA[(
-    SELECT
+              <Value><![CDATA[SELECT
         ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума
-    FROM
+FROM
         {РегістриНакопичення.РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів
-    WHERE
-        РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid
-)]]></Value>
+WHERE
+        РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid]]></Value>
             </AdditionalField>
           </Fields>
         </TabularList>
@@ -4044,6 +4364,20 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 <field>Довідники.Валюти_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <AdditionalField>
+              <Visible>False</Visible>
+              <Name>Залишок</Name>
+              <Caption>Залишок</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[SELECT
+        ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума
+FROM
+        {РегістриНакопичення.РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів
+WHERE
+        РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid]]></Value>
+            </AdditionalField>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -25910,8 +26244,7 @@ HAVING
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ВільніЗалишки</Name>
-      <FullName>
-      </FullName>
+      <FullName>ВільніЗалишки</FullName>
       <Table>tab_a58</Table>
       <Type>Residues</Type>
       <Desc>
@@ -26080,6 +26413,70 @@ HAVING
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>Підсумки</Name>
+          <Table>tab_a77</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <Fields>
+            <Field>
+              <Name>Номенклатура</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладу</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовлення</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <QueryBlockList>
         <QueryBlock>
@@ -26154,6 +26551,60 @@ HAVING
     SUM(CASE WHEN ВільніЗалишки.income = true THEN 
         ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} ELSE 
         -ВільніЗалишки.{ВільніЗалишки_Const.ВРезервіПідЗамовлення} END) != 0 
+
+
+
+
+]]></Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Підсумки</Name>
+          <FinalCalculation>1</FinalCalculation>
+          <Query position="0" key="DELETE"><![CDATA[
+DELETE FROM {ВільніЗалишки_Підсумки_TablePart.TABLE}
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
+INSERT INTO {ВільніЗалишки_Підсумки_TablePart.TABLE} 
+(
+    uid,
+    {ВільніЗалишки_Підсумки_TablePart.Номенклатура},
+    {ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури},
+    {ВільніЗалишки_Підсумки_TablePart.Склад},
+    {ВільніЗалишки_Підсумки_TablePart.ВНаявності},
+    {ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу},
+    {ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення}
+)
+SELECT
+    uuid_generate_v4(),
+    ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.Номенклатура} AS Номенклатура,
+    ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури,
+    ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.Склад} AS Склад,
+
+    /* ВНаявності */
+    SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВНаявності}) AS ВНаявності,
+
+    /* ВРезервіЗіСкладу */
+    SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}) AS ВРезервіЗіСкладу,
+
+    /* ВРезервіПідЗамовлення */
+    SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення}) AS ВРезервіПідЗамовлення
+
+FROM
+    {ВільніЗалишки_Залишки_TablePart.TABLE} AS ВільніЗалишки
+
+GROUP BY
+Номенклатура, ХарактеристикаНоменклатури, Склад
+
+HAVING
+
+    /* ВНаявності */
+    SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВНаявності}) != 0  OR 
+
+    /* ВРезервіЗіСкладу */
+    SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}) != 0  OR 
+
+    /* ВРезервіПідЗамовлення */
+    SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення}) != 0 
 
 
 

@@ -141,7 +141,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
                 </xsl:for-each>
-
                 <xsl:for-each select="Fields/AdditionalField">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
                 </xsl:for-each>
@@ -157,7 +156,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),  
                 </xsl:for-each>
-                
                 <xsl:for-each select="Fields/AdditionalField">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string), 
                 </xsl:for-each>
@@ -254,7 +252,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             <xsl:for-each select="Fields/AdditionalField">
                 /* Additional Field */
                 <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue&lt;string&gt;(@$"<xsl:value-of select="Value"/>", "<xsl:value-of select="Name"/>"));
+                  new NameValue&lt;string&gt;(@$"(<xsl:value-of select="normalize-space(Value)"/>)", "<xsl:value-of select="Name"/>"));
+                /*
+                <xsl:value-of select="Value"/>
+                */
             </xsl:for-each>
 
             /* SELECT */
@@ -274,8 +275,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        <!--<xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
-                        <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>-->
                         <xsl:for-each select="Fields/Field[Type = 'pointer']">
                           <xsl:value-of select="Name"/>
                           <xsl:text> = </xsl:text>

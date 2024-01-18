@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 18.01.2024 15:06:56
+ * Дата конфігурації: 18.01.2024 17:56:13
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -28260,6 +28260,20 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                         break;
                     }
                     
+                    case "ВільніЗалишки":
+                    {
+                        byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
+                        
+                        /* QueryBlock: Підсумки */
+                            
+                        await Config.Kernel.DataBase.ExecuteSQL($@"DELETE FROM {ВільніЗалишки_Підсумки_TablePart.TABLE}", null, transactionID);
+                            
+                        await Config.Kernel.DataBase.ExecuteSQL($@"INSERT INTO {ВільніЗалишки_Підсумки_TablePart.TABLE} ( uid, {ВільніЗалишки_Підсумки_TablePart.Номенклатура}, {ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури}, {ВільніЗалишки_Підсумки_TablePart.Склад}, {ВільніЗалишки_Підсумки_TablePart.ВНаявності}, {ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу}, {ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) SELECT uuid_generate_v4(), ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.Номенклатура} AS Номенклатура, ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ХарактеристикаНоменклатури} AS ХарактеристикаНоменклатури, ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.Склад} AS Склад, /* ВНаявності */ SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВНаявності}) AS ВНаявності, /* ВРезервіЗіСкладу */ SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}) AS ВРезервіЗіСкладу, /* ВРезервіПідЗамовлення */ SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення}) AS ВРезервіПідЗамовлення FROM {ВільніЗалишки_Залишки_TablePart.TABLE} AS ВільніЗалишки GROUP BY Номенклатура, ХарактеристикаНоменклатури, Склад HAVING /* ВНаявності */ SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВНаявності}) != 0 OR /* ВРезервіЗіСкладу */ SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}) != 0 OR /* ВРезервіПідЗамовлення */ SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення}) != 0", null, transactionID);
+                            
+                        await Config.Kernel.DataBase.CommitTransaction(transactionID);
+                        break;
+                    }
+                    
                     case "РухКоштів":
                     {
                         byte transactionID = await Config.Kernel.DataBase.BeginTransaction();
@@ -29257,7 +29271,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     #region REGISTER "ВільніЗалишки"
     public static class ВільніЗалишки_Const
     {
-        public const string FULLNAME = "";
+        public const string FULLNAME = "ВільніЗалишки";
         public const string TABLE = "tab_a58";
 		    public static readonly string[] AllowDocumentSpendTable = ["tab_a32", "tab_a34", "tab_a36", "tab_a31", "tab_a51", "tab_a53", "tab_a83", "tab_a94", "tab_b07", "tab_b10", ];
 		    public static readonly string[] AllowDocumentSpendType = ["ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "ВведенняЗалишків", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", ];
@@ -29420,6 +29434,82 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         public class Record : RegisterAccumulationTablePartRecord
         {
             public DateTime Період { get; set; } = DateTime.MinValue;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal ВНаявності { get; set; } = 0;
+            public decimal ВРезервіЗіСкладу { get; set; } = 0;
+            public decimal ВРезервіПідЗамовлення { get; set; } = 0;
+            
+        }            
+    }
+    
+    
+    public class ВільніЗалишки_Підсумки_TablePart : RegisterAccumulationTablePart
+    {
+        public ВільніЗалишки_Підсумки_TablePart() : base(Config.Kernel, "tab_a77",
+              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) { }
+        
+        public const string TABLE = "tab_a77";
+        
+        public const string Номенклатура = "col_a1";
+        public const string ХарактеристикаНоменклатури = "col_a2";
+        public const string Склад = "col_a3";
+        public const string ВНаявності = "col_a4";
+        public const string ВРезервіЗіСкладу = "col_a5";
+        public const string ВРезервіПідЗамовлення = "col_a6";
+        public List<Record> Records { get; set; } = [];
+    
+        public async ValueTask Read()
+        {
+            Records.Clear();
+            await base.BaseRead();
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record()
+                {
+                    UID = (Guid)fieldValue["uid"],
+                    Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]),
+                    ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_a2"]),
+                    Склад = new Довідники.Склади_Pointer(fieldValue["col_a3"]),
+                    ВНаявності = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0,
+                    ВРезервіЗіСкладу = (fieldValue["col_a5"] != DBNull.Value) ? (decimal)fieldValue["col_a5"] : 0,
+                    ВРезервіПідЗамовлення = (fieldValue["col_a6"] != DBNull.Value) ? (decimal)fieldValue["col_a6"] : 0,
+                    
+                };
+                Records.Add(record);
+            }
+            base.BaseClear();
+        }
+    
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        {
+            await base.BaseBeginTransaction();
+            if (clear_all_before_save) await base.BaseDelete();
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                {
+                    {"col_a1", record.Номенклатура.UnigueID.UGuid},
+                    {"col_a2", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
+                    {"col_a3", record.Склад.UnigueID.UGuid},
+                    {"col_a4", record.ВНаявності},
+                    {"col_a5", record.ВРезервіЗіСкладу},
+                    {"col_a6", record.ВРезервіПідЗамовлення},
+                    
+                };
+                record.UID = await base.BaseSave(record.UID, fieldValue);
+            }
+            await base.BaseCommitTransaction();
+        }
+    
+        public async ValueTask Delete()
+        {
+            await base.BaseDelete();
+        }
+        
+        public class Record : RegisterAccumulationTablePartRecord
+        {
             public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
             public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
             public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
