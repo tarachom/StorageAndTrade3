@@ -129,6 +129,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         <xsl:for-each select="Fields/Field">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
+        <xsl:for-each select="Fields/AdditionalField">
+        string <xsl:value-of select="Name"/> = "";</xsl:for-each>
+
         Array ToArray()
         {
             return new object[] 
@@ -136,6 +139,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 <xsl:for-each select="Fields/Field">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
+                </xsl:for-each>
+
+                <xsl:for-each select="Fields/AdditionalField">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
                 </xsl:for-each>
             };
@@ -150,11 +157,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),  
                 </xsl:for-each>
+                
+                <xsl:for-each select="Fields/AdditionalField">
+                  <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string), 
+                </xsl:for-each>
             ]);
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             <xsl:for-each select="Fields/Field">
               <xsl:text>treeView.AppendColumn(new TreeViewColumn("</xsl:text>
               <xsl:value-of select="normalize-space(Caption)"/>
@@ -168,6 +180,23 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
               </xsl:if>
               <xsl:text> } )</xsl:text>; /*<xsl:value-of select="Name"/>*/
             </xsl:for-each>
+
+            /* Додаткові поля */
+            <xsl:variable name="CountField" select="count(Fields/Field) + 1"/>
+            <xsl:for-each select="Fields/AdditionalField">
+              <xsl:text>treeView.AppendColumn(new TreeViewColumn("</xsl:text>
+              <xsl:value-of select="normalize-space(Caption)"/>
+              <xsl:text>", new CellRendererText() { Xpad = 4 }, "text", </xsl:text>
+              <xsl:value-of select="$CountField + position()"/>
+              <xsl:text>) { MinWidth = 20, Resizable = true, SortColumnId = </xsl:text>
+              <xsl:value-of select="$CountField + position()"/>
+              <xsl:if test="Size != '0'">
+                <xsl:text>, FixedWidth = </xsl:text>
+                <xsl:value-of select="Size"/>
+              </xsl:if>
+              <xsl:text> } )</xsl:text>; /*<xsl:value-of select="Name"/>*/
+            </xsl:for-each>
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -222,6 +251,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 </xsl:for-each>
             </xsl:for-each>
 
+            <xsl:for-each select="Fields/AdditionalField">
+                /* Additional Field */
+                <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.FieldAndAlias.Add(
+                  new NameValue&lt;string&gt;(@$"<xsl:value-of select="Value"/>", "<xsl:value-of select="Name"/>"));
+            </xsl:for-each>
+
             /* SELECT */
             await <xsl:value-of select="$DirectoryName"/>_Select.Select();
 
@@ -239,8 +274,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        <xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
-                        <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>
+                        <!--<xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
+                        <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>-->
                         <xsl:for-each select="Fields/Field[Type = 'pointer']">
                           <xsl:value-of select="Name"/>
                           <xsl:text> = </xsl:text>
@@ -249,8 +284,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                             <xsl:if test="position() &gt; 1"> + " " + </xsl:if>
                             <xsl:text>Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
                             <xsl:if test="$CountAlias = 1"> ?? ""</xsl:if>
-                          </xsl:for-each>
-                          <xsl:if test="$CountNotPointer != 0 or position() != $CountPointer">,</xsl:if> /*<xsl:value-of select="Name"/>*/
+                          </xsl:for-each>,
                         </xsl:for-each>
                         <xsl:for-each select="Fields/Field[Type != 'pointer']">
                           <xsl:value-of select="Name"/>
@@ -292,8 +326,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                               <xsl:value-of select="Name"/>
                               <xsl:text>].ToString() ?? ""</xsl:text>
                             </xsl:otherwise>
-                          </xsl:choose>
-                          <xsl:if test="position() != $CountNotPointer">,</xsl:if> /**/
+                          </xsl:choose>,
+                        </xsl:for-each>
+
+                        <xsl:for-each select="Fields/AdditionalField">
+                            <xsl:value-of select="Name"/>
+                            <xsl:text> = </xsl:text>
+                            <xsl:text>Fields["</xsl:text>
+                            <xsl:value-of select="Name"/>
+                            <xsl:text>"].ToString() ?? ""</xsl:text>,
                         </xsl:for-each>
                     };
 

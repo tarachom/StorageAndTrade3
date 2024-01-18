@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 18.01.2024 14:05:36
+ * Дата конфігурації: 18.01.2024 15:06:56
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -145,10 +145,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -201,8 +206,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Організації_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Організації_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Організації_Const.Код].ToString() ?? "",
+                        Назва = Fields[Організації_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -258,10 +263,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -314,8 +324,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Організації_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Організації_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Організації_Const.Код].ToString() ?? "",
+                        Назва = Fields[Організації_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -343,7 +353,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     
       
     /* ТАБЛИЦЯ */
-    public class Номенклатура_ЗаписиПрототип : ТабличнийСписок
+    public class Номенклатура_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
@@ -352,6 +362,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string Назва = "";
         string ОдиницяВиміру = "";
         string ТипНоменклатури = "";
+        string Залишок = "";
+        string ЗалишокВКомірках = "";
 
         Array ToArray()
         {
@@ -363,6 +375,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 /*Назва*/ Назва,
                 /*ОдиницяВиміру*/ ОдиницяВиміру,
                 /*ТипНоменклатури*/ ТипНоменклатури,
+                /*Залишок*/ Залишок,
+                /*ЗалишокВКомірках*/ ЗалишокВКомірках,
                 
             };
         }
@@ -377,17 +391,26 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 /*Назва*/ typeof(string),  
                 /*ОдиницяВиміру*/ typeof(string),  
                 /*ТипНоменклатури*/ typeof(string),  
+                /*Залишок*/ typeof(string), 
+                /*ЗалишокВКомірках*/ typeof(string), 
                 
             ]);
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Пакування", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ОдиницяВиміру*/
             treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ТипНоменклатури*/
             
+
+            /* Додаткові поля */
+            treeView.AppendColumn(new TreeViewColumn("Залишок", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Залишок*/
+            treeView.AppendColumn(new TreeViewColumn("В комірках", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ЗалишокВКомірках*/
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -431,6 +454,54 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                   Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_1." + Довідники.ПакуванняОдиниціВиміру_Const.Назва, "join_tab_1_field_1"));
                   
+                /* Additional Field */
+                Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                  new NameValue<string>(@$"(
+    CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
+    (
+        WITH Залишки AS 
+        (
+            SELECT
+                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+            FROM
+                {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
+            WHERE
+                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВНаявності, 1) AS ВНаявності 
+        FROM 
+            Залишки
+    )
+    END
+)", "Залишок"));
+            
+                /* Additional Field */
+                Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                  new NameValue<string>(@$"(
+    CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
+	(
+        WITH Залишки AS 
+        (
+            SELECT
+                ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+            FROM
+                {РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках
+            WHERE
+                ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+            GROUP BY Номенклатура
+        )
+        SELECT 
+            ROUND(ВНаявності, 1) AS ВНаявності 
+        FROM 
+            Залишки
+    )
+    END
+)", "ЗалишокВКомірках"));
+            
 
             /* SELECT */
             await Номенклатура_Select.Select();
@@ -445,14 +516,16 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
-                    Номенклатура_ЗаписиПрототип Record = new Номенклатура_ЗаписиПрототип
+                    Номенклатура_Записи Record = new Номенклатура_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        ОдиницяВиміру = Fields["join_tab_1_field_1"].ToString() ?? "", /*ОдиницяВиміру*/
-                        Код = Fields[Номенклатура_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "", /**/
-                        ТипНоменклатури = Перелічення.ПсевдонімиПерелічення.ТипиНоменклатури_Alias( ((Перелічення.ТипиНоменклатури)(Fields[Номенклатура_Const.ТипНоменклатури] != DBNull.Value ? Fields[Номенклатура_Const.ТипНоменклатури] : 0)) ) /**/
+                        ОдиницяВиміру = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[Номенклатура_Const.Код].ToString() ?? "",
+                        Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "",
+                        ТипНоменклатури = Перелічення.ПсевдонімиПерелічення.ТипиНоменклатури_Alias( ((Перелічення.ТипиНоменклатури)(Fields[Номенклатура_Const.ТипНоменклатури] != DBNull.Value ? Fields[Номенклатура_Const.ТипНоменклатури] : 0)) ),
+                        Залишок = Fields["Залишок"].ToString() ?? "",
+                        ЗалишокВКомірках = Fields["ЗалишокВКомірках"].ToString() ?? "",
                         
                     };
 
@@ -508,10 +581,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -564,8 +642,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Номенклатура_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Номенклатура_Const.Код].ToString() ?? "",
+                        Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -626,10 +704,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -682,8 +765,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Виробники_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Виробники_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Виробники_Const.Код].ToString() ?? "",
+                        Назва = Fields[Виробники_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -739,10 +822,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -795,8 +883,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Виробники_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Виробники_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Виробники_Const.Код].ToString() ?? "",
+                        Назва = Fields[Виробники_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -857,10 +945,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -913,8 +1006,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ВидиНоменклатури_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ВидиНоменклатури_Const.Код].ToString() ?? "",
+                        Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -967,9 +1060,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1021,7 +1119,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -1082,10 +1180,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1138,8 +1241,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "",
+                        Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -1195,10 +1298,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1251,8 +1359,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "",
+                        Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -1322,13 +1430,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Коротка назва", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*КороткаНазва*/
             treeView.AppendColumn(new TreeViewColumn("R030", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Код_R030*/
             treeView.AppendColumn(new TreeViewColumn("Показувати на стартовій", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ВиводитиКурсНаСтартову*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1384,11 +1497,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Валюти_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Валюти_Const.Назва].ToString() ?? "", /**/
-                        КороткаНазва = Fields[Валюти_Const.КороткаНазва].ToString() ?? "", /**/
-                        Код_R030 = Fields[Валюти_Const.Код_R030].ToString() ?? "", /**/
-                        ВиводитиКурсНаСтартову = (Fields[Валюти_Const.ВиводитиКурсНаСтартову] != DBNull.Value ? (bool)Fields[Валюти_Const.ВиводитиКурсНаСтартову] : false) ? "Так" : "" /**/
+                        Код = Fields[Валюти_Const.Код].ToString() ?? "",
+                        Назва = Fields[Валюти_Const.Назва].ToString() ?? "",
+                        КороткаНазва = Fields[Валюти_Const.КороткаНазва].ToString() ?? "",
+                        Код_R030 = Fields[Валюти_Const.Код_R030].ToString() ?? "",
+                        ВиводитиКурсНаСтартову = (Fields[Валюти_Const.ВиводитиКурсНаСтартову] != DBNull.Value ? (bool)Fields[Валюти_Const.ВиводитиКурсНаСтартову] : false) ? "Так" : "",
                         
                     };
 
@@ -1450,12 +1563,17 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("КороткаНазва", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*КороткаНазва*/
             treeView.AppendColumn(new TreeViewColumn("Код R030", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Код_R030*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1510,10 +1628,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Валюти_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Валюти_Const.Назва].ToString() ?? "", /**/
-                        КороткаНазва = Fields[Валюти_Const.КороткаНазва].ToString() ?? "", /**/
-                        Код_R030 = Fields[Валюти_Const.Код_R030].ToString() ?? "" /**/
+                        Код = Fields[Валюти_Const.Код].ToString() ?? "",
+                        Назва = Fields[Валюти_Const.Назва].ToString() ?? "",
+                        КороткаНазва = Fields[Валюти_Const.КороткаНазва].ToString() ?? "",
+                        Код_R030 = Fields[Валюти_Const.Код_R030].ToString() ?? "",
                         
                     };
 
@@ -1577,11 +1695,16 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Папка", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Папка*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1642,9 +1765,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Папка = Fields["join_tab_1_field_1"].ToString() ?? "", /*Папка*/
-                        Код = Fields[Контрагенти_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "" /**/
+                        Папка = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[Контрагенти_Const.Код].ToString() ?? "",
+                        Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -1700,10 +1823,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1756,8 +1884,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Контрагенти_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Контрагенти_Const.Код].ToString() ?? "",
+                        Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -1824,12 +1952,17 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Тип cкладу", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ТипСкладу*/
             treeView.AppendColumn(new TreeViewColumn("Адресне зберігання", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*НалаштуванняАдресногоЗберігання*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1884,10 +2017,10 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Склади_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Склади_Const.Назва].ToString() ?? "", /**/
-                        ТипСкладу = Перелічення.ПсевдонімиПерелічення.ТипиСкладів_Alias( ((Перелічення.ТипиСкладів)(Fields[Склади_Const.ТипСкладу] != DBNull.Value ? Fields[Склади_Const.ТипСкладу] : 0)) ), /**/
-                        НалаштуванняАдресногоЗберігання = Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Alias( ((Перелічення.НалаштуванняАдресногоЗберігання)(Fields[Склади_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[Склади_Const.НалаштуванняАдресногоЗберігання] : 0)) ) /**/
+                        Код = Fields[Склади_Const.Код].ToString() ?? "",
+                        Назва = Fields[Склади_Const.Назва].ToString() ?? "",
+                        ТипСкладу = Перелічення.ПсевдонімиПерелічення.ТипиСкладів_Alias( ((Перелічення.ТипиСкладів)(Fields[Склади_Const.ТипСкладу] != DBNull.Value ? Fields[Склади_Const.ТипСкладу] : 0)) ),
+                        НалаштуванняАдресногоЗберігання = Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Alias( ((Перелічення.НалаштуванняАдресногоЗберігання)(Fields[Склади_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[Склади_Const.НалаштуванняАдресногоЗберігання] : 0)) ),
                         
                     };
 
@@ -1943,10 +2076,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -1999,8 +2137,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Склади_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Склади_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Склади_Const.Код].ToString() ?? "",
+                        Назва = Fields[Склади_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2064,11 +2202,16 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2129,9 +2272,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "", /*Валюта*/
-                        Код = Fields[ВидиЦін_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "" /**/
+                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[ВидиЦін_Const.Код].ToString() ?? "",
+                        Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2184,9 +2327,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2238,7 +2386,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2299,10 +2447,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2355,8 +2508,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ВидиЦінПостачальників_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ВидиЦінПостачальників_Const.Код].ToString() ?? "",
+                        Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2412,10 +2565,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2468,8 +2626,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ВидиЦінПостачальників_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ВидиЦінПостачальників_Const.Код].ToString() ?? "",
+                        Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2530,10 +2688,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2586,8 +2749,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Користувачі_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Користувачі_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Користувачі_Const.Код].ToString() ?? "",
+                        Назва = Fields[Користувачі_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2640,9 +2803,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2694,7 +2862,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[Користувачі_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[Користувачі_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2755,10 +2923,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2811,8 +2984,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ФізичніОсоби_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ФізичніОсоби_Const.Код].ToString() ?? "",
+                        Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2865,9 +3038,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -2919,7 +3097,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -2980,10 +3158,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3036,8 +3219,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[СтруктураПідприємства_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[СтруктураПідприємства_Const.Код].ToString() ?? "",
+                        Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -3090,9 +3273,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3144,7 +3332,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -3205,10 +3393,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3261,8 +3454,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[КраїниСвіту_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[КраїниСвіту_Const.Код].ToString() ?? "",
+                        Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -3318,10 +3511,15 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3374,8 +3572,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[КраїниСвіту_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[КраїниСвіту_Const.Код].ToString() ?? "",
+                        Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -3445,13 +3643,18 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Назва файлу", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*НазваФайлу*/
             treeView.AppendColumn(new TreeViewColumn("Розмір", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Розмір*/
             treeView.AppendColumn(new TreeViewColumn("Дата створення", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ДатаСтворення*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3507,11 +3710,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Файли_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Файли_Const.Назва].ToString() ?? "", /**/
-                        НазваФайлу = Fields[Файли_Const.НазваФайлу].ToString() ?? "", /**/
-                        Розмір = Fields[Файли_Const.Розмір].ToString() ?? "", /**/
-                        ДатаСтворення = Fields[Файли_Const.ДатаСтворення].ToString() ?? "" /**/
+                        Код = Fields[Файли_Const.Код].ToString() ?? "",
+                        Назва = Fields[Файли_Const.Назва].ToString() ?? "",
+                        НазваФайлу = Fields[Файли_Const.НазваФайлу].ToString() ?? "",
+                        Розмір = Fields[Файли_Const.Розмір].ToString() ?? "",
+                        ДатаСтворення = Fields[Файли_Const.ДатаСтворення].ToString() ?? "",
                         
                     };
 
@@ -3564,9 +3767,14 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3618,7 +3826,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[Файли_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[Файли_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -3682,11 +3890,16 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Номенклатура*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3747,9 +3960,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Номенклатура = Fields["join_tab_1_field_1"].ToString() ?? "", /*Номенклатура*/
-                        Код = Fields[ХарактеристикиНоменклатури_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ХарактеристикиНоменклатури_Const.Назва].ToString() ?? "" /**/
+                        Номенклатура = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[ХарактеристикиНоменклатури_Const.Код].ToString() ?? "",
+                        Назва = Fields[ХарактеристикиНоменклатури_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -3808,11 +4021,16 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Номенклатура*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -3873,9 +4091,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Номенклатура = Fields["join_tab_1_field_1"].ToString() ?? "", /*Номенклатура*/
-                        Код = Fields[ХарактеристикиНоменклатури_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ХарактеристикиНоменклатури_Const.Назва].ToString() ?? "" /**/
+                        Номенклатура = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[ХарактеристикиНоменклатури_Const.Код].ToString() ?? "",
+                        Назва = Fields[ХарактеристикиНоменклатури_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -4794,7 +5012,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
     
       
     /* ТАБЛИЦЯ */
-    public class Каси_ЗаписиПрототип : ТабличнийСписок
+    public class Каси_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
@@ -4802,6 +5020,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         string Код = "";
         string Назва = "";
         string Валюта = "";
+        string Залишок = "";
 
         Array ToArray()
         {
@@ -4812,6 +5031,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                 /*Код*/ Код,
                 /*Назва*/ Назва,
                 /*Валюта*/ Валюта,
+                /*Залишок*/ Залишок,
                 
             };
         }
@@ -4825,16 +5045,23 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                 /*Код*/ typeof(string),  
                 /*Назва*/ typeof(string),  
                 /*Валюта*/ typeof(string),  
+                /*Залишок*/ typeof(string), 
                 
             ]);
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
             
+
+            /* Додаткові поля */
+            treeView.AppendColumn(new TreeViewColumn("field", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Залишок*/
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -4877,6 +5104,17 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                   Каси_Select.QuerySelect.FieldAndAlias.Add(
                     new NameValue<string>("join_tab_1." + Довідники.Валюти_Const.Назва, "join_tab_1_field_1"));
                   
+                /* Additional Field */
+                Каси_Select.QuerySelect.FieldAndAlias.Add(
+                  new NameValue<string>(@$"(
+    SELECT
+        ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума
+    FROM
+        {РегістриНакопичення.РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів
+    WHERE
+        РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid
+)", "Залишок"));
+            
 
             /* SELECT */
             await Каси_Select.Select();
@@ -4891,13 +5129,14 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
-                    Каси_ЗаписиПрототип Record = new Каси_ЗаписиПрототип
+                    Каси_Записи Record = new Каси_Записи
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "", /*Валюта*/
-                        Код = Fields[Каси_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Каси_Const.Назва].ToString() ?? "" /**/
+                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[Каси_Const.Код].ToString() ?? "",
+                        Назва = Fields[Каси_Const.Назва].ToString() ?? "",
+                        Залишок = Fields["Залишок"].ToString() ?? "",
                         
                     };
 
@@ -4956,11 +5195,16 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5021,9 +5265,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "", /*Валюта*/
-                        Код = Fields[Каси_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Каси_Const.Назва].ToString() ?? "" /**/
+                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[Каси_Const.Код].ToString() ?? "",
+                        Назва = Fields[Каси_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -5087,11 +5331,16 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5152,9 +5401,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "", /*Валюта*/
-                        Код = Fields[БанківськіРахункиОрганізацій_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[БанківськіРахункиОрганізацій_Const.Назва].ToString() ?? "" /**/
+                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[БанківськіРахункиОрганізацій_Const.Код].ToString() ?? "",
+                        Назва = Fields[БанківськіРахункиОрганізацій_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -5213,11 +5462,16 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5278,9 +5532,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "", /*Валюта*/
-                        Код = Fields[БанківськіРахункиОрганізацій_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[БанківськіРахункиОрганізацій_Const.Назва].ToString() ?? "" /**/
+                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[БанківськіРахункиОрганізацій_Const.Код].ToString() ?? "",
+                        Назва = Fields[БанківськіРахункиОрганізацій_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -5347,12 +5601,17 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ТипДоговору*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5414,10 +5673,10 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Контрагент = Fields["join_tab_1_field_1"].ToString() ?? "", /*Контрагент*/
-                        Код = Fields[ДоговориКонтрагентів_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "", /**/
-                        ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias( ((Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ) /**/
+                        Контрагент = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[ДоговориКонтрагентів_Const.Код].ToString() ?? "",
+                        Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "",
+                        ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias( ((Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ),
                         
                     };
 
@@ -5476,11 +5735,16 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Контрагент*/
             treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ТипДоговору*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5541,9 +5805,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Контрагент = Fields["join_tab_1_field_1"].ToString() ?? "", /*Контрагент*/
-                        Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "", /**/
-                        ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias( ((Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ) /**/
+                        Контрагент = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "",
+                        ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias( ((Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ),
                         
                     };
 
@@ -5607,11 +5871,16 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5672,9 +5941,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "", /*Валюта*/
-                        Код = Fields[БанківськіРахункиКонтрагентів_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[БанківськіРахункиКонтрагентів_Const.Назва].ToString() ?? "" /**/
+                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[БанківськіРахункиКонтрагентів_Const.Код].ToString() ?? "",
+                        Назва = Fields[БанківськіРахункиКонтрагентів_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -5733,11 +6002,16 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Валюта*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5798,9 +6072,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "", /*Валюта*/
-                        Код = Fields[БанківськіРахункиКонтрагентів_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[БанківськіРахункиКонтрагентів_Const.Назва].ToString() ?? "" /**/
+                        Валюта = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Код = Fields[БанківськіРахункиКонтрагентів_Const.Код].ToString() ?? "",
+                        Назва = Fields[БанківськіРахункиКонтрагентів_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -5867,12 +6141,17 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("КореспондуючийРахунок", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*КореспондуючийРахунок*/
             treeView.AppendColumn(new TreeViewColumn("ВидРухуКоштів", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ВидРухуКоштів*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -5927,10 +6206,10 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[СтаттяРухуКоштів_Const.Назва].ToString() ?? "", /**/
-                        Код = Fields[СтаттяРухуКоштів_Const.Код].ToString() ?? "", /**/
-                        КореспондуючийРахунок = Fields[СтаттяРухуКоштів_Const.КореспондуючийРахунок].ToString() ?? "", /**/
-                        ВидРухуКоштів = Перелічення.ПсевдонімиПерелічення.ВидиРухуКоштів_Alias( ((Перелічення.ВидиРухуКоштів)(Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] != DBNull.Value ? Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] : 0)) ) /**/
+                        Назва = Fields[СтаттяРухуКоштів_Const.Назва].ToString() ?? "",
+                        Код = Fields[СтаттяРухуКоштів_Const.Код].ToString() ?? "",
+                        КореспондуючийРахунок = Fields[СтаттяРухуКоштів_Const.КореспондуючийРахунок].ToString() ?? "",
+                        ВидРухуКоштів = Перелічення.ПсевдонімиПерелічення.ВидиРухуКоштів_Alias( ((Перелічення.ВидиРухуКоштів)(Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] != DBNull.Value ? Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] : 0)) ),
                         
                     };
 
@@ -5983,9 +6262,14 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6037,7 +6321,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[СтаттяРухуКоштів_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[СтаттяРухуКоштів_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -6095,9 +6379,14 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Номер*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6149,7 +6438,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "" /**/
+                        Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "",
                         
                     };
 
@@ -6202,9 +6491,14 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Номер*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6256,7 +6550,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "" /**/
+                        Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "",
                         
                     };
 
@@ -6326,13 +6620,18 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Дата*/
             treeView.AppendColumn(new TreeViewColumn("ТипДокументу", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ТипДокументу*/
             treeView.AppendColumn(new TreeViewColumn("ПоступленняТоварівТаПослуг", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ПоступленняТоварівТаПослуг*/
             treeView.AppendColumn(new TreeViewColumn("ВведенняЗалишків", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*ВведенняЗалишків*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6402,11 +6701,11 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        ПоступленняТоварівТаПослуг = Fields["join_tab_1_field_1"].ToString() ?? "", /*ПоступленняТоварівТаПослуг*/
-                        ВведенняЗалишків = Fields["join_tab_2_field_1"].ToString() ?? "", /*ВведенняЗалишків*/
-                        Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "", /**/
-                        Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "", /**/
-                        ТипДокументу = Перелічення.ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_Alias( ((Перелічення.ТипДокументуПартіяТоварівКомпозит)(Fields[ПартіяТоварівКомпозит_Const.ТипДокументу] != DBNull.Value ? Fields[ПартіяТоварівКомпозит_Const.ТипДокументу] : 0)) ) /**/
+                        ПоступленняТоварівТаПослуг = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        ВведенняЗалишків = Fields["join_tab_2_field_1"].ToString() ?? "",
+                        Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "",
+                        Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "",
+                        ТипДокументу = Перелічення.ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_Alias( ((Перелічення.ТипДокументуПартіяТоварівКомпозит)(Fields[ПартіяТоварівКомпозит_Const.ТипДокументу] != DBNull.Value ? Fields[ПартіяТоварівКомпозит_Const.ТипДокументу] : 0)) ),
                         
                     };
 
@@ -6462,10 +6761,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Дата*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6518,8 +6822,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "", /**/
-                        Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "" /**/
+                        Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "",
+                        Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "",
                         
                     };
 
@@ -6580,10 +6884,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6636,8 +6945,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ВидиЗапасів_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ВидиЗапасів_Const.Код].ToString() ?? "",
+                        Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -6693,10 +7002,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6749,8 +7063,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[ВидиЗапасів_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[ВидиЗапасів_Const.Код].ToString() ?? "",
+                        Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -6862,7 +7176,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Повна назва", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ПовнаНазва*/
@@ -6883,6 +7198,10 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("КодСтатусу", new CellRendererText() { Xpad = 4 }, "text", 19) { MinWidth = 20, Resizable = true, SortColumnId = 19 } ); /*КодСтатусу*/
             treeView.AppendColumn(new TreeViewColumn("ДатаЗапису", new CellRendererText() { Xpad = 4 }, "text", 20) { MinWidth = 20, Resizable = true, SortColumnId = 20 } ); /*ДатаЗапису*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -6952,25 +7271,25 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Банки_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Банки_Const.Назва].ToString() ?? "", /**/
-                        ПовнаНазва = Fields[Банки_Const.ПовнаНазва].ToString() ?? "", /**/
-                        КодМФО = Fields[Банки_Const.КодМФО].ToString() ?? "", /**/
-                        КодЄДРПОУ = Fields[Банки_Const.КодЄДРПОУ].ToString() ?? "", /**/
-                        НомерЛіцензії = Fields[Банки_Const.НомерЛіцензії].ToString() ?? "", /**/
-                        ДатаЛіцензії = Fields[Банки_Const.ДатаЛіцензії].ToString() ?? "", /**/
-                        Статус = Fields[Банки_Const.Статус].ToString() ?? "", /**/
-                        ТипНаселеногоПункту = Fields[Банки_Const.ТипНаселеногоПункту].ToString() ?? "", /**/
-                        УнікальнийКодБанку = Fields[Банки_Const.УнікальнийКодБанку].ToString() ?? "", /**/
-                        ПоштовийІндекс = Fields[Банки_Const.ПоштовийІндекс].ToString() ?? "", /**/
-                        НазваНаселеногоПункту = Fields[Банки_Const.НазваНаселеногоПункту].ToString() ?? "", /**/
-                        Адреса = Fields[Банки_Const.Адреса].ToString() ?? "", /**/
-                        НомерТелефону = Fields[Банки_Const.НомерТелефону].ToString() ?? "", /**/
-                        ДатаВідкриттяУстанови = Fields[Банки_Const.ДатаВідкриттяУстанови].ToString() ?? "", /**/
-                        ДатаЗакриттяУстанови = Fields[Банки_Const.ДатаЗакриттяУстанови].ToString() ?? "", /**/
-                        КодНБУ = Fields[Банки_Const.КодНБУ].ToString() ?? "", /**/
-                        КодСтатусу = Fields[Банки_Const.КодСтатусу].ToString() ?? "", /**/
-                        ДатаЗапису = Fields[Банки_Const.ДатаЗапису].ToString() ?? "" /**/
+                        Код = Fields[Банки_Const.Код].ToString() ?? "",
+                        Назва = Fields[Банки_Const.Назва].ToString() ?? "",
+                        ПовнаНазва = Fields[Банки_Const.ПовнаНазва].ToString() ?? "",
+                        КодМФО = Fields[Банки_Const.КодМФО].ToString() ?? "",
+                        КодЄДРПОУ = Fields[Банки_Const.КодЄДРПОУ].ToString() ?? "",
+                        НомерЛіцензії = Fields[Банки_Const.НомерЛіцензії].ToString() ?? "",
+                        ДатаЛіцензії = Fields[Банки_Const.ДатаЛіцензії].ToString() ?? "",
+                        Статус = Fields[Банки_Const.Статус].ToString() ?? "",
+                        ТипНаселеногоПункту = Fields[Банки_Const.ТипНаселеногоПункту].ToString() ?? "",
+                        УнікальнийКодБанку = Fields[Банки_Const.УнікальнийКодБанку].ToString() ?? "",
+                        ПоштовийІндекс = Fields[Банки_Const.ПоштовийІндекс].ToString() ?? "",
+                        НазваНаселеногоПункту = Fields[Банки_Const.НазваНаселеногоПункту].ToString() ?? "",
+                        Адреса = Fields[Банки_Const.Адреса].ToString() ?? "",
+                        НомерТелефону = Fields[Банки_Const.НомерТелефону].ToString() ?? "",
+                        ДатаВідкриттяУстанови = Fields[Банки_Const.ДатаВідкриттяУстанови].ToString() ?? "",
+                        ДатаЗакриттяУстанови = Fields[Банки_Const.ДатаЗакриттяУстанови].ToString() ?? "",
+                        КодНБУ = Fields[Банки_Const.КодНБУ].ToString() ?? "",
+                        КодСтатусу = Fields[Банки_Const.КодСтатусу].ToString() ?? "",
+                        ДатаЗапису = Fields[Банки_Const.ДатаЗапису].ToString() ?? "",
                         
                     };
 
@@ -7026,10 +7345,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -7082,8 +7406,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Банки_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Банки_Const.Назва].ToString() ?? "" /**/
+                        Код = Fields[Банки_Const.Код].ToString() ?? "",
+                        Назва = Fields[Банки_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -7147,11 +7471,16 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Склад*/
             treeView.AppendColumn(new TreeViewColumn("Налаштування", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*НалаштуванняАдресногоЗберігання*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -7212,9 +7541,9 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Склад = Fields["join_tab_1_field_1"].ToString() ?? "", /*Склад*/
-                        Назва = Fields[СкладськіПриміщення_Const.Назва].ToString() ?? "", /**/
-                        НалаштуванняАдресногоЗберігання = Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Alias( ((Перелічення.НалаштуванняАдресногоЗберігання)(Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] : 0)) ) /**/
+                        Склад = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Назва = Fields[СкладськіПриміщення_Const.Назва].ToString() ?? "",
+                        НалаштуванняАдресногоЗберігання = Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Alias( ((Перелічення.НалаштуванняАдресногоЗберігання)(Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] : 0)) ),
                         
                     };
 
@@ -7270,10 +7599,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Склад*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -7333,8 +7667,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Склад = Fields["join_tab_1_field_1"].ToString() ?? "", /*Склад*/
-                        Назва = Fields[СкладськіПриміщення_Const.Назва].ToString() ?? "" /**/
+                        Склад = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Назва = Fields[СкладськіПриміщення_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -7416,7 +7750,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Приміщення*/
             treeView.AppendColumn(new TreeViewColumn("Лінія", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Лінія*/
@@ -7427,6 +7762,10 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Типорозмір", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*Типорозмір*/
             treeView.AppendColumn(new TreeViewColumn("Папка", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true, SortColumnId = 10 } ); /*Папка*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -7507,15 +7846,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Приміщення = Fields["join_tab_1_field_1"].ToString() ?? "", /*Приміщення*/
-                        Типорозмір = Fields["join_tab_2_field_1"].ToString() ?? "", /*Типорозмір*/
-                        Папка = Fields["join_tab_3_field_1"].ToString() ?? "", /*Папка*/
-                        Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "", /**/
-                        Лінія = Fields[СкладськіКомірки_Const.Лінія].ToString() ?? "", /**/
-                        Позиція = Fields[СкладськіКомірки_Const.Позиція].ToString() ?? "", /**/
-                        Стелаж = Fields[СкладськіКомірки_Const.Стелаж].ToString() ?? "", /**/
-                        Ярус = Fields[СкладськіКомірки_Const.Ярус].ToString() ?? "", /**/
-                        ТипСкладськоїКомірки = Перелічення.ПсевдонімиПерелічення.ТипиСкладськихКомірок_Alias( ((Перелічення.ТипиСкладськихКомірок)(Fields[СкладськіКомірки_Const.ТипСкладськоїКомірки] != DBNull.Value ? Fields[СкладськіКомірки_Const.ТипСкладськоїКомірки] : 0)) ) /**/
+                        Приміщення = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Типорозмір = Fields["join_tab_2_field_1"].ToString() ?? "",
+                        Папка = Fields["join_tab_3_field_1"].ToString() ?? "",
+                        Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "",
+                        Лінія = Fields[СкладськіКомірки_Const.Лінія].ToString() ?? "",
+                        Позиція = Fields[СкладськіКомірки_Const.Позиція].ToString() ?? "",
+                        Стелаж = Fields[СкладськіКомірки_Const.Стелаж].ToString() ?? "",
+                        Ярус = Fields[СкладськіКомірки_Const.Ярус].ToString() ?? "",
+                        ТипСкладськоїКомірки = Перелічення.ПсевдонімиПерелічення.ТипиСкладськихКомірок_Alias( ((Перелічення.ТипиСкладськихКомірок)(Fields[СкладськіКомірки_Const.ТипСкладськоїКомірки] != DBNull.Value ? Fields[СкладськіКомірки_Const.ТипСкладськоїКомірки] : 0)) ),
                         
                     };
 
@@ -7571,10 +7910,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Приміщення*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -7634,8 +7978,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Приміщення = Fields["join_tab_1_field_1"].ToString() ?? "", /*Приміщення*/
-                        Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "" /**/
+                        Приміщення = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -7696,10 +8040,15 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Приміщення*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -7759,8 +8108,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Приміщення = Fields["join_tab_1_field_1"].ToString() ?? "", /*Приміщення*/
-                        Назва = Fields[ОбластьЗберігання_Const.Назва].ToString() ?? "" /**/
+                        Приміщення = Fields["join_tab_1_field_1"].ToString() ?? "",
+                        Назва = Fields[ОбластьЗберігання_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -7833,7 +8182,8 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Висота", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Висота*/
             treeView.AppendColumn(new TreeViewColumn("Глибина", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Глибина*/
@@ -7841,6 +8191,10 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
             treeView.AppendColumn(new TreeViewColumn("Обєм", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Обєм*/
             treeView.AppendColumn(new TreeViewColumn("Ширина", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Ширина*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -7897,12 +8251,12 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[ТипорозміриКомірок_Const.Назва].ToString() ?? "", /**/
-                        Висота = Fields[ТипорозміриКомірок_Const.Висота].ToString() ?? "", /**/
-                        Глибина = Fields[ТипорозміриКомірок_Const.Глибина].ToString() ?? "", /**/
-                        Вантажопідйомність = Fields[ТипорозміриКомірок_Const.Вантажопідйомність].ToString() ?? "", /**/
-                        Обєм = Fields[ТипорозміриКомірок_Const.Обєм].ToString() ?? "", /**/
-                        Ширина = Fields[ТипорозміриКомірок_Const.Ширина].ToString() ?? "" /**/
+                        Назва = Fields[ТипорозміриКомірок_Const.Назва].ToString() ?? "",
+                        Висота = Fields[ТипорозміриКомірок_Const.Висота].ToString() ?? "",
+                        Глибина = Fields[ТипорозміриКомірок_Const.Глибина].ToString() ?? "",
+                        Вантажопідйомність = Fields[ТипорозміриКомірок_Const.Вантажопідйомність].ToString() ?? "",
+                        Обєм = Fields[ТипорозміриКомірок_Const.Обєм].ToString() ?? "",
+                        Ширина = Fields[ТипорозміриКомірок_Const.Ширина].ToString() ?? "",
                         
                     };
 
@@ -7955,9 +8309,14 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -8009,7 +8368,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Назва = Fields[ТипорозміриКомірок_Const.Назва].ToString() ?? "" /**/
+                        Назва = Fields[ТипорозміриКомірок_Const.Назва].ToString() ?? "",
                         
                     };
 
@@ -8382,11 +8741,16 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ДатаЗапису*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -8440,9 +8804,9 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Блокнот_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Блокнот_Const.Назва].ToString() ?? "", /**/
-                        ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "" /**/
+                        Код = Fields[Блокнот_Const.Код].ToString() ?? "",
+                        Назва = Fields[Блокнот_Const.Назва].ToString() ?? "",
+                        ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "",
                         
                     };
 
@@ -8501,11 +8865,16 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            /* */
+
+            /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ДатаЗапису*/
             
+
+            /* Додаткові поля */
+            
+
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
         }
@@ -8559,9 +8928,9 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
                     {
                         ID = cur.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Блокнот_Const.Код].ToString() ?? "", /**/
-                        Назва = Fields[Блокнот_Const.Назва].ToString() ?? "", /**/
-                        ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "" /**/
+                        Код = Fields[Блокнот_Const.Код].ToString() ?? "",
+                        Назва = Fields[Блокнот_Const.Назва].ToString() ?? "",
+                        ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "",
                         
                     };
 

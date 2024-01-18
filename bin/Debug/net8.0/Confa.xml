@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>18.01.2024 14:05:36</DateTimeSave>
+  <DateTimeSave>18.01.2024 15:06:56</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1368,7 +1368,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       </TabularParts>
       <TabularLists>
         <TabularList>
-          <Name>ЗаписиПрототип</Name>
+          <Name>Записи</Name>
           <Desc>
           </Desc>
           <IsTree>0</IsTree>
@@ -1427,17 +1427,18 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Size>0</Size>
               <SortNum>1</SortNum>
               <Type>string</Type>
-              <Value>(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
-	(
+              <Value><![CDATA[(
+    CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
+    (
         WITH Залишки AS 
         (
             SELECT
-                ТовариНаСкладах.{ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура,
-                SUM(ТовариНаСкладах.{ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
             FROM
-                {ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
+                {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах
             WHERE
-                ТовариНаСкладах.{ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+                ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
             GROUP BY Номенклатура
         )
         SELECT 
@@ -1445,26 +1446,28 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         FROM 
             Залишки
     )
-END)</Value>
+    END
+)]]></Value>
             </AdditionalField>
             <AdditionalField>
-              <Visible>False</Visible>
+              <Visible>True</Visible>
               <Name>ЗалишокВКомірках</Name>
               <Caption>В комірках</Caption>
               <Size>0</Size>
               <SortNum>2</SortNum>
               <Type>string</Type>
-              <Value>(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
+              <Value><![CDATA[(
+    CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN
 	(
         WITH Залишки AS 
         (
             SELECT
-                ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура,
-                SUM(ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
+                ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура,
+                SUM(ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності
             FROM
-                {ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках
+                {РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках
             WHERE
-                ТовариВКомірках.{ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
+                ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid
             GROUP BY Номенклатура
         )
         SELECT 
@@ -1472,7 +1475,8 @@ END)</Value>
         FROM 
             Залишки
     )
-END)</Value>
+    END
+)]]></Value>
             </AdditionalField>
           </Fields>
         </TabularList>
@@ -3935,7 +3939,7 @@ END)</Value>
       <TabularParts />
       <TabularLists>
         <TabularList>
-          <Name>ЗаписиПрототип</Name>
+          <Name>Записи</Name>
           <Desc>
           </Desc>
           <IsTree>0</IsTree>
@@ -3978,6 +3982,22 @@ END)</Value>
                 <field>Довідники.Валюти_Const.Назва</field>
               </FieldAndAlias>
             </Field>
+            <AdditionalField>
+              <Visible>True</Visible>
+              <Name>Залишок</Name>
+              <Caption>field</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Value><![CDATA[(
+    SELECT
+        ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума
+    FROM
+        {РегістриНакопичення.РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів
+    WHERE
+        РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid
+)]]></Value>
+            </AdditionalField>
           </Fields>
         </TabularList>
         <TabularList>
@@ -24901,13 +24921,13 @@ SQL тип  непотрібно вказувати
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ТовариНаСкладах_Залишки_TablePart.TABLE}
 WHERE 
     {ТовариНаСкладах_Залишки_TablePart.TABLE}.{ТовариНаСкладах_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ТовариНаСкладах_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -24963,18 +24983,18 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}
 WHERE 
     {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ТовариНаСкладах_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
@@ -25050,15 +25070,15 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>Підсумки</Name>
           <FinalCalculation>1</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM {ТовариНаСкладах_Підсумки_TablePart.TABLE}
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ТовариНаСкладах_Підсумки_TablePart.TABLE} 
 (
     uid,
@@ -25099,7 +25119,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -25264,13 +25284,13 @@ HAVING
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}
 WHERE 
     {ЗамовленняКлієнтів_Залишки_TablePart.TABLE}.{ЗамовленняКлієнтів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ЗамовленняКлієнтів_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -25326,7 +25346,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -25501,13 +25521,13 @@ HAVING
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}
 WHERE 
     {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE}.{РозрахункиЗКлієнтами_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {РозрахункиЗКлієнтами_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -25546,18 +25566,18 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}
 WHERE 
     {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {РозрахункиЗКлієнтами_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
@@ -25606,7 +25626,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -25831,13 +25851,13 @@ HAVING
         <QueryBlock>
           <Name>Обороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {Закупівлі_Обороти_TablePart.TABLE}
 WHERE 
     {Закупівлі_Обороти_TablePart.TABLE}.{Закупівлі_Обороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {Закупівлі_Обороти_TablePart.TABLE} 
 (
     uid,
@@ -25884,7 +25904,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -26065,13 +26085,13 @@ HAVING
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ВільніЗалишки_Залишки_TablePart.TABLE}
 WHERE 
     {ВільніЗалишки_Залишки_TablePart.TABLE}.{ВільніЗалишки_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ВільніЗалишки_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -26138,7 +26158,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -26286,13 +26306,13 @@ HAVING
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}
 WHERE 
     {ЗамовленняПостачальникам_Залишки_TablePart.TABLE}.{ЗамовленняПостачальникам_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ЗамовленняПостачальникам_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -26335,7 +26355,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -26509,13 +26529,13 @@ HAVING
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}
 WHERE 
     {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE}.{РозрахункиЗПостачальниками_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {РозрахункиЗПостачальниками_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -26554,18 +26574,18 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}
 WHERE 
     {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE}.{РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {РозрахункиЗПостачальниками_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
@@ -26614,7 +26634,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -26862,13 +26882,13 @@ HAVING
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {РухКоштів_Залишки_TablePart.TABLE}
 WHERE 
     {РухКоштів_Залишки_TablePart.TABLE}.{РухКоштів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {РухКоштів_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -26909,18 +26929,18 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}
 WHERE 
     {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE}.{РухКоштів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {РухКоштів_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
@@ -26971,15 +26991,15 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>Підсумки</Name>
           <FinalCalculation>1</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM {РухКоштів_Підсумки_TablePart.TABLE}
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {РухКоштів_Підсумки_TablePart.TABLE} 
 (
     uid,
@@ -27011,7 +27031,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -27464,13 +27484,13 @@ HAVING
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ПартіїТоварів_Залишки_TablePart.TABLE}
 WHERE 
     {ПартіїТоварів_Залишки_TablePart.TABLE}.{ПартіїТоварів_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ПартіїТоварів_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -27532,18 +27552,18 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}
 WHERE 
     {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE}.{ПартіїТоварів_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ПартіїТоварів_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
@@ -27625,15 +27645,15 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>Підсумки</Name>
           <FinalCalculation>1</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM {ПартіїТоварів_Підсумки_TablePart.TABLE}
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ПартіїТоварів_Підсумки_TablePart.TABLE} 
 (
     uid,
@@ -27671,7 +27691,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -27915,13 +27935,13 @@ HAVING
         <QueryBlock>
           <Name>Обороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {Продажі_Обороти_TablePart.TABLE}
 WHERE 
     {Продажі_Обороти_TablePart.TABLE}.{Продажі_Обороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {Продажі_Обороти_TablePart.TABLE} 
 (
     uid,
@@ -27971,7 +27991,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
@@ -28299,13 +28319,13 @@ HAVING
         <QueryBlock>
           <Name>ЗалишкиТаОбороти</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE}
 WHERE 
     {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE}.{ТовариВКомірках_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ТовариВКомірках_ЗалишкиТаОбороти_TablePart.TABLE} 
 (
     uid,
@@ -28360,18 +28380,18 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>Залишки</Name>
           <FinalCalculation>0</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM 
     {ТовариВКомірках_Залишки_TablePart.TABLE}
 WHERE 
     {ТовариВКомірках_Залишки_TablePart.TABLE}.{ТовариВКомірках_Залишки_TablePart.Період} = @ПеріодДеньВідбір
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ТовариВКомірках_Залишки_TablePart.TABLE} 
 (
     uid,
@@ -28416,15 +28436,15 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
         <QueryBlock>
           <Name>Підсумки</Name>
           <FinalCalculation>1</FinalCalculation>
-          <Query position="0" key="DELETE">
+          <Query position="0" key="DELETE"><![CDATA[
 DELETE FROM {ТовариВКомірках_Підсумки_TablePart.TABLE}
-</Query>
-          <Query position="1" key="SELECT">
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
 INSERT INTO {ТовариВКомірках_Підсумки_TablePart.TABLE} 
 (
     uid,
@@ -28460,7 +28480,7 @@ HAVING
 
 
 
-</Query>
+]]></Query>
         </QueryBlock>
       </QueryBlockList>
     </RegisterAccumulation>
