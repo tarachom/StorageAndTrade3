@@ -167,7 +167,7 @@ namespace StorageAndTrade
                 bool isSpend = await ПсуванняТоварів_Objest.SpendTheDocument(ПсуванняТоварів_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПсуванняТоварів_Objest.UnigueID);
 
                 return isSpend;
             }

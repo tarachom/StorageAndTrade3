@@ -94,8 +94,9 @@ namespace StorageAndTrade
             SelectFileName = "";
 
             FileChooserDialog fc = new FileChooserDialog("Виберіть файл для загрузки", Program.GeneralForm,
-                FileChooserAction.Open, "Закрити", ResponseType.Cancel, "Вибрати", ResponseType.Accept) { Filter = new FileFilter() };
-                
+                FileChooserAction.Open, "Закрити", ResponseType.Cancel, "Вибрати", ResponseType.Accept)
+            { Filter = new FileFilter() };
+
             fc.Filter.AddPattern("*.*");
 
             if (fc.Run() == (int)ResponseType.Accept)
@@ -212,6 +213,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
+                return;
             }
 
             //Перечитати

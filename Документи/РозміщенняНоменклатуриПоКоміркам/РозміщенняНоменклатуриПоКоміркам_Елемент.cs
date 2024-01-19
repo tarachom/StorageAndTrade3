@@ -161,7 +161,7 @@ namespace StorageAndTrade
                 bool isSpend = await РозміщенняНоменклатуриПоКоміркам_Objest.SpendTheDocument(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(РозміщенняНоменклатуриПоКоміркам_Objest.UnigueID);
 
                 return isSpend;
             }

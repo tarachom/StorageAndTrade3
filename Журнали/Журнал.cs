@@ -387,7 +387,7 @@ namespace StorageAndTrade
 
                         object? documentObjestSpend = documentObjest.GetType().InvokeMember("SpendTheDocumentSync", BindingFlags.InvokeMethod, null, documentObjest, [dateDoc]);
                         if (documentObjestSpend != null && !(bool)documentObjestSpend)
-                            ФункціїДляПовідомлень.ВідкритиТермінал();
+                            ФункціїДляПовідомлень.ПоказатиПовідомлення(unigueID);
                     }
                     else
                         documentObjest.GetType().InvokeMember("ClearSpendTheDocumentSync", BindingFlags.InvokeMethod, null, documentObjest, null);

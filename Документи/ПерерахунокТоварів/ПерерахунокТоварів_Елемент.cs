@@ -163,7 +163,7 @@ namespace StorageAndTrade
                 bool isSpend = await ПерерахунокТоварів_Objest.SpendTheDocument(ПерерахунокТоварів_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПерерахунокТоварів_Objest.UnigueID);
 
                 return isSpend;
             }

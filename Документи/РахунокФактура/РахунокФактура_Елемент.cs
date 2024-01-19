@@ -283,7 +283,7 @@ namespace StorageAndTrade
                 bool isSpend = await РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(РахунокФактура_Objest.UnigueID);
 
                 return isSpend;
             }

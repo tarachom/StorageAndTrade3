@@ -65,22 +65,46 @@ namespace StorageAndTrade
 
         void CreateMessage(Dictionary<string, object> row)
         {
-            //Дата
-            HBox hBoxDate = new HBox();
-            hBoxDate.PackStart(new Label(row["Дата"].ToString() + "\t" + "[ " + row["НазваПроцесу"].ToString() + " ]\t" + row["НазваОбєкту"].ToString()), false, false, 5);
-            vBoxMessage.PackStart(hBoxDate, false, false, 5);
-
-            HBox hBoxInfo = new HBox();
-            hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
-            vBoxMessage.PackStart(hBoxInfo, false, false, 10);
-
             VBox vBoxInfo = new VBox();
-            hBoxInfo.PackStart(vBoxInfo, false, false, 10);
+
+            //Image
+            {
+                HBox hBox = new HBox();
+                hBox.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
+                hBox.PackStart(vBoxInfo, false, false, 10);
+                vBoxMessage.PackStart(hBox, false, false, 10);
+            }
+
+            //Перший рядок
+            {
+                HBox hBox = new HBox();
+                Label line = new Label("<i>" + row["Обєкт"].ToString() + " " + row["Дата"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
+                {
+                    UseMarkup = true
+                };
+
+                hBox.PackStart(line, false, false, 5);
+                vBoxInfo.PackStart(hBox, false, false, 5);
+            }
+
+            //Другий рядок
+            {
+                HBox hBox = new HBox();
+                Label line = new Label("<b>" + row["НазваОбєкту"].ToString() + "</b>")
+                {
+                    UseMarkup = true
+                };
+
+                hBox.PackStart(line, false, false, 5);
+                vBoxInfo.PackStart(hBox, false, false, 5);
+            }
 
             //Повідомлення
-            HBox hBoxMessage = new HBox();
-            hBoxMessage.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
-            vBoxInfo.PackStart(hBoxMessage, false, false, 5);
+            {
+                HBox hBox = new HBox();
+                hBox.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
+                vBoxInfo.PackStart(hBox, false, false, 5);
+            }
 
             //Для відкриття
             {
@@ -104,5 +128,76 @@ namespace StorageAndTrade
             await LoadRecords();
         }
 
+    }
+
+    class СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід : VBox
+    {
+        VBox vBoxMessage = new VBox();
+
+        public СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід(int width = 800, int height = 400) : base()
+        {
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = width, HeightRequest = height };
+            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scroll.Add(vBoxMessage);
+
+            PackStart(scroll, true, true, 0);
+            ShowAll();
+        }
+
+        public async ValueTask LoadRecords(UnigueID? ВідбірПоОбєкту = null)
+        {
+            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(ВідбірПоОбєкту);
+
+            foreach (Dictionary<string, object> row in record.ListRow)
+                CreateMessage(row);
+
+            vBoxMessage.ShowAll();
+        }
+
+        void CreateMessage(Dictionary<string, object> row)
+        {
+            VBox vBoxInfo = new VBox();
+
+            //Image
+            {
+                HBox hBox = new HBox();
+                hBox.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
+                hBox.PackStart(vBoxInfo, false, false, 10);
+                vBoxMessage.PackStart(hBox, false, false, 10);
+            }
+
+            //Перший рядок
+            {
+                HBox hBox = new HBox();
+                Label line = new Label("<i>" + row["Час"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
+                {
+                    UseMarkup = true
+                };
+
+                hBox.PackStart(line, false, false, 5);
+                vBoxInfo.PackStart(hBox, false, false, 5);
+            }
+
+            //Другий рядок
+            {
+                HBox hBox = new HBox();
+                Label line = new Label("<b>" + row["НазваОбєкту"].ToString() + "</b>")
+                {
+                    UseMarkup = true
+                };
+
+                hBox.PackStart(line, false, false, 5);
+                vBoxInfo.PackStart(hBox, false, false, 5);
+            }
+
+            //Повідомлення
+            {
+                HBox hBox = new HBox();
+                hBox.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
+                vBoxInfo.PackStart(hBox, false, false, 5);
+            }
+
+            vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
+        }
     }
 }

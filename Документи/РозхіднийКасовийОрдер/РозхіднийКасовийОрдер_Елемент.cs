@@ -316,7 +316,7 @@ namespace StorageAndTrade
                 bool isSpend = await РозхіднийКасовийОрдер_Objest.SpendTheDocument(РозхіднийКасовийОрдер_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(РозхіднийКасовийОрдер_Objest.UnigueID);
 
                 return isSpend;
             }

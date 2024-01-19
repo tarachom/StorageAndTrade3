@@ -320,7 +320,7 @@ namespace StorageAndTrade
                 bool isSpend = await ЗамовленняКлієнта_Objest.SpendTheDocument(ЗамовленняКлієнта_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ЗамовленняКлієнта_Objest.UnigueID);
 
                 return isSpend;
             }

@@ -153,7 +153,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await РозміщенняНоменклатуриПоКоміркам_Objest.SpendTheDocument(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(РозміщенняНоменклатуриПоКоміркам_Objest.UnigueID);
             }
             else
                 await РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();

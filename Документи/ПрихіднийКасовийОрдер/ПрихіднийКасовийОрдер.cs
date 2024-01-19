@@ -152,7 +152,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПрихіднийКасовийОрдер_Objest.UnigueID);
             }
             else
                 await ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();

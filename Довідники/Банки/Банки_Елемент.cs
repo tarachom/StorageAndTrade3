@@ -201,6 +201,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
+                return;
             }
 
             UnigueID = Банки_Objest.UnigueID;

@@ -194,6 +194,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
+                return;
             }
 
             await Файли.SaveRecords();

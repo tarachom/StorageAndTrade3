@@ -37,6 +37,9 @@ namespace StorageAndTrade
         Statusbar statusBar = new Statusbar();
         List<string> historyNotebookSwitchList = []; //Список для збереження історії послідовності відкриття вкладок
 
+        //Кнопка виводу повідомлень
+        public Button buttonTerminal;
+
         public FormStorageAndTrade() : base("")
         {
             SetDefaultSize(1200, 900);
@@ -58,8 +61,8 @@ namespace StorageAndTrade
                 };
 
                 //Повідомлення
-                Button buttonTerminal = new Button() { Image = new Image(Stock.Index, IconSize.Button), TooltipText = "Повідомлення" };
-                buttonTerminal.Clicked += (object? sender, EventArgs args) => { ФункціїДляПовідомлень.ВідкритиТермінал(); };
+                buttonTerminal = new Button() { Image = new Image(Stock.Index, IconSize.Button), TooltipText = "Повідомлення" };
+                buttonTerminal.Clicked += (object? sender, EventArgs args) => { ФункціїДляПовідомлень.ВідкритиПовідомлення(); };
                 headerBar.PackEnd(buttonTerminal);
 
                 //Повнотекстовий пошук

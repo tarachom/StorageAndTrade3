@@ -264,7 +264,7 @@ namespace StorageAndTrade
                 bool isSpend = await ПоверненняТоварівВідКлієнта_Objest.SpendTheDocument(ПоверненняТоварівВідКлієнта_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПоверненняТоварівВідКлієнта_Objest.UnigueID);
 
                 return isSpend;
             }

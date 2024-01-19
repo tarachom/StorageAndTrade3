@@ -147,7 +147,7 @@ namespace StorageAndTrade
         public override async void SetValue()
         {
             if (IsNew)
-               await ДоговориКонтрагентів_Objest.New();
+                await ДоговориКонтрагентів_Objest.New();
 
             Код.Text = ДоговориКонтрагентів_Objest.Код;
             Назва.Text = ДоговориКонтрагентів_Objest.Назва;
@@ -204,6 +204,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
+                return;
             }
 
             UnigueID = ДоговориКонтрагентів_Objest.UnigueID;

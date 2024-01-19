@@ -299,7 +299,7 @@ namespace StorageAndTrade
         protected async void MsgError(Exception ex)
         {
             await ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис", UnigueID?.UGuid, "Документи", Caption, ex.Message + "\n" + ex.StackTrace + "\n" + ex.Source);
-            ФункціїДляПовідомлень.ВідкритиТермінал();
+            ФункціїДляПовідомлень.ПоказатиПовідомлення();
 
             Message.Info(Program.GeneralForm, "Не вдалось записати");
         }

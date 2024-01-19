@@ -27,9 +27,11 @@ limitations under the License.
 
 */
 
-using Конфа = StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
+using Gtk;
 using AccountingSoftware;
+
+using StorageAndTrade_1_0;
+using StorageAndTrade_1_0.Константи;
 
 namespace StorageAndTrade
 {
@@ -37,19 +39,18 @@ namespace StorageAndTrade
     {
         public static async ValueTask ДодатиПовідомленняПроПомилку(DateTime Дата, string НазваПроцесу, Guid? Обєкт, string ТипОбєкту, string НазваОбєкту, string Повідомлення)
         {
-            Системні.ПовідомленняТаПомилки_Помилки_TablePart повідомленняТаПомилки_Помилки_TablePart =
-                new Системні.ПовідомленняТаПомилки_Помилки_TablePart();
+            Системні.ПовідомленняТаПомилки_Помилки_TablePart повідомленняТаПомилки_Помилки_TablePart = new();
+            Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record record = new()
+            {
+                Дата = Дата,
+                НазваПроцесу = НазваПроцесу,
+                Обєкт = Обєкт != null ? (Guid)Обєкт : Guid.Empty,
+                ТипОбєкту = ТипОбєкту,
+                НазваОбєкту = НазваОбєкту,
+                Повідомлення = Повідомлення
+            };
 
-            Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record record = new Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record();
             повідомленняТаПомилки_Помилки_TablePart.Records.Add(record);
-
-            record.Дата = Дата;
-            record.НазваПроцесу = НазваПроцесу;
-            record.Обєкт = Обєкт != null ? (Guid)Обєкт : Guid.Empty;
-            record.ТипОбєкту = ТипОбєкту;
-            record.НазваОбєкту = НазваОбєкту;
-            record.Повідомлення = Повідомлення;
-
             await повідомленняТаПомилки_Помилки_TablePart.Save(false);
         }
 
@@ -58,14 +59,15 @@ namespace StorageAndTrade
             string query = $@"
 DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}";
 
-            await Конфа.Config.Kernel.DataBase.ExecuteSQL(query);
+            await Config.Kernel.DataBase.ExecuteSQL(query);
         }
 
-        public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилки()
+        public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилки(UnigueID? ВідбірПоОбєкту = null)
         {
             string query = $@"
 SELECT
     Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Дата} AS Дата,
+    to_char(Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Дата}, 'HH24:MI:SS') AS Час,
     Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.НазваПроцесу} AS НазваПроцесу,
     Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Обєкт} AS Обєкт,
     Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.ТипОбєкту} AS ТипОбєкту,
@@ -73,16 +75,35 @@ SELECT
     Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Повідомлення} AS Повідомлення
 FROM
     {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE} AS Помилки
-ORDER BY Дата DESC
 ";
-            return await Конфа.Config.Kernel.DataBase.SelectRequestAsync(query);
+            if (ВідбірПоОбєкту != null && !ВідбірПоОбєкту.IsEmpty())
+                query += $@"
+WHERE
+    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Обєкт} = '{ВідбірПоОбєкту}'
+";
+            query += $@"
+ORDER BY Дата DESC
+LIMIT 10
+";
+            return await Config.Kernel.DataBase.SelectRequestAsync(query);
         }
 
-        public static async void ВідкритиТермінал()
+        public static async void ВідкритиПовідомлення()
         {
             СпільніФорми_ВивідПовідомленняПроПомилки page = new СпільніФорми_ВивідПовідомленняПроПомилки();
             Program.GeneralForm?.CreateNotebookPage("Повідомлення", () => { return page; });
             await page.LoadRecords();
+        }
+
+        public static async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null)
+        {
+            СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід page = new();
+
+            Popover PopoverSmall = new Popover(Program.GeneralForm?.buttonTerminal) { Position = PositionType.Bottom, BorderWidth = 5 };
+            PopoverSmall.Add(page);
+            PopoverSmall.Show();
+
+            await page.LoadRecords(ВідбірПоОбєкту);
         }
     }
 }

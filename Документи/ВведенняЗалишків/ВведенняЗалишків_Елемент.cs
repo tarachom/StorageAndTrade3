@@ -271,7 +271,7 @@ namespace StorageAndTrade
                 bool isSpend = await ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ВідкритиТермінал();
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ВведенняЗалишків_Objest.UnigueID);
 
                 return isSpend;
             }
