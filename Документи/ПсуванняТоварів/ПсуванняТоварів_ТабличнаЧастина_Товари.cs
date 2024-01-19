@@ -84,8 +84,8 @@ namespace StorageAndTrade
 
             public object[] ToArray()
             {
-                return new object[]
-                {
+                return
+                [
                     НомерРядка,
                     Номенклатура.Назва,
                     Характеристика.Назва,
@@ -97,7 +97,7 @@ namespace StorageAndTrade
                     (float)Ціна,
                     (float)Сума,
                     Партія.Назва
-                };
+                ];
             }
 
             public static Запис Clone(Запис запис)

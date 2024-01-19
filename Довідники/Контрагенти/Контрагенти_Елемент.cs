@@ -118,16 +118,16 @@ namespace StorageAndTrade
         {
             try
             {
-                await Контрагенти_Objest.Save();
+                if (await Контрагенти_Objest.Save())
+                {
+                    await Контакти.SaveRecords();
+                    await Файли.SaveRecords();
+                }
             }
             catch (Exception ex)
             {
                 MsgError(ex);
-                return;
-            }
-
-            await Контакти.SaveRecords();
-            await Файли.SaveRecords();
+            }          
 
             UnigueID = Контрагенти_Objest.UnigueID;
             Caption = Назва.Text;

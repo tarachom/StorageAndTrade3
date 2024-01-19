@@ -146,20 +146,20 @@ namespace StorageAndTrade
 
         protected override async ValueTask<bool> Save()
         {
-            bool isSave;
+            bool isSave = false;
 
             try
             {
-                isSave = await ЗбіркаТоварівНаСкладі_Objest.Save();
+                if (await ЗбіркаТоварівНаСкладі_Objest.Save())
+                {
+                    await Товари.SaveRecords();
+                    isSave = true;
+                }
             }
             catch (Exception ex)
             {
                 MsgError(ex);
-                return false;
             }
-
-            if (isSave)
-                await Товари.SaveRecords();
 
             UnigueID = ЗбіркаТоварівНаСкладі_Objest.UnigueID;
             Caption = ЗбіркаТоварівНаСкладі_Objest.Назва;

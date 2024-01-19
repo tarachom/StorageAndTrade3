@@ -238,24 +238,22 @@ namespace StorageAndTrade
 
         protected override async ValueTask<bool> Save()
         {
-            bool isSave;
+            bool isSave = false;
 
             try
             {
-                isSave = await ВведенняЗалишків_Objest.Save();
+                if (await ВведенняЗалишків_Objest.Save())
+                {
+                    await Товари.SaveRecords();
+                    await Каси.SaveRecords();
+                    await БанківськіРахунки.SaveRecords();
+                    await РозрахункиЗКонтрагентами.SaveRecords();
+                    isSave = true;
+                }
             }
             catch (Exception ex)
             {
                 MsgError(ex);
-                return false;
-            }
-
-            if (isSave)
-            {
-                await Товари.SaveRecords();
-                await Каси.SaveRecords();
-                await БанківськіРахунки.SaveRecords();
-                await РозрахункиЗКонтрагентами.SaveRecords();
             }
 
             UnigueID = ВведенняЗалишків_Objest.UnigueID;

@@ -272,20 +272,20 @@ namespace StorageAndTrade
 
         protected override async ValueTask<bool> Save()
         {
-            bool isSave;
+            bool isSave = false;
 
             try
             {
-                isSave = await ПоверненняТоварівПостачальнику_Objest.Save();
+                if (await ПоверненняТоварівПостачальнику_Objest.Save())
+                {
+                    await Товари.SaveRecords();
+                    isSave = true;
+                }
             }
             catch (Exception ex)
             {
                 MsgError(ex);
-                return false;
             }
-
-            if (isSave)
-                await Товари.SaveRecords();
 
             UnigueID = ПоверненняТоварівПостачальнику_Objest.UnigueID;
             Caption = ПоверненняТоварівПостачальнику_Objest.Назва;

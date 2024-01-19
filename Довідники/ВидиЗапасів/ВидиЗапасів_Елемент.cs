@@ -73,7 +73,6 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
-                return;
             }
 
             UnigueID = ВидиЗапасів_Objest.UnigueID;

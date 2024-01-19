@@ -189,15 +189,13 @@ namespace StorageAndTrade
         {
             try
             {
-                await Номенклатура_Objest.Save();
+                if (await Номенклатура_Objest.Save())
+                    await Файли.SaveRecords();
             }
             catch (Exception ex)
             {
                 MsgError(ex);
-                return;
             }
-
-            await Файли.SaveRecords();
 
             UnigueID = Номенклатура_Objest.UnigueID;
             Caption = Назва.Text;

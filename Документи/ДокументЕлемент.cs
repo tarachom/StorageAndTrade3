@@ -265,7 +265,7 @@ namespace StorageAndTrade
             Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, false);
 
             bool isSave = await Save();
-            bool isSpend = await SpendTheDocument(isSave && spendDoc ? true : false);
+            bool isSpend = await SpendTheDocument(isSave && spendDoc);
 
             Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, true);
 

@@ -125,15 +125,13 @@ namespace StorageAndTrade
         {
             try
             {
-                await Організації_Objest.Save();
+                if (await Організації_Objest.Save())
+                    await Контакти.SaveRecords();
             }
             catch (Exception ex)
             {
                 MsgError(ex);
-                return;
             }
-
-            await Контакти.SaveRecords();
 
             UnigueID = Організації_Objest.UnigueID;
             Caption = Назва.Text;

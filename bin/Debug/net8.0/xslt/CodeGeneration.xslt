@@ -675,6 +675,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 {
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
+      <xsl:variable name="DirectoryTable" select="Table"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
@@ -814,13 +815,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
                 await <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-            await base.BaseDelete(<xsl:text>new string[] { </xsl:text>
-            <xsl:for-each select="TabularParts/TablePart">
-               <xsl:if test="position() != 1">
-                 <xsl:text>, </xsl:text>
-               </xsl:if>
-               <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
-            </xsl:for-each> });
+            await base.BaseDelete([<xsl:for-each select="TabularParts/TablePart">"<xsl:value-of select="Table"/>", </xsl:for-each>]);
         }
 
         /* синхронна функція для Delete() */
@@ -1011,6 +1006,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "<xsl:value-of select="$DirectoryTable"/>"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -1170,6 +1168,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 {
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
+      <xsl:variable name="DocumentTable" select="Table"/>
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
@@ -1653,6 +1652,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "<xsl:value-of select="$DocumentTable"/>"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)

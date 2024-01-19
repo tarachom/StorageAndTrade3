@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 18.01.2024 17:56:13
+ * Дата конфігурації: 19.01.2024 16:48:27
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1825,7 +1825,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Організації_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] { "tab_a02" });
+            await base.BaseDelete(["tab_a02", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -2011,6 +2011,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a01"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -2207,7 +2210,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Номенклатура_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] { "tab_b19" });
+            await base.BaseDelete(["tab_b19", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -2383,6 +2386,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a03"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -2519,7 +2525,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Виробники_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -2749,7 +2755,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ВидиНоменклатури_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -2978,7 +2984,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ПакуванняОдиниціВиміру_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -3210,7 +3216,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Валюти_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -3468,7 +3474,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Контрагенти_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] { "tab_a09", "tab_b20" });
+            await base.BaseDelete(["tab_a09", "tab_b20", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -3653,6 +3659,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -3745,6 +3754,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -3915,7 +3927,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Склади_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] { "tab_a11" });
+            await base.BaseDelete(["tab_a11", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -4100,6 +4112,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a10"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -4252,7 +4267,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ВидиЦін_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -4475,7 +4490,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ВидиЦінПостачальників_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -4718,7 +4733,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Користувачі_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] { "tab_a15" });
+            await base.BaseDelete(["tab_a15", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -4898,6 +4913,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a14"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -5068,7 +5086,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ФізичніОсоби_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] { "tab_a17" });
+            await base.BaseDelete(["tab_a17", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -5248,6 +5266,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a16"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -5398,7 +5419,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await СтруктураПідприємства_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -5617,7 +5638,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await КраїниСвіту_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -5851,7 +5872,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Файли_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -6081,7 +6102,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ХарактеристикиНоменклатури_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -6305,7 +6326,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Номенклатура_Папки_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -6528,7 +6549,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Контрагенти_Папки_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -6751,7 +6772,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Склади_Папки_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -6978,7 +6999,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Каси_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -7242,7 +7263,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await БанківськіРахункиОрганізацій_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -7543,7 +7564,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ДоговориКонтрагентів_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -7831,7 +7852,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await БанківськіРахункиКонтрагентів_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -8086,7 +8107,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await СтаттяРухуКоштів_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] { "tab_a46" });
+            await base.BaseDelete(["tab_a46", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -8254,6 +8275,9 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a45"))
+                throw new Exception("Owner not exist");
+                
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -8392,7 +8416,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await СеріїНоменклатури_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -8627,7 +8651,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ПартіяТоварівКомпозит_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -8869,7 +8893,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ВидиЗапасів_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -9196,7 +9220,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Банки_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -9444,7 +9468,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await СкладськіПриміщення_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -9695,7 +9719,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await СкладськіКомірки_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -9919,7 +9943,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask Delete()
         {
             
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -10152,7 +10176,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await ТипорозміриКомірок_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -10382,7 +10406,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await СкладськіКомірки_Папки_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -10614,7 +10638,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             
                 await Блокнот_Triggers.BeforeDelete(this);
-            await base.BaseDelete(new string[] {  });
+            await base.BaseDelete([]);
         }
 
         /* синхронна функція для Delete() */
@@ -12894,6 +12918,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a25"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -13809,6 +13836,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a32"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -14663,6 +14693,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a34"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -15575,6 +15608,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a36"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -16136,6 +16172,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a42"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -16788,6 +16827,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a44"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -17472,6 +17514,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a48"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -18183,6 +18228,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a31"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -18936,6 +18984,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a51"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -19653,6 +19704,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a53"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -20304,6 +20358,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a81"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -21059,6 +21116,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -21157,6 +21217,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -21243,6 +21306,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -21333,6 +21399,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -21856,6 +21925,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a88"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -22379,6 +22451,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a90"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -22955,6 +23030,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a92"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -23571,6 +23649,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a94"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -24204,6 +24285,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b07"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -24938,6 +25022,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b10"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -25533,6 +25620,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a64"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -26119,6 +26209,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b09"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -26710,6 +26803,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b27"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -27250,6 +27346,9 @@ namespace StorageAndTrade_1_0.Документи
         
         public async ValueTask Save(bool clear_all_before_save /*= true*/) 
         {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b29"))
+                throw new Exception("Owner not exist");
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)

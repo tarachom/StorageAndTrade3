@@ -85,7 +85,6 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
-                return;
             }
 
             UnigueID = БанківськіРахункиОрганізацій_Objest.UnigueID;

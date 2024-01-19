@@ -290,7 +290,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask<bool> Save()
         {
-            bool isSave;
+            bool isSave = false;
 
             try
             {
@@ -299,7 +299,6 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
-                return false;
             }
 
             UnigueID = ПрихіднийКасовийОрдер_Objest.UnigueID;
