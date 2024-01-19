@@ -181,6 +181,7 @@ namespace StorageAndTrade
                 Контрагенти_Objest Контрагенти_Objest_Новий = await Контрагенти_Objest.Copy(true);
                 await Контрагенти_Objest_Новий.Save();
                 await Контрагенти_Objest_Новий.Контакти_TablePart.Save(false);
+                await Контрагенти_Objest_Новий.Файли_TablePart.Save(false);
 
                 return Контрагенти_Objest_Новий.UnigueID;
             }
