@@ -38,8 +38,11 @@ namespace StorageAndTrade
 
             Button bClear = new Button("Очистити");
             bClear.Clicked += OnClear;
-
             hBoxTop.PackStart(bClear, false, false, 10);
+
+            Button bReload = new Button("Перечитати");
+            bReload.Clicked += OnReload;
+            hBoxTop.PackStart(bReload, false, false, 10);
 
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -78,7 +81,7 @@ namespace StorageAndTrade
             //Перший рядок
             {
                 HBox hBox = new HBox();
-                Label line = new Label("<i>" + row["Обєкт"].ToString() + " " + row["Дата"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
+                Label line = new Label("<i>" + row["Дата"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
                 {
                     UseMarkup = true
                 };
@@ -124,10 +127,14 @@ namespace StorageAndTrade
 
         async void OnClear(object? sender, EventArgs args)
         {
-            await ФункціїДляПовідомлень.ОчиститиПовідомлення();
+            await ФункціїДляПовідомлень.ОчиститиВсіПовідомлення();
             await LoadRecords();
         }
 
+        async void OnReload(object? sender, EventArgs args)
+        {
+            await LoadRecords();
+        }
     }
 
     class СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід : VBox
@@ -144,9 +151,9 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public async ValueTask LoadRecords(UnigueID? ВідбірПоОбєкту = null)
+        public async ValueTask LoadRecords(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
-            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(ВідбірПоОбєкту);
+            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(ВідбірПоОбєкту, limit);
 
             foreach (Dictionary<string, object> row in record.ListRow)
                 CreateMessage(row);

@@ -98,7 +98,6 @@ namespace StorageAndTrade
             ButtonSensitive(false);
 
             ClearMessage();
-            await ФункціїДляПовідомлень.ОчиститиПовідомлення();
 
             int counterDocs = 0;
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = true;
@@ -131,10 +130,10 @@ namespace StorageAndTrade
                             //Документ НЕ проведений Error
                             //
                             //Вивід помилок в окремому вікні
-                            ФункціїДляПовідомлень.ПоказатиПовідомлення(doc.UnigueID);
+                            ФункціїДляПовідомлень.ПоказатиПовідомлення(doc.UnigueID, 1);
 
                             //Додатково вивід у помилок у це вікно
-                            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки();
+                            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(doc.UnigueID, 1);
 
                             string msg = "";
                             foreach (Dictionary<string, object> row in record.ListRow)

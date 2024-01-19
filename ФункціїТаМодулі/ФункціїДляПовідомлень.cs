@@ -52,9 +52,12 @@ namespace StorageAndTrade
 
             повідомленняТаПомилки_Помилки_TablePart.Records.Add(record);
             await повідомленняТаПомилки_Помилки_TablePart.Save(false);
+
+            //Автоматичне видалення устарівших
+            await ОчиститиУстарівшіПовідомлення();
         }
 
-        public static async ValueTask ОчиститиПовідомлення()
+        public static async ValueTask ОчиститиВсіПовідомлення()
         {
             string query = $@"
 DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}";
@@ -62,7 +65,21 @@ DELETE FROM {Системні.ПовідомленняТаПомилки_Пом�
             await Config.Kernel.DataBase.ExecuteSQL(query);
         }
 
-        public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилки(UnigueID? ВідбірПоОбєкту = null)
+        public static async ValueTask ОчиститиУстарівшіПовідомлення()
+        {
+            string query = $@"
+DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}
+WHERE {Системні.ПовідомленняТаПомилки_Помилки_TablePart.Дата} < @Дата";
+
+            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            {
+                { "Дата", DateTime.Now.AddDays(-7) }
+            };
+
+            await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
+        }
+
+        public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилки(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
             string query = $@"
 SELECT
@@ -82,8 +99,10 @@ WHERE
     Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Обєкт} = '{ВідбірПоОбєкту}'
 ";
             query += $@"
-ORDER BY Дата DESC
-LIMIT 10
+ORDER BY 
+    Дата DESC
+LIMIT 
+    {limit ?? 100}
 ";
             return await Config.Kernel.DataBase.SelectRequestAsync(query);
         }
@@ -95,7 +114,7 @@ LIMIT 10
             await page.LoadRecords();
         }
 
-        public static async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null)
+        public static async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
             СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід page = new();
 
@@ -103,7 +122,7 @@ LIMIT 10
             PopoverSmall.Add(page);
             PopoverSmall.Show();
 
-            await page.LoadRecords(ВідбірПоОбєкту);
+            await page.LoadRecords(ВідбірПоОбєкту, limit);
         }
     }
 }
