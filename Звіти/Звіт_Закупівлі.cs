@@ -26,6 +26,7 @@ using Gtk;
 using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
@@ -50,6 +51,8 @@ namespace StorageAndTrade
         ХарактеристикиНоменклатури_PointerControl ХарактеристикиНоменклатури = new ХарактеристикиНоменклатури_PointerControl();
         Склади_PointerControl Склад = new Склади_PointerControl();
         Склади_Папки_PointerControl Склад_Папка = new Склади_Папки_PointerControl() { Caption = "Склад папка:" };
+        ComboBoxText ТипНоменклатури = new ComboBoxText();
+        ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:" };
 
         struct ПараметриФільтр
         {
@@ -66,6 +69,8 @@ namespace StorageAndTrade
             public ХарактеристикиНоменклатури_Pointer ХарактеристикиНоменклатури;
             public Склади_Pointer Склад;
             public Склади_Папки_Pointer Склад_Папка;
+            public ТипиНоменклатури ТипНоменклатури;
+            public ВидиНоменклатури_Pointer ВидНоменклатури;
         }
 
         #endregion
@@ -85,8 +90,7 @@ namespace StorageAndTrade
 
             CreateFilters();
 
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false };
-            reportNotebook.TabPos = PositionType.Top;
+            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
             PackStart(reportNotebook, true, true, 0);
 
             ShowAll();
@@ -204,6 +208,20 @@ namespace StorageAndTrade
             vBox.PackStart(hBoxNomenklaturaPapka, false, false, 5);
 
             hBoxNomenklaturaPapka.PackStart(Номенклатура_Папка, false, false, 5);
+
+            //ТипНоменклатури та ВидНоменклатури
+            HBox hBoxTypNomenklatury = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxTypNomenklatury, false, false, 5);
+
+            hBoxTypNomenklatury.PackStart(new Label("Тип:"), false, false, 5);
+            hBoxTypNomenklatury.PackStart(ТипНоменклатури, false, false, 5);
+            hBoxTypNomenklatury.PackStart(ВидНоменклатури, false, false, 5);
+
+            //Заповнення
+            foreach (var field in ПсевдонімиПерелічення.ТипиНоменклатури_List())
+                ТипНоменклатури.Append(field.Value.ToString(), field.Name);
+
+            ТипНоменклатури.Active = 0;
         }
 
         #endregion
@@ -224,7 +242,9 @@ namespace StorageAndTrade
                 Номенклатура_Папка = Номенклатура_Папка.Pointer,
                 ХарактеристикиНоменклатури = ХарактеристикиНоменклатури.Pointer,
                 Склад = Склад.Pointer,
-                Склад_Папка = Склад_Папка.Pointer
+                Склад_Папка = Склад_Папка.Pointer,
+                ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId),
+                ВидНоменклатури = ВидНоменклатури.Pointer
             };
         }
 
@@ -265,6 +285,11 @@ namespace StorageAndTrade
             if (!Фільтр.Склад_Папка.IsEmpty())
                 text += "Склад папка: <b>" + await Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
 
+            text += "Тип: <b>" + Фільтр.ТипНоменклатури.ToString() + "</b>; ";
+
+            if (!Фільтр.ВидНоменклатури.IsEmpty())
+                text += "Вид: <b>" + await Фільтр.ВидНоменклатури.GetPresentation() + "</b>; ";
+
             hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
 
             return hBoxCaption;
@@ -287,7 +312,7 @@ namespace StorageAndTrade
 SELECT 
 " + (Фільтр.ГрупуватиПоПеріоду ? $@"
     Закупівлі.{Закупівлі_Обороти_TablePart.Період} AS Період,
-    TO_CHAR(Закупівлі.{Закупівлі_Обороти_TablePart.Період}, 'dd.mm.yyyy') AS Період_Назва," : "") + 
+    TO_CHAR(Закупівлі.{Закупівлі_Обороти_TablePart.Період}, 'dd.mm.yyyy') AS Період_Назва," : "") +
 $@" 
     Закупівлі.{Закупівлі_Обороти_TablePart.Організація} AS Організація,
     Довідник_Організації.{Організації_Const.Назва} AS Організація_Назва,
@@ -326,7 +351,8 @@ FROM
         Довідник_Номенклатура.{Номенклатура_Const.ОдиницяВиміру}
 WHERE
     Закупівлі.{Закупівлі_Обороти_TablePart.Період} >= @ПочатокПеріоду AND
-    Закупівлі.{Закупівлі_Обороти_TablePart.Період} <= @КінецьПеріоду
+    Закупівлі.{Закупівлі_Обороти_TablePart.Період} <= @КінецьПеріоду AND
+    Довідник_Номенклатура.{Номенклатура_Const.ТипНоменклатури} = @ТипНоменклатури
 ";
 
             #region WHERE
@@ -466,11 +492,22 @@ WHERE
 ";
             }
 
+            //Відбір по вибраному елементу ВидиНоменклатури
+            if (!Фільтр.ВидНоменклатури.IsEmpty())
+            {
+                query += isExistParent ? "AND" : "WHERE";
+                isExistParent = true;
+
+                query += $@"
+Довідник_Номенклатура.{Номенклатура_Const.ВидНоменклатури} = '{Фільтр.ВидНоменклатури.UnigueID}'
+";
+            }
+
             #endregion
 
             query += @"
 GROUP BY " +
-    (Фільтр.ГрупуватиПоПеріоду ? "Період, Період_Назва, " : "") + 
+    (Фільтр.ГрупуватиПоПеріоду ? "Період, Період_Назва, " : "") +
 @"
     Організація, Організація_Назва,
     Склад, Склад_Назва,
@@ -486,7 +523,7 @@ HAVING
     SUM(Закупівлі.{Закупівлі_Обороти_TablePart.Сума}) != 0 
 
 ORDER BY " +
-    (Фільтр.ГрупуватиПоПеріоду ? "Період," : "") + 
+    (Фільтр.ГрупуватиПоПеріоду ? "Період," : "") +
 @"
     Організація_Назва, 
     Склад_Назва, 
@@ -553,7 +590,8 @@ ORDER BY " +
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
             {
                 { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
-                { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
+                { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду },
+                { "ТипНоменклатури", (int)Фільтр.ТипНоменклатури }
             };
 
             var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);

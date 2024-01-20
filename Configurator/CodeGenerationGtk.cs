@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 19.01.2024 16:48:27
+ * Дата конфігурації: 20.01.2024 12:07:00
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -1336,6 +1336,8 @@ END
         
         string Код = "";
         string Назва = "";
+        string КількістьУпаковок = "";
+        string НазваПовна = "";
 
         Array ToArray()
         {
@@ -1345,6 +1347,8 @@ END
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
+                /*КількістьУпаковок*/ КількістьУпаковок,
+                /*НазваПовна*/ НазваПовна,
                 
             };
         }
@@ -1357,6 +1361,8 @@ END
                 /*ID*/ typeof(string),
                 /*Код*/ typeof(string),  
                 /*Назва*/ typeof(string),  
+                /*КількістьУпаковок*/ typeof(string),  
+                /*НазваПовна*/ typeof(string),  
                 
             ]);
 
@@ -1366,6 +1372,8 @@ END
             /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Коєфіціент", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*КількістьУпаковок*/
+            treeView.AppendColumn(new TreeViewColumn("Опис", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*НазваПовна*/
             
 
             /* Додаткові поля */
@@ -1391,6 +1399,8 @@ END
                 /*Помітка на видалення*/ "deletion_label",
                 /*Код*/ Довідники.ПакуванняОдиниціВиміру_Const.Код,
                 /*Назва*/ Довідники.ПакуванняОдиниціВиміру_Const.Назва,
+                /*КількістьУпаковок*/ Довідники.ПакуванняОдиниціВиміру_Const.КількістьУпаковок,
+                /*НазваПовна*/ Довідники.ПакуванняОдиниціВиміру_Const.НазваПовна,
                 
             ]);
 
@@ -1425,6 +1435,8 @@ END
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "",
                         Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "",
+                        КількістьУпаковок = Fields[ПакуванняОдиниціВиміру_Const.КількістьУпаковок].ToString() ?? "",
+                        НазваПовна = Fields[ПакуванняОдиниціВиміру_Const.НазваПовна].ToString() ?? "",
                         
                     };
 
@@ -1454,6 +1466,8 @@ END
         
         string Код = "";
         string Назва = "";
+        string КількістьУпаковок = "";
+        string НазваПовна = "";
 
         Array ToArray()
         {
@@ -1463,6 +1477,8 @@ END
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
+                /*КількістьУпаковок*/ КількістьУпаковок,
+                /*НазваПовна*/ НазваПовна,
                 
             };
         }
@@ -1475,6 +1491,8 @@ END
                 /*ID*/ typeof(string),
                 /*Код*/ typeof(string),  
                 /*Назва*/ typeof(string),  
+                /*КількістьУпаковок*/ typeof(string),  
+                /*НазваПовна*/ typeof(string),  
                 
             ]);
 
@@ -1484,6 +1502,8 @@ END
             /* Поля */
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Коєфіціент", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*КількістьУпаковок*/
+            treeView.AppendColumn(new TreeViewColumn("Опис", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*НазваПовна*/
             
 
             /* Додаткові поля */
@@ -1509,6 +1529,8 @@ END
                 /*Помітка на видалення*/ "deletion_label",
                 /*Код*/ Довідники.ПакуванняОдиниціВиміру_Const.Код,
                 /*Назва*/ Довідники.ПакуванняОдиниціВиміру_Const.Назва,
+                /*КількістьУпаковок*/ Довідники.ПакуванняОдиниціВиміру_Const.КількістьУпаковок,
+                /*НазваПовна*/ Довідники.ПакуванняОдиниціВиміру_Const.НазваПовна,
                 
             ]);
 
@@ -1543,6 +1565,8 @@ END
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "",
                         Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "",
+                        КількістьУпаковок = Fields[ПакуванняОдиниціВиміру_Const.КількістьУпаковок].ToString() ?? "",
+                        НазваПовна = Fields[ПакуванняОдиниціВиміру_Const.НазваПовна].ToString() ?? "",
                         
                     };
 
