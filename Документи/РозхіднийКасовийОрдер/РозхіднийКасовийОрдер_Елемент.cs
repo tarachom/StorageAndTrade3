@@ -326,5 +326,10 @@ namespace StorageAndTrade
                 return true;
             }
         }
+
+        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        {
+            return new РозхіднийКасовийОрдер_Pointer(unigueID);
+        }
     }
 }

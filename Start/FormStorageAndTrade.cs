@@ -36,9 +36,7 @@ namespace StorageAndTrade
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
         Statusbar statusBar = new Statusbar();
         List<string> historyNotebookSwitchList = []; //Список для збереження історії послідовності відкриття вкладок
-
-        //Кнопка виводу повідомлень
-        public Button buttonTerminal;
+        public Button buttonTerminal; //Кнопка виводу повідомлень
 
         public FormStorageAndTrade() : base("")
         {

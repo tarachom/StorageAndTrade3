@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ВнутрішнєСпоживанняТоварів_Objest = ВнутрішнєСпоживанняТоварів_Objest,

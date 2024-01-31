@@ -23,6 +23,8 @@ limitations under the License.
 
 using Gtk;
 
+using AccountingSoftware;
+
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Документи;
 
@@ -176,6 +178,11 @@ namespace StorageAndTrade
                 await ПсуванняТоварів_Objest.ClearSpendTheDocument();
                 return true;
             }
+        }
+
+        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        {
+            return new ПсуванняТоварів_Pointer(unigueID);
         }
     }
 }

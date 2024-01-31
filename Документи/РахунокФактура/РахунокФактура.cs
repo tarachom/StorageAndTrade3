@@ -98,6 +98,7 @@ namespace StorageAndTrade
                     {
                         РахунокФактура_Елемент page = new РахунокФактура_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             РахунокФактура_Objest = РахунокФактура_Objest,

@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ЗбіркаТоварівНаСкладі_Елемент page = new ЗбіркаТоварівНаСкладі_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ЗбіркаТоварівНаСкладі_Objest = ЗбіркаТоварівНаСкладі_Objest,

@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПоверненняТоварівПостачальнику_Objest = ПоверненняТоварівПостачальнику_Objest,

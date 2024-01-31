@@ -98,6 +98,7 @@ namespace StorageAndTrade
                     {
                         ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ЗамовленняКлієнта_Objest = ЗамовленняКлієнта_Objest,

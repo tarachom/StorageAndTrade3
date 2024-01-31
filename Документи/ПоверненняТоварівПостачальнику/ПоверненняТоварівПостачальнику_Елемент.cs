@@ -310,5 +310,10 @@ namespace StorageAndTrade
                 return true;
             }
         }
+
+        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        {
+            return new ПоверненняТоварівПостачальнику_Pointer(unigueID);
+        }
     }
 }

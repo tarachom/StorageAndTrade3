@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ПсуванняТоварів_Елемент page = new ПсуванняТоварів_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПсуванняТоварів_Objest = ПсуванняТоварів_Objest,

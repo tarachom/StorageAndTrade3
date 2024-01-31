@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПереміщенняТоварів_Objest = ПереміщенняТоварів_Objest,

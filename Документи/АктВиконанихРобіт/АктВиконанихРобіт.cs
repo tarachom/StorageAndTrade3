@@ -98,6 +98,7 @@ namespace StorageAndTrade
                     {
                         АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             АктВиконанихРобіт_Objest = АктВиконанихРобіт_Objest,

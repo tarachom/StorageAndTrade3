@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ВведенняЗалишків_Елемент page = new ВведенняЗалишків_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ВведенняЗалишків_Objest = ВведенняЗалишків_Objest,

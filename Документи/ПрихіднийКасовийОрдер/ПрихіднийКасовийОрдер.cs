@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПрихіднийКасовийОрдер_Objest = ПрихіднийКасовийОрдер_Objest,

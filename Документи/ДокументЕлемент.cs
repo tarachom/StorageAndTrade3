@@ -86,9 +86,37 @@ namespace StorageAndTrade
             bSaveAndSpend.Clicked += (object? sender, EventArgs args) => { BeforeAndAfterSave(true, true); };
             HBoxTop.PackStart(bSaveAndSpend, false, false, 10);
 
-            Button bSave = new Button("Зберегти без проведення");
-            bSave.Clicked += (object? sender, EventArgs args) => { BeforeAndAfterSave(false, false); };
+            Button bSpend = new Button("Провести");
+            bSpend.Clicked += (object? sender, EventArgs args) => { BeforeAndAfterSave(true); };
+            HBoxTop.PackStart(bSpend, false, false, 10);
+
+            Button bSave = new Button("Зберегти");
+            bSave.Clicked += (object? sender, EventArgs args) => { BeforeAndAfterSave(false); };
             HBoxTop.PackStart(bSave, false, false, 10);
+
+            //Проводки
+            {
+                LinkButton linkNew = new LinkButton("Проводки") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                linkNew.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (UnigueID != null)
+                    {
+                        DocumentPointer? documentPointer = ReportSpendTheDocument(UnigueID);
+
+                        if (documentPointer != null)
+                        {
+                            Program.GeneralForm?.CreateNotebookPage($"Проводки", () =>
+                            {
+                                Звіт_РухДокументівПоРегістрах page = new Звіт_РухДокументівПоРегістрах();
+                                page.CreateReport(documentPointer);
+                                return page;
+                            });
+                        }
+                    }
+                };
+
+                HBoxTop.PackStart(linkNew, false, false, 0);
+            }
 
             PackStart(HBoxTop, false, false, 10);
 
@@ -303,5 +331,12 @@ namespace StorageAndTrade
 
             Message.Info(Program.GeneralForm, "Не вдалось записати");
         }
+
+        /// <summary>
+        /// Для звіту Проводки
+        /// </summary>
+        /// <param name="unigueID"></param>
+        /// <returns></returns>
+        protected abstract DocumentPointer? ReportSpendTheDocument(UnigueID unigueID);
     }
 }

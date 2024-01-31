@@ -98,6 +98,7 @@ namespace StorageAndTrade
                     {
                         ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Objest,

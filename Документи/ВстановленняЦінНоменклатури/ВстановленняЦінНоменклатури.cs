@@ -96,6 +96,7 @@ namespace StorageAndTrade
                     {
                         ВстановленняЦінНоменклатури_Елемент page = new ВстановленняЦінНоменклатури_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ВстановленняЦінНоменклатури_Objest = ВстановленняЦінНоменклатури_Objest,

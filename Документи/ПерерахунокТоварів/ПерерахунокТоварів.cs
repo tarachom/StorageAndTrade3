@@ -86,6 +86,7 @@ namespace StorageAndTrade
                     {
                         ПерерахунокТоварів_Елемент page = new ПерерахунокТоварів_Елемент
                         {
+                            UnigueID = unigueID,
                             CallBack_LoadRecords = CallBack_LoadRecords,
                             IsNew = false,
                             ПерерахунокТоварів_Objest = ПерерахунокТоварів_Objest,
