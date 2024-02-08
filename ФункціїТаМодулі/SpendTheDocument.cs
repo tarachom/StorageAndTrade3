@@ -609,8 +609,6 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -712,8 +710,6 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -1163,8 +1159,6 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -1243,8 +1237,6 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -1495,8 +1487,6 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -1565,8 +1555,6 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -1815,8 +1803,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -2049,8 +2035,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -2166,8 +2150,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -2279,8 +2261,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -2563,8 +2543,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -2612,8 +2590,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -2811,8 +2787,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -3033,8 +3007,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -3255,8 +3227,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -3297,8 +3267,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -3378,8 +3346,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -3509,8 +3475,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -3623,8 +3587,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }
@@ -3667,8 +3629,6 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ДокументОбєкт.ClearSpendTheDocument();
-
                 return false;
             }
         }

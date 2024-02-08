@@ -1369,13 +1369,21 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         {
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
-                <xsl:text>bool rezult = await </xsl:text><xsl:value-of select="SpendFunctions/Spend"/><xsl:text>(this)</xsl:text>;
-                <xsl:text>await BaseSpend(rezult, spendDate)</xsl:text>;
-                <xsl:text>return rezult;</xsl:text>
+            if (await <xsl:value-of select="SpendFunctions/Spend"/>(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
                 </xsl:when>
                 <xsl:otherwise>
-                <xsl:text>await BaseSpend(false, DateTime.MinValue)</xsl:text>;
-                <xsl:text>return false;</xsl:text>
+            await BaseSpend(false, DateTime.MinValue);
+            return false;
                 </xsl:otherwise>
             </xsl:choose>
         }
@@ -1383,19 +1391,24 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run&lt;bool&gt;(async () =&gt; { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             <xsl:for-each select="AllowRegisterAccumulation/Name">
                 <xsl:variable name="RegName" select="text()"/>
-                /* Очищення регістру накопичення: <xsl:value-of select="$RegName"/> */
-                РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet <xsl:value-of select="$RegName"/>_regAccum = new РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet();
-                await <xsl:value-of select="$RegName"/>_regAccum.Delete(this.UnigueID.UGuid);
+            /* <xsl:value-of select="$RegName"/> */
+            РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet <xsl:value-of select="$RegName"/>_regAccum = new РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet();
+            await <xsl:value-of select="$RegName"/>_regAccum.Delete(this.UnigueID.UGuid);
             </xsl:for-each>
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
             <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
-                await <xsl:value-of select="SpendFunctions/ClearSpend"/>
-                <xsl:text>(this)</xsl:text>;
+            await <xsl:value-of select="SpendFunctions/ClearSpend"/>(this);
             </xsl:if>
-            <xsl:text>await BaseSpend(false, DateTime.MinValue);</xsl:text>
+            await BaseSpend(false, DateTime.MinValue);
         }
 
         /* синхронна функція для ClearSpendTheDocument() */

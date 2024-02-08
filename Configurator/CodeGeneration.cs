@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 08.02.2024 15:36:36
+ * Дата конфігурації: 08.02.2024 17:56:12
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -12414,22 +12414,40 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ЗамовленняПостачальнику_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ЗамовленняПостачальнику_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ЗамовленняПостачальникам */
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
+            /* ЗамовленняПостачальникам */
+            РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+            await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -13315,42 +13333,60 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПоступленняТоварівТаПослуг_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПоступленняТоварівТаПослуг_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: Закупівлі */
-                РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-                await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
+            /* Закупівлі */
+            РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+            await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ЗамовленняПостачальникам */
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
+            /* ЗамовленняПостачальникам */
+            РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+            await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗПостачальниками */
+            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -14206,26 +14242,44 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ЗамовленняКлієнта_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ЗамовленняКлієнта_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ЗамовленняКлієнтів */
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ЗамовленняКлієнтів */
+            РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+            await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -15112,42 +15166,60 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ЗамовленняКлієнтів */
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ЗамовленняКлієнтів */
+            РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+            await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗКлієнтами */
+            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: Продажі */
-                РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await Продажі_regAccum.Delete(this.UnigueID.UGuid);
+            /* Продажі */
+            РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+            await Продажі_regAccum.Delete(this.UnigueID.UGuid);
             
-                await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -15759,18 +15831,36 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -16391,30 +16481,48 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПрихіднийКасовийОрдер_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПрихіднийКасовийОрдер_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗКлієнтами */
+            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗПостачальниками */
+            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РухКоштів */
-                РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
+            /* РухКоштів */
+            РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+            await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -17079,30 +17187,48 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await РозхіднийКасовийОрдер_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await РозхіднийКасовийОрдер_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗКлієнтами */
+            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗПостачальниками */
+            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РухКоштів */
-                РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
+            /* РухКоштів */
+            РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+            await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -17796,30 +17922,48 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПереміщенняТоварів_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПереміщенняТоварів_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -18551,38 +18695,56 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПоверненняТоварівПостачальнику_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПоверненняТоварівПостачальнику_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: Закупівлі */
-                РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-                await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
+            /* Закупівлі */
+            РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+            await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗПостачальниками */
+            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -19292,38 +19454,56 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗКлієнтами */
+            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: Продажі */
-                РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await Продажі_regAccum.Delete(this.UnigueID.UGuid);
+            /* Продажі */
+            РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+            await Продажі_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -19975,26 +20155,44 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await АктВиконанихРобіт_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await АктВиконанихРобіт_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗКлієнтами */
+            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: Продажі */
-                РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await Продажі_regAccum.Delete(this.UnigueID.UGuid);
+            /* Продажі */
+            РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+            await Продажі_regAccum.Delete(this.UnigueID.UGuid);
             
-                await АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -20723,42 +20921,60 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ВведенняЗалишків_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ВведенняЗалишків_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗКлієнтами */
+            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            /* РозрахункиЗПостачальниками */
+            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: РухКоштів */
-                РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
+            /* РухКоштів */
+            РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+            await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -21600,15 +21816,25 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
+            
             await BaseSpend(false, DateTime.MinValue);
-                return false;
+            return false;
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
+        {
+            
+        }
+
         public async ValueTask ClearSpendTheDocument()
         {
+            ClearRegAccum();
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -22126,15 +22352,25 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
+            
             await BaseSpend(false, DateTime.MinValue);
-                return false;
+            return false;
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
+        {
+            
+        }
+
         public async ValueTask ClearSpendTheDocument()
         {
+            ClearRegAccum();
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -22680,18 +22916,36 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПерерахунокТоварів_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПерерахунокТоварів_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                await ПерерахунокТоварів_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПерерахунокТоварів_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -23288,30 +23542,48 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПсуванняТоварів_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПсуванняТоварів_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -23929,30 +24201,48 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариНаСкладах */
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариНаСкладах */
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                /* Очищення регістру накопичення: ПартіїТоварів */
-                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            /* ПартіїТоварів */
+            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -24657,22 +24947,40 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await РахунокФактура_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await РахунокФактура_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ВільніЗалишки */
-                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
-                await РахунокФактура_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await РахунокФактура_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -25278,22 +25586,40 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариВКомірках */
-                РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариВКомірках */
+            РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+            await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
             
-                await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -25866,22 +26192,40 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариВКомірках */
-                РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариВКомірках */
+            РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+            await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -26459,22 +26803,40 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                /* Очищення регістру накопичення: ТовариВКомірках */
-                РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
+            /* ТовариВКомірках */
+            РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+            await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
             
-                await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
@@ -27011,18 +27373,36 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
-            bool rezult = await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend(this);
-                await BaseSpend(rezult, spendDate);
-                return rezult;
+            
+            if (await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
         }
 
         /* синхронна функція для SpendTheDocument() */
         public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
 
-        public async ValueTask ClearSpendTheDocument()
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
         {
             
-                await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(this);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(this);
+            
             await BaseSpend(false, DateTime.MinValue);
         }
 
