@@ -84,6 +84,17 @@
           }
         }
       },
+      "GtkSourceSharp/3.24.24.95": {
+        "dependencies": {
+          "GtkSharp": "3.24.24.95"
+        },
+        "runtime": {
+          "lib/net6.0/GtkSourceSharp.dll": {
+            "assemblyVersion": "3.24.24.95",
+            "fileVersion": "3.24.24.95"
+          }
+        }
+      },
       "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
         "runtime": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -137,7 +148,8 @@
       "Configurator3/1.0.0": {
         "dependencies": {
           "AccountingSoftware": "1.0.0",
-          "GtkSharp": "3.24.24.95"
+          "GtkSharp": "3.24.24.95",
+          "GtkSourceSharp": "3.24.24.95"
         },
         "runtime": {
           "Configurator3.dll": {}
@@ -192,6 +204,13 @@
       "sha512": "sha512-RRUY45hAa5gsMcadvVjcLUzMjVtmuHSYTcIwM6j8LNgKhzFFHk69qM1D5ULfGxaWmVjicqNWiFtOtk8WsvPqaQ==",
       "path": "gtksharp/3.24.24.95",
       "hashPath": "gtksharp.3.24.24.95.nupkg.sha512"
+    },
+    "GtkSourceSharp/3.24.24.95": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IoFpgWFxoqfcthyLoQ4871J3B7OLCBRcjTH776s2Qj8VKbjTGCk1sUg253WgfOhPiovKsyWApZSSt6IV5yS2ww==",
+      "path": "gtksourcesharp/3.24.24.95",
+      "hashPath": "gtksourcesharp.3.24.24.95.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
       "type": "package",

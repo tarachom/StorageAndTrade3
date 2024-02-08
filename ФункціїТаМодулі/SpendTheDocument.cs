@@ -609,7 +609,7 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -617,11 +617,7 @@ FROM
 
         public static async ValueTask ClearSpend(ЗамовленняКлієнта_Objest ДокументОбєкт)
         {
-            ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
-            await замовленняКлієнтів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -716,7 +712,7 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -724,8 +720,7 @@ FROM
 
         public static async ValueTask ClearSpend(РахунокФактура_Objest ДокументОбєкт)
         {
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1168,7 +1163,7 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -1176,27 +1171,7 @@ FROM
 
         public static async ValueTask ClearSpend(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт)
         {
-            ЗамовленняКлієнтів_RecordsSet замовленняКлієнтів_RecordsSet = new ЗамовленняКлієнтів_RecordsSet();
-            await замовленняКлієнтів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-            await розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            //
-            // Обороти
-            //
-
-            Продажі_RecordsSet продажі_RecordsSet = new Продажі_RecordsSet();
-            await продажі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1268,7 +1243,7 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -1276,15 +1251,7 @@ FROM
 
         public static async ValueTask ClearSpend(АктВиконанихРобіт_Objest ДокументОбєкт)
         {
-            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-            await розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            //
-            // Обороти
-            //
-
-            Продажі_RecordsSet продажі_RecordsSet = new Продажі_RecordsSet();
-            await продажі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1528,7 +1495,7 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -1536,27 +1503,7 @@ FROM
 
         public static async ValueTask ClearSpend(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт)
         {
-            ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
-            await замовленняПостачальникам_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-            await розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            //
-            // Обороти
-            //
-
-            Закупівлі_RecordsSet закупівлі_RecordsSet = new Закупівлі_RecordsSet();
-            await закупівлі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1618,7 +1565,7 @@ FROM
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -1626,8 +1573,7 @@ FROM
 
         public static async ValueTask ClearSpend(ЗамовленняПостачальнику_Objest ДокументОбєкт)
         {
-            ЗамовленняПостачальникам_RecordsSet замовленняПостачальникам_RecordsSet = new ЗамовленняПостачальникам_RecordsSet();
-            await замовленняПостачальникам_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -1869,7 +1815,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -1877,24 +1823,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт)
         {
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-            await розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            //
-            // Обороти
-            //
-
-            Продажі_RecordsSet продажі_RecordsSet = new Продажі_RecordsSet();
-            await продажі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2120,7 +2049,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -2128,24 +2057,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт)
         {
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-            await розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            //
-            // Обороти
-            //
-
-            Закупівлі_RecordsSet закупівлі_RecordsSet = new Закупівлі_RecordsSet();
-            await закупівлі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2254,7 +2166,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -2262,14 +2174,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ПрихіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-            await розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-            await розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
-            await рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2374,7 +2279,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -2382,14 +2287,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(РозхіднийКасовийОрдер_Objest ДокументОбєкт)
         {
-            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-            await розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-            await розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
-            await рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2665,7 +2563,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -2673,14 +2571,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ПереміщенняТоварів_Objest ДокументОбєкт)
         {
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2721,7 +2612,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -2729,8 +2620,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
-            ЦіниНоменклатури_RecordsSet ціниНоменклатури_RecordsSet = new ЦіниНоменклатури_RecordsSet();
-            await ціниНоменклатури_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -2921,7 +2811,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -2929,23 +2819,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ВведенняЗалишків_Objest ДокументОбєкт)
         {
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РухКоштів_RecordsSet рухКоштів_RecordsSet = new РухКоштів_RecordsSet();
-            await рухКоштів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
-            await розрахункиЗПостачальниками_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
-            await розрахункиЗКлієнтами_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -3159,7 +3033,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -3167,14 +3041,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт)
         {
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -3388,7 +3255,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -3396,14 +3263,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ПсуванняТоварів_Objest ДокументОбєкт)
         {
-            ТовариНаСкладах_RecordsSet товариНаСкладах_RecordsSet = new ТовариНаСкладах_RecordsSet();
-            await товариНаСкладах_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ВільніЗалишки_RecordsSet вільніЗалишки_RecordsSet = new ВільніЗалишки_RecordsSet();
-            await вільніЗалишки_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
-
-            ПартіїТоварів_RecordsSet партіїТоварів_RecordsSet = new ПартіїТоварів_RecordsSet();
-            await партіїТоварів_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -3432,22 +3292,20 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
                 #endregion
 
-
-
                 return true;
             }
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
+
                 return false;
             }
         }
 
         public static async ValueTask ClearSpend(ПерерахунокТоварів_Objest ДокументОбєкт)
         {
-            // код очищення проводок
-            await ValueTask.FromResult(true); //Заглушка
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -3520,7 +3378,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -3528,8 +3386,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-            ТовариВКомірках_RecordsSet товариВКомірках_RecordsSet = new ТовариВКомірках_RecordsSet();
-            await товариВКомірках_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -3652,7 +3509,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -3660,8 +3517,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт)
         {
-            ТовариВКомірках_RecordsSet товариВКомірках_RecordsSet = new ТовариВКомірках_RecordsSet();
-            await товариВКомірках_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -3767,7 +3623,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -3775,8 +3631,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт)
         {
-            ТовариВКомірках_RecordsSet товариВКомірках_RecordsSet = new ТовариВКомірках_RecordsSet();
-            await товариВКомірках_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 
@@ -3812,7 +3667,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
             catch (Exception ex)
             {
                 СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
-                await ClearSpend(ДокументОбєкт);
+                await ДокументОбєкт.ClearSpendTheDocument();
 
                 return false;
             }
@@ -3820,8 +3675,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт)
         {
-            РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet розміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet = new РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet();
-            await розміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.Delete(ДокументОбєкт.UnigueID.UGuid);
+            await ValueTask.FromResult(true);
         }
     }
 

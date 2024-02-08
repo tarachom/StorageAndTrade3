@@ -709,7 +709,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         {
             BaseNew();
             <xsl:choose>
-              <xsl:when test="normalize-space(TriggerFunctions/New) != ''">
+              <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
               </xsl:when>
               <xsl:otherwise>
@@ -741,7 +741,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         
         public async ValueTask&lt;bool&gt; Save()
         {
-            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != '' and TriggerFunctions/BeforeSave[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;
             </xsl:if>
             <xsl:for-each select="Fields/Field">
@@ -759,10 +759,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             bool result = await BaseSave();
             if (result)
             {
-                <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
-                    await <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
+                <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != '' and TriggerFunctions/AfterSave[@Action = '1']">
+                await <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
                 </xsl:if>
+                <xsl:if test="count(Fields/Field[IsFullTextSearch = '1' and Type = 'string']) &gt; 0">
                 await BaseWriteFullTextSearch(GetBasis(), [<xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']"><xsl:value-of select="Name"/>, </xsl:for-each>]);
+                </xsl:if>
             }
             return result;
         }
@@ -788,23 +790,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             </xsl:if>
 
             await copy.New();
-            <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
-                await <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
+            <xsl:if test="normalize-space(TriggerFunctions/Copying) != '' and TriggerFunctions/Copying[@Action = '1']">
+            await <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
             </xsl:if>
-
-            <xsl:choose>
-                <xsl:when test="count(TabularParts/TablePart) = 0 and normalize-space(TriggerFunctions/Copying) = ''">
-            return await ValueTask.FromResult&lt;<xsl:value-of select="$DirectoryName"/>_Objest&gt;(copy);
-                </xsl:when>
-                <xsl:otherwise>
             return copy;
-                </xsl:otherwise>
-            </xsl:choose>
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
             </xsl:if>
             await base.BaseDeletionLabel(label);
@@ -812,7 +806,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
         public async ValueTask Delete()
         {
-            <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != '' and TriggerFunctions/BeforeDelete[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
             await base.BaseDelete([<xsl:for-each select="TabularParts/TablePart">"<xsl:value-of select="Table"/>", </xsl:for-each>]);
@@ -906,7 +900,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             <xsl:value-of select="$DirectoryName"/>_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+                <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
                     await <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(obj, label)</xsl:text>;
                 </xsl:if>
                 await base.BaseDeletionLabel(label);
@@ -1016,7 +1010,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             
             foreach (Record record in Records)
             {
-                Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;()
+                Dictionary&lt;string, object&gt; fieldValue = new()
                 {
                     <xsl:for-each select="Fields/Field">
                         <xsl:text>{"</xsl:text>
@@ -1046,10 +1040,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
         public List&lt;Record&gt; Copy()
         {
-            List&lt;Record&gt; copyRecords = new List&lt;Record&gt;();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List&lt;Record&gt; copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -1304,7 +1296,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         {
             BaseNew();
             <xsl:choose>
-              <xsl:when test="normalize-space(TriggerFunctions/New) != ''">
+              <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
               </xsl:when>
               <xsl:otherwise>
@@ -1343,7 +1335,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         
         public async Task&lt;bool&gt; Save()
         {
-            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != '' and TriggerFunctions/BeforeSave[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;
             </xsl:if>
             <xsl:for-each select="Fields/Field">
@@ -1362,10 +1354,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             
             if (result)
             {
-                <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
-                    await <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
+                <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != '' and TriggerFunctions/AfterSave[@Action = '1']">
+                await <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
                 </xsl:if>
+                <xsl:if test="count(Fields/Field[IsFullTextSearch = '1' and Type = 'string']) &gt; 0">
                 await BaseWriteFullTextSearch(GetBasis(), [<xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']"><xsl:value-of select="Name"/>, </xsl:for-each>]);
+                </xsl:if>
             }
 
             return result;
@@ -1391,9 +1385,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
         public async ValueTask ClearSpendTheDocument()
         {
+            <xsl:for-each select="AllowRegisterAccumulation/Name">
+                <xsl:variable name="RegName" select="text()"/>
+                /* Очищення регістру накопичення: <xsl:value-of select="$RegName"/> */
+                РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet <xsl:value-of select="$RegName"/>_regAccum = new РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet();
+                await <xsl:value-of select="$RegName"/>_regAccum.Delete(this.UnigueID.UGuid);
+            </xsl:for-each>
             <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
                 await <xsl:value-of select="SpendFunctions/ClearSpend"/>
-              <xsl:text>(this)</xsl:text>;
+                <xsl:text>(this)</xsl:text>;
             </xsl:if>
             <xsl:text>await BaseSpend(false, DateTime.MinValue);</xsl:text>
         }
@@ -1422,23 +1422,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             </xsl:if>
 
             await copy.New();
-            <xsl:if test="normalize-space(TriggerFunctions/Copying) != ''">
+            <xsl:if test="normalize-space(TriggerFunctions/Copying) != '' and TriggerFunctions/Copying[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/Copying"/><xsl:text>(copy, this);</xsl:text>      
             </xsl:if>
-            
-            <xsl:choose>
-                <xsl:when test="count(TabularParts/TablePart) = 0 and normalize-space(TriggerFunctions/Copying) = ''">
-            return await ValueTask.FromResult&lt;<xsl:value-of select="$DocumentName"/>_Objest&gt;(copy);
-                </xsl:when>
-                <xsl:otherwise>
             return copy;
-                </xsl:otherwise>
-            </xsl:choose>
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/><xsl:text>(this, label);</xsl:text>      
             </xsl:if>
             await ClearSpendTheDocument();
@@ -1450,7 +1442,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
         public async ValueTask Delete()
         {
-            <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != '' and TriggerFunctions/BeforeDelete[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
             await ClearSpendTheDocument();
@@ -1535,10 +1527,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' or normalize-space(SpendFunctions/ClearSpend) != ''">
+            <xsl:if test="(normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']) or (normalize-space(SpendFunctions/ClearSpend) != '')">
                 <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != ''">
+                <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
                     await <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/>
                     <xsl:text>(obj, label)</xsl:text>;
                 </xsl:if>

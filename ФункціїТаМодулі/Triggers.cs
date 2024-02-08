@@ -138,7 +138,7 @@ WHERE
     ШтрихкодиНоменклатури.{РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура} = @Номенклатура
 ";
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            Dictionary<string, object> paramQuery = new()
             {
                 { "Номенклатура", ДовідникОбєкт.UnigueID.UGuid }
             };
@@ -1706,7 +1706,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask SetDeletionLabel(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, bool label)
         {
-            // Помітка на виделення всіх партій
+            // Помітка на видалення всіх партій
             if (label == true)
             {
                 ПартіяТоварівКомпозит_Select партіяТоварівКомпозит_Select = new ПартіяТоварівКомпозит_Select();

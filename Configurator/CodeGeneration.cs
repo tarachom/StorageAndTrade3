@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.01.2024 12:07:00
+ * Дата конфігурації: 08.02.2024 15:36:36
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1759,8 +1759,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Організації_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
             base.FieldValue["col_a3"] = НазваПовна;
@@ -1775,8 +1773,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Організації_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі, ]);
+                
             }
             return result;
         }
@@ -1809,22 +1807,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Організації_Triggers.Copying(copy, this);
+            await Організації_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Організації_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Організації_Triggers.BeforeDelete(this);
             await base.BaseDelete(["tab_a02", ]);
         }
 
@@ -1907,8 +1902,6 @@ namespace StorageAndTrade_1_0.Довідники
             Організації_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await Організації_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -2021,7 +2014,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a9", (int)record.Тип},
                     {"col_a4", record.Телефон},
@@ -2046,10 +2039,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -2140,8 +2131,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Номенклатура_Triggers.BeforeSave(this);
             base.FieldValue["col_b1"] = Назва;
             base.FieldValue["col_b2"] = Код;
             base.FieldValue["col_b4"] = НазваПовна;
@@ -2158,8 +2147,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Номенклатура_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, Опис, Артикул, ]);
+                
             }
             return result;
         }
@@ -2194,9 +2183,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Номенклатура_Triggers.Copying(copy, this);
+            await Номенклатура_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -2396,7 +2384,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.Файл.UnigueID.UGuid},
                     {"col_a3", record.Основний},
@@ -2415,10 +2403,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -2482,8 +2468,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Виробники_Triggers.BeforeSave(this);
             base.FieldValue["col_b6"] = Назва;
             base.FieldValue["col_b7"] = Код;
             
@@ -2491,8 +2475,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Виробники_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -2509,22 +2493,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Виробники_Triggers.Copying(copy, this);
+            await Виробники_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Виробники_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Виробники_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -2597,8 +2578,6 @@ namespace StorageAndTrade_1_0.Довідники
             Виробники_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await Виробники_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -2706,8 +2685,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ВидиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_b8"] = Назва;
             base.FieldValue["col_b9"] = Код;
             base.FieldValue["col_a2"] = Опис;
@@ -2718,8 +2695,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ВидиНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Опис, ]);
+                
             }
             return result;
         }
@@ -2739,22 +2716,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ВидиНоменклатури_Triggers.Copying(copy, this);
+            await ВидиНоменклатури_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ВидиНоменклатури_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ВидиНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -2830,8 +2804,6 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ВидиНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -2948,8 +2920,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ПакуванняОдиниціВиміру_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, ]);
+                
             }
             return result;
         }
@@ -2968,22 +2940,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
+            await ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ПакуванняОдиниціВиміру_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -3058,8 +3027,6 @@ namespace StorageAndTrade_1_0.Довідники
             ПакуванняОдиниціВиміру_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ПакуванняОдиниціВиміру_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -3167,8 +3134,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Валюти_Triggers.BeforeSave(this);
             base.FieldValue["col_c5"] = Назва;
             base.FieldValue["col_a2"] = КороткаНазва;
             base.FieldValue["col_c6"] = Код;
@@ -3179,8 +3144,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Валюти_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, КороткаНазва, Код_R030, ]);
+                
             }
             return result;
         }
@@ -3200,9 +3165,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Валюти_Triggers.Copying(copy, this);
+            await Валюти_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -3408,8 +3372,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Контрагенти_Triggers.BeforeSave(this);
             base.FieldValue["col_c7"] = Назва;
             base.FieldValue["col_c8"] = Код;
             base.FieldValue["col_c9"] = НазваПовна;
@@ -3422,8 +3384,9 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Контрагенти_Triggers.AfterSave(this);
+                await Контрагенти_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку, ]);
+                
             }
             return result;
         }
@@ -3458,9 +3421,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Контрагенти_Triggers.Copying(copy, this);
+            await Контрагенти_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -3473,7 +3435,6 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask Delete()
         {
             
-                await Контрагенти_Triggers.BeforeDelete(this);
             await base.BaseDelete(["tab_a09", "tab_b20", ]);
         }
 
@@ -3669,7 +3630,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_d2", (int)record.Тип},
                     {"col_d8", record.Телефон},
@@ -3694,10 +3655,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -3764,7 +3723,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.Файл.UnigueID.UGuid},
                     
@@ -3782,10 +3741,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -3863,8 +3820,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Склади_Triggers.BeforeSave(this);
             base.FieldValue["col_d9"] = Назва;
             base.FieldValue["col_e1"] = Код;
             base.FieldValue["col_a1"] = (int)ТипСкладу;
@@ -3878,8 +3833,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Склади_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -3911,22 +3866,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Склади_Triggers.Copying(copy, this);
+            await Склади_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Склади_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Склади_Triggers.BeforeDelete(this);
             await base.BaseDelete(["tab_a11", ]);
         }
 
@@ -4008,8 +3960,6 @@ namespace StorageAndTrade_1_0.Довідники
             Склади_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await Склади_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4122,7 +4072,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_e2", (int)record.Тип},
                     {"col_e8", record.Телефон},
@@ -4147,10 +4097,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -4222,8 +4170,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ВидиЦін_Triggers.BeforeSave(this);
             base.FieldValue["col_e9"] = Назва;
             base.FieldValue["col_f1"] = Код;
             base.FieldValue["col_f2"] = Валюта.UnigueID.UGuid;
@@ -4232,8 +4178,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ВидиЦін_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -4251,22 +4197,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ВидиЦін_Triggers.Copying(copy, this);
+            await ВидиЦін_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ВидиЦін_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ВидиЦін_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -4340,8 +4283,6 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЦін_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ВидиЦін_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4445,8 +4386,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ВидиЦінПостачальників_Triggers.BeforeSave(this);
             base.FieldValue["col_f3"] = Назва;
             base.FieldValue["col_f4"] = Код;
             base.FieldValue["col_f5"] = Валюта.UnigueID.UGuid;
@@ -4455,8 +4394,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ВидиЦінПостачальників_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -4474,22 +4413,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ВидиЦінПостачальників_Triggers.Copying(copy, this);
+            await ВидиЦінПостачальників_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ВидиЦінПостачальників_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ВидиЦінПостачальників_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -4563,8 +4499,6 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЦінПостачальників_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ВидиЦінПостачальників_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4675,8 +4609,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Користувачі_Triggers.BeforeSave(this);
             base.FieldValue["col_f6"] = Назва;
             base.FieldValue["col_f7"] = Код;
             base.FieldValue["col_a1"] = ФізичнаОсоба.UnigueID.UGuid;
@@ -4687,8 +4619,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Користувачі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Коментар, ]);
+                
             }
             return result;
         }
@@ -4717,22 +4649,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Користувачі_Triggers.Copying(copy, this);
+            await Користувачі_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Користувачі_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Користувачі_Triggers.BeforeDelete(this);
             await base.BaseDelete(["tab_a15", ]);
         }
 
@@ -4811,8 +4740,6 @@ namespace StorageAndTrade_1_0.Довідники
             Користувачі_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await Користувачі_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -4923,7 +4850,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_f8", (int)record.Тип},
                     {"col_g5", record.Телефон},
@@ -4947,10 +4874,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -5028,8 +4953,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ФізичніОсоби_Triggers.BeforeSave(this);
             base.FieldValue["col_g7"] = Назва;
             base.FieldValue["col_g8"] = Код;
             base.FieldValue["col_g9"] = ДатаНародження;
@@ -5040,8 +4963,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ФізичніОсоби_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ІПН, ]);
+                
             }
             return result;
         }
@@ -5070,22 +4993,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ФізичніОсоби_Triggers.Copying(copy, this);
+            await ФізичніОсоби_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ФізичніОсоби_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ФізичніОсоби_Triggers.BeforeDelete(this);
             await base.BaseDelete(["tab_a17", ]);
         }
 
@@ -5164,8 +5084,6 @@ namespace StorageAndTrade_1_0.Довідники
             ФізичніОсоби_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ФізичніОсоби_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -5276,7 +5194,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_h1", (int)record.Тип},
                     {"col_h7", record.Телефон},
@@ -5300,10 +5218,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -5374,8 +5290,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await СтруктураПідприємства_Triggers.BeforeSave(this);
             base.FieldValue["col_h8"] = Назва;
             base.FieldValue["col_h9"] = Код;
             base.FieldValue["col_i1"] = Керівник.UnigueID.UGuid;
@@ -5384,8 +5298,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await СтруктураПідприємства_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -5403,22 +5317,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await СтруктураПідприємства_Triggers.Copying(copy, this);
+            await СтруктураПідприємства_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await СтруктураПідприємства_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await СтруктураПідприємства_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -5492,8 +5403,6 @@ namespace StorageAndTrade_1_0.Довідники
             СтруктураПідприємства_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await СтруктураПідприємства_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -5595,8 +5504,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await КраїниСвіту_Triggers.BeforeSave(this);
             base.FieldValue["col_i2"] = Назва;
             base.FieldValue["col_i3"] = Код;
             
@@ -5604,8 +5511,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await КраїниСвіту_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -5622,22 +5529,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await КраїниСвіту_Triggers.Copying(copy, this);
+            await КраїниСвіту_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await КраїниСвіту_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await КраїниСвіту_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -5710,8 +5614,6 @@ namespace StorageAndTrade_1_0.Довідники
             КраїниСвіту_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await КраїниСвіту_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -5821,8 +5723,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Файли_Triggers.BeforeSave(this);
             base.FieldValue["col_i6"] = Код;
             base.FieldValue["col_i5"] = Назва;
             base.FieldValue["col_a2"] = НазваФайлу;
@@ -5834,8 +5734,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Файли_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваФайлу, ]);
+                
             }
             return result;
         }
@@ -5856,22 +5756,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Файли_Triggers.Copying(copy, this);
+            await Файли_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Файли_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Файли_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -5948,8 +5845,6 @@ namespace StorageAndTrade_1_0.Довідники
             Файли_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await Файли_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -6055,8 +5950,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ХарактеристикиНоменклатури_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
             base.FieldValue["col_i8"] = Код;
             base.FieldValue["col_i9"] = НазваПовна;
@@ -6066,8 +5959,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ХарактеристикиНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, ]);
+                
             }
             return result;
         }
@@ -6086,22 +5979,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
+            await ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ХарактеристикиНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -6176,8 +6066,6 @@ namespace StorageAndTrade_1_0.Довідники
             ХарактеристикиНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ХарактеристикиНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -6281,8 +6169,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Номенклатура_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
@@ -6291,8 +6177,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Номенклатура_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -6310,9 +6196,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Номенклатура_Папки_Triggers.Copying(copy, this);
+            await Номенклатура_Папки_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6504,8 +6389,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Контрагенти_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j4"] = Назва;
             base.FieldValue["col_j5"] = Код;
             base.FieldValue["col_j6"] = Родич.UnigueID.UGuid;
@@ -6514,8 +6397,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Контрагенти_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -6533,9 +6416,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Контрагенти_Папки_Triggers.Copying(copy, this);
+            await Контрагенти_Папки_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6727,8 +6609,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Склади_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j7"] = Назва;
             base.FieldValue["col_j8"] = Код;
             base.FieldValue["col_a1"] = Родич.UnigueID.UGuid;
@@ -6737,8 +6617,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Склади_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -6756,9 +6636,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Склади_Папки_Triggers.Copying(copy, this);
+            await Склади_Папки_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -6952,8 +6831,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Каси_Triggers.BeforeSave(this);
             base.FieldValue["col_k8"] = Назва;
             base.FieldValue["col_k9"] = Код;
             base.FieldValue["col_a2"] = Валюта.UnigueID.UGuid;
@@ -6963,8 +6840,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Каси_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -6983,22 +6860,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Каси_Triggers.Copying(copy, this);
+            await Каси_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Каси_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Каси_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -7073,8 +6947,6 @@ namespace StorageAndTrade_1_0.Довідники
             Каси_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await Каси_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -7198,8 +7070,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await БанківськіРахункиОрганізацій_Triggers.BeforeSave(this);
             base.FieldValue["col_l1"] = Назва;
             base.FieldValue["col_l2"] = Код;
             base.FieldValue["col_l3"] = Валюта.UnigueID.UGuid;
@@ -7218,8 +7088,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await БанківськіРахункиОрганізацій_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку, ]);
+                
             }
             return result;
         }
@@ -7247,22 +7117,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
+            await БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await БанківськіРахункиОрганізацій_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -7346,8 +7213,6 @@ namespace StorageAndTrade_1_0.Довідники
             БанківськіРахункиОрганізацій_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await БанківськіРахункиОрганізацій_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -7512,8 +7377,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ДоговориКонтрагентів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Коментар, ]);
+                
             }
             return result;
         }
@@ -7548,22 +7413,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ДоговориКонтрагентів_Triggers.Copying(copy, this);
+            await ДоговориКонтрагентів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ДоговориКонтрагентів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ДоговориКонтрагентів_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -7654,8 +7516,6 @@ namespace StorageAndTrade_1_0.Довідники
             ДоговориКонтрагентів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ДоговориКонтрагентів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -7783,8 +7643,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await БанківськіРахункиКонтрагентів_Triggers.BeforeSave(this);
             base.FieldValue["col_n7"] = Назва;
             base.FieldValue["col_n8"] = Код;
             base.FieldValue["col_n9"] = НомерРахунку;
@@ -7805,8 +7663,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await БанківськіРахункиКонтрагентів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку, ]);
+                
             }
             return result;
         }
@@ -7836,22 +7694,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
+            await БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await БанківськіРахункиКонтрагентів_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -7937,8 +7792,6 @@ namespace StorageAndTrade_1_0.Довідники
             БанківськіРахункиКонтрагентів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await БанківськіРахункиКонтрагентів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8049,8 +7902,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await СтаттяРухуКоштів_Triggers.BeforeSave(this);
             base.FieldValue["col_i7"] = Назва;
             base.FieldValue["col_i8"] = Код;
             base.FieldValue["col_i9"] = КореспондуючийРахунок;
@@ -8061,8 +7912,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await СтаттяРухуКоштів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Опис, ]);
+                
             }
             return result;
         }
@@ -8091,22 +7942,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await СтаттяРухуКоштів_Triggers.Copying(copy, this);
+            await СтаттяРухуКоштів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await СтаттяРухуКоштів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await СтаттяРухуКоштів_Triggers.BeforeDelete(this);
             await base.BaseDelete(["tab_a46", ]);
         }
 
@@ -8185,8 +8033,6 @@ namespace StorageAndTrade_1_0.Довідники
             СтаттяРухуКоштів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await СтаттяРухуКоштів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8285,7 +8131,7 @@ namespace StorageAndTrade_1_0.Довідники
             
             foreach (Record record in Records)
             {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_j3", (int)record.ГосподарськаОперація},
                     
@@ -8303,10 +8149,8 @@ namespace StorageAndTrade_1_0.Довідники
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
-            foreach (Record copyRecordItem in copyRecords)
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
                 copyRecordItem.UID = Guid.Empty;
 
             return copyRecords;
@@ -8381,8 +8225,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await СеріїНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Номер, Коментар, ]);
+                
             }
             return result;
         }
@@ -8400,22 +8244,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await СеріїНоменклатури_Triggers.Copying(copy, this);
+            await СеріїНоменклатури_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await СеріїНоменклатури_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await СеріїНоменклатури_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -8489,8 +8330,6 @@ namespace StorageAndTrade_1_0.Довідники
             СеріїНоменклатури_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await СеріїНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8573,7 +8412,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             
-                await ПартіяТоварівКомпозит_Triggers.New(this);
+                await ValueTask.FromResult(true);
               
         }
 
@@ -8600,8 +8439,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ПартіяТоварівКомпозит_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Дата;
             base.FieldValue["col_a3"] = (int)ТипДокументу;
@@ -8613,8 +8450,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ПартіяТоварівКомпозит_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -8635,22 +8472,18 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ПартіяТоварівКомпозит_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ПартіяТоварівКомпозит_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -8727,8 +8560,6 @@ namespace StorageAndTrade_1_0.Довідники
             ПартіяТоварівКомпозит_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ПартіяТоварівКомпозит_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -8840,8 +8671,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ВидиЗапасів_Triggers.BeforeSave(this);
             base.FieldValue["col_a5"] = Назва;
             base.FieldValue["col_b3"] = Організація.UnigueID.UGuid;
             base.FieldValue["col_a7"] = (int)ТипЗапасів;
@@ -8854,8 +8683,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ВидиЗапасів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -8877,22 +8706,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ВидиЗапасів_Triggers.Copying(copy, this);
+            await ВидиЗапасів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ВидиЗапасів_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ВидиЗапасів_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -8970,8 +8796,6 @@ namespace StorageAndTrade_1_0.Довідники
             ВидиЗапасів_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ВидиЗапасів_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -9125,8 +8949,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Банки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_b4"] = ТипНаселеногоПункту;
@@ -9160,8 +8982,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Банки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса, ]);
+                
             }
             return result;
         }
@@ -9204,22 +9026,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Банки_Triggers.Copying(copy, this);
+            await Банки_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Банки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Банки_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -9319,8 +9138,6 @@ namespace StorageAndTrade_1_0.Довідники
             if (obj != null)
             {
                 
-                    await Банки_Triggers.SetDeletionLabel(obj, label);
-                
                 await base.BaseDeletionLabel(label);
             }
         }
@@ -9399,7 +9216,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             
-                await СкладськіПриміщення_Triggers.New(this);
+                await ValueTask.FromResult(true);
               
         }
 
@@ -9423,8 +9240,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await СкладськіПриміщення_Triggers.BeforeSave(this);
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = (int)НалаштуванняАдресногоЗберігання;
             base.FieldValue["col_a1"] = Склад.UnigueID.UGuid;
@@ -9433,8 +9248,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await СкладськіПриміщення_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -9452,22 +9267,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await СкладськіПриміщення_Triggers.Copying(copy, this);
+            await СкладськіПриміщення_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await СкладськіПриміщення_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await СкладськіПриміщення_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -9541,8 +9353,6 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіПриміщення_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await СкладськіПриміщення_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -9629,7 +9439,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             
-                await СкладськіКомірки_Triggers.New(this);
+                await ValueTask.FromResult(true);
               
         }
 
@@ -9660,8 +9470,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await СкладськіКомірки_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = ОбластьЗберігання.UnigueID.UGuid;
@@ -9677,8 +9485,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await СкладськіКомірки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -9703,22 +9511,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await СкладськіКомірки_Triggers.Copying(copy, this);
+            await СкладськіКомірки_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await СкладськіКомірки_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await СкладськіКомірки_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -9799,8 +9604,6 @@ namespace StorageAndTrade_1_0.Довідники
             СкладськіКомірки_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await СкладськіКомірки_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -9913,6 +9716,7 @@ namespace StorageAndTrade_1_0.Довідники
             {
                 
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -9930,8 +9734,7 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            return await ValueTask.FromResult<ОбластьЗберігання_Objest>(copy);
-                
+            return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -10098,7 +9901,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             
-                await ТипорозміриКомірок_Triggers.New(this);
+                await ValueTask.FromResult(true);
               
         }
 
@@ -10125,8 +9928,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await ТипорозміриКомірок_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Висота;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = Глибина;
@@ -10138,8 +9939,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await ТипорозміриКомірок_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -10160,22 +9961,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await ТипорозміриКомірок_Triggers.Copying(copy, this);
+            await ТипорозміриКомірок_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ТипорозміриКомірок_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await ТипорозміриКомірок_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -10252,8 +10050,6 @@ namespace StorageAndTrade_1_0.Довідники
             ТипорозміриКомірок_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await ТипорозміриКомірок_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -10359,8 +10155,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await СкладськіКомірки_Папки_Triggers.BeforeSave(this);
             base.FieldValue["col_j1"] = Назва;
             base.FieldValue["col_j2"] = Код;
             base.FieldValue["col_j3"] = Родич.UnigueID.UGuid;
@@ -10370,8 +10164,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await СкладськіКомірки_Папки_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                
             }
             return result;
         }
@@ -10390,9 +10184,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await СкладськіКомірки_Папки_Triggers.Copying(copy, this);
+            await СкладськіКомірки_Папки_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -10589,8 +10382,6 @@ namespace StorageAndTrade_1_0.Довідники
         
         public async ValueTask<bool> Save()
         {
-            
-                await Блокнот_Triggers.BeforeSave(this);
             base.FieldValue["col_a1"] = Код;
             base.FieldValue["col_a2"] = Назва;
             base.FieldValue["col_a3"] = ДатаЗапису;
@@ -10601,8 +10392,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                    await Блокнот_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Опис, ]);
+                
             }
             return result;
         }
@@ -10622,22 +10413,19 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-                await Блокнот_Triggers.Copying(copy, this);
+            await Блокнот_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Блокнот_Triggers.SetDeletionLabel(this, label);
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Блокнот_Triggers.BeforeDelete(this);
             await base.BaseDelete([]);
         }
 
@@ -10713,8 +10501,6 @@ namespace StorageAndTrade_1_0.Довідники
             Блокнот_Objest? obj = await GetDirectoryObject();
             if (obj != null)
             {
-                
-                    await Блокнот_Triggers.SetDeletionLabel(obj, label);
                 
                 await base.BaseDeletionLabel(label);
             }
@@ -12619,8 +12405,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ЗамовленняПостачальнику_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -12638,6 +12424,10 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ЗамовленняПостачальникам */
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -12694,13 +12484,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ЗамовленняПостачальнику_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ЗамовленняПостачальнику_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -12711,7 +12499,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ЗамовленняПостачальнику_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a30" });
         }
@@ -12802,8 +12589,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ЗамовленняПостачальнику_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -13521,8 +13306,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПоступленняТоварівТаПослуг_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -13540,6 +13325,30 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: Закупівлі */
+                РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+                await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ЗамовленняПостачальникам */
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -13602,7 +13411,6 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -13619,7 +13427,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПоступленняТоварівТаПослуг_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a33" });
         }
@@ -14390,8 +14197,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ЗамовленняКлієнта_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -14409,6 +14216,14 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ЗамовленняКлієнтів */
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -14468,13 +14283,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ЗамовленняКлієнта_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ЗамовленняКлієнта_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -14485,7 +14298,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ЗамовленняКлієнта_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a35" });
         }
@@ -14579,8 +14391,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ЗамовленняКлієнта_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -15293,8 +15103,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await РеалізаціяТоварівТаПослуг_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -15312,6 +15122,30 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ЗамовленняКлієнтів */
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: Продажі */
+                РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await Продажі_regAccum.Delete(this.UnigueID.UGuid);
             
                 await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -15373,13 +15207,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -15390,7 +15222,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await РеалізаціяТоварівТаПослуг_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a37" });
         }
@@ -15486,8 +15317,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -15921,8 +15750,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ВстановленняЦінНоменклатури_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -15978,13 +15807,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -15995,7 +15822,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ВстановленняЦінНоменклатури_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a43" });
         }
@@ -16068,8 +15894,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -16558,8 +16382,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПрихіднийКасовийОрдер_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -16577,6 +16401,18 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РухКоштів */
+                РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -16624,13 +16460,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -16641,7 +16475,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПрихіднийКасовийОрдер_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a47" });
         }
@@ -16723,8 +16556,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -17239,8 +17070,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await РозхіднийКасовийОрдер_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -17258,6 +17089,18 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РухКоштів */
+                РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -17307,13 +17150,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -17324,7 +17165,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await РозхіднийКасовийОрдер_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a49" });
         }
@@ -17408,8 +17248,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await РозхіднийКасовийОрдер_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -17949,8 +17787,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПереміщенняТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -17968,6 +17806,18 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -18018,13 +17868,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПереміщенняТоварів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПереміщенняТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -18035,7 +17883,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПереміщенняТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a50" });
         }
@@ -18120,8 +17967,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ПереміщенняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -18697,8 +18542,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПоверненняТоварівПостачальнику_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -18716,6 +18561,26 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: Закупівлі */
+                РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+                await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -18768,13 +18633,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -18785,7 +18648,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПоверненняТоварівПостачальнику_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a52" });
         }
@@ -18872,8 +18734,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -19423,8 +19283,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПоверненняТоварівВідКлієнта_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -19442,6 +19302,26 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: Продажі */
+                РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await Продажі_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -19490,13 +19370,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -19507,7 +19385,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПоверненняТоварівВідКлієнта_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a54" });
         }
@@ -19590,8 +19467,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -20091,8 +19966,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await АктВиконанихРобіт_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -20110,6 +19985,14 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: Продажі */
+                РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await Продажі_regAccum.Delete(this.UnigueID.UGuid);
             
                 await АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -20156,13 +20039,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await АктВиконанихРобіт_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await АктВиконанихРобіт_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -20173,7 +20054,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await АктВиконанихРобіт_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a82" });
         }
@@ -20254,8 +20134,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await АктВиконанихРобіт_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -20836,8 +20714,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ВведенняЗалишків_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -20855,6 +20733,30 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗКлієнтами */
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РозрахункиЗПостачальниками */
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: РухКоштів */
+                РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -20909,7 +20811,6 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ВведенняЗалишків_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -20926,7 +20827,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ВведенняЗалишків_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a84", "tab_a85", "tab_a86", "tab_a87" });
         }
@@ -21692,6 +21592,7 @@ namespace StorageAndTrade_1_0.Документи
             {
                 
                 await BaseWriteFullTextSearch(GetBasis(), [КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -21744,7 +21645,6 @@ namespace StorageAndTrade_1_0.Документи
             await copy.New();
             
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -22218,6 +22118,7 @@ namespace StorageAndTrade_1_0.Документи
             {
                 
                 await BaseWriteFullTextSearch(GetBasis(), [КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -22270,7 +22171,6 @@ namespace StorageAndTrade_1_0.Документи
             await copy.New();
             
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
@@ -22771,8 +22671,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПерерахунокТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -22829,13 +22729,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПерерахунокТоварів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПерерахунокТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -22846,7 +22744,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПерерахунокТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a93" });
         }
@@ -22920,8 +22817,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ПерерахунокТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -23384,8 +23279,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПсуванняТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Причина, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -23403,6 +23298,18 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -23444,13 +23351,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПсуванняТоварів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПсуванняТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -23461,7 +23366,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПсуванняТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a95" });
         }
@@ -23537,8 +23441,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПсуванняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ПсуванняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -24018,8 +23920,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ВнутрішнєСпоживанняТоварів_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -24037,6 +23939,18 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариНаСкладах */
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+                /* Очищення регістру накопичення: ПартіїТоварів */
+                РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -24079,13 +23993,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -24096,7 +24008,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ВнутрішнєСпоживанняТоварів_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b08" });
         }
@@ -24173,8 +24084,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -24739,8 +24648,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await РахунокФактура_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -24758,6 +24667,10 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ВільніЗалишки */
+                РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
             
                 await РахунокФактура_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -24807,13 +24720,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await РахунокФактура_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await РахунокФактура_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -24824,7 +24735,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await РахунокФактура_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b11" });
         }
@@ -24908,8 +24818,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             РахунокФактура_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await РахунокФактура_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -25361,8 +25269,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await РозміщенняТоварівНаСкладі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -25380,6 +25288,10 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариВКомірках */
+                РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
             
                 await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -25420,13 +25332,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -25437,7 +25347,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await РозміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_a68" });
         }
@@ -25512,8 +25421,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -25950,8 +25857,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ПереміщенняТоварівНаСкладі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -25969,6 +25876,10 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариВКомірках */
+                РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -26008,13 +25919,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -26025,7 +25934,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ПереміщенняТоварівНаСкладі_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b26" });
         }
@@ -26099,8 +26007,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -26544,8 +26450,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await ЗбіркаТоварівНаСкладі_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -26563,6 +26469,10 @@ namespace StorageAndTrade_1_0.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
+            
+                /* Очищення регістру накопичення: ТовариВКомірках */
+                РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
             
                 await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             await BaseSpend(false, DateTime.MinValue);
@@ -26603,13 +26513,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -26620,7 +26528,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await ЗбіркаТоварівНаСкладі_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b28" });
         }
@@ -26695,8 +26602,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {
@@ -27097,8 +27002,8 @@ namespace StorageAndTrade_1_0.Документи
             if (result)
             {
                 
-                    await РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave(this);
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
             }
 
             return result;
@@ -27155,13 +27060,11 @@ namespace StorageAndTrade_1_0.Документи
             
                 await РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
             return copy;
-                
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(this, label);
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -27172,7 +27075,6 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask Delete()
         {
             
-                await РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeDelete(this);
             await ClearSpendTheDocument();
             await base.BaseDelete(new string[] { "tab_b32" });
         }
@@ -27246,8 +27148,6 @@ namespace StorageAndTrade_1_0.Документи
         {
             РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
                 if (obj == null) return;
-                
-                    await РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel(obj, label);
                 
                 if (label)
                 {

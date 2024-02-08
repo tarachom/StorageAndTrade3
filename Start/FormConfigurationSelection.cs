@@ -68,7 +68,8 @@ namespace StorageAndTrade
                 OpenConfigurationParam.DataBaseLogin,
                 OpenConfigurationParam.DataBasePassword,
                 OpenConfigurationParam.DataBasePort,
-                OpenConfigurationParam.DataBaseBaseName
+                OpenConfigurationParam.DataBaseBaseName,
+                Configuration.VariantLoadConf.Small
             );
 
             if (!result)
