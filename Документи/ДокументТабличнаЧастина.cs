@@ -35,7 +35,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Дерево
         /// </summary>
-        protected TreeView TreeViewGrid = new TreeView();
+        protected TreeView TreeViewGrid = new TreeView() /*{ EnableSearch = true } !!! */;
 
         /// <summary>
         /// Прокрутка дерева
@@ -100,8 +100,8 @@ namespace StorageAndTrade
 
         void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Button == 1 && 
-                args.Event.Type == Gdk.EventType.DoubleButtonPress && 
+            if (args.Event.Button == 1 &&
+                args.Event.Type == Gdk.EventType.DoubleButtonPress &&
                 TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreePath itemPath;
@@ -132,7 +132,7 @@ namespace StorageAndTrade
 
         void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
         {
-            if (args.Event.Button == 3 && 
+            if (args.Event.Button == 3 &&
                 TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreePath itemPath;

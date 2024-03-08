@@ -52,6 +52,7 @@ namespace StorageAndTrade
         Склади_PointerControl Склад = new Склади_PointerControl();
         Склади_Папки_PointerControl Склад_Папка = new Склади_Папки_PointerControl() { Caption = "Склад папка:" };
         ComboBoxText ТипНоменклатури = new ComboBoxText();
+        Switch ТипНоменклатури_Включено = new Switch();
         ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:" };
 
         struct ПараметриФільтр
@@ -70,6 +71,7 @@ namespace StorageAndTrade
             public Склади_Pointer Склад;
             public Склади_Папки_Pointer Склад_Папка;
             public ТипиНоменклатури ТипНоменклатури;
+            public bool ТипНоменклатури_Включено;
             public ВидиНоменклатури_Pointer ВидНоменклатури;
         }
 
@@ -208,13 +210,21 @@ namespace StorageAndTrade
 
             hBoxNomenklaturaPapka.PackStart(Номенклатура_Папка, false, false, 5);
 
-            //ТипНоменклатури та ВидНоменклатури
+            //ТипНоменклатури
             HBox hBoxTypNomenklatury = new HBox() { Halign = Align.End };
             vBox.PackStart(hBoxTypNomenklatury, false, false, 5);
 
             hBoxTypNomenklatury.PackStart(new Label("Тип:"), false, false, 5);
             hBoxTypNomenklatury.PackStart(ТипНоменклатури, false, false, 5);
-            hBoxTypNomenklatury.PackStart(ВидНоменклатури, false, false, 5);
+
+            VBox hBoxTypNomenklaturyVkl = new VBox();
+            hBoxTypNomenklatury.PackStart(hBoxTypNomenklaturyVkl, false, false, 5);
+            hBoxTypNomenklaturyVkl.PackStart(ТипНоменклатури_Включено, false, false, 5);
+
+            //ВидНоменклатури
+            HBox hBoxVydNomenklatury = new HBox() { Halign = Align.End };
+            vBox.PackStart(hBoxVydNomenklatury, false, false, 5);
+            hBoxVydNomenklatury.PackStart(ВидНоменклатури, false, false, 5);
 
             //Заповнення
             foreach (var field in ПсевдонімиПерелічення.ТипиНоменклатури_List())
@@ -243,6 +253,7 @@ namespace StorageAndTrade
                 Склад = Склад.Pointer,
                 Склад_Папка = Склад_Папка.Pointer,
                 ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId),
+                ТипНоменклатури_Включено = ТипНоменклатури_Включено.Active,
                 ВидНоменклатури = ВидНоменклатури.Pointer
             };
         }
@@ -284,7 +295,8 @@ namespace StorageAndTrade
             if (!Фільтр.Склад_Папка.IsEmpty())
                 text += "Склад папка: <b>" + await Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
 
-            text += "Тип: <b>" + Фільтр.ТипНоменклатури.ToString() + "</b>; ";
+            if (Фільтр.ТипНоменклатури_Включено)
+                text += "Тип: <b>" + Фільтр.ТипНоменклатури.ToString() + "</b>; ";
 
             if (!Фільтр.ВидНоменклатури.IsEmpty())
                 text += "Вид: <b>" + await Фільтр.ВидНоменклатури.GetPresentation() + "</b>; ";
@@ -351,8 +363,8 @@ FROM
         Довідник_Номенклатура.{Номенклатура_Const.ОдиницяВиміру}
 WHERE
     Продажі.{Продажі_Обороти_TablePart.Період} >= @ПочатокПеріоду AND
-    Продажі.{Продажі_Обороти_TablePart.Період} <= @КінецьПеріоду AND
-    Довідник_Номенклатура.{Номенклатура_Const.ТипНоменклатури} = @ТипНоменклатури
+    Продажі.{Продажі_Обороти_TablePart.Період} <= @КінецьПеріоду" +
+    (Фільтр.ТипНоменклатури_Включено ? $@" AND Довідник_Номенклатура.{Номенклатура_Const.ТипНоменклатури} = @ТипНоменклатури" : "") + $@"
 ";
 
             #region WHERE
