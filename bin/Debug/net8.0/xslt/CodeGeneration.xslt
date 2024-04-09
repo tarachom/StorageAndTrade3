@@ -1400,6 +1400,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet <xsl:value-of select="$RegName"/>_regAccum = new РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet();
             await <xsl:value-of select="$RegName"/>_regAccum.Delete(this.UnigueID.UGuid);
             </xsl:for-each>
+            <xsl:if test="count(AllowRegisterAccumulation/Name) = 0">
+            await ValueTask.FromResult(true);
+            </xsl:if>
         }
 
         public async ValueTask ClearSpendTheDocument()

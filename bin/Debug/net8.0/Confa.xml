@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>09.04.2024 12:19:15</DateTimeSave>
+  <DateTimeSave>09.04.2024 12:56:26</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -18412,6 +18412,10 @@ WHERE
           <Name>РозміщенняНоменклатуриПоКоміркам</Name>
           <FullName>Розміщення номенклатури по коміркам</FullName>
         </Item>
+        <Item>
+          <Name>КорегуванняБоргу</Name>
+          <FullName>Корегування боргу контрагентів</FullName>
+        </Item>
       </AllowDocument>
       <TabularLists>
         <TabularList>
@@ -21567,6 +21571,129 @@ WHERE
               </Join>
               <FieldAndAlias>
                 <table>join_tab_3</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+        <TabularList>
+          <Name>КорегуванняБоргу</Name>
+          <Desc>
+          </Desc>
+          <Table>tab_a65</Table>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <DocField>Назва</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Дата</Name>
+              <DocField>ДатаДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>1</WherePeriod>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Номер</Name>
+              <DocField>НомерДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <DocField>Організація</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Join>
+                <table>Довідники.Організації_Const.TABLE</table>
+                <field>Організація</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <DocField>
+              </DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <DocField>
+              </DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <DocField>
+              </DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <DocField>
+              </DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <DocField>
+              </DocField>
+              <SqlType>text</SqlType>
+              <WherePeriod>0</WherePeriod>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <DocField>Автор</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
                 <field>Довідники.Користувачі_Const.Назва</field>
               </FieldAndAlias>
             </Field>

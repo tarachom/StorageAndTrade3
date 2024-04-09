@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.04.2024 12:19:15
+ * Дата конфігурації: 09.04.2024 12:56:26
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -15868,6 +15868,8 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
+            await ValueTask.FromResult(true);
+            
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -21844,6 +21846,8 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
+            await ValueTask.FromResult(true);
+            
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -22379,6 +22383,8 @@ namespace StorageAndTrade_1_0.Документи
         /* Очищення всіх регістрів */
         async void ClearRegAccum()
         {
+            
+            await ValueTask.FromResult(true);
             
         }
 
@@ -22952,6 +22958,8 @@ namespace StorageAndTrade_1_0.Документи
         /* Очищення всіх регістрів */
         async void ClearRegAccum()
         {
+            
+            await ValueTask.FromResult(true);
             
         }
 
@@ -27409,6 +27417,8 @@ namespace StorageAndTrade_1_0.Документи
         /* Очищення всіх регістрів */
         async void ClearRegAccum()
         {
+            
+            await ValueTask.FromResult(true);
             
         }
 

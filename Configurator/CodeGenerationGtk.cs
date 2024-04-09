@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.04.2024 12:19:15
+ * Дата конфігурації: 09.04.2024 12:56:26
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -14291,6 +14291,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 if (where != null) whereList.Add(where);
             }
               
+            {
+                List<Where> whereList = [];
+                WhereDict.Add("КорегуванняБоргу", whereList);
+                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
+                if (where != null) whereList.Add(where);
+            }
+              
         }
 
         public static void ОчиститиВідбір(TreeView treeView)
@@ -14324,6 +14331,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 {"ПереміщенняТоварівНаСкладі", "Переміщення товарів на складі"},
                 {"ЗбіркаТоварівНаСкладі", "Збірка товарів на складі"},
                 {"РозміщенняНоменклатуриПоКоміркам", "Розміщення номенклатури по коміркам"},
+                {"КорегуванняБоргу", "Корегування боргу контрагентів"},
                 
             };
         }
@@ -16011,6 +16019,77 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                               
                               query.FieldAndAlias.Add(
                                   new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
+                            
+
+                  allQuery.Add(query.Construct());
+              }
+              
+              //Документ: КорегуванняБоргу
+              {
+                  Query query = new Query(Документи.КорегуванняБоргу_Const.TABLE);
+
+                  // Встановлення відбору для даного типу документу
+                  if (treeView.Data.ContainsKey("Where"))
+                  {
+                      var where = treeView.Data["Where"];
+                      if (where != null)
+                      {
+                          var Where = (Dictionary<string, List<Where>>)where;
+                          if (Where.ContainsKey("КорегуванняБоргу") && Where["КорегуванняБоргу"].Count != 0) 
+                          {
+                              query.Where = Where["КорегуванняБоргу"];
+                              foreach(Where field in query.Where)
+                                  paramQuery.Add(field.Alias, field.Value);
+                          }
+                      }
+                  }
+
+                  query.FieldAndAlias.Add(new NameValue<string>("'КорегуванняБоргу'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.НомерДок, "Номер"));
+                            
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Організації_Const.TABLE, Документи.КорегуванняБоргу_Const.Організація, query.Table, "join_tab_1"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "Організація"));
+                              
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                        
+                          /* Empty Field */
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
+                        
+                              /* Join Table */
+                              query.Joins.Add(
+                                  new Join(Довідники.Користувачі_Const.TABLE, Документи.КорегуванняБоргу_Const.Автор, query.Table, "join_tab_2"));
+                              
+                                /* Field */
+                                query.FieldAndAlias.Add(
+                                  new NameValue<string>("join_tab_2." + Довідники.Користувачі_Const.Назва, "Автор"));
+                              
+                              query.FieldAndAlias.Add(
+                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Коментар, "Коментар"));
                             
 
                   allQuery.Add(query.Construct());

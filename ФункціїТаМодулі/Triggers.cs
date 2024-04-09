@@ -2491,13 +2491,14 @@ namespace StorageAndTrade_1_0.Документи
         }
     }
 
-
     class КорегуванняБоргу_Triggers
     {
         public static async ValueTask New(КорегуванняБоргу_Objest ДокументОбєкт)
         {
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.КорегуванняБоргу_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
+            ДокументОбєкт.Автор = Program.Користувач;
+            
             await ValueTask.FromResult(true);
         }
 
