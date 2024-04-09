@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 08.02.2024 17:56:12
+ * Дата конфігурації: 09.04.2024 12:19:15
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -13868,6 +13868,174 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         ДатаДок = Fields[РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок].ToString() ?? "", /**/
                         НомерДок = Fields[РозміщенняНоменклатуриПоКоміркам_Const.НомерДок].ToString() ?? "", /**/
                         Коментар = Fields[РозміщенняНоменклатуриПоКоміркам_Const.Коментар].ToString() ?? "" /**/
+                        
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+
+                    if (FirstPath == null)
+                        FirstPath = CurrentPath;
+
+                    if (DocumentPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+        }
+    }
+	    
+    #endregion
+    
+    #region DOCUMENT "КорегуванняБоргу"
+    
+      
+    public class КорегуванняБоргу_Записи : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Автор = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] 
+            { 
+                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                ID, 
+                /*Проведений документ*/ Spend, 
+                /*Назва*/ Назва,
+                /*НомерДок*/ НомерДок,
+                /*ДатаДок*/ ДатаДок,
+                /*Організація*/ Організація,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                
+            };
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Spend Проведений документ*/ typeof(bool),
+                /*Назва*/ typeof(string),  
+                /*НомерДок*/ typeof(string),  
+                /*ДатаДок*/ typeof(string),  
+                /*Організація*/ typeof(string),  
+                /*Автор*/ typeof(string),  
+                /*Коментар*/ typeof(string),  
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("НомерДок", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("ДатаДок", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true } ); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Документи.КорегуванняБоргу_Select КорегуванняБоргу_Select = new Документи.КорегуванняБоргу_Select();
+            КорегуванняБоргу_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Проведений документ*/ "spend",
+                /*Назва*/ Документи.КорегуванняБоргу_Const.Назва,
+                /*НомерДок*/ Документи.КорегуванняБоргу_Const.НомерДок,
+                /*ДатаДок*/ Документи.КорегуванняБоргу_Const.ДатаДок,
+                /*Коментар*/ Документи.КорегуванняБоргу_Const.Коментар,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
+            {
+                var where = treeView.Data["Where"];
+                if (where != null) КорегуванняБоргу_Select.QuerySelect.Where = (List<Where>)where;
+            }
+
+            
+              /* ORDER */
+              КорегуванняБоргу_Select.QuerySelect.Order.Add(Документи.КорегуванняБоргу_Const.ДатаДок, SelectOrder.ASC);
+            
+                /* Join Table */
+                КорегуванняБоргу_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Організації_Const.TABLE, Документи.КорегуванняБоргу_Const.Організація, КорегуванняБоргу_Select.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  КорегуванняБоргу_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Організації_Const.Назва, "join_tab_1_field_1"));
+                  
+                /* Join Table */
+                КорегуванняБоргу_Select.QuerySelect.Joins.Add(
+                    new Join(Довідники.Користувачі_Const.TABLE, Документи.КорегуванняБоргу_Const.Автор, КорегуванняБоргу_Select.QuerySelect.Table, "join_tab_2"));
+                
+                  /* Field */
+                  КорегуванняБоргу_Select.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.Користувачі_Const.Назва, "join_tab_2_field_1"));
+                  
+
+            /* SELECT */
+            await КорегуванняБоргу_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
+            while (КорегуванняБоргу_Select.MoveNext())
+            {
+                Документи.КорегуванняБоргу_Pointer? cur = КорегуванняБоргу_Select.Current;
+
+                if (cur != null)
+                {
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    КорегуванняБоргу_Записи Record = new КорегуванняБоргу_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Spend = (bool)Fields["spend"], /*Проведений документ*/
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Організація = Fields["join_tab_1_field_1"].ToString() ?? "", /**/
+                        Автор = Fields["join_tab_2_field_1"].ToString() ?? "", /**/
+                        Назва = Fields[КорегуванняБоргу_Const.Назва].ToString() ?? "", /**/
+                        НомерДок = Fields[КорегуванняБоргу_Const.НомерДок].ToString() ?? "", /**/
+                        ДатаДок = Fields[КорегуванняБоргу_Const.ДатаДок].ToString() ?? "", /**/
+                        Коментар = Fields[КорегуванняБоргу_Const.Коментар].ToString() ?? "" /**/
                         
                     };
 

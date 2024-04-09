@@ -3277,6 +3277,68 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
         }
     }
 
+    class КорегуванняБоргу_SpendTheDocument
+    {
+        public static async ValueTask<bool> Spend(КорегуванняБоргу_Objest ДокументОбєкт)
+        {
+            try
+            {
+                #region РозрахункиЗКлієнтами та РозрахункиЗПостачальниками
+
+                РозрахункиЗКлієнтами_RecordsSet розрахункиЗКлієнтами_RecordsSet = new РозрахункиЗКлієнтами_RecordsSet();
+                РозрахункиЗПостачальниками_RecordsSet розрахункиЗПостачальниками_RecordsSet = new РозрахункиЗПостачальниками_RecordsSet();
+
+                foreach (КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Record РозрахункиЗКонтрагентами_Record in ДокументОбєкт.РозрахункиЗКонтрагентами_TablePart.Records)
+                {
+                    if (РозрахункиЗКонтрагентами_Record.ТипКонтрагента == Перелічення.ТипиКонтрагентів.Клієнт)
+                    {
+                        РозрахункиЗКлієнтами_RecordsSet.Record record_Клієнт = new РозрахункиЗКлієнтами_RecordsSet.Record()
+                        {
+                            Income = false,
+                            Owner = ДокументОбєкт.UnigueID.UGuid,
+                            Контрагент = РозрахункиЗКонтрагентами_Record.Контрагент,
+                            Валюта = РозрахункиЗКонтрагентами_Record.Валюта,
+                            Сума = РозрахункиЗКонтрагентами_Record.Сума
+                        };
+
+                        розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
+                    }
+
+                    if (РозрахункиЗКонтрагентами_Record.ТипКонтрагента == Перелічення.ТипиКонтрагентів.Постачальник)
+                    {
+                        РозрахункиЗПостачальниками_RecordsSet.Record record_Постачальник = new РозрахункиЗПостачальниками_RecordsSet.Record()
+                        {
+                            Income = true,
+                            Owner = ДокументОбєкт.UnigueID.UGuid,
+                            Контрагент = РозрахункиЗКонтрагентами_Record.Контрагент,
+                            Валюта = РозрахункиЗКонтрагентами_Record.Валюта,
+                            Сума = РозрахункиЗКонтрагентами_Record.Сума,
+                        };
+
+                        розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
+                    }
+                }
+
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+
+                #endregion
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
+                return false;
+            }
+        }
+
+        public static async ValueTask ClearSpend(КорегуванняБоргу_Objest ДокументОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+
     #endregion
 
     #region Адресне розміщення на складі

@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>08.02.2024 17:56:12</DateTimeSave>
+  <DateTimeSave>09.04.2024 12:19:15</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -579,6 +579,14 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>РозміщенняНоменклатуриПоКоміркам</Name>
           <NameInTable>col_b5</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>КорегуванняБоргу</Name>
+          <NameInTable>col_i5</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -17298,6 +17306,264 @@ WHERE
         <ClearSpend>РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
     </Document>
+    <Document>
+      <Name>КорегуванняБоргу</Name>
+      <FullName>Корегування боргу контрагентів</FullName>
+      <Table>tab_a65</Table>
+      <Desc>
+      </Desc>
+      <AutoNum>1</AutoNum>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>docname</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <NameInTable>docnomer</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>docdate</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Організація</Name>
+          <NameInTable>col_c8</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Організації</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Підрозділ</Name>
+          <NameInTable>col_d5</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.СтруктураПідприємства</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
+          <NameInTable>col_d1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Автор</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Користувачі</Pointer>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>КлючовіСловаДляПошуку</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <Multiline>0</Multiline>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>РозрахункиЗКонтрагентами</Name>
+          <Table>tab_b12</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>НомерРядка</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <NameInTable>col_e9</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <NameInTable>col_f1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_f2</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ТипКонтрагента</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипиКонтрагентів</Pointer>
+              <Desc>В залежності від типу контрагента будуть робитися рухи 
+по регістру розрахунки з клієнтами або по регістру розрахунки з 
+постачальниками</Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>True</SortField>
+              <Type>datetime</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <Join>
+                <table>Довідники.Організації_Const.TABLE</table>
+                <field>Організація</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Організації_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <Join>
+                <table>Довідники.Користувачі_Const.TABLE</table>
+                <field>Автор</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.Користувачі_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <SortNum>99</SortNum>
+              <SortField>False</SortField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <AllowRegisterAccumulation>
+        <Name>РозрахункиЗКлієнтами</Name>
+        <Name>РозрахункиЗПостачальниками</Name>
+      </AllowRegisterAccumulation>
+      <TriggerFunctions>
+        <New Action="1">КорегуванняБоргу_Triggers.New</New>
+        <Copying Action="1">КорегуванняБоргу_Triggers.Copying</Copying>
+        <BeforeSave Action="1">КорегуванняБоргу_Triggers.BeforeSave</BeforeSave>
+        <AfterSave Action="0">КорегуванняБоргу_Triggers.AfterSave</AfterSave>
+        <SetDeletionLabel Action="0">КорегуванняБоргу_Triggers.SetDeletionLabel</SetDeletionLabel>
+        <BeforeDelete Action="0">КорегуванняБоргу_Triggers.BeforeDelete</BeforeDelete>
+      </TriggerFunctions>
+      <SpendFunctions>
+        <Spend>КорегуванняБоргу_SpendTheDocument.Spend</Spend>
+        <ClearSpend>КорегуванняБоргу_SpendTheDocument.ClearSpend</ClearSpend>
+      </SpendFunctions>
+    </Document>
   </Documents>
   <Enums>
     <Enum>
@@ -25852,6 +26118,7 @@ HAVING
         <Name>ПоверненняТоварівВідКлієнта</Name>
         <Name>АктВиконанихРобіт</Name>
         <Name>ВведенняЗалишків</Name>
+        <Name>КорегуванняБоргу</Name>
       </AllowDocumentSpend>
       <TabularParts>
         <TablePart>
@@ -26977,6 +27244,7 @@ HAVING
         <Name>РозхіднийКасовийОрдер</Name>
         <Name>ПоверненняТоварівПостачальнику</Name>
         <Name>ВведенняЗалишків</Name>
+        <Name>КорегуванняБоргу</Name>
       </AllowDocumentSpend>
       <TabularParts>
         <TablePart>

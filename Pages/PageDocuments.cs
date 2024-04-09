@@ -175,6 +175,13 @@ namespace StorageAndTrade
                     Program.GeneralForm?.CreateNotebookPage($"{РозхіднийКасовийОрдер_Const.FULLNAME}", () => { return page; });
                     page.SetValue();
                 });
+
+                Link.AddLink(vRight, $"{КорегуванняБоргу_Const.FULLNAME}", () =>
+                {
+                    КорегуванняБоргу page = new КорегуванняБоргу();
+                    Program.GeneralForm?.CreateNotebookPage($"{КорегуванняБоргу_Const.FULLNAME}", () => { return page; });
+                    page.SetValue();
+                });
             }
 
             Link.AddCaption(vRight, "Склад", PageJournals.Склад);

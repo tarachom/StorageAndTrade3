@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 08.02.2024 17:56:12
+ * Дата конфігурації: 09.04.2024 12:19:15
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -169,6 +169,8 @@ namespace StorageAndTrade_1_0
                         case "ЗбіркаТоварівНаСкладі": record.result = await new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
                         case "РозміщенняНоменклатуриПоКоміркам": record.result = await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
+                        
+                        case "КорегуванняБоргу": record.result = await new Документи.КорегуванняБоргу_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
                         
                     }
                     
@@ -1120,6 +1122,19 @@ namespace StorageAndTrade_1_0.Константи
             set
             {
                 Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_b5", value);
+            }
+        }
+        public static int КорегуванняБоргу_Const
+        {
+            get 
+            {
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i5"); } ).Result;
+                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+                return result;
+            }
+            set
+            {
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i5", value);
             }
         }
              
@@ -27679,6 +27694,548 @@ namespace StorageAndTrade_1_0.Документи
     
     #endregion
     
+    #region DOCUMENT "КорегуванняБоргу"
+    public static class КорегуванняБоргу_Const
+    {
+        public const string TABLE = "tab_a65";
+        public const string POINTER = "Документи.КорегуванняБоргу"; /* Повна назва вказівника */
+        public const string FULLNAME = "Корегування боргу контрагентів"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
+        
+        
+        public const string Назва = "docname";
+        public const string НомерДок = "docnomer";
+        public const string ДатаДок = "docdate";
+        public const string Організація = "col_c8";
+        public const string Підрозділ = "col_d5";
+        public const string Коментар = "col_d1";
+        public const string Автор = "col_a3";
+        public const string КлючовіСловаДляПошуку = "col_a2";
+    }
+
+    public static class КорегуванняБоргу_Export
+    {
+        public static async ValueTask ToXmlFile(КорегуванняБоргу_Pointer КорегуванняБоргу, string pathToSave)
+        {
+            КорегуванняБоргу_Objest? obj = await КорегуванняБоргу.GetDocumentObject(true);
+            if (obj == null) return;
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+            xmlWriter.WriteAttributeString("uid", obj.UnigueID.ToString());
+            
+            xmlWriter.WriteStartElement("Назва");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(obj.Назва);
+              
+            xmlWriter.WriteEndElement(); //Назва
+            xmlWriter.WriteStartElement("НомерДок");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(obj.НомерДок);
+              
+            xmlWriter.WriteEndElement(); //НомерДок
+            xmlWriter.WriteStartElement("ДатаДок");
+            xmlWriter.WriteAttributeString("type", "datetime");
+            
+                xmlWriter.WriteValue(obj.ДатаДок);
+              
+            xmlWriter.WriteEndElement(); //ДатаДок
+            xmlWriter.WriteStartElement("Організація");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Організації");
+                    xmlWriter.WriteAttributeString("uid", obj.Організація.UnigueID.ToString());
+                    xmlWriter.WriteString(await obj.Організація.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Організація
+            xmlWriter.WriteStartElement("Підрозділ");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.СтруктураПідприємства");
+                    xmlWriter.WriteAttributeString("uid", obj.Підрозділ.UnigueID.ToString());
+                    xmlWriter.WriteString(await obj.Підрозділ.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Підрозділ
+            xmlWriter.WriteStartElement("Коментар");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(obj.Коментар);
+              
+            xmlWriter.WriteEndElement(); //Коментар
+            xmlWriter.WriteStartElement("Автор");
+            xmlWriter.WriteAttributeString("type", "pointer");
+            
+                    xmlWriter.WriteAttributeString("pointer", "Довідники.Користувачі");
+                    xmlWriter.WriteAttributeString("uid", obj.Автор.UnigueID.ToString());
+                    xmlWriter.WriteString(await obj.Автор.GetPresentation());
+                  
+            xmlWriter.WriteEndElement(); //Автор
+            xmlWriter.WriteStartElement("КлючовіСловаДляПошуку");
+            xmlWriter.WriteAttributeString("type", "string");
+            
+                xmlWriter.WriteValue(obj.КлючовіСловаДляПошуку);
+              
+            xmlWriter.WriteEndElement(); //КлючовіСловаДляПошуку
+
+                /* 
+                Табличні частини
+                */
+
+                xmlWriter.WriteStartElement("TabularParts");
+                
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "РозрахункиЗКонтрагентами");
+
+                    foreach(КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Record record in obj.РозрахункиЗКонтрагентами_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        
+                        xmlWriter.WriteStartElement("НомерРядка");
+                        xmlWriter.WriteAttributeString("type", "integer");
+                        
+                            xmlWriter.WriteValue(record.НомерРядка);
+                          
+                        xmlWriter.WriteEndElement(); //НомерРядка
+                        xmlWriter.WriteStartElement("Контрагент");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Контрагенти");
+                                xmlWriter.WriteAttributeString("uid", record.Контрагент.UnigueID.ToString());
+                                xmlWriter.WriteString(await record.Контрагент.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Контрагент
+                        xmlWriter.WriteStartElement("Валюта");
+                        xmlWriter.WriteAttributeString("type", "pointer");
+                        
+                                xmlWriter.WriteAttributeString("pointer", "Довідники.Валюти");
+                                xmlWriter.WriteAttributeString("uid", record.Валюта.UnigueID.ToString());
+                                xmlWriter.WriteString(await record.Валюта.GetPresentation());
+                              
+                        xmlWriter.WriteEndElement(); //Валюта
+                        xmlWriter.WriteStartElement("Сума");
+                        xmlWriter.WriteAttributeString("type", "numeric");
+                        
+                            xmlWriter.WriteValue(record.Сума);
+                          
+                        xmlWriter.WriteEndElement(); //Сума
+                        xmlWriter.WriteStartElement("ТипКонтрагента");
+                        xmlWriter.WriteAttributeString("type", "enum");
+                        
+                            xmlWriter.WriteAttributeString("pointer", "Перелічення.ТипиКонтрагентів");
+                            xmlWriter.WriteAttributeString("uid", ((int)record.ТипКонтрагента).ToString());
+                            xmlWriter.WriteString(record.ТипКонтрагента.ToString());
+                          
+                        xmlWriter.WriteEndElement(); //ТипКонтрагента
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                
+                xmlWriter.WriteEndElement(); //TabularParts
+            
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+        }
+    }
+
+    public class КорегуванняБоргу_Objest : DocumentObject
+    {
+        public КорегуванняБоргу_Objest() : base(Config.Kernel, "tab_a65", "КорегуванняБоргу",
+             ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_d1", "col_a3", "col_a2", ])
+        {
+            
+                //Табличні частини
+                РозрахункиЗКонтрагентами_TablePart = new КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart(this);
+                
+        }
+        
+        public async ValueTask New()
+        {
+            BaseNew();
+            
+                await КорегуванняБоргу_Triggers.New(this);
+              
+        }
+
+        public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
+        {
+            if (await BaseRead(uid))
+            {
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Організація = new Довідники.Організації_Pointer(base.FieldValue["col_c8"]);
+                Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_d5"]);
+                Коментар = base.FieldValue["col_d1"].ToString() ?? "";
+                Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_a2"].ToString() ?? "";
+                
+                BaseClear();
+                
+                if (readAllTablePart)
+                {
+                    
+                    await РозрахункиЗКонтрагентами_TablePart.Read();
+                }
+                
+                return true;
+            }
+            else
+                return false;
+        }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        public bool ReadSync(UnigueID uid, bool readAllTablePart = false) { return Task.Run<bool>(async () => { return await Read(uid, readAllTablePart); }).Result; }
+        
+        public async Task<bool> Save()
+        {
+            
+                await КорегуванняБоргу_Triggers.BeforeSave(this);
+            base.FieldValue["docname"] = Назва;
+            base.FieldValue["docnomer"] = НомерДок;
+            base.FieldValue["docdate"] = ДатаДок;
+            base.FieldValue["col_c8"] = Організація.UnigueID.UGuid;
+            base.FieldValue["col_d5"] = Підрозділ.UnigueID.UGuid;
+            base.FieldValue["col_d1"] = Коментар;
+            base.FieldValue["col_a3"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = КлючовіСловаДляПошуку;
+            
+            bool result = await BaseSave();
+            
+            if (result)
+            {
+                
+                await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
+            }
+
+            return result;
+        }
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            
+            if (await КорегуванняБоргу_SpendTheDocument.Spend(this))
+            {
+                await BaseSpend(true, spendDate);
+                return true;
+            }
+            else
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+                return false;
+            }
+                
+        }
+
+        /* синхронна функція для SpendTheDocument() */
+        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; }
+
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
+        {
+            
+            /* РозрахункиЗКлієнтами */
+            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            
+            /* РозрахункиЗПостачальниками */
+            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await КорегуванняБоргу_SpendTheDocument.ClearSpend(this);
+            
+            await BaseSpend(false, DateTime.MinValue);
+        }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        public bool ClearSpendTheDocumentSync() { return Task.Run<bool>(async () => { await ClearSpendTheDocument(); return true; }).Result; } 
+
+        public async ValueTask<КорегуванняБоргу_Objest> Copy(bool copyTableParts = false)
+        {
+            КорегуванняБоргу_Objest copy = new КорегуванняБоргу_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Організація = Організація,
+                Підрозділ = Підрозділ,
+                Коментар = Коментар,
+                Автор = Автор,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                
+            };
+            
+            if (copyTableParts)
+            {
+            
+                //РозрахункиЗКонтрагентами - Таблична частина
+                await РозрахункиЗКонтрагентами_TablePart.Read();
+                copy.РозрахункиЗКонтрагентами_TablePart.Records = РозрахункиЗКонтрагентами_TablePart.Copy();
+            
+            }
+            
+
+            await copy.New();
+            
+                await КорегуванняБоргу_Triggers.Copying(copy, this);
+            return copy;
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
+        }
+
+        /* синхронна функція для SetDeletionLabel() */
+        public bool SetDeletionLabelSync(bool label = true) { return Task.Run<bool>(async () => { await SetDeletionLabel(label); return true; }).Result; }
+
+        public async ValueTask Delete()
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDelete(new string[] { "tab_b12" });
+        }
+
+        /* синхронна функція для Delete() */
+        public bool DeleteSync() { return Task.Run<bool>(async () => { await Delete(); return true; }).Result; } 
+        
+        public КорегуванняБоргу_Pointer GetDocumentPointer()
+        {
+            return new КорегуванняБоргу_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, КорегуванняБоргу_Const.POINTER);
+        }
+        
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
+        
+        //Табличні частини
+        public КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart РозрахункиЗКонтрагентами_TablePart { get; set; }
+        
+    }
+    
+    public class КорегуванняБоргу_Pointer : DocumentPointer
+    {
+        public КорегуванняБоргу_Pointer(object? uid = null) : base(Config.Kernel, "tab_a65", "КорегуванняБоргу")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public КорегуванняБоргу_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a65", "КорегуванняБоргу")
+        {
+            base.Init(uid, fields);
+        }
+
+        public string Назва { get; set; } = "";
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return Назва = await base.BasePresentation(
+              ["docname", ]
+            );
+        }
+
+        /* синхронна функція для GetPresentation() */
+        public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; }
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            КорегуванняБоргу_Objest? obj = await GetDocumentObject();
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            КорегуванняБоргу_Objest? obj = await GetDocumentObject();
+            if (obj != null) await obj.ClearSpendTheDocument();
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            КорегуванняБоргу_Objest? obj = await GetDocumentObject();
+                if (obj == null) return;
+                
+                if (label)
+                {
+                    await КорегуванняБоргу_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
+                }
+                
+            await base.BaseDeletionLabel(label);
+        }
+
+        public КорегуванняБоргу_Pointer Copy()
+        {
+            return new КорегуванняБоргу_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+        }
+
+        public КорегуванняБоргу_Pointer GetEmptyPointer()
+        {
+            return new КорегуванняБоргу_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, КорегуванняБоргу_Const.POINTER);
+        }
+
+        public async ValueTask<КорегуванняБоргу_Objest?> GetDocumentObject(bool readAllTablePart = false)
+        {
+            if (this.IsEmpty()) return null;
+            КорегуванняБоргу_Objest КорегуванняБоргуObjestItem = new КорегуванняБоргу_Objest();
+            if (!await КорегуванняБоргуObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
+            
+            return КорегуванняБоргуObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
+        }
+    }
+
+    public class КорегуванняБоргу_Select : DocumentSelect
+    {		
+        public КорегуванняБоргу_Select() : base(Config.Kernel, "tab_a65") { }
+        
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new КорегуванняБоргу_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        
+        public КорегуванняБоргу_Pointer? Current { get; private set; }
+    }
+
+      
+    
+    public class КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart : DocumentTablePart
+    {
+        public КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart(КорегуванняБоргу_Objest owner) : base(Config.Kernel, "tab_b12",
+             ["col_a1", "col_e9", "col_f1", "col_f2", "col_a2", ])
+        {
+            if (owner == null) throw new Exception("owner null");
+            Owner = owner;
+        }
+        
+        public const string НомерРядка = "col_a1";
+        public const string Контрагент = "col_e9";
+        public const string Валюта = "col_f1";
+        public const string Сума = "col_f2";
+        public const string ТипКонтрагента = "col_a2";
+
+        public КорегуванняБоргу_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; } = [];
+        
+        public async ValueTask Read()
+        {
+            Records.Clear();
+            await base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record()
+                {
+                    UID = (Guid)fieldValue["uid"],
+                    НомерРядка = (fieldValue["col_a1"] != DBNull.Value) ? (int)fieldValue["col_a1"] : 0,
+                    Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_e9"]),
+                    Валюта = new Довідники.Валюти_Pointer(fieldValue["col_f1"]),
+                    Сума = (fieldValue["col_f2"] != DBNull.Value) ? (decimal)fieldValue["col_f2"] : 0,
+                    ТипКонтрагента = (fieldValue["col_a2"] != DBNull.Value) ? (Перелічення.ТипиКонтрагентів)fieldValue["col_a2"] : 0,
+                    
+                };
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_a65"))
+                throw new Exception("Owner not exist");
+
+            await base.BaseBeginTransaction();
+                
+            if (clear_all_before_save)
+                await base.BaseDelete(Owner.UnigueID);
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                {
+                    {"col_a1", record.НомерРядка},
+                    {"col_e9", record.Контрагент.UnigueID.UGuid},
+                    {"col_f1", record.Валюта.UnigueID.UGuid},
+                    {"col_f2", record.Сума},
+                    {"col_a2", (int)record.ТипКонтрагента},
+                    
+                };
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+            }
+            
+            await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Delete()
+        {
+            await base.BaseDelete(Owner.UnigueID);
+        }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
+
+        public class Record : DocumentTablePartRecord
+        {
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+            public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+            public decimal Сума { get; set; } = 0;
+            public Перелічення.ТипиКонтрагентів ТипКонтрагента { get; set; } = 0;
+            
+        }
+    }
+      
+    
+    #endregion
+    
 }
 
 namespace StorageAndTrade_1_0.Журнали
@@ -27687,8 +28244,8 @@ namespace StorageAndTrade_1_0.Журнали
     public class Journal_Select: JournalSelect
     {
         public Journal_Select() : base(Config.Kernel,
-             ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", ],
-			       ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", ]) { }
+             ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", "tab_a65", ],
+			       ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", "КорегуванняБоргу", ]) { }
 
         public async ValueTask<DocumentObject?> GetDocumentObject(bool readAllTablePart = true)
         {
@@ -27717,6 +28274,7 @@ namespace StorageAndTrade_1_0.Журнали
                 case "ПереміщенняТоварівНаСкладі": return await new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
                 case "ЗбіркаТоварівНаСкладі": return await new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
                 case "РозміщенняНоменклатуриПоКоміркам": return await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                case "КорегуванняБоргу": return await new Документи.КорегуванняБоргу_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
                 
                 default: return null;
             }
@@ -29228,8 +29786,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     {
         public const string FULLNAME = "";
         public const string TABLE = "tab_a56";
-		    public static readonly string[] AllowDocumentSpendTable = ["tab_a36", "tab_a44", "tab_a48", "tab_a53", "tab_a81", "tab_a83", ];
-		    public static readonly string[] AllowDocumentSpendType = ["РеалізаціяТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", ];
+		    public static readonly string[] AllowDocumentSpendTable = ["tab_a36", "tab_a44", "tab_a48", "tab_a53", "tab_a81", "tab_a83", "tab_a65", ];
+		    public static readonly string[] AllowDocumentSpendType = ["РеалізаціяТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "КорегуванняБоргу", ];
         
         public const string Валюта = "col_a2";
         public const string Контрагент = "col_a5";
@@ -30072,8 +30630,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     {
         public const string FULLNAME = "";
         public const string TABLE = "tab_a61";
-		    public static readonly string[] AllowDocumentSpendTable = ["tab_a32", "tab_a44", "tab_a48", "tab_a51", "tab_a83", ];
-		    public static readonly string[] AllowDocumentSpendType = ["ПоступленняТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівПостачальнику", "ВведенняЗалишків", ];
+		    public static readonly string[] AllowDocumentSpendTable = ["tab_a32", "tab_a44", "tab_a48", "tab_a51", "tab_a83", "tab_a65", ];
+		    public static readonly string[] AllowDocumentSpendType = ["ПоступленняТоварівТаПослуг", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПоверненняТоварівПостачальнику", "ВведенняЗалишків", "КорегуванняБоргу", ];
         
         public const string Контрагент = "col_a6";
         public const string Валюта = "col_a7";
