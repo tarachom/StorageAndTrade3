@@ -231,7 +231,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
             <xsl:for-each select="Fields/Field[SortField = 'True' and Type != 'pointer']">
               /* ORDER */
-              <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Order.Add(Довідники.<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>, SelectOrder.ASC);
+              <xsl:variable name="SortDirection">
+                  <xsl:choose>
+                      <xsl:when test="SortDirection = 'True'">SelectOrder.DESC</xsl:when>
+                      <xsl:otherwise>SelectOrder.ASC</xsl:otherwise>
+                  </xsl:choose>
+              </xsl:variable>
+              <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Order.Add(Довідники.<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>, <xsl:value-of select="$SortDirection"/>);
             </xsl:for-each>
 
             <xsl:for-each select="Fields/Field[Type = 'pointer']">
@@ -670,7 +676,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
             <xsl:for-each select="Fields/Field[SortField = 'True' and Type != 'pointer']">
               /* ORDER */
-              <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Order.Add(Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>, SelectOrder.ASC);
+              <xsl:variable name="SortDirection">
+                  <xsl:choose>
+                      <xsl:when test="SortDirection = 'True'">SelectOrder.DESC</xsl:when>
+                      <xsl:otherwise>SelectOrder.ASC</xsl:otherwise>
+                  </xsl:choose>
+              </xsl:variable>
+              <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Order.Add(Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>, <xsl:value-of select="$SortDirection"/>);
             </xsl:for-each>
 
             <xsl:for-each select="Fields/Field[Type = 'pointer']">
@@ -1099,7 +1111,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 
             <xsl:for-each select="Fields/Field[SortField = 'True' and Type != 'pointer']">
               /* ORDER */
-              <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Order.Add(РегістриВідомостей.<xsl:value-of select="$RegisterName"/>_Const.<xsl:value-of select="Name"/>, SelectOrder.ASC);
+              <xsl:variable name="SortDirection">
+                  <xsl:choose>
+                      <xsl:when test="SortDirection = 'True'">SelectOrder.DESC</xsl:when>
+                      <xsl:otherwise>SelectOrder.ASC</xsl:otherwise>
+                  </xsl:choose>
+              </xsl:variable>
+              <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Order.Add(РегістриВідомостей.<xsl:value-of select="$RegisterName"/>_Const.<xsl:value-of select="Name"/>, <xsl:value-of select="$SortDirection"/>);
             </xsl:for-each>
 
             <xsl:for-each select="Fields/Field[Type = 'pointer']">
