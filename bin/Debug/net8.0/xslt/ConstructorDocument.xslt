@@ -62,6 +62,7 @@ limitations under the License.
         <xsl:variable name="DocumentName" select="Document/Name"/>
         <xsl:variable name="Fields" select="Document/Fields/Field"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
+        <xsl:variable name="FormElementField" select="Directory/ElementFields/ElementField"/>
 
 /*
         <xsl:value-of select="$DocumentName"/>_Елемент.cs
@@ -87,59 +88,62 @@ namespace <xsl:value-of select="$NameSpace"/>
         #region Fields
         <!-- Крім скритого поля Назва яке формується перед збереженням -->
         <xsl:for-each select="$Fields[Name != 'Назва']">
-            <xsl:choose>
-                <xsl:when test="Type = 'string'">
-                     <xsl:choose>
-                        <xsl:when test="Multiline = '1'">
-                    TextView <xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
-                        </xsl:when>
-                        <xsl:otherwise>
-                    Entry <xsl:value-of select="Name"/> = new Entry() { /* WidthRequest = 500 */ };
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:when>
-                <xsl:when test="Type = 'integer'">
-                    IntegerControl <xsl:value-of select="Name"/> = new IntegerControl();
-                </xsl:when>
-                <xsl:when test="Type = 'numeric'">
-                    NumericControl <xsl:value-of select="Name"/> = new NumericControl();
-                </xsl:when>
-                <xsl:when test="Type = 'boolean'">
-                    CheckButton <xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
-                </xsl:when>
-                <xsl:when test="Type = 'date' or Type = 'datetime'">
-                    DateTimeControl <xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
-                </xsl:when>
-                <xsl:when test="Type = 'time'">
-                    TimeControl <xsl:value-of select="Name"/> = new TimeControl();
-                </xsl:when>
-                <xsl:when test="Type = 'composite_pointer'">
-                    CompositePointerControl <xsl:value-of select="Name"/> = new CompositePointerControl();
-                </xsl:when>
-                <xsl:when test="Type = 'pointer'">
-                    <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                    <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="Name"/>", WidthPresentation = 300 };
-                </xsl:when>
-                <xsl:when test="Type = 'enum'">
-                    <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                    ComboBoxText <xsl:value-of select="Name"/> = new ComboBoxText();
-                </xsl:when>
-                <xsl:when test="Type = 'any_pointer'">
-                    //Guid <xsl:value-of select="Name"/> = new Guid();
-                </xsl:when>
-                <xsl:when test="Type = 'bytea'">
-                    //byte[] <xsl:value-of select="Name"/> = new byte[]{ };
-                </xsl:when>
-                <xsl:when test="Type = 'string[]'">
-                    //string[] <xsl:value-of select="Name"/> = new string[]{ };
-                </xsl:when>
-                <xsl:when test="Type = 'integer'">
-                    //int[] <xsl:value-of select="Name"/> = new int[]{ };
-                </xsl:when>
-                <xsl:when test="Type = 'numeric'">
-                    //decimal[] <xsl:value-of select="Name"/> = new decimal[]{ };
-                </xsl:when>
-            </xsl:choose>
+            <xsl:variable name="FieldName" select="Name" />
+            <xsl:if test="$FormElementField[Name = $FieldName]">
+                <xsl:choose>
+                    <xsl:when test="Type = 'string'">
+                        <xsl:choose>
+                            <xsl:when test="Multiline = '1'">
+                        TextView <xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
+                            </xsl:when>
+                            <xsl:otherwise>
+                        Entry <xsl:value-of select="Name"/> = new Entry() { /* WidthRequest = 500 */ };
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="Type = 'integer'">
+                        IntegerControl <xsl:value-of select="Name"/> = new IntegerControl();
+                    </xsl:when>
+                    <xsl:when test="Type = 'numeric'">
+                        NumericControl <xsl:value-of select="Name"/> = new NumericControl();
+                    </xsl:when>
+                    <xsl:when test="Type = 'boolean'">
+                        CheckButton <xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
+                    </xsl:when>
+                    <xsl:when test="Type = 'date' or Type = 'datetime'">
+                        DateTimeControl <xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
+                    </xsl:when>
+                    <xsl:when test="Type = 'time'">
+                        TimeControl <xsl:value-of select="Name"/> = new TimeControl();
+                    </xsl:when>
+                    <xsl:when test="Type = 'composite_pointer'">
+                        CompositePointerControl <xsl:value-of select="Name"/> = new CompositePointerControl();
+                    </xsl:when>
+                    <xsl:when test="Type = 'pointer'">
+                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                        <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="$FormElementField[Name = $FieldName]/Caption"/>", WidthPresentation = 300 };
+                    </xsl:when>
+                    <xsl:when test="Type = 'enum'">
+                        <!--<xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />-->
+                        ComboBoxText <xsl:value-of select="Name"/> = new ComboBoxText();
+                    </xsl:when>
+                    <xsl:when test="Type = 'any_pointer'">
+                        //Guid <xsl:value-of select="Name"/> = new Guid();
+                    </xsl:when>
+                    <xsl:when test="Type = 'bytea'">
+                        //byte[] <xsl:value-of select="Name"/> = new byte[]{ };
+                    </xsl:when>
+                    <xsl:when test="Type = 'string[]'">
+                        //string[] <xsl:value-of select="Name"/> = new string[]{ };
+                    </xsl:when>
+                    <xsl:when test="Type = 'integer'">
+                        //int[] <xsl:value-of select="Name"/> = new int[]{ };
+                    </xsl:when>
+                    <xsl:when test="Type = 'numeric'">
+                        //decimal[] <xsl:value-of select="Name"/> = new decimal[]{ };
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:if>
         </xsl:for-each>
         #endregion
 
@@ -171,10 +175,13 @@ namespace <xsl:value-of select="$NameSpace"/>
         void FillComboBoxes()
         {
             <xsl:for-each select="$Fields">
-                <xsl:if test="Type = 'enum'">
-                    <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                    foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_List())
-                        <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
+                <xsl:variable name="FieldName" select="Name" />
+                <xsl:if test="$FormElementField[Name = $FieldName]">
+                    <xsl:if test="Type = 'enum'">
+                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                        foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_List())
+                            <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
+                    </xsl:if>
                 </xsl:if>
             </xsl:for-each>
         }
@@ -194,28 +201,32 @@ namespace <xsl:value-of select="$NameSpace"/>
             <!-- Крім полів які зразу добавляються в шапку НомерДок, ДатаДок, Коментар -->
             <!-- та скритого поля Назва яке формується перед збереженням -->
             <xsl:for-each select="$Fields[Name != 'Назва' and Name != 'НомерДок' and Name != 'ДатаДок' and Name != 'Коментар']">
-                //<xsl:value-of select="Name"/>
-                <xsl:choose>
-                    <xsl:when test="Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                        <xsl:choose>
-                            <xsl:when test="Type = 'string' and Multiline = '1'">
-                CreateFieldView(vBox, "<xsl:value-of select="Name"/>:", <xsl:value-of select="Name"/>, 500, 200);
-                            </xsl:when>
-                            <xsl:otherwise>
-                CreateField(vBox, "<xsl:value-of select="Name"/>:", <xsl:value-of select="Name"/>);
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                    <xsl:when test="Type = 'composite_pointer' or Type = 'boolean'">
-                CreateField(vBox, null, <xsl:value-of select="Name"/>);
-                    </xsl:when>
-                    <xsl:when test="Type = 'pointer'">
-                CreateField(vBox, null, <xsl:value-of select="Name"/>);
-                    </xsl:when>
-                    <xsl:when test="Type = 'enum'">
-                CreateField(vBox, "<xsl:value-of select="Name"/>:", <xsl:value-of select="Name"/>);
-                    </xsl:when>
-                </xsl:choose>
+                <xsl:variable name="FieldName" select="Name" />
+                <xsl:if test="$FormElementField[Name = $FieldName]">
+                    <xsl:variable name="Caption" select="$FormElementField[Name = $FieldName]/Caption" />
+                    //<xsl:value-of select="Name"/>
+                    <xsl:choose>
+                        <xsl:when test="Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+                            <xsl:choose>
+                                <xsl:when test="Type = 'string' and Multiline = '1'">
+                    CreateFieldView(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>, 500, 200);
+                                </xsl:when>
+                                <xsl:otherwise>
+                    CreateField(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>);
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:when test="Type = 'composite_pointer' or Type = 'boolean'">
+                    CreateField(vBox, null, <xsl:value-of select="Name"/>);
+                        </xsl:when>
+                        <xsl:when test="Type = 'pointer'">
+                    CreateField(vBox, null, <xsl:value-of select="Name"/>);
+                        </xsl:when>
+                        <xsl:when test="Type = 'enum'">
+                    CreateField(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>);
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:if>
             </xsl:for-each>
         }
 
@@ -233,37 +244,40 @@ namespace <xsl:value-of select="$NameSpace"/>
 
             <!-- Крім скритого поля Назва яке формується перед збереженням -->
             <xsl:for-each select="$Fields[Name != 'Назва']">
-                <xsl:choose>
-                    <xsl:when test="Type = 'string'">
-                        <xsl:choose>
-                            <xsl:when test="Multiline = '1'">
-                                <xsl:value-of select="Name"/>.Buffer.Text = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="Name"/>.Text = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                    <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                        <xsl:value-of select="Name"/>.Value = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
-                    </xsl:when>
-                    <xsl:when test="Type = 'boolean'">
-                        <xsl:value-of select="Name"/>.Active = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
-                    </xsl:when>
-                    <xsl:when test="Type = 'composite_pointer'">
-                        <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
-                    </xsl:when>
-                    <xsl:when test="Type = 'pointer'">
-                        <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
-                    </xsl:when>
-                    <xsl:when test="Type = 'enum'">
-                        <xsl:value-of select="Name"/>.ActiveId = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>.ToString();
-                        if (<xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
-                    </xsl:when>
-                    <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                        //<xsl:value-of select="Name"/> = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
-                    </xsl:when>
-                </xsl:choose>
+                <xsl:variable name="FieldName" select="Name" />
+                <xsl:if test="$FormElementField[Name = $FieldName]">
+                    <xsl:choose>
+                        <xsl:when test="Type = 'string'">
+                            <xsl:choose>
+                                <xsl:when test="Multiline = '1'">
+                                    <xsl:value-of select="Name"/>.Buffer.Text = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="Name"/>.Text = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+                            <xsl:value-of select="Name"/>.Value = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                        </xsl:when>
+                        <xsl:when test="Type = 'boolean'">
+                            <xsl:value-of select="Name"/>.Active = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                        </xsl:when>
+                        <xsl:when test="Type = 'composite_pointer'">
+                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                        </xsl:when>
+                        <xsl:when test="Type = 'pointer'">
+                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                        </xsl:when>
+                        <xsl:when test="Type = 'enum'">
+                            <xsl:value-of select="Name"/>.ActiveId = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>.ToString();
+                            if (<xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
+                        </xsl:when>
+                        <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
+                            //<xsl:value-of select="Name"/> = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:if>
             </xsl:for-each>
 
             <xsl:for-each select="$TabularParts">
@@ -277,38 +291,41 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             <!-- Крім скритого поля Назва яке формується перед збереженням -->
             <xsl:for-each select="$Fields[Name != 'Назва']">
-                <xsl:choose>
-                    <xsl:when test="Type = 'string'">
-                        <xsl:choose>
-                            <xsl:when test="Multiline = '1'">
-                                <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                     <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                        <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
-                    </xsl:when>
-                    <xsl:when test="Type = 'boolean'">
-                        <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
-                    </xsl:when>
-                    <xsl:when test="Type = 'composite_pointer'">
-                        <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
-                    </xsl:when>
-                    <xsl:when test="Type = 'pointer'">
-                        <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
-                    </xsl:when>
-                    <xsl:when test="Type = 'enum'">
-                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                        <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active != -1) 
-                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
-                    </xsl:when>
-                    <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                        //<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
-                    </xsl:when>
-                </xsl:choose>
+                <xsl:variable name="FieldName" select="Name" />
+                <xsl:if test="$FormElementField[Name = $FieldName]">
+                    <xsl:choose>
+                        <xsl:when test="Type = 'string'">
+                            <xsl:choose>
+                                <xsl:when test="Multiline = '1'">
+                                    <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
+                        </xsl:when>
+                        <xsl:when test="Type = 'boolean'">
+                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
+                        </xsl:when>
+                        <xsl:when test="Type = 'composite_pointer'">
+                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                        </xsl:when>
+                        <xsl:when test="Type = 'pointer'">
+                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                        </xsl:when>
+                        <xsl:when test="Type = 'enum'">
+                            <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                            <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active != -1) 
+                                <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
+                        </xsl:when>
+                        <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
+                            //<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:if>
             </xsl:for-each>
         }
 
