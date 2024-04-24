@@ -9,6 +9,6 @@
 
 <hr />
  
-  Детальніше про програму [accounting.org.ua](https://accounting.org.ua/storage_and_trade.html)<br/>
-  Середовище розробки [Visual Studio Code](https://code.visualstudio.com)<br/>
-  База даних [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)<br/>
+Детальніше про програму [accounting.org.ua](https://accounting.org.ua/storage_and_trade.html)<br/>
+Середовище розробки [Visual Studio Code](https://code.visualstudio.com)<br/>
+База даних [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)<br/>
