@@ -279,6 +279,9 @@ namespace StorageAndTrade
             else
                 numPage = topNotebook.AppendPage(scroll, hBoxLabel);
 
+            //Переміщення сторінок
+            topNotebook.SetTabReorderable(scroll, true);
+
             if (pageWidget != null)
             {
                 Widget widget = pageWidget.Invoke();
