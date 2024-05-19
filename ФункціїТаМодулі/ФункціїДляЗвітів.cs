@@ -252,6 +252,9 @@ namespace StorageAndTrade
             else
                 numPage = notebook.AppendPage(scroll, hBoxLabel);
 
+            //Переміщення сторінок
+            notebook.SetTabReorderable(scroll, true);
+
             if (pageWidget != null)
                 scroll.Add((Widget)pageWidget.Invoke());
 
