@@ -50,7 +50,7 @@ namespace StorageAndTrade
         protected HBox HBoxTop = new HBox();
 
         protected TreeView TreeViewGrid = new TreeView();
-        protected SearchControl2 Пошук = new SearchControl2();
+        protected SearchControl Пошук = new SearchControl();
 
         public ДовідникШвидкийВибір(bool visibleSearch = true, int width = 600, int height = 300) : base()
         {

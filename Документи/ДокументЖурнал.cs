@@ -76,7 +76,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Пошук
         /// </summary>
-        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
+        SearchControl ПошукПовнотекстовий = new SearchControl();
 
         public ДокументЖурнал() : base()
         {

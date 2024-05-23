@@ -34,7 +34,7 @@ namespace StorageAndTrade
         protected Toolbar ToolbarTop = new Toolbar();
         protected HBox HBoxTop = new HBox();
         protected TreeView TreeViewGrid = new TreeView();
-        SearchControl2 ПошукПовнотекстовий = new SearchControl2();
+        SearchControl ПошукПовнотекстовий = new SearchControl();
 
         public РегістриЖурнал() : base()
         {
