@@ -83,6 +83,7 @@ limitations under the License.
         <xsl:variable name="Fields" select="Directory/Fields/Field"/>
         <xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>
         <xsl:variable name="FormElementField" select="Directory/ElementFields/ElementField"/>
+        <xsl:variable name="FormElementTablePart" select="Directory/ElementTableParts/ElementTablePart"/>
 
 /*
         <xsl:value-of select="$DirectoryName"/>_Елемент.cs
@@ -167,8 +168,11 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region TabularParts
         <xsl:for-each select="$TabularParts">
-            <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text>
-            <xsl:value-of select="Name"/> = new <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>();
+            <xsl:variable name="TablePartName" select="Name" />
+            <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text>
+                <xsl:value-of select="Name"/> = new <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>();
+            </xsl:if>
         </xsl:for-each>
         #endregion
 
@@ -176,12 +180,10 @@ namespace <xsl:value-of select="$NameSpace"/>
         { 
             <xsl:for-each select="$Fields">
                 <xsl:variable name="FieldName" select="Name" />
-                <xsl:if test="$FormElementField[Name = $FieldName]">
-                    <xsl:if test="Type = 'enum'">
-                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                        foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_List())
-                            <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
-                    </xsl:if>
+                <xsl:if test="$FormElementField[Name = $FieldName] and Type = 'enum'">
+                    <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                    foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_List())
+                        <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
                 </xsl:if>
             </xsl:for-each>
         }
@@ -222,7 +224,10 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override void CreatePack2(VBox vBox)
         {
             <xsl:for-each select="$TabularParts">
+                <xsl:variable name="TablePartName" select="Name" />
+                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
                 CreateTablePart(vBox, "<xsl:value-of select="Name"/>:", <xsl:value-of select="Name"/>);
+                </xsl:if>
             </xsl:for-each>
         }
 
@@ -284,9 +289,12 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>
 
             <xsl:for-each select="$TabularParts">
-                /* Таблична частина: <xsl:value-of select="Name"/> */
-                <xsl:value-of select="Name"/>.<xsl:value-of select="$DirectoryName"/>_Objest = <xsl:value-of select="$DirectoryName"/>_Objest;
-                <xsl:value-of select="Name"/>.LoadRecords();
+                <xsl:variable name="TablePartName" select="Name" />
+                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                    /* Таблична частина: <xsl:value-of select="Name"/> */
+                    <xsl:value-of select="Name"/>.<xsl:value-of select="$DirectoryName"/>_Objest = <xsl:value-of select="$DirectoryName"/>_Objest;
+                    <xsl:value-of select="Name"/>.LoadRecords();
+                </xsl:if>
             </xsl:for-each>
         }
 
@@ -340,7 +348,10 @@ namespace <xsl:value-of select="$NameSpace"/>
                 if (await <xsl:value-of select="$DirectoryName"/>_Objest.Save())
                 {
                     <xsl:for-each select="$TabularParts">
-                    await <xsl:value-of select="Name"/>.SaveRecords();
+                        <xsl:variable name="TablePartName" select="Name" />
+                        <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                            await <xsl:value-of select="Name"/>.SaveRecords();
+                        </xsl:if>
                     </xsl:for-each>
                 }
             }

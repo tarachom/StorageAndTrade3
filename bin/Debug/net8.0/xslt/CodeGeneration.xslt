@@ -260,32 +260,32 @@ limitations under the License.
         </xsl:when>
         <xsl:when test="Type = 'string[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : new string[] { }</xsl:text>
         </xsl:when>
        <xsl:when test="Type = 'integer'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : 0</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'integer[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : new int[] { }</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'numeric'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(decimal)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(decimal)</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : 0</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'numeric[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : new decimal[] { }</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'boolean'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : false</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'time'">
@@ -304,23 +304,23 @@ limitations under the License.
         </xsl:when>
         <xsl:when test="Type = 'any_pointer'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(Guid)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(Guid)</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : Guid.Empty</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'composite_pointer'">
 		    <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(UuidAndText)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(UuidAndText)</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : new UuidAndText()</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'enum'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
           <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>
-          <xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : 0</xsl:text>
         </xsl:when>
 		    <xsl:when test="Type = 'bytea'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
-          <xsl:text>(byte[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text></xsl:text>
+          <xsl:text>(byte[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : new byte[] { }</xsl:text>
         </xsl:when>
      </xsl:choose>
@@ -537,21 +537,21 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Кон�
             get 
             {
                 var recordResult = Task.Run( async () =&gt; { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "<xsl:value-of select="NameInTable"/>"); } ).Result;
-                <xsl:text>var result = recordResult.Result ? (</xsl:text>
+                <xsl:text>return recordResult.Result ? (</xsl:text>
                 <xsl:call-template name="ReadFieldValue2">
                   <xsl:with-param name="BaseFieldContainer">recordResult.Value</xsl:with-param>
                 </xsl:call-template>
                 <xsl:text>) : </xsl:text>
-                <xsl:call-template name="DefaultFieldValue" />;
-                <xsl:text>return result</xsl:text>
-                <xsl:if test="Type = 'pointer'">
+                <xsl:call-template name="DefaultFieldValue" />;<!--
+                <xsl:text>return result;</xsl:text>
+                <xsl:if test="Type = 'pointer'"> /* видалити пізніше | 23.05.24 */
                 <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
                 <xsl:choose>
                   <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
                     <xsl:text>.Copy()</xsl:text>
                   </xsl:when>
                 </xsl:choose>
-                </xsl:if>;
+                </xsl:if>;-->
             }
             set
             {
@@ -928,26 +928,21 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }        
         public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
-        
         public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.DirectoryPointerPosition.HasValue) { Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Current { get; private set; }
         
         public async ValueTask&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; FindByField(string name, object value)
         {
-            <xsl:value-of select="$DirectoryName"/>_Pointer itemPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new <xsl:value-of select="$DirectoryName"/>_Pointer(pointer) : new <xsl:value-of select="$DirectoryName"/>_Pointer();
         }
         
         public async ValueTask&lt;List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt;&gt; FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; directoryPointerList = new List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt;();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(directoryPointer.UnigueID));
+            List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -1602,13 +1597,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     public class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect
     {		
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
-        
         public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
-        
         public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.DocumentPointerPosition.HasValue) { Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public <xsl:value-of select="$DocumentName"/>_Pointer? Current { get; private set; }
     }
 

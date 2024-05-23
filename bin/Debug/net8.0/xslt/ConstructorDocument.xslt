@@ -62,7 +62,8 @@ limitations under the License.
         <xsl:variable name="DocumentName" select="Document/Name"/>
         <xsl:variable name="Fields" select="Document/Fields/Field"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
-        <xsl:variable name="FormElementField" select="Directory/ElementFields/ElementField"/>
+        <xsl:variable name="FormElementField" select="Document/ElementFields/ElementField"/>
+        <xsl:variable name="FormElementTablePart" select="Document/ElementTableParts/ElementTablePart"/>
 
 /*
         <xsl:value-of select="$DocumentName"/>_Елемент.cs
@@ -149,8 +150,11 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region TabularParts
         <xsl:for-each select="$TabularParts">
-            <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text>
-            <xsl:value-of select="Name"/> = new <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>();
+            <xsl:variable name="TablePartName" select="Name" />
+            <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text>
+                <xsl:value-of select="Name"/> = new <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>();
+            </xsl:if>
         </xsl:for-each>
         #endregion
 
@@ -158,30 +162,28 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             CreateDocName(<xsl:value-of select="$DocumentName"/>_Const.FULLNAME, НомерДок, ДатаДок);
 
-            <xsl:if test="count($Fields[Name = 'Коментар']) != 0">
-                CreateField(HBoxComment, "Коментар:", Коментар);
+            <xsl:variable name="CommentFieldName" select="'Коментар'" />
+            <xsl:if test="count($Fields[Name = $CommentFieldName]) != 0 and $FormElementField[Name = $CommentFieldName]">
+                CreateField(HBoxComment, "<xsl:value-of select="$FormElementField[Name = $CommentFieldName]/Caption"/>:", Коментар);
             </xsl:if>
 
             <xsl:for-each select="$TabularParts">
-                NotebookTablePart.InsertPage(<xsl:value-of select="Name"/>, new Label("<xsl:value-of select="Name"/>"), <xsl:value-of select="position() - 1"/>);
+                <xsl:variable name="TablePartName" select="Name" />
+                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                    NotebookTablePart.InsertPage(<xsl:value-of select="Name"/>, new Label("<xsl:value-of select="Name"/>"), <xsl:value-of select="position() - 1"/>);
+                </xsl:if>
             </xsl:for-each>
-            <xsl:if test="count($TabularParts) != 0">
+            <xsl:if test="count($FormElementTablePart) != 0">
                 NotebookTablePart.CurrentPage = 0;
             </xsl:if>
 
-            FillComboBoxes();
-        }
-
-        void FillComboBoxes()
-        {
+            <!-- Заповнення випадаючих списків для перелічень -->
             <xsl:for-each select="$Fields">
                 <xsl:variable name="FieldName" select="Name" />
-                <xsl:if test="$FormElementField[Name = $FieldName]">
-                    <xsl:if test="Type = 'enum'">
-                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                        foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_List())
-                            <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
-                    </xsl:if>
+                <xsl:if test="$FormElementField[Name = $FieldName] and Type = 'enum'">
+                    <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                    foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_List())
+                        <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
                 </xsl:if>
             </xsl:for-each>
         }
@@ -281,9 +283,12 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>
 
             <xsl:for-each select="$TabularParts">
-                /* Таблична частина: <xsl:value-of select="Name"/> */
-                <xsl:value-of select="Name"/>.<xsl:value-of select="$DocumentName"/>_Objest = <xsl:value-of select="$DocumentName"/>_Objest;
-                await <xsl:value-of select="Name"/>.LoadRecords();
+                <xsl:variable name="TablePartName" select="Name" />
+                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                    /* Таблична частина: <xsl:value-of select="Name"/> */
+                    <xsl:value-of select="Name"/>.<xsl:value-of select="$DocumentName"/>_Objest = <xsl:value-of select="$DocumentName"/>_Objest;
+                    await <xsl:value-of select="Name"/>.LoadRecords();
+                </xsl:if>
             </xsl:for-each>
         }
 
@@ -340,7 +345,10 @@ namespace <xsl:value-of select="$NameSpace"/>
                 if(await <xsl:value-of select="$DocumentName"/>_Objest.Save())
                 {
                     <xsl:for-each select="$TabularParts">
-                    await <xsl:value-of select="Name"/>.SaveRecords();
+                        <xsl:variable name="TablePartName" select="Name" />
+                        <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                            await <xsl:value-of select="Name"/>.SaveRecords();
+                        </xsl:if>
                     </xsl:for-each>
                     isSave = true;
                 }

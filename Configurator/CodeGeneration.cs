@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 22.04.2024 13:50:14
+ * Дата конфігурації: 23.05.2024 14:01:50
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -270,8 +270,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a1"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.Організації_Pointer(recordResult.Value)) : new Довідники.Організації_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.Організації_Pointer(recordResult.Value)) : new Довідники.Організації_Pointer();
             }
             set
             {
@@ -283,8 +282,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a2"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.Склади_Pointer(recordResult.Value)) : new Довідники.Склади_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.Склади_Pointer(recordResult.Value)) : new Довідники.Склади_Pointer();
             }
             set
             {
@@ -296,8 +294,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a3"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.Валюти_Pointer(recordResult.Value)) : new Довідники.Валюти_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.Валюти_Pointer(recordResult.Value)) : new Довідники.Валюти_Pointer();
             }
             set
             {
@@ -309,8 +306,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a4"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.Контрагенти_Pointer(recordResult.Value)) : new Довідники.Контрагенти_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.Контрагенти_Pointer(recordResult.Value)) : new Довідники.Контрагенти_Pointer();
             }
             set
             {
@@ -322,8 +318,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a5"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.Контрагенти_Pointer(recordResult.Value)) : new Довідники.Контрагенти_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.Контрагенти_Pointer(recordResult.Value)) : new Довідники.Контрагенти_Pointer();
             }
             set
             {
@@ -335,8 +330,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a6"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.Каси_Pointer(recordResult.Value)) : new Довідники.Каси_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.Каси_Pointer(recordResult.Value)) : new Довідники.Каси_Pointer();
             }
             set
             {
@@ -348,8 +342,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a7"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.ПакуванняОдиниціВиміру_Pointer(recordResult.Value)) : new Довідники.ПакуванняОдиниціВиміру_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.ПакуванняОдиниціВиміру_Pointer(recordResult.Value)) : new Довідники.ПакуванняОдиниціВиміру_Pointer();
             }
             set
             {
@@ -361,8 +354,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g4"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.СтруктураПідприємства_Pointer(recordResult.Value)) : new Довідники.СтруктураПідприємства_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.СтруктураПідприємства_Pointer(recordResult.Value)) : new Довідники.СтруктураПідприємства_Pointer();
             }
             set
             {
@@ -374,8 +366,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g5"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.БанківськіРахункиОрганізацій_Pointer(recordResult.Value)) : new Довідники.БанківськіРахункиОрганізацій_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.БанківськіРахункиОрганізацій_Pointer(recordResult.Value)) : new Довідники.БанківськіРахункиОрганізацій_Pointer();
             }
             set
             {
@@ -387,8 +378,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g9"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.ВидиЦін_Pointer(recordResult.Value)) : new Довідники.ВидиЦін_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.ВидиЦін_Pointer(recordResult.Value)) : new Довідники.ВидиЦін_Pointer();
             }
             set
             {
@@ -400,8 +390,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i2"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.ВидиНоменклатури_Pointer(recordResult.Value)) : new Довідники.ВидиНоменклатури_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.ВидиНоменклатури_Pointer(recordResult.Value)) : new Довідники.ВидиНоменклатури_Pointer();
             }
             set
             {
@@ -413,8 +402,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c3"); } ).Result;
-                var result = recordResult.Result ? (new Довідники.ВидиЦін_Pointer(recordResult.Value)) : new Довідники.ВидиЦін_Pointer();
-                return result.Copy();
+                return recordResult.Result ? (new Довідники.ВидиЦін_Pointer(recordResult.Value)) : new Довідники.ВидиЦін_Pointer();
             }
             set
             {
@@ -433,8 +421,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a8"); } ).Result;
-                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
-                return result;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
             }
             set
             {
@@ -446,8 +433,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_a9"); } ).Result;
-                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
-                return result;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
             }
             set
             {
@@ -459,8 +445,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g6"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
             }
             set
             {
@@ -472,8 +457,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g7"); } ).Result;
-                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
-                return result;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
             }
             set
             {
@@ -485,8 +469,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h8"); } ).Result;
-                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
-                return result;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
             }
             set
             {
@@ -498,8 +481,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h9"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
             }
             set
             {
@@ -511,8 +493,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
             }
             set
             {
@@ -843,8 +824,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b7"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -856,8 +836,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b9"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -869,8 +848,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -882,8 +860,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c2"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -895,8 +872,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c4"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -908,8 +884,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c5"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -921,8 +896,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c6"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -934,8 +908,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c7"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -947,8 +920,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c8"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -960,8 +932,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_c9"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -973,8 +944,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f6"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -986,8 +956,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f7"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -999,8 +968,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f8"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1012,8 +980,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f9"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1025,8 +992,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1038,8 +1004,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g2"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1051,8 +1016,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1064,8 +1028,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h2"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1077,8 +1040,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b2"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1090,8 +1052,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b3"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1103,8 +1064,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b4"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1116,8 +1076,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b5"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1129,8 +1088,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i5"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1149,8 +1107,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b8"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1162,8 +1119,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1175,8 +1131,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d2"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1188,8 +1143,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d3"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1201,8 +1155,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d4"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1214,8 +1167,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d5"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1227,8 +1179,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d6"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1240,8 +1191,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d7"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1253,8 +1203,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d8"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1266,8 +1215,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_d9"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1279,8 +1227,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1292,8 +1239,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e2"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1305,8 +1251,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e3"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1318,8 +1263,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e4"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1331,8 +1275,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e5"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1344,8 +1287,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e6"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1357,8 +1299,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e7"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1370,8 +1311,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e8"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1383,8 +1323,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_e9"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1396,8 +1335,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1409,8 +1347,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f2"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1422,8 +1359,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f3"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1435,8 +1371,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f4"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1448,8 +1383,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_f5"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1461,8 +1395,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b1"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1474,8 +1407,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g8"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1487,8 +1419,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i3"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1500,8 +1431,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i4"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1520,8 +1450,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h3"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (Перелічення.ТипПеріодуДляЖурналівДокументів)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (Перелічення.ТипПеріодуДляЖурналівДокументів)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1540,8 +1469,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h4"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (Перелічення.МетодиСписанняПартій)recordResult.Value : 0) : 0;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (Перелічення.МетодиСписанняПартій)recordResult.Value : 0) : 0;
             }
             set
             {
@@ -1560,8 +1488,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h5"); } ).Result;
-                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
-                return result;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
             }
             set
             {
@@ -1573,8 +1500,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_b6"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
             }
             set
             {
@@ -1586,8 +1512,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_g3"); } ).Result;
-                var result = recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
-                return result;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
             }
             set
             {
@@ -1680,8 +1605,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h7"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
             }
             set
             {
@@ -1693,8 +1617,7 @@ namespace StorageAndTrade_1_0.Константи
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h6"); } ).Result;
-                var result = recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
-                return result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
             }
             set
             {
@@ -1943,26 +1866,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Організації_Select() : base(Config.Kernel, "tab_a01") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Організації_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Організації_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Організації_Pointer? Current { get; private set; }
         
         public async ValueTask<Організації_Pointer> FindByField(string name, object value)
         {
-            Організації_Pointer itemPointer = new Організації_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Організації_Pointer(pointer) : new Організації_Pointer();
         }
         
         public async ValueTask<List<Організації_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Організації_Pointer> directoryPointerList = new List<Організації_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Організації_Pointer(directoryPointer.UnigueID));
+            List<Організації_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Організації_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -2325,26 +2243,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Номенклатура_Select() : base(Config.Kernel, "tab_a03") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Номенклатура_Pointer? Current { get; private set; }
         
         public async ValueTask<Номенклатура_Pointer> FindByField(string name, object value)
         {
-            Номенклатура_Pointer itemPointer = new Номенклатура_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Номенклатура_Pointer(pointer) : new Номенклатура_Pointer();
         }
         
         public async ValueTask<List<Номенклатура_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Номенклатура_Pointer> directoryPointerList = new List<Номенклатура_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.UnigueID));
+            List<Номенклатура_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -2619,26 +2532,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Виробники_Select() : base(Config.Kernel, "tab_a04") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Виробники_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Виробники_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Виробники_Pointer? Current { get; private set; }
         
         public async ValueTask<Виробники_Pointer> FindByField(string name, object value)
         {
-            Виробники_Pointer itemPointer = new Виробники_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Виробники_Pointer(pointer) : new Виробники_Pointer();
         }
         
         public async ValueTask<List<Виробники_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Виробники_Pointer> directoryPointerList = new List<Виробники_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Виробники_Pointer(directoryPointer.UnigueID));
+            List<Виробники_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Виробники_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -2845,26 +2753,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ВидиНоменклатури_Select() : base(Config.Kernel, "tab_a05") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиНоменклатури_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиНоменклатури_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ВидиНоменклатури_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиНоменклатури_Pointer> FindByField(string name, object value)
         {
-            ВидиНоменклатури_Pointer itemPointer = new ВидиНоменклатури_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ВидиНоменклатури_Pointer(pointer) : new ВидиНоменклатури_Pointer();
         }
         
         public async ValueTask<List<ВидиНоменклатури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ВидиНоменклатури_Pointer> directoryPointerList = new List<ВидиНоменклатури_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиНоменклатури_Pointer(directoryPointer.UnigueID));
+            List<ВидиНоменклатури_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ВидиНоменклатури_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -3068,26 +2971,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ПакуванняОдиниціВиміру_Select() : base(Config.Kernel, "tab_a06") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПакуванняОдиниціВиміру_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ПакуванняОдиниціВиміру_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПакуванняОдиниціВиміру_Pointer? Current { get; private set; }
         
         public async ValueTask<ПакуванняОдиниціВиміру_Pointer> FindByField(string name, object value)
         {
-            ПакуванняОдиниціВиміру_Pointer itemPointer = new ПакуванняОдиниціВиміру_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПакуванняОдиниціВиміру_Pointer(pointer) : new ПакуванняОдиниціВиміру_Pointer();
         }
         
         public async ValueTask<List<ПакуванняОдиниціВиміру_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ПакуванняОдиниціВиміру_Pointer> directoryPointerList = new List<ПакуванняОдиниціВиміру_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ПакуванняОдиниціВиміру_Pointer(directoryPointer.UnigueID));
+            List<ПакуванняОдиниціВиміру_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ПакуванняОдиниціВиміру_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -3298,26 +3196,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Валюти_Select() : base(Config.Kernel, "tab_a07") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Валюти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Валюти_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Валюти_Pointer? Current { get; private set; }
         
         public async ValueTask<Валюти_Pointer> FindByField(string name, object value)
         {
-            Валюти_Pointer itemPointer = new Валюти_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Валюти_Pointer(pointer) : new Валюти_Pointer();
         }
         
         public async ValueTask<List<Валюти_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Валюти_Pointer> directoryPointerList = new List<Валюти_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Валюти_Pointer(directoryPointer.UnigueID));
+            List<Валюти_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Валюти_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -3559,26 +3452,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Контрагенти_Select() : base(Config.Kernel, "tab_a08") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Контрагенти_Pointer? Current { get; private set; }
         
         public async ValueTask<Контрагенти_Pointer> FindByField(string name, object value)
         {
-            Контрагенти_Pointer itemPointer = new Контрагенти_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Контрагенти_Pointer(pointer) : new Контрагенти_Pointer();
         }
         
         public async ValueTask<List<Контрагенти_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Контрагенти_Pointer> directoryPointerList = new List<Контрагенти_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Контрагенти_Pointer(directoryPointer.UnigueID));
+            List<Контрагенти_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Контрагенти_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -4001,26 +3889,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Склади_Select() : base(Config.Kernel, "tab_a10") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Склади_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Склади_Pointer? Current { get; private set; }
         
         public async ValueTask<Склади_Pointer> FindByField(string name, object value)
         {
-            Склади_Pointer itemPointer = new Склади_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Склади_Pointer(pointer) : new Склади_Pointer();
         }
         
         public async ValueTask<List<Склади_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Склади_Pointer> directoryPointerList = new List<Склади_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Склади_Pointer(directoryPointer.UnigueID));
+            List<Склади_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Склади_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -4324,26 +4207,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ВидиЦін_Select() : base(Config.Kernel, "tab_a12") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиЦін_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЦін_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ВидиЦін_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиЦін_Pointer> FindByField(string name, object value)
         {
-            ВидиЦін_Pointer itemPointer = new ВидиЦін_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ВидиЦін_Pointer(pointer) : new ВидиЦін_Pointer();
         }
         
         public async ValueTask<List<ВидиЦін_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ВидиЦін_Pointer> directoryPointerList = new List<ВидиЦін_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиЦін_Pointer(directoryPointer.UnigueID));
+            List<ВидиЦін_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ВидиЦін_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -4540,26 +4418,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ВидиЦінПостачальників_Select() : base(Config.Kernel, "tab_a13") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиЦінПостачальників_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЦінПостачальників_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ВидиЦінПостачальників_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиЦінПостачальників_Pointer> FindByField(string name, object value)
         {
-            ВидиЦінПостачальників_Pointer itemPointer = new ВидиЦінПостачальників_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ВидиЦінПостачальників_Pointer(pointer) : new ВидиЦінПостачальників_Pointer();
         }
         
         public async ValueTask<List<ВидиЦінПостачальників_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ВидиЦінПостачальників_Pointer> directoryPointerList = new List<ВидиЦінПостачальників_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиЦінПостачальників_Pointer(directoryPointer.UnigueID));
+            List<ВидиЦінПостачальників_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ВидиЦінПостачальників_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -4781,26 +4654,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Користувачі_Select() : base(Config.Kernel, "tab_a14") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Користувачі_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Користувачі_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Користувачі_Pointer? Current { get; private set; }
         
         public async ValueTask<Користувачі_Pointer> FindByField(string name, object value)
         {
-            Користувачі_Pointer itemPointer = new Користувачі_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Користувачі_Pointer(pointer) : new Користувачі_Pointer();
         }
         
         public async ValueTask<List<Користувачі_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Користувачі_Pointer> directoryPointerList = new List<Користувачі_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Користувачі_Pointer(directoryPointer.UnigueID));
+            List<Користувачі_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Користувачі_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -5125,26 +4993,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ФізичніОсоби_Select() : base(Config.Kernel, "tab_a16") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ФізичніОсоби_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ФізичніОсоби_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ФізичніОсоби_Pointer? Current { get; private set; }
         
         public async ValueTask<ФізичніОсоби_Pointer> FindByField(string name, object value)
         {
-            ФізичніОсоби_Pointer itemPointer = new ФізичніОсоби_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ФізичніОсоби_Pointer(pointer) : new ФізичніОсоби_Pointer();
         }
         
         public async ValueTask<List<ФізичніОсоби_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ФізичніОсоби_Pointer> directoryPointerList = new List<ФізичніОсоби_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ФізичніОсоби_Pointer(directoryPointer.UnigueID));
+            List<ФізичніОсоби_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ФізичніОсоби_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -5444,26 +5307,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public СтруктураПідприємства_Select() : base(Config.Kernel, "tab_a18") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new СтруктураПідприємства_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СтруктураПідприємства_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public СтруктураПідприємства_Pointer? Current { get; private set; }
         
         public async ValueTask<СтруктураПідприємства_Pointer> FindByField(string name, object value)
         {
-            СтруктураПідприємства_Pointer itemPointer = new СтруктураПідприємства_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new СтруктураПідприємства_Pointer(pointer) : new СтруктураПідприємства_Pointer();
         }
         
         public async ValueTask<List<СтруктураПідприємства_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<СтруктураПідприємства_Pointer> directoryPointerList = new List<СтруктураПідприємства_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СтруктураПідприємства_Pointer(directoryPointer.UnigueID));
+            List<СтруктураПідприємства_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new СтруктураПідприємства_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -5655,26 +5513,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public КраїниСвіту_Select() : base(Config.Kernel, "tab_a19") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new КраїниСвіту_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new КраїниСвіту_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public КраїниСвіту_Pointer? Current { get; private set; }
         
         public async ValueTask<КраїниСвіту_Pointer> FindByField(string name, object value)
         {
-            КраїниСвіту_Pointer itemPointer = new КраїниСвіту_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new КраїниСвіту_Pointer(pointer) : new КраїниСвіту_Pointer();
         }
         
         public async ValueTask<List<КраїниСвіту_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<КраїниСвіту_Pointer> directoryPointerList = new List<КраїниСвіту_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new КраїниСвіту_Pointer(directoryPointer.UnigueID));
+            List<КраїниСвіту_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new КраїниСвіту_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -5886,26 +5739,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Файли_Select() : base(Config.Kernel, "tab_a20") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Файли_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Файли_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Файли_Pointer? Current { get; private set; }
         
         public async ValueTask<Файли_Pointer> FindByField(string name, object value)
         {
-            Файли_Pointer itemPointer = new Файли_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Файли_Pointer(pointer) : new Файли_Pointer();
         }
         
         public async ValueTask<List<Файли_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Файли_Pointer> directoryPointerList = new List<Файли_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Файли_Pointer(directoryPointer.UnigueID));
+            List<Файли_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Файли_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -6107,26 +5955,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ХарактеристикиНоменклатури_Select() : base(Config.Kernel, "tab_a21") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ХарактеристикиНоменклатури_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ХарактеристикиНоменклатури_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ХарактеристикиНоменклатури_Pointer? Current { get; private set; }
         
         public async ValueTask<ХарактеристикиНоменклатури_Pointer> FindByField(string name, object value)
         {
-            ХарактеристикиНоменклатури_Pointer itemPointer = new ХарактеристикиНоменклатури_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ХарактеристикиНоменклатури_Pointer(pointer) : new ХарактеристикиНоменклатури_Pointer();
         }
         
         public async ValueTask<List<ХарактеристикиНоменклатури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ХарактеристикиНоменклатури_Pointer> directoryPointerList = new List<ХарактеристикиНоменклатури_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ХарактеристикиНоменклатури_Pointer(directoryPointer.UnigueID));
+            List<ХарактеристикиНоменклатури_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ХарактеристикиНоменклатури_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -6327,26 +6170,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Номенклатура_Папки_Select() : base(Config.Kernel, "tab_a22") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Номенклатура_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<Номенклатура_Папки_Pointer> FindByField(string name, object value)
         {
-            Номенклатура_Папки_Pointer itemPointer = new Номенклатура_Папки_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Номенклатура_Папки_Pointer(pointer) : new Номенклатура_Папки_Pointer();
         }
         
         public async ValueTask<List<Номенклатура_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Номенклатура_Папки_Pointer> directoryPointerList = new List<Номенклатура_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Номенклатура_Папки_Pointer(directoryPointer.UnigueID));
+            List<Номенклатура_Папки_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Номенклатура_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -6547,26 +6385,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Контрагенти_Папки_Select() : base(Config.Kernel, "tab_a23") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Контрагенти_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<Контрагенти_Папки_Pointer> FindByField(string name, object value)
         {
-            Контрагенти_Папки_Pointer itemPointer = new Контрагенти_Папки_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Контрагенти_Папки_Pointer(pointer) : new Контрагенти_Папки_Pointer();
         }
         
         public async ValueTask<List<Контрагенти_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Контрагенти_Папки_Pointer> directoryPointerList = new List<Контрагенти_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Контрагенти_Папки_Pointer(directoryPointer.UnigueID));
+            List<Контрагенти_Папки_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Контрагенти_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -6767,26 +6600,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Склади_Папки_Select() : base(Config.Kernel, "tab_a24") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Склади_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<Склади_Папки_Pointer> FindByField(string name, object value)
         {
-            Склади_Папки_Pointer itemPointer = new Склади_Папки_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Склади_Папки_Pointer(pointer) : new Склади_Папки_Pointer();
         }
         
         public async ValueTask<List<Склади_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Склади_Папки_Pointer> directoryPointerList = new List<Склади_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Склади_Папки_Pointer(directoryPointer.UnigueID));
+            List<Склади_Папки_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Склади_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -6988,26 +6816,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Каси_Select() : base(Config.Kernel, "tab_a26") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Каси_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Каси_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Каси_Pointer? Current { get; private set; }
         
         public async ValueTask<Каси_Pointer> FindByField(string name, object value)
         {
-            Каси_Pointer itemPointer = new Каси_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Каси_Pointer(pointer) : new Каси_Pointer();
         }
         
         public async ValueTask<List<Каси_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Каси_Pointer> directoryPointerList = new List<Каси_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Каси_Pointer(directoryPointer.UnigueID));
+            List<Каси_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Каси_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -7254,26 +7077,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public БанківськіРахункиОрганізацій_Select() : base(Config.Kernel, "tab_a27") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new БанківськіРахункиОрганізацій_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new БанківськіРахункиОрганізацій_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public БанківськіРахункиОрганізацій_Pointer? Current { get; private set; }
         
         public async ValueTask<БанківськіРахункиОрганізацій_Pointer> FindByField(string name, object value)
         {
-            БанківськіРахункиОрганізацій_Pointer itemPointer = new БанківськіРахункиОрганізацій_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new БанківськіРахункиОрганізацій_Pointer(pointer) : new БанківськіРахункиОрганізацій_Pointer();
         }
         
         public async ValueTask<List<БанківськіРахункиОрганізацій_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<БанківськіРахункиОрганізацій_Pointer> directoryPointerList = new List<БанківськіРахункиОрганізацій_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new БанківськіРахункиОрганізацій_Pointer(directoryPointer.UnigueID));
+            List<БанківськіРахункиОрганізацій_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new БанківськіРахункиОрганізацій_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -7557,26 +7375,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ДоговориКонтрагентів_Select() : base(Config.Kernel, "tab_a28") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ДоговориКонтрагентів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ДоговориКонтрагентів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ДоговориКонтрагентів_Pointer? Current { get; private set; }
         
         public async ValueTask<ДоговориКонтрагентів_Pointer> FindByField(string name, object value)
         {
-            ДоговориКонтрагентів_Pointer itemPointer = new ДоговориКонтрагентів_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ДоговориКонтрагентів_Pointer(pointer) : new ДоговориКонтрагентів_Pointer();
         }
         
         public async ValueTask<List<ДоговориКонтрагентів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ДоговориКонтрагентів_Pointer> directoryPointerList = new List<ДоговориКонтрагентів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ДоговориКонтрагентів_Pointer(directoryPointer.UnigueID));
+            List<ДоговориКонтрагентів_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ДоговориКонтрагентів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -7833,26 +7646,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public БанківськіРахункиКонтрагентів_Select() : base(Config.Kernel, "tab_a29") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new БанківськіРахункиКонтрагентів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new БанківськіРахункиКонтрагентів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public БанківськіРахункиКонтрагентів_Pointer? Current { get; private set; }
         
         public async ValueTask<БанківськіРахункиКонтрагентів_Pointer> FindByField(string name, object value)
         {
-            БанківськіРахункиКонтрагентів_Pointer itemPointer = new БанківськіРахункиКонтрагентів_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new БанківськіРахункиКонтрагентів_Pointer(pointer) : new БанківськіРахункиКонтрагентів_Pointer();
         }
         
         public async ValueTask<List<БанківськіРахункиКонтрагентів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<БанківськіРахункиКонтрагентів_Pointer> directoryPointerList = new List<БанківськіРахункиКонтрагентів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new БанківськіРахункиКонтрагентів_Pointer(directoryPointer.UnigueID));
+            List<БанківськіРахункиКонтрагентів_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new БанківськіРахункиКонтрагентів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -8074,26 +7882,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public СтаттяРухуКоштів_Select() : base(Config.Kernel, "tab_a45") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new СтаттяРухуКоштів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СтаттяРухуКоштів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public СтаттяРухуКоштів_Pointer? Current { get; private set; }
         
         public async ValueTask<СтаттяРухуКоштів_Pointer> FindByField(string name, object value)
         {
-            СтаттяРухуКоштів_Pointer itemPointer = new СтаттяРухуКоштів_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new СтаттяРухуКоштів_Pointer(pointer) : new СтаттяРухуКоштів_Pointer();
         }
         
         public async ValueTask<List<СтаттяРухуКоштів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<СтаттяРухуКоштів_Pointer> directoryPointerList = new List<СтаттяРухуКоштів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СтаттяРухуКоштів_Pointer(directoryPointer.UnigueID));
+            List<СтаттяРухуКоштів_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new СтаттяРухуКоштів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -8371,26 +8174,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public СеріїНоменклатури_Select() : base(Config.Kernel, "tab_b02") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new СеріїНоменклатури_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СеріїНоменклатури_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public СеріїНоменклатури_Pointer? Current { get; private set; }
         
         public async ValueTask<СеріїНоменклатури_Pointer> FindByField(string name, object value)
         {
-            СеріїНоменклатури_Pointer itemPointer = new СеріїНоменклатури_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new СеріїНоменклатури_Pointer(pointer) : new СеріїНоменклатури_Pointer();
         }
         
         public async ValueTask<List<СеріїНоменклатури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<СеріїНоменклатури_Pointer> directoryPointerList = new List<СеріїНоменклатури_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СеріїНоменклатури_Pointer(directoryPointer.UnigueID));
+            List<СеріїНоменклатури_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new СеріїНоменклатури_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -8601,26 +8399,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ПартіяТоварівКомпозит_Select() : base(Config.Kernel, "tab_b06") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПартіяТоварівКомпозит_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ПартіяТоварівКомпозит_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПартіяТоварівКомпозит_Pointer? Current { get; private set; }
         
         public async ValueTask<ПартіяТоварівКомпозит_Pointer> FindByField(string name, object value)
         {
-            ПартіяТоварівКомпозит_Pointer itemPointer = new ПартіяТоварівКомпозит_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПартіяТоварівКомпозит_Pointer(pointer) : new ПартіяТоварівКомпозит_Pointer();
         }
         
         public async ValueTask<List<ПартіяТоварівКомпозит_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ПартіяТоварівКомпозит_Pointer> directoryPointerList = new List<ПартіяТоварівКомпозит_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ПартіяТоварівКомпозит_Pointer(directoryPointer.UnigueID));
+            List<ПартіяТоварівКомпозит_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ПартіяТоварівКомпозит_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -8837,26 +8630,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ВидиЗапасів_Select() : base(Config.Kernel, "tab_b13") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ВидиЗапасів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЗапасів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ВидиЗапасів_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиЗапасів_Pointer> FindByField(string name, object value)
         {
-            ВидиЗапасів_Pointer itemPointer = new ВидиЗапасів_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ВидиЗапасів_Pointer(pointer) : new ВидиЗапасів_Pointer();
         }
         
         public async ValueTask<List<ВидиЗапасів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ВидиЗапасів_Pointer> directoryPointerList = new List<ВидиЗапасів_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиЗапасів_Pointer(directoryPointer.UnigueID));
+            List<ВидиЗапасів_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ВидиЗапасів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -9178,26 +8966,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Банки_Select() : base(Config.Kernel, "tab_a39") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Банки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Банки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Банки_Pointer? Current { get; private set; }
         
         public async ValueTask<Банки_Pointer> FindByField(string name, object value)
         {
-            Банки_Pointer itemPointer = new Банки_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Банки_Pointer(pointer) : new Банки_Pointer();
         }
         
         public async ValueTask<List<Банки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Банки_Pointer> directoryPointerList = new List<Банки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Банки_Pointer(directoryPointer.UnigueID));
+            List<Банки_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Банки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -9394,26 +9177,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public СкладськіПриміщення_Select() : base(Config.Kernel, "tab_a71") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new СкладськіПриміщення_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіПриміщення_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public СкладськіПриміщення_Pointer? Current { get; private set; }
         
         public async ValueTask<СкладськіПриміщення_Pointer> FindByField(string name, object value)
         {
-            СкладськіПриміщення_Pointer itemPointer = new СкладськіПриміщення_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new СкладськіПриміщення_Pointer(pointer) : new СкладськіПриміщення_Pointer();
         }
         
         public async ValueTask<List<СкладськіПриміщення_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<СкладськіПриміщення_Pointer> directoryPointerList = new List<СкладськіПриміщення_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СкладськіПриміщення_Pointer(directoryPointer.UnigueID));
+            List<СкладськіПриміщення_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new СкладськіПриміщення_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -9645,26 +9423,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public СкладськіКомірки_Select() : base(Config.Kernel, "tab_a72") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new СкладськіКомірки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public СкладськіКомірки_Pointer? Current { get; private set; }
         
         public async ValueTask<СкладськіКомірки_Pointer> FindByField(string name, object value)
         {
-            СкладськіКомірки_Pointer itemPointer = new СкладськіКомірки_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new СкладськіКомірки_Pointer(pointer) : new СкладськіКомірки_Pointer();
         }
         
         public async ValueTask<List<СкладськіКомірки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<СкладськіКомірки_Pointer> directoryPointerList = new List<СкладськіКомірки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СкладськіКомірки_Pointer(directoryPointer.UnigueID));
+            List<СкладськіКомірки_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new СкладськіКомірки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -9860,26 +9633,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ОбластьЗберігання_Select() : base(Config.Kernel, "tab_a73") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ОбластьЗберігання_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ОбластьЗберігання_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ОбластьЗберігання_Pointer? Current { get; private set; }
         
         public async ValueTask<ОбластьЗберігання_Pointer> FindByField(string name, object value)
         {
-            ОбластьЗберігання_Pointer itemPointer = new ОбластьЗберігання_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ОбластьЗберігання_Pointer(pointer) : new ОбластьЗберігання_Pointer();
         }
         
         public async ValueTask<List<ОбластьЗберігання_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ОбластьЗберігання_Pointer> directoryPointerList = new List<ОбластьЗберігання_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ОбластьЗберігання_Pointer(directoryPointer.UnigueID));
+            List<ОбластьЗберігання_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ОбластьЗберігання_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -10091,26 +9859,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public ТипорозміриКомірок_Select() : base(Config.Kernel, "tab_a75") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ТипорозміриКомірок_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ТипорозміриКомірок_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ТипорозміриКомірок_Pointer? Current { get; private set; }
         
         public async ValueTask<ТипорозміриКомірок_Pointer> FindByField(string name, object value)
         {
-            ТипорозміриКомірок_Pointer itemPointer = new ТипорозміриКомірок_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ТипорозміриКомірок_Pointer(pointer) : new ТипорозміриКомірок_Pointer();
         }
         
         public async ValueTask<List<ТипорозміриКомірок_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<ТипорозміриКомірок_Pointer> directoryPointerList = new List<ТипорозміриКомірок_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ТипорозміриКомірок_Pointer(directoryPointer.UnigueID));
+            List<ТипорозміриКомірок_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ТипорозміриКомірок_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -10316,26 +10079,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public СкладськіКомірки_Папки_Select() : base(Config.Kernel, "tab_a76") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public СкладськіКомірки_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<СкладськіКомірки_Папки_Pointer> FindByField(string name, object value)
         {
-            СкладськіКомірки_Папки_Pointer itemPointer = new СкладськіКомірки_Папки_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new СкладськіКомірки_Папки_Pointer(pointer) : new СкладськіКомірки_Папки_Pointer();
         }
         
         public async ValueTask<List<СкладськіКомірки_Папки_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<СкладськіКомірки_Папки_Pointer> directoryPointerList = new List<СкладськіКомірки_Папки_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СкладськіКомірки_Папки_Pointer(directoryPointer.UnigueID));
+            List<СкладськіКомірки_Папки_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new СкладськіКомірки_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -10542,26 +10300,21 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Блокнот_Select() : base(Config.Kernel, "tab_a41") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Блокнот_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Блокнот_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public Блокнот_Pointer? Current { get; private set; }
         
         public async ValueTask<Блокнот_Pointer> FindByField(string name, object value)
         {
-            Блокнот_Pointer itemPointer = new Блокнот_Pointer();
-            DirectoryPointer directoryPointer = await base.BaseFindByField(name, value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new Блокнот_Pointer(pointer) : new Блокнот_Pointer();
         }
         
         public async ValueTask<List<Блокнот_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Блокнот_Pointer> directoryPointerList = new List<Блокнот_Pointer>();
-            foreach (DirectoryPointer directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Блокнот_Pointer(directoryPointer.UnigueID));
+            List<Блокнот_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Блокнот_Pointer(directoryPointer.Item1, directoryPointer.Item2));
             return directoryPointerList;
         }
     }
@@ -12666,13 +12419,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ЗамовленняПостачальнику_Select : DocumentSelect
     {		
         public ЗамовленняПостачальнику_Select() : base(Config.Kernel, "tab_a25") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ЗамовленняПостачальнику_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗамовленняПостачальнику_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ЗамовленняПостачальнику_Pointer? Current { get; private set; }
     }
 
@@ -13620,13 +13369,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПоступленняТоварівТаПослуг_Select : DocumentSelect
     {		
         public ПоступленняТоварівТаПослуг_Select() : base(Config.Kernel, "tab_a32") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПоступленняТоварівТаПослуг_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоступленняТоварівТаПослуг_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПоступленняТоварівТаПослуг_Pointer? Current { get; private set; }
     }
 
@@ -14504,13 +14249,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ЗамовленняКлієнта_Select : DocumentSelect
     {		
         public ЗамовленняКлієнта_Select() : base(Config.Kernel, "tab_a34") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ЗамовленняКлієнта_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗамовленняКлієнта_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ЗамовленняКлієнта_Pointer? Current { get; private set; }
     }
 
@@ -15448,13 +15189,9 @@ namespace StorageAndTrade_1_0.Документи
     public class РеалізаціяТоварівТаПослуг_Select : DocumentSelect
     {		
         public РеалізаціяТоварівТаПослуг_Select() : base(Config.Kernel, "tab_a36") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new РеалізаціяТоварівТаПослуг_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РеалізаціяТоварівТаПослуг_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public РеалізаціяТоварівТаПослуг_Pointer? Current { get; private set; }
     }
 
@@ -16045,13 +15782,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ВстановленняЦінНоменклатури_Select : DocumentSelect
     {		
         public ВстановленняЦінНоменклатури_Select() : base(Config.Kernel, "tab_a42") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ВстановленняЦінНоменклатури_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВстановленняЦінНоменклатури_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ВстановленняЦінНоменклатури_Pointer? Current { get; private set; }
     }
 
@@ -16725,13 +16458,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПрихіднийКасовийОрдер_Select : DocumentSelect
     {		
         public ПрихіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a44") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПрихіднийКасовийОрдер_Pointer? Current { get; private set; }
     }
 
@@ -17435,13 +17164,9 @@ namespace StorageAndTrade_1_0.Документи
     public class РозхіднийКасовийОрдер_Select : DocumentSelect
     {		
         public РозхіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a48") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public РозхіднийКасовийОрдер_Pointer? Current { get; private set; }
     }
 
@@ -18172,13 +17897,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПереміщенняТоварів_Select : DocumentSelect
     {		
         public ПереміщенняТоварів_Select() : base(Config.Kernel, "tab_a31") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПереміщенняТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПереміщенняТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварів_Pointer? Current { get; private set; }
     }
 
@@ -18957,13 +18678,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПоверненняТоварівПостачальнику_Select : DocumentSelect
     {		
         public ПоверненняТоварівПостачальнику_Select() : base(Config.Kernel, "tab_a51") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПоверненняТоварівПостачальнику_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоверненняТоварівПостачальнику_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівПостачальнику_Pointer? Current { get; private set; }
     }
 
@@ -19708,13 +19425,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПоверненняТоварівВідКлієнта_Select : DocumentSelect
     {		
         public ПоверненняТоварівВідКлієнта_Select() : base(Config.Kernel, "tab_a53") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПоверненняТоварівВідКлієнта_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоверненняТоварівВідКлієнта_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівВідКлієнта_Pointer? Current { get; private set; }
     }
 
@@ -20393,13 +20106,9 @@ namespace StorageAndTrade_1_0.Документи
     public class АктВиконанихРобіт_Select : DocumentSelect
     {		
         public АктВиконанихРобіт_Select() : base(Config.Kernel, "tab_a81") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new АктВиконанихРобіт_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new АктВиконанихРобіт_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public АктВиконанихРобіт_Pointer? Current { get; private set; }
     }
 
@@ -21185,13 +20894,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ВведенняЗалишків_Select : DocumentSelect
     {		
         public ВведенняЗалишків_Select() : base(Config.Kernel, "tab_a83") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ВведенняЗалишків_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВведенняЗалишків_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ВведенняЗалишків_Pointer? Current { get; private set; }
     }
 
@@ -22014,13 +21719,9 @@ namespace StorageAndTrade_1_0.Документи
     public class НадлишкиТоварів_Select : DocumentSelect
     {		
         public НадлишкиТоварів_Select() : base(Config.Kernel, "tab_a88") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new НадлишкиТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new НадлишкиТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public НадлишкиТоварів_Pointer? Current { get; private set; }
     }
 
@@ -22552,13 +22253,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПересортицяТоварів_Select : DocumentSelect
     {		
         public ПересортицяТоварів_Select() : base(Config.Kernel, "tab_a90") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПересортицяТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПересортицяТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПересортицяТоварів_Pointer? Current { get; private set; }
     }
 
@@ -23138,13 +22835,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПерерахунокТоварів_Select : DocumentSelect
     {		
         public ПерерахунокТоварів_Select() : base(Config.Kernel, "tab_a92") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПерерахунокТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПерерахунокТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПерерахунокТоварів_Pointer? Current { get; private set; }
     }
 
@@ -23780,13 +23473,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПсуванняТоварів_Select : DocumentSelect
     {		
         public ПсуванняТоварів_Select() : base(Config.Kernel, "tab_a94") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПсуванняТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПсуванняТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПсуванняТоварів_Pointer? Current { get; private set; }
     }
 
@@ -24441,13 +24130,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ВнутрішнєСпоживанняТоварів_Select : DocumentSelect
     {		
         public ВнутрішнєСпоживанняТоварів_Select() : base(Config.Kernel, "tab_b07") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ВнутрішнєСпоживанняТоварів_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВнутрішнєСпоживанняТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ВнутрішнєСпоживанняТоварів_Pointer? Current { get; private set; }
     }
 
@@ -25193,13 +24878,9 @@ namespace StorageAndTrade_1_0.Документи
     public class РахунокФактура_Select : DocumentSelect
     {		
         public РахунокФактура_Select() : base(Config.Kernel, "tab_b10") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new РахунокФактура_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РахунокФактура_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public РахунокФактура_Pointer? Current { get; private set; }
     }
 
@@ -25814,13 +25495,9 @@ namespace StorageAndTrade_1_0.Документи
     public class РозміщенняТоварівНаСкладі_Select : DocumentSelect
     {		
         public РозміщенняТоварівНаСкладі_Select() : base(Config.Kernel, "tab_a64") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new РозміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public РозміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
     }
 
@@ -26418,13 +26095,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ПереміщенняТоварівНаСкладі_Select : DocumentSelect
     {		
         public ПереміщенняТоварівНаСкладі_Select() : base(Config.Kernel, "tab_b09") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ПереміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПереміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
     }
 
@@ -27031,13 +26704,9 @@ namespace StorageAndTrade_1_0.Документи
     public class ЗбіркаТоварівНаСкладі_Select : DocumentSelect
     {		
         public ЗбіркаТоварівНаСкладі_Select() : base(Config.Kernel, "tab_b27") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new ЗбіркаТоварівНаСкладі_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗбіркаТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public ЗбіркаТоварівНаСкладі_Pointer? Current { get; private set; }
     }
 
@@ -27597,13 +27266,9 @@ namespace StorageAndTrade_1_0.Документи
     public class РозміщенняНоменклатуриПоКоміркам_Select : DocumentSelect
     {		
         public РозміщенняНоменклатуриПоКоміркам_Select() : base(Config.Kernel, "tab_b29") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new РозміщенняНоменклатуриПоКоміркам_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозміщенняНоменклатуриПоКоміркам_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public РозміщенняНоменклатуриПоКоміркам_Pointer? Current { get; private set; }
     }
 
@@ -28135,13 +27800,9 @@ namespace StorageAndTrade_1_0.Документи
     public class КорегуванняБоргу_Select : DocumentSelect
     {		
         public КорегуванняБоргу_Select() : base(Config.Kernel, "tab_a65") { }
-        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new КорегуванняБоргу_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
-        
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new КорегуванняБоргу_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
         public КорегуванняБоргу_Pointer? Current { get; private set; }
     }
 

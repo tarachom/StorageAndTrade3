@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>24.04.2024 12:03:44</DateTimeSave>
+  <DateTimeSave>23.05.2024 14:01:50</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -8231,6 +8231,7 @@ WHERE
         <Spend>ЗамовленняПостачальнику_SpendTheDocument.Spend</Spend>
         <ClearSpend>ЗамовленняПостачальнику_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПоступленняТоварівТаПослуг</Name>
@@ -8933,6 +8934,7 @@ WHERE
         <Spend>ПоступленняТоварівТаПослуг_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ЗамовленняКлієнта</Name>
@@ -9572,6 +9574,7 @@ WHERE
         <Spend>ЗамовленняКлієнта_SpendTheDocument.Spend</Spend>
         <ClearSpend>ЗамовленняКлієнта_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>РеалізаціяТоварівТаПослуг</Name>
@@ -10273,6 +10276,7 @@ WHERE
         <Spend>РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend</Spend>
         <ClearSpend>РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ВстановленняЦінНоменклатури</Name>
@@ -10591,6 +10595,7 @@ WHERE
         <Spend>ВстановленняЦінНоменклатури_SpendTheDocument.Spend</Spend>
         <ClearSpend>ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПрихіднийКасовийОрдер</Name>
@@ -11050,6 +11055,7 @@ WHERE
         <Spend>ПрихіднийКасовийОрдер_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>РозхіднийКасовийОрдер</Name>
@@ -11539,6 +11545,7 @@ WHERE
         <Spend>РозхіднийКасовийОрдер_SpendTheDocument.Spend</Spend>
         <ClearSpend>РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПереміщенняТоварів</Name>
@@ -12008,6 +12015,7 @@ WHERE
         <Spend>ПереміщенняТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПереміщенняТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПоверненняТоварівПостачальнику</Name>
@@ -12568,6 +12576,7 @@ WHERE
         <Spend>ПоверненняТоварівПостачальнику_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПоверненняТоварівВідКлієнта</Name>
@@ -13096,6 +13105,7 @@ WHERE
         <Spend>ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>АктВиконанихРобіт</Name>
@@ -13533,6 +13543,7 @@ WHERE
         <Spend>АктВиконанихРобіт_SpendTheDocument.Spend</Spend>
         <ClearSpend>АктВиконанихРобіт_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ВведенняЗалишків</Name>
@@ -14078,6 +14089,7 @@ WHERE
         <Spend>ВведенняЗалишків_SpendTheDocument.Spend</Spend>
         <ClearSpend>ВведенняЗалишків_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>НадлишкиТоварів</Name>
@@ -14386,6 +14398,7 @@ WHERE
         <ClearSpend>
         </ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПересортицяТоварів</Name>
@@ -14694,6 +14707,7 @@ WHERE
         <ClearSpend>
         </ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПерерахунокТоварів</Name>
@@ -15051,6 +15065,7 @@ WHERE
         <Spend>ПерерахунокТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПерерахунокТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПсуванняТоварів</Name>
@@ -15433,6 +15448,7 @@ WHERE
         <Spend>ПсуванняТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПсуванняТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ВнутрішнєСпоживанняТоварів</Name>
@@ -15845,6 +15861,7 @@ WHERE
         <Spend>ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>РахунокФактура</Name>
@@ -16380,6 +16397,7 @@ WHERE
         <Spend>РахунокФактура_SpendTheDocument.Spend</Spend>
         <ClearSpend>РахунокФактура_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>РозміщенняТоварівНаСкладі</Name>
@@ -16717,6 +16735,7 @@ WHERE
         <Spend>РозміщенняТоварівНаСкладі_SpendTheDocument.Spend</Spend>
         <ClearSpend>РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ПереміщенняТоварівНаСкладі</Name>
@@ -17053,6 +17072,7 @@ WHERE
         <Spend>ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>ЗбіркаТоварівНаСкладі</Name>
@@ -17390,6 +17410,7 @@ WHERE
         <Spend>ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend</Spend>
         <ClearSpend>ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>РозміщенняНоменклатуриПоКоміркам</Name>
@@ -17681,6 +17702,7 @@ WHERE
         <Spend>РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend</Spend>
         <ClearSpend>РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
     <Document>
       <Name>КорегуванняБоргу</Name>
@@ -17945,6 +17967,7 @@ WHERE
         <Spend>КорегуванняБоргу_SpendTheDocument.Spend</Spend>
         <ClearSpend>КорегуванняБоргу_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
+      <Forms />
     </Document>
   </Documents>
   <Enums>
