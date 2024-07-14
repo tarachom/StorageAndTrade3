@@ -6,8 +6,8 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>23.05.2024 14:01:50</DateTimeSave>
-  <DictTSearch>simple</DictTSearch>
+  <DateTimeSave>14.07.2024 14:41:27</DateTimeSave>
+  <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -8221,7 +8221,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ЗамовленняПостачальнику_Triggers.New</New>
-        <Copying Action="1">ЗамовленняПостачальнику_Triggers.Copying</Copying>
+        <Copying Action="0">ЗамовленняПостачальнику_Triggers.Copying</Copying>
         <BeforeSave Action="1">ЗамовленняПостачальнику_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ЗамовленняПостачальнику_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ЗамовленняПостачальнику_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -8924,7 +8924,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ПоступленняТоварівТаПослуг_Triggers.New</New>
-        <Copying Action="1">ПоступленняТоварівТаПослуг_Triggers.Copying</Copying>
+        <Copying Action="0">ПоступленняТоварівТаПослуг_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПоступленняТоварівТаПослуг_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПоступленняТоварівТаПослуг_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="1">ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -9564,7 +9564,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ЗамовленняКлієнта_Triggers.New</New>
-        <Copying Action="1">ЗамовленняКлієнта_Triggers.Copying</Copying>
+        <Copying Action="0">ЗамовленняКлієнта_Triggers.Copying</Copying>
         <BeforeSave Action="1">ЗамовленняКлієнта_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ЗамовленняКлієнта_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ЗамовленняКлієнта_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -10266,7 +10266,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">РеалізаціяТоварівТаПослуг_Triggers.New</New>
-        <Copying Action="1">РеалізаціяТоварівТаПослуг_Triggers.Copying</Copying>
+        <Copying Action="0">РеалізаціяТоварівТаПослуг_Triggers.Copying</Copying>
         <BeforeSave Action="1">РеалізаціяТоварівТаПослуг_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">РеалізаціяТоварівТаПослуг_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">РеалізаціяТоварівТаПослуг_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -10585,7 +10585,7 @@ WHERE
       <AllowRegisterAccumulation />
       <TriggerFunctions>
         <New Action="1">ВстановленняЦінНоменклатури_Triggers.New</New>
-        <Copying Action="1">ВстановленняЦінНоменклатури_Triggers.Copying</Copying>
+        <Copying Action="0">ВстановленняЦінНоменклатури_Triggers.Copying</Copying>
         <BeforeSave Action="1">ВстановленняЦінНоменклатури_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ВстановленняЦінНоменклатури_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ВстановленняЦінНоменклатури_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -11045,7 +11045,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ПрихіднийКасовийОрдер_Triggers.New</New>
-        <Copying Action="1">ПрихіднийКасовийОрдер_Triggers.Copying</Copying>
+        <Copying Action="0">ПрихіднийКасовийОрдер_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПрихіднийКасовийОрдер_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПрихіднийКасовийОрдер_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ПрихіднийКасовийОрдер_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -11535,7 +11535,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">РозхіднийКасовийОрдер_Triggers.New</New>
-        <Copying Action="1">РозхіднийКасовийОрдер_Triggers.Copying</Copying>
+        <Copying Action="0">РозхіднийКасовийОрдер_Triggers.Copying</Copying>
         <BeforeSave Action="1">РозхіднийКасовийОрдер_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">РозхіднийКасовийОрдер_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">РозхіднийКасовийОрдер_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -12005,7 +12005,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ПереміщенняТоварів_Triggers.New</New>
-        <Copying Action="1">ПереміщенняТоварів_Triggers.Copying</Copying>
+        <Copying Action="0">ПереміщенняТоварів_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПереміщенняТоварів_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПереміщенняТоварів_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ПереміщенняТоварів_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -12566,7 +12566,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ПоверненняТоварівПостачальнику_Triggers.New</New>
-        <Copying Action="1">ПоверненняТоварівПостачальнику_Triggers.Copying</Copying>
+        <Copying Action="0">ПоверненняТоварівПостачальнику_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПоверненняТоварівПостачальнику_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПоверненняТоварівПостачальнику_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ПоверненняТоварівПостачальнику_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -13095,7 +13095,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ПоверненняТоварівВідКлієнта_Triggers.New</New>
-        <Copying Action="1">ПоверненняТоварівВідКлієнта_Triggers.Copying</Copying>
+        <Copying Action="0">ПоверненняТоварівВідКлієнта_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПоверненняТоварівВідКлієнта_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПоверненняТоварівВідКлієнта_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ПоверненняТоварівВідКлієнта_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -13533,7 +13533,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">АктВиконанихРобіт_Triggers.New</New>
-        <Copying Action="1">АктВиконанихРобіт_Triggers.Copying</Copying>
+        <Copying Action="0">АктВиконанихРобіт_Triggers.Copying</Copying>
         <BeforeSave Action="1">АктВиконанихРобіт_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">АктВиконанихРобіт_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">АктВиконанихРобіт_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -14079,7 +14079,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ВведенняЗалишків_Triggers.New</New>
-        <Copying Action="1">ВведенняЗалишків_Triggers.Copying</Copying>
+        <Copying Action="0">ВведенняЗалишків_Triggers.Copying</Copying>
         <BeforeSave Action="1">ВведенняЗалишків_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ВведенняЗалишків_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="1">ВведенняЗалишків_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -15055,7 +15055,7 @@ WHERE
       <AllowRegisterAccumulation />
       <TriggerFunctions>
         <New Action="1">ПерерахунокТоварів_Triggers.New</New>
-        <Copying Action="1">ПерерахунокТоварів_Triggers.Copying</Copying>
+        <Copying Action="0">ПерерахунокТоварів_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПерерахунокТоварів_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПерерахунокТоварів_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ПерерахунокТоварів_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -15438,7 +15438,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ПсуванняТоварів_Triggers.New</New>
-        <Copying Action="1">ПсуванняТоварів_Triggers.Copying</Copying>
+        <Copying Action="0">ПсуванняТоварів_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПсуванняТоварів_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПсуванняТоварів_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ПсуванняТоварів_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -15851,7 +15851,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ВнутрішнєСпоживанняТоварів_Triggers.New</New>
-        <Copying Action="1">ВнутрішнєСпоживанняТоварів_Triggers.Copying</Copying>
+        <Copying Action="0">ВнутрішнєСпоживанняТоварів_Triggers.Copying</Copying>
         <BeforeSave Action="1">ВнутрішнєСпоживанняТоварів_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ВнутрішнєСпоживанняТоварів_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ВнутрішнєСпоживанняТоварів_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -16387,7 +16387,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">РахунокФактура_Triggers.New</New>
-        <Copying Action="1">РахунокФактура_Triggers.Copying</Copying>
+        <Copying Action="0">РахунокФактура_Triggers.Copying</Copying>
         <BeforeSave Action="1">РахунокФактура_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">РахунокФактура_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">РахунокФактура_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -16725,7 +16725,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">РозміщенняТоварівНаСкладі_Triggers.New</New>
-        <Copying Action="1">РозміщенняТоварівНаСкладі_Triggers.Copying</Copying>
+        <Copying Action="0">РозміщенняТоварівНаСкладі_Triggers.Copying</Copying>
         <BeforeSave Action="1">РозміщенняТоварівНаСкладі_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">РозміщенняТоварівНаСкладі_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">РозміщенняТоварівНаСкладі_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -17062,7 +17062,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ПереміщенняТоварівНаСкладі_Triggers.New</New>
-        <Copying Action="1">ПереміщенняТоварівНаСкладі_Triggers.Copying</Copying>
+        <Copying Action="0">ПереміщенняТоварівНаСкладі_Triggers.Copying</Copying>
         <BeforeSave Action="1">ПереміщенняТоварівНаСкладі_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ПереміщенняТоварівНаСкладі_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ПереміщенняТоварівНаСкладі_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -17400,7 +17400,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">ЗбіркаТоварівНаСкладі_Triggers.New</New>
-        <Copying Action="1">ЗбіркаТоварівНаСкладі_Triggers.Copying</Copying>
+        <Copying Action="0">ЗбіркаТоварівНаСкладі_Triggers.Copying</Copying>
         <BeforeSave Action="1">ЗбіркаТоварівНаСкладі_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">ЗбіркаТоварівНаСкладі_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">ЗбіркаТоварівНаСкладі_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -17692,7 +17692,7 @@ WHERE
       <AllowRegisterAccumulation />
       <TriggerFunctions>
         <New Action="1">РозміщенняНоменклатуриПоКоміркам_Triggers.New</New>
-        <Copying Action="1">РозміщенняНоменклатуриПоКоміркам_Triggers.Copying</Copying>
+        <Copying Action="0">РозміщенняНоменклатуриПоКоміркам_Triggers.Copying</Copying>
         <BeforeSave Action="1">РозміщенняНоменклатуриПоКоміркам_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">РозміщенняНоменклатуриПоКоміркам_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">РозміщенняНоменклатуриПоКоміркам_Triggers.SetDeletionLabel</SetDeletionLabel>
@@ -17957,7 +17957,7 @@ WHERE
       </AllowRegisterAccumulation>
       <TriggerFunctions>
         <New Action="1">КорегуванняБоргу_Triggers.New</New>
-        <Copying Action="1">КорегуванняБоргу_Triggers.Copying</Copying>
+        <Copying Action="0">КорегуванняБоргу_Triggers.Copying</Copying>
         <BeforeSave Action="1">КорегуванняБоргу_Triggers.BeforeSave</BeforeSave>
         <AfterSave Action="0">КорегуванняБоргу_Triggers.AfterSave</AfterSave>
         <SetDeletionLabel Action="0">КорегуванняБоргу_Triggers.SetDeletionLabel</SetDeletionLabel>

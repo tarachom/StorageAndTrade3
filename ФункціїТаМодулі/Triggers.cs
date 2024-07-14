@@ -1645,8 +1645,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ЗамовленняПостачальнику_Objest ДокументОбєкт, ЗамовленняПостачальнику_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1687,8 +1685,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПоступленняТоварівТаПослуг_Objest ДокументОбєкт, ПоступленняТоварівТаПослуг_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1744,8 +1740,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ЗамовленняКлієнта_Objest ДокументОбєкт, ЗамовленняКлієнта_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1786,8 +1780,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(РеалізаціяТоварівТаПослуг_Objest ДокументОбєкт, РеалізаціяТоварівТаПослуг_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1827,8 +1819,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ВстановленняЦінНоменклатури_Objest ДокументОбєкт, ВстановленняЦінНоменклатури_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1868,8 +1858,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПрихіднийКасовийОрдер_Objest ДокументОбєкт, ПрихіднийКасовийОрдер_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1909,8 +1897,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(РозхіднийКасовийОрдер_Objest ДокументОбєкт, РозхіднийКасовийОрдер_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1950,8 +1936,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПереміщенняТоварів_Objest ДокументОбєкт, ПереміщенняТоварів_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -1992,8 +1976,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт, ПоверненняТоварівПостачальнику_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2034,8 +2016,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт, ПоверненняТоварівВідКлієнта_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2076,8 +2056,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(АктВиконанихРобіт_Objest ДокументОбєкт, АктВиконанихРобіт_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2117,8 +2095,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ВведенняЗалишків_Objest ДокументОбєкт, ВведенняЗалишків_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2176,7 +2152,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПерерахунокТоварів_Objest ДокументОбєкт, ПерерахунокТоварів_Objest Основа)
         {
-            ДокументОбєкт.Назва += " - Копія";
             await ValueTask.FromResult(true);
         }
 
@@ -2216,8 +2191,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПсуванняТоварів_Objest ДокументОбєкт, ПсуванняТоварів_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2257,8 +2230,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ВнутрішнєСпоживанняТоварів_Objest ДокументОбєкт, ВнутрішнєСпоживанняТоварів_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2299,8 +2270,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(РахунокФактура_Objest ДокументОбєкт, РахунокФактура_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2340,8 +2309,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(РозміщенняТоварівНаСкладі_Objest ДокументОбєкт, РозміщенняТоварівНаСкладі_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2381,8 +2348,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ПереміщенняТоварівНаСкладі_Objest ДокументОбєкт, ПереміщенняТоварівНаСкладі_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2422,8 +2387,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(ЗбіркаТоварівНаСкладі_Objest ДокументОбєкт, ЗбіркаТоварівНаСкладі_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2463,8 +2426,6 @@ namespace StorageAndTrade_1_0.Документи
 
         public static async ValueTask Copying(РозміщенняНоменклатуриПоКоміркам_Objest ДокументОбєкт, РозміщенняНоменклатуриПоКоміркам_Objest Основа)
         {
-            ДокументОбєкт.Коментар = "Копія: " + Основа.Назва;
-
             await ValueTask.FromResult(true);
         }
 
@@ -2498,13 +2459,12 @@ namespace StorageAndTrade_1_0.Документи
             ДокументОбєкт.НомерДок = (++НумераціяДокументів.КорегуванняБоргу_Const).ToString("D8");
             ДокументОбєкт.ДатаДок = DateTime.Now;
             ДокументОбєкт.Автор = Program.Користувач;
-            
+
             await ValueTask.FromResult(true);
         }
 
         public static async ValueTask Copying(КорегуванняБоргу_Objest ДокументОбєкт, КорегуванняБоргу_Objest Основа)
         {
-            ДокументОбєкт.Назва += " - Копія";
             await ValueTask.FromResult(true);
         }
 

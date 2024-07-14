@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 23.05.2024 14:01:50
+ * Дата конфігурації: 14.07.2024 14:41:27
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -12268,7 +12268,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ЗамовленняПостачальнику_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -13209,7 +13208,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -14095,7 +14093,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ЗамовленняКлієнта_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -15033,7 +15030,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -15649,7 +15645,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -16316,7 +16311,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -17020,7 +17014,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await РозхіднийКасовийОрдер_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -17752,7 +17745,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПереміщенняТоварів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -18531,7 +18523,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -19282,7 +19273,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -19965,7 +19955,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await АктВиконанихРобіт_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -20751,7 +20740,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ВведенняЗалишків_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -22701,7 +22689,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПерерахунокТоварів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -23337,7 +23324,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПсуванняТоварів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -23993,7 +23979,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -24734,7 +24719,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await РахунокФактура_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -25360,7 +25344,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -25961,7 +25944,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -26569,7 +26551,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -27132,7 +27113,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);
             return copy;
         }
 
@@ -27668,7 +27648,6 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
-                await КорегуванняБоргу_Triggers.Copying(copy, this);
             return copy;
         }
 
