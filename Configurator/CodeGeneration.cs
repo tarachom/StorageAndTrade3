@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 14.07.2024 14:41:27
+ * Дата конфігурації: 24.07.2024 11:37:29
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -27891,47 +27891,45 @@ namespace StorageAndTrade_1_0.Документи
 namespace StorageAndTrade_1_0.Журнали
 {
     #region Journal
-    public class Journal_Select: JournalSelect
+    public class JournalSelect: JournalSelectA
     {
-        public Journal_Select() : base(Config.Kernel,
+        public JournalSelect() : base(Config.Kernel,
              ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", "tab_a65", ],
-			       ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", "КорегуванняБоргу", ]) { }
+             ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", "КорегуванняБоргу", ]) { }
 
         public async ValueTask<DocumentObject?> GetDocumentObject(bool readAllTablePart = true)
         {
             if (Current == null) return null;
-            switch (Current.TypeDocument)
+            return Current.TypeDocument switch
             {
-                case "ЗамовленняПостачальнику": return await new Документи.ЗамовленняПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПоступленняТоварівТаПослуг": return await new Документи.ПоступленняТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ЗамовленняКлієнта": return await new Документи.ЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РеалізаціяТоварівТаПослуг": return await new Документи.РеалізаціяТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ВстановленняЦінНоменклатури": return await new Документи.ВстановленняЦінНоменклатури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПрихіднийКасовийОрдер": return await new Документи.ПрихіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РозхіднийКасовийОрдер": return await new Документи.РозхіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПереміщенняТоварів": return await new Документи.ПереміщенняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПоверненняТоварівПостачальнику": return await new Документи.ПоверненняТоварівПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПоверненняТоварівВідКлієнта": return await new Документи.ПоверненняТоварівВідКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "АктВиконанихРобіт": return await new Документи.АктВиконанихРобіт_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ВведенняЗалишків": return await new Документи.ВведенняЗалишків_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "НадлишкиТоварів": return await new Документи.НадлишкиТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПересортицяТоварів": return await new Документи.ПересортицяТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПерерахунокТоварів": return await new Документи.ПерерахунокТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПсуванняТоварів": return await new Документи.ПсуванняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ВнутрішнєСпоживанняТоварів": return await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РахунокФактура": return await new Документи.РахунокФактура_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РозміщенняТоварівНаСкладі": return await new Документи.РозміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ПереміщенняТоварівНаСкладі": return await new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "ЗбіркаТоварівНаСкладі": return await new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "РозміщенняНоменклатуриПоКоміркам": return await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                case "КорегуванняБоргу": return await new Документи.КорегуванняБоргу_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
-                
-                default: return null;
-            }
+                "ЗамовленняПостачальнику" => await new Документи.ЗамовленняПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПоступленняТоварівТаПослуг" => await new Документи.ПоступленняТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ЗамовленняКлієнта" => await new Документи.ЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "РеалізаціяТоварівТаПослуг" => await new Документи.РеалізаціяТоварівТаПослуг_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ВстановленняЦінНоменклатури" => await new Документи.ВстановленняЦінНоменклатури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПрихіднийКасовийОрдер" => await new Документи.ПрихіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "РозхіднийКасовийОрдер" => await new Документи.РозхіднийКасовийОрдер_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПереміщенняТоварів" => await new Документи.ПереміщенняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПоверненняТоварівПостачальнику" => await new Документи.ПоверненняТоварівПостачальнику_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПоверненняТоварівВідКлієнта" => await new Документи.ПоверненняТоварівВідКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "АктВиконанихРобіт" => await new Документи.АктВиконанихРобіт_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ВведенняЗалишків" => await new Документи.ВведенняЗалишків_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "НадлишкиТоварів" => await new Документи.НадлишкиТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПересортицяТоварів" => await new Документи.ПересортицяТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПерерахунокТоварів" => await new Документи.ПерерахунокТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПсуванняТоварів" => await new Документи.ПсуванняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ВнутрішнєСпоживанняТоварів" => await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "РахунокФактура" => await new Документи.РахунокФактура_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "РозміщенняТоварівНаСкладі" => await new Документи.РозміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ПереміщенняТоварівНаСкладі" => await new Документи.ПереміщенняТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ЗбіркаТоварівНаСкладі" => await new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                _ => null
+            };
         }
     }
     #endregion
-
 }
 
 namespace StorageAndTrade_1_0.РегістриВідомостей

@@ -102,7 +102,7 @@ namespace StorageAndTrade
             int counterDocs = 0;
             Константи.Системні.ЗупинитиФоновіЗадачі_Const = true;
 
-            Журнали.Journal_Select journalSelect = new Журнали.Journal_Select();
+            Журнали.JournalSelect journalSelect = new Журнали.JournalSelect();
 
             // Вибірка всіх документів. Встановлюється максимальний період
             await journalSelect.Select(DateTime.Parse("01.01.2000 00:00:00"), DateTime.Now);
@@ -112,7 +112,7 @@ namespace StorageAndTrade
                     break;
 
                 //Обробляються тільки не помічені на видалення і проведені
-                if (!journalSelect.Current.DeletionLabel && journalSelect.Current.Spend)
+                if (journalSelect.Current != null && !journalSelect.Current.DeletionLabel && journalSelect.Current.Spend)
                 {
                     DocumentObject? doc = await journalSelect.GetDocumentObject(true);
                     if (doc != null)

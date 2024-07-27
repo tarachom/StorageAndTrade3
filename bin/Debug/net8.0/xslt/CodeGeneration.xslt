@@ -435,19 +435,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
                 throw new Exception("Порожня сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
 
             while (true)
-            {                
-                //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
-                //провести всі документ, а тоді вже розраховувати регістри
-                if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
-                {
-                    //Виконання обчислень
-                    await Kernel.DataBase.SpetialTableRegAccumTrigerExecute
-                    (
-                        Kernel.Session,
-                        РегістриНакопичення.VirtualTablesСalculation.Execute, 
-                        РегістриНакопичення.VirtualTablesСalculation.ExecuteFinalCalculation
-                    );
-                }
+            {
+                //Виконання обчислень
+                await Kernel.DataBase.SpetialTableRegAccumTrigerExecute
+                (
+                    Kernel.Session,
+                    РегістриНакопичення.VirtualTablesСalculation.Execute, 
+                    РегістриНакопичення.VirtualTablesСalculation.ExecuteFinalCalculation
+                );
 
                 //Затримка на 5 сек
                 await Task.Delay(5000);
@@ -1721,41 +1716,25 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Журнали
 {
     #region Journal
-    public class Journal_Select: JournalSelect
+    public class JournalSelect: JournalSelectA
     {
-        public Journal_Select() : base(Config.Kernel,
+        public JournalSelect() : base(Config.Kernel,
              <xsl:text>[</xsl:text><xsl:for-each select="Configuration/Documents/Document"><xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>", </xsl:text></xsl:for-each>],
-			       <xsl:text>[</xsl:text><xsl:for-each select="Configuration/Documents/Document"><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>", </xsl:text></xsl:for-each>]) { }
+             <xsl:text>[</xsl:text><xsl:for-each select="Configuration/Documents/Document"><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>", </xsl:text></xsl:for-each>]) { }
 
         public async ValueTask&lt;DocumentObject?&gt; GetDocumentObject(bool readAllTablePart = true)
         {
             if (Current == null) return null;
-            switch (Current.TypeDocument)
+            return Current.TypeDocument switch
             {
                 <xsl:for-each select="Configuration/Documents/Document">
-                    <xsl:text>case </xsl:text>"<xsl:value-of select="Name"/>": return await new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+                    <xsl:text>"</xsl:text><xsl:value-of select="Name"/>" =&gt; await new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
                 </xsl:for-each>
-                default: return null;
-            }
+                <xsl:text>_ =&gt; null</xsl:text>
+            };
         }
     }
     #endregion
-<!--
-    public class Journal_Document : JournalObject
-    {
-        public Journal_Document(string documentType, UnigueID uid) : base(Config.Kernel)
-        {
-            switch (documentType)
-            {
-			    <xsl:for-each select="Configuration/Documents/Document">
-					<xsl:variable name="DocumentName" select="Name"/>
-					<xsl:text>case </xsl:text>"<xsl:value-of select="$DocumentName"/>": { base.Table = "<xsl:value-of select="Table"/>"; base.TypeDocument = "<xsl:value-of select="$DocumentName"/>"; break; }
-				</xsl:for-each>
-            }
-            base.BaseRead(uid);
-        }
-    }
--->
 }
 
 namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриВідомостей
