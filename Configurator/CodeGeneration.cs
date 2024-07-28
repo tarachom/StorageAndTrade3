@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.07.2024 11:37:29
+ * Дата конфігурації: 28.07.2024 13:54:30
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -72,19 +72,14 @@ namespace StorageAndTrade_1_0
                 throw new Exception("Порожня сесія користувача. Спочатку потрібно залогінитись, а тоді вже викликати функцію StartBackgroundTask()");
 
             while (true)
-            {                
-                //Зупинка розрахунків використовується при масовому перепроведенні документів щоб
-                //провести всі документ, а тоді вже розраховувати регістри
-                if (!Константи.Системні.ЗупинитиФоновіЗадачі_Const)
-                {
-                    //Виконання обчислень
-                    await Kernel.DataBase.SpetialTableRegAccumTrigerExecute
-                    (
-                        Kernel.Session,
-                        РегістриНакопичення.VirtualTablesСalculation.Execute, 
-                        РегістриНакопичення.VirtualTablesСalculation.ExecuteFinalCalculation
-                    );
-                }
+            {
+                //Виконання обчислень
+                await Kernel.DataBase.SpetialTableRegAccumTrigerExecute
+                (
+                    Kernel.Session,
+                    РегістриНакопичення.VirtualTablesСalculation.Execute, 
+                    РегістриНакопичення.VirtualTablesСalculation.ExecuteFinalCalculation
+                );
 
                 //Затримка на 5 сек
                 await Task.Delay(5000);

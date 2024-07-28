@@ -685,7 +685,7 @@ FROM
     register
 ";
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<Guid, Guid> НоменклатураТаКомірки = new Dictionary<Guid, Guid>();
 

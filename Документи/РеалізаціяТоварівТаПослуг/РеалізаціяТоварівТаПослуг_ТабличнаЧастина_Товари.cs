@@ -244,7 +244,7 @@ ORDER BY
     ЦіниНоменклатури.period DESC 
 LIMIT 1
 ";
-                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+                var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
                 if (recordResult.Result)
                     foreach (Dictionary<string, object> row in recordResult.ListRow)
                     {

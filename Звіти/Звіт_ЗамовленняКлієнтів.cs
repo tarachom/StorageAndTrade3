@@ -396,7 +396,7 @@ ORDER BY
                 { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             ListStore listStore;
             ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
@@ -648,7 +648,7 @@ ORDER BY period ASC
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
 
             ListStore listStore;
             ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);

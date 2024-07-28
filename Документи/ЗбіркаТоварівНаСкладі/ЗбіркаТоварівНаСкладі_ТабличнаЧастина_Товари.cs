@@ -697,7 +697,7 @@ HAVING
                 decimal КількістьЯкуПотрібноРозприділити = КількістьФакт;
                 bool єЗміниВЗаписі = false;
 
-                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+                var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
                 foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
                     decimal ЗалишокВКомірці = (decimal)row["ВНаявності"];

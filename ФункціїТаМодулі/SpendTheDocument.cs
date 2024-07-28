@@ -50,7 +50,7 @@ namespace StorageAndTrade_1_0.Документи
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <param name="Кількість">Кількість яку потрібно списати</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<SelectRequestAsync_Record> ОтриматиСписокНаявнихПартій(
+        public static async ValueTask<SelectRequest_Record> ОтриматиСписокНаявнихПартій(
             Організації_Pointer Організація,
             Номенклатура_Pointer Номенклатура,
             ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
@@ -165,7 +165,7 @@ UNION ALL
 	LIMIT 1
 )
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "period_end", OwnerDateDoc },
                 { "Кількість", Кількість }
@@ -182,7 +182,7 @@ UNION ALL
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗалишкиТоваруНаСкладі(
+        public static async ValueTask<SelectRequest_Record> ОтриматиЗалишкиТоваруНаСкладі(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
             СеріїНоменклатури_Pointer Серія, Склади_Pointer Склад,
             UnigueID Owner, DateTime OwnerDateDoc)
@@ -212,7 +212,7 @@ SELECT
 FROM
     register
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "period_end", OwnerDateDoc }
             });
@@ -229,7 +229,7 @@ FROM
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗалишкиТоваруВКомірці(
+        public static async ValueTask<SelectRequest_Record> ОтриматиЗалишкиТоваруВКомірці(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури,
             ПакуванняОдиниціВиміру_Pointer Пакування, СкладськіКомірки_Pointer Комірка,
             СеріїНоменклатури_Pointer Серія,
@@ -261,7 +261,7 @@ SELECT
 FROM
     register
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "period_end", OwnerDateDoc }
             });
@@ -276,7 +276,7 @@ FROM
         /// <param name="Owner">UID Документу який проводиться</param>
         /// <param name="OwnerDateDoc">Дата документу який проводиться</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<SelectRequestAsync_Record> ОтриматиРезервТоваруНаСкладі(
+        public static async ValueTask<SelectRequest_Record> ОтриматиРезервТоваруНаСкладі(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -316,7 +316,7 @@ FROM
     register
 ";
 
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "period_end", OwnerDateDoc }
             });
@@ -330,7 +330,7 @@ FROM
         /// <param name="Склад">Склад</param>
         /// <param name="Owner">Документ</param>
         /// <returns>Іменований список</returns>
-        public static async ValueTask<SelectRequestAsync_Record> ОтриматиРезервТоваруПоДокументу(
+        public static async ValueTask<SelectRequest_Record> ОтриматиРезервТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ДокументРезерву, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -360,7 +360,7 @@ SELECT
 FROM
     register
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "period_end", OwnerDateDoc }
             });
@@ -376,7 +376,7 @@ FROM
         /// <param name="Owner">Документ</param>
         /// <param name="OwnerDateDoc">Дата документу</param>
         /// <returns></returns>
-        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
+        public static async ValueTask<SelectRequest_Record> ОтриматиЗамовленняКлієнтаДляТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ЗамовленняКлієнта, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -411,7 +411,7 @@ SELECT
 FROM
     register
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "period_end", OwnerDateDoc }
             });
@@ -427,7 +427,7 @@ FROM
         /// <param name="Owner">Документ</param>
         /// <param name="OwnerDateDoc">Дата документу</param>
         /// <returns></returns>
-        public static async ValueTask<SelectRequestAsync_Record> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
+        public static async ValueTask<SelectRequest_Record> ОтриматиЗамовленняПостачальникуДляТоваруПоДокументу(
             Номенклатура_Pointer Номенклатура, ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури, Склади_Pointer Склад,
             UnigueID ЗамовленняПостачальнику, UnigueID Owner, DateTime OwnerDateDoc)
         {
@@ -457,7 +457,7 @@ SELECT
 FROM
     register
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "period_end", OwnerDateDoc }
             });
@@ -1567,7 +1567,7 @@ FROM
 
     class ПоверненняТоварівВідКлієнта_SpendTheDocument
     {
-        private static async ValueTask<SelectRequestAsync_Record> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
+        private static async ValueTask<SelectRequest_Record> ОтриматиПартіїТоваруЗДокументуРеалізації(ПоверненняТоварівВідКлієнта_Objest ДокументОбєкт,
             ПоверненняТоварівВідКлієнта_Товари_TablePart.Record ТовариРядок)
         {
             string query = $@"
@@ -1594,7 +1594,7 @@ WHERE
 
 ORDER BY ПартіяТоварівКомпозит_Дата ASC
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "ДокументРеалізації", ТовариРядок.ДокументРеалізації.UnigueID.UGuid },
                 { "Організація", ДокументОбєкт.Організація.UnigueID.UGuid },
@@ -1815,7 +1815,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
     class ПоверненняТоварівПостачальнику_SpendTheDocument
     {
-        private static async ValueTask<SelectRequestAsync_Record> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
+        private static async ValueTask<SelectRequest_Record> ОтриматиПартіїТоваруЗДокументуПоступлення(ПоверненняТоварівПостачальнику_Objest ДокументОбєкт,
             ПоверненняТоварівПостачальнику_Товари_TablePart.Record ТовариРядок)
         {
             string query = $@"
@@ -1841,7 +1841,7 @@ WHERE
 
 ORDER BY ПартіяТоварівКомпозит_Дата ASC
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query, new()
+            return await Config.Kernel.DataBase.SelectRequest(query, new()
             {
                 { "ДокументПоступлення", ТовариРядок.ДокументПоступлення.UnigueID.UGuid },
                 { "Організація", ДокументОбєкт.Організація.UnigueID.UGuid },

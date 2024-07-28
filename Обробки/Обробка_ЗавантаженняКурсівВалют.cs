@@ -197,7 +197,7 @@ LIMIT 1
                         { "ДатаКурсу", ДатаКурсу }
                     };
 
-                    var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+                    var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
                     if (!recordResult.Result)
                     {
                         КурсиВалют_Objest курсиВалют_Objest = new КурсиВалют_Objest

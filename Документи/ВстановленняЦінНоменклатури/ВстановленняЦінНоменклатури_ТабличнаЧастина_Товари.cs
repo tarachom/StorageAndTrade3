@@ -557,7 +557,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
                     { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
                 };
 
-                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+                var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
 
                 string ВидЦіниНазва = await ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation();
 
@@ -662,7 +662,7 @@ ORDER BY
                     { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
                 };
 
-                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+                var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
 
                 foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {

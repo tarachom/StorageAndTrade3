@@ -55,7 +55,7 @@ namespace StorageAndTrade
                 Dictionary<string, float>? textAlignColumn = null;
                 Dictionary<string, TreeCellDataFunc>? funcColumn = null;
 
-                SelectRequestAsync_Record? recordResult = null;
+                SelectRequest_Record? recordResult = null;
 
                 switch (regAccumName)
                 {
@@ -70,7 +70,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.ТовариНаСкладах.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.ТовариНаСкладах.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.ТовариНаСкладах.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариНаСкладах.Запит, paramQuery);
                             break;
                         }
                     case "ПартіїТоварів":
@@ -84,7 +84,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.ПартіїТоварів.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.ПартіїТоварів.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.ПартіїТоварів.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ПартіїТоварів.Запит, paramQuery);
                             break;
                         }
                     case "ЗамовленняКлієнтів":
@@ -98,7 +98,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.ЗамовленняКлієнтів.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.ЗамовленняКлієнтів.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ЗамовленняКлієнтів.Запит, paramQuery);
                             break;
                         }
                     case "РозрахункиЗКлієнтами":
@@ -112,7 +112,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.РозрахункиЗКлієнтами.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.РозрахункиЗКлієнтами.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РозрахункиЗКлієнтами.Запит, paramQuery);
                             break;
                         }
                     case "ВільніЗалишки":
@@ -126,7 +126,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.ВільніЗалишки.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.ВільніЗалишки.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.ВільніЗалишки.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ВільніЗалишки.Запит, paramQuery);
                             break;
                         }
                     case "ЗамовленняПостачальникам":
@@ -140,7 +140,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.ЗамовленняПостачальникам.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.ЗамовленняПостачальникам.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ЗамовленняПостачальникам.Запит, paramQuery);
                             break;
                         }
                     case "РозрахункиЗПостачальниками":
@@ -154,7 +154,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.РозрахункиЗПостачальниками.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.РозрахункиЗПостачальниками.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РозрахункиЗПостачальниками.Запит, paramQuery);
                             break;
                         }
                     case "РухКоштів":
@@ -168,7 +168,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.РухКоштів.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.РухКоштів.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.РухКоштів.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.РухКоштів.Запит, paramQuery);
                             break;
                         }
                     case "Закупівлі":
@@ -182,7 +182,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.Закупівлі.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.Закупівлі.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.Закупівлі.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.Закупівлі.Запит, paramQuery);
                             break;
                         }
                     case "Продажі":
@@ -196,7 +196,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.Продажі.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.Продажі.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.Продажі.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.Продажі.Запит, paramQuery);
                             break;
                         }
                     case "ТовариВКомірках":
@@ -210,7 +210,7 @@ namespace StorageAndTrade
                             textAlignColumn = РухДокументівПоРегістрах.ТовариВКомірках.ПозиціяТекстуВКолонці();
                             funcColumn = РухДокументівПоРегістрах.ТовариВКомірках.ФункціяДляКолонки();
 
-                            recordResult = await Config.Kernel.DataBase.SelectRequestAsync(РухДокументівПоРегістрах.ТовариВКомірках.Запит, paramQuery);
+                            recordResult = await Config.Kernel.DataBase.SelectRequest(РухДокументівПоРегістрах.ТовариВКомірках.Запит, paramQuery);
                             break;
                         }
                     default:

@@ -79,7 +79,7 @@ WHERE {Системні.ПовідомленняТаПомилки_Помилк�
             await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
         }
 
-        public static async ValueTask<SelectRequestAsync_Record> ПрочитатиПовідомленняПроПомилки(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
+        public static async ValueTask<SelectRequest_Record> ПрочитатиПовідомленняПроПомилки(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
             string query = $@"
 SELECT
@@ -104,7 +104,7 @@ ORDER BY
 LIMIT 
     {limit ?? 100}
 ";
-            return await Config.Kernel.DataBase.SelectRequestAsync(query);
+            return await Config.Kernel.DataBase.SelectRequest(query);
         }
 
         public static async void ВідкритиПовідомлення()

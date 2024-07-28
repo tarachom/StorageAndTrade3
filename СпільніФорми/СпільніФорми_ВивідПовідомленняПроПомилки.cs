@@ -58,7 +58,7 @@ namespace StorageAndTrade
             foreach (Widget Child in vBoxMessage.Children)
                 vBoxMessage.Remove(Child);
 
-            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки();
+            SelectRequest_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки();
 
             foreach (Dictionary<string, object> row in record.ListRow)
                 CreateMessage(row);
@@ -153,7 +153,7 @@ namespace StorageAndTrade
 
         public async ValueTask LoadRecords(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
-            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(ВідбірПоОбєкту, limit);
+            SelectRequest_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(ВідбірПоОбєкту, limit);
 
             foreach (Dictionary<string, object> row in record.ListRow)
                 CreateMessage(row);

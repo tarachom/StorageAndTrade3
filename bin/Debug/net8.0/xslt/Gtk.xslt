@@ -474,7 +474,7 @@ ORDER BY level, {<xsl:value-of select="$DirectoryName"/>_Const.Назва} ASC
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary&lt;string, TreeIter&gt; nodeDictionary = new Dictionary&lt;string, TreeIter&gt;();
 
@@ -994,7 +994,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                 <xsl:text>";</xsl:text>
             </xsl:if>
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
 
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();

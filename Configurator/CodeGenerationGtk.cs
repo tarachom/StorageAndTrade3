@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.07.2024 11:37:29
+ * Дата конфігурації: 28.07.2024 13:54:30
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -4601,7 +4601,7 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -4747,7 +4747,7 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -4898,7 +4898,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -5044,7 +5044,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -5195,7 +5195,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -5341,7 +5341,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -8900,7 +8900,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -9052,7 +9052,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
 
             #endregion
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
             Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
 
@@ -16100,7 +16100,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
 
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
@@ -16559,7 +16559,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
 
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
@@ -17211,7 +17211,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
 
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
@@ -17571,7 +17571,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
 
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
@@ -18104,7 +18104,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
 
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
@@ -18539,7 +18539,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
             unionAllQuery += "\nORDER BY Дата";
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(unionAllQuery, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
 
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();

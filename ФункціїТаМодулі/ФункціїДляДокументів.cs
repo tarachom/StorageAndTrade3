@@ -214,7 +214,7 @@ LIMIT 1
                 { "date_curs", new DateTime(ДатаКурсу.Year, ДатаКурсу.Month, ДатаКурсу.Day, 23, 59, 59) }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
             if (recordResult.Result)
             {
                 Dictionary<string, object> Рядок = recordResult.ListRow[0];

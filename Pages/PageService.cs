@@ -133,7 +133,7 @@ namespace StorageAndTrade
                             ФункціїДляПовідомлень.ПоказатиПовідомлення(doc.UnigueID, 1);
 
                             //Додатково вивід у помилок у це вікно
-                            SelectRequestAsync_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(doc.UnigueID, 1);
+                            SelectRequest_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(doc.UnigueID, 1);
 
                             string msg = "";
                             foreach (Dictionary<string, object> row in record.ListRow)
@@ -188,7 +188,7 @@ namespace StorageAndTrade
                 //Вибірка помічених на видалення
                 string query = @$"SELECT uid FROM {configurationDirectories.Table} WHERE deletion_label = true";
 
-                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+                var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
                 if (recordResult.ListRow.Count > 0)
                 {
@@ -240,7 +240,7 @@ namespace StorageAndTrade
                 //Вибірка помічених на видалення
                 string query = @$"SELECT uid, docname FROM {configurationDocuments.Table} WHERE deletion_label = true";
 
-                var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query);
+                var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
                 if (recordResult.ListRow.Count > 0)
                 {
@@ -303,7 +303,7 @@ namespace StorageAndTrade
                     else if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart)
                         query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid LIMIT 5";
 
-                    var recordResult = await Config.Kernel.DataBase.SelectRequestAsync(query, paramQuery);
+                    var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
 
                     if (recordResult.ListRow.Count > 0)
                     {
