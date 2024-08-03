@@ -569,6 +569,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                     DateTime СімДнівНазад = DateTime.Now.AddDays(-7);
                     return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(СімДнівНазад.Year, СімДнівНазад.Month, СімДнівНазад.Day));
                 }
+                case Перелічення.ТипПеріодуДляЖурналівДокументів.ДваДні:
+                {
+                    DateTime ДваДніНазад = DateTime.Now.AddDays(-1);
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДваДніНазад.Year, ДваДніНазад.Month, ДваДніНазад.Day));
+                }
+                case Перелічення.ТипПеріодуДляЖурналівДокументів.ТриДні:
+                {
+                    DateTime ТриДніНазад = DateTime.Now.AddDays(-2);
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ТриДніНазад.Year, ТриДніНазад.Month, ТриДніНазад.Day));
+                }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ПоточнийДень:
                     return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
                 default: 

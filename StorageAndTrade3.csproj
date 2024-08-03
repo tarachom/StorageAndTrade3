@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftwareLib\AccountingSoftware\AccountingSoftware.csproj" />
+    <ProjectReference Include="..\AccountingSoftwareLib\InterfaceGtk\InterfaceGtk.csproj" />
     <ProjectReference Include="..\Configurator3\Configurator3.csproj" />
   </ItemGroup>
 

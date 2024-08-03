@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.07.2024 13:54:30
+ * Дата конфігурації: 28.07.2024 18:44:09
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -9399,6 +9399,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 {
                     DateTime СімДнівНазад = DateTime.Now.AddDays(-7);
                     return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(СімДнівНазад.Year, СімДнівНазад.Month, СімДнівНазад.Day));
+                }
+                case Перелічення.ТипПеріодуДляЖурналівДокументів.ДваДні:
+                {
+                    DateTime ДваДніНазад = DateTime.Now.AddDays(-1);
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДваДніНазад.Year, ДваДніНазад.Month, ДваДніНазад.Day));
+                }
+                case Перелічення.ТипПеріодуДляЖурналівДокументів.ТриДні:
+                {
+                    DateTime ТриДніНазад = DateTime.Now.AddDays(-2);
+                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ТриДніНазад.Year, ТриДніНазад.Month, ТриДніНазад.Day));
                 }
                 case Перелічення.ТипПеріодуДляЖурналівДокументів.ПоточнийДень:
                     return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));

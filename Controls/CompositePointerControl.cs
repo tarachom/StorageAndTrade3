@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using System.Reflection;
 
 using AccountingSoftware;

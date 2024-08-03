@@ -10,7 +10,8 @@
         "dependencies": {
           "AccountingSoftware": "1.0.0",
           "GtkSharp": "3.24.24.117-develop",
-          "GtkSourceSharp": "3.24.24.95"
+          "GtkSourceSharp": "3.24.24.95",
+          "InterfaceGtk": "1.0.0"
         },
         "runtime": {
           "Configurator3.dll": {}
@@ -144,6 +145,15 @@
         "runtime": {
           "AccountingSoftware.dll": {}
         }
+      },
+      "InterfaceGtk/1.0.0": {
+        "dependencies": {
+          "AccountingSoftware": "1.0.0",
+          "GtkSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "InterfaceGtk.dll": {}
+        }
       }
     }
   },
@@ -231,6 +241,11 @@
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
     "AccountingSoftware/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InterfaceGtk/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

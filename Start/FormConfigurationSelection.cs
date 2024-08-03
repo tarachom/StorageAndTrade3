@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,10 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
-using Configurator;
 
 using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
@@ -33,78 +31,16 @@ using Перелічення = StorageAndTrade_1_0.Перелічення;
 namespace StorageAndTrade
 {
     /// <summary>
-    /// Переоприділення форми вибору бази з Конфігуратора
+    /// Переоприділення форми вибору бази
     /// </summary>
-    class FormConfigurationSelection : Configurator.FormConfigurationSelection
+    class FormConfigurationSelection : InterfaceGtk.FormConfigurationSelection
     {
-        /// <summary>
-        /// Тип форми - робоча програма.
-        /// Добавляється кнопка "Відкрити" і стає активною процедура Open()
-        /// </summary>
         public override TypeForm TypeOpenForm { get; } = TypeForm.WorkingProgram;
+        public override Kernel? ProgramKernel { get; } = Config.Kernel;
+        public override Kernel? ConfiguratorKernel { get; } = Configurator.Program.Kernel;
 
-        /// <summary>
-        /// Переоприділення процедури Open() для кнопки "Відкрити"
-        /// </summary>
-        public override async ValueTask Open()
+        public override async ValueTask<bool> OpenProgram(ConfigurationParam? openConfigurationParam)
         {
-            ListBoxRow[] selectedRows = listBox.SelectedRows;
-            if (selectedRows.Length == 0) return;
-
-            ConfigurationParam? OpenConfigurationParam = ConfigurationParamCollection.GetConfigurationParam(selectedRows[0].Name);
-            if (OpenConfigurationParam == null) return;
-
-            ConfigurationParamCollection.SelectConfigurationParam(selectedRows[0].Name);
-            ConfigurationParamCollection.SaveConfigurationParamFromXML(ConfigurationParamCollection.PathToXML);
-
-            string PathToConfXML = System.IO.Path.Combine(AppContext.BaseDirectory, "Confa.xml");
-
-            Config.Kernel = new Kernel();
-
-            //Підключення до бази даних та завантаження конфігурації
-            bool result = await Config.Kernel.Open(
-                PathToConfXML,
-                OpenConfigurationParam.DataBaseServer,
-                OpenConfigurationParam.DataBaseLogin,
-                OpenConfigurationParam.DataBasePassword,
-                OpenConfigurationParam.DataBasePort,
-                OpenConfigurationParam.DataBaseBaseName,
-                Configuration.VariantLoadConf.Small
-            );
-
-            if (!result)
-            {
-                Message.Error(this, "Error: " + Config.Kernel.Exception?.Message);
-                return;
-            }
-
-            //
-            // Авторизація
-            //
-
-            ResponseType ModalResult = ResponseType.None;
-
-            using (FormLogIn windowFormLogIn = new FormLogIn())
-            {
-                windowFormLogIn.TransientFor = this;
-                windowFormLogIn.Modal = true;
-                windowFormLogIn.Resizable = false;
-                await windowFormLogIn.SetValue();
-                windowFormLogIn.Show();
-
-                while (ModalResult == ResponseType.None)
-                {
-                    ModalResult = windowFormLogIn.ModalResult;
-                    Application.RunIteration(true);
-                }
-            }
-
-            if (ModalResult == ResponseType.Cancel)
-            {
-                Config.Kernel.Close();
-                return;
-            }
-
             if (await Config.Kernel.DataBase.IfExistsTable("tab_constants"))
             {
                 //Запуск фонових задач
@@ -114,7 +50,7 @@ namespace StorageAndTrade
                 if (Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
                     Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
 
-                Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = OpenConfigurationParam };
+                Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = openConfigurationParam };
                 Program.GeneralForm.Show();
 
                 //Вивід інформації в нижній StatusBar
@@ -126,17 +62,25 @@ namespace StorageAndTrade
                 //Відкрити перші сторінки
                 Program.GeneralForm.OpenFirstPages();
 
-                //Сховати форму вибору
-                Hide();
+                return true;
             }
             else
             {
                 Message.Error(this, @"Error: Відсутня таблиця tab_constants. Потрібно відкрити Конфігуратор і зберегти конфігурацію -  
                     (Меню: Конфігурація/Зберегти конфігурацію - дальше Збереження змін. Крок 1, Збереження змін. Крок 2)");
 
-                return;
+                return false;
             }
+        }
 
+        public override async ValueTask<bool> OpenConfigurator(ConfigurationParam? openConfigurationParam)
+        {
+            Configurator.FormConfigurator сonfigurator = new() { OpenConfigurationParam = openConfigurationParam };
+            сonfigurator.Show();
+            сonfigurator.SetValue();
+            сonfigurator.LoadTreeAsync();
+
+            return await ValueTask.FromResult(true);
         }
     }
 }

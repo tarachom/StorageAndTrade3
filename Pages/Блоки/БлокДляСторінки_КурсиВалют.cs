@@ -50,7 +50,7 @@ namespace StorageAndTrade
             Button bDownloadCurs = new Button("Оновити");
             bDownloadCurs.Clicked += OnDownloadCurs;
 
-            hBoxDownloadCurs.PackStart(bDownloadCurs, false, false, 5);
+            hBoxDownloadCurs.PackStart(bDownloadCurs, false, false, 0);
             hBoxDownloadCurs.PackStart(lbDateLastDownload, false, false, 5);
 
             PackStart(hBoxDownloadCurs, false, false, 5);
@@ -87,7 +87,7 @@ namespace StorageAndTrade
             PackStart(hBoxCursyValut, false, false, 5);
 
             vBoxCursyValut = new VBox() { WidthRequest = 300 };
-            hBoxCursyValut.PackStart(vBoxCursyValut, false, false, 5);
+            hBoxCursyValut.PackStart(vBoxCursyValut, false, false, 0);
 
             //
             // Лінки на довідник

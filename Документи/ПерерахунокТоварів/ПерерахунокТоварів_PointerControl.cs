@@ -5,7 +5,9 @@
         PointerControl
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
+
 using StorageAndTrade_1_0.Документи;
 
 namespace StorageAndTrade

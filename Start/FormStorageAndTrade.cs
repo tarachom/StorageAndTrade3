@@ -31,7 +31,7 @@ namespace StorageAndTrade
 {
     class FormStorageAndTrade : Window
     {
-        public Configurator.ConfigurationParam? OpenConfigurationParam { get; set; }
+        public InterfaceGtk.ConfigurationParam? OpenConfigurationParam { get; set; }
 
         Notebook topNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
         Statusbar statusBar = new Statusbar();
@@ -101,9 +101,9 @@ namespace StorageAndTrade
         public void SetStatusBar()
         {
             statusBar.Halign = Align.Start;
-            statusBar.Add(new Label($" Сервер: {OpenConfigurationParam?.DataBaseServer} "));
+            statusBar.Add(new Label($" Сервер: {OpenConfigurationParam?.DataBaseServer} ") { UseUnderline = false });
             statusBar.Add(new Separator(Orientation.Vertical));
-            statusBar.Add(new Label($" База даних: {OpenConfigurationParam?.DataBaseBaseName} "));
+            statusBar.Add(new Label($" База даних: {OpenConfigurationParam?.DataBaseBaseName} ") { UseUnderline = false });
 
             statusBar.ShowAll();
         }
@@ -269,7 +269,7 @@ namespace StorageAndTrade
             int numPage;
             string codePage = Guid.NewGuid().ToString();
 
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
+            ScrolledWindow scroll = new ScrolledWindow() { /*ShadowType = ShadowType.In, */Name = codePage };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             HBox hBoxLabel = CreateLabelPageWidget(tabName, codePage, topNotebook);

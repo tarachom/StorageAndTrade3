@@ -10,7 +10,8 @@
         "dependencies": {
           "AccountingSoftware": "1.0.0",
           "Configurator3": "1.0.0",
-          "GtkSharp": "3.24.24.117-develop"
+          "GtkSharp": "3.24.24.117-develop",
+          "InterfaceGtk": "1.0.0"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -149,10 +150,20 @@
         "dependencies": {
           "AccountingSoftware": "1.0.0",
           "GtkSharp": "3.24.24.117-develop",
-          "GtkSourceSharp": "3.24.24.95"
+          "GtkSourceSharp": "3.24.24.95",
+          "InterfaceGtk": "1.0.0"
         },
         "runtime": {
           "Configurator3.dll": {}
+        }
+      },
+      "InterfaceGtk/1.0.0": {
+        "dependencies": {
+          "AccountingSoftware": "1.0.0",
+          "GtkSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "InterfaceGtk.dll": {}
         }
       }
     }
@@ -246,6 +257,11 @@
       "sha512": ""
     },
     "Configurator3/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InterfaceGtk/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

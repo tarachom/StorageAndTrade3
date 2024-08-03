@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>28.07.2024 13:54:30</DateTimeSave>
+  <DateTimeSave>28.07.2024 18:44:09</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -18510,7 +18510,7 @@ WHERE
       <Name>ТипПеріодуДляЖурналівДокументів</Name>
       <Desc>
       </Desc>
-      <SerialNumber>8</SerialNumber>
+      <SerialNumber>10</SerialNumber>
       <Fields>
         <Field>
           <Name>ВесьПеріод</Name>
@@ -18551,6 +18551,16 @@ WHERE
           <Name>ПоточнийДень</Name>
           <Value>5</Value>
           <Desc>День</Desc>
+        </Field>
+        <Field>
+          <Name>ДваДні</Name>
+          <Value>9</Value>
+          <Desc>Два дні</Desc>
+        </Field>
+        <Field>
+          <Name>ТриДні</Name>
+          <Value>10</Value>
+          <Desc>Три дні</Desc>
         </Field>
       </Fields>
     </Enum>

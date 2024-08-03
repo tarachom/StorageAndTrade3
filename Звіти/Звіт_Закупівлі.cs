@@ -22,6 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;

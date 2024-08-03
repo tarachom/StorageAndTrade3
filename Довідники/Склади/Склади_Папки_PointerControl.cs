@@ -20,9 +20,11 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
-using Gtk;
 
+using Gtk;
+using InterfaceGtk;
 using AccountingSoftware;
+
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade

@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
@@ -150,10 +150,7 @@ namespace StorageAndTrade
             ToolbarTop.Add(refreshButton);
 
             //Separator
-            ToolItem toolItemSeparator = new ToolItem
-            {
-                new Separator(Orientation.Horizontal)
-            };
+            ToolItem toolItemSeparator = new ToolItem { new Separator(Orientation.Horizontal) };
             ToolbarTop.Add(toolItemSeparator);
 
             MenuToolButton provodkyButton = new MenuToolButton(new Image(Stock.Find, IconSize.Menu), "Проводки") { IsImportant = true };
