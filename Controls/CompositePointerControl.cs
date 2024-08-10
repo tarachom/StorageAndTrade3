@@ -99,7 +99,7 @@ namespace StorageAndTrade
 
                 Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-                System.Action<string, string> CallBackAction = (string p, string t) =>
+                Action<string, string> CallBackAction = (string p, string t) =>
                 {
                     PointerName = p;
                     TypeCaption = t;
@@ -114,17 +114,11 @@ namespace StorageAndTrade
             {
                 Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
-                //Простір імен програми
-                string NameSpacePage = "StorageAndTrade";
-
-                //Простір імен конфігурації
-                string NameSpaceConfig = $"StorageAndTrade_1_0.{PointerName}";
-
                 object? listPage;
 
                 try
                 {
-                    listPage = ExecutingAssembly.CreateInstance($"{NameSpacePage}.{TypeCaption}");
+                    listPage = ExecutingAssembly.CreateInstance($"{Config.NameSpageProgram}.{TypeCaption}");
                 }
                 catch (Exception ex)
                 {
@@ -152,7 +146,7 @@ namespace StorageAndTrade
                     //Заголовок журналу з константи конфігурації
                     string listName = "Список";
                     {
-                        Type? documentConst = Type.GetType($"{NameSpaceConfig}.{TypeCaption}_Const");
+                        Type? documentConst = Type.GetType($"{Config.NameSpageCodeGeneration}.{TypeCaption}_Const");
                         if (documentConst != null)
                             listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                     }
@@ -167,7 +161,7 @@ namespace StorageAndTrade
             }
         }
 
-        VBox ВибірТипуДаних(System.Action<string, string> CallBackAction)
+        VBox ВибірТипуДаних(Action<string, string> CallBackAction)
         {
             VBox vBoxContainer = new VBox();
 
