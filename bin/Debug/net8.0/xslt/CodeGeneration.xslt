@@ -452,12 +452,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
 
     public class Functions
     {
-        public record CompositePointerPresentation_Record
-        {
-            public string result = "";
-            public string pointer = "";
-            public string type = "";
-        }
         /*
           Функція для типу який задається користувачем.
           Повертає презентацію для uuidAndText.
@@ -478,40 +472,29 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
                 record.pointer = pointer_and_type[0];
                 record.type = pointer_and_type[1];
 
-                if (record.pointer == "Документи")
+                if (record.pointer == "Довідники") 
                 {
-                    <xsl:variable name="DocCount" select="count(Configuration/Documents/Document)"/>
-                    <xsl:if test="$DocCount != 0">
-                    switch (record.type)
+                    <xsl:text>record.result = record.type switch</xsl:text>
                     {
-                        <xsl:for-each select="Configuration/Documents/Document">
-                            <xsl:variable name="DocumentName" select="Name"/>
-                        case "<xsl:value-of select="$DocumentName"/>": record.result = await new Документи.<xsl:value-of select="$DocumentName"/>_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        </xsl:for-each>
-                    }
-                    </xsl:if>
-                    <xsl:if test="$DocCount = 0">
-                    return record;
-                    </xsl:if>
+                    <xsl:for-each select="Configuration/Directories/Directory">
+                        <xsl:variable name="DirectoryName" select="Name"/>
+                        <xsl:text>"</xsl:text><xsl:value-of select="$DirectoryName"/>" =&gt; await new Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    </xsl:for-each>
+                    <xsl:text>_ =&gt; ""</xsl:text>
+                    };
                 }
-                else if (record.pointer == "Довідники")
+                else if (record.pointer == "Документи") 
                 {
-                    <xsl:variable name="DirCount" select="count(Configuration/Directories/Directory)"/>
-                    <xsl:if test="$DirCount != 0">
-                    switch (record.type)
+                    <xsl:text>record.result = record.type switch</xsl:text>
                     {
-                        <xsl:for-each select="Configuration/Directories/Directory">
-                            <xsl:variable name="DirectoryName" select="Name"/>
-                        case "<xsl:value-of select="$DirectoryName"/>": record.result = await new Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        </xsl:for-each>
-                    }
-                    </xsl:if>
-                    <xsl:if test="$DirCount = 0">
-                    return record;
-                    </xsl:if>
+                    <xsl:for-each select="Configuration/Documents/Document">
+                        <xsl:variable name="DocumentName" select="Name"/>
+                        <xsl:text>"</xsl:text><xsl:value-of select="$DocumentName"/>" =&gt; await new Документи.<xsl:value-of select="$DocumentName"/>_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    </xsl:for-each>
+                    <xsl:text>_ =&gt; ""</xsl:text>
+                    };
                 }
             }
-
             return record;
         }
     }

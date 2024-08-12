@@ -22,224 +22,25 @@ limitations under the License.
 */
 
 using Gtk;
-using InterfaceGtk;
 using System.Reflection;
-
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
-    class CompositePointerControl : PointerControl
+    class CompositePointerControl : InterfaceGtk.CompositePointerControl
     {
-        event EventHandler<UuidAndText>? PointerChanged;
-
-        public CompositePointerControl()
+        protected override string NameSpageProgram { get; } = Config.NameSpageProgram;
+        protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
+        protected override Kernel Kernel { get; } = Config.Kernel;
+        protected override Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
+        protected override async ValueTask<CompositePointerPresentation_Record> CompositePointerPresentation(UuidAndText uuidAndText)
         {
-            PointerChanged += OnPointerChanged;
-
-            pointer = new UuidAndText();
-            WidthPresentation = 300;
-            Caption = "Основа:";
+            return await Functions.CompositePointerPresentation(uuidAndText);
         }
-
-        UuidAndText pointer;
-        public UuidAndText Pointer
+        protected override void CreateNotebookPage(string tabName, Func<Widget>? pageWidget)
         {
-            get
-            {
-                return pointer;
-            }
-            set
-            {
-                pointer = value;
-                PointerChanged?.Invoke(this, pointer);
-            }
-        }
-
-        protected async void OnPointerChanged(object? sender, UuidAndText pointer)
-        {
-            if (pointer != null)
-            {
-                var record = await Functions.CompositePointerPresentation(pointer);
-                
-                Presentation = record.result;
-                PointerName = record.pointer;
-                TypeCaption = record.type;
-            }
-            else
-                Presentation = PointerName = TypeCaption = "";
-        }
-
-        /// <summary>
-        /// Документи або Довідники
-        /// </summary>
-        public string PointerName = "";
-
-        /// <summary>
-        /// Назва обєкту як в конфігурації
-        /// </summary>
-        public string TypeCaption = "";
-
-        /// <summary>
-        /// Функція формує назву
-        /// </summary>
-        string GetBasisName()
-        {
-            return !string.IsNullOrEmpty(PointerName) ? PointerName + "." + TypeCaption : "";
-        }
-
-        protected override void OpenSelect(object? sender, EventArgs args)
-        {
-            if (string.IsNullOrEmpty(PointerName))
-            {
-                //
-                // Вибір типу
-                //
-
-                Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
-
-                Action<string, string> CallBackAction = (string p, string t) =>
-                {
-                    PointerName = p;
-                    TypeCaption = t;
-
-                    PopoverSmallSelect.Hide();
-                };
-
-                PopoverSmallSelect.Add(ВибірТипуДаних(CallBackAction));
-                PopoverSmallSelect.ShowAll();
-            }
-            else if (PointerName == "Документи" || PointerName == "Довідники")
-            {
-                Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-
-                object? listPage;
-
-                try
-                {
-                    listPage = ExecutingAssembly.CreateInstance($"{Config.NameSpageProgram}.{TypeCaption}");
-                }
-                catch (Exception ex)
-                {
-                    Message.Error(Program.GeneralForm, ex.Message);
-                    return;
-                }
-
-                if (listPage != null)
-                {
-                    //Елемент який потрібно виділити в списку
-                    listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, pointer.UnigueID());
-
-                    //Елемент для вибору
-                    if (PointerName == "Документи")
-                        listPage.GetType().GetProperty("DocumentPointerItem")?.SetValue(listPage, pointer.UnigueID());
-                    else
-                        listPage.GetType().GetProperty("DirectoryPointerItem")?.SetValue(listPage, pointer.UnigueID());
-
-                    //Функція зворотнього виклику при виборі
-                    listPage.GetType().GetProperty("CallBack_OnSelectPointer")?.SetValue(listPage, (UnigueID selectPointer) =>
-                    {
-                        Pointer = new UuidAndText(selectPointer.UGuid, GetBasisName());
-                    });
-
-                    //Заголовок журналу з константи конфігурації
-                    string listName = "Список";
-                    {
-                        Type? documentConst = Type.GetType($"{Config.NameSpageCodeGeneration}.{TypeCaption}_Const");
-                        if (documentConst != null)
-                            listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
-                    }
-
-                    Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; });
-
-                    if (PointerName == "Документи")
-                        listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
-                    else
-                        listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
-                }
-            }
-        }
-
-        Box ВибірТипуДаних(Action<string, string> CallBackAction)
-        {
-            Box vBoxContainer = new Box(Orientation.Vertical, 0);
-
-            Box hBoxCaption = new Box(Orientation.Horizontal, 0);
-            hBoxCaption.PackStart(new Label("<b>Вибір типу даних</b>") { UseMarkup = true, Halign = Align.Center }, true, false, 0);
-            vBoxContainer.PackStart(hBoxCaption, false, false, 0);
-
-            Box hBox = new Box(Orientation.Horizontal, 0);
-            vBoxContainer.PackStart(hBox, false, false, 0);
-
-            //Довідники
-            {
-                Box vBox = new Box(Orientation.Vertical, 0);
-                hBox.PackStart(vBox, false, false, 2);
-
-                vBox.PackStart(new Label("Довідники"), false, false, 2);
-
-                ListBox listBox = new ListBox();
-                listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
-                {
-                    if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
-                        if (listBox.SelectedRows.Length != 0)
-                            CallBackAction.Invoke("Довідники", listBox.SelectedRows[0].Name);
-                };
-
-                ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 400, ShadowType = ShadowType.In };
-                scrollList.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-                scrollList.Add(listBox);
-
-                vBox.PackStart(scrollList, false, false, 2);
-
-                foreach (KeyValuePair<string, ConfigurationDirectories> directories in Config.Kernel.Conf.Directories)
-                {
-                    ListBoxRow row = new ListBoxRow() { Name = directories.Key };
-                    row.Add(new Label(directories.Value.FullName) { Halign = Align.Start });
-
-                    listBox.Add(row);
-                }
-            }
-
-            //Документи
-            {
-                Box vBox = new Box(Orientation.Vertical, 0);
-                hBox.PackStart(vBox, false, false, 2);
-
-                vBox.PackStart(new Label("Документи"), false, false, 2);
-
-                ListBox listBox = new ListBox();
-                listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
-                {
-                    if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
-                        if (listBox.SelectedRows.Length != 0)
-                            CallBackAction.Invoke("Документи", listBox.SelectedRows[0].Name);
-                };
-
-                ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 400, ShadowType = ShadowType.In };
-                scrollList.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-                scrollList.Add(listBox);
-
-                vBox.PackStart(scrollList, false, false, 2);
-
-                foreach (KeyValuePair<string, ConfigurationDocuments> documents in Config.Kernel.Conf.Documents)
-                {
-                    ListBoxRow row = new ListBoxRow() { Name = documents.Key };
-                    row.Add(new Label(documents.Value.FullName) { Halign = Align.Start });
-
-                    listBox.Add(row);
-                }
-            }
-
-            vBoxContainer.ShowAll();
-
-            return vBoxContainer;
-        }
-
-        protected override void OnClear(object? sender, EventArgs args)
-        {
-            Pointer = new UuidAndText();
+            Program.GeneralForm?.CreateNotebookPage(tabName, pageWidget);
         }
     }
 }

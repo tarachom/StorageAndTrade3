@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 12.08.2024 14:22:58
+ * Дата конфігурації: 12.08.2024 20:45:26
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -89,12 +89,6 @@ namespace StorageAndTrade_1_0
 
     public class Functions
     {
-        public record CompositePointerPresentation_Record
-        {
-            public string result = "";
-            public string pointer = "";
-            public string type = "";
-        }
         /*
           Функція для типу який задається користувачем.
           Повертає презентацію для uuidAndText.
@@ -115,140 +109,78 @@ namespace StorageAndTrade_1_0
                 record.pointer = pointer_and_type[0];
                 record.type = pointer_and_type[1];
 
-                if (record.pointer == "Документи")
+                if (record.pointer == "Довідники") 
                 {
-                    
-                    switch (record.type)
+                    record.result = record.type switch
                     {
-                        
-                        case "ЗамовленняПостачальнику": record.result = await new Документи.ЗамовленняПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПоступленняТоварівТаПослуг": record.result = await new Документи.ПоступленняТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ЗамовленняКлієнта": record.result = await new Документи.ЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "РеалізаціяТоварівТаПослуг": record.result = await new Документи.РеалізаціяТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ВстановленняЦінНоменклатури": record.result = await new Документи.ВстановленняЦінНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПрихіднийКасовийОрдер": record.result = await new Документи.ПрихіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "РозхіднийКасовийОрдер": record.result = await new Документи.РозхіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПереміщенняТоварів": record.result = await new Документи.ПереміщенняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПоверненняТоварівПостачальнику": record.result = await new Документи.ПоверненняТоварівПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПоверненняТоварівВідКлієнта": record.result = await new Документи.ПоверненняТоварівВідКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "АктВиконанихРобіт": record.result = await new Документи.АктВиконанихРобіт_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ВведенняЗалишків": record.result = await new Документи.ВведенняЗалишків_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "НадлишкиТоварів": record.result = await new Документи.НадлишкиТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПересортицяТоварів": record.result = await new Документи.ПересортицяТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПерерахунокТоварів": record.result = await new Документи.ПерерахунокТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПсуванняТоварів": record.result = await new Документи.ПсуванняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ВнутрішнєСпоживанняТоварів": record.result = await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "РахунокФактура": record.result = await new Документи.РахунокФактура_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "РозміщенняТоварівНаСкладі": record.result = await new Документи.РозміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПереміщенняТоварівНаСкладі": record.result = await new Документи.ПереміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ЗбіркаТоварівНаСкладі": record.result = await new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "РозміщенняНоменклатуриПоКоміркам": record.result = await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "КорегуванняБоргу": record.result = await new Документи.КорегуванняБоргу_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                    }
-                    
+                    "Організації" => await new Довідники.Організації_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Номенклатура" => await new Довідники.Номенклатура_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Виробники" => await new Довідники.Виробники_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ВидиНоменклатури" => await new Довідники.ВидиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПакуванняОдиниціВиміру" => await new Довідники.ПакуванняОдиниціВиміру_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Валюти" => await new Довідники.Валюти_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Контрагенти" => await new Довідники.Контрагенти_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Склади" => await new Довідники.Склади_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ВидиЦін" => await new Довідники.ВидиЦін_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ВидиЦінПостачальників" => await new Довідники.ВидиЦінПостачальників_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Користувачі" => await new Довідники.Користувачі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ФізичніОсоби" => await new Довідники.ФізичніОсоби_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "СтруктураПідприємства" => await new Довідники.СтруктураПідприємства_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "КраїниСвіту" => await new Довідники.КраїниСвіту_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Файли" => await new Довідники.Файли_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ХарактеристикиНоменклатури" => await new Довідники.ХарактеристикиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Номенклатура_Папки" => await new Довідники.Номенклатура_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Контрагенти_Папки" => await new Довідники.Контрагенти_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Склади_Папки" => await new Довідники.Склади_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Каси" => await new Довідники.Каси_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "БанківськіРахункиОрганізацій" => await new Довідники.БанківськіРахункиОрганізацій_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ДоговориКонтрагентів" => await new Довідники.ДоговориКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "БанківськіРахункиКонтрагентів" => await new Довідники.БанківськіРахункиКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "СтаттяРухуКоштів" => await new Довідники.СтаттяРухуКоштів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "СеріїНоменклатури" => await new Довідники.СеріїНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПартіяТоварівКомпозит" => await new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ВидиЗапасів" => await new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Банки" => await new Довідники.Банки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "СкладськіПриміщення" => await new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "СкладськіКомірки" => await new Довідники.СкладськіКомірки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ОбластьЗберігання" => await new Довідники.ОбластьЗберігання_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ТипорозміриКомірок" => await new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "СкладськіКомірки_Папки" => await new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "Блокнот" => await new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    _ => ""
+                    };
                 }
-                else if (record.pointer == "Довідники")
+                else if (record.pointer == "Документи") 
                 {
-                    
-                    switch (record.type)
+                    record.result = record.type switch
                     {
-                        
-                        case "Організації": record.result = await new Довідники.Організації_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Номенклатура": record.result = await new Довідники.Номенклатура_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Виробники": record.result = await new Довідники.Виробники_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ВидиНоменклатури": record.result = await new Довідники.ВидиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПакуванняОдиниціВиміру": record.result = await new Довідники.ПакуванняОдиниціВиміру_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Валюти": record.result = await new Довідники.Валюти_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Контрагенти": record.result = await new Довідники.Контрагенти_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Склади": record.result = await new Довідники.Склади_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ВидиЦін": record.result = await new Довідники.ВидиЦін_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ВидиЦінПостачальників": record.result = await new Довідники.ВидиЦінПостачальників_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Користувачі": record.result = await new Довідники.Користувачі_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ФізичніОсоби": record.result = await new Довідники.ФізичніОсоби_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "СтруктураПідприємства": record.result = await new Довідники.СтруктураПідприємства_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "КраїниСвіту": record.result = await new Довідники.КраїниСвіту_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Файли": record.result = await new Довідники.Файли_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ХарактеристикиНоменклатури": record.result = await new Довідники.ХарактеристикиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Номенклатура_Папки": record.result = await new Довідники.Номенклатура_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Контрагенти_Папки": record.result = await new Довідники.Контрагенти_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Склади_Папки": record.result = await new Довідники.Склади_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Каси": record.result = await new Довідники.Каси_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "БанківськіРахункиОрганізацій": record.result = await new Довідники.БанківськіРахункиОрганізацій_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ДоговориКонтрагентів": record.result = await new Довідники.ДоговориКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "БанківськіРахункиКонтрагентів": record.result = await new Довідники.БанківськіРахункиКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "СтаттяРухуКоштів": record.result = await new Довідники.СтаттяРухуКоштів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "СеріїНоменклатури": record.result = await new Довідники.СеріїНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ПартіяТоварівКомпозит": record.result = await new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ВидиЗапасів": record.result = await new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Банки": record.result = await new Довідники.Банки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "СкладськіПриміщення": record.result = await new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "СкладськіКомірки": record.result = await new Довідники.СкладськіКомірки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ОбластьЗберігання": record.result = await new Довідники.ОбластьЗберігання_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "ТипорозміриКомірок": record.result = await new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "СкладськіКомірки_Папки": record.result = await new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                        case "Блокнот": record.result = await new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation(); return record;
-                        
-                    }
-                    
+                    "ЗамовленняПостачальнику" => await new Документи.ЗамовленняПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПоступленняТоварівТаПослуг" => await new Документи.ПоступленняТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ЗамовленняКлієнта" => await new Документи.ЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "РеалізаціяТоварівТаПослуг" => await new Документи.РеалізаціяТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ВстановленняЦінНоменклатури" => await new Документи.ВстановленняЦінНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПрихіднийКасовийОрдер" => await new Документи.ПрихіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "РозхіднийКасовийОрдер" => await new Документи.РозхіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПереміщенняТоварів" => await new Документи.ПереміщенняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПоверненняТоварівПостачальнику" => await new Документи.ПоверненняТоварівПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПоверненняТоварівВідКлієнта" => await new Документи.ПоверненняТоварівВідКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "АктВиконанихРобіт" => await new Документи.АктВиконанихРобіт_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ВведенняЗалишків" => await new Документи.ВведенняЗалишків_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "НадлишкиТоварів" => await new Документи.НадлишкиТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПересортицяТоварів" => await new Документи.ПересортицяТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПерерахунокТоварів" => await new Документи.ПерерахунокТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПсуванняТоварів" => await new Документи.ПсуванняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ВнутрішнєСпоживанняТоварів" => await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "РахунокФактура" => await new Документи.РахунокФактура_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "РозміщенняТоварівНаСкладі" => await new Документи.РозміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ПереміщенняТоварівНаСкладі" => await new Документи.ПереміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "ЗбіркаТоварівНаСкладі" => await new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(uuidAndText.Uuid).GetPresentation(),
+                    _ => ""
+                    };
                 }
             }
-
             return record;
         }
     }
