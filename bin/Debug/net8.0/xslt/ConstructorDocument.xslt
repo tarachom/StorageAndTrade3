@@ -188,17 +188,17 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>
         }
 
-        protected override void CreateContainer1(VBox vBox)
+        protected override void CreateContainer1(Box vBox)
         {
             
         }
 
-        protected override void CreateContainer2(VBox vBox)
+        protected override void CreateContainer2(Box vBox)
         {
            
         }
 
-        protected override void CreateContainer3(VBox vBox)
+        protected override void CreateContainer3(Box vBox)
         {
             <!-- Крім полів які зразу добавляються в шапку НомерДок, ДатаДок, Коментар -->
             <!-- та скритого поля Назва яке формується перед збереженням -->
@@ -232,7 +232,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>
         }
 
-        protected override void CreateContainer4(VBox vBox)
+        protected override void CreateContainer4(Box vBox)
         {
             
         }

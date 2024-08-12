@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,19 +35,19 @@ using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
-    class PageJournals : VBox
+    class PageJournals : Box
     {
-        public PageJournals() : base()
+        public PageJournals() : base(Orientation.Vertical, 0)
         {
             //Всі Журнали
             {
-                HBox hBoxAll = new HBox();
+                Box hBoxAll = new Box(Orientation.Horizontal, 0);
                 PackStart(hBoxAll, false, false, 10);
 
                 Expander expanderAll = new Expander("Всі журнали");
                 hBoxAll.PackStart(expanderAll, false, false, 5);
 
-                VBox vBoxAll = new VBox();
+                Box vBoxAll = new Box(Orientation.Vertical, 0);
                 expanderAll.Add(vBoxAll);
 
                 vBoxAll.PackStart(new Label("Журнали"), false, false, 2);
@@ -77,10 +77,10 @@ namespace StorageAndTrade
             }
 
             //Список
-            HBox hBoxList = new HBox();
+            Box hBoxList = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxList, false, false, 10);
 
-            VBox vLeft = new VBox();
+            Box vLeft = new Box(Orientation.Vertical, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
             Link.AddLink(vLeft, "Повний (всі документи)", () =>

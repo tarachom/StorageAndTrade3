@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -106,7 +106,7 @@ namespace StorageAndTrade
             СпосібДоставки.ActiveId = Перелічення.СпособиДоставки.Самовивіз.ToString();
         }
 
-        protected override void CreateContainer1(VBox vBox)
+        protected override void CreateContainer1(Box vBox)
         {
             //Організація
             CreateField(vBox, null, Організація);
@@ -155,7 +155,7 @@ namespace StorageAndTrade
             };
         }
 
-        protected override void CreateContainer2(VBox vBox)
+        protected override void CreateContainer2(Box vBox)
         {
             //Каса
             CreateField(vBox, null, Каса);
@@ -167,7 +167,7 @@ namespace StorageAndTrade
             CreateField(vBox, null, Склад);
         }
 
-        protected override void CreateContainer3(VBox vBox)
+        protected override void CreateContainer3(Box vBox)
         {
             //ГосподарськаОперація
             CreateField(vBox, "Господарська операція:", ГосподарськаОперація);
@@ -191,7 +191,7 @@ namespace StorageAndTrade
             CreateField(vBox, null, Основа);
         }
 
-        protected override void CreateContainer4(VBox vBox)
+        protected override void CreateContainer4(Box vBox)
         {
             //ФормаОплати
             CreateField(vBox, "Форма оплати:", ФормаОплати);
@@ -200,11 +200,11 @@ namespace StorageAndTrade
             CreateField(vBox, "Дата оплати:", ДатаОплати);
 
             //Курс та Кратність
-            HBox hBox1 = CreateField(vBox, "Курс:", Курс);
+            Box hBox1 = CreateField(vBox, "Курс:", Курс);
             CreateField(hBox1, "Кратність:", Кратність);
 
             //Узгоджений та ПовернутиТару
-            HBox hBox2 = CreateField(vBox, null, Узгоджений);
+            Box hBox2 = CreateField(vBox, null, Узгоджений);
             CreateField(hBox2, null, ПовернутиТару);
 
             //ДатаПоверненняТари
@@ -214,7 +214,7 @@ namespace StorageAndTrade
             CreateField(vBox, "Спосіб доставки:", СпосібДоставки);
 
             //ЧасДоставки
-            HBox hBox3 = CreateField(vBox, "Час доставки з", ЧасДоставкиЗ);
+            Box hBox3 = CreateField(vBox, "Час доставки з", ЧасДоставкиЗ);
             CreateField(hBox3, "до", ЧасДоставкиДо);
         }
 

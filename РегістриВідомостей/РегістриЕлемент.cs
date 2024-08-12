@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,12 +22,13 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using AccountingSoftware;
 
 namespace StorageAndTrade
 {
-    public abstract class РегістриЕлемент : VBox
+    public abstract class РегістриЕлемент : ФормаЕлемент
     {
         /// <summary>
         /// Чи це новий елемент
@@ -37,7 +38,7 @@ namespace StorageAndTrade
         /// <summary>
         /// Функція зворотнього виклику для перевантаження списку
         /// </summary>
-        public System.Action<UnigueID?>? CallBack_LoadRecords { get; set; }
+        public Action<UnigueID?>? CallBack_LoadRecords { get; set; }
 
         /// <summary>
         /// ІД елементу
@@ -52,12 +53,12 @@ namespace StorageAndTrade
         /// <summary>
         /// Горизонтальний бокс для кнопок
         /// </summary>
-        protected HBox HBoxTop = new HBox();
+        protected Box HBoxTop = new Box(Orientation.Horizontal, 0);
 
         /// <summary>
         /// Панель з двох колонок
         /// </summary>
-        protected HPaned HPanedTop = new HPaned() { BorderWidth = 5, Position = 500 };
+        protected Paned HPanedTop = new Paned(Orientation.Horizontal) { BorderWidth = 5, Position = 500 };
 
         public РегістриЕлемент() : base()
         {
@@ -72,12 +73,12 @@ namespace StorageAndTrade
             PackStart(HBoxTop, false, false, 10);
 
             //Pack1
-            VBox vBox1 = new VBox();
+            Box vBox1 = new Box(Orientation.Vertical, 0);
             HPanedTop.Pack1(vBox1, false, false);
             CreatePack1(vBox1);
 
             //Pack2
-            VBox vBox2 = new VBox();
+            Box vBox2 = new Box(Orientation.Horizontal, 0);
             HPanedTop.Pack2(vBox2, false, false);
             CreatePack2(vBox2);
 
@@ -89,73 +90,12 @@ namespace StorageAndTrade
         /// <summary>
         /// Лівий Блок
         /// </summary>
-        protected virtual void CreatePack1(VBox vBox) { }
+        protected virtual void CreatePack1(Box vBox) { }
 
         /// <summary>
         /// Правий Блок
         /// </summary>
-        protected virtual void CreatePack2(VBox vBox) { }
-
-        #region Create Field
-
-        /// <summary>
-        /// Створення поля із заголовком
-        /// </summary>
-        /// <param name="vBox">Контейнер</param>
-        /// <param name="label">Заголовок</param>
-        /// <param name="field">Поле</param>
-        /// <param name="Halign">Положення</param>
-        protected HBox CreateField(VBox vBox, string? label, Widget field, Align Halign = Align.End)
-        {
-            HBox hBox = new HBox() { Halign = Halign };
-            vBox.PackStart(hBox, false, false, 5);
-
-            if (label != null)
-                hBox.PackStart(new Label(label), false, false, 5);
-
-            hBox.PackStart(field, false, false, 5);
-
-            return hBox;
-        }
-
-        /// <summary>
-        /// Добавлення поля в HBox
-        /// </summary>
-        /// <param name="hBox">Контейнер</param>
-        /// <param name="label">Заголовок</param>
-        /// <param name="field">Поле</param>
-        protected void CreateField(HBox hBox, string? label, Widget field)
-        {
-            if (label != null)
-                hBox.PackStart(new Label(label), false, false, 5);
-
-            hBox.PackStart(field, false, false, 5);
-        }
-
-        /// <summary>
-        /// Добавлення поля з прокруткою
-        /// </summary>
-        /// <param name="vBox">Контейнер</param>
-        /// <param name="label">Заголовок</param>
-        /// <param name="field">Поле</param>
-        /// <param name="Width">Висота</param>
-        /// <param name="Height">Ширина</param>
-        protected void CreateFieldView(VBox vBox, string? label, Widget field, int Width = 100, int Height = 100, Align Halign = Align.End)
-        {
-            HBox hBox = new HBox() { Halign = Halign };
-            vBox.PackStart(hBox, false, false, 5);
-
-            if (label != null)
-                hBox.PackStart(new Label(label) { Valign = Align.Start }, false, false, 5);
-
-            ScrolledWindow scrollTextView = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = Width, HeightRequest = Height };
-            scrollTextView.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollTextView.Add(field);
-
-            hBox.PackStart(scrollTextView, false, false, 5);
-        }
-
-        #endregion
+        protected virtual void CreatePack2(Box vBox) { }
 
         /// <summary>
         /// Присвоєння значень

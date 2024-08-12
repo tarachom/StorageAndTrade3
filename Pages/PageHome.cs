@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,22 +31,22 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    class PageHome : VBox
+    class PageHome : Box
     {
         public БлокДляСторінки_КурсиВалют БлокКурсиВалют = new БлокДляСторінки_КурсиВалют() { WidthRequest = 500 };
         public БлокДляСторінки_АктивніКористувачі АктивніКористувачі = new БлокДляСторінки_АктивніКористувачі() { WidthRequest = 500 };
 
-        public PageHome() : base()
+        public PageHome() : base(Orientation.Vertical, 0)
         {
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(БлокКурсиВалют, false, false, 5);
 
                 PackStart(hBox, false, false, 5);
             }
 
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(АктивніКористувачі, false, false, 5);
                 PackStart(hBox, false, false, 5);
             }

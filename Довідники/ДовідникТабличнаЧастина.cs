@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    public abstract class ДовідникТабличнаЧастина : VBox
+    public abstract class ДовідникТабличнаЧастина : Box
     {
         /// <summary>
         /// Верхній набір меню
@@ -42,7 +42,7 @@ namespace StorageAndTrade
         /// </summary>
         ScrolledWindow ScrollTree;
 
-        public ДовідникТабличнаЧастина() : base()
+        public ДовідникТабличнаЧастина() : base(Orientation.Vertical, 0)
         {
             CreateToolbar();
 
@@ -100,18 +100,12 @@ namespace StorageAndTrade
 
         void OnButtonPressEvent(object sender, ButtonPressEventArgs args)
         {
-            if (args.Event.Button == 1 &&
-                args.Event.Type == Gdk.EventType.DoubleButtonPress &&
-                TreeViewGrid.Selection.CountSelectedRows() != 0)
+            if (args.Event.Button == 1 && args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                TreePath itemPath;
-                TreeViewColumn treeColumn;
-
-                TreeViewGrid.GetCursor(out itemPath, out treeColumn);
+                TreeViewGrid.GetCursor(out TreePath itemPath, out TreeViewColumn treeColumn);
                 if (treeColumn.Data.ContainsKey("Column"))
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     //Швидкий вибір
                     Gdk.Rectangle rectangleCell = TreeViewGrid.GetCellArea(itemPath, treeColumn);
@@ -132,18 +126,12 @@ namespace StorageAndTrade
 
         void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
         {
-            if (args.Event.Button == 3 &&
-                TreeViewGrid.Selection.CountSelectedRows() != 0)
+            if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                TreePath itemPath;
-                TreeViewColumn treeColumn;
-
-                TreeViewGrid.GetCursor(out itemPath, out treeColumn);
+                TreeViewGrid.GetCursor(out TreePath itemPath, out TreeViewColumn treeColumn);
                 if (treeColumn.Data.ContainsKey("Column"))
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
                     int rowNumber = int.Parse(itemPath.ToString());
 
                     //Меню
@@ -229,19 +217,12 @@ namespace StorageAndTrade
         void OnCopyClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                foreach (TreePath itemPath in selectionRows)
+                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
                     int rowNumber = int.Parse(itemPath.ToString());
 
                     CopyRecord(rowNumber);
                 }
-            }
         }
 
         void OnDeleteClick(object? sender, EventArgs args)
@@ -253,9 +234,7 @@ namespace StorageAndTrade
                 {
                     TreePath itemPath = selectionRows[i];
 
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
-
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
                     int rowNumber = int.Parse(itemPath.ToString());
 
                     DeleteRecord(iter, rowNumber);

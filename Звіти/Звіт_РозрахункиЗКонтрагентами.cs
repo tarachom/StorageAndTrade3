@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_РозрахункиЗКонтрагентами : VBox
+    class Звіт_РозрахункиЗКонтрагентами : ФормаЕлемент
     {
         Notebook reportNotebook;
 
@@ -57,7 +57,7 @@ namespace StorageAndTrade
         public Звіт_РозрахункиЗКонтрагентами() : base()
         {
             //Кнопки
-            HBox hBoxTop = new HBox();
+            Box hBoxTop = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxTop, false, false, 10);
 
             //2
@@ -90,19 +90,19 @@ namespace StorageAndTrade
 
         void CreateFilters()
         {
-            HBox hBoxContainer = new HBox();
+            Box hBoxContainer = new Box(Orientation.Horizontal, 0);
 
             Expander expander = new Expander("Відбори") { Expanded = true };
             expander.Add(hBoxContainer);
 
             //Container1
-            VBox vBoxContainer1 = new VBox() { WidthRequest = 500 };
+            Box vBoxContainer1 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
             hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
 
             CreateContainer1(vBoxContainer1);
 
             //Container2
-            VBox vBoxContainer2 = new VBox() { WidthRequest = 500 };
+            Box vBoxContainer2 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
             hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
 
             CreateContainer2(vBoxContainer2);
@@ -110,36 +110,22 @@ namespace StorageAndTrade
             PackStart(expander, false, false, 10);
         }
 
-        void CreateContainer1(VBox vBox)
+        void CreateContainer1(Box vBox)
         {
             //Період
-            HBox hBoxPeriod = new HBox() { Halign = Align.End };
-            hBoxPeriod.PackStart(new Label("Період з "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаПочатокПеріоду, false, false, 5);
-            hBoxPeriod.PackStart(new Label(" по "), false, false, 5);
-            hBoxPeriod.PackStart(ДатаКінецьПеріоду, false, false, 5);
-            vBox.PackStart(hBoxPeriod, false, false, 5);
+            CreateField(CreateField(vBox, "Період з ", ДатаПочатокПеріоду), " по ", ДатаКінецьПеріоду);
 
             //Контрагент
-            HBox hBoxKontragent = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKontragent, false, false, 5);
-
-            hBoxKontragent.PackStart(Контрагент, false, false, 5);
+            CreateField(vBox, null, Контрагент);
 
             //Контрагент папка
-            HBox hBoxKontragentPapka = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxKontragentPapka, false, false, 5);
-
-            hBoxKontragentPapka.PackStart(Контрагент_Папка, false, false, 5);
+            CreateField(vBox, null, Контрагент_Папка);
         }
 
-        void CreateContainer2(VBox vBox)
+        void CreateContainer2(Box vBox)
         {
             //Валюта
-            HBox hBoxValuta = new HBox() { Halign = Align.End };
-            vBox.PackStart(hBoxValuta, false, false, 5);
-
-            hBoxValuta.PackStart(Валюта, false, false, 5);
+            CreateField(vBox, null, Валюта);
         }
 
         #endregion
@@ -156,9 +142,9 @@ namespace StorageAndTrade
             };
         }
 
-        async ValueTask<HBox> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        async ValueTask<Box> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
         {
-            HBox hBoxCaption = new HBox();
+            Box hBoxCaption = new Box(Orientation.Horizontal, 0);
 
             string text = "";
 

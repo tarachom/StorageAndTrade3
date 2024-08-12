@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,17 +33,17 @@ using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
-    class PageFullTextSearch : VBox
+    class PageFullTextSearch : Box
     {
-        VBox vBoxMessage = new VBox();
+        Box vBoxMessage = new Box(Orientation.Vertical, 0);
         SearchEntry entryFullTextSearch = new SearchEntry() { WidthRequest = 500 };
         const int maxRowsToPage = 10;
         uint offset = 0;
         int count = 0;
 
-        public PageFullTextSearch() : base()
+        public PageFullTextSearch() : base(Orientation.Vertical, 0)
         {
-            HBox hBoxTop = new HBox() { Halign = Align.Center };
+            Box hBoxTop = new Box(Orientation.Horizontal, 0) { Halign = Align.Center };
             PackStart(hBoxTop, false, false, 10);
 
             hBoxTop.PackStart(entryFullTextSearch, false, false, 10);
@@ -93,16 +93,16 @@ namespace StorageAndTrade
                 Pointer = (UuidAndText)row["obj"]
             };
 
-            HBox hBoxRowInfo = new HBox();
+            Box hBoxRowInfo = new Box(Orientation.Horizontal, 0);
             vBoxMessage.PackStart(hBoxRowInfo, false, false, 3);
             hBoxRowInfo.PackStart(new Label(row["value"].ToString()) { UseMarkup = true, Wrap = true, Selectable = true }, false, false, 12);
 
-            HBox hBoxRowType = new HBox();
+            Box hBoxRowType = new Box(Orientation.Horizontal, 0);
             vBoxMessage.PackStart(hBoxRowType, false, false, 3);
             hBoxRowType.PackStart(new Label("<small>" + Обєкт.PointerName + ": " + Обєкт.TypeCaption + "</small>") { UseMarkup = true, Selectable = true }, false, false, 12);
             hBoxRowType.PackStart(new Label("<small>Додано: " + row["dateadd"].ToString() + "</small>") { UseMarkup = true, Selectable = true }, false, false, 12);
 
-            HBox hBoxRowControl = new HBox();
+            Box hBoxRowControl = new Box(Orientation.Horizontal, 0);
             vBoxMessage.PackStart(hBoxRowControl, false, false, 3);
             hBoxRowControl.PackStart(Обєкт, false, false, 0);
 
@@ -111,7 +111,7 @@ namespace StorageAndTrade
 
         void CreatePagination()
         {
-            HBox hBoxPagination = new HBox() { Halign = Align.Center };
+            Box hBoxPagination = new Box(Orientation.Horizontal, 0) { Halign = Align.Center };
 
             if (offset >= maxRowsToPage)
             {

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,9 +66,7 @@ namespace StorageAndTrade
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new Банки_Pointer(selectPointer);
-
-                    if (AfterSelectFunc != null)
-                        AfterSelectFunc.Invoke();
+                    AfterSelectFunc?.Invoke();
                 }
             };
 

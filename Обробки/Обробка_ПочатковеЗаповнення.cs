@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
@@ -31,7 +32,7 @@ using System.Xml.XPath;
 
 namespace StorageAndTrade
 {
-    class Обробка_ПочатковеЗаповнення : VBox
+    class Обробка_ПочатковеЗаповнення : ФормаЕлемент
     {
         #region Fields
 
@@ -39,7 +40,7 @@ namespace StorageAndTrade
         Button bStop;
         Switch visibleOnStart;
         ScrolledWindow scrollMessage;
-        VBox vBoxMessage;
+        Box vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
 
         enum TypeMessage
@@ -55,7 +56,7 @@ namespace StorageAndTrade
         public Обробка_ПочатковеЗаповнення() : base()
         {
             //Кнопки
-            HBox hBoxTop = new HBox();
+            Box hBoxTop = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxTop, false, false, 10);
 
             bFilling = new Button("Заповнити");
@@ -69,9 +70,9 @@ namespace StorageAndTrade
             hBoxTop.PackStart(bStop, false, false, 10);
 
             //Показувати при запуску -->
-            VBox vBoxSwitch = new VBox();
+            Box vBoxSwitch = new Box(Orientation.Vertical, 0);
 
-            HBox hBoxSwitch = new HBox();
+            Box hBoxSwitch = new Box(Orientation.Horizontal, 0);
             vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
 
             visibleOnStart = new Switch() { HeightRequest = 20, Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
@@ -85,7 +86,7 @@ namespace StorageAndTrade
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollMessage.Add(vBoxMessage = new VBox());
+            scrollMessage.Add(vBoxMessage = new Box(Orientation.Vertical, 0));
 
             PackStart(scrollMessage, true, true, 0);
 
@@ -557,7 +558,7 @@ namespace StorageAndTrade
                 CreateMessage(TypeMessage.Error, $"Не знайдений файл {initialFillingXmlFilePath}");
                 CreateMessage(TypeMessage.None, "Початкове заповнення перервано!");
             }
-            
+
             ButtonSensitive(true);
 
             CreateMessage(TypeMessage.None, "\n\n\nГотово\n\n\n");
@@ -573,7 +574,7 @@ namespace StorageAndTrade
 
         void CreateMessage(TypeMessage typeMsg, string message)
         {
-            HBox hBoxInfo = new HBox();
+            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
             vBoxMessage.PackStart(hBoxInfo, false, false, 2);
 
             switch (typeMsg)

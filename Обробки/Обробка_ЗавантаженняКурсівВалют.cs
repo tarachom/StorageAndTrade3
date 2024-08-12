@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,14 +34,14 @@ using System.Xml.XPath;
 
 namespace StorageAndTrade
 {
-    class Обробка_ЗавантаженняКурсівВалют : VBox
+    class Обробка_ЗавантаженняКурсівВалют : ФормаЕлемент
     {
         #region Fields
 
         Button bDownload;
         Button bStop;
         ScrolledWindow scrollMessage;
-        VBox vBoxMessage;
+        Box vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
 
         CheckButton ЗавантаженняНаВказануДату = new CheckButton("Завантажити на дату:");
@@ -60,7 +60,7 @@ namespace StorageAndTrade
         public Обробка_ЗавантаженняКурсівВалют() : base()
         {
             //Кнопки
-            HBox hBoxTop = new HBox();
+            Box hBoxTop = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxTop, false, false, 10);
 
             bDownload = new Button("Завантаження");
@@ -81,7 +81,7 @@ namespace StorageAndTrade
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollMessage.Add(vBoxMessage = new VBox());
+            scrollMessage.Add(vBoxMessage = new Box(Orientation.Vertical, 0));
 
             PackStart(scrollMessage, true, true, 0);
 
@@ -230,8 +230,7 @@ LIMIT 1
 
             ButtonSensitive(true);
 
-            if (CallBack_EndBackgroundWork != null)
-                CallBack_EndBackgroundWork.Invoke();
+            CallBack_EndBackgroundWork?.Invoke();
 
             CreateMessage(TypeMessage.None, "\n\n\nГотово!\n\n\n");
             await Task.Delay(1000);
@@ -246,7 +245,7 @@ LIMIT 1
 
         void CreateMessage(TypeMessage typeMsg, string message)
         {
-            HBox hBoxInfo = new HBox();
+            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
             vBoxMessage.PackStart(hBoxInfo, false, false, 2);
 
             switch (typeMsg)

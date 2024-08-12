@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.07.2024 18:44:09
+ * Дата конфігурації: 12.08.2024 14:22:58
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt

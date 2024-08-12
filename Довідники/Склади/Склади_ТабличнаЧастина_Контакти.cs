@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class Склади_ТабличнаЧастина_Контакти : VBox
+    class Склади_ТабличнаЧастина_Контакти : Box
     {
         public Склади_Objest? Склади_Objest { get; set; }
 
@@ -59,7 +59,7 @@ namespace StorageAndTrade
 
         TreeView TreeViewGrid;
 
-        public Склади_ТабличнаЧастина_Контакти() : base()
+        public Склади_ТабличнаЧастина_Контакти() : base(Orientation.Vertical, 0)
         {
             CreateToolbar();
 

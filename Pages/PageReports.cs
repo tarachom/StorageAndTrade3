@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,14 +31,14 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    class PageReports : VBox
+    class PageReports : Box
     {
-        public PageReports() : base()
+        public PageReports() : base(Orientation.Vertical, 0)
         {           
             //Список
-            HBox hBoxList = new HBox();
+            Box hBoxList = new Box(Orientation.Horizontal, 0);
 
-            VBox vLeft = new VBox();
+            Box vLeft = new Box(Orientation.Vertical, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
             AddLink(vLeft, "Товари на складах", ТовариНаСкладах);
@@ -168,7 +168,7 @@ namespace StorageAndTrade
         }
 
 
-        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
+        void AddLink(Box vbox, string uri, EventHandler? clickAction = null)
         {
             LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);

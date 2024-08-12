@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,19 +34,19 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class БлокДляСторінки_КурсиВалют : VBox
+    class БлокДляСторінки_КурсиВалют : Box
     {
         Label lbDateLastDownload = new Label();
         Switch autoDownloadCursOnStart;
-        VBox vBoxCursyValut;
+        Box vBoxCursyValut;
 
-        public БлокДляСторінки_КурсиВалют() : base()
+        public БлокДляСторінки_КурсиВалют() : base(Orientation.Vertical, 0)
         {
-            HBox hBoxCaption = new HBox();
+            Box hBoxCaption = new Box(Orientation.Horizontal, 0);
             hBoxCaption.PackStart(new Label("<b>Курси валют НБУ</b>") { UseMarkup = true }, false, false, 5);
             PackStart(hBoxCaption, false, false, 5);
 
-            HBox hBoxDownloadCurs = new HBox();
+            Box hBoxDownloadCurs = new Box(Orientation.Horizontal, 0);
             Button bDownloadCurs = new Button("Оновити");
             bDownloadCurs.Clicked += OnDownloadCurs;
 
@@ -57,9 +57,9 @@ namespace StorageAndTrade
 
             //Переключатель: Завантажувати при запуску
             {
-                VBox vBoxSwitch = new VBox();
+                Box vBoxSwitch = new Box(Orientation.Vertical, 0);
 
-                HBox hBoxSwitch = new HBox();
+                Box hBoxSwitch = new Box(Orientation.Horizontal, 0);
                 vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
 
                 autoDownloadCursOnStart = new Switch()
@@ -83,20 +83,20 @@ namespace StorageAndTrade
             // Курси вибраних валют
             //
 
-            HBox hBoxCursyValut = new HBox();
+            Box hBoxCursyValut = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxCursyValut, false, false, 5);
 
-            vBoxCursyValut = new VBox() { WidthRequest = 300 };
+            vBoxCursyValut = new Box(Orientation.Vertical, 0) { WidthRequest = 300 };
             hBoxCursyValut.PackStart(vBoxCursyValut, false, false, 0);
 
             //
             // Лінки на довідник
             //
 
-            VBox vBoxDirectory = new VBox();
+            Box vBoxDirectory = new Box(Orientation.Vertical, 0);
             PackStart(vBoxDirectory, false, false, 5);
 
-            HBox hBoxInfo = new HBox();
+            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
             vBoxDirectory.PackStart(hBoxInfo, false, false, 5);
 
             Link.AddLink(hBoxInfo, "Довідник - Валюти", async () =>
@@ -135,7 +135,7 @@ namespace StorageAndTrade
 
             foreach (Dictionary<string, object> Row in recordResult.ListRow)
             {
-                HBox hBoxItemValuta = new HBox();
+                Box hBoxItemValuta = new Box(Orientation.Horizontal, 0);
                 hBoxItemValuta.PackStart(new Label(Row["ВалютаНазва"].ToString()), false, false, 2);
                 hBoxItemValuta.PackEnd(new Label("<b>" + Row["Курс"].ToString() + "</b>") { UseMarkup = true }, false, false, 6);
                 vBoxCursyValut.PackStart(hBoxItemValuta, false, false, 4);

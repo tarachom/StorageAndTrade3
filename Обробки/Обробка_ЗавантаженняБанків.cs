@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using System.Text;
 
@@ -33,14 +34,14 @@ using System.Xml.XPath;
 
 namespace StorageAndTrade
 {
-    class Обробка_ЗавантаженняБанків : VBox
+    class Обробка_ЗавантаженняБанків : ФормаЕлемент
     {
         #region Fields
 
         Button bDownload;
         Button bStop;
         ScrolledWindow scrollMessage;
-        VBox vBoxMessage;
+        Box vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
 
         enum TypeMessage
@@ -56,7 +57,7 @@ namespace StorageAndTrade
         public Обробка_ЗавантаженняБанків() : base()
         {
             //Кнопки
-            HBox hBoxTop = new HBox();
+            Box hBoxTop = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxTop, false, false, 10);
 
             bDownload = new Button("Завантаження");
@@ -71,7 +72,7 @@ namespace StorageAndTrade
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollMessage.Add(vBoxMessage = new VBox());
+            scrollMessage.Add(vBoxMessage = new Box(Orientation.Vertical, 0));
 
             PackStart(scrollMessage, true, true, 0);
 
@@ -253,7 +254,7 @@ namespace StorageAndTrade
 
         void CreateMessage(TypeMessage typeMsg, string message)
         {
-            HBox hBoxInfo = new HBox();
+            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
             vBoxMessage.PackStart(hBoxInfo, false, false, 2);
 
             switch (typeMsg)

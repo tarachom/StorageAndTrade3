@@ -56,7 +56,7 @@ namespace StorageAndTrade
 
         }
 
-        protected override void CreateContainer1(VBox vBox)
+        protected override void CreateContainer1(Box vBox)
         {
             //Організація
             CreateField(vBox, null, Організація);
@@ -65,19 +65,19 @@ namespace StorageAndTrade
             CreateField(vBox, null, Склад);
         }
 
-        protected override void CreateContainer2(VBox vBox)
+        protected override void CreateContainer2(Box vBox)
         {
             //Відповідальний
             CreateField(vBox, null, Відповідальний);
         }
 
-        protected override void CreateContainer3(VBox vBox)
+        protected override void CreateContainer3(Box vBox)
         {
             //Автор
             CreateField(vBox, null, Автор);
         }
 
-        protected override void CreateContainer4(VBox vBox)
+        protected override void CreateContainer4(Box vBox)
         {
             //Підрозділ
             CreateField(vBox, null, Підрозділ);

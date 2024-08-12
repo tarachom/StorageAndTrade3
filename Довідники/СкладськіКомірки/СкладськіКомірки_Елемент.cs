@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,7 @@ namespace StorageAndTrade
 
         public СкладськіКомірки_Елемент() : base() { }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
             //Назва
             CreateField(vBox, "Назва:", Назва);
@@ -72,34 +72,34 @@ namespace StorageAndTrade
             CreateField(vBox, null, Типорозмір);
         }
 
-        protected override void CreatePack2(VBox vBox)
+        protected override void CreatePack2(Box vBox)
         {
-            VBox vBoxContainer = new VBox() { WidthRequest = 300, Halign = Align.Start };
+            Box vBoxContainer = new Box(Orientation.Vertical, 0) { WidthRequest = 300, Halign = Align.Start };
             vBox.PackStart(vBoxContainer, false, false, 0);
 
             // Лінія
-            HBox hBoxLine = new HBox() { Halign = Align.End };
+            Box hBoxLine = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
             vBoxContainer.PackStart(hBoxLine, false, false, 5);
 
             hBoxLine.PackStart(new Label("Лінія:"), false, false, 5);
             hBoxLine.PackStart(Лінія, false, false, 5);
 
             // Стелаж
-            HBox hBoxStelaj = new HBox() { Halign = Align.End };
+            Box hBoxStelaj = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
             vBoxContainer.PackStart(hBoxStelaj, false, false, 5);
 
             hBoxStelaj.PackStart(new Label("Стелаж:"), false, false, 5);
             hBoxStelaj.PackStart(Стелаж, false, false, 5);
 
             // Позиція
-            HBox hBoxPosition = new HBox() { Halign = Align.End };
+            Box hBoxPosition = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
             vBoxContainer.PackStart(hBoxPosition, false, false, 5);
 
             hBoxPosition.PackStart(new Label("Позиція:"), false, false, 5);
             hBoxPosition.PackStart(Позиція, false, false, 5);
 
             // Ярус
-            HBox hBoxYarus = new HBox() { Halign = Align.End };
+            Box hBoxYarus = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
             vBoxContainer.PackStart(hBoxYarus, false, false, 5);
 
             hBoxYarus.PackStart(new Label("Ярус:"), false, false, 5);

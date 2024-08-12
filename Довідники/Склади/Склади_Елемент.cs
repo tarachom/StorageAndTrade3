@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +47,7 @@ namespace StorageAndTrade
 
         public Склади_Елемент() : base() { }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
             //Код
             CreateField(vBox, "Код:", Код);
@@ -74,7 +74,7 @@ namespace StorageAndTrade
             CreateField(vBox, "Адресне зберігання:", Налаштування);
         }
 
-        protected override void CreatePack2(VBox vBox)
+        protected override void CreatePack2(Box vBox)
         {
             //Контакти
             CreateTablePart(vBox, "Контакти:", Контакти);

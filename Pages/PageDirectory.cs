@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,19 +37,19 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class PageDirectory : VBox
+    class PageDirectory : Box
     {
-        public PageDirectory() : base()
+        public PageDirectory() : base(Orientation.Vertical, 0)
         {
             //Всі Довідники
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 PackStart(hBox, false, false, 10);
 
                 Expander expander = new Expander("Всі довідники");
                 hBox.PackStart(expander, false, false, 5);
 
-                VBox vBox = new VBox();
+                Box vBox = new Box(Orientation.Vertical, 0);
                 expander.Add(vBox);
 
                 vBox.PackStart(new Label("Довідники"), false, false, 2);
@@ -79,10 +79,10 @@ namespace StorageAndTrade
             }
 
             //Список
-            HBox hBoxList = new HBox();
+            Box hBoxList = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxList, false, false, 10);
 
-            VBox vLeft = new VBox();
+            Box vLeft = new Box(Orientation.Vertical, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
             //Link.AddCaption(vLeft, "Основні");

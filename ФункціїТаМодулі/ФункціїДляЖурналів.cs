@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -79,7 +79,7 @@ namespace StorageAndTrade
 
         public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0)
         {
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
 
             foreach (KeyValuePair<string, string> typeDoc in allowDocument)
             {

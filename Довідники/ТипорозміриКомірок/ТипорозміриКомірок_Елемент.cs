@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ namespace StorageAndTrade
             HPanedTop.Position = 150;
         }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
             //Назва
             CreateField(vBox, "Назва:", Назва);

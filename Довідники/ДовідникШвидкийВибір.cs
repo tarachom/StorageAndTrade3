@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ using AccountingSoftware;
 
 namespace StorageAndTrade
 {
-    public abstract class ДовідникШвидкийВибір : VBox
+    public abstract class ДовідникШвидкийВибір : Box
     {
         /// <summary>
         /// Вспливаюче вікно
@@ -47,12 +47,12 @@ namespace StorageAndTrade
         /// <summary>
         /// Верхній горизонтальний блок
         /// </summary>
-        protected HBox HBoxTop = new HBox();
+        protected Box HBoxTop = new Box(Orientation.Horizontal, 0);
 
         protected TreeView TreeViewGrid = new TreeView();
         protected SearchControl Пошук = new SearchControl();
 
-        public ДовідникШвидкийВибір(bool visibleSearch = true, int width = 600, int height = 300) : base()
+        public ДовідникШвидкийВибір(bool visibleSearch = true, int width = 600, int height = 300) : base(Orientation.Vertical, 0)
         {
             BorderWidth = 0;
 
@@ -95,9 +95,7 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
-
+                TreeViewGrid.Model.GetIter(out TreeIter iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
                 DirectoryPointerItem = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
             }
         }
@@ -105,20 +103,13 @@ namespace StorageAndTrade
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
         {
             if (args.Event.Type == Gdk.EventType.DoubleButtonPress && TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                if (TreeViewGrid.Model.GetIter(out TreeIter iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
                     DirectoryPointerItem = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                    if (CallBack_OnSelectPointer != null)
-                        CallBack_OnSelectPointer.Invoke(DirectoryPointerItem);
-
-                    if (PopoverParent != null)
-                        PopoverParent.Hide();
+                    CallBack_OnSelectPointer?.Invoke(DirectoryPointerItem);
+                    PopoverParent?.Hide();
                 }
-            }
         }
 
         #endregion

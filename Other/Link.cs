@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ namespace StorageAndTrade
     /// </summary>
     class Link
     {
-        public static void AddCaption(VBox vBox, string name, EventHandler? clickAction = null)
+        public static void AddCaption(Box vBox, string name, EventHandler? clickAction = null)
         {
             if (clickAction != null)
             {
@@ -52,13 +52,13 @@ namespace StorageAndTrade
             }
         }
 
-        public static void AddSeparator(HBox hbox)
+        public static void AddSeparator(Box hbox)
         {
             Separator separator = new Separator(Orientation.Horizontal);
             hbox.PackStart(separator, false, false, 5);
         }
 
-        public static void AddLink(VBox vbox, string uri, System.Action? clickAction = null)
+        public static void AddLink(Box vbox, string uri, System.Action? clickAction = null)
         {
             LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image($"{AppContext.BaseDirectory}images/doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
@@ -70,16 +70,16 @@ namespace StorageAndTrade
                 };
         }
 
-        public static void AddLink(HBox hbox, string uri, System.Action? clickAction = null)
-        {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image($"{AppContext.BaseDirectory}images/doc.png"), AlwaysShowImage = true };
-            hbox.PackStart(lb, false, false, 0);
+        // public static void AddLink(Box hbox, string uri, System.Action? clickAction = null)
+        // {
+        //     LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image($"{AppContext.BaseDirectory}images/doc.png"), AlwaysShowImage = true };
+        //     hbox.PackStart(lb, false, false, 0);
 
-            if (clickAction != null)
-                lb.Clicked += (object? sender, EventArgs args) =>
-                {
-                    clickAction.Invoke();
-                };
-        }
+        //     if (clickAction != null)
+        //         lb.Clicked += (object? sender, EventArgs args) =>
+        //         {
+        //             clickAction.Invoke();
+        //         };
+        // }
     }
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,14 +25,14 @@ using Gtk;
 
 namespace StorageAndTrade
 {
-    class КурсиВалют_ІсторіяЗавантаження : VBox
+    class КурсиВалют_ІсторіяЗавантаження : Box
     {
-        VBox vBoxMessage = new VBox();
+        Box vBoxMessage = new Box(Orientation.Vertical, 0);
 
         public КурсиВалют_ІсторіяЗавантаження() : base()
         {
             //Кнопки
-            HBox hBoxTop = new HBox();
+            Box hBoxTop = new Box(Orientation.Horizontal, 0);
 
             Button bClear = new Button("Очистити");
             bClear.Clicked += OnClear;
@@ -66,7 +66,7 @@ namespace StorageAndTrade
         void CreateMessage(Dictionary<string, object> row)
         {
             //Дата
-            HBox hBoxDate = new HBox();
+            Box hBoxDate = new Box(Orientation.Horizontal, 0);
 
             hBoxDate.PackStart(new Label(
                 row["Дата"].ToString() + "\t" + "[ " + row["Стан"].ToString() + " ]\t" +

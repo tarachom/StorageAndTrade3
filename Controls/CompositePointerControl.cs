@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -161,20 +161,20 @@ namespace StorageAndTrade
             }
         }
 
-        VBox ВибірТипуДаних(Action<string, string> CallBackAction)
+        Box ВибірТипуДаних(Action<string, string> CallBackAction)
         {
-            VBox vBoxContainer = new VBox();
+            Box vBoxContainer = new Box(Orientation.Vertical, 0);
 
-            HBox hBoxCaption = new HBox();
+            Box hBoxCaption = new Box(Orientation.Horizontal, 0);
             hBoxCaption.PackStart(new Label("<b>Вибір типу даних</b>") { UseMarkup = true, Halign = Align.Center }, true, false, 0);
             vBoxContainer.PackStart(hBoxCaption, false, false, 0);
 
-            HBox hBox = new HBox();
+            Box hBox = new Box(Orientation.Horizontal, 0);
             vBoxContainer.PackStart(hBox, false, false, 0);
 
             //Довідники
             {
-                VBox vBox = new VBox();
+                Box vBox = new Box(Orientation.Vertical, 0);
                 hBox.PackStart(vBox, false, false, 2);
 
                 vBox.PackStart(new Label("Довідники"), false, false, 2);
@@ -204,7 +204,7 @@ namespace StorageAndTrade
 
             //Документи
             {
-                VBox vBox = new VBox();
+                Box vBox = new Box(Orientation.Vertical, 0);
                 hBox.PackStart(vBox, false, false, 2);
 
                 vBox.PackStart(new Label("Документи"), false, false, 2);

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,13 +22,14 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
-    class Звіт_РухДокументівПоРегістрах : VBox
+    class Звіт_РухДокументівПоРегістрах : ФормаЕлемент
     {
         public Звіт_РухДокументівПоРегістрах() : base()
         {
@@ -38,18 +39,14 @@ namespace StorageAndTrade
         public async void CreateReport(DocumentPointer ДокументВказівник)
         {
             List<string> allowRegisterAccumulation = Config.Kernel.Conf.Documents[ДокументВказівник.TypeDocument].AllowRegisterAccumulation;
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>
-            {
-                { "ДокументВказівник", ДокументВказівник.UnigueID.UGuid }
-            };
+            Dictionary<string, object> paramQuery = new() { { "ДокументВказівник", ДокументВказівник.UnigueID.UGuid } };
 
             foreach (string regAccumName in allowRegisterAccumulation)
             {
                 bool exist = false;
                 string blockCaption = "";
 
-                Dictionary<string, string> visibleColumn = new Dictionary<string, string>();
+                Dictionary<string, string> visibleColumn = [];
                 Dictionary<string, string>? dataColumn = null;
                 Dictionary<string, string>? typeColumn = null;
                 Dictionary<string, float>? textAlignColumn = null;
@@ -222,8 +219,7 @@ namespace StorageAndTrade
 
                 if (exist && recordResult != null)
                 {
-                    ListStore listStore;
-                    ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
+                    ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
 
                     TreeView treeView = new TreeView(listStore);
                     treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
@@ -238,12 +234,12 @@ namespace StorageAndTrade
 
         void WriteBlock(string blockName, TreeView treeView)
         {
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
 
             Expander expander = new Expander(blockName) { Expanded = true };
             expander.Add(vBox);
 
-            HBox hBox = new HBox();
+            Box hBox = new Box(Orientation.Horizontal, 0);
             vBox.PackStart(hBox, false, false, 10);
 
             hBox.PackStart(treeView, false, false, 10);

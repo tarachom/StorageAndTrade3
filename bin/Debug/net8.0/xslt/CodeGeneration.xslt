@@ -1083,7 +1083,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Пер�
         #region ENUM "<xsl:value-of select="$EnumName"/>"
         public static string <xsl:value-of select="$EnumName"/>_Alias(<xsl:value-of select="$EnumName"/> value)
         {
-            switch (value)
+            return value switch
             {
                 <xsl:for-each select="Fields/Field">
                   <xsl:variable name="ReturnValue">
@@ -1096,15 +1096,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Пер�
                           </xsl:otherwise>
                       </xsl:choose>
                   </xsl:variable>
-                case <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>: return "<xsl:value-of select="$ReturnValue"/>";
+                  <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/> =&gt; "<xsl:value-of select="$ReturnValue"/>",
                 </xsl:for-each>
-                default: return "";
-            }
+                <xsl:text>_ =&gt; ""</xsl:text>
+            };
         }
 
         public static <xsl:value-of select="$EnumName"/>? <xsl:value-of select="$EnumName"/>_FindByName(string name)
         {
-            switch (name)
+            return name switch
             {
                 <xsl:for-each select="Fields/Field">
                   <xsl:variable name="ReturnValue">
@@ -1117,15 +1117,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Пер�
                           </xsl:otherwise>
                       </xsl:choose>
                   </xsl:variable>
-                case "<xsl:value-of select="$ReturnValue"/>": return <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>;
+                  <xsl:text>"</xsl:text><xsl:value-of select="$ReturnValue"/>" =&gt; <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>,
                 </xsl:for-each>
-                default: return null;
-            }
+                <xsl:text>_ =&gt; null</xsl:text>
+            };
         }
 
         public static List&lt;NameValue&lt;<xsl:value-of select="$EnumName"/>&gt;&gt; <xsl:value-of select="$EnumName"/>_List()
         {
-            List&lt;NameValue&lt;<xsl:value-of select="$EnumName"/>&gt;&gt; value = new List&lt;NameValue&lt;<xsl:value-of select="$EnumName"/>&gt;&gt;();
+            return new List&lt;NameValue&lt;<xsl:value-of select="$EnumName"/>&gt;&gt;() {
             <xsl:for-each select="Fields/Field">
               <xsl:variable name="ReturnValue">
                   <xsl:choose>
@@ -1137,9 +1137,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Пер�
                       </xsl:otherwise>
                   </xsl:choose>
               </xsl:variable>
-            value.Add(new NameValue&lt;<xsl:value-of select="$EnumName"/>&gt;("<xsl:value-of select="$ReturnValue"/>", <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>));
-            </xsl:for-each>
-            return value;
+              <xsl:text>new NameValue&lt;</xsl:text><xsl:value-of select="$EnumName"/>&gt;("<xsl:value-of select="$ReturnValue"/>", <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>),
+            </xsl:for-each>};
         }
         #endregion
     </xsl:for-each>

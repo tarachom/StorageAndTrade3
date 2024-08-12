@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class PageSettings : VBox
+    class PageSettings : Box
     {
 
         #region Const
@@ -82,10 +82,10 @@ namespace StorageAndTrade
 
         #endregion
 
-        public PageSettings() : base()
+        public PageSettings() : base(Orientation.Vertical, 0)
         {
             //Кнопки
-            HBox hBox = new HBox();
+            Box hBox = new Box(Orientation.Horizontal, 0);
 
             Button bSave = new Button("Зберегти");
             bSave.Clicked += OnSaveClick;
@@ -96,7 +96,7 @@ namespace StorageAndTrade
 
             FillComboBoxes();
 
-            HPaned hPaned = new HPaned() { BorderWidth = 5, Position = 500 };
+            Paned hPaned = new Paned(Orientation.Horizontal) { BorderWidth = 5, Position = 500 };
 
             CreatePack1(hPaned);
             CreatePack2(hPaned);
@@ -115,9 +115,9 @@ namespace StorageAndTrade
                 МетодиСписанняПартій.Append(field.Name, field.Desc);
         }
 
-        void CreatePack1(HPaned hPaned)
+        void CreatePack1(Paned hPaned)
         {
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
 
             CreateDefaultBlock(vBox);
 
@@ -132,9 +132,9 @@ namespace StorageAndTrade
             hPaned.Pack1(vBox, false, false);
         }
 
-        void CreatePack2(HPaned hPaned)
+        void CreatePack2(Paned hPaned)
         {
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
             hPaned.Pack2(vBox, false, false);
 
             //
@@ -143,13 +143,13 @@ namespace StorageAndTrade
 
             //1
             {
-                VBox vBoxSystem = new VBox();
+                Box vBoxSystem = new Box(Orientation.Vertical, 0);
 
                 Expander expanderSystem = new Expander("Налаштування обліку") { Expanded = false };
                 expanderSystem.Add(vBoxSystem);
 
                 //Info
-                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBoxSystem.PackStart(hBoxInfo, false, false, 15);
                 hBoxInfo.PackStart(new Label("Видимість колонок у документах і звітах"), false, false, 5);
 
@@ -162,13 +162,13 @@ namespace StorageAndTrade
 
             //2
             {
-                VBox vBoxBatch = new VBox();
+                Box vBoxBatch = new Box(Orientation.Vertical, 0);
 
                 Expander expanderBatch = new Expander("Партії товарів") { Expanded = false };
                 expanderBatch.Add(vBoxBatch);
 
                 //Info
-                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBoxBatch.PackStart(hBoxInfo, false, false, 15);
                 hBoxInfo.PackStart(new Label("Метод списання партій товарів"), false, false, 5);
 
@@ -180,13 +180,13 @@ namespace StorageAndTrade
 
             //3
             {
-                VBox vBoxBackgroundTask = new VBox();
+                Box vBoxBackgroundTask = new Box(Orientation.Vertical, 0);
 
                 Expander expanderBackgroundTask = new Expander("Фонові обчислення") { Expanded = false };
                 expanderBackgroundTask.Add(vBoxBackgroundTask);
 
                 //Info
-                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBoxBackgroundTask.PackStart(hBoxInfo, false, false, 15);
                 hBoxInfo.PackStart(new Label("Обчислення віртуальних залишків по регістрах накопичення") { Wrap = true }, false, false, 5);
 
@@ -198,13 +198,13 @@ namespace StorageAndTrade
 
             //4
             {
-                VBox vBoxDownloadCursNBU = new VBox();
+                Box vBoxDownloadCursNBU = new Box(Orientation.Vertical, 0);
 
                 Expander expanderDownloadCursNBU = new Expander("Завантаження курсів валют НБУ") { Expanded = false };
                 expanderDownloadCursNBU.Add(vBoxDownloadCursNBU);
 
                 //Info
-                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBoxDownloadCursNBU.PackStart(hBoxInfo, false, false, 15);
                 hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange") { Selectable = true, Wrap = true }, false, false, 5);
 
@@ -216,13 +216,13 @@ namespace StorageAndTrade
 
             //5
             {
-                VBox vBoxDownloadListBank = new VBox();
+                Box vBoxDownloadListBank = new Box(Orientation.Vertical, 0);
 
                 Expander expanderDownloadListBank = new Expander("Завантаження списку банків") { Expanded = false };
                 expanderDownloadListBank.Add(vBoxDownloadListBank);
 
                 //Info
-                HBox hBoxInfo = new HBox() { Halign = Align.Start };
+                Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBoxDownloadListBank.PackStart(hBoxInfo, false, false, 15);
                 hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank") { Selectable = true, Wrap = true }, false, false, 5);
 
@@ -234,15 +234,15 @@ namespace StorageAndTrade
         }
 
         //Значення за замовчування
-        void CreateDefaultBlock(VBox vBoxTop)
+        void CreateDefaultBlock(Box vBoxTop)
         {
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
 
             Expander expanderConstDefault = new Expander("Значення за замовчуванням") { Expanded = true };
             expanderConstDefault.Add(vBox);
 
             //Info
-            HBox hBoxInfo = new HBox() { Halign = Align.Start };
+            Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
             vBox.PackStart(hBoxInfo, false, false, 15);
             hBoxInfo.PackStart(new Label("Для заповненння нових документів та довідників"), false, false, 5);
 
@@ -263,9 +263,9 @@ namespace StorageAndTrade
             vBoxTop.PackStart(expanderConstDefault, false, false, 10);
         }
 
-        void CreateJournalBlock(VBox vBoxTop)
+        void CreateJournalBlock(Box vBoxTop)
         {
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
 
             Expander expander = new Expander("Журнали документів") { Expanded = true };
             expander.Add(vBox);
@@ -276,9 +276,9 @@ namespace StorageAndTrade
             vBoxTop.PackStart(expander, false, false, 10);
         }
 
-        void CreateLinkBlock(VBox vBoxTop)
+        void CreateLinkBlock(Box vBoxTop)
         {
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
 
             Expander expander = new Expander("Додатково") { Expanded = true };
             expander.Add(vBox);
@@ -302,32 +302,32 @@ namespace StorageAndTrade
             vBoxTop.PackStart(expander, false, false, 0);
         }
 
-        void AddPointerControl(VBox vBox, Widget wgPointerControl)
+        void AddPointerControl(Box vBox, Widget wgPointerControl)
         {
-            HBox hBox = new HBox() { Halign = Align.End };
+            Box hBox = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
             vBox.PackStart(hBox, false, false, 5);
 
             hBox.PackStart(wgPointerControl, false, false, 5);
         }
 
-        void AddCaptionAndControl(VBox vBox, Widget wgCaption, Widget wgControl)
+        void AddCaptionAndControl(Box vBox, Widget wgCaption, Widget wgControl)
         {
-            HBox hBox = new HBox() { Halign = Align.Start };
+            Box hBox = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
             vBox.PackStart(hBox, false, false, 5);
 
             hBox.PackStart(wgCaption, false, false, 5);
             hBox.PackStart(wgControl, false, false, 5);
         }
 
-        void AddControl(VBox vBox, Widget wgControl)
+        void AddControl(Box vBox, Widget wgControl)
         {
-            HBox hBox = new HBox() { Halign = Align.Start };
+            Box hBox = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
             vBox.PackStart(hBox, false, false, 5);
 
             hBox.PackStart(wgControl, false, false, 5);
         }
 
-        void AddLink(VBox vbox, string uri, EventHandler? clickAction = null)
+        void AddLink(Box vbox, string uri, EventHandler? clickAction = null)
         {
             LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
@@ -365,7 +365,7 @@ namespace StorageAndTrade
             //ПартіїТоварів
             {
                 МетодиСписанняПартій.ActiveId = Константи.ПартіїТоварів.МетодСписанняПартій_Const.ToString();
-                
+
                 if (МетодиСписанняПартій.Active == -1)
                     МетодиСписанняПартій.ActiveId = Перелічення.МетодиСписанняПартій.FIFO.ToString();
             }

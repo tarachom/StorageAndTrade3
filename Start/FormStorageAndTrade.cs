@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,10 +71,10 @@ namespace StorageAndTrade
                 Titlebar = headerBar;
             }
 
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
             Add(vBox);
 
-            HBox hBox = new HBox();
+            Box hBox = new Box(Orientation.Horizontal, 0);
             vBox.PackStart(hBox, true, true, 0);
 
             CreateLeftMenu(hBox);
@@ -173,9 +173,9 @@ namespace StorageAndTrade
 
         #region LeftMenu
 
-        void CreateLeftMenu(HBox hbox)
+        void CreateLeftMenu(Box hbox)
         {
-            VBox vbox = new VBox() { BorderWidth = 0 };
+            Box vbox = new Box(Orientation.Vertical, 0) { BorderWidth = 0 };
 
             ScrolledWindow scrolLeftMenu = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = 170 };
             scrolLeftMenu.SetPolicy(PolicyType.Never, PolicyType.Never);
@@ -191,7 +191,7 @@ namespace StorageAndTrade
             hbox.PackStart(scrolLeftMenu, false, false, 0);
         }
 
-        void CreateItemLeftMenu(VBox vBox, string name, EventHandler ClikAction, string image)
+        void CreateItemLeftMenu(Box vBox, string name, EventHandler ClikAction, string image)
         {
             LinkButton lb = new LinkButton(name, name)
             {
@@ -272,7 +272,7 @@ namespace StorageAndTrade
             ScrolledWindow scroll = new ScrolledWindow() { /*ShadowType = ShadowType.In, */Name = codePage };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-            HBox hBoxLabel = CreateLabelPageWidget(tabName, codePage, topNotebook);
+            Box hBoxLabel = CreateLabelPageWidget(tabName, codePage, topNotebook);
 
             if (insertPage)
                 numPage = topNotebook.InsertPage(scroll, hBoxLabel, topNotebook.CurrentPage);
@@ -302,9 +302,9 @@ namespace StorageAndTrade
         /// <param name="codePage">Код сторінки</param>
         /// <param name="notebook">Блокнот</param>
         /// <returns></returns>
-        public HBox CreateLabelPageWidget(string caption, string codePage, Notebook notebook)
+        public Box CreateLabelPageWidget(string caption, string codePage, Notebook notebook)
         {
-            HBox hBoxLabel = new HBox();
+            Box hBoxLabel = new Box(Orientation.Horizontal, 0);
 
             //Ico
             hBoxLabel.PackStart(new Image($"{AppContext.BaseDirectory}images/doc.png"), false, false, 2);
@@ -371,7 +371,7 @@ namespace StorageAndTrade
         /// <param name="codePage">Код</param>
         public void RenameNotebookPageToCode(string name, string codePage)
         {
-            HBox hBoxLabel = CreateLabelPageWidget(name, codePage, topNotebook);
+            Box hBoxLabel = CreateLabelPageWidget(name, codePage, topNotebook);
 
             topNotebook.Foreach(
                 (Widget wg) =>

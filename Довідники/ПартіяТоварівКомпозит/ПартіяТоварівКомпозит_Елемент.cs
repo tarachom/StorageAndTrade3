@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,7 +50,7 @@ namespace StorageAndTrade
             ТипДокументу.ActiveId = ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг.ToString();
         }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
             //Назва
             CreateField(vBox, "Назва:", Назва);
@@ -65,9 +65,9 @@ namespace StorageAndTrade
             CreateField(vBox, null, ВведенняЗалишків);
         }
 
-        protected override void CreatePack2(VBox vBox)
+        protected override void CreatePack2(Box vBox)
         {
-            HBox hBoxInfo = new HBox() { Halign = Align.Start };
+            Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
             vBox.PackStart(hBoxInfo, false, false, 5);
 
             hBoxInfo.PackStart(new Label("Редагувати дозволено тільки назву"), false, false, 5);

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,7 @@ namespace StorageAndTrade
 
         public КурсиВалют_Елемент() : base() { }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
             //ДатаКурсу
             CreateField(vBox, "Дата:", ДатаКурсу);
@@ -97,7 +97,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 MsgError(ex);
-return;
+                return;
             }
 
             UnigueID = КурсиВалют_Objest.UnigueID;

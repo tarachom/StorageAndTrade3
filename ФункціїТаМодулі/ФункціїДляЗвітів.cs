@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -225,7 +225,7 @@ namespace StorageAndTrade
             bool insertPage = false, System.Action? refresh = null)
         {
             int numPage;
-            HBox hBoxLabel = Program.GeneralForm!.CreateLabelPageWidget(tabName, codePage, notebook);
+            Box hBoxLabel = Program.GeneralForm!.CreateLabelPageWidget(tabName, codePage, notebook);
 
             //Лінк для обновлення звіту
             if (refresh != null)
@@ -272,21 +272,21 @@ namespace StorageAndTrade
         /// <param name="refreshParam">Параметри процедури формування звіту</param>
         /// <param name="refreshPage">Признак обновлення сторінки</param>
         public static void CreateReportNotebookPage(Notebook notebook, string caption, Widget wgHead, Widget wgTree,
-            System.Action<object?, bool>? onRefreshAction = null, object? refreshParam = null, bool refreshPage = false)
+            Action<object?, bool>? onRefreshAction = null, object? refreshParam = null, bool refreshPage = false)
         {
             string codePage = Guid.NewGuid().ToString();
 
-            VBox vBox = new VBox();
+            Box vBox = new Box(Orientation.Vertical, 0);
 
             ScrolledWindow scrol = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrol.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scrol.Add(wgTree);
 
-            HBox hBoxHead = new HBox();
+            Box hBoxHead = new Box(Orientation.Horizontal, 0);
             hBoxHead.PackStart(wgHead, false, false, 5);
             vBox.PackStart(hBoxHead, false, false, 5);
 
-            HBox hBox = new HBox();
+            Box hBox = new Box(Orientation.Horizontal, 0);
             hBox.PackStart(scrol, true, true, 5);
             vBox.PackStart(hBox, true, true, 5);
 

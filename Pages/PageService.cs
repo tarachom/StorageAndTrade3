@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,7 @@ using Журнали = StorageAndTrade_1_0.Журнали;
 
 namespace StorageAndTrade
 {
-    class PageService : VBox
+    class PageService : Box
     {
         Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
         CancellationTokenSource? CancellationTokenPageService;
@@ -47,7 +47,7 @@ namespace StorageAndTrade
         Button bClearDeletionLabel;
         Button bStop;
         ScrolledWindow scrollMessage;
-        VBox vBoxMessage = new VBox();
+        Box vBoxMessage = new Box(Orientation.Vertical, 0);
 
         enum TypeMessage
         {
@@ -57,10 +57,10 @@ namespace StorageAndTrade
             None
         }
 
-        public PageService() : base()
+        public PageService() : base(Orientation.Vertical, 0)
         {
             //Кнопки
-            HBox hBoxBotton = new HBox();
+            Box hBoxBotton = new Box(Orientation.Horizontal, 0);
 
             bSpendTheDocument = new Button("Перепровести документи");
             bSpendTheDocument.Clicked += OnSpendTheDocument;
@@ -350,7 +350,7 @@ namespace StorageAndTrade
 
         void CreateMessage(TypeMessage typeMsg, string message)
         {
-            HBox hBoxInfo = new HBox();
+            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
             vBoxMessage.PackStart(hBoxInfo, false, false, 2);
 
             switch (typeMsg)

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,7 @@ namespace StorageAndTrade
 
         public Файли_Елемент() : base() { }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
             //Код
             CreateField(vBox, "Код:", Код);
@@ -64,11 +64,11 @@ namespace StorageAndTrade
             CreateField(vBox, "Дата cтворення:", ДатаСтворення);
         }
 
-        protected override void CreatePack2(VBox vBox)
+        protected override void CreatePack2(Box vBox)
         {
             //Загрузити файл
             {
-                HBox hBox = new HBox() { Halign = Align.Start };
+                Box hBox = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBox.PackStart(hBox, false, false, 5);
 
                 Button bSelectFile = new Button("Вибрати файл");
@@ -80,7 +80,7 @@ namespace StorageAndTrade
 
             //Вигрузити файл
             {
-                HBox hBox = new HBox() { Halign = Align.Start };
+                Box hBox = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBox.PackStart(hBox, false, false, 5);
 
                 Button bSaveFile = new Button("Зберегти файл");

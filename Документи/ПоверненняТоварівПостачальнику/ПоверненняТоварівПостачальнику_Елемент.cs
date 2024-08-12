@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -94,7 +94,7 @@ namespace StorageAndTrade
 
         }
 
-        protected override void CreateContainer1(VBox vBox)
+        protected override void CreateContainer1(Box vBox)
         {
             //Організація
             CreateField(vBox, null, Організація);
@@ -143,7 +143,7 @@ namespace StorageAndTrade
             };
         }
 
-        protected override void CreateContainer2(VBox vBox)
+        protected override void CreateContainer2(Box vBox)
         {
             //Склад
             CreateField(vBox, null, Склад);
@@ -155,7 +155,7 @@ namespace StorageAndTrade
             CreateField(vBox, null, Валюта);
         }
 
-        protected override void CreateContainer3(VBox vBox)
+        protected override void CreateContainer3(Box vBox)
         {
             //Підрозділ
             CreateField(vBox, null, Підрозділ);
@@ -176,7 +176,7 @@ namespace StorageAndTrade
             CreateField(vBox, null, Основа);
         }
 
-        protected override void CreateContainer4(VBox vBox)
+        protected override void CreateContainer4(Box vBox)
         {
             //ГосподарськаОперація
             CreateField(vBox, "Господарська операція:", ГосподарськаОперація);
@@ -185,7 +185,7 @@ namespace StorageAndTrade
             CreateField(vBox, "Спосіб доставки:", СпосібДоставки);
 
             //ЧасДоставки
-            HBox hBox1 = CreateField(vBox, "Час доставки з", ЧасДоставкиЗ);
+            Box hBox1 = CreateField(vBox, "Час доставки з", ЧасДоставкиЗ);
             CreateField(hBox1, "до", ЧасДоставкиДо);
         }
 

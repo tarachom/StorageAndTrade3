@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
         }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
 
             CreateField(vBox, "Код:", Код);
@@ -114,7 +114,7 @@ namespace StorageAndTrade
 
         }
 
-        protected override void CreatePack2(VBox vBox)
+        protected override void CreatePack2(Box vBox)
         {
 
         }

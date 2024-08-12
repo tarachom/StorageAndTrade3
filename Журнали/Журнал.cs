@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ using ТабличніСписки = StorageAndTrade_1_0.Документи.Та
 
 namespace StorageAndTrade
 {
-    public abstract class Журнал : VBox
+    public abstract class Журнал : Box
     {
         public UnigueID? SelectPointerItem { get; set; }
         public Перелічення.ТипПеріодуДляЖурналівДокументів PeriodWhere { get; set; } = 0;
@@ -51,11 +51,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Журнал() : base()
+        public Журнал() : base(Orientation.Vertical, 0)
         {
             BorderWidth = 0;
 
-            HBox hBoxTop = new HBox();
+            Box hBoxTop = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxTop, false, false, 10);
 
             //Відбір по періоду
@@ -189,9 +189,7 @@ namespace StorageAndTrade
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
-                TreeIter iter;
-                TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
-
+                TreeViewGrid.Model.GetIter(out TreeIter iter, TreeViewGrid.Selection.GetSelectedRows()[0]);
                 SelectPointerItem = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
             }
         }
@@ -199,16 +197,13 @@ namespace StorageAndTrade
         void OnButtonReleaseEvent(object? sender, ButtonReleaseEventArgs args)
         {
             if (args.Event.Button == 3 && TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                if (TreeViewGrid.Model.GetIter(out TreeIter iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                     SelectPointerItem = new UnigueID(uid);
 
                     PopUpContextMenu().Popup();
                 }
-            }
         }
 
         void OnButtonPressEvent(object? sender, ButtonPressEventArgs args)
@@ -220,9 +215,7 @@ namespace StorageAndTrade
         void OpenDocJournal()
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                if (TreeViewGrid.Model.GetIter(out TreeIter iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                     string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);
@@ -230,7 +223,6 @@ namespace StorageAndTrade
                     ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc, new UnigueID(uid),
                         Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
                 }
-            }
         }
 
         void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
@@ -303,11 +295,9 @@ namespace StorageAndTrade
                 if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
                     foreach (TreePath itemPath in selectionRows)
                     {
-                        TreeIter iter;
-                        TreeViewGrid.Model.GetIter(out iter, itemPath);
+                        TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                         string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                         string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);
@@ -343,9 +333,7 @@ namespace StorageAndTrade
         void OnReportSpendTheDocumentClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreeIter iter;
-                if (TreeViewGrid.Model.GetIter(out iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
+                if (TreeViewGrid.Model.GetIter(out TreeIter iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                     string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);
@@ -364,7 +352,6 @@ namespace StorageAndTrade
                         });
                     }
                 }
-            }
         }
 
         #endregion
@@ -406,11 +393,9 @@ namespace StorageAndTrade
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
                     string typeDoc = (string)TreeViewGrid.Model.GetValue(iter, 2);

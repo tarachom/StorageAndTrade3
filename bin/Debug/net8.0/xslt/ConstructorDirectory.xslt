@@ -188,7 +188,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>
         }
 
-        protected override void CreatePack1(VBox vBox)
+        protected override void CreatePack1(Box vBox)
         {
             <xsl:for-each select="$Fields">
                 <xsl:variable name="FieldName" select="Name" />
@@ -221,7 +221,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>
         }
 
-        protected override void CreatePack2(VBox vBox)
+        protected override void CreatePack2(Box vBox)
         {
             <xsl:for-each select="$TabularParts">
                 <xsl:variable name="TablePartName" select="Name" />
@@ -1054,9 +1054,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
-
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
+            BeforeClickOpenFunc?.Invoke();
 
             <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() 
             { 
@@ -1065,9 +1063,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
                 {
                     Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer);
-
-                    if (AfterSelectFunc != null)
-                        AfterSelectFunc.Invoke();
+                    AfterSelectFunc?.Invoke();
                 }
             };
 
@@ -1080,9 +1076,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-
-            if (AfterSelectFunc != null)
-                AfterSelectFunc.Invoke();
+            AfterSelectFunc?.Invoke();
         }
     }
 }
@@ -1138,18 +1132,14 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override void OpenSelect(object? sender, EventArgs args)
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
-
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
+            BeforeClickOpenFunc?.Invoke();
 
             <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() 
             { PopoverParent = PopoverSmallSelect, OpenFolder = OpenFolder, DirectoryPointerItem = Pointer.UnigueID };
             page.CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
             {
                 Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer);
-
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                AfterSelectFunc?.Invoke();
             };
 
             PopoverSmallSelect.Add(page);
@@ -1161,9 +1151,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-
-            if (AfterSelectFunc != null)
-                AfterSelectFunc.Invoke();
+            AfterSelectFunc?.Invoke();
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,14 +26,14 @@ using AccountingSoftware;
 
 namespace StorageAndTrade
 {
-    class СпільніФорми_ВивідПовідомленняПроПомилки : VBox
+    class СпільніФорми_ВивідПовідомленняПроПомилки : Box
     {
-        VBox vBoxMessage = new VBox();
+        Box vBoxMessage = new Box(Orientation.Vertical, 0);
 
-        public СпільніФорми_ВивідПовідомленняПроПомилки() : base()
+        public СпільніФорми_ВивідПовідомленняПроПомилки() : base(Orientation.Vertical, 0)
         {
             //Кнопки
-            HBox hBoxTop = new HBox();
+            Box hBoxTop = new Box(Orientation.Horizontal, 0);
             PackStart(hBoxTop, false, false, 10);
 
             Button bClear = new Button("Очистити");
@@ -68,11 +68,11 @@ namespace StorageAndTrade
 
         void CreateMessage(Dictionary<string, object> row)
         {
-            VBox vBoxInfo = new VBox();
+            Box vBoxInfo = new Box(Orientation.Vertical, 0);
 
             //Image
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
                 hBox.PackStart(vBoxInfo, false, false, 10);
                 vBoxMessage.PackStart(hBox, false, false, 10);
@@ -80,7 +80,7 @@ namespace StorageAndTrade
 
             //Перший рядок
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 Label line = new Label("<i>" + row["Дата"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
                 {
                     UseMarkup = true
@@ -92,7 +92,7 @@ namespace StorageAndTrade
 
             //Другий рядок
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 Label line = new Label("<b>" + row["НазваОбєкту"].ToString() + "</b>")
                 {
                     UseMarkup = true
@@ -104,7 +104,7 @@ namespace StorageAndTrade
 
             //Повідомлення
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
                 vBoxInfo.PackStart(hBox, false, false, 5);
             }
@@ -117,7 +117,7 @@ namespace StorageAndTrade
                     Caption = ""
                 };
 
-                HBox hBoxObject = new HBox();
+                Box hBoxObject = new Box(Orientation.Horizontal, 0);
                 hBoxObject.PackStart(Обєкт, false, false, 0);
                 vBoxInfo.PackStart(hBoxObject, false, false, 0);
             }
@@ -137,11 +137,11 @@ namespace StorageAndTrade
         }
     }
 
-    class СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід : VBox
+    class СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід : Box
     {
-        VBox vBoxMessage = new VBox();
+        Box vBoxMessage = new Box(Orientation.Vertical, 0);
 
-        public СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід(int width = 800, int height = 400) : base()
+        public СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід(int width = 800, int height = 400) : base(Orientation.Vertical, 0)
         {
             ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = width, HeightRequest = height };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
@@ -163,11 +163,11 @@ namespace StorageAndTrade
 
         void CreateMessage(Dictionary<string, object> row)
         {
-            VBox vBoxInfo = new VBox();
+            Box vBoxInfo = new Box(Orientation.Vertical, 0);
 
             //Image
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
                 hBox.PackStart(vBoxInfo, false, false, 10);
                 vBoxMessage.PackStart(hBox, false, false, 10);
@@ -175,7 +175,7 @@ namespace StorageAndTrade
 
             //Перший рядок
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 Label line = new Label("<i>" + row["Час"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
                 {
                     UseMarkup = true
@@ -187,7 +187,7 @@ namespace StorageAndTrade
 
             //Другий рядок
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 Label line = new Label("<b>" + row["НазваОбєкту"].ToString() + "</b>")
                 {
                     UseMarkup = true
@@ -199,7 +199,7 @@ namespace StorageAndTrade
 
             //Повідомлення
             {
-                HBox hBox = new HBox();
+                Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
                 vBoxInfo.PackStart(hBox, false, false, 5);
             }
