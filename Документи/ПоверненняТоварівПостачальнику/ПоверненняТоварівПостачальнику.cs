@@ -21,11 +21,11 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -74,7 +74,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівПостачальнику_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПоверненняТоварівПостачальнику_Const.FULLNAME} *", () =>
                 {
                     ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
                     {
@@ -92,7 +92,7 @@ namespace StorageAndTrade
                 ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальнику_Objest = new ПоверненняТоварівПостачальнику_Objest();
                 if (await ПоверненняТоварівПостачальнику_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ПоверненняТоварівПостачальнику_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПоверненняТоварівПостачальнику_Objest.Назва}", () =>
                     {
                         ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
                         {
@@ -141,7 +141,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
@@ -154,7 +154,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ПоверненняТоварівПостачальнику_Objest.SpendTheDocument(ПоверненняТоварівПостачальнику_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПоверненняТоварівПостачальнику_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ПоверненняТоварівПостачальнику_Objest.UnigueID);
             }
             else
                 await ПоверненняТоварівПостачальнику_Objest.ClearSpendTheDocument();

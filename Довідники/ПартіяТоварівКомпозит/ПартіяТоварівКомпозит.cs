@@ -21,8 +21,9 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
-using GLib;
+
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -73,7 +74,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПартіяТоварівКомпозит_Const.FULLNAME} *", () =>
                 {
                     ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
                     {
@@ -91,7 +92,7 @@ namespace StorageAndTrade
                 ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest = new ПартіяТоварівКомпозит_Objest();
                 if (await ПартіяТоварівКомпозит_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ПартіяТоварівКомпозит_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПартіяТоварівКомпозит_Objest.Назва}", () =>
                     {
                         ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
                         {

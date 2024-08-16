@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -45,7 +45,7 @@ namespace StorageAndTrade
                         КурсиВалют page = new КурсиВалют();
                         page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem!);
 
-                        Program.GeneralForm?.CreateNotebookPage("Курси валют", () => { return page; });
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Курси валют", () => { return page; });
                         page.LoadRecords();
                     }
                 };
@@ -58,7 +58,7 @@ namespace StorageAndTrade
                 LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження курсів валют НБУ") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження курсів валют НБУ", () =>
                     {
                         return new Обробка_ЗавантаженняКурсівВалют();
                     });
@@ -109,7 +109,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Const.FULLNAME} *", () =>
                 {
                     Валюти_Елемент page = new Валюти_Елемент
                     {
@@ -127,7 +127,7 @@ namespace StorageAndTrade
                 Валюти_Objest Валюти_Objest = new Валюти_Objest();
                 if (await Валюти_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Валюти_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Objest.Назва}", () =>
                     {
                         Валюти_Елемент page = new Валюти_Елемент
                         {

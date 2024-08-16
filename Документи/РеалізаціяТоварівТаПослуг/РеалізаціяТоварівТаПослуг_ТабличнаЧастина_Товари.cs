@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
@@ -743,7 +743,7 @@ LIMIT 1
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        Program.GeneralForm?.CreateNotebookPage($"Вибір - {ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; });
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; });
 
                         page.LoadRecords();
 
@@ -759,7 +759,7 @@ LIMIT 1
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        Program.GeneralForm?.CreateNotebookPage($"Вибір - {РахунокФактура_Const.FULLNAME}", () => { return page; });
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {РахунокФактура_Const.FULLNAME}", () => { return page; });
 
                         page.LoadRecords();
 
@@ -913,8 +913,7 @@ LIMIT 1
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;
 
-                TreeIter iter;
-                Store.GetIterFromString(out iter, args.Path);
+                Store.GetIterFromString(out TreeIter iter, args.Path);
 
                 int rowNumber = int.Parse(args.Path);
                 Запис запис = Записи[rowNumber];

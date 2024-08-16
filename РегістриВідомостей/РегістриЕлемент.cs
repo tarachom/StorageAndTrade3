@@ -121,9 +121,9 @@ namespace StorageAndTrade
                 CallBack_LoadRecords.Invoke(UnigueID);
 
             if (closePage)
-                Program.GeneralForm?.CloseNotebookPageToCode(this.Name);
+                NotebookFunction.CloseNotebookPageToCode(Program.GeneralNotebook, this.Name);
             else
-                Program.GeneralForm?.RenameNotebookPageToCode(Caption, this.Name);
+                NotebookFunction.RenameNotebookPageToCode(Program.GeneralNotebook, Caption, this.Name);
         }
 
         /// <summary>
@@ -137,8 +137,8 @@ namespace StorageAndTrade
         /// <param name="ex">Помилка</param>
         protected async void MsgError(Exception ex)
         {
-            await ФункціїДляПовідомлень.ДодатиПовідомленняПроПомилку(DateTime.Now, "Запис", UnigueID?.UGuid, "Регістри Відомостей", Caption, ex.Message);
-            ФункціїДляПовідомлень.ПоказатиПовідомлення(UnigueID);
+            await new ФункціїДляПовідомлень().ДодатиПовідомленняПроПомилку("Запис", UnigueID?.UGuid, "Регістри Відомостей", Caption, ex.Message);
+            new ФункціїДляПовідомлень().ПоказатиПовідомлення(UnigueID);
 
             Message.Info(Program.GeneralForm, "Не вдалось записати");
         }

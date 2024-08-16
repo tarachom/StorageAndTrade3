@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = StorageAndTrade_1_0.РегістриВідомостей.ТабличніСписки;
 using StorageAndTrade_1_0.РегістриВідомостей;
@@ -119,7 +120,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ШтрихкодиНоменклатури_Const.FULLNAME} *", () =>
                 {
                     ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
                     {
@@ -139,7 +140,7 @@ namespace StorageAndTrade
                 ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
                 if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Objest.Штрихкод}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ШтрихкодиНоменклатури_Objest.Штрихкод}", () =>
                     {
                         ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
                         {

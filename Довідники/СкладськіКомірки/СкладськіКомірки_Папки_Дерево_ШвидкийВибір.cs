@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -51,7 +51,7 @@ namespace StorageAndTrade
                         OpenFolder = OpenFolder
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {СкладськіКомірки_Папки_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {СкладськіКомірки_Папки_Const.FULLNAME}", () => { return page; });
 
                     page.LoadTree();
                 };
@@ -70,7 +70,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{СкладськіКомірки_Папки_Const.FULLNAME} *", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіКомірки_Папки_Const.FULLNAME} *", () => { return page; });
 
                     page.SetValue();
                 };

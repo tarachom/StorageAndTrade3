@@ -21,11 +21,11 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -74,7 +74,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ЗбіркаТоварівНаСкладі_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ЗбіркаТоварівНаСкладі_Const.FULLNAME} *", () =>
                 {
                     ЗбіркаТоварівНаСкладі_Елемент page = new ЗбіркаТоварівНаСкладі_Елемент
                     {
@@ -92,7 +92,7 @@ namespace StorageAndTrade
                 ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладі_Objest = new ЗбіркаТоварівНаСкладі_Objest();
                 if (await ЗбіркаТоварівНаСкладі_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ЗбіркаТоварівНаСкладі_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ЗбіркаТоварівНаСкладі_Objest.Назва}", () =>
                     {
                         ЗбіркаТоварівНаСкладі_Елемент page = new ЗбіркаТоварівНаСкладі_Елемент
                         {
@@ -141,7 +141,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.ЗбіркаТоварівНаСкладі_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
@@ -154,7 +154,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ЗбіркаТоварівНаСкладі_Objest.SpendTheDocument(ЗбіркаТоварівНаСкладі_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ЗбіркаТоварівНаСкладі_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ЗбіркаТоварівНаСкладі_Objest.UnigueID);
             }
             else
                 await ЗбіркаТоварівНаСкладі_Objest.ClearSpendTheDocument();

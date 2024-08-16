@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -51,7 +51,7 @@ namespace StorageAndTrade
 
                     page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
 
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     await page.LoadRecords();
                 };
@@ -71,7 +71,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME} *", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ХарактеристикиНоменклатури_Const.FULLNAME} *", () => { return page; });
 
                     page.SetValue();
                 };

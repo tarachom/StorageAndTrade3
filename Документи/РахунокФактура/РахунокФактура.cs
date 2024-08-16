@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
@@ -76,7 +76,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{РахунокФактура_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РахунокФактура_Const.FULLNAME} *", () =>
                 {
                     РахунокФактура_Елемент page = new РахунокФактура_Елемент
                     {
@@ -94,7 +94,7 @@ namespace StorageAndTrade
                 РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
                 if (await РахунокФактура_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{РахунокФактура_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РахунокФактура_Objest.Назва}", () =>
                     {
                         РахунокФактура_Елемент page = new РахунокФактура_Елемент
                         {
@@ -143,7 +143,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.РахунокФактура_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.РахунокФактура_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
@@ -156,7 +156,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await РахунокФактура_Objest.SpendTheDocument(РахунокФактура_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(РахунокФактура_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(РахунокФактура_Objest.UnigueID);
             }
             else
                 await РахунокФактура_Objest.ClearSpendTheDocument();
@@ -202,8 +202,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -250,7 +249,7 @@ namespace StorageAndTrade
 
                     await реалізаціяТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
 
-                    Program.GeneralForm?.CreateNotebookPage($"{реалізаціяТоварівТаПослуг_Новий.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{реалізаціяТоварівТаПослуг_Новий.Назва}", () =>
                     {
                         РеалізаціяТоварівТаПослуг_Елемент page = new РеалізаціяТоварівТаПослуг_Елемент
                         {
@@ -274,8 +273,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -321,7 +319,7 @@ namespace StorageAndTrade
 
                         await замовленняПостачальнику_Новий.Товари_TablePart.Save(false);
 
-                        Program.GeneralForm?.CreateNotebookPage($"{замовленняПостачальнику_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{замовленняПостачальнику_Новий.Назва}", () =>
                         {
                             ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                             {

@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПсуванняТоварів_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ПсуванняТоварів_Const.FULLNAME}", () => { return page; });
 
             if (UseWherePeriod)
                 page.SetValue();

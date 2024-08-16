@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
@@ -571,8 +571,7 @@ namespace StorageAndTrade
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;
 
-                TreeIter iter;
-                Store.GetIterFromString(out iter, args.Path);
+                Store.GetIterFromString(out TreeIter iter, args.Path);
 
                 int rowNumber = int.Parse(args.Path);
                 Запис запис = Записи[rowNumber];
@@ -651,7 +650,7 @@ namespace StorageAndTrade
             if (Записи.Count == 0)
                 return;
 
-            List<Guid> списокНоменклатуриДляВідбору = new List<Guid>();
+            List<Guid> списокНоменклатуриДляВідбору = [];
 
             foreach (Запис запис in Записи)
                 списокНоменклатуриДляВідбору.Add(запис.Номенклатура.UnigueID.UGuid);
@@ -687,7 +686,7 @@ FROM
 
             var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
 
-            Dictionary<Guid, Guid> НоменклатураТаКомірки = new Dictionary<Guid, Guid>();
+            Dictionary<Guid, Guid> НоменклатураТаКомірки = [];
 
             foreach (Dictionary<string, object> row in recordResult.ListRow)
                 НоменклатураТаКомірки.Add((Guid)row["Номенклатура"], (Guid)row["Комірка"]);
@@ -696,9 +695,9 @@ FROM
 
             foreach (Запис запис in Записи)
             {
-                if (НоменклатураТаКомірки.ContainsKey(запис.Номенклатура.UnigueID.UGuid))
+                if (НоменклатураТаКомірки.TryGetValue(запис.Номенклатура.UnigueID.UGuid, out Guid value))
                 {
-                    запис.Комірка = new СкладськіКомірки_Pointer(НоменклатураТаКомірки[запис.Номенклатура.UnigueID.UGuid]);
+                    запис.Комірка = new СкладськіКомірки_Pointer(value);
                     await Запис.ПісляЗміни_Комірка(запис);
 
                     TreeIter iter;

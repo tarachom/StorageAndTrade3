@@ -28,7 +28,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
@@ -86,7 +86,7 @@ namespace StorageAndTrade
             Link.AddLink(vLeft, "Повний (всі документи)", () =>
             {
                 Журнал_Повний page = new Журнал_Повний();
-                Program.GeneralForm?.CreateNotebookPage("Повний", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Повний", () => { return page; });
                 page.SetValue();
             });
 
@@ -121,35 +121,35 @@ namespace StorageAndTrade
         public static void Продажі(object? sender, EventArgs args)
         {
             Журнал_Продажі page = new Журнал_Продажі();
-            Program.GeneralForm?.CreateNotebookPage("Продажі", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Продажі", () => { return page; });
             page.SetValue();
         }
 
         public static void Закупівлі(object? sender, EventArgs args)
         {
             Журнал_Закупівлі page = new Журнал_Закупівлі();
-            Program.GeneralForm?.CreateNotebookPage("Закупівлі", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Закупівлі", () => { return page; });
             page.SetValue();
         }
 
         public static void Каса(object? sender, EventArgs args)
         {
             Журнал_Каса page = new Журнал_Каса();
-            Program.GeneralForm?.CreateNotebookPage("Каса", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Каса", () => { return page; });
             page.SetValue();
         }
 
         public static void Склад(object? sender, EventArgs args)
         {
             Журнал_Склад page = new Журнал_Склад();
-            Program.GeneralForm?.CreateNotebookPage("Склад", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Склад", () => { return page; });
             page.SetValue();
         }
 
         public static void АдреснеЗберігання(object? sender, EventArgs args)
         {
             Журнал_АдреснеЗберігання page = new Журнал_АдреснеЗберігання();
-            Program.GeneralForm?.CreateNotebookPage("Адресне зберігання", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Адресне зберігання", () => { return page; });
             page.SetValue();
         }
     }

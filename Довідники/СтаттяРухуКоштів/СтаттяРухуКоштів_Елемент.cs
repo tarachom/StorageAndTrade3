@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Перелічення;
 

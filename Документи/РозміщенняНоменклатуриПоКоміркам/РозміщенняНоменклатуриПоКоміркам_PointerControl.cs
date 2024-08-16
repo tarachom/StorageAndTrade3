@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () => { return page; });
 
             if (UseWherePeriod)
                 page.SetValue();

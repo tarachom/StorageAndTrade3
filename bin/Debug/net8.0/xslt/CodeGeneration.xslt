@@ -462,7 +462,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
         {
             CompositePointerPresentation_Record record = new();
 
-            if (uuidAndText.IsEmpty() || string.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
+            if (string.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
                 return record;
 
             string[] pointer_and_type = uuidAndText.Text.Split(".", StringSplitOptions.None);
@@ -472,28 +472,29 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
                 record.pointer = pointer_and_type[0];
                 record.type = pointer_and_type[1];
 
-                if (record.pointer == "Довідники") 
-                {
-                    <xsl:text>record.result = record.type switch</xsl:text>
+                if (!uuidAndText.IsEmpty())
+                    if (record.pointer == "Довідники") 
                     {
-                    <xsl:for-each select="Configuration/Directories/Directory">
-                        <xsl:variable name="DirectoryName" select="Name"/>
-                        <xsl:text>"</xsl:text><xsl:value-of select="$DirectoryName"/>" =&gt; await new Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    </xsl:for-each>
-                    <xsl:text>_ =&gt; ""</xsl:text>
-                    };
-                }
-                else if (record.pointer == "Документи") 
-                {
-                    <xsl:text>record.result = record.type switch</xsl:text>
+                        <xsl:text>record.result = record.type switch</xsl:text>
+                        {
+                        <xsl:for-each select="Configuration/Directories/Directory">
+                            <xsl:variable name="DirectoryName" select="Name"/>
+                            <xsl:text>"</xsl:text><xsl:value-of select="$DirectoryName"/>" =&gt; await new Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        </xsl:for-each>
+                        <xsl:text>_ =&gt; ""</xsl:text>
+                        };
+                    }
+                    else if (record.pointer == "Документи") 
                     {
-                    <xsl:for-each select="Configuration/Documents/Document">
-                        <xsl:variable name="DocumentName" select="Name"/>
-                        <xsl:text>"</xsl:text><xsl:value-of select="$DocumentName"/>" =&gt; await new Документи.<xsl:value-of select="$DocumentName"/>_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    </xsl:for-each>
-                    <xsl:text>_ =&gt; ""</xsl:text>
-                    };
-                }
+                        <xsl:text>record.result = record.type switch</xsl:text>
+                        {
+                        <xsl:for-each select="Configuration/Documents/Document">
+                            <xsl:variable name="DocumentName" select="Name"/>
+                            <xsl:text>"</xsl:text><xsl:value-of select="$DocumentName"/>" =&gt; await new Документи.<xsl:value-of select="$DocumentName"/>_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        </xsl:for-each>
+                        <xsl:text>_ =&gt; ""</xsl:text>
+                        };
+                    }
             }
             return record;
         }

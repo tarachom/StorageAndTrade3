@@ -155,7 +155,7 @@ namespace StorageAndTrade
                 bool isSpend = await КорегуванняБоргу_Objest.SpendTheDocument(КорегуванняБоргу_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(КорегуванняБоргу_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(КорегуванняБоргу_Objest.UnigueID);
 
                 return isSpend;
             }

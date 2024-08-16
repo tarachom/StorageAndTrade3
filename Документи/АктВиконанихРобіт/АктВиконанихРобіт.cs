@@ -22,12 +22,11 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -76,7 +75,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{АктВиконанихРобіт_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{АктВиконанихРобіт_Const.FULLNAME} *", () =>
                 {
                     АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
                     {
@@ -94,7 +93,7 @@ namespace StorageAndTrade
                 АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
                 if (await АктВиконанихРобіт_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{АктВиконанихРобіт_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{АктВиконанихРобіт_Objest.Назва}", () =>
                     {
                         АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
                         {
@@ -143,7 +142,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.АктВиконанихРобіт_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.АктВиконанихРобіт_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
@@ -156,7 +155,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await АктВиконанихРобіт_Objest.SpendTheDocument(АктВиконанихРобіт_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(АктВиконанихРобіт_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(АктВиконанихРобіт_Objest.UnigueID);
             }
             else
                 await АктВиконанихРобіт_Objest.ClearSpendTheDocument();
@@ -198,8 +197,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -223,7 +221,7 @@ namespace StorageAndTrade
 
                     if (await прихіднийКасовийОрдер_Новий.Save())
                     {
-                        Program.GeneralForm?.CreateNotebookPage($"{прихіднийКасовийОрдер_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{прихіднийКасовийОрдер_Новий.Назва}", () =>
                         {
                             ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                             {

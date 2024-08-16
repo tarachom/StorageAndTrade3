@@ -28,97 +28,29 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
 
 namespace StorageAndTrade
 {
-    class ФункціїДляПовідомлень
+    class ФункціїДляПовідомлень : InterfaceGtk.ФункціїДляПовідомлень
     {
-        public static async ValueTask ДодатиПовідомленняПроПомилку(DateTime Дата, string НазваПроцесу, Guid? Обєкт, string ТипОбєкту, string НазваОбєкту, string Повідомлення)
-        {
-            Системні.ПовідомленняТаПомилки_Помилки_TablePart повідомленняТаПомилки_Помилки_TablePart = new();
-            Системні.ПовідомленняТаПомилки_Помилки_TablePart.Record record = new()
-            {
-                Дата = Дата,
-                НазваПроцесу = НазваПроцесу,
-                Обєкт = Обєкт != null ? (Guid)Обєкт : Guid.Empty,
-                ТипОбєкту = ТипОбєкту,
-                НазваОбєкту = НазваОбєкту,
-                Повідомлення = Повідомлення
-            };
+        protected override Kernel Kernel { get; } = Config.Kernel;
 
-            повідомленняТаПомилки_Помилки_TablePart.Records.Add(record);
-            await повідомленняТаПомилки_Помилки_TablePart.Save(false);
-
-            //Автоматичне видалення устарівших
-            await ОчиститиУстарівшіПовідомлення();
-        }
-
-        public static async ValueTask ОчиститиВсіПовідомлення()
-        {
-            string query = $@"
-DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}";
-
-            await Config.Kernel.DataBase.ExecuteSQL(query);
-        }
-
-        public static async ValueTask ОчиститиУстарівшіПовідомлення()
-        {
-            string query = $@"
-DELETE FROM {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE}
-WHERE {Системні.ПовідомленняТаПомилки_Помилки_TablePart.Дата} < @Дата";
-
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
-            {
-                { "Дата", DateTime.Now.AddDays(-7) }
-            };
-
-            await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
-        }
-
-        public static async ValueTask<SelectRequest_Record> ПрочитатиПовідомленняПроПомилки(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
-        {
-            string query = $@"
-SELECT
-    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Дата} AS Дата,
-    to_char(Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Дата}, 'HH24:MI:SS') AS Час,
-    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.НазваПроцесу} AS НазваПроцесу,
-    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Обєкт} AS Обєкт,
-    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.ТипОбєкту} AS ТипОбєкту,
-    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.НазваОбєкту} AS НазваОбєкту,
-    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Повідомлення} AS Повідомлення
-FROM
-    {Системні.ПовідомленняТаПомилки_Помилки_TablePart.TABLE} AS Помилки
-";
-            if (ВідбірПоОбєкту != null && !ВідбірПоОбєкту.IsEmpty())
-                query += $@"
-WHERE
-    Помилки.{Системні.ПовідомленняТаПомилки_Помилки_TablePart.Обєкт} = '{ВідбірПоОбєкту}'
-";
-            query += $@"
-ORDER BY 
-    Дата DESC
-LIMIT 
-    {limit ?? 100}
-";
-            return await Config.Kernel.DataBase.SelectRequest(query);
-        }
-
-        public static async void ВідкритиПовідомлення()
+        public async void ВідкритиПовідомлення()
         {
             СпільніФорми_ВивідПовідомленняПроПомилки page = new СпільніФорми_ВивідПовідомленняПроПомилки();
-            Program.GeneralForm?.CreateNotebookPage("Повідомлення", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Повідомлення", () => { return page; });
             await page.LoadRecords();
         }
 
-        public static async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
+        public async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
             СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід page = new();
 
-            Popover PopoverSmall = new Popover(Program.GeneralForm?.buttonTerminal) { Position = PositionType.Bottom, BorderWidth = 5 };
+            Popover PopoverSmall = new Popover(Program.GeneralForm?.ButtonMessage) { Position = PositionType.Bottom, BorderWidth = 5 };
             PopoverSmall.Add(page);
             PopoverSmall.Show();
 

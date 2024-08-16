@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.КонтрагентВласник.Pointer = new Контрагенти_Pointer(SelectPointerItem);
 
-                    Program.GeneralForm?.CreateNotebookPage($"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
 
                     await page.LoadRecords();
                 };
@@ -126,7 +126,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Const.FULLNAME} *", () =>
                 {
                     Контрагенти_Елемент page = new Контрагенти_Елемент
                     {
@@ -145,7 +145,7 @@ namespace StorageAndTrade
                 Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
                 if (await Контрагенти_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Objest.Назва}", () =>
                     {
                         Контрагенти_Елемент page = new Контрагенти_Елемент
                         {

@@ -56,8 +56,7 @@ namespace StorageAndTrade
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
+            BeforeClickOpenFunc?.Invoke();
 
             Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір
             {
@@ -66,9 +65,7 @@ namespace StorageAndTrade
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new Валюти_Pointer(selectPointer);
-
-                    if (AfterSelectFunc != null)
-                        AfterSelectFunc.Invoke();
+                    AfterSelectFunc?.Invoke();
                 }
             };
 

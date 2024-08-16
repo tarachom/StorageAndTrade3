@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
@@ -76,7 +76,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ПоступленняТоварівТаПослуг_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПоступленняТоварівТаПослуг_Const.FULLNAME} *", () =>
                 {
                     ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                     {
@@ -94,7 +94,7 @@ namespace StorageAndTrade
                 ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
                 if (await ПоступленняТоварівТаПослуг_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ПоступленняТоварівТаПослуг_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПоступленняТоварівТаПослуг_Objest.Назва}", () =>
                     {
                         ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                         {
@@ -143,7 +143,7 @@ namespace StorageAndTrade
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
 
@@ -156,7 +156,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ПоступленняТоварівТаПослуг_Objest.SpendTheDocument(ПоступленняТоварівТаПослуг_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПоступленняТоварівТаПослуг_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ПоступленняТоварівТаПослуг_Objest.UnigueID);
             }
             else
                 await ПоступленняТоварівТаПослуг_Objest.ClearSpendTheDocument();
@@ -214,8 +214,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -240,7 +239,7 @@ namespace StorageAndTrade
 
                     if (await розхіднийКасовийОрдер_Новий.Save())
                     {
-                        Program.GeneralForm?.CreateNotebookPage($"{розхіднийКасовийОрдер_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{розхіднийКасовийОрдер_Новий.Назва}", () =>
                         {
                             РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                             {
@@ -265,8 +264,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -310,7 +308,7 @@ namespace StorageAndTrade
 
                         await поверненняТоварівПостачальнику_Objest.Товари_TablePart.Save(false);
 
-                        Program.GeneralForm?.CreateNotebookPage($"{поверненняТоварівПостачальнику_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{поверненняТоварівПостачальнику_Objest.Назва}", () =>
                         {
                             ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
                             {
@@ -335,8 +333,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -375,7 +372,7 @@ namespace StorageAndTrade
 
                         await розміщенняТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
 
-                        Program.GeneralForm?.CreateNotebookPage($"{розміщенняТоварівНаСкладі_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{розміщенняТоварівНаСкладі_Objest.Назва}", () =>
                         {
                             РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
                             {
@@ -400,8 +397,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -442,7 +438,7 @@ namespace StorageAndTrade
 
                         await внутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Save(true);
 
-                        Program.GeneralForm?.CreateNotebookPage($"{внутрішнєСпоживанняТоварів_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{внутрішнєСпоживанняТоварів_Objest.Назва}", () =>
                         {
                             ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент
                             {
@@ -467,8 +463,7 @@ namespace StorageAndTrade
 
                 foreach (TreePath itemPath in selectionRows)
                 {
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
@@ -506,7 +501,7 @@ namespace StorageAndTrade
 
                         await переміщенняТоварів_Objest.Товари_TablePart.Save(true);
 
-                        Program.GeneralForm?.CreateNotebookPage($"{переміщенняТоварів_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{переміщенняТоварів_Objest.Назва}", () =>
                         {
                             ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
                             {

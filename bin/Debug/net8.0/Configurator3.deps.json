@@ -143,7 +143,10 @@
           "Npgsql": "8.0.3"
         },
         "runtime": {
-          "AccountingSoftware.dll": {}
+          "AccountingSoftware.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "InterfaceGtk/1.0.0": {
@@ -152,7 +155,10 @@
           "GtkSharp": "3.24.24.117-develop"
         },
         "runtime": {
-          "InterfaceGtk.dll": {}
+          "InterfaceGtk.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

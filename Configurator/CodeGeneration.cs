@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 12.08.2024 20:45:26
+ * Дата конфігурації: 16.08.2024 12:19:04
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -99,7 +99,7 @@ namespace StorageAndTrade_1_0
         {
             CompositePointerPresentation_Record record = new();
 
-            if (uuidAndText.IsEmpty() || string.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
+            if (string.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
                 return record;
 
             string[] pointer_and_type = uuidAndText.Text.Split(".", StringSplitOptions.None);
@@ -109,77 +109,78 @@ namespace StorageAndTrade_1_0
                 record.pointer = pointer_and_type[0];
                 record.type = pointer_and_type[1];
 
-                if (record.pointer == "Довідники") 
-                {
-                    record.result = record.type switch
+                if (!uuidAndText.IsEmpty())
+                    if (record.pointer == "Довідники") 
                     {
-                    "Організації" => await new Довідники.Організації_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Номенклатура" => await new Довідники.Номенклатура_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Виробники" => await new Довідники.Виробники_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ВидиНоменклатури" => await new Довідники.ВидиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПакуванняОдиниціВиміру" => await new Довідники.ПакуванняОдиниціВиміру_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Валюти" => await new Довідники.Валюти_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Контрагенти" => await new Довідники.Контрагенти_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Склади" => await new Довідники.Склади_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ВидиЦін" => await new Довідники.ВидиЦін_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ВидиЦінПостачальників" => await new Довідники.ВидиЦінПостачальників_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Користувачі" => await new Довідники.Користувачі_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ФізичніОсоби" => await new Довідники.ФізичніОсоби_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "СтруктураПідприємства" => await new Довідники.СтруктураПідприємства_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "КраїниСвіту" => await new Довідники.КраїниСвіту_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Файли" => await new Довідники.Файли_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ХарактеристикиНоменклатури" => await new Довідники.ХарактеристикиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Номенклатура_Папки" => await new Довідники.Номенклатура_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Контрагенти_Папки" => await new Довідники.Контрагенти_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Склади_Папки" => await new Довідники.Склади_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Каси" => await new Довідники.Каси_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "БанківськіРахункиОрганізацій" => await new Довідники.БанківськіРахункиОрганізацій_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ДоговориКонтрагентів" => await new Довідники.ДоговориКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "БанківськіРахункиКонтрагентів" => await new Довідники.БанківськіРахункиКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "СтаттяРухуКоштів" => await new Довідники.СтаттяРухуКоштів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "СеріїНоменклатури" => await new Довідники.СеріїНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПартіяТоварівКомпозит" => await new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ВидиЗапасів" => await new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Банки" => await new Довідники.Банки_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "СкладськіПриміщення" => await new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "СкладськіКомірки" => await new Довідники.СкладськіКомірки_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ОбластьЗберігання" => await new Довідники.ОбластьЗберігання_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ТипорозміриКомірок" => await new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "СкладськіКомірки_Папки" => await new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "Блокнот" => await new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    _ => ""
-                    };
-                }
-                else if (record.pointer == "Документи") 
-                {
-                    record.result = record.type switch
+                        record.result = record.type switch
+                        {
+                        "Організації" => await new Довідники.Організації_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Номенклатура" => await new Довідники.Номенклатура_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Виробники" => await new Довідники.Виробники_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ВидиНоменклатури" => await new Довідники.ВидиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПакуванняОдиниціВиміру" => await new Довідники.ПакуванняОдиниціВиміру_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Валюти" => await new Довідники.Валюти_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Контрагенти" => await new Довідники.Контрагенти_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Склади" => await new Довідники.Склади_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ВидиЦін" => await new Довідники.ВидиЦін_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ВидиЦінПостачальників" => await new Довідники.ВидиЦінПостачальників_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Користувачі" => await new Довідники.Користувачі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ФізичніОсоби" => await new Довідники.ФізичніОсоби_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "СтруктураПідприємства" => await new Довідники.СтруктураПідприємства_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "КраїниСвіту" => await new Довідники.КраїниСвіту_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Файли" => await new Довідники.Файли_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ХарактеристикиНоменклатури" => await new Довідники.ХарактеристикиНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Номенклатура_Папки" => await new Довідники.Номенклатура_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Контрагенти_Папки" => await new Довідники.Контрагенти_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Склади_Папки" => await new Довідники.Склади_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Каси" => await new Довідники.Каси_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "БанківськіРахункиОрганізацій" => await new Довідники.БанківськіРахункиОрганізацій_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ДоговориКонтрагентів" => await new Довідники.ДоговориКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "БанківськіРахункиКонтрагентів" => await new Довідники.БанківськіРахункиКонтрагентів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "СтаттяРухуКоштів" => await new Довідники.СтаттяРухуКоштів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "СеріїНоменклатури" => await new Довідники.СеріїНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПартіяТоварівКомпозит" => await new Довідники.ПартіяТоварівКомпозит_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ВидиЗапасів" => await new Довідники.ВидиЗапасів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Банки" => await new Довідники.Банки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "СкладськіПриміщення" => await new Довідники.СкладськіПриміщення_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "СкладськіКомірки" => await new Довідники.СкладськіКомірки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ОбластьЗберігання" => await new Довідники.ОбластьЗберігання_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ТипорозміриКомірок" => await new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "СкладськіКомірки_Папки" => await new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "Блокнот" => await new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        _ => ""
+                        };
+                    }
+                    else if (record.pointer == "Документи") 
                     {
-                    "ЗамовленняПостачальнику" => await new Документи.ЗамовленняПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПоступленняТоварівТаПослуг" => await new Документи.ПоступленняТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ЗамовленняКлієнта" => await new Документи.ЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "РеалізаціяТоварівТаПослуг" => await new Документи.РеалізаціяТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ВстановленняЦінНоменклатури" => await new Документи.ВстановленняЦінНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПрихіднийКасовийОрдер" => await new Документи.ПрихіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "РозхіднийКасовийОрдер" => await new Документи.РозхіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПереміщенняТоварів" => await new Документи.ПереміщенняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПоверненняТоварівПостачальнику" => await new Документи.ПоверненняТоварівПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПоверненняТоварівВідКлієнта" => await new Документи.ПоверненняТоварівВідКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "АктВиконанихРобіт" => await new Документи.АктВиконанихРобіт_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ВведенняЗалишків" => await new Документи.ВведенняЗалишків_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "НадлишкиТоварів" => await new Документи.НадлишкиТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПересортицяТоварів" => await new Документи.ПересортицяТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПерерахунокТоварів" => await new Документи.ПерерахунокТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПсуванняТоварів" => await new Документи.ПсуванняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ВнутрішнєСпоживанняТоварів" => await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "РахунокФактура" => await new Документи.РахунокФактура_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "РозміщенняТоварівНаСкладі" => await new Документи.РозміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ПереміщенняТоварівНаСкладі" => await new Документи.ПереміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "ЗбіркаТоварівНаСкладі" => await new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(uuidAndText.Uuid).GetPresentation(),
-                    _ => ""
-                    };
-                }
+                        record.result = record.type switch
+                        {
+                        "ЗамовленняПостачальнику" => await new Документи.ЗамовленняПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПоступленняТоварівТаПослуг" => await new Документи.ПоступленняТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ЗамовленняКлієнта" => await new Документи.ЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "РеалізаціяТоварівТаПослуг" => await new Документи.РеалізаціяТоварівТаПослуг_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ВстановленняЦінНоменклатури" => await new Документи.ВстановленняЦінНоменклатури_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПрихіднийКасовийОрдер" => await new Документи.ПрихіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "РозхіднийКасовийОрдер" => await new Документи.РозхіднийКасовийОрдер_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПереміщенняТоварів" => await new Документи.ПереміщенняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПоверненняТоварівПостачальнику" => await new Документи.ПоверненняТоварівПостачальнику_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПоверненняТоварівВідКлієнта" => await new Документи.ПоверненняТоварівВідКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "АктВиконанихРобіт" => await new Документи.АктВиконанихРобіт_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ВведенняЗалишків" => await new Документи.ВведенняЗалишків_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "НадлишкиТоварів" => await new Документи.НадлишкиТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПересортицяТоварів" => await new Документи.ПересортицяТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПерерахунокТоварів" => await new Документи.ПерерахунокТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПсуванняТоварів" => await new Документи.ПсуванняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ВнутрішнєСпоживанняТоварів" => await new Документи.ВнутрішнєСпоживанняТоварів_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "РахунокФактура" => await new Документи.РахунокФактура_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "РозміщенняТоварівНаСкладі" => await new Документи.РозміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ПереміщенняТоварівНаСкладі" => await new Документи.ПереміщенняТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ЗбіркаТоварівНаСкладі" => await new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        _ => ""
+                        };
+                    }
             }
             return record;
         }
@@ -1372,16 +1373,16 @@ namespace StorageAndTrade_1_0.Константи
 	  #region CONSTANTS BLOCK "ЖурналиДокументів"
     public static class ЖурналиДокументів
     {       
-        public static Перелічення.ТипПеріодуДляЖурналівДокументів ОсновнийТипПеріоду_Const
+        public static string ОсновнийТипПеріоду_Const
         {
             get 
             {
                 var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h3"); } ).Result;
-                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (Перелічення.ТипПеріодуДляЖурналівДокументів)recordResult.Value : 0) : 0;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
             }
             set
             {
-                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h3", (int)value);
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h3", value);
             }
         }
              
@@ -10433,22 +10434,6 @@ namespace StorageAndTrade_1_0.Перелічення
     }
     #endregion
     
-    #region ENUM "ТипПеріодуДляЖурналівДокументів"
-    public enum ТипПеріодуДляЖурналівДокументів
-    {
-         ВесьПеріод = 1,
-         ЗПочаткуРоку = 2,
-         Квартал = 6,
-         ЗМинулогоМісяця = 7,
-         Місяць = 8,
-         ЗПочаткуМісяця = 3,
-         ЗПочаткуТижня = 4,
-         ПоточнийДень = 5,
-         ДваДні = 9,
-         ТриДні = 10
-    }
-    #endregion
-    
     #region ENUM "МетодиСписанняПартій"
     public enum МетодиСписанняПартій
     {
@@ -11118,60 +11103,6 @@ namespace StorageAndTrade_1_0.Перелічення
             new NameValue<ТипДокументуПродажіДокументКомпозит>("ЗамовленняКлієнта", ТипДокументуПродажіДокументКомпозит.ЗамовленняКлієнта),
             new NameValue<ТипДокументуПродажіДокументКомпозит>("АктВиконанихРобіт", ТипДокументуПродажіДокументКомпозит.АктВиконанихРобіт),
             new NameValue<ТипДокументуПродажіДокументКомпозит>("РеалізаціяТоварівТаПослуг", ТипДокументуПродажіДокументКомпозит.РеалізаціяТоварівТаПослуг),
-            };
-        }
-        #endregion
-    
-        #region ENUM "ТипПеріодуДляЖурналівДокументів"
-        public static string ТипПеріодуДляЖурналівДокументів_Alias(ТипПеріодуДляЖурналівДокументів value)
-        {
-            return value switch
-            {
-                ТипПеріодуДляЖурналівДокументів.ВесьПеріод => "Весь період",
-                ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку => "Рік (з початку року)",
-                ТипПеріодуДляЖурналівДокументів.Квартал => "Квартал (три місяці)",
-                ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця => "Два місяці (з 1 числа)",
-                ТипПеріодуДляЖурналівДокументів.Місяць => "Місяць",
-                ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця => "Місяць (з 1 числа)",
-                ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня => "Тиждень",
-                ТипПеріодуДляЖурналівДокументів.ПоточнийДень => "День",
-                ТипПеріодуДляЖурналівДокументів.ДваДні => "Два дні",
-                ТипПеріодуДляЖурналівДокументів.ТриДні => "Три дні",
-                _ => ""
-            };
-        }
-
-        public static ТипПеріодуДляЖурналівДокументів? ТипПеріодуДляЖурналівДокументів_FindByName(string name)
-        {
-            return name switch
-            {
-                "Весь період" => ТипПеріодуДляЖурналівДокументів.ВесьПеріод,
-                "Рік (з початку року)" => ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку,
-                "Квартал (три місяці)" => ТипПеріодуДляЖурналівДокументів.Квартал,
-                "Два місяці (з 1 числа)" => ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця,
-                "Місяць" => ТипПеріодуДляЖурналівДокументів.Місяць,
-                "Місяць (з 1 числа)" => ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця,
-                "Тиждень" => ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня,
-                "День" => ТипПеріодуДляЖурналівДокументів.ПоточнийДень,
-                "Два дні" => ТипПеріодуДляЖурналівДокументів.ДваДні,
-                "Три дні" => ТипПеріодуДляЖурналівДокументів.ТриДні,
-                _ => null
-            };
-        }
-
-        public static List<NameValue<ТипПеріодуДляЖурналівДокументів>> ТипПеріодуДляЖурналівДокументів_List()
-        {
-            return new List<NameValue<ТипПеріодуДляЖурналівДокументів>>() {
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Весь період", ТипПеріодуДляЖурналівДокументів.ВесьПеріод),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Рік (з початку року)", ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Квартал (три місяці)", ТипПеріодуДляЖурналівДокументів.Квартал),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Два місяці (з 1 числа)", ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Місяць", ТипПеріодуДляЖурналівДокументів.Місяць),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Місяць (з 1 числа)", ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Тиждень", ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("День", ТипПеріодуДляЖурналівДокументів.ПоточнийДень),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Два дні", ТипПеріодуДляЖурналівДокументів.ДваДні),
-            new NameValue<ТипПеріодуДляЖурналівДокументів>("Три дні", ТипПеріодуДляЖурналівДокументів.ТриДні),
             };
         }
         #endregion

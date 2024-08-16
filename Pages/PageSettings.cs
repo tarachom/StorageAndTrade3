@@ -28,6 +28,7 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using AccountingSoftware;
 using StorageAndTrade_1_0;
@@ -71,7 +72,7 @@ namespace StorageAndTrade
         //ЖурналиДокументів
         //
 
-        ComboBoxText ОсновнийТипПеріоду_ДляЖурналівДокументів = new ComboBoxText();
+        ComboBoxText ОсновнийТипПеріоду_ДляЖурналівДокументів = ПеріодДляЖурналу.СписокВідбірПоПеріоду();
 
         //
         //ЗавантаженняДанихІзСайтів
@@ -108,9 +109,6 @@ namespace StorageAndTrade
 
         void FillComboBoxes()
         {
-            foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["ТипПеріодуДляЖурналівДокументів"].Fields.Values)
-                ОсновнийТипПеріоду_ДляЖурналівДокументів.Append(field.Name, field.Desc);
-
             foreach (ConfigurationEnumField field in Config.Kernel.Conf.Enums["МетодиСписанняПартій"].Fields.Values)
                 МетодиСписанняПартій.Append(field.Name, field.Desc);
         }
@@ -285,7 +283,7 @@ namespace StorageAndTrade
 
             AddLink(vBox, "Заповнення початковими даними", (object? sender, EventArgs args) =>
             {
-                Program.GeneralForm?.CreateNotebookPage("Початкове заповнення", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Початкове заповнення", () =>
                 {
                     return new Обробка_ПочатковеЗаповнення();
                 });
@@ -293,7 +291,7 @@ namespace StorageAndTrade
 
             AddLink(vBox, "Завантаження курсів валют НБУ", (object? sender, EventArgs args) =>
             {
-                Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження курсів валют НБУ", () =>
                 {
                     return new Обробка_ЗавантаженняКурсівВалют();
                 });
@@ -380,7 +378,7 @@ namespace StorageAndTrade
                 ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const.ToString();
 
                 if (ОсновнийТипПеріоду_ДляЖурналівДокументів.Active == -1)
-                    ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод.ToString();
+                    ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId = ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод.ToString();
             }
 
             //
@@ -393,7 +391,7 @@ namespace StorageAndTrade
 
         void GetValue()
         {
-            Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, false);
+            NotebookFunction.SensitiveNotebookPageToCode(Program.GeneralNotebook, this.Name, false);
 
             //
             //Значення за замовчуванням
@@ -425,7 +423,7 @@ namespace StorageAndTrade
             //ЖурналиДокументів
             //
 
-            Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId);
+            Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = ОсновнийТипПеріоду_ДляЖурналівДокументів.ActiveId;
 
             //
             //ЗавантаженняДанихІзСайтів
@@ -433,8 +431,8 @@ namespace StorageAndTrade
 
             Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняКурсівВалют_Const = ЗавантаженняДанихІзСайтів.Text;
             Константи.ЗавантаженняДанихІзСайтів.ЗавантаженняСпискуБанків_Const = ЗавантаженняСпискуБанківІзСайтів.Text;
-
-            Program.GeneralForm?.SensitiveNotebookPageToCode(this.Name, true);
+ 
+            NotebookFunction.SensitiveNotebookPageToCode(Program.GeneralNotebook, this.Name, true);
         }
 
         void OnSaveClick(object? sender, EventArgs args)

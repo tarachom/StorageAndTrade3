@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -73,7 +74,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КраїниСвіту_Const.FULLNAME} *", () =>
                 {
                     КраїниСвіту_Елемент page = new КраїниСвіту_Елемент
                     {
@@ -91,7 +92,7 @@ namespace StorageAndTrade
                 КраїниСвіту_Objest КраїниСвіту_Objest = new КраїниСвіту_Objest();
                 if (await КраїниСвіту_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{КраїниСвіту_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КраїниСвіту_Objest.Назва}", () =>
                     {
                         КраїниСвіту_Елемент page = new КраїниСвіту_Елемент
                         {

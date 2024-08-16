@@ -190,8 +190,7 @@ namespace StorageAndTrade
             if (IsNew)
             {
                 //Основний договір
-                if (Контрагент.AfterSelectFunc != null)
-                    Контрагент.AfterSelectFunc.Invoke();
+                Контрагент.AfterSelectFunc?.Invoke();
             }
 
             Товари.ВведенняЗалишків_Objest = ВведенняЗалишків_Objest;
@@ -269,7 +268,7 @@ namespace StorageAndTrade
                 bool isSpend = await ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ВведенняЗалишків_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ВведенняЗалишків_Objest.UnigueID);
 
                 return isSpend;
             }

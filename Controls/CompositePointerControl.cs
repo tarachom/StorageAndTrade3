@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-using System.Reflection;
+using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 
@@ -33,14 +33,13 @@ namespace StorageAndTrade
         protected override string NameSpageProgram { get; } = Config.NameSpageProgram;
         protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
         protected override Kernel Kernel { get; } = Config.Kernel;
-        protected override Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
         protected override async ValueTask<CompositePointerPresentation_Record> CompositePointerPresentation(UuidAndText uuidAndText)
         {
             return await Functions.CompositePointerPresentation(uuidAndText);
         }
         protected override void CreateNotebookPage(string tabName, Func<Widget>? pageWidget)
         {
-            Program.GeneralForm?.CreateNotebookPage(tabName, pageWidget);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, tabName, pageWidget);
         }
     }
 }

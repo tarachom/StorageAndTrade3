@@ -62,7 +62,7 @@ namespace StorageAndTrade
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; });
 
             await page.LoadRecords();
         }

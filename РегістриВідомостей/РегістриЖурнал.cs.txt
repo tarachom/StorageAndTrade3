@@ -27,65 +27,23 @@ using AccountingSoftware;
 
 namespace StorageAndTrade
 {
-    public abstract class ДовідникЖурнал : Box
+    public abstract class РегістриЖурнал : ФормаЖурнал
     {
-        /// <summary>
-        /// Елемент на який треба спозиціонувати список при обновленні
-        /// </summary>
         public UnigueID? SelectPointerItem { get; set; }
 
-        /// <summary>
-        /// Елемент на який треба спозиціонувати список при виборі
-        /// </summary>
-        public UnigueID? DirectoryPointerItem { get; set; }
-
-        /// <summary>
-        /// Функція зворотнього виклику при виборі
-        /// </summary>
-        public Action<UnigueID>? CallBack_OnSelectPointer { get; set; }
-
-        /// <summary>
-        /// Верхній набір меню
-        /// </summary>
         protected Toolbar ToolbarTop = new Toolbar();
-
-        /// <summary>
-        /// Верхній горизонтальний бокс.
-        /// можна додаткові кнопки і різні лінки добавляти
-        /// </summary>
         protected Box HBoxTop = new Box(Orientation.Horizontal, 0);
-
-        /// <summary>
-        /// Панелька яка містить одну область за замовчуванням і туди добавляється список
-        /// У випадку якщо потрібно можна додати ще одну область, це використовується для ієрархічних довідників
-        /// </summary>
-        protected Paned HPanedTable = new Paned(Orientation.Horizontal);
-
-        /// <summary>
-        /// Дерево
-        /// </summary>
         protected TreeView TreeViewGrid = new TreeView();
-
-        /// <summary>
-        /// Пошук
-        /// </summary>
         SearchControl ПошукПовнотекстовий = new SearchControl();
 
-        /// <summary>
-        /// Текст для діалогів
-        /// </summary>
-        protected string MessageRequestText { get; set; } = "Встановити або зняти помітку на видалення?";
-
-        public ДовідникЖурнал() : base(Orientation.Vertical, 0)
+        public РегістриЖурнал() : base()
         {
-            BorderWidth = 0;
-
             //Кнопки
             PackStart(HBoxTop, false, false, 10);
 
             //Пошук
-            ПошукПовнотекстовий.Select = async (string x) => { await LoadRecords_OnSearch(x); };
-            ПошукПовнотекстовий.Clear = async () => { await LoadRecords(); };
+            ПошукПовнотекстовий.Select = LoadRecords_OnSearch;
+            ПошукПовнотекстовий.Clear = LoadRecords;
             HBoxTop.PackStart(ПошукПовнотекстовий, false, false, 2);
 
             CreateToolbar();
@@ -99,13 +57,9 @@ namespace StorageAndTrade
             TreeViewGrid.ButtonPressEvent += OnButtonPressEvent;
             TreeViewGrid.ButtonReleaseEvent += OnButtonReleaseEvent;
             TreeViewGrid.KeyReleaseEvent += OnKeyReleaseEvent;
-            //TreeViewGrid.KeyPressEvent += OnKeyPressEvent;
-
             scrollTree.Add(TreeViewGrid);
 
-            HPanedTable.Pack1(scrollTree, true, true);
-
-            PackStart(HPanedTable, true, true, 0);
+            PackStart(scrollTree, true, true, 0);
 
             ShowAll();
         }
@@ -141,9 +95,9 @@ namespace StorageAndTrade
         {
             Menu Menu = new Menu();
 
-            MenuItem setDeletionLabel = new MenuItem("Помітка на видалення");
-            setDeletionLabel.Activated += OnDeleteClick;
-            Menu.Append(setDeletionLabel);
+            MenuItem delete = new MenuItem("Видалити");
+            delete.Activated += OnDeleteClick;
+            Menu.Append(delete);
 
             Menu.ShowAll();
 
@@ -152,22 +106,22 @@ namespace StorageAndTrade
 
         #endregion
 
-        #region Virtual & Abstract Function
+        #region Virtual Function
 
-        public abstract ValueTask LoadRecords();
+        public virtual void LoadRecords() { }
 
-        protected abstract ValueTask LoadRecords_OnSearch(string searchText);
+        protected virtual void LoadRecords_OnSearch(string searchText) { }
 
-        protected abstract void OpenPageElement(bool IsNew, UnigueID? unigueID = null);
+        protected virtual void OpenPageElement(bool IsNew, UnigueID? unigueID = null) { }
 
-        protected abstract ValueTask SetDeletionLabel(UnigueID unigueID);
+        protected virtual ValueTask Delete(UnigueID unigueID) { return new ValueTask(); }
 
-        protected abstract ValueTask<UnigueID?> Copy(UnigueID unigueID);
+        protected virtual ValueTask<UnigueID?> Copy(UnigueID unigueID) { return new ValueTask<UnigueID?>(); }
 
-        public virtual async void CallBack_LoadRecords(UnigueID? selectPointer)
+        public virtual void CallBack_LoadRecords(UnigueID? selectPointer)
         {
             SelectPointerItem = selectPointer;
-            await LoadRecords();
+            LoadRecords();
         }
 
         #endregion
@@ -199,33 +153,12 @@ namespace StorageAndTrade
                 if (TreeViewGrid.Model.GetIter(out TreeIter iter, TreeViewGrid.Selection.GetSelectedRows()[0]))
                 {
                     UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
-
-                    if (DirectoryPointerItem == null)
-                        OpenPageElement(false, unigueID);
-                    else
-                    {
-                        CallBack_OnSelectPointer?.Invoke(unigueID);
-                        Program.GeneralForm?.CloseNotebookPageToCode(this.Name);
-                    }
+                    OpenPageElement(false, unigueID);
                 }
         }
 
-        async void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
+        void OnKeyReleaseEvent(object? sender, KeyReleaseEventArgs args)
         {
-            /*
-            if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask))
-            {
-                switch (args.Event.Key)
-                {
-                    case Gdk.Key.Return:
-                        {
-                            Console.WriteLine(1);
-                            break;
-                        }
-                }
-            }
-            else
-            */
             switch (args.Event.Key)
             {
                 case Gdk.Key.Insert:
@@ -235,7 +168,7 @@ namespace StorageAndTrade
                     }
                 case Gdk.Key.F5:
                     {
-                        await LoadRecords();
+                        LoadRecords();
                         break;
                     }
                 case Gdk.Key.KP_Enter:
@@ -262,20 +195,6 @@ namespace StorageAndTrade
             }
         }
 
-        // void OnKeyPressEvent(object? sender, KeyPressEventArgs args)
-        // {
-        // Console.WriteLine(args.Event.State);
-        // Console.WriteLine(Gdk.ModifierType.ControlMask);
-        // Console.WriteLine(Gdk.ModifierType.Mod2Mask);
-        // Console.WriteLine(Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask);
-        // Console.WriteLine(args.Event.Key);
-
-        // if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.Return)
-        // {
-        //     Console.WriteLine(1);
-        // }
-        //}
-
         #endregion
 
         #region ToolBar
@@ -290,7 +209,6 @@ namespace StorageAndTrade
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
             {
                 TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
                 foreach (TreePath itemPath in selectionRows)
                     if (TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath))
                     {
@@ -300,29 +218,28 @@ namespace StorageAndTrade
             }
         }
 
-        async void OnRefreshClick(object? sender, EventArgs args)
+        void OnRefreshClick(object? sender, EventArgs args)
         {
-            await LoadRecords();
+            LoadRecords();
         }
 
         async void OnDeleteClick(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-                if (Message.Request(Program.GeneralForm, MessageRequestText) == ResponseType.Yes)
+                if (Message.Request(Program.GeneralForm, "Встановити або зняти помітку на видалення?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
                     foreach (TreePath itemPath in selectionRows)
                     {
                         TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
                         UnigueID unigueID = new UnigueID((string)TreeViewGrid.Model.GetValue(iter, 1));
 
-                        await SetDeletionLabel(unigueID);
+                        await Delete(unigueID);
 
                         SelectPointerItem = unigueID;
                     }
 
-                    await LoadRecords();
+                    LoadRecords();
                 }
         }
 
@@ -332,7 +249,6 @@ namespace StorageAndTrade
                 if (Message.Request(Program.GeneralForm, "Копіювати?") == ResponseType.Yes)
                 {
                     TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
                     foreach (TreePath itemPath in selectionRows)
                     {
                         TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
@@ -343,7 +259,7 @@ namespace StorageAndTrade
                             SelectPointerItem = newUnigueID;
                     }
 
-                    await LoadRecords();
+                    LoadRecords();
                 }
         }
 

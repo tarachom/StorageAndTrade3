@@ -65,7 +65,7 @@ namespace StorageAndTrade
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {ЗамовленняПостачальнику_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ЗамовленняПостачальнику_Const.FULLNAME}", () => { return page; });
 
             if (UseWherePeriod)
                 page.SetValue();

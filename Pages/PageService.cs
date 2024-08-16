@@ -130,10 +130,10 @@ namespace StorageAndTrade
                             //Документ НЕ проведений Error
                             //
                             //Вивід помилок в окремому вікні
-                            ФункціїДляПовідомлень.ПоказатиПовідомлення(doc.UnigueID, 1);
+                            new ФункціїДляПовідомлень().ПоказатиПовідомлення(doc.UnigueID, 1);
 
                             //Додатково вивід у помилок у це вікно
-                            SelectRequest_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(doc.UnigueID, 1);
+                            SelectRequest_Record record = await new ФункціїДляПовідомлень().ПрочитатиПовідомленняПроПомилки(doc.UnigueID, 1);
 
                             string msg = "";
                             foreach (Dictionary<string, object> row in record.ListRow)

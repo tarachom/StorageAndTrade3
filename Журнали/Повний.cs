@@ -21,11 +21,11 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-using System.Runtime.CompilerServices;
-using GLib;
 using Gtk;
+using InterfaceGtk;
+using System.Reflection;
 
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0;
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -56,6 +56,9 @@ namespace StorageAndTrade
 
         }
 
+        protected override Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
+        protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
+
         public override async void LoadRecords()
         {
             ТабличніСписки.Журнали_Повний.SelectPointerItem = SelectPointerItem;
@@ -75,12 +78,12 @@ namespace StorageAndTrade
         public override void OpenTypeListDocs(Widget relative_to)
         {
             ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Повний.AllowDocument(),
-                Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+                Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
         }
 
         public override void PeriodWhereChanged()
         {
-            ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<Перелічення.ТипПеріодуДляЖурналівДокументів>(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
             LoadRecords();
         }
     }

@@ -232,8 +232,7 @@ namespace StorageAndTrade
             if (IsNew)
             {
                 //Основний договір
-                if (Контрагент.AfterSelectFunc != null)
-                    Контрагент.AfterSelectFunc.Invoke();
+                Контрагент.AfterSelectFunc?.Invoke();
             }
         }
 
@@ -300,7 +299,7 @@ namespace StorageAndTrade
                 bool isSpend = await ПоверненняТоварівПостачальнику_Objest.SpendTheDocument(ПоверненняТоварівПостачальнику_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПоверненняТоварівПостачальнику_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ПоверненняТоварівПостачальнику_Objest.UnigueID);
 
                 return isSpend;
             }

@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -59,7 +59,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.ХарактеристикиНоменклатуриВласник.Pointer = new ХарактеристикиНоменклатури_Pointer(SelectPointerItem);
 
-                    Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
@@ -121,7 +121,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ХарактеристикиНоменклатури_Const.FULLNAME} *", () =>
                 {
                     ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
                     {
@@ -139,7 +139,7 @@ namespace StorageAndTrade
                 ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
                 if (await ХарактеристикиНоменклатури_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ХарактеристикиНоменклатури_Objest.Назва}", () =>
                     {
                         ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
                         {

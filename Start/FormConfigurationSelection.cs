@@ -26,7 +26,6 @@ using AccountingSoftware;
 
 using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -41,16 +40,17 @@ namespace StorageAndTrade
 
         public override async ValueTask<bool> OpenProgram(ConfigurationParam? openConfigurationParam)
         {
-            if (await Config.Kernel.DataBase.IfExistsTable("tab_constants"))
+            if (await Config.Kernel.DataBase.IfExistsTable(SpecialTables.Constants))
             {
                 //Запуск фонових задач
                 Config.StartBackgroundTask();
 
                 //Значення констант за замовчуванням
-                if (Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const == 0)
-                    Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод;
+                if (string.IsNullOrEmpty(Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const))
+                    Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод.ToString();
 
                 Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = openConfigurationParam };
+                Program.GeneralNotebook = Program.GeneralForm.Notebook;
                 Program.GeneralForm.Show();
 
                 //Вивід інформації в нижній StatusBar
@@ -77,6 +77,7 @@ namespace StorageAndTrade
         {
             Configurator.FormConfigurator сonfigurator = new() { OpenConfigurationParam = openConfigurationParam };
             сonfigurator.Show();
+
             сonfigurator.SetValue();
             сonfigurator.LoadTreeAsync();
 

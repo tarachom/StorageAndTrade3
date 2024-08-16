@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -53,7 +53,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
-                    Program.GeneralForm?.CreateNotebookPage($"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     await page.LoadRecords();
                 };
@@ -71,7 +71,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
-                    Program.GeneralForm?.CreateNotebookPage($"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     page.LoadRecords();
                 };
@@ -147,7 +147,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Номенклатура_Const.FULLNAME} *", () =>
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент
                     {
@@ -166,7 +166,7 @@ namespace StorageAndTrade
                 Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
                 if (await Номенклатура_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Номенклатура_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Номенклатура_Objest.Назва}", () =>
                     {
                         Номенклатура_Елемент page = new Номенклатура_Елемент
                         {
@@ -210,6 +210,11 @@ namespace StorageAndTrade
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return null;
             }
+        }
+
+        protected override void FilterRecords(Box vBox)
+        {
+
         }
 
         #endregion

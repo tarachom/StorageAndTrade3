@@ -31,6 +31,7 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 using System.Reflection;
 
 using AccountingSoftware;
@@ -54,7 +55,7 @@ namespace StorageAndTrade
         /// <param name="unigueID">Елемент для позиціювання</param>
         /// <param name="periodWhere">Період</param>
         /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0)
+        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, ПеріодДляЖурналу.ТипПеріоду periodWhere = 0)
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -83,9 +84,9 @@ namespace StorageAndTrade
                         listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                 }
 
-                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,listName, () => { return (Widget)listPage; });
 
-                listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere != 0 ? periodWhere : Перелічення.ТипПеріодуДляЖурналівДокументів.ВесьПеріод);
+                listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere != 0 ? periodWhere : ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод);
                 listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
             }
         }

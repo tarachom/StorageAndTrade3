@@ -263,7 +263,7 @@ namespace StorageAndTrade
                 bool isSpend = await АктВиконанихРобіт_Objest.SpendTheDocument(АктВиконанихРобіт_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(АктВиконанихРобіт_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(АктВиконанихРобіт_Objest.UnigueID);
 
                 return isSpend;
             }

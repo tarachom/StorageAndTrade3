@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>12.08.2024 20:45:26</DateTimeSave>
+  <DateTimeSave>16.08.2024 12:19:04</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -834,8 +834,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
           <Name>ОсновнийТипПеріоду</Name>
           <NameInTable>col_h3</NameInTable>
           <Desc>Тип періоду журналів</Desc>
-          <Type>enum</Type>
-          <Pointer>Перелічення.ТипПеріодуДляЖурналівДокументів</Pointer>
+          <Type>string</Type>
           <TabularParts />
         </Constant>
       </Constants>
@@ -1166,6 +1165,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1177,6 +1177,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1196,6 +1197,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1207,6 +1209,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1396,6 +1399,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1407,6 +1411,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1418,6 +1423,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
               <Join>
@@ -1437,6 +1443,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиНоменклатури</Pointer>
             </Field>
@@ -1573,6 +1580,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1584,6 +1592,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1595,6 +1604,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
               <Join>
@@ -1752,6 +1762,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1763,6 +1774,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1782,6 +1794,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1793,6 +1806,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1887,6 +1901,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1898,6 +1913,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1917,6 +1933,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -1999,6 +2016,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2010,6 +2028,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2021,6 +2040,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>integer</Type>
               <Pointer>
               </Pointer>
@@ -2032,6 +2052,7 @@ END]]></Value>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2051,6 +2072,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2062,6 +2084,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2073,6 +2096,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>integer</Type>
               <Pointer>
               </Pointer>
@@ -2084,6 +2108,7 @@ END]]></Value>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2175,6 +2200,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2186,6 +2212,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2197,6 +2224,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2208,6 +2236,7 @@ END]]></Value>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2219,6 +2248,7 @@ END]]></Value>
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>boolean</Type>
               <Pointer>
               </Pointer>
@@ -2238,6 +2268,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2249,6 +2280,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2260,6 +2292,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2271,6 +2304,7 @@ END]]></Value>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2495,6 +2529,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2506,6 +2541,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2517,6 +2553,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти_Папки</Pointer>
               <Join>
@@ -2544,6 +2581,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2555,6 +2593,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2772,6 +2811,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2783,6 +2823,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2794,6 +2835,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиСкладів</Pointer>
             </Field>
@@ -2804,6 +2846,7 @@ END]]></Value>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.НалаштуванняАдресногоЗберігання</Pointer>
             </Field>
@@ -2822,6 +2865,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2833,6 +2877,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2905,6 +2950,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2916,6 +2962,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -2927,6 +2974,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -2954,6 +3002,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3026,6 +3075,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3037,6 +3087,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3056,6 +3107,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3067,6 +3119,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3238,6 +3291,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3249,6 +3303,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3268,6 +3323,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3440,6 +3496,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3451,6 +3508,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3470,6 +3528,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3542,6 +3601,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3553,6 +3613,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3572,6 +3633,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3633,6 +3695,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3644,6 +3707,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3663,6 +3727,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3674,6 +3739,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3777,6 +3843,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3788,6 +3855,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3799,6 +3867,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3810,6 +3879,7 @@ END]]></Value>
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3821,6 +3891,7 @@ END]]></Value>
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -3840,6 +3911,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3923,6 +3995,7 @@ END]]></Value>
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -3934,6 +4007,7 @@ END]]></Value>
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
               <Join>
@@ -3953,6 +4027,7 @@ END]]></Value>
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4050,6 +4125,7 @@ FROM
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4061,6 +4137,7 @@ FROM
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
               <Join>
@@ -4080,6 +4157,7 @@ FROM
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4442,6 +4520,7 @@ FROM
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4453,6 +4532,7 @@ FROM
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4464,6 +4544,7 @@ FROM
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -4505,6 +4586,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4516,6 +4598,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4527,6 +4610,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -4730,6 +4814,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4741,6 +4826,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4752,6 +4838,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -4779,6 +4866,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4790,6 +4878,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -4801,6 +4890,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -5062,6 +5152,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5073,6 +5164,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5084,6 +5176,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -5103,6 +5196,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипДоговорів</Pointer>
             </Field>
@@ -5121,6 +5215,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5132,6 +5227,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -5151,6 +5247,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипДоговорів</Pointer>
             </Field>
@@ -5353,6 +5450,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5364,6 +5462,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5375,6 +5474,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -5402,6 +5502,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5413,6 +5514,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5424,6 +5526,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -5545,6 +5648,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5556,6 +5660,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5567,6 +5672,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5578,6 +5684,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ВидиРухуКоштів</Pointer>
             </Field>
@@ -5596,6 +5703,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5669,6 +5777,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5688,6 +5797,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5792,6 +5902,7 @@ WHERE
               <SortNum>0</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5803,6 +5914,7 @@ WHERE
               <SortNum>0</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -5814,6 +5926,7 @@ WHERE
               <SortNum>0</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипДокументуПартіяТоварівКомпозит</Pointer>
             </Field>
@@ -5824,6 +5937,7 @@ WHERE
               <SortNum>0</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
               <Join>
@@ -5843,6 +5957,7 @@ WHERE
               <SortNum>0</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.ВведенняЗалишків</Pointer>
               <Join>
@@ -5870,6 +5985,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -5881,6 +5997,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -5999,6 +6116,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6010,6 +6128,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6029,6 +6148,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6040,6 +6160,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6388,6 +6509,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6399,6 +6521,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6410,6 +6533,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6421,6 +6545,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6432,6 +6557,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6443,6 +6569,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6454,6 +6581,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6465,6 +6593,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6476,6 +6605,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6487,6 +6617,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6498,6 +6629,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6509,6 +6641,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6520,6 +6653,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6531,6 +6665,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6542,6 +6677,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6553,6 +6689,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6564,6 +6701,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6575,6 +6713,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6586,6 +6725,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6605,6 +6745,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6616,6 +6757,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6692,6 +6834,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6703,6 +6846,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -6722,6 +6866,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.НалаштуванняАдресногоЗберігання</Pointer>
             </Field>
@@ -6740,6 +6885,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6751,6 +6897,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -6911,6 +7058,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6922,6 +7070,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
               <Join>
@@ -6941,6 +7090,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6952,6 +7102,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6963,6 +7114,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6974,6 +7126,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -6985,6 +7138,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиСкладськихКомірок</Pointer>
             </Field>
@@ -6995,6 +7149,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ТипорозміриКомірок</Pointer>
               <Join>
@@ -7014,6 +7169,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
               <Join>
@@ -7041,6 +7197,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7052,6 +7209,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
               <Join>
@@ -7136,6 +7294,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7147,6 +7306,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
               <Join>
@@ -7267,6 +7427,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7278,6 +7439,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7289,6 +7451,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7300,6 +7463,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7311,6 +7475,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7322,6 +7487,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7341,6 +7507,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7425,6 +7592,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
               <Join>
@@ -7452,6 +7620,7 @@ WHERE
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
               <Join>
@@ -7553,6 +7722,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7564,6 +7734,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7575,6 +7746,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -7594,6 +7766,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7605,6 +7778,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -7616,6 +7790,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -8070,6 +8245,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -8081,6 +8257,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -8092,6 +8269,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -8103,6 +8281,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -8122,6 +8301,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -8141,6 +8321,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -8160,6 +8341,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -8179,6 +8361,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -8190,6 +8373,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -8209,6 +8393,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -8568,6 +8753,7 @@ WHERE
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -8749,6 +8935,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -8760,6 +8947,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -8771,6 +8959,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -8782,6 +8971,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -8801,6 +8991,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>True</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -8820,6 +9011,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>True</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -8839,6 +9031,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -8858,6 +9051,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>True</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -8877,6 +9071,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -8888,6 +9083,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -8907,6 +9103,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -9393,6 +9590,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -9404,6 +9602,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -9415,6 +9614,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -9426,6 +9626,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -9445,6 +9646,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -9464,6 +9666,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -9483,6 +9686,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -9502,6 +9706,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -9521,6 +9726,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -9532,6 +9738,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -9551,6 +9758,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10091,6 +10299,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10102,6 +10311,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10113,6 +10323,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -10124,6 +10335,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -10143,6 +10355,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -10162,6 +10375,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -10181,6 +10395,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -10200,6 +10415,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -10219,6 +10435,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -10230,6 +10447,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -10249,6 +10467,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10466,6 +10685,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10477,6 +10697,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10488,6 +10709,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -10499,6 +10721,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -10518,6 +10741,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -10537,6 +10761,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
               <Join>
@@ -10556,6 +10781,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -10575,6 +10801,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10882,6 +11109,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10893,6 +11121,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -10904,6 +11133,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -10915,6 +11145,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -10934,6 +11165,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -10953,6 +11185,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -10972,6 +11205,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -10991,6 +11225,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -11002,6 +11237,7 @@ WHERE
               <SortNum>10</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ГосподарськіОперації</Pointer>
             </Field>
@@ -11012,6 +11248,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -11031,6 +11268,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -11372,6 +11610,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -11383,6 +11622,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -11394,6 +11634,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -11405,6 +11646,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -11424,6 +11666,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -11443,6 +11686,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -11462,6 +11706,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -11481,6 +11726,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -11492,6 +11738,7 @@ WHERE
               <SortNum>10</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>enum</Type>
               <Pointer>Перелічення.ГосподарськіОперації</Pointer>
             </Field>
@@ -11502,6 +11749,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -11521,6 +11769,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -11882,6 +12131,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -11893,6 +12143,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -11904,6 +12155,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -11915,6 +12167,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -11934,6 +12187,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -11953,6 +12207,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -11972,6 +12227,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -11991,6 +12247,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -12392,6 +12649,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -12403,6 +12661,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -12414,6 +12673,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -12425,6 +12685,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -12444,6 +12705,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -12463,6 +12725,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -12482,6 +12745,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -12501,6 +12765,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -12520,6 +12785,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -12531,6 +12797,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -12550,6 +12817,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -12921,6 +13189,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -12932,6 +13201,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -12943,6 +13213,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -12954,6 +13225,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -12973,6 +13245,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -12992,6 +13265,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -13011,6 +13285,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -13030,6 +13305,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -13049,6 +13325,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -13060,6 +13337,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -13079,6 +13357,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -13381,6 +13660,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -13392,6 +13672,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -13403,6 +13684,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -13414,6 +13696,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -13433,6 +13716,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -13452,6 +13736,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -13471,6 +13756,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -13490,6 +13776,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -13501,6 +13788,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -13520,6 +13808,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -13934,6 +14223,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -13945,6 +14235,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -13956,6 +14247,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -13967,6 +14259,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -13986,6 +14279,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -14005,6 +14299,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -14024,6 +14319,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -14043,6 +14339,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -14062,6 +14359,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14280,6 +14578,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14291,6 +14590,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14302,6 +14602,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -14313,6 +14614,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -14332,6 +14634,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -14351,6 +14654,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -14370,6 +14674,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14589,6 +14894,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14600,6 +14906,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14611,6 +14918,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -14622,6 +14930,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -14641,6 +14950,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -14660,6 +14970,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -14679,6 +14990,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14936,6 +15248,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14947,6 +15260,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -14958,6 +15272,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -14969,6 +15284,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -14988,6 +15304,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -15007,6 +15324,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ФізичніОсоби</Pointer>
               <Join>
@@ -15026,6 +15344,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -15045,6 +15364,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -15323,6 +15643,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -15334,6 +15655,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -15345,6 +15667,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -15356,6 +15679,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -15375,6 +15699,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -15394,6 +15719,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -15405,6 +15731,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -15424,6 +15751,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -15717,6 +16045,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -15728,6 +16057,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -15739,6 +16069,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -15750,6 +16081,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -15769,6 +16101,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -15788,6 +16121,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -15807,6 +16141,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -15818,6 +16153,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -15837,6 +16173,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16217,6 +16554,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16228,6 +16566,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16239,6 +16578,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -16250,6 +16590,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -16269,6 +16610,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
               <Join>
@@ -16288,6 +16630,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -16307,6 +16650,7 @@ WHERE
               <SortNum>7</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
               <Join>
@@ -16326,6 +16670,7 @@ WHERE
               <SortNum>8</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -16345,6 +16690,7 @@ WHERE
               <SortNum>9</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -16356,6 +16702,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -16375,6 +16722,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16623,6 +16971,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16634,6 +16983,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -16645,6 +16995,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16656,6 +17007,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -16675,6 +17027,7 @@ WHERE
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
               <Join>
@@ -16694,6 +17047,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -16713,6 +17067,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16960,6 +17315,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16971,6 +17327,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -16982,6 +17339,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -16993,6 +17351,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -17012,6 +17371,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -17031,6 +17391,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -17050,6 +17411,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17298,6 +17660,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17309,6 +17672,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -17320,6 +17684,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17331,6 +17696,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -17350,6 +17716,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
               <Join>
@@ -17369,6 +17736,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -17388,6 +17756,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17592,6 +17961,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17603,6 +17973,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -17614,6 +17985,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17625,6 +17997,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -17644,6 +18017,7 @@ WHERE
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
               <Join>
@@ -17663,6 +18037,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -17682,6 +18057,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17873,6 +18249,7 @@ WHERE
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17884,6 +18261,7 @@ WHERE
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -17895,6 +18273,7 @@ WHERE
               <SortNum>3</SortNum>
               <SortField>True</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>datetime</Type>
               <Pointer>
               </Pointer>
@@ -17906,6 +18285,7 @@ WHERE
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
               <Join>
@@ -17925,6 +18305,7 @@ WHERE
               <SortNum>98</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
               <Join>
@@ -17944,6 +18325,7 @@ WHERE
               <SortNum>99</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -18503,64 +18885,6 @@ WHERE
           <Value>7</Value>
           <Desc>
           </Desc>
-        </Field>
-      </Fields>
-    </Enum>
-    <Enum>
-      <Name>ТипПеріодуДляЖурналівДокументів</Name>
-      <Desc>
-      </Desc>
-      <SerialNumber>10</SerialNumber>
-      <Fields>
-        <Field>
-          <Name>ВесьПеріод</Name>
-          <Value>1</Value>
-          <Desc>Весь період</Desc>
-        </Field>
-        <Field>
-          <Name>ЗПочаткуРоку</Name>
-          <Value>2</Value>
-          <Desc>Рік (з початку року)</Desc>
-        </Field>
-        <Field>
-          <Name>Квартал</Name>
-          <Value>6</Value>
-          <Desc>Квартал (три місяці)</Desc>
-        </Field>
-        <Field>
-          <Name>ЗМинулогоМісяця</Name>
-          <Value>7</Value>
-          <Desc>Два місяці (з 1 числа)</Desc>
-        </Field>
-        <Field>
-          <Name>Місяць</Name>
-          <Value>8</Value>
-          <Desc>Місяць</Desc>
-        </Field>
-        <Field>
-          <Name>ЗПочаткуМісяця</Name>
-          <Value>3</Value>
-          <Desc>Місяць (з 1 числа)</Desc>
-        </Field>
-        <Field>
-          <Name>ЗПочаткуТижня</Name>
-          <Value>4</Value>
-          <Desc>Тиждень</Desc>
-        </Field>
-        <Field>
-          <Name>ПоточнийДень</Name>
-          <Value>5</Value>
-          <Desc>День</Desc>
-        </Field>
-        <Field>
-          <Name>ДваДні</Name>
-          <Value>9</Value>
-          <Desc>Два дні</Desc>
-        </Field>
-        <Field>
-          <Name>ТриДні</Name>
-          <Value>10</Value>
-          <Desc>Три дні</Desc>
         </Field>
       </Fields>
     </Enum>
@@ -25397,6 +25721,7 @@ SQL тип  непотрібно вказувати
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
               <Join>
@@ -25416,6 +25741,7 @@ SQL тип  непотрібно вказувати
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
               <Join>
@@ -25435,6 +25761,7 @@ SQL тип  непотрібно вказувати
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
               <Join>
@@ -25454,6 +25781,7 @@ SQL тип  непотрібно вказувати
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -25465,6 +25793,7 @@ SQL тип  непотрібно вказувати
               <SortNum>5</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
               <Join>
@@ -25484,6 +25813,7 @@ SQL тип  непотрібно вказувати
               <SortNum>6</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -25559,6 +25889,7 @@ SQL тип  непотрібно вказувати
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
               <Join>
@@ -25578,6 +25909,7 @@ SQL тип  непотрібно вказувати
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>numeric</Type>
               <Pointer>
               </Pointer>
@@ -25589,6 +25921,7 @@ SQL тип  непотрібно вказувати
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>integer</Type>
               <Pointer>
               </Pointer>
@@ -25668,6 +26001,7 @@ SQL тип  непотрібно вказувати
               <SortNum>1</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>string</Type>
               <Pointer>
               </Pointer>
@@ -25679,6 +26013,7 @@ SQL тип  непотрібно вказувати
               <SortNum>2</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
               <Join>
@@ -25698,6 +26033,7 @@ SQL тип  непотрібно вказувати
               <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
               <Join>
@@ -25717,6 +26053,7 @@ SQL тип  непотрібно вказувати
               <SortNum>4</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
               <Join>
@@ -25773,6 +26110,7 @@ SQL тип  непотрібно вказувати
               <SortNum>100</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Файли</Pointer>
               <Join>

@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
@@ -707,7 +707,7 @@ LIMIT 1
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        Program.GeneralForm?.CreateNotebookPage("Вибір - Замовлення постачальнику", () => { return page; });
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Вибір - Замовлення постачальнику", () => { return page; });
 
                         page.LoadRecords();
 
@@ -816,8 +816,7 @@ LIMIT 1
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;
 
-                TreeIter iter;
-                Store.GetIterFromString(out iter, args.Path);
+                Store.GetIterFromString(out TreeIter iter, args.Path);
 
                 int rowNumber = int.Parse(args.Path);
                 Запис запис = Записи[rowNumber];

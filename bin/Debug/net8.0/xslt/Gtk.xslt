@@ -41,76 +41,8 @@ limitations under the License.
  */
 
 using Gtk;
+using InterfaceGtk;
 using AccountingSoftware;
-
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Іконки
-{
-    public static class ДляТабличногоСписку
-    {
-        public static Gdk.Pixbuf Normal = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/doc.png");
-        public static Gdk.Pixbuf Delete = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/doc_delete.png");
-    }
-
-    public static class ДляДерева
-    {
-        public static Gdk.Pixbuf Normal = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/folder.png");
-        public static Gdk.Pixbuf Delete = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/folder_delete.png");
-    }
-}
-
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
-{
-    public abstract class ТабличнийСписок
-    {
-        public static void ДодатиВідбір(TreeView treeView, Where where, bool clear_all_before_add = false)
-        {
-            if (!treeView.Data.ContainsKey("Where"))
-                treeView.Data.Add("Where", new List&lt;Where&gt;() { where });
-            else
-            {
-                if (clear_all_before_add)
-                    treeView.Data["Where"] = new List&lt;Where&gt;() { where };
-                else
-                {
-                    object? value = treeView.Data["Where"];
-                    if (value == null)
-                        treeView.Data["Where"] = new List&lt;Where&gt;() { where };
-                    else
-                        ((List&lt;Where&gt;)value).Add(where);
-                }
-            }
-        }
-
-        public static void ДодатиВідбір(TreeView treeView, List&lt;Where&gt; where, bool clear_all_before_add = false)
-        {
-            if (!treeView.Data.ContainsKey("Where"))
-                treeView.Data.Add("Where", where);
-            else
-            {
-                if (clear_all_before_add)
-                    treeView.Data["Where"] = where;
-                else
-                {
-                    object? value = treeView.Data["Where"];
-                    if (value == null)
-                        treeView.Data["Where"] = where;
-                    else
-                    {
-                        var list = (List&lt;Where&gt;)value;
-                        foreach (Where item in where)
-                            list.Add(item);
-                    }
-                }
-            }
-        }
-
-        public static void ОчиститиВідбір(TreeView treeView)
-        {
-            if (treeView.Data.ContainsKey("Where"))
-                treeView.Data["Where"] = null;
-        }
-    }
-}
 
 namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Довідники.ТабличніСписки
 {
@@ -136,7 +68,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
@@ -376,7 +308,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -525,68 +457,6 @@ ORDER BY level, {<xsl:value-of select="$DirectoryName"/>_Const.Назва} ASC
 
 namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Документи.ТабличніСписки
 {
-    public static class Інтерфейс
-    {
-        public static ComboBoxText СписокВідбірПоПеріоду()
-        {
-            ComboBoxText сomboBox = new ComboBoxText();
-
-            if (Config.Kernel != null)
-            {
-                ConfigurationEnums ТипПеріодуДляЖурналівДокументів = Config.Kernel.Conf.Enums["ТипПеріодуДляЖурналівДокументів"];
-
-                foreach (ConfigurationEnumField field in ТипПеріодуДляЖурналівДокументів.Fields.Values)
-                    сomboBox.Append(field.Name, field.Desc);
-            }
-
-            /*сomboBox.Active = 0;*/
-
-            return сomboBox;
-        }
-
-        public static Where? ВідбірПоПеріоду(string fieldWhere, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
-        {
-            switch (типПеріоду)
-            {
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку:
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, 1, 1));
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.Квартал:
-                {
-                    DateTime ДатаТриМісцяНазад = DateTime.Now.AddMonths(-3);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаТриМісцяНазад.Year, ДатаТриМісцяНазад.Month, 1));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця:
-                {
-                    DateTime ДатаМісцьНазад = DateTime.Now.AddMonths(-1);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаМісцьНазад.Year, ДатаМісцьНазад.Month, 1));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.Місяць:
-                    return new Where(fieldWhere, Comparison.QT_EQ, DateTime.Now.AddMonths(-1));
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця:
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня:
-                {
-                    DateTime СімДнівНазад = DateTime.Now.AddDays(-7);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(СімДнівНазад.Year, СімДнівНазад.Month, СімДнівНазад.Day));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ДваДні:
-                {
-                    DateTime ДваДніНазад = DateTime.Now.AddDays(-1);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДваДніНазад.Year, ДваДніНазад.Month, ДваДніНазад.Day));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ТриДні:
-                {
-                    DateTime ТриДніНазад = DateTime.Now.AddDays(-2);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ТриДніНазад.Year, ТриДніНазад.Month, ТриДніНазад.Day));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ПоточнийДень:
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
-                default: 
-                    return null;
-            }
-        }
-    }
-
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
@@ -605,7 +475,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 <xsl:for-each select="Fields/Field">
@@ -646,10 +516,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -830,7 +700,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -872,7 +742,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary&lt;string, List&lt;Where&gt;&gt; WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -886,7 +756,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             {
                 List&lt;Where&gt; whereList = [];
                 WhereDict.Add("<xsl:value-of select="$AllowName"/>", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.<xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               </xsl:if>
@@ -1057,7 +927,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
         {
             return new object[] 
             { 
-                Іконки.ДляТабличногоСписку.Normal, 
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Період,
                 <xsl:for-each select="Fields/Field">

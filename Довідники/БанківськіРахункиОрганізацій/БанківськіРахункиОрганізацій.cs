@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -73,7 +74,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиОрганізацій_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{БанківськіРахункиОрганізацій_Const.FULLNAME} *", () =>
                 {
                     БанківськіРахункиОрганізацій_Елемент page = new БанківськіРахункиОрганізацій_Елемент
                     {
@@ -91,7 +92,7 @@ namespace StorageAndTrade
                 БанківськіРахункиОрганізацій_Objest БанківськіРахункиОрганізацій_Objest = new БанківськіРахункиОрганізацій_Objest();
                 if (await БанківськіРахункиОрганізацій_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиОрганізацій_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{БанківськіРахункиОрганізацій_Objest.Назва}", () =>
                     {
                         БанківськіРахункиОрганізацій_Елемент page = new БанківськіРахункиОрганізацій_Елемент
                         {

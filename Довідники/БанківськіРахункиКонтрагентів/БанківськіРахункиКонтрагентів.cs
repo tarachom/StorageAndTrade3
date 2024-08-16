@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -75,7 +75,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{БанківськіРахункиКонтрагентів_Const.FULLNAME} *", () =>
                 {
                     БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
                     {
@@ -93,7 +93,7 @@ namespace StorageAndTrade
                 БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest = new БанківськіРахункиКонтрагентів_Objest();
                 if (await БанківськіРахункиКонтрагентів_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{БанківськіРахункиКонтрагентів_Objest.Назва}", () =>
                     {
                         БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
                         {

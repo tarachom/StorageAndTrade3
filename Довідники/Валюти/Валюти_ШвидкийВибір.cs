@@ -22,11 +22,9 @@ limitations under the License.
 */
 
 using Gtk;
-
-using AccountingSoftware;
+using InterfaceGtk;
 
 using StorageAndTrade_1_0.Довідники;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -48,7 +46,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {Валюти_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Валюти_Const.FULLNAME}", () => { return page; });
 
                     await page.LoadRecords();
                 };
@@ -67,7 +65,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME} *", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Валюти_Const.FULLNAME} *", () => { return page; });
 
                     page.SetValue();
                 };

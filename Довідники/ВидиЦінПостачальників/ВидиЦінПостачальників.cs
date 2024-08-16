@@ -21,8 +21,9 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
-using GLib;
+
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -72,7 +73,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ВидиЦінПостачальників_Const.FULLNAME} *", () =>
                 {
                     ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
                     {
@@ -90,7 +91,7 @@ namespace StorageAndTrade
                 ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
                 if (await ВидиЦінПостачальників_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ВидиЦінПостачальників_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ВидиЦінПостачальників_Objest.Назва}", () =>
                     {
                         ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
                         {

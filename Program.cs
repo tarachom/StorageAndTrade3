@@ -22,26 +22,23 @@ limitations under the License.
 */
 
 using Gtk;
-
 using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
     class Program
     {
-        #region Const
-
-        //Шлях до іконки
-        public static readonly string IcoFileName = AppContext.BaseDirectory + "images/form.ico"; //????
-
-        #endregion
-
         #region Global Var
 
         /// <summary>
         /// Основна форма
         /// </summary>
         public static FormStorageAndTrade? GeneralForm { get; set; }
+
+        /// <summary>
+        /// Основний блокнот
+        /// </summary>
+        public static Notebook? GeneralNotebook { get; set; }
 
         /// <summary>
         /// Авторизований користувач
@@ -55,14 +52,6 @@ namespace StorageAndTrade
             Application.Init();
             _ = new FormConfigurationSelection();
             Application.Run();
-        }
-
-        /// <summary>
-        /// Завершення програми
-        /// </summary>
-        public static void Quit()
-        {
-            Application.Quit();
         }
     }
 }

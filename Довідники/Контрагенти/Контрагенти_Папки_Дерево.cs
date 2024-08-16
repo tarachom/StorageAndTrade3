@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -55,7 +56,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Папки_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Папки_Const.FULLNAME} *", () =>
                 {
                     Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
                     {
@@ -74,7 +75,7 @@ namespace StorageAndTrade
                 Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
                 if (await Контрагенти_Папки_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Контрагенти_Папки_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Папки_Objest.Назва}", () =>
                     {
                         Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
                         {

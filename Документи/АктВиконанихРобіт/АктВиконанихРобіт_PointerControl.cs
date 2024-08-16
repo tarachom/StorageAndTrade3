@@ -62,7 +62,7 @@ namespace StorageAndTrade
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {АктВиконанихРобіт_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {АктВиконанихРобіт_Const.FULLNAME}", () => { return page; });
 
             page.LoadRecords();
         }

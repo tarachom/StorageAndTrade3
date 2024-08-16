@@ -21,6 +21,8 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -73,7 +75,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Блокнот_Const.FULLNAME} *", () =>
                 {
                     Блокнот_Елемент page = new Блокнот_Елемент
                     {
@@ -91,7 +93,7 @@ namespace StorageAndTrade
                 Блокнот_Objest Блокнот_Objest = new Блокнот_Objest();
                 if (await Блокнот_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Блокнот_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Блокнот_Objest.Назва}", () =>
                     {
                         Блокнот_Елемент page = new Блокнот_Елемент
                         {

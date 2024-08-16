@@ -193,7 +193,7 @@ namespace StorageAndTrade
                 bool isSpend = await ВнутрішнєСпоживанняТоварів_Objest.SpendTheDocument(ВнутрішнєСпоживанняТоварів_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ВнутрішнєСпоживанняТоварів_Objest.UnigueID);
+                   new ФункціїДляПовідомлень().ПоказатиПовідомлення(ВнутрішнєСпоживанняТоварів_Objest.UnigueID);
 
                 return isSpend;
             }

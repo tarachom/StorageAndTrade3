@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 namespace StorageAndTrade
@@ -225,7 +225,7 @@ namespace StorageAndTrade
             bool insertPage = false, System.Action? refresh = null)
         {
             int numPage;
-            Box hBoxLabel = Program.GeneralForm!.CreateLabelPageWidget(tabName, codePage, notebook);
+            Box hBoxLabel = NotebookFunction.CreateLabelPageWidget(notebook, tabName, codePage);
 
             //Лінк для обновлення звіту
             if (refresh != null)
@@ -298,11 +298,11 @@ namespace StorageAndTrade
                 {
                     if (onRefreshAction != null)
                     {
-                        Program.GeneralForm!.CurrentNotebookPageToCode(notebook, codePage);
+                        NotebookFunction.CurrentNotebookPageToCode(notebook, codePage);
 
                         onRefreshAction.Invoke(refreshParam, true);
 
-                        Program.GeneralForm!.CloseNotebookPageToCode(notebook, codePage);
+                        NotebookFunction.CloseNotebookPageToCode(notebook, codePage);
                     }
                 }
             );

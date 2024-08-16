@@ -21,190 +21,40 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+/*
+ 
+Повідомлення про помилки
+
+*/
+
 using Gtk;
 using AccountingSoftware;
 
 namespace StorageAndTrade
 {
-    class СпільніФорми_ВивідПовідомленняПроПомилки : Box
+    class СпільніФорми_ВивідПовідомленняПроПомилки : InterfaceGtk.СпільніФорми_ВивідПовідомленняПроПомилки
     {
-        Box vBoxMessage = new Box(Orientation.Vertical, 0);
-
-        public СпільніФорми_ВивідПовідомленняПроПомилки() : base(Orientation.Vertical, 0)
+        protected override async ValueTask<SelectRequest_Record> ПрочитатиПовідомленняПроПомилки()
         {
-            //Кнопки
-            Box hBoxTop = new Box(Orientation.Horizontal, 0);
-            PackStart(hBoxTop, false, false, 10);
-
-            Button bClear = new Button("Очистити");
-            bClear.Clicked += OnClear;
-            hBoxTop.PackStart(bClear, false, false, 10);
-
-            Button bReload = new Button("Перечитати");
-            bReload.Clicked += OnReload;
-            hBoxTop.PackStart(bReload, false, false, 10);
-
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scroll.Add(vBoxMessage);
-
-            PackStart(scroll, true, true, 0);
-
-            ShowAll();
+            return await new ФункціїДляПовідомлень().ПрочитатиПовідомленняПроПомилки();
         }
 
-        public async ValueTask LoadRecords()
+        protected override async ValueTask ОчиститиВсіПовідомлення()
         {
-            foreach (Widget Child in vBoxMessage.Children)
-                vBoxMessage.Remove(Child);
-
-            SelectRequest_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки();
-
-            foreach (Dictionary<string, object> row in record.ListRow)
-                CreateMessage(row);
-
-            vBoxMessage.ShowAll();
+            await new ФункціїДляПовідомлень().ОчиститиВсіПовідомлення();
         }
 
-        void CreateMessage(Dictionary<string, object> row)
+        protected override Widget СтворитиВибір(UuidAndText uuidAndText)
         {
-            Box vBoxInfo = new Box(Orientation.Vertical, 0);
-
-            //Image
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                hBox.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
-                hBox.PackStart(vBoxInfo, false, false, 10);
-                vBoxMessage.PackStart(hBox, false, false, 10);
-            }
-
-            //Перший рядок
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                Label line = new Label("<i>" + row["Дата"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
-                {
-                    UseMarkup = true
-                };
-
-                hBox.PackStart(line, false, false, 5);
-                vBoxInfo.PackStart(hBox, false, false, 5);
-            }
-
-            //Другий рядок
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                Label line = new Label("<b>" + row["НазваОбєкту"].ToString() + "</b>")
-                {
-                    UseMarkup = true
-                };
-
-                hBox.PackStart(line, false, false, 5);
-                vBoxInfo.PackStart(hBox, false, false, 5);
-            }
-
-            //Повідомлення
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                hBox.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
-                vBoxInfo.PackStart(hBox, false, false, 5);
-            }
-
-            //Для відкриття
-            {
-                CompositePointerControl Обєкт = new CompositePointerControl
-                {
-                    Pointer = new UuidAndText(new UnigueID(row["Обєкт"]).UGuid, row["ТипОбєкту"].ToString() ?? ""),
-                    Caption = ""
-                };
-
-                Box hBoxObject = new Box(Orientation.Horizontal, 0);
-                hBoxObject.PackStart(Обєкт, false, false, 0);
-                vBoxInfo.PackStart(hBoxObject, false, false, 0);
-            }
-
-            vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
-        }
-
-        async void OnClear(object? sender, EventArgs args)
-        {
-            await ФункціїДляПовідомлень.ОчиститиВсіПовідомлення();
-            await LoadRecords();
-        }
-
-        async void OnReload(object? sender, EventArgs args)
-        {
-            await LoadRecords();
+            return new CompositePointerControl { Pointer = uuidAndText, Caption = "" };
         }
     }
 
-    class СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід : Box
+    class СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід : InterfaceGtk.СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід
     {
-        Box vBoxMessage = new Box(Orientation.Vertical, 0);
-
-        public СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід(int width = 800, int height = 400) : base(Orientation.Vertical, 0)
+        protected override async ValueTask<SelectRequest_Record> ПрочитатиПовідомленняПроПомилки(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, WidthRequest = width, HeightRequest = height };
-            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scroll.Add(vBoxMessage);
-
-            PackStart(scroll, true, true, 0);
-            ShowAll();
-        }
-
-        public async ValueTask LoadRecords(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
-        {
-            SelectRequest_Record record = await ФункціїДляПовідомлень.ПрочитатиПовідомленняПроПомилки(ВідбірПоОбєкту, limit);
-
-            foreach (Dictionary<string, object> row in record.ListRow)
-                CreateMessage(row);
-
-            vBoxMessage.ShowAll();
-        }
-
-        void CreateMessage(Dictionary<string, object> row)
-        {
-            Box vBoxInfo = new Box(Orientation.Vertical, 0);
-
-            //Image
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                hBox.PackStart(new Image(AppContext.BaseDirectory + "images/error.png"), false, false, 25);
-                hBox.PackStart(vBoxInfo, false, false, 10);
-                vBoxMessage.PackStart(hBox, false, false, 10);
-            }
-
-            //Перший рядок
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                Label line = new Label("<i>" + row["Час"].ToString() + " " + row["НазваПроцесу"].ToString() + "</i>")
-                {
-                    UseMarkup = true
-                };
-
-                hBox.PackStart(line, false, false, 5);
-                vBoxInfo.PackStart(hBox, false, false, 5);
-            }
-
-            //Другий рядок
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                Label line = new Label("<b>" + row["НазваОбєкту"].ToString() + "</b>")
-                {
-                    UseMarkup = true
-                };
-
-                hBox.PackStart(line, false, false, 5);
-                vBoxInfo.PackStart(hBox, false, false, 5);
-            }
-
-            //Повідомлення
-            {
-                Box hBox = new Box(Orientation.Horizontal, 0);
-                hBox.PackStart(new Label("-> " + row["Повідомлення"].ToString()) { Wrap = true }, false, false, 5);
-                vBoxInfo.PackStart(hBox, false, false, 5);
-            }
-
-            vBoxMessage.PackStart(new Separator(Orientation.Horizontal), false, false, 5);
+            return await new ФункціїДляПовідомлень().ПрочитатиПовідомленняПроПомилки(ВідбірПоОбєкту, limit);
         }
     }
 }

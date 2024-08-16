@@ -136,7 +136,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         TimeControl <xsl:value-of select="Name"/> = new TimeControl();
                     </xsl:when>
                     <xsl:when test="Type = 'composite_pointer'">
-                        CompositePointerControl <xsl:value-of select="Name"/> = new CompositePointerControl();
+                        CompositePointerControl <xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Довідники.<xsl:value-of select="$DirectoryName"/>.<xsl:value-of select="Name"/>" };
                     </xsl:when>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />

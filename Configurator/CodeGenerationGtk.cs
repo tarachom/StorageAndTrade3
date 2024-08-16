@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 12.08.2024 20:45:26
+ * Дата конфігурації: 16.08.2024 12:19:04
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -34,76 +34,8 @@ limitations under the License.
  */
 
 using Gtk;
+using InterfaceGtk;
 using AccountingSoftware;
-
-namespace StorageAndTrade_1_0.Іконки
-{
-    public static class ДляТабличногоСписку
-    {
-        public static Gdk.Pixbuf Normal = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/doc.png");
-        public static Gdk.Pixbuf Delete = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/doc_delete.png");
-    }
-
-    public static class ДляДерева
-    {
-        public static Gdk.Pixbuf Normal = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/folder.png");
-        public static Gdk.Pixbuf Delete = new Gdk.Pixbuf($"{AppContext.BaseDirectory}images/folder_delete.png");
-    }
-}
-
-namespace StorageAndTrade_1_0
-{
-    public abstract class ТабличнийСписок
-    {
-        public static void ДодатиВідбір(TreeView treeView, Where where, bool clear_all_before_add = false)
-        {
-            if (!treeView.Data.ContainsKey("Where"))
-                treeView.Data.Add("Where", new List<Where>() { where });
-            else
-            {
-                if (clear_all_before_add)
-                    treeView.Data["Where"] = new List<Where>() { where };
-                else
-                {
-                    object? value = treeView.Data["Where"];
-                    if (value == null)
-                        treeView.Data["Where"] = new List<Where>() { where };
-                    else
-                        ((List<Where>)value).Add(where);
-                }
-            }
-        }
-
-        public static void ДодатиВідбір(TreeView treeView, List<Where> where, bool clear_all_before_add = false)
-        {
-            if (!treeView.Data.ContainsKey("Where"))
-                treeView.Data.Add("Where", where);
-            else
-            {
-                if (clear_all_before_add)
-                    treeView.Data["Where"] = where;
-                else
-                {
-                    object? value = treeView.Data["Where"];
-                    if (value == null)
-                        treeView.Data["Where"] = where;
-                    else
-                    {
-                        var list = (List<Where>)value;
-                        foreach (Where item in where)
-                            list.Add(item);
-                    }
-                }
-            }
-        }
-
-        public static void ОчиститиВідбір(TreeView treeView)
-        {
-            if (treeView.Data.ContainsKey("Where"))
-                treeView.Data["Where"] = null;
-        }
-    }
-}
 
 namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 {
@@ -124,7 +56,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -242,7 +174,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -371,7 +303,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -636,7 +568,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -865,7 +797,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -983,7 +915,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -1106,7 +1038,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -1223,7 +1155,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -1343,7 +1275,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -1473,7 +1405,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -1609,7 +1541,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -1744,7 +1676,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -1878,7 +1810,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2008,7 +1940,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2133,7 +2065,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2261,7 +2193,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2385,7 +2317,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2514,7 +2446,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -2632,7 +2564,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2750,7 +2682,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2873,7 +2805,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -2990,7 +2922,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -3108,7 +3040,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -3225,7 +3157,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -3343,7 +3275,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -3460,7 +3392,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -3578,7 +3510,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -3696,7 +3628,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -3822,7 +3754,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -3954,7 +3886,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -4076,7 +4008,7 @@ END
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Номенклатура*/ Номенклатура,
@@ -4294,7 +4226,7 @@ FROM
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Номенклатура*/ Номенклатура,
@@ -4511,7 +4443,7 @@ FROM
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -4657,7 +4589,7 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -4808,7 +4740,7 @@ ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -4954,7 +4886,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -5105,7 +5037,7 @@ ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -5251,7 +5183,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -5406,7 +5338,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -5554,7 +5486,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -5706,7 +5638,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -5837,7 +5769,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -5974,7 +5906,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -6110,7 +6042,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Контрагент*/ Контрагент,
@@ -6246,7 +6178,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -6377,7 +6309,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -6514,7 +6446,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Код*/ Код,
@@ -6641,7 +6573,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -6758,7 +6690,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Номер*/ Номер,
                 
@@ -6870,7 +6802,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Номер*/ Номер,
                 
@@ -6991,7 +6923,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Дата*/ Дата,
@@ -7138,7 +7070,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Дата*/ Дата,
@@ -7261,7 +7193,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -7379,7 +7311,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -7519,7 +7451,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -7722,7 +7654,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -7846,7 +7778,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Склад*/ Склад,
@@ -7976,7 +7908,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Склад*/ Склад,
@@ -8113,7 +8045,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Приміщення*/ Приміщення,
@@ -8287,7 +8219,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Приміщення*/ Приміщення,
@@ -8417,7 +8349,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Приміщення*/ Приміщення,
@@ -8551,7 +8483,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 /*Висота*/ Висота,
@@ -8688,7 +8620,7 @@ WHERE
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Назва*/ Назва,
                 
@@ -8804,7 +8736,7 @@ WHERE
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -8956,7 +8888,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         {
             return new object[] 
             {
-                DeletionLabel ? Іконки.ДляДерева.Delete : Іконки.ДляДерева.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
                 ID,
                 Назва
             };
@@ -9116,7 +9048,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -9240,7 +9172,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
                 /*Код*/ Код,
                 /*Назва*/ Назва,
@@ -9356,68 +9288,6 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
 
 namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 {
-    public static class Інтерфейс
-    {
-        public static ComboBoxText СписокВідбірПоПеріоду()
-        {
-            ComboBoxText сomboBox = new ComboBoxText();
-
-            if (Config.Kernel != null)
-            {
-                ConfigurationEnums ТипПеріодуДляЖурналівДокументів = Config.Kernel.Conf.Enums["ТипПеріодуДляЖурналівДокументів"];
-
-                foreach (ConfigurationEnumField field in ТипПеріодуДляЖурналівДокументів.Fields.Values)
-                    сomboBox.Append(field.Name, field.Desc);
-            }
-
-            /*сomboBox.Active = 0;*/
-
-            return сomboBox;
-        }
-
-        public static Where? ВідбірПоПеріоду(string fieldWhere, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
-        {
-            switch (типПеріоду)
-            {
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуРоку:
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, 1, 1));
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.Квартал:
-                {
-                    DateTime ДатаТриМісцяНазад = DateTime.Now.AddMonths(-3);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаТриМісцяНазад.Year, ДатаТриМісцяНазад.Month, 1));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗМинулогоМісяця:
-                {
-                    DateTime ДатаМісцьНазад = DateTime.Now.AddMonths(-1);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДатаМісцьНазад.Year, ДатаМісцьНазад.Month, 1));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.Місяць:
-                    return new Where(fieldWhere, Comparison.QT_EQ, DateTime.Now.AddMonths(-1));
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуМісяця:
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ЗПочаткуТижня:
-                {
-                    DateTime СімДнівНазад = DateTime.Now.AddDays(-7);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(СімДнівНазад.Year, СімДнівНазад.Month, СімДнівНазад.Day));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ДваДні:
-                {
-                    DateTime ДваДніНазад = DateTime.Now.AddDays(-1);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ДваДніНазад.Year, ДваДніНазад.Month, ДваДніНазад.Day));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ТриДні:
-                {
-                    DateTime ТриДніНазад = DateTime.Now.AddDays(-2);
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(ТриДніНазад.Year, ТриДніНазад.Month, ТриДніНазад.Day));
-                }
-                case Перелічення.ТипПеріодуДляЖурналівДокументів.ПоточнийДень:
-                    return new Where(fieldWhere, Comparison.QT_EQ, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
-                default: 
-                    return null;
-            }
-        }
-    }
-
     
     #region DOCUMENT "ЗамовленняПостачальнику"
     
@@ -9443,7 +9313,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -9499,10 +9369,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -9657,7 +9527,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -9716,10 +9586,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -9883,7 +9753,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -9942,10 +9812,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10109,7 +9979,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -10168,10 +10038,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10332,7 +10202,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -10382,10 +10252,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10529,7 +10399,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -10588,10 +10458,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10748,7 +10618,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -10807,10 +10677,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10964,7 +10834,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -11014,10 +10884,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11161,7 +11031,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -11220,10 +11090,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11387,7 +11257,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -11446,10 +11316,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11612,7 +11482,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -11668,10 +11538,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11824,7 +11694,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -11877,10 +11747,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12029,7 +11899,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -12076,10 +11946,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.НадлишкиТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.НадлишкиТоварів_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12210,7 +12080,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -12257,10 +12127,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПересортицяТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПересортицяТоварів_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12392,7 +12262,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -12442,10 +12312,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12586,7 +12456,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -12636,10 +12506,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12774,7 +12644,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -12827,10 +12697,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12976,7 +12846,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -13035,10 +12905,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13198,7 +13068,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -13245,10 +13115,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13379,7 +13249,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -13426,10 +13296,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13560,7 +13430,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -13607,10 +13477,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13741,7 +13611,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -13788,10 +13658,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13921,7 +13791,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 /*Назва*/ Назва,
@@ -13965,10 +13835,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
-            Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -14101,7 +13971,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -14153,7 +14023,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -14164,147 +14034,147 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ЗамовленняПостачальнику", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПоступленняТоварівТаПослуг", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ЗамовленняКлієнта", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РеалізаціяТоварівТаПослуг", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ВстановленняЦінНоменклатури", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПрихіднийКасовийОрдер", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РозхіднийКасовийОрдер", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПереміщенняТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПоверненняТоварівПостачальнику", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПоверненняТоварівВідКлієнта", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("АктВиконанихРобіт", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ВведенняЗалишків", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПерерахунокТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПсуванняТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ВнутрішнєСпоживанняТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РахунокФактура", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РозміщенняТоварівНаСкладі", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПереміщенняТоварівНаСкладі", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ЗбіркаТоварівНаСкладі", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("КорегуванняБоргу", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
@@ -16177,7 +16047,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -16229,7 +16099,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -16240,21 +16110,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ЗамовленняПостачальнику", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПоступленняТоварівТаПослуг", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПоверненняТоварівПостачальнику", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
@@ -16636,7 +16506,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -16688,7 +16558,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -16699,35 +16569,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ЗамовленняКлієнта", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РеалізаціяТоварівТаПослуг", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПоверненняТоварівВідКлієнта", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("АктВиконанихРобіт", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РахунокФактура", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
@@ -17288,7 +17158,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -17340,7 +17210,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -17351,14 +17221,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПрихіднийКасовийОрдер", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РозхіднийКасовийОрдер", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
@@ -17645,7 +17515,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -17691,7 +17561,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -17702,35 +17572,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПереміщенняТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ВведенняЗалишків", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПерерахунокТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПсуванняТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ВнутрішнєСпоживанняТоварів", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
@@ -18174,7 +18044,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         {
             return new object[] 
             { 
-                DeletionLabel ? Іконки.ДляТабличногоСписку.Delete : Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -18218,7 +18088,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, Перелічення.ТипПеріодуДляЖурналівДокументів типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -18229,28 +18099,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РозміщенняТоварівНаСкладі", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ПереміщенняТоварівНаСкладі", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("ЗбіркаТоварівНаСкладі", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
             {
                 List<Where> whereList = [];
                 WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", whereList);
-                Where? where = Інтерфейс.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
                 if (where != null) whereList.Add(where);
             }
               
@@ -18610,7 +18480,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         {
             return new object[] 
             { 
-                Іконки.ДляТабличногоСписку.Normal, 
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Період,
                 /*Номенклатура*/ Номенклатура,
@@ -18767,7 +18637,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         {
             return new object[] 
             { 
-                Іконки.ДляТабличногоСписку.Normal, 
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Період,
                 /*Валюта*/ Валюта,
@@ -18881,7 +18751,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         {
             return new object[] 
             { 
-                Іконки.ДляТабличногоСписку.Normal, 
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Період,
                 /*Штрихкод*/ Штрихкод,
@@ -19012,7 +18882,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
         {
             return new object[] 
             { 
-                Іконки.ДляТабличногоСписку.Normal, 
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Період,
                 /*Файл*/ Файл,

@@ -28,6 +28,7 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
@@ -102,7 +103,7 @@ namespace StorageAndTrade
             Link.AddLink(hBoxInfo, "Довідник - Валюти", async () =>
             {
                 Валюти page = new Валюти();
-                Program.GeneralForm?.CreateNotebookPage($"{Валюти_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Const.FULLNAME}", () => { return page; });
                 await page.LoadRecords();
             });
 
@@ -112,7 +113,7 @@ namespace StorageAndTrade
         void OnDownloadCurs(object? sender, EventArgs args)
         {
             Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
-            Program.GeneralForm?.CreateNotebookPage("Завантаження курсів валют НБУ", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження курсів валют НБУ", () => { return page; });
 
             Task.Run(() =>
             {
@@ -181,7 +182,7 @@ namespace StorageAndTrade
         {
             КурсиВалют_ІсторіяЗавантаження page = new КурсиВалют_ІсторіяЗавантаження();
             page.LoadRecords();
-            Program.GeneralForm?.CreateNotebookPage("Курси валют - історія завантаження", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Курси валют - історія завантаження", () => { return page; });
         }
     }
 }

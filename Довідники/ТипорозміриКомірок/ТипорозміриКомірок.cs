@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -73,7 +74,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ТипорозміриКомірок_Const.FULLNAME} *", () =>
                 {
                     ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
                     {
@@ -91,7 +92,7 @@ namespace StorageAndTrade
                 ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest = new ТипорозміриКомірок_Objest();
                 if (await ТипорозміриКомірок_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{ТипорозміриКомірок_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ТипорозміриКомірок_Objest.Назва}", () =>
                     {
                         ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
                         {

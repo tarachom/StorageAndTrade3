@@ -21,7 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 using Gtk;
-
+using InterfaceGtk;
 using System.Reflection;
 
 using AccountingSoftware;
@@ -73,7 +73,7 @@ namespace StorageAndTrade
                         listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                 }
 
-                Program.GeneralForm?.CreateNotebookPage(listName, () => { return (Widget)listPage; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,listName, () => { return (Widget)listPage; });
 
                 listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
             }

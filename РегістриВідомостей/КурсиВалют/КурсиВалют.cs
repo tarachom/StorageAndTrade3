@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = StorageAndTrade_1_0.РегістриВідомостей.ТабличніСписки;
 using StorageAndTrade_1_0.РегістриВідомостей;
@@ -102,7 +103,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{КурсиВалют_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КурсиВалют_Const.FULLNAME} *", () =>
                 {
                     КурсиВалют_Елемент page = new КурсиВалют_Елемент
                     {
@@ -121,7 +122,7 @@ namespace StorageAndTrade
                 КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
                 if (await КурсиВалют_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{КурсиВалют_Objest.Курс}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КурсиВалют_Objest.Курс}", () =>
                     {
                         КурсиВалют_Елемент page = new КурсиВалют_Елемент
                         {

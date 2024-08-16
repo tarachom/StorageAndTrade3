@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using Константи = StorageAndTrade_1_0.Константи;
@@ -602,8 +602,7 @@ namespace StorageAndTrade
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;
 
-                TreeIter iter;
-                Store.GetIterFromString(out iter, args.Path);
+                Store.GetIterFromString(out TreeIter iter, args.Path);
 
                 int rowNumber = int.Parse(args.Path);
                 Запис запис = Записи[rowNumber];

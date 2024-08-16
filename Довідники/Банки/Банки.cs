@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
@@ -40,7 +40,7 @@ namespace StorageAndTrade
                 LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження списку Банків") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
                 linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
                 {
-                    Program.GeneralForm?.CreateNotebookPage("Завантаження списку Банків", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження списку Банків", () =>
                     {
                         return new Обробка_ЗавантаженняБанків();
                     });
@@ -89,7 +89,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                Program.GeneralForm?.CreateNotebookPage($"{Банки_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Банки_Const.FULLNAME} *", () =>
                 {
                     Банки_Елемент page = new Банки_Елемент
                     {
@@ -107,7 +107,7 @@ namespace StorageAndTrade
                 Банки_Objest Банки_Objest = new Банки_Objest();
                 if (await Банки_Objest.Read(unigueID))
                 {
-                    Program.GeneralForm?.CreateNotebookPage($"{Банки_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Банки_Objest.Назва}", () =>
                     {
                         Банки_Елемент page = new Банки_Елемент
                         {

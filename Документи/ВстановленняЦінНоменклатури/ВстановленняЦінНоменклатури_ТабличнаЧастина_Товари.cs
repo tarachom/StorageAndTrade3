@@ -22,7 +22,7 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
@@ -457,8 +457,7 @@ namespace StorageAndTrade
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;
 
-                TreeIter iter;
-                Store.GetIterFromString(out iter, args.Path);
+                Store.GetIterFromString(out TreeIter iter, args.Path);
 
                 int rowNumber = int.Parse(args.Path);
                 Запис запис = Записи[rowNumber];
@@ -514,8 +513,7 @@ namespace StorageAndTrade
 
         async void OnFillDirectory(object? sender, EventArgs args)
         {
-            if (ОбновитиЗначенняДокумента != null)
-                ОбновитиЗначенняДокумента.Invoke();
+            ОбновитиЗначенняДокумента?.Invoke();
 
             string query = $@"
 SELECT
@@ -585,8 +583,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
 
         async void OnFillRegister(object? sender, EventArgs args)
         {
-            if (ОбновитиЗначенняДокумента != null)
-                ОбновитиЗначенняДокумента.Invoke();
+            ОбновитиЗначенняДокумента?.Invoke();
 
             string query = $@"
 WITH register AS

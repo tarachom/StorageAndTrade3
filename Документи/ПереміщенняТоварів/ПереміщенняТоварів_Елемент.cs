@@ -221,7 +221,7 @@ namespace StorageAndTrade
                 bool isSpend = await ПереміщенняТоварів_Objest.SpendTheDocument(ПереміщенняТоварів_Objest.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПереміщенняТоварів_Objest.UnigueID);
+                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ПереміщенняТоварів_Objest.UnigueID);
 
                 return isSpend;
             }

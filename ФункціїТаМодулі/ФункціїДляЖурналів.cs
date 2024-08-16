@@ -28,13 +28,12 @@ limitations under the License.
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using System.Reflection;
 
 using AccountingSoftware;
 
 using StorageAndTrade_1_0;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -47,7 +46,7 @@ namespace StorageAndTrade
         /// <param name="unigueID">Елемент для позиціювання</param>
         /// <param name="periodWhere">Період</param>
         /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиЖурналВідповідноДоВиду(string typeJournal, UnigueID? unigueID, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0)
+        public static void ВідкритиЖурналВідповідноДоВиду(string typeJournal, UnigueID? unigueID, ПеріодДляЖурналу.ТипПеріоду periodWhere = 0)
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -68,7 +67,7 @@ namespace StorageAndTrade
                 //Документ який потрібно виділити в списку
                 listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
 
-                Program.GeneralForm?.CreateNotebookPage(typeJournal, () => { return (Widget)listPage; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,typeJournal, () => { return (Widget)listPage; });
 
                 if (periodWhere != 0)
                     listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
@@ -77,7 +76,7 @@ namespace StorageAndTrade
             }
         }
 
-        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, Перелічення.ТипПеріодуДляЖурналівДокументів periodWhere = 0)
+        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, ПеріодДляЖурналу.ТипПеріоду periodWhere = 0)
         {
             Box vBox = new Box(Orientation.Vertical, 0);
 

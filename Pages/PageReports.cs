@@ -28,6 +28,7 @@ limitations under the License.
 */
 
 using Gtk;
+using InterfaceGtk;
 
 namespace StorageAndTrade
 {
@@ -61,7 +62,7 @@ namespace StorageAndTrade
 
         void ВільніЗалишки(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Вільні залишки", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Вільні залишки", () =>
             {
                 Звіт_ВільніЗалишки page = new Звіт_ВільніЗалишки();
                 return page;
@@ -70,7 +71,7 @@ namespace StorageAndTrade
 
         void ЗамовленняКлієнтів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Замовлення клієнтів", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Замовлення клієнтів", () =>
             {
                 Звіт_ЗамовленняКлієнтів page = new Звіт_ЗамовленняКлієнтів();
                 return page;
@@ -79,7 +80,7 @@ namespace StorageAndTrade
 
         void ЗамовленняПостачальникам(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Замовлення постачальникам", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Замовлення постачальникам", () =>
             {
                 Звіт_ЗамовленняПостачальникам page = new Звіт_ЗамовленняПостачальникам();
                 return page;
@@ -88,7 +89,7 @@ namespace StorageAndTrade
 
         void ПартіїТоварів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Партії товарів", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Партії товарів", () =>
             {
                 Звіт_ПартіїТоварів page = new Звіт_ПартіїТоварів();
                 return page;
@@ -97,7 +98,7 @@ namespace StorageAndTrade
 
         void РозрахункиЗКлієнтами(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Розрахунки з клієнтами", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Розрахунки з клієнтами", () =>
             {
                 Звіт_РозрахункиЗКлієнтами page = new Звіт_РозрахункиЗКлієнтами();
                 return page;
@@ -106,7 +107,7 @@ namespace StorageAndTrade
 
         void РозрахункиЗКонтрагентами(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Розрахунки з контрагентами", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Розрахунки з контрагентами", () =>
             {
                 Звіт_РозрахункиЗКонтрагентами page = new Звіт_РозрахункиЗКонтрагентами();
                 return page;
@@ -115,7 +116,7 @@ namespace StorageAndTrade
 
         void РозрахункиЗПостачальниками(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Розрахунки з постачальниками", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Розрахунки з постачальниками", () =>
             {
                 Звіт_РозрахункиЗПостачальниками page = new Звіт_РозрахункиЗПостачальниками();
                 return page;
@@ -124,7 +125,7 @@ namespace StorageAndTrade
 
         void РухКоштів(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Рух коштів", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Рух коштів", () =>
             {
                 Звіт_РухКоштів page = new Звіт_РухКоштів();
                 return page;
@@ -133,7 +134,7 @@ namespace StorageAndTrade
 
         void ТовариНаСкладах(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Товари на складах", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Товари на складах", () =>
             {
                 Звіт_ТовариНаСкладах page = new Звіт_ТовариНаСкладах();
                 return page;
@@ -142,7 +143,7 @@ namespace StorageAndTrade
 
         void Закупівлі(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Закупівлі", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Закупівлі", () =>
             {
                 Звіт_Закупівлі page = new Звіт_Закупівлі();
                 return page;
@@ -151,7 +152,7 @@ namespace StorageAndTrade
 
         void Продажі(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Продажі", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Продажі", () =>
             {
                 Звіт_Продажі page = new Звіт_Продажі();
                 return page;
@@ -160,7 +161,7 @@ namespace StorageAndTrade
 
         void ТовариВКоміркахНаСкладах(object? sender, EventArgs args)
         {
-            Program.GeneralForm?.CreateNotebookPage("Звіт - Товари в комірках на складах", () =>
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Звіт - Товари в комірках на складах", () =>
             {
                 Звіт_ТовариВКоміркахНаСкладах page = new Звіт_ТовариВКоміркахНаСкладах();
                 return page;
