@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.08.2024 16:14:49
+ * Дата конфігурації: 17.08.2024 20:35:19
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -9369,15 +9369,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -9588,15 +9588,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -9816,15 +9816,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10044,15 +10044,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10260,15 +10260,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10468,15 +10468,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10689,15 +10689,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -10898,15 +10898,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11106,15 +11106,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11334,15 +11334,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11558,15 +11558,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11769,15 +11769,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -11970,15 +11970,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.НадлишкиТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.НадлишкиТоварів_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12153,15 +12153,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПересортицяТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПересортицяТоварів_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12340,15 +12340,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12536,15 +12536,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12729,15 +12729,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -12939,15 +12939,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13151,15 +13151,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13334,15 +13334,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13517,15 +13517,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13700,15 +13700,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -13879,15 +13879,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -14069,12 +14069,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -14083,107 +14083,107 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ЗамовленняПостачальнику", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПоступленняТоварівТаПослуг", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ЗамовленняКлієнта", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РеалізаціяТоварівТаПослуг", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ВстановленняЦінНоменклатури", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПрихіднийКасовийОрдер", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РозхіднийКасовийОрдер", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПереміщенняТоварів", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПоверненняТоварівПостачальнику", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПоверненняТоварівВідКлієнта", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("АктВиконанихРобіт", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ВведенняЗалишків", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПерерахунокТоварів", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПсуванняТоварів", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ВнутрішнєСпоживанняТоварів", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РахунокФактура", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РозміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПереміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ЗбіркаТоварівНаСкладі", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("КорегуванняБоргу", [where]);
             }
               
@@ -16045,12 +16045,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -16059,17 +16059,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ЗамовленняПостачальнику", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПоступленняТоварівТаПослуг", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПоверненняТоварівПостачальнику", [where]);
             }
               
@@ -16494,12 +16494,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -16508,27 +16508,27 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ЗамовленняКлієнта", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РеалізаціяТоварівТаПослуг", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПоверненняТоварівВідКлієнта", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("АктВиконанихРобіт", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РахунокФактура", [where]);
             }
               
@@ -17126,12 +17126,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -17140,12 +17140,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПрихіднийКасовийОрдер", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РозхіднийКасовийОрдер", [where]);
             }
               
@@ -17472,12 +17472,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -17486,27 +17486,27 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПереміщенняТоварів", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ВведенняЗалишків", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПерерахунокТоварів", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПсуванняТоварів", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ВнутрішнєСпоживанняТоварів", [where]);
             }
               
@@ -17979,12 +17979,12 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -17993,22 +17993,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РозміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ПереміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("ЗбіркаТоварівНаСкладі", [where]);
             }
               
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", [where]);
             }
               

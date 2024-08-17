@@ -90,7 +90,7 @@ namespace StorageAndTrade
                 listPage.GetType().GetProperty("KeyForSetting")?.SetValue(listPage, ".Report");
 
                 //Період
-                listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
+                //listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
 
                 //Заповнення даними
                 listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);

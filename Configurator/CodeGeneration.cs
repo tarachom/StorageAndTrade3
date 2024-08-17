@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.08.2024 16:14:49
+ * Дата конфігурації: 17.08.2024 20:35:19
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -841,13 +841,15 @@ namespace StorageAndTrade_1_0.Константи
         public class НалаштуванняКористувача_ПеріодиЖурналів_TablePart : ConstantsTablePart
         {
             public НалаштуванняКористувача_ПеріодиЖурналів_TablePart() : base(Config.Kernel, "tab_a80",
-                 ["col_a1", "col_a2", "col_a3", ]) { }
+                 ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) { }
             
             public const string TABLE = "tab_a80";
             
             public const string Користувач = "col_a1";
             public const string Журнал = "col_a2";
             public const string ПеріодЗначення = "col_a3";
+            public const string ДатаСтарт = "col_a4";
+            public const string ДатаСтоп = "col_a5";
             public List<Record> Records { get; set; } = [];
         
             public async ValueTask Read()
@@ -863,6 +865,8 @@ namespace StorageAndTrade_1_0.Константи
                         Користувач = new Довідники.Користувачі_Pointer(fieldValue["col_a1"]),
                         Журнал = fieldValue["col_a2"].ToString() ?? "",
                         ПеріодЗначення = fieldValue["col_a3"].ToString() ?? "",
+                        ДатаСтарт = (fieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a4"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue,
+                        ДатаСтоп = (fieldValue["col_a5"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a5"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue,
                         
                     };
                     Records.Add(record);
@@ -885,6 +889,8 @@ namespace StorageAndTrade_1_0.Константи
                         {"col_a1", record.Користувач.UnigueID.UGuid},
                         {"col_a2", record.Журнал},
                         {"col_a3", record.ПеріодЗначення},
+                        {"col_a4", record.ДатаСтарт},
+                        {"col_a5", record.ДатаСтоп},
                         
                     };
                     record.UID = await base.BaseSave(record.UID, fieldValue);
@@ -924,6 +930,8 @@ namespace StorageAndTrade_1_0.Константи
                 public Довідники.Користувачі_Pointer Користувач { get; set; } = new Довідники.Користувачі_Pointer();
                 public string Журнал { get; set; } = "";
                 public string ПеріодЗначення { get; set; } = "";
+                public DateTime ДатаСтарт { get; set; } = DateTime.MinValue;
+                public DateTime ДатаСтоп { get; set; } = DateTime.MinValue;
                 
             }
         }

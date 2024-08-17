@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.08.2024 16:14:49</DateTimeSave>
+  <DateTimeSave>17.08.2024 20:35:19</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -442,6 +442,24 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <IsIndex>0</IsIndex>
                   <IsFullTextSearch>0</IsFullTextSearch>
                   <Multiline>0</Multiline>
+                </Field>
+                <Field>
+                  <Name>ДатаСтарт</Name>
+                  <NameInTable>col_a4</NameInTable>
+                  <Type>date</Type>
+                  <Desc>
+                  </Desc>
+                  <IsIndex>0</IsIndex>
+                  <IsFullTextSearch>0</IsFullTextSearch>
+                </Field>
+                <Field>
+                  <Name>ДатаСтоп</Name>
+                  <NameInTable>col_a5</NameInTable>
+                  <Type>date</Type>
+                  <Desc>
+                  </Desc>
+                  <IsIndex>0</IsIndex>
+                  <IsFullTextSearch>0</IsFullTextSearch>
                 </Field>
               </Fields>
             </TablePart>

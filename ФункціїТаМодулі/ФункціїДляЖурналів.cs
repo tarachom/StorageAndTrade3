@@ -69,8 +69,8 @@ namespace StorageAndTrade
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, typeJournal, () => { return (Widget)listPage; });
 
-                if (periodWhere != 0)
-                    listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
+                //if (periodWhere != 0)
+                    //listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
 
                 listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
             }

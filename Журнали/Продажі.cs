@@ -54,24 +54,22 @@ namespace StorageAndTrade
 
         public override void OpenTypeListDocs(Widget relative_to)
         {
-            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Продажі.AllowDocument(), ComboBoxPeriodWhere.ActiveId);
+            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Продажі.AllowDocument(), Період.Period.ToString());
         }
 
         const string КлючНалаштуванняКористувача = "Журнали.Продажі";
 
         protected override async ValueTask BeforeSetValue()
         {
-            string періодДляЖурналу = await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача);
-            if (!string.IsNullOrEmpty(періодДляЖурналу) && Enum.TryParse<ПеріодДляЖурналу.ТипПеріоду>(періодДляЖурналу, out ПеріодДляЖурналу.ТипПеріоду result))
-                PeriodWhere = result;
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        public override async void PeriodWhereChanged()
+        public override async void PeriodChanged()
         {
-            ТабличніСписки.Журнали_Продажі.ДодатиВідбірПоПеріоду(TreeViewGrid, ComboBoxPeriodWhere.ActiveId);
+            ТабличніСписки.Журнали_Продажі.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period);
             LoadRecords();
 
-            await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, ComboBoxPeriodWhere.ActiveId);
+            await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
         }
     }
 }

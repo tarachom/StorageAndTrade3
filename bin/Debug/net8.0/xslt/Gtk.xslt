@@ -516,15 +516,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse&lt;ПеріодДляЖурналу.ТипПеріоду&gt;(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse&lt;ПеріодДляЖурналу.ТипПеріоду&gt;(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
-            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду, start, stop);
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
@@ -744,12 +744,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse&lt;ПеріодДляЖурналу.ТипПеріоду&gt;(типПеріоду));
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse&lt;ПеріодДляЖурналу.ТипПеріоду&gt;(типПеріоду), start, stop);
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary&lt;string, List&lt;Where&gt;&gt; WhereDict = [];
             if (!treeView.Data.ContainsKey("Where"))
@@ -761,7 +761,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
               <xsl:variable name="DocField" select="../../TabularLists/TabularList[Name = $AllowName]/Fields/Field[WherePeriod = '1']/DocField" />
               <xsl:if test="normalize-space($DocField) != ''">
             {
-                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду, start, stop);
                 if (where != null) WhereDict.Add("<xsl:value-of select="$AllowName"/>", [where]);
             }
               </xsl:if>

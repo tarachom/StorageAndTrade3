@@ -9,7 +9,24 @@ namespace StorageAndTrade
 {
     class ФункціїНалаштуванняКористувача
     {
-        public static async ValueTask<string> ОтриматиПеріодДляЖурналу(string НазваЖурналу)
+        public static async ValueTask ОтриматиПеріодДляЖурналу(string НазваЖурналу, PeriodControl Період)
+        {
+            var періодДляЖурналу = await ОтриматиПеріодДляЖурналу(НазваЖурналу);
+
+            if (періодДляЖурналу.ДатаСтарт != null)
+                Період.DateStart = періодДляЖурналу.ДатаСтарт.Value;
+
+            if (періодДляЖурналу.ДатаСтоп != null)
+                Період.DateStop = періодДляЖурналу.ДатаСтоп.Value;
+
+            if (!string.IsNullOrEmpty(періодДляЖурналу.Період) && Enum.TryParse<ПеріодДляЖурналу.ТипПеріоду>(періодДляЖурналу.Період, out ПеріодДляЖурналу.ТипПеріоду result))
+                Період.Period = result;
+            else
+                Період.Period = Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ЖурналиДокументів.ОсновнийТипПеріоду_Const);
+
+        }
+
+        public static async ValueTask<(string Період, DateTime? ДатаСтарт, DateTime? ДатаСтоп)> ОтриматиПеріодДляЖурналу(string НазваЖурналу)
         {
             Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart НалаштуванняКористувача = new();
 
@@ -19,7 +36,18 @@ namespace StorageAndTrade
             НалаштуванняКористувача.QuerySelect.Limit = 1;
 
             await НалаштуванняКористувача.Read();
-            return (НалаштуванняКористувача.Records.Count != 0) ? НалаштуванняКористувача.Records[0].ПеріодЗначення : "";
+            if (НалаштуванняКористувача.Records.Count != 0)
+            {
+                var record = НалаштуванняКористувача.Records[0];
+
+                string періодЗначення = record.ПеріодЗначення;
+                DateTime? датаСтарт = (record.ДатаСтарт != DateTime.MinValue) ? record.ДатаСтарт : null;
+                DateTime? датаСтоп = (record.ДатаСтоп != DateTime.MinValue) ? record.ДатаСтоп : null;
+
+                return (періодЗначення, датаСтарт, датаСтоп);
+            }
+            else
+                return ("", null, null);
         }
 
         static void ЗаповнитиВідбір(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart НалаштуванняКористувача, string НазваЖурналу)
@@ -31,7 +59,7 @@ namespace StorageAndTrade
             НалаштуванняКористувача.QuerySelect.Where.Add(new Where(Comparison.AND, Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Журнал, Comparison.EQ, НазваЖурналу));
         }
 
-        public static async ValueTask ЗаписатиПеріодДляЖурналу(string НазваЖурналу, string Період)
+        public static async ValueTask ЗаписатиПеріодДляЖурналу(string НазваЖурналу, string Період, DateTime? ДатаСтарт = null, DateTime? ДатаСтоп = null)
         {
             Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart НалаштуванняКористувача = new();
 
@@ -45,12 +73,20 @@ namespace StorageAndTrade
 
             //Додавання нового
             {
-                НалаштуванняКористувача.Records.Add(new()
+                Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Record record = new()
                 {
                     Користувач = Program.Користувач,
                     Журнал = НазваЖурналу,
                     ПеріодЗначення = Період
-                });
+                };
+
+                if (ДатаСтарт != null)
+                    record.ДатаСтарт = ДатаСтарт.Value;
+
+                if (ДатаСтоп != null)
+                    record.ДатаСтоп = ДатаСтоп.Value;
+
+                НалаштуванняКористувача.Records.Add(record);
 
                 await НалаштуванняКористувача.Save(false);
             }
