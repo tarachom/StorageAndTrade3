@@ -533,7 +533,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         protected override void PeriodWhereChanged()
         {
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse&lt;ТипПеріодуДляЖурналівДокументів&gt;(ComboBoxPeriodWhere.ActiveId));
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, ComboBoxPeriodWhere.ActiveId);
             LoadRecords();
         }
 

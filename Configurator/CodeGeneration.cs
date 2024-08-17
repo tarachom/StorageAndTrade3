@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.08.2024 12:19:04
+ * Дата конфігурації: 17.08.2024 16:14:49
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -428,6 +428,18 @@ namespace StorageAndTrade_1_0.Константи
                 Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i1", value);
             }
         }
+        public static string НалаштуванняКористувача_Const
+        {
+            get 
+            {
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i6"); } ).Result;
+                return recordResult.Result ? (recordResult.Value.ToString() ?? "") : "";
+            }
+            set
+            {
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i6", value);
+            }
+        }
         
         
         public class ЖурналРеєстрації_Журнал_TablePart : ConstantsTablePart
@@ -486,6 +498,27 @@ namespace StorageAndTrade_1_0.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+            }
+
+            public async ValueTask Remove(Record record)
+            {
+                await base.BaseRemove(record.UID);
+                Records.RemoveAll((Record item) => record.UID == item.UID);
+            }
+
+            public async ValueTask RemoveAll(List<Record> records)
+            {
+                List<Guid> removeList = [];
+
+                await base.BaseBeginTransaction();
+                foreach (Record record in records)
+                {
+                    removeList.Add(record.UID);
+                    await base.BaseRemove(record.UID);
+                }
+                await base.BaseCommitTransaction();
+
+                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -567,6 +600,27 @@ namespace StorageAndTrade_1_0.Константи
                 
                 await base.BaseCommitTransaction();
             }
+
+            public async ValueTask Remove(Record record)
+            {
+                await base.BaseRemove(record.UID);
+                Records.RemoveAll((Record item) => record.UID == item.UID);
+            }
+
+            public async ValueTask RemoveAll(List<Record> records)
+            {
+                List<Guid> removeList = [];
+
+                await base.BaseBeginTransaction();
+                foreach (Record record in records)
+                {
+                    removeList.Add(record.UID);
+                    await base.BaseRemove(record.UID);
+                }
+                await base.BaseCommitTransaction();
+
+                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            }
         
             public async ValueTask Delete()
             {
@@ -642,6 +696,27 @@ namespace StorageAndTrade_1_0.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+            }
+
+            public async ValueTask Remove(Record record)
+            {
+                await base.BaseRemove(record.UID);
+                Records.RemoveAll((Record item) => record.UID == item.UID);
+            }
+
+            public async ValueTask RemoveAll(List<Record> records)
+            {
+                List<Guid> removeList = [];
+
+                await base.BaseBeginTransaction();
+                foreach (Record record in records)
+                {
+                    removeList.Add(record.UID);
+                    await base.BaseRemove(record.UID);
+                }
+                await base.BaseCommitTransaction();
+
+                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -723,6 +798,27 @@ namespace StorageAndTrade_1_0.Константи
                 
                 await base.BaseCommitTransaction();
             }
+
+            public async ValueTask Remove(Record record)
+            {
+                await base.BaseRemove(record.UID);
+                Records.RemoveAll((Record item) => record.UID == item.UID);
+            }
+
+            public async ValueTask RemoveAll(List<Record> records)
+            {
+                List<Guid> removeList = [];
+
+                await base.BaseBeginTransaction();
+                foreach (Record record in records)
+                {
+                    removeList.Add(record.UID);
+                    await base.BaseRemove(record.UID);
+                }
+                await base.BaseCommitTransaction();
+
+                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            }
         
             public async ValueTask Delete()
             {
@@ -737,6 +833,97 @@ namespace StorageAndTrade_1_0.Константи
                 public string ТипОбєкту { get; set; } = "";
                 public string НазваОбєкту { get; set; } = "";
                 public string Повідомлення { get; set; } = "";
+                
+            }
+        }
+          
+        
+        public class НалаштуванняКористувача_ПеріодиЖурналів_TablePart : ConstantsTablePart
+        {
+            public НалаштуванняКористувача_ПеріодиЖурналів_TablePart() : base(Config.Kernel, "tab_a80",
+                 ["col_a1", "col_a2", "col_a3", ]) { }
+            
+            public const string TABLE = "tab_a80";
+            
+            public const string Користувач = "col_a1";
+            public const string Журнал = "col_a2";
+            public const string ПеріодЗначення = "col_a3";
+            public List<Record> Records { get; set; } = [];
+        
+            public async ValueTask Read()
+            {
+                Records.Clear();
+                await base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    Record record = new Record()
+                    {
+                        UID = (Guid)fieldValue["uid"],
+                        Користувач = new Довідники.Користувачі_Pointer(fieldValue["col_a1"]),
+                        Журнал = fieldValue["col_a2"].ToString() ?? "",
+                        ПеріодЗначення = fieldValue["col_a3"].ToString() ?? "",
+                        
+                    };
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+            {
+                await base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    await base.BaseDelete();
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                    {
+                        {"col_a1", record.Користувач.UnigueID.UGuid},
+                        {"col_a2", record.Журнал},
+                        {"col_a3", record.ПеріодЗначення},
+                        
+                    };
+                    record.UID = await base.BaseSave(record.UID, fieldValue);
+                }
+                
+                await base.BaseCommitTransaction();
+            }
+
+            public async ValueTask Remove(Record record)
+            {
+                await base.BaseRemove(record.UID);
+                Records.RemoveAll((Record item) => record.UID == item.UID);
+            }
+
+            public async ValueTask RemoveAll(List<Record> records)
+            {
+                List<Guid> removeList = [];
+
+                await base.BaseBeginTransaction();
+                foreach (Record record in records)
+                {
+                    removeList.Add(record.UID);
+                    await base.BaseRemove(record.UID);
+                }
+                await base.BaseCommitTransaction();
+
+                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            }
+        
+            public async ValueTask Delete()
+            {
+                await base.BaseDelete();
+            }
+            
+            public class Record : ConstantsTablePartRecord
+            {
+                public Довідники.Користувачі_Pointer Користувач { get; set; } = new Довідники.Користувачі_Pointer();
+                public string Журнал { get; set; } = "";
+                public string ПеріодЗначення { get; set; } = "";
                 
             }
         }
@@ -1506,6 +1693,27 @@ namespace StorageAndTrade_1_0.Константи
                 
                 await base.BaseCommitTransaction();
             }
+
+            public async ValueTask Remove(Record record)
+            {
+                await base.BaseRemove(record.UID);
+                Records.RemoveAll((Record item) => record.UID == item.UID);
+            }
+
+            public async ValueTask RemoveAll(List<Record> records)
+            {
+                List<Guid> removeList = [];
+
+                await base.BaseBeginTransaction();
+                foreach (Record record in records)
+                {
+                    removeList.Add(record.UID);
+                    await base.BaseRemove(record.UID);
+                }
+                await base.BaseCommitTransaction();
+
+                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            }
         
             public async ValueTask Delete()
             {
@@ -1892,6 +2100,27 @@ namespace StorageAndTrade_1_0.Довідники
                 
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
         
         public async ValueTask Delete()
         {
@@ -2250,6 +2479,27 @@ namespace StorageAndTrade_1_0.Довідники
             }
                 
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -3478,6 +3728,27 @@ namespace StorageAndTrade_1_0.Довідники
                 
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
         
         public async ValueTask Delete()
         {
@@ -3563,6 +3834,27 @@ namespace StorageAndTrade_1_0.Довідники
             }
                 
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -3914,6 +4206,27 @@ namespace StorageAndTrade_1_0.Довідники
             }
                 
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -4677,6 +4990,27 @@ namespace StorageAndTrade_1_0.Довідники
                 
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
         
         public async ValueTask Delete()
         {
@@ -5015,6 +5349,27 @@ namespace StorageAndTrade_1_0.Довідники
             }
                 
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -7886,6 +8241,27 @@ namespace StorageAndTrade_1_0.Довідники
             }
                 
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -12037,6 +12413,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -12992,6 +13389,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -13860,6 +14278,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -14813,6 +15252,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -15376,6 +15836,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -16051,6 +16532,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -16759,6 +17261,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -17494,6 +18017,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -18282,6 +18826,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -19031,6 +19596,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -19694,6 +20280,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -20492,6 +21099,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -20587,6 +21215,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -20674,6 +21323,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -20769,6 +21439,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -21305,6 +21996,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -21837,6 +22549,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -22430,6 +23163,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -23070,6 +23824,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -23726,6 +24501,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -24478,6 +25274,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -25085,6 +25902,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -25685,6 +26523,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -26292,6 +27151,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -26841,6 +27721,27 @@ namespace StorageAndTrade_1_0.Документи
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -27375,6 +28276,27 @@ namespace StorageAndTrade_1_0.Документи
             }
             
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -28583,6 +29505,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -28675,6 +29618,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -28755,6 +29719,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
     
         public async ValueTask Delete()
@@ -28929,6 +29914,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -29082,6 +30088,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -29155,6 +30182,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
     
         public async ValueTask Delete()
@@ -29350,6 +30398,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -29531,6 +30600,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -29607,6 +30697,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
     
         public async ValueTask Delete()
@@ -29774,6 +30885,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -29926,6 +31058,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -29999,6 +31152,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
     
         public async ValueTask Delete()
@@ -30159,6 +31333,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -30237,6 +31432,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -30307,6 +31523,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
     
         public async ValueTask Delete()
@@ -30504,6 +31741,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -30608,6 +31866,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -30694,6 +31973,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
     
         public async ValueTask Delete()
@@ -30897,6 +32197,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -31081,6 +32402,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -31163,6 +32505,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
     
         public async ValueTask Delete()
         {
@@ -31239,6 +32602,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
         }
     
         public async ValueTask Delete()

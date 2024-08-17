@@ -53,8 +53,10 @@ namespace StorageAndTrade
             //         ТабличніСписки.Журнали_Повний.LoadRecords();
             //     }
             // };
-
         }
+
+        //await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу("Журнали.Повний");//ЗаписатиПеріодДляЖурналу("Журнали.Повний", ComboBoxPeriodWhere.ActiveId);
+        //PeriodWhere
 
         protected override Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
         protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
@@ -77,14 +79,24 @@ namespace StorageAndTrade
 
         public override void OpenTypeListDocs(Widget relative_to)
         {
-            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Повний.AllowDocument(),
-                Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
+            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Повний.AllowDocument(), ComboBoxPeriodWhere.ActiveId);
         }
 
-        public override void PeriodWhereChanged()
+        const string КлючНалаштуванняКористувача = "Журнали.Повний";
+
+        protected override async ValueTask BeforeSetValue()
         {
-            ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
+            string періодДляЖурналу = await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача);
+            if (!string.IsNullOrEmpty(періодДляЖурналу) && Enum.TryParse<ПеріодДляЖурналу.ТипПеріоду>(періодДляЖурналу, out ПеріодДляЖурналу.ТипПеріоду result))
+                PeriodWhere = result;
+        }
+
+        public override async void PeriodWhereChanged()
+        {
+            ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(TreeViewGrid, ComboBoxPeriodWhere.ActiveId);
             LoadRecords();
+
+            await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, ComboBoxPeriodWhere.ActiveId);
         }
     }
 }

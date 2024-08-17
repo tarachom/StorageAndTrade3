@@ -140,10 +140,21 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void PeriodWhereChanged()
+        const string КлючНалаштуванняКористувача = "Документи.АктВиконанихРобіт";
+
+        protected override async ValueTask BeforeSetValue()
         {
-            ТабличніСписки.АктВиконанихРобіт_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ComboBoxPeriodWhere.ActiveId));
+            string періодДляЖурналу = await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting);
+            if (!string.IsNullOrEmpty(періодДляЖурналу) && Enum.TryParse<ПеріодДляЖурналу.ТипПеріоду>(періодДляЖурналу, out ПеріодДляЖурналу.ТипПеріоду result))
+                PeriodWhere = result;
+        }
+
+        protected override async void PeriodWhereChanged()
+        {
+            ТабличніСписки.АктВиконанихРобіт_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, ComboBoxPeriodWhere.ActiveId);
             LoadRecords();
+
+            await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, ComboBoxPeriodWhere.ActiveId);
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)

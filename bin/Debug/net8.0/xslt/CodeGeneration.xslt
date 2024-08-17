@@ -521,16 +521,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Кон�
                   <xsl:with-param name="BaseFieldContainer">recordResult.Value</xsl:with-param>
                 </xsl:call-template>
                 <xsl:text>) : </xsl:text>
-                <xsl:call-template name="DefaultFieldValue" />;<!--
-                <xsl:text>return result;</xsl:text>
-                <xsl:if test="Type = 'pointer'"> /* видалити пізніше | 23.05.24 */
-                <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
-                <xsl:choose>
-                  <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
-                    <xsl:text>.Copy()</xsl:text>
-                  </xsl:when>
-                </xsl:choose>
-                </xsl:if>;-->
+                <xsl:call-template name="DefaultFieldValue" />;
             }
             set
             {
@@ -624,6 +615,27 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Кон�
                 }
                 
                 await base.BaseCommitTransaction();
+            }
+
+            public async ValueTask Remove(Record record)
+            {
+                await base.BaseRemove(record.UID);
+                Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+            }
+
+            public async ValueTask RemoveAll(List&lt;Record&gt; records)
+            {
+                List&lt;Guid&gt; removeList = [];
+
+                await base.BaseBeginTransaction();
+                foreach (Record record in records)
+                {
+                    removeList.Add(record.UID);
+                    await base.BaseRemove(record.UID);
+                }
+                await base.BaseCommitTransaction();
+
+                Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -1005,6 +1017,27 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             }
                 
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List&lt;Record&gt; records)
+        {
+            List&lt;Guid&gt; removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -1662,6 +1695,27 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             await base.BaseCommitTransaction();
         }
 
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List&lt;Record&gt; records)
+        {
+            List&lt;Guid&gt; removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
+        }
+
         public async ValueTask Delete()
         {
             await base.BaseDelete(Owner.UnigueID);
@@ -2138,6 +2192,27 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                 record.UID = await base.BaseSave(record.UID, fieldValue);
             }
             await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List&lt;Record&gt; records)
+        {
+            List&lt;Guid&gt; removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
         }
     
         public async ValueTask Delete()

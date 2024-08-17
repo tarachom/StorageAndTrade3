@@ -85,73 +85,73 @@ namespace StorageAndTrade
 
             Link.AddCaption(vLeft, "Продажі", PageJournals.Продажі);
             {
-                Link.AddLink(vLeft, $"{ЗамовленняКлієнта_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ЗамовленняКлієнта_Const.FULLNAME}", async () =>
                 {
                     ЗамовленняКлієнта page = new ЗамовленняКлієнта();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняКлієнта_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vLeft, $"{РахунокФактура_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{РахунокФактура_Const.FULLNAME}", async () =>
                 {
                     РахунокФактура page = new РахунокФактура();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РахунокФактура_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vLeft, $"{РеалізаціяТоварівТаПослуг_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{РеалізаціяТоварівТаПослуг_Const.FULLNAME}", async () =>
                 {
                     РеалізаціяТоварівТаПослуг page = new РеалізаціяТоварівТаПослуг();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РеалізаціяТоварівТаПослуг_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vLeft, $"{АктВиконанихРобіт_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{АктВиконанихРобіт_Const.FULLNAME}", async () =>
                 {
                     АктВиконанихРобіт page = new АктВиконанихРобіт();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{АктВиконанихРобіт_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vLeft, $"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}", async () =>
                 {
                     ПоверненняТоварівВідКлієнта page = new ПоверненняТоварівВідКлієнта();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПоверненняТоварівВідКлієнта_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
             }
 
             Link.AddCaption(vLeft, "Закупівлі", PageJournals.Закупівлі);
             {
-                Link.AddLink(vLeft, $"{ЗамовленняПостачальнику_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ЗамовленняПостачальнику_Const.FULLNAME}", async () =>
                 {
                     ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняПостачальнику_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vLeft, $"{ПоступленняТоварівТаПослуг_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ПоступленняТоварівТаПослуг_Const.FULLNAME}", async () =>
                 {
                     ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vLeft, $"{ПоверненняТоварівПостачальнику_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ПоверненняТоварівПостачальнику_Const.FULLNAME}", async () =>
                 {
                     ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПоверненняТоварівПостачальнику_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
             }
 
             Link.AddCaption(vLeft, "Ціноутворення");
             {
-                Link.AddLink(vLeft, $"{ВстановленняЦінНоменклатури_Const.FULLNAME}", () =>
+                Link.AddLink(vLeft, $"{ВстановленняЦінНоменклатури_Const.FULLNAME}", async () =>
                 {
                     ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ВстановленняЦінНоменклатури_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
             }
 
@@ -162,87 +162,87 @@ namespace StorageAndTrade
 
             Link.AddCaption(vRight, "Каса", PageJournals.Каса);
             {
-                Link.AddLink(vRight, $"{ПрихіднийКасовийОрдер_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ПрихіднийКасовийОрдер_Const.FULLNAME}", async () =>
                 {
                     ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПрихіднийКасовийОрдер_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{РозхіднийКасовийОрдер_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{РозхіднийКасовийОрдер_Const.FULLNAME}", async () =>
                 {
                     РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РозхіднийКасовийОрдер_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{КорегуванняБоргу_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{КорегуванняБоргу_Const.FULLNAME}", async () =>
                 {
                     КорегуванняБоргу page = new КорегуванняБоргу();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{КорегуванняБоргу_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
             }
 
             Link.AddCaption(vRight, "Склад", PageJournals.Склад);
             {
-                Link.AddLink(vRight, $"{ПереміщенняТоварів_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ПереміщенняТоварів_Const.FULLNAME}", async () =>
                 {
                     ПереміщенняТоварів page = new ПереміщенняТоварів();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПереміщенняТоварів_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{ВведенняЗалишків_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ВведенняЗалишків_Const.FULLNAME}", async () =>
                 {
                     ВведенняЗалишків page = new ВведенняЗалишків();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ВведенняЗалишків_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", async () =>
                 {
                     ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{ПсуванняТоварів_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ПсуванняТоварів_Const.FULLNAME}", async () =>
                 {
                     ПсуванняТоварів page = new ПсуванняТоварів();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПсуванняТоварів_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{ПерерахунокТоварів_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ПерерахунокТоварів_Const.FULLNAME}", async () =>
                 {
                     ПерерахунокТоварів page = new ПерерахунокТоварів();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПерерахунокТоварів_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
             }
 
             Link.AddCaption(vRight, "Адресне зберігання", PageJournals.АдреснеЗберігання);
             {
-                Link.AddLink(vRight, $"{РозміщенняТоварівНаСкладі_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{РозміщенняТоварівНаСкладі_Const.FULLNAME}", async () =>
                 {
                     РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РозміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{ЗбіркаТоварівНаСкладі_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ЗбіркаТоварівНаСкладі_Const.FULLNAME}", async () =>
                 {
                     ЗбіркаТоварівНаСкладі page = new ЗбіркаТоварівНаСкладі();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗбіркаТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
 
-                Link.AddLink(vRight, $"{ПереміщенняТоварівНаСкладі_Const.FULLNAME}", () =>
+                Link.AddLink(vRight, $"{ПереміщенняТоварівНаСкладі_Const.FULLNAME}", async () =>
                 {
                     ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПереміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
             }
 
@@ -253,7 +253,7 @@ namespace StorageAndTrade
                 {
                     РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}", () => { return page; });
-                    page.SetValue();
+                    await page.SetValue();
                 });
             }
             */

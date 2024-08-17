@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>16.08.2024 12:19:04</DateTimeSave>
+  <DateTimeSave>17.08.2024 16:14:49</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -317,8 +317,7 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>ПовідомленняТаПомилки</Name>
           <NameInTable>col_h8</NameInTable>
-          <Desc>
-          </Desc>
+          <Desc>Не використовується! </Desc>
           <Type>string</Type>
           <TabularParts>
             <TablePart>
@@ -400,6 +399,53 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
           <Desc>Видимість колонки Характеристики в документах і звітах</Desc>
           <Type>boolean</Type>
           <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>НалаштуванняКористувача</Name>
+          <NameInTable>col_i6</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+          <TabularParts>
+            <TablePart>
+              <Name>ПеріодиЖурналів</Name>
+              <Table>tab_a80</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Користувач</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Користувачі</Pointer>
+                  <Desc>
+                  </Desc>
+                  <IsIndex>1</IsIndex>
+                  <IsFullTextSearch>0</IsFullTextSearch>
+                </Field>
+                <Field>
+                  <Name>Журнал</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                  <IsIndex>1</IsIndex>
+                  <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
+                </Field>
+                <Field>
+                  <Name>ПеріодЗначення</Name>
+                  <NameInTable>col_a3</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                  <IsIndex>0</IsIndex>
+                  <IsFullTextSearch>0</IsFullTextSearch>
+                  <Multiline>0</Multiline>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
         </Constant>
       </Constants>
     </ConstantsBlock>

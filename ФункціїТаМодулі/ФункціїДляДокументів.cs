@@ -55,7 +55,7 @@ namespace StorageAndTrade
         /// <param name="unigueID">Елемент для позиціювання</param>
         /// <param name="periodWhere">Період</param>
         /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, ПеріодДляЖурналу.ТипПеріоду periodWhere = 0)
+        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, ПеріодДляЖурналу.ТипПеріоду periodWhere = ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод)
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -84,9 +84,15 @@ namespace StorageAndTrade
                         listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
                 }
 
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,listName, () => { return (Widget)listPage; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, listName, () => { return (Widget)listPage; });
 
-                listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere != 0 ? periodWhere : ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод);
+                //Додатковий ключ для налаштувань
+                listPage.GetType().GetProperty("KeyForSetting")?.SetValue(listPage, ".Report");
+
+                //Період
+                listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
+
+                //Заповнення даними
                 listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
             }
         }

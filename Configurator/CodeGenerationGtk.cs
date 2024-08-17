@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 16.08.2024 12:19:04
+ * Дата конфігурації: 17.08.2024 16:14:49
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -9369,6 +9369,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -9400,11 +9405,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ЗамовленняПостачальнику_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ЗамовленняПостачальнику_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -9586,6 +9588,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -9617,11 +9624,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПоступленняТоварівТаПослуг_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПоступленняТоварівТаПослуг_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -9812,6 +9816,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -9843,11 +9852,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ЗамовленняКлієнта_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ЗамовленняКлієнта_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -10038,6 +10044,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -10069,11 +10080,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) РеалізаціяТоварівТаПослуг_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) РеалізаціяТоварівТаПослуг_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -10252,6 +10260,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -10282,11 +10295,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВстановленняЦінНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВстановленняЦінНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -10458,6 +10468,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -10490,11 +10505,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПрихіднийКасовийОрдер_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПрихіднийКасовийОрдер_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -10677,6 +10689,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -10709,11 +10726,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) РозхіднийКасовийОрдер_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) РозхіднийКасовийОрдер_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -10884,6 +10898,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -10914,11 +10933,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПереміщенняТоварів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПереміщенняТоварів_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -11090,6 +11106,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -11121,11 +11142,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПоверненняТоварівПостачальнику_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПоверненняТоварівПостачальнику_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -11316,6 +11334,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -11347,11 +11370,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПоверненняТоварівВідКлієнта_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПоверненняТоварівВідКлієнта_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -11538,6 +11558,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -11569,11 +11594,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) АктВиконанихРобіт_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) АктВиконанихРобіт_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -11747,6 +11769,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -11777,11 +11804,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВведенняЗалишків_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВведенняЗалишків_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -11946,6 +11970,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -11976,11 +12005,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) НадлишкиТоварів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) НадлишкиТоварів_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -12127,6 +12153,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -12157,11 +12188,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПересортицяТоварів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПересортицяТоварів_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -12312,6 +12340,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -12342,11 +12375,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПерерахунокТоварів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПерерахунокТоварів_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -12506,6 +12536,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -12537,11 +12572,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПсуванняТоварів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПсуванняТоварів_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -12697,6 +12729,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -12728,11 +12765,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -12905,6 +12939,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -12936,11 +12975,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) РахунокФактура_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) РахунокФактура_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -13115,6 +13151,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -13145,11 +13186,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) РозміщенняТоварівНаСкладі_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) РозміщенняТоварівНаСкладі_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -13296,6 +13334,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -13326,11 +13369,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПереміщенняТоварівНаСкладі_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПереміщенняТоварівНаСкладі_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -13477,6 +13517,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -13507,11 +13552,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ЗбіркаТоварівНаСкладі_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ЗбіркаТоварівНаСкладі_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -13658,6 +13700,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -13688,11 +13735,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -13835,6 +13879,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -13865,11 +13914,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) КорегуванняБоргу_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) КорегуванняБоргу_Select.QuerySelect.Where = (List<Where>)where;
 
             
               /* ORDER */
@@ -14023,6 +14069,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -14032,150 +14083,108 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ЗамовленняПостачальнику", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ЗамовленняПостачальнику", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПоступленняТоварівТаПослуг", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПоступленняТоварівТаПослуг", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ЗамовленняКлієнта", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ЗамовленняКлієнта", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РеалізаціяТоварівТаПослуг", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РеалізаціяТоварівТаПослуг", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ВстановленняЦінНоменклатури", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ВстановленняЦінНоменклатури", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПрихіднийКасовийОрдер", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПрихіднийКасовийОрдер", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РозхіднийКасовийОрдер", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РозхіднийКасовийОрдер", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПереміщенняТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПереміщенняТоварів", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПоверненняТоварівПостачальнику", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПоверненняТоварівПостачальнику", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПоверненняТоварівВідКлієнта", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПоверненняТоварівВідКлієнта", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("АктВиконанихРобіт", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("АктВиконанихРобіт", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ВведенняЗалишків", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ВведенняЗалишків", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПерерахунокТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПерерахунокТоварів", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПсуванняТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПсуванняТоварів", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ВнутрішнєСпоживанняТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ВнутрішнєСпоживанняТоварів", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РахунокФактура", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РахунокФактура", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РозміщенняТоварівНаСкладі", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РозміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПереміщенняТоварівНаСкладі", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПереміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ЗбіркаТоварівНаСкладі", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ЗбіркаТоварівНаСкладі", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("КорегуванняБоргу", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("КорегуванняБоргу", [where]);
             }
               
         }
@@ -14233,22 +14242,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ЗамовленняПостачальнику_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗамовленняПостачальнику", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ЗамовленняПостачальнику") && Where["ЗамовленняПостачальнику"].Count != 0) 
-                          {
-                              query.Where = Where["ЗамовленняПостачальнику"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14324,22 +14330,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПоступленняТоварівТаПослуг_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПоступленняТоварівТаПослуг", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПоступленняТоварівТаПослуг") && Where["ПоступленняТоварівТаПослуг"].Count != 0) 
-                          {
-                              query.Where = Where["ПоступленняТоварівТаПослуг"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14415,22 +14418,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ЗамовленняКлієнта_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗамовленняКлієнта", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ЗамовленняКлієнта") && Where["ЗамовленняКлієнта"].Count != 0) 
-                          {
-                              query.Where = Where["ЗамовленняКлієнта"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14506,22 +14506,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РеалізаціяТоварівТаПослуг", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РеалізаціяТоварівТаПослуг") && Where["РеалізаціяТоварівТаПослуг"].Count != 0) 
-                          {
-                              query.Where = Where["РеалізаціяТоварівТаПослуг"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14597,22 +14594,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ВстановленняЦінНоменклатури_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ВстановленняЦінНоменклатури", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ВстановленняЦінНоменклатури") && Where["ВстановленняЦінНоменклатури"].Count != 0) 
-                          {
-                              query.Where = Where["ВстановленняЦінНоменклатури"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ВстановленняЦінНоменклатури'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14673,22 +14667,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПрихіднийКасовийОрдер_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПрихіднийКасовийОрдер", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПрихіднийКасовийОрдер") && Where["ПрихіднийКасовийОрдер"].Count != 0) 
-                          {
-                              query.Where = Where["ПрихіднийКасовийОрдер"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14759,22 +14750,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РозхіднийКасовийОрдер_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РозхіднийКасовийОрдер", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РозхіднийКасовийОрдер") && Where["РозхіднийКасовийОрдер"].Count != 0) 
-                          {
-                              query.Where = Where["РозхіднийКасовийОрдер"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14845,22 +14833,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПереміщенняТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПереміщенняТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПереміщенняТоварів") && Where["ПереміщенняТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ПереміщенняТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -14921,22 +14906,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПоверненняТоварівПостачальнику_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПоверненняТоварівПостачальнику", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПоверненняТоварівПостачальнику") && Where["ПоверненняТоварівПостачальнику"].Count != 0) 
-                          {
-                              query.Where = Where["ПоверненняТоварівПостачальнику"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15012,22 +14994,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПоверненняТоварівВідКлієнта", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПоверненняТоварівВідКлієнта") && Where["ПоверненняТоварівВідКлієнта"].Count != 0) 
-                          {
-                              query.Where = Where["ПоверненняТоварівВідКлієнта"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15103,22 +15082,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.АктВиконанихРобіт_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("АктВиконанихРобіт", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("АктВиконанихРобіт") && Where["АктВиконанихРобіт"].Count != 0) 
-                          {
-                              query.Where = Where["АктВиконанихРобіт"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15189,22 +15165,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ВведенняЗалишків_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ВведенняЗалишків", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ВведенняЗалишків") && Where["ВведенняЗалишків"].Count != 0) 
-                          {
-                              query.Where = Where["ВведенняЗалишків"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15275,22 +15248,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПерерахунокТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПерерахунокТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПерерахунокТоварів") && Where["ПерерахунокТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ПерерахунокТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПерерахунокТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15356,22 +15326,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПсуванняТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПсуванняТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПсуванняТоварів") && Where["ПсуванняТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ПсуванняТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15432,22 +15399,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ВнутрішнєСпоживанняТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ВнутрішнєСпоживанняТоварів") && Where["ВнутрішнєСпоживанняТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ВнутрішнєСпоживанняТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15513,22 +15477,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РахунокФактура_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РахунокФактура", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РахунокФактура") && Where["РахунокФактура"].Count != 0) 
-                          {
-                              query.Where = Where["РахунокФактура"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15604,22 +15565,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РозміщенняТоварівНаСкладі_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РозміщенняТоварівНаСкладі", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РозміщенняТоварівНаСкладі") && Where["РозміщенняТоварівНаСкладі"].Count != 0) 
-                          {
-                              query.Where = Where["РозміщенняТоварівНаСкладі"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15680,22 +15638,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПереміщенняТоварівНаСкладі", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПереміщенняТоварівНаСкладі") && Where["ПереміщенняТоварівНаСкладі"].Count != 0) 
-                          {
-                              query.Where = Where["ПереміщенняТоварівНаСкладі"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15756,22 +15711,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗбіркаТоварівНаСкладі", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ЗбіркаТоварівНаСкладі") && Where["ЗбіркаТоварівНаСкладі"].Count != 0) 
-                          {
-                              query.Where = Where["ЗбіркаТоварівНаСкладі"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15832,22 +15784,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РозміщенняНоменклатуриПоКоміркам", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РозміщенняНоменклатуриПоКоміркам") && Where["РозміщенняНоменклатуриПоКоміркам"].Count != 0) 
-                          {
-                              query.Where = Where["РозміщенняНоменклатуриПоКоміркам"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -15908,22 +15857,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.КорегуванняБоргу_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("КорегуванняБоргу", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("КорегуванняБоргу") && Where["КорегуванняБоргу"].Count != 0) 
-                          {
-                              query.Where = Where["КорегуванняБоргу"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'КорегуванняБоргу'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16099,6 +16045,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -16108,24 +16059,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ЗамовленняПостачальнику", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ЗамовленняПостачальнику", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПоступленняТоварівТаПослуг", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПоступленняТоварівТаПослуг", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПоверненняТоварівПостачальнику", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПоверненняТоварівПостачальнику", [where]);
             }
               
         }
@@ -16165,22 +16110,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ЗамовленняПостачальнику_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗамовленняПостачальнику", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ЗамовленняПостачальнику") && Where["ЗамовленняПостачальнику"].Count != 0) 
-                          {
-                              query.Where = Where["ЗамовленняПостачальнику"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16256,22 +16198,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПоступленняТоварівТаПослуг_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПоступленняТоварівТаПослуг", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПоступленняТоварівТаПослуг") && Where["ПоступленняТоварівТаПослуг"].Count != 0) 
-                          {
-                              query.Where = Where["ПоступленняТоварівТаПослуг"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16347,22 +16286,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПоверненняТоварівПостачальнику_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПоверненняТоварівПостачальнику", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПоверненняТоварівПостачальнику") && Where["ПоверненняТоварівПостачальнику"].Count != 0) 
-                          {
-                              query.Where = Where["ПоверненняТоварівПостачальнику"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16558,6 +16494,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -16567,38 +16508,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ЗамовленняКлієнта", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ЗамовленняКлієнта", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РеалізаціяТоварівТаПослуг", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РеалізаціяТоварівТаПослуг", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПоверненняТоварівВідКлієнта", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПоверненняТоварівВідКлієнта", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("АктВиконанихРобіт", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("АктВиконанихРобіт", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РахунокФактура", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РахунокФактура", [where]);
             }
               
         }
@@ -16640,22 +16571,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ЗамовленняКлієнта_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗамовленняКлієнта", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ЗамовленняКлієнта") && Where["ЗамовленняКлієнта"].Count != 0) 
-                          {
-                              query.Where = Where["ЗамовленняКлієнта"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16731,22 +16659,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РеалізаціяТоварівТаПослуг", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РеалізаціяТоварівТаПослуг") && Where["РеалізаціяТоварівТаПослуг"].Count != 0) 
-                          {
-                              query.Where = Where["РеалізаціяТоварівТаПослуг"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16822,22 +16747,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПоверненняТоварівВідКлієнта", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПоверненняТоварівВідКлієнта") && Where["ПоверненняТоварівВідКлієнта"].Count != 0) 
-                          {
-                              query.Where = Where["ПоверненняТоварівВідКлієнта"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16913,22 +16835,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.АктВиконанихРобіт_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("АктВиконанихРобіт", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("АктВиконанихРобіт") && Where["АктВиконанихРобіт"].Count != 0) 
-                          {
-                              query.Where = Where["АктВиконанихРобіт"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -16999,22 +16918,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РахунокФактура_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РахунокФактура", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РахунокФактура") && Where["РахунокФактура"].Count != 0) 
-                          {
-                              query.Where = Where["РахунокФактура"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -17210,6 +17126,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -17219,17 +17140,13 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПрихіднийКасовийОрдер", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПрихіднийКасовийОрдер", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РозхіднийКасовийОрдер", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РозхіднийКасовийОрдер", [where]);
             }
               
         }
@@ -17268,22 +17185,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПрихіднийКасовийОрдер_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПрихіднийКасовийОрдер", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПрихіднийКасовийОрдер") && Where["ПрихіднийКасовийОрдер"].Count != 0) 
-                          {
-                              query.Where = Where["ПрихіднийКасовийОрдер"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -17359,22 +17273,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РозхіднийКасовийОрдер_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РозхіднийКасовийОрдер", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РозхіднийКасовийОрдер") && Where["РозхіднийКасовийОрдер"].Count != 0) 
-                          {
-                              query.Where = Where["РозхіднийКасовийОрдер"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -17561,6 +17472,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -17570,38 +17486,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПереміщенняТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПереміщенняТоварів", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ВведенняЗалишків", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ВведенняЗалишків", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПерерахунокТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПерерахунокТоварів", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПсуванняТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПсуванняТоварів", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ВнутрішнєСпоживанняТоварів", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ВнутрішнєСпоживанняТоварів", [where]);
             }
               
         }
@@ -17643,22 +17549,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПереміщенняТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПереміщенняТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПереміщенняТоварів") && Where["ПереміщенняТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ПереміщенняТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -17715,22 +17618,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ВведенняЗалишків_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ВведенняЗалишків", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ВведенняЗалишків") && Where["ВведенняЗалишків"].Count != 0) 
-                          {
-                              query.Where = Where["ВведенняЗалишків"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -17782,22 +17682,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ВнутрішнєСпоживанняТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ВнутрішнєСпоживанняТоварів") && Where["ВнутрішнєСпоживанняТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ВнутрішнєСпоживанняТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -17849,22 +17746,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПсуванняТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПсуванняТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПсуванняТоварів") && Where["ПсуванняТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ПсуванняТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -17916,22 +17810,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПерерахунокТоварів_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПерерахунокТоварів", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПерерахунокТоварів") && Where["ПерерахунокТоварів"].Count != 0) 
-                          {
-                              query.Where = Where["ПерерахунокТоварів"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПерерахунокТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -18088,6 +17979,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -18097,31 +17993,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 treeView.Data["Where"] = WhereDict;
             
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РозміщенняТоварівНаСкладі", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РозміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ПереміщенняТоварівНаСкладі", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ПереміщенняТоварівНаСкладі", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("ЗбіркаТоварівНаСкладі", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("ЗбіркаТоварівНаСкладі", [where]);
             }
               
             {
-                List<Where> whereList = [];
-                WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("РозміщенняНоменклатуриПоКоміркам", [where]);
             }
               
         }
@@ -18162,22 +18050,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РозміщенняТоварівНаСкладі_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РозміщенняТоварівНаСкладі", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РозміщенняТоварівНаСкладі") && Where["РозміщенняТоварівНаСкладі"].Count != 0) 
-                          {
-                              query.Where = Where["РозміщенняТоварівНаСкладі"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -18226,22 +18111,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ПереміщенняТоварівНаСкладі", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ПереміщенняТоварівНаСкладі") && Where["ПереміщенняТоварівНаСкладі"].Count != 0) 
-                          {
-                              query.Where = Where["ПереміщенняТоварівНаСкладі"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -18290,22 +18172,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗбіркаТоварівНаСкладі", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("ЗбіркаТоварівНаСкладі") && Where["ЗбіркаТоварівНаСкладі"].Count != 0) 
-                          {
-                              query.Where = Where["ЗбіркаТоварівНаСкладі"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
@@ -18354,22 +18233,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
               {
                   Query query = new Query(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("РозміщенняНоменклатуриПоКоміркам", out List<Where>? listWhere))
                       {
-                          var Where = (Dictionary<string, List<Where>>)where;
-                          if (Where.ContainsKey("РозміщенняНоменклатуриПоКоміркам") && Where["РозміщенняНоменклатуриПоКоміркам"].Count != 0) 
-                          {
-                              query.Where = Where["РозміщенняНоменклатуриПоКоміркам"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");

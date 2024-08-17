@@ -83,11 +83,11 @@ namespace StorageAndTrade
             Box vLeft = new Box(Orientation.Vertical, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            Link.AddLink(vLeft, "Повний (всі документи)", () =>
+            Link.AddLink(vLeft, "Повний (всі документи)", async () =>
             {
                 Журнал_Повний page = new Журнал_Повний();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Повний", () => { return page; });
-                page.SetValue();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Повний", () => { return page; });
+                await page.SetValue();
             });
 
             Link.AddLink(vLeft, "Продажі", () =>
@@ -118,39 +118,39 @@ namespace StorageAndTrade
             ShowAll();
         }
 
-        public static void Продажі(object? sender, EventArgs args)
+        public static async void Продажі(object? sender, EventArgs args)
         {
             Журнал_Продажі page = new Журнал_Продажі();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Продажі", () => { return page; });
-            page.SetValue();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Продажі", () => { return page; });
+            await page.SetValue();
         }
 
-        public static void Закупівлі(object? sender, EventArgs args)
+        public static async void Закупівлі(object? sender, EventArgs args)
         {
             Журнал_Закупівлі page = new Журнал_Закупівлі();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Закупівлі", () => { return page; });
-            page.SetValue();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Закупівлі", () => { return page; });
+            await page.SetValue();
         }
 
-        public static void Каса(object? sender, EventArgs args)
+        public static async void Каса(object? sender, EventArgs args)
         {
             Журнал_Каса page = new Журнал_Каса();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Каса", () => { return page; });
-            page.SetValue();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Каса", () => { return page; });
+            await page.SetValue();
         }
 
-        public static void Склад(object? sender, EventArgs args)
+        public static async void Склад(object? sender, EventArgs args)
         {
             Журнал_Склад page = new Журнал_Склад();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Склад", () => { return page; });
-            page.SetValue();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Склад", () => { return page; });
+            await page.SetValue();
         }
 
-        public static void АдреснеЗберігання(object? sender, EventArgs args)
+        public static async void АдреснеЗберігання(object? sender, EventArgs args)
         {
             Журнал_АдреснеЗберігання page = new Журнал_АдреснеЗберігання();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Адресне зберігання", () => { return page; });
-            page.SetValue();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Адресне зберігання", () => { return page; });
+            await page.SetValue();
         }
     }
 }

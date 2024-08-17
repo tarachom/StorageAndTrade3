@@ -516,6 +516,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse&lt;ПеріодДляЖурналу.ТипПеріоду&gt;(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             ОчиститиВідбір(treeView);
@@ -548,11 +553,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Where = (List&lt;Where&gt;)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Where = (List&lt;Where&gt;)where;
 
             <xsl:for-each select="Fields/Field[SortField = 'True' and Type != 'pointer']">
               /* ORDER */
@@ -742,6 +744,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду)
+        {
+            ДодатиВідбірПоПеріоду(treeView, Enum.Parse&lt;ПеріодДляЖурналу.ТипПеріоду&gt;(типПеріоду));
+        }
+
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду)
         {
             Dictionary&lt;string, List&lt;Where&gt;&gt; WhereDict = [];
@@ -754,10 +761,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
               <xsl:variable name="DocField" select="../../TabularLists/TabularList[Name = $AllowName]/Fields/Field[WherePeriod = '1']/DocField" />
               <xsl:if test="normalize-space($DocField) != ''">
             {
-                List&lt;Where&gt; whereList = [];
-                WhereDict.Add("<xsl:value-of select="$AllowName"/>", whereList);
                 Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$AllowName"/>_Const.<xsl:value-of select="$DocField"/>, типПеріоду);
-                if (where != null) whereList.Add(where);
+                if (where != null) WhereDict.Add("<xsl:value-of select="$AllowName"/>", [where]);
             }
               </xsl:if>
             </xsl:for-each>
@@ -802,22 +807,19 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
               {
                   Query query = new Query(Документи.<xsl:value-of select="$DocumentName"/>_Const.TABLE);
 
-                  // Встановлення відбору для даного типу документу
-                  if (treeView.Data.ContainsKey("Where"))
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
                   {
-                      var where = treeView.Data["Where"];
-                      if (where != null)
+                      var dictWhere = (Dictionary&lt;string, List&lt;Where&gt;&gt;)dataWhere;
+                      if (dictWhere.TryGetValue("<xsl:value-of select="$DocumentName"/>", out List&lt;Where&gt;? listWhere))
                       {
-                          var Where = (Dictionary&lt;string, List&lt;Where&gt;&gt;)where;
-                          if (Where.ContainsKey("<xsl:value-of select="$DocumentName"/>") &amp;&amp; Where["<xsl:value-of select="$DocumentName"/>"].Count != 0) 
-                          {
-                              query.Where = Where["<xsl:value-of select="$DocumentName"/>"];
-                              foreach(Where field in query.Where)
-                                  paramQuery.Add(field.Alias, field.Value);
-                          }
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
                       }
                   }
-
+                  
                   query.FieldAndAlias.Add(new NameValue&lt;string&gt;("'<xsl:value-of select="$DocumentName"/>'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");

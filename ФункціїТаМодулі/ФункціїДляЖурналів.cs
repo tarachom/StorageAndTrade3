@@ -67,7 +67,7 @@ namespace StorageAndTrade
                 //Документ який потрібно виділити в списку
                 listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
 
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,typeJournal, () => { return (Widget)listPage; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, typeJournal, () => { return (Widget)listPage; });
 
                 if (periodWhere != 0)
                     listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
@@ -76,7 +76,7 @@ namespace StorageAndTrade
             }
         }
 
-        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, ПеріодДляЖурналу.ТипПеріоду periodWhere = 0)
+        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, string periodWhere)
         {
             Box vBox = new Box(Orientation.Vertical, 0);
 
@@ -87,7 +87,7 @@ namespace StorageAndTrade
 
                 lb.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc.Key, new UnigueID(), periodWhere);
+                    ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc.Key, new UnigueID(), Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(periodWhere));
                 };
             }
 
