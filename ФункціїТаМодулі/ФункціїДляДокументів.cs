@@ -55,7 +55,7 @@ namespace StorageAndTrade
         /// <param name="unigueID">Елемент для позиціювання</param>
         /// <param name="periodWhere">Період</param>
         /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, ПеріодДляЖурналу.ТипПеріоду periodWhere = ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод)
+        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, string keyForSetting = "")
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -87,10 +87,8 @@ namespace StorageAndTrade
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, listName, () => { return (Widget)listPage; });
 
                 //Додатковий ключ для налаштувань
-                listPage.GetType().GetProperty("KeyForSetting")?.SetValue(listPage, ".Report");
-
-                //Період
-                //listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
+                if (!string.IsNullOrEmpty(keyForSetting))
+                    listPage.GetType().GetProperty("KeyForSetting")?.SetValue(listPage, keyForSetting);
 
                 //Заповнення даними
                 listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);

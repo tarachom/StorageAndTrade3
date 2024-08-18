@@ -79,7 +79,7 @@ namespace StorageAndTrade
 
         public override void OpenTypeListDocs(Widget relative_to)
         {
-            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Повний.AllowDocument(), Період.Period.ToString());
+            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Повний.AllowDocument());
         }
 
         const string КлючНалаштуванняКористувача = "Журнали.Повний";

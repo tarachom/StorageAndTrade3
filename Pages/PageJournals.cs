@@ -56,7 +56,7 @@ namespace StorageAndTrade
                 listBox.ButtonPressEvent += (object? sender, ButtonPressEventArgs args) =>
                 {
                     if (args.Event.Type == Gdk.EventType.DoubleButtonPress && listBox.SelectedRows.Length != 0)
-                        ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВиду(listBox.SelectedRows[0].Name, null, 0);
+                        ФункціїДляЖурналів.ВідкритиЖурналВідповідноДоВиду(listBox.SelectedRows[0].Name, null);
                 };
 
                 ScrolledWindow scrollList = new ScrolledWindow() { WidthRequest = 300, HeightRequest = 300, ShadowType = ShadowType.In };

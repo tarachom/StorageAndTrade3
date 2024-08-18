@@ -46,7 +46,7 @@ namespace StorageAndTrade
         /// <param name="unigueID">Елемент для позиціювання</param>
         /// <param name="periodWhere">Період</param>
         /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиЖурналВідповідноДоВиду(string typeJournal, UnigueID? unigueID, ПеріодДляЖурналу.ТипПеріоду periodWhere = 0)
+        public static void ВідкритиЖурналВідповідноДоВиду(string typeJournal, UnigueID? unigueID)
         {
             Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
@@ -69,14 +69,11 @@ namespace StorageAndTrade
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, typeJournal, () => { return (Widget)listPage; });
 
-                //if (periodWhere != 0)
-                    //listPage.GetType().GetProperty("PeriodWhere")?.SetValue(listPage, periodWhere);
-
                 listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
             }
         }
 
-        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument, string periodWhere)
+        public static void ВідкритиСписокДокументів(Widget relative_to, Dictionary<string, string> allowDocument)
         {
             Box vBox = new Box(Orientation.Vertical, 0);
 
@@ -87,7 +84,7 @@ namespace StorageAndTrade
 
                 lb.Clicked += (object? sender, EventArgs args) =>
                 {
-                    ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc.Key, new UnigueID(), Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(periodWhere));
+                    ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc.Key, new UnigueID());
                 };
             }
 
