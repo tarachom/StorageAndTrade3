@@ -43,7 +43,7 @@ namespace StorageAndTrade
             СкладВласник.AfterSelectFunc = async () => { await LoadRecords(); };
 
             //Складські комірки
-            LinkButton linkButtonHar = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
             linkButtonHar.Clicked += async (object? sender, EventArgs args) =>
             {
                 СкладськіКомірки page = new СкладськіКомірки();

@@ -32,14 +32,13 @@ static class ВидиЦінПостачальників_ВідбориДляПо
 {
     public static List<Where> Відбори(string searchText)
     {
-        return new List<Where>()
-        {
+        return
+        [
             //Код
             new Where(ВидиЦінПостачальників_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
             //Назва
             new Where(Comparison.OR, ВидиЦінПостачальників_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
-        };
+        ];
     }
 }

@@ -139,7 +139,7 @@ namespace StorageAndTrade
             fc.Dispose();
             fc.Destroy();
 
-            if (!String.IsNullOrEmpty(fullPath))
+            if (!string.IsNullOrEmpty(fullPath))
             {
                 if (File.Exists(fullPath) && Message.Request(Program.GeneralForm, "Файл '" + Файли_Objest.НазваФайлу + "' уже існує. Перезаписати?") == ResponseType.No)
                     return;

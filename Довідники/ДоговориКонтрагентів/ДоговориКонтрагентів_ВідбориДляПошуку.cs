@@ -32,14 +32,13 @@ static class ДоговориКонтрагентів_ВідбориДляПош
 {
     public static List<Where> Відбори(string searchText)
     {
-        return new List<Where>()
-        {
+        return
+        [
             //Код
             new Where(ДоговориКонтрагентів_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
             //Назва
             new Where(Comparison.OR, ДоговориКонтрагентів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
-        };
+        ];
     }
 }

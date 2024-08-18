@@ -164,8 +164,7 @@ namespace StorageAndTrade
             Файли.Номенклатура_Objest = Номенклатура_Objest;
             await Файли.LoadRecords();
 
-            if (ОсновнаКартинкаФайл.AfterSelectFunc != null)
-                ОсновнаКартинкаФайл.AfterSelectFunc.Invoke();
+            ОсновнаКартинкаФайл.AfterSelectFunc?.Invoke();
         }
 
         protected override void GetValue()

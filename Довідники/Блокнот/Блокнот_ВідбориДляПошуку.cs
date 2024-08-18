@@ -32,8 +32,8 @@ static class Блокнот_ВідбориДляПошуку
 {
     public static List<Where> Відбори(string searchText)
     {
-        return new List<Where>()
-        {
+        return
+        [
             //Код
             new Where(Блокнот_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
@@ -42,6 +42,6 @@ static class Блокнот_ВідбориДляПошуку
 
             //Опис
             new Where(Comparison.OR, Блокнот_Const.Опис, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-        };
+        ];
     }
 }

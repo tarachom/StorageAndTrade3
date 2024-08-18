@@ -58,8 +58,7 @@ namespace StorageAndTrade
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
+            BeforeClickOpenFunc?.Invoke();
 
             ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
             page.НоменклатураВласник.Pointer = НоменклатураВласник;
@@ -67,8 +66,7 @@ namespace StorageAndTrade
             {
                 Pointer = new ХарактеристикиНоменклатури_Pointer(selectPointer);
 
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                AfterSelectFunc?.Invoke();
             };
 
             PopoverSmallSelect.Add(page);
@@ -81,8 +79,7 @@ namespace StorageAndTrade
         {
             Pointer = new ХарактеристикиНоменклатури_Pointer();
 
-            if (AfterSelectFunc != null)
-                AfterSelectFunc.Invoke();
+            AfterSelectFunc?.Invoke();
         }
     }
 }

@@ -58,8 +58,7 @@ namespace StorageAndTrade
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
+            BeforeClickOpenFunc?.Invoke();
 
             СкладськіКомірки_ШвидкийВибір page = new СкладськіКомірки_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
             page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник;
@@ -67,8 +66,7 @@ namespace StorageAndTrade
             {
                 Pointer = new СкладськіКомірки_Pointer(selectPointer);
 
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                AfterSelectFunc?.Invoke();
             };
 
             PopoverSmallSelect.Add(page);

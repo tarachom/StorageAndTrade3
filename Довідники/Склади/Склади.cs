@@ -43,7 +43,7 @@ namespace StorageAndTrade
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Склади приміщення
-            LinkButton linkButtonHar = new LinkButton($" {СкладськіПриміщення_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+            LinkButton linkButtonHar = new LinkButton($" {СкладськіПриміщення_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
             linkButtonHar.Clicked += async (object? sender, EventArgs args) =>
             {
                 СкладськіПриміщення page = new СкладськіПриміщення();

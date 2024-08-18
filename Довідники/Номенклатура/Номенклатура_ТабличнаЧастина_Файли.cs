@@ -54,7 +54,7 @@ namespace StorageAndTrade
 
         private class Запис
         {
-            public string Image { get; set; } = AppContext.BaseDirectory + "images/doc.png";
+            public Gdk.Pixbuf Image { get; set; } = InterfaceGtk.Іконки.ДляКнопок.Doc;
             public Guid ID { get; set; } = Guid.Empty;
             public Файли_Pointer Файл { get; set; } = new Файли_Pointer();
             public bool Основний { get; set; } = false;
@@ -63,7 +63,7 @@ namespace StorageAndTrade
             {
                 return
                 [
-                    new Gdk.Pixbuf(Image),
+                    Image,
                     ID.ToString(),
                     Основний,
                     Файл.Назва

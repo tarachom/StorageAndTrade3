@@ -22,7 +22,6 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-
 using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
@@ -32,14 +31,14 @@ namespace StorageAndTrade
     {
         public static List<Where> Відбори(string searchText)
         {
-            return new List<Where>()
-            {
+            return
+            [
                 //Код
                 new Where(Склади_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
                 //Назва
                 new Where(Comparison.OR, Склади_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }
-            };
+            ];
         }
     }
 }

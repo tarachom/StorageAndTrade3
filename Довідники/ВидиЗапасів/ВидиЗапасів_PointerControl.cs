@@ -56,8 +56,7 @@ namespace StorageAndTrade
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
+            BeforeClickOpenFunc?.Invoke();
 
             ВидиЗапасів_ШвидкийВибір page = new ВидиЗапасів_ШвидкийВибір
             {
@@ -67,8 +66,7 @@ namespace StorageAndTrade
                 {
                     Pointer = new ВидиЗапасів_Pointer(selectPointer);
 
-                    if (AfterSelectFunc != null)
-                        AfterSelectFunc.Invoke();
+                    AfterSelectFunc?.Invoke();
                 }
             };
 

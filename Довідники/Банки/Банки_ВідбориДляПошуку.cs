@@ -32,8 +32,8 @@ static class Банки_ВідбориДляПошуку
 {
     public static List<Where> Відбори(string searchText)
     {
-        return new List<Where>()
-        {
+        return
+        [
             //Код
             new Where(Банки_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
@@ -51,6 +51,6 @@ static class Банки_ВідбориДляПошуку
 
             //КодНБУ
             new Where(Comparison.OR, Банки_Const.КодНБУ, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-        };
+        ];
     }
 }

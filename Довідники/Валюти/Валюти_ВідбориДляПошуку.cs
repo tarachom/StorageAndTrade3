@@ -32,8 +32,8 @@ static class Валюти_ВідбориДляПошуку
 {
     public static List<Where> Відбори(string searchText)
     {
-        return new List<Where>()
-        {
+        return
+        [
             //Код
             new Where(Валюти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
@@ -45,6 +45,6 @@ static class Валюти_ВідбориДляПошуку
 
             //Код_R030
             new Where(Comparison.OR, Валюти_Const.Код_R030, Comparison.LIKE, searchText) { FuncToField = "LOWER" }
-        };
+        ];
     }
 }

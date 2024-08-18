@@ -56,16 +56,14 @@ namespace StorageAndTrade
         {
             Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            if (BeforeClickOpenFunc != null)
-                BeforeClickOpenFunc.Invoke();
+            BeforeClickOpenFunc?.Invoke();
 
             БанківськіРахункиКонтрагентів_ШвидкийВибір page = new БанківськіРахункиКонтрагентів_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
             page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
             {
                 Pointer = new БанківськіРахункиКонтрагентів_Pointer(selectPointer);
 
-                if (AfterSelectFunc != null)
-                    AfterSelectFunc.Invoke();
+                AfterSelectFunc?.Invoke();
             };
 
             PopoverSmallSelect.Add(page);

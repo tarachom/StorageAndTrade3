@@ -32,14 +32,13 @@ static class ВидиЗапасів_ВідбориДляПошуку
 {
     public static List<Where> Відбори(string searchText)
     {
-        return new List<Where>()
-        {
+        return
+        [
             //Код
             new Where(ВидиЗапасів_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
             //Назва
             new Where(Comparison.OR, ВидиЗапасів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
-        };
+        ];
     }
 }

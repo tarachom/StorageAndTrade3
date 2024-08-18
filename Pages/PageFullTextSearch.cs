@@ -116,7 +116,7 @@ namespace StorageAndTrade
 
             if (offset >= maxRowsToPage)
             {
-                LinkButton linkButtonLast = new LinkButton("", " Попередня сторінка") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonLast = new LinkButton("", " Попередня сторінка") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkButtonLast.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (offset >= maxRowsToPage) offset -= maxRowsToPage;
@@ -128,7 +128,7 @@ namespace StorageAndTrade
 
             if (count == maxRowsToPage)
             {
-                LinkButton linkButtonNext = new LinkButton("", " Наступна сторінка") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonNext = new LinkButton("", " Наступна сторінка") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkButtonNext.Clicked += (object? sender, EventArgs args) =>
                 {
                     Find(entryFullTextSearch.Text, offset += maxRowsToPage);

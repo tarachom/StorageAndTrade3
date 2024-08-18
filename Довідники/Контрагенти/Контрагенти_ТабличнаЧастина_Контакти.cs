@@ -124,8 +124,7 @@ namespace StorageAndTrade
             {
                 Контрагенти_Objest.Контакти_TablePart.Records.Clear();
 
-                TreeIter iter;
-                if (Store.GetIterFirst(out iter))
+                if (Store.GetIterFirst(out TreeIter iter))
                     do
                     {
                         Контрагенти_Контакти_TablePart.Record record = new Контрагенти_Контакти_TablePart.Record();
@@ -166,8 +165,7 @@ namespace StorageAndTrade
             {
                 int sequenceNumber = 0;
 
-                TreeIter iter;
-                if (Store.GetIterFirst(out iter))
+                if (Store.GetIterFirst(out TreeIter iter))
                     do
                     {
                         ключовіСлова += $"\n{++sequenceNumber}. " +
@@ -264,8 +262,7 @@ namespace StorageAndTrade
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;
 
-                TreeIter iter;
-                if (Store.GetIterFromString(out iter, args.Path))
+                if (Store.GetIterFromString(out TreeIter iter, args.Path))
                     Store.SetValue(iter, ColumnNum, args.NewText);
             }
         }
@@ -287,9 +284,7 @@ namespace StorageAndTrade
                 for (int i = selectionRows.Length - 1; i >= 0; i--)
                 {
                     TreePath itemPath = selectionRows[i];
-
-                    TreeIter iter;
-                    TreeViewGrid.Model.GetIter(out iter, itemPath);
+                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
 
                     Store.Remove(ref iter);
                 }

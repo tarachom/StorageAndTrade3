@@ -37,7 +37,7 @@ namespace StorageAndTrade
         {
             //Завантаження списку Банків
             {
-                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження списку Банків") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження списку Банків") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
                 {
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження списку Банків", () =>

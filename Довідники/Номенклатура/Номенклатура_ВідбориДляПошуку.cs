@@ -32,14 +32,14 @@ namespace StorageAndTrade
     {
         public static List<Where> Відбори(string searchText)
         {
-            return new List<Where>()
-            {
+            return
+            [
                 //Код
                 new Where(Номенклатура_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
                 //Назва
                 new Where(Comparison.OR, Номенклатура_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }
-            };
+            ];
         }
     }
 }
