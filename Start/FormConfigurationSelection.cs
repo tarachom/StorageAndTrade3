@@ -34,9 +34,7 @@ namespace StorageAndTrade
     /// </summary>
     class FormConfigurationSelection : InterfaceGtk.FormConfigurationSelection
     {
-        public override TypeForm TypeOpenForm { get; } = TypeForm.WorkingProgram;
-        public override Kernel? ProgramKernel { get; } = Config.Kernel;
-        public override Kernel? ConfiguratorKernel { get; } = Configurator.Program.Kernel;
+        public FormConfigurationSelection() : base(Config.Kernel, Configurator.Program.Kernel, TypeForm.WorkingProgram) { }
 
         public override async ValueTask<bool> OpenProgram(ConfigurationParam? openConfigurationParam)
         {

@@ -37,7 +37,7 @@ namespace StorageAndTrade
 {
     class ФункціїДляПовідомлень : InterfaceGtk.ФункціїДляПовідомлень
     {
-        protected override Kernel Kernel { get; } = Config.Kernel;
+        public ФункціїДляПовідомлень() : base(Config.Kernel) { }
 
         public async void ВідкритиПовідомлення()
         {

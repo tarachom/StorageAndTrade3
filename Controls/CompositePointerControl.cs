@@ -30,9 +30,8 @@ namespace StorageAndTrade
 {
     class CompositePointerControl : InterfaceGtk.CompositePointerControl
     {
-        protected override string NameSpageProgram { get; } = Config.NameSpageProgram;
-        protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
-        protected override Kernel Kernel { get; } = Config.Kernel;
+        public CompositePointerControl() : base(Config.Kernel, Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
+
         protected override async ValueTask<CompositePointerPresentation_Record> CompositePointerPresentation(UuidAndText uuidAndText)
         {
             return await Functions.CompositePointerPresentation(uuidAndText);

@@ -1,14 +1,19 @@
-using Gtk;
+
+
 using InterfaceGtk;
 
 using AccountingSoftware;
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
 
 namespace StorageAndTrade
 {
     class ФункціїНалаштуванняКористувача
     {
+        /// <summary>
+        /// Функція отримує збережені налаштування користувача і зразу заповнює PeriodControl
+        /// </summary>
+        /// <param name="НазваЖурналу">Журнал</param>
+        /// <param name="Період">PeriodControl</param>
         public static async ValueTask ОтриматиПеріодДляЖурналу(string НазваЖурналу, PeriodControl Період)
         {
             var періодДляЖурналу = await ОтриматиПеріодДляЖурналу(НазваЖурналу);
@@ -23,22 +28,27 @@ namespace StorageAndTrade
                 Період.Period = result;
             else
                 Період.Period = Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(ЖурналиДокументів.ОсновнийТипПеріоду_Const);
-
         }
 
+        /// <summary>
+        /// Функція отримує з табличної частини константи Системні/НалаштуванняКористувача/ПеріодиЖурналів
+        /// збережені налаштування користувача
+        /// </summary>
+        /// <param name="НазваЖурналу">Назва журналу</param>
+        /// <returns>Повертає кортеж</returns>
         public static async ValueTask<(string Період, DateTime? ДатаСтарт, DateTime? ДатаСтоп)> ОтриматиПеріодДляЖурналу(string НазваЖурналу)
         {
-            Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart НалаштуванняКористувача = new();
+            Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart Налаштування_TablePart = new();
 
-            ЗаповнитиВідбір(НалаштуванняКористувача, НазваЖурналу);
+            ЗаповнитиВідбір(Налаштування_TablePart, НазваЖурналу);
 
             //Вибирати тільки одне значення
-            НалаштуванняКористувача.QuerySelect.Limit = 1;
+            Налаштування_TablePart.QuerySelect.Limit = 1;
 
-            await НалаштуванняКористувача.Read();
-            if (НалаштуванняКористувача.Records.Count != 0)
+            await Налаштування_TablePart.Read();
+            if (Налаштування_TablePart.Records.Count != 0)
             {
-                var record = НалаштуванняКористувача.Records[0];
+                var record = Налаштування_TablePart.Records[0];
 
                 string періодЗначення = record.ПеріодЗначення;
                 DateTime? датаСтарт = (record.ДатаСтарт != DateTime.MinValue) ? record.ДатаСтарт : null;
@@ -50,15 +60,24 @@ namespace StorageAndTrade
                 return ("", null, null);
         }
 
-        static void ЗаповнитиВідбір(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart НалаштуванняКористувача, string НазваЖурналу)
+        static void ЗаповнитиВідбір(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart Налаштування_TablePart, string НазваЖурналу)
         {
             //Відбір по користувачу
-            НалаштуванняКористувача.QuerySelect.Where.Add(new Where(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Користувач, Comparison.EQ, Program.Користувач.UnigueID.UGuid));
+            Налаштування_TablePart.QuerySelect.Where.Add(
+                new Where(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Користувач, Comparison.EQ, Program.Користувач.UnigueID.UGuid));
 
             //Відбір по журналу
-            НалаштуванняКористувача.QuerySelect.Where.Add(new Where(Comparison.AND, Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Журнал, Comparison.EQ, НазваЖурналу));
+            Налаштування_TablePart.QuerySelect.Where.Add(
+                new Where(Comparison.AND, Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Журнал, Comparison.EQ, НазваЖурналу));
         }
 
+        /// <summary>
+        /// Функція записує налаштування користувача
+        /// </summary>
+        /// <param name="НазваЖурналу">Журнал</param>
+        /// <param name="Період">Тип періоду</param>
+        /// <param name="ДатаСтарт"></param>
+        /// <param name="ДатаСтоп"></param>
         public static async ValueTask ЗаписатиПеріодДляЖурналу(string НазваЖурналу, string Період, DateTime? ДатаСтарт = null, DateTime? ДатаСтоп = null)
         {
             Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart НалаштуванняКористувача = new();
