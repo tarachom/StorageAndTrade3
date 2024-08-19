@@ -64,7 +64,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -94,7 +94,7 @@ namespace StorageAndTrade
             if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
             {
                 ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(Comparison.AND, СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
+                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
             }
 
             await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid);

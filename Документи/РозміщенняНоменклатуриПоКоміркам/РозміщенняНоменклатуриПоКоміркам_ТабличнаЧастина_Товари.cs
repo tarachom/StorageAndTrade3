@@ -282,7 +282,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Пакування:
@@ -299,7 +299,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Комірка:
@@ -316,7 +316,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
             }

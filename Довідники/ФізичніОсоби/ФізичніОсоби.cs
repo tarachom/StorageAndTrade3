@@ -39,7 +39,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ФізичніОсоби_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ФізичніОсоби_Записи.DirectoryPointerItem = DirectoryPointerItem;

@@ -34,8 +34,8 @@ namespace StorageAndTrade
 
         Entry Назва = new Entry() { WidthRequest = 500 };
         ComboBoxText ТипДокументу = new ComboBoxText();
-        ПоступленняТоварівТаПослуг_PointerControl ПоступленняТоварівТаПослуг = new ПоступленняТоварівТаПослуг_PointerControl() { UseWherePeriod = true };
-        ВведенняЗалишків_PointerControl ВведенняЗалишків = new ВведенняЗалишків_PointerControl() { UseWherePeriod = true };
+        ПоступленняТоварівТаПослуг_PointerControl ПоступленняТоварівТаПослуг = new ПоступленняТоварівТаПослуг_PointerControl();
+        ВведенняЗалишків_PointerControl ВведенняЗалишків = new ВведенняЗалишків_PointerControl();
 
         public ПартіяТоварівКомпозит_Елемент() : base()
         {

@@ -89,7 +89,7 @@ namespace StorageAndTrade
 
             //period
             ТабличніСписки.КурсиВалют_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(Comparison.AND, "period", Comparison.LIKE, searchText)
+                new Where("period", Comparison.LIKE, searchText)
                 {
                     FuncToField = "to_char",
                     FuncToField_Param1 = "'DD.MM.YYYY'"

@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>19.08.2024 15:45:20</DateTimeSave>
+  <DateTimeSave>19.08.2024 16:59:53</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -25893,6 +25893,7 @@ SQL тип  непотрібно вказувати
           </Fields>
         </TabularList>
       </TabularLists>
+      <Forms />
     </RegisterInformation>
     <RegisterInformation>
       <Name>КурсиВалют</Name>
@@ -25993,6 +25994,29 @@ SQL тип  непотрібно вказувати
           </Fields>
         </TabularList>
       </TabularLists>
+      <Forms>
+        <Form>
+          <Name>erter</Name>
+          <Desc>
+          </Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <ElementField>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Курс</Name>
+              <Caption>Курс</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Кратність</Name>
+              <Caption>Кратність</Caption>
+            </ElementField>
+          </ElementFields>
+          <ElementTableParts />
+        </Form>
+      </Forms>
     </RegisterInformation>
     <RegisterInformation>
       <Name>ШтрихкодиНоменклатури</Name>
@@ -26133,6 +26157,7 @@ SQL тип  непотрібно вказувати
           </Fields>
         </TabularList>
       </TabularLists>
+      <Forms />
     </RegisterInformation>
     <RegisterInformation>
       <Name>ФайлиДокументів</Name>
@@ -26190,6 +26215,7 @@ SQL тип  непотрібно вказувати
           </Fields>
         </TabularList>
       </TabularLists>
+      <Forms />
     </RegisterInformation>
     <RegisterInformation>
       <Name>РозміщенняНоменклатуриПоКоміркамНаСкладі</Name>
@@ -26246,6 +26272,7 @@ SQL тип  непотрібно вказувати
         <Fields />
       </PropertyFields>
       <TabularLists />
+      <Forms />
     </RegisterInformation>
   </RegistersInformation>
   <RegistersAccumulation>

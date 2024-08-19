@@ -38,10 +38,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПрихіднийКасовийОрдер_Записи.DocumentPointerItem = DocumentPointerItem;
+
+            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ПрихіднийКасовийОрдер_Записи.LoadRecords(TreeViewGrid);
 
@@ -74,7 +76,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПрихіднийКасовийОрдер_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПрихіднийКасовийОрдер_Const.FULLNAME} *", () =>
                 {
                     ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                     {
@@ -92,7 +94,7 @@ namespace StorageAndTrade
                 ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдер_Objest = new ПрихіднийКасовийОрдер_Objest();
                 if (await ПрихіднийКасовийОрдер_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПрихіднийКасовийОрдер_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПрихіднийКасовийОрдер_Objest.Назва}", () =>
                     {
                         ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                         {
@@ -147,10 +149,8 @@ namespace StorageAndTrade
 
         protected override async void PeriodChanged()
         {
-            ТабличніСписки.ПрихіднийКасовийОрдер_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)

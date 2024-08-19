@@ -40,10 +40,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.DocumentPointerItem = DocumentPointerItem;
+
+            ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.LoadRecords(TreeViewGrid);
 
@@ -76,7 +78,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РеалізаціяТоварівТаПослуг_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РеалізаціяТоварівТаПослуг_Const.FULLNAME} *", () =>
                 {
                     РеалізаціяТоварівТаПослуг_Елемент page = new РеалізаціяТоварівТаПослуг_Елемент
                     {
@@ -94,7 +96,7 @@ namespace StorageAndTrade
                 РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослуг_Objest = new РеалізаціяТоварівТаПослуг_Objest();
                 if (await РеалізаціяТоварівТаПослуг_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РеалізаціяТоварівТаПослуг_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РеалізаціяТоварівТаПослуг_Objest.Назва}", () =>
                     {
                         РеалізаціяТоварівТаПослуг_Елемент page = new РеалізаціяТоварівТаПослуг_Елемент
                         {
@@ -150,10 +152,8 @@ namespace StorageAndTrade
 
         protected override async void PeriodChanged()
         {
-            ТабличніСписки.РеалізаціяТоварівТаПослуг_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
@@ -246,7 +246,7 @@ namespace StorageAndTrade
 
                     if (await прихіднийКасовийОрдер_Новий.Save())
                     {
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{прихіднийКасовийОрдер_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{прихіднийКасовийОрдер_Новий.Назва}", () =>
                         {
                             ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                             {
@@ -315,7 +315,7 @@ namespace StorageAndTrade
 
                         await поверненняТоварівВідКлієнта_Objest.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{поверненняТоварівВідКлієнта_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{поверненняТоварівВідКлієнта_Objest.Назва}", () =>
                         {
                             ПоверненняТоварівВідКлієнта_Елемент page = new ПоверненняТоварівВідКлієнта_Елемент
                             {
@@ -377,7 +377,7 @@ namespace StorageAndTrade
 
                         await збіркаТоварівНаСкладі_Objest.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{збіркаТоварівНаСкладі_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{збіркаТоварівНаСкладі_Objest.Назва}", () =>
                         {
                             ЗбіркаТоварівНаСкладі_Елемент page = new ЗбіркаТоварівНаСкладі_Елемент
                             {

@@ -64,7 +64,7 @@ namespace StorageAndTrade
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {АктВиконанихРобіт_Const.FULLNAME}", () => { return page; });
 
-            page.LoadRecords();
+            page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

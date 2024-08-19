@@ -72,7 +72,7 @@ namespace StorageAndTrade
             PopoverSmallSelect.Add(page);
             PopoverSmallSelect.ShowAll();
 
-            await page.LoadRecords();
+            await page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

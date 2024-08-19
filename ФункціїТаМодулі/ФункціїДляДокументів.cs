@@ -182,7 +182,7 @@ namespace StorageAndTrade
             {
                 //Відбір по типу договору
                 договориКонтрагентів.QuerySelect.Where.Add(
-                    new Where(Comparison.AND, Довідники.ДоговориКонтрагентів_Const.ТипДоговору, Comparison.EQ, (int)ТипДоговору));
+                    new Where(Довідники.ДоговориКонтрагентів_Const.ТипДоговору, Comparison.EQ, (int)ТипДоговору));
             }
 
             if (await договориКонтрагентів.SelectSingle())

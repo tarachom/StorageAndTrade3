@@ -91,49 +91,49 @@ namespace StorageAndTrade
                 {
                     Контрагенти page = new Контрагенти();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Const.FULLNAME}", () => { return page; });
-                    await page.LoadRecords();
+                    await page.SetValue();
                 });
 
                 Link.AddLink(vLeft, $"{Номенклатура_Const.FULLNAME}", async () =>
                 {
                     Номенклатура page = new Номенклатура();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Номенклатура_Const.FULLNAME}", () => { return page; });
-                    await page.LoadRecords();
+                    await page.SetValue();
                 });
 
                 Link.AddLink(vLeft, $"{Організації_Const.FULLNAME}", async () =>
                 {
                     Організації page = new Організації();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Організації_Const.FULLNAME}", () => { return page; });
-                    await page.LoadRecords();
+                    await page.SetValue();
                 });
 
                 Link.AddLink(vLeft, $"{Склади_Const.FULLNAME}", async () =>
                 {
                     Склади page = new Склади();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Склади_Const.FULLNAME}", () => { return page; });
-                    await page.LoadRecords();
+                    await page.SetValue();
                 });
 
                 Link.AddLink(vLeft, $"{Валюти_Const.FULLNAME}", async () =>
                 {
                     Валюти page = new Валюти();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Const.FULLNAME}", () => { return page; });
-                    await page.LoadRecords();
+                    await page.SetValue();
                 });
 
                 Link.AddLink(vLeft, $"{Каси_Const.FULLNAME}", async () =>
                 {
                     Каси page = new Каси();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Каси_Const.FULLNAME}", () => { return page; });
-                    await page.LoadRecords();
+                    await page.SetValue();
                 });
 
                 Link.AddLink(vLeft, $"{Блокнот_Const.FULLNAME}", async () =>
                 {
                     Блокнот page = new Блокнот();
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Блокнот_Const.FULLNAME}", () => { return page; });
-                    await page.LoadRecords();
+                    await page.SetValue();
                 });
 
                 /*

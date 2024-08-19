@@ -38,10 +38,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.DocumentPointerItem = DocumentPointerItem;
+
+            ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.LoadRecords(TreeViewGrid);
 
@@ -74,7 +76,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РозміщенняТоварівНаСкладі_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РозміщенняТоварівНаСкладі_Const.FULLNAME} *", () =>
                 {
                     РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
                     {
@@ -92,7 +94,7 @@ namespace StorageAndTrade
                 РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладі_Objest = new РозміщенняТоварівНаСкладі_Objest();
                 if (await РозміщенняТоварівНаСкладі_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РозміщенняТоварівНаСкладі_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РозміщенняТоварівНаСкладі_Objest.Назва}", () =>
                     {
                         РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
                         {
@@ -148,10 +150,8 @@ namespace StorageAndTrade
 
         protected override async void PeriodChanged()
         {
-            ТабличніСписки.РозміщенняТоварівНаСкладі_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)

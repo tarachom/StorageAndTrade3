@@ -38,10 +38,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.ПсуванняТоварів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПсуванняТоварів_Записи.DocumentPointerItem = DocumentPointerItem;
+
+            ТабличніСписки.ПсуванняТоварів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords(TreeViewGrid);
 
@@ -74,7 +76,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПсуванняТоварів_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПсуванняТоварів_Const.FULLNAME} *", () =>
                 {
                     ПсуванняТоварів_Елемент page = new ПсуванняТоварів_Елемент
                     {
@@ -92,7 +94,7 @@ namespace StorageAndTrade
                 ПсуванняТоварів_Objest ПсуванняТоварів_Objest = new ПсуванняТоварів_Objest();
                 if (await ПсуванняТоварів_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПсуванняТоварів_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПсуванняТоварів_Objest.Назва}", () =>
                     {
                         ПсуванняТоварів_Елемент page = new ПсуванняТоварів_Елемент
                         {
@@ -148,10 +150,8 @@ namespace StorageAndTrade
 
         protected override async void PeriodChanged()
         {
-            ТабличніСписки.ПсуванняТоварів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)

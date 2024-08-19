@@ -363,7 +363,7 @@ namespace StorageAndTrade
                     MinWidth = 200,
                     Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const
                 };
-                
+
                 Характеристика.Data.Add("Column", Columns.Характеристика);
 
                 TreeViewGrid.AppendColumn(Характеристика);
@@ -477,7 +477,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Характеристика:
@@ -496,7 +496,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Серія:
@@ -513,7 +513,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Пакування:
@@ -530,7 +530,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.РеалізаціяТоварівТаПослуг:
@@ -546,9 +546,9 @@ namespace StorageAndTrade
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Вибір - Реалізація товарів та послуг", () => { return page; });
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Вибір - Реалізація товарів та послуг", () => { return page; });
 
-                        page.LoadRecords();
+                        await page.SetValue();
 
                         break;
                     }

@@ -49,7 +49,7 @@ namespace StorageAndTrade
 
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {БанківськіРахункиКонтрагентів_Const.FULLNAME}", () => { return page; });
 
-                    await page.LoadRecords();
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -75,7 +75,7 @@ namespace StorageAndTrade
             }
         }
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 

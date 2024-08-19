@@ -40,10 +40,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.РахунокФактура_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РахунокФактура_Записи.DocumentPointerItem = DocumentPointerItem;
+
+            ТабличніСписки.РахунокФактура_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.РахунокФактура_Записи.LoadRecords(TreeViewGrid);
 
@@ -76,7 +78,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РахунокФактура_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РахунокФактура_Const.FULLNAME} *", () =>
                 {
                     РахунокФактура_Елемент page = new РахунокФактура_Елемент
                     {
@@ -94,7 +96,7 @@ namespace StorageAndTrade
                 РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
                 if (await РахунокФактура_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{РахунокФактура_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РахунокФактура_Objest.Назва}", () =>
                     {
                         РахунокФактура_Елемент page = new РахунокФактура_Елемент
                         {
@@ -150,10 +152,8 @@ namespace StorageAndTrade
 
         protected override async void PeriodChanged()
         {
-            ТабличніСписки.РахунокФактура_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
@@ -258,7 +258,7 @@ namespace StorageAndTrade
 
                     await реалізаціяТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{реалізаціяТоварівТаПослуг_Новий.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{реалізаціяТоварівТаПослуг_Новий.Назва}", () =>
                     {
                         РеалізаціяТоварівТаПослуг_Елемент page = new РеалізаціяТоварівТаПослуг_Елемент
                         {
@@ -328,7 +328,7 @@ namespace StorageAndTrade
 
                         await замовленняПостачальнику_Новий.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{замовленняПостачальнику_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{замовленняПостачальнику_Новий.Назва}", () =>
                         {
                             ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                             {

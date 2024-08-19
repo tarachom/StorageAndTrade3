@@ -64,7 +64,7 @@ namespace StorageAndTrade
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; });
 
-            await page.LoadRecords();
+            await page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

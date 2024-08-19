@@ -604,7 +604,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Характеристика:
@@ -624,7 +624,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Серія:
@@ -641,7 +641,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Пакування:
@@ -658,7 +658,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.ВидЦіни:
@@ -676,7 +676,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Склад:
@@ -693,7 +693,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.ЗамовленняПостачальнику:
@@ -707,9 +707,9 @@ LIMIT 1
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Вибір - Замовлення постачальнику", () => { return page; });
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Вибір - Замовлення постачальнику", () => { return page; });
 
-                        page.LoadRecords();
+                        await page.SetValue();
 
                         break;
                     }
@@ -833,7 +833,7 @@ LIMIT 1
                                 запис.КількістьУпаковок = value;
                                 Запис.ПісляЗміни_КількістьАбоЦіна(запис);
                             }
-                            
+
                             break;
                         }
                     case Columns.Кількість:

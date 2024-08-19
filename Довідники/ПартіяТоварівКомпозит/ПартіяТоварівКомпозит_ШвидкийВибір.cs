@@ -52,7 +52,7 @@ namespace StorageAndTrade
 
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; });
 
-                    await page.LoadRecords();
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -64,7 +64,7 @@ namespace StorageAndTrade
             НоменклатураВідбір.AfterSelectFunc = async () => { await LoadRecords(); };
         }
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 

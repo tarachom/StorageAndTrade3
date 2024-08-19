@@ -110,7 +110,7 @@ namespace StorageAndTrade_1_0.Довідники
             {
                 ХарактеристикиНоменклатури_Select характеристикиНоменклатури_Select = new ХарактеристикиНоменклатури_Select();
                 характеристикиНоменклатури_Select.QuerySelect.Where.Add(new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-                характеристикиНоменклатури_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ХарактеристикиНоменклатури_Const.DELETION_LABEL, Comparison.NOT, true));
+                характеристикиНоменклатури_Select.QuerySelect.Where.Add(new Where(ХарактеристикиНоменклатури_Const.DELETION_LABEL, Comparison.NOT, true));
                 await характеристикиНоменклатури_Select.Select();
 
                 while (характеристикиНоменклатури_Select.MoveNext())
@@ -351,7 +351,7 @@ WHERE
             {
                 ДоговориКонтрагентів_Select договориКонтрагентів_Select = new ДоговориКонтрагентів_Select();
                 договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-                договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ДоговориКонтрагентів_Const.DELETION_LABEL, Comparison.NOT, true));
+                договориКонтрагентів_Select.QuerySelect.Where.Add(new Where(ДоговориКонтрагентів_Const.DELETION_LABEL, Comparison.NOT, true));
                 await договориКонтрагентів_Select.Select();
 
                 while (договориКонтрагентів_Select.MoveNext())
@@ -740,7 +740,7 @@ WHERE
 
                 Номенклатура_Select номенклатура_Select = new Номенклатура_Select();
                 номенклатура_Select.QuerySelect.Where.Add(new Where(Номенклатура_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-                номенклатура_Select.QuerySelect.Where.Add(new Where(Comparison.AND, Номенклатура_Const.DELETION_LABEL, Comparison.NOT, true));
+                номенклатура_Select.QuerySelect.Where.Add(new Where(Номенклатура_Const.DELETION_LABEL, Comparison.NOT, true));
                 await номенклатура_Select.Select();
 
                 while (номенклатура_Select.MoveNext())
@@ -849,7 +849,7 @@ WHERE
 
                 Контрагенти_Select контрагенти_Select = new Контрагенти_Select();
                 контрагенти_Select.QuerySelect.Where.Add(new Where(Контрагенти_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-                контрагенти_Select.QuerySelect.Where.Add(new Where(Comparison.AND, Контрагенти_Const.DELETION_LABEL, Comparison.NOT, true));
+                контрагенти_Select.QuerySelect.Where.Add(new Where(Контрагенти_Const.DELETION_LABEL, Comparison.NOT, true));
                 await контрагенти_Select.Select();
 
                 while (контрагенти_Select.MoveNext())
@@ -962,7 +962,7 @@ WHERE
 
                 Склади_Select склади_Select = new Склади_Select();
                 склади_Select.QuerySelect.Where.Add(new Where(Склади_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-                склади_Select.QuerySelect.Where.Add(new Where(Comparison.AND, Склади_Const.DELETION_LABEL, Comparison.NOT, true));
+                склади_Select.QuerySelect.Where.Add(new Where(Склади_Const.DELETION_LABEL, Comparison.NOT, true));
                 await склади_Select.Select();
 
                 while (склади_Select.MoveNext())
@@ -1245,7 +1245,7 @@ WHERE
         {
             СеріїНоменклатури_Select серіїНоменклатури_Select = new СеріїНоменклатури_Select();
             серіїНоменклатури_Select.QuerySelect.Where.Add(new Where(СеріїНоменклатури_Const.Номер, Comparison.EQ, ДовідникОбєкт.Номер));
-            серіїНоменклатури_Select.QuerySelect.Where.Add(new Where(Comparison.AND, "uid", Comparison.NOT, ДовідникОбєкт.UnigueID.UGuid));
+            серіїНоменклатури_Select.QuerySelect.Where.Add(new Where("uid", Comparison.NOT, ДовідникОбєкт.UnigueID.UGuid));
 
             if (await серіїНоменклатури_Select.SelectSingle())
             {
@@ -1518,7 +1518,7 @@ WHERE
 
                 СкладськіКомірки_Select cкладськіКомірки_Select = new СкладськіКомірки_Select();
                 cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-                cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(Comparison.AND, СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
+                cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
                 await cкладськіКомірки_Select.Select();
 
                 while (cкладськіКомірки_Select.MoveNext())
@@ -1555,7 +1555,7 @@ WHERE
 
             СкладськіКомірки_Select cкладськіКомірки_Select = new СкладськіКомірки_Select();
             cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-            cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(Comparison.AND, СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
+            cкладськіКомірки_Select.QuerySelect.Where.Add(new Where(СкладськіКомірки_Const.DELETION_LABEL, Comparison.NOT, true));
             await cкладськіКомірки_Select.Select();
 
             while (cкладськіКомірки_Select.MoveNext())
@@ -1707,7 +1707,7 @@ namespace StorageAndTrade_1_0.Документи
             {
                 ПартіяТоварівКомпозит_Select партіяТоварівКомпозит_Select = new ПартіяТоварівКомпозит_Select();
                 партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.ПоступленняТоварівТаПослуг, Comparison.EQ, ДокументОбєкт.UnigueID.UGuid));
-                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ПартіяТоварівКомпозит_Const.DELETION_LABEL, Comparison.NOT, true));
+                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.DELETION_LABEL, Comparison.NOT, true));
                 await партіяТоварівКомпозит_Select.Select();
 
                 while (партіяТоварівКомпозит_Select.MoveNext())
@@ -2117,7 +2117,7 @@ namespace StorageAndTrade_1_0.Документи
             {
                 ПартіяТоварівКомпозит_Select партіяТоварівКомпозит_Select = new ПартіяТоварівКомпозит_Select();
                 партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.ВведенняЗалишків, Comparison.EQ, ДокументОбєкт.UnigueID.UGuid));
-                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(Comparison.AND, ПартіяТоварівКомпозит_Const.DELETION_LABEL, Comparison.NOT, true));
+                партіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where(ПартіяТоварівКомпозит_Const.DELETION_LABEL, Comparison.NOT, true));
                 await партіяТоварівКомпозит_Select.Select();
 
                 while (партіяТоварівКомпозит_Select.MoveNext())

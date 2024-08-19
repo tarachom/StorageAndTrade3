@@ -35,9 +35,6 @@ namespace StorageAndTrade
             }
         }
 
-        //Відбір по періоду в журналі
-        public bool UseWherePeriod { get; set; } = true;
-
         protected override void OpenSelect(object? sender, EventArgs args)
         {
             ПерерахунокТоварів page = new ПерерахунокТоварів
@@ -49,12 +46,9 @@ namespace StorageAndTrade
                 }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ПерерахунокТоварів_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПерерахунокТоварів_Const.FULLNAME}", () => { return page; });
 
-            if (UseWherePeriod)
-                page.SetValue();
-            else
-                page.LoadRecords();
+            page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

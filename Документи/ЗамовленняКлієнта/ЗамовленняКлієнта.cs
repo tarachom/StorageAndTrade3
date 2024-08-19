@@ -40,10 +40,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.ЗамовленняКлієнта_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗамовленняКлієнта_Записи.DocumentPointerItem = DocumentPointerItem;
+
+            ТабличніСписки.ЗамовленняКлієнта_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ЗамовленняКлієнта_Записи.LoadRecords(TreeViewGrid);
 
@@ -76,7 +78,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ЗамовленняКлієнта_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняКлієнта_Const.FULLNAME} *", () =>
                 {
                     ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
                     {
@@ -94,7 +96,7 @@ namespace StorageAndTrade
                 ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest = new ЗамовленняКлієнта_Objest();
                 if (await ЗамовленняКлієнта_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ЗамовленняКлієнта_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняКлієнта_Objest.Назва}", () =>
                     {
                         ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
                         {
@@ -150,10 +152,8 @@ namespace StorageAndTrade
 
         protected override async void PeriodChanged()
         {
-            ТабличніСписки.ЗамовленняКлієнта_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
@@ -275,7 +275,7 @@ namespace StorageAndTrade
 
                         await реалізаціяТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{реалізаціяТоварівТаПослуг_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{реалізаціяТоварівТаПослуг_Новий.Назва}", () =>
                         {
                             РеалізаціяТоварівТаПослуг_Елемент page = new РеалізаціяТоварівТаПослуг_Елемент
                             {
@@ -346,7 +346,7 @@ namespace StorageAndTrade
 
                         await замовленняПостачальнику_Новий.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{замовленняПостачальнику_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{замовленняПостачальнику_Новий.Назва}", () =>
                         {
                             ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                             {
@@ -417,7 +417,7 @@ namespace StorageAndTrade
 
                         await поступленняТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{поступленняТоварівТаПослуг_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{поступленняТоварівТаПослуг_Новий.Назва}", () =>
                         {
                             ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                             {
@@ -467,7 +467,7 @@ namespace StorageAndTrade
 
                     if (await прихіднийКасовийОрдер_Новий.Save())
                     {
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{прихіднийКасовийОрдер_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{прихіднийКасовийОрдер_Новий.Назва}", () =>
                         {
                             ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                             {

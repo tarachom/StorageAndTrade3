@@ -75,7 +75,7 @@ namespace StorageAndTrade
             if (!ХарактеристикиНоменклатуриВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
+                    new Where(ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
             }
 
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
@@ -106,12 +106,12 @@ namespace StorageAndTrade
             if (!ХарактеристикиНоменклатуриВласник.Pointer.IsEmpty())
             {
                 ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
+                    new Where(ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, Comparison.EQ, ХарактеристикиНоменклатуриВласник.Pointer.UnigueID.UGuid));
             }
 
             //Штрихкод
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, 
-                new Where(Comparison.AND, ШтрихкодиНоменклатури_Const.Штрихкод, Comparison.LIKE, searchText));
+                new Where(ШтрихкодиНоменклатури_Const.Штрихкод, Comparison.LIKE, searchText));
 
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }

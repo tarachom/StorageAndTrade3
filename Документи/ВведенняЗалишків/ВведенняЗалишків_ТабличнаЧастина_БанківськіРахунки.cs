@@ -258,7 +258,7 @@ namespace StorageAndTrade
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
             }

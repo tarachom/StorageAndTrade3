@@ -104,7 +104,7 @@ namespace StorageAndTrade
             {
                 Валюти page = new Валюти();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Const.FULLNAME}", () => { return page; });
-                await page.LoadRecords();
+                await page.SetValue();
             });
 
             Link.AddLink(hBoxInfo, "Історія завантажень", КурсиВалют_Історія);

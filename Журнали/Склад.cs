@@ -40,10 +40,10 @@ namespace StorageAndTrade
         protected override Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
         protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.Журнали_Склад.SelectPointerItem = SelectPointerItem;
-
+            ТабличніСписки.Журнали_Склад.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period);
             await ТабличніСписки.Журнали_Склад.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.Журнали_Склад.SelectPath != null)
@@ -52,7 +52,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Склад.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        public override void OpenTypeListDocs(Widget relative_to)
+        protected override void OpenTypeListDocs(Widget relative_to)
         {
             ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Склад.AllowDocument());
         }
@@ -64,12 +64,10 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        public override async void PeriodChanged()
+        protected override async void PeriodChanged()
         {
-            ТабличніСписки.Журнали_Склад.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();            
         }
     }
 }

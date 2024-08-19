@@ -23,7 +23,11 @@ namespace StorageAndTrade
 
             if (періодДляЖурналу.ДатаСтоп != null)
                 Період.DateStop = періодДляЖурналу.ДатаСтоп.Value;
-
+            /*
+            ВАЖЛИВО!
+            Коли змінюється значення Період.Period вкликається функція PeriodChanged()
+            Послідовність: SetValue() -> BeforeSetValue() -> PeriodChanged() -> LoadRecords();
+            */
             if (!string.IsNullOrEmpty(періодДляЖурналу.Період) && Enum.TryParse<ПеріодДляЖурналу.ТипПеріоду>(періодДляЖурналу.Період, out ПеріодДляЖурналу.ТипПеріоду result))
                 Період.Period = result;
             else
@@ -68,7 +72,7 @@ namespace StorageAndTrade
 
             //Відбір по журналу
             Налаштування_TablePart.QuerySelect.Where.Add(
-                new Where(Comparison.AND, Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Журнал, Comparison.EQ, НазваЖурналу));
+                new Where(Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart.Журнал, Comparison.EQ, НазваЖурналу));
         }
 
         /// <summary>

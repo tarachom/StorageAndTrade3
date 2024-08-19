@@ -548,7 +548,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Характеристика:
@@ -567,7 +567,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Пакування:
@@ -584,7 +584,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.ВидЦіни:
@@ -602,7 +602,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
                 case Columns.Склад:
@@ -619,7 +619,7 @@ LIMIT 1
                         popoverSmallSelect.Add(page);
                         popoverSmallSelect.ShowAll();
 
-                        await page.LoadRecords();
+                        await page.SetValue();
                         break;
                     }
             }

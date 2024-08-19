@@ -51,9 +51,6 @@ namespace StorageAndTrade
             }
         }
 
-        //Відбір по періоду в журналі
-        public bool UseWherePeriod { get; set; } = true;
-
         protected override void OpenSelect(object? sender, EventArgs args)
         {
             ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг
@@ -65,12 +62,9 @@ namespace StorageAndTrade
                 }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; });
 
-            if (UseWherePeriod)
-                page.SetValue();
-            else
-                page.LoadRecords();
+            page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

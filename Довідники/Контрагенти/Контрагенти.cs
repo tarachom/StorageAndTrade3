@@ -54,7 +54,7 @@ namespace StorageAndTrade
 
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
 
-                    await page.LoadRecords();
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkButton, false, false, 10);
@@ -73,7 +73,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {

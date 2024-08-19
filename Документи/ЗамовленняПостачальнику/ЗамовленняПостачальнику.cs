@@ -39,10 +39,12 @@ namespace StorageAndTrade
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.ЗамовленняПостачальнику_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗамовленняПостачальнику_Записи.DocumentPointerItem = DocumentPointerItem;
+
+            ТабличніСписки.ЗамовленняПостачальнику_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ЗамовленняПостачальнику_Записи.LoadRecords(TreeViewGrid);
 
@@ -75,7 +77,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ЗамовленняПостачальнику_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняПостачальнику_Const.FULLNAME} *", () =>
                 {
                     ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                     {
@@ -93,7 +95,7 @@ namespace StorageAndTrade
                 ЗамовленняПостачальнику_Objest ЗамовленняПостачальнику_Objest = new ЗамовленняПостачальнику_Objest();
                 if (await ЗамовленняПостачальнику_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ЗамовленняПостачальнику_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняПостачальнику_Objest.Назва}", () =>
                     {
                         ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                         {
@@ -149,10 +151,8 @@ namespace StorageAndTrade
 
         protected override async void PeriodChanged()
         {
-            ТабличніСписки.ЗамовленняПостачальнику_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            LoadRecords();
-
             await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
@@ -257,7 +257,7 @@ namespace StorageAndTrade
 
                         await поступленняТоварівТаПослуг_Новий.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{поступленняТоварівТаПослуг_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{поступленняТоварівТаПослуг_Новий.Назва}", () =>
                         {
                             ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                             {
@@ -306,7 +306,7 @@ namespace StorageAndTrade
 
                     if (await розхіднийКасовийОрдер_Новий.Save())
                     {
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{розхіднийКасовийОрдер_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{розхіднийКасовийОрдер_Новий.Назва}", () =>
                         {
                             РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                             {

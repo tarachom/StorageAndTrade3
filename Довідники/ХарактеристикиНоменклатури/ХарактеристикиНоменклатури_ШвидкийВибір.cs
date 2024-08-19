@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
 
-                    await page.LoadRecords();
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -85,7 +85,7 @@ namespace StorageAndTrade
             НоменклатураВласник.AfterSelectFunc = async () => { await LoadRecords(); };
         }
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 

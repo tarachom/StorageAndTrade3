@@ -75,7 +75,7 @@ namespace StorageAndTrade
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,listName, () => { return (Widget)listPage; });
 
-                listPage.GetType().InvokeMember("LoadRecords", BindingFlags.InvokeMethod, null, listPage, null);
+                listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
             }
         }
 
@@ -104,7 +104,7 @@ namespace StorageAndTrade
 
             //Відбір по типу договору
             ВибіркаДоговорівКонтрагента.QuerySelect.Where.Add(
-                new Where(Comparison.AND, Довідники.ДоговориКонтрагентів_Const.ТипДоговору, Comparison.EQ, (int)Перелічення.ТипДоговорів.ЗПокупцями));
+                new Where(Довідники.ДоговориКонтрагентів_Const.ТипДоговору, Comparison.EQ, (int)Перелічення.ТипДоговорів.ЗПокупцями));
 
             if (!await ВибіркаДоговорівКонтрагента.Select())
             {
