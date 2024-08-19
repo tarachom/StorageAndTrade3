@@ -46,7 +46,7 @@ namespace StorageAndTrade
                         page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem!);
 
                         NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Курси валют", () => { return page; });
-                        page.LoadRecords();
+                        page.SetValue();
                     }
                 };
 

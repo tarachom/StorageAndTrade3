@@ -34,16 +34,11 @@ namespace StorageAndTrade
             if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
             {
                 TreeView treeView = (TreeView)sender;
-
-                TreePath itemPath;
-                TreeViewColumn treeColumn;
-
-                treeView.GetCursor(out itemPath, out treeColumn);
+                treeView.GetCursor(out TreePath itemPath, out TreeViewColumn treeColumn);
 
                 if (treeColumn.Data.ContainsKey("Column"))
                 {
-                    TreeIter iter;
-                    treeView.Model.GetIter(out iter, itemPath);
+                    treeView.Model.GetIter(out TreeIter iter, itemPath);
 
                     //
                     //NameValue<int> 
@@ -52,7 +47,7 @@ namespace StorageAndTrade
                     //
 
                     //Два ключі Column і ColumnDataNum йдуть в парі
-                    string columnName = treeColumn.Data["Column"]?.ToString() ?? "";
+                    //string columnName = treeColumn.Data["Column"]?.ToString() ?? "";
                     int columnDataNum = int.Parse(treeColumn.Data["ColumnDataNum"]?.ToString() ?? "0");
 
                     //Тип даних (Документи.*, Документи.<Назва>, Довідники.*, Довідники.<Назва>)
@@ -67,7 +62,7 @@ namespace StorageAndTrade
                     // 
 
                     string uid, vyd = "";
-                    if (valueDataCell.IndexOf(":") != -1)
+                    if (valueDataCell.Contains(':'))
                     {
                         // 2. Guid:Вид
                         string[] uid_and_text = valueDataCell.Split(":");
@@ -80,8 +75,7 @@ namespace StorageAndTrade
                         uid = valueDataCell;
                     }
 
-                    Guid guid;
-                    if (!Guid.TryParse(uid, out guid))
+                    if (!Guid.TryParse(uid, out _))
                         return;
 
                     UnigueID unigueID = new UnigueID(uid);
@@ -93,7 +87,7 @@ namespace StorageAndTrade
                     //
 
                     string pointer, type = "";
-                    if (columnDataType.IndexOf(".") != -1)
+                    if (columnDataType.Contains('.'))
                     {
                         string[] pointer_and_type = columnDataType.Split(".");
                         pointer = pointer_and_type[0];
@@ -147,7 +141,7 @@ namespace StorageAndTrade
                 string title = visible ? visibleColumns[columnName] : columnName;
 
                 //Позиція тексту в колонці (0 .. 1)
-                float xalign = visible ? (xalignColumns != null && xalignColumns.ContainsKey(columnName) ? xalignColumns[columnName] : 0) : 0;
+                float xalign = visible ? (xalignColumns != null && xalignColumns.TryGetValue(columnName, out float xalign_value) ? xalign_value : 0) : 0;
 
                 CellRendererText cellRendererText = new CellRendererText() { Xalign = xalign };
                 TreeViewColumn treeColumn = new TreeViewColumn(title, cellRendererText, "text", i)
@@ -162,9 +156,8 @@ namespace StorageAndTrade
                 // Привязка колонки з даними до видимої колонки
                 //
 
-                if (visible && (dataColumns != null && dataColumns.ContainsKey(columnName)))
+                if (visible && dataColumns != null && dataColumns.TryGetValue(columnName, out string? dataColumName))
                 {
-                    string dataColumName = dataColumns[columnName];
                     for (int j = 0; j < columnsName.Length; j++)
                         if (dataColumName == columnsName[j])
                         {
@@ -172,8 +165,8 @@ namespace StorageAndTrade
                             treeColumn.Data.Add("ColumnDataNum", j);
 
                             //Тип колонки з даними
-                            if (typeDataColumns != null && typeDataColumns.ContainsKey(columnName))
-                                treeColumn.Data.Add("ColumnDataType", typeDataColumns[columnName]);
+                            if (typeDataColumns != null && typeDataColumns.TryGetValue(columnName, out string? dataColumType))
+                                treeColumn.Data.Add("ColumnDataType", dataColumType);
                             break;
                         }
                 }
@@ -182,10 +175,10 @@ namespace StorageAndTrade
                 //Функція обробки ячейки для видимої колонки
                 //
 
-                if (visible && columnCellDataFunc != null && columnCellDataFunc.ContainsKey(columnName))
+                if (visible && columnCellDataFunc != null && columnCellDataFunc.TryGetValue(columnName, out TreeCellDataFunc? dataColumFunc))
                 {
                     treeColumn.Data.Add("CellDataFunc", columnName);
-                    treeColumn.SetCellDataFunc(cellRendererText, columnCellDataFunc[columnName]);
+                    treeColumn.SetCellDataFunc(cellRendererText, dataColumFunc);
                 }
 
                 treeView.AppendColumn(treeColumn);
@@ -323,11 +316,8 @@ namespace StorageAndTrade
         {
             CellRendererText cellText = (CellRendererText)cell;
             if (column.Data.Contains("CellDataFunc"))
-            {
-                float result;
-                if (float.TryParse(cellText.Text, out result))
+                if (float.TryParse(cellText.Text, out float result))
                     cellText.Foreground = (result >= 0) ? "green" : "red";
-            }
         }
 
         #endregion

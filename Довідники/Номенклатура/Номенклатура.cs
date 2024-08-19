@@ -53,7 +53,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
 
                     await page.LoadRecords();
                 };
@@ -64,16 +64,16 @@ namespace StorageAndTrade
             //ШтрихКоди
             {
                 LinkButton linkButtonShKody = new LinkButton($" {ШтрихкодиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkButtonShKody.Clicked += (object? sender, EventArgs args) =>
+                linkButtonShKody.Clicked += async (object? sender, EventArgs args) =>
                 {
                     ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
 
                     if (SelectPointerItem != null)
                         page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
 
-                    page.LoadRecords();
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkButtonShKody, false, false, 10);
@@ -147,7 +147,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Номенклатура_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Номенклатура_Const.FULLNAME} *", () =>
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент
                     {
@@ -166,7 +166,7 @@ namespace StorageAndTrade
                 Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
                 if (await Номенклатура_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Номенклатура_Objest.Назва}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Номенклатура_Objest.Назва}", () =>
                     {
                         Номенклатура_Елемент page = new Номенклатура_Елемент
                         {

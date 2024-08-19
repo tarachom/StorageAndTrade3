@@ -46,7 +46,7 @@ namespace StorageAndTrade
             //ШтрихКоди
             {
                 LinkButton linkButtonShKody = new LinkButton($" {ШтрихкодиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkButtonShKody.Clicked += (object? sender, EventArgs args) =>
+                linkButtonShKody.Clicked += async (object? sender, EventArgs args) =>
                 {
                     ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
 
@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
 
-                    page.LoadRecords();
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkButtonShKody, false, false, 10);

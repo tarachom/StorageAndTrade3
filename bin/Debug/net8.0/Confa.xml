@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.08.2024 20:35:19</DateTimeSave>
+  <DateTimeSave>19.08.2024 15:45:20</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -26792,6 +26792,120 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Join>
+                <table>Довідники.Номенклатура_Const.TABLE</table>
+                <field>Номенклатура</field>
+                <alias>join_tab_1</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_1</table>
+                <field>Довідники.Номенклатура_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>ХарактеристикаНоменклатури</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <Join>
+                <table>Довідники.ХарактеристикиНоменклатури_Const.TABLE</table>
+                <field>ХарактеристикаНоменклатури</field>
+                <alias>join_tab_2</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_2</table>
+                <field>Довідники.ХарактеристикиНоменклатури_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <Join>
+                <table>Довідники.Склади_Const.TABLE</table>
+                <field>Склад</field>
+                <alias>join_tab_3</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_3</table>
+                <field>Довідники.Склади_Const.Назва</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <Caption>Серія</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <Join>
+                <table>Довідники.СеріїНоменклатури_Const.TABLE</table>
+                <field>Серія</field>
+                <alias>join_tab_4</alias>
+              </Join>
+              <FieldAndAlias>
+                <table>join_tab_4</table>
+                <field>Довідники.СеріїНоменклатури_Const.Номер</field>
+              </FieldAndAlias>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <Caption>ВНаявності</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ДоВідвантаження</Name>
+              <Caption>ДоВідвантаження</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняКлієнтів</Name>
@@ -27019,6 +27133,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗКлієнтами</Name>
@@ -27300,6 +27415,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>Закупівлі</Name>
@@ -27578,6 +27694,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ВільніЗалишки</Name>
@@ -27949,6 +28066,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняПостачальникам</Name>
@@ -28146,6 +28264,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗПостачальниками</Name>
@@ -28426,6 +28545,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РухКоштів</Name>
@@ -28823,6 +28943,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ПартіїТоварів</Name>
@@ -29483,6 +29604,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>Продажі</Name>
@@ -29783,6 +29905,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ТовариВКомірках</Name>
@@ -30272,6 +30395,7 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
+      <TabularLists />
     </RegisterAccumulation>
   </RegistersAccumulation>
 </Configuration>

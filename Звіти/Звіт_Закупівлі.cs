@@ -38,8 +38,7 @@ namespace StorageAndTrade
 
         #region Filters
 
-        DateTimeControl ДатаПочатокПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Parse($"01.{DateTime.Now.Month}.{DateTime.Now.Year}") };
-        DateTimeControl ДатаКінецьПеріоду = new DateTimeControl() { OnlyDate = true, Value = DateTime.Now };
+        PeriodControl Період = new PeriodControl() { Period = ПеріодДляЖурналу.ТипПеріоду.Місяць, SensitiveSelectButton = false };
         CheckButton ГрупуватиПоПеріоду = new CheckButton("Групувати по періоду (День)");
         CheckButton СобівартістьЗакупки = new CheckButton("Собівартість закупки");
 
@@ -91,6 +90,7 @@ namespace StorageAndTrade
 
             PackStart(hBoxTop, false, false, 10);
 
+            CreatePeriod();
             CreateFilters();
 
             reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
@@ -100,6 +100,16 @@ namespace StorageAndTrade
         }
 
         #region Filters
+
+        void CreatePeriod()
+        {
+            Box hBox = new Box(Orientation.Horizontal, 0);
+
+            //Період
+            CreateField(hBox, null, Період);
+
+            PackStart(hBox, false, false, 5);
+        }
 
         void CreateFilters()
         {
@@ -125,9 +135,6 @@ namespace StorageAndTrade
 
         void CreateContainer1(Box vBox)
         {
-            //Період
-            CreateField(CreateField(vBox, "Період з ", ДатаПочатокПеріоду), " по ", ДатаКінецьПеріоду);
-
             //Організація
             CreateField(vBox, null, Організація);
 
@@ -190,8 +197,8 @@ namespace StorageAndTrade
         {
             return new ПараметриФільтр()
             {
-                ДатаПочатокПеріоду = ДатаПочатокПеріоду.ПочатокДня(),
-                ДатаКінецьПеріоду = ДатаКінецьПеріоду.КінецьДня(),
+                ДатаПочатокПеріоду = Період.DateStartControl.ПочатокДня(),
+                ДатаКінецьПеріоду = Період.DateStopControl.КінецьДня(),
                 ГрупуватиПоПеріоду = ГрупуватиПоПеріоду.Active,
                 СобівартістьЗакупки = СобівартістьЗакупки.Active,
                 Організація = Організація.Pointer,
@@ -558,8 +565,7 @@ ORDER BY " +
 
             var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
 
-            ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
+            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;

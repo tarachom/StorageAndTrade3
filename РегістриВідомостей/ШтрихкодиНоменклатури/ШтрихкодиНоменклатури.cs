@@ -60,11 +60,11 @@ namespace StorageAndTrade
             };
         }
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
 
-            ТабличніСписки.ШтрихкодиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             if (!НоменклатураВласник.Pointer.IsEmpty())
             {
@@ -183,6 +183,19 @@ namespace StorageAndTrade
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return null;
             }
+        }
+
+        const string КлючНалаштуванняКористувача = "РегістриВідомостей.ШтрихкодиНоменклатури";
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
+        }
+
+        protected override async void PeriodChanged()
+        {
+            await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();
         }
     }
 }

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.08.2024 20:35:19
+ * Дата конфігурації: 19.08.2024 15:45:20
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -9369,11 +9369,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -9586,11 +9581,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -9816,11 +9806,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -10044,11 +10029,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -10260,11 +10240,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -10466,11 +10441,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -10689,11 +10659,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -10898,11 +10863,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -11104,11 +11064,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -11334,11 +11289,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -11558,11 +11508,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -11769,11 +11714,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -11970,11 +11910,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -12151,11 +12086,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -12338,11 +12268,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -12536,11 +12461,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -12727,11 +12647,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -12937,11 +12852,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -13151,11 +13061,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -13332,11 +13237,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -13517,11 +13417,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -13700,11 +13595,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             ОчиститиВідбір(treeView);
@@ -13877,11 +13767,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -14067,11 +13952,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -16045,11 +15925,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -16492,11 +16367,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -17126,11 +16996,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -17470,11 +17335,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
         }
 
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
@@ -17979,11 +17839,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static void ДодатиВідбірПоПеріоду(TreeView treeView, string типПеріоду, DateTime? start = null, DateTime? stop = null)
-        {
-            ДодатиВідбірПоПеріоду(treeView, Enum.Parse<ПеріодДляЖурналу.ТипПеріоду>(типПеріоду), start, stop);
-        }
-
         public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
         {
             Dictionary<string, List<Where>> WhereDict = [];
@@ -18400,6 +18255,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду("period", типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -18411,11 +18273,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             РегістриВідомостей.ЦіниНоменклатури_RecordsSet ЦіниНоменклатури_RecordsSet = new РегістриВідомостей.ЦіниНоменклатури_RecordsSet();
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ЦіниНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ЦіниНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
             /* DEFAULT ORDER */
             ЦіниНоменклатури_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
@@ -18548,6 +18407,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду("period", типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -18559,11 +18425,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             РегістриВідомостей.КурсиВалют_RecordsSet КурсиВалют_RecordsSet = new РегістриВідомостей.КурсиВалют_RecordsSet();
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) КурсиВалют_RecordsSet.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) КурсиВалют_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
             /* DEFAULT ORDER */
             КурсиВалют_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
@@ -18665,6 +18528,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду("period", типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -18676,11 +18546,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet ШтрихкодиНоменклатури_RecordsSet = new РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet();
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
             /* DEFAULT ORDER */
             ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
@@ -18787,6 +18654,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             treeView.AppendColumn(new TreeViewColumn());
         }
 
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду("period", типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
         public static UnigueID? SelectPointerItem { get; set; }
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -18798,11 +18672,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             РегістриВідомостей.ФайлиДокументів_RecordsSet ФайлиДокументів_RecordsSet = new РегістриВідомостей.ФайлиДокументів_RecordsSet();
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ФайлиДокументів_RecordsSet.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ФайлиДокументів_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
             /* DEFAULT ORDER */
             ФайлиДокументів_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
@@ -18848,6 +18719,213 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
     #endregion
     
     #region REGISTER "РозміщенняНоменклатуриПоКоміркамНаСкладі"
+    
+      
+    #endregion
+    
+}
+
+namespace StorageAndTrade_1_0.РегістриНакопичення.ТабличніСписки
+{
+    
+    #region REGISTER "ТовариНаСкладах"
+    
+      
+    public class ТовариНаСкладах_Записи : ТабличнийСписок
+    {
+        string ID = "";
+        string Період = "";
+        
+        string Номенклатура = "";
+        string ХарактеристикаНоменклатури = "";
+        string Склад = "";
+        string Серія = "";
+        string ВНаявності = "";
+        string ДоВідвантаження = "";
+
+        Array ToArray()
+        {
+            return new object[] 
+            { 
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
+                ID, 
+                Період,
+                /*Номенклатура*/ Номенклатура,
+                /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
+                /*Склад*/ Склад,
+                /*Серія*/ Серія,
+                /*ВНаявності*/ ВНаявності,
+                /*ДоВідвантаження*/ ДоВідвантаження,
+                 
+            };
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Період*/ typeof(string),
+                /*Номенклатура*/ typeof(string),
+                /*ХарактеристикаНоменклатури*/ typeof(string),
+                /*Склад*/ typeof(string),
+                /*Серія*/ typeof(string),
+                /*ВНаявності*/ typeof(string),
+                /*ДоВідвантаження*/ typeof(string),
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("ХарактеристикаНоменклатури", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Серія*/
+            treeView.AppendColumn(new TreeViewColumn("ВНаявності", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ВНаявності*/
+            treeView.AppendColumn(new TreeViewColumn("ДоВідвантаження", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*ДоВідвантаження*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            SelectPath = CurrentPath = null;
+
+            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_RecordsSet = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
+            {
+                var where = treeView.Data["Where"];
+                if (where != null) ТовариНаСкладах_RecordsSet.QuerySelect.Where = (List<Where>)where;
+            }
+
+            /* DEFAULT ORDER */
+            ТовариНаСкладах_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
+
+            
+                /* Join Table */
+                ТовариНаСкладах_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.Номенклатура_Const.TABLE, РегістриНакопичення.ТовариНаСкладах_Const.Номенклатура, ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_1"));
+                
+                  /* Field */
+                  ТовариНаСкладах_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_1." + Довідники.Номенклатура_Const.Назва, "join_tab_1_field_1"));
+                  
+                /* Join Table */
+                ТовариНаСкладах_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.ХарактеристикиНоменклатури_Const.TABLE, РегістриНакопичення.ТовариНаСкладах_Const.ХарактеристикаНоменклатури, ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_2"));
+                
+                  /* Field */
+                  ТовариНаСкладах_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_2." + Довідники.ХарактеристикиНоменклатури_Const.Назва, "join_tab_2_field_1"));
+                  
+                /* Join Table */
+                ТовариНаСкладах_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.Склади_Const.TABLE, РегістриНакопичення.ТовариНаСкладах_Const.Склад, ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_3"));
+                
+                  /* Field */
+                  ТовариНаСкладах_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_3." + Довідники.Склади_Const.Назва, "join_tab_3_field_1"));
+                  
+                /* Join Table */
+                ТовариНаСкладах_RecordsSet.QuerySelect.Joins.Add(
+                    new Join(Довідники.СеріїНоменклатури_Const.TABLE, РегістриНакопичення.ТовариНаСкладах_Const.Серія, ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_4"));
+                
+                  /* Field */
+                  ТовариНаСкладах_RecordsSet.QuerySelect.FieldAndAlias.Add(
+                    new NameValue<string>("join_tab_4." + Довідники.СеріїНоменклатури_Const.Номер, "join_tab_4_field_1"));
+                  
+
+            /* Read */
+            await ТовариНаСкладах_RecordsSet.Read();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
+            foreach (ТовариНаСкладах_RecordsSet.Record record in ТовариНаСкладах_RecordsSet.Records)
+            {
+                ТовариНаСкладах_Записи Record = new ТовариНаСкладах_Записи
+                {
+                    ID = record.UID.ToString(),
+                    Період = record.Period.ToString(),
+                    Номенклатура = ТовариНаСкладах_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_1_field_1"].ToString() ?? "", /**/
+                    ХарактеристикаНоменклатури = ТовариНаСкладах_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_2_field_1"].ToString() ?? "", /**/
+                    Склад = ТовариНаСкладах_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_3_field_1"].ToString() ?? "", /**/
+                    Серія = ТовариНаСкладах_RecordsSet.JoinValue[record.UID.ToString()]["join_tab_4_field_1"].ToString() ?? "", /**/
+                    ВНаявності = record.ВНаявності.ToString() ?? "", /**/
+                    ДоВідвантаження = record.ДоВідвантаження.ToString() ?? "" /**/
+                    
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                {
+                    if (Record.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+                }
+            }
+        }
+    }
+	    
+    #endregion
+    
+    #region REGISTER "ЗамовленняКлієнтів"
+    
+      
+    #endregion
+    
+    #region REGISTER "РозрахункиЗКлієнтами"
+    
+      
+    #endregion
+    
+    #region REGISTER "Закупівлі"
+    
+      
+    #endregion
+    
+    #region REGISTER "ВільніЗалишки"
+    
+      
+    #endregion
+    
+    #region REGISTER "ЗамовленняПостачальникам"
+    
+      
+    #endregion
+    
+    #region REGISTER "РозрахункиЗПостачальниками"
+    
+      
+    #endregion
+    
+    #region REGISTER "РухКоштів"
+    
+      
+    #endregion
+    
+    #region REGISTER "ПартіїТоварів"
+    
+      
+    #endregion
+    
+    #region REGISTER "Продажі"
+    
+      
+    #endregion
+    
+    #region REGISTER "ТовариВКомірках"
     
       
     #endregion

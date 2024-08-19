@@ -44,14 +44,14 @@ namespace StorageAndTrade
             };
         }
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
                 return;
 
             ТабличніСписки.КурсиВалют_Записи.SelectPointerItem = SelectPointerItem;
 
-            ТабличніСписки.КурсиВалют_Записи.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.КурсиВалют_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
             {
@@ -103,7 +103,7 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КурсиВалют_Const.FULLNAME} *", () =>
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{КурсиВалют_Const.FULLNAME} *", () =>
                 {
                     КурсиВалют_Елемент page = new КурсиВалют_Елемент
                     {
@@ -122,7 +122,7 @@ namespace StorageAndTrade
                 КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
                 if (await КурсиВалют_Objest.Read(unigueID))
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КурсиВалют_Objest.Курс}", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{КурсиВалют_Objest.Курс}", () =>
                     {
                         КурсиВалют_Елемент page = new КурсиВалют_Елемент
                         {
@@ -165,6 +165,19 @@ namespace StorageAndTrade
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return null;
             }
+        }
+
+        const string КлючНалаштуванняКористувача = "РегістриВідомостей.КурсиВалют";
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
+        }
+
+        protected override async void PeriodChanged()
+        {
+            await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            LoadRecords();           
         }
     }
 }
