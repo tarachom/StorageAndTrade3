@@ -657,7 +657,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region Override
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -1070,7 +1070,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             PopoverSmallSelect.Add(page);
             PopoverSmallSelect.ShowAll();
 
-            await page.LoadRecords();
+            await page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

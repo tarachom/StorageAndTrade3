@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>19.08.2024 16:59:53</DateTimeSave>
+  <DateTimeSave>20.08.2024 00:06:28</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -25996,7 +25996,7 @@ SQL тип  непотрібно вказувати
       </TabularLists>
       <Forms>
         <Form>
-          <Name>erter</Name>
+          <Name>Елемент</Name>
           <Desc>
           </Desc>
           <Type>Element</Type>
@@ -26015,6 +26015,13 @@ SQL тип  непотрібно вказувати
             </ElementField>
           </ElementFields>
           <ElementTableParts />
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи2</TabularList>
         </Form>
       </Forms>
     </RegisterInformation>

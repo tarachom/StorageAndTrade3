@@ -117,8 +117,7 @@ namespace StorageAndTrade
 
             await Save();
 
-            if (CallBack_LoadRecords != null)
-                CallBack_LoadRecords.Invoke(UnigueID);
+            CallBack_LoadRecords?.Invoke(UnigueID);
 
             if (closePage)
                 NotebookFunction.CloseNotebookPageToCode(Program.GeneralNotebook, this.Name);

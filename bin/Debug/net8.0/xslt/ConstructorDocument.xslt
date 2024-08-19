@@ -426,7 +426,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region Override
 
-        public override async void LoadRecords()
+        protected override async void LoadRecords()
         {
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.DocumentPointerItem = DocumentPointerItem;
@@ -611,9 +611,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             }
         }
 
-        //Відбір по періоду в журналі
-        public bool UseWherePeriod { get; set; } = true;
-
         protected override void OpenSelect(object? sender, EventArgs args)
         {
             <xsl:value-of select="$DocumentName"/> page = new <xsl:value-of select="$DocumentName"/>
@@ -627,10 +624,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
             Program.GeneralForm?.CreateNotebookPage($"Вибір - {<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}", () =&gt; { return page; });
 
-            if (UseWherePeriod)
-                page.SetValue();
-            else
-                page.LoadRecords();
+            page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

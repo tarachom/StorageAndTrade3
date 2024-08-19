@@ -46,9 +46,6 @@ namespace StorageAndTrade
 
         protected override async void LoadRecords()
         {
-            if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
-                return;
-
             ТабличніСписки.КурсиВалют_Записи.SelectPointerItem = SelectPointerItem;
 
             ТабличніСписки.КурсиВалют_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
@@ -109,7 +106,7 @@ namespace StorageAndTrade
                     {
                         CallBack_LoadRecords = CallBack_LoadRecords,
                         IsNew = true,
-                        ВалютаДляНового = ВалютаВласник.Pointer
+                        //ВалютаДляНового = ВалютаВласник.Pointer
                     };
 
                     page.SetValue();
