@@ -32,6 +32,7 @@ using InterfaceGtk;
 
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
@@ -104,6 +105,13 @@ namespace StorageAndTrade
             {
                 Валюти page = new Валюти();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Const.FULLNAME}", () => { return page; });
+                await page.SetValue();
+            });
+
+            Link.AddLink(hBoxInfo, "ТовариНаСкладах", async () =>
+            {
+                ТовариНаСкладах page = new ТовариНаСкладах();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ТовариНаСкладах_Const.FULLNAME}", () => { return page; });
                 await page.SetValue();
             });
 

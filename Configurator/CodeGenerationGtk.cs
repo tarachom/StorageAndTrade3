@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.08.2024 17:55:50
+ * Дата конфігурації: 20.08.2024 23:00:46
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -16382,27 +16382,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             SelectPath = CurrentPath = null;
 
             РегістриВідомостей.ЦіниНоменклатури_RecordsSet ЦіниНоменклатури_RecordsSet = new РегістриВідомостей.ЦіниНоменклатури_RecordsSet();
+            ЦіниНоменклатури_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ЦіниНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            /* DEFAULT ORDER */
-            ЦіниНоменклатури_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
-
-            Довідники.Номенклатура_Pointer.GetJoin(ЦіниНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ЦіниНоменклатури_Const.Номенклатура,
-                ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_1", "Номенклатура");
-            Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(ЦіниНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ЦіниНоменклатури_Const.ХарактеристикаНоменклатури,
-                ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_2", "ХарактеристикаНоменклатури");
-            Довідники.ВидиЦін_Pointer.GetJoin(ЦіниНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ЦіниНоменклатури_Const.ВидЦіни,
-                ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_3", "ВидЦіни");
-            Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(ЦіниНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ЦіниНоменклатури_Const.Пакування,
-                ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_4", "Пакування");
-            Довідники.Валюти_Pointer.GetJoin(ЦіниНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ЦіниНоменклатури_Const.Валюта,
-                ЦіниНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_5", "Валюта");
             
 
-            /* Read */
             await ЦіниНоменклатури_RecordsSet.Read();
 
             ListStore Store = (ListStore)treeView.Model;
@@ -16410,31 +16397,25 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
             foreach (ЦіниНоменклатури_RecordsSet.Record record in ЦіниНоменклатури_RecordsSet.Records)
             {
-                ЦіниНоменклатури_Записи recordLocal = new ЦіниНоменклатури_Записи
+                ЦіниНоменклатури_Записи row = new ЦіниНоменклатури_Записи
                 {
                     ID = record.UID.ToString(),
                     Період = record.Period.ToString(),
-                    Ціна = record.Ціна.ToString() ?? "",
+                    Номенклатура = record.Номенклатура.Назва,
+                        ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
+                        ВидЦіни = record.ВидЦіни.Назва,
+                        Ціна = record.Ціна.ToString() ?? "",
+                        Пакування = record.Пакування.Назва,
+                        Валюта = record.Валюта.Назва,
                         
                 };
-                if (ЦіниНоменклатури_RecordsSet.JoinValue.TryGetValue(recordLocal.ID.ToString(), out var ItemValue))
-                {
-                   recordLocal.Номенклатура = ItemValue["Номенклатура"];
-                   recordLocal.ХарактеристикаНоменклатури = ItemValue["ХарактеристикаНоменклатури"];
-                   recordLocal.ВидЦіни = ItemValue["ВидЦіни"];
-                   recordLocal.Пакування = ItemValue["Пакування"];
-                   recordLocal.Валюта = ItemValue["Валюта"];
-                   
-                }
 
-                TreeIter CurrentIter = Store.AppendValues(recordLocal.ToArray());
+                TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
                 if (SelectPointerItem != null)
-                {
-                    if (recordLocal.ID == SelectPointerItem.ToString())
+                    if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
-                }
             }
         }
     }
@@ -16508,19 +16489,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             SelectPath = CurrentPath = null;
 
             РегістриВідомостей.КурсиВалют_RecordsSet КурсиВалют_RecordsSet = new РегістриВідомостей.КурсиВалют_RecordsSet();
+            КурсиВалют_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) КурсиВалют_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            /* DEFAULT ORDER */
-            КурсиВалют_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
-
-            Довідники.Валюти_Pointer.GetJoin(КурсиВалют_RecordsSet.QuerySelect, РегістриВідомостей.КурсиВалют_Const.Валюта,
-                КурсиВалют_RecordsSet.QuerySelect.Table, "join_tab_1", "Валюта");
             
 
-            /* Read */
             await КурсиВалют_RecordsSet.Read();
 
             ListStore Store = (ListStore)treeView.Model;
@@ -16528,28 +16504,22 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
             foreach (КурсиВалют_RecordsSet.Record record in КурсиВалют_RecordsSet.Records)
             {
-                КурсиВалют_Записи recordLocal = new КурсиВалют_Записи
+                КурсиВалют_Записи row = new КурсиВалют_Записи
                 {
                     ID = record.UID.ToString(),
                     Період = record.Period.ToString(),
-                    Курс = record.Курс.ToString() ?? "",
+                    Валюта = record.Валюта.Назва,
+                        Курс = record.Курс.ToString() ?? "",
                         Кратність = record.Кратність.ToString() ?? "",
                         
                 };
-                if (КурсиВалют_RecordsSet.JoinValue.TryGetValue(recordLocal.ID.ToString(), out var ItemValue))
-                {
-                   recordLocal.Валюта = ItemValue["Валюта"];
-                   
-                }
 
-                TreeIter CurrentIter = Store.AppendValues(recordLocal.ToArray());
+                TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
                 if (SelectPointerItem != null)
-                {
-                    if (recordLocal.ID == SelectPointerItem.ToString())
+                    if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
-                }
             }
         }
     }
@@ -16627,23 +16597,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             SelectPath = CurrentPath = null;
 
             РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet ШтрихкодиНоменклатури_RecordsSet = new РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet();
+            ШтрихкодиНоменклатури_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            /* DEFAULT ORDER */
-            ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
-
-            Довідники.Номенклатура_Pointer.GetJoin(ШтрихкодиНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура,
-                ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_1", "Номенклатура");
-            Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(ШтрихкодиНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури,
-                ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_2", "ХарактеристикаНоменклатури");
-            Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(ШтрихкодиНоменклатури_RecordsSet.QuerySelect, РегістриВідомостей.ШтрихкодиНоменклатури_Const.Пакування,
-                ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Table, "join_tab_3", "Пакування");
             
 
-            /* Read */
             await ШтрихкодиНоменклатури_RecordsSet.Read();
 
             ListStore Store = (ListStore)treeView.Model;
@@ -16651,29 +16612,23 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
             foreach (ШтрихкодиНоменклатури_RecordsSet.Record record in ШтрихкодиНоменклатури_RecordsSet.Records)
             {
-                ШтрихкодиНоменклатури_Записи recordLocal = new ШтрихкодиНоменклатури_Записи
+                ШтрихкодиНоменклатури_Записи row = new ШтрихкодиНоменклатури_Записи
                 {
                     ID = record.UID.ToString(),
                     Період = record.Period.ToString(),
                     Штрихкод = record.Штрихкод.ToString() ?? "",
+                        Номенклатура = record.Номенклатура.Назва,
+                        ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
+                        Пакування = record.Пакування.Назва,
                         
                 };
-                if (ШтрихкодиНоменклатури_RecordsSet.JoinValue.TryGetValue(recordLocal.ID.ToString(), out var ItemValue))
-                {
-                   recordLocal.Номенклатура = ItemValue["Номенклатура"];
-                   recordLocal.ХарактеристикаНоменклатури = ItemValue["ХарактеристикаНоменклатури"];
-                   recordLocal.Пакування = ItemValue["Пакування"];
-                   
-                }
 
-                TreeIter CurrentIter = Store.AppendValues(recordLocal.ToArray());
+                TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
                 if (SelectPointerItem != null)
-                {
-                    if (recordLocal.ID == SelectPointerItem.ToString())
+                    if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
-                }
             }
         }
     }
@@ -16739,19 +16694,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             SelectPath = CurrentPath = null;
 
             РегістриВідомостей.ФайлиДокументів_RecordsSet ФайлиДокументів_RecordsSet = new РегістриВідомостей.ФайлиДокументів_RecordsSet();
+            ФайлиДокументів_RecordsSet.FillJoin(["period"]);
 
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ФайлиДокументів_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            /* DEFAULT ORDER */
-            ФайлиДокументів_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
-
-            Довідники.Файли_Pointer.GetJoin(ФайлиДокументів_RecordsSet.QuerySelect, РегістриВідомостей.ФайлиДокументів_Const.Файл,
-                ФайлиДокументів_RecordsSet.QuerySelect.Table, "join_tab_1", "Файл");
             
 
-            /* Read */
             await ФайлиДокументів_RecordsSet.Read();
 
             ListStore Store = (ListStore)treeView.Model;
@@ -16759,26 +16709,20 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
 
             foreach (ФайлиДокументів_RecordsSet.Record record in ФайлиДокументів_RecordsSet.Records)
             {
-                ФайлиДокументів_Записи recordLocal = new ФайлиДокументів_Записи
+                ФайлиДокументів_Записи row = new ФайлиДокументів_Записи
                 {
                     ID = record.UID.ToString(),
                     Період = record.Period.ToString(),
-                    
+                    Файл = record.Файл.Назва,
+                        
                 };
-                if (ФайлиДокументів_RecordsSet.JoinValue.TryGetValue(recordLocal.ID.ToString(), out var ItemValue))
-                {
-                   recordLocal.Файл = ItemValue["Файл"];
-                   
-                }
 
-                TreeIter CurrentIter = Store.AppendValues(recordLocal.ToArray());
+                TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
                 if (SelectPointerItem != null)
-                {
-                    if (recordLocal.ID == SelectPointerItem.ToString())
+                    if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
-                }
             }
         }
     }
@@ -16801,6 +16745,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
     public class ТовариНаСкладах_Записи : ТабличнийСписок
     {
         string ID = "";
+        bool Income = false;
         string Період = "";
         
         string Номенклатура = "";
@@ -16816,7 +16761,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             { 
                 InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
-                Період,
+                Income ? "+" : "-", 
+                Період, 
                 /*Номенклатура*/ Номенклатура,
                 /*ХарактеристикаНоменклатури*/ ХарактеристикаНоменклатури,
                 /*Склад*/ Склад,
@@ -16833,6 +16779,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             [
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
+                /*Income*/ typeof(string), 
                 /*Період*/ typeof(string),
                 /*Номенклатура*/ typeof(string),
                 /*ХарактеристикаНоменклатури*/ typeof(string),
@@ -16845,17 +16792,25 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
 
             treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2));
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3));
             /* */
-            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Номенклатура*/
-            treeView.AppendColumn(new TreeViewColumn("ХарактеристикаНоменклатури", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*ХарактеристикаНоменклатури*/
-            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Склад*/
-            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Серія*/
-            treeView.AppendColumn(new TreeViewColumn("ВНаявності", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*ВНаявності*/
-            treeView.AppendColumn(new TreeViewColumn("ДоВідвантаження", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*ДоВідвантаження*/
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("ХарактеристикаНоменклатури", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*ХарактеристикаНоменклатури*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Серія", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Серія*/
+            treeView.AppendColumn(new TreeViewColumn("ВНаявності", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*ВНаявності*/
+            treeView.AppendColumn(new TreeViewColumn("ДоВідвантаження", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true, SortColumnId = 9 } ); /*ДоВідвантаження*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду("period", типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
         }
 
         public static UnigueID? SelectPointerItem { get; set; }
@@ -16867,25 +16822,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             SelectPath = CurrentPath = null;
 
             РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_RecordsSet = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+             ТовариНаСкладах_RecordsSet.FillJoin(["period"]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ТовариНаСкладах_RecordsSet.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ТовариНаСкладах_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            /* DEFAULT ORDER */
-            ТовариНаСкладах_RecordsSet.QuerySelect.Order.Add("period", SelectOrder.ASC);
-
-            Довідники.Номенклатура_Pointer.GetJoin(ТовариНаСкладах_RecordsSet.QuerySelect, РегістриНакопичення.ТовариНаСкладах_Const.Номенклатура,
-                ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_1", "Номенклатура");
-            Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(ТовариНаСкладах_RecordsSet.QuerySelect, РегістриНакопичення.ТовариНаСкладах_Const.ХарактеристикаНоменклатури,
-                ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_2", "ХарактеристикаНоменклатури");
-            Довідники.Склади_Pointer.GetJoin(ТовариНаСкладах_RecordsSet.QuerySelect, РегістриНакопичення.ТовариНаСкладах_Const.Склад,
-                ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_3", "Склад");
-            Довідники.СеріїНоменклатури_Pointer.GetJoin(ТовариНаСкладах_RecordsSet.QuerySelect, РегістриНакопичення.ТовариНаСкладах_Const.Серія,
-                ТовариНаСкладах_RecordsSet.QuerySelect.Table, "join_tab_4", "Серія");
             
 
             /* Read */
@@ -16896,31 +16838,26 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
 
             foreach (ТовариНаСкладах_RecordsSet.Record record in ТовариНаСкладах_RecordsSet.Records)
             {
-                ТовариНаСкладах_Записи recordLocal = new ТовариНаСкладах_Записи
+                ТовариНаСкладах_Записи row = new ТовариНаСкладах_Записи
                 {
                     ID = record.UID.ToString(),
                     Період = record.Period.ToString(),
-                    ВНаявності = record.ВНаявності.ToString() ?? "",
+                    Income = record.Income,
+                    Номенклатура = record.Номенклатура.Назва,
+                        ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури.Назва,
+                        Склад = record.Склад.Назва,
+                        Серія = record.Серія.Назва,
+                        ВНаявності = record.ВНаявності.ToString() ?? "",
                         ДоВідвантаження = record.ДоВідвантаження.ToString() ?? "",
                         
                 };
-                if (ТовариНаСкладах_RecordsSet.JoinValue.TryGetValue(recordLocal.ID.ToString(), out var ItemValue))
-                {
-                   recordLocal.Номенклатура = ItemValue["Номенклатура"];
-                   recordLocal.ХарактеристикаНоменклатури = ItemValue["ХарактеристикаНоменклатури"];
-                   recordLocal.Склад = ItemValue["Склад"];
-                   recordLocal.Серія = ItemValue["Серія"];
-                   
-                }
 
-                TreeIter CurrentIter = Store.AppendValues(recordLocal.ToArray());
+                TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
 
                 if (SelectPointerItem != null)
-                {
-                    if (recordLocal.ID == SelectPointerItem.ToString())
+                    if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
-                }
             }
         }
     }

@@ -1874,6 +1874,22 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 		
         public List&lt;Record&gt; Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                <xsl:if test="Type = 'pointer'">
+                  <xsl:value-of select="substring-before(Pointer, '.')"/>.<xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer.GetJoin(QuerySelect, 
+                  <xsl:value-of select="$RegisterName"/>_Const.<xsl:value-of select="Name"/>, "<xsl:value-of select="../../../Table"/>", "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
+                </xsl:if>
+            </xsl:for-each>
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -1894,6 +1910,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                     </xsl:for-each>
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                    <xsl:if test="Type = 'pointer'">
+                      <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
+                    </xsl:if>
+                </xsl:for-each>
+                }
             }
             base.BaseClear();
         }
@@ -2129,6 +2153,22 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 		
         public List&lt;Record&gt; Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                <xsl:if test="Type = 'pointer'">
+                  <xsl:value-of select="substring-before(Pointer, '.')"/>.<xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer.GetJoin(QuerySelect, 
+                  <xsl:value-of select="$RegisterName"/>_Const.<xsl:value-of select="Name"/>, "<xsl:value-of select="../../../Table"/>", "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
+                </xsl:if>
+            </xsl:for-each>
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -2150,6 +2190,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                     </xsl:for-each>
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                    <xsl:if test="Type = 'pointer'">
+                      <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
+                    </xsl:if>
+                </xsl:for-each>
+                }
             }
             base.BaseClear();
         }

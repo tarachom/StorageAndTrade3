@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.08.2024 17:55:50
+ * Дата конфігурації: 20.08.2024 23:00:46
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -29849,6 +29849,27 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ЦіниНоменклатури_Const.Номенклатура, "tab_a40", "join_tab_1", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ЦіниНоменклатури_Const.ХарактеристикаНоменклатури, "tab_a40", "join_tab_2", "ХарактеристикаНоменклатури");
+                Довідники.ВидиЦін_Pointer.GetJoin(QuerySelect, 
+                  ЦіниНоменклатури_Const.ВидЦіни, "tab_a40", "join_tab_3", "ВидЦіни");
+                Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, 
+                  ЦіниНоменклатури_Const.Пакування, "tab_a40", "join_tab_5", "Пакування");
+                Довідники.Валюти_Pointer.GetJoin(QuerySelect, 
+                  ЦіниНоменклатури_Const.Валюта, "tab_a40", "join_tab_6", "Валюта");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -29869,6 +29890,15 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
+                    record.Пакування.Назва = ItemValue["Пакування"];
+                    record.Валюта.Назва = ItemValue["Валюта"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -29999,6 +30029,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Валюти_Pointer.GetJoin(QuerySelect, 
+                  КурсиВалют_Const.Валюта, "tab_a59", "join_tab_1", "Валюта");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -30016,6 +30059,11 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Валюта.Назва = ItemValue["Валюта"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -30129,6 +30177,23 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ШтрихкодиНоменклатури_Const.Номенклатура, "tab_b17", "join_tab_2", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ШтрихкодиНоменклатури_Const.ХарактеристикаНоменклатури, "tab_b17", "join_tab_3", "ХарактеристикаНоменклатури");
+                Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, 
+                  ШтрихкодиНоменклатури_Const.Пакування, "tab_b17", "join_tab_4", "Пакування");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -30147,6 +30212,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.Пакування.Назва = ItemValue["Пакування"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -30263,6 +30335,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Файли_Pointer.GetJoin(QuerySelect, 
+                  ФайлиДокументів_Const.Файл, "tab_b23", "join_tab_1", "Файл");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -30278,6 +30363,11 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Файл.Назва = ItemValue["Файл"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -30379,6 +30469,25 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Номенклатура, "tab_a74", "join_tab_1", "Номенклатура");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Склад, "tab_a74", "join_tab_2", "Склад");
+                Довідники.СкладськіПриміщення_Pointer.GetJoin(QuerySelect, 
+                  РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Приміщення, "tab_a74", "join_tab_3", "Приміщення");
+                Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, 
+                  РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.Комірка, "tab_a74", "join_tab_4", "Комірка");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -30397,6 +30506,14 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    record.Приміщення.Назва = ItemValue["Приміщення"];
+                    record.Комірка.Назва = ItemValue["Комірка"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -30825,6 +30942,25 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ТовариНаСкладах_Const.Номенклатура, "tab_a38", "join_tab_1", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ТовариНаСкладах_Const.ХарактеристикаНоменклатури, "tab_a38", "join_tab_2", "ХарактеристикаНоменклатури");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  ТовариНаСкладах_Const.Склад, "tab_a38", "join_tab_3", "Склад");
+                Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ТовариНаСкладах_Const.Серія, "tab_a38", "join_tab_4", "Серія");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -30846,6 +30982,14 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    record.Серія.Назва = ItemValue["Серія"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -31234,6 +31378,25 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Документи.ЗамовленняКлієнта_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняКлієнтів_Const.ЗамовленняКлієнта, "tab_a55", "join_tab_1", "ЗамовленняКлієнта");
+                Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняКлієнтів_Const.Номенклатура, "tab_a55", "join_tab_2", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняКлієнтів_Const.ХарактеристикаНоменклатури, "tab_a55", "join_tab_3", "ХарактеристикаНоменклатури");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняКлієнтів_Const.Склад, "tab_a55", "join_tab_4", "Склад");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -31255,6 +31418,14 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.ЗамовленняКлієнта.Назва = ItemValue["ЗамовленняКлієнта"];
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -31426,6 +31597,21 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Валюти_Pointer.GetJoin(QuerySelect, 
+                  РозрахункиЗКлієнтами_Const.Валюта, "tab_a56", "join_tab_1", "Валюта");
+                Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, 
+                  РозрахункиЗКлієнтами_Const.Контрагент, "tab_a56", "join_tab_2", "Контрагент");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -31444,6 +31630,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Валюта.Назва = ItemValue["Валюта"];
+                    record.Контрагент.Назва = ItemValue["Контрагент"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -31700,6 +31892,29 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Організації_Pointer.GetJoin(QuerySelect, 
+                  Закупівлі_Const.Організація, "tab_a57", "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  Закупівлі_Const.Склад, "tab_a57", "join_tab_2", "Склад");
+                Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, 
+                  Закупівлі_Const.Контрагент, "tab_a57", "join_tab_3", "Контрагент");
+                Довідники.ДоговориКонтрагентів_Pointer.GetJoin(QuerySelect, 
+                  Закупівлі_Const.Договір, "tab_a57", "join_tab_4", "Договір");
+                Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  Закупівлі_Const.Номенклатура, "tab_a57", "join_tab_5", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  Закупівлі_Const.ХарактеристикаНоменклатури, "tab_a57", "join_tab_6", "ХарактеристикаНоменклатури");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -31724,6 +31939,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Організація.Назва = ItemValue["Організація"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    record.Контрагент.Назва = ItemValue["Контрагент"];
+                    record.Договір.Назва = ItemValue["Договір"];
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -31917,6 +32142,23 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ВільніЗалишки_Const.Номенклатура, "tab_a58", "join_tab_1", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ВільніЗалишки_Const.ХарактеристикаНоменклатури, "tab_a58", "join_tab_2", "ХарактеристикаНоменклатури");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  ВільніЗалишки_Const.Склад, "tab_a58", "join_tab_3", "Склад");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -31939,6 +32181,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -32211,6 +32460,25 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Документи.ЗамовленняПостачальнику_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняПостачальникам_Const.ЗамовленняПостачальнику, "tab_a60", "join_tab_1", "ЗамовленняПостачальнику");
+                Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняПостачальникам_Const.Номенклатура, "tab_a60", "join_tab_2", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняПостачальникам_Const.ХарактеристикаНоменклатури, "tab_a60", "join_tab_3", "ХарактеристикаНоменклатури");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  ЗамовленняПостачальникам_Const.Склад, "tab_a60", "join_tab_4", "Склад");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -32231,6 +32499,14 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.ЗамовленняПостачальнику.Назва = ItemValue["ЗамовленняПостачальнику"];
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -32396,6 +32672,21 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, 
+                  РозрахункиЗПостачальниками_Const.Контрагент, "tab_a61", "join_tab_1", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(QuerySelect, 
+                  РозрахункиЗПостачальниками_Const.Валюта, "tab_a61", "join_tab_2", "Валюта");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -32414,6 +32705,12 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Контрагент.Назва = ItemValue["Контрагент"];
+                    record.Валюта.Назва = ItemValue["Валюта"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -32665,6 +32962,23 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Організації_Pointer.GetJoin(QuerySelect, 
+                  РухКоштів_Const.Організація, "tab_a78", "join_tab_1", "Організація");
+                Довідники.Каси_Pointer.GetJoin(QuerySelect, 
+                  РухКоштів_Const.Каса, "tab_a78", "join_tab_2", "Каса");
+                Довідники.Валюти_Pointer.GetJoin(QuerySelect, 
+                  РухКоштів_Const.Валюта, "tab_a78", "join_tab_3", "Валюта");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -32684,6 +32998,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Організація.Назва = ItemValue["Організація"];
+                    record.Каса.Назва = ItemValue["Каса"];
+                    record.Валюта.Назва = ItemValue["Валюта"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -33040,6 +33361,29 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Організації_Pointer.GetJoin(QuerySelect, 
+                  ПартіїТоварів_Const.Організація, "tab_a79", "join_tab_1", "Організація");
+                Довідники.ПартіяТоварівКомпозит_Pointer.GetJoin(QuerySelect, 
+                  ПартіїТоварів_Const.ПартіяТоварівКомпозит, "tab_a79", "join_tab_2", "ПартіяТоварівКомпозит");
+                Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ПартіїТоварів_Const.Номенклатура, "tab_a79", "join_tab_3", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ПартіїТоварів_Const.ХарактеристикаНоменклатури, "tab_a79", "join_tab_4", "ХарактеристикаНоменклатури");
+                Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ПартіїТоварів_Const.Серія, "tab_a79", "join_tab_5", "Серія");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  ПартіїТоварів_Const.Склад, "tab_a79", "join_tab_6", "Склад");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -33065,6 +33409,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Організація.Назва = ItemValue["Організація"];
+                    record.ПартіяТоварівКомпозит.Назва = ItemValue["ПартіяТоварівКомпозит"];
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.Серія.Назва = ItemValue["Серія"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -33493,6 +33847,29 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Організації_Pointer.GetJoin(QuerySelect, 
+                  Продажі_Const.Організація, "tab_a66", "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, 
+                  Продажі_Const.Склад, "tab_a66", "join_tab_2", "Склад");
+                Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, 
+                  Продажі_Const.Контрагент, "tab_a66", "join_tab_3", "Контрагент");
+                Довідники.ДоговориКонтрагентів_Pointer.GetJoin(QuerySelect, 
+                  Продажі_Const.Договір, "tab_a66", "join_tab_4", "Договір");
+                Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  Продажі_Const.Номенклатура, "tab_a66", "join_tab_5", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  Продажі_Const.ХарактеристикаНоменклатури, "tab_a66", "join_tab_6", "ХарактеристикаНоменклатури");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -33518,6 +33895,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Організація.Назва = ItemValue["Організація"];
+                    record.Склад.Назва = ItemValue["Склад"];
+                    record.Контрагент.Назва = ItemValue["Контрагент"];
+                    record.Договір.Назва = ItemValue["Договір"];
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    
+                }
             }
             base.BaseClear();
         }
@@ -33716,6 +34103,27 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
 		
         public List<Record> Records { get; set; } = [];
         
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, 
+                  ТовариВКомірках_Const.Номенклатура, "tab_b01", "join_tab_1", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ТовариВКомірках_Const.ХарактеристикаНоменклатури, "tab_b01", "join_tab_2", "ХарактеристикаНоменклатури");
+                Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, 
+                  ТовариВКомірках_Const.Пакування, "tab_b01", "join_tab_3", "Пакування");
+                Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, 
+                  ТовариВКомірках_Const.Комірка, "tab_b01", "join_tab_4", "Комірка");
+                Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, 
+                  ТовариВКомірках_Const.Серія, "tab_b01", "join_tab_5", "Серія");
+                
+        }
+
         public async ValueTask Read()
         {
             Records.Clear();
@@ -33737,6 +34145,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                    record.Пакування.Назва = ItemValue["Пакування"];
+                    record.Комірка.Назва = ItemValue["Комірка"];
+                    record.Серія.Назва = ItemValue["Серія"];
+                    
+                }
             }
             base.BaseClear();
         }
