@@ -69,9 +69,11 @@ namespace StorageAndTrade
             // ТабличніСписки.Журнали_Повний.Limit = 50;
             // ТабличніСписки.Журнали_Повний.Offset = 0;
 
+            Console.WriteLine("IN ДодатиВідбірПоПеріоду");
             ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
+            Console.WriteLine("IN ДодатиВідбірПоПеріоду ok");
             await ТабличніСписки.Журнали_Повний.LoadRecords(TreeViewGrid);
-
+            Console.WriteLine("IN LoadRecords ok");
             if (ТабличніСписки.Журнали_Повний.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Повний.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.Журнали_Повний.CurrentPath != null)
@@ -90,10 +92,13 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override async void PeriodChanged()
+        protected override void PeriodChanged()
         {
-            await ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();            
+            Console.WriteLine("P 1");
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            Console.WriteLine("P LoadRecords");
+            LoadRecords();
+            Console.WriteLine("P LoadRecords ok");
         }
     }
 }

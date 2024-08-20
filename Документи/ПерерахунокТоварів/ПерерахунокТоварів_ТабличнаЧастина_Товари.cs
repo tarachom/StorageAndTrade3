@@ -185,42 +185,11 @@ namespace StorageAndTrade
 
             if (ПерерахунокТоварів_Objest != null)
             {
-                Query querySelect = ПерерахунокТоварів_Objest.Товари_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, ПерерахунокТоварів_Товари_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Характеристика
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
-                querySelect.Joins.Add(
-                    new Join(ХарактеристикиНоменклатури_Const.TABLE, ПерерахунокТоварів_Товари_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
-
-                //JOIN Пакування
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПакуванняОдиниціВиміру_Const.TABLE + "." + ПакуванняОдиниціВиміру_Const.Назва, "Пакування"));
-                querySelect.Joins.Add(
-                    new Join(ПакуванняОдиниціВиміру_Const.TABLE, ПерерахунокТоварів_Товари_TablePart.Пакування, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(ПерерахунокТоварів_Товари_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ПерерахунокТоварів_Objest.Товари_TablePart.FillJoin([ПерерахунокТоварів_Товари_TablePart.НомерРядка]);
                 await ПерерахунокТоварів_Objest.Товари_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ПерерахунокТоварів_Objest.Товари_TablePart.JoinValue;
 
                 foreach (ПерерахунокТоварів_Товари_TablePart.Record record in ПерерахунокТоварів_Objest.Товари_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
-                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

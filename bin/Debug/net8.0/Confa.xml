@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>20.08.2024 00:06:28</DateTimeSave>
+  <DateTimeSave>20.08.2024 17:55:50</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1490,15 +1490,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
-              <Join>
-                <table>Довідники.ПакуванняОдиниціВиміру_Const.TABLE</table>
-                <field>ОдиницяВиміру</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.ПакуванняОдиниціВиміру_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ТипНоменклатури</Name>
@@ -1671,15 +1662,6 @@ END]]></Value>
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
-              <Join>
-                <table>Довідники.ПакуванняОдиниціВиміру_Const.TABLE</table>
-                <field>ОдиницяВиміру</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.ПакуванняОдиниціВиміру_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <AdditionalField>
               <Visible>True</Visible>
@@ -2620,15 +2602,6 @@ END]]></Value>
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти_Папки</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Папки_Const.TABLE</table>
-                <field>Папка</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Контрагенти_Папки_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -3041,15 +3014,6 @@ END]]></Value>
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -4074,15 +4038,6 @@ END]]></Value>
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
-              <Join>
-                <table>Довідники.Номенклатура_Const.TABLE</table>
-                <field>Номенклатура</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Номенклатура_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -4204,15 +4159,6 @@ FROM
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
-              <Join>
-                <table>Довідники.Номенклатура_Const.TABLE</table>
-                <field>Номенклатура</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Номенклатура_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -4611,15 +4557,6 @@ FROM
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <AdditionalField>
               <Visible>True</Visible>
@@ -4677,15 +4614,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <AdditionalField>
               <Visible>False</Visible>
@@ -4905,15 +4833,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -4957,15 +4876,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -5243,15 +5153,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ТипДоговору</Name>
@@ -5294,15 +5195,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ТипДоговору</Name>
@@ -5541,15 +5433,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -5593,15 +5476,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -6004,15 +5878,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
-              <Join>
-                <table>Документи.ПоступленняТоварівТаПослуг_Const.TABLE</table>
-                <field>ПоступленняТоварівТаПослуг</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Документи.ПоступленняТоварівТаПослуг_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ВведенняЗалишків</Name>
@@ -6024,15 +5889,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.ВведенняЗалишків</Pointer>
-              <Join>
-                <table>Документи.ВведенняЗалишків_Const.TABLE</table>
-                <field>ВведенняЗалишків</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Документи.ВведенняЗалишків_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -6913,15 +6769,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>НалаштуванняАдресногоЗберігання</Name>
@@ -6964,15 +6811,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -7137,15 +6975,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
-              <Join>
-                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
-                <field>Приміщення</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Лінія</Name>
@@ -7216,15 +7045,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ТипорозміриКомірок</Pointer>
-              <Join>
-                <table>Довідники.ТипорозміриКомірок_Const.TABLE</table>
-                <field>Типорозмір</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.ТипорозміриКомірок_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Папка</Name>
@@ -7236,15 +7056,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
-              <Join>
-                <table>Довідники.СкладськіКомірки_Папки_Const.TABLE</table>
-                <field>Папка</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.СкладськіКомірки_Папки_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -7276,15 +7087,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
-              <Join>
-                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
-                <field>Приміщення</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -7373,15 +7175,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
-              <Join>
-                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
-                <field>Приміщення</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -7659,15 +7452,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
-              <Join>
-                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
-                <field>Власник</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -7687,15 +7471,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
-              <Join>
-                <table>Довідники.СкладськіПриміщення_Const.TABLE</table>
-                <field>Власник</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.СкладськіПриміщення_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -8348,15 +8123,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -8368,15 +8134,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -8388,15 +8145,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -8408,15 +8156,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -8440,15 +8179,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -9038,15 +8768,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -9058,15 +8779,6 @@ WHERE
               <FilterField>True</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -9078,15 +8790,6 @@ WHERE
               <FilterField>True</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -9098,15 +8801,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -9118,15 +8812,6 @@ WHERE
               <FilterField>True</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -9150,15 +8835,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -9693,15 +9369,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -9713,15 +9380,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -9733,15 +9391,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -9753,15 +9402,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -9773,15 +9413,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -9805,15 +9436,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -10402,15 +10024,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -10422,15 +10035,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -10442,15 +10046,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -10462,15 +10057,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -10482,15 +10068,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -10514,15 +10091,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -10788,15 +10356,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -10808,15 +10367,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ВидЦіни</Name>
@@ -10828,15 +10378,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
-              <Join>
-                <table>Довідники.ВидиЦін_Const.TABLE</table>
-                <field>ВидЦіни</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.ВидиЦін_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -10848,15 +10389,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -11212,15 +10744,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -11232,15 +10755,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -11252,15 +10766,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -11272,15 +10777,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -11315,15 +10811,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -11713,15 +11200,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -11733,15 +11211,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -11753,15 +11222,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -11773,15 +11233,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -11816,15 +11267,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -12234,15 +11676,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладВідправник</Name>
@@ -12254,15 +11687,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>СкладВідправник</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладОтримувач</Name>
@@ -12274,15 +11698,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>СкладОтримувач</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -12294,15 +11709,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -12752,15 +12158,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -12772,15 +12169,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -12792,15 +12180,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -12812,15 +12191,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -12832,15 +12202,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -12864,15 +12225,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -13292,15 +12644,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -13312,15 +12655,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -13332,15 +12666,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -13352,15 +12677,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -13372,15 +12688,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -13404,15 +12711,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -13763,15 +13061,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -13783,15 +13072,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -13803,15 +13083,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -13823,15 +13094,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -13855,15 +13117,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -14326,15 +13579,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -14346,15 +13590,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -14366,15 +13601,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -14386,15 +13612,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -14406,15 +13623,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -14681,15 +13889,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -14701,15 +13900,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -14721,15 +13911,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -14997,15 +14178,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -15017,15 +14189,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -15037,15 +14200,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -15351,15 +14505,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -15371,15 +14516,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Відповідальний</Name>
@@ -15391,15 +14527,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ФізичніОсоби</Pointer>
-              <Join>
-                <table>Довідники.ФізичніОсоби_Const.TABLE</table>
-                <field>Відповідальний</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.ФізичніОсоби_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -15411,15 +14538,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -15746,15 +14864,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -15766,15 +14875,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -15798,15 +14898,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -16148,15 +15239,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -16168,15 +15250,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -16188,15 +15261,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -16220,15 +15284,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -16657,15 +15712,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -16677,15 +15723,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -16697,15 +15734,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -16717,15 +15745,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -16737,15 +15756,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -16769,15 +15779,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -17074,15 +16075,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ДокументПоступлення</Name>
@@ -17094,15 +16086,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
-              <Join>
-                <table>Документи.ПоступленняТоварівТаПослуг_Const.TABLE</table>
-                <field>ДокументПоступлення</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Документи.ПоступленняТоварівТаПослуг_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -17114,15 +16097,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -17418,15 +16392,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -17438,15 +16403,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -17458,15 +16414,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -17763,15 +16710,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ДокументРеалізації</Name>
@@ -17783,15 +16721,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
-              <Join>
-                <table>Документи.РеалізаціяТоварівТаПослуг_Const.TABLE</table>
-                <field>ДокументРеалізації</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Документи.РеалізаціяТоварівТаПослуг_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -17803,15 +16732,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -18064,15 +16984,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -18084,15 +16995,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -18104,15 +17006,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -18352,15 +17245,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -18372,15 +17256,6 @@ WHERE
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -19265,15 +18140,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -19283,15 +18149,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -19301,15 +18158,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -19319,15 +18167,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -19337,15 +18176,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -19364,15 +18194,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -19430,15 +18251,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -19448,15 +18260,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -19466,15 +18269,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -19484,15 +18278,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -19502,15 +18287,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -19529,15 +18305,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -19595,15 +18362,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -19613,15 +18371,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -19631,15 +18380,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -19649,15 +18389,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -19667,15 +18398,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -19694,15 +18416,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -19760,15 +18473,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -19778,15 +18482,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -19796,15 +18491,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -19814,15 +18500,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -19832,15 +18509,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -19859,15 +18527,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -19925,15 +18584,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -19967,15 +18617,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -19992,15 +18633,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -20058,15 +18690,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -20076,15 +18699,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -20102,15 +18716,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -20120,15 +18725,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -20147,15 +18743,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -20213,15 +18800,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -20231,15 +18809,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -20257,15 +18826,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -20275,15 +18835,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -20302,15 +18853,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -20368,15 +18910,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -20394,15 +18927,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>СкладВідправник</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -20435,15 +18959,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -20501,15 +19016,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -20519,15 +19025,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -20537,15 +19034,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -20555,15 +19043,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -20573,15 +19052,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -20600,15 +19070,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -20666,15 +19127,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -20684,15 +19136,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -20702,15 +19145,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -20720,15 +19154,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -20738,15 +19163,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -20765,15 +19181,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -20831,15 +19238,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -20849,15 +19247,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -20875,15 +19264,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -20893,15 +19273,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -20920,15 +19291,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -20986,15 +19348,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -21004,15 +19357,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -21022,15 +19366,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -21048,15 +19383,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -21073,15 +19399,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -21313,15 +19630,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -21331,15 +19639,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.ФізичніОсоби</Pointer>
-              <Join>
-                <table>Довідники.ФізичніОсоби_Const.TABLE</table>
-                <field>Відповідальний</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.ФізичніОсоби_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -21349,15 +19648,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -21390,15 +19680,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -21456,15 +19737,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -21482,15 +19754,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -21525,15 +19788,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -21591,15 +19845,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -21617,15 +19862,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -21643,15 +19879,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -21670,15 +19897,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -21736,15 +19954,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -21754,15 +19963,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -21772,15 +19972,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -21790,15 +19981,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -21808,15 +19990,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -21835,15 +20008,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -21901,15 +20065,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -21927,15 +20082,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -21968,15 +20114,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -22034,15 +20171,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -22060,15 +20188,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -22101,15 +20220,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -22167,15 +20277,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -22193,15 +20294,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -22234,15 +20326,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -22300,15 +20383,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -22326,15 +20400,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -22367,15 +20432,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -22433,15 +20489,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -22490,15 +20537,6 @@ WHERE
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -22678,15 +20716,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -22696,15 +20725,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -22714,15 +20734,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -22732,15 +20743,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -22750,15 +20752,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -22778,15 +20771,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -22844,15 +20828,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -22862,15 +20837,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -22880,15 +20846,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -22898,15 +20855,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -22916,15 +20864,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -22944,15 +20883,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -23010,15 +20940,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -23028,15 +20949,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -23046,15 +20958,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -23064,15 +20967,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -23082,15 +20976,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -23110,15 +20995,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -23307,15 +21183,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -23325,15 +21192,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -23343,15 +21201,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -23361,15 +21210,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -23379,15 +21219,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -23407,15 +21238,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -23473,15 +21295,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -23491,15 +21304,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -23509,15 +21313,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -23527,15 +21322,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -23545,15 +21331,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -23573,15 +21350,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -23639,15 +21407,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -23657,15 +21416,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -23675,15 +21425,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -23693,15 +21434,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -23711,15 +21443,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -23739,15 +21462,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -23805,15 +21519,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -23823,15 +21528,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -23849,15 +21545,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -23867,15 +21554,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -23895,15 +21573,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -23961,15 +21630,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -23979,15 +21639,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -23997,15 +21648,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -24015,15 +21657,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -24033,15 +21666,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -24061,15 +21685,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -24244,15 +21859,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -24262,15 +21868,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -24280,15 +21877,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса2</Name>
@@ -24298,15 +21886,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>КасаВідправник</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -24316,15 +21895,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -24344,15 +21914,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -24410,15 +21971,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -24428,15 +21980,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
-              <Join>
-                <table>Довідники.Контрагенти_Const.TABLE</table>
-                <field>Контрагент</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Контрагенти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -24446,15 +21989,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>Каса</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Каса2</Name>
@@ -24464,15 +21998,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
-              <Join>
-                <table>Довідники.Каси_Const.TABLE</table>
-                <field>КасаОтримувач</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Каси_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -24482,15 +22007,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -24510,15 +22026,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_6</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_6</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -24678,15 +22185,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладВідправник</Name>
@@ -24696,15 +22194,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>СкладВідправник</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладОтримувач</Name>
@@ -24714,15 +22203,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>СкладОтримувач</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -24732,15 +22212,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -24798,15 +22269,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладВідправник</Name>
@@ -24824,15 +22286,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -24842,15 +22295,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -24908,15 +22352,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладВідправник</Name>
@@ -24934,15 +22369,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -24952,15 +22378,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -25018,15 +22435,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладВідправник</Name>
@@ -25036,15 +22444,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладОтримувач</Name>
@@ -25062,15 +22461,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -25128,15 +22518,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладВідправник</Name>
@@ -25146,15 +22527,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>СкладОтримувач</Name>
@@ -25172,15 +22544,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -25327,15 +22690,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -25345,15 +22699,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -25363,15 +22708,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -25429,15 +22765,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -25447,15 +22774,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -25465,15 +22783,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -25531,15 +22840,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -25549,15 +22849,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -25567,15 +22858,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -25633,15 +22915,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
-              <Join>
-                <table>Довідники.Організації_Const.TABLE</table>
-                <field>Організація</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Організації_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -25651,15 +22924,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -25669,15 +22933,6 @@ SQL тип  непотрібно вказувати
               <WherePeriod>0</WherePeriod>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
-              <Join>
-                <table>Довідники.Користувачі_Const.TABLE</table>
-                <field>Автор</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Користувачі_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -25788,15 +23043,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
-              <Join>
-                <table>Довідники.Номенклатура_Const.TABLE</table>
-                <field>Номенклатура</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Номенклатура_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ХарактеристикаНоменклатури</Name>
@@ -25808,15 +23054,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Join>
-                <table>Довідники.ХарактеристикиНоменклатури_Const.TABLE</table>
-                <field>ХарактеристикаНоменклатури</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.ХарактеристикиНоменклатури_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ВидЦіни</Name>
@@ -25828,15 +23065,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
-              <Join>
-                <table>Довідники.ВидиЦін_Const.TABLE</table>
-                <field>ВидЦіни</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.ВидиЦін_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Ціна</Name>
@@ -25860,15 +23088,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
-              <Join>
-                <table>Довідники.ПакуванняОдиниціВиміру_Const.TABLE</table>
-                <field>Пакування</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.ПакуванняОдиниціВиміру_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -25880,15 +23099,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_5</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_5</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -25957,15 +23167,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-              <Join>
-                <table>Довідники.Валюти_Const.TABLE</table>
-                <field>Валюта</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Валюти_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Курс</Name>
@@ -26111,15 +23312,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
-              <Join>
-                <table>Довідники.Номенклатура_Const.TABLE</table>
-                <field>Номенклатура</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Номенклатура_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ХарактеристикаНоменклатури</Name>
@@ -26131,15 +23323,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Join>
-                <table>Довідники.ХарактеристикиНоменклатури_Const.TABLE</table>
-                <field>ХарактеристикаНоменклатури</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.ХарактеристикиНоменклатури_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Пакування</Name>
@@ -26151,15 +23334,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
-              <Join>
-                <table>Довідники.ПакуванняОдиниціВиміру_Const.TABLE</table>
-                <field>Пакування</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.ПакуванняОдиниціВиміру_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -26209,15 +23383,6 @@ SQL тип  непотрібно вказувати
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Файли</Pointer>
-              <Join>
-                <table>Довідники.Файли_Const.TABLE</table>
-                <field>Файл</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Файли_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
           </Fields>
         </TabularList>
@@ -26843,15 +24008,6 @@ HAVING
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
-              <Join>
-                <table>Довідники.Номенклатура_Const.TABLE</table>
-                <field>Номенклатура</field>
-                <alias>join_tab_1</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_1</table>
-                <field>Довідники.Номенклатура_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ХарактеристикаНоменклатури</Name>
@@ -26863,15 +24019,6 @@ HAVING
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
-              <Join>
-                <table>Довідники.ХарактеристикиНоменклатури_Const.TABLE</table>
-                <field>ХарактеристикаНоменклатури</field>
-                <alias>join_tab_2</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_2</table>
-                <field>Довідники.ХарактеристикиНоменклатури_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -26883,15 +24030,6 @@ HAVING
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
-              <Join>
-                <table>Довідники.Склади_Const.TABLE</table>
-                <field>Склад</field>
-                <alias>join_tab_3</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_3</table>
-                <field>Довідники.Склади_Const.Назва</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>Серія</Name>
@@ -26903,15 +24041,6 @@ HAVING
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.СеріїНоменклатури</Pointer>
-              <Join>
-                <table>Довідники.СеріїНоменклатури_Const.TABLE</table>
-                <field>Серія</field>
-                <alias>join_tab_4</alias>
-              </Join>
-              <FieldAndAlias>
-                <table>join_tab_4</table>
-                <field>Довідники.СеріїНоменклатури_Const.Номер</field>
-              </FieldAndAlias>
             </Field>
             <Field>
               <Name>ВНаявності</Name>

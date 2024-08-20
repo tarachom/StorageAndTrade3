@@ -146,35 +146,11 @@ namespace StorageAndTrade
 
             if (КорегуванняБоргу_Objest != null)
             {
-                Query querySelect = КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Контрагент
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Контрагенти_Const.TABLE + "." + Контрагенти_Const.Назва, "Контрагент"));
-                querySelect.Joins.Add(
-                    new Join(Контрагенти_Const.TABLE, КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Контрагент, querySelect.Table));
-
-                //JOIN Валюта
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Валюти_Const.TABLE + "." + Валюти_Const.Назва, "Валюта"));
-                querySelect.Joins.Add(
-                    new Join(Валюти_Const.TABLE, КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Валюта, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.НомерРядка, SelectOrder.ASC);
-
+                КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.FillJoin([КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.НомерРядка]);
                 await КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.JoinValue;
 
                 foreach (КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Record record in КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Контрагент.Назва = JoinValue[uid]["Контрагент"];
-                    record.Валюта.Назва = JoinValue[uid]["Валюта"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

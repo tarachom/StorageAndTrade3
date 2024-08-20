@@ -130,28 +130,12 @@ namespace StorageAndTrade
 
             if (ВведенняЗалишків_Objest != null)
             {
-                Query querySelect = ВведенняЗалишків_Objest.Каси_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Каса
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Каси_Const.TABLE + "." + Каси_Const.Назва, "Каса"));
-                querySelect.Joins.Add(
-                    new Join(Каси_Const.TABLE, ВведенняЗалишків_Каси_TablePart.Каса, querySelect.Table));
-
                 //ORDER
-                querySelect.Order.Add(ВведенняЗалишків_Каси_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ВведенняЗалишків_Objest.Каси_TablePart.FillJoin([ВведенняЗалишків_Каси_TablePart.НомерРядка]);
                 await ВведенняЗалишків_Objest.Каси_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ВведенняЗалишків_Objest.Каси_TablePart.JoinValue;
 
                 foreach (ВведенняЗалишків_Каси_TablePart.Record record in ВведенняЗалишків_Objest.Каси_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Каса.Назва = JoinValue[uid]["Каса"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

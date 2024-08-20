@@ -210,56 +210,11 @@ namespace StorageAndTrade
 
             if (ПоверненняТоварівПостачальнику_Objest != null)
             {
-                Query querySelect = ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, ПоверненняТоварівПостачальнику_Товари_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Характеристика
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
-                querySelect.Joins.Add(
-                    new Join(ХарактеристикиНоменклатури_Const.TABLE, ПоверненняТоварівПостачальнику_Товари_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
-
-                //JOIN Серія
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(СеріїНоменклатури_Const.TABLE + "." + СеріїНоменклатури_Const.Номер, "Серія"));
-                querySelect.Joins.Add(
-                    new Join(СеріїНоменклатури_Const.TABLE, ПоверненняТоварівПостачальнику_Товари_TablePart.Серія, querySelect.Table));
-
-                //JOIN Пакування
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПакуванняОдиниціВиміру_Const.TABLE + "." + ПакуванняОдиниціВиміру_Const.Назва, "Пакування"));
-                querySelect.Joins.Add(
-                    new Join(ПакуванняОдиниціВиміру_Const.TABLE, ПоверненняТоварівПостачальнику_Товари_TablePart.Пакування, querySelect.Table));
-
-                //JOIN ДокументПоступлення
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПоступленняТоварівТаПослуг_Const.TABLE + "." + ПоступленняТоварівТаПослуг_Const.Назва, "ДокументПоступлення"));
-                querySelect.Joins.Add(
-                    new Join(ПоступленняТоварівТаПослуг_Const.TABLE, ПоверненняТоварівПостачальнику_Товари_TablePart.ДокументПоступлення, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(ПоверненняТоварівПостачальнику_Товари_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.FillJoin([ПоверненняТоварівПостачальнику_Товари_TablePart.НомерРядка]);
                 await ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.JoinValue;
 
                 foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record record in ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
-                    record.Серія.Назва = JoinValue[uid]["Серія"];
-                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
-                    record.ДокументПоступлення.Назва = JoinValue[uid]["ДокументПоступлення"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

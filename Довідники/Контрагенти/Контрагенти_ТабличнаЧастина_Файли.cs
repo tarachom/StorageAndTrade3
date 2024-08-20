@@ -96,23 +96,11 @@ namespace StorageAndTrade
 
             if (Контрагенти_Objest != null)
             {
-                Query querySelect = Контрагенти_Objest.Файли_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN 1
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Файли_Const.TABLE + "." + Файли_Const.Назва, "file_name"));
-                querySelect.Joins.Add(
-                    new Join(Файли_Const.TABLE, Контрагенти_Файли_TablePart.Файл, querySelect.Table));
-
+                Контрагенти_Objest.Файли_TablePart.FillJoin();
                 await Контрагенти_Objest.Файли_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> join = Контрагенти_Objest.Файли_TablePart.JoinValue;
 
                 foreach (Контрагенти_Файли_TablePart.Record record in Контрагенти_Objest.Файли_TablePart.Records)
                 {
-                    record.Файл.Назва = join[record.UID.ToString()]["file_name"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

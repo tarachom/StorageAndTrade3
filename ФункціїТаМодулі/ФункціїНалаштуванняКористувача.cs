@@ -82,7 +82,7 @@ namespace StorageAndTrade
         /// <param name="Період">Тип періоду</param>
         /// <param name="ДатаСтарт"></param>
         /// <param name="ДатаСтоп"></param>
-        public static async ValueTask ЗаписатиПеріодДляЖурналу(string НазваЖурналу, string Період, DateTime? ДатаСтарт = null, DateTime? ДатаСтоп = null)
+        public static async void ЗаписатиПеріодДляЖурналу(string НазваЖурналу, string Період, DateTime? ДатаСтарт = null, DateTime? ДатаСтоп = null)
         {
             Системні.НалаштуванняКористувача_ПеріодиЖурналів_TablePart НалаштуванняКористувача = new();
 
@@ -90,8 +90,11 @@ namespace StorageAndTrade
             {
                 ЗаповнитиВідбір(НалаштуванняКористувача, НазваЖурналу);
 
+                Console.WriteLine("! Read");
                 await НалаштуванняКористувача.Read();
+                Console.WriteLine("! Read ok Records = " + НалаштуванняКористувача.Records.Count);
                 await НалаштуванняКористувача.RemoveAll(НалаштуванняКористувача.Records);
+                Console.WriteLine("! RemoveAll ok");
             }
 
             //Додавання нового
@@ -110,8 +113,9 @@ namespace StorageAndTrade
                     record.ДатаСтоп = ДатаСтоп.Value;
 
                 НалаштуванняКористувача.Records.Add(record);
-
+                Console.WriteLine("! Save");
                 await НалаштуванняКористувача.Save(false);
+                Console.WriteLine("! Save ok");
             }
         }
     }

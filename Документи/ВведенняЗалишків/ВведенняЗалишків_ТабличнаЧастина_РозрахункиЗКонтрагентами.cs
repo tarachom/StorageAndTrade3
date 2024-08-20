@@ -145,35 +145,12 @@ namespace StorageAndTrade
 
             if (ВведенняЗалишків_Objest != null)
             {
-                Query querySelect = ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Контрагент
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Контрагенти_Const.TABLE + "." + Контрагенти_Const.Назва, "Контрагент"));
-                querySelect.Joins.Add(
-                    new Join(Контрагенти_Const.TABLE, ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Контрагент, querySelect.Table));
-
-                //JOIN Валюта
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Валюти_Const.TABLE + "." + Валюти_Const.Назва, "Валюта"));
-                querySelect.Joins.Add(
-                    new Join(Валюти_Const.TABLE, ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Валюта, querySelect.Table));
-
                 //ORDER
-                querySelect.Order.Add(ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.FillJoin([ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.НомерРядка]);
                 await ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.JoinValue;
 
                 foreach (ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Record record in ВведенняЗалишків_Objest.РозрахункиЗКонтрагентами_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Контрагент.Назва = JoinValue[uid]["Контрагент"];
-                    record.Валюта.Назва = JoinValue[uid]["Валюта"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

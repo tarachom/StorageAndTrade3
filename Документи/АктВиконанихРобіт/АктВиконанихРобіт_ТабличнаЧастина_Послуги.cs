@@ -55,7 +55,7 @@ namespace StorageAndTrade
             typeof(float)     //Сума
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -153,35 +153,11 @@ namespace StorageAndTrade
 
             if (АктВиконанихРобіт_Objest != null)
             {
-                Query querySelect = АктВиконанихРобіт_Objest.Послуги_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, АктВиконанихРобіт_Послуги_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Характеристика
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
-                querySelect.Joins.Add(
-                    new Join(ХарактеристикиНоменклатури_Const.TABLE, АктВиконанихРобіт_Послуги_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(АктВиконанихРобіт_Послуги_TablePart.НомерРядка, SelectOrder.ASC);
-
+                АктВиконанихРобіт_Objest.Послуги_TablePart.FillJoin([АктВиконанихРобіт_Послуги_TablePart.НомерРядка]);
                 await АктВиконанихРобіт_Objest.Послуги_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = АктВиконанихРобіт_Objest.Послуги_TablePart.JoinValue;
 
                 foreach (АктВиконанихРобіт_Послуги_TablePart.Record record in АктВиконанихРобіт_Objest.Послуги_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

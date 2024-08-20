@@ -201,49 +201,11 @@ namespace StorageAndTrade
 
             if (ВведенняЗалишків_Objest != null)
             {
-                Query querySelect = ВведенняЗалишків_Objest.Товари_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, ВведенняЗалишків_Товари_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Характеристика
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
-                querySelect.Joins.Add(
-                    new Join(ХарактеристикиНоменклатури_Const.TABLE, ВведенняЗалишків_Товари_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
-
-                //JOIN Серія
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(СеріїНоменклатури_Const.TABLE + "." + СеріїНоменклатури_Const.Номер, "Серія"));
-                querySelect.Joins.Add(
-                    new Join(СеріїНоменклатури_Const.TABLE, ВведенняЗалишків_Товари_TablePart.Серія, querySelect.Table));
-
-                //JOIN Пакування
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПакуванняОдиниціВиміру_Const.TABLE + "." + ПакуванняОдиниціВиміру_Const.Назва, "Пакування"));
-                querySelect.Joins.Add(
-                    new Join(ПакуванняОдиниціВиміру_Const.TABLE, ВведенняЗалишків_Товари_TablePart.Пакування, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(ВведенняЗалишків_Товари_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ВведенняЗалишків_Objest.Товари_TablePart.FillJoin([ВведенняЗалишків_Товари_TablePart.НомерРядка]);
                 await ВведенняЗалишків_Objest.Товари_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ВведенняЗалишків_Objest.Товари_TablePart.JoinValue;
 
                 foreach (ВведенняЗалишків_Товари_TablePart.Record record in ВведенняЗалишків_Objest.Товари_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
-                    record.Серія.Назва = JoinValue[uid]["Серія"];
-                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,
@@ -431,7 +393,7 @@ namespace StorageAndTrade
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
-                          await  Запис.ПісляЗміни_Номенклатура(запис);
+                            await Запис.ПісляЗміни_Номенклатура(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -450,7 +412,7 @@ namespace StorageAndTrade
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Характеристика = new ХарактеристикиНоменклатури_Pointer(selectPointer);
-                          await  Запис.ПісляЗміни_Характеристика(запис);
+                            await Запис.ПісляЗміни_Характеристика(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -467,7 +429,7 @@ namespace StorageAndTrade
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
-                          await  Запис.ПісляЗміни_Серія(запис);
+                            await Запис.ПісляЗміни_Серія(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };
@@ -484,7 +446,7 @@ namespace StorageAndTrade
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
-                           await Запис.ПісляЗміни_Пакування(запис);
+                            await Запис.ПісляЗміни_Пакування(запис);
 
                             Store.SetValues(iter, запис.ToArray());
                         };

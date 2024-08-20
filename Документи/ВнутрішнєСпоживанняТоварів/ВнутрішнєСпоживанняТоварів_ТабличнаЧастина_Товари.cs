@@ -209,56 +209,11 @@ namespace StorageAndTrade
 
             if (ВнутрішнєСпоживанняТоварів_Objest != null)
             {
-                Query querySelect = ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, ВнутрішнєСпоживанняТоварів_Товари_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Характеристика
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
-                querySelect.Joins.Add(
-                    new Join(ХарактеристикиНоменклатури_Const.TABLE, ВнутрішнєСпоживанняТоварів_Товари_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
-
-                //JOIN Серія
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(СеріїНоменклатури_Const.TABLE + "." + СеріїНоменклатури_Const.Номер, "Серія"));
-                querySelect.Joins.Add(
-                    new Join(СеріїНоменклатури_Const.TABLE, ВнутрішнєСпоживанняТоварів_Товари_TablePart.Серія, querySelect.Table));
-
-                //JOIN Пакування
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПакуванняОдиниціВиміру_Const.TABLE + "." + ПакуванняОдиниціВиміру_Const.Назва, "Пакування"));
-                querySelect.Joins.Add(
-                    new Join(ПакуванняОдиниціВиміру_Const.TABLE, ВнутрішнєСпоживанняТоварів_Товари_TablePart.Пакування, querySelect.Table));
-
-                //JOIN Партія
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПартіяТоварівКомпозит_Const.TABLE + "." + ПартіяТоварівКомпозит_Const.Назва, "Партія"));
-                querySelect.Joins.Add(
-                    new Join(ПартіяТоварівКомпозит_Const.TABLE, ВнутрішнєСпоживанняТоварів_Товари_TablePart.Партія, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(ВнутрішнєСпоживанняТоварів_Товари_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.FillJoin([ВнутрішнєСпоживанняТоварів_Товари_TablePart.НомерРядка]);
                 await ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.JoinValue;
 
                 foreach (ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record record in ВнутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
-                    record.Серія.Назва = JoinValue[uid]["Серія"];
-                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
-                    record.Партія.Назва = JoinValue[uid]["Партія"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,
@@ -362,7 +317,7 @@ namespace StorageAndTrade
                     MinWidth = 200,
                     Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const
                 };
-                
+
                 Характеристика.Data.Add("Column", Columns.Характеристика);
 
                 TreeViewGrid.AppendColumn(Характеристика);
@@ -376,7 +331,7 @@ namespace StorageAndTrade
                     MinWidth = 200,
                     Visible = Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const
                 };
-                
+
                 Серія.Data.Add("Column", Columns.Серія);
 
                 TreeViewGrid.AppendColumn(Серія);

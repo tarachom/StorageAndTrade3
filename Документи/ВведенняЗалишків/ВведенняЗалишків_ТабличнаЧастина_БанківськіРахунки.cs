@@ -130,28 +130,11 @@ namespace StorageAndTrade
 
             if (ВведенняЗалишків_Objest != null)
             {
-                Query querySelect = ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN БанківськійРахунок
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(БанківськіРахункиОрганізацій_Const.TABLE + "." + БанківськіРахункиОрганізацій_Const.Назва, "БанківськійРахунок"));
-                querySelect.Joins.Add(
-                    new Join(БанківськіРахункиОрганізацій_Const.TABLE, ВведенняЗалишків_БанківськіРахунки_TablePart.БанківськийРахунок, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(ВведенняЗалишків_БанківськіРахунки_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.FillJoin([ВведенняЗалишків_БанківськіРахунки_TablePart.НомерРядка]);
                 await ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.JoinValue;
 
                 foreach (ВведенняЗалишків_БанківськіРахунки_TablePart.Record record in ВведенняЗалишків_Objest.БанківськіРахунки_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.БанківськийРахунок.Назва = JoinValue[uid]["БанківськійРахунок"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

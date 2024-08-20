@@ -186,56 +186,11 @@ namespace StorageAndTrade
 
             if (ЗбіркаТоварівНаСкладі_Objest != null)
             {
-                Query querySelect = ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, ЗбіркаТоварівНаСкладі_Товари_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Характеристика
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
-                querySelect.Joins.Add(
-                    new Join(ХарактеристикиНоменклатури_Const.TABLE, ЗбіркаТоварівНаСкладі_Товари_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
-
-                //JOIN Серія
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(СеріїНоменклатури_Const.TABLE + "." + СеріїНоменклатури_Const.Номер, "Серія"));
-                querySelect.Joins.Add(
-                    new Join(СеріїНоменклатури_Const.TABLE, ЗбіркаТоварівНаСкладі_Товари_TablePart.Серія, querySelect.Table));
-
-                //JOIN Пакування
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПакуванняОдиниціВиміру_Const.TABLE + "." + ПакуванняОдиниціВиміру_Const.Назва, "Пакування"));
-                querySelect.Joins.Add(
-                    new Join(ПакуванняОдиниціВиміру_Const.TABLE, ЗбіркаТоварівНаСкладі_Товари_TablePart.Пакування, querySelect.Table));
-
-                //JOIN Комірка
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(СкладськіКомірки_Const.TABLE + "." + СкладськіКомірки_Const.Назва, "Комірка"));
-                querySelect.Joins.Add(
-                    new Join(СкладськіКомірки_Const.TABLE, ЗбіркаТоварівНаСкладі_Товари_TablePart.Комірка, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(ЗбіркаТоварівНаСкладі_Товари_TablePart.НомерРядка, SelectOrder.ASC);
-
+                ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.FillJoin([ЗбіркаТоварівНаСкладі_Товари_TablePart.НомерРядка]);
                 await ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.JoinValue;
 
                 foreach (ЗбіркаТоварівНаСкладі_Товари_TablePart.Record record in ЗбіркаТоварівНаСкладі_Objest.Товари_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
-                    record.Серія.Назва = JoinValue[uid]["Серія"];
-                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
-                    record.Комірка.Назва = JoinValue[uid]["Комірка"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

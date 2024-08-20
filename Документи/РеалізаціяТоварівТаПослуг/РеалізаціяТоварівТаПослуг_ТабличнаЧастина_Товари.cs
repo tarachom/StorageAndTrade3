@@ -309,84 +309,11 @@ LIMIT 1
 
             if (РеалізаціяТоварівТаПослуг_Objest != null)
             {
-                Query querySelect = РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Характеристика
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ХарактеристикиНоменклатури_Const.TABLE + "." + ХарактеристикиНоменклатури_Const.Назва, "Характеристика"));
-                querySelect.Joins.Add(
-                    new Join(ХарактеристикиНоменклатури_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.ХарактеристикаНоменклатури, querySelect.Table));
-
-                //JOIN Серія
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(СеріїНоменклатури_Const.TABLE + "." + СеріїНоменклатури_Const.Номер, "Серія"));
-                querySelect.Joins.Add(
-                    new Join(СеріїНоменклатури_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.Серія, querySelect.Table));
-
-                //JOIN Пакування
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПакуванняОдиниціВиміру_Const.TABLE + "." + ПакуванняОдиниціВиміру_Const.Назва, "Пакування"));
-                querySelect.Joins.Add(
-                    new Join(ПакуванняОдиниціВиміру_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.Пакування, querySelect.Table));
-
-                //JOIN ВидЦін
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ВидиЦін_Const.TABLE + "." + ВидиЦін_Const.Назва, "ВидЦін"));
-                querySelect.Joins.Add(
-                    new Join(ВидиЦін_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.ВидЦіни, querySelect.Table));
-
-                //JOIN Замовлення
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ЗамовленняКлієнта_Const.TABLE + "." + ЗамовленняКлієнта_Const.Назва, "Замовлення"));
-                querySelect.Joins.Add(
-                    new Join(ЗамовленняКлієнта_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.ЗамовленняКлієнта, querySelect.Table));
-
-                //JOIN Рахунок
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(РахунокФактура_Const.TABLE + "." + РахунокФактура_Const.Назва, "Рахунок"));
-                querySelect.Joins.Add(
-                    new Join(РахунокФактура_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.РахунокФактура, querySelect.Table));
-
-                //JOIN Склад
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Склади_Const.TABLE + "." + Склади_Const.Назва, "Склад"));
-                querySelect.Joins.Add(
-                    new Join(Склади_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.Склад, querySelect.Table));
-
-                //JOIN Партія
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПартіяТоварівКомпозит_Const.TABLE + "." + ПартіяТоварівКомпозит_Const.Назва, "Партія"));
-                querySelect.Joins.Add(
-                    new Join(ПартіяТоварівКомпозит_Const.TABLE, РеалізаціяТоварівТаПослуг_Товари_TablePart.Партія, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(РеалізаціяТоварівТаПослуг_Товари_TablePart.НомерРядка, SelectOrder.ASC);
-
+                РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.FillJoin([РеалізаціяТоварівТаПослуг_Товари_TablePart.НомерРядка]);
                 await РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.JoinValue;
 
                 foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record in РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = JoinValue[uid]["Характеристика"];
-                    record.Серія.Назва = JoinValue[uid]["Серія"];
-                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
-                    record.ВидЦіни.Назва = JoinValue[uid]["ВидЦін"];
-                    record.ЗамовленняКлієнта.Назва = JoinValue[uid]["Замовлення"];
-                    record.РахунокФактура.Назва = JoinValue[uid]["Рахунок"];
-                    record.Склад.Назва = JoinValue[uid]["Склад"];
-                    record.Партія.Назва = JoinValue[uid]["Партія"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,

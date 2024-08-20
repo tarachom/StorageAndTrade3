@@ -134,42 +134,11 @@ namespace StorageAndTrade
 
             if (РозміщенняНоменклатуриПоКоміркам_Objest != null)
             {
-                Query querySelect = РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.QuerySelect;
-                querySelect.Clear();
-
-                //JOIN Номенклатура
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(Номенклатура_Const.TABLE + "." + Номенклатура_Const.Назва, "Номенклатура"));
-                querySelect.Joins.Add(
-                    new Join(Номенклатура_Const.TABLE, РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Номенклатура, querySelect.Table));
-
-                //JOIN Пакування
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(ПакуванняОдиниціВиміру_Const.TABLE + "." + ПакуванняОдиниціВиміру_Const.Назва, "Пакування"));
-                querySelect.Joins.Add(
-                    new Join(ПакуванняОдиниціВиміру_Const.TABLE, РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Пакування, querySelect.Table));
-
-                //JOIN Комірка
-                querySelect.FieldAndAlias.Add(
-                    new NameValue<string>(СкладськіКомірки_Const.TABLE + "." + СкладськіКомірки_Const.Назва, "Комірка"));
-                querySelect.Joins.Add(
-                    new Join(СкладськіКомірки_Const.TABLE, РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Комірка, querySelect.Table));
-
-                //ORDER
-                querySelect.Order.Add(РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.НомерРядка, SelectOrder.ASC);
-
+                РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.FillJoin([РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.НомерРядка]);
                 await РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.Read();
-
-                Dictionary<string, Dictionary<string, string>> JoinValue = РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.JoinValue;
 
                 foreach (РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Record record in РозміщенняНоменклатуриПоКоміркам_Objest.Товари_TablePart.Records)
                 {
-                    string uid = record.UID.ToString();
-
-                    record.Номенклатура.Назва = JoinValue[uid]["Номенклатура"];
-                    record.Пакування.Назва = JoinValue[uid]["Пакування"];
-                    record.Комірка.Назва = JoinValue[uid]["Комірка"];
-
                     Запис запис = new Запис
                     {
                         ID = record.UID,
