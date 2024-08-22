@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>20.08.2024 23:00:46</DateTimeSave>
+  <DateTimeSave>22.08.2024 18:30:04</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -24011,7 +24011,7 @@ HAVING
             </Field>
             <Field>
               <Name>ХарактеристикаНоменклатури</Name>
-              <Caption>ХарактеристикаНоменклатури</Caption>
+              <Caption>Характеристика</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
               <SortField>False</SortField>
@@ -24044,19 +24044,7 @@ HAVING
             </Field>
             <Field>
               <Name>ВНаявності</Name>
-              <Caption>ВНаявності</Caption>
-              <Size>0</Size>
-              <SortNum>100</SortNum>
-              <SortField>False</SortField>
-              <SortDirection>False</SortDirection>
-              <FilterField>False</FilterField>
-              <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-            <Field>
-              <Name>ДоВідвантаження</Name>
-              <Caption>ДоВідвантаження</Caption>
+              <Caption>В наявності</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
               <SortField>False</SortField>
@@ -24069,11 +24057,19 @@ HAVING
           </Fields>
         </TabularList>
       </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняКлієнтів</Name>
-      <FullName>
-      </FullName>
+      <FullName>ЗамовленняКлієнтів</FullName>
       <Table>tab_a55</Table>
       <Type>Residues</Type>
       <Desc>Замовлення клієнтів</Desc>
@@ -24296,12 +24292,97 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>ЗамовленняКлієнта</Name>
+              <Caption>Замовлення клієнта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняКлієнта</Pointer>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>Замовлено</Name>
+              <Caption>Замовлено</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗКлієнтами</Name>
-      <FullName>
-      </FullName>
+      <FullName>РозрахункиЗКлієнтами</FullName>
       <Table>tab_a56</Table>
       <Type>Residues</Type>
       <Desc>
@@ -24578,12 +24659,63 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>Закупівлі</Name>
-      <FullName>
-      </FullName>
+      <FullName>Закупівлі</FullName>
       <Table>tab_a57</Table>
       <Type>Turnover</Type>
       <Desc>
@@ -24857,7 +24989,127 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Кількість</Name>
+              <Caption>Кількість</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Собівартість</Name>
+              <Caption>Собівартість</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ВільніЗалишки</Name>
@@ -25229,12 +25481,98 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <Caption>В наявності</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ВРезервіЗіСкладу</Name>
+              <Caption>В резерві зі складу</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>ВРезервіПідЗамовлення</Name>
+              <Caption>В резерві під замовлення</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ЗамовленняПостачальникам</Name>
-      <FullName>
-      </FullName>
+      <FullName>ЗамовленняПостачальникам</FullName>
       <Table>tab_a60</Table>
       <Type>Residues</Type>
       <Desc>
@@ -25427,12 +25765,85 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>ЗамовленняПостачальнику</Name>
+              <Caption>Замовлення постачальнику</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>Замовлено</Name>
+              <Caption>Замовлено</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РозрахункиЗПостачальниками</Name>
-      <FullName>
-      </FullName>
+      <FullName>РозрахункиЗПостачальниками</FullName>
       <Table>tab_a61</Table>
       <Type>Residues</Type>
       <Desc>
@@ -25708,12 +26119,63 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>РухКоштів</Name>
-      <FullName>
-      </FullName>
+      <FullName>РухКоштів</FullName>
       <Table>tab_a78</Table>
       <Type>Residues</Type>
       <Desc>
@@ -26106,7 +26568,70 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ПартіїТоварів</Name>
@@ -26767,12 +27292,143 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
+              <Name>ПартіяТоварівКомпозит</Name>
+              <Caption>Партія</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <Caption>Серія</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>Рядок</Name>
+              <Caption>Рядок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>integer</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Кількість</Name>
+              <Caption>Кількість</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Собівартість</Name>
+              <Caption>Собівартість</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>СписанаСобівартість</Name>
+              <Caption>Списана собівартість</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>Продажі</Name>
-      <FullName>
-      </FullName>
+      <FullName>Продажі</FullName>
       <Table>tab_a66</Table>
       <Type>Turnover</Type>
       <Desc>
@@ -27068,12 +27724,143 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Кількість</Name>
+              <Caption>Кількість</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Дохід</Name>
+              <Caption>Дохід</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Собівартість</Name>
+              <Caption>Собівартість</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
     <RegisterAccumulation>
       <Name>ТовариВКомірках</Name>
-      <FullName>
-      </FullName>
+      <FullName>ТовариВКомірках</FullName>
       <Table>tab_b01</Table>
       <Type>Residues</Type>
       <Desc>
@@ -27558,7 +28345,92 @@ HAVING
 ]]></Query>
         </QueryBlock>
       </QueryBlockList>
-      <TabularLists />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Desc>
+          </Desc>
+          <IsTree>0</IsTree>
+          <Fields>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>Характеристика</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <Caption>Пакування</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+            </Field>
+            <Field>
+              <Name>Комірка</Name>
+              <Caption>Комірка</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СкладськіКомірки</Pointer>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <Caption>Серія</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+            </Field>
+            <Field>
+              <Name>ВНаявності</Name>
+              <Caption>В наявності</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterAccumulation>
   </RegistersAccumulation>
 </Configuration>

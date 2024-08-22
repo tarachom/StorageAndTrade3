@@ -104,24 +104,52 @@ namespace StorageAndTrade
             Link.AddLink(hBoxInfo, "Довідник - Валюти", async () =>
             {
                 Валюти page = new Валюти();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Валюти_Const.FULLNAME}", () => { return page; });
                 await page.SetValue();
             });
 
-            Link.AddLink(hBoxInfo, "ТовариНаСкладах", async () =>
+            Link.AddLink(hBoxInfo, "Історія завантажень", КурсиВалют_Історія);
+
+            Link.AddLink(vBoxDirectory, "ТовариНаСкладах", async () =>
             {
                 ТовариНаСкладах page = new ТовариНаСкладах();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ТовариНаСкладах_Const.FULLNAME}", () => { return page; });
                 await page.SetValue();
             });
 
-            Link.AddLink(hBoxInfo, "Історія завантажень", КурсиВалют_Історія);
+            Link.AddLink(vBoxDirectory, "ЗамовленняКлієнтів", async () =>
+            {
+                ЗамовленняКлієнтів page = new ЗамовленняКлієнтів();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняКлієнтів_Const.FULLNAME}", () => { return page; });
+                await page.SetValue();
+            });
+
+            Link.AddLink(vBoxDirectory, "РухКоштів", async () =>
+            {
+                РухКоштів page = new РухКоштів();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РухКоштів_Const.FULLNAME}", () => { return page; });
+                await page.SetValue();
+            });
+
+            Link.AddLink(vBoxDirectory, "ПартіїТоварів", async () =>
+            {
+                ПартіїТоварів page = new ПартіїТоварів();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПартіїТоварів_Const.FULLNAME}", () => { return page; });
+                await page.SetValue();
+            });
+
+            Link.AddLink(vBoxDirectory, "Закупівлі", async () =>
+            {
+                Закупівлі page = new Закупівлі();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Закупівлі_Const.FULLNAME}", () => { return page; });
+                await page.SetValue();
+            });
         }
 
         void OnDownloadCurs(object? sender, EventArgs args)
         {
             Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження курсів валют НБУ", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => { return page; });
 
             Task.Run(() =>
             {
@@ -190,7 +218,7 @@ namespace StorageAndTrade
         {
             КурсиВалют_ІсторіяЗавантаження page = new КурсиВалют_ІсторіяЗавантаження();
             page.LoadRecords();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Курси валют - історія завантаження", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Курси валют - історія завантаження", () => { return page; });
         }
     }
 }

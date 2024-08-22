@@ -170,9 +170,9 @@ namespace StorageAndTrade
                 await АктВиконанихРобіт_Objest.ClearSpendTheDocument();
         }
 
-        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
-            return new АктВиконанихРобіт_Pointer(unigueID);
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new АктВиконанихРобіт_Pointer(unigueID));
         }
 
         protected override async void ExportXML(UnigueID unigueID)

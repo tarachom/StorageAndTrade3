@@ -23,6 +23,7 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
+using AccountingSoftware;
 using System.Reflection;
 
 using StorageAndTrade_1_0;
@@ -34,25 +35,7 @@ namespace StorageAndTrade
     {
         public Журнал_Повний() : base()
         {
-            ТабличніСписки.Журнали_Повний.AddColumns(TreeViewGrid);
-
-            // ТабличніСписки.Журнали_Повний.Limit = 50;
-            // ТабличніСписки.Журнали_Повний.Offset = 0;
-
-            // ScrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
-            // {
-            //     Console.WriteLine(
-            //     ScrollTree.Vadjustment.Value + " - " +
-            //     ScrollTree.Vadjustment.Upper + " - " +
-            //     (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize) + " - " +
-            //     ScrollTree.Vadjustment.PageSize);
-
-            //     if (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize == ScrollTree.Vadjustment.Value)
-            //     {
-            //         ТабличніСписки.Журнали_Повний.Offset += 50;
-            //         ТабличніСписки.Журнали_Повний.LoadRecords();
-            //     }
-            // };
+            ТабличніСписки.Журнали_Повний.AddColumns(TreeViewGrid);           
         }
 
         //await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу("Журнали.Повний");//ЗаписатиПеріодДляЖурналу("Журнали.Повний", Період.Period.ToString());
@@ -64,16 +47,9 @@ namespace StorageAndTrade
         protected override async void LoadRecords()
         {
             ТабличніСписки.Журнали_Повний.SelectPointerItem = SelectPointerItem;
-
-            // ТабличніСписки.Журнали_Повний.Store.Clear();
-            // ТабличніСписки.Журнали_Повний.Limit = 50;
-            // ТабличніСписки.Журнали_Повний.Offset = 0;
-
-            Console.WriteLine("IN ДодатиВідбірПоПеріоду");
             ТабличніСписки.Журнали_Повний.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
-            Console.WriteLine("IN ДодатиВідбірПоПеріоду ok");
             await ТабличніСписки.Журнали_Повний.LoadRecords(TreeViewGrid);
-            Console.WriteLine("IN LoadRecords ok");
+
             if (ТабличніСписки.Журнали_Повний.SelectPath != null)
                 TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Повний.SelectPath, TreeViewGrid.Columns[0], false);
             else if (ТабличніСписки.Журнали_Повний.CurrentPath != null)
@@ -85,6 +61,21 @@ namespace StorageAndTrade
             ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Повний.AllowDocument());
         }
 
+        protected override void ErrorSpendTheDocument(UnigueID unigueID)
+        {
+            new ФункціїДляПовідомлень().ПоказатиПовідомлення(unigueID);
+        }
+
+        protected override void ReportSpendTheDocument(DocumentPointer documentPointer)
+        {
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(documentPointer);
+        }
+
+        protected override void OpenDoc(string typeDoc, UnigueID unigueID)
+        {
+            ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc, unigueID);
+        }
+
         const string КлючНалаштуванняКористувача = "Журнали.Повний";
 
         protected override async ValueTask BeforeSetValue()
@@ -94,16 +85,33 @@ namespace StorageAndTrade
 
         protected override void PeriodChanged()
         {
-            Console.WriteLine("P 1");
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            Console.WriteLine("P LoadRecords");
             LoadRecords();
-            Console.WriteLine("P LoadRecords ok");
         }
     }
 }
 
 /*
+// ТабличніСписки.Журнали_Повний.Limit = 50;
+// ТабличніСписки.Журнали_Повний.Offset = 0;
+
+// ScrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
+// {
+//     Console.WriteLine(
+//     ScrollTree.Vadjustment.Value + " - " +
+//     ScrollTree.Vadjustment.Upper + " - " +
+//     (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize) + " - " +
+//     ScrollTree.Vadjustment.PageSize);
+
+//     if (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize == ScrollTree.Vadjustment.Value)
+//     {
+//         ТабличніСписки.Журнали_Повний.Offset += 50;
+//         ТабличніСписки.Журнали_Повний.LoadRecords();
+//     }
+// };
+
+
+
 
 scrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
 {

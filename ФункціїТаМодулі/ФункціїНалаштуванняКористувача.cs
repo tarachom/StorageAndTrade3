@@ -90,11 +90,8 @@ namespace StorageAndTrade
             {
                 ЗаповнитиВідбір(НалаштуванняКористувача, НазваЖурналу);
 
-                Console.WriteLine("! Read");
                 await НалаштуванняКористувача.Read();
-                Console.WriteLine("! Read ok Records = " + НалаштуванняКористувача.Records.Count);
                 await НалаштуванняКористувача.RemoveAll(НалаштуванняКористувача.Records);
-                Console.WriteLine("! RemoveAll ok");
             }
 
             //Додавання нового
@@ -113,9 +110,7 @@ namespace StorageAndTrade
                     record.ДатаСтоп = ДатаСтоп.Value;
 
                 НалаштуванняКористувача.Records.Add(record);
-                Console.WriteLine("! Save");
                 await НалаштуванняКористувача.Save(false);
-                Console.WriteLine("! Save ok");
             }
         }
     }

@@ -23,6 +23,7 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
+using AccountingSoftware;
 using System.Reflection;
 
 using StorageAndTrade_1_0;
@@ -55,6 +56,21 @@ namespace StorageAndTrade
         protected override void OpenTypeListDocs(Widget relative_to)
         {
             ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_АдреснеЗберігання.AllowDocument());
+        }
+
+        protected override void ErrorSpendTheDocument(UnigueID unigueID)
+        {
+            new ФункціїДляПовідомлень().ПоказатиПовідомлення(unigueID);
+        }
+
+        protected override void ReportSpendTheDocument(DocumentPointer documentPointer)
+        {
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(documentPointer);
+        }
+
+        protected override void OpenDoc(string typeDoc, UnigueID unigueID)
+        {
+            ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc, unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Журнали.АдреснеЗберігання";
