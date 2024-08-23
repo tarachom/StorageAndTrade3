@@ -28,7 +28,7 @@ using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class ШтрихкодиНоменклатури : РегістриЖурнал
+    class ШтрихкодиНоменклатури : РегістриВідомостейЖурнал
     {
         public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
         public ХарактеристикиНоменклатури_PointerControl ХарактеристикиНоменклатуриВласник = new ХарактеристикиНоменклатури_PointerControl();

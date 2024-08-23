@@ -28,7 +28,7 @@ using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class КурсиВалют : РегістриЖурнал
+    class КурсиВалют : РегістриВідомостейЖурнал
     {
         public Валюти_PointerControl ВалютаВласник = new Валюти_PointerControl();
 

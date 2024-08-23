@@ -65,16 +65,18 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
+using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриВідомостей;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    class <xsl:value-of select="$RegisterInformationName"/>_Елемент : РегістриЕлемент
+    class <xsl:value-of select="$RegisterInformationName"/>_Елемент : РегістриВідомостейЕлемент
     {
         public <xsl:value-of select="$RegisterInformationName"/>_Objest <xsl:value-of select="$RegisterInformationName"/>_Objest { get; set; } = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
         DateTimeControl Період = new DateTimeControl();
 
         #region Fields
+
         <xsl:for-each select="$Fields">
             <xsl:variable name="FieldName" select="Name" />
             <xsl:if test="$FormElementField[Name = $FieldName]">
@@ -132,6 +134,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 </xsl:choose>
             </xsl:if>
         </xsl:for-each>
+
         #endregion
 
         public <xsl:value-of select="$RegisterInformationName"/>_Елемент() : base() 
@@ -235,8 +238,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         protected override void GetValue()
         {
-            UnigueID = <xsl:value-of select="$RegisterInformationName"/>_Objest.UnigueID;
-            Caption = Період.Value.ToString();
+            <xsl:value-of select="$RegisterInformationName"/>_Objest.Period = Період.Value;
 
             <xsl:for-each select="$Fields">
                 <xsl:variable name="FieldName" select="Name" />
@@ -281,13 +283,16 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         protected override async ValueTask Save()
         {
+            UnigueID = <xsl:value-of select="$RegisterInformationName"/>_Objest.UnigueID;
+            Caption = Період.Value.ToString();
+
             try
             {
                 await <xsl:value-of select="$RegisterInformationName"/>_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(UnigueID.UGuid), Caption, ex);
             }
         }
     }
@@ -319,7 +324,7 @@ using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationC
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    public class <xsl:value-of select="$RegisterInformationName"/> : РегістриЖурнал
+    public class <xsl:value-of select="$RegisterInformationName"/> : РегістриВідомостейЖурнал
     {
         public <xsl:value-of select="$RegisterInformationName"/>() : base()
         {

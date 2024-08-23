@@ -33,6 +33,7 @@ using InterfaceGtk;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриНакопичення;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
@@ -142,6 +143,13 @@ namespace StorageAndTrade
             {
                 Закупівлі page = new Закупівлі();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Закупівлі_Const.FULLNAME}", () => { return page; });
+                await page.SetValue();
+            });
+
+            Link.AddLink(vBoxDirectory, "ЦіниНоменклатури", async () =>
+            {
+                ЦіниНоменклатури page = new ЦіниНоменклатури();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЦіниНоменклатури_Const.FULLNAME}", () => { return page; });
                 await page.SetValue();
             });
         }

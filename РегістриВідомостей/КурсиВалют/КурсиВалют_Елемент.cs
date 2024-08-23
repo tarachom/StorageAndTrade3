@@ -23,13 +23,13 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
-
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class КурсиВалют_Елемент : РегістриЕлемент
+    class КурсиВалют_Елемент : РегістриВідомостейЕлемент
     {
         public КурсиВалют_Objest КурсиВалют_Objest { get; set; } = new КурсиВалют_Objest();
 
@@ -77,9 +77,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = КурсиВалют_Objest.UnigueID;
-            Caption = ДатаКурсу.Value.ToString();
-
             КурсиВалют_Objest.Period = ДатаКурсу.Value;
             КурсиВалют_Objest.Валюта = Валюта.Pointer;
             КурсиВалют_Objest.Курс = Курс.Value;
@@ -90,17 +87,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = КурсиВалют_Objest.UnigueID;
+            Caption = ДатаКурсу.Value.ToString();
+
             try
             {
                 await КурсиВалют_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
-                return;
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(UnigueID.UGuid), Caption, ex);
             }
-
-            UnigueID = КурсиВалют_Objest.UnigueID;
         }
     }
 }

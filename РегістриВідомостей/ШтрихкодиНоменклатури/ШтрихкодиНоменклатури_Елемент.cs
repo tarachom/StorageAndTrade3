@@ -23,13 +23,13 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
-
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class ШтрихкодиНоменклатури_Елемент : РегістриЕлемент
+    class ШтрихкодиНоменклатури_Елемент : РегістриВідомостейЕлемент
     {
         public ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest { get; set; } = new ШтрихкодиНоменклатури_Objest();
 
@@ -91,9 +91,6 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            UnigueID = ШтрихкодиНоменклатури_Objest.UnigueID;
-            Caption = Штрихкод.Text;
-
             ШтрихкодиНоменклатури_Objest.Period = ДатаШтрихкоду.Value;
             ШтрихкодиНоменклатури_Objest.Штрихкод = Штрихкод.Text;
             ШтрихкодиНоменклатури_Objest.Номенклатура = Номенклатура.Pointer;
@@ -105,17 +102,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = ШтрихкодиНоменклатури_Objest.UnigueID;
+            Caption = Штрихкод.Text;
+
             try
             {
                 await ШтрихкодиНоменклатури_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
-                return;
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(UnigueID.UGuid), Caption, ex);
             }
-
-            UnigueID = ШтрихкодиНоменклатури_Objest.UnigueID;
         }
     }
 }

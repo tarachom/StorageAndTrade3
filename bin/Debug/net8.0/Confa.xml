@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>23.08.2024 08:51:10</DateTimeSave>
+  <DateTimeSave>23.08.2024 19:40:55</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -23103,7 +23103,48 @@ SQL тип  непотрібно вказувати
           </Fields>
         </TabularList>
       </TabularLists>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>
+          </Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <ElementField>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <Caption>ХарактеристикаНоменклатури</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>ВидЦіни</Name>
+              <Caption>ВидЦіни</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Ціна</Name>
+              <Caption>Ціна</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Пакування</Name>
+              <Caption>Пакування</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+            </ElementField>
+          </ElementFields>
+          <ElementTableParts />
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>
+          </Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </RegisterInformation>
     <RegisterInformation>
       <Name>КурсиВалют</Name>

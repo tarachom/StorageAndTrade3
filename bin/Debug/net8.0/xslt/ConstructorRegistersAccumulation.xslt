@@ -67,7 +67,7 @@ using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationC
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    public class <xsl:value-of select="$RegistersAccumulationName"/> : РегістриЖурнал
+    public class <xsl:value-of select="$RegistersAccumulationName"/> : РегістриНакопиченняЖурнал
     {
         public <xsl:value-of select="$RegistersAccumulationName"/>() : base()
         {
