@@ -60,7 +60,7 @@ namespace StorageAndTrade
 
         protected override void ErrorSpendTheDocument(UnigueID unigueID)
         {
-            new ФункціїДляПовідомлень().ПоказатиПовідомлення(unigueID);
+            ФункціїДляПовідомлень.ПоказатиПовідомлення(unigueID);
         }
 
         protected override void ReportSpendTheDocument(DocumentPointer documentPointer)

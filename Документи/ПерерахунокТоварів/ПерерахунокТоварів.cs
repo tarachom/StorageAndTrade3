@@ -154,7 +154,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ПерерахунокТоварів_Objest.SpendTheDocument(ПерерахунокТоварів_Objest.ДатаДок))
-                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ПерерахунокТоварів_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПерерахунокТоварів_Objest.UnigueID);
             }
             else
                 await ПерерахунокТоварів_Objest.ClearSpendTheDocument();

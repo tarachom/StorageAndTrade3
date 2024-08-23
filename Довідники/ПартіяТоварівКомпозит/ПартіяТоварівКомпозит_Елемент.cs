@@ -104,17 +104,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = ПартіяТоварівКомпозит_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await ПартіяТоварівКомпозит_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
-            }
-
-            UnigueID = ПартіяТоварівКомпозит_Objest.UnigueID;
-            Caption = Назва.Text;
+                ФункціїДляПовідомлень.ДодатиПовідомлення(ПартіяТоварівКомпозит_Objest.GetBasis(), Caption, ex);
+            }            
         }
     }
 }

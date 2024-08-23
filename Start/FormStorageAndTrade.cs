@@ -39,7 +39,7 @@ namespace StorageAndTrade
 
         protected override void ButtonMessageClicked()
         {
-            new ФункціїДляПовідомлень().ВідкритиПовідомлення();
+            ФункціїДляПовідомлень.ВідкритиПовідомлення();
         }
 
         protected override void ButtonFindClicked(string text)
@@ -115,6 +115,11 @@ namespace StorageAndTrade
             Popover po = new Popover(lb) { Position = PositionType.Right };
             po.Add(new PageDirectory());
             po.ShowAll();
+        }
+
+        protected override void Регістри(LinkButton lb)
+        {
+            
         }
 
         protected override void Налаштування(LinkButton lb)

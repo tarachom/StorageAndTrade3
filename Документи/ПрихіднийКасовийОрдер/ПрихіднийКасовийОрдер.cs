@@ -162,7 +162,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ПрихіднийКасовийОрдер_Objest.SpendTheDocument(ПрихіднийКасовийОрдер_Objest.ДатаДок))
-                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ПрихіднийКасовийОрдер_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПрихіднийКасовийОрдер_Objest.UnigueID);
             }
             else
                 await ПрихіднийКасовийОрдер_Objest.ClearSpendTheDocument();

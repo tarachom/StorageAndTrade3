@@ -131,6 +131,8 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
+            UnigueID = ПерерахунокТоварів_Objest.UnigueID;
+            Caption = ПерерахунокТоварів_Objest.Назва;
 
             try
             {
@@ -142,11 +144,8 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(ПерерахунокТоварів_Objest.GetBasis(), Caption, ex);
             }
-
-            UnigueID = ПерерахунокТоварів_Objest.UnigueID;
-            Caption = ПерерахунокТоварів_Objest.Назва;
 
             return isSave;
         }
@@ -158,7 +157,7 @@ namespace StorageAndTrade
                 bool isSpend = await ПерерахунокТоварів_Objest.SpendTheDocument(ПерерахунокТоварів_Objest.ДатаДок);
 
                 if (!isSpend)
-                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ПерерахунокТоварів_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПерерахунокТоварів_Objest.UnigueID);
 
                 return isSpend;
             }
@@ -170,9 +169,9 @@ namespace StorageAndTrade
             }
         }
 
-        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
-            return new ПерерахунокТоварів_Pointer(unigueID);
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПерерахунокТоварів_Pointer(unigueID));
         }
     }
 }

@@ -198,17 +198,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = ДоговориКонтрагентів_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await ДоговориКонтрагентів_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(ДоговориКонтрагентів_Objest.GetBasis(), Caption, ex);
             }
-
-            UnigueID = ДоговориКонтрагентів_Objest.UnigueID;
-            Caption = Назва.Text;
         }
     }
 }

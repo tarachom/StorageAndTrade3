@@ -128,6 +128,8 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
+            UnigueID = КорегуванняБоргу_Objest.UnigueID;
+            Caption = КорегуванняБоргу_Objest.Назва;
 
             try
             {
@@ -139,12 +141,9 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(КорегуванняБоргу_Objest.GetBasis(), Caption, ex);
             }
-
-            UnigueID = КорегуванняБоргу_Objest.UnigueID;
-            Caption = КорегуванняБоргу_Objest.Назва;
-
+            
             return isSave;
         }
 
@@ -155,7 +154,7 @@ namespace StorageAndTrade
                 bool isSpend = await КорегуванняБоргу_Objest.SpendTheDocument(КорегуванняБоргу_Objest.ДатаДок);
 
                 if (!isSpend)
-                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(КорегуванняБоргу_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(КорегуванняБоргу_Objest.UnigueID);
 
                 return isSpend;
             }
@@ -167,9 +166,9 @@ namespace StorageAndTrade
             }
         }
 
-        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
-            return new КорегуванняБоргу_Pointer(unigueID);
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new КорегуванняБоргу_Pointer(unigueID));
         }
     }
 }

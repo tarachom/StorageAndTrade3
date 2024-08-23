@@ -162,7 +162,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await РозхіднийКасовийОрдер_Objest.SpendTheDocument(РозхіднийКасовийОрдер_Objest.ДатаДок))
-                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(РозхіднийКасовийОрдер_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(РозхіднийКасовийОрдер_Objest.UnigueID);
             }
             else
                 await РозхіднийКасовийОрдер_Objest.ClearSpendTheDocument();
@@ -178,10 +178,6 @@ namespace StorageAndTrade
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РозхіднийКасовийОрдер_Const.FULLNAME}_{unigueID}.xml");
             await РозхіднийКасовийОрдер_Export.ToXmlFile(new РозхіднийКасовийОрдер_Pointer(unigueID), pathToSave);
         }
-
-        #endregion
-
-        #region ToolBar
 
         #endregion
     }

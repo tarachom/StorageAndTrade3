@@ -93,17 +93,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = ТипорозміриКомірок_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await ТипорозміриКомірок_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
-            }
-
-            UnigueID = ТипорозміриКомірок_Objest.UnigueID;
-            Caption = Назва.Text;
+                ФункціїДляПовідомлень.ДодатиПовідомлення(ТипорозміриКомірок_Objest.GetBasis(), Caption, ex);
+            }            
         }
     }
 }

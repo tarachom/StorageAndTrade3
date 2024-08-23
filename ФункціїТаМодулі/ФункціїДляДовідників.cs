@@ -38,7 +38,6 @@ namespace StorageAndTrade
     /// </summary>
     class ФункціїДляДовідників
     {
-
         /// <summary>
         /// Функція відкриває список довідника і позиціонує на вибраний елемент
         /// </summary>
@@ -66,7 +65,7 @@ namespace StorageAndTrade
                 listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
 
                 //Заголовок журналу з константи конфігурації
-                string listName = "Список документів";
+                string listName = "Список";
                 {
                     Type? documentConst = Type.GetType($"{Config.NameSpageCodeGeneration}.Довідники.{typeDir}_Const");
                     if (documentConst != null)

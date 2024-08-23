@@ -72,17 +72,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = ВидиЦін_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await ВидиЦін_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
-            }
-
-            UnigueID = ВидиЦін_Objest.UnigueID;
-            Caption = Назва.Text;
+                ФункціїДляПовідомлень.ДодатиПовідомлення(ВидиЦін_Objest.GetBasis(), Caption, ex);
+            }            
         }
     }
 }

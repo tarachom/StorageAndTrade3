@@ -206,20 +206,19 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = Файли_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
-                await Файли_Objest.Save();
+                if (await Файли_Objest.Save())
+                    //Перечитати
+                    SetValue();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Файли_Objest.GetBasis(), Caption, ex);
             }
-
-            //Перечитати
-            SetValue();
-
-            UnigueID = Файли_Objest.UnigueID;
-            Caption = Назва.Text;
         }
     }
 }

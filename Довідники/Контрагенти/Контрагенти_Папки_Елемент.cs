@@ -87,7 +87,7 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Контрагенти_Папки_Objest.GetBasis(), Caption, ex);
             }
         }
     }

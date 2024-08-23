@@ -78,17 +78,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = БанківськіРахункиКонтрагентів_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await БанківськіРахункиКонтрагентів_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(БанківськіРахункиКонтрагентів_Objest.GetBasis(), Caption, ex);
             }
-
-            UnigueID = БанківськіРахункиКонтрагентів_Objest.UnigueID;
-            Caption = Назва.Text;
         }
     }
 }

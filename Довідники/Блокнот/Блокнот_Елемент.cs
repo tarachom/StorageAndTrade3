@@ -50,10 +50,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Блокнот_Елемент() : base()
-        {
-
-        }
+        public Блокнот_Елемент() : base() { }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -102,17 +99,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = Блокнот_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await Блокнот_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Блокнот_Objest.GetBasis(), Caption, ex);
             }
-
-            UnigueID = Блокнот_Objest.UnigueID;
-            Caption = Назва.Text;
         }
     }
 }

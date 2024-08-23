@@ -95,17 +95,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = СтаттяРухуКоштів_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await СтаттяРухуКоштів_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(СтаттяРухуКоштів_Objest.GetBasis(), Caption, ex);
             }
-
-            UnigueID = СтаттяРухуКоштів_Objest.UnigueID;
-            Caption = Назва.Text;
         }
     }
 }

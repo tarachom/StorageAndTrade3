@@ -237,7 +237,7 @@ namespace StorageAndTrade
                 hBoxLabel.ShowAll();
             }
 
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, Name = codePage };
+            ScrolledWindow scroll = new ScrolledWindow() { Name = codePage };
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
             if (insertPage)

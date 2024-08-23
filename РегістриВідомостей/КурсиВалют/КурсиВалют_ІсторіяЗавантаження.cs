@@ -29,7 +29,7 @@ namespace StorageAndTrade
     {
         Box vBoxMessage = new Box(Orientation.Vertical, 0);
 
-        public КурсиВалют_ІсторіяЗавантаження() : base()
+        public КурсиВалют_ІсторіяЗавантаження() : base(Orientation.Vertical, 0)
         {
             //Кнопки
             Box hBoxTop = new Box(Orientation.Horizontal, 0);
@@ -41,7 +41,7 @@ namespace StorageAndTrade
 
             PackStart(hBoxTop, false, false, 10);
 
-            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In };
+            ScrolledWindow scroll = new ScrolledWindow();
             scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
             scroll.Add(vBoxMessage);
 

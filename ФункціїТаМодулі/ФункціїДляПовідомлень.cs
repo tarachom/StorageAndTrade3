@@ -39,14 +39,21 @@ namespace StorageAndTrade
     {
         public ФункціїДляПовідомлень() : base(Config.Kernel) { }
 
-        public async void ВідкритиПовідомлення()
+        public static async void ДодатиПовідомлення(UuidAndText basis, string НазваОбєкту, Exception exception)
+        {
+            ФункціїДляПовідомлень Повідомлення = new ФункціїДляПовідомлень();
+            await Повідомлення.ДодатиПовідомленняПроПомилку("Запис", basis.Uuid, basis.Text, НазваОбєкту, exception.Message);
+            ПоказатиПовідомлення(basis.UnigueID());
+        }
+
+        public static async void ВідкритиПовідомлення()
         {
             СпільніФорми_ВивідПовідомленняПроПомилки page = new СпільніФорми_ВивідПовідомленняПроПомилки();
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Повідомлення", () => { return page; });
             await page.LoadRecords();
         }
 
-        public async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
+        public static async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
             СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід page = new();
 

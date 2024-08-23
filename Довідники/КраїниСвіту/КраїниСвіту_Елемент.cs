@@ -66,17 +66,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = КраїниСвіту_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await КраїниСвіту_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
-            }
-
-            UnigueID = КраїниСвіту_Objest.UnigueID;
-            Caption = Назва.Text;
+                ФункціїДляПовідомлень.ДодатиПовідомлення(КраїниСвіту_Objest.GetBasis(), Caption, ex);
+            }            
         }
     }
 }

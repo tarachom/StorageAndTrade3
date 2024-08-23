@@ -166,7 +166,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ВведенняЗалишків_Objest.SpendTheDocument(ВведенняЗалишків_Objest.ДатаДок))
-                    new ФункціїДляПовідомлень().ПоказатиПовідомлення(ВведенняЗалишків_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ВведенняЗалишків_Objest.UnigueID);
             }
             else
                 await ВведенняЗалишків_Objest.ClearSpendTheDocument();

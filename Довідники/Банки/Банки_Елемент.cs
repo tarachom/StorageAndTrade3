@@ -195,17 +195,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
+            UnigueID = Банки_Objest.UnigueID;
+            Caption = Назва.Text;
+
             try
             {
                 await Банки_Objest.Save();
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Банки_Objest.GetBasis(), Caption, ex);
             }
-
-            UnigueID = Банки_Objest.UnigueID;
-            Caption = Назва.Text;
         }
     }
 }
