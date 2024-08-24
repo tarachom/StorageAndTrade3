@@ -119,7 +119,7 @@ namespace StorageAndTrade
 
         protected override void Регістри(LinkButton lb)
         {
-            
+
         }
 
         protected override void Налаштування(LinkButton lb)
@@ -134,11 +134,9 @@ namespace StorageAndTrade
 
         protected override void Сервіс(LinkButton lb)
         {
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Сервіс", () =>
-            {
-                PageService page = new PageService();
-                return page;
-            });
+            PageService page = new PageService();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Сервіс", () => { return page; });
+            page.SetValue();
         }
     }
 }

@@ -21,372 +21,121 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-/*
-
-Масове перепроведення документів
-
-*/
-
-using Gtk;
-
 using System.Reflection;
 
+using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0;
-using Константи = StorageAndTrade_1_0.Константи;
 using Журнали = StorageAndTrade_1_0.Журнали;
+using Gtk;
 
 namespace StorageAndTrade
 {
-    class PageService : Box
+    class PageService : InterfaceGtk.PageService
     {
-        Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-        CancellationTokenSource? CancellationTokenPageService;
+        public PageService() : base(Config.Kernel, Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
 
-        Button bSpendTheDocument;
-        Button bClearDeletionLabel;
-        Button bStop;
-        ScrolledWindow scrollMessage;
-        Box vBoxMessage = new Box(Orientation.Vertical, 0);
+        #region ПроведенняДокументів
 
-        enum TypeMessage
+        protected override async ValueTask SpendTheDocument(CancellationTokenSource cancellationToken, System.Action CallBack)
         {
-            Ok,
-            Error,
-            Info,
-            None
-        }
-
-        public PageService() : base(Orientation.Vertical, 0)
-        {
-            //Кнопки
-            Box hBoxBotton = new Box(Orientation.Horizontal, 0);
-
-            bSpendTheDocument = new Button("Перепровести документи");
-            bSpendTheDocument.Clicked += OnSpendTheDocument;
-            hBoxBotton.PackStart(bSpendTheDocument, false, false, 10);
-
-            bClearDeletionLabel = new Button("Очистити помічені на видалення");
-            bClearDeletionLabel.Clicked += OnClearDeletionLabel;
-            hBoxBotton.PackStart(bClearDeletionLabel, false, false, 10);
-
-            bStop = new Button("Зупинити") { Sensitive = false };
-            bStop.Clicked += (object? sender, EventArgs args) => { CancellationTokenPageService?.Cancel(); };
-            hBoxBotton.PackStart(bStop, false, false, 10);
-
-            PackStart(hBoxBotton, false, false, 10);
-
-            scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollMessage.Add(vBoxMessage);
-
-            PackStart(scrollMessage, true, true, 0);
-
-            ShowAll();
-        }
-
-        #region SpendTheDocument
-
-        async void OnSpendTheDocument(object? sender, EventArgs args)
-        {
-            CancellationTokenPageService = new CancellationTokenSource();
-            await SpendTheDocument();
-        }
-
-        async ValueTask SpendTheDocument()
-        {
-            ButtonSensitive(false);
-
-            ClearMessage();
-
             int counterDocs = 0;
-            Константи.Системні.ЗупинитиФоновіЗадачі_Const = true;
+            DateTime dateTimeCurrDoc = DateTime.MinValue.Date;
 
+            Лог.CreateMessage($"Період з <b>{Період.DateStartControl.ПочатокДня()}</b> по <b>{Період.DateStopControl.КінецьДня()}</b>", LogMessage.TypeMessage.Info);
             Журнали.JournalSelect journalSelect = new Журнали.JournalSelect();
 
-            // Вибірка всіх документів. Встановлюється максимальний період
-            await journalSelect.Select(DateTime.Parse("01.01.2000 00:00:00"), DateTime.Now);
-            while (journalSelect.MoveNext())
-            {
-                if (CancellationTokenPageService!.IsCancellationRequested)
-                    break;
+            Box hBoxFindDoc = Лог.CreateMessage($"Пошук проведених документів:", LogMessage.TypeMessage.Info, true);
+            await journalSelect.Select(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня(), null, true);
 
-                //Обробляються тільки не помічені на видалення і проведені
-                if (journalSelect.Current != null && !journalSelect.Current.DeletionLabel && journalSelect.Current.Spend)
+            Лог.AppendMessage(hBoxFindDoc, $"знайдено {journalSelect.Count()} документів");
+            while (journalSelect.MoveNext())
+                if (journalSelect.Current != null)
                 {
+                    if (cancellationToken!.IsCancellationRequested)
+                        break;
+
+                    //Список документів які ігноруються при обрахунку регістрів накопичення
+                    if (dateTimeCurrDoc != journalSelect.Current.DocDate.Date)
+                    {
+                        dateTimeCurrDoc = journalSelect.Current.DocDate.Date;
+                        await ОчиститиСписокІгноруванняДокументів();
+                        Лог.CreateMessage($"{dateTimeCurrDoc.ToString("dd-MM-yyyy")}", LogMessage.TypeMessage.None);
+                    }
+
+                    await ДодатиДокументВСписокІгнорування(journalSelect.Current.UnigueID.UGuid, journalSelect.Current.DocName);
+
                     DocumentObject? doc = await journalSelect.GetDocumentObject(true);
                     if (doc != null)
                     {
+                        Box hBox = Лог.CreateMessage($"Проведення <b>{journalSelect.Current.DocName}</b>", LogMessage.TypeMessage.Info);
+
                         //Для документу викликається функція проведення
                         object? obj = doc.GetType().InvokeMember("SpendTheDocumentSync", BindingFlags.InvokeMethod, null, doc, [journalSelect.Current.SpendDate]);
+                        if (obj != null)
+                            if ((bool)obj)
+                            {
+                                //Документ проведений ОК
+                                Лог.AppendMessage(hBox, "Проведено");
 
-                        if (obj != null ? (bool)obj : false)
-                        {
-                            //Документ проведений ОК
-                            CreateMessage(TypeMessage.Ok, journalSelect.Current.TypeDocument + " " + journalSelect.Current.SpendDate);
-                        }
-                        else
-                        {
-                            //Документ НЕ проведений Error
-                            //
-                            //Вивід помилок в окремому вікні
-                            ФункціїДляПовідомлень.ПоказатиПовідомлення(doc.UnigueID, 1);
+                                counterDocs++;
+                            }
+                            else
+                            {
+                                //Документ НЕ проведений Error
+                                Лог.AppendMessage(hBox, "Помилка", LogMessage.TypeMessage.Error);
 
-                            //Додатково вивід у помилок у це вікно
-                            SelectRequest_Record record = await new ФункціїДляПовідомлень().ПрочитатиПовідомленняПроПомилки(doc.UnigueID, 1);
+                                //Додатково вивід помилок у це вікно
+                                SelectRequest_Record record = await new ФункціїДляПовідомлень().ПрочитатиПовідомленняПроПомилки(doc.UnigueID, 1);
 
-                            string msg = "";
-                            foreach (Dictionary<string, object> row in record.ListRow)
-                                msg += row["Повідомлення"].ToString();
+                                string msg = "";
+                                foreach (Dictionary<string, object> row in record.ListRow)
+                                    msg += "<i>" + row["message"].ToString() + "</i>";
 
-                            CreateMessage(TypeMessage.Error, msg);
-                            CreateMessage(TypeMessage.Info, "\n\nПроведення документів перервано!\n\n");
+                                Лог.CreateMessage(msg, LogMessage.TypeMessage.None, true);
+                                Лог.CreateWidget(CreateCompositControl("Документи:", journalSelect.Current.GetBasis()), LogMessage.TypeMessage.None, true);
+                                Лог.CreateMessage("Проведення документів перервано!", LogMessage.TypeMessage.Info, true);
 
-                            break;
-                        }
-
-                        counterDocs++;
+                                break;
+                            }
                     }
                 }
-            }
 
-            Константи.Системні.ЗупинитиФоновіЗадачі_Const = false;
+            await ОчиститиСписокІгноруванняДокументів();
 
-            CreateMessage(TypeMessage.None, "Готово!\n\n\n");
-            CreateMessage(TypeMessage.Info, "Проведено документів: " + counterDocs);
+            CallBack.Invoke();
+            
+            Лог.CreateEmptyMsg();
+            Лог.CreateMessage($"Обробку завершено!", LogMessage.TypeMessage.None, true);
+            Лог.CreateMessage($"Проведено документів: {counterDocs}", LogMessage.TypeMessage.Info, true);
 
             await Task.Delay(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n\n");
-
-            ButtonSensitive(true);
+            Лог.CreateEmptyMsg();
         }
 
         #endregion
 
-        #region Clear DeletionLabel
-
-        async void OnClearDeletionLabel(object? sender, EventArgs args)
+        protected override Widget CreateCompositControl(string caption, UuidAndText uuidAndText)
         {
-            CancellationTokenPageService = new CancellationTokenSource();
-            await ClearDeletionLabel();
-        }
-
-        async ValueTask ClearDeletionLabel()
-        {
-            ButtonSensitive(false);
-            ClearMessage();
-
-            CreateMessage(TypeMessage.Info, "Обробка довідників:");
-
-            foreach (ConfigurationDirectories configurationDirectories in Config.Kernel.Conf.Directories.Values)
+            return new CompositePointerControl()
             {
-                if (CancellationTokenPageService!.IsCancellationRequested)
-                    break;
-
-                CreateMessage(TypeMessage.Info, " -> " + configurationDirectories.Name);
-
-                //Вибірка помічених на видалення
-                string query = @$"SELECT uid FROM {configurationDirectories.Table} WHERE deletion_label = true";
-
-                var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-                if (recordResult.ListRow.Count > 0)
-                {
-                    //Пошук залежностей
-                    List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Довідники." + configurationDirectories.Name);
-
-                    string directoryObjestName = $"StorageAndTrade_1_0.Довідники.{configurationDirectories.Name}_Objest";
-
-                    //Обробка довідників
-                    foreach (Dictionary<string, object> row in recordResult.ListRow)
-                    {
-                        UnigueID unigueID = new UnigueID(row["uid"]);
-                        string name = "";
-
-                        //Обєкт довідника
-                        object? directoryObject = ExecutingAssembly.CreateInstance(directoryObjestName);
-                        if (directoryObject != null)
-                        {
-                            object? objRead = directoryObject.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, directoryObject, new object[] { unigueID });
-                            if (objRead != null ? (bool)objRead : false)
-                            {
-                                object? objName = directoryObject.GetType().InvokeMember("GetPresentationSync", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                if (objName != null)
-                                    name = (string)objName;
-
-                                long allCountDependencies = await SearchDependencies(listDependencies, unigueID.UGuid, name);
-                                if (allCountDependencies == 0)
-                                {
-                                    directoryObject.GetType().InvokeMember("DeleteSync", BindingFlags.InvokeMethod, null, directoryObject, null);
-                                    CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-
-            CreateMessage(TypeMessage.None, "\n");
-            CreateMessage(TypeMessage.Info, "Обробка документів:");
-
-            foreach (ConfigurationDocuments configurationDocuments in Config.Kernel.Conf.Documents.Values)
-            {
-                if (CancellationTokenPageService!.IsCancellationRequested)
-                    break;
-
-                CreateMessage(TypeMessage.Info, " -> " + configurationDocuments.Name);
-
-                //Вибірка помічених на видалення
-                string query = @$"SELECT uid, docname FROM {configurationDocuments.Table} WHERE deletion_label = true";
-
-                var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-                if (recordResult.ListRow.Count > 0)
-                {
-                    //Пошук залежностей
-                    List<ConfigurationDependencies> listDependencies = Config.Kernel.Conf.SearchDependencies("Документи." + configurationDocuments.Name);
-
-                    string DocumentObjestName = $"StorageAndTrade_1_0.Документи.{configurationDocuments.Name}_Objest";
-
-                    //Обробка документів
-                    foreach (Dictionary<string, object> row in recordResult.ListRow)
-                    {
-                        UnigueID unigueID = new UnigueID(row["uid"]);
-                        string name = (string)row["docname"];
-
-                        object? documentObject = ExecutingAssembly.CreateInstance(DocumentObjestName);
-                        if (documentObject != null)
-                        {
-                            object? objRead = documentObject.GetType().InvokeMember("ReadSync", BindingFlags.InvokeMethod, null, documentObject, [unigueID, false]);
-                            if (objRead != null ? (bool)objRead : false)
-                            {
-                                long allCountDependencies = await SearchDependencies(listDependencies, unigueID.UGuid, name);
-                                if (allCountDependencies == 0)
-                                {
-                                    documentObject.GetType().InvokeMember("DeleteSync", BindingFlags.InvokeMethod, null, documentObject, null);
-                                    CreateMessage(TypeMessage.Ok, " --> Видалено: " + name + " [" + unigueID.ToString() + "]");
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-
-            CreateMessage(TypeMessage.None, "\n\n\nГотово!\n\n\n");
-
-            await Task.Delay(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n\n");
-
-            ButtonSensitive(true);
+                Caption = caption,
+                ClearSensetive = false,
+                TypeSelectSensetive = false,
+                Pointer = uuidAndText
+            };
         }
 
-        async ValueTask<long> SearchDependencies(List<ConfigurationDependencies> listDependencies, Guid uid, string name)
+        const string КлючНалаштуванняКористувача = "PageService";
+
+        protected override async ValueTask BeforeSetValue()
         {
-            long allCountDependencies = 0;
-
-            if (listDependencies.Count > 0)
-            {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>
-                {
-                    { "uid", uid }
-                };
-
-                //Обробка залежностей
-                foreach (ConfigurationDependencies dependence in listDependencies)
-                {
-                    string query = "";
-
-                    if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.Object)
-                        query = $"SELECT uid FROM {dependence.Table} WHERE {dependence.Field} = @uid LIMIT 5";
-                    else if (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart)
-                        query = $"SELECT DISTINCT owner AS uid FROM {dependence.Table} WHERE {dependence.Field} = @uid LIMIT 5";
-
-                    var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
-
-                    if (recordResult.ListRow.Count > 0)
-                    {
-                        allCountDependencies += recordResult.ListRow.Count;
-
-                        CreateMessage(TypeMessage.Error, name);
-                        CreateMessage(TypeMessage.None, "використовується --> " + dependence.ConfigurationGroupName +
-                            ", \"" + dependence.ConfigurationObjectName + "\" " +
-                            (dependence.ConfigurationGroupLevel == ConfigurationDependencies.GroupLevel.TablePart ?
-                                ", таблична частина \"" + dependence.ConfigurationTablePartName + "\" " : "") +
-                            ", поле \"" + dependence.ConfigurationFieldName + "\"");
-
-                        foreach (Dictionary<string, object> row in recordResult.ListRow)
-                        {
-                            UnigueID unigueID = new UnigueID(row["uid"]);
-
-                            if (dependence.ConfigurationGroupName == "Довідники" || dependence.ConfigurationGroupName == "Документи")
-                            {
-                                string documentPointerName = $"StorageAndTrade_1_0.{dependence.ConfigurationGroupName}.{dependence.ConfigurationObjectName}_Pointer";
-                                object? documentPointer = ExecutingAssembly.CreateInstance(documentPointerName, false, BindingFlags.CreateInstance, null, [unigueID, null!], null, null);
-                                if (documentPointer != null)
-                                {
-                                    object? objPresentation = documentPointer.GetType().InvokeMember("GetPresentationSync", BindingFlags.InvokeMethod, null, documentPointer, null);
-                                    if (objPresentation != null)
-                                        CreateMessage(TypeMessage.None, (string)objPresentation + $" [{unigueID}]");
-                                }
-                            }
-                        } //foreach
-                    } //if
-                } //foreach
-            } //if
-
-            return allCountDependencies;
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        #endregion
-
-        void ButtonSensitive(bool sensitive)
+        protected override void PeriodChanged()
         {
-            bSpendTheDocument.Sensitive = sensitive;
-            bClearDeletionLabel.Sensitive = sensitive;
-            bStop.Sensitive = !sensitive;
-        }
-
-        void CreateMessage(TypeMessage typeMsg, string message)
-        {
-            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
-            vBoxMessage.PackStart(hBoxInfo, false, false, 2);
-
-            switch (typeMsg)
-            {
-                case TypeMessage.Ok:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Error:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Info:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.None:
-                    {
-                        hBoxInfo.PackStart(new Label(""), false, false, 5);
-                        break;
-                    }
-            }
-
-            hBoxInfo.PackStart(new Label(message) { Wrap = true, Selectable = true }, false, false, 0);
-            hBoxInfo.ShowAll();
-
-            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-        }
-
-        void ClearMessage()
-        {
-            foreach (Widget Child in vBoxMessage.Children)
-                vBoxMessage.Remove(Child);
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
         }
     }
 }

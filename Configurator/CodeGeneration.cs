@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 23.08.2024 19:40:55
+ * Дата конфігурації: 24.08.2024 15:38:40
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -12113,17 +12113,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ЗамовленняПостачальнику_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ЗамовленняПостачальнику_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -12718,17 +12713,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПоступленняТоварівТаПослуг_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПоступленняТоварівТаПослуг_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -13363,17 +13353,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ЗамовленняКлієнта_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ЗамовленняКлієнта_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -13971,17 +13956,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -14554,17 +14534,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ВстановленняЦінНоменклатури_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -15050,17 +15025,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПрихіднийКасовийОрдер_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПрихіднийКасовийОрдер_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -15578,17 +15548,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await РозхіднийКасовийОрдер_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await РозхіднийКасовийОрдер_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -16117,17 +16082,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПереміщенняТоварів_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПереміщенняТоварів_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -16672,17 +16632,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПоверненняТоварівПостачальнику_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПоверненняТоварівПостачальнику_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -17235,17 +17190,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -17788,17 +17738,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await АктВиконанихРобіт_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await АктВиконанихРобіт_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -18293,17 +18238,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ВведенняЗалишків_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ВведенняЗалишків_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -20106,17 +20046,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПерерахунокТоварів_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПерерахунокТоварів_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -20596,17 +20531,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПсуванняТоварів_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПсуванняТоварів_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -21111,17 +21041,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -21649,17 +21574,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await РахунокФактура_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await РахунокФактура_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -22170,17 +22090,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await РозміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -22658,17 +22573,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -23153,17 +23063,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -23641,17 +23546,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -24099,17 +23999,12 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             
-            if (await КорегуванняБоргу_SpendTheDocument.Spend(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await КорегуванняБоргу_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 
         }
 
@@ -24458,7 +24353,7 @@ namespace StorageAndTrade_1_0.Документи
 namespace StorageAndTrade_1_0.Журнали
 {
     #region Journal
-    public class JournalSelect: JournalSelectA
+    public class JournalSelect: AccountingSoftware.JournalSelect
     {
         public JournalSelect() : base(Config.Kernel,
              ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", "tab_a65", ],

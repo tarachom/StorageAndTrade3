@@ -1408,17 +1408,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         {
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
-            if (await <xsl:value-of select="SpendFunctions/Spend"/>(this))
-            {
-                await BaseSpend(true, spendDate);
-                return true;
-            }
-            else
-            {
-                ClearRegAccum();
-                await BaseSpend(false, DateTime.MinValue);
-                return false;
-            }
+            BaseAddIgnoreDocumentList();
+            bool spend = await <xsl:value-of select="SpendFunctions/Spend"/>(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
                 </xsl:when>
                 <xsl:otherwise>
             await BaseSpend(false, DateTime.MinValue);
@@ -1812,7 +1807,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Журнали
 {
     #region Journal
-    public class JournalSelect: JournalSelectA
+    public class JournalSelect: AccountingSoftware.JournalSelect
     {
         public JournalSelect() : base(Config.Kernel,
              <xsl:text>[</xsl:text><xsl:for-each select="Configuration/Documents/Document"><xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>", </xsl:text></xsl:for-each>],
