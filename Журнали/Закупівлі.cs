@@ -33,13 +33,10 @@ namespace StorageAndTrade
 {
     class Журнал_Закупівлі : Журнал
     {
-        public Журнал_Закупівлі() : base()
+        public Журнал_Закупівлі() : base(Config.NameSpageCodeGeneration)
         {
             ТабличніСписки.Журнали_Закупівлі.AddColumns(TreeViewGrid);
         }
-
-        protected override Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
-        protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
 
         protected override async void LoadRecords()
         {

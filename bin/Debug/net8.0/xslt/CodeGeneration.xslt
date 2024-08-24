@@ -732,7 +732,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         }
 
         /* синхронна функція для Read(UnigueID uid) */
-        public bool ReadSync(UnigueID uid) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid); }).Result; }
+        /* public bool ReadSync(UnigueID uid) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid); }).Result; } */
         
         public async ValueTask&lt;bool&gt; Save()
         {
@@ -808,7 +808,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         }
 
         /* синхронна функція для Delete() */
-        public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } 
+        /* public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } */
         
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
         {
@@ -826,7 +826,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         }
         
         /* синхронна функція для GetPresentation() */
-        public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; }
+        /* public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; } */
         
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
@@ -887,7 +887,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         }
 
         /* синхронна функція для GetPresentation() */
-        public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; }
+        /* public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; } */
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
@@ -1370,7 +1370,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         }
 
         /* синхронна функція для Read(UnigueID uid) */
-        public bool ReadSync(UnigueID uid, bool readAllTablePart = false) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid, readAllTablePart); }).Result; }
+        /* public bool ReadSync(UnigueID uid, bool readAllTablePart = false) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid, readAllTablePart); }).Result; } */
         
         public async Task&lt;bool&gt; Save()
         {
@@ -1423,7 +1423,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         }
 
         /* синхронна функція для SpendTheDocument() */
-        public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run&lt;bool&gt;(async () =&gt; { return await SpendTheDocument(spendDate); }).Result; }
+        /* public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run&lt;bool&gt;(async () =&gt; { return await SpendTheDocument(spendDate); }).Result; } */
 
         /* Очищення всіх регістрів */
         async void ClearRegAccum()
@@ -1449,7 +1449,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         }
 
         /* синхронна функція для ClearSpendTheDocument() */
-        public bool ClearSpendTheDocumentSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await ClearSpendTheDocument(); return true; }).Result; } 
+        /* public bool ClearSpendTheDocumentSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await ClearSpendTheDocument(); return true; }).Result; } */
 
         public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest&gt; Copy(bool copyTableParts = false)
         {
@@ -1488,7 +1488,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         }
 
         /* синхронна функція для SetDeletionLabel() */
-        public bool SetDeletionLabelSync(bool label = true) { return Task.Run&lt;bool&gt;(async () =&gt; { await SetDeletionLabel(label); return true; }).Result; }
+        /* public bool SetDeletionLabelSync(bool label = true) { return Task.Run&lt;bool&gt;(async () =&gt; { await SetDeletionLabel(label); return true; }).Result; } */
 
         public async ValueTask Delete()
         {
@@ -1506,7 +1506,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         }
 
         /* синхронна функція для Delete() */
-        public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } 
+        /* public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } */
         
         public <xsl:value-of select="$DocumentName"/>_Pointer GetDocumentPointer()
         {
@@ -1564,7 +1564,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         }
 
         /* синхронна функція для GetPresentation() */
-        public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; }
+        /* public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; } */
 
         public async ValueTask&lt;bool&gt; SpendTheDocument(DateTime spendDate)
         {

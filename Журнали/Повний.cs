@@ -33,16 +33,10 @@ namespace StorageAndTrade
 {
     class Журнал_Повний : Журнал
     {
-        public Журнал_Повний() : base()
+        public Журнал_Повний() : base(Config.NameSpageCodeGeneration)
         {
             ТабличніСписки.Журнали_Повний.AddColumns(TreeViewGrid);           
         }
-
-        //await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу("Журнали.Повний");//ЗаписатиПеріодДляЖурналу("Журнали.Повний", Період.Period.ToString());
-        //PeriodWhere
-
-        protected override Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
-        protected override string NameSpageCodeGeneration { get; } = Config.NameSpageCodeGeneration;
 
         protected override async void LoadRecords()
         {
