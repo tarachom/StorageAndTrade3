@@ -713,7 +713,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             </xsl:choose>
         }
 
-        public async ValueTask&lt;bool&gt; Read(UnigueID uid)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readAllTablePart = false)
         {
             if (await BaseRead(uid))
             {
@@ -725,6 +725,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                   </xsl:call-template>;
                 </xsl:for-each>
                 BaseClear();
+                <xsl:if test="count(TabularParts/TablePart) != 0">
+                if (readAllTablePart)
+                {
+                    <xsl:for-each select="TabularParts/TablePart">
+                    await <xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
+                }
+                </xsl:if>
                 return true;
             }
             else
@@ -1408,7 +1415,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         {
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
-            BaseAddIgnoreDocumentList();
+            await BaseAddIgnoreDocumentList();
             bool spend = await <xsl:value-of select="SpendFunctions/Spend"/>(this);
             if (!spend) ClearRegAccum();
             await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
@@ -1496,13 +1503,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                 await <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
             await ClearSpendTheDocument();
-            await base.BaseDelete(<xsl:text>new string[] { </xsl:text>
-            <xsl:for-each select="TabularParts/TablePart">
-              <xsl:if test="position() != 1">
-                <xsl:text>, </xsl:text>
-              </xsl:if>
-              <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
-            </xsl:for-each> });
+            await base.BaseDelete([<xsl:for-each select="TabularParts/TablePart">"<xsl:value-of select="Table"/>", </xsl:for-each>]);
         }
 
         /* синхронна функція для Delete() */
@@ -1516,6 +1517,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
+        }
+
+        public async ValueTask&lt;string&gt; GetPresentation()
+        {
+            return await base.BasePresentation(<xsl:value-of select="$DocumentName"/>_Const.PRESENTATION_FIELDS);
         }
         
         <xsl:for-each select="Fields/Field">
