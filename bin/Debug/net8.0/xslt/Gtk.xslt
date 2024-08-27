@@ -1320,11 +1320,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                           <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва,
                         </xsl:when>
                         <xsl:when test="Type = 'enum'">
-                          <xsl:text>Перелічення.ПсевдонімиПерелічення.</xsl:text><xsl:value-of select="substring-after(Pointer, '.')"/>_Alias((
-                            <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/>)(record.<xsl:value-of select="Name"/> != DBNull.Value ? record.<xsl:value-of select="Name"/> : 0)) ),
+                          <xsl:text>Перелічення.ПсевдонімиПерелічення.</xsl:text>
+                          <xsl:value-of select="substring-after(Pointer, '.')"/>_Alias(record.<xsl:value-of select="Name"/>),
                         </xsl:when>
                         <xsl:when test="Type = 'boolean'">
-                            <xsl:text>(record.</xsl:text><xsl:value-of select="Name"/> != DBNull.Value ? (bool)record.<xsl:value-of select="Name"/> : false) ? "Так" : "",
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/> ? "Так" : "",
                         </xsl:when>
                         <xsl:otherwise>
                           <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString() ?? "",
