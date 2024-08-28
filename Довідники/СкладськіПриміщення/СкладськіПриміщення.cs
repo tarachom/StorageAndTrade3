@@ -116,14 +116,15 @@ namespace StorageAndTrade
                 IsNew = IsNew
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.СкладськіПриміщення_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                await page.СкладськіПриміщення_Objest.New();
+            else if (unigueID == null || !await page.СкладськіПриміщення_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? СкладськіПриміщення_Const.FULLNAME : page.СкладськіПриміщення_Objest.Назва, () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

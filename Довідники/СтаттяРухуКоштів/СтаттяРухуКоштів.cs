@@ -79,14 +79,15 @@ namespace StorageAndTrade
                 IsNew = IsNew
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.СтаттяРухуКоштів_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                await page.СтаттяРухуКоштів_Objest.New();
+            else if (unigueID == null || !await page.СтаттяРухуКоштів_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? СтаттяРухуКоштів_Const.FULLNAME : page.СтаттяРухуКоштів_Objest.Назва, () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

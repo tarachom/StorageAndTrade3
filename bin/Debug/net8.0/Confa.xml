@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>28.08.2024 16:57:33</DateTimeSave>
+  <DateTimeSave>28.08.2024 17:50:49</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -22965,6 +22965,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.Номенклатура</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -22975,6 +22976,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -22985,6 +22987,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.ВидиЦін</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -22998,6 +23001,7 @@ SQL тип  непотрібно вказувати
             <Type>numeric</Type>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>0</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23008,6 +23012,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23018,6 +23023,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.Валюти</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23161,6 +23167,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.Валюти</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23174,6 +23181,7 @@ SQL тип  непотрібно вказувати
             <Type>numeric</Type>
             <Desc>
             </Desc>
+            <IsPresentation>1</IsPresentation>
             <IsIndex>0</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23183,6 +23191,7 @@ SQL тип  непотрібно вказувати
             <Type>integer</Type>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>0</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23281,6 +23290,7 @@ SQL тип  непотрібно вказувати
             <Type>string</Type>
             <Desc>
             </Desc>
+            <IsPresentation>1</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
             <Multiline>0</Multiline>
@@ -23296,6 +23306,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.Номенклатура</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>0</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23306,6 +23317,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>0</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23316,6 +23328,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>0</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23396,6 +23409,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.Файли</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>0</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23445,6 +23459,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.Номенклатура</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23454,6 +23469,7 @@ SQL тип  непотрібно вказувати
             <Type>pointer</Type>
             <Pointer>Довідники.Склади</Pointer>
             <Desc>Невикористовується ще</Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23463,6 +23479,7 @@ SQL тип  непотрібно вказувати
             <Type>pointer</Type>
             <Pointer>Довідники.СкладськіПриміщення</Pointer>
             <Desc>Невикористовується ще</Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>
@@ -23473,6 +23490,7 @@ SQL тип  непотрібно вказувати
             <Pointer>Довідники.СкладськіКомірки</Pointer>
             <Desc>
             </Desc>
+            <IsPresentation>0</IsPresentation>
             <IsIndex>1</IsIndex>
             <IsFullTextSearch>0</IsFullTextSearch>
           </Field>

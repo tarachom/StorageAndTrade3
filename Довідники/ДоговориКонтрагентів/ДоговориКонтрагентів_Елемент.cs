@@ -148,11 +148,8 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
-            if (IsNew)
-                await ДоговориКонтрагентів_Objest.New();
-
             Код.Text = ДоговориКонтрагентів_Objest.Код;
             Назва.Text = ДоговориКонтрагентів_Objest.Назва;
             Дата.Value = ДоговориКонтрагентів_Objest.Дата;

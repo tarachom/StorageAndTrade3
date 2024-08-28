@@ -42,7 +42,11 @@ namespace StorageAndTrade
         ХарактеристикиНоменклатури_PointerControl ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_PointerControl();
         ПакуванняОдиниціВиміру_PointerControl ПакуванняОдиниціВиміру = new ПакуванняОдиниціВиміру_PointerControl();
 
-        public ШтрихкодиНоменклатури_Елемент() : base() { }
+        public ШтрихкодиНоменклатури_Елемент() : base() 
+        {
+            ШтрихкодиНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
+            ШтрихкодиНоменклатури_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -68,8 +72,6 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ШтрихкодиНоменклатури_Objest.New();
-
                 ШтрихкодиНоменклатури_Objest.Номенклатура = НоменклатураДляНового;
 
                 if (!НоменклатураДляНового.IsEmpty())
@@ -102,16 +104,13 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ШтрихкодиНоменклатури_Objest.UnigueID;
-            Caption = Штрихкод.Text;
-
             try
             {
                 await ШтрихкодиНоменклатури_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(UnigueID.UGuid), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(ШтрихкодиНоменклатури_Objest.UnigueID.UGuid), Caption, ex);
             }
         }
     }

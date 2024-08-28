@@ -81,14 +81,15 @@ namespace StorageAndTrade
                 IsNew = IsNew
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                await page.ВнутрішнєСпоживанняТоварів_Objest.New();
+            else if (unigueID == null || !await page.ВнутрішнєСпоживанняТоварів_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? ВнутрішнєСпоживанняТоварів_Const.FULLNAME : page.ВнутрішнєСпоживанняТоварів_Objest.Назва, () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
@@ -128,7 +129,7 @@ namespace StorageAndTrade
         protected override void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();            
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)

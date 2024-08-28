@@ -105,14 +105,15 @@ namespace StorageAndTrade
                 IsNew = IsNew
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.КурсиВалют_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                page.КурсиВалют_Objest.New();
+            else if (unigueID == null || !await page.КурсиВалют_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? КурсиВалют_Const.FULLNAME : page.КурсиВалют_Objest.Курс.ToString(), () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)
@@ -151,7 +152,7 @@ namespace StorageAndTrade
         protected override void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();           
+            LoadRecords();
         }
     }
 }

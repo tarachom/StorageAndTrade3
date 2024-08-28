@@ -37,7 +37,7 @@ namespace StorageAndTrade
         Склади_PointerControl Склад = new Склади_PointerControl() { Caption = "Склад:" };
         ComboBoxText Налаштування = new ComboBoxText();
 
-        public СкладськіПриміщення_Елемент() : base() 
+        public СкладськіПриміщення_Елемент() : base()
         {
             СкладськіПриміщення_Objest.UnigueIDChanged += UnigueIDChanged;
             СкладськіПриміщення_Objest.CaptionChanged += CaptionChanged;
@@ -63,10 +63,7 @@ namespace StorageAndTrade
         public override async void SetValue()
         {
             if (IsNew)
-            {
-                await СкладськіПриміщення_Objest.New();
                 СкладськіПриміщення_Objest.Склад = СкладДляНового;
-            }
 
             Назва.Text = СкладськіПриміщення_Objest.Назва;
             Склад.Pointer = СкладськіПриміщення_Objest.Склад;

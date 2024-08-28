@@ -56,11 +56,8 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
-            if (IsNew)
-                await СеріїНоменклатури_Objest.New();
-
             Номер.Text = СеріїНоменклатури_Objest.Номер;
             Коментар.Text = СеріїНоменклатури_Objest.Коментар;
             ДатаСтворення.Value = СеріїНоменклатури_Objest.ДатаСтворення;

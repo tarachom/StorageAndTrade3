@@ -42,7 +42,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public СтаттяРухуКоштів_Елемент() : base() 
+        public СтаттяРухуКоштів_Елемент() : base()
         {
             СтаттяРухуКоштів_Objest.UnigueIDChanged += UnigueIDChanged;
             СтаттяРухуКоштів_Objest.CaptionChanged += CaptionChanged;
@@ -74,10 +74,7 @@ namespace StorageAndTrade
         public override async void SetValue()
         {
             if (IsNew)
-            {
-                await СтаттяРухуКоштів_Objest.New();
                 СтаттяРухуКоштів_Objest.ВидРухуКоштів = ВидиРухуКоштів.ОплатаОборотнихАктивів;
-            }
 
             Код.Text = СтаттяРухуКоштів_Objest.Код;
             Назва.Text = СтаттяРухуКоштів_Objest.Назва;

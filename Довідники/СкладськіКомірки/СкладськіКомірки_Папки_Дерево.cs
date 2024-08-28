@@ -64,14 +64,15 @@ namespace StorageAndTrade
                 РодичДляНового = new СкладськіКомірки_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.СкладськіКомірки_Папки_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                await page.СкладськіКомірки_Папки_Objest.New();
+            else if (unigueID == null || !await page.СкладськіКомірки_Папки_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? СкладськіКомірки_Папки_Const.FULLNAME : page.СкладськіКомірки_Папки_Objest.Назва, () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         #region ToolBar

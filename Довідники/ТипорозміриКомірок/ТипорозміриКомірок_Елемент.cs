@@ -69,11 +69,8 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
-            if (IsNew)
-                await ТипорозміриКомірок_Objest.New();
-
             Назва.Text = ТипорозміриКомірок_Objest.Назва;
             Висота.Text = ТипорозміриКомірок_Objest.Висота;
             Ширина.Text = ТипорозміриКомірок_Objest.Ширина;

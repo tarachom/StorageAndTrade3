@@ -86,10 +86,7 @@ namespace StorageAndTrade
         public override async void SetValue()
         {
             if (IsNew)
-            {
-                await Контрагенти_Objest.New();
                 Контрагенти_Objest.Папка = РодичДляНового;
-            }
 
             Код.Text = Контрагенти_Objest.Код;
             Назва.Text = Контрагенти_Objest.Назва;

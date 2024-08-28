@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.08.2024 16:57:33
+ * Дата конфігурації: 28.08.2024 17:50:49
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1815,6 +1815,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Організації_Const.FULLNAME + " *");
             
                 await Організації_Triggers.New(this);
               
@@ -1843,6 +1844,7 @@ namespace StorageAndTrade_1_0.Довідники
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -2235,6 +2237,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Номенклатура_Const.FULLNAME + " *");
             
                 await Номенклатура_Triggers.New(this);
               
@@ -2265,6 +2268,7 @@ namespace StorageAndTrade_1_0.Довідники
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -2633,6 +2637,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Виробники_Const.FULLNAME + " *");
             
                 await Виробники_Triggers.New(this);
               
@@ -2648,6 +2653,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -2855,6 +2861,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ВидиНоменклатури_Const.FULLNAME + " *");
             
                 await ВидиНоменклатури_Triggers.New(this);
               
@@ -2873,6 +2880,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -3088,6 +3096,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПакуванняОдиниціВиміру_Const.FULLNAME + " *");
             
                 await ПакуванняОдиниціВиміру_Triggers.New(this);
               
@@ -3105,6 +3114,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -3320,6 +3330,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Валюти_Const.FULLNAME + " *");
             
                 await Валюти_Triggers.New(this);
               
@@ -3338,6 +3349,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -3564,6 +3576,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Контрагенти_Const.FULLNAME + " *");
             
                 await Контрагенти_Triggers.New(this);
               
@@ -3591,6 +3604,7 @@ namespace StorageAndTrade_1_0.Довідники
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -4100,6 +4114,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Склади_Const.FULLNAME + " *");
             
                 await Склади_Triggers.New(this);
               
@@ -4127,6 +4142,7 @@ namespace StorageAndTrade_1_0.Довідники
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -4505,6 +4521,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ВидиЦін_Const.FULLNAME + " *");
             
                 await ВидиЦін_Triggers.New(this);
               
@@ -4521,6 +4538,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -4729,6 +4747,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ВидиЦінПостачальників_Const.FULLNAME + " *");
             
                 await ВидиЦінПостачальників_Triggers.New(this);
               
@@ -4745,6 +4764,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -4958,6 +4978,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Користувачі_Const.FULLNAME + " *");
             
                 await Користувачі_Triggers.New(this);
               
@@ -4982,6 +5003,7 @@ namespace StorageAndTrade_1_0.Довідники
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -5352,6 +5374,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ФізичніОсоби_Const.FULLNAME + " *");
             
                 await ФізичніОсоби_Triggers.New(this);
               
@@ -5376,6 +5399,7 @@ namespace StorageAndTrade_1_0.Довідники
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -5741,6 +5765,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, СтруктураПідприємства_Const.FULLNAME + " *");
             
                 await СтруктураПідприємства_Triggers.New(this);
               
@@ -5757,6 +5782,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -5964,6 +5990,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, КраїниСвіту_Const.FULLNAME + " *");
             
                 await КраїниСвіту_Triggers.New(this);
               
@@ -5979,6 +6006,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -6187,6 +6215,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Файли_Const.FULLNAME + " *");
             
                 await Файли_Triggers.New(this);
               
@@ -6206,6 +6235,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -6424,6 +6454,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ХарактеристикиНоменклатури_Const.FULLNAME + " *");
             
                 await ХарактеристикиНоменклатури_Triggers.New(this);
               
@@ -6441,6 +6472,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -6652,6 +6684,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Номенклатура_Папки_Const.FULLNAME + " *");
             
                 await Номенклатура_Папки_Triggers.New(this);
               
@@ -6668,6 +6701,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -6880,6 +6914,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Контрагенти_Папки_Const.FULLNAME + " *");
             
                 await Контрагенти_Папки_Triggers.New(this);
               
@@ -6896,6 +6931,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -7108,6 +7144,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Склади_Папки_Const.FULLNAME + " *");
             
                 await Склади_Папки_Triggers.New(this);
               
@@ -7124,6 +7161,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -7337,6 +7375,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Каси_Const.FULLNAME + " *");
             
                 await Каси_Triggers.New(this);
               
@@ -7354,6 +7393,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -7575,6 +7615,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, БанківськіРахункиОрганізацій_Const.FULLNAME + " *");
             
                 await БанківськіРахункиОрганізацій_Triggers.New(this);
               
@@ -7601,6 +7642,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -7856,6 +7898,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ДоговориКонтрагентів_Const.FULLNAME + " *");
             
                 await ДоговориКонтрагентів_Triggers.New(this);
               
@@ -7889,6 +7932,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ТипДоговоруПредставлення, ]));
                 return true;
             }
             else
@@ -8162,6 +8206,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, БанківськіРахункиКонтрагентів_Const.FULLNAME + " *");
             
                 await БанківськіРахункиКонтрагентів_Triggers.New(this);
               
@@ -8190,6 +8235,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -8439,6 +8485,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, СтаттяРухуКоштів_Const.FULLNAME + " *");
             
                 await СтаттяРухуКоштів_Triggers.New(this);
               
@@ -8463,6 +8510,7 @@ namespace StorageAndTrade_1_0.Довідники
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -8804,6 +8852,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, СеріїНоменклатури_Const.FULLNAME + " *");
             
                 await СеріїНоменклатури_Triggers.New(this);
               
@@ -8820,6 +8869,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Номер, ]));
                 return true;
             }
             else
@@ -9033,6 +9083,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПартіяТоварівКомпозит_Const.FULLNAME + " *");
             
                 await ValueTask.FromResult(true);
               
@@ -9052,6 +9103,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -9272,6 +9324,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ВидиЗапасів_Const.FULLNAME + " *");
             
                 await ВидиЗапасів_Triggers.New(this);
               
@@ -9292,6 +9345,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -9537,6 +9591,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Банки_Const.FULLNAME + " *");
             
                 await Банки_Triggers.New(this);
               
@@ -9578,6 +9633,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -9861,6 +9917,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, СкладськіПриміщення_Const.FULLNAME + " *");
             
                 await ValueTask.FromResult(true);
               
@@ -9877,6 +9934,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -10092,6 +10150,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, СкладськіКомірки_Const.FULLNAME + " *");
             
                 await ValueTask.FromResult(true);
               
@@ -10115,6 +10174,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -10344,6 +10404,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ОбластьЗберігання_Const.FULLNAME + " *");
             
                 await ValueTask.FromResult(true);
               
@@ -10360,6 +10421,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -10570,6 +10632,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ТипорозміриКомірок_Const.FULLNAME + " *");
             
                 await ValueTask.FromResult(true);
               
@@ -10589,6 +10652,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -10807,6 +10871,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, СкладськіКомірки_Папки_Const.FULLNAME + " *");
             
                 await СкладськіКомірки_Папки_Triggers.New(this);
               
@@ -10824,6 +10889,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -11041,6 +11107,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, Блокнот_Const.FULLNAME + " *");
             
                 await Блокнот_Triggers.New(this);
               
@@ -11059,6 +11126,7 @@ namespace StorageAndTrade_1_0.Довідники
                 BaseClear();
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -12297,6 +12365,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ЗамовленняПостачальнику_Const.FULLNAME + " *");
             
                 await ЗамовленняПостачальнику_Triggers.New(this);
               
@@ -12343,6 +12412,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -12896,6 +12966,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПоступленняТоварівТаПослуг_Const.FULLNAME + " *");
             
                 await ПоступленняТоварівТаПослуг_Triggers.New(this);
               
@@ -12948,6 +13019,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -13553,6 +13625,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ЗамовленняКлієнта_Const.FULLNAME + " *");
             
                 await ЗамовленняКлієнта_Triggers.New(this);
               
@@ -13602,6 +13675,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -14163,6 +14237,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, РеалізаціяТоварівТаПослуг_Const.FULLNAME + " *");
             
                 await РеалізаціяТоварівТаПослуг_Triggers.New(this);
               
@@ -14214,6 +14289,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -14798,6 +14874,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ВстановленняЦінНоменклатури_Const.FULLNAME + " *");
             
                 await ВстановленняЦінНоменклатури_Triggers.New(this);
               
@@ -14826,6 +14903,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -15282,6 +15360,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПрихіднийКасовийОрдер_Const.FULLNAME + " *");
             
                 await ПрихіднийКасовийОрдер_Triggers.New(this);
               
@@ -15319,6 +15398,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -15812,6 +15892,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, РозхіднийКасовийОрдер_Const.FULLNAME + " *");
             
                 await РозхіднийКасовийОрдер_Triggers.New(this);
               
@@ -15851,6 +15932,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -16355,6 +16437,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПереміщенняТоварів_Const.FULLNAME + " *");
             
                 await ПереміщенняТоварів_Triggers.New(this);
               
@@ -16395,6 +16478,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -16912,6 +16996,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПоверненняТоварівПостачальнику_Const.FULLNAME + " *");
             
                 await ПоверненняТоварівПостачальнику_Triggers.New(this);
               
@@ -16954,6 +17039,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -17489,6 +17575,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПоверненняТоварівВідКлієнта_Const.FULLNAME + " *");
             
                 await ПоверненняТоварівВідКлієнта_Triggers.New(this);
               
@@ -17527,6 +17614,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -18052,6 +18140,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, АктВиконанихРобіт_Const.FULLNAME + " *");
             
                 await АктВиконанихРобіт_Triggers.New(this);
               
@@ -18088,6 +18177,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -18568,6 +18658,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ВведенняЗалишків_Const.FULLNAME + " *");
             
                 await ВведенняЗалишків_Triggers.New(this);
               
@@ -18603,6 +18694,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -19506,6 +19598,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, НадлишкиТоварів_Const.FULLNAME + " *");
             
                 await ValueTask.FromResult(true);
               
@@ -19535,6 +19628,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -19962,6 +20056,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПересортицяТоварів_Const.FULLNAME + " *");
             
                 await ValueTask.FromResult(true);
               
@@ -19991,6 +20086,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -20418,6 +20514,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПерерахунокТоварів_Const.FULLNAME + " *");
             
                 await ПерерахунокТоварів_Triggers.New(this);
               
@@ -20447,6 +20544,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -20910,6 +21008,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПсуванняТоварів_Const.FULLNAME + " *");
             
                 await ПсуванняТоварів_Triggers.New(this);
               
@@ -20941,6 +21040,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -21429,6 +21529,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ВнутрішнєСпоживанняТоварів_Const.FULLNAME + " *");
             
                 await ВнутрішнєСпоживанняТоварів_Triggers.New(this);
               
@@ -21461,6 +21562,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -21959,6 +22061,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, РахунокФактура_Const.FULLNAME + " *");
             
                 await РахунокФактура_Triggers.New(this);
               
@@ -21998,6 +22101,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -22504,6 +22608,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, РозміщенняТоварівНаСкладі_Const.FULLNAME + " *");
             
                 await РозміщенняТоварівНаСкладі_Triggers.New(this);
               
@@ -22534,6 +22639,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -23000,6 +23106,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ПереміщенняТоварівНаСкладі_Const.FULLNAME + " *");
             
                 await ПереміщенняТоварівНаСкладі_Triggers.New(this);
               
@@ -23029,6 +23136,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -23499,6 +23607,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ЗбіркаТоварівНаСкладі_Const.FULLNAME + " *");
             
                 await ЗбіркаТоварівНаСкладі_Triggers.New(this);
               
@@ -23529,6 +23638,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -23995,6 +24105,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME + " *");
             
                 await РозміщенняНоменклатуриПоКоміркам_Triggers.New(this);
               
@@ -24024,6 +24135,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -24463,6 +24575,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, КорегуванняБоргу_Const.FULLNAME + " *");
             
                 await КорегуванняБоргу_Triggers.New(this);
               
@@ -24490,6 +24603,7 @@ namespace StorageAndTrade_1_0.Документи
                 }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
                 return true;
             }
             else
@@ -25048,9 +25162,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
     public class ЦіниНоменклатури_Objest : RegisterInformationObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
 		    public ЦіниНоменклатури_Objest() : base(Config.Kernel, "tab_a40",
              ["col_f5", "col_f6", "col_f7", "col_f8", "col_f9", "col_g2", ]) { }
-        
+
+        public void New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ЦіниНоменклатури_Const.FULLNAME + " *");
+        }
+
         public async ValueTask<bool> Read(UnigueID uid)
         {
             if (await BaseRead(uid))
@@ -25063,6 +25187,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_g2"]);
                 
                 BaseClear();
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), ]));
                 return true;
             }
             else
@@ -25079,6 +25205,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.FieldValue["col_g2"] = Валюта.UnigueID.UGuid;
             
             await BaseSave();
+            CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), ]));
         }
 
         public ЦіниНоменклатури_Objest Copy()
@@ -25207,9 +25334,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
     public class КурсиВалют_Objest : RegisterInformationObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
 		    public КурсиВалют_Objest() : base(Config.Kernel, "tab_a59",
              ["col_a1", "col_a2", "col_a3", ]) { }
-        
+
+        public void New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, КурсиВалют_Const.FULLNAME + " *");
+        }
+
         public async ValueTask<bool> Read(UnigueID uid)
         {
             if (await BaseRead(uid))
@@ -25219,6 +25356,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 Кратність = (base.FieldValue["col_a3"] != DBNull.Value) ? (int)base.FieldValue["col_a3"] : 0;
                 
                 BaseClear();
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), Курс, ]));
                 return true;
             }
             else
@@ -25232,6 +25371,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.FieldValue["col_a3"] = Кратність;
             
             await BaseSave();
+            CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), Курс, ]));
         }
 
         public КурсиВалют_Objest Copy()
@@ -25364,9 +25504,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
     public class ШтрихкодиНоменклатури_Objest : RegisterInformationObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
 		    public ШтрихкодиНоменклатури_Objest() : base(Config.Kernel, "tab_b17",
              ["col_a1", "col_a2", "col_a3", "col_a4", ]) { }
-        
+
+        public void New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ШтрихкодиНоменклатури_Const.FULLNAME + " *");
+        }
+
         public async ValueTask<bool> Read(UnigueID uid)
         {
             if (await BaseRead(uid))
@@ -25377,6 +25527,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(base.FieldValue["col_a4"]);
                 
                 BaseClear();
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), Штрихкод, ]));
                 return true;
             }
             else
@@ -25391,6 +25543,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.FieldValue["col_a4"] = Пакування.UnigueID.UGuid;
             
             await BaseSave();
+            CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), Штрихкод, ]));
         }
 
         public ШтрихкодиНоменклатури_Objest Copy()
@@ -25507,9 +25660,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
     public class ФайлиДокументів_Objest : RegisterInformationObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
 		    public ФайлиДокументів_Objest() : base(Config.Kernel, "tab_b23",
              ["col_a1", ]) { }
-        
+
+        public void New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ФайлиДокументів_Const.FULLNAME + " *");
+        }
+
         public async ValueTask<bool> Read(UnigueID uid)
         {
             if (await BaseRead(uid))
@@ -25517,6 +25680,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 Файл = new Довідники.Файли_Pointer(base.FieldValue["col_a1"]);
                 
                 BaseClear();
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), ]));
                 return true;
             }
             else
@@ -25528,6 +25693,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.FieldValue["col_a1"] = Файл.UnigueID.UGuid;
             
             await BaseSave();
+            CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), ]));
         }
 
         public ФайлиДокументів_Objest Copy()
@@ -25659,9 +25825,19 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
 
     public class РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest : RegisterInformationObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
 		    public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest() : base(Config.Kernel, "tab_a74",
              ["col_a1", "col_a2", "col_a3", "col_a4", ]) { }
-        
+
+        public void New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, РозміщенняНоменклатуриПоКоміркамНаСкладі_Const.FULLNAME + " *");
+        }
+
         public async ValueTask<bool> Read(UnigueID uid)
         {
             if (await BaseRead(uid))
@@ -25672,6 +25848,8 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                 Комірка = new Довідники.СкладськіКомірки_Pointer(base.FieldValue["col_a4"]);
                 
                 BaseClear();
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), ]));
                 return true;
             }
             else
@@ -25686,6 +25864,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
             base.FieldValue["col_a4"] = Комірка.UnigueID.UGuid;
             
             await BaseSave();
+            CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), ]));
         }
 
         public РозміщенняНоменклатуриПоКоміркамНаСкладі_Objest Copy()

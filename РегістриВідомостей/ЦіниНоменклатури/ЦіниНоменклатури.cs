@@ -68,14 +68,15 @@ namespace StorageAndTrade
                 IsNew = IsNew
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.ЦіниНоменклатури_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                page.ЦіниНоменклатури_Objest.New();
+            else if (unigueID == null || !await page.ЦіниНоменклатури_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? ЦіниНоменклатури_Const.FULLNAME : page.ЦіниНоменклатури_Objest.Period.ToString(), () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)

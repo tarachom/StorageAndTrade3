@@ -40,7 +40,11 @@ namespace StorageAndTrade
         NumericControl Курс = new NumericControl();
         IntegerControl Кратність = new IntegerControl();
 
-        public КурсиВалют_Елемент() : base() { }
+        public КурсиВалют_Елемент() : base() 
+        {
+            КурсиВалют_Objest.UnigueIDChanged += UnigueIDChanged;
+            КурсиВалют_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -63,8 +67,6 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                КурсиВалют_Objest.New();
-
                 КурсиВалют_Objest.Валюта = ВалютаДляНового;
                 КурсиВалют_Objest.Кратність = 1;
             }
@@ -87,16 +89,13 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = КурсиВалют_Objest.UnigueID;
-            Caption = ДатаКурсу.Value.ToString();
-
             try
             {
                 await КурсиВалют_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(UnigueID.UGuid), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(КурсиВалют_Objest.UnigueID.UGuid), Caption, ex);
             }
         }
     }

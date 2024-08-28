@@ -32,7 +32,8 @@ namespace StorageAndTrade
 
         public ЦіниНоменклатури_Елемент() : base()
         {
-
+            ЦіниНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
+            ЦіниНоменклатури_Objest.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -74,9 +75,6 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            if (IsNew)
-                ЦіниНоменклатури_Objest.New();
-
             Період.Value = ЦіниНоменклатури_Objest.Period;
 
             Номенклатура.Pointer = ЦіниНоменклатури_Objest.Номенклатура;
@@ -105,16 +103,13 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ЦіниНоменклатури_Objest.UnigueID;
-            Caption = Період.Value.ToString();
-
             try
             {
                 await ЦіниНоменклатури_Objest.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(UnigueID.UGuid), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(ЦіниНоменклатури_Objest.UnigueID.UGuid), Caption, ex);
             }
         }
     }

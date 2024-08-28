@@ -78,11 +78,8 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
-            if (IsNew)
-                await ПартіяТоварівКомпозит_Objest.New();
-
             Назва.Text = ПартіяТоварівКомпозит_Objest.Назва;
             ТипДокументу.ActiveId = ПартіяТоварівКомпозит_Objest.ТипДокументу.ToString();
             ПоступленняТоварівТаПослуг.Pointer = ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг;

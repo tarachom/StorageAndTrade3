@@ -707,6 +707,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, <xsl:value-of select="$DirectoryName"/>_Const.FULLNAME + " *");
             <xsl:choose>
               <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
@@ -737,6 +738,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 }
                 </xsl:if>
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
                 return true;
             }
             else
@@ -1351,6 +1353,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         {
             BaseNew();
             UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, <xsl:value-of select="$DocumentName"/>_Const.FULLNAME + " *");
             <xsl:choose>
               <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
@@ -1381,6 +1384,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                 }
                 </xsl:if>
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
                 return true;
             }
             else
@@ -1965,12 +1969,22 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 
     public class <xsl:value-of select="$RegisterName"/>_Objest : RegisterInformationObject
     {
+        public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
+        public event EventHandler&lt;string&gt;? CaptionChanged;
+
 		    public <xsl:value-of select="$RegisterName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>[</xsl:text>
              <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
              </xsl:for-each>]) { }
-        
+
+        public void New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, <xsl:value-of select="$RegisterName"/>_Const.FULLNAME + " *");
+        }
+
         public async ValueTask&lt;bool&gt; Read(UnigueID uid)
         {
             if (await BaseRead(uid))
@@ -1983,6 +1997,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                   </xsl:call-template>;
                 </xsl:for-each>
                 BaseClear();
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
                 return true;
             }
             else
@@ -2004,6 +2020,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
               </xsl:choose>;
             </xsl:for-each>
             await BaseSave();
+            CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
         }
 
         public <xsl:value-of select="$RegisterName"/>_Objest Copy()

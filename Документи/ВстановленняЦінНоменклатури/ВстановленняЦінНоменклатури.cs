@@ -81,14 +81,15 @@ namespace StorageAndTrade
                 IsNew = IsNew
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.ВстановленняЦінНоменклатури_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                await page.ВстановленняЦінНоменклатури_Objest.New();
+            else if (unigueID == null || !await page.ВстановленняЦінНоменклатури_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? ВстановленняЦінНоменклатури_Const.FULLNAME : page.ВстановленняЦінНоменклатури_Objest.Назва, () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
@@ -140,7 +141,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 if (!await ВстановленняЦінНоменклатури_Objest.SpendTheDocument(ВстановленняЦінНоменклатури_Objest.ДатаДок))
-                     ФункціїДляПовідомлень.ПоказатиПовідомлення(ВстановленняЦінНоменклатури_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ВстановленняЦінНоменклатури_Objest.UnigueID);
             }
             else
                 await ВстановленняЦінНоменклатури_Objest.ClearSpendTheDocument();

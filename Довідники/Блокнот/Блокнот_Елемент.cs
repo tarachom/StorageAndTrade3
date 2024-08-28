@@ -74,11 +74,8 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
-            if (IsNew)
-                await Блокнот_Objest.New();
-
             Код.Text = Блокнот_Objest.Код;
             Назва.Text = Блокнот_Objest.Назва;
             ДатаЗапису.Value = Блокнот_Objest.ДатаЗапису;

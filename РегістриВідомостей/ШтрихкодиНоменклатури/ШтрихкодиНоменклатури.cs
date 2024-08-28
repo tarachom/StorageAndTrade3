@@ -127,14 +127,15 @@ namespace StorageAndTrade
                 ХарактеристикаДляНового = ХарактеристикиНоменклатуриВласник.Pointer
             };
 
-            if (!IsNew && unigueID != null)
-                if (!await page.ШтрихкодиНоменклатури_Objest.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return ("", null, null);
-                }
+            if (IsNew)
+                page.ШтрихкодиНоменклатури_Objest.New();
+            else if (unigueID == null || !await page.ШтрихкодиНоменклатури_Objest.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
+            }
 
-            return (IsNew ? ШтрихкодиНоменклатури_Const.FULLNAME : page.ШтрихкодиНоменклатури_Objest.Штрихкод.ToString(), () => page, page.SetValue);
+            return (page.Caption, () => page, page.SetValue);
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)

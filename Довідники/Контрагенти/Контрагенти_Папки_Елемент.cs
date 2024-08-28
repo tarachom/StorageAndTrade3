@@ -56,13 +56,10 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
-            {
-                await Контрагенти_Папки_Objest.New();
                 Контрагенти_Папки_Objest.Родич = РодичДляНового;
-            }
             else
                 Родич.OpenFolder = Контрагенти_Папки_Objest.UnigueID;
 

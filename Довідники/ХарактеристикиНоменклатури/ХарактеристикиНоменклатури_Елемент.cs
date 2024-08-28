@@ -63,10 +63,7 @@ namespace StorageAndTrade
         public override async void SetValue()
         {
             if (IsNew)
-            {
-                await ХарактеристикиНоменклатури_Objest.New();
                 ХарактеристикиНоменклатури_Objest.Номенклатура = НоменклатураДляНового;
-            }
 
             Код.Text = ХарактеристикиНоменклатури_Objest.Код;
             Назва.Text = ХарактеристикиНоменклатури_Objest.Назва;
