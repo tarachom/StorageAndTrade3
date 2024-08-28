@@ -34,7 +34,11 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public ВидиЗапасів_Елемент() : base() { }
+        public ВидиЗапасів_Елемент() : base() 
+        {
+            ВидиЗапасів_Objest.UnigueIDChanged += UnigueIDChanged;
+            ВидиЗапасів_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -66,9 +70,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ВидиЗапасів_Objest.UnigueID;
-            Caption = ВидиЗапасів_Objest.Назва;
-
             try
             {
                 await ВидиЗапасів_Objest.Save();

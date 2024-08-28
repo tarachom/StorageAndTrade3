@@ -45,7 +45,11 @@ namespace StorageAndTrade
         ComboBoxText ТипСкладськоїКомірки = new ComboBoxText();
         ТипорозміриКомірок_PointerControl Типорозмір = new ТипорозміриКомірок_PointerControl() { Caption = "Типорозмір:" };
 
-        public СкладськіКомірки_Елемент() : base() { }
+        public СкладськіКомірки_Елемент() : base() 
+        {
+            СкладськіКомірки_Objest.UnigueIDChanged += UnigueIDChanged;
+            СкладськіКомірки_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -138,9 +142,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = СкладськіКомірки_Objest.UnigueID;
-            Caption = СкладськіКомірки_Objest.Назва;
-
             try
             {
                 await СкладськіКомірки_Objest.Save();

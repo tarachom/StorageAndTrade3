@@ -36,7 +36,11 @@ namespace StorageAndTrade
         Entry Коментар = new Entry() { WidthRequest = 500 };
         DateTimeControl ДатаСтворення = new DateTimeControl();
 
-        public СеріїНоменклатури_Елемент() : base() { }
+        public СеріїНоменклатури_Елемент() : base() 
+        {
+            СеріїНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
+            СеріїНоменклатури_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -73,9 +77,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = СеріїНоменклатури_Objest.UnigueID;
-            Caption = СеріїНоменклатури_Objest.Номер;
-
             try
             {
                 await СеріїНоменклатури_Objest.Save();

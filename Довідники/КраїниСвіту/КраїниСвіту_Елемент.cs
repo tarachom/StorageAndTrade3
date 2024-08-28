@@ -34,7 +34,11 @@ namespace StorageAndTrade
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
-        public КраїниСвіту_Елемент() : base() { }
+        public КраїниСвіту_Елемент() : base() 
+        {
+            КраїниСвіту_Objest.UnigueIDChanged += UnigueIDChanged;
+            КраїниСвіту_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -66,9 +70,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = КраїниСвіту_Objest.UnigueID;
-            Caption = КраїниСвіту_Objest.Назва;
-
             try
             {
                 await КраїниСвіту_Objest.Save();

@@ -684,6 +684,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
     public class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
+        public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
+        public event EventHandler&lt;string&gt;? CaptionChanged;
+
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>[</xsl:text>
              <xsl:for-each select="Fields/Field">
@@ -703,6 +706,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             <xsl:choose>
               <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
@@ -732,6 +736,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                     await <xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
                 }
                 </xsl:if>
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -768,6 +773,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 await BaseWriteFullTextSearch(GetBasis(), [<xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']"><xsl:value-of select="Name"/>, </xsl:for-each>]);
                 </xsl:if>
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
             return result;
         }
 
@@ -1322,6 +1328,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
     public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
+        public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
+        public event EventHandler&lt;string&gt;? CaptionChanged;
+
         public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>",
              <xsl:text>[</xsl:text>
              <xsl:for-each select="Fields/Field">
@@ -1341,6 +1350,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             <xsl:choose>
               <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="TriggerFunctions/New"/><xsl:text>(this)</xsl:text>;
@@ -1370,6 +1380,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                     await <xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
                 }
                 </xsl:if>
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -1408,6 +1419,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                 </xsl:if>
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
             return result;
         }
 

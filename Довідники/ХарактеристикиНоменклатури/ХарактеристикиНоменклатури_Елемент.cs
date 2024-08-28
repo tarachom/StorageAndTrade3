@@ -37,7 +37,11 @@ namespace StorageAndTrade
         TextView НазваПовна = new TextView();
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
 
-        public ХарактеристикиНоменклатури_Елемент() : base() { }
+        public ХарактеристикиНоменклатури_Елемент() : base() 
+        {
+            ХарактеристикиНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
+            ХарактеристикиНоменклатури_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -82,9 +86,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ХарактеристикиНоменклатури_Objest.UnigueID;
-            Caption = ХарактеристикиНоменклатури_Objest.Назва;
-
             try
             {
                 await ХарактеристикиНоменклатури_Objest.Save();

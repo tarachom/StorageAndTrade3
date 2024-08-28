@@ -60,6 +60,9 @@ namespace StorageAndTrade
 
         public ПоверненняТоварівВідКлієнта_Елемент() : base()
         {
+            ПоверненняТоварівВідКлієнта_Objest.UnigueIDChanged += UnigueIDChanged;
+            ПоверненняТоварівВідКлієнта_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(ПоверненняТоварівВідКлієнта_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -236,7 +239,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = ПоверненняТоварівВідКлієнта_Objest.UnigueID;
             
             try
             {
@@ -245,8 +247,6 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
-                
-                Caption = ПоверненняТоварівВідКлієнта_Objest.Назва;
             }
             catch (Exception ex)
             {

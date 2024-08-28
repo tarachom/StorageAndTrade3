@@ -49,6 +49,9 @@ namespace StorageAndTrade
 
         public КорегуванняБоргу_Елемент() : base()
         {
+            КорегуванняБоргу_Objest.UnigueIDChanged += UnigueIDChanged;
+            КорегуванняБоргу_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(КорегуванняБоргу_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -128,7 +131,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = КорегуванняБоргу_Objest.UnigueID;
             
             try
             {
@@ -137,8 +139,6 @@ namespace StorageAndTrade
                     await РозрахункиЗКонтрагентами.SaveRecords();
                     isSave = true;
                 }
-
-                Caption = КорегуванняБоргу_Objest.Назва;
             }
             catch (Exception ex)
             {

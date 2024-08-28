@@ -59,6 +59,9 @@ namespace StorageAndTrade
 
         public ДоговориКонтрагентів_Елемент() : base()
         {
+            ДоговориКонтрагентів_Objest.UnigueIDChanged += UnigueIDChanged;
+            ДоговориКонтрагентів_Objest.CaptionChanged += CaptionChanged;
+
             FillComboBoxes();
         }
 
@@ -198,9 +201,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ДоговориКонтрагентів_Objest.UnigueID;
-            Caption = ДоговориКонтрагентів_Objest.Назва;
-
             try
             {
                 await ДоговориКонтрагентів_Objest.Save();

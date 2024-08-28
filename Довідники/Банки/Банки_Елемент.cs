@@ -51,7 +51,8 @@ namespace StorageAndTrade
 
         public Банки_Елемент() : base()
         {
-
+            Банки_Objest.UnigueIDChanged += UnigueIDChanged;
+            Банки_Objest.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -195,9 +196,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Банки_Objest.UnigueID;
-            Caption = Банки_Objest.Назва;
-
             try
             {
                 await Банки_Objest.Save();

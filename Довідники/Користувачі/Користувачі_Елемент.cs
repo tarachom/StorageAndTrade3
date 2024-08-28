@@ -36,7 +36,11 @@ namespace StorageAndTrade
         ФізичніОсоби_PointerControl ФізичнаОсоба = new ФізичніОсоби_PointerControl() { Caption = "Фізична особа:" };
         TextView Коментар = new TextView();
 
-        public Користувачі_Елемент() : base() { }
+        public Користувачі_Елемент() : base() 
+        {
+            Користувачі_Objest.UnigueIDChanged += UnigueIDChanged;
+            Користувачі_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -78,9 +82,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Користувачі_Objest.UnigueID;
-            Caption = Користувачі_Objest.Назва;
-
             try
             {
                 await Користувачі_Objest.Save();

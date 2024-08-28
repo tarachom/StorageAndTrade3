@@ -35,7 +35,11 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "Пакування:" };
 
-        public ВидиНоменклатури_Елемент() : base() { }
+        public ВидиНоменклатури_Елемент() : base()
+        {
+            ВидиНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
+            ВидиНоменклатури_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -72,9 +76,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ВидиНоменклатури_Objest.UnigueID;
-            Caption = ВидиНоменклатури_Objest.Назва;
-
             try
             {
                 await ВидиНоменклатури_Objest.Save();

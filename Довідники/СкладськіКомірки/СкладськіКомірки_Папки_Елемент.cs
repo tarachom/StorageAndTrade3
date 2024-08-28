@@ -38,7 +38,11 @@ namespace StorageAndTrade
         СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Родич:" };
         СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
 
-        public СкладськіКомірки_Папки_Елемент() : base() { }
+        public СкладськіКомірки_Папки_Елемент() : base() 
+        {
+            СкладськіКомірки_Папки_Objest.UnigueIDChanged += UnigueIDChanged;
+            СкладськіКомірки_Папки_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -86,9 +90,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = СкладськіКомірки_Папки_Objest.UnigueID;
-            Caption = СкладськіКомірки_Папки_Objest.Назва;
-
             try
             {
                 await СкладськіКомірки_Папки_Objest.Save();

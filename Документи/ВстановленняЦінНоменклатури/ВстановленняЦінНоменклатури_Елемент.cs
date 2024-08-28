@@ -50,6 +50,9 @@ namespace StorageAndTrade
 
         public ВстановленняЦінНоменклатури_Елемент() : base()
         {
+            ВстановленняЦінНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
+            ВстановленняЦінНоменклатури_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(ВстановленняЦінНоменклатури_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -135,7 +138,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = ВстановленняЦінНоменклатури_Objest.UnigueID;
             
             try
             {
@@ -144,8 +146,6 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
-
-                Caption = ВстановленняЦінНоменклатури_Objest.Назва;
             }
             catch (Exception ex)
             {

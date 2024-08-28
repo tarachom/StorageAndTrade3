@@ -45,7 +45,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Контрагенти_Елемент() : base() { }
+        public Контрагенти_Елемент() : base() 
+        {
+            Контрагенти_Objest.UnigueIDChanged += UnigueIDChanged;
+            Контрагенти_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -115,10 +119,7 @@ namespace StorageAndTrade
         #endregion
 
         protected override async ValueTask Save()
-        {
-            UnigueID = Контрагенти_Objest.UnigueID;
-            Caption = Контрагенти_Objest.Назва;
-            
+        {           
             try
             {
                 if (await Контрагенти_Objest.Save())

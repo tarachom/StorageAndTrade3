@@ -119,7 +119,6 @@ namespace StorageAndTrade
 
             Довідники.Файли_Objest файли_Objest = new Довідники.Файли_Objest();
             await файли_Objest.New();
-            файли_Objest.Код = (++Константи.НумераціяДовідників.Файли_Const).ToString("D6");
             файли_Objest.НазваФайлу = fileInfo.Name;
             файли_Objest.Назва = Path.GetFileNameWithoutExtension(PathToFile);
             файли_Objest.Розмір = Math.Round((decimal)(fileInfo.Length / 1024)).ToString() + " KB";

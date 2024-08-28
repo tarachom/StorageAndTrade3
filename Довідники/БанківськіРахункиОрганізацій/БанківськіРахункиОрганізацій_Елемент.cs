@@ -36,7 +36,11 @@ namespace StorageAndTrade
         Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта:" };
         Організації_PointerControl Організація = new Організації_PointerControl() { Caption = "Організація:" };
 
-        public БанківськіРахункиОрганізацій_Елемент() : base() { }
+        public БанківськіРахункиОрганізацій_Елемент() : base() 
+        {
+            БанківськіРахункиОрганізацій_Objest.UnigueIDChanged += UnigueIDChanged;
+            БанківськіРахункиОрганізацій_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -78,9 +82,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = БанківськіРахункиОрганізацій_Objest.UnigueID;
-            Caption = БанківськіРахункиОрганізацій_Objest.Назва;
-
             try
             {
                 await БанківськіРахункиОрганізацій_Objest.Save();

@@ -38,6 +38,9 @@ namespace StorageAndTrade
 
         public ПерерахунокТоварів_Елемент() : base()
         {
+            ПерерахунокТоварів_Objest.UnigueIDChanged += UnigueIDChanged;
+            ПерерахунокТоварів_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(ПерерахунокТоварів_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -131,7 +134,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = ПерерахунокТоварів_Objest.UnigueID;
             
             try
             {
@@ -140,8 +142,6 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
-
-                Caption = ПерерахунокТоварів_Objest.Назва;
             }
             catch (Exception ex)
             {

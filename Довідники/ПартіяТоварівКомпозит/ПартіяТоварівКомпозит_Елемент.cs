@@ -39,6 +39,9 @@ namespace StorageAndTrade
 
         public ПартіяТоварівКомпозит_Елемент() : base()
         {
+            ПартіяТоварівКомпозит_Objest.UnigueIDChanged += UnigueIDChanged;
+            ПартіяТоварівКомпозит_Objest.CaptionChanged += CaptionChanged;
+
             FillComboBoxes();
         }
 
@@ -104,9 +107,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ПартіяТоварівКомпозит_Objest.UnigueID;
-            Caption = ПартіяТоварівКомпозит_Objest.Назва;
-
             try
             {
                 await ПартіяТоварівКомпозит_Objest.Save();

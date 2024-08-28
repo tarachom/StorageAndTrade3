@@ -33,8 +33,8 @@ namespace StorageAndTrade
     {
         public static async void СформуватиЗвіт(DocumentPointer ДокументВказівник)
         {
-            СпільніФорми_РухДокументуПоРегістрах page = new СпільніФорми_РухДокументуПоРегістрах();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Проводки", () => { return page; });
+            СпільніФорми_РухДокументуПоРегістрах page = new();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Проводки", () => page);
             await page.Заповнити(ДокументВказівник);
         }
 

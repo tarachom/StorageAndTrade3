@@ -42,7 +42,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        public СтаттяРухуКоштів_Елемент() : base() { }
+        public СтаттяРухуКоштів_Елемент() : base() 
+        {
+            СтаттяРухуКоштів_Objest.UnigueIDChanged += UnigueIDChanged;
+            СтаттяРухуКоштів_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -95,9 +99,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = СтаттяРухуКоштів_Objest.UnigueID;
-            Caption = СтаттяРухуКоштів_Objest.Назва;
-
             try
             {
                 await СтаттяРухуКоштів_Objest.Save();

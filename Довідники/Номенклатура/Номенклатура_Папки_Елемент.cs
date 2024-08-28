@@ -36,7 +36,11 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Родич:" };
 
-        public Номенклатура_Папки_Елемент() : base() { }
+        public Номенклатура_Папки_Елемент() : base() 
+        {
+            Номенклатура_Папки_Objest.UnigueIDChanged += UnigueIDChanged;
+            Номенклатура_Папки_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -78,9 +82,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Номенклатура_Папки_Objest.UnigueID;
-            Caption = Номенклатура_Папки_Objest.Назва;
-
             try
             {
                 await Номенклатура_Папки_Objest.Save();

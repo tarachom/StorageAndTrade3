@@ -48,7 +48,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Організації_Елемент() : base() { }
+        public Організації_Елемент() : base() 
+        {
+            Організації_Objest.UnigueIDChanged += UnigueIDChanged;
+            Організації_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -124,9 +128,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Організації_Objest.UnigueID;
-            Caption = Організації_Objest.Назва;
-
             try
             {
                 if (await Організації_Objest.Save())

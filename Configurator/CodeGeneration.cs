@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 26.08.2024 17:53:41
+ * Дата конфігурації: 28.08.2024 16:57:33
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1799,6 +1799,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Організації_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Організації_Objest() : base(Config.Kernel, "tab_a01",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", ]) 
         {
@@ -1811,6 +1814,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Організації_Triggers.New(this);
               
@@ -1838,6 +1842,7 @@ namespace StorageAndTrade_1_0.Довідники
                     await Контакти_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -1866,6 +1871,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -2213,6 +2219,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Номенклатура_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Номенклатура_Objest() : base(Config.Kernel, "tab_a03",
              ["col_b1", "col_b2", "col_b4", "col_a1", "col_b3", "col_b5", "col_a2", "col_a3", "col_a4", "col_a5", "col_a7", ]) 
         {
@@ -2225,6 +2234,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Номенклатура_Triggers.New(this);
               
@@ -2254,6 +2264,7 @@ namespace StorageAndTrade_1_0.Довідники
                     await Файли_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -2284,6 +2295,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, Опис, Артикул, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -2608,6 +2620,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Виробники_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Виробники_Objest() : base(Config.Kernel, "tab_a04",
              ["col_b6", "col_b7", ]) 
         {
@@ -2617,6 +2632,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Виробники_Triggers.New(this);
               
@@ -2631,6 +2647,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -2652,6 +2669,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -2824,6 +2842,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ВидиНоменклатури_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ВидиНоменклатури_Objest() : base(Config.Kernel, "tab_a05",
              ["col_b8", "col_b9", "col_a2", "col_a1", "col_a4", ]) 
         {
@@ -2833,6 +2854,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ВидиНоменклатури_Triggers.New(this);
               
@@ -2850,6 +2872,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -2874,6 +2897,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Опис, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -3051,6 +3075,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ПакуванняОдиниціВиміру_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПакуванняОдиниціВиміру_Objest() : base(Config.Kernel, "tab_a06",
              ["col_c1", "col_c2", "col_c3", "col_c4", ]) 
         {
@@ -3060,6 +3087,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПакуванняОдиниціВиміру_Triggers.New(this);
               
@@ -3076,6 +3104,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -3101,6 +3130,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -3277,6 +3307,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Валюти_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Валюти_Objest() : base(Config.Kernel, "tab_a07",
              ["col_c5", "col_a2", "col_c6", "col_a1", "col_a3", ]) 
         {
@@ -3286,6 +3319,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Валюти_Triggers.New(this);
               
@@ -3303,6 +3337,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -3327,6 +3362,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, КороткаНазва, Код_R030, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -3511,6 +3547,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Контрагенти_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Контрагенти_Objest() : base(Config.Kernel, "tab_a08",
              ["col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3", ]) 
         {
@@ -3524,6 +3563,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Контрагенти_Triggers.New(this);
               
@@ -3550,6 +3590,7 @@ namespace StorageAndTrade_1_0.Довідники
                     await Файли_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -3577,6 +3618,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -4042,6 +4084,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Склади_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Склади_Objest() : base(Config.Kernel, "tab_a10",
              ["col_d9", "col_e1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
         {
@@ -4054,6 +4099,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Склади_Triggers.New(this);
               
@@ -4080,6 +4126,7 @@ namespace StorageAndTrade_1_0.Довідники
                     await Контакти_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -4107,6 +4154,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -4444,6 +4492,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ВидиЦін_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ВидиЦін_Objest() : base(Config.Kernel, "tab_a12",
              ["col_e9", "col_f1", "col_f2", ]) 
         {
@@ -4453,6 +4504,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ВидиЦін_Triggers.New(this);
               
@@ -4468,6 +4520,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -4490,6 +4543,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -4662,6 +4716,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ВидиЦінПостачальників_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ВидиЦінПостачальників_Objest() : base(Config.Kernel, "tab_a13",
              ["col_f3", "col_f4", "col_f5", ]) 
         {
@@ -4671,6 +4728,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ВидиЦінПостачальників_Triggers.New(this);
               
@@ -4686,6 +4744,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -4708,6 +4767,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -4882,6 +4942,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Користувачі_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Користувачі_Objest() : base(Config.Kernel, "tab_a14",
              ["col_f6", "col_f7", "col_a1", "col_g6", "col_a2", ]) 
         {
@@ -4894,6 +4957,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Користувачі_Triggers.New(this);
               
@@ -4917,6 +4981,7 @@ namespace StorageAndTrade_1_0.Довідники
                     await Контакти_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -4941,6 +5006,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Коментар, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -5270,6 +5336,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ФізичніОсоби_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ФізичніОсоби_Objest() : base(Config.Kernel, "tab_a16",
              ["col_g7", "col_g8", "col_g9", "col_a1", "col_a2", ]) 
         {
@@ -5282,6 +5351,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ФізичніОсоби_Triggers.New(this);
               
@@ -5305,6 +5375,7 @@ namespace StorageAndTrade_1_0.Довідники
                     await Контакти_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -5329,6 +5400,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ІПН, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -5656,6 +5728,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class СтруктураПідприємства_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public СтруктураПідприємства_Objest() : base(Config.Kernel, "tab_a18",
              ["col_h8", "col_h9", "col_i1", ]) 
         {
@@ -5665,6 +5740,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await СтруктураПідприємства_Triggers.New(this);
               
@@ -5680,6 +5756,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -5702,6 +5779,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -5873,6 +5951,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class КраїниСвіту_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public КраїниСвіту_Objest() : base(Config.Kernel, "tab_a19",
              ["col_i2", "col_i3", ]) 
         {
@@ -5882,6 +5963,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await КраїниСвіту_Triggers.New(this);
               
@@ -5896,6 +5978,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -5917,6 +6000,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -6090,6 +6174,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Файли_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Файли_Objest() : base(Config.Kernel, "tab_a20",
              ["col_i6", "col_i5", "col_a2", "col_a1", "col_a3", "col_a4", ]) 
         {
@@ -6099,6 +6186,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Файли_Triggers.New(this);
               
@@ -6117,6 +6205,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -6142,6 +6231,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваФайлу, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -6321,6 +6411,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ХарактеристикиНоменклатури_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ХарактеристикиНоменклатури_Objest() : base(Config.Kernel, "tab_a21",
              ["col_i7", "col_i8", "col_i9", "col_a1", ]) 
         {
@@ -6330,6 +6423,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ХарактеристикиНоменклатури_Triggers.New(this);
               
@@ -6346,6 +6440,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -6369,6 +6464,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -6543,6 +6639,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Номенклатура_Папки_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Номенклатура_Папки_Objest() : base(Config.Kernel, "tab_a22",
              ["col_j1", "col_j2", "col_j3", ]) 
         {
@@ -6552,6 +6651,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Номенклатура_Папки_Triggers.New(this);
               
@@ -6567,6 +6667,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -6589,6 +6690,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -6765,6 +6867,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Контрагенти_Папки_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Контрагенти_Папки_Objest() : base(Config.Kernel, "tab_a23",
              ["col_j4", "col_j5", "col_j6", ]) 
         {
@@ -6774,6 +6879,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Контрагенти_Папки_Triggers.New(this);
               
@@ -6789,6 +6895,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -6811,6 +6918,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -6987,6 +7095,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Склади_Папки_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Склади_Папки_Objest() : base(Config.Kernel, "tab_a24",
              ["col_j7", "col_j8", "col_a1", ]) 
         {
@@ -6996,6 +7107,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Склади_Папки_Triggers.New(this);
               
@@ -7011,6 +7123,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -7033,6 +7146,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -7210,6 +7324,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Каси_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Каси_Objest() : base(Config.Kernel, "tab_a26",
              ["col_k8", "col_k9", "col_a2", "col_a1", ]) 
         {
@@ -7219,6 +7336,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Каси_Triggers.New(this);
               
@@ -7235,6 +7353,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -7258,6 +7377,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -7442,6 +7562,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class БанківськіРахункиОрганізацій_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public БанківськіРахункиОрганізацій_Objest() : base(Config.Kernel, "tab_a27",
              ["col_l1", "col_l2", "col_l3", "col_l4", "col_l5", "col_l6", "col_l7", "col_l8", "col_l9", "col_n1", "col_n2", "col_n3", "col_a1", ]) 
         {
@@ -7451,6 +7574,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await БанківськіРахункиОрганізацій_Triggers.New(this);
               
@@ -7476,6 +7600,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -7508,6 +7633,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Банк, НазваБанку, НомерРахунку, АдресаБанку, МістоБанку, ТелефониБанку, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -7717,6 +7843,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ДоговориКонтрагентів_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ДоговориКонтрагентів_Objest() : base(Config.Kernel, "tab_a28",
              ["col_n4", "col_n5", "col_n6", "col_a1", "col_a2", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b8", "col_b6", "col_b7", "col_a3", ]) 
         {
@@ -7726,6 +7855,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ДоговориКонтрагентів_Triggers.New(this);
               
@@ -7758,6 +7888,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -7799,6 +7930,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Коментар, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ТипДоговоруПредставлення, ]));
             return result;
         }
 
@@ -8017,6 +8149,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class БанківськіРахункиКонтрагентів_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public БанківськіРахункиКонтрагентів_Objest() : base(Config.Kernel, "tab_a29",
              ["col_n7", "col_n8", "col_n9", "col_m1", "col_m2", "col_m3", "col_m4", "col_m5", "col_m6", "col_m7", "col_m8", "col_m9", "col_o1", "col_o2", "col_o3", ]) 
         {
@@ -8026,6 +8161,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await БанківськіРахункиКонтрагентів_Triggers.New(this);
               
@@ -8053,6 +8189,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -8087,6 +8224,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваБанку, КорРахунокБанку, МістоБанку, АдресаБанку, ТелефониБанку, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -8285,6 +8423,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class СтаттяРухуКоштів_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public СтаттяРухуКоштів_Objest() : base(Config.Kernel, "tab_a45",
              ["col_i7", "col_i8", "col_i9", "col_j2", "col_j1", ]) 
         {
@@ -8297,6 +8438,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await СтаттяРухуКоштів_Triggers.New(this);
               
@@ -8320,6 +8462,7 @@ namespace StorageAndTrade_1_0.Довідники
                     await ГосподарськіОперації_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -8344,6 +8487,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Опис, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -8647,6 +8791,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class СеріїНоменклатури_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public СеріїНоменклатури_Objest() : base(Config.Kernel, "tab_b02",
              ["col_a3", "col_a1", "col_a2", ]) 
         {
@@ -8656,6 +8803,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await СеріїНоменклатури_Triggers.New(this);
               
@@ -8671,6 +8819,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -8695,6 +8844,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Номер, Коментар, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Номер, ]));
             return result;
         }
 
@@ -8870,6 +9020,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ПартіяТоварівКомпозит_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПартіяТоварівКомпозит_Objest() : base(Config.Kernel, "tab_b06",
              ["col_a1", "col_a2", "col_a3", "col_a6", "col_a4", "col_a5", ]) 
         {
@@ -8879,6 +9032,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ValueTask.FromResult(true);
               
@@ -8897,6 +9051,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -8922,6 +9077,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -9103,6 +9259,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ВидиЗапасів_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ВидиЗапасів_Objest() : base(Config.Kernel, "tab_b13",
              ["col_a5", "col_b3", "col_a7", "col_a9", "col_b1", "col_b2", "col_a1", ]) 
         {
@@ -9112,6 +9271,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ВидиЗапасів_Triggers.New(this);
               
@@ -9131,6 +9291,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -9157,6 +9318,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -9362,6 +9524,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Банки_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Банки_Objest() : base(Config.Kernel, "tab_a39",
              ["col_a1", "col_a2", "col_b4", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", ]) 
         {
@@ -9371,6 +9536,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Банки_Triggers.New(this);
               
@@ -9411,6 +9577,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -9458,6 +9625,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, КодМФО, КодЄДРПОУ, НазваНаселеногоПункту, Адреса, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -9680,6 +9848,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class СкладськіПриміщення_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public СкладськіПриміщення_Objest() : base(Config.Kernel, "tab_a71",
              ["col_a2", "col_a3", "col_a1", ]) 
         {
@@ -9689,6 +9860,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ValueTask.FromResult(true);
               
@@ -9704,6 +9876,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -9726,6 +9899,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -9905,6 +10079,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class СкладськіКомірки_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public СкладськіКомірки_Objest() : base(Config.Kernel, "tab_a72",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ]) 
         {
@@ -9914,6 +10091,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ValueTask.FromResult(true);
               
@@ -9936,6 +10114,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -9965,6 +10144,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -10151,6 +10331,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ОбластьЗберігання_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ОбластьЗберігання_Objest() : base(Config.Kernel, "tab_a73",
              ["col_a2", "col_a3", "col_a4", ]) 
         {
@@ -10160,6 +10343,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ValueTask.FromResult(true);
               
@@ -10175,6 +10359,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -10197,6 +10382,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -10371,6 +10557,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class ТипорозміриКомірок_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ТипорозміриКомірок_Objest() : base(Config.Kernel, "tab_a75",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
         {
@@ -10380,6 +10569,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ValueTask.FromResult(true);
               
@@ -10398,6 +10588,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -10423,6 +10614,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -10602,6 +10794,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class СкладськіКомірки_Папки_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public СкладськіКомірки_Папки_Objest() : base(Config.Kernel, "tab_a76",
              ["col_j1", "col_j2", "col_j3", "col_a1", ]) 
         {
@@ -10611,6 +10806,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await СкладськіКомірки_Папки_Triggers.New(this);
               
@@ -10627,6 +10823,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -10650,6 +10847,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -10830,6 +11028,9 @@ namespace StorageAndTrade_1_0.Довідники
 
     public class Блокнот_Objest : DirectoryObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public Блокнот_Objest() : base(Config.Kernel, "tab_a41",
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) 
         {
@@ -10839,6 +11040,7 @@ namespace StorageAndTrade_1_0.Довідники
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await Блокнот_Triggers.New(this);
               
@@ -10856,6 +11058,7 @@ namespace StorageAndTrade_1_0.Довідники
                 
                 BaseClear();
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -10880,6 +11083,7 @@ namespace StorageAndTrade_1_0.Довідники
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, Опис, ]);
                 
             }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -12077,6 +12281,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ЗамовленняПостачальнику_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_a25", "ЗамовленняПостачальнику",
              ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_k4", "col_k5", "col_k6", "col_k7", "col_a1", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_a6", "col_b5", "col_b6", "col_b7", "col_b8", "col_a2", "col_b9", ])
         {
@@ -12089,6 +12296,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ЗамовленняПостачальнику_Triggers.New(this);
               
@@ -12134,6 +12342,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -12184,6 +12393,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -12670,6 +12880,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПоступленняТоварівТаПослуг_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПоступленняТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a32", "ПоступленняТоварівТаПослуг",
              ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_a1", "col_b1", "col_a2", ])
         {
@@ -12682,6 +12895,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПоступленняТоварівТаПослуг_Triggers.New(this);
               
@@ -12733,6 +12947,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -12789,6 +13004,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -13321,6 +13537,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ЗамовленняКлієнта_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a34", "ЗамовленняКлієнта",
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_a9", "col_b9", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_c1", "col_b2", "col_b3", ])
         {
@@ -13333,6 +13552,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ЗамовленняКлієнта_Triggers.New(this);
               
@@ -13381,6 +13601,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -13434,6 +13655,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -13925,6 +14147,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class РеалізаціяТоварівТаПослуг_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a36", "РеалізаціяТоварівТаПослуг",
              ["docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9", "col_d1", ])
         {
@@ -13937,6 +14162,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await РеалізаціяТоварівТаПослуг_Triggers.New(this);
               
@@ -13987,6 +14213,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -14042,6 +14269,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -14554,6 +14782,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ВстановленняЦінНоменклатури_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ВстановленняЦінНоменклатури_Objest() : base(Config.Kernel, "tab_a42", "ВстановленняЦінНоменклатури",
              ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_a3", "col_g9", "col_a4", "col_a5", ])
         {
@@ -14566,6 +14797,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ВстановленняЦінНоменклатури_Triggers.New(this);
               
@@ -14593,6 +14825,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -14625,6 +14858,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -15032,6 +15266,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПрихіднийКасовийОрдер_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a44", "ПрихіднийКасовийОрдер",
              ["docname", "docnomer", "docdate", "col_h8", "col_h9", "col_i1", "col_i2", "col_i3", "col_i4", "col_a6", "col_i5", "col_i6", "col_a1", "col_a2", "col_a4", "col_a3", "col_a5", "col_a7", ])
         {
@@ -15044,6 +15281,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПрихіднийКасовийОрдер_Triggers.New(this);
               
@@ -15080,6 +15318,7 @@ namespace StorageAndTrade_1_0.Документи
                     await РозшифруванняПлатежу_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -15121,6 +15360,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -15556,6 +15796,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class РозхіднийКасовийОрдер_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a48", "РозхіднийКасовийОрдер",
              ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_a3", "col_a5", "col_k5", "col_k4", "col_k7", "col_a4", "col_k8", "col_k9", "col_l2", "col_k6", "col_a2", "col_a1", "col_l1", "col_a6", "col_a7", ])
         {
@@ -15568,6 +15811,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await РозхіднийКасовийОрдер_Triggers.New(this);
               
@@ -15606,6 +15850,7 @@ namespace StorageAndTrade_1_0.Документи
                     await РозшифруванняПлатежу_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -15649,6 +15894,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -16093,6 +16339,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПереміщенняТоварів_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПереміщенняТоварів_Objest() : base(Config.Kernel, "tab_a31", "ПереміщенняТоварів",
              ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2", "col_b9", ])
         {
@@ -16105,6 +16354,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПереміщенняТоварів_Triggers.New(this);
               
@@ -16144,6 +16394,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -16188,6 +16439,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -16644,6 +16896,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПоверненняТоварівПостачальнику_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel, "tab_a51", "ПоверненняТоварівПостачальнику",
              ["docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4", "col_a5", ])
         {
@@ -16656,6 +16911,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПоверненняТоварівПостачальнику_Triggers.New(this);
               
@@ -16697,6 +16953,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -16743,6 +17000,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -17215,6 +17473,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПоверненняТоварівВідКлієнта_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПоверненняТоварівВідКлієнта_Objest() : base(Config.Kernel, "tab_a53", "ПоверненняТоварівВідКлієнта",
              ["docname", "docnomer", "docdate", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f5", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_a1", "col_a2", "col_f6", "col_a3", "col_a4", ])
         {
@@ -17227,6 +17488,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПоверненняТоварівВідКлієнта_Triggers.New(this);
               
@@ -17264,6 +17526,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -17306,6 +17569,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -17772,6 +18036,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class АктВиконанихРобіт_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public АктВиконанихРобіт_Objest() : base(Config.Kernel, "tab_a81", "АктВиконанихРобіт",
              ["docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8", "col_a9", ])
         {
@@ -17784,6 +18051,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await АктВиконанихРобіт_Triggers.New(this);
               
@@ -17819,6 +18087,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Послуги_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -17859,6 +18128,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -18279,6 +18549,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ВведенняЗалишків_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ВведенняЗалишків_Objest() : base(Config.Kernel, "tab_a83", "ВведенняЗалишків",
              ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3", "col_a2", ])
         {
@@ -18294,6 +18567,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ВведенняЗалишків_Triggers.New(this);
               
@@ -18328,6 +18602,7 @@ namespace StorageAndTrade_1_0.Документи
                     await РозрахункиЗКонтрагентами_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -18364,6 +18639,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -19214,6 +19490,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class НадлишкиТоварів_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public НадлишкиТоварів_Objest() : base(Config.Kernel, "tab_a88", "НадлишкиТоварів",
              ["col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "docnomer", "docdate", "docname", "col_a1", "col_a2", ])
         {
@@ -19226,6 +19505,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ValueTask.FromResult(true);
               
@@ -19254,6 +19534,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -19285,6 +19566,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -19664,6 +19946,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПересортицяТоварів_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПересортицяТоварів_Objest() : base(Config.Kernel, "tab_a90", "ПересортицяТоварів",
              ["docname", "docnomer", "docdate", "col_h2", "col_h3", "col_h4", "col_h5", "col_h6", "col_a1", "col_a2", ])
         {
@@ -19676,6 +19961,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ValueTask.FromResult(true);
               
@@ -19704,6 +19990,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -19735,6 +20022,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -20114,6 +20402,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПерерахунокТоварів_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПерерахунокТоварів_Objest() : base(Config.Kernel, "tab_a92", "ПерерахунокТоварів",
              ["docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2", "col_a3", "col_a4", ])
         {
@@ -20126,6 +20417,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПерерахунокТоварів_Triggers.New(this);
               
@@ -20154,6 +20446,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -20187,6 +20480,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -20600,6 +20894,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПсуванняТоварів_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПсуванняТоварів_Objest() : base(Config.Kernel, "tab_a94", "ПсуванняТоварів",
              ["docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_a1", "col_a5", "col_a2", "col_a3", "col_b2", ])
         {
@@ -20612,6 +20909,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПсуванняТоварів_Triggers.New(this);
               
@@ -20642,6 +20940,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -20677,6 +20976,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -21113,6 +21413,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ВнутрішнєСпоживанняТоварів_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ВнутрішнєСпоживанняТоварів_Objest() : base(Config.Kernel, "tab_b07", "ВнутрішнєСпоживанняТоварів",
              ["docname", "docnomer", "docdate", "col_a1", "col_b1", "col_a2", "col_a9", "col_a8", "col_b7", "col_b9", "col_b4", "col_b2", "col_a3", ])
         {
@@ -21125,6 +21428,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ВнутрішнєСпоживанняТоварів_Triggers.New(this);
               
@@ -21156,6 +21460,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -21192,6 +21497,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -21637,6 +21943,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class РахунокФактура_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public РахунокФактура_Objest() : base(Config.Kernel, "tab_b10", "РахунокФактура",
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a3", "col_a4", "col_a5", "col_a6", "col_b9", "col_c2", "col_c3", "col_c4", "col_c1", "col_a2", "col_a7", ])
         {
@@ -21649,6 +21958,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await РахунокФактура_Triggers.New(this);
               
@@ -21687,6 +21997,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -21730,6 +22041,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -22176,6 +22488,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class РозміщенняТоварівНаСкладі_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_a64", "РозміщенняТоварівНаСкладі",
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
         {
@@ -22188,6 +22503,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await РозміщенняТоварівНаСкладі_Triggers.New(this);
               
@@ -22217,6 +22533,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -22251,6 +22568,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -22666,6 +22984,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ПереміщенняТоварівНаСкладі_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ПереміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b09", "ПереміщенняТоварівНаСкладі",
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ])
         {
@@ -22678,6 +22999,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ПереміщенняТоварівНаСкладі_Triggers.New(this);
               
@@ -22706,6 +23028,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -22739,6 +23062,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -23159,6 +23483,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class ЗбіркаТоварівНаСкладі_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b27", "ЗбіркаТоварівНаСкладі",
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
         {
@@ -23171,6 +23498,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await ЗбіркаТоварівНаСкладі_Triggers.New(this);
               
@@ -23200,6 +23528,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -23234,6 +23563,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -23649,6 +23979,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class РозміщенняНоменклатуриПоКоміркам_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel, "tab_b29", "РозміщенняНоменклатуриПоКоміркам",
              ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5", "col_a6", ])
         {
@@ -23661,6 +23994,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await РозміщенняНоменклатуриПоКоміркам_Triggers.New(this);
               
@@ -23689,6 +24023,7 @@ namespace StorageAndTrade_1_0.Документи
                     await Товари_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -23722,6 +24057,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 
@@ -24111,6 +24447,9 @@ namespace StorageAndTrade_1_0.Документи
 
     public class КорегуванняБоргу_Objest : DocumentObject
     {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
         public КорегуванняБоргу_Objest() : base(Config.Kernel, "tab_a65", "КорегуванняБоргу",
              ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_d1", "col_a3", "col_a2", ])
         {
@@ -24123,6 +24462,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask New()
         {
             BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
             
                 await КорегуванняБоргу_Triggers.New(this);
               
@@ -24149,6 +24489,7 @@ namespace StorageAndTrade_1_0.Документи
                     await РозрахункиЗКонтрагентами_TablePart.Read();
                 }
                 
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
                 return true;
             }
             else
@@ -24180,6 +24521,7 @@ namespace StorageAndTrade_1_0.Документи
                 
             }
 
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
             return result;
         }
 

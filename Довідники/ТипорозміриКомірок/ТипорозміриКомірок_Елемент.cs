@@ -40,6 +40,9 @@ namespace StorageAndTrade
 
         public ТипорозміриКомірок_Елемент() : base()
         {
+            ТипорозміриКомірок_Objest.UnigueIDChanged += UnigueIDChanged;
+            ТипорозміриКомірок_Objest.CaptionChanged += CaptionChanged;
+
             HPanedTop.Position = 150;
         }
 
@@ -93,9 +96,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ТипорозміриКомірок_Objest.UnigueID;
-            Caption = ТипорозміриКомірок_Objest.Назва;
-
             try
             {
                 await ТипорозміриКомірок_Objest.Save();

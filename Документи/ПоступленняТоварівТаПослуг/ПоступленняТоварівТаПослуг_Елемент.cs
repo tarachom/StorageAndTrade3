@@ -36,7 +36,7 @@ namespace StorageAndTrade
     class ПоступленняТоварівТаПослуг_Елемент : ДокументЕлемент
     {
         public ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest { get; set; } = new ПоступленняТоварівТаПослуг_Objest();
-
+            
         #region Fields
 
         Entry НомерДок = new Entry() { WidthRequest = 100 };
@@ -76,8 +76,10 @@ namespace StorageAndTrade
 
         public ПоступленняТоварівТаПослуг_Елемент() : base()
         {
-            CreateDocName(ПоступленняТоварівТаПослуг_Const.FULLNAME, НомерДок, ДатаДок);
+            ПоступленняТоварівТаПослуг_Objest.UnigueIDChanged += UnigueIDChanged;
+            ПоступленняТоварівТаПослуг_Objest.CaptionChanged += CaptionChanged;
 
+            CreateDocName(ПоступленняТоварівТаПослуг_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);
 
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
@@ -337,8 +339,7 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = ПоступленняТоварівТаПослуг_Objest.UnigueID;
-            
+
             try
             {
                 if (await ПоступленняТоварівТаПослуг_Objest.Save())
@@ -346,8 +347,6 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
-                
-                Caption = ПоступленняТоварівТаПослуг_Objest.Назва;
             }
             catch (Exception ex)
             {

@@ -35,7 +35,11 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта:" };
 
-        public ВидиЦінПостачальників_Елемент() : base() { }
+        public ВидиЦінПостачальників_Елемент() : base() 
+        {
+            ВидиЦінПостачальників_Objest.UnigueIDChanged += UnigueIDChanged;
+            ВидиЦінПостачальників_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -72,9 +76,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = ВидиЦінПостачальників_Objest.UnigueID;
-            Caption = ВидиЦінПостачальників_Objest.Назва;
-
             try
             {
                 await ВидиЦінПостачальників_Objest.Save();

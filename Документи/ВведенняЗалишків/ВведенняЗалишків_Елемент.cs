@@ -60,6 +60,9 @@ namespace StorageAndTrade
 
         public ВведенняЗалишків_Елемент() : base()
         {
+            ВведенняЗалишків_Objest.UnigueIDChanged += UnigueIDChanged;
+            ВведенняЗалишків_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(ВведенняЗалишків_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -238,7 +241,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = ВведенняЗалишків_Objest.UnigueID;
             
             try
             {
@@ -250,8 +252,6 @@ namespace StorageAndTrade
                     await РозрахункиЗКонтрагентами.SaveRecords();
                     isSave = true;
                 }
-
-                Caption = ВведенняЗалишків_Objest.Назва;
             }
             catch (Exception ex)
             {

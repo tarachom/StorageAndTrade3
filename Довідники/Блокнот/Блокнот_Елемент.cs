@@ -35,13 +35,9 @@ namespace StorageAndTrade
         #region Fields
 
         Entry Код = new Entry() { WidthRequest = 500 };
-
         Entry Назва = new Entry() { WidthRequest = 500 };
-
         DateTimeControl ДатаЗапису = new DateTimeControl();
-
         TextView Опис = new TextView() { WidthRequest = 500 };
-
         Entry Лінк = new Entry() { WidthRequest = 500 };
 
         #endregion
@@ -50,7 +46,11 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Блокнот_Елемент() : base() { }
+        public Блокнот_Елемент() : base() 
+        {
+            Блокнот_Objest.UnigueIDChanged += UnigueIDChanged;
+            Блокнот_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -99,9 +99,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Блокнот_Objest.UnigueID;
-            Caption = Блокнот_Objest.Назва;
-
             try
             {
                 await Блокнот_Objest.Save();

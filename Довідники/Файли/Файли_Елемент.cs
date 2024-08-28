@@ -44,7 +44,11 @@ namespace StorageAndTrade
 
         Label labelFileName = new Label() { Wrap = true, Selectable = true };
 
-        public Файли_Елемент() : base() { }
+        public Файли_Елемент() : base() 
+        {
+            Файли_Objest.UnigueIDChanged += UnigueIDChanged;
+            Файли_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -206,9 +210,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Файли_Objest.UnigueID;
-            Caption = Файли_Objest.Назва;
-
             try
             {
                 if (await Файли_Objest.Save())

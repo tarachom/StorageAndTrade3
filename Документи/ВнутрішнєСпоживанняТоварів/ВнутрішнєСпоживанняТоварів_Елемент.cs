@@ -55,6 +55,9 @@ namespace StorageAndTrade
 
         public ВнутрішнєСпоживанняТоварів_Елемент() : base()
         {
+            ВнутрішнєСпоживанняТоварів_Objest.UnigueIDChanged += UnigueIDChanged;
+            ВнутрішнєСпоживанняТоварів_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(ВнутрішнєСпоживанняТоварів_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -166,7 +169,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = ВнутрішнєСпоживанняТоварів_Objest.UnigueID;
             
             try
             {
@@ -175,8 +177,6 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
-
-                Caption = ВнутрішнєСпоживанняТоварів_Objest.Назва;
             }
             catch (Exception ex)
             {

@@ -52,6 +52,9 @@ namespace StorageAndTrade
 
         public РозміщенняТоварівНаСкладі_Елемент() : base()
         {
+            РозміщенняТоварівНаСкладі_Objest.UnigueIDChanged += UnigueIDChanged;
+            РозміщенняТоварівНаСкладі_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(РозміщенняТоварівНаСкладі_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -149,7 +152,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = РозміщенняТоварівНаСкладі_Objest.UnigueID;
             
             try
             {
@@ -158,8 +160,6 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
-
-                Caption = РозміщенняТоварівНаСкладі_Objest.Назва;
             }
             catch (Exception ex)
             {

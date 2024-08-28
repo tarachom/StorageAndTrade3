@@ -57,6 +57,9 @@ namespace StorageAndTrade
 
         public Номенклатура_Елемент() : base()
         {
+            Номенклатура_Objest.UnigueIDChanged += UnigueIDChanged;
+            Номенклатура_Objest.CaptionChanged += CaptionChanged;
+
             ОсновнаКартинкаФайл.AfterSelectFunc = async () =>
             {
                 foreach (Widget item in scrollImageView.Children)
@@ -186,9 +189,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Номенклатура_Objest.UnigueID;
-            Caption = Номенклатура_Objest.Назва;
-
             try
             {
                 if (await Номенклатура_Objest.Save())

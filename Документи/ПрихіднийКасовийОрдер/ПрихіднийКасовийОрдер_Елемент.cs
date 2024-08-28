@@ -60,6 +60,9 @@ namespace StorageAndTrade
 
         public ПрихіднийКасовийОрдер_Елемент() : base()
         {
+            ПрихіднийКасовийОрдер_Objest.UnigueIDChanged += UnigueIDChanged;
+            ПрихіднийКасовийОрдер_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(ПрихіднийКасовийОрдер_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -290,12 +293,10 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = ПрихіднийКасовийОрдер_Objest.UnigueID;
             
             try
             {
                 isSave = await ПрихіднийКасовийОрдер_Objest.Save(); 
-                Caption = ПрихіднийКасовийОрдер_Objest.Назва;
             }
             catch (Exception ex)
             {

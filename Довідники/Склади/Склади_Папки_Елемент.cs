@@ -36,7 +36,11 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl();
 
-        public Склади_Папки_Елемент() : base() { }
+        public Склади_Папки_Елемент() : base() 
+        {
+            Склади_Папки_Objest.UnigueIDChanged += UnigueIDChanged;
+            Склади_Папки_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -78,9 +82,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Склади_Папки_Objest.UnigueID;
-            Caption = Склади_Папки_Objest.Назва;
-
             try
             {
                 await Склади_Папки_Objest.Save();

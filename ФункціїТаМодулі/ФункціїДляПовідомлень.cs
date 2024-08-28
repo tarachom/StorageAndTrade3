@@ -48,7 +48,7 @@ namespace StorageAndTrade
         public static async void ВідкритиПовідомлення()
         {
             СпільніФорми_ВивідПовідомленняПроПомилки page = new();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Повідомлення", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Повідомлення", () => page);
             await page.LoadRecords();
         }
 

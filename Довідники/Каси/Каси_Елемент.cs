@@ -35,7 +35,11 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта:" };
 
-        public Каси_Елемент() : base() { }
+        public Каси_Елемент() : base() 
+        {
+            Каси_Objest.UnigueIDChanged += UnigueIDChanged;
+            Каси_Objest.CaptionChanged += CaptionChanged;
+        }
 
         protected override void CreatePack1(Box vBox)
         {
@@ -72,9 +76,6 @@ namespace StorageAndTrade
 
         protected override async ValueTask Save()
         {
-            UnigueID = Каси_Objest.UnigueID;
-            Caption = Каси_Objest.Назва;
-
             try
             {
                 await Каси_Objest.Save();

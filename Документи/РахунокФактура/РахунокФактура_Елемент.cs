@@ -62,6 +62,9 @@ namespace StorageAndTrade
 
         public РахунокФактура_Елемент() : base()
         {
+            РахунокФактура_Objest.UnigueIDChanged += UnigueIDChanged;
+            РахунокФактура_Objest.CaptionChanged += CaptionChanged;
+
             CreateDocName(РахунокФактура_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
@@ -255,7 +258,6 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            UnigueID = РахунокФактура_Objest.UnigueID;
             
             try
             {
@@ -264,8 +266,6 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
-
-                Caption = РахунокФактура_Objest.Назва;
             }
             catch (Exception ex)
             {
