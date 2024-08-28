@@ -94,7 +94,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = ТипорозміриКомірок_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = ТипорозміриКомірок_Objest.Назва;
 
             try
             {
@@ -103,7 +103,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(ТипорозміриКомірок_Objest.GetBasis(), Caption, ex);
-            }            
+            }
         }
     }
 }

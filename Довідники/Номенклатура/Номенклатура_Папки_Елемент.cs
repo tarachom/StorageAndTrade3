@@ -79,7 +79,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = Номенклатура_Папки_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = Номенклатура_Папки_Objest.Назва;
 
             try
             {

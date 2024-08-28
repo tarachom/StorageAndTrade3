@@ -71,40 +71,23 @@ namespace StorageAndTrade
 
             //Типорозмір
             CreateField(vBox, null, Типорозмір);
+
+            // Лінія
+            CreateField(vBox, "Лінія:", Лінія);
+
+            // Стелаж
+            CreateField(vBox, "Стелаж:", Стелаж);
+
+            // Позиція
+            CreateField(vBox, "Позиція:", Позиція);
+
+            // Ярус
+            CreateField(vBox, "Ярус:", Ярус);
         }
 
         protected override void CreatePack2(Box vBox)
         {
-            Box vBoxContainer = new Box(Orientation.Vertical, 0) { WidthRequest = 300, Halign = Align.Start };
-            vBox.PackStart(vBoxContainer, false, false, 0);
-
-            // Лінія
-            Box hBoxLine = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
-            vBoxContainer.PackStart(hBoxLine, false, false, 5);
-
-            hBoxLine.PackStart(new Label("Лінія:"), false, false, 5);
-            hBoxLine.PackStart(Лінія, false, false, 5);
-
-            // Стелаж
-            Box hBoxStelaj = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
-            vBoxContainer.PackStart(hBoxStelaj, false, false, 5);
-
-            hBoxStelaj.PackStart(new Label("Стелаж:"), false, false, 5);
-            hBoxStelaj.PackStart(Стелаж, false, false, 5);
-
-            // Позиція
-            Box hBoxPosition = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
-            vBoxContainer.PackStart(hBoxPosition, false, false, 5);
-
-            hBoxPosition.PackStart(new Label("Позиція:"), false, false, 5);
-            hBoxPosition.PackStart(Позиція, false, false, 5);
-
-            // Ярус
-            Box hBoxYarus = new Box(Orientation.Horizontal, 0) { Halign = Align.End };
-            vBoxContainer.PackStart(hBoxYarus, false, false, 5);
-
-            hBoxYarus.PackStart(new Label("Ярус:"), false, false, 5);
-            hBoxYarus.PackStart(Ярус, false, false, 5);
+            
         }
 
         #region Присвоєння / зчитування значень
@@ -156,7 +139,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = СкладськіКомірки_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = СкладськіКомірки_Objest.Назва;
 
             try
             {

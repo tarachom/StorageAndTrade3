@@ -79,7 +79,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = БанківськіРахункиОрганізацій_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = БанківськіРахункиОрганізацій_Objest.Назва;
 
             try
             {

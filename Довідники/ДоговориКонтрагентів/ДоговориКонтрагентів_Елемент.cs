@@ -199,7 +199,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = ДоговориКонтрагентів_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = ДоговориКонтрагентів_Objest.Назва;
 
             try
             {

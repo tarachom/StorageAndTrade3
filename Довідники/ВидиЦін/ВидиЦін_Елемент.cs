@@ -73,7 +73,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = ВидиЦін_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = ВидиЦін_Objest.Назва;
 
             try
             {

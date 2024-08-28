@@ -100,7 +100,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = Блокнот_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = Блокнот_Objest.Назва;
 
             try
             {

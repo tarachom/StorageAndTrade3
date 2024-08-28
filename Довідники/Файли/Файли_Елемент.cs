@@ -207,7 +207,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = Файли_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = Файли_Objest.Назва;
 
             try
             {

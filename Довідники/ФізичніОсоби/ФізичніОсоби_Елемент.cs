@@ -67,7 +67,7 @@ namespace StorageAndTrade
         protected override async ValueTask Save()
         {
             UnigueID = ФізичніОсоби_Objest.UnigueID;
-            Caption = Назва.Text;
+            Caption = ФізичніОсоби_Objest.Назва;
 
             try
             {
@@ -76,7 +76,7 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(ФізичніОсоби_Objest.GetBasis(), Caption, ex);
-            }           
+            }
         }
     }
 }

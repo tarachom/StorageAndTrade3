@@ -24,7 +24,6 @@ limitations under the License.
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using System.Reflection;
 
 using StorageAndTrade_1_0;
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
