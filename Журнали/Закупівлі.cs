@@ -51,7 +51,7 @@ namespace StorageAndTrade
 
         protected override void OpenTypeListDocs(Widget relative_to)
         {
-            ФункціїДляЖурналів.ВідкритиСписокДокументів(relative_to, ТабличніСписки.Журнали_Закупівлі.AllowDocument());
+            new ФункціїДляДинамічногоВідкриття().ВідкритиСписокДокументівДляЖурналу(relative_to, ТабличніСписки.Журнали_Закупівлі.AllowDocument());
         }
 
         protected override void ErrorSpendTheDocument(UnigueID unigueID)
@@ -66,7 +66,7 @@ namespace StorageAndTrade
 
         protected override void OpenDoc(string typeDoc, UnigueID unigueID)
         {
-            ФункціїДляДокументів.ВідкритиДокументВідповідноДоВиду(typeDoc, unigueID);
+            new ФункціїДляДинамічногоВідкриття().ВідкритиДокументВідповідноДоВиду(typeDoc, unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Журнали.Закупівлі";

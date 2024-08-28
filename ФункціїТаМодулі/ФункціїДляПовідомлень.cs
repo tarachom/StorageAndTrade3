@@ -41,14 +41,13 @@ namespace StorageAndTrade
 
         public static async void ДодатиПовідомлення(UuidAndText basis, string НазваОбєкту, Exception exception)
         {
-            ФункціїДляПовідомлень Повідомлення = new ФункціїДляПовідомлень();
-            await Повідомлення.ДодатиПовідомленняПроПомилку("Запис", basis.Uuid, basis.Text, НазваОбєкту, exception.Message);
+            await new ФункціїДляПовідомлень().ДодатиПовідомленняПроПомилку("Запис", basis.Uuid, basis.Text, НазваОбєкту, exception.Message);
             ПоказатиПовідомлення(basis.UnigueID());
         }
 
         public static async void ВідкритиПовідомлення()
         {
-            СпільніФорми_ВивідПовідомленняПроПомилки page = new СпільніФорми_ВивідПовідомленняПроПомилки();
+            СпільніФорми_ВивідПовідомленняПроПомилки page = new();
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Повідомлення", () => { return page; });
             await page.LoadRecords();
         }
@@ -57,9 +56,9 @@ namespace StorageAndTrade
         {
             СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід page = new();
 
-            Popover PopoverSmall = new Popover(Program.GeneralForm?.ButtonMessage) { Position = PositionType.Bottom, BorderWidth = 5 };
-            PopoverSmall.Add(page);
-            PopoverSmall.Show();
+            Popover popover = new Popover(Program.GeneralForm?.ButtonMessage) { Position = PositionType.Bottom, BorderWidth = 5 };
+            popover.Add(page);
+            popover.Show();
 
             await page.LoadRecords(ВідбірПоОбєкту, limit);
         }

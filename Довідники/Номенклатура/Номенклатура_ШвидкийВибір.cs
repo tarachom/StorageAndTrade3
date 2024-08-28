@@ -47,7 +47,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {Номенклатура_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Номенклатура_Const.FULLNAME}", () => page);
 
                     await page.SetValue();
                 };
@@ -66,7 +66,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Номенклатура_Const.FULLNAME} *", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Номенклатура_Const.FULLNAME} *", () => page);
 
                     page.SetValue();
 

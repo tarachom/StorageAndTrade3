@@ -20,16 +20,12 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
-using Gtk;
-using InterfaceGtk;
-using System.Reflection;
 
 using AccountingSoftware;
 
 using Довідники = StorageAndTrade_1_0.Довідники;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 using Константи = StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -38,46 +34,6 @@ namespace StorageAndTrade
     /// </summary>
     class ФункціїДляДовідників
     {
-        /// <summary>
-        /// Функція відкриває список довідника і позиціонує на вибраний елемент
-        /// </summary>
-        /// <param name="typeDir">Тип</param>
-        /// <param name="unigueID">Елемент для позиціонування</param>
-        public static void ВідкритиДовідникВідповідноДоВиду(string typeDir, UnigueID? unigueID)
-        {
-            Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-
-            object? listPage;
-
-            try
-            {
-                listPage = ExecutingAssembly.CreateInstance($"{Config.NameSpageProgram}.{typeDir}");
-            }
-            catch (Exception ex)
-            {
-                Message.Error(Program.GeneralForm, ex.Message);
-                return;
-            }
-
-            if (listPage != null)
-            {
-                //Довідник який потрібно виділити в списку
-                listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
-
-                //Заголовок журналу з константи конфігурації
-                string listName = "Список";
-                {
-                    Type? documentConst = Type.GetType($"{Config.NameSpageCodeGeneration}.Довідники.{typeDir}_Const");
-                    if (documentConst != null)
-                        listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
-                }
-
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,listName, () => { return (Widget)listPage; });
-
-                listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
-            }
-        }
-
         /// <summary>
         /// Функція створює договори для контрагента
         /// </summary>
@@ -173,7 +129,5 @@ namespace StorageAndTrade
 
             return файли_Objest.GetDirectoryPointer();
         }
-
-
     }
 }

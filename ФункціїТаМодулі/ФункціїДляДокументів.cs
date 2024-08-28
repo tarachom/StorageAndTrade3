@@ -30,10 +30,6 @@ limitations under the License.
 
 */
 
-using Gtk;
-using InterfaceGtk;
-using System.Reflection;
-
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 using Довідники = StorageAndTrade_1_0.Довідники;
@@ -48,53 +44,6 @@ namespace StorageAndTrade
     /// </summary>
     class ФункціїДляДокументів
     {
-        /// <summary>
-        /// Функція відкриває список докуменів і позиціонує на вибраний елемент
-        /// </summary>
-        /// <param name="typeDoc">Тип документу</param>
-        /// <param name="unigueID">Елемент для позиціювання</param>
-        /// <param name="periodWhere">Період</param>
-        /// <param name="insertPage">Вставити сторінку</param>
-        public static void ВідкритиДокументВідповідноДоВиду(string typeDoc, UnigueID? unigueID, string keyForSetting = "")
-        {
-            Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-
-            object? listPage;
-
-            try
-            {
-                listPage = ExecutingAssembly.CreateInstance($"{Config.NameSpageProgram}.{typeDoc}");
-            }
-            catch (Exception ex)
-            {
-                Message.Error(Program.GeneralForm, ex.Message);
-                return;
-            }
-
-            if (listPage != null)
-            {
-                //Документ який потрібно виділити в списку
-                listPage.GetType().GetProperty("SelectPointerItem")?.SetValue(listPage, unigueID);
-
-                //Заголовок журналу з константи конфігурації
-                string listName = "Список документів";
-                {
-                    Type? documentConst = Type.GetType($"{Config.NameSpageCodeGeneration}.Документи.{typeDoc}_Const");
-                    if (documentConst != null)
-                        listName = documentConst.GetField("FULLNAME")?.GetValue(null)?.ToString() ?? listName;
-                }
-
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, listName, () => { return (Widget)listPage; });
-
-                //Додатковий ключ для налаштувань
-                if (!string.IsNullOrEmpty(keyForSetting))
-                    listPage.GetType().GetProperty("KeyForSetting")?.SetValue(listPage, keyForSetting);
-
-                //Заповнення даними
-                listPage.GetType().InvokeMember("SetValue", BindingFlags.InvokeMethod, null, listPage, null);
-            }
-        }
-
         /// <summary>
         /// Функція обєднує дві дати (з пешої дата, з другої час)
         /// </summary>

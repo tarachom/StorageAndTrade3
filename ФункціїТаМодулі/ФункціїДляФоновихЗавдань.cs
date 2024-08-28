@@ -107,7 +107,6 @@ LIMIT 1
 ";
 
             var recordResult = await Конфа.Config.Kernel.DataBase.SelectRequest(query);
-
             if (recordResult.Result)
             {
                 Dictionary<string, object> Рядок = recordResult.ListRow[0];
