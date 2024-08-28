@@ -7,6 +7,7 @@
         Табличний список - Записи
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0.РегістриВідомостей;
@@ -59,45 +60,22 @@ namespace StorageAndTrade
             await ТабличніСписки.ЦіниНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ЦіниНоменклатури_Елемент page = new ЦіниНоменклатури_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЦіниНоменклатури_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ЦіниНоменклатури_Objest.Read(unigueID))
                 {
-                    ЦіниНоменклатури_Елемент page = new ЦіниНоменклатури_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ЦіниНоменклатури_Objest ЦіниНоменклатури_Objest = new ЦіниНоменклатури_Objest();
-                if (await ЦіниНоменклатури_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЦіниНоменклатури_Objest.Period}", () =>
-                    {
-                        ЦіниНоменклатури_Елемент page = new ЦіниНоменклатури_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ЦіниНоменклатури_Objest = ЦіниНоменклатури_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ЦіниНоменклатури_Const.FULLNAME : page.ЦіниНоменклатури_Objest.Period.ToString(), () => page, page.SetValue);
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)

@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = StorageAndTrade_1_0.РегістриВідомостей.ТабличніСписки;
@@ -96,46 +97,22 @@ namespace StorageAndTrade
             await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            КурсиВалют_Елемент page = new КурсиВалют_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{КурсиВалют_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.КурсиВалют_Objest.Read(unigueID))
                 {
-                    КурсиВалют_Елемент page = new КурсиВалют_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true,
-                        //ВалютаДляНового = ВалютаВласник.Pointer
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                КурсиВалют_Objest КурсиВалют_Objest = new КурсиВалют_Objest();
-                if (await КурсиВалют_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{КурсиВалют_Objest.Курс}", () =>
-                    {
-                        КурсиВалют_Елемент page = new КурсиВалют_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            КурсиВалют_Objest = КурсиВалют_Objest
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? КурсиВалют_Const.FULLNAME : page.КурсиВалют_Objest.Курс.ToString(), () => page, page.SetValue);
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)

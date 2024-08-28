@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = StorageAndTrade_1_0.РегістриВідомостей.ТабличніСписки;
@@ -116,47 +117,24 @@ namespace StorageAndTrade
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ШтрихкодиНоменклатури_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew,
+                НоменклатураДляНового = НоменклатураВласник.Pointer,
+                ХарактеристикаДляНового = ХарактеристикиНоменклатуриВласник.Pointer
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ШтрихкодиНоменклатури_Objest.Read(unigueID))
                 {
-                    ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true,
-                        НоменклатураДляНового = НоменклатураВласник.Pointer,
-                        ХарактеристикаДляНового = ХарактеристикиНоменклатуриВласник.Pointer
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ШтрихкодиНоменклатури_Objest ШтрихкодиНоменклатури_Objest = new ШтрихкодиНоменклатури_Objest();
-                if (await ШтрихкодиНоменклатури_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ШтрихкодиНоменклатури_Objest.Штрихкод}", () =>
-                    {
-                        ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ШтрихкодиНоменклатури_Objest = ШтрихкодиНоменклатури_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ШтрихкодиНоменклатури_Const.FULLNAME : page.ШтрихкодиНоменклатури_Objest.Штрихкод.ToString(), () => page, page.SetValue);
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)
