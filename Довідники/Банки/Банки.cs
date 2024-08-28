@@ -40,7 +40,7 @@ namespace StorageAndTrade
                 LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження списку Банків") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження списку Банків", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження списку Банків", () =>
                     {
                         return new Обробка_ЗавантаженняБанків();
                     });
@@ -85,45 +85,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Банки_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Банки_Елемент page = new Банки_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Банки_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Банки_Objest.Read(unigueID))
                 {
-                    Банки_Елемент page = new Банки_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Банки_Objest Банки_Objest = new Банки_Objest();
-                if (await Банки_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Банки_Objest.Назва}", () =>
-                    {
-                        Банки_Елемент page = new Банки_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            Банки_Objest = Банки_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? Банки_Const.FULLNAME : page.Банки_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

@@ -74,46 +74,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняКлієнта_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняКлієнта_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ЗамовленняКлієнта_Objest.Read(unigueID))
                 {
-                    ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ЗамовленняКлієнта_Objest ЗамовленняКлієнта_Objest = new ЗамовленняКлієнта_Objest();
-                if (await ЗамовленняКлієнта_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняКлієнта_Objest.Назва}", () =>
-                    {
-                        ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ЗамовленняКлієнта_Objest = ЗамовленняКлієнта_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ЗамовленняКлієнта_Const.FULLNAME : page.ЗамовленняКлієнта_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

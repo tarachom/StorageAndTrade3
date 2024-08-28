@@ -83,7 +83,8 @@ namespace StorageAndTrade
             ДеревоПапок = new Номенклатура_Папки_Дерево
             {
                 WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack
+                CallBack_RowActivated = LoadRecords_TreeCallBack,
+                ParentWidget = this
             };
 
             HPanedTable.Pack2(ДеревоПапок, false, true);
@@ -143,46 +144,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Номенклатура_Елемент page = new Номенклатура_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Номенклатура_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Номенклатура_Objest.Read(unigueID))
                 {
-                    Номенклатура_Елемент page = new Номенклатура_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true,
-                        РодичДляНового = new Номенклатура_Папки_Pointer(ДеревоПапок.DirectoryPointerItem ?? new UnigueID())
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Номенклатура_Objest Номенклатура_Objest = new Номенклатура_Objest();
-                if (await Номенклатура_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Номенклатура_Objest.Назва}", () =>
-                    {
-                        Номенклатура_Елемент page = new Номенклатура_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            Номенклатура_Objest = Номенклатура_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? Номенклатура_Const.FULLNAME : page.Номенклатура_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

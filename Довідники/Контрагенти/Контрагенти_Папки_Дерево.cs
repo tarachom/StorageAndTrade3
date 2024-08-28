@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -52,48 +53,24 @@ namespace StorageAndTrade
             RowActivated();
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Папки_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadTree,
+                IsNew = IsNew,
+                РодичДляНового = new Контрагенти_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Контрагенти_Папки_Objest.Read(unigueID))
                 {
-                    Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadTree,
-                        IsNew = true,
-                        РодичДляНового = new Контрагенти_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Контрагенти_Папки_Objest Контрагенти_Папки_Objest = new Контрагенти_Папки_Objest();
-                if (await Контрагенти_Папки_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Папки_Objest.Назва}", () =>
-                    {
-                        Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadTree,
-                            IsNew = false,
-                            Контрагенти_Папки_Objest = Контрагенти_Папки_Objest
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
-        }
+                    return ("", null, null);
+                }
 
+            return (IsNew ? Контрагенти_Папки_Const.FULLNAME : page.Контрагенти_Папки_Objest.Назва, () => page, page.SetValue);
+        }
 
         #region ToolBar
 

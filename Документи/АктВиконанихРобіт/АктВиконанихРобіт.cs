@@ -73,46 +73,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.АктВиконанихРобіт_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{АктВиконанихРобіт_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.АктВиконанихРобіт_Objest.Read(unigueID))
                 {
-                    АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
-                if (await АктВиконанихРобіт_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{АктВиконанихРобіт_Objest.Назва}", () =>
-                    {
-                        АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            АктВиконанихРобіт_Objest = АктВиконанихРобіт_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? АктВиконанихРобіт_Const.FULLNAME : page.АктВиконанихРобіт_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
@@ -152,7 +128,7 @@ namespace StorageAndTrade
         protected override void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();            
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
@@ -230,7 +206,7 @@ namespace StorageAndTrade
 
                     if (await прихіднийКасовийОрдер_Новий.Save())
                     {
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{прихіднийКасовийОрдер_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{прихіднийКасовийОрдер_Новий.Назва}", () =>
                         {
                             ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                             {

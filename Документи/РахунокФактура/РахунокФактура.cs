@@ -74,46 +74,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РахунокФактура_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            РахунокФактура_Елемент page = new РахунокФактура_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РахунокФактура_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.РахунокФактура_Objest.Read(unigueID))
                 {
-                    РахунокФактура_Елемент page = new РахунокФактура_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                РахунокФактура_Objest РахунокФактура_Objest = new РахунокФактура_Objest();
-                if (await РахунокФактура_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РахунокФактура_Objest.Назва}", () =>
-                    {
-                        РахунокФактура_Елемент page = new РахунокФактура_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            РахунокФактура_Objest = РахунокФактура_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? РахунокФактура_Const.FULLNAME : page.РахунокФактура_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

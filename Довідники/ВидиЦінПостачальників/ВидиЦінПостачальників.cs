@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -69,45 +70,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ВидиЦінПостачальників_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ВидиЦінПостачальників_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ВидиЦінПостачальників_Objest.Read(unigueID))
                 {
-                    ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest = new ВидиЦінПостачальників_Objest();
-                if (await ВидиЦінПостачальників_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ВидиЦінПостачальників_Objest.Назва}", () =>
-                    {
-                        ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ВидиЦінПостачальників_Objest = ВидиЦінПостачальників_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ВидиЦінПостачальників_Const.FULLNAME : page.ВидиЦінПостачальників_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

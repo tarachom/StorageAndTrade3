@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -70,45 +71,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Файли_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Файли_Елемент page = new Файли_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Файли_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Файли_Objest.Read(unigueID))
                 {
-                    Файли_Елемент page = new Файли_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Файли_Objest Файли_Objest = new Файли_Objest();
-                if (await Файли_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Файли_Objest.Назва}", () =>
-                    {
-                        Файли_Елемент page = new Файли_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            Файли_Objest = Файли_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? Файли_Const.FULLNAME : page.Файли_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

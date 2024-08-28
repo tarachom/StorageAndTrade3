@@ -45,7 +45,7 @@ namespace StorageAndTrade
                         КурсиВалют page = new КурсиВалют();
                         page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem!);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Курси валют", () => { return page; });
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Курси валют", () => { return page; });
                         page.SetValue();
                     }
                 };
@@ -58,7 +58,7 @@ namespace StorageAndTrade
                 LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження курсів валют НБУ") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
                 {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження курсів валют НБУ", () =>
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () =>
                     {
                         return new Обробка_ЗавантаженняКурсівВалют();
                     });
@@ -105,45 +105,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Валюти_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Валюти_Елемент page = new Валюти_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Валюти_Objest.Read(unigueID))
                 {
-                    Валюти_Елемент page = new Валюти_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Валюти_Objest Валюти_Objest = new Валюти_Objest();
-                if (await Валюти_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Валюти_Objest.Назва}", () =>
-                    {
-                        Валюти_Елемент page = new Валюти_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            Валюти_Objest = Валюти_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? Валюти_Const.FULLNAME : page.Валюти_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -70,45 +71,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Користувачі_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Користувачі_Елемент page = new Користувачі_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Користувачі_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Користувачі_Objest.Read(unigueID))
                 {
-                    Користувачі_Елемент page = new Користувачі_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Користувачі_Objest Користувачі_Objest = new Користувачі_Objest();
-                if (await Користувачі_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Користувачі_Objest.Назва}", () =>
-                    {
-                        Користувачі_Елемент page = new Користувачі_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            Користувачі_Objest = Користувачі_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? Користувачі_Const.FULLNAME : page.Користувачі_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

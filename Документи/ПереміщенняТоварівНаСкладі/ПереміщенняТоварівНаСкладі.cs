@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -72,48 +73,24 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПереміщенняТоварівНаСкладі_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ПереміщенняТоварівНаСкладі_Елемент page = new ПереміщенняТоварівНаСкладі_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПереміщенняТоварівНаСкладі_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
                 {
-                    ПереміщенняТоварівНаСкладі_Елемент page = new ПереміщенняТоварівНаСкладі_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest = new ПереміщенняТоварівНаСкладі_Objest();
-                if (await ПереміщенняТоварівНаСкладі_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПереміщенняТоварівНаСкладі_Objest.Назва}", () =>
-                    {
-                        ПереміщенняТоварівНаСкладі_Елемент page = new ПереміщенняТоварівНаСкладі_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ПереміщенняТоварівНаСкладі_Objest = ПереміщенняТоварівНаСкладі_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
-        }
+                    return ("", null, null);
+                }
 
+            return (IsNew ? ПереміщенняТоварівНаСкладі_Const.FULLNAME : page.ПереміщенняТоварівНаСкладі_Objest.Назва, () => page, page.SetValue);
+        }
+        
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладі_Objest = new ПереміщенняТоварівНаСкладі_Objest();

@@ -55,7 +55,8 @@ namespace StorageAndTrade
             ДеревоПапок = new СкладськіКомірки_Папки_Дерево
             {
                 WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack
+                CallBack_RowActivated = LoadRecords_TreeCallBack,
+                ParentWidget = this
             };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
@@ -129,47 +130,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіКомірки_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.СкладськіКомірки_Objest.Read(unigueID))
                 {
-                    СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true,
-                        РодичДляНового = new СкладськіКомірки_Папки_Pointer(ДеревоПапок.DirectoryPointerItem ?? new UnigueID()),
-                        СкладськеПриміщенняДляНового = СкладПриміщенняВласник.Pointer
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                СкладськіКомірки_Objest СкладськіКомірки_Objest = new СкладськіКомірки_Objest();
-                if (await СкладськіКомірки_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіКомірки_Objest.Назва}", () =>
-                    {
-                        СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            СкладськіКомірки_Objest = СкладськіКомірки_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? СкладськіКомірки_Const.FULLNAME : page.СкладськіКомірки_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

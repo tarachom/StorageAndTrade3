@@ -61,46 +61,22 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ПерерахунокТоварів_Елемент page = new ПерерахунокТоварів_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПерерахунокТоварів_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ПерерахунокТоварів_Objest.Read(unigueID))
                 {
-                    ПерерахунокТоварів_Елемент page = new ПерерахунокТоварів_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ПерерахунокТоварів_Objest ПерерахунокТоварів_Objest = new ПерерахунокТоварів_Objest();
-                if (await ПерерахунокТоварів_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПерерахунокТоварів_Objest.Назва}", () =>
-                    {
-                        ПерерахунокТоварів_Елемент page = new ПерерахунокТоварів_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ПерерахунокТоварів_Objest = ПерерахунокТоварів_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ПерерахунокТоварів_Const.FULLNAME : page.ПерерахунокТоварів_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

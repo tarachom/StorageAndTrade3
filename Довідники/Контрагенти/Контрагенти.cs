@@ -52,7 +52,7 @@ namespace StorageAndTrade
                     if (SelectPointerItem != null)
                         page.КонтрагентВласник.Pointer = new Контрагенти_Pointer(SelectPointerItem);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
 
                     await page.SetValue();
                 };
@@ -64,7 +64,8 @@ namespace StorageAndTrade
             ДеревоПапок = new Контрагенти_Папки_Дерево
             {
                 WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack
+                CallBack_RowActivated = LoadRecords_TreeCallBack,
+                ParentWidget = this
             };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
@@ -122,46 +123,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Контрагенти_Елемент page = new Контрагенти_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Контрагенти_Objest.Read(unigueID))
                 {
-                    Контрагенти_Елемент page = new Контрагенти_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true,
-                        РодичДляНового = new Контрагенти_Папки_Pointer(ДеревоПапок.DirectoryPointerItem ?? new UnigueID())
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Контрагенти_Objest Контрагенти_Objest = new Контрагенти_Objest();
-                if (await Контрагенти_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Контрагенти_Objest.Назва}", () =>
-                    {
-                        Контрагенти_Елемент page = new Контрагенти_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            Контрагенти_Objest = Контрагенти_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? Контрагенти_Const.FULLNAME : page.Контрагенти_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

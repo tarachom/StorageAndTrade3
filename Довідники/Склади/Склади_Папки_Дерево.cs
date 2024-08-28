@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -52,46 +53,23 @@ namespace StorageAndTrade
             RowActivated();
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            Склади_Папки_Елемент page = new Склади_Папки_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Склади_Папки_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadTree,
+                IsNew = IsNew,
+                РодичДляНового = new Склади_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.Склади_Папки_Objest.Read(unigueID))
                 {
-                    Склади_Папки_Елемент page = new Склади_Папки_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadTree,
-                        IsNew = true,
-                        РодичДляНового = new Склади_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                Склади_Папки_Objest Склади_Папки_Objest = new Склади_Папки_Objest();
-                if (await Склади_Папки_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Склади_Папки_Objest.Назва}", () =>
-                    {
-                        Склади_Папки_Елемент page = new Склади_Папки_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadTree,
-                            IsNew = false,
-                            Склади_Папки_Objest = Склади_Папки_Objest
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? Склади_Папки_Const.FULLNAME : page.Склади_Папки_Objest.Назва, () => page, page.SetValue);
         }
 
 

@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -70,45 +71,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ФізичніОсоби_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ФізичніОсоби_Елемент page = new ФізичніОсоби_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ФізичніОсоби_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ФізичніОсоби_Objest.Read(unigueID))
                 {
-                    ФізичніОсоби_Елемент page = new ФізичніОсоби_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ФізичніОсоби_Objest ФізичніОсоби_Objest = new ФізичніОсоби_Objest();
-                if (await ФізичніОсоби_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ФізичніОсоби_Objest.Назва}", () =>
-                    {
-                        ФізичніОсоби_Елемент page = new ФізичніОсоби_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ФізичніОсоби_Objest = ФізичніОсоби_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ФізичніОсоби_Const.FULLNAME : page.ФізичніОсоби_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

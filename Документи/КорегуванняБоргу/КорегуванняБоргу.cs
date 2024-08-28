@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -72,46 +73,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.КорегуванняБоргу_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            КорегуванняБоргу_Елемент page = new КорегуванняБоргу_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КорегуванняБоргу_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.КорегуванняБоргу_Objest.Read(unigueID))
                 {
-                    КорегуванняБоргу_Елемент page = new КорегуванняБоргу_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                КорегуванняБоргу_Objest КорегуванняБоргу_Objest = new КорегуванняБоргу_Objest();
-                if (await КорегуванняБоргу_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{КорегуванняБоргу_Objest.Назва}", () =>
-                    {
-                        КорегуванняБоргу_Елемент page = new КорегуванняБоргу_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            КорегуванняБоргу_Objest = КорегуванняБоргу_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? КорегуванняБоргу_Const.FULLNAME : page.КорегуванняБоргу_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

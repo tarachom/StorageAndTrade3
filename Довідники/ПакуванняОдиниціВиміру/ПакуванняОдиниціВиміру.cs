@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -70,45 +71,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПакуванняОдиниціВиміру_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ПакуванняОдиниціВиміру_Елемент page = new ПакуванняОдиниціВиміру_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПакуванняОдиниціВиміру_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ПакуванняОдиниціВиміру_Objest.Read(unigueID))
                 {
-                    ПакуванняОдиниціВиміру_Елемент page = new ПакуванняОдиниціВиміру_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest = new ПакуванняОдиниціВиміру_Objest();
-                if (await ПакуванняОдиниціВиміру_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПакуванняОдиниціВиміру_Objest.Назва}", () =>
-                    {
-                        ПакуванняОдиниціВиміру_Елемент page = new ПакуванняОдиниціВиміру_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ПакуванняОдиниціВиміру_Objest = ПакуванняОдиниціВиміру_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ПакуванняОдиниціВиміру_Const.FULLNAME : page.ПакуванняОдиниціВиміру_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

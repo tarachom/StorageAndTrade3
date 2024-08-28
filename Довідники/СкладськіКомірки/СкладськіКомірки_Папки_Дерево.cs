@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -54,49 +55,24 @@ namespace StorageAndTrade
             RowActivated();
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіКомірки_Папки_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadTree,
+                IsNew = IsNew,
+                РодичДляНового = new СкладськіКомірки_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.СкладськіКомірки_Папки_Objest.Read(unigueID))
                 {
-                    СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadTree,
-                        IsNew = true,
-                        РодичДляНового = new СкладськіКомірки_Папки_Pointer(DirectoryPointerItem ?? new UnigueID()),
-                        СкладськеПриміщенняДляНового = СкладПриміщенняВласник
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest = new СкладськіКомірки_Папки_Objest();
-                if (await СкладськіКомірки_Папки_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіКомірки_Папки_Objest.Назва}", () =>
-                    {
-                        СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadTree,
-                            IsNew = false,
-                            СкладськіКомірки_Папки_Objest = СкладськіКомірки_Папки_Objest
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
-        }
+                    return ("", null, null);
+                }
 
+            return (IsNew ? СкладськіКомірки_Папки_Const.FULLNAME : page.СкладськіКомірки_Папки_Objest.Назва, () => page, page.SetValue);
+        }
 
         #region ToolBar
 

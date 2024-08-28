@@ -74,46 +74,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПоступленняТоварівТаПослуг_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.ПоступленняТоварівТаПослуг_Objest.Read(unigueID))
                 {
-                    ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
-                if (await ПоступленняТоварівТаПослуг_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ПоступленняТоварівТаПослуг_Objest.Назва}", () =>
-                    {
-                        ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            ПоступленняТоварівТаПослуг_Objest = ПоступленняТоварівТаПослуг_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? ПоступленняТоварівТаПослуг_Const.FULLNAME : page.ПоступленняТоварівТаПослуг_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
@@ -153,7 +129,7 @@ namespace StorageAndTrade
         protected override void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();            
+            LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
@@ -248,7 +224,7 @@ namespace StorageAndTrade
 
                     if (await розхіднийКасовийОрдер_Новий.Save())
                     {
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{розхіднийКасовийОрдер_Новий.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{розхіднийКасовийОрдер_Новий.Назва}", () =>
                         {
                             РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                             {
@@ -317,7 +293,7 @@ namespace StorageAndTrade
 
                         await поверненняТоварівПостачальнику_Objest.Товари_TablePart.Save(false);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{поверненняТоварівПостачальнику_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{поверненняТоварівПостачальнику_Objest.Назва}", () =>
                         {
                             ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
                             {
@@ -381,7 +357,7 @@ namespace StorageAndTrade
 
                         await розміщенняТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{розміщенняТоварівНаСкладі_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{розміщенняТоварівНаСкладі_Objest.Назва}", () =>
                         {
                             РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
                             {
@@ -447,7 +423,7 @@ namespace StorageAndTrade
 
                         await внутрішнєСпоживанняТоварів_Objest.Товари_TablePart.Save(true);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{внутрішнєСпоживанняТоварів_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{внутрішнєСпоживанняТоварів_Objest.Назва}", () =>
                         {
                             ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент
                             {
@@ -510,7 +486,7 @@ namespace StorageAndTrade
 
                         await переміщенняТоварів_Objest.Товари_TablePart.Save(true);
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{переміщенняТоварів_Objest.Назва}", () =>
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{переміщенняТоварів_Objest.Назва}", () =>
                         {
                             ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
                             {

@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
@@ -70,45 +71,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.СтаттяРухуКоштів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            СтаттяРухуКоштів_Елемент page = new СтаттяРухуКоштів_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СтаттяРухуКоштів_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.СтаттяРухуКоштів_Objest.Read(unigueID))
                 {
-                    СтаттяРухуКоштів_Елемент page = new СтаттяРухуКоштів_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest = new СтаттяРухуКоштів_Objest();
-                if (await СтаттяРухуКоштів_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СтаттяРухуКоштів_Objest.Назва}", () =>
-                    {
-                        СтаттяРухуКоштів_Елемент page = new СтаттяРухуКоштів_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            СтаттяРухуКоштів_Objest = СтаттяРухуКоштів_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? СтаттяРухуКоштів_Const.FULLNAME : page.СтаттяРухуКоштів_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

@@ -108,45 +108,22 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (IsNew)
+            СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіПриміщення_Const.FULLNAME} *", () =>
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
+            if (!IsNew && unigueID != null)
+                if (!await page.СкладськіПриміщення_Objest.Read(unigueID))
                 {
-                    СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-                if (await СкладськіПриміщення_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіПриміщення_Objest.Назва}", () =>
-                    {
-                        СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            СкладськіПриміщення_Objest = СкладськіПриміщення_Objest,
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
                     Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+                    return ("", null, null);
+                }
+
+            return (IsNew ? СкладськіПриміщення_Const.FULLNAME : page.СкладськіПриміщення_Objest.Назва, () => page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
