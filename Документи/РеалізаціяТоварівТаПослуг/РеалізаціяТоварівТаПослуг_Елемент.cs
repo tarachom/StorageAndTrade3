@@ -317,8 +317,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = РеалізаціяТоварівТаПослуг_Objest.UnigueID;
-            Caption = РеалізаціяТоварівТаПослуг_Objest.Назва;
-
+            
             try
             {
                 if (await РеалізаціяТоварівТаПослуг_Objest.Save())
@@ -326,6 +325,8 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = РеалізаціяТоварівТаПослуг_Objest.Назва;
             }
             catch (Exception ex)
             {

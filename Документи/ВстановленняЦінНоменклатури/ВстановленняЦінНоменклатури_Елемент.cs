@@ -136,8 +136,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = ВстановленняЦінНоменклатури_Objest.UnigueID;
-            Caption = ВстановленняЦінНоменклатури_Objest.Назва;
-
+            
             try
             {
                 if (await ВстановленняЦінНоменклатури_Objest.Save())
@@ -145,6 +144,8 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = ВстановленняЦінНоменклатури_Objest.Назва;
             }
             catch (Exception ex)
             {

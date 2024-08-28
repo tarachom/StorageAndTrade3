@@ -239,8 +239,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = ВведенняЗалишків_Objest.UnigueID;
-            Caption = ВведенняЗалишків_Objest.Назва;
-
+            
             try
             {
                 if (await ВведенняЗалишків_Objest.Save())
@@ -251,6 +250,8 @@ namespace StorageAndTrade
                     await РозрахункиЗКонтрагентами.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = ВведенняЗалишків_Objest.Назва;
             }
             catch (Exception ex)
             {

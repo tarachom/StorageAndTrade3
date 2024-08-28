@@ -138,8 +138,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = РозміщенняНоменклатуриПоКоміркам_Objest.UnigueID;
-            Caption = РозміщенняНоменклатуриПоКоміркам_Objest.Назва;
-
+            
             try
             {
                 if (await РозміщенняНоменклатуриПоКоміркам_Objest.Save())
@@ -147,6 +146,8 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = РозміщенняНоменклатуриПоКоміркам_Objest.Назва;
             }
             catch (Exception ex)
             {

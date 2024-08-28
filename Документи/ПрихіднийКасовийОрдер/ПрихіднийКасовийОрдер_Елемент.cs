@@ -291,11 +291,11 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = ПрихіднийКасовийОрдер_Objest.UnigueID;
-            Caption = ПрихіднийКасовийОрдер_Objest.Назва;
-
+            
             try
             {
-                isSave = await ПрихіднийКасовийОрдер_Objest.Save();
+                isSave = await ПрихіднийКасовийОрдер_Objest.Save(); 
+                Caption = ПрихіднийКасовийОрдер_Objest.Назва;
             }
             catch (Exception ex)
             {

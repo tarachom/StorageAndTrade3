@@ -167,8 +167,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = ВнутрішнєСпоживанняТоварів_Objest.UnigueID;
-            Caption = ВнутрішнєСпоживанняТоварів_Objest.Назва;
-
+            
             try
             {
                 if (await ВнутрішнєСпоживанняТоварів_Objest.Save())
@@ -176,6 +175,8 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = ВнутрішнєСпоживанняТоварів_Objest.Назва;
             }
             catch (Exception ex)
             {

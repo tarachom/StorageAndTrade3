@@ -256,8 +256,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = РахунокФактура_Objest.UnigueID;
-            Caption = РахунокФактура_Objest.Назва;
-
+            
             try
             {
                 if (await РахунокФактура_Objest.Save())
@@ -265,6 +264,8 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = РахунокФактура_Objest.Назва;
             }
             catch (Exception ex)
             {

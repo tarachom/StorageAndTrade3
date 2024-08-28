@@ -129,8 +129,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = КорегуванняБоргу_Objest.UnigueID;
-            Caption = КорегуванняБоргу_Objest.Назва;
-
+            
             try
             {
                 if (await КорегуванняБоргу_Objest.Save())
@@ -138,6 +137,8 @@ namespace StorageAndTrade
                     await РозрахункиЗКонтрагентами.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = КорегуванняБоргу_Objest.Назва;
             }
             catch (Exception ex)
             {

@@ -150,8 +150,7 @@ namespace StorageAndTrade
         {
             bool isSave = false;
             UnigueID = РозміщенняТоварівНаСкладі_Objest.UnigueID;
-            Caption = РозміщенняТоварівНаСкладі_Objest.Назва;
-
+            
             try
             {
                 if (await РозміщенняТоварівНаСкладі_Objest.Save())
@@ -159,6 +158,8 @@ namespace StorageAndTrade
                     await Товари.SaveRecords();
                     isSave = true;
                 }
+
+                Caption = РозміщенняТоварівНаСкладі_Objest.Назва;
             }
             catch (Exception ex)
             {
