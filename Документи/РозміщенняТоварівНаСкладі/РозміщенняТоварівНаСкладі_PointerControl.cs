@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class РозміщенняТоварівНаСкладі_PointerControl : PointerControl
     {
+        event EventHandler<РозміщенняТоварівНаСкладі_Pointer> PointerChanged;
+
         public РозміщенняТоварівНаСкладі_PointerControl()
         {
             pointer = new РозміщенняТоварівНаСкладі_Pointer();
             WidthPresentation = 300;
             Caption = $"{РозміщенняТоварівНаСкладі_Const.FULLNAME}:";
+            PointerChanged += async (object? _, РозміщенняТоварівНаСкладі_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         РозміщенняТоварівНаСкладі_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,10 +62,7 @@ namespace StorageAndTrade
             РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new РозміщенняТоварівНаСкладі_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new РозміщенняТоварівНаСкладі_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {РозміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; });

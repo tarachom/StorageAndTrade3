@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class Склади_ТабличнаЧастина_Контакти : Box
     {
-        public Склади_Objest? Склади_Objest { get; set; }
+        public Склади_Objest? ЕлементВласник { get; set; }
 
         enum Columns
         {
@@ -97,11 +97,11 @@ namespace StorageAndTrade
         {
             Store.Clear();
 
-            if (Склади_Objest != null)
+            if (ЕлементВласник != null)
             {
-                await Склади_Objest.Контакти_TablePart.Read();
+                await ЕлементВласник.Контакти_TablePart.Read();
 
-                foreach (Склади_Контакти_TablePart.Record record in Склади_Objest.Контакти_TablePart.Records)
+                foreach (Склади_Контакти_TablePart.Record record in ЕлементВласник.Контакти_TablePart.Records)
                 {
                     Store.AppendValues(
                         record.UID.ToString(),
@@ -120,15 +120,15 @@ namespace StorageAndTrade
 
         public async ValueTask SaveRecords()
         {
-            if (Склади_Objest != null)
+            if (ЕлементВласник != null)
             {
-                Склади_Objest.Контакти_TablePart.Records.Clear();
+                ЕлементВласник.Контакти_TablePart.Records.Clear();
 
                 if (Store.GetIterFirst(out TreeIter iter))
                     do
                     {
                         Склади_Контакти_TablePart.Record record = new Склади_Контакти_TablePart.Record();
-                        Склади_Objest.Контакти_TablePart.Records.Add(record);
+                        ЕлементВласник.Контакти_TablePart.Records.Add(record);
 
                         string uid = (string)Store.GetValue(iter, (int)Columns.UID);
 
@@ -153,7 +153,7 @@ namespace StorageAndTrade
                     }
                     while (Store.IterNext(ref iter));
 
-                await Склади_Objest.Контакти_TablePart.Save(true);
+                await ЕлементВласник.Контакти_TablePart.Save(true);
             }
         }
 

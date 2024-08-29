@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class Склади_Папки_Елемент : ДовідникЕлемент
     {
-        public Склади_Папки_Objest Склади_Папки_Objest { get; set; } = new Склади_Папки_Objest();
+        public Склади_Папки_Objest Елемент { get; set; } = new Склади_Папки_Objest();
         public Склади_Папки_Pointer РодичДляНового { get; set; } = new Склади_Папки_Pointer();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -38,8 +38,8 @@ namespace StorageAndTrade
 
         public Склади_Папки_Елемент() : base() 
         {
-            Склади_Папки_Objest.UnigueIDChanged += UnigueIDChanged;
-            Склади_Папки_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -59,20 +59,20 @@ namespace StorageAndTrade
         public override void SetValue()
         {
             if (IsNew)
-                Склади_Папки_Objest.Родич = РодичДляНового;
+                Елемент.Родич = РодичДляНового;
             else
-                Родич.OpenFolder = Склади_Папки_Objest.UnigueID;
+                Родич.OpenFolder = Елемент.UnigueID;
 
-            Код.Text = Склади_Папки_Objest.Код;
-            Назва.Text = Склади_Папки_Objest.Назва;
-            Родич.Pointer = Склади_Папки_Objest.Родич;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Родич.Pointer = Елемент.Родич;
         }
 
         protected override void GetValue()
         {
-            Склади_Папки_Objest.Код = Код.Text;
-            Склади_Папки_Objest.Назва = Назва.Text;
-            Склади_Папки_Objest.Родич = Родич.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Родич = Родич.Pointer;
         }
 
         #endregion
@@ -81,11 +81,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await Склади_Папки_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Склади_Папки_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

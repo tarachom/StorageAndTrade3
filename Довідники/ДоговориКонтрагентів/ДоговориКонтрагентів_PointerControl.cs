@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class ДоговориКонтрагентів_PointerControl : PointerControl
     {
+        event EventHandler<ДоговориКонтрагентів_Pointer> PointerChanged;
+
         public ДоговориКонтрагентів_PointerControl()
         {
             pointer = new ДоговориКонтрагентів_Pointer();
             WidthPresentation = 300;
             Caption = $"{ДоговориКонтрагентів_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ДоговориКонтрагентів_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ДоговориКонтрагентів_Pointer pointer;
@@ -48,7 +54,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,21 +62,25 @@ namespace StorageAndTrade
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
-            ДоговориКонтрагентів_ШвидкийВибір page = new ДоговориКонтрагентів_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
-            page.КонтрагентВласник.Pointer = КонтрагентВласник;
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            ДоговориКонтрагентів_ШвидкийВибір page = new ДоговориКонтрагентів_ШвидкийВибір
             {
-                Pointer = new ДоговориКонтрагентів_Pointer(selectPointer);
-
-                AfterSelectFunc?.Invoke();
+                PopoverParent = popover,
+                DirectoryPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new ДоговориКонтрагентів_Pointer(selectPointer);
+                    AfterSelectFunc?.Invoke();
+                }
             };
+            
+            page.КонтрагентВласник.Pointer = КонтрагентВласник;
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }
@@ -78,7 +88,6 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new ДоговориКонтрагентів_Pointer();
-
             AfterSelectFunc?.Invoke();
         }
     }

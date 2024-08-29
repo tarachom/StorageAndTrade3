@@ -33,7 +33,7 @@ namespace StorageAndTrade
 {
     class ВведенняЗалишків_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public ВведенняЗалишків_Objest? ВведенняЗалишків_Objest { get; set; }
+        public ВведенняЗалишків_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -64,7 +64,7 @@ namespace StorageAndTrade
             typeof(float)     //Сума
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -199,12 +199,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (ВведенняЗалишків_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ВведенняЗалишків_Objest.Товари_TablePart.FillJoin([ВведенняЗалишків_Товари_TablePart.НомерРядка]);
-                await ВведенняЗалишків_Objest.Товари_TablePart.Read();
+                ЕлементВласник.Товари_TablePart.FillJoin([ВведенняЗалишків_Товари_TablePart.НомерРядка]);
+                await ЕлементВласник.Товари_TablePart.Read();
 
-                foreach (ВведенняЗалишків_Товари_TablePart.Record record in ВведенняЗалишків_Objest.Товари_TablePart.Records)
+                foreach (ВведенняЗалишків_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -229,9 +229,9 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (ВведенняЗалишків_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ВведенняЗалишків_Objest.Товари_TablePart.Records.Clear();
+                ЕлементВласник.Товари_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -251,10 +251,10 @@ namespace StorageAndTrade
                         Сума = запис.Сума
                     };
 
-                    ВведенняЗалишків_Objest.Товари_TablePart.Records.Add(record);
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
-                await ВведенняЗалишків_Objest.Товари_TablePart.Save(true);
+                await ЕлементВласник.Товари_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -264,7 +264,7 @@ namespace StorageAndTrade
         {
             string ключовіСлова = "";
 
-            if (ВведенняЗалишків_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

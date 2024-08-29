@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class Контрагенти_Елемент : ДовідникЕлемент
     {
-        public Контрагенти_Objest Контрагенти_Objest { get; set; } = new Контрагенти_Objest();
+        public Контрагенти_Objest Елемент { get; set; } = new Контрагенти_Objest();
         public Контрагенти_Папки_Pointer РодичДляНового { get; set; } = new Контрагенти_Папки_Pointer();
 
         #region Field
@@ -40,15 +40,19 @@ namespace StorageAndTrade
         Entry РеєстраційнийНомер = new Entry() { WidthRequest = 300 };
         TextView Опис = new TextView();
         Контрагенти_Папки_PointerControl Родич = new Контрагенти_Папки_PointerControl() { Caption = "Папка:" };
+
         Контрагенти_ТабличнаЧастина_Контакти Контакти = new Контрагенти_ТабличнаЧастина_Контакти();
         Контрагенти_ТабличнаЧастина_Файли Файли = new Контрагенти_ТабличнаЧастина_Файли();
 
         #endregion
 
-        public Контрагенти_Елемент() : base() 
+        public Контрагенти_Елемент() : base()
         {
-            Контрагенти_Objest.UnigueIDChanged += UnigueIDChanged;
-            Контрагенти_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
+
+            Контакти.ЕлементВласник = Елемент;
+            Файли.ЕлементВласник = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -86,40 +90,37 @@ namespace StorageAndTrade
         public override async void SetValue()
         {
             if (IsNew)
-                Контрагенти_Objest.Папка = РодичДляНового;
+                Елемент.Папка = РодичДляНового;
 
-            Код.Text = Контрагенти_Objest.Код;
-            Назва.Text = Контрагенти_Objest.Назва;
-            Родич.Pointer = Контрагенти_Objest.Папка;
-            НазваПовна.Buffer.Text = Контрагенти_Objest.НазваПовна;
-            РеєстраційнийНомер.Text = Контрагенти_Objest.РеєстраційнийНомер;
-            Опис.Buffer.Text = Контрагенти_Objest.Опис;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Родич.Pointer = Елемент.Папка;
+            НазваПовна.Buffer.Text = Елемент.НазваПовна;
+            РеєстраційнийНомер.Text = Елемент.РеєстраційнийНомер;
+            Опис.Buffer.Text = Елемент.Опис;
 
-            Контакти.Контрагенти_Objest = Контрагенти_Objest;
             Контакти.LoadRecords();
-
-            Файли.Контрагенти_Objest = Контрагенти_Objest;
             await Файли.LoadRecords();
         }
 
         protected override void GetValue()
         {
-            Контрагенти_Objest.Код = Код.Text;
-            Контрагенти_Objest.Назва = Назва.Text;
-            Контрагенти_Objest.Папка = Родич.Pointer;
-            Контрагенти_Objest.НазваПовна = НазваПовна.Buffer.Text;
-            Контрагенти_Objest.РеєстраційнийНомер = РеєстраційнийНомер.Text;
-            Контрагенти_Objest.Опис = Опис.Buffer.Text;
-            Контрагенти_Objest.КлючовіСловаДляПошуку = Контакти.КлючовіСловаДляПошуку();
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Папка = Родич.Pointer;
+            Елемент.НазваПовна = НазваПовна.Buffer.Text;
+            Елемент.РеєстраційнийНомер = РеєстраційнийНомер.Text;
+            Елемент.Опис = Опис.Buffer.Text;
+            Елемент.КлючовіСловаДляПошуку = Контакти.КлючовіСловаДляПошуку();
         }
 
         #endregion
 
         protected override async ValueTask Save()
-        {           
+        {
             try
             {
-                if (await Контрагенти_Objest.Save())
+                if (await Елемент.Save())
                 {
                     await Контакти.SaveRecords();
                     await Файли.SaveRecords();
@@ -127,7 +128,7 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Контрагенти_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

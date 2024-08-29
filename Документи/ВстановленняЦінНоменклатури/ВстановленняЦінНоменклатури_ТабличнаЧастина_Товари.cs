@@ -36,7 +36,7 @@ namespace StorageAndTrade
 {
     class ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public ВстановленняЦінНоменклатури_Objest? ВстановленняЦінНоменклатури_Objest { get; set; }
+        public ВстановленняЦінНоменклатури_Objest? ЕлементВласник { get; set; }
         public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
         #region Записи
@@ -152,12 +152,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (ВстановленняЦінНоменклатури_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ВстановленняЦінНоменклатури_Objest.Товари_TablePart.FillJoin([ВстановленняЦінНоменклатури_Товари_TablePart.НомерРядка]);
-                await ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Read();
+                ЕлементВласник.Товари_TablePart.FillJoin([ВстановленняЦінНоменклатури_Товари_TablePart.НомерРядка]);
+                await ЕлементВласник.Товари_TablePart.Read();
 
-                foreach (ВстановленняЦінНоменклатури_Товари_TablePart.Record record in ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Records)
+                foreach (ВстановленняЦінНоменклатури_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -178,9 +178,9 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (ВстановленняЦінНоменклатури_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Records.Clear();
+                ЕлементВласник.Товари_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -197,10 +197,10 @@ namespace StorageAndTrade
                         Ціна = запис.Ціна
                     };
 
-                    ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Records.Add(record);
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
-                await ВстановленняЦінНоменклатури_Objest.Товари_TablePart.Save(true);
+                await ЕлементВласник.Товари_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -210,7 +210,7 @@ namespace StorageAndTrade
         {
             string ключовіСлова = "";
 
-            if (ВстановленняЦінНоменклатури_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
@@ -509,17 +509,17 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
             Store.Clear();
             Записи.Clear();
 
-            if (ВстановленняЦінНоменклатури_Objest != null)
+            if (ЕлементВласник != null)
             {
                 Dictionary<string, object> paramQuery = new Dictionary<string, object>
                 {
-                    { "valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid },
-                    { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
+                    { "valuta", ЕлементВласник.Валюта.UnigueID.UGuid },
+                    { "vid_cen", ЕлементВласник.ВидЦіни.UnigueID.UGuid }
                 };
 
                 var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
 
-                string ВидЦіниНазва = await ВстановленняЦінНоменклатури_Objest.ВидЦіни.GetPresentation();
+                string ВидЦіниНазва = await ЕлементВласник.ВидЦіни.GetPresentation();
 
                 foreach (Dictionary<string, object> row in recordResult.ListRow)
                 {
@@ -529,7 +529,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
                         Номенклатура = new Номенклатура_Pointer(row["Номенклатура"]),
                         Характеристика = new ХарактеристикиНоменклатури_Pointer(),
                         Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
-                        ВидЦіни = ВстановленняЦінНоменклатури_Objest.ВидЦіни,
+                        ВидЦіни = ЕлементВласник.ВидЦіни,
                         Ціна = row["Ціна"] != DBNull.Value ? (decimal)row["Ціна"] : 0
                     };
 
@@ -561,7 +561,7 @@ WITH register AS
 
             #region WHERE
 
-            if (ВстановленняЦінНоменклатури_Objest != null && !ВстановленняЦінНоменклатури_Objest.ВидЦіни.IsEmpty())
+            if (ЕлементВласник != null && !ЕлементВласник.ВидЦіни.IsEmpty())
             {
                 query += $@"
 AND {ЦіниНоменклатури_Const.ВидЦіни} = @vid_cen
@@ -613,12 +613,12 @@ ORDER BY
             Store.Clear();
             Записи.Clear();
 
-            if (ВстановленняЦінНоменклатури_Objest != null)
+            if (ЕлементВласник != null)
             {
                 Dictionary<string, object> paramQuery = new Dictionary<string, object>
                 {
-                    { "valuta", ВстановленняЦінНоменклатури_Objest.Валюта.UnigueID.UGuid },
-                    { "vid_cen", ВстановленняЦінНоменклатури_Objest.ВидЦіни.UnigueID.UGuid }
+                    { "valuta", ЕлементВласник.Валюта.UnigueID.UGuid },
+                    { "vid_cen", ЕлементВласник.ВидЦіни.UnigueID.UGuid }
                 };
 
                 var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);

@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class СеріїНоменклатури_PointerControl : PointerControl
     {
+        event EventHandler<СеріїНоменклатури_Pointer> PointerChanged;
+
         public СеріїНоменклатури_PointerControl()
         {
             pointer = new СеріїНоменклатури_Pointer();
             WidthPresentation = 300;
             Caption = $"{СеріїНоменклатури_Const.FULLNAME}:";
+            PointerChanged += async (object? _, СеріїНоменклатури_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         СеріїНоменклатури_Pointer pointer;
@@ -48,30 +54,29 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             СеріїНоменклатури_ШвидкийВибір page = new СеріїНоменклатури_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new СеріїНоменклатури_Pointer(selectPointer);
-
                     AfterSelectFunc?.Invoke();
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

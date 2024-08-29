@@ -35,7 +35,7 @@ namespace StorageAndTrade
 {
     class ЗамовленняКлієнта_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public ЗамовленняКлієнта_Objest? ЗамовленняКлієнта_Objest { get; set; }
+        public ЗамовленняКлієнта_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -272,12 +272,12 @@ LIMIT 1
             Store.Clear();
             Записи.Clear();
 
-            if (ЗамовленняКлієнта_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ЗамовленняКлієнта_Objest.Товари_TablePart.FillJoin([ЗамовленняКлієнта_Товари_TablePart.НомерРядка]);
-                await ЗамовленняКлієнта_Objest.Товари_TablePart.Read();
+                ЕлементВласник.Товари_TablePart.FillJoin([ЗамовленняКлієнта_Товари_TablePart.НомерРядка]);
+                await ЕлементВласник.Товари_TablePart.Read();
 
-                foreach (ЗамовленняКлієнта_Товари_TablePart.Record record in ЗамовленняКлієнта_Objest.Товари_TablePart.Records)
+                foreach (ЗамовленняКлієнта_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -304,9 +304,9 @@ LIMIT 1
 
         public override async ValueTask SaveRecords()
         {
-            if (ЗамовленняКлієнта_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ЗамовленняКлієнта_Objest.Товари_TablePart.Records.Clear();
+                ЕлементВласник.Товари_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -328,10 +328,10 @@ LIMIT 1
                         Склад = запис.Склад
                     };
 
-                    ЗамовленняКлієнта_Objest.Товари_TablePart.Records.Add(record);
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
-                await ЗамовленняКлієнта_Objest.Товари_TablePart.Save(true);
+                await ЕлементВласник.Товари_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -351,7 +351,7 @@ LIMIT 1
         {
             string ключовіСлова = "";
 
-            if (ЗамовленняКлієнта_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

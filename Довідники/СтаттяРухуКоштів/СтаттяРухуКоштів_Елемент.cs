@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class СтаттяРухуКоштів_Елемент : ДовідникЕлемент
     {
-        public СтаттяРухуКоштів_Objest СтаттяРухуКоштів_Objest { get; set; } = new СтаттяРухуКоштів_Objest();
+        public СтаттяРухуКоштів_Objest Елемент { get; set; } = new СтаттяРухуКоштів_Objest();
 
         #region Fields
 
@@ -44,8 +44,8 @@ namespace StorageAndTrade
 
         public СтаттяРухуКоштів_Елемент() : base()
         {
-            СтаттяРухуКоштів_Objest.UnigueIDChanged += UnigueIDChanged;
-            СтаттяРухуКоштів_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -71,25 +71,25 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
-                СтаттяРухуКоштів_Objest.ВидРухуКоштів = ВидиРухуКоштів.ОплатаОборотнихАктивів;
+                Елемент.ВидРухуКоштів = ВидиРухуКоштів.ОплатаОборотнихАктивів;
 
-            Код.Text = СтаттяРухуКоштів_Objest.Код;
-            Назва.Text = СтаттяРухуКоштів_Objest.Назва;
-            КореспондуючийРахунок.Text = СтаттяРухуКоштів_Objest.КореспондуючийРахунок;
-            ВидРухуКоштів.ActiveId = СтаттяРухуКоштів_Objest.ВидРухуКоштів.ToString();
-            Опис.Buffer.Text = СтаттяРухуКоштів_Objest.Опис;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            КореспондуючийРахунок.Text = Елемент.КореспондуючийРахунок;
+            ВидРухуКоштів.ActiveId = Елемент.ВидРухуКоштів.ToString();
+            Опис.Buffer.Text = Елемент.Опис;
         }
 
         protected override void GetValue()
         {
-            СтаттяРухуКоштів_Objest.Код = Код.Text;
-            СтаттяРухуКоштів_Objest.Назва = Назва.Text;
-            СтаттяРухуКоштів_Objest.КореспондуючийРахунок = КореспондуючийРахунок.Text;
-            СтаттяРухуКоштів_Objest.ВидРухуКоштів = Enum.Parse<ВидиРухуКоштів>(ВидРухуКоштів.ActiveId);
-            СтаттяРухуКоштів_Objest.Опис = Опис.Buffer.Text;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.КореспондуючийРахунок = КореспондуючийРахунок.Text;
+            Елемент.ВидРухуКоштів = Enum.Parse<ВидиРухуКоштів>(ВидРухуКоштів.ActiveId);
+            Елемент.Опис = Опис.Buffer.Text;
         }
 
         #endregion
@@ -98,11 +98,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await СтаттяРухуКоштів_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(СтаттяРухуКоштів_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

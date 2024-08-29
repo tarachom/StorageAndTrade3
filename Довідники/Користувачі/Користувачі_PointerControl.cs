@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class Користувачі_PointerControl : PointerControl
     {
+        event EventHandler<Користувачі_Pointer> PointerChanged;
+
         public Користувачі_PointerControl()
         {
             pointer = new Користувачі_Pointer();
             WidthPresentation = 300;
             Caption = $"{Користувачі_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Користувачі_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         Користувачі_Pointer pointer;
@@ -48,30 +54,29 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             Користувачі_ШвидкийВибір page = new Користувачі_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new Користувачі_Pointer(selectPointer);
-
                     AfterSelectFunc?.Invoke();
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

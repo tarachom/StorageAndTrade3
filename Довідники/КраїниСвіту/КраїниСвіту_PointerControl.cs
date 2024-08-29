@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class КраїниСвіту_PointerControl : PointerControl
     {
+        event EventHandler<КраїниСвіту_Pointer> PointerChanged;
+
         public КраїниСвіту_PointerControl()
         {
             pointer = new КраїниСвіту_Pointer();
             WidthPresentation = 300;
             Caption = $"{КраїниСвіту_Const.FULLNAME}:";
+            PointerChanged += async (object? _, КраїниСвіту_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         КраїниСвіту_Pointer pointer;
@@ -48,30 +54,29 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             КраїниСвіту_ШвидкийВибір page = new КраїниСвіту_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new КраїниСвіту_Pointer(selectPointer);
-
                     AfterSelectFunc?.Invoke();
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

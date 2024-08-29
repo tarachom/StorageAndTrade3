@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class БанківськіРахункиОрганізацій_Елемент : ДовідникЕлемент
     {
-        public БанківськіРахункиОрганізацій_Objest БанківськіРахункиОрганізацій_Objest { get; set; } = new БанківськіРахункиОрганізацій_Objest();
+        public БанківськіРахункиОрганізацій_Objest Елемент { get; set; } = new БанківськіРахункиОрганізацій_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -38,8 +38,8 @@ namespace StorageAndTrade
 
         public БанківськіРахункиОрганізацій_Елемент() : base() 
         {
-            БанківськіРахункиОрганізацій_Objest.UnigueIDChanged += UnigueIDChanged;
-            БанківськіРахункиОрганізацій_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -61,18 +61,18 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = БанківськіРахункиОрганізацій_Objest.Код;
-            Назва.Text = БанківськіРахункиОрганізацій_Objest.Назва;
-            Валюта.Pointer = БанківськіРахункиОрганізацій_Objest.Валюта;
-            Організація.Pointer = БанківськіРахункиОрганізацій_Objest.Організація;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Валюта.Pointer = Елемент.Валюта;
+            Організація.Pointer = Елемент.Організація;
         }
 
         protected override void GetValue()
         {
-            БанківськіРахункиОрганізацій_Objest.Код = Код.Text;
-            БанківськіРахункиОрганізацій_Objest.Назва = Назва.Text;
-            БанківськіРахункиОрганізацій_Objest.Валюта = Валюта.Pointer;
-            БанківськіРахункиОрганізацій_Objest.Організація = Організація.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Валюта = Валюта.Pointer;
+            Елемент.Організація = Організація.Pointer;
         }
 
         #endregion
@@ -81,11 +81,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await БанківськіРахункиОрганізацій_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(БанківськіРахункиОрганізацій_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

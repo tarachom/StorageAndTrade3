@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class ВидиЦінПостачальників_Елемент : ДовідникЕлемент
     {
-        public ВидиЦінПостачальників_Objest ВидиЦінПостачальників_Objest { get; set; } = new ВидиЦінПостачальників_Objest();
+        public ВидиЦінПостачальників_Objest Елемент { get; set; } = new ВидиЦінПостачальників_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -37,8 +37,8 @@ namespace StorageAndTrade
 
         public ВидиЦінПостачальників_Елемент() : base() 
         {
-            ВидиЦінПостачальників_Objest.UnigueIDChanged += UnigueIDChanged;
-            ВидиЦінПостачальників_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -57,16 +57,16 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = ВидиЦінПостачальників_Objest.Код;
-            Назва.Text = ВидиЦінПостачальників_Objest.Назва;
-            Валюта.Pointer = ВидиЦінПостачальників_Objest.Валюта;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Валюта.Pointer = Елемент.Валюта;
         }
 
         protected override void GetValue()
         {
-            ВидиЦінПостачальників_Objest.Код = Код.Text;
-            ВидиЦінПостачальників_Objest.Назва = Назва.Text;
-            ВидиЦінПостачальників_Objest.Валюта = Валюта.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Валюта = Валюта.Pointer;
         }
 
         #endregion
@@ -75,11 +75,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ВидиЦінПостачальників_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ВидиЦінПостачальників_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

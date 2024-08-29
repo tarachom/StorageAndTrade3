@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class ПакуванняОдиниціВиміру_Елемент : ДовідникЕлемент
     {
-        public ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміру_Objest { get; set; } = new ПакуванняОдиниціВиміру_Objest();
+        public ПакуванняОдиниціВиміру_Objest Елемент { get; set; } = new ПакуванняОдиниціВиміру_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -39,8 +39,8 @@ namespace StorageAndTrade
 
         public ПакуванняОдиниціВиміру_Елемент() : base()
         {
-            ПакуванняОдиниціВиміру_Objest.UnigueIDChanged += UnigueIDChanged;
-            ПакуванняОдиниціВиміру_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -63,20 +63,20 @@ namespace StorageAndTrade
         public override void SetValue()
         {
             if (IsNew)
-                ПакуванняОдиниціВиміру_Objest.КількістьУпаковок = 1;
+                Елемент.КількістьУпаковок = 1;
 
-            Код.Text = ПакуванняОдиниціВиміру_Objest.Код;
-            Назва.Text = ПакуванняОдиниціВиміру_Objest.Назва;
-            НазваПовна.Text = ПакуванняОдиниціВиміру_Objest.НазваПовна;
-            КількістьУпаковок.Value = ПакуванняОдиниціВиміру_Objest.КількістьУпаковок;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            НазваПовна.Text = Елемент.НазваПовна;
+            КількістьУпаковок.Value = Елемент.КількістьУпаковок;
         }
 
         protected override void GetValue()
         {
-            ПакуванняОдиниціВиміру_Objest.Код = Код.Text;
-            ПакуванняОдиниціВиміру_Objest.Назва = Назва.Text;
-            ПакуванняОдиниціВиміру_Objest.НазваПовна = НазваПовна.Text;
-            ПакуванняОдиниціВиміру_Objest.КількістьУпаковок = КількістьУпаковок.Value;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.НазваПовна = НазваПовна.Text;
+            Елемент.КількістьУпаковок = КількістьУпаковок.Value;
         }
 
         #endregion
@@ -85,11 +85,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ПакуванняОдиниціВиміру_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ПакуванняОдиниціВиміру_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

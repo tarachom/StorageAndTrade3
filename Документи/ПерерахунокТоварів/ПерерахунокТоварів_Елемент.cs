@@ -16,7 +16,7 @@ namespace StorageAndTrade
 {
     class ПерерахунокТоварів_Елемент : ДокументЕлемент
     {
-        public ПерерахунокТоварів_Objest ПерерахунокТоварів_Objest { get; set; } = new ПерерахунокТоварів_Objest();
+        public ПерерахунокТоварів_Objest Елемент { get; set; } = new ПерерахунокТоварів_Objest();
 
         #region Fields
 
@@ -29,32 +29,27 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ", WidthPresentation = 300 };
         Entry Коментар = new Entry() { WidthRequest = 920 };
 
-        #endregion
-
-        #region TabularParts
         ПерерахунокТоварів_ТабличнаЧастина_Товари Товари = new ПерерахунокТоварів_ТабличнаЧастина_Товари();
 
         #endregion
 
         public ПерерахунокТоварів_Елемент() : base()
         {
-            ПерерахунокТоварів_Objest.UnigueIDChanged += UnigueIDChanged;
-            ПерерахунокТоварів_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ПерерахунокТоварів_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
 
+            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
 
             FillComboBoxes();
         }
 
-        void FillComboBoxes()
-        {
-
-        }
+        void FillComboBoxes() { }
 
         protected override void CreateContainer1(Box vBox)
         {
@@ -89,37 +84,36 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ПерерахунокТоварів_Objest.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
-                ПерерахунокТоварів_Objest.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
-                ПерерахунокТоварів_Objest.Склад = ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const;
+                Елемент.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
+                Елемент.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
+                Елемент.Склад = ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const;
             }
 
-            НомерДок.Text = ПерерахунокТоварів_Objest.НомерДок;
-            ДатаДок.Value = ПерерахунокТоварів_Objest.ДатаДок;
-            Склад.Pointer = ПерерахунокТоварів_Objest.Склад;
-            Відповідальний.Pointer = ПерерахунокТоварів_Objest.Відповідальний;
-            Коментар.Text = ПерерахунокТоварів_Objest.Коментар;
-            Автор.Pointer = ПерерахунокТоварів_Objest.Автор;
-            Організація.Pointer = ПерерахунокТоварів_Objest.Організація;
-            Підрозділ.Pointer = ПерерахунокТоварів_Objest.Підрозділ;
+            НомерДок.Text = Елемент.НомерДок;
+            ДатаДок.Value = Елемент.ДатаДок;
+            Склад.Pointer = Елемент.Склад;
+            Відповідальний.Pointer = Елемент.Відповідальний;
+            Коментар.Text = Елемент.Коментар;
+            Автор.Pointer = Елемент.Автор;
+            Організація.Pointer = Елемент.Організація;
+            Підрозділ.Pointer = Елемент.Підрозділ;
 
-            /* Таблична частина: Товари */
-            Товари.ПерерахунокТоварів_Objest = ПерерахунокТоварів_Objest;
+            //Таблична частина Товари
             await Товари.LoadRecords();
         }
 
         protected override void GetValue()
         {
-            ПерерахунокТоварів_Objest.НомерДок = НомерДок.Text;
-            ПерерахунокТоварів_Objest.ДатаДок = ДатаДок.Value;
-            ПерерахунокТоварів_Objest.Склад = Склад.Pointer;
-            ПерерахунокТоварів_Objest.Відповідальний = Відповідальний.Pointer;
-            ПерерахунокТоварів_Objest.Коментар = Коментар.Text;
-            ПерерахунокТоварів_Objest.Автор = Автор.Pointer;
-            ПерерахунокТоварів_Objest.Організація = Організація.Pointer;
-            ПерерахунокТоварів_Objest.Підрозділ = Підрозділ.Pointer;
+            Елемент.НомерДок = НомерДок.Text;
+            Елемент.ДатаДок = ДатаДок.Value;
+            Елемент.Склад = Склад.Pointer;
+            Елемент.Відповідальний = Відповідальний.Pointer;
+            Елемент.Коментар = Коментар.Text;
+            Елемент.Автор = Автор.Pointer;
+            Елемент.Організація = Організація.Pointer;
+            Елемент.Підрозділ = Підрозділ.Pointer;
 
-            ПерерахунокТоварів_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
+            Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }
 
         string КлючовіСловаДляПошуку()
@@ -132,10 +126,10 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            
+
             try
             {
-                if (await ПерерахунокТоварів_Objest.Save())
+                if (await Елемент.Save())
                 {
                     await Товари.SaveRecords();
                     isSave = true;
@@ -143,7 +137,7 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ПерерахунокТоварів_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
 
             return isSave;
@@ -153,16 +147,16 @@ namespace StorageAndTrade
         {
             if (spendDoc)
             {
-                bool isSpend = await ПерерахунокТоварів_Objest.SpendTheDocument(ПерерахунокТоварів_Objest.ДатаДок);
+                bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПерерахунокТоварів_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
 
                 return isSpend;
             }
             else
             {
-                await ПерерахунокТоварів_Objest.ClearSpendTheDocument();
+                await Елемент.ClearSpendTheDocument();
 
                 return true;
             }

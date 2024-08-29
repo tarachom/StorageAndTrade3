@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class Організації_Елемент : ДовідникЕлемент
     {
-        public Організації_Objest Організації_Objest { get; set; } = new Організації_Objest();
+        public Організації_Objest Елемент { get; set; } = new Організації_Objest();
 
         #region Field
 
@@ -48,10 +48,12 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Організації_Елемент() : base() 
+        public Організації_Елемент() : base()
         {
-            Організації_Objest.UnigueIDChanged += UnigueIDChanged;
-            Організації_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
+
+            Контакти.ЕлементВласник = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -94,31 +96,30 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = Організації_Objest.Код;
-            Назва.Text = Організації_Objest.Назва;
-            НазваСкорочена.Text = Організації_Objest.НазваСкорочена;
-            ДатаРеєстрації.Value = Організації_Objest.ДатаРеєстрації;
-            КраїнаРеєстрації.Text = Організації_Objest.КраїнаРеєстрації;
-            СвідоцтвоСеріяНомер.Text = Організації_Objest.СвідоцтвоСеріяНомер;
-            СвідоцтвоДатаВидачі.Text = Організації_Objest.СвідоцтвоДатаВидачі;
-            НазваПовна.Buffer.Text = Організації_Objest.НазваПовна;
-            Холдинг.Pointer = Організації_Objest.Холдинг;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            НазваСкорочена.Text = Елемент.НазваСкорочена;
+            ДатаРеєстрації.Value = Елемент.ДатаРеєстрації;
+            КраїнаРеєстрації.Text = Елемент.КраїнаРеєстрації;
+            СвідоцтвоСеріяНомер.Text = Елемент.СвідоцтвоСеріяНомер;
+            СвідоцтвоДатаВидачі.Text = Елемент.СвідоцтвоДатаВидачі;
+            НазваПовна.Buffer.Text = Елемент.НазваПовна;
+            Холдинг.Pointer = Елемент.Холдинг;
 
-            Контакти.Організації_Objest = Організації_Objest;
             Контакти.LoadRecords();
         }
 
         protected override void GetValue()
         {
-            Організації_Objest.Код = Код.Text;
-            Організації_Objest.Назва = Назва.Text;
-            Організації_Objest.НазваСкорочена = НазваСкорочена.Text;
-            Організації_Objest.ДатаРеєстрації = ДатаРеєстрації.Value;
-            Організації_Objest.КраїнаРеєстрації = КраїнаРеєстрації.Text;
-            Організації_Objest.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер.Text;
-            Організації_Objest.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі.Text;
-            Організації_Objest.НазваПовна = НазваПовна.Buffer.Text;
-            Організації_Objest.Холдинг = Холдинг.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.НазваСкорочена = НазваСкорочена.Text;
+            Елемент.ДатаРеєстрації = ДатаРеєстрації.Value;
+            Елемент.КраїнаРеєстрації = КраїнаРеєстрації.Text;
+            Елемент.СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер.Text;
+            Елемент.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі.Text;
+            Елемент.НазваПовна = НазваПовна.Buffer.Text;
+            Елемент.Холдинг = Холдинг.Pointer;
         }
 
         #endregion
@@ -127,13 +128,13 @@ namespace StorageAndTrade
         {
             try
             {
-                if (await Організації_Objest.Save())
+                if (await Елемент.Save())
                     await Контакти.SaveRecords();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Організації_Objest.GetBasis(), Caption, ex);
-            }            
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+            }
         }
     }
 }

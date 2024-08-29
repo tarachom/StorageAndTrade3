@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class ДоговориКонтрагентів_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl() { WidthPresentation = 100 };
+        public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl() { Caption = "Контрагент:", WidthPresentation = 100 };
 
         public ДоговориКонтрагентів_ШвидкийВибір() : base()
         {
@@ -51,7 +51,7 @@ namespace StorageAndTrade
 
                     page.КонтрагентВласник.Pointer = КонтрагентВласник.Pointer;
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
 
                     await page.SetValue();
                 };
@@ -62,7 +62,7 @@ namespace StorageAndTrade
             //Новий
             {
                 LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += (object? sender, EventArgs args) =>
+                linkNew.Clicked += async (object? sender, EventArgs args) =>
                 {
                     ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
                     {
@@ -70,7 +70,9 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{ДоговориКонтрагентів_Const.FULLNAME} *", () => { return page; });
+                    await page.Елемент.New();
+
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
 
                     page.SetValue();
                 };
@@ -80,8 +82,7 @@ namespace StorageAndTrade
 
             //Власник
             HBoxTop.PackStart(КонтрагентВласник, false, false, 2);
-            КонтрагентВласник.Caption = "Контрагент:";
-            КонтрагентВласник.AfterSelectFunc = async () => { await LoadRecords(); };
+            КонтрагентВласник.AfterSelectFunc = async () => await LoadRecords();
         }
 
         protected override async ValueTask LoadRecords()

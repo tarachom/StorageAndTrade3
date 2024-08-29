@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class ВстановленняЦінНоменклатури_PointerControl : PointerControl
     {
+        event EventHandler<ВстановленняЦінНоменклатури_Pointer> PointerChanged;
+
         public ВстановленняЦінНоменклатури_PointerControl()
         {
             pointer = new ВстановленняЦінНоменклатури_Pointer();
             WidthPresentation = 300;
             Caption = $"{ВстановленняЦінНоменклатури_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ВстановленняЦінНоменклатури_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ВстановленняЦінНоменклатури_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,10 +62,7 @@ namespace StorageAndTrade
             ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new ВстановленняЦінНоменклатури_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ВстановленняЦінНоменклатури_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ВстановленняЦінНоменклатури_Const.FULLNAME}", () => { return page; });

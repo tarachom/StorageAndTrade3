@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class БанківськіРахункиКонтрагентів_Елемент : ДовідникЕлемент
     {
-        public БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентів_Objest { get; set; } = new БанківськіРахункиКонтрагентів_Objest();
+        public БанківськіРахункиКонтрагентів_Objest Елемент { get; set; } = new БанківськіРахункиКонтрагентів_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -38,8 +38,8 @@ namespace StorageAndTrade
 
         public БанківськіРахункиКонтрагентів_Елемент() : base() 
         {
-            БанківськіРахункиКонтрагентів_Objest.UnigueIDChanged += UnigueIDChanged;
-            БанківськіРахункиКонтрагентів_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -61,18 +61,18 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = БанківськіРахункиКонтрагентів_Objest.Код;
-            Назва.Text = БанківськіРахункиКонтрагентів_Objest.Назва;
-            Валюта.Pointer = БанківськіРахункиКонтрагентів_Objest.Валюта;
-            Контрагент.Pointer = БанківськіРахункиКонтрагентів_Objest.Контрагент;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Валюта.Pointer = Елемент.Валюта;
+            Контрагент.Pointer = Елемент.Контрагент;
         }
 
         protected override void GetValue()
         {
-            БанківськіРахункиКонтрагентів_Objest.Код = Код.Text;
-            БанківськіРахункиКонтрагентів_Objest.Назва = Назва.Text;
-            БанківськіРахункиКонтрагентів_Objest.Валюта = Валюта.Pointer;
-            БанківськіРахункиКонтрагентів_Objest.Контрагент = Контрагент.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Валюта = Валюта.Pointer;
+            Елемент.Контрагент = Контрагент.Pointer;
         }
 
         #endregion
@@ -81,11 +81,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await БанківськіРахункиКонтрагентів_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(БанківськіРахункиКонтрагентів_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

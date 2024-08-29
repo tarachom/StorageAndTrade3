@@ -47,7 +47,7 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {Склади_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Склади_Const.FULLNAME}", () => { return page; });
 
                     await page.SetValue();
                 };
@@ -58,7 +58,7 @@ namespace StorageAndTrade
             //Новий
             {
                 LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += (object? sender, EventArgs args) =>
+                linkNew.Clicked += async (object? sender, EventArgs args) =>
                 {
                     Склади_Елемент page = new Склади_Елемент
                     {
@@ -66,7 +66,9 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{Склади_Const.FULLNAME} *", () => { return page; });
+                    await page.Елемент.New();
+
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
 
                     page.SetValue();
                 };

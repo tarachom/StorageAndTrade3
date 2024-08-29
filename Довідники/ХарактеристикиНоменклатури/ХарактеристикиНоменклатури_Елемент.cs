@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class ХарактеристикиНоменклатури_Елемент : ДовідникЕлемент
     {
-        public ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest { get; set; } = new ХарактеристикиНоменклатури_Objest();
+        public ХарактеристикиНоменклатури_Objest Елемент { get; set; } = new ХарактеристикиНоменклатури_Objest();
         public Номенклатура_Pointer НоменклатураДляНового { get; set; } = new Номенклатура_Pointer();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -39,8 +39,8 @@ namespace StorageAndTrade
 
         public ХарактеристикиНоменклатури_Елемент() : base() 
         {
-            ХарактеристикиНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
-            ХарактеристикиНоменклатури_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -60,23 +60,23 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
-                ХарактеристикиНоменклатури_Objest.Номенклатура = НоменклатураДляНового;
+                Елемент.Номенклатура = НоменклатураДляНового;
 
-            Код.Text = ХарактеристикиНоменклатури_Objest.Код;
-            Назва.Text = ХарактеристикиНоменклатури_Objest.Назва;
-            НазваПовна.Buffer.Text = ХарактеристикиНоменклатури_Objest.НазваПовна;
-            Номенклатура.Pointer = ХарактеристикиНоменклатури_Objest.Номенклатура;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            НазваПовна.Buffer.Text = Елемент.НазваПовна;
+            Номенклатура.Pointer = Елемент.Номенклатура;
         }
 
         protected override void GetValue()
         {
-            ХарактеристикиНоменклатури_Objest.Код = Код.Text;
-            ХарактеристикиНоменклатури_Objest.Назва = Назва.Text;
-            ХарактеристикиНоменклатури_Objest.НазваПовна = НазваПовна.Buffer.Text;
-            ХарактеристикиНоменклатури_Objest.Номенклатура = Номенклатура.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.НазваПовна = НазваПовна.Buffer.Text;
+            Елемент.Номенклатура = Номенклатура.Pointer;
         }
 
         #endregion
@@ -85,11 +85,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ХарактеристикиНоменклатури_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ХарактеристикиНоменклатури_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

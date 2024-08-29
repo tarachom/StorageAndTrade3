@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class СкладськіКомірки_PointerControl : PointerControl
     {
+        event EventHandler<СкладськіКомірки_Pointer> PointerChanged;
+
         public СкладськіКомірки_PointerControl()
         {
             pointer = new СкладськіКомірки_Pointer();
             WidthPresentation = 300;
             Caption = $"{СкладськіКомірки_Const.FULLNAME}:";
+            PointerChanged += async (object? _, СкладськіКомірки_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         СкладськіКомірки_Pointer pointer;
@@ -48,7 +54,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,21 +62,26 @@ namespace StorageAndTrade
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
-            СкладськіКомірки_ШвидкийВибір page = new СкладськіКомірки_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, DirectoryPointerItem = Pointer.UnigueID };
-            page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник;
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            СкладськіКомірки_ШвидкийВибір page = new СкладськіКомірки_ШвидкийВибір
             {
-                Pointer = new СкладськіКомірки_Pointer(selectPointer);
+                PopoverParent = popover,
+                DirectoryPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new СкладськіКомірки_Pointer(selectPointer);
 
-                AfterSelectFunc?.Invoke();
+                    AfterSelectFunc?.Invoke();
+                }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник;
+
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

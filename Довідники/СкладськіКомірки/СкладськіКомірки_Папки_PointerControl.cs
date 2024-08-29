@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class СкладськіКомірки_Папки_PointerControl : PointerControl
     {
+        event EventHandler<СкладськіКомірки_Папки_Pointer> PointerChanged;
+
         public СкладськіКомірки_Папки_PointerControl()
         {
             pointer = new СкладськіКомірки_Папки_Pointer();
             WidthPresentation = 300;
             Caption = $"{СкладськіКомірки_Папки_Const.FULLNAME}:";
+            PointerChanged += async (object? _, СкладськіКомірки_Папки_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         public UnigueID? OpenFolder { get; set; }
@@ -50,7 +56,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -58,26 +64,25 @@ namespace StorageAndTrade
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             СкладськіКомірки_Папки_Дерево_ШвидкийВибір page = new СкладськіКомірки_Папки_Дерево_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 OpenFolder = OpenFolder,
                 DirectoryPointerItem = Pointer.UnigueID,
                 СкладПриміщенняВласник = СкладПриміщенняВласник,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new СкладськіКомірки_Папки_Pointer(selectPointer);
-
                     AfterSelectFunc?.Invoke();
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             page.LoadTree();
         }

@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class Склади_Папки_PointerControl : PointerControl
     {
+        event EventHandler<Склади_Папки_Pointer> PointerChanged;
+
         public Склади_Папки_PointerControl()
         {
             pointer = new Склади_Папки_Pointer();
             WidthPresentation = 300;
             Caption = $"{Склади_Папки_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Склади_Папки_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         public UnigueID? OpenFolder { get; set; }
@@ -50,26 +56,30 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
-            Склади_Папки_Дерево_ШвидкийВибір page = new Склади_Папки_Дерево_ШвидкийВибір() { PopoverParent = PopoverSmallSelect, OpenFolder = OpenFolder, DirectoryPointerItem = Pointer.UnigueID };
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+            Склади_Папки_Дерево_ШвидкийВибір page = new Склади_Папки_Дерево_ШвидкийВибір
             {
-                Pointer = new Склади_Папки_Pointer(selectPointer);
-
-                AfterSelectFunc?.Invoke();
+                PopoverParent = popover,
+                OpenFolder = OpenFolder,
+                DirectoryPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new Склади_Папки_Pointer(selectPointer);
+                    AfterSelectFunc?.Invoke();
+                }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             page.LoadTree();
         }

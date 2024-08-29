@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class СкладськіКомірки_Папки_Елемент : ДовідникЕлемент
     {
-        public СкладськіКомірки_Папки_Objest СкладськіКомірки_Папки_Objest { get; set; } = new СкладськіКомірки_Папки_Objest();
+        public СкладськіКомірки_Папки_Objest Елемент { get; set; } = new СкладськіКомірки_Папки_Objest();
         public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
         public СкладськіПриміщення_Pointer СкладськеПриміщенняДляНового { get; set; } = new СкладськіПриміщення_Pointer();
 
@@ -40,8 +40,8 @@ namespace StorageAndTrade
 
         public СкладськіКомірки_Папки_Елемент() : base() 
         {
-            СкладськіКомірки_Папки_Objest.UnigueIDChanged += UnigueIDChanged;
-            СкладськіКомірки_Папки_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -65,24 +65,24 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                СкладськіКомірки_Папки_Objest.Родич = РодичДляНового;
-                СкладськіКомірки_Папки_Objest.Власник = СкладськеПриміщенняДляНового;
+                Елемент.Родич = РодичДляНового;
+                Елемент.Власник = СкладськеПриміщенняДляНового;
             }
             else
-                Родич.OpenFolder = СкладськіКомірки_Папки_Objest.UnigueID;
+                Родич.OpenFolder = Елемент.UnigueID;
 
-            Код.Text = СкладськіКомірки_Папки_Objest.Код;
-            Назва.Text = СкладськіКомірки_Папки_Objest.Назва;
-            Родич.Pointer = СкладськіКомірки_Папки_Objest.Родич;
-            СкладськеПриміщення.Pointer = СкладськіКомірки_Папки_Objest.Власник;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Родич.Pointer = Елемент.Родич;
+            СкладськеПриміщення.Pointer = Елемент.Власник;
         }
 
         protected override void GetValue()
         {
-            СкладськіКомірки_Папки_Objest.Код = Код.Text;
-            СкладськіКомірки_Папки_Objest.Назва = Назва.Text;
-            СкладськіКомірки_Папки_Objest.Родич = Родич.Pointer;
-            СкладськіКомірки_Папки_Objest.Власник = СкладськеПриміщення.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Родич = Родич.Pointer;
+            Елемент.Власник = СкладськеПриміщення.Pointer;
         }
 
         #endregion
@@ -91,11 +91,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await СкладськіКомірки_Папки_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(СкладськіКомірки_Папки_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

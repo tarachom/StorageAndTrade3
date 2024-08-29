@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class РахунокФактура_PointerControl : PointerControl
     {
+        event EventHandler<РахунокФактура_Pointer> PointerChanged;
+
         public РахунокФактура_PointerControl()
         {
             pointer = new РахунокФактура_Pointer();
             WidthPresentation = 300;
             Caption = $"{РахунокФактура_Const.FULLNAME}:";
+            PointerChanged += async (object? _, РахунокФактура_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         РахунокФактура_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,13 +62,10 @@ namespace StorageAndTrade
             РахунокФактура page = new РахунокФактура
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new РахунокФактура_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new РахунокФактура_Pointer(selectPointer); }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {РахунокФактура_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {РахунокФактура_Const.FULLNAME}", () => page);
 
             page.SetValue();
         }

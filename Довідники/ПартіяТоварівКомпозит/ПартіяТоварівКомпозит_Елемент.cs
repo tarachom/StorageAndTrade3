@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class ПартіяТоварівКомпозит_Елемент : ДовідникЕлемент
     {
-        public ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозит_Objest { get; set; } = new ПартіяТоварівКомпозит_Objest();
+        public ПартіяТоварівКомпозит_Objest Елемент { get; set; } = new ПартіяТоварівКомпозит_Objest();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
         ComboBoxText ТипДокументу = new ComboBoxText();
@@ -39,8 +39,8 @@ namespace StorageAndTrade
 
         public ПартіяТоварівКомпозит_Елемент() : base()
         {
-            ПартіяТоварівКомпозит_Objest.UnigueIDChanged += UnigueIDChanged;
-            ПартіяТоварівКомпозит_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
 
             FillComboBoxes();
         }
@@ -80,22 +80,22 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Назва.Text = ПартіяТоварівКомпозит_Objest.Назва;
-            ТипДокументу.ActiveId = ПартіяТоварівКомпозит_Objest.ТипДокументу.ToString();
-            ПоступленняТоварівТаПослуг.Pointer = ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг;
-            ВведенняЗалишків.Pointer = ПартіяТоварівКомпозит_Objest.ВведенняЗалишків;
+            Назва.Text = Елемент.Назва;
+            ТипДокументу.ActiveId = Елемент.ТипДокументу.ToString();
+            ПоступленняТоварівТаПослуг.Pointer = Елемент.ПоступленняТоварівТаПослуг;
+            ВведенняЗалишків.Pointer = Елемент.ВведенняЗалишків;
         }
 
         protected override void GetValue()
         {
-            ПартіяТоварівКомпозит_Objest.Назва = Назва.Text;
+            Елемент.Назва = Назва.Text;
 
             /*
             Редагування заборонено, тільки назва
 
-            ПартіяТоварівКомпозит_Objest.ТипДокументу = Enum.Parse<Перелічення.ТипДокументуПартіяТоварівКомпозит>(ТипДокументу.ActiveId);
-            ПартіяТоварівКомпозит_Objest.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг.Pointer;
-            ПартіяТоварівКомпозит_Objest.ВведенняЗалишків = ВведенняЗалишків.Pointer;
+            Елемент.ТипДокументу = Enum.Parse<Перелічення.ТипДокументуПартіяТоварівКомпозит>(ТипДокументу.ActiveId);
+            Елемент.ПоступленняТоварівТаПослуг = ПоступленняТоварівТаПослуг.Pointer;
+            Елемент.ВведенняЗалишків = ВведенняЗалишків.Pointer;
             
             */
         }
@@ -106,11 +106,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ПартіяТоварівКомпозит_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ПартіяТоварівКомпозит_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

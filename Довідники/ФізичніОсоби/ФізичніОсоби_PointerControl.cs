@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class ФізичніОсоби_PointerControl : PointerControl
     {
+        event EventHandler<ФізичніОсоби_Pointer> PointerChanged;
+
         public ФізичніОсоби_PointerControl()
         {
             pointer = new ФізичніОсоби_Pointer();
             WidthPresentation = 300;
             Caption = $"{ФізичніОсоби_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ФізичніОсоби_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ФізичніОсоби_Pointer pointer;
@@ -48,30 +54,29 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             ФізичніОсоби_ШвидкийВибір page = new ФізичніОсоби_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new ФізичніОсоби_Pointer(selectPointer);
-
                     AfterSelectFunc?.Invoke();
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

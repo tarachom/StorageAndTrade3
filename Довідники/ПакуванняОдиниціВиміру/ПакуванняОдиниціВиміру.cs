@@ -64,7 +64,7 @@ namespace StorageAndTrade
 
             //Відбори
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.ДодатиВідбір(TreeViewGrid, ПакуванняОдиниціВиміру_ВідбориДляПошуку.Відбори(searchText), true);
-            
+
             await ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords(TreeViewGrid);
 
             if (ТабличніСписки.ПакуванняОдиниціВиміру_Записи.FirstPath != null)
@@ -80,8 +80,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.ПакуванняОдиниціВиміру_Objest.New();
-            else if (unigueID == null || !await page.ПакуванняОдиниціВиміру_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);

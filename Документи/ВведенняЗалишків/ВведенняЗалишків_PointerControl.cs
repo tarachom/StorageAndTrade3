@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class ВведенняЗалишків_PointerControl : PointerControl
     {
+        event EventHandler<ВведенняЗалишків_Pointer> PointerChanged;
+
         public ВведенняЗалишків_PointerControl()
         {
             pointer = new ВведенняЗалишків_Pointer();
             WidthPresentation = 300;
             Caption = $"{ВведенняЗалишків_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ВведенняЗалишків_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ВведенняЗалишків_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,10 +62,7 @@ namespace StorageAndTrade
             ВведенняЗалишків page = new ВведенняЗалишків
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new ВведенняЗалишків_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ВведенняЗалишків_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ВведенняЗалишків_Const.FULLNAME}", () => { return page; });

@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class Контрагенти_Папки_PointerControl : PointerControl
     {
+        event EventHandler<Контрагенти_Папки_Pointer> PointerChanged;
+
         public Контрагенти_Папки_PointerControl()
         {
             pointer = new Контрагенти_Папки_Pointer();
             WidthPresentation = 300;
             Caption = $"{Контрагенти_Папки_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Контрагенти_Папки_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         public UnigueID? OpenFolder { get; set; }
@@ -50,31 +56,30 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             Контрагенти_Папки_Дерево_ШвидкийВибір page = new Контрагенти_Папки_Дерево_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 OpenFolder = OpenFolder,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new Контрагенти_Папки_Pointer(selectPointer);
-
                     AfterSelectFunc?.Invoke();
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             page.LoadTree();
         }

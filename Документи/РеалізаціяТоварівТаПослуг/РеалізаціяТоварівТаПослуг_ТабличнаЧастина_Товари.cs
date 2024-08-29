@@ -35,7 +35,7 @@ namespace StorageAndTrade
 {
     class РеалізаціяТоварівТаПослуг_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public РеалізаціяТоварівТаПослуг_Objest? РеалізаціяТоварівТаПослуг_Objest { get; set; }
+        public РеалізаціяТоварівТаПослуг_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -307,12 +307,12 @@ LIMIT 1
             Store.Clear();
             Записи.Clear();
 
-            if (РеалізаціяТоварівТаПослуг_Objest != null)
+            if (ЕлементВласник != null)
             {
-                РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.FillJoin([РеалізаціяТоварівТаПослуг_Товари_TablePart.НомерРядка]);
-                await РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Read();
+                ЕлементВласник.Товари_TablePart.FillJoin([РеалізаціяТоварівТаПослуг_Товари_TablePart.НомерРядка]);
+                await ЕлементВласник.Товари_TablePart.Read();
 
-                foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record in РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -343,9 +343,9 @@ LIMIT 1
 
         public override async ValueTask SaveRecords()
         {
-            if (РеалізаціяТоварівТаПослуг_Objest != null)
+            if (ЕлементВласник != null)
             {
-                РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records.Clear();
+                ЕлементВласник.Товари_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -371,10 +371,10 @@ LIMIT 1
                         Партія = запис.Партія
                     };
 
-                    РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Records.Add(record);
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
-                await РеалізаціяТоварівТаПослуг_Objest.Товари_TablePart.Save(true);
+                await ЕлементВласник.Товари_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -384,7 +384,7 @@ LIMIT 1
         {
             string ключовіСлова = "";
 
-            if (РеалізаціяТоварівТаПослуг_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class СеріїНоменклатури_Елемент : ДовідникЕлемент
     {
-        public СеріїНоменклатури_Objest СеріїНоменклатури_Objest { get; set; } = new СеріїНоменклатури_Objest();
+        public СеріїНоменклатури_Objest Елемент { get; set; } = new СеріїНоменклатури_Objest();
 
         Entry Номер = new Entry() { WidthRequest = 500 };
         Entry Коментар = new Entry() { WidthRequest = 500 };
@@ -38,8 +38,8 @@ namespace StorageAndTrade
 
         public СеріїНоменклатури_Елемент() : base() 
         {
-            СеріїНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
-            СеріїНоменклатури_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -58,16 +58,16 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Номер.Text = СеріїНоменклатури_Objest.Номер;
-            Коментар.Text = СеріїНоменклатури_Objest.Коментар;
-            ДатаСтворення.Value = СеріїНоменклатури_Objest.ДатаСтворення;
+            Номер.Text = Елемент.Номер;
+            Коментар.Text = Елемент.Коментар;
+            ДатаСтворення.Value = Елемент.ДатаСтворення;
         }
 
         protected override void GetValue()
         {
-            СеріїНоменклатури_Objest.Номер = Номер.Text;
-            СеріїНоменклатури_Objest.Коментар = Коментар.Text;
-            СеріїНоменклатури_Objest.ДатаСтворення = ДатаСтворення.Value;
+            Елемент.Номер = Номер.Text;
+            Елемент.Коментар = Коментар.Text;
+            Елемент.ДатаСтворення = ДатаСтворення.Value;
         }
 
         #endregion
@@ -76,11 +76,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await СеріїНоменклатури_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(СеріїНоменклатури_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

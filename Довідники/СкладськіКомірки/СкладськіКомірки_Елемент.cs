@@ -31,7 +31,7 @@ namespace StorageAndTrade
 {
     class СкладськіКомірки_Елемент : ДовідникЕлемент
     {
-        public СкладськіКомірки_Objest СкладськіКомірки_Objest { get; set; } = new СкладськіКомірки_Objest();
+        public СкладськіКомірки_Objest Елемент { get; set; } = new СкладськіКомірки_Objest();
         public СкладськіПриміщення_Pointer СкладськеПриміщенняДляНового { get; set; } = new СкладськіПриміщення_Pointer();
         public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
 
@@ -45,10 +45,10 @@ namespace StorageAndTrade
         ComboBoxText ТипСкладськоїКомірки = new ComboBoxText();
         ТипорозміриКомірок_PointerControl Типорозмір = new ТипорозміриКомірок_PointerControl() { Caption = "Типорозмір:" };
 
-        public СкладськіКомірки_Елемент() : base() 
+        public СкладськіКомірки_Елемент() : base()
         {
-            СкладськіКомірки_Objest.UnigueIDChanged += UnigueIDChanged;
-            СкладськіКомірки_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -60,11 +60,7 @@ namespace StorageAndTrade
             CreateField(vBox, null, СкладськеПриміщення);
 
             //Родич
-            Родич.BeforeClickOpenFunc = () =>
-            {
-                Родич.СкладПриміщенняВласник = СкладськеПриміщення.Pointer;
-            };
-
+            Родич.BeforeClickOpenFunc = () => Родич.СкладПриміщенняВласник = СкладськеПриміщення.Pointer;
             CreateField(vBox, null, Родич);
 
             //ТипСкладськоїКомірки
@@ -91,7 +87,7 @@ namespace StorageAndTrade
 
         protected override void CreatePack2(Box vBox)
         {
-            
+
         }
 
         #region Присвоєння / зчитування значень
@@ -100,41 +96,41 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                СкладськіКомірки_Objest.Приміщення = СкладськеПриміщенняДляНового;
-                СкладськіКомірки_Objest.Папка = РодичДляНового;
+                Елемент.Приміщення = СкладськеПриміщенняДляНового;
+                Елемент.Папка = РодичДляНового;
             }
 
-            Назва.Text = СкладськіКомірки_Objest.Назва;
-            СкладськеПриміщення.Pointer = СкладськіКомірки_Objest.Приміщення;
-            Родич.Pointer = СкладськіКомірки_Objest.Папка;
+            Назва.Text = Елемент.Назва;
+            СкладськеПриміщення.Pointer = Елемент.Приміщення;
+            Родич.Pointer = Елемент.Папка;
 
-            ТипСкладськоїКомірки.ActiveId = СкладськіКомірки_Objest.ТипСкладськоїКомірки.ToString();
+            ТипСкладськоїКомірки.ActiveId = Елемент.ТипСкладськоїКомірки.ToString();
 
             if (ТипСкладськоїКомірки.Active == -1)
                 ТипСкладськоїКомірки.ActiveId = ТипиСкладськихКомірок.Зберігання.ToString();
 
-            Лінія.Text = СкладськіКомірки_Objest.Лінія;
-            Стелаж.Text = СкладськіКомірки_Objest.Стелаж;
-            Позиція.Text = СкладськіКомірки_Objest.Позиція;
-            Ярус.Text = СкладськіКомірки_Objest.Ярус;
+            Лінія.Text = Елемент.Лінія;
+            Стелаж.Text = Елемент.Стелаж;
+            Позиція.Text = Елемент.Позиція;
+            Ярус.Text = Елемент.Ярус;
 
-            Типорозмір.Pointer = СкладськіКомірки_Objest.Типорозмір;
+            Типорозмір.Pointer = Елемент.Типорозмір;
         }
 
         protected override void GetValue()
         {
-            СкладськіКомірки_Objest.Назва = Назва.Text;
-            СкладськіКомірки_Objest.Приміщення = СкладськеПриміщення.Pointer;
-            СкладськіКомірки_Objest.Папка = Родич.Pointer;
+            Елемент.Назва = Назва.Text;
+            Елемент.Приміщення = СкладськеПриміщення.Pointer;
+            Елемент.Папка = Родич.Pointer;
 
-            СкладськіКомірки_Objest.ТипСкладськоїКомірки = Enum.Parse<ТипиСкладськихКомірок>(ТипСкладськоїКомірки.ActiveId);
+            Елемент.ТипСкладськоїКомірки = Enum.Parse<ТипиСкладськихКомірок>(ТипСкладськоїКомірки.ActiveId);
 
-            СкладськіКомірки_Objest.Лінія = Лінія.Text;
-            СкладськіКомірки_Objest.Стелаж = Стелаж.Text;
-            СкладськіКомірки_Objest.Позиція = Позиція.Text;
-            СкладськіКомірки_Objest.Ярус = Ярус.Text;
+            Елемент.Лінія = Лінія.Text;
+            Елемент.Стелаж = Стелаж.Text;
+            Елемент.Позиція = Позиція.Text;
+            Елемент.Ярус = Ярус.Text;
 
-            СкладськіКомірки_Objest.Типорозмір = Типорозмір.Pointer;
+            Елемент.Типорозмір = Типорозмір.Pointer;
         }
 
         #endregion
@@ -143,11 +139,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await СкладськіКомірки_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(СкладськіКомірки_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class Валюти_Елемент : ДовідникЕлемент
     {
-        public Валюти_Objest Валюти_Objest { get; set; } = new Валюти_Objest();
+        public Валюти_Objest Елемент { get; set; } = new Валюти_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -39,8 +39,8 @@ namespace StorageAndTrade
 
         public Валюти_Елемент() : base() 
         {
-            Валюти_Objest.UnigueIDChanged += UnigueIDChanged;
-            Валюти_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -65,20 +65,20 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = Валюти_Objest.Код;
-            Назва.Text = Валюти_Objest.Назва;
-            КороткаНазва.Text = Валюти_Objest.КороткаНазва;
-            Код_R030.Text = Валюти_Objest.Код_R030;
-            ВиводитиКурсНаСтартову.Active = Валюти_Objest.ВиводитиКурсНаСтартову;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            КороткаНазва.Text = Елемент.КороткаНазва;
+            Код_R030.Text = Елемент.Код_R030;
+            ВиводитиКурсНаСтартову.Active = Елемент.ВиводитиКурсНаСтартову;
         }
 
         protected override void GetValue()
         {
-            Валюти_Objest.Код = Код.Text;
-            Валюти_Objest.Назва = Назва.Text;
-            Валюти_Objest.КороткаНазва = КороткаНазва.Text;
-            Валюти_Objest.Код_R030 = Код_R030.Text;
-            Валюти_Objest.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову.Active;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.КороткаНазва = КороткаНазва.Text;
+            Елемент.Код_R030 = Код_R030.Text;
+            Елемент.ВиводитиКурсНаСтартову = ВиводитиКурсНаСтартову.Active;
         }
 
         #endregion
@@ -87,11 +87,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await Валюти_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Валюти_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

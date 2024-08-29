@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 28.08.2024 17:50:49
+ * Дата конфігурації: 29.08.2024 16:59:52
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -25911,7 +25911,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         /* Функція для обчислення віртуальних таблиць  */
         public static async ValueTask Execute(DateTime period, string regAccumName)
         {
-            if (Config.Kernel == null) return;
             
             Dictionary<string, object> paramQuery = new Dictionary<string, object>{ { "ПеріодДеньВідбір", period } };
 
@@ -26117,7 +26116,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
         /* Функція для обчислення підсумкових віртуальних таблиць */
         public static async ValueTask ExecuteFinalCalculation(List<string> regAccumNameList)
         {
-            if (Config.Kernel == null) return;
             
             foreach (string regAccumName in regAccumNameList)
                 switch(regAccumName)

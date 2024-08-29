@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class СтаттяРухуКоштів_PointerControl : PointerControl
     {
+        event EventHandler<СтаттяРухуКоштів_Pointer> PointerChanged;
+
         public СтаттяРухуКоштів_PointerControl()
         {
             pointer = new СтаттяРухуКоштів_Pointer();
             WidthPresentation = 300;
             Caption = $"{СтаттяРухуКоштів_Const.FULLNAME}:";
+            PointerChanged += async (object? _, СтаттяРухуКоштів_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         СтаттяРухуКоштів_Pointer pointer;
@@ -48,30 +54,29 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             СтаттяРухуКоштів_ШвидкийВибір page = new СтаттяРухуКоштів_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new СтаттяРухуКоштів_Pointer(selectPointer);
-
                     AfterSelectFunc?.Invoke();
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

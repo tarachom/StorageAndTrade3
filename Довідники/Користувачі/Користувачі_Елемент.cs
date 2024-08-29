@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class Користувачі_Елемент : ДовідникЕлемент
     {
-        public Користувачі_Objest Користувачі_Objest { get; set; } = new Користувачі_Objest();
+        public Користувачі_Objest Елемент { get; set; } = new Користувачі_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -38,8 +38,8 @@ namespace StorageAndTrade
 
         public Користувачі_Елемент() : base() 
         {
-            Користувачі_Objest.UnigueIDChanged += UnigueIDChanged;
-            Користувачі_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -61,18 +61,18 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = Користувачі_Objest.Код;
-            Назва.Text = Користувачі_Objest.Назва;
-            ФізичнаОсоба.Pointer = Користувачі_Objest.ФізичнаОсоба;
-            Коментар.Buffer.Text = Користувачі_Objest.Коментар;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            ФізичнаОсоба.Pointer = Елемент.ФізичнаОсоба;
+            Коментар.Buffer.Text = Елемент.Коментар;
         }
 
         protected override void GetValue()
         {
-            Користувачі_Objest.Код = Код.Text;
-            Користувачі_Objest.Назва = Назва.Text;
-            Користувачі_Objest.ФізичнаОсоба = ФізичнаОсоба.Pointer;
-            Користувачі_Objest.Коментар = Коментар.Buffer.Text;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.ФізичнаОсоба = ФізичнаОсоба.Pointer;
+            Елемент.Коментар = Коментар.Buffer.Text;
         }
 
         #endregion
@@ -81,11 +81,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await Користувачі_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Користувачі_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

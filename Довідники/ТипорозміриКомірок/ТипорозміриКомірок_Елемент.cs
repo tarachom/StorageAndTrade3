@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class ТипорозміриКомірок_Елемент : ДовідникЕлемент
     {
-        public ТипорозміриКомірок_Objest ТипорозміриКомірок_Objest { get; set; } = new ТипорозміриКомірок_Objest();
+        public ТипорозміриКомірок_Objest Елемент { get; set; } = new ТипорозміриКомірок_Objest();
 
         Entry Назва = new Entry() { WidthRequest = 250 };
         Entry Висота = new Entry() { WidthRequest = 100 };
@@ -40,8 +40,8 @@ namespace StorageAndTrade
 
         public ТипорозміриКомірок_Елемент() : base()
         {
-            ТипорозміриКомірок_Objest.UnigueIDChanged += UnigueIDChanged;
-            ТипорозміриКомірок_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
 
             HPanedTop.Position = 150;
         }
@@ -71,22 +71,22 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Назва.Text = ТипорозміриКомірок_Objest.Назва;
-            Висота.Text = ТипорозміриКомірок_Objest.Висота;
-            Ширина.Text = ТипорозміриКомірок_Objest.Ширина;
-            Глибина.Text = ТипорозміриКомірок_Objest.Глибина;
-            Обєм.Text = ТипорозміриКомірок_Objest.Обєм;
-            Вантажопідйомність.Text = ТипорозміриКомірок_Objest.Вантажопідйомність;
+            Назва.Text = Елемент.Назва;
+            Висота.Text = Елемент.Висота;
+            Ширина.Text = Елемент.Ширина;
+            Глибина.Text = Елемент.Глибина;
+            Обєм.Text = Елемент.Обєм;
+            Вантажопідйомність.Text = Елемент.Вантажопідйомність;
         }
 
         protected override void GetValue()
         {
-            ТипорозміриКомірок_Objest.Назва = Назва.Text;
-            ТипорозміриКомірок_Objest.Висота = Висота.Text;
-            ТипорозміриКомірок_Objest.Ширина = Ширина.Text;
-            ТипорозміриКомірок_Objest.Глибина = Глибина.Text;
-            ТипорозміриКомірок_Objest.Обєм = Обєм.Text;
-            ТипорозміриКомірок_Objest.Вантажопідйомність = Вантажопідйомність.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Висота = Висота.Text;
+            Елемент.Ширина = Ширина.Text;
+            Елемент.Глибина = Глибина.Text;
+            Елемент.Обєм = Обєм.Text;
+            Елемент.Вантажопідйомність = Вантажопідйомність.Text;
         }
 
         #endregion
@@ -95,11 +95,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ТипорозміриКомірок_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ТипорозміриКомірок_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

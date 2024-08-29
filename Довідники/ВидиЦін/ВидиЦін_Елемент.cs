@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class ВидиЦін_Елемент : ДовідникЕлемент
     {
-        public ВидиЦін_Objest ВидиЦін_Objest { get; set; } = new ВидиЦін_Objest();
+        public ВидиЦін_Objest Елемент { get; set; } = new ВидиЦін_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -37,8 +37,8 @@ namespace StorageAndTrade
 
         public ВидиЦін_Елемент() : base() 
         {
-            ВидиЦін_Objest.UnigueIDChanged += UnigueIDChanged;
-            ВидиЦін_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -57,16 +57,16 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = ВидиЦін_Objest.Код;
-            Назва.Text = ВидиЦін_Objest.Назва;
-            Валюта.Pointer = ВидиЦін_Objest.Валюта;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Валюта.Pointer = Елемент.Валюта;
         }
 
         protected override void GetValue()
         {
-            ВидиЦін_Objest.Код = Код.Text;
-            ВидиЦін_Objest.Назва = Назва.Text;
-            ВидиЦін_Objest.Валюта = Валюта.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Валюта = Валюта.Pointer;
         }
 
         #endregion
@@ -75,11 +75,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ВидиЦін_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ВидиЦін_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

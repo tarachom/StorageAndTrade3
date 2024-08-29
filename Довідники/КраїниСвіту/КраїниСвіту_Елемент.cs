@@ -29,15 +29,15 @@ namespace StorageAndTrade
 {
     class КраїниСвіту_Елемент : ДовідникЕлемент
     {
-        public КраїниСвіту_Objest КраїниСвіту_Objest { get; set; } = new КраїниСвіту_Objest();
+        public КраїниСвіту_Objest Елемент { get; set; } = new КраїниСвіту_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
         public КраїниСвіту_Елемент() : base() 
         {
-            КраїниСвіту_Objest.UnigueIDChanged += UnigueIDChanged;
-            КраїниСвіту_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -53,14 +53,14 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = КраїниСвіту_Objest.Код;
-            Назва.Text = КраїниСвіту_Objest.Назва;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
         }
 
         protected override void GetValue()
         {
-            КраїниСвіту_Objest.Код = Код.Text;
-            КраїниСвіту_Objest.Назва = Назва.Text;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
         }
 
         #endregion
@@ -69,11 +69,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await КраїниСвіту_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(КраїниСвіту_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

@@ -83,8 +83,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.РахунокФактура_Objest.New();
-            else if (unigueID == null || !await page.РахунокФактура_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);
@@ -240,7 +240,7 @@ namespace StorageAndTrade
                         РеалізаціяТоварівТаПослуг_Елемент page = new РеалізаціяТоварівТаПослуг_Елемент
                         {
                             IsNew = false,
-                            РеалізаціяТоварівТаПослуг_Objest = реалізаціяТоварівТаПослуг_Новий,
+                            Елемент = реалізаціяТоварівТаПослуг_Новий,
                         };
 
                         page.SetValue();
@@ -310,7 +310,7 @@ namespace StorageAndTrade
                             ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                             {
                                 IsNew = false,
-                                ЗамовленняПостачальнику_Objest = замовленняПостачальнику_Новий,
+                                Елемент = замовленняПостачальнику_Новий,
                             };
 
                             page.SetValue();

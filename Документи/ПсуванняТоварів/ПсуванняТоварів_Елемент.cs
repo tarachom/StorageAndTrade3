@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class ПсуванняТоварів_Елемент : ДокументЕлемент
     {
-        public ПсуванняТоварів_Objest ПсуванняТоварів_Objest { get; set; } = new ПсуванняТоварів_Objest();
+        public ПсуванняТоварів_Objest Елемент { get; set; } = new ПсуванняТоварів_Objest();
 
         #region Fields
 
@@ -52,13 +52,14 @@ namespace StorageAndTrade
 
         public ПсуванняТоварів_Елемент() : base()
         {
-            ПсуванняТоварів_Objest.UnigueIDChanged += UnigueIDChanged;
-            ПсуванняТоварів_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ПсуванняТоварів_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
 
+            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
         }
@@ -98,40 +99,39 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                ПсуванняТоварів_Objest.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
-                ПсуванняТоварів_Objest.Склад = ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const;
-                ПсуванняТоварів_Objest.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
+                Елемент.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
+                Елемент.Склад = ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const;
+                Елемент.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
             }
 
-            НомерДок.Text = ПсуванняТоварів_Objest.НомерДок;
-            ДатаДок.Value = ПсуванняТоварів_Objest.ДатаДок;
-            Організація.Pointer = ПсуванняТоварів_Objest.Організація;
-            Склад.Pointer = ПсуванняТоварів_Objest.Склад;
-            Причина.Text = ПсуванняТоварів_Objest.Причина;
-            Коментар.Text = ПсуванняТоварів_Objest.Коментар;
-            Підрозділ.Pointer = ПсуванняТоварів_Objest.Підрозділ;
-            Автор.Pointer = ПсуванняТоварів_Objest.Автор;
-            Основа.Pointer = ПсуванняТоварів_Objest.Основа;
+            НомерДок.Text = Елемент.НомерДок;
+            ДатаДок.Value = Елемент.ДатаДок;
+            Організація.Pointer = Елемент.Організація;
+            Склад.Pointer = Елемент.Склад;
+            Причина.Text = Елемент.Причина;
+            Коментар.Text = Елемент.Коментар;
+            Підрозділ.Pointer = Елемент.Підрозділ;
+            Автор.Pointer = Елемент.Автор;
+            Основа.Pointer = Елемент.Основа;
 
             //Таблична частина
-            Товари.ПсуванняТоварів_Objest = ПсуванняТоварів_Objest;
             await Товари.LoadRecords();
         }
 
         protected override void GetValue()
         {
-            ПсуванняТоварів_Objest.НомерДок = НомерДок.Text;
-            ПсуванняТоварів_Objest.ДатаДок = ДатаДок.Value;
-            ПсуванняТоварів_Objest.Організація = Організація.Pointer;
-            ПсуванняТоварів_Objest.Склад = Склад.Pointer;
-            ПсуванняТоварів_Objest.Причина = Причина.Text;
-            ПсуванняТоварів_Objest.Коментар = Коментар.Text;
-            ПсуванняТоварів_Objest.Підрозділ = Підрозділ.Pointer;
-            ПсуванняТоварів_Objest.Автор = Автор.Pointer;
-            ПсуванняТоварів_Objest.Основа = Основа.Pointer;
+            Елемент.НомерДок = НомерДок.Text;
+            Елемент.ДатаДок = ДатаДок.Value;
+            Елемент.Організація = Організація.Pointer;
+            Елемент.Склад = Склад.Pointer;
+            Елемент.Причина = Причина.Text;
+            Елемент.Коментар = Коментар.Text;
+            Елемент.Підрозділ = Підрозділ.Pointer;
+            Елемент.Автор = Автор.Pointer;
+            Елемент.Основа = Основа.Pointer;
 
-            ПсуванняТоварів_Objest.СумаДокументу = Товари.СумаДокументу();
-            ПсуванняТоварів_Objest.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
+            Елемент.СумаДокументу = Товари.СумаДокументу();
+            Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }
 
         string КлючовіСловаДляПошуку()
@@ -147,7 +147,7 @@ namespace StorageAndTrade
             
             try
             {
-                if (await ПсуванняТоварів_Objest.Save())
+                if (await Елемент.Save())
                 {
                     await Товари.SaveRecords();
                     isSave = true;
@@ -155,7 +155,7 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ПсуванняТоварів_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
 
             return isSave;
@@ -165,16 +165,16 @@ namespace StorageAndTrade
         {
             if (spendDoc)
             {
-                bool isSpend = await ПсуванняТоварів_Objest.SpendTheDocument(ПсуванняТоварів_Objest.ДатаДок);
+                bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПсуванняТоварів_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
 
                 return isSpend;
             }
             else
             {
-                await ПсуванняТоварів_Objest.ClearSpendTheDocument();
+                await Елемент.ClearSpendTheDocument();
                 return true;
             }
         }

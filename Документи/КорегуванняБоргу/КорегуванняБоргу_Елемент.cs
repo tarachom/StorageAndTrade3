@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class КорегуванняБоргу_Елемент : ДокументЕлемент
     {
-        public КорегуванняБоргу_Objest КорегуванняБоргу_Objest { get; set; } = new КорегуванняБоргу_Objest();
+        public КорегуванняБоргу_Objest Елемент { get; set; } = new КорегуванняБоргу_Objest();
 
         #region Fields
 
@@ -49,13 +49,14 @@ namespace StorageAndTrade
 
         public КорегуванняБоргу_Елемент() : base()
         {
-            КорегуванняБоргу_Objest.UnigueIDChanged += UnigueIDChanged;
-            КорегуванняБоргу_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(КорегуванняБоргу_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
 
+            РозрахункиЗКонтрагентами.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(РозрахункиЗКонтрагентами, new Label("Розрахунки з контрагентами"), 0);
             NotebookTablePart.CurrentPage = 0;
         }
@@ -91,33 +92,30 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                КорегуванняБоргу_Objest.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
-                КорегуванняБоргу_Objest.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
+                Елемент.Організація = ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
+                Елемент.Підрозділ = ЗначенняЗаЗамовчуванням.ОсновнийПідрозділ_Const;
             }
 
-            НомерДок.Text = КорегуванняБоргу_Objest.НомерДок;
-            ДатаДок.Value = КорегуванняБоргу_Objest.ДатаДок;
-            Організація.Pointer = КорегуванняБоргу_Objest.Організація;
-            Коментар.Text = КорегуванняБоргу_Objest.Коментар;
-            Підрозділ.Pointer = КорегуванняБоргу_Objest.Підрозділ;
-            Автор.Pointer = КорегуванняБоргу_Objest.Автор;
+            НомерДок.Text = Елемент.НомерДок;
+            ДатаДок.Value = Елемент.ДатаДок;
+            Організація.Pointer = Елемент.Організація;
+            Коментар.Text = Елемент.Коментар;
+            Підрозділ.Pointer = Елемент.Підрозділ;
+            Автор.Pointer = Елемент.Автор;
 
-            РозрахункиЗКонтрагентами.КорегуванняБоргу_Objest = КорегуванняБоргу_Objest;
             await РозрахункиЗКонтрагентами.LoadRecords();
         }
 
         protected override void GetValue()
         {
-            КорегуванняБоргу_Objest.НомерДок = НомерДок.Text;
-            КорегуванняБоргу_Objest.ДатаДок = ДатаДок.Value;
-            КорегуванняБоргу_Objest.Організація = Організація.Pointer;
-            КорегуванняБоргу_Objest.Коментар = Коментар.Text;
-            КорегуванняБоргу_Objest.Підрозділ = Підрозділ.Pointer;
-            КорегуванняБоргу_Objest.Автор = Автор.Pointer;
+            Елемент.НомерДок = НомерДок.Text;
+            Елемент.ДатаДок = ДатаДок.Value;
+            Елемент.Організація = Організація.Pointer;
+            Елемент.Коментар = Коментар.Text;
+            Елемент.Підрозділ = Підрозділ.Pointer;
+            Елемент.Автор = Автор.Pointer;
 
-            КорегуванняБоргу_Objest.КлючовіСловаДляПошуку =
-                КлючовіСловаДляПошуку() +
-                РозрахункиЗКонтрагентами.КлючовіСловаДляПошуку();
+            Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + РозрахункиЗКонтрагентами.КлючовіСловаДляПошуку();
         }
 
         string КлючовіСловаДляПошуку()
@@ -130,10 +128,10 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            
+
             try
             {
-                if (await КорегуванняБоргу_Objest.Save())
+                if (await Елемент.Save())
                 {
                     await РозрахункиЗКонтрагентами.SaveRecords();
                     isSave = true;
@@ -141,9 +139,9 @@ namespace StorageAndTrade
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(КорегуванняБоргу_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
-            
+
             return isSave;
         }
 
@@ -151,16 +149,16 @@ namespace StorageAndTrade
         {
             if (spendDoc)
             {
-                bool isSpend = await КорегуванняБоргу_Objest.SpendTheDocument(КорегуванняБоргу_Objest.ДатаДок);
+                bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
 
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(КорегуванняБоргу_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
 
                 return isSpend;
             }
             else
             {
-                await КорегуванняБоргу_Objest.ClearSpendTheDocument();
+                await Елемент.ClearSpendTheDocument();
 
                 return true;
             }

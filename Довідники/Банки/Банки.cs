@@ -94,8 +94,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.Банки_Objest.New();
-            else if (unigueID == null || !await page.Банки_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);

@@ -33,7 +33,7 @@ namespace StorageAndTrade
 {
     class ПоверненняТоварівПостачальнику_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public ПоверненняТоварівПостачальнику_Objest? ПоверненняТоварівПостачальнику_Objest { get; set; }
+        public ПоверненняТоварівПостачальнику_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -66,7 +66,7 @@ namespace StorageAndTrade
             typeof(string)    //ПоступленняТоварівТаПослуг
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -208,12 +208,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (ПоверненняТоварівПостачальнику_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.FillJoin([ПоверненняТоварівПостачальнику_Товари_TablePart.НомерРядка]);
-                await ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Read();
+                ЕлементВласник.Товари_TablePart.FillJoin([ПоверненняТоварівПостачальнику_Товари_TablePart.НомерРядка]);
+                await ЕлементВласник.Товари_TablePart.Read();
 
-                foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record record in ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Records)
+                foreach (ПоверненняТоварівПостачальнику_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -239,9 +239,9 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (ПоверненняТоварівПостачальнику_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Records.Clear();
+                ЕлементВласник.Товари_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -262,10 +262,10 @@ namespace StorageAndTrade
                         ДокументПоступлення = запис.ПоступленняТоварівТаПослуг
                     };
 
-                    ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Records.Add(record);
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
-                await ПоверненняТоварівПостачальнику_Objest.Товари_TablePart.Save(true);
+                await ЕлементВласник.Товари_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -275,7 +275,7 @@ namespace StorageAndTrade
         {
             string ключовіСлова = "";
 
-            if (ПоверненняТоварівПостачальнику_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

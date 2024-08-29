@@ -63,8 +63,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.Контрагенти_Папки_Objest.New();
-            else if (unigueID == null || !await page.Контрагенти_Папки_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);

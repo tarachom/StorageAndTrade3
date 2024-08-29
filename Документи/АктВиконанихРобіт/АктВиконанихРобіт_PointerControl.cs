@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class АктВиконанихРобіт_PointerControl : PointerControl
     {
+        event EventHandler<АктВиконанихРобіт_Pointer> PointerChanged;
+
         public АктВиконанихРобіт_PointerControl()
         {
             pointer = new АктВиконанихРобіт_Pointer();
             WidthPresentation = 300;
             Caption = $"{АктВиконанихРобіт_Const.FULLNAME}:";
+            PointerChanged += async (object? _, АктВиконанихРобіт_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         АктВиконанихРобіт_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,13 +62,10 @@ namespace StorageAndTrade
             АктВиконанихРобіт page = new АктВиконанихРобіт()
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new АктВиконанихРобіт_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new АктВиконанихРобіт_Pointer(selectPointer); }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {АктВиконанихРобіт_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {АктВиконанихРобіт_Const.FULLNAME}", () => { return page; });
 
             page.SetValue();
         }

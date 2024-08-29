@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class Склади_Елемент : ДовідникЕлемент
     {
-        public Склади_Objest Склади_Objest { get; set; } = new Склади_Objest();
+        public Склади_Objest Елемент { get; set; } = new Склади_Objest();
         public Склади_Папки_Pointer РодичДляНового { get; set; } = new Склади_Папки_Pointer();
 
         #region Field
@@ -46,9 +46,11 @@ namespace StorageAndTrade
         #endregion
 
         public Склади_Елемент() : base()
-         {
-            Склади_Objest.UnigueIDChanged += UnigueIDChanged;
-            Склади_Objest.CaptionChanged += CaptionChanged;
+        {
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
+
+            Контакти.ЕлементВласник = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -86,17 +88,17 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
-                Склади_Objest.Папка = РодичДляНового;
+                Елемент.Папка = РодичДляНового;
 
-            Код.Text = Склади_Objest.Код;
-            Назва.Text = Склади_Objest.Назва;
-            Родич.Pointer = Склади_Objest.Папка;
-            ВидЦін.Pointer = Склади_Objest.ВидЦін;
-            ТипСкладу.ActiveId = Склади_Objest.ТипСкладу.ToString();
-            Налаштування.ActiveId = Склади_Objest.НалаштуванняАдресногоЗберігання.ToString();
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Родич.Pointer = Елемент.Папка;
+            ВидЦін.Pointer = Елемент.ВидЦін;
+            ТипСкладу.ActiveId = Елемент.ТипСкладу.ToString();
+            Налаштування.ActiveId = Елемент.НалаштуванняАдресногоЗберігання.ToString();
 
             if (ТипСкладу.Active == -1)
                 ТипСкладу.ActiveId = ТипиСкладів.Гуртовий.ToString();
@@ -104,18 +106,17 @@ namespace StorageAndTrade
             if (Налаштування.Active == -1)
                 Налаштування.ActiveId = НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
 
-            Контакти.Склади_Objest = Склади_Objest;
             Контакти.LoadRecords();
         }
 
         protected override void GetValue()
         {
-            Склади_Objest.Код = Код.Text;
-            Склади_Objest.Назва = Назва.Text;
-            Склади_Objest.Папка = Родич.Pointer;
-            Склади_Objest.ВидЦін = ВидЦін.Pointer;
-            Склади_Objest.ТипСкладу = Enum.Parse<ТипиСкладів>(ТипСкладу.ActiveId);
-            Склади_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Папка = Родич.Pointer;
+            Елемент.ВидЦін = ВидЦін.Pointer;
+            Елемент.ТипСкладу = Enum.Parse<ТипиСкладів>(ТипСкладу.ActiveId);
+            Елемент.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
         }
 
         #endregion
@@ -124,12 +125,12 @@ namespace StorageAndTrade
         {
             try
             {
-                if (await Склади_Objest.Save())
+                if (await Елемент.Save())
                     await Контакти.SaveRecords();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Склади_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

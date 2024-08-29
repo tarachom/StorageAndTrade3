@@ -35,7 +35,7 @@ namespace StorageAndTrade
 {
     class РозміщенняТоварівНаСкладі_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public РозміщенняТоварівНаСкладі_Objest? РозміщенняТоварівНаСкладі_Objest { get; set; }
+        public РозміщенняТоварівНаСкладі_Objest? ЕлементВласник { get; set; }
         public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
         #region Записи
@@ -65,7 +65,7 @@ namespace StorageAndTrade
             typeof(string)    //Комірка
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -184,12 +184,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (РозміщенняТоварівНаСкладі_Objest != null)
+            if (ЕлементВласник != null)
             {
-                РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.FillJoin([РозміщенняТоварівНаСкладі_Товари_TablePart.НомерРядка]);
-                await РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Read();
+                ЕлементВласник.Товари_TablePart.FillJoin([РозміщенняТоварівНаСкладі_Товари_TablePart.НомерРядка]);
+                await ЕлементВласник.Товари_TablePart.Read();
 
-                foreach (РозміщенняТоварівНаСкладі_Товари_TablePart.Record record in РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records)
+                foreach (РозміщенняТоварівНаСкладі_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -213,9 +213,9 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (РозміщенняТоварівНаСкладі_Objest != null)
+            if (ЕлементВласник != null)
             {
-                РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records.Clear();
+                ЕлементВласник.Товари_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -234,10 +234,10 @@ namespace StorageAndTrade
                         Комірка = запис.Комірка
                     };
 
-                    РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Records.Add(record);
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
-                await РозміщенняТоварівНаСкладі_Objest.Товари_TablePart.Save(true);
+                await ЕлементВласник.Товари_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -247,7 +247,7 @@ namespace StorageAndTrade
         {
             string ключовіСлова = "";
 
-            if (РозміщенняТоварівНаСкладі_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

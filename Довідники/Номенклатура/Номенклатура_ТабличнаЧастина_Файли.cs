@@ -31,7 +31,7 @@ namespace StorageAndTrade
 {
     class Номенклатура_ТабличнаЧастина_Файли : ДовідникТабличнаЧастина
     {
-        public Номенклатура_Objest? Номенклатура_Objest { get; set; }
+        public Номенклатура_Objest? ЕлементВласник { get; set; }
 
         #region Запис
 
@@ -50,7 +50,7 @@ namespace StorageAndTrade
             typeof(string)      //ФайлНазва
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -99,12 +99,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (Номенклатура_Objest != null)
+            if (ЕлементВласник != null)
             {
-                Номенклатура_Objest.Файли_TablePart.FillJoin();
-                await Номенклатура_Objest.Файли_TablePart.Read();
+                ЕлементВласник.Файли_TablePart.FillJoin();
+                await ЕлементВласник.Файли_TablePart.Read();
 
-                foreach (Номенклатура_Файли_TablePart.Record record in Номенклатура_Objest.Файли_TablePart.Records)
+                foreach (Номенклатура_Файли_TablePart.Record record in ЕлементВласник.Файли_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -121,9 +121,9 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (Номенклатура_Objest != null)
+            if (ЕлементВласник != null)
             {
-                Номенклатура_Objest.Файли_TablePart.Records.Clear();
+                ЕлементВласник.Файли_TablePart.Records.Clear();
 
                 foreach (Запис запис in Записи)
                 {
@@ -134,10 +134,10 @@ namespace StorageAndTrade
                         Основний = запис.Основний
                     };
 
-                    Номенклатура_Objest.Файли_TablePart.Records.Add(record);
+                    ЕлементВласник.Файли_TablePart.Records.Add(record);
                 }
 
-                await Номенклатура_Objest.Файли_TablePart.Save(true);
+                await ЕлементВласник.Файли_TablePart.Save(true);
             }
         }
 
@@ -221,8 +221,7 @@ namespace StorageAndTrade
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;
 
-                TreeIter iter;
-                Store.GetIterFromString(out iter, args.Path);
+                Store.GetIterFromString(out TreeIter iter, args.Path);
 
                 int rowNumber = int.Parse(args.Path);
                 Запис запис = Записи[rowNumber];

@@ -35,7 +35,7 @@ namespace StorageAndTrade
     {
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         СкладськіКомірки_Папки_Дерево ДеревоПапок;
-        public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl();
+        public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
 
         public СкладськіКомірки() : base()
         {
@@ -45,11 +45,7 @@ namespace StorageAndTrade
 
             //Власник
             HBoxTop.PackStart(СкладПриміщенняВласник, false, false, 2);
-            СкладПриміщенняВласник.Caption = "Приміщення:";
-            СкладПриміщенняВласник.AfterSelectFunc = async () =>
-            {
-                await LoadRecords();
-            };
+            СкладПриміщенняВласник.AfterSelectFunc = async () => await LoadRecords();
 
             //Дерево папок зправа
             ДеревоПапок = new СкладськіКомірки_Папки_Дерево
@@ -139,8 +135,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.СкладськіКомірки_Objest.New();
-            else if (unigueID == null || !await page.СкладськіКомірки_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);

@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class ВидиНоменклатури_Елемент : ДовідникЕлемент
     {
-        public ВидиНоменклатури_Objest ВидиНоменклатури_Objest { get; set; } = new ВидиНоменклатури_Objest();
+        public ВидиНоменклатури_Objest Елемент { get; set; } = new ВидиНоменклатури_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -37,8 +37,8 @@ namespace StorageAndTrade
 
         public ВидиНоменклатури_Елемент() : base()
         {
-            ВидиНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
-            ВидиНоменклатури_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -57,16 +57,16 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = ВидиНоменклатури_Objest.Код;
-            Назва.Text = ВидиНоменклатури_Objest.Назва;
-            ОдиницяВиміру.Pointer = ВидиНоменклатури_Objest.ОдиницяВиміру;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            ОдиницяВиміру.Pointer = Елемент.ОдиницяВиміру;
         }
 
         protected override void GetValue()
         {
-            ВидиНоменклатури_Objest.Код = Код.Text;
-            ВидиНоменклатури_Objest.Назва = Назва.Text;
-            ВидиНоменклатури_Objest.ОдиницяВиміру = ОдиницяВиміру.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.ОдиницяВиміру = ОдиницяВиміру.Pointer;
         }
 
         #endregion
@@ -75,11 +75,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ВидиНоменклатури_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ВидиНоменклатури_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

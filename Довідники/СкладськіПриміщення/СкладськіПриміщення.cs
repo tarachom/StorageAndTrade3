@@ -33,14 +33,13 @@ namespace StorageAndTrade
 {
     public class СкладськіПриміщення : ДовідникЖурнал
     {
-        public Склади_PointerControl СкладВласник = new Склади_PointerControl();
+        public Склади_PointerControl СкладВласник = new Склади_PointerControl() { Caption = "Склад:" };
 
         public СкладськіПриміщення() : base()
         {
             //Власник
             HBoxTop.PackStart(СкладВласник, false, false, 2);
-            СкладВласник.Caption = "Склад:";
-            СкладВласник.AfterSelectFunc = async () => { await LoadRecords(); };
+            СкладВласник.AfterSelectFunc = async () => await LoadRecords();
 
             //Складські комірки
             LinkButton linkButtonHar = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
@@ -51,7 +50,7 @@ namespace StorageAndTrade
                 if (SelectPointerItem != null)
                     page.СкладПриміщенняВласник.Pointer = new СкладськіПриміщення_Pointer(SelectPointerItem);
 
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"{СкладськіКомірки_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{СкладськіКомірки_Const.FULLNAME}", () => { return page; });
 
                 await page.SetValue();
             };
@@ -117,8 +116,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.СкладськіПриміщення_Objest.New();
-            else if (unigueID == null || !await page.СкладськіПриміщення_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);

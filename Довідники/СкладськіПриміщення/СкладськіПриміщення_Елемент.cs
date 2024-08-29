@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class СкладськіПриміщення_Елемент : ДовідникЕлемент
     {
-        public СкладськіПриміщення_Objest СкладськіПриміщення_Objest { get; set; } = new СкладськіПриміщення_Objest();
+        public СкладськіПриміщення_Objest Елемент { get; set; } = new СкладськіПриміщення_Objest();
         public Склади_Pointer СкладДляНового { get; set; } = new Склади_Pointer();
 
         Entry Назва = new Entry() { WidthRequest = 500 };
@@ -39,8 +39,8 @@ namespace StorageAndTrade
 
         public СкладськіПриміщення_Елемент() : base()
         {
-            СкладськіПриміщення_Objest.UnigueIDChanged += UnigueIDChanged;
-            СкладськіПриміщення_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -60,14 +60,14 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
             if (IsNew)
-                СкладськіПриміщення_Objest.Склад = СкладДляНового;
+                Елемент.Склад = СкладДляНового;
 
-            Назва.Text = СкладськіПриміщення_Objest.Назва;
-            Склад.Pointer = СкладськіПриміщення_Objest.Склад;
-            Налаштування.ActiveId = СкладськіПриміщення_Objest.НалаштуванняАдресногоЗберігання.ToString();
+            Назва.Text = Елемент.Назва;
+            Склад.Pointer = Елемент.Склад;
+            Налаштування.ActiveId = Елемент.НалаштуванняАдресногоЗберігання.ToString();
 
             if (Налаштування.Active == -1)
                 Налаштування.ActiveId = НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
@@ -75,9 +75,9 @@ namespace StorageAndTrade
 
         protected override void GetValue()
         {
-            СкладськіПриміщення_Objest.Назва = Назва.Text;
-            СкладськіПриміщення_Objest.Склад = Склад.Pointer;
-            СкладськіПриміщення_Objest.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
+            Елемент.Назва = Назва.Text;
+            Елемент.Склад = Склад.Pointer;
+            Елемент.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
         }
 
         #endregion
@@ -86,11 +86,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await СкладськіПриміщення_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(СкладськіПриміщення_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

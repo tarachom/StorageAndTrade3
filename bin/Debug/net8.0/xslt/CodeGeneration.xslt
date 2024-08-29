@@ -2068,7 +2068,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
         /* Функція для обчислення віртуальних таблиць  */
         public static async ValueTask Execute(DateTime period, string regAccumName)
         {
-            if (Config.Kernel == null) return;
             <xsl:variable name="QueryAllCountCalculation" select="count(Configuration/RegistersAccumulation/RegisterAccumulation/QueryBlockList/QueryBlock[FinalCalculation = '0']/Query)"/>
             <xsl:if test="$QueryAllCountCalculation != 0">
             Dictionary&lt;string, object&gt; paramQuery = new Dictionary&lt;string, object&gt;{ { "ПеріодДеньВідбір", period } };
@@ -2105,7 +2104,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
         /* Функція для обчислення підсумкових віртуальних таблиць */
         public static async ValueTask ExecuteFinalCalculation(List&lt;string&gt; regAccumNameList)
         {
-            if (Config.Kernel == null) return;
             <xsl:variable name="QueryAllCountFinalCalculation" select="count(Configuration/RegistersAccumulation/RegisterAccumulation/QueryBlockList/QueryBlock[FinalCalculation = '1']/Query)"/>
             <xsl:if test="$QueryAllCountFinalCalculation != 0">
             foreach (string regAccumName in regAccumNameList)

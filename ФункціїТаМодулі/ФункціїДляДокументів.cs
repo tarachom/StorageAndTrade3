@@ -71,11 +71,10 @@ namespace StorageAndTrade
             Документи.ПоступленняТоварівТаПослуг_Objest? ДокументПоступлення,
             Документи.ВведенняЗалишків_Objest? ДокументВведенняЗалишків)
         {
-            Довідники.ПартіяТоварівКомпозит_Select партіяТоварівКомпозитВибірка = new Довідники.ПартіяТоварівКомпозит_Select();
-            Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит =
-                await партіяТоварівКомпозитВибірка.FindByField(Довідники.ПартіяТоварівКомпозит_Const.ДокументКлюч, ДокументКлюч);
+            Довідники.ПартіяТоварівКомпозит_Pointer ПартіяТоварівКомпозит = await new Довідники.ПартіяТоварівКомпозит_Select()
+                .FindByField(Довідники.ПартіяТоварівКомпозит_Const.ДокументКлюч, ДокументКлюч);
 
-            Довідники.ПартіяТоварівКомпозит_Objest партіяТоварівКомпозитНовий = new Довідники.ПартіяТоварівКомпозит_Objest();
+            Довідники.ПартіяТоварівКомпозит_Objest партіяТоварівКомпозитНовий = new();
             if (ПартіяТоварівКомпозит.IsEmpty())
                 await партіяТоварівКомпозитНовий.New();
             else if (!await партіяТоварівКомпозитНовий.Read(ПартіяТоварівКомпозит.UnigueID))
@@ -118,26 +117,19 @@ namespace StorageAndTrade
         public static async ValueTask<Довідники.ДоговориКонтрагентів_Pointer?> ОсновнийДоговірДляКонтрагента(
             Довідники.Контрагенти_Pointer Контрагент, Перелічення.ТипДоговорів ТипДоговору = 0)
         {
-            if (Контрагент == null || Контрагент.IsEmpty())
+            if (Контрагент.IsEmpty())
                 return null;
 
-            Довідники.ДоговориКонтрагентів_Select договориКонтрагентів = new Довідники.ДоговориКонтрагентів_Select();
+            Довідники.ДоговориКонтрагентів_Select договориКонтрагентів = new();
 
             //Відбір по контрагенту
-            договориКонтрагентів.QuerySelect.Where.Add(
-                new Where(Довідники.ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, Контрагент.UnigueID.UGuid));
+            договориКонтрагентів.QuerySelect.Where.Add(new Where(Довідники.ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, Контрагент.UnigueID.UGuid));
 
+            //Відбір по типу договору
             if (ТипДоговору != 0)
-            {
-                //Відбір по типу договору
-                договориКонтрагентів.QuerySelect.Where.Add(
-                    new Where(Довідники.ДоговориКонтрагентів_Const.ТипДоговору, Comparison.EQ, (int)ТипДоговору));
-            }
+                договориКонтрагентів.QuerySelect.Where.Add(new Where(Довідники.ДоговориКонтрагентів_Const.ТипДоговору, Comparison.EQ, (int)ТипДоговору));
 
-            if (await договориКонтрагентів.SelectSingle())
-                return договориКонтрагентів.Current;
-            else
-                return null;
+            return await договориКонтрагентів.SelectSingle() ? договориКонтрагентів.Current : null;
         }
 
         /// <summary>
@@ -153,7 +145,7 @@ namespace StorageAndTrade
 
             string query = @$"
 SELECT
-    {РегістриВідомостей.КурсиВалют_Const.Курс} AS Курс
+    КурсиВалют.{РегістриВідомостей.КурсиВалют_Const.Курс} AS Курс
 FROM
     {РегістриВідомостей.КурсиВалют_Const.TABLE} AS КурсиВалют
 WHERE
@@ -162,7 +154,7 @@ WHERE
 ORDER BY КурсиВалют.period DESC
 LIMIT 1
 ";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>()
+            Dictionary<string, object> paramQuery = new()
             {
                 { "valuta", Валюта.UnigueID.UGuid },
                 { "date_curs", new DateTime(ДатаКурсу.Year, ДатаКурсу.Month, ДатаКурсу.Day, 23, 59, 59) }

@@ -29,15 +29,15 @@ namespace StorageAndTrade
 {
     class ФізичніОсоби_Елемент : ДовідникЕлемент
     {
-        public ФізичніОсоби_Objest ФізичніОсоби_Objest { get; set; } = new ФізичніОсоби_Objest();
+        public ФізичніОсоби_Objest Елемент { get; set; } = new ФізичніОсоби_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
         public ФізичніОсоби_Елемент() : base() 
         {
-            ФізичніОсоби_Objest.UnigueIDChanged += UnigueIDChanged;
-            ФізичніОсоби_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -53,14 +53,14 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = ФізичніОсоби_Objest.Код;
-            Назва.Text = ФізичніОсоби_Objest.Назва;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
         }
 
         protected override void GetValue()
         {
-            ФізичніОсоби_Objest.Код = Код.Text;
-            ФізичніОсоби_Objest.Назва = Назва.Text;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
         }
 
         #endregion
@@ -69,11 +69,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ФізичніОсоби_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ФізичніОсоби_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

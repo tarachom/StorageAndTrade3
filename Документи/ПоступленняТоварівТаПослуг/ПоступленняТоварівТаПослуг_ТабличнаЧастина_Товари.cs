@@ -35,7 +35,7 @@ namespace StorageAndTrade
 {
     class ПоступленняТоварівТаПослуг_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public ПоступленняТоварівТаПослуг_Objest? ПоступленняТоварівТаПослуг_Objest { get; set; }
+        public ПоступленняТоварівТаПослуг_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -74,7 +74,7 @@ namespace StorageAndTrade
             typeof(string)    //ЗамовленняПостачальнику
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -289,12 +289,12 @@ LIMIT 1
             Store.Clear();
             Записи.Clear();
 
-            if (ПоступленняТоварівТаПослуг_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.FillJoin([ПоступленняТоварівТаПослуг_Товари_TablePart.НомерРядка]);
-                await ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Read();
+                ЕлементВласник.Товари_TablePart.FillJoin([ПоступленняТоварівТаПослуг_Товари_TablePart.НомерРядка]);
+                await ЕлементВласник.Товари_TablePart.Read();
 
-                foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Records)
+                foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -323,15 +323,14 @@ LIMIT 1
 
         public override async ValueTask SaveRecords()
         {
-            if (ПоступленняТоварівТаПослуг_Objest != null)
+            if (ЕлементВласник != null)
             {
-                ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Records.Clear();
-
+                ЕлементВласник.Товари_TablePart.Records.Clear();
                 int sequenceNumber = 0;
 
                 foreach (Запис запис in Записи)
                 {
-                    ПоступленняТоварівТаПослуг_Товари_TablePart.Record record = new ПоступленняТоварівТаПослуг_Товари_TablePart.Record
+                    ПоступленняТоварівТаПослуг_Товари_TablePart.Record record = new()
                     {
                         UID = запис.ID,
                         НомерРядка = ++sequenceNumber,
@@ -349,10 +348,10 @@ LIMIT 1
                         Склад = запис.Склад
                     };
 
-                    ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Records.Add(record);
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
-                await ПоступленняТоварівТаПослуг_Objest.Товари_TablePart.Save(true);
+                await ЕлементВласник.Товари_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -372,7 +371,7 @@ LIMIT 1
         {
             string ключовіСлова = "";
 
-            if (ПоступленняТоварівТаПослуг_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

@@ -30,12 +30,18 @@ using StorageAndTrade_1_0.Довідники;
 namespace StorageAndTrade
 {
     class Банки_PointerControl : PointerControl
-    {        
+    {
+        event EventHandler<Банки_Pointer> PointerChanged;
+
         public Банки_PointerControl()
         {
             pointer = new Банки_Pointer();
             WidthPresentation = 300;
             Caption = $"{Банки_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Банки_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         Банки_Pointer pointer;
@@ -48,19 +54,19 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             Банки_ШвидкийВибір page = new Банки_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
@@ -69,8 +75,8 @@ namespace StorageAndTrade
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

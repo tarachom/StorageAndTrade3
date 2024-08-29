@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class Блокнот_Елемент : ДовідникЕлемент
     {
-        public Блокнот_Objest Блокнот_Objest { get; set; } = new Блокнот_Objest();
+        public Блокнот_Objest Елемент { get; set; } = new Блокнот_Objest();
 
         #region Fields
 
@@ -48,8 +48,8 @@ namespace StorageAndTrade
 
         public Блокнот_Елемент() : base() 
         {
-            Блокнот_Objest.UnigueIDChanged += UnigueIDChanged;
-            Блокнот_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -76,20 +76,20 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = Блокнот_Objest.Код;
-            Назва.Text = Блокнот_Objest.Назва;
-            ДатаЗапису.Value = Блокнот_Objest.ДатаЗапису;
-            Опис.Buffer.Text = Блокнот_Objest.Опис;
-            Лінк.Text = Блокнот_Objest.Лінк;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            ДатаЗапису.Value = Елемент.ДатаЗапису;
+            Опис.Buffer.Text = Елемент.Опис;
+            Лінк.Text = Елемент.Лінк;
         }
 
         protected override void GetValue()
         {
-            Блокнот_Objest.Код = Код.Text;
-            Блокнот_Objest.Назва = Назва.Text;
-            Блокнот_Objest.ДатаЗапису = ДатаЗапису.Value;
-            Блокнот_Objest.Опис = Опис.Buffer.Text;
-            Блокнот_Objest.Лінк = Лінк.Text;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.ДатаЗапису = ДатаЗапису.Value;
+            Елемент.Опис = Опис.Buffer.Text;
+            Елемент.Лінк = Лінк.Text;
         }
 
         #endregion
@@ -98,11 +98,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await Блокнот_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Блокнот_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

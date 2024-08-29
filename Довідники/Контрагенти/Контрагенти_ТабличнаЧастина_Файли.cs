@@ -31,7 +31,7 @@ namespace StorageAndTrade
 {
     class Контрагенти_ТабличнаЧастина_Файли : ДовідникТабличнаЧастина
     {
-        public Контрагенти_Objest? Контрагенти_Objest { get; set; }
+        public Контрагенти_Objest? ЕлементВласник { get; set; }
 
         #region Запис
 
@@ -48,7 +48,7 @@ namespace StorageAndTrade
             typeof(string)      //Файл
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -94,12 +94,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (Контрагенти_Objest != null)
+            if (ЕлементВласник != null)
             {
-                Контрагенти_Objest.Файли_TablePart.FillJoin();
-                await Контрагенти_Objest.Файли_TablePart.Read();
+                ЕлементВласник.Файли_TablePart.FillJoin();
+                await ЕлементВласник.Файли_TablePart.Read();
 
-                foreach (Контрагенти_Файли_TablePart.Record record in Контрагенти_Objest.Файли_TablePart.Records)
+                foreach (Контрагенти_Файли_TablePart.Record record in ЕлементВласник.Файли_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -115,20 +115,22 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (Контрагенти_Objest != null)
+            if (ЕлементВласник != null)
             {
-                Контрагенти_Objest.Файли_TablePart.Records.Clear();
+                ЕлементВласник.Файли_TablePart.Records.Clear();
 
                 foreach (Запис запис in Записи)
                 {
-                    Контрагенти_Файли_TablePart.Record record = new Контрагенти_Файли_TablePart.Record();
-                    Контрагенти_Objest.Файли_TablePart.Records.Add(record);
-
-                    record.UID = запис.ID;
-                    record.Файл = запис.Файл;
+                    Контрагенти_Файли_TablePart.Record record = new Контрагенти_Файли_TablePart.Record
+                    {
+                        UID = запис.ID,
+                        Файл = запис.Файл
+                    };
+                    
+                    ЕлементВласник.Файли_TablePart.Records.Add(record);
                 }
 
-                await Контрагенти_Objest.Файли_TablePart.Save(true);
+                await ЕлементВласник.Файли_TablePart.Save(true);
             }
         }
 

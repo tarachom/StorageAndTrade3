@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class ПоверненняТоварівПостачальнику_PointerControl : PointerControl
     {
+        event EventHandler<ПоверненняТоварівПостачальнику_Pointer> PointerChanged;
+
         public ПоверненняТоварівПостачальнику_PointerControl()
         {
             pointer = new ПоверненняТоварівПостачальнику_Pointer();
             WidthPresentation = 300;
             Caption = $"{ПоверненняТоварівПостачальнику_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ПоверненняТоварівПостачальнику_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ПоверненняТоварівПостачальнику_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,10 +62,7 @@ namespace StorageAndTrade
             ПоверненняТоварівПостачальнику page = new ПоверненняТоварівПостачальнику
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new ПоверненняТоварівПостачальнику_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПоверненняТоварівПостачальнику_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПоверненняТоварівПостачальнику_Const.FULLNAME}", () => { return page; });

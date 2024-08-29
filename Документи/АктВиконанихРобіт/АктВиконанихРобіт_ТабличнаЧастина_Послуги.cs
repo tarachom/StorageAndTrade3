@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class АктВиконанихРобіт_ТабличнаЧастина_Послуги : ДокументТабличнаЧастина
     {
-        public АктВиконанихРобіт_Objest? АктВиконанихРобіт_Objest { get; set; }
+        public АктВиконанихРобіт_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -151,12 +151,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (АктВиконанихРобіт_Objest != null)
+            if (ЕлементВласник != null)
             {
-                АктВиконанихРобіт_Objest.Послуги_TablePart.FillJoin([АктВиконанихРобіт_Послуги_TablePart.НомерРядка]);
-                await АктВиконанихРобіт_Objest.Послуги_TablePart.Read();
+                ЕлементВласник.Послуги_TablePart.FillJoin([АктВиконанихРобіт_Послуги_TablePart.НомерРядка]);
+                await ЕлементВласник.Послуги_TablePart.Read();
 
-                foreach (АктВиконанихРобіт_Послуги_TablePart.Record record in АктВиконанихРобіт_Objest.Послуги_TablePart.Records)
+                foreach (АктВиконанихРобіт_Послуги_TablePart.Record record in ЕлементВласник.Послуги_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -177,9 +177,9 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (АктВиконанихРобіт_Objest != null)
+            if (ЕлементВласник != null)
             {
-                АктВиконанихРобіт_Objest.Послуги_TablePart.Records.Clear();
+                ЕлементВласник.Послуги_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -196,10 +196,10 @@ namespace StorageAndTrade
                         Сума = запис.Сума
                     };
 
-                    АктВиконанихРобіт_Objest.Послуги_TablePart.Records.Add(record);
+                    ЕлементВласник.Послуги_TablePart.Records.Add(record);
                 }
 
-                await АктВиконанихРобіт_Objest.Послуги_TablePart.Save(true);
+                await ЕлементВласник.Послуги_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -219,7 +219,7 @@ namespace StorageAndTrade
         {
             string ключовіСлова = "";
 
-            if (АктВиконанихРобіт_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

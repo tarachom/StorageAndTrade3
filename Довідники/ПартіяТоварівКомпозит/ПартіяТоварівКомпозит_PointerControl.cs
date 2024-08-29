@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class ПартіяТоварівКомпозит_PointerControl : PointerControl
     {
+        event EventHandler<ПартіяТоварівКомпозит_Pointer> PointerChanged;
+
         public ПартіяТоварівКомпозит_PointerControl()
         {
             pointer = new ПартіяТоварівКомпозит_Pointer();
             WidthPresentation = 300;
             Caption = $"{ПартіяТоварівКомпозит_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ПартіяТоварівКомпозит_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ПартіяТоварівКомпозит_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,13 +62,10 @@ namespace StorageAndTrade
             ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит
             {
                 DirectoryPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new ПартіяТоварівКомпозит_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПартіяТоварівКомпозит_Pointer(selectPointer); }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; });
 
             await page.SetValue();
         }

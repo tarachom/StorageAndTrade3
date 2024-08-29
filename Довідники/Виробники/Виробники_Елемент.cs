@@ -29,15 +29,15 @@ namespace StorageAndTrade
 {
     class Виробники_Елемент : ДовідникЕлемент
     {
-        public Виробники_Objest Виробники_Objest { get; set; } = new Виробники_Objest();
+        public Виробники_Objest Елемент { get; set; } = new Виробники_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
         public Виробники_Елемент() : base() 
         {
-            Виробники_Objest.UnigueIDChanged += UnigueIDChanged;
-            Виробники_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -53,14 +53,14 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = Виробники_Objest.Код;
-            Назва.Text = Виробники_Objest.Назва;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
         }
 
         protected override void GetValue()
         {
-            Виробники_Objest.Код = Код.Text;
-            Виробники_Objest.Назва = Назва.Text;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
         }
 
         #endregion
@@ -69,11 +69,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await Виробники_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Виробники_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }            
         }
     }

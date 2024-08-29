@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class Валюти_PointerControl : PointerControl
     {
+        event EventHandler<Валюти_Pointer> PointerChanged;
+
         public Валюти_PointerControl()
         {
             pointer = new Валюти_Pointer();
             WidthPresentation = 300;
             Caption = $"{Валюти_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Валюти_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         Валюти_Pointer pointer;
@@ -48,19 +54,19 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
@@ -69,8 +75,8 @@ namespace StorageAndTrade
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

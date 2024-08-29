@@ -83,8 +83,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.ЗамовленняКлієнта_Objest.New();
-            else if (unigueID == null || !await page.ЗамовленняКлієнта_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);
@@ -257,7 +257,7 @@ namespace StorageAndTrade
                             РеалізаціяТоварівТаПослуг_Елемент page = new РеалізаціяТоварівТаПослуг_Елемент
                             {
                                 IsNew = false,
-                                РеалізаціяТоварівТаПослуг_Objest = реалізаціяТоварівТаПослуг_Новий,
+                                Елемент = реалізаціяТоварівТаПослуг_Новий,
                             };
 
                             page.SetValue();
@@ -328,7 +328,7 @@ namespace StorageAndTrade
                             ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент
                             {
                                 IsNew = false,
-                                ЗамовленняПостачальнику_Objest = замовленняПостачальнику_Новий,
+                                Елемент = замовленняПостачальнику_Новий,
                             };
 
                             page.SetValue();
@@ -399,7 +399,7 @@ namespace StorageAndTrade
                             ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
                             {
                                 IsNew = false,
-                                ПоступленняТоварівТаПослуг_Objest = поступленняТоварівТаПослуг_Новий,
+                                Елемент = поступленняТоварівТаПослуг_Новий,
                             };
 
                             page.SetValue();
@@ -449,7 +449,7 @@ namespace StorageAndTrade
                             ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                             {
                                 IsNew = false,
-                                ПрихіднийКасовийОрдер_Objest = прихіднийКасовийОрдер_Новий,
+                                Елемент = прихіднийКасовийОрдер_Новий,
                             };
 
                             page.SetValue();

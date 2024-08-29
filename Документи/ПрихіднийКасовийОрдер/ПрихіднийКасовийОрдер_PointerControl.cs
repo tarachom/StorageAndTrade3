@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class ПрихіднийКасовийОрдер_PointerControl : PointerControl
     {
+        event EventHandler<ПрихіднийКасовийОрдер_Pointer> PointerChanged;
+
         public ПрихіднийКасовийОрдер_PointerControl()
         {
             pointer = new ПрихіднийКасовийОрдер_Pointer();
             WidthPresentation = 300;
             Caption = $"{ПрихіднийКасовийОрдер_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ПрихіднийКасовийОрдер_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ПрихіднийКасовийОрдер_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,10 +62,7 @@ namespace StorageAndTrade
             ПрихіднийКасовийОрдер page = new ПрихіднийКасовийОрдер
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new ПрихіднийКасовийОрдер_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПрихіднийКасовийОрдер_Pointer(selectPointer); }
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПрихіднийКасовийОрдер_Const.FULLNAME}", () => { return page; });

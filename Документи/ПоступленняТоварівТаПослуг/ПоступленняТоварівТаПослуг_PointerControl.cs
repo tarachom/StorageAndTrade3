@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class ПоступленняТоварівТаПослуг_PointerControl : PointerControl
     {
+        event EventHandler<ПоступленняТоварівТаПослуг_Pointer> PointerChanged;
+
         public ПоступленняТоварівТаПослуг_PointerControl()
         {
             pointer = new ПоступленняТоварівТаПослуг_Pointer();
             WidthPresentation = 300;
             Caption = $"{ПоступленняТоварівТаПослуг_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ПоступленняТоварівТаПослуг_Pointer pointer)=> 
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ПоступленняТоварівТаПослуг_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,13 +62,10 @@ namespace StorageAndTrade
             ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new ПоступленняТоварівТаПослуг_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПоступленняТоварівТаПослуг_Pointer(selectPointer); }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => page);
 
             page.SetValue();
         }

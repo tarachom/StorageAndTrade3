@@ -83,8 +83,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.ПоступленняТоварівТаПослуг_Objest.New();
-            else if (unigueID == null || !await page.ПоступленняТоварівТаПослуг_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);
@@ -230,7 +230,7 @@ namespace StorageAndTrade
                             РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
                             {
                                 IsNew = false,
-                                РозхіднийКасовийОрдер_Objest = розхіднийКасовийОрдер_Новий,
+                                Елемент = розхіднийКасовийОрдер_Новий,
                             };
 
                             page.SetValue();
@@ -299,7 +299,7 @@ namespace StorageAndTrade
                             ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
                             {
                                 IsNew = false,
-                                ПоверненняТоварівПостачальнику_Objest = поверненняТоварівПостачальнику_Objest
+                                Елемент = поверненняТоварівПостачальнику_Objest
                             };
 
                             page.SetValue();
@@ -363,7 +363,7 @@ namespace StorageAndTrade
                             РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
                             {
                                 IsNew = false,
-                                РозміщенняТоварівНаСкладі_Objest = розміщенняТоварівНаСкладі_Objest
+                                Елемент = розміщенняТоварівНаСкладі_Objest
                             };
 
                             page.SetValue();
@@ -429,7 +429,7 @@ namespace StorageAndTrade
                             ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент
                             {
                                 IsNew = false,
-                                ВнутрішнєСпоживанняТоварів_Objest = внутрішнєСпоживанняТоварів_Objest
+                                Елемент = внутрішнєСпоживанняТоварів_Objest
                             };
 
                             page.SetValue();
@@ -492,7 +492,7 @@ namespace StorageAndTrade
                             ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
                             {
                                 IsNew = false,
-                                ПереміщенняТоварів_Objest = переміщенняТоварів_Objest
+                                Елемент = переміщенняТоварів_Objest
                             };
 
                             page.SetValue();

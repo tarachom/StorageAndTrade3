@@ -30,11 +30,17 @@ namespace StorageAndTrade
 {
     class ВнутрішнєСпоживанняТоварів_PointerControl : PointerControl
     {
+        event EventHandler<ВнутрішнєСпоживанняТоварів_Pointer> PointerChanged;
+
         public ВнутрішнєСпоживанняТоварів_PointerControl()
         {
             pointer = new ВнутрішнєСпоживанняТоварів_Pointer();
             WidthPresentation = 300;
             Caption = $"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ВнутрішнєСпоживанняТоварів_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ВнутрішнєСпоживанняТоварів_Pointer pointer;
@@ -47,7 +53,7 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
@@ -56,15 +62,12 @@ namespace StorageAndTrade
             ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
-                {
-                    Pointer = new ВнутрішнєСпоживанняТоварів_Pointer(selectPointer);
-                }
+                CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ВнутрішнєСпоживанняТоварів_Pointer(selectPointer); }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,$"Вибір - {ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ВнутрішнєСпоживанняТоварів_Const.FULLNAME}", () => { return page; });
 
-                page.SetValue();
+            page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

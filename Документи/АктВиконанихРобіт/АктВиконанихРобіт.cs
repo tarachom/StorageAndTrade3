@@ -82,8 +82,8 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
-                await page.АктВиконанихРобіт_Objest.New();
-            else if (unigueID == null || !await page.АктВиконанихРобіт_Objest.Read(unigueID))
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return ("", null, null);
@@ -212,7 +212,7 @@ namespace StorageAndTrade
                             ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
                             {
                                 IsNew = false,
-                                ПрихіднийКасовийОрдер_Objest = прихіднийКасовийОрдер_Новий,
+                                Елемент = прихіднийКасовийОрдер_Новий,
                             };
 
                             page.SetValue();

@@ -58,7 +58,7 @@ namespace StorageAndTrade
             //Новий
             {
                 LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += (object? sender, EventArgs args) =>
+                linkNew.Clicked += async (object? sender, EventArgs args) =>
                 {
                     Номенклатура_Елемент page = new Номенклатура_Елемент
                     {
@@ -66,7 +66,9 @@ namespace StorageAndTrade
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Номенклатура_Const.FULLNAME} *", () => page);
+                    await page.Елемент.New();
+
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
 
                     page.SetValue();
 

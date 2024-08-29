@@ -31,11 +31,17 @@ namespace StorageAndTrade
 {
     class ВидиЦін_PointerControl : PointerControl
     {
+        event EventHandler<ВидиЦін_Pointer> PointerChanged;
+
         public ВидиЦін_PointerControl()
         {
             pointer = new ВидиЦін_Pointer();
             WidthPresentation = 300;
             Caption = $"{ВидиЦін_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ВидиЦін_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         ВидиЦін_Pointer pointer;
@@ -48,19 +54,19 @@ namespace StorageAndTrade
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () => { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
             ВидиЦін_ШвидкийВибір page = new ВидиЦін_ШвидкийВибір
             {
-                PopoverParent = PopoverSmallSelect,
+                PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
@@ -70,8 +76,8 @@ namespace StorageAndTrade
                 }
             };
 
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
         }

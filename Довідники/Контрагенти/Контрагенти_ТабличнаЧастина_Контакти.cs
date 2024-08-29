@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class Контрагенти_ТабличнаЧастина_Контакти : Box
     {
-        public Контрагенти_Objest? Контрагенти_Objest { get; set; }
+        public Контрагенти_Objest? ЕлементВласник { get; set; }
 
         enum Columns
         {
@@ -97,11 +97,11 @@ namespace StorageAndTrade
         {
             Store.Clear();
 
-            if (Контрагенти_Objest != null)
+            if (ЕлементВласник != null)
             {
-                await Контрагенти_Objest.Контакти_TablePart.Read();
+                await ЕлементВласник.Контакти_TablePart.Read();
 
-                foreach (Контрагенти_Контакти_TablePart.Record record in Контрагенти_Objest.Контакти_TablePart.Records)
+                foreach (Контрагенти_Контакти_TablePart.Record record in ЕлементВласник.Контакти_TablePart.Records)
                 {
                     Store.AppendValues(
                         record.UID.ToString(),
@@ -120,15 +120,15 @@ namespace StorageAndTrade
 
         public async ValueTask SaveRecords()
         {
-            if (Контрагенти_Objest != null)
+            if (ЕлементВласник != null)
             {
-                Контрагенти_Objest.Контакти_TablePart.Records.Clear();
+                ЕлементВласник.Контакти_TablePart.Records.Clear();
 
                 if (Store.GetIterFirst(out TreeIter iter))
                     do
                     {
                         Контрагенти_Контакти_TablePart.Record record = new Контрагенти_Контакти_TablePart.Record();
-                        Контрагенти_Objest.Контакти_TablePart.Records.Add(record);
+                        ЕлементВласник.Контакти_TablePart.Records.Add(record);
 
                         string uid = (string)Store.GetValue(iter, (int)Columns.UID);
 
@@ -153,7 +153,7 @@ namespace StorageAndTrade
                     }
                     while (Store.IterNext(ref iter));
 
-                await Контрагенти_Objest.Контакти_TablePart.Save(true);
+                await ЕлементВласник.Контакти_TablePart.Save(true);
             }
         }
 
@@ -161,7 +161,7 @@ namespace StorageAndTrade
         {
             string ключовіСлова = "";
 
-            if (Контрагенти_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
 

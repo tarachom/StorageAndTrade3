@@ -34,7 +34,7 @@ namespace StorageAndTrade
 {
     class КорегуванняБоргу_ТабличнаЧастина_РозрахункиЗКонтрагентами : ДокументТабличнаЧастина
     {
-        public КорегуванняБоргу_Objest? КорегуванняБоргу_Objest { get; set; }
+        public КорегуванняБоргу_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -55,7 +55,7 @@ namespace StorageAndTrade
             typeof(float)     //Сума
         );
 
-        List<Запис> Записи = new List<Запис>();
+        List<Запис> Записи = [];
 
         private class Запис
         {
@@ -144,12 +144,12 @@ namespace StorageAndTrade
             Store.Clear();
             Записи.Clear();
 
-            if (КорегуванняБоргу_Objest != null)
+            if (ЕлементВласник != null)
             {
-                КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.FillJoin([КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.НомерРядка]);
-                await КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.Read();
+                ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.FillJoin([КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.НомерРядка]);
+                await ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Read();
 
-                foreach (КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Record record in КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.Records)
+                foreach (КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Record record in ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -169,9 +169,9 @@ namespace StorageAndTrade
 
         public override async ValueTask SaveRecords()
         {
-            if (КорегуванняБоргу_Objest != null)
+            if (ЕлементВласник != null)
             {
-                КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.Records.Clear();
+                ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Records.Clear();
 
                 int sequenceNumber = 0;
 
@@ -187,10 +187,10 @@ namespace StorageAndTrade
                         Сума = запис.Сума
                     };
 
-                    КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.Records.Add(record);
+                    ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Records.Add(record);
                 }
 
-                await КорегуванняБоргу_Objest.РозрахункиЗКонтрагентами_TablePart.Save(true);
+                await ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Save(true);
 
                 await LoadRecords();
             }
@@ -200,7 +200,7 @@ namespace StorageAndTrade
         {
             string ключовіСлова = "";
 
-            if (КорегуванняБоргу_Objest != null)
+            if (ЕлементВласник != null)
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)

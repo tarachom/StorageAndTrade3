@@ -29,7 +29,7 @@ namespace StorageAndTrade
 {
     class Номенклатура_Папки_Елемент : ДовідникЕлемент
     {
-        public Номенклатура_Папки_Objest Номенклатура_Папки_Objest { get; set; } = new Номенклатура_Папки_Objest();
+        public Номенклатура_Папки_Objest Елемент { get; set; } = new Номенклатура_Папки_Objest();
         public Номенклатура_Папки_Pointer РодичДляНового { get; set; } = new Номенклатура_Папки_Pointer();
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -38,8 +38,8 @@ namespace StorageAndTrade
 
         public Номенклатура_Папки_Елемент() : base() 
         {
-            Номенклатура_Папки_Objest.UnigueIDChanged += UnigueIDChanged;
-            Номенклатура_Папки_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -59,20 +59,20 @@ namespace StorageAndTrade
         public override void SetValue()
         {
             if (IsNew)
-                Номенклатура_Папки_Objest.Родич = РодичДляНового;
+                Елемент.Родич = РодичДляНового;
             else
-                Родич.OpenFolder = Номенклатура_Папки_Objest.UnigueID;
+                Родич.OpenFolder = Елемент.UnigueID;
 
-            Код.Text = Номенклатура_Папки_Objest.Код;
-            Назва.Text = Номенклатура_Папки_Objest.Назва;
-            Родич.Pointer = Номенклатура_Папки_Objest.Родич;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
+            Родич.Pointer = Елемент.Родич;
         }
 
         protected override void GetValue()
         {
-            Номенклатура_Папки_Objest.Код = Код.Text;
-            Номенклатура_Папки_Objest.Назва = Назва.Text;
-            Номенклатура_Папки_Objest.Родич = Родич.Pointer;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
+            Елемент.Родич = Родич.Pointer;
         }
 
         #endregion
@@ -81,11 +81,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await Номенклатура_Папки_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(Номенклатура_Папки_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

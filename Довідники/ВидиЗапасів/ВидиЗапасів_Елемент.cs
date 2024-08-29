@@ -29,15 +29,15 @@ namespace StorageAndTrade
 {
     class ВидиЗапасів_Елемент : ДовідникЕлемент
     {
-        public ВидиЗапасів_Objest ВидиЗапасів_Objest { get; set; } = new ВидиЗапасів_Objest();
+        public ВидиЗапасів_Objest Елемент { get; set; } = new ВидиЗапасів_Objest();
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
 
         public ВидиЗапасів_Елемент() : base() 
         {
-            ВидиЗапасів_Objest.UnigueIDChanged += UnigueIDChanged;
-            ВидиЗапасів_Objest.CaptionChanged += CaptionChanged;
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -53,14 +53,14 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Код.Text = ВидиЗапасів_Objest.Код;
-            Назва.Text = ВидиЗапасів_Objest.Назва;
+            Код.Text = Елемент.Код;
+            Назва.Text = Елемент.Назва;
         }
 
         protected override void GetValue()
         {
-            ВидиЗапасів_Objest.Код = Код.Text;
-            ВидиЗапасів_Objest.Назва = Назва.Text;
+            Елемент.Код = Код.Text;
+            Елемент.Назва = Назва.Text;
         }
 
         #endregion
@@ -69,11 +69,11 @@ namespace StorageAndTrade
         {
             try
             {
-                await ВидиЗапасів_Objest.Save();
+                await Елемент.Save();
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(ВидиЗапасів_Objest.GetBasis(), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
         }
     }

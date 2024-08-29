@@ -30,7 +30,7 @@ namespace StorageAndTrade
 {
     class Організації_ТабличнаЧастина_Контакти : Box
     {
-        public Організації_Objest? Організації_Objest { get; set; }
+        public Організації_Objest? ЕлементВласник { get; set; }
 
         enum Columns
         {
@@ -97,11 +97,11 @@ namespace StorageAndTrade
         {
             Store.Clear();
 
-            if (Організації_Objest != null)
+            if (ЕлементВласник != null)
             {
-                await Організації_Objest.Контакти_TablePart.Read();
+                await ЕлементВласник.Контакти_TablePart.Read();
 
-                foreach (Організації_Контакти_TablePart.Record record in Організації_Objest.Контакти_TablePart.Records)
+                foreach (Організації_Контакти_TablePart.Record record in ЕлементВласник.Контакти_TablePart.Records)
                 {
                     Store.AppendValues(
                         record.UID.ToString(),
@@ -120,16 +120,15 @@ namespace StorageAndTrade
 
         public async ValueTask SaveRecords()
         {
-            if (Організації_Objest != null)
+            if (ЕлементВласник != null)
             {
-                Організації_Objest.Контакти_TablePart.Records.Clear();
+                ЕлементВласник.Контакти_TablePart.Records.Clear();
 
-                TreeIter iter;
-                if (Store.GetIterFirst(out iter))
+                if (Store.GetIterFirst(out TreeIter iter))
                     do
                     {
                         Організації_Контакти_TablePart.Record record = new Організації_Контакти_TablePart.Record();
-                        Організації_Objest.Контакти_TablePart.Records.Add(record);
+                        ЕлементВласник.Контакти_TablePart.Records.Add(record);
 
                         string uid = (string)Store.GetValue(iter, (int)Columns.UID);
 
@@ -154,7 +153,7 @@ namespace StorageAndTrade
                     }
                     while (Store.IterNext(ref iter));
 
-                await Організації_Objest.Контакти_TablePart.Save(true);
+                await ЕлементВласник.Контакти_TablePart.Save(true);
             }
         }
 
