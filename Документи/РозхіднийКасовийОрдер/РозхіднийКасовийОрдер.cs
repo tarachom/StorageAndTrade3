@@ -73,6 +73,11 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.РозхіднийКасовийОрдер_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.РозхіднийКасовийОрдер_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент

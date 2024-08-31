@@ -61,6 +61,11 @@ namespace StorageAndTrade
             TreeViewGrid.GrabFocus();
         }
 
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.ПерерахунокТоварів_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             ПерерахунокТоварів_Елемент page = new ПерерахунокТоварів_Елемент

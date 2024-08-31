@@ -126,6 +126,11 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.СкладськіКомірки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент

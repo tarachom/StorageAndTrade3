@@ -71,6 +71,11 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ТипорозміриКомірок_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.ТипорозміриКомірок_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент

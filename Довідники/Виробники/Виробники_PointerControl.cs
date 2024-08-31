@@ -84,7 +84,7 @@ namespace StorageAndTrade
 
         protected override void OnClear(object? sender, EventArgs args)
         {
-            Pointer.Clear();
+            Pointer = new Виробники_Pointer();
         }
     }
 }

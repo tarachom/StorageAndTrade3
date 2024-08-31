@@ -144,6 +144,11 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.Номенклатура_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Номенклатура_Елемент page = new Номенклатура_Елемент
@@ -188,11 +193,6 @@ namespace StorageAndTrade
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return null;
             }
-        }
-
-        protected override void FilterRecords(Box vBox)
-        {
-
         }
 
         #endregion

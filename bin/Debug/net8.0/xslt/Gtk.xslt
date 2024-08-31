@@ -43,6 +43,8 @@ limitations under the License.
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+using <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Перелічення;
+using <xsl:value-of select="Configuration/NameSpace"/>;
 
 namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Довідники.ТабличніСписки
 {
@@ -136,6 +138,82 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
+
+        public static ListBox CreateFilter(TreeView treeView)
+        {
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            <xsl:choose>
+                <xsl:when test="count(Fields/Field[FilterField = 'True']) != 0">
+                  List&lt;Tuple&lt;string, Widget, Switch&gt;&gt; widgets = [];
+                  <xsl:for-each select="Fields/Field[FilterField = 'True']">
+                  { /* <xsl:value-of select="Name"/>, <xsl:value-of select="Type"/> */
+                      <xsl:choose>
+                          <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
+                          <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'integer'">IntegerControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'numeric'">NumericControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'date'">DateTimeControl <xsl:value-of select="Name"/> = new() { OnlyDate = true };</xsl:when>
+                          <xsl:when test="Type = 'datetime'">DateTimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'time'">TimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "" };</xsl:when>
+                          <xsl:when test="Type = 'enum'">ComboBoxText <xsl:value-of select="Name"/> = new();
+                          foreach (var item in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List()) <xsl:value-of select="Name"/>.Append(item.Value.ToString(), item.Name);
+                          <xsl:value-of select="Name"/>.Active = 0;
+                          </xsl:when>
+                          <xsl:otherwise>Label <xsl:value-of select="Name"/>  = new("<xsl:value-of select="Type"/>");</xsl:otherwise>
+                      </xsl:choose>
+                      Switch sw = new();
+                      widgets.Add(new("<xsl:value-of select="Name"/>", <xsl:value-of select="Name"/>, sw));
+                      ДодатиЕлементВФільтр(listBox, "<xsl:value-of select="normalize-space(Caption)"/>:", <xsl:value-of select="Name"/>, sw);
+                  }
+                  </xsl:for-each>
+                  {
+                      Button bOn = new Button("Фільтрувати");
+                      bOn.Clicked += async (object? sender, EventArgs args) =>
+                      {
+                          List&lt;Where&gt; listWhere = [];
+                          foreach (var widget in widgets)
+                              if (widget.Item3.Active)
+                              {
+                                  string? field = widget.Item1 switch { <xsl:for-each select="Fields/Field[FilterField = 'True']">
+                                      <xsl:text>"</xsl:text><xsl:value-of select="Name"/>" =&gt; <xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>,
+                                  </xsl:for-each> _ =&gt; null };
+                                  object? value = widget.Item1 switch { <xsl:for-each select="Fields/Field[FilterField = 'True']">
+                                      <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>" =&gt; </xsl:text>
+                                      <xsl:choose>
+                                          <xsl:when test="Type = 'string'">((Entry)widget.Item2).Text</xsl:when>
+                                          <xsl:when test="Type = 'boolean'">((CheckButton)widget.Item2).Active</xsl:when>
+                                          <xsl:when test="Type = 'integer'">((IntegerControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'numeric'">((NumericControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'date' or Type = 'datetime'">((DateTimeControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'time'">((TimeControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'pointer'">((<xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl)widget.Item2).Pointer.UnigueID.UGuid</xsl:when>
+                                          <xsl:when test="Type = 'enum'">(int)Enum.Parse&lt;<xsl:value-of select="substring-after(Pointer, '.')"/>&gt;(((ComboBoxText)widget.Item2).ActiveId)</xsl:when>
+                                      </xsl:choose>,
+                                  </xsl:for-each> _ =&gt; null };
+                                  if (field != null &amp;&amp; value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
+                              }
+                          if (listWhere.Count != 0)
+                          {
+                              ДодатиВідбір(treeView, listWhere, true);
+                              await LoadRecords(treeView);
+                          }
+                      };
+
+                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
+                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
+                      vBox.PackStart(hBox, false, false, 5);
+                      hBox.PackStart(bOn, false, false, 5);
+                      
+                      listBox.Add(new ListBoxRow() { vBox });
+                  }
+                </xsl:when>
+                <xsl:otherwise>
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                </xsl:otherwise>
+            </xsl:choose>
+            return listBox;
+        }
 
         public static async ValueTask LoadRecords(TreeView treeView)
         {
@@ -486,6 +564,82 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
+
+        public static ListBox CreateFilter(TreeView treeView)
+        {
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            <xsl:choose>
+                <xsl:when test="count(Fields/Field[FilterField = 'True']) != 0">
+                  List&lt;Tuple&lt;string, Widget, Switch&gt;&gt; widgets = [];
+                  <xsl:for-each select="Fields/Field[FilterField = 'True']">
+                  { /* <xsl:value-of select="Name"/>, <xsl:value-of select="Type"/> */
+                      <xsl:choose>
+                          <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
+                          <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'integer'">IntegerControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'numeric'">NumericControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'date'">DateTimeControl <xsl:value-of select="Name"/> = new() { OnlyDate = true };</xsl:when>
+                          <xsl:when test="Type = 'datetime'">DateTimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'time'">TimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "" };</xsl:when>
+                          <xsl:when test="Type = 'enum'">ComboBoxText <xsl:value-of select="Name"/> = new();
+                          foreach (var item in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List()) <xsl:value-of select="Name"/>.Append(item.Value.ToString(), item.Name);
+                          <xsl:value-of select="Name"/>.Active = 0;
+                          </xsl:when>
+                          <xsl:otherwise>Label <xsl:value-of select="Name"/>  = new("<xsl:value-of select="Type"/>");</xsl:otherwise>
+                      </xsl:choose>
+                      Switch sw = new();
+                      widgets.Add(new("<xsl:value-of select="Name"/>", <xsl:value-of select="Name"/>, sw));
+                      ДодатиЕлементВФільтр(listBox, "<xsl:value-of select="normalize-space(Caption)"/>:", <xsl:value-of select="Name"/>, sw);
+                  }
+                  </xsl:for-each>
+                  {
+                      Button bOn = new Button("Фільтрувати");
+                      bOn.Clicked += async (object? sender, EventArgs args) =>
+                      {
+                          List&lt;Where&gt; listWhere = [];
+                          foreach (var widget in widgets)
+                              if (widget.Item3.Active)
+                              {
+                                  string? field = widget.Item1 switch { <xsl:for-each select="Fields/Field[FilterField = 'True']">
+                                      <xsl:text>"</xsl:text><xsl:value-of select="Name"/>" =&gt; <xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>,
+                                  </xsl:for-each> _ =&gt; null };
+                                  object? value = widget.Item1 switch { <xsl:for-each select="Fields/Field[FilterField = 'True']">
+                                      <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>" =&gt; </xsl:text>
+                                      <xsl:choose>
+                                          <xsl:when test="Type = 'string'">((Entry)widget.Item2).Text</xsl:when>
+                                          <xsl:when test="Type = 'boolean'">((CheckButton)widget.Item2).Active</xsl:when>
+                                          <xsl:when test="Type = 'integer'">((IntegerControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'numeric'">((NumericControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'date' or Type = 'datetime'">((DateTimeControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'time'">((TimeControl)widget.Item2).Value</xsl:when>
+                                          <xsl:when test="Type = 'pointer'">((<xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl)widget.Item2).Pointer.UnigueID.UGuid</xsl:when>
+                                          <xsl:when test="Type = 'enum'">(int)Enum.Parse&lt;<xsl:value-of select="substring-after(Pointer, '.')"/>&gt;(((ComboBoxText)widget.Item2).ActiveId)</xsl:when>
+                                      </xsl:choose>,
+                                  </xsl:for-each> _ =&gt; null };
+                                  if (field != null &amp;&amp; value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
+                              }
+                          if (listWhere.Count != 0)
+                          {
+                              ДодатиВідбір(treeView, listWhere, true);
+                              await LoadRecords(treeView);
+                          }
+                      };
+
+                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
+                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
+                      vBox.PackStart(hBox, false, false, 5);
+                      hBox.PackStart(bOn, false, false, 5);
+                      
+                      listBox.Add(new ListBoxRow() { vBox });
+                  }
+                </xsl:when>
+                <xsl:otherwise>
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                </xsl:otherwise>
+            </xsl:choose>
+            return listBox;
+        }
 
         public static async ValueTask LoadRecords(TreeView treeView)
         {

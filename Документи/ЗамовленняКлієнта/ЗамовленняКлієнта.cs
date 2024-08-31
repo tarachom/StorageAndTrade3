@@ -74,6 +74,11 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняКлієнта_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.ЗамовленняКлієнта_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
