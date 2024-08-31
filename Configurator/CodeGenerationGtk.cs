@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 31.08.2024 14:07:29
+ * Дата конфігурації: 31.08.2024 14:37:10
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -386,18 +386,20 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* ОдиницяВиміру, pointer */
-                      ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new() { Caption = "" };
                       Switch sw = new();
+                      ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new() { Caption = "" };
+                          ОдиницяВиміру.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("ОдиницяВиміру", ОдиницяВиміру, sw));
                       ДодатиЕлементВФільтр(listBox, "Пакування:", ОдиницяВиміру, sw);
                   }
                   
                   { /* ТипНоменклатури, enum */
+                      Switch sw = new();
                       ComboBoxText ТипНоменклатури = new();
                           foreach (var item in ПсевдонімиПерелічення.ТипиНоменклатури_List()) ТипНоменклатури.Append(item.Value.ToString(), item.Name);
                           ТипНоменклатури.Active = 0;
                           
-                      Switch sw = new();
                       widgets.Add(new("ТипНоменклатури", ТипНоменклатури, sw));
                       ДодатиЕлементВФільтр(listBox, "Тип:", ТипНоменклатури, sw);
                   }
@@ -1716,15 +1718,15 @@ END
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Код_R030, string */
-                      Entry Код_R030 = new() { WidthRequest = 400 };
                       Switch sw = new();
+                      Entry Код_R030 = new() { WidthRequest = 400 };
                       widgets.Add(new("Код_R030", Код_R030, sw));
                       ДодатиЕлементВФільтр(listBox, "R030:", Код_R030, sw);
                   }
                   
                   { /* ВиводитиКурсНаСтартову, boolean */
-                      CheckButton ВиводитиКурсНаСтартову = new();
                       Switch sw = new();
+                      CheckButton ВиводитиКурсНаСтартову = new();
                       widgets.Add(new("ВиводитиКурсНаСтартову", ВиводитиКурсНаСтартову, sw));
                       ДодатиЕлементВФільтр(listBox, "Показувати на стартовій:", ВиводитиКурсНаСтартову, sw);
                   }
@@ -2308,21 +2310,21 @@ END
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* ТипСкладу, enum */
+                      Switch sw = new();
                       ComboBoxText ТипСкладу = new();
                           foreach (var item in ПсевдонімиПерелічення.ТипиСкладів_List()) ТипСкладу.Append(item.Value.ToString(), item.Name);
                           ТипСкладу.Active = 0;
                           
-                      Switch sw = new();
                       widgets.Add(new("ТипСкладу", ТипСкладу, sw));
                       ДодатиЕлементВФільтр(listBox, "Тип cкладу:", ТипСкладу, sw);
                   }
                   
                   { /* НалаштуванняАдресногоЗберігання, enum */
+                      Switch sw = new();
                       ComboBoxText НалаштуванняАдресногоЗберігання = new();
                           foreach (var item in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List()) НалаштуванняАдресногоЗберігання.Append(item.Value.ToString(), item.Name);
                           НалаштуванняАдресногоЗберігання.Active = 0;
                           
-                      Switch sw = new();
                       widgets.Add(new("НалаштуванняАдресногоЗберігання", НалаштуванняАдресногоЗберігання, sw));
                       ДодатиЕлементВФільтр(listBox, "Адресне зберігання:", НалаштуванняАдресногоЗберігання, sw);
                   }
@@ -2626,8 +2628,10 @@ END
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -5796,8 +5800,10 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -6133,8 +6139,10 @@ WHERE
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -6444,18 +6452,20 @@ WHERE
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* ТипДоговору, enum */
+                      Switch sw = new();
                       ComboBoxText ТипДоговору = new();
                           foreach (var item in ПсевдонімиПерелічення.ТипДоговорів_List()) ТипДоговору.Append(item.Value.ToString(), item.Name);
                           ТипДоговору.Active = 0;
                           
-                      Switch sw = new();
                       widgets.Add(new("ТипДоговору", ТипДоговору, sw));
                       ДодатиЕлементВФільтр(listBox, "Тип:", ТипДоговору, sw);
                   }
@@ -6767,8 +6777,10 @@ WHERE
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -7078,11 +7090,11 @@ WHERE
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* ВидРухуКоштів, enum */
+                      Switch sw = new();
                       ComboBoxText ВидРухуКоштів = new();
                           foreach (var item in ПсевдонімиПерелічення.ВидиРухуКоштів_List()) ВидРухуКоштів.Append(item.Value.ToString(), item.Name);
                           ВидРухуКоштів.Active = 0;
                           
-                      Switch sw = new();
                       widgets.Add(new("ВидРухуКоштів", ВидРухуКоштів, sw));
                       ДодатиЕлементВФільтр(listBox, "ВидРухуКоштів:", ВидРухуКоштів, sw);
                   }
@@ -7630,11 +7642,11 @@ WHERE
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* ТипДокументу, enum */
+                      Switch sw = new();
                       ComboBoxText ТипДокументу = new();
                           foreach (var item in ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_List()) ТипДокументу.Append(item.Value.ToString(), item.Name);
                           ТипДокументу.Active = 0;
                           
-                      Switch sw = new();
                       widgets.Add(new("ТипДокументу", ТипДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "ТипДокументу:", ТипДокументу, sw);
                   }
@@ -8555,18 +8567,20 @@ WHERE
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* НалаштуванняАдресногоЗберігання, enum */
+                      Switch sw = new();
                       ComboBoxText НалаштуванняАдресногоЗберігання = new();
                           foreach (var item in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List()) НалаштуванняАдресногоЗберігання.Append(item.Value.ToString(), item.Name);
                           НалаштуванняАдресногоЗберігання.Active = 0;
                           
-                      Switch sw = new();
                       widgets.Add(new("НалаштуванняАдресногоЗберігання", НалаштуванняАдресногоЗберігання, sw));
                       ДодатиЕлементВФільтр(listBox, "Налаштування:", НалаштуванняАдресногоЗберігання, sw);
                   }
@@ -8893,8 +8907,10 @@ WHERE
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Приміщення, pointer */
-                      СкладськіПриміщення_PointerControl Приміщення = new() { Caption = "" };
                       Switch sw = new();
+                      СкладськіПриміщення_PointerControl Приміщення = new() { Caption = "" };
+                          Приміщення.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Приміщення", Приміщення, sw));
                       ДодатиЕлементВФільтр(listBox, "Приміщення:", Приміщення, sw);
                   }
@@ -10232,43 +10248,53 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -10505,50 +10531,62 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -10790,50 +10828,62 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11075,50 +11125,62 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11348,29 +11410,37 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* ВидЦіни, pointer */
-                      ВидиЦін_PointerControl ВидЦіни = new() { Caption = "" };
                       Switch sw = new();
+                      ВидиЦін_PointerControl ВидЦіни = new() { Caption = "" };
+                          ВидЦіни.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("ВидЦіни", ВидЦіни, sw));
                       ДодатиЕлементВФільтр(listBox, "Вид ціни:", ВидЦіни, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11598,43 +11668,53 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11874,43 +11954,53 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -12138,29 +12228,37 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* СкладВідправник, pointer */
-                      Склади_PointerControl СкладВідправник = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl СкладВідправник = new() { Caption = "" };
+                          СкладВідправник.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("СкладВідправник", СкладВідправник, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад відправник:", СкладВідправник, sw);
                   }
                   
                   { /* СкладОтримувач, pointer */
-                      Склади_PointerControl СкладОтримувач = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl СкладОтримувач = new() { Caption = "" };
+                          СкладОтримувач.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("СкладОтримувач", СкладОтримувач, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад отримувач:", СкладОтримувач, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -12388,50 +12486,62 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -12673,50 +12783,62 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -12954,43 +13076,53 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13219,36 +13351,46 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13465,22 +13607,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13687,22 +13835,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13913,29 +14067,37 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Відповідальний, pointer */
-                      ФізичніОсоби_PointerControl Відповідальний = new() { Caption = "" };
                       Switch sw = new();
+                      ФізичніОсоби_PointerControl Відповідальний = new() { Caption = "" };
+                          Відповідальний.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Відповідальний", Відповідальний, sw));
                       ДодатиЕлементВФільтр(listBox, "Відповідальний:", Відповідальний, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14151,29 +14313,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14392,36 +14560,44 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14653,50 +14829,62 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
                       Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
+                          Контрагент.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
                       Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "" };
+                          Валюта.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
-                      Каси_PointerControl Каса = new() { Caption = "" };
                       Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "" };
+                          Каса.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* СумаДокументу, numeric */
-                      NumericControl СумаДокументу = new();
                       Switch sw = new();
+                      NumericControl СумаДокументу = new();
                       widgets.Add(new("СумаДокументу", СумаДокументу, sw));
                       ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14922,22 +15110,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* ДокументПоступлення, pointer */
-                      ПоступленняТоварівТаПослуг_PointerControl ДокументПоступлення = new() { Caption = "" };
                       Switch sw = new();
+                      ПоступленняТоварівТаПослуг_PointerControl ДокументПоступлення = new() { Caption = "" };
+                          ДокументПоступлення.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("ДокументПоступлення", ДокументПоступлення, sw));
                       ДодатиЕлементВФільтр(listBox, "Документ поступлення:", ДокументПоступлення, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15144,22 +15338,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15366,22 +15566,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* ДокументРеалізації, pointer */
-                      РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new() { Caption = "" };
                       Switch sw = new();
+                      РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new() { Caption = "" };
+                          ДокументРеалізації.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("ДокументРеалізації", ДокументРеалізації, sw));
                       ДодатиЕлементВФільтр(listBox, "Документ реалізації:", ДокументРеалізації, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15588,22 +15794,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
-                      Склади_PointerControl Склад = new() { Caption = "" };
                       Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "" };
+                          Склад.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15806,15 +16018,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   List<Tuple<string, Widget, Switch>> widgets = [];
                   
                   { /* Організація, pointer */
-                      Організації_PointerControl Організація = new() { Caption = "" };
                       Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "" };
+                          Організація.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Автор, pointer */
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
                       Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "" };
+                          Автор.AfterSelectFunc = () => sw.Active = true;
+                          
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }

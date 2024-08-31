@@ -147,6 +147,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                   List&lt;Tuple&lt;string, Widget, Switch&gt;&gt; widgets = [];
                   <xsl:for-each select="Fields/Field[FilterField = 'True']">
                   { /* <xsl:value-of select="Name"/>, <xsl:value-of select="Type"/> */
+                      Switch sw = new();
                       <xsl:choose>
                           <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
                           <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();</xsl:when>
@@ -155,14 +156,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                           <xsl:when test="Type = 'date'">DateTimeControl <xsl:value-of select="Name"/> = new() { OnlyDate = true };</xsl:when>
                           <xsl:when test="Type = 'datetime'">DateTimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
                           <xsl:when test="Type = 'time'">TimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
-                          <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "" };</xsl:when>
+                          <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "" };
+                          <xsl:value-of select="Name"/>.AfterSelectFunc = () =&gt; sw.Active = true;
+                          </xsl:when>
                           <xsl:when test="Type = 'enum'">ComboBoxText <xsl:value-of select="Name"/> = new();
                           foreach (var item in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List()) <xsl:value-of select="Name"/>.Append(item.Value.ToString(), item.Name);
                           <xsl:value-of select="Name"/>.Active = 0;
                           </xsl:when>
                           <xsl:otherwise>Label <xsl:value-of select="Name"/>  = new("<xsl:value-of select="Type"/>");</xsl:otherwise>
                       </xsl:choose>
-                      Switch sw = new();
                       widgets.Add(new("<xsl:value-of select="Name"/>", <xsl:value-of select="Name"/>, sw));
                       ДодатиЕлементВФільтр(listBox, "<xsl:value-of select="normalize-space(Caption)"/>:", <xsl:value-of select="Name"/>, sw);
                   }
@@ -573,6 +575,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                   List&lt;Tuple&lt;string, Widget, Switch&gt;&gt; widgets = [];
                   <xsl:for-each select="Fields/Field[FilterField = 'True']">
                   { /* <xsl:value-of select="Name"/>, <xsl:value-of select="Type"/> */
+                      Switch sw = new();
                       <xsl:choose>
                           <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
                           <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();</xsl:when>
@@ -581,14 +584,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                           <xsl:when test="Type = 'date'">DateTimeControl <xsl:value-of select="Name"/> = new() { OnlyDate = true };</xsl:when>
                           <xsl:when test="Type = 'datetime'">DateTimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
                           <xsl:when test="Type = 'time'">TimeControl <xsl:value-of select="Name"/> = new();</xsl:when>
-                          <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "" };</xsl:when>
+                          <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_PointerControl <xsl:value-of select="Name"/> = new() { Caption = "" };
+                          <xsl:value-of select="Name"/>.AfterSelectFunc = () =&gt; sw.Active = true;
+                          </xsl:when>
                           <xsl:when test="Type = 'enum'">ComboBoxText <xsl:value-of select="Name"/> = new();
                           foreach (var item in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List()) <xsl:value-of select="Name"/>.Append(item.Value.ToString(), item.Name);
                           <xsl:value-of select="Name"/>.Active = 0;
                           </xsl:when>
                           <xsl:otherwise>Label <xsl:value-of select="Name"/>  = new("<xsl:value-of select="Type"/>");</xsl:otherwise>
                       </xsl:choose>
-                      Switch sw = new();
                       widgets.Add(new("<xsl:value-of select="Name"/>", <xsl:value-of select="Name"/>, sw));
                       ДодатиЕлементВФільтр(listBox, "<xsl:value-of select="normalize-space(Caption)"/>:", <xsl:value-of select="Name"/>, sw);
                   }
