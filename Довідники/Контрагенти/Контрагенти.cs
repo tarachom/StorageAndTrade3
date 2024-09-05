@@ -34,7 +34,7 @@ namespace StorageAndTrade
     public class Контрагенти : ДовідникЖурнал
     {
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
-        Контрагенти_Папки_Дерево ДеревоПапок;
+        Контрагенти_Папки ДеревоПапок;
 
         public Контрагенти() : base()
         {
@@ -61,7 +61,7 @@ namespace StorageAndTrade
             }
 
             //Дерево папок зправа
-            ДеревоПапок = new Контрагенти_Папки_Дерево
+            ДеревоПапок = new Контрагенти_Папки
             {
                 WidthRequest = 500,
                 CallBack_RowActivated = LoadRecords_TreeCallBack,
@@ -85,7 +85,7 @@ namespace StorageAndTrade
                     ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
 
-            ДеревоПапок.LoadTree();
+            await ДеревоПапок.SetValue();
         }
 
         async void LoadRecords_TreeCallBack()

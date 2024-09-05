@@ -962,10 +962,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
     {
         public <xsl:value-of select="$DirectoryName"/>_SelectHierarchical() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="Fields/Field[Name = $ParentField]/NameInTable"/>") { }        
         public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
-        public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.DirectoryPointerPosition.HasValue) { Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.DirectoryPointerPosition.HasValue) { 
+          Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); 
+          Parent = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.Parent); 
+          Level = base.DirectoryPointerPosition.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Current { get; private set; }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Parent { get; private set; }
+        public int Level { get; private set; } = 0;
     }
     </xsl:if>
 

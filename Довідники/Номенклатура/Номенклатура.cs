@@ -35,7 +35,7 @@ namespace StorageAndTrade
     public class Номенклатура : ДовідникЖурнал
     {
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
-        Номенклатура_Папки_Дерево ДеревоПапок;
+        Номенклатура_Папки ДеревоПапок;
 
         public Номенклатура() : base()
         {
@@ -80,7 +80,7 @@ namespace StorageAndTrade
             }
 
             //Дерево папок cправа
-            ДеревоПапок = new Номенклатура_Папки_Дерево
+            ДеревоПапок = new Номенклатура_Папки
             {
                 WidthRequest = 500,
                 CallBack_RowActivated = LoadRecords_TreeCallBack,
@@ -105,7 +105,7 @@ namespace StorageAndTrade
                     ДеревоПапок.DirectoryPointerItem = номенклатура_Objest.Папка.UnigueID;
             }
 
-            ДеревоПапок.LoadTree();
+            await ДеревоПапок.SetValue();
         }
 
         async void LoadRecords_TreeCallBack()

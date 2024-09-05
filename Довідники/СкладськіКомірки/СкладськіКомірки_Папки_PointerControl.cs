@@ -62,13 +62,13 @@ namespace StorageAndTrade
 
         public СкладськіПриміщення_Pointer СкладПриміщенняВласник { get; set; } = new СкладськіПриміщення_Pointer();
 
-        protected override void OpenSelect(object? sender, EventArgs args)
+        protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
             BeforeClickOpenFunc?.Invoke();
 
-            СкладськіКомірки_Папки_Дерево_ШвидкийВибір page = new СкладськіКомірки_Папки_Дерево_ШвидкийВибір
+            СкладськіКомірки_Папки_ШвидкийВибір page = new СкладськіКомірки_Папки_ШвидкийВибір
             {
                 PopoverParent = popover,
                 OpenFolder = OpenFolder,
@@ -84,7 +84,7 @@ namespace StorageAndTrade
             popover.Add(page);
             popover.ShowAll();
 
-            page.LoadTree();
+            await page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

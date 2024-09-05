@@ -30,20 +30,20 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Контрагенти_Папки_Дерево_ШвидкийВибір : ДовідникШвидкийВибір
+    class Контрагенти_Папки_ШвидкийВибір : ДовідникШвидкийВибір
     {
         public UnigueID? OpenFolder { get; set; }
 
-        public Контрагенти_Папки_Дерево_ШвидкийВибір() : base(false)
+        public Контрагенти_Папки_ШвидкийВибір() : base(false)
         {
             ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
             //Сторінка
             {
                 LinkButton linkPage = new LinkButton($" {Контрагенти_Папки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =>
+                linkPage.Clicked += async (object? sender, EventArgs args) =>
                 {
-                    Контрагенти_Папки_Дерево page = new Контрагенти_Папки_Дерево()
+                    Контрагенти_Папки page = new Контрагенти_Папки()
                     {
                         DirectoryPointerItem = DirectoryPointerItem,
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer,
@@ -52,7 +52,7 @@ namespace StorageAndTrade
 
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Контрагенти_Папки_Const.FULLNAME}", () => { return page; });
 
-                    page.LoadTree();
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -80,9 +80,14 @@ namespace StorageAndTrade
             }
         }
 
-        public async void LoadTree()
+        protected override async ValueTask LoadRecords()
         {
-            await ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem);
+            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+
+            if (OpenFolder != null)
+                ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+
+            await ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
@@ -92,6 +97,11 @@ namespace StorageAndTrade
                 TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath);
                 TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
             }
+        }
+
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+
         }
     }
 }

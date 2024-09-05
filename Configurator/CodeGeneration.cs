@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.09.2024 07:16:48
+ * Дата конфігурації: 05.09.2024 17:34:04
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -6886,10 +6886,14 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Номенклатура_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a22", "col_j3") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { 
+          Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); 
+          Parent = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); 
+          Level = base.DirectoryPointerPosition.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
         public Номенклатура_Папки_Pointer? Current { get; private set; }
         public Номенклатура_Папки_Pointer? Parent { get; private set; }
+        public int Level { get; private set; } = 0;
     }
     
    
@@ -7126,10 +7130,14 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Контрагенти_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a23", "col_j6") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { 
+          Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); 
+          Parent = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); 
+          Level = base.DirectoryPointerPosition.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
         public Контрагенти_Папки_Pointer? Current { get; private set; }
         public Контрагенти_Папки_Pointer? Parent { get; private set; }
+        public int Level { get; private set; } = 0;
     }
     
    
@@ -7366,10 +7374,14 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public Склади_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a24", "col_a1") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { 
+          Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); 
+          Parent = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); 
+          Level = base.DirectoryPointerPosition.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
         public Склади_Папки_Pointer? Current { get; private set; }
         public Склади_Папки_Pointer? Parent { get; private set; }
+        public int Level { get; private set; } = 0;
     }
     
    
@@ -11107,10 +11119,14 @@ namespace StorageAndTrade_1_0.Довідники
     {
         public СкладськіКомірки_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a76", "col_j3") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
-        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { 
+          Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); 
+          Parent = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); 
+          Level = base.DirectoryPointerPosition.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
         public СкладськіКомірки_Папки_Pointer? Current { get; private set; }
         public СкладськіКомірки_Папки_Pointer? Parent { get; private set; }
+        public int Level { get; private set; } = 0;
     }
     
    

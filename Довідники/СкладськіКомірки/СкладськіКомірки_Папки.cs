@@ -30,18 +30,29 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class СкладськіКомірки_Папки_Дерево : ДовідникДерево
+    class СкладськіКомірки_Папки : ДовідникДерево
     {
         public СкладськіПриміщення_Pointer СкладПриміщенняВласник = new СкладськіПриміщення_Pointer();
 
-        public СкладськіКомірки_Папки_Дерево() : base()
+        public СкладськіКомірки_Папки() : base()
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.AddColumns(TreeViewGrid);
         }
 
-        public override async void LoadTree()
+        protected override async ValueTask LoadRecords()
         {
-            await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem, СкладПриміщенняВласник.UnigueID);
+            ТабличніСписки.СкладськіКомірки_Папки_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.СкладськіКомірки_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.СкладськіКомірки_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            if (OpenFolder != null)
+                ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+
+            if (!СкладПриміщенняВласник.IsEmpty())
+                ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, СкладПриміщенняВласник.UnigueID.UGuid));
+
+            await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadRecords(TreeViewGrid);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
@@ -59,7 +70,7 @@ namespace StorageAndTrade
         {
             СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
             {
-                CallBack_LoadRecords = CallBack_LoadTree,
+                CallBack_LoadRecords = CallBack_LoadRecords,
                 IsNew = IsNew,
                 РодичДляНового = new СкладськіКомірки_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
             };

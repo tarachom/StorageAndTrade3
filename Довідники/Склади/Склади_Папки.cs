@@ -30,16 +30,22 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Склади_Папки_Дерево : ДовідникДерево
+    class Склади_Папки : ДовідникДерево
     {
-        public Склади_Папки_Дерево() : base()
+        public Склади_Папки() : base()
         {
             ТабличніСписки.Склади_Папки_Записи.AddColumns(TreeViewGrid);
         }
 
-        public override async void LoadTree()
+        protected override async ValueTask LoadRecords()
         {
-            await ТабличніСписки.Склади_Папки_Записи.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem);
+            ТабличніСписки.Склади_Папки_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.Склади_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            if (OpenFolder != null)
+                ТабличніСписки.Склади_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+
+            await ТабличніСписки.Склади_Папки_Записи.LoadRecords(TreeViewGrid);
 
             TreeViewGrid.ExpandToPath(ТабличніСписки.Склади_Папки_Записи.RootPath);
             TreeViewGrid.SetCursor(ТабличніСписки.Склади_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
@@ -57,7 +63,7 @@ namespace StorageAndTrade
         {
             Склади_Папки_Елемент page = new Склади_Папки_Елемент
             {
-                CallBack_LoadRecords = CallBack_LoadTree,
+                CallBack_LoadRecords = CallBack_LoadRecords,
                 IsNew = IsNew,
                 РодичДляНового = new Склади_Папки_Pointer(DirectoryPointerItem ?? new UnigueID())
             };

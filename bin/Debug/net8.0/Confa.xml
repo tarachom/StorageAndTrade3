@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>05.09.2024 07:16:48</DateTimeSave>
+  <DateTimeSave>05.09.2024 17:34:04</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1220,7 +1220,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1252,7 +1251,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1454,7 +1452,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1626,7 +1623,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1799,7 +1795,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1831,7 +1826,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1938,7 +1932,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -1970,7 +1963,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -2053,7 +2045,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2109,7 +2100,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2237,7 +2227,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2305,7 +2294,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2566,7 +2554,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2609,7 +2596,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2839,7 +2825,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2893,7 +2878,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -2978,7 +2962,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3021,7 +3004,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -3094,7 +3076,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3126,7 +3107,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3310,7 +3290,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3342,7 +3321,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -3515,7 +3493,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3547,7 +3524,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -3620,7 +3596,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3652,7 +3627,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -3714,7 +3688,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3746,7 +3719,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3862,7 +3834,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -3930,7 +3901,6 @@ END]]></Value>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -4014,7 +3984,6 @@ END]]></Value>
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4135,7 +4104,6 @@ FROM
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4310,15 +4278,63 @@ FROM
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
         </TabularList>
         <TabularList>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
         </TabularList>
       </TabularLists>
       <TriggerFunctions>
@@ -4378,15 +4394,63 @@ FROM
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
         </TabularList>
         <TabularList>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
         </TabularList>
       </TabularLists>
       <TriggerFunctions>
@@ -4446,15 +4510,63 @@ FROM
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
         </TabularList>
         <TabularList>
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+          </Fields>
         </TabularList>
       </TabularLists>
       <TriggerFunctions>
@@ -4524,7 +4636,6 @@ FROM
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4581,7 +4692,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4800,7 +4910,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -4843,7 +4952,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5120,7 +5228,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5174,7 +5281,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5400,7 +5506,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5443,7 +5548,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -5580,7 +5684,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5635,7 +5738,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5709,7 +5811,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номер</Name>
@@ -5729,7 +5830,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номер</Name>
@@ -5834,7 +5934,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -5899,7 +5998,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6030,7 +6128,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -6062,7 +6159,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -6423,7 +6519,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -6659,7 +6754,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -6748,7 +6842,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6790,7 +6883,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -6954,7 +7046,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -7066,7 +7157,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -7154,7 +7244,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -7278,7 +7367,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -7358,7 +7446,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -7444,13 +7531,36 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
           <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
             <Field>
               <Name>Власник</Name>
               <Caption>Власник</Caption>
               <Size>0</Size>
-              <SortNum>100</SortNum>
+              <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
@@ -7463,13 +7573,36 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>1</IsTree>
           <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
             <Field>
               <Name>Власник</Name>
               <Caption>Власник</Caption>
               <Size>0</Size>
-              <SortNum>100</SortNum>
+              <SortNum>3</SortNum>
               <SortField>False</SortField>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
@@ -7556,7 +7689,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -7600,7 +7732,6 @@ WHERE
           <Name>ЗаписиШвидкийВибір</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Код</Name>
@@ -8079,7 +8210,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -8724,7 +8854,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -9325,7 +9454,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -9980,7 +10108,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -10312,7 +10439,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -10700,7 +10826,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -11156,7 +11281,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -11632,7 +11756,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -12114,7 +12237,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -12600,7 +12722,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -13017,7 +13138,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -13535,7 +13655,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -13845,7 +13964,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -14134,7 +14252,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -14461,7 +14578,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -14820,7 +14936,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -15195,7 +15310,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -15668,7 +15782,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -16031,7 +16144,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -16348,7 +16460,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -16666,7 +16777,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -16940,7 +17050,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -17201,7 +17310,6 @@ WHERE
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Назва</Name>
@@ -23041,7 +23149,6 @@ SQL тип  непотрібно вказувати
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номенклатура</Name>
@@ -23209,7 +23316,6 @@ SQL тип  непотрібно вказувати
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Валюта</Name>
@@ -23346,7 +23452,6 @@ SQL тип  непотрібно вказувати
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Штрихкод</Name>
@@ -23430,7 +23535,6 @@ SQL тип  непотрібно вказувати
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Файл</Name>
@@ -24059,7 +24163,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номенклатура</Name>
@@ -24360,7 +24463,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>ЗамовленняКлієнта</Name>
@@ -24727,7 +24829,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Валюта</Name>
@@ -25057,7 +25158,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Організація</Name>
@@ -25549,7 +25649,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номенклатура</Name>
@@ -25833,7 +25932,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>ЗамовленняПостачальнику</Name>
@@ -26187,7 +26285,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Контрагент</Name>
@@ -26636,7 +26733,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Організація</Name>
@@ -27360,7 +27456,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Організація</Name>
@@ -27792,7 +27887,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Організація</Name>
@@ -28413,7 +28507,6 @@ HAVING
           <Name>Записи</Name>
           <Desc>
           </Desc>
-          <IsTree>0</IsTree>
           <Fields>
             <Field>
               <Name>Номенклатура</Name>

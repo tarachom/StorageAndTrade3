@@ -34,7 +34,7 @@ namespace StorageAndTrade
     public class Склади : ДовідникЖурнал
     {
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
-        Склади_Папки_Дерево ДеревоПапок;
+        Склади_Папки ДеревоПапок;
 
         public Склади() : base()
         {
@@ -59,7 +59,7 @@ namespace StorageAndTrade
             HBoxTop.PackStart(linkButtonHar, false, false, 10);
 
             //Дерево папок зправа
-            ДеревоПапок = new Склади_Папки_Дерево
+            ДеревоПапок = new Склади_Папки
             {
                 WidthRequest = 500,
                 CallBack_RowActivated = LoadRecords_TreeCallBack,
@@ -83,7 +83,7 @@ namespace StorageAndTrade
                     ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
 
-            ДеревоПапок.LoadTree();
+            await ДеревоПапок.SetValue();
         }
 
         async void LoadRecords_TreeCallBack()

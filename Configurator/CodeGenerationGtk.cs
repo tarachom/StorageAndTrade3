@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.09.2024 07:16:48
+ * Дата конфігурації: 05.09.2024 17:34:04
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -52,7 +52,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -97,7 +99,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -137,10 +139,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Організації_Select.MoveNext())
             {
                 Довідники.Організації_Pointer? cur = Організації_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -152,12 +156,13 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                             Назва = Fields[Організації_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -178,7 +183,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -223,7 +230,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -263,10 +270,12 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Організації_Select.MoveNext())
             {
                 Довідники.Організації_Pointer? cur = Організації_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -278,12 +287,13 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                             Назва = Fields[Організації_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -309,9 +319,13 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string ОдиницяВиміру = "";
+        
         string ТипНоменклатури = "";
+        
         string Залишок = "";
         string ВРезерві = "";
         string ВРезервіПідЗамовлення = "";
@@ -378,7 +392,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -581,10 +595,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Номенклатура_Select.MoveNext())
             {
                 Довідники.Номенклатура_Pointer? cur = Номенклатура_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -603,12 +619,13 @@ END
                         ЗалишокВКомірках = Fields["ЗалишокВКомірках"].ToString() ?? "",
                         
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -629,8 +646,11 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string ОдиницяВиміру = "";
+        
         string Залишок = "";
         string ВРезерві = "";
         string ВРезервіПідЗамовлення = "";
@@ -690,7 +710,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -814,10 +834,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Номенклатура_Select.MoveNext())
             {
                 Довідники.Номенклатура_Pointer? cur = Номенклатура_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -833,12 +855,13 @@ END
                         ВРезервіПідЗамовлення = Fields["ВРезервіПідЗамовлення"].ToString() ?? "",
                         
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -864,7 +887,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -909,7 +934,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -949,10 +974,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Виробники_Select.MoveNext())
             {
                 Довідники.Виробники_Pointer? cur = Виробники_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -964,12 +991,13 @@ END
                             Назва = Fields[Виробники_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -990,7 +1018,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -1035,7 +1065,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1075,10 +1105,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Виробники_Select.MoveNext())
             {
                 Довідники.Виробники_Pointer? cur = Виробники_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -1090,12 +1122,13 @@ END
                             Назва = Fields[Виробники_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1121,7 +1154,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -1166,7 +1201,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1206,10 +1241,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиНоменклатури_Select.MoveNext())
             {
                 Довідники.ВидиНоменклатури_Pointer? cur = ВидиНоменклатури_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -1221,12 +1258,13 @@ END
                             Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1247,6 +1285,7 @@ END
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -1288,7 +1327,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1327,10 +1366,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиНоменклатури_Select.MoveNext())
             {
                 Довідники.ВидиНоменклатури_Pointer? cur = ВидиНоменклатури_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -1341,12 +1382,13 @@ END
                         Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1372,9 +1414,13 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string КількістьУпаковок = "";
+        
         string НазваПовна = "";
+        
 
         Array ToArray()
         {
@@ -1425,7 +1471,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1467,10 +1513,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ПакуванняОдиниціВиміру_Select.MoveNext())
             {
                 Довідники.ПакуванняОдиниціВиміру_Pointer? cur = ПакуванняОдиниціВиміру_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -1484,12 +1532,13 @@ END
                             НазваПовна = Fields[ПакуванняОдиниціВиміру_Const.НазваПовна].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1510,9 +1559,13 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string КількістьУпаковок = "";
+        
         string НазваПовна = "";
+        
 
         Array ToArray()
         {
@@ -1563,7 +1616,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1605,10 +1658,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ПакуванняОдиниціВиміру_Select.MoveNext())
             {
                 Довідники.ПакуванняОдиниціВиміру_Pointer? cur = ПакуванняОдиниціВиміру_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -1622,12 +1677,13 @@ END
                             НазваПовна = Fields[ПакуванняОдиниціВиміру_Const.НазваПовна].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1653,10 +1709,15 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string КороткаНазва = "";
+        
         string Код_R030 = "";
+        
         string ВиводитиКурсНаСтартову = "";
+        
 
         Array ToArray()
         {
@@ -1710,7 +1771,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1798,10 +1859,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Валюти_Select.MoveNext())
             {
                 Довідники.Валюти_Pointer? cur = Валюти_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -1816,12 +1879,13 @@ END
                             ВиводитиКурсНаСтартову = (Fields[Валюти_Const.ВиводитиКурсНаСтартову] != DBNull.Value ? (bool)Fields[Валюти_Const.ВиводитиКурсНаСтартову] : false) ? "Так" : "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1842,9 +1906,13 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string КороткаНазва = "";
+        
         string Код_R030 = "";
+        
 
         Array ToArray()
         {
@@ -1895,7 +1963,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1937,10 +2005,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Валюти_Select.MoveNext())
             {
                 Довідники.Валюти_Pointer? cur = Валюти_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -1954,12 +2024,13 @@ END
                             Код_R030 = Fields[Валюти_Const.Код_R030].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -1985,8 +2056,11 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Папка = "";
+        
 
         Array ToArray()
         {
@@ -2034,7 +2108,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2076,10 +2150,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Контрагенти_Select.MoveNext())
             {
                 Довідники.Контрагенти_Pointer? cur = Контрагенти_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -2092,12 +2168,13 @@ END
                             Папка = Fields["Папка"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2118,7 +2195,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -2163,7 +2242,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2203,10 +2282,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Контрагенти_Select.MoveNext())
             {
                 Довідники.Контрагенти_Pointer? cur = Контрагенти_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -2218,12 +2299,13 @@ END
                             Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2249,9 +2331,13 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string ТипСкладу = "";
+        
         string НалаштуванняАдресногоЗберігання = "";
+        
 
         Array ToArray()
         {
@@ -2302,7 +2388,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2395,10 +2481,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Склади_Select.MoveNext())
             {
                 Довідники.Склади_Pointer? cur = Склади_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -2414,12 +2502,13 @@ END
                               (Перелічення.НалаштуванняАдресногоЗберігання)(Fields[Склади_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[Склади_Const.НалаштуванняАдресногоЗберігання] : 0)) ),
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2440,7 +2529,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -2485,7 +2576,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2525,10 +2616,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Склади_Select.MoveNext())
             {
                 Довідники.Склади_Pointer? cur = Склади_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -2540,12 +2633,13 @@ END
                             Назва = Fields[Склади_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2571,8 +2665,11 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Валюта = "";
+        
 
         Array ToArray()
         {
@@ -2620,7 +2717,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2700,10 +2797,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиЦін_Select.MoveNext())
             {
                 Довідники.ВидиЦін_Pointer? cur = ВидиЦін_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -2716,12 +2815,13 @@ END
                             Валюта = Fields["Валюта"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2742,6 +2842,7 @@ END
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -2783,7 +2884,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2822,10 +2923,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиЦін_Select.MoveNext())
             {
                 Довідники.ВидиЦін_Pointer? cur = ВидиЦін_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -2836,12 +2939,13 @@ END
                         Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2867,7 +2971,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -2912,7 +3018,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2952,10 +3058,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиЦінПостачальників_Select.MoveNext())
             {
                 Довідники.ВидиЦінПостачальників_Pointer? cur = ВидиЦінПостачальників_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -2967,12 +3075,13 @@ END
                             Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -2993,7 +3102,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3038,7 +3149,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3078,10 +3189,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиЦінПостачальників_Select.MoveNext())
             {
                 Довідники.ВидиЦінПостачальників_Pointer? cur = ВидиЦінПостачальників_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3093,12 +3206,13 @@ END
                             Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3124,7 +3238,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3169,7 +3285,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3209,10 +3325,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Користувачі_Select.MoveNext())
             {
                 Довідники.Користувачі_Pointer? cur = Користувачі_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3224,12 +3342,13 @@ END
                             Назва = Fields[Користувачі_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3250,6 +3369,7 @@ END
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3291,7 +3411,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3330,10 +3450,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Користувачі_Select.MoveNext())
             {
                 Довідники.Користувачі_Pointer? cur = Користувачі_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3344,12 +3466,13 @@ END
                         Назва = Fields[Користувачі_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3375,7 +3498,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3420,7 +3545,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3460,10 +3585,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ФізичніОсоби_Select.MoveNext())
             {
                 Довідники.ФізичніОсоби_Pointer? cur = ФізичніОсоби_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3475,12 +3602,13 @@ END
                             Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3501,6 +3629,7 @@ END
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3542,7 +3671,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3581,10 +3710,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ФізичніОсоби_Select.MoveNext())
             {
                 Довідники.ФізичніОсоби_Pointer? cur = ФізичніОсоби_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3595,12 +3726,13 @@ END
                         Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3626,7 +3758,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3671,7 +3805,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3711,10 +3845,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СтруктураПідприємства_Select.MoveNext())
             {
                 Довідники.СтруктураПідприємства_Pointer? cur = СтруктураПідприємства_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3726,12 +3862,13 @@ END
                             Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3752,6 +3889,7 @@ END
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3793,7 +3931,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3832,10 +3970,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СтруктураПідприємства_Select.MoveNext())
             {
                 Довідники.СтруктураПідприємства_Pointer? cur = СтруктураПідприємства_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3846,12 +3986,13 @@ END
                         Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -3877,7 +4018,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -3922,7 +4065,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3962,10 +4105,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (КраїниСвіту_Select.MoveNext())
             {
                 Довідники.КраїниСвіту_Pointer? cur = КраїниСвіту_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -3977,12 +4122,13 @@ END
                             Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4003,7 +4149,9 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -4048,7 +4196,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4088,10 +4236,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (КраїниСвіту_Select.MoveNext())
             {
                 Довідники.КраїниСвіту_Pointer? cur = КраїниСвіту_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -4103,12 +4253,13 @@ END
                             Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4134,10 +4285,15 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string НазваФайлу = "";
+        
         string Розмір = "";
+        
         string ДатаСтворення = "";
+        
 
         Array ToArray()
         {
@@ -4191,7 +4347,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4234,10 +4390,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Файли_Select.MoveNext())
             {
                 Довідники.Файли_Pointer? cur = Файли_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -4252,12 +4410,13 @@ END
                             ДатаСтворення = Fields[Файли_Const.ДатаСтворення].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4278,6 +4437,7 @@ END
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -4319,7 +4479,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4358,10 +4518,12 @@ END
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Файли_Select.MoveNext())
             {
                 Довідники.Файли_Pointer? cur = Файли_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -4372,12 +4534,13 @@ END
                         Назва = Fields[Файли_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4403,8 +4566,11 @@ END
         string ID = "";
         
         string Код = "";
+        
         string Номенклатура = "";
+        
         string Назва = "";
+        
         string Залишки = "";
         string ВРезерві = "";
         string ВРезервіПідЗамовлення = "";
@@ -4464,7 +4630,7 @@ END
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4578,10 +4744,12 @@ FROM
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ХарактеристикиНоменклатури_Select.MoveNext())
             {
                 Довідники.ХарактеристикиНоменклатури_Pointer? cur = ХарактеристикиНоменклатури_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -4597,12 +4765,13 @@ FROM
                         ВРезервіПідЗамовлення = Fields["ВРезервіПідЗамовлення"].ToString() ?? "",
                         
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4623,8 +4792,11 @@ FROM
         string ID = "";
         
         string Код = "";
+        
         string Номенклатура = "";
+        
         string Назва = "";
+        
         string Залишки = "";
         string ВРезерві = "";
         string ВРезервіПідЗамовлення = "";
@@ -4684,7 +4856,7 @@ FROM
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4798,10 +4970,12 @@ FROM
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ХарактеристикиНоменклатури_Select.MoveNext())
             {
                 Довідники.ХарактеристикиНоменклатури_Pointer? cur = ХарактеристикиНоменклатури_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -4817,12 +4991,13 @@ FROM
                         ВРезервіПідЗамовлення = Fields["ВРезервіПідЗамовлення"].ToString() ?? "",
                         
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -4841,892 +5016,904 @@ FROM
     #region DIRECTORY "Номенклатура_Папки"
     
       
-    /* ДЕРЕВО */
-    public class Номенклатура_Папки_Записи
+    /* ТАБЛИЦЯ */
+    public class Номенклатура_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer )
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            Номенклатура_Папки_Записи rootRecord = new Номенклатура_Папки_Записи
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.Номенклатура_Папки_SelectHierarchical Номенклатура_Папки_Select = new Довідники.Номенклатура_Папки_SelectHierarchical();
+            Номенклатура_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.Номенклатура_Папки_Const.Назва,
+                /*Код*/ Довідники.Номенклатура_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            Номенклатура_Папки_Select.QuerySelect.Order.Add(
+               Довідники.Номенклатура_Папки_Const.Назва, SelectOrder.ASC);
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {Номенклатура_Папки_Const.Назва}, 
-        {Номенклатура_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {Номенклатура_Папки_Const.TABLE}
-    WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {Номенклатура_Папки_Const.TABLE}.uid, 
-        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Назва}, 
-        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {Номенклатура_Папки_Const.TABLE}.deletion_label 
-    FROM {Номенклатура_Папки_Const.TABLE}
-        JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
-
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {Номенклатура_Папки_Const.Назва} AS Назва, 
-    {Номенклатура_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await Номенклатура_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new Номенклатура_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (Номенклатура_Папки_Select.MoveNext())
+            {
+                Довідники.Номенклатура_Папки_Pointer? cur = Номенклатура_Папки_Select.Current;
+                
+                string Parent = Номенклатура_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = Номенклатура_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    Номенклатура_Папки_Записи record = new Номенклатура_Папки_Записи
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    Номенклатура_Папки_Записи Record = new Номенклатура_Папки_Записи
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[Номенклатура_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[Номенклатура_Папки_Const.Код].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
-    /* ДЕРЕВО */
-    public class Номенклатура_Папки_ЗаписиШвидкийВибір
+	    
+    /* ТАБЛИЦЯ */
+    public class Номенклатура_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer )
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            Номенклатура_Папки_ЗаписиШвидкийВибір rootRecord = new Номенклатура_Папки_ЗаписиШвидкийВибір
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.Номенклатура_Папки_SelectHierarchical Номенклатура_Папки_Select = new Довідники.Номенклатура_Папки_SelectHierarchical();
+            Номенклатура_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.Номенклатура_Папки_Const.Назва,
+                /*Код*/ Довідники.Номенклатура_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            Номенклатура_Папки_Select.QuerySelect.Order.Add(
+               Довідники.Номенклатура_Папки_Const.Назва, SelectOrder.ASC);
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {Номенклатура_Папки_Const.Назва}, 
-        {Номенклатура_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {Номенклатура_Папки_Const.TABLE}
-    WHERE {Номенклатура_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {Номенклатура_Папки_Const.TABLE}.uid, 
-        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Назва}, 
-        {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {Номенклатура_Папки_Const.TABLE}.deletion_label 
-    FROM {Номенклатура_Папки_Const.TABLE}
-        JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid";
-
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {Номенклатура_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {Номенклатура_Папки_Const.Назва} AS Назва, 
-    {Номенклатура_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {Номенклатура_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await Номенклатура_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new Номенклатура_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (Номенклатура_Папки_Select.MoveNext())
+            {
+                Довідники.Номенклатура_Папки_Pointer? cur = Номенклатура_Папки_Select.Current;
+                
+                string Parent = Номенклатура_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = Номенклатура_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    Номенклатура_Папки_ЗаписиШвидкийВибір record = new Номенклатура_Папки_ЗаписиШвидкийВибір
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    Номенклатура_Папки_ЗаписиШвидкийВибір Record = new Номенклатура_Папки_ЗаписиШвидкийВибір
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[Номенклатура_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[Номенклатура_Папки_Const.Код].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
+	    
     #endregion
     
     #region DIRECTORY "Контрагенти_Папки"
     
       
-    /* ДЕРЕВО */
-    public class Контрагенти_Папки_Записи
+    /* ТАБЛИЦЯ */
+    public class Контрагенти_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer )
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            Контрагенти_Папки_Записи rootRecord = new Контрагенти_Папки_Записи
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.Контрагенти_Папки_SelectHierarchical Контрагенти_Папки_Select = new Довідники.Контрагенти_Папки_SelectHierarchical();
+            Контрагенти_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.Контрагенти_Папки_Const.Назва,
+                /*Код*/ Довідники.Контрагенти_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            Контрагенти_Папки_Select.QuerySelect.Order.Add(
+               Довідники.Контрагенти_Папки_Const.Назва, SelectOrder.ASC);
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {Контрагенти_Папки_Const.Назва}, 
-        {Контрагенти_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {Контрагенти_Папки_Const.TABLE}
-    WHERE {Контрагенти_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {Контрагенти_Папки_Const.TABLE}.uid, 
-        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Назва}, 
-        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {Контрагенти_Папки_Const.TABLE}.deletion_label 
-    FROM {Контрагенти_Папки_Const.TABLE}
-        JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid";
-
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {Контрагенти_Папки_Const.Назва} AS Назва, 
-    {Контрагенти_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await Контрагенти_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new Контрагенти_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (Контрагенти_Папки_Select.MoveNext())
+            {
+                Довідники.Контрагенти_Папки_Pointer? cur = Контрагенти_Папки_Select.Current;
+                
+                string Parent = Контрагенти_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = Контрагенти_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    Контрагенти_Папки_Записи record = new Контрагенти_Папки_Записи
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    Контрагенти_Папки_Записи Record = new Контрагенти_Папки_Записи
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[Контрагенти_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[Контрагенти_Папки_Const.Код].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
-    /* ДЕРЕВО */
-    public class Контрагенти_Папки_ЗаписиШвидкийВибір
+	    
+    /* ТАБЛИЦЯ */
+    public class Контрагенти_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer )
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            Контрагенти_Папки_ЗаписиШвидкийВибір rootRecord = new Контрагенти_Папки_ЗаписиШвидкийВибір
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.Контрагенти_Папки_SelectHierarchical Контрагенти_Папки_Select = new Довідники.Контрагенти_Папки_SelectHierarchical();
+            Контрагенти_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.Контрагенти_Папки_Const.Назва,
+                /*Код*/ Довідники.Контрагенти_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            Контрагенти_Папки_Select.QuerySelect.Order.Add(
+               Довідники.Контрагенти_Папки_Const.Назва, SelectOrder.ASC);
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {Контрагенти_Папки_Const.Назва}, 
-        {Контрагенти_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {Контрагенти_Папки_Const.TABLE}
-    WHERE {Контрагенти_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {Контрагенти_Папки_Const.TABLE}.uid, 
-        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Назва}, 
-        {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {Контрагенти_Папки_Const.TABLE}.deletion_label 
-    FROM {Контрагенти_Папки_Const.TABLE}
-        JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid";
-
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {Контрагенти_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {Контрагенти_Папки_Const.Назва} AS Назва, 
-    {Контрагенти_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {Контрагенти_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await Контрагенти_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new Контрагенти_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (Контрагенти_Папки_Select.MoveNext())
+            {
+                Довідники.Контрагенти_Папки_Pointer? cur = Контрагенти_Папки_Select.Current;
+                
+                string Parent = Контрагенти_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = Контрагенти_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    Контрагенти_Папки_ЗаписиШвидкийВибір record = new Контрагенти_Папки_ЗаписиШвидкийВибір
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    Контрагенти_Папки_ЗаписиШвидкийВибір Record = new Контрагенти_Папки_ЗаписиШвидкийВибір
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[Контрагенти_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[Контрагенти_Папки_Const.Код].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
+	    
     #endregion
     
     #region DIRECTORY "Склади_Папки"
     
       
-    /* ДЕРЕВО */
-    public class Склади_Папки_Записи
+    /* ТАБЛИЦЯ */
+    public class Склади_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer )
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            Склади_Папки_Записи rootRecord = new Склади_Папки_Записи
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.Склади_Папки_SelectHierarchical Склади_Папки_Select = new Довідники.Склади_Папки_SelectHierarchical();
+            Склади_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.Склади_Папки_Const.Назва,
+                /*Код*/ Довідники.Склади_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            Склади_Папки_Select.QuerySelect.Order.Add(
+               Довідники.Склади_Папки_Const.Назва, SelectOrder.ASC);
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {Склади_Папки_Const.Назва}, 
-        {Склади_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {Склади_Папки_Const.TABLE}
-    WHERE {Склади_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {Склади_Папки_Const.TABLE}.uid, 
-        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Назва}, 
-        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {Склади_Папки_Const.TABLE}.deletion_label 
-    FROM {Склади_Папки_Const.TABLE}
-        JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid";
-
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {Склади_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {Склади_Папки_Const.Назва} AS Назва, 
-    {Склади_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {Склади_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await Склади_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new Склади_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (Склади_Папки_Select.MoveNext())
+            {
+                Довідники.Склади_Папки_Pointer? cur = Склади_Папки_Select.Current;
+                
+                string Parent = Склади_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = Склади_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    Склади_Папки_Записи record = new Склади_Папки_Записи
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    Склади_Папки_Записи Record = new Склади_Папки_Записи
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[Склади_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[Склади_Папки_Const.Код].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
-    /* ДЕРЕВО */
-    public class Склади_Папки_ЗаписиШвидкийВибір
+	    
+    /* ТАБЛИЦЯ */
+    public class Склади_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer )
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            Склади_Папки_ЗаписиШвидкийВибір rootRecord = new Склади_Папки_ЗаписиШвидкийВибір
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.Склади_Папки_SelectHierarchical Склади_Папки_Select = new Довідники.Склади_Папки_SelectHierarchical();
+            Склади_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.Склади_Папки_Const.Назва,
+                /*Код*/ Довідники.Склади_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            Склади_Папки_Select.QuerySelect.Order.Add(
+               Довідники.Склади_Папки_Const.Назва, SelectOrder.ASC);
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {Склади_Папки_Const.Назва}, 
-        {Склади_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {Склади_Папки_Const.TABLE}
-    WHERE {Склади_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {Склади_Папки_Const.TABLE}.uid, 
-        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Назва}, 
-        {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {Склади_Папки_Const.TABLE}.deletion_label 
-    FROM {Склади_Папки_Const.TABLE}
-        JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid";
-
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {Склади_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {Склади_Папки_Const.Назва} AS Назва, 
-    {Склади_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {Склади_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await Склади_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new Склади_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (Склади_Папки_Select.MoveNext())
+            {
+                Довідники.Склади_Папки_Pointer? cur = Склади_Папки_Select.Current;
+                
+                string Parent = Склади_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = Склади_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    Склади_Папки_ЗаписиШвидкийВибір record = new Склади_Папки_ЗаписиШвидкийВибір
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    Склади_Папки_ЗаписиШвидкийВибір Record = new Склади_Папки_ЗаписиШвидкийВибір
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[Склади_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[Склади_Папки_Const.Код].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
+	    
     #endregion
     
     #region DIRECTORY "Каси"
@@ -5739,8 +5926,11 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Валюта = "";
+        
         string Залишок = "";
 
         Array ToArray()
@@ -5792,7 +5982,7 @@ ORDER BY level, {Склади_Папки_Const.Назва} ASC
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5884,10 +6074,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Каси_Select.MoveNext())
             {
                 Довідники.Каси_Pointer? cur = Каси_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -5901,12 +6093,13 @@ WHERE
                             Залишок = Fields["Залишок"].ToString() ?? "",
                         
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -5927,8 +6120,11 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Валюта = "";
+        
         string Залишок = "";
 
         Array ToArray()
@@ -5980,7 +6176,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6034,10 +6230,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Каси_Select.MoveNext())
             {
                 Довідники.Каси_Pointer? cur = Каси_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -6051,12 +6249,13 @@ WHERE
                             Залишок = Fields["Залишок"].ToString() ?? "",
                         
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -6082,8 +6281,11 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Валюта = "";
+        
 
         Array ToArray()
         {
@@ -6131,7 +6333,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6211,10 +6413,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (БанківськіРахункиОрганізацій_Select.MoveNext())
             {
                 Довідники.БанківськіРахункиОрганізацій_Pointer? cur = БанківськіРахункиОрганізацій_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -6227,12 +6431,13 @@ WHERE
                             Валюта = Fields["Валюта"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -6253,8 +6458,11 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Валюта = "";
+        
 
         Array ToArray()
         {
@@ -6302,7 +6510,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6344,10 +6552,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (БанківськіРахункиОрганізацій_Select.MoveNext())
             {
                 Довідники.БанківськіРахункиОрганізацій_Pointer? cur = БанківськіРахункиОрганізацій_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -6360,12 +6570,13 @@ WHERE
                             Валюта = Fields["Валюта"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -6391,9 +6602,13 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Контрагент = "";
+        
         string ТипДоговору = "";
+        
 
         Array ToArray()
         {
@@ -6444,7 +6659,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6537,10 +6752,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ДоговориКонтрагентів_Select.MoveNext())
             {
                 Довідники.ДоговориКонтрагентів_Pointer? cur = ДоговориКонтрагентів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -6555,12 +6772,13 @@ WHERE
                               (Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ),
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -6581,8 +6799,11 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Контрагент = "";
+        
         string ТипДоговору = "";
+        
 
         Array ToArray()
         {
@@ -6630,7 +6851,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6672,10 +6893,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ДоговориКонтрагентів_Select.MoveNext())
             {
                 Довідники.ДоговориКонтрагентів_Pointer? cur = ДоговориКонтрагентів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -6689,12 +6912,13 @@ WHERE
                               (Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ),
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -6720,8 +6944,11 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Валюта = "";
+        
 
         Array ToArray()
         {
@@ -6769,7 +6996,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6849,10 +7076,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (БанківськіРахункиКонтрагентів_Select.MoveNext())
             {
                 Довідники.БанківськіРахункиКонтрагентів_Pointer? cur = БанківськіРахункиКонтрагентів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -6865,12 +7094,13 @@ WHERE
                             Валюта = Fields["Валюта"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -6891,8 +7121,11 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string Валюта = "";
+        
 
         Array ToArray()
         {
@@ -6940,7 +7173,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6982,10 +7215,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (БанківськіРахункиКонтрагентів_Select.MoveNext())
             {
                 Довідники.БанківськіРахункиКонтрагентів_Pointer? cur = БанківськіРахункиКонтрагентів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -6998,12 +7233,13 @@ WHERE
                             Валюта = Fields["Валюта"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -7029,9 +7265,13 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Код = "";
+        
         string КореспондуючийРахунок = "";
+        
         string ВидРухуКоштів = "";
+        
 
         Array ToArray()
         {
@@ -7082,7 +7322,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7163,10 +7403,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СтаттяРухуКоштів_Select.MoveNext())
             {
                 Довідники.СтаттяРухуКоштів_Pointer? cur = СтаттяРухуКоштів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -7181,12 +7423,13 @@ WHERE
                               (Перелічення.ВидиРухуКоштів)(Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] != DBNull.Value ? Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] : 0)) ),
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -7207,6 +7450,7 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -7248,7 +7492,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7287,10 +7531,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СтаттяРухуКоштів_Select.MoveNext())
             {
                 Довідники.СтаттяРухуКоштів_Pointer? cur = СтаттяРухуКоштів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -7301,12 +7547,13 @@ WHERE
                         Назва = Fields[СтаттяРухуКоштів_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -7332,6 +7579,7 @@ WHERE
         string ID = "";
         
         string Номер = "";
+        
 
         Array ToArray()
         {
@@ -7373,7 +7621,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7412,10 +7660,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СеріїНоменклатури_Select.MoveNext())
             {
                 Довідники.СеріїНоменклатури_Pointer? cur = СеріїНоменклатури_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -7426,12 +7676,13 @@ WHERE
                         Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -7452,6 +7703,7 @@ WHERE
         string ID = "";
         
         string Номер = "";
+        
 
         Array ToArray()
         {
@@ -7493,7 +7745,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7532,10 +7784,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СеріїНоменклатури_Select.MoveNext())
             {
                 Довідники.СеріїНоменклатури_Pointer? cur = СеріїНоменклатури_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -7546,12 +7800,13 @@ WHERE
                         Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -7577,10 +7832,15 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Дата = "";
+        
         string ТипДокументу = "";
+        
         string ПоступленняТоварівТаПослуг = "";
+        
         string ВведенняЗалишків = "";
+        
 
         Array ToArray()
         {
@@ -7634,7 +7894,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7718,10 +7978,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ПартіяТоварівКомпозит_Select.MoveNext())
             {
                 Довідники.ПартіяТоварівКомпозит_Pointer? cur = ПартіяТоварівКомпозит_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -7737,12 +7999,13 @@ WHERE
                             ВведенняЗалишків = Fields["ВведенняЗалишків"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -7763,7 +8026,9 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Дата = "";
+        
 
         Array ToArray()
         {
@@ -7808,7 +8073,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7848,10 +8113,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ПартіяТоварівКомпозит_Select.MoveNext())
             {
                 Довідники.ПартіяТоварівКомпозит_Pointer? cur = ПартіяТоварівКомпозит_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -7863,12 +8130,13 @@ WHERE
                             Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -7894,7 +8162,9 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -7939,7 +8209,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7979,10 +8249,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиЗапасів_Select.MoveNext())
             {
                 Довідники.ВидиЗапасів_Pointer? cur = ВидиЗапасів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -7994,12 +8266,13 @@ WHERE
                             Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -8020,7 +8293,9 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -8065,7 +8340,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8105,10 +8380,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ВидиЗапасів_Select.MoveNext())
             {
                 Довідники.ВидиЗапасів_Pointer? cur = ВидиЗапасів_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -8120,12 +8397,13 @@ WHERE
                             Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -8151,24 +8429,43 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string ПовнаНазва = "";
+        
         string КодМФО = "";
+        
         string КодЄДРПОУ = "";
+        
         string НомерЛіцензії = "";
+        
         string ДатаЛіцензії = "";
+        
         string Статус = "";
+        
         string ТипНаселеногоПункту = "";
+        
         string УнікальнийКодБанку = "";
+        
         string ПоштовийІндекс = "";
+        
         string НазваНаселеногоПункту = "";
+        
         string Адреса = "";
+        
         string НомерТелефону = "";
+        
         string ДатаВідкриттяУстанови = "";
+        
         string ДатаЗакриттяУстанови = "";
+        
         string КодНБУ = "";
+        
         string КодСтатусу = "";
+        
         string ДатаЗапису = "";
+        
 
         Array ToArray()
         {
@@ -8264,7 +8561,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8321,10 +8618,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Банки_Select.MoveNext())
             {
                 Довідники.Банки_Pointer? cur = Банки_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -8353,12 +8652,13 @@ WHERE
                             ДатаЗапису = Fields[Банки_Const.ДатаЗапису].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -8379,7 +8679,9 @@ WHERE
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -8424,7 +8726,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8464,10 +8766,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Банки_Select.MoveNext())
             {
                 Довідники.Банки_Pointer? cur = Банки_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -8479,12 +8783,13 @@ WHERE
                             Назва = Fields[Банки_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -8510,8 +8815,11 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Склад = "";
+        
         string НалаштуванняАдресногоЗберігання = "";
+        
 
         Array ToArray()
         {
@@ -8559,7 +8867,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8651,10 +8959,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СкладськіПриміщення_Select.MoveNext())
             {
                 Довідники.СкладськіПриміщення_Pointer? cur = СкладськіПриміщення_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -8668,12 +8978,13 @@ WHERE
                               (Перелічення.НалаштуванняАдресногоЗберігання)(Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] : 0)) ),
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -8694,7 +9005,9 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Склад = "";
+        
 
         Array ToArray()
         {
@@ -8739,7 +9052,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8780,10 +9093,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СкладськіПриміщення_Select.MoveNext())
             {
                 Довідники.СкладськіПриміщення_Pointer? cur = СкладськіПриміщення_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -8795,12 +9110,13 @@ WHERE
                             Склад = Fields["Склад"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -8826,14 +9142,23 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Приміщення = "";
+        
         string Лінія = "";
+        
         string Позиція = "";
+        
         string Стелаж = "";
+        
         string Ярус = "";
+        
         string ТипСкладськоїКомірки = "";
+        
         string Типорозмір = "";
+        
         string Папка = "";
+        
 
         Array ToArray()
         {
@@ -8899,7 +9224,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8987,10 +9312,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СкладськіКомірки_Select.MoveNext())
             {
                 Довідники.СкладськіКомірки_Pointer? cur = СкладськіКомірки_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -9010,12 +9337,13 @@ WHERE
                             Папка = Fields["Папка"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -9036,7 +9364,9 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Приміщення = "";
+        
 
         Array ToArray()
         {
@@ -9081,7 +9411,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9122,10 +9452,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (СкладськіКомірки_Select.MoveNext())
             {
                 Довідники.СкладськіКомірки_Pointer? cur = СкладськіКомірки_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -9137,12 +9469,13 @@ WHERE
                             Приміщення = Fields["Приміщення"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -9168,7 +9501,9 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Приміщення = "";
+        
 
         Array ToArray()
         {
@@ -9213,7 +9548,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9254,10 +9589,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ОбластьЗберігання_Select.MoveNext())
             {
                 Довідники.ОбластьЗберігання_Pointer? cur = ОбластьЗберігання_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -9269,12 +9606,13 @@ WHERE
                             Приміщення = Fields["Приміщення"].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -9300,11 +9638,17 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
         string Висота = "";
+        
         string Глибина = "";
+        
         string Вантажопідйомність = "";
+        
         string Обєм = "";
+        
         string Ширина = "";
+        
 
         Array ToArray()
         {
@@ -9361,7 +9705,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9405,10 +9749,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ТипорозміриКомірок_Select.MoveNext())
             {
                 Довідники.ТипорозміриКомірок_Pointer? cur = ТипорозміриКомірок_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -9424,12 +9770,13 @@ WHERE
                             Ширина = Fields[ТипорозміриКомірок_Const.Ширина].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -9450,6 +9797,7 @@ WHERE
         string ID = "";
         
         string Назва = "";
+        
 
         Array ToArray()
         {
@@ -9491,7 +9839,7 @@ WHERE
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9530,10 +9878,12 @@ WHERE
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (ТипорозміриКомірок_Select.MoveNext())
             {
                 Довідники.ТипорозміриКомірок_Pointer? cur = ТипорозміриКомірок_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -9544,12 +9894,13 @@ WHERE
                         Назва = Fields[ТипорозміриКомірок_Const.Назва].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -9568,310 +9919,318 @@ WHERE
     #region DIRECTORY "СкладськіКомірки_Папки"
     
       
-    /* ДЕРЕВО */
-    public class СкладськіКомірки_Папки_Записи
+    /* ТАБЛИЦЯ */
+    public class СкладськіКомірки_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
+        string Власник = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                /*Власник*/ Власник,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                /*Власник*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Власник", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Власник*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer , UnigueID? owner)
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            СкладськіКомірки_Папки_Записи rootRecord = new СкладськіКомірки_Папки_Записи
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.СкладськіКомірки_Папки_SelectHierarchical СкладськіКомірки_Папки_Select = new Довідники.СкладськіКомірки_Папки_SelectHierarchical();
+            СкладськіКомірки_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.СкладськіКомірки_Папки_Const.Назва,
+                /*Код*/ Довідники.СкладськіКомірки_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            СкладськіКомірки_Папки_Select.QuerySelect.Order.Add(
+               Довідники.СкладськіКомірки_Папки_Const.Назва, SelectOrder.ASC);
+            Довідники.СкладськіПриміщення_Pointer.GetJoin(СкладськіКомірки_Папки_Select.QuerySelect, Довідники.СкладськіКомірки_Папки_Const.Власник,
+                СкладськіКомірки_Папки_Select.QuerySelect.Table, "join_tab_1", "Власник");
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {СкладськіКомірки_Папки_Const.Назва}, 
-        {СкладськіКомірки_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {СкладськіКомірки_Папки_Const.TABLE}
-    WHERE {СкладськіКомірки_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-            if (owner != null && !owner.IsEmpty()) query += $@"
-        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {СкладськіКомірки_Папки_Const.TABLE}.uid, 
-        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Назва}, 
-        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {СкладськіКомірки_Папки_Const.TABLE}.deletion_label 
-    FROM {СкладськіКомірки_Папки_Const.TABLE}
-        JOIN r ON {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич} = r.uid";
-
-        
-            if (owner != null && !owner.IsEmpty()) query += $@"
-        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {СкладськіКомірки_Папки_Const.Назва} AS Назва, 
-    {СкладськіКомірки_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await СкладськіКомірки_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new СкладськіКомірки_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (СкладськіКомірки_Папки_Select.MoveNext())
+            {
+                Довідники.СкладськіКомірки_Папки_Pointer? cur = СкладськіКомірки_Папки_Select.Current;
+                
+                string Parent = СкладськіКомірки_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = СкладськіКомірки_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    СкладськіКомірки_Папки_Записи record = new СкладськіКомірки_Папки_Записи
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    СкладськіКомірки_Папки_Записи Record = new СкладськіКомірки_Папки_Записи
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[СкладськіКомірки_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[СкладськіКомірки_Папки_Const.Код].ToString() ?? "",
+                            Власник = Fields["Власник"].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
-    /* ДЕРЕВО */
-    public class СкладськіКомірки_Папки_ЗаписиШвидкийВибір
+	    
+    /* ТАБЛИЦЯ */
+    public class СкладськіКомірки_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
         string ID = "";
-        string Назва = "";
+        
+        string Назва = "Дерево";
+        
+        string Код = "";
+        
+        string Власник = "";
+        
 
         Array ToArray()
         {
             return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID,
-                Назва
+                /*Назва*/ Назва,
+                /*Код*/ Код,
+                /*Власник*/ Власник,
+                
             };
         }
 
         public static void AddColumns(TreeView treeView)
         {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
+            treeView.Model = new TreeStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Код*/ typeof(string),  
+                /*Власник*/ typeof(string),  
+                
+            ]);
 
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Власник", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Власник*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
         }
 
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
         public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer , UnigueID? owner)
+        public static TreePath? CurrentPath;
+        
+        public static TreePath? RootPath;
+        
+        public static ListBox CreateFilter(TreeView treeView)
         {
-            RootPath = SelectPath = null;
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
 
-            СкладськіКомірки_Папки_ЗаписиШвидкийВибір rootRecord = new СкладськіКомірки_Папки_ЗаписиШвидкийВибір
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.СкладськіКомірки_Папки_SelectHierarchical СкладськіКомірки_Папки_Select = new Довідники.СкладськіКомірки_Папки_SelectHierarchical();
+            СкладськіКомірки_Папки_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.СкладськіКомірки_Папки_Const.Назва,
+                /*Код*/ Довідники.СкладськіКомірки_Папки_Const.Код,
+                
+            ]);
+
+            /* Where */
+            if (treeView.Data.ContainsKey("Where"))
             {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
+                var where = treeView.Data["Where"];
+                if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
+            }
 
-            #region SQL
+            СкладськіКомірки_Папки_Select.QuerySelect.Order.Add(
+               Довідники.СкладськіКомірки_Папки_Const.Назва, SelectOrder.ASC);
+            Довідники.СкладськіПриміщення_Pointer.GetJoin(СкладськіКомірки_Папки_Select.QuerySelect, Довідники.СкладськіКомірки_Папки_Const.Власник,
+                СкладськіКомірки_Папки_Select.QuerySelect.Table, "join_tab_1", "Власник");
+            
 
-            string query = $@"
-WITH RECURSIVE r AS (
-    SELECT 
-        uid, 
-        {СкладськіКомірки_Папки_Const.Назва}, 
-        {СкладськіКомірки_Папки_Const.Родич}, 
-        1 AS level,
-        deletion_label
-    FROM {СкладськіКомірки_Папки_Const.TABLE}
-    WHERE {СкладськіКомірки_Папки_Const.Родич} = '{Guid.Empty}'";
-
-        
-            if (owner != null && !owner.IsEmpty()) query += $@"
-        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
-        
-
-            if (openFolder != null) query += $@"
-        AND uid != '{openFolder}'";
-
-            query += $@"
-    UNION ALL
-    SELECT 
-        {СкладськіКомірки_Папки_Const.TABLE}.uid, 
-        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Назва}, 
-        {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич}, 
-        r.level + 1 AS level,
-        {СкладськіКомірки_Папки_Const.TABLE}.deletion_label 
-    FROM {СкладськіКомірки_Папки_Const.TABLE}
-        JOIN r ON {СкладськіКомірки_Папки_Const.TABLE}.{СкладськіКомірки_Папки_Const.Родич} = r.uid";
-
-        
-            if (owner != null && !owner.IsEmpty()) query += $@"
-        AND {СкладськіКомірки_Папки_Const.Власник} = '{owner}'";
-        
-
-            if (openFolder != null) query += $@"
-    WHERE {СкладськіКомірки_Папки_Const.TABLE}.uid != '{openFolder}'";
-
-            query += $@"
-)
-SELECT 
-    uid, 
-    {СкладськіКомірки_Папки_Const.Назва} AS Назва, 
-    {СкладськіКомірки_Папки_Const.Родич} AS Родич, 
-    level,
-    deletion_label
-FROM r
-ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} ASC
-";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary<string, TreeIter> nodeDictionary = new Dictionary<string, TreeIter>();
+            /* SELECT */
+            await СкладськіКомірки_Папки_Select.Select();
 
             TreeStore Store = (TreeStore)treeView.Model;
             Store.Clear();
 
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
+            
+            Dictionary<string, TreeIter> nodeDictionary = new();
+            TreeIter rootIter = Store.AppendValues(new СкладськіКомірки_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
             RootPath = Store.GetPath(rootIter);
+            
 
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
+            while (СкладськіКомірки_Папки_Select.MoveNext())
+            {
+                Довідники.СкладськіКомірки_Папки_Pointer? cur = СкладськіКомірки_Папки_Select.Current;
+                
+                string Parent = СкладськіКомірки_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
+                int Level = СкладськіКомірки_Папки_Select.Level;
+                
+                if (cur != null)
                 {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    СкладськіКомірки_Папки_ЗаписиШвидкийВибір record = new СкладськіКомірки_Папки_ЗаписиШвидкийВибір
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    СкладськіКомірки_Папки_ЗаписиШвидкийВибір Record = new СкладськіКомірки_Папки_ЗаписиШвидкийВибір
                     {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[СкладськіКомірки_Папки_Const.Назва].ToString() ?? "",
+                            Код = Fields[СкладськіКомірки_Папки_Const.Код].ToString() ?? "",
+                            Власник = Fields["Власник"].ToString() ?? "",
+                            
                     };
                     
-                    TreeIter Iter;
+                    
+                        TreeIter CurrentIter;
+                        if (Level == 1)
+                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
+                        else
+                        {
+                            TreeIter parentIter = nodeDictionary[Parent];
+                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
+                        }
+                        nodeDictionary.Add(Record.ID, CurrentIter);
+                      
 
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
                     }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
                 }
+            }
         }
     }
-      
+	    
     #endregion
     
     #region DIRECTORY "Блокнот"
@@ -9884,8 +10243,11 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string ДатаЗапису = "";
+        
 
         Array ToArray()
         {
@@ -9933,7 +10295,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9974,10 +10336,12 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Блокнот_Select.MoveNext())
             {
                 Довідники.Блокнот_Pointer? cur = Блокнот_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -9990,12 +10354,13 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
                             ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
@@ -10016,8 +10381,11 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         string ID = "";
         
         string Код = "";
+        
         string Назва = "";
+        
         string ДатаЗапису = "";
+        
 
         Array ToArray()
         {
@@ -10065,7 +10433,7 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-
+        
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -10106,10 +10474,12 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            
+
             while (Блокнот_Select.MoveNext())
             {
                 Довідники.Блокнот_Pointer? cur = Блокнот_Select.Current;
-
+                
                 if (cur != null)
                 {
                     Dictionary<string, object> Fields = cur.Fields!;
@@ -10122,12 +10492,13 @@ ORDER BY level, {СкладськіКомірки_Папки_Const.Назва} A
                             ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "",
                             
                     };
+                    
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
 
-                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {

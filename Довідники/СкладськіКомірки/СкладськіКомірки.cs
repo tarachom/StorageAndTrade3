@@ -34,7 +34,7 @@ namespace StorageAndTrade
     public class СкладськіКомірки : ДовідникЖурнал
     {
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
-        СкладськіКомірки_Папки_Дерево ДеревоПапок;
+        СкладськіКомірки_Папки ДеревоПапок;
         public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
 
         public СкладськіКомірки() : base()
@@ -48,7 +48,7 @@ namespace StorageAndTrade
             СкладПриміщенняВласник.AfterSelectFunc = async () => await LoadRecords();
 
             //Дерево папок зправа
-            ДеревоПапок = new СкладськіКомірки_Папки_Дерево
+            ДеревоПапок = new СкладськіКомірки_Папки
             {
                 WidthRequest = 500,
                 CallBack_RowActivated = LoadRecords_TreeCallBack,
@@ -74,7 +74,7 @@ namespace StorageAndTrade
             }
 
             ДеревоПапок.СкладПриміщенняВласник = СкладПриміщенняВласник.Pointer;
-            ДеревоПапок.LoadTree();
+            await ДеревоПапок.SetValue();
         }
 
         async void LoadRecords_TreeCallBack()
