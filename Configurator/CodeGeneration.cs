@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 31.08.2024 14:37:10
+ * Дата конфігурації: 05.09.2024 07:16:48
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2032,7 +2032,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Організації_Select() : base(Config.Kernel, "tab_a01") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Організації_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Організації_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Організації_Pointer? Current { get; private set; }
         
         public async ValueTask<Організації_Pointer> FindByField(string name, object value)
@@ -2045,12 +2045,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Організації_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Організації_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Організації_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
     
     public class Організації_Контакти_TablePart : DirectoryTablePart
     {
@@ -2466,7 +2466,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Номенклатура_Select() : base(Config.Kernel, "tab_a03") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Номенклатура_Pointer? Current { get; private set; }
         
         public async ValueTask<Номенклатура_Pointer> FindByField(string name, object value)
@@ -2479,12 +2479,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Номенклатура_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
     
     public class Номенклатура_Файли_TablePart : DirectoryTablePart
     {
@@ -2808,7 +2808,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Виробники_Select() : base(Config.Kernel, "tab_a04") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Виробники_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Виробники_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Виробники_Pointer? Current { get; private set; }
         
         public async ValueTask<Виробники_Pointer> FindByField(string name, object value)
@@ -2821,12 +2821,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Виробники_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Виробники_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Виробники_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -3044,7 +3044,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиНоменклатури_Select() : base(Config.Kernel, "tab_a05") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиНоменклатури_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиНоменклатури_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиНоменклатури_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиНоменклатури_Pointer> FindByField(string name, object value)
@@ -3057,12 +3057,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ВидиНоменклатури_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиНоменклатури_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ВидиНоменклатури_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -3277,7 +3277,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ПакуванняОдиниціВиміру_Select() : base(Config.Kernel, "tab_a06") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ПакуванняОдиниціВиміру_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ПакуванняОдиниціВиміру_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПакуванняОдиниціВиміру_Pointer? Current { get; private set; }
         
         public async ValueTask<ПакуванняОдиниціВиміру_Pointer> FindByField(string name, object value)
@@ -3290,12 +3290,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ПакуванняОдиниціВиміру_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ПакуванняОдиниціВиміру_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ПакуванняОдиниціВиміру_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -3517,7 +3517,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Валюти_Select() : base(Config.Kernel, "tab_a07") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Валюти_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Валюти_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Валюти_Pointer? Current { get; private set; }
         
         public async ValueTask<Валюти_Pointer> FindByField(string name, object value)
@@ -3530,12 +3530,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Валюти_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Валюти_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Валюти_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -3795,7 +3795,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Контрагенти_Select() : base(Config.Kernel, "tab_a08") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Контрагенти_Pointer? Current { get; private set; }
         
         public async ValueTask<Контрагенти_Pointer> FindByField(string name, object value)
@@ -3808,12 +3808,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Контрагенти_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Контрагенти_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Контрагенти_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
     
     public class Контрагенти_Контакти_TablePart : DirectoryTablePart
     {
@@ -4327,7 +4327,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Склади_Select() : base(Config.Kernel, "tab_a10") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Склади_Pointer? Current { get; private set; }
         
         public async ValueTask<Склади_Pointer> FindByField(string name, object value)
@@ -4340,12 +4340,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Склади_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Склади_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Склади_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
     
     public class Склади_Контакти_TablePart : DirectoryTablePart
     {
@@ -4696,7 +4696,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЦін_Select() : base(Config.Kernel, "tab_a12") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЦін_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЦін_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиЦін_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиЦін_Pointer> FindByField(string name, object value)
@@ -4709,12 +4709,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ВидиЦін_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиЦін_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ВидиЦін_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -4922,7 +4922,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЦінПостачальників_Select() : base(Config.Kernel, "tab_a13") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЦінПостачальників_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЦінПостачальників_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиЦінПостачальників_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиЦінПостачальників_Pointer> FindByField(string name, object value)
@@ -4935,12 +4935,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ВидиЦінПостачальників_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиЦінПостачальників_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ВидиЦінПостачальників_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -5179,7 +5179,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Користувачі_Select() : base(Config.Kernel, "tab_a14") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Користувачі_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Користувачі_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Користувачі_Pointer? Current { get; private set; }
         
         public async ValueTask<Користувачі_Pointer> FindByField(string name, object value)
@@ -5192,12 +5192,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Користувачі_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Користувачі_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Користувачі_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
     
     public class Користувачі_Контакти_TablePart : DirectoryTablePart
     {
@@ -5575,7 +5575,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ФізичніОсоби_Select() : base(Config.Kernel, "tab_a16") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ФізичніОсоби_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ФізичніОсоби_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ФізичніОсоби_Pointer? Current { get; private set; }
         
         public async ValueTask<ФізичніОсоби_Pointer> FindByField(string name, object value)
@@ -5588,12 +5588,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ФізичніОсоби_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ФізичніОсоби_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ФізичніОсоби_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
     
     public class ФізичніОсоби_Контакти_TablePart : DirectoryTablePart
     {
@@ -5940,7 +5940,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СтруктураПідприємства_Select() : base(Config.Kernel, "tab_a18") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СтруктураПідприємства_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СтруктураПідприємства_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СтруктураПідприємства_Pointer? Current { get; private set; }
         
         public async ValueTask<СтруктураПідприємства_Pointer> FindByField(string name, object value)
@@ -5953,12 +5953,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<СтруктураПідприємства_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СтруктураПідприємства_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new СтруктураПідприємства_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -6161,7 +6161,7 @@ namespace StorageAndTrade_1_0.Довідники
         public КраїниСвіту_Select() : base(Config.Kernel, "tab_a19") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new КраїниСвіту_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new КраїниСвіту_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public КраїниСвіту_Pointer? Current { get; private set; }
         
         public async ValueTask<КраїниСвіту_Pointer> FindByField(string name, object value)
@@ -6174,12 +6174,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<КраїниСвіту_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new КраїниСвіту_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new КраїниСвіту_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -6402,7 +6402,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Файли_Select() : base(Config.Kernel, "tab_a20") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Файли_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Файли_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Файли_Pointer? Current { get; private set; }
         
         public async ValueTask<Файли_Pointer> FindByField(string name, object value)
@@ -6415,12 +6415,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Файли_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Файли_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Файли_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -6633,7 +6633,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ХарактеристикиНоменклатури_Select() : base(Config.Kernel, "tab_a21") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ХарактеристикиНоменклатури_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ХарактеристикиНоменклатури_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ХарактеристикиНоменклатури_Pointer? Current { get; private set; }
         
         public async ValueTask<ХарактеристикиНоменклатури_Pointer> FindByField(string name, object value)
@@ -6646,12 +6646,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ХарактеристикиНоменклатури_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ХарактеристикиНоменклатури_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ХарактеристикиНоменклатури_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -6863,7 +6863,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Номенклатура_Папки_Select() : base(Config.Kernel, "tab_a22") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Номенклатура_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<Номенклатура_Папки_Pointer> FindByField(string name, object value)
@@ -6876,12 +6876,22 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Номенклатура_Папки_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Номенклатура_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Номенклатура_Папки_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
+    public class Номенклатура_Папки_SelectHierarchical : DirectorySelectHierarchical
+    {
+        public Номенклатура_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a22", "col_j3") { }        
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new Номенклатура_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public Номенклатура_Папки_Pointer? Current { get; private set; }
+        public Номенклатура_Папки_Pointer? Parent { get; private set; }
+    }
+    
    
     #endregion
     
@@ -7093,7 +7103,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Контрагенти_Папки_Select() : base(Config.Kernel, "tab_a23") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Контрагенти_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<Контрагенти_Папки_Pointer> FindByField(string name, object value)
@@ -7106,12 +7116,22 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Контрагенти_Папки_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Контрагенти_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Контрагенти_Папки_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
+    public class Контрагенти_Папки_SelectHierarchical : DirectorySelectHierarchical
+    {
+        public Контрагенти_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a23", "col_j6") { }        
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new Контрагенти_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public Контрагенти_Папки_Pointer? Current { get; private set; }
+        public Контрагенти_Папки_Pointer? Parent { get; private set; }
+    }
+    
    
     #endregion
     
@@ -7323,7 +7343,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Склади_Папки_Select() : base(Config.Kernel, "tab_a24") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Склади_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<Склади_Папки_Pointer> FindByField(string name, object value)
@@ -7336,12 +7356,22 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Склади_Папки_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Склади_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Склади_Папки_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
+    public class Склади_Папки_SelectHierarchical : DirectorySelectHierarchical
+    {
+        public Склади_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a24", "col_a1") { }        
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new Склади_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public Склади_Папки_Pointer? Current { get; private set; }
+        public Склади_Папки_Pointer? Parent { get; private set; }
+    }
+    
    
     #endregion
     
@@ -7554,7 +7584,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Каси_Select() : base(Config.Kernel, "tab_a26") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Каси_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Каси_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Каси_Pointer? Current { get; private set; }
         
         public async ValueTask<Каси_Pointer> FindByField(string name, object value)
@@ -7567,12 +7597,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Каси_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Каси_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Каси_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -7830,7 +7860,7 @@ namespace StorageAndTrade_1_0.Довідники
         public БанківськіРахункиОрганізацій_Select() : base(Config.Kernel, "tab_a27") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new БанківськіРахункиОрганізацій_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new БанківськіРахункиОрганізацій_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public БанківськіРахункиОрганізацій_Pointer? Current { get; private set; }
         
         public async ValueTask<БанківськіРахункиОрганізацій_Pointer> FindByField(string name, object value)
@@ -7843,12 +7873,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<БанківськіРахункиОрганізацій_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new БанківськіРахункиОрганізацій_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new БанківськіРахункиОрганізацій_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -8143,7 +8173,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ДоговориКонтрагентів_Select() : base(Config.Kernel, "tab_a28") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ДоговориКонтрагентів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ДоговориКонтрагентів_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ДоговориКонтрагентів_Pointer? Current { get; private set; }
         
         public async ValueTask<ДоговориКонтрагентів_Pointer> FindByField(string name, object value)
@@ -8156,12 +8186,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ДоговориКонтрагентів_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ДоговориКонтрагентів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ДоговориКонтрагентів_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -8429,7 +8459,7 @@ namespace StorageAndTrade_1_0.Довідники
         public БанківськіРахункиКонтрагентів_Select() : base(Config.Kernel, "tab_a29") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new БанківськіРахункиКонтрагентів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new БанківськіРахункиКонтрагентів_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public БанківськіРахункиКонтрагентів_Pointer? Current { get; private set; }
         
         public async ValueTask<БанківськіРахункиКонтрагентів_Pointer> FindByField(string name, object value)
@@ -8442,12 +8472,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<БанківськіРахункиКонтрагентів_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new БанківськіРахункиКонтрагентів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new БанківськіРахункиКонтрагентів_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -8686,7 +8716,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СтаттяРухуКоштів_Select() : base(Config.Kernel, "tab_a45") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СтаттяРухуКоштів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СтаттяРухуКоштів_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СтаттяРухуКоштів_Pointer? Current { get; private set; }
         
         public async ValueTask<СтаттяРухуКоштів_Pointer> FindByField(string name, object value)
@@ -8699,12 +8729,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<СтаттяРухуКоштів_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СтаттяРухуКоштів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new СтаттяРухуКоштів_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
     
     public class СтаттяРухуКоштів_ГосподарськіОперації_TablePart : DirectoryTablePart
     {
@@ -9029,7 +9059,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СеріїНоменклатури_Select() : base(Config.Kernel, "tab_b02") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СеріїНоменклатури_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СеріїНоменклатури_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СеріїНоменклатури_Pointer? Current { get; private set; }
         
         public async ValueTask<СеріїНоменклатури_Pointer> FindByField(string name, object value)
@@ -9042,12 +9072,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<СеріїНоменклатури_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СеріїНоменклатури_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new СеріїНоменклатури_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -9269,7 +9299,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ПартіяТоварівКомпозит_Select() : base(Config.Kernel, "tab_b06") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ПартіяТоварівКомпозит_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ПартіяТоварівКомпозит_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПартіяТоварівКомпозит_Pointer? Current { get; private set; }
         
         public async ValueTask<ПартіяТоварівКомпозит_Pointer> FindByField(string name, object value)
@@ -9282,12 +9312,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ПартіяТоварівКомпозит_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ПартіяТоварівКомпозит_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ПартіяТоварівКомпозит_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -9515,7 +9545,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ВидиЗапасів_Select() : base(Config.Kernel, "tab_b13") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЗапасів_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ВидиЗапасів_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиЗапасів_Pointer? Current { get; private set; }
         
         public async ValueTask<ВидиЗапасів_Pointer> FindByField(string name, object value)
@@ -9528,12 +9558,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ВидиЗапасів_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ВидиЗапасів_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ВидиЗапасів_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -9866,7 +9896,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Банки_Select() : base(Config.Kernel, "tab_a39") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Банки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Банки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Банки_Pointer? Current { get; private set; }
         
         public async ValueTask<Банки_Pointer> FindByField(string name, object value)
@@ -9879,12 +9909,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Банки_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Банки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Банки_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -10092,7 +10122,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіПриміщення_Select() : base(Config.Kernel, "tab_a71") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіПриміщення_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіПриміщення_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СкладськіПриміщення_Pointer? Current { get; private set; }
         
         public async ValueTask<СкладськіПриміщення_Pointer> FindByField(string name, object value)
@@ -10105,12 +10135,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<СкладськіПриміщення_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СкладськіПриміщення_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new СкладськіПриміщення_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -10353,7 +10383,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіКомірки_Select() : base(Config.Kernel, "tab_a72") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СкладськіКомірки_Pointer? Current { get; private set; }
         
         public async ValueTask<СкладськіКомірки_Pointer> FindByField(string name, object value)
@@ -10366,12 +10396,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<СкладськіКомірки_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СкладськіКомірки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new СкладськіКомірки_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -10578,7 +10608,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ОбластьЗберігання_Select() : base(Config.Kernel, "tab_a73") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ОбластьЗберігання_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ОбластьЗберігання_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ОбластьЗберігання_Pointer? Current { get; private set; }
         
         public async ValueTask<ОбластьЗберігання_Pointer> FindByField(string name, object value)
@@ -10591,12 +10621,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ОбластьЗберігання_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ОбластьЗберігання_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ОбластьЗберігання_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -10819,7 +10849,7 @@ namespace StorageAndTrade_1_0.Довідники
         public ТипорозміриКомірок_Select() : base(Config.Kernel, "tab_a75") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ТипорозміриКомірок_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ТипорозміриКомірок_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ТипорозміриКомірок_Pointer? Current { get; private set; }
         
         public async ValueTask<ТипорозміриКомірок_Pointer> FindByField(string name, object value)
@@ -10832,12 +10862,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<ТипорозміриКомірок_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new ТипорозміриКомірок_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new ТипорозміриКомірок_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -11054,7 +11084,7 @@ namespace StorageAndTrade_1_0.Довідники
         public СкладськіКомірки_Папки_Select() : base(Config.Kernel, "tab_a76") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СкладськіКомірки_Папки_Pointer? Current { get; private set; }
         
         public async ValueTask<СкладськіКомірки_Папки_Pointer> FindByField(string name, object value)
@@ -11067,12 +11097,22 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<СкладськіКомірки_Папки_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new СкладськіКомірки_Папки_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new СкладськіКомірки_Папки_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
+    public class СкладськіКомірки_Папки_SelectHierarchical : DirectorySelectHierarchical
+    {
+        public СкладськіКомірки_Папки_SelectHierarchical() : base(Config.Kernel, "tab_a76", "col_j3") { }        
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); Parent = new СкладськіКомірки_Папки_Pointer(base.DirectoryPointerPosition.Value.Parent); return true; } else { Current = Parent = null; return false; } }
+        public СкладськіКомірки_Папки_Pointer? Current { get; private set; }
+        public СкладськіКомірки_Папки_Pointer? Parent { get; private set; }
+    }
+    
    
     #endregion
     
@@ -11290,7 +11330,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Блокнот_Select() : base(Config.Kernel, "tab_a41") { }        
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Блокнот_Pointer(base.DirectoryPointerPosition.Value.Item1, base.DirectoryPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new Блокнот_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Блокнот_Pointer? Current { get; private set; }
         
         public async ValueTask<Блокнот_Pointer> FindByField(string name, object value)
@@ -11303,12 +11343,12 @@ namespace StorageAndTrade_1_0.Довідники
         {
             List<Блокнот_Pointer> directoryPointerList = [];
             foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
-                directoryPointerList.Add(new Блокнот_Pointer(directoryPointer.Item1, directoryPointer.Item2));
+                directoryPointerList.Add(new Блокнот_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
             return directoryPointerList;
         }
     }
+
     
-      
    
     #endregion
     
@@ -12713,7 +12753,7 @@ namespace StorageAndTrade_1_0.Документи
         public ЗамовленняПостачальнику_Select() : base(Config.Kernel, "tab_a25") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗамовленняПостачальнику_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗамовленняПостачальнику_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗамовленняПостачальнику_Pointer? Current { get; private set; }
     }
 
@@ -13361,7 +13401,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПоступленняТоварівТаПослуг_Select() : base(Config.Kernel, "tab_a32") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоступленняТоварівТаПослуг_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоступленняТоварівТаПослуг_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоступленняТоварівТаПослуг_Pointer? Current { get; private set; }
     }
 
@@ -13989,7 +14029,7 @@ namespace StorageAndTrade_1_0.Документи
         public ЗамовленняКлієнта_Select() : base(Config.Kernel, "tab_a34") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗамовленняКлієнта_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗамовленняКлієнта_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗамовленняКлієнта_Pointer? Current { get; private set; }
     }
 
@@ -14625,7 +14665,7 @@ namespace StorageAndTrade_1_0.Документи
         public РеалізаціяТоварівТаПослуг_Select() : base(Config.Kernel, "tab_a36") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РеалізаціяТоварівТаПослуг_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РеалізаціяТоварівТаПослуг_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РеалізаціяТоварівТаПослуг_Pointer? Current { get; private set; }
     }
 
@@ -15148,7 +15188,7 @@ namespace StorageAndTrade_1_0.Документи
         public ВстановленняЦінНоменклатури_Select() : base(Config.Kernel, "tab_a42") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВстановленняЦінНоменклатури_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВстановленняЦінНоменклатури_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВстановленняЦінНоменклатури_Pointer? Current { get; private set; }
     }
 
@@ -15680,7 +15720,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПрихіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a44") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПрихіднийКасовийОрдер_Pointer? Current { get; private set; }
     }
 
@@ -16220,7 +16260,7 @@ namespace StorageAndTrade_1_0.Документи
         public РозхіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a48") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозхіднийКасовийОрдер_Pointer? Current { get; private set; }
     }
 
@@ -16769,7 +16809,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварів_Select() : base(Config.Kernel, "tab_a31") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПереміщенняТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПереміщенняТоварів_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварів_Pointer? Current { get; private set; }
     }
 
@@ -17344,7 +17384,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПоверненняТоварівПостачальнику_Select() : base(Config.Kernel, "tab_a51") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоверненняТоварівПостачальнику_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоверненняТоварівПостачальнику_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівПостачальнику_Pointer? Current { get; private set; }
     }
 
@@ -17907,7 +17947,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПоверненняТоварівВідКлієнта_Select() : base(Config.Kernel, "tab_a53") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоверненняТоварівВідКлієнта_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПоверненняТоварівВідКлієнта_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівВідКлієнта_Pointer? Current { get; private set; }
     }
 
@@ -18452,7 +18492,7 @@ namespace StorageAndTrade_1_0.Документи
         public АктВиконанихРобіт_Select() : base(Config.Kernel, "tab_a81") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new АктВиконанихРобіт_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new АктВиконанихРобіт_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public АктВиконанихРобіт_Pointer? Current { get; private set; }
     }
 
@@ -18991,7 +19031,7 @@ namespace StorageAndTrade_1_0.Документи
         public ВведенняЗалишків_Select() : base(Config.Kernel, "tab_a83") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВведенняЗалишків_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВведенняЗалишків_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВведенняЗалишків_Pointer? Current { get; private set; }
     }
 
@@ -19860,7 +19900,7 @@ namespace StorageAndTrade_1_0.Документи
         public НадлишкиТоварів_Select() : base(Config.Kernel, "tab_a88") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new НадлишкиТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new НадлишкиТоварів_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public НадлишкиТоварів_Pointer? Current { get; private set; }
     }
 
@@ -20318,7 +20358,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПересортицяТоварів_Select() : base(Config.Kernel, "tab_a90") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПересортицяТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПересортицяТоварів_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПересортицяТоварів_Pointer? Current { get; private set; }
     }
 
@@ -20792,7 +20832,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПерерахунокТоварів_Select() : base(Config.Kernel, "tab_a92") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПерерахунокТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПерерахунокТоварів_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПерерахунокТоварів_Pointer? Current { get; private set; }
     }
 
@@ -21304,7 +21344,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПсуванняТоварів_Select() : base(Config.Kernel, "tab_a94") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПсуванняТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПсуванняТоварів_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПсуванняТоварів_Pointer? Current { get; private set; }
     }
 
@@ -21829,7 +21869,7 @@ namespace StorageAndTrade_1_0.Документи
         public ВнутрішнєСпоживанняТоварів_Select() : base(Config.Kernel, "tab_b07") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВнутрішнєСпоживанняТоварів_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ВнутрішнєСпоживанняТоварів_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВнутрішнєСпоживанняТоварів_Pointer? Current { get; private set; }
     }
 
@@ -22381,7 +22421,7 @@ namespace StorageAndTrade_1_0.Документи
         public РахунокФактура_Select() : base(Config.Kernel, "tab_b10") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РахунокФактура_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РахунокФактура_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РахунокФактура_Pointer? Current { get; private set; }
     }
 
@@ -22892,7 +22932,7 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняТоварівНаСкладі_Select() : base(Config.Kernel, "tab_a64") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
     }
 
@@ -23386,7 +23426,7 @@ namespace StorageAndTrade_1_0.Документи
         public ПереміщенняТоварівНаСкладі_Select() : base(Config.Kernel, "tab_b09") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПереміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ПереміщенняТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
     }
 
@@ -23891,7 +23931,7 @@ namespace StorageAndTrade_1_0.Документи
         public ЗбіркаТоварівНаСкладі_Select() : base(Config.Kernel, "tab_b27") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗбіркаТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗбіркаТоварівНаСкладі_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗбіркаТоварівНаСкладі_Pointer? Current { get; private set; }
     }
 
@@ -24383,7 +24423,7 @@ namespace StorageAndTrade_1_0.Документи
         public РозміщенняНоменклатуриПоКоміркам_Select() : base(Config.Kernel, "tab_b29") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозміщенняНоменклатуриПоКоміркам_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new РозміщенняНоменклатуриПоКоміркам_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозміщенняНоменклатуриПоКоміркам_Pointer? Current { get; private set; }
     }
 
@@ -24851,7 +24891,7 @@ namespace StorageAndTrade_1_0.Документи
         public КорегуванняБоргу_Select() : base(Config.Kernel, "tab_a65") { }
         public async ValueTask<bool> Select() { return await base.BaseSelect(); }
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new КорегуванняБоргу_Pointer(base.DocumentPointerPosition.Value.Item1, base.DocumentPointerPosition.Value.Item2); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new КорегуванняБоргу_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public КорегуванняБоргу_Pointer? Current { get; private set; }
     }
 

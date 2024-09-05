@@ -52,6 +52,17 @@ namespace StorageAndTrade
                 PackStart(hBox, false, false, 5);
             }
 
+            // {
+            //     Query QuerySelect = new Query("tab") { ParentField = "col_aa" };
+            //     QuerySelect.Where.Add(new Where("col_bb", Comparison.EQ, "1"));
+
+            //     QuerySelect.Joins.Add(new Join("Довідник", "Назва", "Table"));
+            //     QuerySelect.FieldAndAlias.Add(new NameValue<string>("ПОЛЕ", "ЗНАЧЕННЯ"));
+            //     QuerySelect.Order.Add("ПОЛЕ", SelectOrder.ASC);
+
+            //     Console.WriteLine(QuerySelect.ConstructHierarchical());
+            // }
+
             ShowAll();
         }
     }

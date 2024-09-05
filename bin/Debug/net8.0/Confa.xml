@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>31.08.2024 14:37:10</DateTimeSave>
+  <DateTimeSave>05.09.2024 07:16:48</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -4270,6 +4270,7 @@ FROM
       <Desc>Номенклатура папки</Desc>
       <AutoNum>1</AutoNum>
       <Type>Hierarchical</Type>
+      <ParentField>Родич</ParentField>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4337,6 +4338,7 @@ FROM
       <Desc>Контрагенти папки</Desc>
       <AutoNum>1</AutoNum>
       <Type>Hierarchical</Type>
+      <ParentField>Родич</ParentField>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4404,6 +4406,7 @@ FROM
       <Desc>Склади папки</Desc>
       <AutoNum>1</AutoNum>
       <Type>Hierarchical</Type>
+      <ParentField>Родич</ParentField>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -7390,6 +7393,7 @@ WHERE
       </Desc>
       <AutoNum>1</AutoNum>
       <Type>Hierarchical</Type>
+      <ParentField>Родич</ParentField>
       <Fields>
         <Field>
           <Name>Назва</Name>
