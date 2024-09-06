@@ -1650,7 +1650,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             return new <xsl:value-of select="$DocumentName"/>_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
         }

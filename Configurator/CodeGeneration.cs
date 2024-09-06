@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.09.2024 15:14:22
+ * Дата конфігурації: 06.09.2024 15:55:36
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -12729,7 +12729,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ЗамовленняПостачальнику_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ЗамовленняПостачальнику_Const.POINTER);
         }
@@ -13379,7 +13379,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПоступленняТоварівТаПослуг_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПоступленняТоварівТаПослуг_Const.POINTER);
         }
@@ -14009,7 +14009,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ЗамовленняКлієнта_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ЗамовленняКлієнта_Const.POINTER);
         }
@@ -14647,7 +14647,7 @@ namespace StorageAndTrade_1_0.Документи
             return new РеалізаціяТоварівТаПослуг_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, РеалізаціяТоварівТаПослуг_Const.POINTER);
         }
@@ -15172,7 +15172,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ВстановленняЦінНоменклатури_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ВстановленняЦінНоменклатури_Const.POINTER);
         }
@@ -15706,7 +15706,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПрихіднийКасовийОрдер_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПрихіднийКасовийОрдер_Const.POINTER);
         }
@@ -16248,7 +16248,7 @@ namespace StorageAndTrade_1_0.Документи
             return new РозхіднийКасовийОрдер_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, РозхіднийКасовийОрдер_Const.POINTER);
         }
@@ -16799,7 +16799,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПереміщенняТоварів_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварів_Const.POINTER);
         }
@@ -17376,7 +17376,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПоверненняТоварівПостачальнику_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівПостачальнику_Const.POINTER);
         }
@@ -17941,7 +17941,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПоверненняТоварівВідКлієнта_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПоверненняТоварівВідКлієнта_Const.POINTER);
         }
@@ -18488,7 +18488,7 @@ namespace StorageAndTrade_1_0.Документи
             return new АктВиконанихРобіт_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, АктВиконанихРобіт_Const.POINTER);
         }
@@ -19029,7 +19029,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ВведенняЗалишків_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ВведенняЗалишків_Const.POINTER);
         }
@@ -19906,7 +19906,7 @@ namespace StorageAndTrade_1_0.Документи
             return new НадлишкиТоварів_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, НадлишкиТоварів_Const.POINTER);
         }
@@ -20366,7 +20366,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПересортицяТоварів_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПересортицяТоварів_Const.POINTER);
         }
@@ -20842,7 +20842,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПерерахунокТоварів_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПерерахунокТоварів_Const.POINTER);
         }
@@ -21356,7 +21356,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПсуванняТоварів_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПсуванняТоварів_Const.POINTER);
         }
@@ -21883,7 +21883,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ВнутрішнєСпоживанняТоварів_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ВнутрішнєСпоживанняТоварів_Const.POINTER);
         }
@@ -22437,7 +22437,7 @@ namespace StorageAndTrade_1_0.Документи
             return new РахунокФактура_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, РахунокФактура_Const.POINTER);
         }
@@ -22950,7 +22950,7 @@ namespace StorageAndTrade_1_0.Документи
             return new РозміщенняТоварівНаСкладі_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, РозміщенняТоварівНаСкладі_Const.POINTER);
         }
@@ -23446,7 +23446,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ПереміщенняТоварівНаСкладі_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ПереміщенняТоварівНаСкладі_Const.POINTER);
         }
@@ -23953,7 +23953,7 @@ namespace StorageAndTrade_1_0.Документи
             return new ЗбіркаТоварівНаСкладі_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, ЗбіркаТоварівНаСкладі_Const.POINTER);
         }
@@ -24447,7 +24447,7 @@ namespace StorageAndTrade_1_0.Документи
             return new РозміщенняНоменклатуриПоКоміркам_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, РозміщенняНоменклатуриПоКоміркам_Const.POINTER);
         }
@@ -24917,7 +24917,7 @@ namespace StorageAndTrade_1_0.Документи
             return new КорегуванняБоргу_Pointer();
         }
 
-        public UuidAndText GetBasis()
+        public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, КорегуванняБоргу_Const.POINTER);
         }

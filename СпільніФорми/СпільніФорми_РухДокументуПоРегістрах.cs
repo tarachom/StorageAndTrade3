@@ -38,8 +38,15 @@ namespace StorageAndTrade
             await page.Заповнити(ДокументВказівник);
         }
 
+        protected override Widget Документ_PointerControl(DocumentPointer ДокументВказівник)
+        {
+            return new CompositePointerControl { Pointer = ДокументВказівник.GetBasis(), Caption = "Документ:", TypeSelectSensetive = false, ClearSensetive = false };
+        }
+
         public async ValueTask Заповнити(DocumentPointer ДокументВказівник)
         {
+            ДодатиДокументНаФорму(ДокументВказівник);
+
             foreach (string regAccumName in Config.Kernel.Conf.Documents[ДокументВказівник.TypeDocument].AllowRegisterAccumulation)
             {
                 TreeView treeView = new TreeView();
