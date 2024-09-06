@@ -464,8 +464,8 @@ ORDER BY
             Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
             {
                 { "Рядок", CellDataFunc },
-                { "Кількість", CellDataFunc },
-                { "Собівартість", CellDataFunc }
+                { "Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
             };
 
             var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
@@ -844,14 +844,14 @@ ORDER BY
             Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
             {
                 { "Рядок", CellDataFunc },
-                { "КількістьПочатковийЗалишок", CellDataFunc },
-                { "СобівартістьПочатковийЗалишок", CellDataFunc },
-                { "КількістьПрихід", CellDataFunc },
-                { "КількістьРозхід", CellDataFunc },
-                { "СобівартістьПрихід", CellDataFunc },
-                { "СобівартістьРозхід", CellDataFunc },
-                { "КількістьКінцевийЗалишок", CellDataFunc },
-                { "СобівартістьКінцевийЗалишок", CellDataFunc }
+                { "КількістьПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "СобівартістьПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "КількістьПрихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "КількістьРозхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "СобівартістьПрихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "СобівартістьРозхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "КількістьКінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "СобівартістьКінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
             };
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
@@ -1156,8 +1156,8 @@ ORDER BY
             Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
             {
                 { "Рядок", CellDataFunc },
-                { "Кількість", CellDataFunc },
-                { "Собівартість", CellDataFunc }
+                { "Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
+                { "Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
             };
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
@@ -1192,13 +1192,6 @@ ORDER BY
                         {
                             if (!string.IsNullOrEmpty(cellText.Text))
                                 cellText.Text = "№ " + cellText.Text;
-                            break;
-                        }
-                    default:
-                        {
-                            if (float.TryParse(cellText.Text, out float result))
-                                cellText.Foreground = (result >= 0) ? "green" : "red";
-
                             break;
                         }
                 }

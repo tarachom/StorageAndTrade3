@@ -34,7 +34,7 @@ namespace StorageAndTrade
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Родич:" };
+        Номенклатура_Папки_PointerControl Родич = new Номенклатура_Папки_PointerControl() { Caption = "Папка:" };
 
         public Номенклатура_Папки_Елемент() : base() 
         {

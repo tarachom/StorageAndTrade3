@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.09.2024 17:34:04
+ * Дата конфігурації: 06.09.2024 15:14:22
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -43,9 +43,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 {
     
     #region DIRECTORY "Організації"
-    
       
-    /* ТАБЛИЦЯ */
     public class Організації_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -123,11 +121,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Організації_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Організації_Select.QuerySelect.Where = (List<Where>)where;
 
             Організації_Select.QuerySelect.Order.Add(
                Довідники.Організації_Const.Назва, SelectOrder.ASC);
@@ -157,7 +152,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -167,7 +161,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -176,7 +169,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Організації_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -254,11 +246,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Організації_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Організації_Select.QuerySelect.Where = (List<Where>)where;
 
             Організації_Select.QuerySelect.Order.Add(
                Довідники.Організації_Const.Назва, SelectOrder.ASC);
@@ -288,7 +277,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -298,7 +286,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -310,9 +297,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
     #endregion
     
     #region DIRECTORY "Номенклатура"
-    
       
-    /* ТАБЛИЦЯ */
     public class Номенклатура_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -401,9 +386,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                   
                   { /* ОдиницяВиміру, pointer */
                       Switch sw = new();
-                      ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new() { Caption = "" };
-                          ОдиницяВиміру.AfterSelectFunc = () => sw.Active = true;
-                          
+                      ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("ОдиницяВиміру", ОдиницяВиміру, sw));
                       ДодатиЕлементВФільтр(listBox, "Пакування:", ОдиницяВиміру, sw);
                   }
@@ -467,11 +450,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Номенклатура_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Номенклатура_Select.QuerySelect.Where = (List<Where>)where;
 
             Номенклатура_Select.QuerySelect.Order.Add(
                Довідники.Номенклатура_Const.Назва, SelectOrder.ASC);
@@ -620,7 +600,6 @@ END
                         
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -630,7 +609,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -639,7 +617,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Номенклатура_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -734,11 +711,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Номенклатура_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Номенклатура_Select.QuerySelect.Where = (List<Where>)where;
 
             Номенклатура_Select.QuerySelect.Order.Add(
                Довідники.Номенклатура_Const.Назва, SelectOrder.ASC);
@@ -856,7 +830,6 @@ END
                         
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -866,7 +839,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -878,9 +850,7 @@ END
     #endregion
     
     #region DIRECTORY "Виробники"
-    
       
-    /* ТАБЛИЦЯ */
     public class Виробники_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -958,11 +928,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Виробники_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Виробники_Select.QuerySelect.Where = (List<Where>)where;
 
             Виробники_Select.QuerySelect.Order.Add(
                Довідники.Виробники_Const.Назва, SelectOrder.ASC);
@@ -992,7 +959,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -1002,7 +968,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -1011,7 +976,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Виробники_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -1089,11 +1053,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Виробники_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Виробники_Select.QuerySelect.Where = (List<Where>)where;
 
             Виробники_Select.QuerySelect.Order.Add(
                Довідники.Виробники_Const.Назва, SelectOrder.ASC);
@@ -1123,7 +1084,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -1133,7 +1093,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -1145,9 +1104,7 @@ END
     #endregion
     
     #region DIRECTORY "ВидиНоменклатури"
-    
       
-    /* ТАБЛИЦЯ */
     public class ВидиНоменклатури_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -1225,11 +1182,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиНоменклатури_Select.QuerySelect.Order.Add(
                Довідники.ВидиНоменклатури_Const.Назва, SelectOrder.ASC);
@@ -1259,7 +1213,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -1269,7 +1222,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -1278,7 +1230,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ВидиНоменклатури_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -1350,11 +1301,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиНоменклатури_Select.QuerySelect.Order.Add(
                Довідники.ВидиНоменклатури_Const.Назва, SelectOrder.ASC);
@@ -1383,7 +1331,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -1393,7 +1340,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -1405,9 +1351,7 @@ END
     #endregion
     
     #region DIRECTORY "ПакуванняОдиниціВиміру"
-    
       
-    /* ТАБЛИЦЯ */
     public class ПакуванняОдиниціВиміру_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -1497,11 +1441,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПакуванняОдиниціВиміру_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПакуванняОдиниціВиміру_Select.QuerySelect.Where = (List<Where>)where;
 
             ПакуванняОдиниціВиміру_Select.QuerySelect.Order.Add(
                Довідники.ПакуванняОдиниціВиміру_Const.Назва, SelectOrder.ASC);
@@ -1533,7 +1474,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -1543,7 +1483,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -1552,7 +1491,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ПакуванняОдиниціВиміру_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -1642,11 +1580,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПакуванняОдиниціВиміру_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПакуванняОдиниціВиміру_Select.QuerySelect.Where = (List<Where>)where;
 
             ПакуванняОдиниціВиміру_Select.QuerySelect.Order.Add(
                Довідники.ПакуванняОдиниціВиміру_Const.Назва, SelectOrder.ASC);
@@ -1678,7 +1613,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -1688,7 +1622,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -1700,9 +1633,7 @@ END
     #endregion
     
     #region DIRECTORY "Валюти"
-    
       
-    /* ТАБЛИЦЯ */
     public class Валюти_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -1843,11 +1774,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Валюти_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Валюти_Select.QuerySelect.Where = (List<Where>)where;
 
             Валюти_Select.QuerySelect.Order.Add(
                Довідники.Валюти_Const.Код, SelectOrder.ASC);
@@ -1880,7 +1808,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -1890,7 +1817,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -1899,7 +1825,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Валюти_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -1989,11 +1914,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Валюти_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Валюти_Select.QuerySelect.Where = (List<Where>)where;
 
             Валюти_Select.QuerySelect.Order.Add(
                Довідники.Валюти_Const.Код, SelectOrder.ASC);
@@ -2025,7 +1947,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -2035,7 +1956,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -2047,9 +1967,7 @@ END
     #endregion
     
     #region DIRECTORY "Контрагенти"
-    
       
-    /* ТАБЛИЦЯ */
     public class Контрагенти_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -2132,11 +2050,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Контрагенти_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Контрагенти_Select.QuerySelect.Where = (List<Where>)where;
 
             Контрагенти_Select.QuerySelect.Order.Add(
                Довідники.Контрагенти_Const.Назва, SelectOrder.ASC);
@@ -2169,7 +2084,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -2179,7 +2093,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -2188,7 +2101,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Контрагенти_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -2266,11 +2178,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Контрагенти_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Контрагенти_Select.QuerySelect.Where = (List<Where>)where;
 
             Контрагенти_Select.QuerySelect.Order.Add(
                Довідники.Контрагенти_Const.Назва, SelectOrder.ASC);
@@ -2300,7 +2209,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -2310,7 +2218,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -2322,9 +2229,7 @@ END
     #endregion
     
     #region DIRECTORY "Склади"
-    
       
-    /* ТАБЛИЦЯ */
     public class Склади_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -2465,11 +2370,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Склади_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Склади_Select.QuerySelect.Where = (List<Where>)where;
 
             Склади_Select.QuerySelect.Order.Add(
                Довідники.Склади_Const.Назва, SelectOrder.ASC);
@@ -2503,7 +2405,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -2513,7 +2414,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -2522,7 +2422,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Склади_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -2600,11 +2499,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Склади_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Склади_Select.QuerySelect.Where = (List<Where>)where;
 
             Склади_Select.QuerySelect.Order.Add(
                Довідники.Склади_Const.Назва, SelectOrder.ASC);
@@ -2634,7 +2530,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -2644,7 +2539,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -2656,9 +2550,7 @@ END
     #endregion
     
     #region DIRECTORY "ВидиЦін"
-    
       
-    /* ТАБЛИЦЯ */
     public class ВидиЦін_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -2726,9 +2618,7 @@ END
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -2779,11 +2669,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиЦін_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиЦін_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиЦін_Select.QuerySelect.Order.Add(
                Довідники.ВидиЦін_Const.Назва, SelectOrder.ASC);
@@ -2816,7 +2703,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -2826,7 +2712,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -2835,7 +2720,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ВидиЦін_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -2907,11 +2791,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиЦін_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиЦін_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиЦін_Select.QuerySelect.Order.Add(
                Довідники.ВидиЦін_Const.Назва, SelectOrder.ASC);
@@ -2940,7 +2821,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -2950,7 +2830,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -2962,9 +2841,7 @@ END
     #endregion
     
     #region DIRECTORY "ВидиЦінПостачальників"
-    
       
-    /* ТАБЛИЦЯ */
     public class ВидиЦінПостачальників_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3042,11 +2919,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиЦінПостачальників_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиЦінПостачальників_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиЦінПостачальників_Select.QuerySelect.Order.Add(
                Довідники.ВидиЦінПостачальників_Const.Назва, SelectOrder.ASC);
@@ -3076,7 +2950,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3086,7 +2959,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -3095,7 +2967,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ВидиЦінПостачальників_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3173,11 +3044,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиЦінПостачальників_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиЦінПостачальників_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиЦінПостачальників_Select.QuerySelect.Order.Add(
                Довідники.ВидиЦінПостачальників_Const.Назва, SelectOrder.ASC);
@@ -3207,7 +3075,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3217,7 +3084,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -3229,9 +3095,7 @@ END
     #endregion
     
     #region DIRECTORY "Користувачі"
-    
       
-    /* ТАБЛИЦЯ */
     public class Користувачі_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3309,11 +3173,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Користувачі_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Користувачі_Select.QuerySelect.Where = (List<Where>)where;
 
             Користувачі_Select.QuerySelect.Order.Add(
                Довідники.Користувачі_Const.Назва, SelectOrder.ASC);
@@ -3343,7 +3204,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3353,7 +3213,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -3362,7 +3221,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Користувачі_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3434,11 +3292,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Користувачі_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Користувачі_Select.QuerySelect.Where = (List<Where>)where;
 
             Користувачі_Select.QuerySelect.Order.Add(
                Довідники.Користувачі_Const.Назва, SelectOrder.ASC);
@@ -3467,7 +3322,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3477,7 +3331,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -3489,9 +3342,7 @@ END
     #endregion
     
     #region DIRECTORY "ФізичніОсоби"
-    
       
-    /* ТАБЛИЦЯ */
     public class ФізичніОсоби_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3569,11 +3420,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ФізичніОсоби_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ФізичніОсоби_Select.QuerySelect.Where = (List<Where>)where;
 
             ФізичніОсоби_Select.QuerySelect.Order.Add(
                Довідники.ФізичніОсоби_Const.Назва, SelectOrder.ASC);
@@ -3603,7 +3451,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3613,7 +3460,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -3622,7 +3468,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ФізичніОсоби_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3694,11 +3539,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ФізичніОсоби_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ФізичніОсоби_Select.QuerySelect.Where = (List<Where>)where;
 
             ФізичніОсоби_Select.QuerySelect.Order.Add(
                Довідники.ФізичніОсоби_Const.Назва, SelectOrder.ASC);
@@ -3727,7 +3569,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3737,7 +3578,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -3749,9 +3589,7 @@ END
     #endregion
     
     #region DIRECTORY "СтруктураПідприємства"
-    
       
-    /* ТАБЛИЦЯ */
     public class СтруктураПідприємства_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3829,11 +3667,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СтруктураПідприємства_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СтруктураПідприємства_Select.QuerySelect.Where = (List<Where>)where;
 
             СтруктураПідприємства_Select.QuerySelect.Order.Add(
                Довідники.СтруктураПідприємства_Const.Назва, SelectOrder.ASC);
@@ -3863,7 +3698,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3873,7 +3707,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -3882,7 +3715,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class СтруктураПідприємства_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -3954,11 +3786,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СтруктураПідприємства_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СтруктураПідприємства_Select.QuerySelect.Where = (List<Where>)where;
 
             СтруктураПідприємства_Select.QuerySelect.Order.Add(
                Довідники.СтруктураПідприємства_Const.Назва, SelectOrder.ASC);
@@ -3987,7 +3816,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -3997,7 +3825,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -4009,9 +3836,7 @@ END
     #endregion
     
     #region DIRECTORY "КраїниСвіту"
-    
       
-    /* ТАБЛИЦЯ */
     public class КраїниСвіту_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -4089,11 +3914,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) КраїниСвіту_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) КраїниСвіту_Select.QuerySelect.Where = (List<Where>)where;
 
             КраїниСвіту_Select.QuerySelect.Order.Add(
                Довідники.КраїниСвіту_Const.Назва, SelectOrder.ASC);
@@ -4123,7 +3945,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -4133,7 +3954,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -4142,7 +3962,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class КраїниСвіту_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -4220,11 +4039,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) КраїниСвіту_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) КраїниСвіту_Select.QuerySelect.Where = (List<Where>)where;
 
             КраїниСвіту_Select.QuerySelect.Order.Add(
                Довідники.КраїниСвіту_Const.Назва, SelectOrder.ASC);
@@ -4254,7 +4070,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -4264,7 +4079,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -4276,9 +4090,7 @@ END
     #endregion
     
     #region DIRECTORY "Файли"
-    
       
-    /* ТАБЛИЦЯ */
     public class Файли_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -4374,11 +4186,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Файли_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Файли_Select.QuerySelect.Where = (List<Where>)where;
 
             Файли_Select.QuerySelect.Order.Add(
                Довідники.Файли_Const.Назва, SelectOrder.ASC);
@@ -4411,7 +4220,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -4421,7 +4229,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -4430,7 +4237,6 @@ END
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Файли_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -4502,11 +4308,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Файли_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Файли_Select.QuerySelect.Where = (List<Where>)where;
 
             Файли_Select.QuerySelect.Order.Add(
                Довідники.Файли_Const.Назва, SelectOrder.ASC);
@@ -4535,7 +4338,6 @@ END
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -4545,7 +4347,6 @@ END
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -4557,9 +4358,7 @@ END
     #endregion
     
     #region DIRECTORY "ХарактеристикиНоменклатури"
-    
       
-    /* ТАБЛИЦЯ */
     public class ХарактеристикиНоменклатури_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -4654,11 +4453,8 @@ END
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ХарактеристикиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ХарактеристикиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
 
             ХарактеристикиНоменклатури_Select.QuerySelect.Order.Add(
                Довідники.ХарактеристикиНоменклатури_Const.Назва, SelectOrder.ASC);
@@ -4766,7 +4562,6 @@ FROM
                         
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -4776,7 +4571,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -4785,7 +4579,6 @@ FROM
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ХарактеристикиНоменклатури_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -4880,11 +4673,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ХарактеристикиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ХарактеристикиНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
 
             ХарактеристикиНоменклатури_Select.QuerySelect.Order.Add(
                Довідники.ХарактеристикиНоменклатури_Const.Назва, SelectOrder.ASC);
@@ -4992,7 +4782,6 @@ FROM
                         
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -5002,7 +4791,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -5014,9 +4802,7 @@ FROM
     #endregion
     
     #region DIRECTORY "Номенклатура_Папки"
-    
       
-    /* ТАБЛИЦЯ */
     public class Номенклатура_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -5096,11 +4882,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             Номенклатура_Папки_Select.QuerySelect.Order.Add(
                Довідники.Номенклатура_Папки_Const.Назва, SelectOrder.ASC);
@@ -5137,15 +4920,7 @@ FROM
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -5155,7 +4930,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -5164,7 +4938,6 @@ FROM
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Номенклатура_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -5244,11 +5017,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             Номенклатура_Папки_Select.QuerySelect.Order.Add(
                Довідники.Номенклатура_Папки_Const.Назва, SelectOrder.ASC);
@@ -5285,15 +5055,7 @@ FROM
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -5303,7 +5065,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -5315,9 +5076,7 @@ FROM
     #endregion
     
     #region DIRECTORY "Контрагенти_Папки"
-    
       
-    /* ТАБЛИЦЯ */
     public class Контрагенти_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -5397,11 +5156,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             Контрагенти_Папки_Select.QuerySelect.Order.Add(
                Довідники.Контрагенти_Папки_Const.Назва, SelectOrder.ASC);
@@ -5438,15 +5194,7 @@ FROM
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -5456,7 +5204,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -5465,7 +5212,6 @@ FROM
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Контрагенти_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -5545,11 +5291,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             Контрагенти_Папки_Select.QuerySelect.Order.Add(
                Довідники.Контрагенти_Папки_Const.Назва, SelectOrder.ASC);
@@ -5586,15 +5329,7 @@ FROM
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -5604,7 +5339,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -5616,9 +5350,7 @@ FROM
     #endregion
     
     #region DIRECTORY "Склади_Папки"
-    
       
-    /* ТАБЛИЦЯ */
     public class Склади_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -5698,11 +5430,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             Склади_Папки_Select.QuerySelect.Order.Add(
                Довідники.Склади_Папки_Const.Назва, SelectOrder.ASC);
@@ -5739,15 +5468,7 @@ FROM
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -5757,7 +5478,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -5766,7 +5486,6 @@ FROM
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Склади_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -5846,11 +5565,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             Склади_Папки_Select.QuerySelect.Order.Add(
                Довідники.Склади_Папки_Const.Назва, SelectOrder.ASC);
@@ -5887,15 +5603,7 @@ FROM
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -5905,7 +5613,6 @@ FROM
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -5917,9 +5624,7 @@ FROM
     #endregion
     
     #region DIRECTORY "Каси"
-    
       
-    /* ТАБЛИЦЯ */
     public class Каси_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -5991,9 +5696,7 @@ FROM
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -6044,11 +5747,8 @@ FROM
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Каси_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Каси_Select.QuerySelect.Where = (List<Where>)where;
 
             Каси_Select.QuerySelect.Order.Add(
                Довідники.Каси_Const.Назва, SelectOrder.ASC);
@@ -6094,7 +5794,6 @@ WHERE
                         
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -6104,7 +5803,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -6113,7 +5811,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Каси_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -6200,11 +5897,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Каси_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Каси_Select.QuerySelect.Where = (List<Where>)where;
 
             Каси_Select.QuerySelect.Order.Add(
                Довідники.Каси_Const.Назва, SelectOrder.ASC);
@@ -6250,7 +5944,6 @@ WHERE
                         
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -6260,7 +5953,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -6272,9 +5964,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "БанківськіРахункиОрганізацій"
-    
       
-    /* ТАБЛИЦЯ */
     public class БанківськіРахункиОрганізацій_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -6342,9 +6032,7 @@ WHERE
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -6395,11 +6083,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) БанківськіРахункиОрганізацій_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) БанківськіРахункиОрганізацій_Select.QuerySelect.Where = (List<Where>)where;
 
             БанківськіРахункиОрганізацій_Select.QuerySelect.Order.Add(
                Довідники.БанківськіРахункиОрганізацій_Const.Назва, SelectOrder.ASC);
@@ -6432,7 +6117,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -6442,7 +6126,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -6451,7 +6134,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class БанківськіРахункиОрганізацій_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -6534,11 +6216,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) БанківськіРахункиОрганізацій_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) БанківськіРахункиОрганізацій_Select.QuerySelect.Where = (List<Where>)where;
 
             БанківськіРахункиОрганізацій_Select.QuerySelect.Order.Add(
                Довідники.БанківськіРахункиОрганізацій_Const.Назва, SelectOrder.ASC);
@@ -6571,7 +6250,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -6581,7 +6259,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -6593,9 +6270,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "ДоговориКонтрагентів"
-    
       
-    /* ТАБЛИЦЯ */
     public class ДоговориКонтрагентів_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -6668,9 +6343,7 @@ WHERE
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
@@ -6734,11 +6407,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ДоговориКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ДоговориКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
 
             ДоговориКонтрагентів_Select.QuerySelect.Order.Add(
                Довідники.ДоговориКонтрагентів_Const.Назва, SelectOrder.ASC);
@@ -6773,7 +6443,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -6783,7 +6452,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -6792,7 +6460,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ДоговориКонтрагентів_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -6875,11 +6542,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ДоговориКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ДоговориКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
 
             ДоговориКонтрагентів_Select.QuerySelect.Order.Add(
                Довідники.ДоговориКонтрагентів_Const.Назва, SelectOrder.ASC);
@@ -6913,7 +6577,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -6923,7 +6586,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -6935,9 +6597,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "БанківськіРахункиКонтрагентів"
-    
       
-    /* ТАБЛИЦЯ */
     public class БанківськіРахункиКонтрагентів_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -7005,9 +6665,7 @@ WHERE
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -7058,11 +6716,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) БанківськіРахункиКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) БанківськіРахункиКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
 
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Order.Add(
                Довідники.БанківськіРахункиКонтрагентів_Const.Назва, SelectOrder.ASC);
@@ -7095,7 +6750,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -7105,7 +6759,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -7114,7 +6767,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -7197,11 +6849,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) БанківськіРахункиКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) БанківськіРахункиКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
 
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Order.Add(
                Довідники.БанківськіРахункиКонтрагентів_Const.Назва, SelectOrder.ASC);
@@ -7234,7 +6883,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -7244,7 +6892,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -7256,9 +6903,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "СтаттяРухуКоштів"
-    
       
-    /* ТАБЛИЦЯ */
     public class СтаттяРухуКоштів_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -7387,11 +7032,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СтаттяРухуКоштів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СтаттяРухуКоштів_Select.QuerySelect.Where = (List<Where>)where;
 
             СтаттяРухуКоштів_Select.QuerySelect.Order.Add(
                Довідники.СтаттяРухуКоштів_Const.Назва, SelectOrder.ASC);
@@ -7424,7 +7066,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -7434,7 +7075,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -7443,7 +7083,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class СтаттяРухуКоштів_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -7515,11 +7154,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СтаттяРухуКоштів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СтаттяРухуКоштів_Select.QuerySelect.Where = (List<Where>)where;
 
             СтаттяРухуКоштів_Select.QuerySelect.Order.Add(
                Довідники.СтаттяРухуКоштів_Const.Назва, SelectOrder.ASC);
@@ -7548,7 +7184,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -7558,7 +7193,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -7570,9 +7204,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "СеріїНоменклатури"
-    
       
-    /* ТАБЛИЦЯ */
     public class СеріїНоменклатури_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -7644,11 +7276,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СеріїНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СеріїНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
 
             СеріїНоменклатури_Select.QuerySelect.Order.Add(
                Довідники.СеріїНоменклатури_Const.Номер, SelectOrder.ASC);
@@ -7677,7 +7306,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -7687,7 +7315,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -7696,7 +7323,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class СеріїНоменклатури_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -7768,11 +7394,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СеріїНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СеріїНоменклатури_Select.QuerySelect.Where = (List<Where>)where;
 
             СеріїНоменклатури_Select.QuerySelect.Order.Add(
                Довідники.СеріїНоменклатури_Const.Номер, SelectOrder.ASC);
@@ -7801,7 +7424,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -7811,7 +7433,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -7823,9 +7444,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "ПартіяТоварівКомпозит"
-    
       
-    /* ТАБЛИЦЯ */
     public class ПартіяТоварівКомпозит_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -7958,11 +7577,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПартіяТоварівКомпозит_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПартіяТоварівКомпозит_Select.QuerySelect.Where = (List<Where>)where;
 
             ПартіяТоварівКомпозит_Select.QuerySelect.Order.Add(
                Довідники.ПартіяТоварівКомпозит_Const.Дата, SelectOrder.ASC);
@@ -8000,7 +7616,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -8010,7 +7625,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -8019,7 +7633,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ПартіяТоварівКомпозит_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -8097,11 +7710,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ПартіяТоварівКомпозит_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ПартіяТоварівКомпозит_Select.QuerySelect.Where = (List<Where>)where;
 
             ПартіяТоварівКомпозит_Select.QuerySelect.Order.Add(
                Довідники.ПартіяТоварівКомпозит_Const.Дата, SelectOrder.ASC);
@@ -8131,7 +7741,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -8141,7 +7750,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -8153,9 +7761,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "ВидиЗапасів"
-    
       
-    /* ТАБЛИЦЯ */
     public class ВидиЗапасів_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -8233,11 +7839,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиЗапасів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиЗапасів_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиЗапасів_Select.QuerySelect.Order.Add(
                Довідники.ВидиЗапасів_Const.Назва, SelectOrder.ASC);
@@ -8267,7 +7870,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -8277,7 +7879,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -8286,7 +7887,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ВидиЗапасів_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -8364,11 +7964,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ВидиЗапасів_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ВидиЗапасів_Select.QuerySelect.Where = (List<Where>)where;
 
             ВидиЗапасів_Select.QuerySelect.Order.Add(
                Довідники.ВидиЗапасів_Const.Назва, SelectOrder.ASC);
@@ -8398,7 +7995,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -8408,7 +8004,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -8420,9 +8015,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "Банки"
-    
       
-    /* ТАБЛИЦЯ */
     public class Банки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -8602,11 +8195,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Банки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Банки_Select.QuerySelect.Where = (List<Where>)where;
 
             Банки_Select.QuerySelect.Order.Add(
                Довідники.Банки_Const.Назва, SelectOrder.ASC);
@@ -8653,7 +8243,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -8663,7 +8252,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -8672,7 +8260,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Банки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -8750,11 +8337,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Банки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Банки_Select.QuerySelect.Where = (List<Where>)where;
 
             Банки_Select.QuerySelect.Order.Add(
                Довідники.Банки_Const.Назва, SelectOrder.ASC);
@@ -8784,7 +8368,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -8794,7 +8377,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -8806,9 +8388,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "СкладськіПриміщення"
-    
       
-    /* ТАБЛИЦЯ */
     public class СкладськіПриміщення_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -8876,9 +8456,7 @@ WHERE
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
@@ -8941,11 +8519,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СкладськіПриміщення_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СкладськіПриміщення_Select.QuerySelect.Where = (List<Where>)where;
 
             СкладськіПриміщення_Select.QuerySelect.Order.Add(
                Довідники.СкладськіПриміщення_Const.Назва, SelectOrder.ASC);
@@ -8979,7 +8554,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -8989,7 +8563,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -8998,7 +8571,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class СкладськіПриміщення_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -9075,11 +8647,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СкладськіПриміщення_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СкладськіПриміщення_Select.QuerySelect.Where = (List<Where>)where;
 
             СкладськіПриміщення_Select.QuerySelect.Order.Add(
                Довідники.СкладськіПриміщення_Const.Назва, SelectOrder.ASC);
@@ -9111,7 +8680,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -9121,7 +8689,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -9133,9 +8700,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "СкладськіКомірки"
-    
       
-    /* ТАБЛИЦЯ */
     public class СкладськіКомірки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -9233,9 +8798,7 @@ WHERE
                   
                   { /* Приміщення, pointer */
                       Switch sw = new();
-                      СкладськіПриміщення_PointerControl Приміщення = new() { Caption = "" };
-                          Приміщення.AfterSelectFunc = () => sw.Active = true;
-                          
+                      СкладськіПриміщення_PointerControl Приміщення = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Приміщення", Приміщення, sw));
                       ДодатиЕлементВФільтр(listBox, "Приміщення:", Приміщення, sw);
                   }
@@ -9290,11 +8853,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СкладськіКомірки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СкладськіКомірки_Select.QuerySelect.Where = (List<Where>)where;
 
             СкладськіКомірки_Select.QuerySelect.Order.Add(
                Довідники.СкладськіКомірки_Const.Назва, SelectOrder.ASC);
@@ -9338,7 +8898,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -9348,7 +8907,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -9357,7 +8915,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class СкладськіКомірки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -9434,11 +8991,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СкладськіКомірки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СкладськіКомірки_Select.QuerySelect.Where = (List<Where>)where;
 
             СкладськіКомірки_Select.QuerySelect.Order.Add(
                Довідники.СкладськіКомірки_Const.Назва, SelectOrder.ASC);
@@ -9470,7 +9024,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -9480,7 +9033,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -9492,9 +9044,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "ОбластьЗберігання"
-    
       
-    /* ТАБЛИЦЯ */
     public class ОбластьЗберігання_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -9571,11 +9121,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ОбластьЗберігання_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ОбластьЗберігання_Select.QuerySelect.Where = (List<Where>)where;
 
             ОбластьЗберігання_Select.QuerySelect.Order.Add(
                Довідники.ОбластьЗберігання_Const.Назва, SelectOrder.ASC);
@@ -9607,7 +9154,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -9617,7 +9163,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -9629,9 +9174,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "ТипорозміриКомірок"
-    
       
-    /* ТАБЛИЦЯ */
     public class ТипорозміриКомірок_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -9733,11 +9276,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ТипорозміриКомірок_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ТипорозміриКомірок_Select.QuerySelect.Where = (List<Where>)where;
 
             ТипорозміриКомірок_Select.QuerySelect.Order.Add(
                Довідники.ТипорозміриКомірок_Const.Назва, SelectOrder.ASC);
@@ -9771,7 +9311,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -9781,7 +9320,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -9790,7 +9328,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class ТипорозміриКомірок_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -9862,11 +9399,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) ТипорозміриКомірок_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) ТипорозміриКомірок_Select.QuerySelect.Where = (List<Where>)where;
 
             ТипорозміриКомірок_Select.QuerySelect.Order.Add(
                Довідники.ТипорозміриКомірок_Const.Назва, SelectOrder.ASC);
@@ -9895,7 +9429,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -9905,7 +9438,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -9917,9 +9449,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "СкладськіКомірки_Папки"
-    
       
-    /* ТАБЛИЦЯ */
     public class СкладськіКомірки_Папки_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -10004,11 +9534,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             СкладськіКомірки_Папки_Select.QuerySelect.Order.Add(
                Довідники.СкладськіКомірки_Папки_Const.Назва, SelectOrder.ASC);
@@ -10048,15 +9575,7 @@ WHERE
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -10066,7 +9585,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -10075,7 +9593,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class СкладськіКомірки_Папки_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -10160,11 +9677,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
 
             СкладськіКомірки_Папки_Select.QuerySelect.Order.Add(
                Довідники.СкладськіКомірки_Папки_Const.Назва, SelectOrder.ASC);
@@ -10204,15 +9718,7 @@ WHERE
                             
                     };
                     
-                    
-                        TreeIter CurrentIter;
-                        if (Level == 1)
-                            CurrentIter = Store.AppendValues(rootIter, Record.ToArray());
-                        else
-                        {
-                            TreeIter parentIter = nodeDictionary[Parent];
-                            CurrentIter = Store.AppendValues(parentIter, Record.ToArray());
-                        }
+                        TreeIter CurrentIter = Level == 1 ? Store.AppendValues(rootIter, Record.ToArray()) : Store.AppendValues(nodeDictionary[Parent], Record.ToArray());
                         nodeDictionary.Add(Record.ID, CurrentIter);
                       
 
@@ -10222,7 +9728,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -10234,9 +9739,7 @@ WHERE
     #endregion
     
     #region DIRECTORY "Блокнот"
-    
       
-    /* ТАБЛИЦЯ */
     public class Блокнот_Записи : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -10320,11 +9823,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Блокнот_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Блокнот_Select.QuerySelect.Where = (List<Where>)where;
 
             Блокнот_Select.QuerySelect.Order.Add(
                Довідники.Блокнот_Const.ДатаЗапису, SelectOrder.ASC);
@@ -10355,7 +9855,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -10365,7 +9864,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -10374,7 +9872,6 @@ WHERE
         }
     }
 	    
-    /* ТАБЛИЦЯ */
     public class Блокнот_ЗаписиШвидкийВибір : ТабличнийСписок
     {
         bool DeletionLabel = false;
@@ -10458,11 +9955,8 @@ WHERE
             ]);
 
             /* Where */
-            if (treeView.Data.ContainsKey("Where"))
-            {
-                var where = treeView.Data["Where"];
-                if (where != null) Блокнот_Select.QuerySelect.Where = (List<Where>)where;
-            }
+            var where = treeView.Data["Where"];
+            if (where != null) Блокнот_Select.QuerySelect.Where = (List<Where>)where;
 
             Блокнот_Select.QuerySelect.Order.Add(
                Довідники.Блокнот_Const.ДатаЗапису, SelectOrder.ASC);
@@ -10493,7 +9987,6 @@ WHERE
                             
                     };
                     
-                    
                         TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                       
 
@@ -10503,7 +9996,6 @@ WHERE
                     if (DirectoryPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -10620,36 +10112,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -10663,9 +10147,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -10781,13 +10263,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -10903,45 +10383,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
@@ -10955,9 +10425,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11078,13 +10546,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -11200,45 +10666,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
@@ -11252,9 +10708,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11375,13 +10829,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -11497,45 +10949,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
@@ -11549,9 +10991,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11672,13 +11112,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -11782,36 +11220,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* ВидЦіни, pointer */
                       Switch sw = new();
-                      ВидиЦін_PointerControl ВидЦіни = new() { Caption = "" };
-                          ВидЦіни.AfterSelectFunc = () => sw.Active = true;
-                          
+                      ВидиЦін_PointerControl ВидЦіни = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("ВидЦіни", ВидЦіни, sw));
                       ДодатиЕлементВФільтр(listBox, "Вид ціни:", ВидЦіни, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -11918,13 +11348,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -12040,36 +11468,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
@@ -12083,9 +11503,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -12204,13 +11622,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -12326,36 +11742,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
@@ -12369,9 +11777,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -12490,13 +11896,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -12600,36 +12004,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* СкладВідправник, pointer */
                       Switch sw = new();
-                      Склади_PointerControl СкладВідправник = new() { Caption = "" };
-                          СкладВідправник.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl СкладВідправник = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("СкладВідправник", СкладВідправник, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад відправник:", СкладВідправник, sw);
                   }
                   
                   { /* СкладОтримувач, pointer */
                       Switch sw = new();
-                      Склади_PointerControl СкладОтримувач = new() { Caption = "" };
-                          СкладОтримувач.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl СкладОтримувач = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("СкладОтримувач", СкладОтримувач, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад отримувач:", СкладОтримувач, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -12736,13 +12132,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -12858,45 +12252,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
@@ -12910,9 +12294,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13033,13 +12415,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -13155,45 +12535,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
@@ -13207,9 +12577,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13330,13 +12698,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -13448,36 +12814,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
@@ -13491,9 +12849,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13609,13 +12965,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -13723,45 +13077,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -13873,13 +13217,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -13979,27 +13321,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14101,13 +13437,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -14207,27 +13541,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14329,13 +13657,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -14439,36 +13765,28 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Відповідальний, pointer */
                       Switch sw = new();
-                      ФізичніОсоби_PointerControl Відповідальний = new() { Caption = "" };
-                          Відповідальний.AfterSelectFunc = () => sw.Active = true;
-                          
+                      ФізичніОсоби_PointerControl Відповідальний = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Відповідальний", Відповідальний, sw));
                       ДодатиЕлементВФільтр(listBox, "Відповідальний:", Відповідальний, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14575,13 +13893,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -14685,18 +14001,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
@@ -14710,9 +14022,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -14818,13 +14128,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -14932,27 +14240,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
@@ -14966,9 +14268,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15079,13 +14379,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -15201,45 +14499,35 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Контрагент, pointer */
                       Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "" };
-                          Контрагент.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Контрагент", Контрагент, sw));
                       ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
                   }
                   
                   { /* Валюта, pointer */
                       Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "" };
-                          Валюта.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Валюта", Валюта, sw));
                       ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
                   }
                   
                   { /* Каса, pointer */
                       Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "" };
-                          Каса.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Каса", Каса, sw));
                       ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
@@ -15253,9 +14541,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15376,13 +14662,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -15482,27 +14766,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* ДокументПоступлення, pointer */
                       Switch sw = new();
-                      ПоступленняТоварівТаПослуг_PointerControl ДокументПоступлення = new() { Caption = "" };
-                          ДокументПоступлення.AfterSelectFunc = () => sw.Active = true;
-                          
+                      ПоступленняТоварівТаПослуг_PointerControl ДокументПоступлення = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("ДокументПоступлення", ДокументПоступлення, sw));
                       ДодатиЕлементВФільтр(listBox, "Документ поступлення:", ДокументПоступлення, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15604,13 +14882,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -15710,27 +14986,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -15832,13 +15102,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -15938,27 +15206,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* ДокументРеалізації, pointer */
                       Switch sw = new();
-                      РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new() { Caption = "" };
-                          ДокументРеалізації.AfterSelectFunc = () => sw.Active = true;
-                          
+                      РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("ДокументРеалізації", ДокументРеалізації, sw));
                       ДодатиЕлементВФільтр(listBox, "Документ реалізації:", ДокументРеалізації, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -16060,13 +15322,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -16166,27 +15426,21 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Склад, pointer */
                       Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "" };
-                          Склад.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Склад", Склад, sw));
                       ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -16288,13 +15542,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -16390,18 +15642,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   
                   { /* Організація, pointer */
                       Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "" };
-                          Організація.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Організація", Організація, sw));
                       ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
                   }
                   
                   { /* Автор, pointer */
                       Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "" };
-                          Автор.AfterSelectFunc = () => sw.Active = true;
-                          
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
                       widgets.Add(new("Автор", Автор, sw));
                       ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
                   }
@@ -16498,13 +15746,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
 
-                    if (FirstPath == null)
-                        FirstPath = CurrentPath;
+                    FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
                     {
                         string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-
                         if (Record.ID == UidSelect)
                             SelectPath = CurrentPath;
                     }
@@ -16551,7 +15797,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
-                /*Назва*/ Назва, /*Дата*/ Дата, /*Номер*/ Номер, /*Організація*/ Організація, /*Контрагент*/ Контрагент, /*Склад*/ Склад, /*Каса*/ Каса, /*Валюта*/ Валюта, /*Сума*/ Сума, /*Автор*/ Автор, /*Коментар*/ Коментар,  
+                /*Назва*/ Назва,
+                /*Дата*/ Дата,
+                /*Номер*/ Номер,
+                /*Організація*/ Організація,
+                /*Контрагент*/ Контрагент,
+                /*Склад*/ Склад,
+                /*Каса*/ Каса,
+                /*Валюта*/ Валюта,
+                /*Сума*/ Сума,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                 
             };
         }
 
@@ -16784,34 +16041,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -16836,34 +16081,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -16888,34 +16121,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -16940,34 +16161,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -16992,37 +16201,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
-                        Довідники.Валюти_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                        Довідники.Валюти_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17047,35 +16244,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
-                        Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                        Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17100,35 +16285,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
-                        Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                        Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17153,37 +16326,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладВідправник,
-                                query.Table, "join_tab_6", "Склад");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладВідправник, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17208,34 +16369,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17260,34 +16409,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17312,35 +16449,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
-                        Довідники.Каси_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                        Довідники.Каси_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17365,35 +16490,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
-                        Довідники.Валюти_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                        Довідники.Валюти_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17418,36 +16531,24 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.ФізичніОсоби_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Відповідальний,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.ФізичніОсоби_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Відповідальний, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17472,37 +16573,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17527,36 +16616,24 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
-                        Довідники.Валюти_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                        Довідники.Валюти_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17581,34 +16658,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу + "::text", "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17633,37 +16698,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17688,37 +16741,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17743,37 +16784,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17798,37 +16827,25 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17853,38 +16870,26 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.КорегуванняБоргу_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.КорегуванняБоргу_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта"));
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.КорегуванняБоргу_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.КорегуванняБоргу_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -17964,7 +16969,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
-                /*Назва*/ Назва, /*Дата*/ Дата, /*Номер*/ Номер, /*Організація*/ Організація, /*Контрагент*/ Контрагент, /*Склад*/ Склад, /*Каса*/ Каса, /*Валюта*/ Валюта, /*Сума*/ Сума, /*Автор*/ Автор, /*Коментар*/ Коментар,  
+                /*Назва*/ Назва,
+                /*Дата*/ Дата,
+                /*Номер*/ Номер,
+                /*Організація*/ Організація,
+                /*Контрагент*/ Контрагент,
+                /*Склад*/ Склад,
+                /*Каса*/ Каса,
+                /*Валюта*/ Валюта,
+                /*Сума*/ Сума,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                 
             };
         }
 
@@ -18089,34 +17105,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18141,34 +17145,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18193,34 +17185,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18300,7 +17280,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
-                /*Назва*/ Назва, /*Дата*/ Дата, /*Номер*/ Номер, /*Організація*/ Організація, /*Контрагент*/ Контрагент, /*Склад*/ Склад, /*Каса*/ Каса, /*Валюта*/ Валюта, /*Сума*/ Сума, /*Автор*/ Автор, /*Коментар*/ Коментар,  
+                /*Назва*/ Назва,
+                /*Дата*/ Дата,
+                /*Номер*/ Номер,
+                /*Організація*/ Організація,
+                /*Контрагент*/ Контрагент,
+                /*Склад*/ Склад,
+                /*Каса*/ Каса,
+                /*Валюта*/ Валюта,
+                /*Сума*/ Сума,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                 
             };
         }
 
@@ -18437,34 +17428,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18489,34 +17468,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18541,34 +17508,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18593,35 +17548,23 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад"));
-                        Довідники.Каси_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                        Довідники.Каси_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18646,34 +17589,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Склад,
-                                query.Table, "join_tab_6", "Склад");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Каса,
-                                query.Table, "join_tab_7", "Каса");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18753,7 +17684,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
-                /*Назва*/ Назва, /*Дата*/ Дата, /*Номер*/ Номер, /*Організація*/ Організація, /*Контрагент*/ Контрагент, /*Каса*/ Каса, /*Каса2*/ Каса2, /*Валюта*/ Валюта, /*Сума*/ Сума, /*Автор*/ Автор, /*Коментар*/ Коментар,  
+                /*Назва*/ Назва,
+                /*Дата*/ Дата,
+                /*Номер*/ Номер,
+                /*Організація*/ Організація,
+                /*Контрагент*/ Контрагент,
+                /*Каса*/ Каса,
+                /*Каса2*/ Каса2,
+                /*Валюта*/ Валюта,
+                /*Сума*/ Сума,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                 
             };
         }
 
@@ -18872,34 +17814,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Каса,
-                                query.Table, "join_tab_6", "Каса");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.КасаВідправник,
-                                query.Table, "join_tab_7", "Каса2");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_6", "Каса");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.КасаВідправник, query.Table, "join_tab_7", "Каса2");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -18924,34 +17854,22 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Контрагент,
-                                query.Table, "join_tab_5", "Контрагент");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Каса,
-                                query.Table, "join_tab_6", "Каса");
-                            Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.КасаОтримувач,
-                                query.Table, "join_tab_7", "Каса2");
-                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Валюта,
-                                query.Table, "join_tab_8", "Валюта");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_6", "Каса");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.КасаОтримувач, query.Table, "join_tab_7", "Каса2");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Автор,
-                                query.Table, "join_tab_10", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19028,7 +17946,15 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
-                /*Назва*/ Назва, /*Дата*/ Дата, /*Номер*/ Номер, /*Організація*/ Організація, /*СкладВідправник*/ СкладВідправник, /*СкладОтримувач*/ СкладОтримувач, /*Автор*/ Автор, /*Коментар*/ Коментар,  
+                /*Назва*/ Назва,
+                /*Дата*/ Дата,
+                /*Номер*/ Номер,
+                /*Організація*/ Організація,
+                /*СкладВідправник*/ СкладВідправник,
+                /*СкладОтримувач*/ СкладОтримувач,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                 
             };
         }
 
@@ -19159,27 +18085,18 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладВідправник,
-                                query.Table, "join_tab_5", "СкладВідправник");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладОтримувач,
-                                query.Table, "join_tab_6", "СкладОтримувач");
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Автор,
-                                query.Table, "join_tab_7", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладВідправник, query.Table, "join_tab_5", "СкладВідправник");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладОтримувач, query.Table, "join_tab_6", "СкладОтримувач");
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19204,28 +18121,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Склад,
-                                query.Table, "join_tab_6", "СкладОтримувач");
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Автор,
-                                query.Table, "join_tab_7", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник")); /* Empty Field - СкладВідправник*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Склад, query.Table, "join_tab_6", "СкладОтримувач");
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19250,28 +18158,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник"));
-                        Довідники.Склади_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад,
-                                query.Table, "join_tab_6", "СкладОтримувач");
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор,
-                                query.Table, "join_tab_7", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник")); /* Empty Field - СкладВідправник*/
+                        Довідники.Склади_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, query.Table, "join_tab_6", "СкладОтримувач");
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19296,28 +18195,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Склад,
-                                query.Table, "join_tab_5", "СкладВідправник");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Склад, query.Table, "join_tab_5", "СкладВідправник");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Автор,
-                                query.Table, "join_tab_7", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач")); /* Empty Field - СкладОтримувач*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19342,28 +18232,19 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Склад,
-                                query.Table, "join_tab_5", "СкладВідправник");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Склад, query.Table, "join_tab_5", "СкладВідправник");
                             
-                          /* Empty Field */
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач"));
-                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Автор,
-                                query.Table, "join_tab_7", "Автор");
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач")); /* Empty Field - СкладОтримувач*/
+                        Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19436,7 +18317,14 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
-                /*Назва*/ Назва, /*Дата*/ Дата, /*Номер*/ Номер, /*Організація*/ Організація, /*Склад*/ Склад, /*Автор*/ Автор, /*Коментар*/ Коментар,  
+                /*Назва*/ Назва,
+                /*Дата*/ Дата,
+                /*Номер*/ Номер,
+                /*Організація*/ Організація,
+                /*Склад*/ Склад,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                 
             };
         }
 
@@ -19559,25 +18447,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Склад,
-                                query.Table, "join_tab_5", "Склад");
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Автор,
-                                query.Table, "join_tab_6", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_5", "Склад");
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19602,25 +18482,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Склад,
-                                query.Table, "join_tab_5", "Склад");
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Автор,
-                                query.Table, "join_tab_6", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_5", "Склад");
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19645,25 +18517,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Склад,
-                                query.Table, "join_tab_5", "Склад");
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Автор,
-                                query.Table, "join_tab_6", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Склад, query.Table, "join_tab_5", "Склад");
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19688,25 +18552,17 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
-                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація,
-                                query.Table, "join_tab_4", "Організація");
-                            Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад,
-                                query.Table, "join_tab_5", "Склад");
-                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор,
-                                query.Table, "join_tab_6", "Автор");
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад, query.Table, "join_tab_5", "Склад");
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(
-                                  new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
                             
-
                   allQuery.Add(query.Construct());
               }
               
@@ -19842,8 +18698,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             var where = treeView.Data["Where"];
             if (where != null) ЦіниНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            
-
             await ЦіниНоменклатури_RecordsSet.Read();
 
             ListStore Store = (ListStore)treeView.Model;
@@ -19948,8 +18802,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) КурсиВалют_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             await КурсиВалют_RecordsSet.Read();
 
@@ -20057,8 +18909,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             var where = treeView.Data["Where"];
             if (where != null) ШтрихкодиНоменклатури_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            
-
             await ШтрихкодиНоменклатури_RecordsSet.Read();
 
             ListStore Store = (ListStore)treeView.Model;
@@ -20153,8 +19003,6 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ФайлиДокументів_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             await ФайлиДокументів_RecordsSet.Read();
 
@@ -20288,8 +19136,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ТовариНаСкладах_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             /* Read */
             await ТовариНаСкладах_RecordsSet.Read();
@@ -20425,8 +19271,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             var where = treeView.Data["Where"];
             if (where != null) ЗамовленняКлієнтів_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            
-
             /* Read */
             await ЗамовленняКлієнтів_RecordsSet.Read();
 
@@ -20549,8 +19393,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) РозрахункиЗКлієнтами_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             /* Read */
             await РозрахункиЗКлієнтами_RecordsSet.Read();
@@ -20696,8 +19538,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             var where = treeView.Data["Where"];
             if (where != null) Закупівлі_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            
-
             /* Read */
             await Закупівлі_RecordsSet.Read();
 
@@ -20836,8 +19676,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             var where = treeView.Data["Where"];
             if (where != null) ВільніЗалишки_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            
-
             /* Read */
             await ВільніЗалишки_RecordsSet.Read();
 
@@ -20969,8 +19807,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             var where = treeView.Data["Where"];
             if (where != null) ЗамовленняПостачальникам_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            
-
             /* Read */
             await ЗамовленняПостачальникам_RecordsSet.Read();
 
@@ -21092,8 +19928,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) РозрахункиЗПостачальниками_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             /* Read */
             await РозрахункиЗПостачальниками_RecordsSet.Read();
@@ -21218,8 +20052,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) РухКоштів_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             /* Read */
             await РухКоштів_RecordsSet.Read();
@@ -21369,8 +20201,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ПартіїТоварів_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             /* Read */
             await ПартіїТоварів_RecordsSet.Read();
@@ -21527,8 +20357,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             var where = treeView.Data["Where"];
             if (where != null) Продажі_RecordsSet.QuerySelect.Where = (List<Where>)where;
 
-            
-
             /* Read */
             await Продажі_RecordsSet.Read();
 
@@ -21667,8 +20495,6 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ТовариВКомірках_RecordsSet.QuerySelect.Where = (List<Where>)where;
-
-            
 
             /* Read */
             await ТовариВКомірках_RecordsSet.Read();

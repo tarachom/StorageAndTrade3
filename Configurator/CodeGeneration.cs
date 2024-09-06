@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.09.2024 17:34:04
+ * Дата конфігурації: 06.09.2024 15:14:22
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -2106,10 +2106,7 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
                 
-                }
             }
             
             base.BaseClear();
@@ -2529,11 +2526,13 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Файл.Назва = ItemValue["Файл"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Файл.Назва = ItemValue["Файл"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -3869,10 +3868,7 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
                 
-                }
             }
             
             base.BaseClear();
@@ -3999,11 +3995,13 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Файл.Назва = ItemValue["Файл"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Файл.Назва = ItemValue["Файл"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -4401,10 +4399,7 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
                 
-                }
             }
             
             base.BaseClear();
@@ -5251,10 +5246,7 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
                 
-                }
             }
             
             base.BaseClear();
@@ -5647,10 +5639,7 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
                 
-                }
             }
             
             base.BaseClear();
@@ -8788,10 +8777,7 @@ namespace StorageAndTrade_1_0.Довідники
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
                 
-                }
             }
             
             base.BaseClear();
@@ -12842,15 +12828,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Склад.Назва = ItemValue["Склад"];
-                    record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Склад.Назва = ItemValue["Склад"];
+                        record.Підрозділ.Назва = ItemValue["Підрозділ"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -13497,18 +13485,20 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Склад.Назва = ItemValue["Склад"];
-                    record.ЗамовленняПостачальнику.Назва = ItemValue["ЗамовленняПостачальнику"];
-                    record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                    record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Склад.Назва = ItemValue["Склад"];
+                        record.ЗамовленняПостачальнику.Назва = ItemValue["ЗамовленняПостачальнику"];
+                        record.Підрозділ.Назва = ItemValue["Підрозділ"];
+                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -14116,15 +14106,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                    record.Склад.Назва = ItemValue["Склад"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
+                        record.Склад.Назва = ItemValue["Склад"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -14764,19 +14756,21 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                    record.Склад.Назва = ItemValue["Склад"];
-                    record.ЗамовленняКлієнта.Назва = ItemValue["ЗамовленняКлієнта"];
-                    record.РахунокФактура.Назва = ItemValue["РахунокФактура"];
-                    record.Партія.Назва = ItemValue["Партія"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
+                        record.Склад.Назва = ItemValue["Склад"];
+                        record.ЗамовленняКлієнта.Назва = ItemValue["ЗамовленняКлієнта"];
+                        record.РахунокФактура.Назва = ItemValue["РахунокФактура"];
+                        record.Партія.Назва = ItemValue["Партія"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -15264,14 +15258,16 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -15795,13 +15791,15 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                    record.ВалютаВзаєморозрахунків.Назва = ItemValue["ВалютаВзаєморозрахунків"];
-                    record.Організація.Назва = ItemValue["Організація"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Підрозділ.Назва = ItemValue["Підрозділ"];
+                        record.ВалютаВзаєморозрахунків.Назва = ItemValue["ВалютаВзаєморозрахунків"];
+                        record.Організація.Назва = ItemValue["Організація"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -16337,13 +16335,15 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.ВалютаВзаєморозрахунків.Назва = ItemValue["ВалютаВзаєморозрахунків"];
-                    record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                    record.Організація.Назва = ItemValue["Організація"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.ВалютаВзаєморозрахунків.Назва = ItemValue["ВалютаВзаєморозрахунків"];
+                        record.Підрозділ.Назва = ItemValue["Підрозділ"];
+                        record.Організація.Назва = ItemValue["Організація"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -16890,15 +16890,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Партія.Назва = ItemValue["Партія"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Партія.Назва = ItemValue["Партія"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -17469,15 +17471,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.ДокументПоступлення.Назва = ItemValue["ДокументПоступлення"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.ДокументПоступлення.Назва = ItemValue["ДокументПоступлення"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -18034,15 +18038,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.ДокументРеалізації.Назва = ItemValue["ДокументРеалізації"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.ДокументРеалізації.Назва = ItemValue["ДокументРеалізації"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -18566,12 +18572,14 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -19113,14 +19121,16 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -19255,11 +19265,13 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Каса.Назва = ItemValue["Каса"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Каса.Назва = ItemValue["Каса"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -19382,11 +19394,13 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.БанківськийРахунок.Назва = ItemValue["БанківськийРахунок"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.БанківськийРахунок.Назва = ItemValue["БанківськийРахунок"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -19514,12 +19528,14 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Контрагент.Назва = ItemValue["Контрагент"];
-                    record.Валюта.Назва = ItemValue["Валюта"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Контрагент.Назва = ItemValue["Контрагент"];
+                        record.Валюта.Назва = ItemValue["Валюта"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -19972,12 +19988,14 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -20430,12 +20448,14 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -20913,13 +20933,15 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -21429,15 +21451,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Партія.Назва = ItemValue["Партія"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Партія.Назва = ItemValue["Партія"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -21954,15 +21978,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Партія.Назва = ItemValue["Партія"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Партія.Назва = ItemValue["Партія"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -22508,15 +22534,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                    record.Склад.Назва = ItemValue["Склад"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
+                        record.Склад.Назва = ItemValue["Склад"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -23013,15 +23041,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Комірка.Назва = ItemValue["Комірка"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Комірка.Назва = ItemValue["Комірка"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -23510,16 +23540,18 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.КоміркаВідправник.Назва = ItemValue["КоміркаВідправник"];
-                    record.КоміркаОтримувач.Назва = ItemValue["КоміркаОтримувач"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.КоміркаВідправник.Назва = ItemValue["КоміркаВідправник"];
+                        record.КоміркаОтримувач.Назва = ItemValue["КоміркаОтримувач"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -24012,15 +24044,17 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Серія.Назва = ItemValue["Серія"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Комірка.Назва = ItemValue["Комірка"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Назва = ItemValue["Серія"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Комірка.Назва = ItemValue["Комірка"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -24494,13 +24528,15 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.Комірка.Назва = ItemValue["Комірка"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.Комірка.Назва = ItemValue["Комірка"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -24963,12 +24999,14 @@ namespace StorageAndTrade_1_0.Документи
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Контрагент.Назва = ItemValue["Контрагент"];
-                    record.Валюта.Назва = ItemValue["Валюта"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Контрагент.Назва = ItemValue["Контрагент"];
+                        record.Валюта.Назва = ItemValue["Валюта"];
+                        
+                  }
+                
             }
             
             base.BaseClear();
@@ -25163,15 +25201,17 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    record.Валюта.Назва = ItemValue["Валюта"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Валюта.Назва = ItemValue["Валюта"];
+                        
+                  }
+                
             }
             base.BaseClear();
         }
@@ -25345,11 +25385,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Валюта.Назва = ItemValue["Валюта"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Валюта.Назва = ItemValue["Валюта"];
+                        
+                  }
+                
             }
             base.BaseClear();
         }
@@ -25511,13 +25553,15 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                    record.Пакування.Назва = ItemValue["Пакування"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        
+                  }
+                
             }
             base.BaseClear();
         }
@@ -25675,11 +25719,13 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Файл.Назва = ItemValue["Файл"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Файл.Назва = ItemValue["Файл"];
+                        
+                  }
+                
             }
             base.BaseClear();
         }
@@ -25831,14 +25877,16 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                    record.Склад.Назва = ItemValue["Склад"];
-                    record.Приміщення.Назва = ItemValue["Приміщення"];
-                    record.Комірка.Назва = ItemValue["Комірка"];
-                    
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.Склад.Назва = ItemValue["Склад"];
+                        record.Приміщення.Назва = ItemValue["Приміщення"];
+                        record.Комірка.Назва = ItemValue["Комірка"];
+                        
+                  }
+                
             }
             base.BaseClear();
         }
@@ -26329,15 +26377,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          record.Склад.Назва = ItemValue["Склад"];
+                          record.Серія.Назва = ItemValue["Серія"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -26777,15 +26827,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.ЗамовленняКлієнта.Назва = ItemValue["ЗамовленняКлієнта"];
-                        record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.ЗамовленняКлієнта.Назва = ItemValue["ЗамовленняКлієнта"];
+                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          record.Склад.Назва = ItemValue["Склад"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -27001,13 +27053,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Валюта.Назва = ItemValue["Валюта"];
-                        record.Контрагент.Назва = ItemValue["Контрагент"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Валюта.Назва = ItemValue["Валюта"];
+                          record.Контрагент.Назва = ItemValue["Контрагент"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -27322,17 +27376,19 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Організація.Назва = ItemValue["Організація"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        record.Контрагент.Назва = ItemValue["Контрагент"];
-                        record.Договір.Назва = ItemValue["Договір"];
-                        record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Організація.Назва = ItemValue["Організація"];
+                          record.Склад.Назва = ItemValue["Склад"];
+                          record.Контрагент.Назва = ItemValue["Контрагент"];
+                          record.Договір.Назва = ItemValue["Договір"];
+                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -27576,14 +27632,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          record.Склад.Назва = ItemValue["Склад"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -27906,15 +27964,17 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.ЗамовленняПостачальнику.Назва = ItemValue["ЗамовленняПостачальнику"];
-                        record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.ЗамовленняПостачальнику.Назва = ItemValue["ЗамовленняПостачальнику"];
+                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          record.Склад.Назва = ItemValue["Склад"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -28124,13 +28184,15 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Контрагент.Назва = ItemValue["Контрагент"];
-                        record.Валюта.Назва = ItemValue["Валюта"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Контрагент.Назва = ItemValue["Контрагент"];
+                          record.Валюта.Назва = ItemValue["Валюта"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -28429,14 +28491,16 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Організація.Назва = ItemValue["Організація"];
-                        record.Каса.Назва = ItemValue["Каса"];
-                        record.Валюта.Назва = ItemValue["Валюта"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Організація.Назва = ItemValue["Організація"];
+                          record.Каса.Назва = ItemValue["Каса"];
+                          record.Валюта.Назва = ItemValue["Валюта"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -28852,17 +28916,19 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Організація.Назва = ItemValue["Організація"];
-                        record.ПартіяТоварівКомпозит.Назва = ItemValue["ПартіяТоварівКомпозит"];
-                        record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Організація.Назва = ItemValue["Організація"];
+                          record.ПартіяТоварівКомпозит.Назва = ItemValue["ПартіяТоварівКомпозит"];
+                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          record.Серія.Назва = ItemValue["Серія"];
+                          record.Склад.Назва = ItemValue["Склад"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -29350,17 +29416,19 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Організація.Назва = ItemValue["Організація"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        record.Контрагент.Назва = ItemValue["Контрагент"];
-                        record.Договір.Назва = ItemValue["Договір"];
-                        record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Організація.Назва = ItemValue["Організація"];
+                          record.Склад.Назва = ItemValue["Склад"];
+                          record.Контрагент.Назва = ItemValue["Контрагент"];
+                          record.Договір.Назва = ItemValue["Договір"];
+                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }
@@ -29612,16 +29680,18 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
                     
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Комірка.Назва = ItemValue["Комірка"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        
-                }
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                          record.Пакування.Назва = ItemValue["Пакування"];
+                          record.Комірка.Назва = ItemValue["Комірка"];
+                          record.Серія.Назва = ItemValue["Серія"];
+                          
+                  }
+                
             }
             base.BaseClear();
         }

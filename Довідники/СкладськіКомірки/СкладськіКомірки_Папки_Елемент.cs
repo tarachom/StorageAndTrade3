@@ -35,10 +35,10 @@ namespace StorageAndTrade
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Родич:" };
+        СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Папка:" };
         СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
 
-        public СкладськіКомірки_Папки_Елемент() : base() 
+        public СкладськіКомірки_Папки_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

@@ -1029,14 +1029,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                     </xsl:for-each>
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                <xsl:for-each select="Fields/Field">
-                    <xsl:if test="Type = 'pointer'">
-                      <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
-                    </xsl:if>
-                </xsl:for-each>
-                }
+                <xsl:if test="count(Fields/Field[Type = 'pointer']) != 0">
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    <xsl:for-each select="Fields/Field">
+                        <xsl:if test="Type = 'pointer'">
+                          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
+                        </xsl:if>
+                    </xsl:for-each>
+                  }
+                </xsl:if>
             }
             
             base.BaseClear();
@@ -1740,14 +1742,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                     </xsl:for-each>
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                <xsl:for-each select="Fields/Field">
-                    <xsl:if test="Type = 'pointer'">
-                      <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
-                    </xsl:if>
-                </xsl:for-each>
-                }
+                <xsl:if test="count(Fields/Field[Type = 'pointer']) != 0">
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    <xsl:for-each select="Fields/Field">
+                        <xsl:if test="Type = 'pointer'">
+                          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
+                        </xsl:if>
+                    </xsl:for-each>
+                  }
+                </xsl:if>
             }
             
             base.BaseClear();
@@ -1926,14 +1930,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                     </xsl:for-each>
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-                    <xsl:if test="Type = 'pointer'">
-                      <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
-                    </xsl:if>
-                </xsl:for-each>
-                }
+                <xsl:if test="count((DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[Type = 'pointer']) != 0">
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                        <xsl:if test="Type = 'pointer'">
+                          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
+                        </xsl:if>
+                    </xsl:for-each>
+                  }
+                </xsl:if>
             }
             base.BaseClear();
         }
@@ -2235,15 +2241,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                     </xsl:for-each>
                 };
                 Records.Add(record);
-                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                {
-                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                    <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-                        <xsl:if test="Type = 'pointer'">
-                          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
-                        </xsl:if>
-                    </xsl:for-each>
-                }
+                <xsl:if test="count((DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[Type = 'pointer']) != 0">
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                      <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                          <xsl:if test="Type = 'pointer'">
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва = ItemValue["<xsl:value-of select="Name"/>"];
+                          </xsl:if>
+                      </xsl:for-each>
+                  }
+                </xsl:if>
             }
             base.BaseClear();
         }

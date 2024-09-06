@@ -309,7 +309,13 @@ namespace StorageAndTrade
         {
             CellRendererText cellText = (CellRendererText)cell;
             if (column.Data.Contains("CellDataFunc"))
-                cellText.Foreground = "green";
+                if (float.TryParse(cellText.Text, out float result))
+                {
+                    if (result == 0)
+                        cellText.Text = "";
+                    else
+                        cellText.Foreground = "green";
+                }
         }
 
         public static void ФункціяДляКолонкиВідємнеЧислоЧервоним(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
@@ -317,7 +323,12 @@ namespace StorageAndTrade
             CellRendererText cellText = (CellRendererText)cell;
             if (column.Data.Contains("CellDataFunc"))
                 if (float.TryParse(cellText.Text, out float result))
-                    cellText.Foreground = (result >= 0) ? "green" : "red";
+                {
+                    if (result == 0)
+                        cellText.Text = "";
+                    else
+                        cellText.Foreground = (result >= 0) ? "green" : "red";
+                }
         }
 
         #endregion

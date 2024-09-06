@@ -34,7 +34,7 @@ namespace StorageAndTrade
 
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl();
+        Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:" };
 
         public Склади_Папки_Елемент() : base() 
         {
