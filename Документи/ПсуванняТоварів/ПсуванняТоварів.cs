@@ -47,30 +47,15 @@ namespace StorageAndTrade
             ТабличніСписки.ПсуванняТоварів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ПсуванняТоварів_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ПсуванняТоварів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.ПсуванняТоварів_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ПсуванняТоварів_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async void LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Назва
             ТабличніСписки.ПсуванняТоварів_Записи.ДодатиВідбір(TreeViewGrid,
                 new Where(ПсуванняТоварів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
             await ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ПсуванняТоварів_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ПсуванняТоварів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

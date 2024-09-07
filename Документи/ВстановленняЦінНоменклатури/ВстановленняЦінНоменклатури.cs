@@ -47,30 +47,15 @@ namespace StorageAndTrade
             ТабличніСписки.ВстановленняЦінНоменклатури_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ВстановленняЦінНоменклатури_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ВстановленняЦінНоменклатури_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВстановленняЦінНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.ВстановленняЦінНоменклатури_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВстановленняЦінНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async void LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Назва
             ТабличніСписки.ВстановленняЦінНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                 new Where(ВстановленняЦінНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
             await ТабличніСписки.ВстановленняЦінНоменклатури_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ВстановленняЦінНоменклатури_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВстановленняЦінНоменклатури_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

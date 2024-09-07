@@ -40,6 +40,8 @@ namespace StorageAndTrade
         Entry РеєстраційнийНомер = new Entry() { WidthRequest = 300 };
         TextView Опис = new TextView();
         Контрагенти_Папки_PointerControl Родич = new Контрагенти_Папки_PointerControl() { Caption = "Папка:" };
+        CheckButton Постачальник = new CheckButton("Постачальник");
+        CheckButton Покупець = new CheckButton("Покупець");
 
         Контрагенти_ТабличнаЧастина_Контакти Контакти = new Контрагенти_ТабличнаЧастина_Контакти();
         Контрагенти_ТабличнаЧастина_Файли Файли = new Контрагенти_ТабличнаЧастина_Файли();
@@ -74,6 +76,9 @@ namespace StorageAndTrade
 
             //Опис
             CreateFieldView(vBox, "Опис:", Опис, 500, 200);
+
+            //Постачальник та Покупець
+            CreateField(CreateField(vBox, null, Постачальник), null, Покупець);
         }
 
         protected override void CreatePack2(Box vBox)
@@ -98,6 +103,8 @@ namespace StorageAndTrade
             НазваПовна.Buffer.Text = Елемент.НазваПовна;
             РеєстраційнийНомер.Text = Елемент.РеєстраційнийНомер;
             Опис.Buffer.Text = Елемент.Опис;
+            Постачальник.Active = Елемент.Постачальник;
+            Покупець.Active = Елемент.Покупець;
 
             Контакти.LoadRecords();
             await Файли.LoadRecords();
@@ -111,6 +118,8 @@ namespace StorageAndTrade
             Елемент.НазваПовна = НазваПовна.Buffer.Text;
             Елемент.РеєстраційнийНомер = РеєстраційнийНомер.Text;
             Елемент.Опис = Опис.Buffer.Text;
+            Елемент.Постачальник = Постачальник.Active;
+            Елемент.Покупець = Покупець.Active;
             Елемент.КлючовіСловаДляПошуку = Контакти.КлючовіСловаДляПошуку();
         }
 

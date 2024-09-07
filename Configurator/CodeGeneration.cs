@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.09.2024 15:55:36
+ * Дата конфігурації: 07.09.2024 19:31:56
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -3554,6 +3554,8 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Папка = "col_a1";
         public const string Опис = "col_a2";
         public const string КлючовіСловаДляПошуку = "col_a3";
+        public const string Постачальник = "col_a4";
+        public const string Покупець = "col_a5";
     }
 
     public class Контрагенти_Objest : DirectoryObject
@@ -3562,7 +3564,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Контрагенти_Objest() : base(Config.Kernel, "tab_a08",
-             ["col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3", ]) 
+             ["col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) 
         {
             
                 //Табличні частини
@@ -3592,6 +3594,8 @@ namespace StorageAndTrade_1_0.Довідники
                 Папка = new Довідники.Контрагенти_Папки_Pointer(base.FieldValue["col_a1"]);
                 Опис = base.FieldValue["col_a2"].ToString() ?? "";
                 КлючовіСловаДляПошуку = base.FieldValue["col_a3"].ToString() ?? "";
+                Постачальник = (base.FieldValue["col_a4"] != DBNull.Value) ? (bool)base.FieldValue["col_a4"] : false;
+                Покупець = (base.FieldValue["col_a5"] != DBNull.Value) ? (bool)base.FieldValue["col_a5"] : false;
                 
                 BaseClear();
                 
@@ -3622,6 +3626,8 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a1"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a2"] = Опис;
             base.FieldValue["col_a3"] = КлючовіСловаДляПошуку;
+            base.FieldValue["col_a4"] = Постачальник;
+            base.FieldValue["col_a5"] = Покупець;
             
             bool result = await BaseSave();
             if (result)
@@ -3646,6 +3652,8 @@ namespace StorageAndTrade_1_0.Довідники
                 Папка = Папка,
                 Опис = Опис,
                 КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                Постачальник = Постачальник,
+                Покупець = Покупець,
                 
             };
             
@@ -3710,6 +3718,8 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.Контрагенти_Папки_Pointer Папка { get; set; } = new Довідники.Контрагенти_Папки_Pointer();
         public string Опис { get; set; } = "";
         public string КлючовіСловаДляПошуку { get; set; } = "";
+        public bool Постачальник { get; set; } = false;
+        public bool Покупець { get; set; } = false;
         
         //Табличні частини
         public Контрагенти_Контакти_TablePart Контакти_TablePart { get; set; }

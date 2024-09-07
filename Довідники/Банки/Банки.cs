@@ -62,27 +62,14 @@ namespace StorageAndTrade
             ТабличніСписки.Банки_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Банки_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Банки_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Банки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Відбори
             ТабличніСписки.Банки_Записи.ДодатиВідбір(TreeViewGrid, Банки_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.Банки_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Банки_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Банки_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

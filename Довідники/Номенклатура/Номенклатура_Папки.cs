@@ -30,7 +30,7 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Номенклатура_Папки : ДовідникДерево
+    class Номенклатура_Папки : ДовідникЖурнал
     {
         public Номенклатура_Папки() : base()
         {
@@ -41,22 +41,25 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Номенклатура_Папки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Номенклатура_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Номенклатура_Папки_Записи.OpenFolder = OpenFolder;
 
-            if (OpenFolder != null)
-                ТабличніСписки.Номенклатура_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+            ТабличніСписки.Номенклатура_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_Записи.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            //Назва
+            ТабличніСписки.Номенклатура_Папки_Записи.ДодатиВідбір(TreeViewGrid, 
+                new Where(Comparison.OR, Номенклатура_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            if (ТабличніСписки.Номенклатура_Папки_Записи.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_Записи.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            }
+            await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            RowActivated();
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.Номенклатура_Папки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)

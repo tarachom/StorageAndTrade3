@@ -89,6 +89,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
+            ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
@@ -100,20 +101,10 @@ namespace StorageAndTrade
             }
 
             await ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())

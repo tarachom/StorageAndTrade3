@@ -32,7 +32,6 @@ namespace StorageAndTrade
 {
     class СкладськіКомірки_Папки_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public UnigueID? OpenFolder { get; set; }
         public СкладськіПриміщення_Pointer СкладПриміщенняВласник = new СкладськіПриміщення_Pointer();
 
         public СкладськіКомірки_Папки_ШвидкийВибір() : base(false)
@@ -83,31 +82,25 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
+            ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.OpenFolder = OpenFolder;
 
             ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
-
-            if (OpenFolder != null)
-                ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
 
             if (!СкладПриміщенняВласник.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, СкладПриміщенняВласник.UnigueID.UGuid));
 
             await ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
-
-            if (ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
-            }
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            
+            //Назва
+            ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, СкладськіКомірки_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+
+            await ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

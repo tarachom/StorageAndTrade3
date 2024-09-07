@@ -30,7 +30,7 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class СкладськіКомірки_Папки : ДовідникДерево
+    class СкладськіКомірки_Папки : ДовідникЖурнал
     {
         public СкладськіПриміщення_Pointer СкладПриміщенняВласник = new СкладськіПриміщення_Pointer();
 
@@ -43,27 +43,28 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СкладськіКомірки_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.СкладськіКомірки_Папки_Записи.OpenFolder = OpenFolder;
 
             ТабличніСписки.СкладськіКомірки_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
-
-            if (OpenFolder != null)
-                ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
 
             if (!СкладПриміщенняВласник.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, СкладПриміщенняВласник.UnigueID.UGuid));
 
             await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            //Назва
+            ТабличніСписки.СкладськіКомірки_Папки_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, СкладськіКомірки_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            if (ТабличніСписки.СкладськіКомірки_Папки_Записи.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.СкладськіКомірки_Папки_Записи.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Папки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            }
+            await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            RowActivated();
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.СкладськіКомірки_Папки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)

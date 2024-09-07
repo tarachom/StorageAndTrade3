@@ -78,25 +78,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
+            ТабличніСписки.Користувачі_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.Користувачі_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Користувачі_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Користувачі_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Користувачі_ЗаписиШвидкийВибір.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Користувачі_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Відбори
             ТабличніСписки.Користувачі_Записи.ДодатиВідбір(TreeViewGrid, Користувачі_ВідбориДляПошуку.Відбори(searchText), true);
 

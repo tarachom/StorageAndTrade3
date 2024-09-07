@@ -68,6 +68,7 @@ namespace StorageAndTrade
             {
                 PopoverParent = popover,
                 DirectoryPointerItem = Pointer.UnigueID,
+                OpenFolder = OpenFolder,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Pointer = new Організації_Pointer(selectPointer);

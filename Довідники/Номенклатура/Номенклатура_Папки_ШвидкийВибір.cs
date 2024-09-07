@@ -32,8 +32,6 @@ namespace StorageAndTrade
 {
     class Номенклатура_Папки_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public UnigueID? OpenFolder { get; set; }
-
         public Номенклатура_Папки_ШвидкийВибір() : base(false)
         {
             ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
@@ -82,26 +80,22 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
+            ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.OpenFolder = OpenFolder;
 
-            if (OpenFolder != null)
-                ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+            ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
-
-            if (ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
-            }
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
+            //Назва
+            ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, Номенклатура_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
+            await ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

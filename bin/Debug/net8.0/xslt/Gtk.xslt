@@ -133,12 +133,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        <xsl:if test="$DirectoryType = 'Hierarchical'">
-        public static TreePath? RootPath;
-        </xsl:if>
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -150,7 +149,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                       Switch sw = new();
                       <xsl:choose>
                           <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
-                          <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();
+                          <xsl:value-of select="Name"/>.Clicked += (object? sender, EventArgs args) =&gt; sw.Active = <xsl:value-of select="Name"/>.Active;
+                          </xsl:when>
                           <xsl:when test="Type = 'integer'">IntegerControl <xsl:value-of select="Name"/> = new();</xsl:when>
                           <xsl:when test="Type = 'numeric'">NumericControl <xsl:value-of select="Name"/> = new();</xsl:when>
                           <xsl:when test="Type = 'date'">DateTimeControl <xsl:value-of select="Name"/> = new() { OnlyDate = true };</xsl:when>
@@ -232,6 +233,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                 </xsl:for-each>
             ]);
 
+            <xsl:if test="$DirectoryType = 'Hierarchical'">
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            </xsl:if>
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Where = (List&lt;Where&gt;)where;
@@ -274,7 +280,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             <xsl:if test="$DirectoryType = 'Hierarchical'">
             Dictionary&lt;string, TreeIter&gt; nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             </xsl:if>
 
             while (<xsl:value-of select="$DirectoryName"/>_Select.MoveNext())
@@ -334,6 +340,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
                     }
                 }
             }
+            <xsl:if test="$DirectoryType = 'Hierarchical'">
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            </xsl:if>
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            <xsl:if test="$DirectoryType = 'Hierarchical'">
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            </xsl:if>
         }
     }
 	    </xsl:for-each>
@@ -579,7 +594,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                       Switch sw = new();
                       <xsl:choose>
                           <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
-                          <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();</xsl:when>
+                          <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();
+                          <xsl:value-of select="Name"/>.Clicked += (object? sender, EventArgs args) =&gt; sw.Active = <xsl:value-of select="Name"/>.Active;
+                          </xsl:when>
                           <xsl:when test="Type = 'integer'">IntegerControl <xsl:value-of select="Name"/> = new();</xsl:when>
                           <xsl:when test="Type = 'numeric'">NumericControl <xsl:value-of select="Name"/> = new();</xsl:when>
                           <xsl:when test="Type = 'date'">DateTimeControl <xsl:value-of select="Name"/> = new() { OnlyDate = true };</xsl:when>
@@ -666,32 +683,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             var where = treeView.Data["Where"];
             if (where != null) <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Where = (List&lt;Where&gt;)where;
 
-            <!--<xsl:for-each select="Fields/Field[SortField = 'True' and Type != 'pointer']">
-              /* ORDER */
-              <xsl:variable name="SortDirection">
-                  <xsl:choose>
-                      <xsl:when test="SortDirection = 'True'">SelectOrder.DESC</xsl:when>
-                      <xsl:otherwise>SelectOrder.ASC</xsl:otherwise>
-                  </xsl:choose>
-              </xsl:variable>
-              <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Order.Add(Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>, <xsl:value-of select="$SortDirection"/>);
-            </xsl:for-each>
-
-            <xsl:for-each select="Fields/Field[Type = 'pointer']">
-                /* Join Table */
-                <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Joins.Add(
-                    new Join(<xsl:value-of select="Join/table"/>, Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Join/field"/>, <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Table, "<xsl:value-of select="Join/alias"/>"));
-                <xsl:for-each select="FieldAndAlias">
-                  /* Field */
-                  <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.FieldAndAlias.Add(
-                    new NameValue&lt;string&gt;("<xsl:value-of select="table"/>." + <xsl:value-of select="field"/>, "<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/>"));
-                  <xsl:if test="../SortField = 'True'">
-                    /* ORDER */
-                    <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Order.Add("<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/>", SelectOrder.ASC);
-                  </xsl:if>
-                </xsl:for-each>
-            </xsl:for-each>-->
-
             <xsl:for-each select="Fields/Field[SortField = 'True']">
               <xsl:variable name="SortDirection">
                   <xsl:choose>
@@ -730,62 +721,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                         ID = cur.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        <!--<xsl:variable name="CountPointer" select="count(Fields/Field[Type = 'pointer'])"/>
-                        <xsl:variable name="CountNotPointer" select="count(Fields/Field[Type != 'pointer'])"/>
-                        <xsl:for-each select="Fields/Field[Type = 'pointer']">
-                          <xsl:value-of select="Name"/>
-                          <xsl:text> = </xsl:text>
-                          <xsl:variable name="CountAlias" select="count(FieldAndAlias)"/>
-                          <xsl:for-each select="FieldAndAlias">
-                            <xsl:if test="position() &gt; 1"> + " " + </xsl:if>
-                            <xsl:text>Fields[</xsl:text>"<xsl:value-of select="table"/>_field_<xsl:value-of select="position()"/><xsl:text>"].ToString()</xsl:text>
-                            <xsl:if test="$CountAlias = 1"> ?? ""</xsl:if>
-                          </xsl:for-each>
-                          <xsl:if test="$CountNotPointer != 0 or position() != $CountPointer">,</xsl:if> /**/
-                        </xsl:for-each>
-                        <xsl:for-each select="Fields/Field[Type != 'pointer']">
-                          <xsl:value-of select="Name"/>
-                          <xsl:text> = </xsl:text>
-                          <xsl:choose>
-                            <xsl:when test="Type = 'enum'">
-                              <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                              <xsl:text>Перелічення.ПсевдонімиПерелічення.</xsl:text>
-                              <xsl:value-of select="$namePointer"/>
-                              <xsl:text>_Alias( </xsl:text>
-                              <xsl:text>((</xsl:text>
-                              <xsl:value-of select="Pointer"/>
-                              <xsl:text>)</xsl:text>
-                              <xsl:text>(Fields[</xsl:text>
-                              <xsl:value-of select="$DocumentName"/>
-                              <xsl:text>_Const.</xsl:text>
-                              <xsl:value-of select="Name"/>
-                              <xsl:text>] != DBNull.Value ? Fields[</xsl:text>
-                              <xsl:value-of select="$DocumentName"/>
-                              <xsl:text>_Const.</xsl:text>
-                              <xsl:value-of select="Name"/>
-                              <xsl:text>] : 0)) )</xsl:text>
-                            </xsl:when>
-                            <xsl:when test="Type = 'boolean'">
-                              <xsl:text>(Fields[</xsl:text>
-                              <xsl:value-of select="$DocumentName"/>
-                              <xsl:text>_Const.</xsl:text>
-                              <xsl:value-of select="Name"/>
-                              <xsl:text>] != DBNull.Value ? (bool)Fields[</xsl:text>
-                              <xsl:value-of select="$DocumentName"/>
-                              <xsl:text>_Const.</xsl:text>
-                              <xsl:value-of select="Name"/>
-                              <xsl:text>] : false) ? "Так" : ""</xsl:text>
-                            </xsl:when>
-                            <xsl:otherwise>
-                              <xsl:text>Fields[</xsl:text>
-                              <xsl:value-of select="$DocumentName"/>
-                              <xsl:text>_Const.</xsl:text>
-                              <xsl:value-of select="Name"/>
-                              <xsl:text>].ToString() ?? ""</xsl:text>
-                            </xsl:otherwise>
-                          </xsl:choose>
-                          <xsl:if test="position() != $CountNotPointer">,</xsl:if> /**/
-                        </xsl:for-each>-->
                         <xsl:for-each select="Fields/Field">
                           <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
                           <xsl:choose>
@@ -808,7 +743,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -819,6 +753,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    </xsl:for-each>

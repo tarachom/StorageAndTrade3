@@ -1,41 +1,74 @@
+/*
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 /*
-        Організації.cs
-        Дерево
+Автор:    Тарахомин Юрій Іванович
+Адреса:   Україна, м. Львів
+Сайт:     accounting.org.ua
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
 using StorageAndTrade_1_0.Довідники;
+
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
-    class Організації : ДовідникЖурнал
+    public class ОрганізаціїO : ДовідникЖурнал
     {
-        public Організації() : base()
+        public ОрганізаціїO() : base()
         {
             ТабличніСписки.Організації_Записи.AddColumns(TreeViewGrid);
         }
 
+        #region Override
+
         protected override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Організації_Записи.SelectPointerItem = SelectPointerItem; //!+
+            ТабличніСписки.Організації_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Організації_Записи.DirectoryPointerItem = DirectoryPointerItem;
-            ТабличніСписки.Організації_Записи.OpenFolder = OpenFolder; //!+
 
             ТабличніСписки.Організації_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
+
+            if (ТабличніСписки.Організації_Записи.SelectPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Організації_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
+            searchText = searchText.ToLower().Trim();
+
+            if (searchText.Length < 1)
+                return;
+
+            searchText = "%" + searchText.Replace(" ", "%") + "%";
+
             //Відбори
             ТабличніСписки.Організації_Записи.ДодатиВідбір(TreeViewGrid, Організації_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
+
+            if (ТабличніСписки.Організації_Записи.FirstPath != null)
+                TreeViewGrid.SetCursor(ТабличніСписки.Організації_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -48,8 +81,7 @@ namespace StorageAndTrade
             Організації_Елемент page = new Організації_Елемент
             {
                 CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew,
-                //РодичДляНового = new Організації_Pointer(DirectoryPointerItem ?? new UnigueID())
+                IsNew = IsNew
             };
 
             if (IsNew)
@@ -62,8 +94,6 @@ namespace StorageAndTrade
 
             return (page.Caption, () => page, page.SetValue);
         }
-
-        #region ToolBar
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
@@ -81,8 +111,7 @@ namespace StorageAndTrade
             {
                 Організації_Objest Організації_Objest_Новий = await Організації_Objest.Copy(true);
                 await Організації_Objest_Новий.Save();
-
-                await Організації_Objest_Новий.Контакти_TablePart.Save(false); // Таблична частина "Контакти"
+                await Організації_Objest_Новий.Контакти_TablePart.Save(false);
 
                 return Організації_Objest_Новий.UnigueID;
             }

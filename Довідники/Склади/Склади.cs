@@ -39,7 +39,7 @@ namespace StorageAndTrade
         public Склади() : base()
         {
             //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
+            checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Склади приміщення
@@ -80,7 +80,7 @@ namespace StorageAndTrade
 
                 Склади_Objest? контрагенти_Objest = await new Склади_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
                 if (контрагенти_Objest != null)
-                    ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
+                    ДеревоПапок.SelectPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
 
             await ДеревоПапок.SetValue();
@@ -95,30 +95,17 @@ namespace StorageAndTrade
 
             if (checkButtonIsHierarchy.Active)
                 ТабличніСписки.Склади_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(Склади_Const.Папка, Comparison.EQ, ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
+                    new Where(Склади_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
             await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Склади_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Відбори
             ТабличніСписки.Склади_Записи.ДодатиВідбір(TreeViewGrid, Склади_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Склади_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Склади_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -173,10 +160,5 @@ namespace StorageAndTrade
         }
 
         #endregion
-
-        async void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
-        {
-            await LoadRecords();
-        }
     }
 }

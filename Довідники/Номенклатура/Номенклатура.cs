@@ -40,7 +40,7 @@ namespace StorageAndTrade
         public Номенклатура() : base()
         {
             //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
+            checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Характеристики
@@ -98,11 +98,9 @@ namespace StorageAndTrade
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                UnigueID? unigueID = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem;
-
-                Номенклатура_Objest? номенклатура_Objest = await new Номенклатура_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
-                if (номенклатура_Objest != null)
-                    ДеревоПапок.DirectoryPointerItem = номенклатура_Objest.Папка.UnigueID;
+                UnigueID? unigueID = SelectPointerItem ?? DirectoryPointerItem;
+                Номенклатура_Objest? Обєкт = await new Номенклатура_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
+                if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
             }
 
             await ДеревоПапок.SetValue();
@@ -117,31 +115,17 @@ namespace StorageAndTrade
 
             if (checkButtonIsHierarchy.Active)
                 ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
+                    new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
             await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Номенклатура_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Відбори
             ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid, Номенклатура_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Номенклатура_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Номенклатура_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -196,10 +180,5 @@ namespace StorageAndTrade
         }
 
         #endregion
-
-        async void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
-        {
-            await LoadRecords();
-        }
     }
 }

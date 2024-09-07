@@ -37,7 +37,9 @@ limitations under the License.
 
         <xsl:choose>
             <xsl:when test="$File = 'Element'">
-                <xsl:call-template name="DirectoryElement" />
+                <xsl:call-template name="DirectoryElement">
+                    <xsl:with-param name="IsTree">0</xsl:with-param>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="$File = 'List'">
                 <xsl:call-template name="DirectoryList" />
@@ -45,26 +47,11 @@ limitations under the License.
             <xsl:when test="$File = 'ListSmallSelect'">
                 <xsl:call-template name="DirectoryListSmallSelect" />
             </xsl:when>
-            <xsl:when test="$File = 'ListAndTree'">
-                <xsl:call-template name="DirectoryListAndTree" />
-            </xsl:when>
             <xsl:when test="$File = 'PointerControl'">
                 <xsl:call-template name="DirectoryPointerControl" />
             </xsl:when>
-
-            <xsl:when test="$File = 'ElementTree'">
-                <xsl:call-template name="DirectoryElement">
-                    <xsl:with-param name="IsTree">1</xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$File = 'Tree'">
-                <xsl:call-template name="DirectoryTree" />
-            </xsl:when>
-                <xsl:when test="$File = 'TreeSmallSelect'">
-                <xsl:call-template name="DirectoryTreeSmallSelect" />
-            </xsl:when>
-            <xsl:when test="$File = 'PointerControlTree'">
-                <xsl:call-template name="DirectoryPointerControlTree" />
+            <xsl:when test="$File = 'ListAndTree'">
+                <xsl:call-template name="DirectoryListAndTree" />
             </xsl:when>
         </xsl:choose>
 
@@ -84,13 +71,13 @@ limitations under the License.
         <xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>
         <xsl:variable name="FormElementField" select="Directory/ElementFields/ElementField"/>
         <xsl:variable name="FormElementTablePart" select="Directory/ElementTableParts/ElementTablePart"/>
-
 /*
         <xsl:value-of select="$DirectoryName"/>_Елемент.cs
         Елемент
 */
 
 using Gtk;
+using InterfaceGtk;
 
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
@@ -100,11 +87,10 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$DirectoryName"/>_Елемент : ДовідникЕлемент
     {
-        public <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest { get; set; } = new <xsl:value-of select="$DirectoryName"/>_Objest();
+        public <xsl:value-of select="$DirectoryName"/>_Objest Елемент { get; set; } = new <xsl:value-of select="$DirectoryName"/>_Objest();
         <xsl:if test="$IsTree = '1'">
             public <xsl:value-of select="$DirectoryName"/>_Pointer РодичДляНового { get; set; } = new <xsl:value-of select="$DirectoryName"/>_Pointer();
         </xsl:if>
-
         #region Fields
         <xsl:for-each select="$Fields">
             <xsl:variable name="FieldName" select="Name" />
@@ -113,53 +99,52 @@ namespace <xsl:value-of select="$NameSpace"/>
                     <xsl:when test="Type = 'string'">
                         <xsl:choose>
                             <xsl:when test="Multiline = '1'">
-                        TextView <xsl:value-of select="Name"/> = new TextView();
+                        <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView();
                             </xsl:when>
                             <xsl:otherwise>
-                        Entry <xsl:value-of select="Name"/> = new Entry() { WidthRequest = 500 };
+                        <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new Entry() { WidthRequest = 500 };
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:when test="Type = 'integer'">
-                        IntegerControl <xsl:value-of select="Name"/> = new IntegerControl();
+                        <xsl:text>IntegerControl </xsl:text><xsl:value-of select="Name"/> = new IntegerControl();
                     </xsl:when>
                     <xsl:when test="Type = 'numeric'">
-                        NumericControl <xsl:value-of select="Name"/> = new NumericControl();
+                        <xsl:text>NumericControl </xsl:text><xsl:value-of select="Name"/> = new NumericControl();
                     </xsl:when>
                     <xsl:when test="Type = 'boolean'">
-                        CheckButton <xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
+                        <xsl:text>CheckButton </xsl:text><xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
                     </xsl:when>
                     <xsl:when test="Type = 'date' or Type = 'datetime'">
-                        DateTimeControl <xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
+                        <xsl:text>DateTimeControl </xsl:text><xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
                     </xsl:when>
                     <xsl:when test="Type = 'time'">
-                        TimeControl <xsl:value-of select="Name"/> = new TimeControl();
+                        <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = new TimeControl();
                     </xsl:when>
                     <xsl:when test="Type = 'composite_pointer'">
-                        CompositePointerControl <xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Довідники.<xsl:value-of select="$DirectoryName"/>.<xsl:value-of select="Name"/>" };
+                        <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Довідники.<xsl:value-of select="$DirectoryName"/>.<xsl:value-of select="Name"/>" };
                     </xsl:when>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                        <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="$FormElementField[Name = $FieldName]/Caption"/>", WidthPresentation = 300 };
+                        <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="$FormElementField[Name = $FieldName]/Caption"/>" };
                     </xsl:when>
                     <xsl:when test="Type = 'enum'">
-                        <!--<xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />-->
-                        ComboBoxText <xsl:value-of select="Name"/> = new ComboBoxText();
+                        <xsl:text>ComboBoxText </xsl:text><xsl:value-of select="Name"/> = new ComboBoxText();
                     </xsl:when>
                     <xsl:when test="Type = 'any_pointer'">
-                        //Guid <xsl:value-of select="Name"/> = new Guid();
+                        <xsl:text>//Guid </xsl:text><xsl:value-of select="Name"/> = new Guid();
                     </xsl:when>
                     <xsl:when test="Type = 'bytea'">
-                        //byte[] <xsl:value-of select="Name"/> = new byte[]{ };
+                        <xsl:text>//byte[] </xsl:text><xsl:value-of select="Name"/> = new byte[]{ };
                     </xsl:when>
                     <xsl:when test="Type = 'string[]'">
-                        //string[] <xsl:value-of select="Name"/> = new string[]{ };
+                        <xsl:text>//string[] </xsl:text><xsl:value-of select="Name"/> = new string[]{ };
                     </xsl:when>
                     <xsl:when test="Type = 'integer'">
-                        //int[] <xsl:value-of select="Name"/> = new int[]{ };
+                        <xsl:text>//int[] </xsl:text><xsl:value-of select="Name"/> = new int[]{ };
                     </xsl:when>
                     <xsl:when test="Type = 'numeric'">
-                        //decimal[] <xsl:value-of select="Name"/> = new decimal[]{ };
+                        <xsl:text>//decimal[] </xsl:text><xsl:value-of select="Name"/> = new decimal[]{ };
                     </xsl:when>
                 </xsl:choose>
             </xsl:if>
@@ -178,6 +163,16 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public <xsl:value-of select="$DirectoryName"/>_Елемент() : base() 
         { 
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
+
+            <xsl:for-each select="$TabularParts">
+                <xsl:variable name="TablePartName" select="Name" />
+                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
+                    <xsl:value-of select="Name"/>.ЕлементВласник = Елемент; // Таблична частина "<xsl:value-of select="Name"/>"
+                </xsl:if>
+            </xsl:for-each>
+
             <xsl:for-each select="$Fields">
                 <xsl:variable name="FieldName" select="Name" />
                 <xsl:if test="$FormElementField[Name = $FieldName] and Type = 'enum'">
@@ -210,7 +205,6 @@ namespace <xsl:value-of select="$NameSpace"/>
                     CreateField(vBox, null, <xsl:value-of select="Name"/>);
                         </xsl:when>
                         <xsl:when test="Type = 'pointer'">
-
                     CreateField(vBox, null, <xsl:value-of select="Name"/>);
                         </xsl:when>
                         <xsl:when test="Type = 'enum'">
@@ -233,22 +227,15 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {            
             <xsl:choose>
                 <xsl:when test="$IsTree = '1'">
                     if (IsNew)
-                    {
-                        await <xsl:value-of select="$DirectoryName"/>_Objest.New();
-                        <xsl:value-of select="$DirectoryName"/>_Objest.Родич = РодичДляНового;
-                    }
+                        Елемент.Родич = РодичДляНового;
                     else
-                        Родич.OpenFolder = <xsl:value-of select="$DirectoryName"/>_Objest.UnigueID;
+                        Родич.OpenFolder = Елемент.UnigueID;
                 </xsl:when>
-                <xsl:otherwise>
-                    if (IsNew)
-                        await <xsl:value-of select="$DirectoryName"/>_Objest.New();
-                </xsl:otherwise>
             </xsl:choose>
 
             <xsl:for-each select="$Fields">
@@ -258,31 +245,31 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:when test="Type = 'string'">
                             <xsl:choose>
                                 <xsl:when test="Multiline = '1'">
-                                    <xsl:value-of select="Name"/>.Buffer.Text = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>;
+                                    <xsl:value-of select="Name"/>.Buffer.Text = Елемент.<xsl:value-of select="Name"/>;
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="Name"/>.Text = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>;
+                                    <xsl:value-of select="Name"/>.Text = Елемент.<xsl:value-of select="Name"/>;
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:when>
                         <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:value-of select="Name"/>.Value = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Value = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'boolean'">
-                            <xsl:value-of select="Name"/>.Active = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Active = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'composite_pointer'">
-                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Pointer = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'pointer'">
-                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Pointer = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'enum'">
-                            <xsl:value-of select="Name"/>.ActiveId = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>.ToString();
-                            if (<xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
+                            <xsl:value-of select="Name"/>.ActiveId = Елемент.<xsl:value-of select="Name"/>.ToString();
+                            <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
                         </xsl:when>
                         <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                            //<xsl:value-of select="Name"/> = <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:text>//</xsl:text><xsl:value-of select="Name"/> = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                     </xsl:choose>
                 </xsl:if>
@@ -291,9 +278,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             <xsl:for-each select="$TabularParts">
                 <xsl:variable name="TablePartName" select="Name" />
                 <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                    /* Таблична частина: <xsl:value-of select="Name"/> */
-                    <xsl:value-of select="Name"/>.<xsl:value-of select="$DirectoryName"/>_Objest = <xsl:value-of select="$DirectoryName"/>_Objest;
-                    <xsl:value-of select="Name"/>.LoadRecords();
+                    <xsl:value-of select="Name"/>.LoadRecords(); // Таблична частина "<xsl:value-of select="Name"/>"
                 </xsl:if>
             </xsl:for-each>
         }
@@ -307,32 +292,32 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:when test="Type = 'string'">
                             <xsl:choose>
                                 <xsl:when test="Multiline = '1'">
-                                    <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:when>
                         <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
                         </xsl:when>
                         <xsl:when test="Type = 'boolean'">
-                            <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
                         </xsl:when>
                         <xsl:when test="Type = 'composite_pointer'">
-                            <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
                         </xsl:when>
                         <xsl:when test="Type = 'pointer'">
-                            <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
                         </xsl:when>
                         <xsl:when test="Type = 'enum'">
                             <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
                             <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active != -1) 
-                                <xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
                         </xsl:when>
                         <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                            //<xsl:value-of select="$DirectoryName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
+                            <xsl:text>//Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
                         </xsl:when>
                     </xsl:choose>
                 </xsl:if>
@@ -345,23 +330,20 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             try
             {
-                if (await <xsl:value-of select="$DirectoryName"/>_Objest.Save())
+                if (await Елемент.Save())
                 {
                     <xsl:for-each select="$TabularParts">
                         <xsl:variable name="TablePartName" select="Name" />
                         <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                            await <xsl:value-of select="Name"/>.SaveRecords();
+                            <xsl:text>await </xsl:text><xsl:value-of select="Name"/>.SaveRecords();
                         </xsl:if>
                     </xsl:for-each>
                 }
             }
             catch (Exception ex)
             {
-                MsgError(ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
-
-            UnigueID = <xsl:value-of select="$DirectoryName"/>_Objest.UnigueID;
-            Caption = Назва.Text;
         }
     }
 }
@@ -377,12 +359,14 @@ namespace <xsl:value-of select="$NameSpace"/>
     <xsl:template name="DirectoryList">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
         <xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>
-
+        <xsl:variable name="TabularList" select="Directory/TabularList"/>
 /*     
         <xsl:value-of select="$DirectoryName"/>.cs
         Список
 */
 
+using Gtk;
+using InterfaceGtk;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники.ТабличніСписки;
@@ -393,84 +377,58 @@ namespace <xsl:value-of select="$NameSpace"/>
     {
         public <xsl:value-of select="$DirectoryName"/>() : base()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
         }
 
         #region Override
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
-            if (searchText.Length &lt; 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.ОчиститиВідбір(TreeViewGrid);
+            //Код
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
+                new Where(<xsl:value-of select="$DirectoryName"/>_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             //Назва
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(<xsl:value-of select="$DirectoryName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, <xsl:value-of select="$DirectoryName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.FirstPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override void FilterRecords(Box hBox)
         {
+            hBox.PackStart(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
+        protected override async ValueTask&lt;(string Name, Func&lt;Widget&gt;? FuncWidget, System.Action? SetValue)&gt; OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
+            {
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
             if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
-                Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME} *", () =>
-                {
-                    <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
             }
-            else if (unigueID != null)
-            {
-                <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await <xsl:value-of select="$DirectoryName"/>_Objest.Read(unigueID))
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Objest.Назва}", () =>
-                    {
-                        <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            <xsl:value-of select="$DirectoryName"/>_Objest = <xsl:value-of select="$DirectoryName"/>_Objest,
-                        };
 
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+            return (page.Caption, () =&gt; page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
@@ -490,8 +448,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest_Новий = await <xsl:value-of select="$DirectoryName"/>_Objest.Copy(true);
                 await <xsl:value-of select="$DirectoryName"/>_Objest_Новий.Save();
                 <xsl:for-each select="$TabularParts">
-                    /* Таблична частина: <xsl:value-of select="Name"/> */
-                    await <xsl:value-of select="$DirectoryName"/>_Objest_Новий.<xsl:value-of select="Name"/>_TablePart.Save(false);
+                    await <xsl:value-of select="$DirectoryName"/>_Objest_Новий.<xsl:value-of select="Name"/>_TablePart.Save(false);  // Таблична частина "<xsl:value-of select="Name"/>"
                 </xsl:for-each>
                 return <xsl:value-of select="$DirectoryName"/>_Objest_Новий.UnigueID;
             }
@@ -516,14 +473,14 @@ namespace <xsl:value-of select="$NameSpace"/>
     <!-- ШвидкийВибір -->
     <xsl:template name="DirectoryListSmallSelect">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
-
+        <xsl:variable name="TabularList" select="Directory/TabularList"/>
 /*     
         <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір.cs
         ШвидкийВибір
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники.ТабличніСписки;
@@ -534,22 +491,22 @@ namespace <xsl:value-of select="$NameSpace"/>
     {
         public <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() : base()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
 
             //Сторінка
             {
-                LinkButton linkPage = new LinkButton($" {<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
+                LinkButton linkPage = new LinkButton($" {<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkPage.Clicked += async (object? sender, EventArgs args) =&gt;
                 {
                     <xsl:value-of select="$DirectoryName"/> page = new <xsl:value-of select="$DirectoryName"/>()
                     {
                         DirectoryPointerItem = DirectoryPointerItem,
+                        OpenFolder = OpenFolder,
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}", () =&gt; { return page; });
-
-                    await page.LoadRecords();
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}", () =&gt; page);
+                    await page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkPage, false, false, 10);
@@ -566,8 +523,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME} *", () =&gt; { return page; });
-
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
                     page.SetValue();
                 };
 
@@ -575,38 +531,29 @@ namespace <xsl:value-of select="$NameSpace"/>
             }
         }
 
-        public override async ValueTask LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = null;
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length &lt; 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
             //Код
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                 new Where(<xsl:value-of select="$DirectoryName"/>_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             //Назва
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                 new Where(Comparison.OR, <xsl:value-of select="$DirectoryName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
     }
 }
@@ -614,22 +561,22 @@ namespace <xsl:value-of select="$NameSpace"/>
 
 <!--- 
 //
-// ============================ Список та Дерево ============================
+// ============================ Список з Деревом ============================
 //
 -->
 
-    <!-- Список та Дерево-->
+    <!-- Список з Деревом-->
     <xsl:template name="DirectoryListAndTree">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
         <xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>
-
+        <xsl:variable name="TabularList" select="Directory/TabularList"/>
 /*     
         <xsl:value-of select="$DirectoryName"/>.cs 
-        Список та Дерево 
+        Список з Деревом
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники.ТабличніСписки;
@@ -639,20 +586,19 @@ namespace <xsl:value-of select="$NameSpace"/>
     public class <xsl:value-of select="$DirectoryName"/> : ДовідникЖурнал
     {
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
-        <xsl:value-of select="$DirectoryName"/>_Папки_Дерево ДеревоПапок;
+        <xsl:value-of select="$DirectoryName"/>_Папки ДеревоПапок;
 
         public <xsl:value-of select="$DirectoryName"/>() : base()
         {
             //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
+            checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) =&gt; await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Дерево папок
-            ДеревоПапок = new <xsl:value-of select="$DirectoryName"/>_Папки_Дерево() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack };
+            ДеревоПапок = new <xsl:value-of select="$DirectoryName"/>_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack, ParentWidget = this };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
-            TreeViewGrid.Model = ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.Store;
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
         }
 
         #region Override
@@ -661,99 +607,65 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                UnigueID? unigueID = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem;
-
-                <xsl:value-of select="$DirectoryName"/>_Objest? контрагенти_Objest = await new <xsl:value-of select="$DirectoryName"/>_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
-                if (контрагенти_Objest != null)
-                    ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
+                UnigueID? unigueID = SelectPointerItem ?? DirectoryPointerItem;
+                <xsl:value-of select="$DirectoryName"/>_Objest? Обєкт = await new <xsl:value-of select="$DirectoryName"/>_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
+                if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
             }
 
-            ДеревоПапок.LoadTree();
+            await ДеревоПапок.SetValue();
         }
 
         async void LoadRecords_TreeCallBack()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.DirectoryPointerItem = DirectoryPointerItem;
 
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.Where.Clear();
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
             if (checkButtonIsHierarchy.Active)
-                ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.Where.Add(new Where(<xsl:value-of select="$DirectoryName"/>_Const.Папка, Comparison.EQ,
-                    ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
+                ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
+                    new Where(<xsl:value-of select="$DirectoryName"/>_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.LoadRecords();
-
-            if (ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-
-            TreeViewGrid.GrabFocus();
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords();
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length &lt; 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.Where.Clear();
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
             //Код
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.Where.Add(
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                 new Where(<xsl:value-of select="$DirectoryName"/>_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             //Назва
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.Where.Add(
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                 new Where(Comparison.OR, <xsl:value-of select="$DirectoryName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.LoadRecords();
-
-            if (ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.FirstPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords();
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override void FilterRecords(Box hBox)
         {
+            hBox.PackStart(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
+        protected override async ValueTask&lt;(string Name, Func&lt;Widget&gt;? FuncWidget, System.Action? SetValue)&gt; OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
+            {
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
             if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
-                Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME} *", () =>
-                {
-                    <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return ("", null, null);
             }
-            else if (unigueID != null)
-            {
-                <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await <xsl:value-of select="$DirectoryName"/>_Objest.Read(unigueID))
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Objest.Назва}", () =>
-                    {
-                        <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            <xsl:value-of select="$DirectoryName"/>_Objest = <xsl:value-of select="$DirectoryName"/>_Objest,
-                        };
 
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+            return (page.Caption, () =&gt; page, page.SetValue);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
@@ -773,8 +685,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest_Новий = await <xsl:value-of select="$DirectoryName"/>_Objest.Copy(true);
                 await <xsl:value-of select="$DirectoryName"/>_Objest_Новий.Save();
                 <xsl:for-each select="$TabularParts">
-                    /* Таблична частина: <xsl:value-of select="Name"/> */
-                    await <xsl:value-of select="$DirectoryName"/>_Objest_Новий.<xsl:value-of select="Name"/>_TablePart.Save(false);
+                    await <xsl:value-of select="$DirectoryName"/>_Objest_Новий.<xsl:value-of select="Name"/>_TablePart.Save(false); // Таблична частина "<xsl:value-of select="Name"/>"
                 </xsl:for-each>
                 return <xsl:value-of select="$DirectoryName"/>_Objest_Новий.UnigueID;
             }
@@ -786,222 +697,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         }
 
         #endregion
-
-        async void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
-        {
-            await LoadRecords();
-        }
-    }
-}
-    </xsl:template>
-
-<!--- 
-//
-// ============================ Дерево ============================
-//
--->
-
-    <!-- Дерево -->
-    <xsl:template name="DirectoryTree">
-        <xsl:variable name="DirectoryName" select="Directory/Name"/>
-
-/*
-        <xsl:value-of select="$DirectoryName"/>_Дерево.cs
-        Дерево
-*/
-
-using Gtk;
-
-using AccountingSoftware;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
-using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники.ТабличніСписки;
-
-namespace <xsl:value-of select="$NameSpace"/>
-{
-    class <xsl:value-of select="$DirectoryName"/>_Дерево : ДовідникДерево
-    {
-        public <xsl:value-of select="$DirectoryName"/>_Дерево() : base()
-        {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.AddColumns(TreeViewGrid);
-        }
-
-        public override async void LoadTree()
-        {
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem);
-
-            TreeViewGrid.ExpandToPath(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.RootPath, TreeViewGrid.Columns[0], false);
-
-            if (ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            }
-
-            RowActivated();
-        }
-
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
-        {
-            if (IsNew)
-            {
-                Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME} *", () =>
-                {
-                    <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadTree,
-                        IsNew = true,
-                        РодичДляНового = new <xsl:value-of select="$DirectoryName"/>_Pointer(DirectoryPointerItem ?? new UnigueID())
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
-            }
-            else if (unigueID != null)
-            {
-                <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await <xsl:value-of select="$DirectoryName"/>_Objest.Read(unigueID))
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Objest.Назва}", () =>
-                    {
-                        <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadTree,
-                            IsNew = false,
-                            <xsl:value-of select="$DirectoryName"/>_Objest = <xsl:value-of select="$DirectoryName"/>_Objest
-                        };
-
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
-        }
-
-
-        #region ToolBar
-
-        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
-        {
-            <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            if (await <xsl:value-of select="$DirectoryName"/>_Objest.Read(unigueID))
-                await <xsl:value-of select="$DirectoryName"/>_Objest.SetDeletionLabel(!<xsl:value-of select="$DirectoryName"/>_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-        }
-
-        protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
-        {
-            <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            if (await <xsl:value-of select="$DirectoryName"/>_Objest.Read(unigueID))
-            {
-                <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>_Objest_Новий = await <xsl:value-of select="$DirectoryName"/>_Objest.Copy(true);
-                await <xsl:value-of select="$DirectoryName"/>_Objest_Новий.Save();
-
-                return <xsl:value-of select="$DirectoryName"/>_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
-        }
-
-        #endregion
-    }
-}
-    </xsl:template>
-
-<!--- 
-//
-// ============================ Дерево Швидкий вибір ============================
-//
--->
-
-    <!-- Дерево Швидкий вибір -->
-    <xsl:template name="DirectoryTreeSmallSelect">
-        <xsl:variable name="DirectoryName" select="Directory/Name"/>
-
-/*
-        <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір.cs
-        Дерево Швидкий вибір
-*/
-
-using Gtk;
-
-using AccountingSoftware;
-
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
-using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники.ТабличніСписки;
-
-namespace <xsl:value-of select="$NameSpace"/>
-{
-    class <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір : ДовідникШвидкийВибір
-    {
-        public UnigueID? OpenFolder { get; set; }
-
-        public <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() : base(false)
-        {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(AppContext.BaseDirectory + "images/doc.png"), AlwaysShowImage = true };
-                linkPage.Clicked += (object? sender, EventArgs args) =&gt;
-                {
-                    <xsl:value-of select="$DirectoryName"/>_Дерево page = new <xsl:value-of select="$DirectoryName"/>_Дерево()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer,
-                        OpenFolder = OpenFolder
-                    };
-
-                    Program.GeneralForm?.CreateNotebookPage($"Вибір - {<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}", () =&gt; { return page; });
-
-                    page.LoadTree();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += (object? sender, EventArgs args) =&gt;
-                {
-                    <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                    {
-                        IsNew = true,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME} *", () =&gt; { return page; });
-
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
-        }
-
-        public async void LoadTree()
-        {
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.LoadTree(TreeViewGrid, OpenFolder, DirectoryPointerItem);
-
-            TreeViewGrid.ExpandToPath(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
-
-            if (ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
-            }
-        }
     }
 }
     </xsl:template>
@@ -1015,14 +710,13 @@ namespace <xsl:value-of select="$NameSpace"/>
     <!-- PointerControl -->
     <xsl:template name="DirectoryPointerControl">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
-
 /*     
         <xsl:value-of select="$DirectoryName"/>_PointerControl.cs
         PointerControl (Список)
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 
@@ -1030,11 +724,17 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$DirectoryName"/>_PointerControl : PointerControl
     {
+        event EventHandler&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; PointerChanged;
+
         public <xsl:value-of select="$DirectoryName"/>_PointerControl()
         {
             pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
             WidthPresentation = 300;
             Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
+            PointerChanged += async (object? _, <xsl:value-of select="$DirectoryName"/>_Pointer pointer) =&gt;
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         <xsl:value-of select="$DirectoryName"/>_Pointer pointer;
@@ -1047,105 +747,29 @@ namespace <xsl:value-of select="$NameSpace"/>
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () =&gt; { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
             BeforeClickOpenFunc?.Invoke();
-
             <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() 
             { 
-                PopoverParent = PopoverSmallSelect, 
+                PopoverParent = popover, 
                 DirectoryPointerItem = Pointer.UnigueID,
+                OpenFolder = OpenFolder,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
                 {
                     Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();
                 }
             };
-
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
+            popover.Add(page);
+            popover.ShowAll();
 
             await page.SetValue();
-        }
-
-        protected override void OnClear(object? sender, EventArgs args)
-        {
-            Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            AfterSelectFunc?.Invoke();
-        }
-    }
-}
-    </xsl:template>
-
-<!--- 
-//
-// ============================ PointerControlTree ============================
-//
--->
-
-    <!-- PointerControlTree -->
-    <xsl:template name="DirectoryPointerControlTree">
-        <xsl:variable name="DirectoryName" select="Directory/Name"/>
-
-/*     
-        <xsl:value-of select="$DirectoryName"/>_PointerControl.cs
-        PointerControl (Дерево)
-*/
-
-using Gtk;
-
-using AccountingSoftware;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
-
-namespace <xsl:value-of select="$NameSpace"/>
-{
-    class <xsl:value-of select="$DirectoryName"/>_PointerControl : PointerControl
-    {
-        public <xsl:value-of select="$DirectoryName"/>_PointerControl()
-        {
-            pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            WidthPresentation = 300;
-            Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
-        }
-
-        public UnigueID? OpenFolder { get; set; }
-
-        <xsl:value-of select="$DirectoryName"/>_Pointer pointer;
-        public <xsl:value-of select="$DirectoryName"/>_Pointer Pointer
-        {
-            get
-            {
-                return pointer;
-            }
-            set
-            {
-                pointer = value;
-                Presentation = pointer != null ? Task.Run(async () =&gt; { return await pointer.GetPresentation(); }).Result : "";
-            }
-        }
-
-        protected override void OpenSelect(object? sender, EventArgs args)
-        {
-            Popover PopoverSmallSelect = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
-            BeforeClickOpenFunc?.Invoke();
-
-            <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() 
-            { PopoverParent = PopoverSmallSelect, OpenFolder = OpenFolder, DirectoryPointerItem = Pointer.UnigueID };
-            page.CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
-            {
-                Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer);
-                AfterSelectFunc?.Invoke();
-            };
-
-            PopoverSmallSelect.Add(page);
-            PopoverSmallSelect.ShowAll();
-
-            page.LoadTree();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

@@ -44,8 +44,6 @@ namespace StorageAndTrade
             };
         }
 
-        public UnigueID? OpenFolder { get; set; }
-
         Склади_Папки_Pointer pointer;
         public Склади_Папки_Pointer Pointer
         {

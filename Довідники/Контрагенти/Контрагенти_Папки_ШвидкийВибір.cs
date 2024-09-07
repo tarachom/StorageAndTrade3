@@ -32,8 +32,6 @@ namespace StorageAndTrade
 {
     class Контрагенти_Папки_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public UnigueID? OpenFolder { get; set; }
-
         public Контрагенти_Папки_ШвидкийВибір() : base(false)
         {
             ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
@@ -82,26 +80,22 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
+            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.OpenFolder = OpenFolder;
 
-            if (OpenFolder != null)
-                ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
-
-            if (ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
-            }
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
+            //Назва
+            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, 
+                new Where(Comparison.OR, Контрагенти_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
+            await ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

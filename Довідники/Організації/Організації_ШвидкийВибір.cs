@@ -23,7 +23,7 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
-
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -33,7 +33,7 @@ namespace StorageAndTrade
     {
         public Організації_ШвидкийВибір() : base()
         {
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
+            ТабличніСписки.Організації_Записи.AddColumns(TreeViewGrid);
 
             //Сторінка
             {
@@ -43,10 +43,11 @@ namespace StorageAndTrade
                     Організації page = new Організації()
                     {
                         DirectoryPointerItem = DirectoryPointerItem,
+                        OpenFolder = OpenFolder,
                         CallBack_OnSelectPointer = CallBack_OnSelectPointer
                     };
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Організації_Const.FULLNAME}", () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Організації_Const.FULLNAME}", () => page);
 
                     await page.SetValue();
                 };
@@ -67,7 +68,7 @@ namespace StorageAndTrade
 
                     await page.Елемент.New();
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
 
                     page.SetValue();
                 };
@@ -78,29 +79,21 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Організації_Записи.SelectPointerItem = null;
+            ТабличніСписки.Організації_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Організації_Записи.OpenFolder = OpenFolder;
 
-            ТабличніСписки.Організації_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.Організації_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Організації_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Організації_ЗаписиШвидкийВибір.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Організації_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Відбори
             ТабличніСписки.Організації_Записи.ДодатиВідбір(TreeViewGrid, Організації_ВідбориДляПошуку.Відбори(searchText), true);
 
-            await ТабличніСписки.Організації_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
         }
     }
 }

@@ -48,27 +48,14 @@ namespace StorageAndTrade
             ТабличніСписки.КраїниСвіту_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.КраїниСвіту_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.КраїниСвіту_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.КраїниСвіту_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Відбори
             ТабличніСписки.КраїниСвіту_Записи.ДодатиВідбір(TreeViewGrid, КраїниСвіту_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.КраїниСвіту_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.КраїниСвіту_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.КраїниСвіту_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>06.09.2024 15:55:36</DateTimeSave>
+  <DateTimeSave>07.09.2024 19:31:56</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1247,37 +1247,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
         </TabularList>
-        <TabularList>
-          <Name>ЗаписиШвидкийВибір</Name>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Код</Name>
-              <Caption>Код</Caption>
-              <Size>0</Size>
-              <SortNum>1</SortNum>
-              <SortField>False</SortField>
-              <SortDirection>False</SortDirection>
-              <FilterField>False</FilterField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-            <Field>
-              <Name>Назва</Name>
-              <Caption>Назва</Caption>
-              <Size>0</Size>
-              <SortNum>2</SortNum>
-              <SortField>True</SortField>
-              <SortDirection>False</SortDirection>
-              <FilterField>False</FilterField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-          </Fields>
-        </TabularList>
       </TabularLists>
       <TriggerFunctions>
         <New Action="1">Організації_Triggers.New</New>
@@ -1287,7 +1256,74 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <SetDeletionLabel Action="0">Організації_Triggers.SetDeletionLabel</SetDeletionLabel>
         <BeforeDelete Action="0">Організації_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>Швидкий вибір</Name>
+          <Desc>Швидкий вибір</Desc>
+          <Type>ListSmallSelect</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <ElementField>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>НазваПовна</Name>
+              <Caption>Назва повна</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>НазваСкорочена</Name>
+              <Caption>Назва скорочена</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>ДатаРеєстрації</Name>
+              <Caption>Дата реєстрації</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>КраїнаРеєстрації</Name>
+              <Caption>Країна реєстрації</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>СвідоцтвоСеріяНомер</Name>
+              <Caption>Свідоцтво серія номер</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>СвідоцтвоДатаВидачі</Name>
+              <Caption>Свідоцтво дата видачі</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Холдинг</Name>
+              <Caption>Холдинг</Caption>
+            </ElementField>
+          </ElementFields>
+          <ElementTableParts>
+            <ElementTablePart>
+              <Name>Контакти</Name>
+              <Caption>Контакти</Caption>
+            </ElementTablePart>
+          </ElementTableParts>
+        </Form>
+        <Form>
+          <Name>PointerControl</Name>
+          <Desc>PointerControl</Desc>
+          <Type>PointerControl</Type>
+        </Form>
+      </Forms>
     </Directory>
     <Directory>
       <Name>Номенклатура</Name>
@@ -1822,37 +1858,6 @@ END]]></Value>
             </Field>
           </Fields>
         </TabularList>
-        <TabularList>
-          <Name>ЗаписиШвидкийВибір</Name>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Код</Name>
-              <Caption>Код</Caption>
-              <Size>0</Size>
-              <SortNum>1</SortNum>
-              <SortField>False</SortField>
-              <SortDirection>False</SortDirection>
-              <FilterField>False</FilterField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-            <Field>
-              <Name>Назва</Name>
-              <Caption>Назва</Caption>
-              <Size>0</Size>
-              <SortNum>2</SortNum>
-              <SortField>True</SortField>
-              <SortDirection>False</SortDirection>
-              <FilterField>False</FilterField>
-              <Type>string</Type>
-              <Pointer>
-              </Pointer>
-            </Field>
-          </Fields>
-        </TabularList>
       </TabularLists>
       <TriggerFunctions>
         <New Action="1">Виробники_Triggers.New</New>
@@ -1862,7 +1867,41 @@ END]]></Value>
         <SetDeletionLabel Action="0">Виробники_Triggers.SetDeletionLabel</SetDeletionLabel>
         <BeforeDelete Action="0">Виробники_Triggers.BeforeDelete</BeforeDelete>
       </TriggerFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Швидкий вибір</Name>
+          <Desc>Швидкий вибір</Desc>
+          <Type>ListSmallSelect</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <ElementField>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+            </ElementField>
+            <ElementField>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+            </ElementField>
+          </ElementFields>
+          <ElementTableParts />
+        </Form>
+        <Form>
+          <Name>PointerControl</Name>
+          <Desc>PointerControl</Desc>
+          <Type>PointerControl</Type>
+        </Form>
+      </Forms>
     </Directory>
     <Directory>
       <Name>ВидиНоменклатури</Name>
@@ -2440,6 +2479,24 @@ END]]></Value>
           <IsFullTextSearch>1</IsFullTextSearch>
           <Multiline>0</Multiline>
         </Field>
+        <Field>
+          <Name>Постачальник</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>boolean</Type>
+          <Desc>Відмітка що цей контрагент Постачальник</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
+        <Field>
+          <Name>Покупець</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>boolean</Type>
+          <Desc>Відмітка що цей контрагент Покупець</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -2589,6 +2646,30 @@ END]]></Value>
               <FilterField>False</FilterField>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти_Папки</Pointer>
+            </Field>
+            <Field>
+              <Name>Постачальник</Name>
+              <Caption>Постачальник</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>True</FilterField>
+              <Type>boolean</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Покупець</Name>
+              <Caption>Покупець</Caption>
+              <Size>0</Size>
+              <SortNum>5</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>True</FilterField>
+              <Type>boolean</Type>
+              <Pointer>
+              </Pointer>
             </Field>
           </Fields>
         </TabularList>

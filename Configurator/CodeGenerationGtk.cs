@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.09.2024 15:55:36
+ * Дата конфігурації: 07.09.2024 19:31:56
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -94,10 +94,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -119,6 +120,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 /*Назва*/ Довідники.Організації_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -166,131 +169,9 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                     }
                 }
             }
-        }
-    }
-	    
-    public class Організації_ЗаписиШвидкийВибір : ТабличнийСписок
-    {
-        bool DeletionLabel = false;
-        string ID = "";
-        
-        string Код = "";
-        
-        string Назва = "";
-        
-
-        Array ToArray()
-        {
-            return new object[] 
-            { 
-                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
-                ID,
-                /*Код*/ Код,
-                /*Назва*/ Назва,
-                
-            };
-        }
-
-        public static void AddColumns(TreeView treeView)
-        {
-            treeView.Model = new ListStore(
-            [
-                /*Image*/ typeof(Gdk.Pixbuf), 
-                /*ID*/ typeof(string),
-                /*Код*/ typeof(string),  
-                /*Назва*/ typeof(string),  
-                
-            ]);
-
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-
-            /* Поля */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
-
-            /* Додаткові поля */
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
             
-
-            //Пустишка
-            treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static UnigueID? DirectoryPointerItem { get; set; }
-        public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? FirstPath;
-        public static TreePath? SelectPath;
-        public static TreePath? CurrentPath;
-        
-        public static ListBox CreateFilter(TreeView treeView)
-        {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
-        }
-
-        public static async ValueTask LoadRecords(TreeView treeView)
-        {
-            FirstPath = SelectPath = CurrentPath = null;
-
-            Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
-            Організації_Select.QuerySelect.Field.AddRange(
-            [
-                /*Помітка на видалення*/ "deletion_label",
-                /*Код*/ Довідники.Організації_Const.Код,
-                /*Назва*/ Довідники.Організації_Const.Назва,
-                
-            ]);
-
-            /* Where */
-            var where = treeView.Data["Where"];
-            if (where != null) Організації_Select.QuerySelect.Where = (List<Where>)where;
-
-            Організації_Select.QuerySelect.Order.Add(
-               Довідники.Організації_Const.Назва, SelectOrder.ASC);
-            
-
-            /* SELECT */
-            await Організації_Select.Select();
-
-            ListStore Store = (ListStore)treeView.Model;
-            Store.Clear();
-
-            
-
-            while (Організації_Select.MoveNext())
-            {
-                Довідники.Організації_Pointer? cur = Організації_Select.Current;
-                
-                if (cur != null)
-                {
-                    Dictionary<string, object> Fields = cur.Fields!;
-                    Організації_ЗаписиШвидкийВибір Record = new Організації_ЗаписиШвидкийВибір
-                    {
-                        ID = cur.UnigueID.ToString(),
-                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Організації_Const.Код].ToString() ?? "",
-                            Назва = Fields[Організації_Const.Назва].ToString() ?? "",
-                            
-                    };
-                    
-                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
-                      
-
-                    CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
-
-                    if (DirectoryPointerItem != null || SelectPointerItem != null)
-                    {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-                        if (Record.ID == UidSelect)
-                            SelectPath = CurrentPath;
-                    }
-                }
-            }
         }
     }
 	    
@@ -374,10 +255,11 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -448,6 +330,8 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
                 /*ТипНоменклатури*/ Довідники.Номенклатура_Const.ТипНоменклатури,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -614,6 +498,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -684,10 +571,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -709,6 +597,8 @@ END
                 /*Назва*/ Довідники.Номенклатура_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -844,6 +734,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -901,10 +794,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -926,6 +820,8 @@ END
                 /*Назва*/ Довідники.Виробники_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -973,131 +869,9 @@ END
                     }
                 }
             }
-        }
-    }
-	    
-    public class Виробники_ЗаписиШвидкийВибір : ТабличнийСписок
-    {
-        bool DeletionLabel = false;
-        string ID = "";
-        
-        string Код = "";
-        
-        string Назва = "";
-        
-
-        Array ToArray()
-        {
-            return new object[] 
-            { 
-                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
-                ID,
-                /*Код*/ Код,
-                /*Назва*/ Назва,
-                
-            };
-        }
-
-        public static void AddColumns(TreeView treeView)
-        {
-            treeView.Model = new ListStore(
-            [
-                /*Image*/ typeof(Gdk.Pixbuf), 
-                /*ID*/ typeof(string),
-                /*Код*/ typeof(string),  
-                /*Назва*/ typeof(string),  
-                
-            ]);
-
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-
-            /* Поля */
-            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             
-
-            /* Додаткові поля */
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
             
-
-            //Пустишка
-            treeView.AppendColumn(new TreeViewColumn());
-        }
-
-        public static UnigueID? DirectoryPointerItem { get; set; }
-        public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? FirstPath;
-        public static TreePath? SelectPath;
-        public static TreePath? CurrentPath;
-        
-        public static ListBox CreateFilter(TreeView treeView)
-        {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
-        }
-
-        public static async ValueTask LoadRecords(TreeView treeView)
-        {
-            FirstPath = SelectPath = CurrentPath = null;
-
-            Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
-            Виробники_Select.QuerySelect.Field.AddRange(
-            [
-                /*Помітка на видалення*/ "deletion_label",
-                /*Код*/ Довідники.Виробники_Const.Код,
-                /*Назва*/ Довідники.Виробники_Const.Назва,
-                
-            ]);
-
-            /* Where */
-            var where = treeView.Data["Where"];
-            if (where != null) Виробники_Select.QuerySelect.Where = (List<Where>)where;
-
-            Виробники_Select.QuerySelect.Order.Add(
-               Довідники.Виробники_Const.Назва, SelectOrder.ASC);
-            
-
-            /* SELECT */
-            await Виробники_Select.Select();
-
-            ListStore Store = (ListStore)treeView.Model;
-            Store.Clear();
-
-            
-
-            while (Виробники_Select.MoveNext())
-            {
-                Довідники.Виробники_Pointer? cur = Виробники_Select.Current;
-                
-                if (cur != null)
-                {
-                    Dictionary<string, object> Fields = cur.Fields!;
-                    Виробники_ЗаписиШвидкийВибір Record = new Виробники_ЗаписиШвидкийВибір
-                    {
-                        ID = cur.UnigueID.ToString(),
-                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
-                        Код = Fields[Виробники_Const.Код].ToString() ?? "",
-                            Назва = Fields[Виробники_Const.Назва].ToString() ?? "",
-                            
-                    };
-                    
-                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
-                      
-
-                    CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
-
-                    if (DirectoryPointerItem != null || SelectPointerItem != null)
-                    {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-                        if (Record.ID == UidSelect)
-                            SelectPath = CurrentPath;
-                    }
-                }
-            }
         }
     }
 	    
@@ -1155,10 +929,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1180,6 +955,8 @@ END
                 /*Назва*/ Довідники.ВидиНоменклатури_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -1227,6 +1004,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -1275,10 +1055,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1299,6 +1080,8 @@ END
                 /*Назва*/ Довідники.ВидиНоменклатури_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -1345,6 +1128,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -1412,10 +1198,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1439,6 +1226,8 @@ END
                 /*НазваПовна*/ Довідники.ПакуванняОдиниціВиміру_Const.НазваПовна,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -1488,6 +1277,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -1551,10 +1343,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1578,6 +1371,8 @@ END
                 /*НазваПовна*/ Довідники.ПакуванняОдиниціВиміру_Const.НазваПовна,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -1627,6 +1422,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -1699,10 +1497,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1719,6 +1518,8 @@ END
                   { /* ВиводитиКурсНаСтартову, boolean */
                       Switch sw = new();
                       CheckButton ВиводитиКурсНаСтартову = new();
+                          ВиводитиКурсНаСтартову.Clicked += (object? sender, EventArgs args) => sw.Active = ВиводитиКурсНаСтартову.Active;
+                          
                       widgets.Add(new("ВиводитиКурсНаСтартову", ВиводитиКурсНаСтартову, sw));
                       ДодатиЕлементВФільтр(listBox, "Показувати на стартовій:", ВиводитиКурсНаСтартову, sw);
                   }
@@ -1773,6 +1574,8 @@ END
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Валюти_Select.QuerySelect.Where = (List<Where>)where;
@@ -1822,6 +1625,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -1885,10 +1691,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -1912,6 +1719,8 @@ END
                 /*Код_R030*/ Довідники.Валюти_Const.Код_R030,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -1961,6 +1770,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -1979,6 +1791,10 @@ END
         
         string Папка = "";
         
+        string Постачальник = "";
+        
+        string Покупець = "";
+        
 
         Array ToArray()
         {
@@ -1989,6 +1805,8 @@ END
                 /*Код*/ Код,
                 /*Назва*/ Назва,
                 /*Папка*/ Папка,
+                /*Постачальник*/ Постачальник,
+                /*Покупець*/ Покупець,
                 
             };
         }
@@ -2002,6 +1820,8 @@ END
                 /*Код*/ typeof(string),  
                 /*Назва*/ typeof(string),  
                 /*Папка*/ typeof(string),  
+                /*Постачальник*/ typeof(string),  
+                /*Покупець*/ typeof(string),  
                 
             ]);
 
@@ -2012,6 +1832,8 @@ END
             treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
             treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Назва*/
             treeView.AppendColumn(new TreeViewColumn("Папка", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Папка*/
+            treeView.AppendColumn(new TreeViewColumn("Постачальник", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Постачальник*/
+            treeView.AppendColumn(new TreeViewColumn("Покупець", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Покупець*/
             
 
             /* Додаткові поля */
@@ -2023,15 +1845,65 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
             
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                  List<Tuple<string, Widget, Switch>> widgets = [];
+                  
+                  { /* Постачальник, boolean */
+                      Switch sw = new();
+                      CheckButton Постачальник = new();
+                          Постачальник.Clicked += (object? sender, EventArgs args) => sw.Active = Постачальник.Active;
+                          
+                      widgets.Add(new("Постачальник", Постачальник, sw));
+                      ДодатиЕлементВФільтр(listBox, "Постачальник:", Постачальник, sw);
+                  }
+                  
+                  { /* Покупець, boolean */
+                      Switch sw = new();
+                      CheckButton Покупець = new();
+                          Покупець.Clicked += (object? sender, EventArgs args) => sw.Active = Покупець.Active;
+                          
+                      widgets.Add(new("Покупець", Покупець, sw));
+                      ДодатиЕлементВФільтр(listBox, "Покупець:", Покупець, sw);
+                  }
+                  
+                  {
+                      Button bOn = new Button("Фільтрувати");
+                      bOn.Clicked += async (object? sender, EventArgs args) =>
+                      {
+                          List<Where> listWhere = [];
+                          foreach (var widget in widgets)
+                              if (widget.Item3.Active)
+                              {
+                                  string? field = widget.Item1 switch { "Постачальник" => Контрагенти_Const.Постачальник,
+                                  "Покупець" => Контрагенти_Const.Покупець,
+                                   _ => null };
+                                  object? value = widget.Item1 switch { "Постачальник" => ((CheckButton)widget.Item2).Active,
+                                  "Покупець" => ((CheckButton)widget.Item2).Active,
+                                   _ => null };
+                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
+                              }
+                          if (listWhere.Count != 0)
+                          {
+                              ДодатиВідбір(treeView, listWhere, true);
+                              await LoadRecords(treeView);
+                          }
+                      };
+
+                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
+                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
+                      vBox.PackStart(hBox, false, false, 5);
+                      hBox.PackStart(bOn, false, false, 5);
+                      
+                      listBox.Add(new ListBoxRow() { vBox });
+                  }
                 
             return listBox;
         }
@@ -2046,8 +1918,12 @@ END
                 /*Помітка на видалення*/ "deletion_label",
                 /*Код*/ Довідники.Контрагенти_Const.Код,
                 /*Назва*/ Довідники.Контрагенти_Const.Назва,
+                /*Постачальник*/ Довідники.Контрагенти_Const.Постачальник,
+                /*Покупець*/ Довідники.Контрагенти_Const.Покупець,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -2081,6 +1957,8 @@ END
                         Код = Fields[Контрагенти_Const.Код].ToString() ?? "",
                             Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
                             Папка = Fields["Папка"].ToString() ?? "",
+                            Постачальник = (Fields[Контрагенти_Const.Постачальник] != DBNull.Value ? (bool)Fields[Контрагенти_Const.Постачальник] : false) ? "Так" : "",
+                            Покупець = (Fields[Контрагенти_Const.Покупець] != DBNull.Value ? (bool)Fields[Контрагенти_Const.Покупець] : false) ? "Так" : "",
                             
                     };
                     
@@ -2098,6 +1976,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -2151,10 +2032,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2176,6 +2058,8 @@ END
                 /*Назва*/ Довідники.Контрагенти_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -2223,6 +2107,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -2290,10 +2177,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2369,6 +2257,8 @@ END
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Склади_Select.QuerySelect.Where = (List<Where>)where;
@@ -2419,6 +2309,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -2472,10 +2365,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2497,6 +2391,8 @@ END
                 /*Назва*/ Довідники.Склади_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -2544,6 +2440,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -2606,10 +2505,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2668,6 +2568,8 @@ END
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ВидиЦін_Select.QuerySelect.Where = (List<Where>)where;
@@ -2717,6 +2619,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -2765,10 +2670,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2789,6 +2695,8 @@ END
                 /*Назва*/ Довідники.ВидиЦін_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -2835,6 +2743,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -2892,10 +2803,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -2917,6 +2829,8 @@ END
                 /*Назва*/ Довідники.ВидиЦінПостачальників_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -2964,6 +2878,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3017,10 +2934,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3042,6 +2960,8 @@ END
                 /*Назва*/ Довідники.ВидиЦінПостачальників_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3089,6 +3009,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3146,10 +3069,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3171,6 +3095,8 @@ END
                 /*Назва*/ Довідники.Користувачі_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3218,6 +3144,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3266,10 +3195,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3290,6 +3220,8 @@ END
                 /*Назва*/ Довідники.Користувачі_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3336,6 +3268,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3393,10 +3328,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3418,6 +3354,8 @@ END
                 /*Назва*/ Довідники.ФізичніОсоби_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3465,6 +3403,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3513,10 +3454,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3537,6 +3479,8 @@ END
                 /*Назва*/ Довідники.ФізичніОсоби_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3583,6 +3527,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3640,10 +3587,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3665,6 +3613,8 @@ END
                 /*Назва*/ Довідники.СтруктураПідприємства_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3712,6 +3662,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3760,10 +3713,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3784,6 +3738,8 @@ END
                 /*Назва*/ Довідники.СтруктураПідприємства_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3830,6 +3786,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -3887,10 +3846,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -3912,6 +3872,8 @@ END
                 /*Назва*/ Довідники.КраїниСвіту_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -3959,6 +3921,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -4012,10 +3977,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4037,6 +4003,8 @@ END
                 /*Назва*/ Довідники.КраїниСвіту_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -4084,6 +4052,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -4156,10 +4127,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4184,6 +4156,8 @@ END
                 /*ДатаСтворення*/ Довідники.Файли_Const.ДатаСтворення,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -4234,6 +4208,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -4282,10 +4259,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4306,6 +4284,8 @@ END
                 /*Назва*/ Довідники.Файли_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -4352,6 +4332,9 @@ END
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -4426,10 +4409,11 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4451,6 +4435,8 @@ END
                 /*Назва*/ Довідники.ХарактеристикиНоменклатури_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -4576,6 +4562,9 @@ FROM
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -4646,10 +4635,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4671,6 +4661,8 @@ FROM
                 /*Назва*/ Довідники.ХарактеристикиНоменклатури_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -4796,6 +4788,9 @@ FROM
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -4853,12 +4848,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -4881,6 +4875,11 @@ FROM
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -4898,7 +4897,7 @@ FROM
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new Номенклатура_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (Номенклатура_Папки_Select.MoveNext())
@@ -4935,6 +4934,15 @@ FROM
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -4988,12 +4996,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5016,6 +5023,11 @@ FROM
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Номенклатура_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -5033,7 +5045,7 @@ FROM
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new Номенклатура_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (Номенклатура_Папки_Select.MoveNext())
@@ -5070,6 +5082,15 @@ FROM
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -5127,12 +5148,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5155,6 +5175,11 @@ FROM
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -5172,7 +5197,7 @@ FROM
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new Контрагенти_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (Контрагенти_Папки_Select.MoveNext())
@@ -5209,6 +5234,15 @@ FROM
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -5262,12 +5296,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5290,6 +5323,11 @@ FROM
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Контрагенти_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -5307,7 +5345,7 @@ FROM
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new Контрагенти_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (Контрагенти_Папки_Select.MoveNext())
@@ -5344,6 +5382,15 @@ FROM
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -5401,12 +5448,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5429,6 +5475,11 @@ FROM
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -5446,7 +5497,7 @@ FROM
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new Склади_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (Склади_Папки_Select.MoveNext())
@@ -5483,6 +5534,15 @@ FROM
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -5536,12 +5596,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5564,6 +5623,11 @@ FROM
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) Склади_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -5581,7 +5645,7 @@ FROM
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new Склади_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (Склади_Папки_Select.MoveNext())
@@ -5618,6 +5682,15 @@ FROM
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -5684,10 +5757,11 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5745,6 +5819,8 @@ FROM
                 /*Назва*/ Довідники.Каси_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -5808,6 +5884,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -5870,10 +5949,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -5895,6 +5975,8 @@ WHERE
                 /*Назва*/ Довідники.Каси_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -5958,6 +6040,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -6020,10 +6105,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6082,6 +6168,8 @@ WHERE
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) БанківськіРахункиОрганізацій_Select.QuerySelect.Where = (List<Where>)where;
@@ -6131,6 +6219,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -6189,10 +6280,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6214,6 +6306,8 @@ WHERE
                 /*Назва*/ Довідники.БанківськіРахункиОрганізацій_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -6264,6 +6358,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -6331,10 +6428,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6406,6 +6504,8 @@ WHERE
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ДоговориКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
@@ -6457,6 +6557,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -6515,10 +6618,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6540,6 +6644,8 @@ WHERE
                 /*ТипДоговору*/ Довідники.ДоговориКонтрагентів_Const.ТипДоговору,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -6591,6 +6697,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -6653,10 +6762,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6715,6 +6825,8 @@ WHERE
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) БанківськіРахункиКонтрагентів_Select.QuerySelect.Where = (List<Where>)where;
@@ -6764,6 +6876,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -6822,10 +6937,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -6847,6 +6963,8 @@ WHERE
                 /*Назва*/ Довідники.БанківськіРахункиКонтрагентів_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -6897,6 +7015,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -6964,10 +7085,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7031,6 +7153,8 @@ WHERE
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) СтаттяРухуКоштів_Select.QuerySelect.Where = (List<Where>)where;
@@ -7080,6 +7204,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -7128,10 +7255,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7152,6 +7280,8 @@ WHERE
                 /*Назва*/ Довідники.СтаттяРухуКоштів_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7198,6 +7328,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -7250,10 +7383,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7274,6 +7408,8 @@ WHERE
                 /*Номер*/ Довідники.СеріїНоменклатури_Const.Номер,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7320,6 +7456,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -7368,10 +7507,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7392,6 +7532,8 @@ WHERE
                 /*Номер*/ Довідники.СеріїНоменклатури_Const.Номер,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7438,6 +7580,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -7510,10 +7655,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7576,6 +7722,8 @@ WHERE
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) ПартіяТоварівКомпозит_Select.QuerySelect.Where = (List<Where>)where;
@@ -7630,6 +7778,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -7683,10 +7834,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7708,6 +7860,8 @@ WHERE
                 /*Дата*/ Довідники.ПартіяТоварівКомпозит_Const.Дата,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7755,6 +7909,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -7812,10 +7969,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7837,6 +7995,8 @@ WHERE
                 /*Назва*/ Довідники.ВидиЗапасів_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7884,6 +8044,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -7937,10 +8100,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -7962,6 +8126,8 @@ WHERE
                 /*Назва*/ Довідники.ВидиЗапасів_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8009,6 +8175,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -8151,10 +8320,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8193,6 +8363,8 @@ WHERE
                 /*ДатаЗапису*/ Довідники.Банки_Const.ДатаЗапису,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8257,6 +8429,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -8310,10 +8485,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8335,6 +8511,8 @@ WHERE
                 /*Назва*/ Довідники.Банки_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8382,6 +8560,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -8444,10 +8625,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8518,6 +8700,8 @@ WHERE
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) СкладськіПриміщення_Select.QuerySelect.Where = (List<Where>)where;
@@ -8568,6 +8752,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -8621,10 +8808,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8645,6 +8833,8 @@ WHERE
                 /*Назва*/ Довідники.СкладськіПриміщення_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8694,6 +8884,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -8786,10 +8979,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8852,6 +9046,8 @@ WHERE
                 
             ]);
 
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) СкладськіКомірки_Select.QuerySelect.Where = (List<Where>)where;
@@ -8912,6 +9108,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -8965,10 +9164,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -8989,6 +9189,8 @@ WHERE
                 /*Назва*/ Довідники.СкладськіКомірки_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9038,6 +9240,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -9095,10 +9300,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9119,6 +9325,8 @@ WHERE
                 /*Назва*/ Довідники.ОбластьЗберігання_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9168,6 +9376,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -9245,10 +9456,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9274,6 +9486,8 @@ WHERE
                 /*Ширина*/ Довідники.ТипорозміриКомірок_Const.Ширина,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9325,6 +9539,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -9373,10 +9590,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9397,6 +9615,8 @@ WHERE
                 /*Назва*/ Довідники.ТипорозміриКомірок_Const.Назва,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9443,6 +9663,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -9505,12 +9728,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9533,6 +9755,11 @@ WHERE
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -9552,7 +9779,7 @@ WHERE
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new СкладськіКомірки_Папки_Записи(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (СкладськіКомірки_Папки_Select.MoveNext())
@@ -9590,6 +9817,15 @@ WHERE
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -9648,12 +9884,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
-        public static TreePath? RootPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9676,6 +9911,11 @@ WHERE
                 
             ]);
 
+            
+            if (OpenFolder != null) 
+              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            
+
             /* Where */
             var where = treeView.Data["Where"];
             if (where != null) СкладськіКомірки_Папки_Select.QuerySelect.Where = (List<Where>)where;
@@ -9695,7 +9935,7 @@ WHERE
             
             Dictionary<string, TreeIter> nodeDictionary = new();
             TreeIter rootIter = Store.AppendValues(new СкладськіКомірки_Папки_ЗаписиШвидкийВибір(){ ID = Guid.Empty.ToString() }.ToArray());
-            RootPath = Store.GetPath(rootIter);
+            TreePath rootPath = Store.GetPath(rootIter);
             
 
             while (СкладськіКомірки_Папки_Select.MoveNext())
@@ -9733,6 +9973,15 @@ WHERE
                     }
                 }
             }
+            
+            treeView.ExpandToPath(rootPath);
+            treeView.SetCursor(rootPath, treeView.Columns[0], false);
+            if (SelectPath != null) treeView.ExpandToPath(SelectPath);
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+            treeView.ActivateRow(SelectPath != null ? SelectPath: rootPath, treeView.Columns[0]);
+            
         }
     }
 	    
@@ -9795,10 +10044,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9821,6 +10071,8 @@ WHERE
                 /*ДатаЗапису*/ Довідники.Блокнот_Const.ДатаЗапису,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9869,6 +10121,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -9927,10 +10182,11 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
+        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
-        
+
         public static ListBox CreateFilter(TreeView treeView)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
@@ -9953,6 +10209,8 @@ WHERE
                 /*ДатаЗапису*/ Довідники.Блокнот_Const.ДатаЗапису,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -10001,6 +10259,9 @@ WHERE
                     }
                 }
             }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
         }
     }
 	    
@@ -10262,7 +10523,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -10273,6 +10533,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -10545,7 +10809,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -10556,6 +10819,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -10828,7 +11095,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -10839,6 +11105,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -11111,7 +11381,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -11122,6 +11391,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -11347,7 +11620,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -11358,6 +11630,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -11621,7 +11897,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -11632,6 +11907,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -11895,7 +12174,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -11906,6 +12184,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -12131,7 +12413,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -12142,6 +12423,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -12414,7 +12699,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -12425,6 +12709,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -12697,7 +12985,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -12708,6 +12995,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -12964,7 +13255,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -12975,6 +13265,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -13216,7 +13510,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -13227,6 +13520,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -13436,7 +13733,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -13447,6 +13743,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -13656,7 +13956,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -13667,6 +13966,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -13892,7 +14195,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -13903,6 +14205,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -14127,7 +14433,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -14138,6 +14443,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -14378,7 +14687,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -14389,6 +14697,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -14661,7 +14973,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -14672,6 +14983,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -14881,7 +15196,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -14892,6 +15206,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -15101,7 +15419,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -15112,6 +15429,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -15321,7 +15642,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -15332,6 +15652,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -15541,7 +15865,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -15552,6 +15875,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -15745,7 +16072,6 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-
                     FirstPath ??= CurrentPath;
 
                     if (DocumentPointerItem != null || SelectPointerItem != null)
@@ -15756,6 +16082,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                     }
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    

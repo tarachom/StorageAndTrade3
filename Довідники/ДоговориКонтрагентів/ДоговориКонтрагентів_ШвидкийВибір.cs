@@ -87,6 +87,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
+            ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
@@ -98,20 +99,10 @@ namespace StorageAndTrade
             }
 
             await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())

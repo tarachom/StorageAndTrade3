@@ -48,27 +48,14 @@ namespace StorageAndTrade
             ТабличніСписки.ФізичніОсоби_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.ФізичніОсоби_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ФізичніОсоби_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ФізичніОсоби_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Відбори
             ТабличніСписки.ФізичніОсоби_Записи.ДодатиВідбір(TreeViewGrid, ФізичніОсоби_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.ФізичніОсоби_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ФізичніОсоби_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ФізичніОсоби_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

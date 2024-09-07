@@ -76,20 +76,10 @@ namespace StorageAndTrade
             }
 
             await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.СкладськіПриміщення_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!СкладВласник.Pointer.UnigueID.IsEmpty())
@@ -102,9 +92,6 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid, СкладськіПриміщення_ВідбориДляПошуку.Відбори(searchText));
 
             await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.СкладськіПриміщення_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіПриміщення_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

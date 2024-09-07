@@ -30,7 +30,7 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Контрагенти_Папки : ДовідникДерево
+    class Контрагенти_Папки : ДовідникЖурнал
     {
         public Контрагенти_Папки() : base()
         {
@@ -41,22 +41,25 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Контрагенти_Папки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Контрагенти_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Контрагенти_Папки_Записи.OpenFolder = OpenFolder;
 
-            if (OpenFolder != null)
-                ТабличніСписки.Контрагенти_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+            ТабличніСписки.Контрагенти_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Контрагенти_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_Записи.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            //Назва
+            ТабличніСписки.Контрагенти_Папки_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, Контрагенти_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            if (ТабличніСписки.Контрагенти_Папки_Записи.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.Контрагенти_Папки_Записи.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.Контрагенти_Папки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            }
+            await ТабличніСписки.Контрагенти_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            RowActivated();
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.Контрагенти_Папки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)

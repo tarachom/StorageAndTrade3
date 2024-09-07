@@ -61,20 +61,10 @@ namespace StorageAndTrade
             }
 
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.ДоговориКонтрагентів_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
@@ -87,9 +77,6 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_ВідбориДляПошуку.Відбори(searchText));
 
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ДоговориКонтрагентів_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ДоговориКонтрагентів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

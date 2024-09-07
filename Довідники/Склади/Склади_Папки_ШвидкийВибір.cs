@@ -32,8 +32,6 @@ namespace StorageAndTrade
 {
     class Склади_Папки_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public UnigueID? OpenFolder { get; set; }
-
         public Склади_Папки_ШвидкийВибір() : base(false)
         {
             ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
@@ -82,26 +80,22 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords()
         {
+            ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.OpenFolder = OpenFolder;
 
-            if (OpenFolder != null)
-                ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+            ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-
-            TreeViewGrid.ExpandToPath(ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.RootPath, TreeViewGrid.Columns[0], false);
-
-            if (ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.SelectPath, TreeViewGrid.Columns[0], false);
-            }
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
+            //Назва
+            ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, Склади_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
+            await ТабличніСписки.Склади_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
     }
 }

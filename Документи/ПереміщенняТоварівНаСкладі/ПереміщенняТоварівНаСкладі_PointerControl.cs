@@ -57,7 +57,7 @@ namespace StorageAndTrade
             }
         }
 
-        protected override void OpenSelect(object? sender, EventArgs args)
+        protected override async void OpenSelect(object? sender, EventArgs args)
         {
             ПереміщенняТоварівНаСкладі page = new ПереміщенняТоварівНаСкладі
             {
@@ -67,7 +67,7 @@ namespace StorageAndTrade
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПереміщенняТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
 
-            page.SetValue();
+            await page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)

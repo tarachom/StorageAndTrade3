@@ -47,30 +47,15 @@ namespace StorageAndTrade
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async void LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             //Назва
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.ДодатиВідбір(TreeViewGrid,
                 new Where(ВнутрішнєСпоживанняТоварів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
             await ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

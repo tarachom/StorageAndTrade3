@@ -40,7 +40,7 @@ namespace StorageAndTrade
         public СкладськіКомірки() : base()
         {
             //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += OnCheckButtonIsHierarchyClicked;
+            checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Власник
@@ -70,7 +70,7 @@ namespace StorageAndTrade
 
                 СкладськіКомірки_Objest? контрагенти_Objest = await new СкладськіКомірки_Pointer(unigueID).GetDirectoryObject();
                 if (контрагенти_Objest != null)
-                    ДеревоПапок.DirectoryPointerItem = контрагенти_Objest.Папка.UnigueID;
+                    ДеревоПапок.SelectPointerItem = контрагенти_Objest.Папка.UnigueID;
             }
 
             ДеревоПапок.СкладПриміщенняВласник = СкладПриміщенняВласник.Pointer;
@@ -86,7 +86,7 @@ namespace StorageAndTrade
 
             if (checkButtonIsHierarchy.Active)
                 ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.DirectoryPointerItem?.UGuid ?? new UnigueID().UGuid));
+                    new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
             if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
             {
@@ -95,20 +95,10 @@ namespace StorageAndTrade
             }
 
             await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.СкладськіКомірки_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
@@ -121,9 +111,6 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid, СкладськіКомірки_ВідбориДляПошуку.Відбори(searchText));
 
             await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.СкладськіКомірки_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.СкладськіКомірки_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -177,10 +164,5 @@ namespace StorageAndTrade
         }
 
         #endregion
-
-        async void OnCheckButtonIsHierarchyClicked(object? sender, EventArgs args)
-        {
-            await LoadRecords();
-        }
     }
 }

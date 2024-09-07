@@ -1,32 +1,13 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+/*     
+        Виробники.cs
+        Список
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-
 using StorageAndTrade_1_0.Довідники;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -48,27 +29,21 @@ namespace StorageAndTrade
             ТабличніСписки.Виробники_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Виробники_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Виробники_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Виробники_Записи.SelectPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
+            ТабличніСписки.Виробники_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (searchText.Length < 1)
-                return;
+            //Код
+            ТабличніСписки.Виробники_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(Виробники_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
-            //Відбори
-            ТабличніСписки.Виробники_Записи.ДодатиВідбір(TreeViewGrid, Виробники_ВідбориДляПошуку.Відбори(searchText), true);
+            //Назва
+            ТабличніСписки.Виробники_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, Виробники_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             await ТабличніСписки.Виробники_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.Виробники_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Виробники_Записи.FirstPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override void FilterRecords(Box hBox)

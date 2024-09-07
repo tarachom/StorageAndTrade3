@@ -30,7 +30,7 @@ using ТабличніСписки = StorageAndTrade_1_0.Довідники.Та
 
 namespace StorageAndTrade
 {
-    class Склади_Папки : ДовідникДерево
+    class Склади_Папки : ДовідникЖурнал
     {
         public Склади_Папки() : base()
         {
@@ -41,22 +41,25 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Склади_Папки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Склади_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
+            ТабличніСписки.Склади_Папки_Записи.OpenFolder = OpenFolder;
 
-            if (OpenFolder != null)
-                ТабличніСписки.Склади_Папки_Записи.ДодатиВідбір(TreeViewGrid, new Where("uid", Comparison.NOT, OpenFolder.UGuid), true);
+            ТабличніСписки.Склади_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Склади_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            TreeViewGrid.ExpandToPath(ТабличніСписки.Склади_Папки_Записи.RootPath);
-            TreeViewGrid.SetCursor(ТабличніСписки.Склади_Папки_Записи.RootPath, TreeViewGrid.Columns[0], false);
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            //Назва
+            ТабличніСписки.Склади_Папки_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where(Comparison.OR, Склади_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            if (ТабличніСписки.Склади_Папки_Записи.SelectPath != null)
-            {
-                TreeViewGrid.ExpandToPath(ТабличніСписки.Склади_Папки_Записи.SelectPath);
-                TreeViewGrid.SetCursor(ТабличніСписки.Склади_Папки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            }
+            await ТабличніСписки.Склади_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
 
-            RowActivated();
+        protected override void FilterRecords(Box hBox)
+        {
+            hBox.PackStart(ТабличніСписки.Склади_Папки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
         protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
