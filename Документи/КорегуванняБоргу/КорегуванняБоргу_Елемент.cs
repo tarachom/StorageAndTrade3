@@ -47,7 +47,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public КорегуванняБоргу_Елемент() : base()
+        public КорегуванняБоргу_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

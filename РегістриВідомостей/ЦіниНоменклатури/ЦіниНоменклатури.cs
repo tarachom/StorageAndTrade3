@@ -17,14 +17,14 @@ namespace StorageAndTrade
 {
     public class ЦіниНоменклатури : РегістриВідомостейЖурнал
     {
-        public ЦіниНоменклатури() : base()
+        public ЦіниНоменклатури() 
         {
             ТабличніСписки.ЦіниНоменклатури_Записи.AddColumns(TreeViewGrid);
         }
 
         #region Override
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ЦіниНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЦіниНоменклатури_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
@@ -37,15 +37,8 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЦіниНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.ЦіниНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
             //period
@@ -60,7 +53,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ЦіниНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             ЦіниНоменклатури_Елемент page = new ЦіниНоменклатури_Елемент
             {
@@ -73,10 +66,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.ЦіниНоменклатури_Objest.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)
@@ -111,13 +106,12 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();
+            await LoadRecords();
         }
 
         #endregion
     }
 }
-    

@@ -37,7 +37,7 @@ namespace StorageAndTrade
         ПоступленняТоварівТаПослуг_PointerControl ПоступленняТоварівТаПослуг = new ПоступленняТоварівТаПослуг_PointerControl();
         ВведенняЗалишків_PointerControl ВведенняЗалишків = new ВведенняЗалишків_PointerControl();
 
-        public ПартіяТоварівКомпозит_Елемент() : base()
+        public ПартіяТоварівКомпозит_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -102,16 +102,17 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-            }            
+                return false;
+            }
         }
     }
 }

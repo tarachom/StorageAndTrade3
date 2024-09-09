@@ -34,7 +34,7 @@ namespace StorageAndTrade
     {
         public СкладськіПриміщення_Pointer СкладПриміщенняВласник = new СкладськіПриміщення_Pointer();
 
-        public СкладськіКомірки_Папки() : base()
+        public СкладськіКомірки_Папки() 
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.AddColumns(TreeViewGrid);
         }
@@ -67,7 +67,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.СкладськіКомірки_Папки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
             {
@@ -81,10 +81,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         #region ToolBar

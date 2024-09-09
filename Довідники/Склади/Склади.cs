@@ -36,34 +36,29 @@ namespace StorageAndTrade
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         Склади_Папки ДеревоПапок;
 
-        public Склади() : base()
+        public Склади()
         {
             //Враховувати ієрархію папок
             checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
-            //Склади приміщення
-            LinkButton linkButtonHar = new LinkButton($" {СкладськіПриміщення_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-            linkButtonHar.Clicked += async (object? sender, EventArgs args) =>
+            CreateLink(HBoxTop, СкладськіПриміщення_Const.FULLNAME, async () =>
             {
                 СкладськіПриміщення page = new СкладськіПриміщення();
 
                 if (SelectPointerItem != null)
                     page.СкладВласник.Pointer = new Склади_Pointer(SelectPointerItem);
 
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{СкладськіПриміщення_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{СкладськіПриміщення_Const.FULLNAME}", () => page);
 
                 await page.SetValue();
-            };
-
-            HBoxTop.PackStart(linkButtonHar, false, false, 10);
+            });
 
             //Дерево папок зправа
             ДеревоПапок = new Склади_Папки
             {
                 WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack,
-                ParentWidget = this
+                CallBack_RowActivated = LoadRecords_TreeCallBack
             };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
@@ -113,7 +108,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.Склади_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Склади_Елемент page = new Склади_Елемент
             {
@@ -126,10 +121,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

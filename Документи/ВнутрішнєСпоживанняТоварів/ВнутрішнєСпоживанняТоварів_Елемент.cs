@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ВнутрішнєСпоживанняТоварів_Елемент() : base()
+        public ВнутрішнєСпоживанняТоварів_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

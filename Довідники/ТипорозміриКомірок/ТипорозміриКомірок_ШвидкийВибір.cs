@@ -23,7 +23,7 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
-
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -32,49 +32,9 @@ namespace StorageAndTrade
 {
     class ТипорозміриКомірок_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public ТипорозміриКомірок_ШвидкийВибір() : base()
+        public ТипорозміриКомірок_ШвидкийВибір() 
         {
             ТабличніСписки.ТипорозміриКомірок_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {ТипорозміриКомірок_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ТипорозміриКомірок page = new ТипорозміриКомірок()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ТипорозміриКомірок_Const.FULLNAME}", () => { return page; });
-
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
-                    {
-                        IsNew = true,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    await page.Елемент.New();
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
-
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
         }
 
         protected override async ValueTask LoadRecords()
@@ -93,6 +53,50 @@ namespace StorageAndTrade
             ТабличніСписки.ТипорозміриКомірок_Записи.ДодатиВідбір(TreeViewGrid, ТипорозміриКомірок_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.ТипорозміриКомірок_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            ТипорозміриКомірок page = new ТипорозміриКомірок()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ТипорозміриКомірок_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            ТипорозміриКомірок_Objest Обєкт = new ТипорозміриКомірок_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

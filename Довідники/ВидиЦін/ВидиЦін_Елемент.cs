@@ -35,7 +35,7 @@ namespace StorageAndTrade
         Entry Назва = new Entry() { WidthRequest = 500 };
         Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта:" };
 
-        public ВидиЦін_Елемент() : base() 
+        public ВидиЦін_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -71,15 +71,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }            
         }
     }

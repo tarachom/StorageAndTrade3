@@ -32,7 +32,8 @@ namespace StorageAndTrade
     class ДоговориКонтрагентів_Елемент : ДовідникЕлемент
     {
         public ДоговориКонтрагентів_Objest Елемент { get; set; } = new ДоговориКонтрагентів_Objest();
-
+        public Контрагенти_Pointer КонтрагентиДляНового { get; set; } = new Контрагенти_Pointer();
+        
         #region Fields
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -57,7 +58,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ДоговориКонтрагентів_Елемент() : base()
+        public ДоговориКонтрагентів_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -150,6 +151,9 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
+            if (IsNew)
+                Елемент.Контрагент = КонтрагентиДляНового;
+
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
             Дата.Value = Елемент.Дата;
@@ -196,15 +200,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

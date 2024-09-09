@@ -49,7 +49,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public РозміщенняНоменклатуриПоКоміркам_Елемент() : base()
+        public РозміщенняНоменклатуриПоКоміркам_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

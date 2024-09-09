@@ -33,7 +33,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ПерерахунокТоварів_Елемент() : base()
+        public ПерерахунокТоварів_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

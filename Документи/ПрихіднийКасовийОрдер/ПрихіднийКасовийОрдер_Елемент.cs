@@ -58,7 +58,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ПрихіднийКасовийОрдер_Елемент() : base()
+        public ПрихіднийКасовийОрдер_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 07.09.2024 19:31:56
+ * Дата конфігурації: 09.09.2024 13:08:54
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -17264,6 +17264,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           
         }
     }
@@ -17575,6 +17579,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           
         }
     }
@@ -17979,6 +17987,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           
         }
     }
@@ -18244,6 +18256,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           
         }
     }
@@ -18616,6 +18632,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           
         }
     }
@@ -18933,6 +18953,10 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         SelectPath = CurrentPath;
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           
         }
     }

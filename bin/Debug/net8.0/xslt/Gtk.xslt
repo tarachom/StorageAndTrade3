@@ -971,6 +971,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                         SelectPath = CurrentPath;
                 }
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           </xsl:if>
         }
     }

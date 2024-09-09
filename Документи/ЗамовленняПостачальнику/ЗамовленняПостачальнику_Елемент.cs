@@ -64,7 +64,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ЗамовленняПостачальнику_Елемент() : base()
+        public ЗамовленняПостачальнику_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

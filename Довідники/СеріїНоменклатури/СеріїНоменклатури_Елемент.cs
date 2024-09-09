@@ -36,7 +36,7 @@ namespace StorageAndTrade
         Entry Коментар = new Entry() { WidthRequest = 500 };
         DateTimeControl ДатаСтворення = new DateTimeControl();
 
-        public СеріїНоменклатури_Елемент() : base() 
+        public СеріїНоменклатури_Елемент()  
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -72,15 +72,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }            
         }
     }

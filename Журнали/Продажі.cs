@@ -37,16 +37,16 @@ namespace StorageAndTrade
             ТабличніСписки.Журнали_Продажі.AddColumns(TreeViewGrid);
         }
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.Журнали_Продажі.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Журнали_Продажі.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period);
             await ТабличніСписки.Журнали_Продажі.LoadRecords(TreeViewGrid);
+        }
 
-            if (ТабличніСписки.Журнали_Продажі.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Продажі.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.Журнали_Продажі.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.Журнали_Продажі.CurrentPath, TreeViewGrid.Columns[0], false);
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            await ValueTask.FromResult(true);
         }
 
         protected override void OpenTypeListDocs(Widget relative_to)
@@ -76,10 +76,10 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();            
+            await LoadRecords();
         }
     }
 }

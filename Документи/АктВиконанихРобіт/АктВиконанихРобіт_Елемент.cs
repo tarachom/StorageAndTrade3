@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public АктВиконанихРобіт_Елемент() : base()
+        public АктВиконанихРобіт_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -260,7 +260,6 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
-
                 if (!isSpend)
                     ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
 

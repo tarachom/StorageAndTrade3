@@ -109,7 +109,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public РозміщенняНоменклатуриПоКоміркам_ТабличнаЧастина_Товари() : base()
+        public РозміщенняНоменклатуриПоКоміркам_ТабличнаЧастина_Товари() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

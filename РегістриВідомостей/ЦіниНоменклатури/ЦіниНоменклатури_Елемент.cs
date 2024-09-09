@@ -9,6 +9,7 @@ using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0.РегістриВідомостей;
+using System.Numerics;
 
 namespace StorageAndTrade
 {
@@ -30,7 +31,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ЦіниНоменклатури_Елемент() : base()
+        public ЦіниНоменклатури_Елемент() 
         {
             ЦіниНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
             ЦіниНоменклатури_Objest.CaptionChanged += CaptionChanged;
@@ -101,15 +102,17 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
                 await ЦіниНоменклатури_Objest.Save();
+                return true;
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(ЦіниНоменклатури_Objest.UnigueID.UGuid), Caption, ex);
+                return false;
             }
         }
     }

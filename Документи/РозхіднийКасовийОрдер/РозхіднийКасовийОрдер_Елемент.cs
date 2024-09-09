@@ -59,7 +59,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public РозхіднийКасовийОрдер_Елемент() : base()
+        public РозхіднийКасовийОрдер_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

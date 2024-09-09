@@ -33,19 +33,19 @@ namespace StorageAndTrade
     {
         public Валюти_PointerControl ВалютаВласник = new Валюти_PointerControl();
 
-        public КурсиВалют() : base()
+        public КурсиВалют() 
         {
             ТабличніСписки.КурсиВалют_Записи.AddColumns(TreeViewGrid);
 
             HBoxTop.PackStart(ВалютаВласник, false, false, 2);
-            ВалютаВласник.AfterSelectFunc = () =>
+            ВалютаВласник.AfterSelectFunc = async () =>
             {
                 SelectPointerItem?.Clear();
-                LoadRecords();
+                await LoadRecords();
             };
         }
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.КурсиВалют_Записи.SelectPointerItem = SelectPointerItem;
 
@@ -65,17 +65,10 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
                 return;
-
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
 
             ТабличніСписки.КурсиВалют_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -97,7 +90,7 @@ namespace StorageAndTrade
             await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             КурсиВалют_Елемент page = new КурсиВалют_Елемент
             {
@@ -110,10 +103,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.КурсиВалют_Objest.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)
@@ -149,10 +144,10 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();
+            await LoadRecords();
         }
     }
 }

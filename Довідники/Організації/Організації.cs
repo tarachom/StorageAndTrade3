@@ -14,7 +14,7 @@ namespace StorageAndTrade
 {
     class Організації : ДовідникЖурнал
     {
-        public Організації() : base()
+        public Організації() 
         {
             ТабличніСписки.Організації_Записи.AddColumns(TreeViewGrid);
         }
@@ -43,7 +43,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.Організації_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Організації_Елемент page = new Організації_Елемент
             {
@@ -57,10 +57,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         #region ToolBar

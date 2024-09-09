@@ -37,7 +37,7 @@ namespace StorageAndTrade
         Склади_PointerControl Склад = new Склади_PointerControl() { Caption = "Склад:" };
         ComboBoxText Налаштування = new ComboBoxText();
 
-        public СкладськіПриміщення_Елемент() : base()
+        public СкладськіПриміщення_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -82,15 +82,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

@@ -40,7 +40,7 @@ namespace StorageAndTrade
         NumericControl Курс = new NumericControl();
         IntegerControl Кратність = new IntegerControl();
 
-        public КурсиВалют_Елемент() : base() 
+        public КурсиВалют_Елемент() 
         {
             КурсиВалют_Objest.UnigueIDChanged += UnigueIDChanged;
             КурсиВалют_Objest.CaptionChanged += CaptionChanged;
@@ -87,15 +87,17 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
                 await КурсиВалют_Objest.Save();
+                return true;
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(КурсиВалют_Objest.UnigueID.UGuid), Caption, ex);
+                return false;
             }
         }
     }

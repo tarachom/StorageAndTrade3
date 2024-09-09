@@ -15,14 +15,14 @@ namespace StorageAndTrade
 {
     public class ПартіїТоварів : РегістриНакопиченняЖурнал
     {
-        public ПартіїТоварів() : base()
+        public ПартіїТоварів() 
         {
             ТабличніСписки.ПартіїТоварів_Записи.AddColumns(TreeViewGrid);
         }
 
         #region Override
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ПартіїТоварів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПартіїТоварів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
@@ -35,7 +35,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ПартіїТоварів_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
             await ТабличніСписки.ПартіїТоварів_Записи.LoadRecords(TreeViewGrid);
         }
-        
+
         const string КлючНалаштуванняКористувача = "РегістриНакопичення.ПартіїТоварів";
 
         protected override async ValueTask BeforeSetValue()
@@ -65,13 +65,12 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();           
+            await LoadRecords();
         }
 
         #endregion
     }
 }
-    

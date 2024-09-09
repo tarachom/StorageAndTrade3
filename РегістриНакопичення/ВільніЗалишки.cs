@@ -15,14 +15,14 @@ namespace StorageAndTrade
 {
     public class ВільніЗалишки : РегістриНакопиченняЖурнал
     {
-        public ВільніЗалишки() : base()
+        public ВільніЗалишки() 
         {
             ТабличніСписки.ВільніЗалишки_Записи.AddColumns(TreeViewGrid);
         }
 
         #region Override
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ВільніЗалишки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ВільніЗалишки_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
@@ -35,15 +35,8 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ВільніЗалишки_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.ВільніЗалишки_Записи.ОчиститиВідбір(TreeViewGrid);
 
             //period
@@ -57,7 +50,7 @@ namespace StorageAndTrade
 
             await ТабличніСписки.ВільніЗалишки_Записи.LoadRecords(TreeViewGrid);
         }
-        
+
         const string КлючНалаштуванняКористувача = "РегістриНакопичення.ВільніЗалишки";
 
         protected override async ValueTask BeforeSetValue()
@@ -65,13 +58,12 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();           
+            await LoadRecords();
         }
 
         #endregion
     }
 }
-    

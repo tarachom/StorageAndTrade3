@@ -164,7 +164,7 @@ namespace StorageAndTrade
         Label ПідсумокСума = new Label() { Selectable = true };
         Label ПідсумокСкидка = new Label() { Selectable = true };
 
-        public ЗамовленняПостачальнику_ТабличнаЧастина_Товари() : base()
+        public ЗамовленняПостачальнику_ТабличнаЧастина_Товари() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

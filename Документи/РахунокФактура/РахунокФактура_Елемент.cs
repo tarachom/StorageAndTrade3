@@ -60,7 +60,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public РахунокФактура_Елемент() : base()
+        public РахунокФактура_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

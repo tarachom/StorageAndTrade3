@@ -35,27 +35,23 @@ namespace StorageAndTrade
     {
         public Склади_PointerControl СкладВласник = new Склади_PointerControl() { Caption = "Склад:" };
 
-        public СкладськіПриміщення() : base()
+        public СкладськіПриміщення()
         {
             //Власник
             HBoxTop.PackStart(СкладВласник, false, false, 2);
             СкладВласник.AfterSelectFunc = async () => await LoadRecords();
 
-            //Складські комірки
-            LinkButton linkButtonHar = new LinkButton($" {СкладськіКомірки_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-            linkButtonHar.Clicked += async (object? sender, EventArgs args) =>
+            CreateLink(HBoxTop, СкладськіКомірки_Const.FULLNAME, async () =>
             {
                 СкладськіКомірки page = new СкладськіКомірки();
 
                 if (SelectPointerItem != null)
                     page.СкладПриміщенняВласник.Pointer = new СкладськіПриміщення_Pointer(SelectPointerItem);
 
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{СкладськіКомірки_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{СкладськіКомірки_Const.FULLNAME}", () => page);
 
                 await page.SetValue();
-            };
-
-            HBoxTop.PackStart(linkButtonHar, false, false, 10);
+            });
 
             ТабличніСписки.СкладськіПриміщення_Записи.AddColumns(TreeViewGrid);
         }
@@ -99,7 +95,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.СкладськіПриміщення_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
             {
@@ -112,10 +108,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

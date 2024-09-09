@@ -48,7 +48,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Організації_Елемент() : base()
+        public Організації_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -126,16 +126,18 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
                 if (await Елемент.Save())
                     await Контакти.SaveRecords();
+                return true;
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

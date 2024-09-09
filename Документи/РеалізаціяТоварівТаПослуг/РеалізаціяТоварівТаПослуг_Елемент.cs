@@ -70,7 +70,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public РеалізаціяТоварівТаПослуг_Елемент() : base()
+        public РеалізаціяТоварівТаПослуг_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

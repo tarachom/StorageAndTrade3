@@ -23,7 +23,7 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
-
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -32,49 +32,9 @@ namespace StorageAndTrade
 {
     class БанківськіРахункиКонтрагентів_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public БанківськіРахункиКонтрагентів_ШвидкийВибір() : base()
+        public БанківськіРахункиКонтрагентів_ШвидкийВибір() 
         {
             ТабличніСписки.БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {БанківськіРахункиКонтрагентів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {БанківськіРахункиКонтрагентів_Const.FULLNAME}", () => { return page; });
-
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
-                    {
-                        IsNew = true,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    await page.Елемент.New();
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
-
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
         }
 
         protected override async ValueTask LoadRecords()
@@ -93,6 +53,50 @@ namespace StorageAndTrade
             ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, БанківськіРахункиКонтрагентів_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.БанківськіРахункиКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            БанківськіРахункиКонтрагентів page = new БанківськіРахункиКонтрагентів()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {БанківськіРахункиКонтрагентів_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            БанківськіРахункиКонтрагентів_Елемент page = new БанківськіРахункиКонтрагентів_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            БанківськіРахункиКонтрагентів_Objest Обєкт = new БанківськіРахункиКонтрагентів_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

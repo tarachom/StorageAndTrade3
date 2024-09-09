@@ -23,7 +23,7 @@ limitations under the License.
 
 using Gtk;
 using InterfaceGtk;
-
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -31,49 +31,9 @@ namespace StorageAndTrade
 {
     class СеріїНоменклатури_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public СеріїНоменклатури_ШвидкийВибір() : base()
+        public СеріїНоменклатури_ШвидкийВибір() 
         {
             ТабличніСписки.СеріїНоменклатури_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {СеріїНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    СеріїНоменклатури page = new СеріїНоменклатури()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {СеріїНоменклатури_Const.FULLNAME}", () => { return page; });
-
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    СеріїНоменклатури_Елемент page = new СеріїНоменклатури_Елемент
-                    {
-                        IsNew = true,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    await page.Елемент.New();
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
-
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
         }
 
         protected override async ValueTask LoadRecords()
@@ -92,6 +52,50 @@ namespace StorageAndTrade
             ТабличніСписки.СеріїНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, СеріїНоменклатури_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.СеріїНоменклатури_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            СеріїНоменклатури page = new СеріїНоменклатури()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {СеріїНоменклатури_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            СеріїНоменклатури_Елемент page = new СеріїНоменклатури_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            СеріїНоменклатури_Objest Обєкт = new СеріїНоменклатури_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

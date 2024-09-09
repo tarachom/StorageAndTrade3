@@ -50,7 +50,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ЗбіркаТоварівНаСкладі_Елемент() : base()
+        public ЗбіркаТоварівНаСкладі_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

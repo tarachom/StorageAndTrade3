@@ -34,51 +34,9 @@ namespace StorageAndTrade
     {
         public Склади_PointerControl СкладВласник = new Склади_PointerControl();
 
-        public СкладськіПриміщення_ШвидкийВибір() : base()
+        public СкладськіПриміщення_ШвидкийВибір()
         {
             ТабличніСписки.СкладськіПриміщення_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {СкладськіПриміщення_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    СкладськіПриміщення page = new СкладськіПриміщення()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    page.СкладВласник.Pointer = СкладВласник.Pointer;
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {СкладськіПриміщення_Const.FULLNAME}", () => { return page; });
-
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
-                    {
-                        IsNew = true,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    await page.Елемент.New();
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
-
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
 
             //Власник
             HBoxTop.PackStart(СкладВласник, false, false, 2);
@@ -116,6 +74,55 @@ namespace StorageAndTrade
             ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid, СкладськіПриміщення_ВідбориДляПошуку.Відбори(searchText));
 
             await ТабличніСписки.СкладськіПриміщення_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            СкладськіПриміщення page = new СкладськіПриміщення()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            page.СкладВласник.Pointer = СкладВласник.Pointer;
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {СкладськіПриміщення_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+            {
+                await page.Елемент.New();
+                page.СкладДляНового = СкладВласник.Pointer;
+            }
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            СкладськіПриміщення_Objest Обєкт = new СкладськіПриміщення_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

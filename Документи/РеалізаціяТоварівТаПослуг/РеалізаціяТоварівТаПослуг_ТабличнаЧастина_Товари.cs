@@ -259,7 +259,7 @@ LIMIT 1
         Label ПідсумокСума = new Label() { Selectable = true };
         Label ПідсумокСкидка = new Label() { Selectable = true };
 
-        public РеалізаціяТоварівТаПослуг_ТабличнаЧастина_Товари() : base()
+        public РеалізаціяТоварівТаПослуг_ТабличнаЧастина_Товари() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

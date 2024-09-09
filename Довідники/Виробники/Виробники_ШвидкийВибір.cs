@@ -14,46 +14,9 @@ namespace StorageAndTrade
 {
     class Виробники_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public Виробники_ШвидкийВибір() : base()
+        public Виробники_ШвидкийВибір() 
         {
             ТабличніСписки.Виробники_Записи.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {Виробники_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    Виробники page = new Виробники()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        OpenFolder = OpenFolder,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Виробники_Const.FULLNAME}", () => page);
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += (object? sender, EventArgs args) =>
-                {
-                    Виробники_Елемент page = new Виробники_Елемент
-                    {
-                        IsNew = true,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
         }
 
         protected override async ValueTask LoadRecords()
@@ -79,6 +42,50 @@ namespace StorageAndTrade
                 new Where(Comparison.OR, Виробники_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
             await ТабличніСписки.Виробники_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            Виробники page = new Виробники()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Виробники_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            Виробники_Елемент page = new Виробники_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            Виробники_Objest Обєкт = new Виробники_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

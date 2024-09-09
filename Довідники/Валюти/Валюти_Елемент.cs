@@ -37,7 +37,7 @@ namespace StorageAndTrade
         Entry Код_R030 = new Entry() { WidthRequest = 500 };
         CheckButton ВиводитиКурсНаСтартову = new CheckButton("Виводити курс на стартову");
 
-        public Валюти_Елемент() : base() 
+        public Валюти_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -83,15 +83,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

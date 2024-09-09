@@ -36,36 +36,29 @@ namespace StorageAndTrade
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         Контрагенти_Папки ДеревоПапок;
 
-        public Контрагенти() : base()
+        public Контрагенти()
         {
             //Враховувати ієрархію папок
             checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
-            //Договори
+            CreateLink(HBoxTop, ДоговориКонтрагентів_Const.FULLNAME, async () =>
             {
-                LinkButton linkButton = new LinkButton($" {ДоговориКонтрагентів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkButton.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ДоговориКонтрагентів page = new ДоговориКонтрагентів();
+                ДоговориКонтрагентів page = new ДоговориКонтрагентів();
 
-                    if (SelectPointerItem != null)
-                        page.КонтрагентВласник.Pointer = new Контрагенти_Pointer(SelectPointerItem);
+                if (SelectPointerItem != null)
+                    page.КонтрагентВласник.Pointer = new Контрагенти_Pointer(SelectPointerItem);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ДоговориКонтрагентів_Const.FULLNAME}", () => page);
 
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkButton, false, false, 10);
-            }
+                await page.SetValue();
+            });
 
             //Дерево папок зправа
             ДеревоПапок = new Контрагенти_Папки
             {
                 WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack,
-                ParentWidget = this
+                CallBack_RowActivated = LoadRecords_TreeCallBack
             };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
@@ -115,7 +108,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.Контрагенти_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Контрагенти_Елемент page = new Контрагенти_Елемент
             {
@@ -128,10 +121,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

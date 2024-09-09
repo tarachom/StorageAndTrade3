@@ -15,14 +15,14 @@ namespace StorageAndTrade
 {
     public class ЗамовленняКлієнтів : РегістриНакопиченняЖурнал
     {
-        public ЗамовленняКлієнтів() : base()
+        public ЗамовленняКлієнтів() 
         {
             ТабличніСписки.ЗамовленняКлієнтів_Записи.AddColumns(TreeViewGrid);
         }
 
         #region Override
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ЗамовленняКлієнтів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗамовленняКлієнтів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
@@ -35,7 +35,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняКлієнтів_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -65,10 +65,10 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();
+            await LoadRecords();
         }
 
         #endregion

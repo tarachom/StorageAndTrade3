@@ -34,51 +34,9 @@ namespace StorageAndTrade
     {
         public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl() { Caption = "Контрагент:", WidthPresentation = 100 };
 
-        public ДоговориКонтрагентів_ШвидкийВибір() : base()
+        public ДоговориКонтрагентів_ШвидкийВибір() 
         {
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {ДоговориКонтрагентів_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ДоговориКонтрагентів page = new ДоговориКонтрагентів()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    page.КонтрагентВласник.Pointer = КонтрагентВласник.Pointer;
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ДоговориКонтрагентів_Const.FULLNAME}", () => { return page; });
-
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
-                    {
-                        IsNew = true,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    await page.Елемент.New();
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
-
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
 
             //Власник
             HBoxTop.PackStart(КонтрагентВласник, false, false, 2);
@@ -115,6 +73,55 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_ВідбориДляПошуку.Відбори(searchText));
 
             await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            ДоговориКонтрагентів page = new ДоговориКонтрагентів()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            page.КонтрагентВласник.Pointer = КонтрагентВласник.Pointer;
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ДоговориКонтрагентів_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+            {
+                await page.Елемент.New();
+                page.КонтрагентиДляНового = КонтрагентВласник.Pointer;
+            }
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            ДоговориКонтрагентів_Objest Обєкт = new ДоговориКонтрагентів_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

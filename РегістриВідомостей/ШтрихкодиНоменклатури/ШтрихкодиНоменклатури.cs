@@ -34,17 +34,17 @@ namespace StorageAndTrade
         public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
         public ХарактеристикиНоменклатури_PointerControl ХарактеристикиНоменклатуриВласник = new ХарактеристикиНоменклатури_PointerControl();
 
-        public ШтрихкодиНоменклатури() : base()
+        public ШтрихкодиНоменклатури() 
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.AddColumns(TreeViewGrid);
 
             //Номенклатура Власник
             HBoxTop.PackStart(НоменклатураВласник, false, false, 2);
             НоменклатураВласник.Caption = "Номенклатура:";
-            НоменклатураВласник.AfterSelectFunc = () =>
+            НоменклатураВласник.AfterSelectFunc = async () =>
             {
                 SelectPointerItem?.Clear();
-                LoadRecords();
+                await LoadRecords();
             };
 
             //Характеристика Власник
@@ -54,14 +54,14 @@ namespace StorageAndTrade
             {
                 ХарактеристикиНоменклатуриВласник.НоменклатураВласник = НоменклатураВласник.Pointer;
             };
-            ХарактеристикиНоменклатуриВласник.AfterSelectFunc = () =>
+            ХарактеристикиНоменклатуриВласник.AfterSelectFunc = async () =>
             {
                 SelectPointerItem?.Clear();
-                LoadRecords();
+                await LoadRecords();
             };
         }
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
 
@@ -87,15 +87,8 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ШтрихкодиНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!НоменклатураВласник.Pointer.IsEmpty())
@@ -111,13 +104,13 @@ namespace StorageAndTrade
             }
 
             //Штрихкод
-            ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, 
+            ТабличніСписки.ШтрихкодиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                 new Where(ШтрихкодиНоменклатури_Const.Штрихкод, Comparison.LIKE, searchText));
 
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
             {
@@ -132,10 +125,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.ШтрихкодиНоменклатури_Objest.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask Delete(UnigueID unigueID)
@@ -171,10 +166,10 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();
+            await LoadRecords();
         }
     }
 }

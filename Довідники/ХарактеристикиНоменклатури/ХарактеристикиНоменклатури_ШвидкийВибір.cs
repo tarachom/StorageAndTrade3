@@ -34,52 +34,9 @@ namespace StorageAndTrade
     {
         public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl() { WidthPresentation = 100 };
 
-        public ХарактеристикиНоменклатури_ШвидкийВибір(bool IsSelectPointer = false) : base()
+        public ХарактеристикиНоменклатури_ШвидкийВибір(bool IsSelectPointer = false)
         {
             ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {ХарактеристикиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
-
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
-
-            //Новий
-            {
-                LinkButton linkNew = new LinkButton("Новий");
-                linkNew.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
-                    {
-                        IsNew = true,
-                        НоменклатураДляНового = НоменклатураВласник.Pointer,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    await page.Елемент.New();
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => { return page; });
-
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkNew, false, false, 0);
-            }
 
             //Власник
             HBoxTop.PackStart(НоменклатураВласник, false, false, 2);
@@ -117,6 +74,55 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, ХарактеристикиНоменклатури_ВідбориДляПошуку.Відбори(searchText));
 
             await ТабличніСписки.ХарактеристикиНоменклатури_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ХарактеристикиНоменклатури_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+            {
+                await page.Елемент.New();
+                page.НоменклатураДляНового = НоменклатураВласник.Pointer;
+            }
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            ХарактеристикиНоменклатури_Objest Обєкт = new ХарактеристикиНоменклатури_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

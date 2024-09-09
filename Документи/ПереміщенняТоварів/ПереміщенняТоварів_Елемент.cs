@@ -58,7 +58,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ПереміщенняТоварів_Елемент() : base()
+        public ПереміщенняТоварів_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

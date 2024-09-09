@@ -158,7 +158,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ЗбіркаТоварівНаСкладі_ТабличнаЧастина_Товари() : base()
+        public ЗбіркаТоварівНаСкладі_ТабличнаЧастина_Товари() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

@@ -104,7 +104,7 @@ namespace StorageAndTrade
 
         Label ПідсумокСума = new Label() { Selectable = true };
 
-        public КорегуванняБоргу_ТабличнаЧастина_РозрахункиЗКонтрагентами() : base()
+        public КорегуванняБоргу_ТабличнаЧастина_РозрахункиЗКонтрагентами() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

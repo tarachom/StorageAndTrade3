@@ -88,7 +88,7 @@ namespace StorageAndTrade
 
         Label ПідсумокСума = new Label() { Selectable = true };
 
-        public ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки() : base()
+        public ВведенняЗалишків_ТабличнаЧастина_БанківськіРахунки() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

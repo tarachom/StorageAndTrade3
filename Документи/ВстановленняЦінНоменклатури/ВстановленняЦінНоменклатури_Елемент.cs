@@ -48,7 +48,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ВстановленняЦінНоменклатури_Елемент() : base()
+        public ВстановленняЦінНоменклатури_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

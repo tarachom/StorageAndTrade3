@@ -36,7 +36,7 @@ namespace StorageAndTrade
         Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта:" };
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl() { Caption = "Контрагент:" };
 
-        public БанківськіРахункиКонтрагентів_Елемент() : base() 
+        public БанківськіРахункиКонтрагентів_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -77,15 +77,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

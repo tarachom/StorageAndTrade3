@@ -58,7 +58,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ВведенняЗалишків_Елемент() : base()
+        public ВведенняЗалишків_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

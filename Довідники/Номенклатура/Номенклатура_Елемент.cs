@@ -55,7 +55,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Номенклатура_Елемент() : base()
+        public Номенклатура_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -187,16 +187,18 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
                 if (await Елемент.Save())
                     await Файли.SaveRecords();
+                return true;
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

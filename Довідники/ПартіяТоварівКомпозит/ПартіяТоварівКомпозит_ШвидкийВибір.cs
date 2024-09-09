@@ -35,28 +35,9 @@ namespace StorageAndTrade
     {
         public Номенклатура_PointerControl НоменклатураВідбір = new Номенклатура_PointerControl() { WidthPresentation = 100 };
 
-        public ПартіяТоварівКомпозит_ШвидкийВибір() : base()
+        public ПартіяТоварівКомпозит_ШвидкийВибір()
         {
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-
-            //Сторінка
-            {
-                LinkButton linkPage = new LinkButton($" {ПартіяТоварівКомпозит_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkPage.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит()
-                    {
-                        DirectoryPointerItem = DirectoryPointerItem,
-                        CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                    };
-
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => { return page; });
-
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkPage, false, false, 10);
-            }
 
             //Відбір
             HBoxTop.PackStart(НоменклатураВідбір, false, false, 2);
@@ -106,6 +87,51 @@ WHERE
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.ДодатиВідбір(TreeViewGrid, ПартіяТоварівКомпозит_ВідбориДляПошуку.Відбори(searchText), true);
 
             await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            ПартіяТоварівКомпозит page = new ПартіяТоварівКомпозит()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                OpenFolder = OpenFolder
+            };
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПартіяТоварівКомпозит_Const.FULLNAME}", () => page);
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            if (!IsNew)
+            {
+                ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
+                {
+                    IsNew = IsNew,
+                    CallBack_OnSelectPointer = CallBack_OnSelectPointer
+                };
+
+                if (unigueID == null || !await page.Елемент.Read(unigueID))
+                {
+                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                    return;
+                }
+
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+                page.SetValue();
+            }
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            ПартіяТоварівКомпозит_Objest Обєкт = new ПартіяТоварівКомпозит_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
     }
 }

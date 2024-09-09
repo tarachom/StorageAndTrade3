@@ -37,7 +37,7 @@ namespace StorageAndTrade
         TextView НазваПовна = new TextView();
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
 
-        public ХарактеристикиНоменклатури_Елемент() : base() 
+        public ХарактеристикиНоменклатури_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -81,15 +81,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

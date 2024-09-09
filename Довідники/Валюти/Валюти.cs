@@ -33,21 +33,18 @@ namespace StorageAndTrade
 {
     public class Валюти : ДовідникЖурнал
     {
-        public Валюти() : base()
+        public Валюти()
         {
             //Курси валют
             {
                 LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
                 {
-                    if (SelectPointerItem != null || DirectoryPointerItem != null)
-                    {
-                        КурсиВалют page = new КурсиВалют();
-                        page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem!);
+                    КурсиВалют page = new КурсиВалют();
+                    page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID());
 
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Курси валют", () => { return page; });
-                        page.SetValue();
-                    }
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Курси валют", () => { return page; });
+                    page.SetValue();
                 };
 
                 HBoxTop.PackStart(linkButtonCurs, false, false, 10);
@@ -68,8 +65,6 @@ namespace StorageAndTrade
             }
 
             ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
-
-            MessageRequestText = "Встановити або зняти помітку на видалення?\n\nУВАГА!\nПри встановленні помітку на видалення, буде очищений регіст Курси Валют!";
         }
 
         #region Override
@@ -97,7 +92,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.Валюти_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Валюти_Елемент page = new Валюти_Елемент
             {
@@ -110,10 +105,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

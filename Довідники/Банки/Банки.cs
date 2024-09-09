@@ -33,7 +33,7 @@ namespace StorageAndTrade
 {
     public class Банки : ДовідникЖурнал
     {
-        public Банки() : base()
+        public Банки() 
         {
             //Завантаження списку Банків
             {
@@ -77,7 +77,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.Банки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Банки_Елемент page = new Банки_Елемент
             {
@@ -90,10 +90,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

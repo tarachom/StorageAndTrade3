@@ -32,7 +32,7 @@ using System.Xml.XPath;
 
 namespace StorageAndTrade
 {
-    class Обробка_ПочатковеЗаповнення : ФормаЕлемент
+    class Обробка_ПочатковеЗаповнення : Обробка
     {
         #region Fields
 
@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Обробка_ПочатковеЗаповнення() : base()
+        public Обробка_ПочатковеЗаповнення() 
         {
             //Кнопки
             Box hBoxTop = new Box(Orientation.Horizontal, 0);

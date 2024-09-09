@@ -44,7 +44,7 @@ namespace StorageAndTrade
 
         Label labelFileName = new Label() { Wrap = true, Selectable = true };
 
-        public Файли_Елемент() : base() 
+        public Файли_Елемент()  
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -205,17 +205,21 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
                 if (await Елемент.Save())
+                {
                     //Перечитати
                     SetValue();
+                }
+                return true;
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

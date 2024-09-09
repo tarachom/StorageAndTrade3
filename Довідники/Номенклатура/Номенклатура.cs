@@ -37,54 +37,41 @@ namespace StorageAndTrade
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         Номенклатура_Папки ДеревоПапок;
 
-        public Номенклатура() : base()
+        public Номенклатура()
         {
             //Враховувати ієрархію папок
             checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
-            //Характеристики
+            CreateLink(HBoxTop, ХарактеристикиНоменклатури_Const.FULLNAME, async () =>
             {
-                LinkButton linkButtonHar = new LinkButton($" {ХарактеристикиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkButtonHar.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
+                ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
 
-                    if (SelectPointerItem != null)
-                        page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
+                if (SelectPointerItem != null)
+                    page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => page);
 
-                    await page.SetValue();
-                };
+                await page.SetValue();
+            });
 
-                HBoxTop.PackStart(linkButtonHar, false, false, 10);
-            }
-
-            //ШтрихКоди
+            CreateLink(HBoxTop, ШтрихкодиНоменклатури_Const.FULLNAME, async () =>
             {
-                LinkButton linkButtonShKody = new LinkButton($" {ШтрихкодиНоменклатури_Const.FULLNAME}") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkButtonShKody.Clicked += async (object? sender, EventArgs args) =>
-                {
-                    ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
+                ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
 
-                    if (SelectPointerItem != null)
-                        page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
+                if (SelectPointerItem != null)
+                    page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => page);
 
-                    await page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkButtonShKody, false, false, 10);
-            }
+                await page.SetValue();
+            });
 
             //Дерево папок cправа
             ДеревоПапок = new Номенклатура_Папки
             {
                 WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack,
-                ParentWidget = this
+                CallBack_RowActivated = LoadRecords_TreeCallBack
             };
 
             HPanedTable.Pack2(ДеревоПапок, false, true);
@@ -133,7 +120,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.Номенклатура_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Номенклатура_Елемент page = new Номенклатура_Елемент
             {
@@ -146,10 +133,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

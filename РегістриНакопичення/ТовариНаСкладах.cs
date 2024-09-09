@@ -29,12 +29,12 @@ namespace StorageAndTrade
 {
     class ТовариНаСкладах : РегістриНакопиченняЖурнал
     {
-        public ТовариНаСкладах() : base()
+        public ТовариНаСкладах() 
         {
             ТабличніСписки.ТовариНаСкладах_Записи.AddColumns(TreeViewGrid);
         }
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.ТовариНаСкладах_Записи.SelectPointerItem = SelectPointerItem;
 
@@ -48,7 +48,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ТовариНаСкладах_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             searchText = searchText.ToLower().Trim();
 
@@ -78,10 +78,10 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();           
+            await LoadRecords();
         }
     }
 }

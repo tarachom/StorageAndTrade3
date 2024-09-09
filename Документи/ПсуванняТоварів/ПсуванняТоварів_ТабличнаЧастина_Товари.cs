@@ -167,7 +167,7 @@ namespace StorageAndTrade
 
         Label ПідсумокСума = new Label() { Selectable = true };
 
-        public ПсуванняТоварів_ТабличнаЧастина_Товари() : base()
+        public ПсуванняТоварів_ТабличнаЧастина_Товари() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

@@ -88,7 +88,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Номенклатура_ТабличнаЧастина_Файли() : base()
+        public Номенклатура_ТабличнаЧастина_Файли() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

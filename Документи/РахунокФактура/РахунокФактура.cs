@@ -33,14 +33,14 @@ namespace StorageAndTrade
 {
     public class РахунокФактура : ДокументЖурнал
     {
-        public РахунокФактура() : base()
+        public РахунокФактура() 
         {
             ТабличніСписки.РахунокФактура_Записи.AddColumns(TreeViewGrid);
         }
 
         #region Override
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
             ТабличніСписки.РахунокФактура_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РахунокФактура_Записи.DocumentPointerItem = DocumentPointerItem;
@@ -50,7 +50,7 @@ namespace StorageAndTrade
             await ТабличніСписки.РахунокФактура_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             //Назва
             ТабличніСписки.РахунокФактура_Записи.ДодатиВідбір(TreeViewGrid,
@@ -64,7 +64,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.РахунокФактура_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             РахунокФактура_Елемент page = new РахунокФактура_Елемент
             {
@@ -77,10 +77,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
@@ -117,10 +119,10 @@ namespace StorageAndTrade
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
         }
 
-        protected override void PeriodChanged()
+        protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            LoadRecords();
+            await LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)

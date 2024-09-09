@@ -33,7 +33,7 @@ namespace StorageAndTrade
 {
     public class ПартіяТоварівКомпозит : ДовідникЖурнал
     {
-        public ПартіяТоварівКомпозит() : base()
+        public ПартіяТоварівКомпозит() 
         {
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.AddColumns(TreeViewGrid);
         }
@@ -63,7 +63,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.ПартіяТоварівКомпозит_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
             {
@@ -76,10 +76,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

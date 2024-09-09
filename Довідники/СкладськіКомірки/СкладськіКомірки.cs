@@ -37,7 +37,7 @@ namespace StorageAndTrade
         СкладськіКомірки_Папки ДеревоПапок;
         public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
 
-        public СкладськіКомірки() : base()
+        public СкладськіКомірки() 
         {
             //Враховувати ієрархію папок
             checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
@@ -51,8 +51,7 @@ namespace StorageAndTrade
             ДеревоПапок = new СкладськіКомірки_Папки
             {
                 WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack,
-                ParentWidget = this
+                CallBack_RowActivated = LoadRecords_TreeCallBack
             };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
@@ -118,7 +117,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.СкладськіКомірки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
             {
@@ -131,10 +130,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

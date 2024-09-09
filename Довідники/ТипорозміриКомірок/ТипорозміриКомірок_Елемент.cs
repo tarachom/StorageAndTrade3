@@ -38,7 +38,7 @@ namespace StorageAndTrade
         Entry Обєм = new Entry() { WidthRequest = 100 };
         Entry Вантажопідйомність = new Entry() { WidthRequest = 100 };
 
-        public ТипорозміриКомірок_Елемент() : base()
+        public ТипорозміриКомірок_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -91,15 +91,16 @@ namespace StorageAndTrade
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask<bool> Save()
         {
             try
             {
-                await Елемент.Save();
+                return await Елемент.Save();
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+                return false;
             }
         }
     }

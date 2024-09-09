@@ -84,6 +84,7 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new Валюти_Pointer();
+            AfterSelectFunc?.Invoke();
         }
     }
 }

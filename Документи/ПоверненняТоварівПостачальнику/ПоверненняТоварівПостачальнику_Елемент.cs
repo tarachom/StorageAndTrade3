@@ -63,7 +63,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ПоверненняТоварівПостачальнику_Елемент() : base()
+        public ПоверненняТоварівПостачальнику_Елемент() 
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;

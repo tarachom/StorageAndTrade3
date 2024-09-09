@@ -32,7 +32,7 @@ using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_ЗамовленняКлієнтів : ФормаЕлемент
+    class Звіт_ЗамовленняКлієнтів : ФормаЗвіт
     {
         Notebook reportNotebook;
 
@@ -58,7 +58,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Звіт_ЗамовленняКлієнтів() : base()
+        public Звіт_ЗамовленняКлієнтів() 
         {
             //Кнопки
             Box hBoxTop = new Box(Orientation.Horizontal, 0);

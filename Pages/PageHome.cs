@@ -27,7 +27,6 @@ limitations under the License.
 
 */
 
-using AccountingSoftware;
 using Gtk;
 
 namespace StorageAndTrade

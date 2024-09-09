@@ -34,7 +34,7 @@ using System.Xml.XPath;
 
 namespace StorageAndTrade
 {
-    class Обробка_ЗавантаженняКурсівВалют : ФормаЕлемент
+    class Обробка_ЗавантаженняКурсівВалют : Обробка
     {
         #region Fields
 
@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Обробка_ЗавантаженняКурсівВалют() : base()
+        public Обробка_ЗавантаженняКурсівВалют() 
         {
             //Кнопки
             Box hBoxTop = new Box(Orientation.Horizontal, 0);

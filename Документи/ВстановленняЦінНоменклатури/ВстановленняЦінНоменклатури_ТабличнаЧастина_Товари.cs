@@ -125,7 +125,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари() : base()
+        public ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

@@ -35,7 +35,7 @@ namespace StorageAndTrade
     {
         public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl();
 
-        public ДоговориКонтрагентів() : base()
+        public ДоговориКонтрагентів() 
         {
             //Власник
             HBoxTop.PackStart(КонтрагентВласник, false, false, 2);
@@ -84,7 +84,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.ДоговориКонтрагентів_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
             {
@@ -97,10 +97,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

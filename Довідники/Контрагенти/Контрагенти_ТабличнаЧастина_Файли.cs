@@ -83,7 +83,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Контрагенти_ТабличнаЧастина_Файли() : base()
+        public Контрагенти_ТабличнаЧастина_Файли() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();

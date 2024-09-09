@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class Склади_Папки : ДовідникЖурнал
     {
-        public Склади_Папки() : base()
+        public Склади_Папки() 
         {
             ТабличніСписки.Склади_Папки_Записи.AddColumns(TreeViewGrid);
         }
@@ -62,7 +62,7 @@ namespace StorageAndTrade
             hBox.PackStart(ТабличніСписки.Склади_Папки_Записи.CreateFilter(TreeViewGrid), false, false, 5);
         }
 
-        protected override async ValueTask<(string Name, Func<Widget>? FuncWidget, System.Action? SetValue)> OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             Склади_Папки_Елемент page = new Склади_Папки_Елемент
             {
@@ -76,10 +76,12 @@ namespace StorageAndTrade
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return ("", null, null);
+                return;
             }
 
-            return (page.Caption, () => page, page.SetValue);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+
+            page.SetValue();
         }
 
 
