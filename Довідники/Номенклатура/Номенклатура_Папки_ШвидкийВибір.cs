@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class Номенклатура_Папки_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public Номенклатура_Папки_ШвидкийВибір() : base(false)
+        public Номенклатура_Папки_ШвидкийВибір()
         {
             ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
         }
@@ -41,11 +41,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
-            ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.OpenFolder = OpenFolder;
 
             ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -54,7 +53,7 @@ namespace StorageAndTrade
             ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
                 new Where(Comparison.OR, Номенклатура_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            await ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Номенклатура_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)

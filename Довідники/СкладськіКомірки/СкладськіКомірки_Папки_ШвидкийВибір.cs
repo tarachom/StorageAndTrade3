@@ -43,14 +43,13 @@ namespace StorageAndTrade
         {
             ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
-            ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.OpenFolder = OpenFolder;
 
             ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             if (!СкладПриміщенняВласник.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, new Where(СкладськіКомірки_Папки_Const.Власник, Comparison.EQ, СкладПриміщенняВласник.UnigueID.UGuid));
 
-            await ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.СкладськіКомірки_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)

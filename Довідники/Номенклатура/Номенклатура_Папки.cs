@@ -41,11 +41,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Номенклатура_Папки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Номенклатура_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
-            ТабличніСписки.Номенклатура_Папки_Записи.OpenFolder = OpenFolder;
 
             ТабличніСписки.Номенклатура_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -54,7 +53,7 @@ namespace StorageAndTrade
             ТабличніСписки.Номенклатура_Папки_Записи.ДодатиВідбір(TreeViewGrid, 
                 new Where(Comparison.OR, Номенклатура_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
 
-            await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override void FilterRecords(Box hBox)

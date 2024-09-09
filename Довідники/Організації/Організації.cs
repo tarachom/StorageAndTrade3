@@ -23,7 +23,6 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Організації_Записи.SelectPointerItem = SelectPointerItem; //!+
             ТабличніСписки.Організації_Записи.DirectoryPointerItem = DirectoryPointerItem;
-            ТабличніСписки.Організації_Записи.OpenFolder = OpenFolder; //!+
 
             ТабличніСписки.Організації_Записи.ОчиститиВідбір(TreeViewGrid);
 

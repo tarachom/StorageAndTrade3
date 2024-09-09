@@ -41,11 +41,10 @@ namespace StorageAndTrade
         {
             ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
-            ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.OpenFolder = OpenFolder;
 
             ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Контрагенти_Папки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)

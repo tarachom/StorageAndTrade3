@@ -45,14 +45,14 @@ namespace StorageAndTrade
         protected override void ButtonFindClicked(string text)
         {
             PageFullTextSearch page = new PageFullTextSearch();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Пошук", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Пошук", () => page);
             page.Find(text);
         }
 
         public void OpenFirstPages()
         {
             PageHome page = new PageHome();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Стартова", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Стартова", () => page);
 
             //Активні користувачі
             page.АктивніКористувачі.AutoRefreshRun();
@@ -65,7 +65,7 @@ namespace StorageAndTrade
 
             //Початкове заповнення
             if (!ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const)
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Початкове заповнення", () => { return new Обробка_ПочатковеЗаповнення(); });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Початкове заповнення", () => new Обробка_ПочатковеЗаповнення());
         }
 
         public async void SetCurrentUser()
@@ -124,18 +124,15 @@ namespace StorageAndTrade
 
         protected override void Налаштування(LinkButton lb)
         {
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Налаштування", () =>
-            {
-                PageSettings page = new PageSettings();
-                page.SetValue();
-                return page;
-            });
+            PageSettings page = new PageSettings();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Налаштування", () => page);
+            page.SetValue();
         }
 
         protected override void Сервіс(LinkButton lb)
         {
             PageService page = new PageService();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Сервіс", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Сервіс", () => page);
             page.SetValue();
         }
     }

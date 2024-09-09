@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.09.2024 13:08:54
+ * Дата конфігурації: 09.09.2024 17:50:49
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -94,7 +94,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -108,7 +107,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -255,7 +254,6 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -317,7 +315,7 @@ namespace StorageAndTrade_1_0.Довідники.ТабличніСписки
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -571,7 +569,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -585,7 +582,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -794,7 +791,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -808,7 +804,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -929,7 +925,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -943,7 +938,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -1055,7 +1050,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1069,7 +1063,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -1198,7 +1192,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1212,7 +1205,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -1343,7 +1336,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1357,7 +1349,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -1497,7 +1489,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1558,7 +1549,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -1691,7 +1682,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1705,7 +1695,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -1845,7 +1835,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -1908,7 +1897,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -2032,7 +2021,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2046,7 +2034,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -2177,7 +2165,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2242,7 +2229,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -2365,7 +2352,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2379,7 +2365,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -2505,7 +2491,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2555,7 +2540,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -2670,7 +2655,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2684,7 +2668,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -2803,7 +2787,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2817,7 +2800,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -2934,7 +2917,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -2948,7 +2930,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3069,7 +3051,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3083,7 +3064,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3195,7 +3176,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3209,7 +3189,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3328,7 +3308,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3342,7 +3321,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3454,7 +3433,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3468,7 +3446,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3587,7 +3565,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3601,7 +3578,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3713,7 +3690,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3727,7 +3703,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3846,7 +3822,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3860,7 +3835,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -3977,7 +3952,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -3991,7 +3965,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -4127,7 +4101,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4141,7 +4114,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -4259,7 +4232,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4273,7 +4245,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -4409,7 +4381,6 @@ END
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4423,7 +4394,7 @@ END
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -4635,7 +4606,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4649,7 +4619,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -4848,7 +4818,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -4862,7 +4831,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -4996,7 +4965,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5010,7 +4978,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -5148,7 +5116,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5162,7 +5129,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -5296,7 +5263,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5310,7 +5276,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -5448,7 +5414,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5462,7 +5427,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -5596,7 +5561,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5610,7 +5574,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -5757,7 +5721,6 @@ FROM
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5807,7 +5770,7 @@ FROM
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -5949,7 +5912,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -5963,7 +5925,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -6105,7 +6067,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6155,7 +6116,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -6280,7 +6241,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6294,7 +6254,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -6428,7 +6388,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6490,7 +6449,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -6618,7 +6577,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6632,7 +6590,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -6762,7 +6720,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6812,7 +6769,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -6937,7 +6894,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -6951,7 +6907,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -7085,7 +7041,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7138,7 +7093,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -7255,7 +7210,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7269,7 +7223,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -7383,7 +7337,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7397,7 +7350,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -7507,7 +7460,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7521,7 +7473,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -7655,7 +7607,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7708,7 +7659,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -7834,7 +7785,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7848,7 +7798,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -7969,7 +7919,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -7983,7 +7932,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -8100,7 +8049,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8114,7 +8062,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -8320,7 +8268,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8334,7 +8281,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -8485,7 +8432,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8499,7 +8445,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -8625,7 +8571,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8687,7 +8632,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -8808,7 +8753,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -8822,7 +8766,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -8979,7 +8923,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9029,7 +8972,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -9164,7 +9107,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9178,7 +9120,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -9300,7 +9242,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9314,7 +9255,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -9456,7 +9397,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9470,7 +9410,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -9590,7 +9530,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9604,7 +9543,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -9728,7 +9667,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9742,7 +9680,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -9884,7 +9822,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -9898,7 +9835,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -10044,7 +9981,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10058,7 +9994,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
@@ -10182,7 +10118,6 @@ WHERE
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static UnigueID? OpenFolder { get; set; }
         public static TreePath? FirstPath;
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
@@ -10196,7 +10131,7 @@ WHERE
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
         {
             FirstPath = SelectPath = CurrentPath = null;
 
