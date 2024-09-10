@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.09.2024 17:50:49
+ * Дата конфігурації: 10.09.2024 13:50:00
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -16026,6 +16026,302 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 	    
     #endregion
     
+    #region DOCUMENT "МійДокумент"
+    
+      
+    public class МійДокумент_Записи : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string ДатаДок = "";
+        string НомерДок = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] 
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
+                ID, 
+                /*Проведений документ*/ Spend, 
+                /*Назва*/ Назва,
+                /*ДатаДок*/ ДатаДок,
+                /*НомерДок*/ НомерДок,
+                /*Коментар*/ Коментар,
+                
+            };
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Spend Проведений документ*/ typeof(bool),
+                /*Назва*/ typeof(string),  
+                /*ДатаДок*/ typeof(string),  
+                /*НомерДок*/ typeof(string),  
+                /*Коментар*/ typeof(string),  
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.МійДокумент_Const.ДатаДок, типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static ListBox CreateFilter(TreeView treeView)
+        {
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
+
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Документи.МійДокумент_Select МійДокумент_Select = new Документи.МійДокумент_Select();
+            МійДокумент_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Проведений документ*/ "spend",
+                /*Назва*/ Документи.МійДокумент_Const.Назва,
+                /*ДатаДок*/ Документи.МійДокумент_Const.ДатаДок,
+                /*НомерДок*/ Документи.МійДокумент_Const.НомерДок,
+                /*Коментар*/ Документи.МійДокумент_Const.Коментар,
+                
+            ]);
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) МійДокумент_Select.QuerySelect.Where = (List<Where>)where;
+
+            МійДокумент_Select.QuerySelect.Order.Add(
+               Документи.МійДокумент_Const.ДатаДок, SelectOrder.ASC);
+            
+
+            /* SELECT */
+            await МійДокумент_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
+            while (МійДокумент_Select.MoveNext())
+            {
+                Документи.МійДокумент_Pointer? cur = МійДокумент_Select.Current;
+
+                if (cur != null)
+                {
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    МійДокумент_Записи Record = new МійДокумент_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Spend = (bool)Fields["spend"], /*Проведений документ*/
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[МійДокумент_Const.Назва].ToString() ?? "",
+                            ДатаДок = Fields[МійДокумент_Const.ДатаДок].ToString() ?? "",
+                            НомерДок = Fields[МійДокумент_Const.НомерДок].ToString() ?? "",
+                            Коментар = Fields[МійДокумент_Const.Коментар].ToString() ?? "",
+                            
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DocumentPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
+        }
+    }
+	    
+    #endregion
+    
+    #region DOCUMENT "МійДокумент2"
+    
+      
+    public class МійДокумент2_Записи : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] 
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
+                ID, 
+                /*Проведений документ*/ Spend, 
+                /*Назва*/ Назва,
+                /*НомерДок*/ НомерДок,
+                /*ДатаДок*/ ДатаДок,
+                /*Коментар*/ Коментар,
+                
+            };
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Spend Проведений документ*/ typeof(bool),
+                /*Назва*/ typeof(string),  
+                /*НомерДок*/ typeof(string),  
+                /*ДатаДок*/ typeof(string),  
+                /*Коментар*/ typeof(string),  
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.МійДокумент2_Const.ДатаДок, типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static ListBox CreateFilter(TreeView treeView)
+        {
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
+
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Документи.МійДокумент2_Select МійДокумент2_Select = new Документи.МійДокумент2_Select();
+            МійДокумент2_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Проведений документ*/ "spend",
+                /*Назва*/ Документи.МійДокумент2_Const.Назва,
+                /*НомерДок*/ Документи.МійДокумент2_Const.НомерДок,
+                /*ДатаДок*/ Документи.МійДокумент2_Const.ДатаДок,
+                /*Коментар*/ Документи.МійДокумент2_Const.Коментар,
+                
+            ]);
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) МійДокумент2_Select.QuerySelect.Where = (List<Where>)where;
+
+            МійДокумент2_Select.QuerySelect.Order.Add(
+               Документи.МійДокумент2_Const.ДатаДок, SelectOrder.ASC);
+            
+
+            /* SELECT */
+            await МійДокумент2_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
+            while (МійДокумент2_Select.MoveNext())
+            {
+                Документи.МійДокумент2_Pointer? cur = МійДокумент2_Select.Current;
+
+                if (cur != null)
+                {
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    МійДокумент2_Записи Record = new МійДокумент2_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Spend = (bool)Fields["spend"], /*Проведений документ*/
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[МійДокумент2_Const.Назва].ToString() ?? "",
+                            НомерДок = Fields[МійДокумент2_Const.НомерДок].ToString() ?? "",
+                            ДатаДок = Fields[МійДокумент2_Const.ДатаДок].ToString() ?? "",
+                            Коментар = Fields[МійДокумент2_Const.Коментар].ToString() ?? "",
+                            
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DocumentPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
+        }
+    }
+	    
+    #endregion
+    
 
     //
     // Журнали
@@ -16234,6 +16530,16 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 if (where != null) WhereDict.Add("КорегуванняБоргу", [where]);
             }
               
+            {
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.МійДокумент_Const.ДатаДок, типПеріоду, start, stop);
+                if (where != null) WhereDict.Add("МійДокумент", [where]);
+            }
+              
+            {
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.МійДокумент2_Const.ДатаДок, типПеріоду, start, stop);
+                if (where != null) WhereDict.Add("МійДокумент2", [where]);
+            }
+              
         }
 
         public static void ОчиститиВідбір(TreeView treeView)
@@ -16268,6 +16574,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 {"ЗбіркаТоварівНаСкладі", "Збірка товарів на складі"},
                 {"РозміщенняНоменклатуриПоКоміркам", "Розміщення номенклатури по коміркам"},
                 {"КорегуванняБоргу", "Корегування боргу контрагентів"},
+                {"МійДокумент", "МійДокумент"},
+                {"МійДокумент2", "МійДокумент2"},
                 
             };
         }
@@ -17154,6 +17462,98 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.КорегуванняБоргу_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
                               query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Коментар, "Коментар"));
+                            
+                  allQuery.Add(query.Construct());
+              }
+              
+              //Документ: МійДокумент
+              {
+                  Query query = new Query(Документи.МійДокумент_Const.TABLE);
+
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
+                  {
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("МійДокумент", out List<Where>? listWhere))
+                      {
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
+                      }
+                  }
+                  
+                  query.FieldAndAlias.Add(new NameValue<string>("'МійДокумент'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент_Const.TABLE + "." + Документи.МійДокумент_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент_Const.TABLE + "." + Документи.МійДокумент_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент_Const.TABLE + "." + Документи.МійДокумент_Const.НомерДок, "Номер"));
+                            
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Організація")); /* Empty Field - Організація*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Автор")); /* Empty Field - Автор*/
+                        
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент_Const.TABLE + "." + Документи.МійДокумент_Const.Коментар, "Коментар"));
+                            
+                  allQuery.Add(query.Construct());
+              }
+              
+              //Документ: МійДокумент2
+              {
+                  Query query = new Query(Документи.МійДокумент2_Const.TABLE);
+
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
+                  {
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("МійДокумент2", out List<Where>? listWhere))
+                      {
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
+                      }
+                  }
+                  
+                  query.FieldAndAlias.Add(new NameValue<string>("'МійДокумент2'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент2_Const.TABLE + "." + Документи.МійДокумент2_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент2_Const.TABLE + "." + Документи.МійДокумент2_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент2_Const.TABLE + "." + Документи.МійДокумент2_Const.НомерДок, "Номер"));
+                            
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Організація")); /* Empty Field - Організація*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                        
+                          query.FieldAndAlias.Add(new NameValue<string>("''", "Автор")); /* Empty Field - Автор*/
+                        
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.МійДокумент2_Const.TABLE + "." + Документи.МійДокумент2_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }

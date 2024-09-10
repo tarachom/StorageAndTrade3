@@ -85,8 +85,7 @@ namespace StorageAndTrade
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                UnigueID? unigueID = SelectPointerItem ?? DirectoryPointerItem;
-                Номенклатура_Objest? Обєкт = await new Номенклатура_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
+                Номенклатура_Objest? Обєкт = await new Номенклатура_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
                 if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
             }
 

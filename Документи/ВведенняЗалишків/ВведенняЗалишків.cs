@@ -129,8 +129,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            ВведенняЗалишків_Pointer ВведенняЗалишків_Pointer = new ВведенняЗалишків_Pointer(unigueID);
-            ВведенняЗалишків_Objest? ВведенняЗалишків_Objest = await ВведенняЗалишків_Pointer.GetDocumentObject(true);
+            ВведенняЗалишків_Objest? ВведенняЗалишків_Objest = await new ВведенняЗалишків_Pointer(unigueID).GetDocumentObject(true);
             if (ВведенняЗалишків_Objest == null) return;
 
             if (spendDoc)

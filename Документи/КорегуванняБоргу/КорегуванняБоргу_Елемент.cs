@@ -47,16 +47,14 @@ namespace StorageAndTrade
 
         #endregion
 
-        public КорегуванняБоргу_Елемент() 
+        public КорегуванняБоргу_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(КорегуванняБоргу_Const.FULLNAME, НомерДок, ДатаДок);
-
             CreateField(HBoxComment, "Коментар:", Коментар);
 
-            РозрахункиЗКонтрагентами.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(РозрахункиЗКонтрагентами, new Label("Розрахунки з контрагентами"), 0);
             NotebookTablePart.CurrentPage = 0;
         }
@@ -103,6 +101,7 @@ namespace StorageAndTrade
             Підрозділ.Pointer = Елемент.Підрозділ;
             Автор.Pointer = Елемент.Автор;
 
+            РозрахункиЗКонтрагентами.ЕлементВласник = Елемент;
             await РозрахункиЗКонтрагентами.LoadRecords();
         }
 

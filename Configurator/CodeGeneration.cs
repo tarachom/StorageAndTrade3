@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 09.09.2024 17:50:49
+ * Дата конфігурації: 10.09.2024 13:50:00
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -178,6 +178,8 @@ namespace StorageAndTrade_1_0
                         "ЗбіркаТоварівНаСкладі" => await new Документи.ЗбіркаТоварівНаСкладі_Pointer(uuidAndText.Uuid).GetPresentation(),
                         "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(),
                         "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "МійДокумент" => await new Документи.МійДокумент_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "МійДокумент2" => await new Документи.МійДокумент2_Pointer(uuidAndText.Uuid).GetPresentation(),
                         _ => ""
                         };
                     }
@@ -25100,6 +25102,542 @@ namespace StorageAndTrade_1_0.Документи
     
     #endregion
     
+    #region DOCUMENT "МійДокумент"
+    public static class МійДокумент_Const
+    {
+        public const string TABLE = "tab_a96";
+        public const string POINTER = "Документи.МійДокумент"; /* Повна назва вказівника */
+        public const string FULLNAME = "МійДокумент"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
+        public readonly static string[] PRESENTATION_FIELDS = ["docname", ];
+        
+        
+        public const string Назва = "docname";
+        public const string ДатаДок = "docdate";
+        public const string НомерДок = "docnomer";
+        public const string Коментар = "col_a1";
+    }
+
+    public static class МійДокумент_Export
+    {
+        public static async ValueTask ToXmlFile(МійДокумент_Pointer МійДокумент, string pathToSave)
+        {
+            await ValueTask.FromResult(true);
+            
+        }
+    }
+
+    public class МійДокумент_Objest : DocumentObject
+    {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
+        public МійДокумент_Objest() : base(Config.Kernel, "tab_a96", "МійДокумент",
+             ["docname", "docdate", "docnomer", "col_a1", ])
+        {
+            
+        }
+        
+        public async ValueTask New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, МійДокумент_Const.FULLNAME + " *");
+            
+                await ValueTask.FromResult(true);
+              
+        }
+
+        public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
+        {
+            if (await BaseRead(uid))
+            {
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                Коментар = base.FieldValue["col_a1"].ToString() ?? "";
+                
+                BaseClear();
+                
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+                return true;
+            }
+            else
+                return false;
+        }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        /* public bool ReadSync(UnigueID uid, bool readAllTablePart = false) { return Task.Run<bool>(async () => { return await Read(uid, readAllTablePart); }).Result; } */
+        
+        public async Task<bool> Save()
+        {
+            base.FieldValue["docname"] = Назва;
+            base.FieldValue["docdate"] = ДатаДок;
+            base.FieldValue["docnomer"] = НомерДок;
+            base.FieldValue["col_a1"] = Коментар;
+            
+            bool result = await BaseSave();
+            
+            if (result)
+            {
+                
+            }
+
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+            return result;
+        }
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            
+            await BaseSpend(false, DateTime.MinValue);
+            return false;
+                
+        }
+
+        /* синхронна функція для SpendTheDocument() */
+        /* public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; } */
+
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
+        {
+            
+            await ValueTask.FromResult(true);
+            
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await BaseSpend(false, DateTime.MinValue);
+        }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        /* public bool ClearSpendTheDocumentSync() { return Task.Run<bool>(async () => { await ClearSpendTheDocument(); return true; }).Result; } */
+
+        public async ValueTask<МійДокумент_Objest> Copy(bool copyTableParts = false)
+        {
+            МійДокумент_Objest copy = new МійДокумент_Objest()
+            {
+                Назва = Назва,
+                ДатаДок = ДатаДок,
+                НомерДок = НомерДок,
+                Коментар = Коментар,
+                
+            };
+            
+
+            await copy.New();
+            
+            return copy;
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
+        }
+
+        /* синхронна функція для SetDeletionLabel() */
+        /* public bool SetDeletionLabelSync(bool label = true) { return Task.Run<bool>(async () => { await SetDeletionLabel(label); return true; }).Result; } */
+
+        public async ValueTask Delete()
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDelete([]);
+        }
+
+        /* синхронна функція для Delete() */
+        /* public bool DeleteSync() { return Task.Run<bool>(async () => { await Delete(); return true; }).Result; } */
+        
+        public МійДокумент_Pointer GetDocumentPointer()
+        {
+            return new МійДокумент_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, МійДокумент_Const.POINTER);
+        }
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return await base.BasePresentation(МійДокумент_Const.PRESENTATION_FIELDS);
+        }
+        
+        public string Назва { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public string НомерДок { get; set; } = "";
+        public string Коментар { get; set; } = "";
+        
+    }
+    
+    public class МійДокумент_Pointer : DocumentPointer
+    {
+        public МійДокумент_Pointer(object? uid = null) : base(Config.Kernel, "tab_a96", "МійДокумент")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public МійДокумент_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a96", "МійДокумент")
+        {
+            base.Init(uid, fields);
+        }
+
+        public string Назва { get; set; } = "";
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return Назва = await base.BasePresentation(МійДокумент_Const.PRESENTATION_FIELDS);
+        }
+
+        public static void GetJoin(Query querySelect, string joinField, string parentTable, string joinTableAlias, string fieldAlias)
+        {
+            string[] presentationField = new string [МійДокумент_Const.PRESENTATION_FIELDS.Length];
+            for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{МійДокумент_Const.PRESENTATION_FIELDS[i]}";
+            querySelect.Joins.Add(new Join(МійДокумент_Const.TABLE, joinField, parentTable, joinTableAlias));
+            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+        }
+
+        /* синхронна функція для GetPresentation() */
+        /* public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; } */
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            МійДокумент_Objest? obj = await GetDocumentObject();
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            МійДокумент_Objest? obj = await GetDocumentObject();
+            if (obj != null) await obj.ClearSpendTheDocument();
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            
+            await base.BaseDeletionLabel(label);
+        }
+
+        public МійДокумент_Pointer Copy()
+        {
+            return new МійДокумент_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+        }
+
+        public МійДокумент_Pointer GetEmptyPointer()
+        {
+            return new МійДокумент_Pointer();
+        }
+
+        public override UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, МійДокумент_Const.POINTER);
+        }
+
+        public async ValueTask<МійДокумент_Objest?> GetDocumentObject(bool readAllTablePart = false)
+        {
+            if (this.IsEmpty()) return null;
+            МійДокумент_Objest МійДокументObjestItem = new МійДокумент_Objest();
+            if (!await МійДокументObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
+            
+            return МійДокументObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
+        }
+    }
+
+    public class МійДокумент_Select : DocumentSelect
+    {		
+        public МійДокумент_Select() : base(Config.Kernel, "tab_a96") { }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new МійДокумент_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
+        public МійДокумент_Pointer? Current { get; private set; }
+    }
+
+      
+    
+    #endregion
+    
+    #region DOCUMENT "МійДокумент2"
+    public static class МійДокумент2_Const
+    {
+        public const string TABLE = "tab_b04";
+        public const string POINTER = "Документи.МійДокумент2"; /* Повна назва вказівника */
+        public const string FULLNAME = "МійДокумент2"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
+        public readonly static string[] PRESENTATION_FIELDS = ["docname", ];
+        
+        
+        public const string Назва = "docname";
+        public const string НомерДок = "docnomer";
+        public const string ДатаДок = "docdate";
+        public const string Коментар = "col_a1";
+    }
+
+    public static class МійДокумент2_Export
+    {
+        public static async ValueTask ToXmlFile(МійДокумент2_Pointer МійДокумент2, string pathToSave)
+        {
+            await ValueTask.FromResult(true);
+            
+        }
+    }
+
+    public class МійДокумент2_Objest : DocumentObject
+    {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
+        public МійДокумент2_Objest() : base(Config.Kernel, "tab_b04", "МійДокумент2",
+             ["docname", "docnomer", "docdate", "col_a1", ])
+        {
+            
+        }
+        
+        public async ValueTask New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, МійДокумент2_Const.FULLNAME + " *");
+            
+                await ValueTask.FromResult(true);
+              
+        }
+
+        public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
+        {
+            if (await BaseRead(uid))
+            {
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Коментар = base.FieldValue["col_a1"].ToString() ?? "";
+                
+                BaseClear();
+                
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+                return true;
+            }
+            else
+                return false;
+        }
+
+        /* синхронна функція для Read(UnigueID uid) */
+        /* public bool ReadSync(UnigueID uid, bool readAllTablePart = false) { return Task.Run<bool>(async () => { return await Read(uid, readAllTablePart); }).Result; } */
+        
+        public async Task<bool> Save()
+        {
+            base.FieldValue["docname"] = Назва;
+            base.FieldValue["docnomer"] = НомерДок;
+            base.FieldValue["docdate"] = ДатаДок;
+            base.FieldValue["col_a1"] = Коментар;
+            
+            bool result = await BaseSave();
+            
+            if (result)
+            {
+                
+            }
+
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+            return result;
+        }
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            
+            await BaseSpend(false, DateTime.MinValue);
+            return false;
+                
+        }
+
+        /* синхронна функція для SpendTheDocument() */
+        /* public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run<bool>(async () => { return await SpendTheDocument(spendDate); }).Result; } */
+
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
+        {
+            
+            await ValueTask.FromResult(true);
+            
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await BaseSpend(false, DateTime.MinValue);
+        }
+
+        /* синхронна функція для ClearSpendTheDocument() */
+        /* public bool ClearSpendTheDocumentSync() { return Task.Run<bool>(async () => { await ClearSpendTheDocument(); return true; }).Result; } */
+
+        public async ValueTask<МійДокумент2_Objest> Copy(bool copyTableParts = false)
+        {
+            МійДокумент2_Objest copy = new МійДокумент2_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Коментар = Коментар,
+                
+            };
+            
+
+            await copy.New();
+            
+            return copy;
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
+        }
+
+        /* синхронна функція для SetDeletionLabel() */
+        /* public bool SetDeletionLabelSync(bool label = true) { return Task.Run<bool>(async () => { await SetDeletionLabel(label); return true; }).Result; } */
+
+        public async ValueTask Delete()
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDelete([]);
+        }
+
+        /* синхронна функція для Delete() */
+        /* public bool DeleteSync() { return Task.Run<bool>(async () => { await Delete(); return true; }).Result; } */
+        
+        public МійДокумент2_Pointer GetDocumentPointer()
+        {
+            return new МійДокумент2_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, МійДокумент2_Const.POINTER);
+        }
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return await base.BasePresentation(МійДокумент2_Const.PRESENTATION_FIELDS);
+        }
+        
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public string Коментар { get; set; } = "";
+        
+    }
+    
+    public class МійДокумент2_Pointer : DocumentPointer
+    {
+        public МійДокумент2_Pointer(object? uid = null) : base(Config.Kernel, "tab_b04", "МійДокумент2")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public МійДокумент2_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b04", "МійДокумент2")
+        {
+            base.Init(uid, fields);
+        }
+
+        public string Назва { get; set; } = "";
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return Назва = await base.BasePresentation(МійДокумент2_Const.PRESENTATION_FIELDS);
+        }
+
+        public static void GetJoin(Query querySelect, string joinField, string parentTable, string joinTableAlias, string fieldAlias)
+        {
+            string[] presentationField = new string [МійДокумент2_Const.PRESENTATION_FIELDS.Length];
+            for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{МійДокумент2_Const.PRESENTATION_FIELDS[i]}";
+            querySelect.Joins.Add(new Join(МійДокумент2_Const.TABLE, joinField, parentTable, joinTableAlias));
+            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+        }
+
+        /* синхронна функція для GetPresentation() */
+        /* public string GetPresentationSync() { return Task.Run<string>(async () => { return await GetPresentation(); }).Result; } */
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            МійДокумент2_Objest? obj = await GetDocumentObject();
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            МійДокумент2_Objest? obj = await GetDocumentObject();
+            if (obj != null) await obj.ClearSpendTheDocument();
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            
+            await base.BaseDeletionLabel(label);
+        }
+
+        public МійДокумент2_Pointer Copy()
+        {
+            return new МійДокумент2_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+        }
+
+        public МійДокумент2_Pointer GetEmptyPointer()
+        {
+            return new МійДокумент2_Pointer();
+        }
+
+        public override UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, МійДокумент2_Const.POINTER);
+        }
+
+        public async ValueTask<МійДокумент2_Objest?> GetDocumentObject(bool readAllTablePart = false)
+        {
+            if (this.IsEmpty()) return null;
+            МійДокумент2_Objest МійДокумент2ObjestItem = new МійДокумент2_Objest();
+            if (!await МійДокумент2ObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
+            
+            return МійДокумент2ObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
+        }
+    }
+
+    public class МійДокумент2_Select : DocumentSelect
+    {		
+        public МійДокумент2_Select() : base(Config.Kernel, "tab_b04") { }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new МійДокумент2_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
+        public МійДокумент2_Pointer? Current { get; private set; }
+    }
+
+      
+    
+    #endregion
+    
 }
 
 namespace StorageAndTrade_1_0.Журнали
@@ -25108,8 +25646,8 @@ namespace StorageAndTrade_1_0.Журнали
     public class JournalSelect: AccountingSoftware.JournalSelect
     {
         public JournalSelect() : base(Config.Kernel,
-             ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", "tab_a65", ],
-             ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", "КорегуванняБоргу", ]) { }
+             ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", "tab_a65", "tab_a96", "tab_b04", ],
+             ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", "КорегуванняБоргу", "МійДокумент", "МійДокумент2", ]) { }
 
         public async ValueTask<DocumentObject?> GetDocumentObject(bool readAllTablePart = true)
         {
@@ -25139,6 +25677,8 @@ namespace StorageAndTrade_1_0.Журнали
                 "ЗбіркаТоварівНаСкладі" => await new Документи.ЗбіркаТоварівНаСкладі_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
                 "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
                 "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "МійДокумент" => await new Документи.МійДокумент_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "МійДокумент2" => await new Документи.МійДокумент2_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
                 _ => null
             };
         }

@@ -46,19 +46,17 @@ namespace StorageAndTrade
         CompositePointerControl Основа = new CompositePointerControl();
 
         ПереміщенняТоварівНаСкладі_ТабличнаЧастина_Товари Товари = new ПереміщенняТоварівНаСкладі_ТабличнаЧастина_Товари();
-        
+
         #endregion
 
-        public ПереміщенняТоварівНаСкладі_Елемент() 
+        public ПереміщенняТоварівНаСкладі_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ПереміщенняТоварівНаСкладі_Const.FULLNAME, НомерДок, ДатаДок);
-
             CreateField(HBoxComment, "Коментар:", Коментар);
 
-            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
         }
@@ -113,12 +111,10 @@ namespace StorageAndTrade
             Основа.Pointer = Елемент.Основа;
 
             //Таблична частина
-            Товари.ОбновитиЗначенняДокумента = () =>
-            {
-                Елемент.Склад = Склад.Pointer;
-            };
-
+            Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
+
+            Товари.ОбновитиЗначенняДокумента = () => Елемент.Склад = Склад.Pointer;
         }
 
         protected override void GetValue()
@@ -145,7 +141,7 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            
+
             try
             {
                 if (await Елемент.Save())

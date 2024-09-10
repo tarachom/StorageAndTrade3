@@ -29,7 +29,7 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class ДоговориКонтрагентів_PointerControl : PointerControl
+    public class ДоговориКонтрагентів_PointerControl : PointerControl
     {
         event EventHandler<ДоговориКонтрагентів_Pointer> PointerChanged;
 
@@ -76,7 +76,7 @@ namespace StorageAndTrade
                     AfterSelectFunc?.Invoke();
                 }
             };
-            
+
             page.КонтрагентВласник.Pointer = КонтрагентВласник;
 
             popover.Add(page);

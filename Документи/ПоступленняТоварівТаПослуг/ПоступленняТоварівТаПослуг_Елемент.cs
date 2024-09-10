@@ -74,7 +74,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ПоступленняТоварівТаПослуг_Елемент() 
+        public ПоступленняТоварівТаПослуг_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -82,7 +82,6 @@ namespace StorageAndTrade
             CreateDocName(ПоступленняТоварівТаПослуг_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);
 
-            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
 
@@ -120,46 +119,11 @@ namespace StorageAndTrade
 
             //Контрагент
             CreateField(vBox, null, Контрагент);
-
-            Контрагент.AfterSelectFunc = async () =>
-            {
-                if (Договір.Pointer.IsEmpty())
-                {
-                    ДоговориКонтрагентів_Pointer? договірКонтрагента =
-                    await ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Контрагент.Pointer, Перелічення.ТипДоговорів.ЗПостачальниками);
-
-                    if (договірКонтрагента != null)
-                        Договір.Pointer = договірКонтрагента;
-                }
-                else
-                {
-                    if (Контрагент.Pointer.IsEmpty())
-                        Договір.Pointer = new ДоговориКонтрагентів_Pointer();
-                    else
-                    {
-                        //
-                        //Перевірити чи змінився контрагент
-                        //
-
-                        ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = await Договір.Pointer.GetDirectoryObject();
-
-                        if (договориКонтрагентів_Objest != null)
-                            if (договориКонтрагентів_Objest.Контрагент != Контрагент.Pointer)
-                            {
-                                Договір.Pointer = new ДоговориКонтрагентів_Pointer();
-                                Контрагент.AfterSelectFunc!.Invoke();
-                            };
-                    }
-                }
-            };
-
+            Контрагент.AfterSelectFunc = async () => await Контрагент.ПривязкаДоДоговору(Договір);
+ 
             //Договір
             CreateField(vBox, null, Договір);
-
-            Договір.BeforeClickOpenFunc = () =>
-            {
-                Договір.КонтрагентВласник = Контрагент.Pointer;
-            };
+            Договір.BeforeClickOpenFunc = () => Договір.КонтрагентВласник = Контрагент.Pointer;
         }
 
         protected override void CreateContainer2(Box vBox)
@@ -213,8 +177,7 @@ namespace StorageAndTrade
             CreateField(vBox, "Дата оплати:", ДатаОплати);
 
             //Узгоджений та ВернутиТару
-            Box hBox1 = CreateField(vBox, null, Узгоджений);
-            CreateField(hBox1, null, ПовернутиТару);
+            CreateField(CreateField(vBox, null, Узгоджений), null, ПовернутиТару);
 
             //ДатаПоверненняТари
             CreateField(vBox, "Дата повернення тари:", ДатаПоверненняТари);
@@ -226,15 +189,13 @@ namespace StorageAndTrade
             CreateField(vBox, "Дата вхід. док:", ДатаВхідногоДокументу);
 
             //Курс та Кратність
-            Box hBox2 = CreateField(vBox, "Курс:", Курс);
-            CreateField(hBox2, "Кратність:", Кратність);
+            CreateField(CreateField(vBox, "Курс:", Курс), "Кратність:", Кратність);
 
             //СпосібДоставки
             CreateField(vBox, "Спосіб доставки:", СпосібДоставки);
 
             //ЧасДоставки
-            Box hBox3 = CreateField(vBox, "Час доставки з", ЧасДоставкиЗ);
-            CreateField(hBox3, "до", ЧасДоставкиДо);
+            CreateField(CreateField(vBox, "Час доставки з", ЧасДоставкиЗ), "до", ЧасДоставкиДо);
         }
 
         #region Присвоєння / зчитування значень
@@ -282,6 +243,7 @@ namespace StorageAndTrade
             СтаттяРухуКоштів.Pointer = Елемент.СтаттяРухуКоштів;
             Основа.Pointer = Елемент.Основа;
 
+            Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
 
             if (IsNew)

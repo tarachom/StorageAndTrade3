@@ -64,10 +64,8 @@ namespace StorageAndTrade
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ПереміщенняТоварів_Const.FULLNAME, НомерДок, ДатаДок);
-
             CreateField(HBoxComment, "Коментар:", Коментар);
 
-            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
 
@@ -131,8 +129,7 @@ namespace StorageAndTrade
             CreateField(vBox, "Спосіб доставки:", СпосібДоставки);
 
             //ЧасДоставки
-            Box hBox1 = CreateField(vBox, "Час доставки з", ЧасДоставкиЗ);
-            CreateField(hBox1, "до", ЧасДоставкиДо);
+            CreateField(CreateField(vBox, "Час доставки з", ЧасДоставкиЗ), "до", ЧасДоставкиДо);
         }
 
         #region Присвоєння / зчитування значень
@@ -163,6 +160,7 @@ namespace StorageAndTrade
             Основа.Pointer = Елемент.Основа;
 
             //Таблична частина
+            Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
         }
 

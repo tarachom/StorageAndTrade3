@@ -64,14 +64,13 @@ limitations under the License.
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
         <xsl:variable name="FormElementField" select="Document/ElementFields/ElementField"/>
         <xsl:variable name="FormElementTablePart" select="Document/ElementTableParts/ElementTablePart"/>
-
 /*
         <xsl:value-of select="$DocumentName"/>_Елемент.cs
         Елемент
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using <xsl:value-of select="$NameSpaceGenerationCode"/>;
@@ -84,7 +83,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$DocumentName"/>_Елемент : ДокументЕлемент
     {
-        public <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest { get; set; } = new <xsl:value-of select="$DocumentName"/>_Objest();
+        public <xsl:value-of select="$DocumentName"/>_Objest Елемент { get; set; } = new <xsl:value-of select="$DocumentName"/>_Objest();
 
         #region Fields
         <!-- Крім скритого поля Назва яке формується перед збереженням -->
@@ -95,30 +94,30 @@ namespace <xsl:value-of select="$NameSpace"/>
                     <xsl:when test="Type = 'string'">
                         <xsl:choose>
                             <xsl:when test="Multiline = '1'">
-                        TextView <xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
+                        <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
                             </xsl:when>
                             <xsl:otherwise>
-                        Entry <xsl:value-of select="Name"/> = new Entry() { /* WidthRequest = 500 */ };
+                        <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new Entry() { WidthRequest = 500 };
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:when test="Type = 'integer'">
-                        IntegerControl <xsl:value-of select="Name"/> = new IntegerControl();
+                        <xsl:text>IntegerControl </xsl:text><xsl:value-of select="Name"/> = new IntegerControl();
                     </xsl:when>
                     <xsl:when test="Type = 'numeric'">
-                        NumericControl <xsl:value-of select="Name"/> = new NumericControl();
+                        <xsl:text>NumericControl </xsl:text><xsl:value-of select="Name"/> = new NumericControl();
                     </xsl:when>
                     <xsl:when test="Type = 'boolean'">
-                        CheckButton <xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
+                        <xsl:text>CheckButton </xsl:text><xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
                     </xsl:when>
                     <xsl:when test="Type = 'date' or Type = 'datetime'">
-                        DateTimeControl <xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
+                        <xsl:text>DateTimeControl </xsl:text><xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
                     </xsl:when>
                     <xsl:when test="Type = 'time'">
-                        TimeControl <xsl:value-of select="Name"/> = new TimeControl();
+                        <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = new TimeControl();
                     </xsl:when>
                     <xsl:when test="Type = 'composite_pointer'">
-                        CompositePointerControl <xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Документи.<xsl:value-of select="$DocumentName"/>.<xsl:value-of select="Name"/>" };
+                        <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Документи.<xsl:value-of select="$DocumentName"/>.<xsl:value-of select="Name"/>" };
                     </xsl:when>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
@@ -126,22 +125,22 @@ namespace <xsl:value-of select="$NameSpace"/>
                     </xsl:when>
                     <xsl:when test="Type = 'enum'">
                         <!--<xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />-->
-                        ComboBoxText <xsl:value-of select="Name"/> = new ComboBoxText();
+                        <xsl:text>ComboBoxText </xsl:text><xsl:value-of select="Name"/> = new ComboBoxText();
                     </xsl:when>
                     <xsl:when test="Type = 'any_pointer'">
-                        //Guid <xsl:value-of select="Name"/> = new Guid();
+                        <xsl:text>//Guid </xsl:text><xsl:value-of select="Name"/> = new Guid();
                     </xsl:when>
                     <xsl:when test="Type = 'bytea'">
-                        //byte[] <xsl:value-of select="Name"/> = new byte[]{ };
+                        <xsl:text>//byte[] </xsl:text><xsl:value-of select="Name"/> = new byte[]{ };
                     </xsl:when>
                     <xsl:when test="Type = 'string[]'">
-                        //string[] <xsl:value-of select="Name"/> = new string[]{ };
+                        <xsl:text>//string[] </xsl:text><xsl:value-of select="Name"/> = new string[]{ };
                     </xsl:when>
                     <xsl:when test="Type = 'integer'">
-                        //int[] <xsl:value-of select="Name"/> = new int[]{ };
+                        <xsl:text>//int[] </xsl:text><xsl:value-of select="Name"/> = new int[]{ };
                     </xsl:when>
                     <xsl:when test="Type = 'numeric'">
-                        //decimal[] <xsl:value-of select="Name"/> = new decimal[]{ };
+                        <xsl:text>//decimal[] </xsl:text><xsl:value-of select="Name"/> = new decimal[]{ };
                     </xsl:when>
                 </xsl:choose>
             </xsl:if>
@@ -158,13 +157,15 @@ namespace <xsl:value-of select="$NameSpace"/>
         </xsl:for-each>
         #endregion
 
-        public <xsl:value-of select="$DocumentName"/>_Елемент() : base()
+        public <xsl:value-of select="$DocumentName"/>_Елемент()
         {
-            CreateDocName(<xsl:value-of select="$DocumentName"/>_Const.FULLNAME, НомерДок, ДатаДок);
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
 
+            CreateDocName(<xsl:value-of select="$DocumentName"/>_Const.FULLNAME, НомерДок, ДатаДок);
             <xsl:variable name="CommentFieldName" select="'Коментар'" />
             <xsl:if test="count($Fields[Name = $CommentFieldName]) != 0 and $FormElementField[Name = $CommentFieldName]">
-                CreateField(HBoxComment, "<xsl:value-of select="$FormElementField[Name = $CommentFieldName]/Caption"/>:", Коментар);
+                CreateField(HBoxComment, "<xsl:value-of select="$FormElementField[Name = $CommentFieldName]/Caption"/>:", <xsl:value-of select="$CommentFieldName"/>);
             </xsl:if>
 
             <xsl:for-each select="$TabularParts">
@@ -242,7 +243,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         public override async void SetValue()
         {
             if (IsNew)
-                await <xsl:value-of select="$DocumentName"/>_Objest.New();
+                await Елемент.New();
 
             <!-- Крім скритого поля Назва яке формується перед збереженням -->
             <xsl:for-each select="$Fields[Name != 'Назва']">
@@ -252,31 +253,31 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:when test="Type = 'string'">
                             <xsl:choose>
                                 <xsl:when test="Multiline = '1'">
-                                    <xsl:value-of select="Name"/>.Buffer.Text = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Buffer.Text = Елемент.<xsl:value-of select="Name"/>;
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="Name"/>.Text = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Text = Елемент.<xsl:value-of select="Name"/>;
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:when>
                         <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:value-of select="Name"/>.Value = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Value = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'boolean'">
-                            <xsl:value-of select="Name"/>.Active = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Active = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'composite_pointer'">
-                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Pointer = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'pointer'">
-                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:value-of select="Name"/>.Pointer = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                         <xsl:when test="Type = 'enum'">
-                            <xsl:value-of select="Name"/>.ActiveId = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>.ToString();
-                            if (<xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
+                            <xsl:value-of select="Name"/>.ActiveId = Елемент.<xsl:value-of select="Name"/>.ToString();
+                            <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
                         </xsl:when>
                         <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                            //<xsl:value-of select="Name"/> = <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/>;
+                            <xsl:text>//</xsl:text><xsl:value-of select="Name"/> = Елемент.<xsl:value-of select="Name"/>;
                         </xsl:when>
                     </xsl:choose>
                 </xsl:if>
@@ -285,9 +286,8 @@ namespace <xsl:value-of select="$NameSpace"/>
             <xsl:for-each select="$TabularParts">
                 <xsl:variable name="TablePartName" select="Name" />
                 <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                    /* Таблична частина: <xsl:value-of select="Name"/> */
-                    <xsl:value-of select="Name"/>.<xsl:value-of select="$DocumentName"/>_Objest = <xsl:value-of select="$DocumentName"/>_Objest;
-                    await <xsl:value-of select="Name"/>.LoadRecords();
+                    <xsl:value-of select="Name"/>.ЕлементВласник = Елемент;
+                    <xsl:text>await </xsl:text><xsl:value-of select="Name"/>.LoadRecords();
                 </xsl:if>
             </xsl:for-each>
         }
@@ -302,32 +302,32 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:when test="Type = 'string'">
                             <xsl:choose>
                                 <xsl:when test="Multiline = '1'">
-                                    <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:when>
                         <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
                         </xsl:when>
                         <xsl:when test="Type = 'boolean'">
-                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
                         </xsl:when>
                         <xsl:when test="Type = 'composite_pointer'">
-                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
                         </xsl:when>
                         <xsl:when test="Type = 'pointer'">
-                            <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
                         </xsl:when>
                         <xsl:when test="Type = 'enum'">
                             <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
                             <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active != -1) 
-                                <xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
+                            <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
                         </xsl:when>
                         <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                            //<xsl:value-of select="$DocumentName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
+                            <xsl:text>//Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
                         </xsl:when>
                     </xsl:choose>
                 </xsl:if>
@@ -338,11 +338,11 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         protected override async ValueTask&lt;bool&gt; Save()
         {
-            bool isSave = false;
+            bool isSaved = false;
 
             try
             {
-                if(await <xsl:value-of select="$DocumentName"/>_Objest.Save())
+                if(await Елемент.Save())
                 {
                     <xsl:for-each select="$TabularParts">
                         <xsl:variable name="TablePartName" select="Name" />
@@ -350,42 +350,37 @@ namespace <xsl:value-of select="$NameSpace"/>
                             await <xsl:value-of select="Name"/>.SaveRecords();
                         </xsl:if>
                     </xsl:for-each>
-                    isSave = true;
+                    isSaved = true;
                 }
             }
             catch (Exception ex)
             {
-                MsgError(ex);
-                return false;
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
 
-            UnigueID = <xsl:value-of select="$DocumentName"/>_Objest.UnigueID;
-            Caption = <xsl:value-of select="$DocumentName"/>_Objest.Назва;
-
-            return isSave;
+            return isSaved;
         }
 
         protected override async ValueTask&lt;bool&gt; SpendTheDocument(bool spendDoc)
         {
             if (spendDoc)
             {
-                bool isSpend = await <xsl:value-of select="$DocumentName"/>_Objest.SpendTheDocument(<xsl:value-of select="$DocumentName"/>_Objest.ДатаДок);
-
+                bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
                 if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(<xsl:value-of select="$DocumentName"/>_Objest.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
 
                 return isSpend;
             }
             else
             {
-                await <xsl:value-of select="$DocumentName"/>_Objest.ClearSpendTheDocument();
+                await Елемент.ClearSpendTheDocument();
                 return true;
             }
         }
 
-        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
-            return new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID);
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID));
         }
     }
 }
@@ -401,6 +396,7 @@ namespace <xsl:value-of select="$NameSpace"/>
     <xsl:template name="DocumentList">
         <xsl:variable name="DocumentName" select="Document/Name"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
+        <xsl:variable name="TabularList" select="Document/TabularList"/>
 
 /*     
         <xsl:value-of select="$DocumentName"/>.cs
@@ -408,12 +404,11 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-
+using InterfaceGtk;
 using AccountingSoftware;
 
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи.ТабличніСписки;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.Перелічення;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
@@ -421,108 +416,77 @@ namespace <xsl:value-of select="$NameSpace"/>
     {
         public <xsl:value-of select="$DocumentName"/>() : base()
         {
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
         }
 
         #region Override
 
-        protected override async void LoadRecords()
+        protected override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.DocumentPointerItem = DocumentPointerItem;
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.DocumentPointerItem = DocumentPointerItem;
 
-            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.LoadRecords(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            if (ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void LoadRecords_OnSearch(string searchText)
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length &lt; 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
             //Назва
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.ДодатиВідбір(TreeViewGrid,
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                 new Where(<xsl:value-of select="$DocumentName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
 
-            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.FirstPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.FirstPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override void FilterRecords(Box hBox)
         {
+            hBox.PackStart(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid), false, false, 5);
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            <xsl:value-of select="$DocumentName"/>_Елемент page = new <xsl:value-of select="$DocumentName"/>_Елемент
+            {
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
             if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
-                Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME} *", () =>
-                {
-                    <xsl:value-of select="$DocumentName"/>_Елемент page = new <xsl:value-of select="$DocumentName"/>_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
             }
-            else if (unigueID != null)
-            {
-                <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest = new <xsl:value-of select="$DocumentName"/>_Objest();
-                if (await <xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
-                {
-                    Program.GeneralForm?.CreateNotebookPage($"{<xsl:value-of select="$DocumentName"/>_Objest.Назва}", () =>
-                    {
-                        <xsl:value-of select="$DocumentName"/>_Елемент page = new <xsl:value-of select="$DocumentName"/>_Елемент
-                        {
-                            UnigueID = unigueID,
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            <xsl:value-of select="$DocumentName"/>_Objest = <xsl:value-of select="$DocumentName"/>_Objest,
-                        };
 
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
+            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (await <xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
-                await <xsl:value-of select="$DocumentName"/>_Objest.SetDeletionLabel(!<xsl:value-of select="$DocumentName"/>_Objest.DeletionLabel);
+            <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new <xsl:value-of select="$DocumentName"/>_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
         protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (await <xsl:value-of select="$DocumentName"/>_Objest.Read(unigueID))
+            <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new <xsl:value-of select="$DocumentName"/>_Objest();
+            if (await Обєкт.Read(unigueID))
             {
-                <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>_Objest_Новий = await <xsl:value-of select="$DocumentName"/>_Objest.Copy(true);
-                await <xsl:value-of select="$DocumentName"/>_Objest_Новий.Save();
+                <xsl:value-of select="$DocumentName"/>_Objest Новий = await Обєкт.Copy(true);
+                await Новий.Save();
                 <xsl:for-each select="$TabularParts">
-                    /* Таблична частина: <xsl:value-of select="Name"/> */
-                    await <xsl:value-of select="$DocumentName"/>_Objest_Новий.<xsl:value-of select="Name"/>_TablePart.Save(false);
+                    await Новий.<xsl:value-of select="Name"/>_TablePart.Save(false); // Таблична частина "<xsl:value-of select="Name"/>"
                 </xsl:for-each>
-                return <xsl:value-of select="$DocumentName"/>_Objest_Новий.UnigueID;
+                return Новий.UnigueID;
             }
             else
             {
@@ -531,30 +495,36 @@ namespace <xsl:value-of select="$NameSpace"/>
             }
         }
 
-        protected override void PeriodWhereChanged()
+        const string КлючНалаштуванняКористувача = "Документи.<xsl:value-of select="$DocumentName"/>";
+
+        protected override async ValueTask BeforeSetValue()
         {
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, ComboBoxPeriodWhere.ActiveId);
-            LoadRecords();
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
+        }
+
+        protected override async void PeriodChanged()
+        {
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            await LoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            <xsl:value-of select="$DocumentName"/>_Pointer <xsl:value-of select="$DocumentName"/>_Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID);
-            <xsl:value-of select="$DocumentName"/>_Objest? <xsl:value-of select="$DocumentName"/>_Objest = await <xsl:value-of select="$DocumentName"/>_Pointer.GetDocumentObject(true);
-            if (<xsl:value-of select="$DocumentName"/>_Objest == null) return;
+            <xsl:value-of select="$DocumentName"/>_Objest? Обєкт = await new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await <xsl:value-of select="$DocumentName"/>_Objest.SpendTheDocument(<xsl:value-of select="$DocumentName"/>_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(<xsl:value-of select="$DocumentName"/>_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await <xsl:value-of select="$DocumentName"/>_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
-        protected override DocumentPointer? ReportSpendTheDocument(UnigueID unigueID)
+        protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
-            return new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID);
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID));
         }
 
         protected override async void ExportXML(UnigueID unigueID)
@@ -582,7 +552,8 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:value-of select="$DocumentName"/>_PointerControl.cs
         PointerControl
 */
-
+using Gtk;
+using InterfaceGtk;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
 
@@ -590,11 +561,17 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerControl
     {
+        event EventHandler&lt;<xsl:value-of select="$DocumentName"/>_Pointer&gt; PointerChanged;
+
         public <xsl:value-of select="$DocumentName"/>_PointerControl()
         {
             pointer = new <xsl:value-of select="$DocumentName"/>_Pointer();
             WidthPresentation = 300;
             Caption = $"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}:";
+            PointerChanged += async (object? _, <xsl:value-of select="$DocumentName"/>_Pointer pointer) =&gt;
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
         }
 
         <xsl:value-of select="$DocumentName"/>_Pointer pointer;
@@ -607,29 +584,31 @@ namespace <xsl:value-of select="$NameSpace"/>
             set
             {
                 pointer = value;
-                Presentation = pointer != null ? Task.Run(async () =&gt; { return await pointer.GetPresentation(); }).Result : "";
+                PointerChanged?.Invoke(null, pointer);
             }
         }
 
         protected override void OpenSelect(object? sender, EventArgs args)
         {
+            BeforeClickOpenFunc?.Invoke();
             <xsl:value-of select="$DocumentName"/> page = new <xsl:value-of select="$DocumentName"/>
             {
                 DocumentPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
                 {
                     Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(selectPointer);
+                    AfterSelectFunc?.Invoke();
                 }
             };
 
-            Program.GeneralForm?.CreateNotebookPage($"Вибір - {<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}", () =&gt; { return page; });
-
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}", () =&gt; page);
             page.SetValue();
         }
 
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer();
+            AfterSelectFunc?.Invoke();
         }
     }
 }

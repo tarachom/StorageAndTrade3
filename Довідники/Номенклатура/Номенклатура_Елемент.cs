@@ -60,8 +60,6 @@ namespace StorageAndTrade
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
 
-            Файли.ЕлементВласник = Елемент;
-
             ОсновнаКартинкаФайл.AfterSelectFunc = async () =>
             {
                 foreach (Widget item in scrollImageView.Children)
@@ -165,6 +163,7 @@ namespace StorageAndTrade
             if (ТипНоменклатури.Active == -1)
                 ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
 
+            Файли.ЕлементВласник = Елемент;
             await Файли.LoadRecords();
 
             ОсновнаКартинкаФайл.AfterSelectFunc?.Invoke();

@@ -158,12 +158,13 @@ namespace StorageAndTrade
         {
             Menu Menu = new Menu();
 
-            MenuItem newDocKasovyiOrderButton = new MenuItem($"{ПрихіднийКасовийОрдер_Const.FULLNAME}");
-            newDocKasovyiOrderButton.Activated += OnNewDocNaOsnovi_KasovyiOrder;
-            Menu.Append(newDocKasovyiOrderButton);
+            {
+                MenuItem doc = new MenuItem($"{ПрихіднийКасовийОрдер_Const.FULLNAME}");
+                doc.Activated += OnNewDocNaOsnovi_KasovyiOrder;
+                Menu.Append(doc);
+            }
 
             Menu.ShowAll();
-
             return Menu;
         }
 

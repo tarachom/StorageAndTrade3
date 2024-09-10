@@ -49,8 +49,6 @@ namespace StorageAndTrade
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
-
-            Контакти.ЕлементВласник = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -106,6 +104,7 @@ namespace StorageAndTrade
             if (Налаштування.Active == -1)
                 Налаштування.ActiveId = НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
 
+            Контакти.ЕлементВласник = Елемент;
             Контакти.LoadRecords();
         }
 

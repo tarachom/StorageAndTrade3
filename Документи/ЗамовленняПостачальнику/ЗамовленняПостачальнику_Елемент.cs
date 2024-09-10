@@ -64,16 +64,14 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ЗамовленняПостачальнику_Елемент() 
+        public ЗамовленняПостачальнику_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ЗамовленняПостачальнику_Const.FULLNAME, НомерДок, ДатаДок);
-
             CreateField(HBoxComment, "Коментар:", Коментар);
 
-            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
 
@@ -111,46 +109,11 @@ namespace StorageAndTrade
 
             //Контрагент
             CreateField(vBox, null, Контрагент);
-
-            Контрагент.AfterSelectFunc = async () =>
-            {
-                if (Договір.Pointer.IsEmpty())
-                {
-                    ДоговориКонтрагентів_Pointer? договірКонтрагента =
-                    await ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Контрагент.Pointer, Перелічення.ТипДоговорів.ЗПостачальниками);
-
-                    if (договірКонтрагента != null)
-                        Договір.Pointer = договірКонтрагента;
-                }
-                else
-                {
-                    if (Контрагент.Pointer.IsEmpty())
-                        Договір.Pointer = new ДоговориКонтрагентів_Pointer();
-                    else
-                    {
-                        //
-                        //Перевірити чи змінився контрагент
-                        //
-
-                        ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = await Договір.Pointer.GetDirectoryObject();
-
-                        if (договориКонтрагентів_Objest != null)
-                            if (договориКонтрагентів_Objest.Контрагент != Контрагент.Pointer)
-                            {
-                                Договір.Pointer = new ДоговориКонтрагентів_Pointer();
-                                Контрагент.AfterSelectFunc!.Invoke();
-                            };
-                    }
-                }
-            };
+            Контрагент.AfterSelectFunc = async () => await Контрагент.ПривязкаДоДоговору(Договір);
 
             //Договір
             CreateField(vBox, null, Договір);
-
-            Договір.BeforeClickOpenFunc = () =>
-            {
-                Договір.КонтрагентВласник = Контрагент.Pointer;
-            };
+            Договір.BeforeClickOpenFunc = () => Договір.КонтрагентВласник = Контрагент.Pointer;
         }
 
         protected override void CreateContainer2(Box vBox)
@@ -242,6 +205,7 @@ namespace StorageAndTrade
             Основа.Pointer = Елемент.Основа;
 
             //Таблична частина
+            Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
 
             if (IsNew)

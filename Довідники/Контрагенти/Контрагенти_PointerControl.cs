@@ -26,6 +26,7 @@ using InterfaceGtk;
 using AccountingSoftware;
 
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -84,8 +85,32 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             Pointer = new Контрагенти_Pointer();
-
             AfterSelectFunc?.Invoke();
+        }
+
+        public async ValueTask ПривязкаДоДоговору(ДоговориКонтрагентів_PointerControl Договір)
+        {
+            if (Договір.Pointer.IsEmpty())
+            {
+                ДоговориКонтрагентів_Pointer? договірКонтрагента = await ФункціїДляДокументів.ОсновнийДоговірДляКонтрагента(Pointer, ТипДоговорів.ЗПостачальниками);
+                if (договірКонтрагента != null) Договір.Pointer = договірКонтрагента;
+            }
+            else
+            {
+                if (Pointer.IsEmpty())
+                    Договір.Pointer = new ДоговориКонтрагентів_Pointer();
+                else
+                {
+                    //Перевірити чи змінився контрагент
+                    ДоговориКонтрагентів_Objest? договориКонтрагентів_Objest = await Договір.Pointer.GetDirectoryObject();
+                    if (договориКонтрагентів_Objest != null)
+                        if (договориКонтрагентів_Objest.Контрагент != Pointer)
+                        {
+                            Договір.Pointer = new ДоговориКонтрагентів_Pointer();
+                            AfterSelectFunc?.Invoke();
+                        };
+                }
+            }
         }
     }
 }

@@ -168,13 +168,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
 
-            <xsl:for-each select="$TabularParts">
-                <xsl:variable name="TablePartName" select="Name" />
-                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                    <xsl:value-of select="Name"/>.ЕлементВласник = Елемент; // Таблична частина "<xsl:value-of select="Name"/>"
-                </xsl:if>
-            </xsl:for-each>
-
             <xsl:for-each select="$Fields">
                 <xsl:variable name="FieldName" select="Name" />
                 <xsl:if test="$FormElementField[Name = $FieldName] and Type = 'enum'">
@@ -280,7 +273,8 @@ namespace <xsl:value-of select="$NameSpace"/>
             <xsl:for-each select="$TabularParts">
                 <xsl:variable name="TablePartName" select="Name" />
                 <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                    await <xsl:value-of select="Name"/>.LoadRecords(); // Таблична частина "<xsl:value-of select="Name"/>"
+                    <xsl:value-of select="Name"/>.ЕлементВласник = Елемент; // Таблична частина "<xsl:value-of select="Name"/>"
+                    await <xsl:value-of select="Name"/>.LoadRecords();
                 </xsl:if>
             </xsl:for-each>
         }
@@ -609,7 +603,6 @@ namespace <xsl:value-of select="$NameSpace"/>
                 <xsl:otherwise>Папка</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
 /*     
         <xsl:value-of select="$DirectoryName"/>.cs 
         Список з Деревом
@@ -647,8 +640,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                UnigueID? unigueID = SelectPointerItem ?? DirectoryPointerItem;
-                <xsl:value-of select="$DirectoryName"/>_Objest? Обєкт = await new <xsl:value-of select="$DirectoryName"/>_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
+                <xsl:value-of select="$DirectoryName"/>_Objest? Обєкт = await new <xsl:value-of select="$DirectoryName"/>_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
                 if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.<xsl:value-of select="$FieldFolder"/>.UnigueID;
             }
 

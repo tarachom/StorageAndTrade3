@@ -48,16 +48,14 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ВстановленняЦінНоменклатури_Елемент() 
+        public ВстановленняЦінНоменклатури_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ВстановленняЦінНоменклатури_Const.FULLNAME, НомерДок, ДатаДок);
-
             CreateField(HBoxComment, "Коментар:", Коментар);
 
-            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
         }
@@ -106,12 +104,10 @@ namespace StorageAndTrade
             Коментар.Text = Елемент.Коментар;
             Автор.Pointer = Елемент.Автор;
 
+            Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
 
-            Товари.ОбновитиЗначенняДокумента = () =>
-            {
-                Елемент.ВидЦіни = ВидЦіни.Pointer;
-            };
+            Товари.ОбновитиЗначенняДокумента = () => Елемент.ВидЦіни = ВидЦіни.Pointer;
         }
 
         protected override void GetValue()
@@ -137,7 +133,7 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            
+
             try
             {
                 if (await Елемент.Save())

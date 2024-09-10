@@ -39,10 +39,8 @@ namespace StorageAndTrade
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ПерерахунокТоварів_Const.FULLNAME, НомерДок, ДатаДок);
-
             CreateField(HBoxComment, "Коментар:", Коментар);
 
-            Товари.ЕлементВласник = Елемент;
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
 
@@ -99,6 +97,7 @@ namespace StorageAndTrade
             Підрозділ.Pointer = Елемент.Підрозділ;
 
             //Таблична частина Товари
+            Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
         }
 

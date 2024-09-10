@@ -93,7 +93,7 @@ namespace StorageAndTrade
             toolbar.Add(deleteButton);
         }
 
-        public async void LoadRecords()
+        public async ValueTask LoadRecords()
         {
             Store.Clear();
 

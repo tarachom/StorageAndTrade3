@@ -497,7 +497,6 @@ namespace StorageAndTrade
         void TextChanged(object sender, EditedArgs args)
         {
             CellRenderer cellRender = (CellRenderer)sender;
-
             if (cellRender.Data.Contains("Column"))
             {
                 int ColumnNum = (int)cellRender.Data["Column"]!;

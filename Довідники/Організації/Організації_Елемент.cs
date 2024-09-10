@@ -52,8 +52,6 @@ namespace StorageAndTrade
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
-
-            Контакти.ЕлементВласник = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -106,8 +104,9 @@ namespace StorageAndTrade
             НазваПовна.Buffer.Text = Елемент.НазваПовна;
             
             Холдинг.Pointer = Елемент.Холдинг;
-            Холдинг.OpenFolder = Елемент.UnigueID;//!+
+            Холдинг.OpenFolder = Елемент.UnigueID;
 
+            Контакти.ЕлементВласник = Елемент;
             Контакти.LoadRecords();
         }
 

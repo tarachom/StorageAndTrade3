@@ -48,13 +48,10 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Контрагенти_Елемент() 
+        public Контрагенти_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
-
-            Контакти.ЕлементВласник = Елемент;
-            Файли.ЕлементВласник = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -106,7 +103,10 @@ namespace StorageAndTrade
             Постачальник.Active = Елемент.Постачальник;
             Покупець.Active = Елемент.Покупець;
 
-            Контакти.LoadRecords();
+            Контакти.ЕлементВласник = Елемент;
+            await Контакти.LoadRecords();
+
+            Файли.ЕлементВласник = Елемент;
             await Файли.LoadRecords();
         }
 
