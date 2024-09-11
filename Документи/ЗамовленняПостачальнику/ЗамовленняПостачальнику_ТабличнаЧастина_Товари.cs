@@ -413,7 +413,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async  void OpenSelect(TreeIter iter, int rowNumber, int colNumber, Popover popover)
         {
             Запис запис = Записи[rowNumber];
 
@@ -421,7 +421,7 @@ namespace StorageAndTrade
             {
                 case Columns.Номенклатура:
                     {
-                        Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Номенклатура.UnigueID };
+                        Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Номенклатура.UnigueID };
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
@@ -430,15 +430,15 @@ namespace StorageAndTrade
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        popoverSmallSelect.Add(page);
-                        popoverSmallSelect.ShowAll();
+                        popover.Add(page);
+                        popover.ShowAll();
 
                         await page.SetValue();
                         break;
                     }
                 case Columns.Характеристика:
                     {
-                        ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Характеристика.UnigueID };
+                        ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Характеристика.UnigueID };
 
                         page.НоменклатураВласник.Pointer = запис.Номенклатура;
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
@@ -449,15 +449,15 @@ namespace StorageAndTrade
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        popoverSmallSelect.Add(page);
-                        popoverSmallSelect.ShowAll();
+                        popover.Add(page);
+                        popover.ShowAll();
 
                         await page.SetValue();
                         break;
                     }
                 case Columns.Пакування:
                     {
-                        ПакуванняОдиниціВиміру_ШвидкийВибір page = new ПакуванняОдиниціВиміру_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Пакування.UnigueID };
+                        ПакуванняОдиниціВиміру_ШвидкийВибір page = new ПакуванняОдиниціВиміру_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Пакування.UnigueID };
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
@@ -466,15 +466,15 @@ namespace StorageAndTrade
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        popoverSmallSelect.Add(page);
-                        popoverSmallSelect.ShowAll();
+                        popover.Add(page);
+                        popover.ShowAll();
 
                         await page.SetValue();
                         break;
                     }
                 case Columns.Склад:
                     {
-                        Склади_ШвидкийВибір page = new Склади_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Склад.UnigueID };
+                        Склади_ШвидкийВибір page = new Склади_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Склад.UnigueID };
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Склад = new Склади_Pointer(selectPointer);
@@ -483,8 +483,8 @@ namespace StorageAndTrade
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        popoverSmallSelect.Add(page);
-                        popoverSmallSelect.ShowAll();
+                        popover.Add(page);
+                        popover.ShowAll();
 
                         await page.SetValue();
                         break;

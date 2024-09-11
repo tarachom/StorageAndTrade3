@@ -23,7 +23,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 -->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> <!-- xmlns:exslt="http://exslt.org/common" -->
     <xsl:output method="text" indent="yes" />
 
     <!-- Файл -->
@@ -86,18 +86,27 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DocumentName"/>_Objest Елемент { get; set; } = new <xsl:value-of select="$DocumentName"/>_Objest();
 
         #region Fields
-        <!-- Крім скритого поля Назва яке формується перед збереженням -->
+        <!-- Крім поля Назва -->
         <xsl:for-each select="$Fields[Name != 'Назва']">
             <xsl:variable name="FieldName" select="Name" />
-            <xsl:if test="$FormElementField[Name = $FieldName]">
+            <xsl:variable name="Field" select="$FormElementField[Name = $FieldName]" />
+            <xsl:if test="$Field">
+                <xsl:variable name="Size">
+                    <xsl:choose>
+                        <xsl:when test="$Field/Size != '0'">
+                            <xsl:value-of select="$Field/Size"/>
+                        </xsl:when>
+                        <xsl:otherwise>500</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="Type = 'string'">
                         <xsl:choose>
                             <xsl:when test="Multiline = '1'">
-                        <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
+                        <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WidthRequest = <xsl:value-of select="$Size"/>, WrapMode = WrapMode.Word };
                             </xsl:when>
                             <xsl:otherwise>
-                        <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new Entry() { WidthRequest = 500 };
+                        <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new Entry() { WidthRequest = <xsl:value-of select="$Size"/> };
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
@@ -121,10 +130,9 @@ namespace <xsl:value-of select="$NameSpace"/>
                     </xsl:when>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                        <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="$FormElementField[Name = $FieldName]/Caption"/>", WidthPresentation = 300 };
+                        <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="$Field/Caption"/>", WidthPresentation = <xsl:value-of select="$Size"/> };
                     </xsl:when>
                     <xsl:when test="Type = 'enum'">
-                        <!--<xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />-->
                         <xsl:text>ComboBoxText </xsl:text><xsl:value-of select="Name"/> = new ComboBoxText();
                     </xsl:when>
                     <xsl:when test="Type = 'any_pointer'">
@@ -148,12 +156,9 @@ namespace <xsl:value-of select="$NameSpace"/>
         #endregion
 
         #region TabularParts
-        <xsl:for-each select="$TabularParts">
-            <xsl:variable name="TablePartName" select="Name" />
-            <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text>
-                <xsl:value-of select="Name"/> = new <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>();
-            </xsl:if>
+        <xsl:for-each select="$FormElementTablePart">
+            // Таблична частина "<xsl:value-of select="Name"/>" 
+            <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> = new <xsl:value-of select="$DocumentName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>();
         </xsl:for-each>
         #endregion
 
@@ -163,17 +168,15 @@ namespace <xsl:value-of select="$NameSpace"/>
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(<xsl:value-of select="$DocumentName"/>_Const.FULLNAME, НомерДок, ДатаДок);
-            <xsl:variable name="CommentFieldName" select="'Коментар'" />
-            <xsl:if test="count($Fields[Name = $CommentFieldName]) != 0 and $FormElementField[Name = $CommentFieldName]">
-                CreateField(HBoxComment, "<xsl:value-of select="$FormElementField[Name = $CommentFieldName]/Caption"/>:", <xsl:value-of select="$CommentFieldName"/>);
+            <xsl:if test="$FormElementField[Name = 'Коментар']">
+            CreateField(HBoxComment, "<xsl:value-of select="$FormElementField[Name = 'Коментар']/Caption"/>:", Коментар);
             </xsl:if>
 
-            <xsl:for-each select="$TabularParts">
-                <xsl:variable name="TablePartName" select="Name" />
-                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                    NotebookTablePart.InsertPage(<xsl:value-of select="Name"/>, new Label("<xsl:value-of select="Name"/>"), <xsl:value-of select="position() - 1"/>);
-                </xsl:if>
+            <xsl:for-each select="$FormElementTablePart">
+                // Таблична частина "<xsl:value-of select="Name"/>" 
+                NotebookTablePart.InsertPage(<xsl:value-of select="Name"/>, new Label("<xsl:value-of select="Caption"/>"), <xsl:value-of select="position() - 1"/>);
             </xsl:for-each>
+
             <xsl:if test="count($FormElementTablePart) != 0">
                 NotebookTablePart.CurrentPage = 0;
             </xsl:if>
@@ -203,33 +206,42 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             <!-- Крім полів які зразу добавляються в шапку НомерДок, ДатаДок, Коментар -->
             <!-- та скритого поля Назва яке формується перед збереженням -->
-            <xsl:for-each select="$Fields[Name != 'Назва' and Name != 'НомерДок' and Name != 'ДатаДок' and Name != 'Коментар']">
+            <xsl:for-each select="$FormElementField[Name != 'Назва' and Name != 'НомерДок' and Name != 'ДатаДок' and Name != 'Коментар']">
+                <xsl:sort select="SortNum" data-type="number" />
+
                 <xsl:variable name="FieldName" select="Name" />
-                <xsl:if test="$FormElementField[Name = $FieldName]">
-                    <xsl:variable name="Caption" select="$FormElementField[Name = $FieldName]/Caption" />
-                    //<xsl:value-of select="Name"/>
-                    <xsl:choose>
-                        <xsl:when test="Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:choose>
-                                <xsl:when test="Type = 'string' and Multiline = '1'">
-                    CreateFieldView(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>, 500, 200);
-                                </xsl:when>
-                                <xsl:otherwise>
-                    CreateField(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>);
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:when>
-                        <xsl:when test="Type = 'composite_pointer' or Type = 'boolean'">
-                    CreateField(vBox, null, <xsl:value-of select="Name"/>);
-                        </xsl:when>
-                        <xsl:when test="Type = 'pointer'">
-                    CreateField(vBox, null, <xsl:value-of select="Name"/>);
-                        </xsl:when>
-                        <xsl:when test="Type = 'enum'">
-                    CreateField(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>);
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:if>
+                <xsl:variable name="Field" select="$Fields[Name = $FieldName]" />
+                <xsl:variable name="Type" select="$Field/Type" />
+                // <xsl:value-of select="Name"/>
+                <xsl:choose>
+                    <xsl:when test="$Type = 'string' or $Type = 'integer' or $Type = 'numeric' or $Type = 'date' or $Type = 'datetime' or $Type = 'time'">
+                        <xsl:choose>
+                            <xsl:when test="$Type = 'string' and $Field/Multiline = '1'">
+                            <xsl:variable name="Size">
+                                <xsl:choose>
+                                    <xsl:when test="Size != '0'">
+                                        <xsl:value-of select="Size"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>500</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                CreateFieldView(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>, <xsl:value-of select="$Size"/>, 200);
+                            </xsl:when>
+                            <xsl:otherwise>
+                CreateField(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>);
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="$Type = 'composite_pointer' or $Type = 'boolean'">
+                CreateField(vBox, null, <xsl:value-of select="Name"/>);
+                    </xsl:when>
+                    <xsl:when test="$Type = 'pointer'">
+                CreateField(vBox, null, <xsl:value-of select="Name"/>);
+                    </xsl:when>
+                    <xsl:when test="$Type = 'enum'">
+                CreateField(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>);
+                    </xsl:when>
+                </xsl:choose>
             </xsl:for-each>
         }
 
@@ -242,9 +254,6 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public override async void SetValue()
         {
-            if (IsNew)
-                await Елемент.New();
-
             <!-- Крім скритого поля Назва яке формується перед збереженням -->
             <xsl:for-each select="$Fields[Name != 'Назва']">
                 <xsl:variable name="FieldName" select="Name" />
@@ -283,12 +292,10 @@ namespace <xsl:value-of select="$NameSpace"/>
                 </xsl:if>
             </xsl:for-each>
 
-            <xsl:for-each select="$TabularParts">
-                <xsl:variable name="TablePartName" select="Name" />
-                <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                    <xsl:value-of select="Name"/>.ЕлементВласник = Елемент;
-                    <xsl:text>await </xsl:text><xsl:value-of select="Name"/>.LoadRecords();
-                </xsl:if>
+            <xsl:for-each select="$FormElementTablePart">
+                // Таблична частина "<xsl:value-of select="Name"/>" 
+                <xsl:value-of select="Name"/>.ЕлементВласник = Елемент; 
+                <xsl:text>await </xsl:text><xsl:value-of select="Name"/>.LoadRecords();
             </xsl:for-each>
         }
 
@@ -344,11 +351,8 @@ namespace <xsl:value-of select="$NameSpace"/>
             {
                 if(await Елемент.Save())
                 {
-                    <xsl:for-each select="$TabularParts">
-                        <xsl:variable name="TablePartName" select="Name" />
-                        <xsl:if test="$FormElementTablePart[Name = $TablePartName]">
-                            await <xsl:value-of select="Name"/>.SaveRecords();
-                        </xsl:if>
+                    <xsl:for-each select="$FormElementTablePart">
+                        <xsl:text>await </xsl:text><xsl:value-of select="Name"/>.SaveRecords(); // Таблична частина "<xsl:value-of select="Name"/>"
                     </xsl:for-each>
                     isSaved = true;
                 }
@@ -366,9 +370,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             if (spendDoc)
             {
                 bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
-                if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
-
+                if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
                 return isSpend;
             }
             else

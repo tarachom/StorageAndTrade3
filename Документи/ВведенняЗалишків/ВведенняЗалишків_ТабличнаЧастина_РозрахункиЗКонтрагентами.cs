@@ -262,7 +262,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async  void OpenSelect(TreeIter iter, int rowNumber, int colNumber, Popover popover)
         {
             Запис запис = Записи[rowNumber];
 
@@ -270,7 +270,7 @@ namespace StorageAndTrade
             {
                 case Columns.Контрагент:
                     {
-                        Контрагенти_ШвидкийВибір page = new Контрагенти_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Контрагент.UnigueID };
+                        Контрагенти_ШвидкийВибір page = new Контрагенти_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Контрагент.UnigueID };
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Контрагент = new Контрагенти_Pointer(selectPointer);
@@ -279,15 +279,15 @@ namespace StorageAndTrade
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        popoverSmallSelect.Add(page);
-                        popoverSmallSelect.ShowAll();
+                        popover.Add(page);
+                        popover.ShowAll();
 
                         await page.SetValue();
                         break;
                     }
                 case Columns.Валюта:
                     {
-                        Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = popoverSmallSelect, DirectoryPointerItem = запис.Валюта.UnigueID };
+                        Валюти_ШвидкийВибір page = new Валюти_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Валюта.UnigueID };
                         page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
                             запис.Валюта = new Валюти_Pointer(selectPointer);
@@ -296,8 +296,8 @@ namespace StorageAndTrade
                             Store.SetValues(iter, запис.ToArray());
                         };
 
-                        popoverSmallSelect.Add(page);
-                        popoverSmallSelect.ShowAll();
+                        popover.Add(page);
+                        popover.ShowAll();
 
                         await page.SetValue();
                         break;

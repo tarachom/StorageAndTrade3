@@ -36,21 +36,45 @@ limitations under the License.
             <xsl:when test="$File = 'TablePart'">
                 <xsl:call-template name="TablePart" />
             </xsl:when>
+            <xsl:when test="$File = 'List'">
+                <xsl:call-template name="TablePartList" />
+            </xsl:when>
             
         </xsl:choose>
 
     </xsl:template>
 
+<!--- 
+//
+// ============================ Таблична Частина ============================
+//
+-->
+
     <!-- Таблична Частина -->
     <xsl:template name="TablePart">
         <xsl:variable name="TablePartName" select="TablePart/Name"/>
         <xsl:variable name="Fields" select="TablePart/Fields/Field"/>
-
 /*
         _ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
         Таблична Частина
 */
 
+    </xsl:template>
+
+<!--- 
+//
+// ============================ Список ============================
+//
+-->
+
+    <!-- Список -->
+    <xsl:template name="TablePartList">
+        <xsl:variable name="TablePartName" select="TablePart/Name"/>
+        <xsl:variable name="Fields" select="TablePart/Fields/Field"/>
+/*
+        _ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
+        Список
+*/
     </xsl:template>
 
 </xsl:stylesheet>

@@ -152,7 +152,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override async void ButtonSelect(TreeIter iter, int rowNumber, int colNumber, Popover popoverSmallSelect)
+        protected override async  void OpenSelect(TreeIter iter, int rowNumber, int colNumber, Popover popover)
         {
             Запис запис = Записи[rowNumber];
 
@@ -162,7 +162,7 @@ namespace StorageAndTrade
                     {
                         Файли_ШвидкийВибір page = new Файли_ШвидкийВибір
                         {
-                            PopoverParent = popoverSmallSelect,
+                            PopoverParent = popover,
                             DirectoryPointerItem = запис.Файл.UnigueID,
                             CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                             {
@@ -172,8 +172,8 @@ namespace StorageAndTrade
                             }
                         };
 
-                        popoverSmallSelect.Add(page);
-                        popoverSmallSelect.ShowAll();
+                        popover.Add(page);
+                        popover.ShowAll();
 
                         await page.SetValue();
                         break;

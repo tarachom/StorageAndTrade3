@@ -24,6 +24,8 @@ namespace StorageAndTrade
         Entry НомерДок = new Entry() { WidthRequest = 500 };
         DateTimeControl ДатаДок = new DateTimeControl();
         Entry Коментар = new Entry() { WidthRequest = 500 };
+        Entry Поле1 = new Entry() { WidthRequest = 200 };
+        TextView Поле2 = new TextView() { WidthRequest = 300, WrapMode = WrapMode.Word };
 
         #endregion
 
@@ -37,7 +39,6 @@ namespace StorageAndTrade
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(МійДокумент2_Const.FULLNAME, НомерДок, ДатаДок);
-
 
             CreateField(HBoxComment, "Коментар:", Коментар);
 
@@ -56,6 +57,12 @@ namespace StorageAndTrade
         protected override void CreateContainer3(Box vBox)
         {
 
+            // Поле2
+            CreateFieldView(vBox, "Поле2:", Поле2, 300, 200);
+
+            // Поле1
+            CreateField(vBox, "Поле1:", Поле1);
+
         }
 
         protected override void CreateContainer4(Box vBox)
@@ -65,14 +72,13 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override void SetValue()
         {
-            if (IsNew)
-                await Елемент.New();
-
             НомерДок.Text = Елемент.НомерДок;
             ДатаДок.Value = Елемент.ДатаДок;
             Коментар.Text = Елемент.Коментар;
+            Поле1.Text = Елемент.Поле1;
+            Поле2.Buffer.Text = Елемент.Поле2;
 
         }
 
@@ -81,6 +87,8 @@ namespace StorageAndTrade
             Елемент.НомерДок = НомерДок.Text;
             Елемент.ДатаДок = ДатаДок.Value;
             Елемент.Коментар = Коментар.Text;
+            Елемент.Поле1 = Поле1.Text;
+            Елемент.Поле2 = Поле2.Buffer.Text;
 
         }
 
@@ -111,9 +119,7 @@ namespace StorageAndTrade
             if (spendDoc)
             {
                 bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
-                if (!isSpend)
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
-
+                if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
                 return isSpend;
             }
             else

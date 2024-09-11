@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>10.09.2024 13:50:00</DateTimeSave>
+  <DateTimeSave>11.09.2024 20:14:48</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -179,6 +179,8 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <Multiline>0</Multiline>
                 </Field>
               </Fields>
+              <TabularLists />
+              <Forms />
             </TablePart>
           </TabularParts>
         </Constant>
@@ -250,6 +252,8 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <Multiline>0</Multiline>
                 </Field>
               </Fields>
+              <TabularLists />
+              <Forms />
             </TablePart>
           </TabularParts>
         </Constant>
@@ -311,6 +315,8 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <IsFullTextSearch>0</IsFullTextSearch>
                 </Field>
               </Fields>
+              <TabularLists />
+              <Forms />
             </TablePart>
           </TabularParts>
         </Constant>
@@ -383,6 +389,8 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <Multiline>0</Multiline>
                 </Field>
               </Fields>
+              <TabularLists />
+              <Forms />
             </TablePart>
           </TabularParts>
         </Constant>
@@ -462,6 +470,75 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   <IsFullTextSearch>0</IsFullTextSearch>
                 </Field>
               </Fields>
+              <TabularLists>
+                <TabularList>
+                  <Name>Записи</Name>
+                  <Desc>
+                  </Desc>
+                  <Fields>
+                    <Field>
+                      <Name>Користувач</Name>
+                      <Caption>Користувач</Caption>
+                      <Size>0</Size>
+                      <SortNum>100</SortNum>
+                      <SortField>False</SortField>
+                      <SortDirection>False</SortDirection>
+                      <FilterField>False</FilterField>
+                      <Type>pointer</Type>
+                      <Pointer>Довідники.Користувачі</Pointer>
+                    </Field>
+                    <Field>
+                      <Name>Журнал</Name>
+                      <Caption>Журнал</Caption>
+                      <Size>0</Size>
+                      <SortNum>100</SortNum>
+                      <SortField>False</SortField>
+                      <SortDirection>False</SortDirection>
+                      <FilterField>False</FilterField>
+                      <Type>string</Type>
+                      <Pointer>
+                      </Pointer>
+                    </Field>
+                    <Field>
+                      <Name>ПеріодЗначення</Name>
+                      <Caption>ПеріодЗначення</Caption>
+                      <Size>0</Size>
+                      <SortNum>100</SortNum>
+                      <SortField>False</SortField>
+                      <SortDirection>False</SortDirection>
+                      <FilterField>False</FilterField>
+                      <Type>string</Type>
+                      <Pointer>
+                      </Pointer>
+                    </Field>
+                    <Field>
+                      <Name>ДатаСтарт</Name>
+                      <Caption>ДатаСтарт</Caption>
+                      <Size>0</Size>
+                      <SortNum>100</SortNum>
+                      <SortField>False</SortField>
+                      <SortDirection>False</SortDirection>
+                      <FilterField>False</FilterField>
+                      <Type>date</Type>
+                      <Pointer>
+                      </Pointer>
+                    </Field>
+                    <Field>
+                      <Name>ДатаСтоп</Name>
+                      <Caption>ДатаСтоп</Caption>
+                      <Size>0</Size>
+                      <SortNum>100</SortNum>
+                      <SortField>False</SortField>
+                      <SortDirection>False</SortDirection>
+                      <FilterField>False</FilterField>
+                      <Type>date</Type>
+                      <Pointer>
+                      </Pointer>
+                    </Field>
+                  </Fields>
+                </TabularList>
+              </TabularLists>
+              <Forms />
             </TablePart>
           </TabularParts>
         </Constant>
@@ -976,6 +1053,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Multiline>0</Multiline>
                 </Field>
               </Fields>
+              <TabularLists />
+              <Forms />
             </TablePart>
           </TabularParts>
         </Constant>
@@ -1213,6 +1292,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Multiline>0</Multiline>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -1277,38 +1358,56 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <ElementField>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Код</Name>
               <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>НазваПовна</Name>
               <Caption>Назва повна</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>НазваСкорочена</Name>
               <Caption>Назва скорочена</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>ДатаРеєстрації</Name>
               <Caption>Дата реєстрації</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>КраїнаРеєстрації</Name>
               <Caption>Країна реєстрації</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>СвідоцтвоСеріяНомер</Name>
               <Caption>Свідоцтво серія номер</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>СвідоцтвоДатаВидачі</Name>
               <Caption>Свідоцтво дата видачі</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Холдинг</Name>
               <Caption>Холдинг</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
           </ElementFields>
           <ElementTableParts>
@@ -1481,6 +1580,8 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -1888,10 +1989,14 @@ END]]></Value>
             <ElementField>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Код</Name>
               <Caption>Код</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
           </ElementFields>
           <ElementTableParts />
@@ -2586,6 +2691,8 @@ END]]></Value>
               <Multiline>0</Multiline>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Файли</Name>
@@ -2604,6 +2711,8 @@ END]]></Value>
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -2899,6 +3008,8 @@ END]]></Value>
               <Multiline>0</Multiline>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -3364,6 +3475,8 @@ END]]></Value>
               <Multiline>0</Multiline>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -3567,6 +3680,8 @@ END]]></Value>
               <Multiline>0</Multiline>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -5758,6 +5873,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -8284,6 +8401,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -8928,6 +9047,176 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists>
+            <TabularList>
+              <Name>Записи</Name>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>НомерРядка</Name>
+                  <Caption>НомерРядка</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>integer</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Номенклатура</Name>
+                  <Caption>Номенклатура</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Номенклатура</Pointer>
+                </Field>
+                <Field>
+                  <Name>ХарактеристикаНоменклатури</Name>
+                  <Caption>ХарактеристикаНоменклатури</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                </Field>
+                <Field>
+                  <Name>Серія</Name>
+                  <Caption>Серія</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                </Field>
+                <Field>
+                  <Name>Пакування</Name>
+                  <Caption>Пакування</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                </Field>
+                <Field>
+                  <Name>КількістьУпаковок</Name>
+                  <Caption>КількістьУпаковок</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>integer</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Кількість</Name>
+                  <Caption>Кількість</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>numeric</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Ціна</Name>
+                  <Caption>Ціна</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>numeric</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Сума</Name>
+                  <Caption>Сума</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>numeric</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Склад</Name>
+                  <Caption>Склад</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Склади</Pointer>
+                </Field>
+                <Field>
+                  <Name>ЗамовленняПостачальнику</Name>
+                  <Caption>ЗамовленняПостачальнику</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+                </Field>
+                <Field>
+                  <Name>Скидка</Name>
+                  <Caption>Скидка</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>numeric</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Підрозділ</Name>
+                  <Caption>Підрозділ</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.СтруктураПідприємства</Pointer>
+                </Field>
+                <Field>
+                  <Name>ВидЦіни</Name>
+                  <Caption>ВидЦіни</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ВидиЦін</Pointer>
+                </Field>
+              </Fields>
+            </TabularList>
+          </TabularLists>
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -9085,7 +9374,219 @@ WHERE
         <Spend>ПоступленняТоварівТаПослуг_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <ElementField>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ЗамовленняПостачальнику</Name>
+              <Caption>ЗамовленняПостачальнику</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ДатаОплати</Name>
+              <Caption>ДатаОплати</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ФормаОплати</Name>
+              <Caption>ФормаОплати</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Узгоджений</Name>
+              <Caption>Узгоджений</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>БанківськийРахунокОрганізації</Name>
+              <Caption>БанківськийРахунокОрганізації</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>НомерВхідногоДокументу</Name>
+              <Caption>НомерВхідногоДокументу</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ДатаВхідногоДокументу</Name>
+              <Caption>ДатаВхідногоДокументу</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>БанківськийРахунокКонтрагента</Name>
+              <Caption>БанківськийРахунокКонтрагента</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ПовернутиТару</Name>
+              <Caption>ПовернутиТару</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ДатаПоверненняТари</Name>
+              <Caption>ДатаПоверненняТари</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>СпосібДоставки</Name>
+              <Caption>СпосібДоставки</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Курс</Name>
+              <Caption>Курс</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Кратність</Name>
+              <Caption>Кратність</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ЧасДоставкиЗ</Name>
+              <Caption>ЧасДоставкиЗ</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>ЧасДоставкиДо</Name>
+              <Caption>ЧасДоставкиДо</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Менеджер</Name>
+              <Caption>Менеджер</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>СтаттяРухуКоштів</Name>
+              <Caption>СтаттяРухуКоштів</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+          </ElementFields>
+          <ElementTableParts>
+            <ElementTablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+            </ElementTablePart>
+          </ElementTableParts>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ЗамовленняКлієнта</Name>
@@ -9528,6 +10029,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -10182,6 +10685,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -10513,6 +11018,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -10900,6 +11407,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -11355,6 +11864,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -11830,6 +12341,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -12311,6 +12824,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -12796,6 +13311,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -13212,6 +13729,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -13600,6 +14119,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Каси</Name>
@@ -13636,6 +14157,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>БанківськіРахунки</Name>
@@ -13672,6 +14195,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>РозрахункиЗКонтрагентами</Name>
@@ -13729,6 +14254,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -14038,6 +14565,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -14326,6 +14855,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -14652,6 +15183,8 @@ WHERE
               <Multiline>0</Multiline>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -15010,6 +15543,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -15384,6 +15919,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -15856,6 +16393,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -16218,6 +16757,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -16534,6 +17075,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -16851,6 +17394,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -17124,6 +17669,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -17384,6 +17931,8 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <TabularLists>
@@ -17619,18 +18168,26 @@ WHERE
             <ElementField>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>НомерДок</Name>
               <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
           </ElementFields>
           <ElementTableParts />
@@ -17695,8 +18252,167 @@ WHERE
           <IsFullTextSearch>0</IsFullTextSearch>
           <Multiline>0</Multiline>
         </Field>
+        <Field>
+          <Name>Поле1</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Поле2</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <Multiline>0</Multiline>
+        </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>Контакти1</Name>
+          <Table>tab_b15</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Поле1</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Поле2</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
+            </Field>
+          </Fields>
+          <TabularLists>
+            <TabularList>
+              <Name>Записи</Name>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Поле1</Name>
+                  <Caption>Поле1</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>string</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле2</Name>
+                  <Caption>Поле2</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>string</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+              </Fields>
+            </TabularList>
+          </TabularLists>
+          <Forms>
+            <Form>
+              <Name>Таблична частина</Name>
+              <Desc>Таблична частина</Desc>
+              <Type>TablePart</Type>
+            </Form>
+            <Form>
+              <Name>Список</Name>
+              <Desc>Список</Desc>
+              <Type>List</Type>
+              <TabularList>Записи</TabularList>
+            </Form>
+          </Forms>
+        </TablePart>
+        <TablePart>
+          <Name>Контакти2</Name>
+          <Table>tab_b39</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Поле1</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Поле2</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <Multiline>0</Multiline>
+            </Field>
+          </Fields>
+          <TabularLists>
+            <TabularList>
+              <Name>Записи</Name>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Поле1</Name>
+                  <Caption>Поле1</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>string</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле2</Name>
+                  <Caption>Поле2</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>string</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+              </Fields>
+            </TabularList>
+          </TabularLists>
+          <Forms />
+        </TablePart>
+      </TabularParts>
       <TabularLists>
         <TabularList>
           <Name>Записи</Name>
@@ -17751,6 +18467,30 @@ WHERE
               <Pointer>
               </Pointer>
             </Field>
+            <Field>
+              <Name>Поле1</Name>
+              <Caption>Поле1</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
+            <Field>
+              <Name>Поле2</Name>
+              <Caption>Поле2</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Pointer>
+              </Pointer>
+            </Field>
           </Fields>
         </TabularList>
       </TabularLists>
@@ -17784,21 +18524,50 @@ WHERE
             <ElementField>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>НомерДок</Name>
               <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Поле1</Name>
+              <Caption>Поле1</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+            </ElementField>
+            <ElementField>
+              <Name>Поле2</Name>
+              <Caption>Поле2</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
           </ElementFields>
-          <ElementTableParts />
+          <ElementTableParts>
+            <ElementTablePart>
+              <Name>Контакти1</Name>
+              <Caption>Контакти1</Caption>
+            </ElementTablePart>
+            <ElementTablePart>
+              <Name>Контакти2</Name>
+              <Caption>Контакти2</Caption>
+            </ElementTablePart>
+          </ElementTableParts>
         </Form>
         <Form>
           <Name>Список</Name>
@@ -23855,26 +24624,38 @@ SQL тип  непотрібно вказувати
             <ElementField>
               <Name>Номенклатура</Name>
               <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>ХарактеристикаНоменклатури</Name>
               <Caption>ХарактеристикаНоменклатури</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>ВидЦіни</Name>
               <Caption>ВидЦіни</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Ціна</Name>
               <Caption>Ціна</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Пакування</Name>
               <Caption>Пакування</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
           </ElementFields>
           <ElementTableParts />
@@ -23990,14 +24771,20 @@ SQL тип  непотрібно вказувати
             <ElementField>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Курс</Name>
               <Caption>Курс</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
             <ElementField>
               <Name>Кратність</Name>
               <Caption>Кратність</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
             </ElementField>
           </ElementFields>
           <ElementTableParts />
@@ -24401,6 +25188,96 @@ SQL тип  непотрібно вказувати
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists>
+            <TabularList>
+              <Name>Записи</Name>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Період</Name>
+                  <Caption>Період</Caption>
+                  <Size>0</Size>
+                  <SortNum>1</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>date</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Номенклатура</Name>
+                  <Caption>Номенклатура</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Номенклатура</Pointer>
+                </Field>
+                <Field>
+                  <Name>ХарактеристикаНоменклатури</Name>
+                  <Caption>Характеристика</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                </Field>
+                <Field>
+                  <Name>Склад</Name>
+                  <Caption>Склад</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Склади</Pointer>
+                </Field>
+                <Field>
+                  <Name>Серія</Name>
+                  <Caption>Серія</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                </Field>
+                <Field>
+                  <Name>ВНаявності</Name>
+                  <Caption>ВНаявності</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>numeric</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>ДоВідвантаження</Name>
+                  <Caption>ДоВідвантаження</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>numeric</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+              </Fields>
+            </TabularList>
+          </TabularLists>
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>ЗалишкиТаОбороти</Name>
@@ -24511,6 +25388,8 @@ SQL тип  непотрібно вказувати
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Підсумки</Name>
@@ -24576,6 +25455,8 @@ SQL тип  непотрібно вказувати
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -25012,6 +25893,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -25272,6 +26155,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>ЗалишкиТаОбороти</Name>
@@ -25335,6 +26220,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -25716,6 +26603,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -26069,6 +26958,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Підсумки</Name>
@@ -26133,6 +27024,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -26494,6 +27387,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -26728,6 +27623,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>ЗалишкиТаОбороти</Name>
@@ -26791,6 +27688,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -27076,6 +27975,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>ЗалишкиТаОбороти</Name>
@@ -27149,6 +28050,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Підсумки</Name>
@@ -27195,6 +28098,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -27645,6 +28550,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>ЗалишкиТаОбороти</Name>
@@ -27784,6 +28691,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Підсумки</Name>
@@ -27860,6 +28769,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -28442,6 +29353,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>
@@ -28816,6 +29729,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Залишки</Name>
@@ -28891,6 +29806,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
         <TablePart>
           <Name>Підсумки</Name>
@@ -28957,6 +29874,8 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
             </Field>
           </Fields>
+          <TabularLists />
+          <Forms />
         </TablePart>
       </TabularParts>
       <QueryBlockList>

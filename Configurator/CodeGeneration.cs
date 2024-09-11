@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.09.2024 13:50:00
+ * Дата конфігурації: 11.09.2024 20:14:48
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -25386,6 +25386,8 @@ namespace StorageAndTrade_1_0.Документи
         public const string НомерДок = "docnomer";
         public const string ДатаДок = "docdate";
         public const string Коментар = "col_a1";
+        public const string Поле1 = "col_a2";
+        public const string Поле2 = "col_a3";
     }
 
     public static class МійДокумент2_Export
@@ -25403,9 +25405,13 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public МійДокумент2_Objest() : base(Config.Kernel, "tab_b04", "МійДокумент2",
-             ["docname", "docnomer", "docdate", "col_a1", ])
+             ["docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", ])
         {
             
+                //Табличні частини
+                Контакти1_TablePart = new МійДокумент2_Контакти1_TablePart(this);
+                Контакти2_TablePart = new МійДокумент2_Контакти2_TablePart(this);
+                
         }
         
         public async ValueTask New()
@@ -25426,8 +25432,17 @@ namespace StorageAndTrade_1_0.Документи
                 НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
                 ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 Коментар = base.FieldValue["col_a1"].ToString() ?? "";
+                Поле1 = base.FieldValue["col_a2"].ToString() ?? "";
+                Поле2 = base.FieldValue["col_a3"].ToString() ?? "";
                 
                 BaseClear();
+                
+                if (readAllTablePart)
+                {
+                    
+                    await Контакти1_TablePart.Read();
+                    await Контакти2_TablePart.Read();
+                }
                 
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
                 CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
@@ -25446,6 +25461,8 @@ namespace StorageAndTrade_1_0.Документи
             base.FieldValue["docnomer"] = НомерДок;
             base.FieldValue["docdate"] = ДатаДок;
             base.FieldValue["col_a1"] = Коментар;
+            base.FieldValue["col_a2"] = Поле1;
+            base.FieldValue["col_a3"] = Поле2;
             
             bool result = await BaseSave();
             
@@ -25495,8 +25512,23 @@ namespace StorageAndTrade_1_0.Документи
                 НомерДок = НомерДок,
                 ДатаДок = ДатаДок,
                 Коментар = Коментар,
+                Поле1 = Поле1,
+                Поле2 = Поле2,
                 
             };
+            
+            if (copyTableParts)
+            {
+            
+                //Контакти1 - Таблична частина
+                await Контакти1_TablePart.Read();
+                copy.Контакти1_TablePart.Records = Контакти1_TablePart.Copy();
+            
+                //Контакти2 - Таблична частина
+                await Контакти2_TablePart.Read();
+                copy.Контакти2_TablePart.Records = Контакти2_TablePart.Copy();
+            
+            }
             
 
             await copy.New();
@@ -25518,7 +25550,7 @@ namespace StorageAndTrade_1_0.Документи
         {
             
             await ClearSpendTheDocument();
-            await base.BaseDelete([]);
+            await base.BaseDelete(["tab_b15", "tab_b39", ]);
         }
 
         /* синхронна функція для Delete() */
@@ -25543,6 +25575,12 @@ namespace StorageAndTrade_1_0.Документи
         public string НомерДок { get; set; } = "";
         public DateTime ДатаДок { get; set; } = DateTime.MinValue;
         public string Коментар { get; set; } = "";
+        public string Поле1 { get; set; } = "";
+        public string Поле2 { get; set; } = "";
+        
+        //Табличні частини
+        public МійДокумент2_Контакти1_TablePart Контакти1_TablePart { get; set; }
+        public МійДокумент2_Контакти2_TablePart Контакти2_TablePart { get; set; }
         
     }
     
@@ -25634,6 +25672,242 @@ namespace StorageAndTrade_1_0.Документи
         public МійДокумент2_Pointer? Current { get; private set; }
     }
 
+      
+    
+    public class МійДокумент2_Контакти1_TablePart : DocumentTablePart
+    {
+        public МійДокумент2_Контакти1_TablePart(МійДокумент2_Objest owner) : base(Config.Kernel, "tab_b15",
+             ["col_a1", "col_a2", ])
+        {
+            if (owner == null) throw new Exception("owner null");
+            Owner = owner;
+        }
+        
+        public const string Поле1 = "col_a1";
+        public const string Поле2 = "col_a2";
+
+        public МійДокумент2_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; } = [];
+        
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            
+        }
+
+        public async ValueTask Read()
+        {
+            Records.Clear();
+            await base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record()
+                {
+                    UID = (Guid)fieldValue["uid"],
+                    Поле1 = fieldValue["col_a1"].ToString() ?? "",
+                    Поле2 = fieldValue["col_a2"].ToString() ?? "",
+                    
+                };
+                Records.Add(record);
+                
+            }
+            
+            base.BaseClear();
+        }
+        
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b04"))
+                throw new Exception("Owner not exist");
+
+            await base.BaseBeginTransaction();
+                
+            if (clear_all_before_save)
+                await base.BaseDelete(Owner.UnigueID);
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                {
+                    {"col_a1", record.Поле1},
+                    {"col_a2", record.Поле2},
+                    
+                };
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+            }
+            
+            await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
+        public async ValueTask Delete()
+        {
+            await base.BaseDelete(Owner.UnigueID);
+        }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
+
+        public class Record : DocumentTablePartRecord
+        {
+            public string Поле1 { get; set; } = "";
+            public string Поле2 { get; set; } = "";
+            
+        }
+    }
+      
+    
+    public class МійДокумент2_Контакти2_TablePart : DocumentTablePart
+    {
+        public МійДокумент2_Контакти2_TablePart(МійДокумент2_Objest owner) : base(Config.Kernel, "tab_b39",
+             ["col_a1", "col_a2", ])
+        {
+            if (owner == null) throw new Exception("owner null");
+            Owner = owner;
+        }
+        
+        public const string Поле1 = "col_a1";
+        public const string Поле2 = "col_a2";
+
+        public МійДокумент2_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; } = [];
+        
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            
+        }
+
+        public async ValueTask Read()
+        {
+            Records.Clear();
+            await base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record()
+                {
+                    UID = (Guid)fieldValue["uid"],
+                    Поле1 = fieldValue["col_a1"].ToString() ?? "",
+                    Поле2 = fieldValue["col_a2"].ToString() ?? "",
+                    
+                };
+                Records.Add(record);
+                
+            }
+            
+            base.BaseClear();
+        }
+        
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b04"))
+                throw new Exception("Owner not exist");
+
+            await base.BaseBeginTransaction();
+                
+            if (clear_all_before_save)
+                await base.BaseDelete(Owner.UnigueID);
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                {
+                    {"col_a1", record.Поле1},
+                    {"col_a2", record.Поле2},
+                    
+                };
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+            }
+            
+            await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
+        public async ValueTask Delete()
+        {
+            await base.BaseDelete(Owner.UnigueID);
+        }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new List<Record>();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
+
+        public class Record : DocumentTablePartRecord
+        {
+            public string Поле1 { get; set; } = "";
+            public string Поле2 { get; set; } = "";
+            
+        }
+    }
       
     
     #endregion

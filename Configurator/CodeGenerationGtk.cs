@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 10.09.2024 13:50:00
+ * Дата конфігурації: 11.09.2024 20:14:48
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -16187,6 +16187,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
         string НомерДок = "";
         string ДатаДок = "";
         string Коментар = "";
+        string Поле1 = "";
+        string Поле2 = "";
 
         Array ToArray()
         {
@@ -16199,6 +16201,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 /*НомерДок*/ НомерДок,
                 /*ДатаДок*/ ДатаДок,
                 /*Коментар*/ Коментар,
+                /*Поле1*/ Поле1,
+                /*Поле2*/ Поле2,
                 
             };
         }
@@ -16214,6 +16218,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 /*НомерДок*/ typeof(string),  
                 /*ДатаДок*/ typeof(string),  
                 /*Коментар*/ typeof(string),  
+                /*Поле1*/ typeof(string),  
+                /*Поле2*/ typeof(string),  
                 
             ]);
 
@@ -16225,6 +16231,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*НомерДок*/
             treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*ДатаДок*/
             treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            treeView.AppendColumn(new TreeViewColumn("Поле1", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true } ); /*Поле1*/
+            treeView.AppendColumn(new TreeViewColumn("Поле2", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true } ); /*Поле2*/
             
             //Пустишка
             treeView.AppendColumn(new TreeViewColumn());
@@ -16265,6 +16273,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 /*НомерДок*/ Документи.МійДокумент2_Const.НомерДок,
                 /*ДатаДок*/ Документи.МійДокумент2_Const.ДатаДок,
                 /*Коментар*/ Документи.МійДокумент2_Const.Коментар,
+                /*Поле1*/ Документи.МійДокумент2_Const.Поле1,
+                /*Поле2*/ Документи.МійДокумент2_Const.Поле2,
                 
             ]);
 
@@ -16298,6 +16308,8 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                             НомерДок = Fields[МійДокумент2_Const.НомерДок].ToString() ?? "",
                             ДатаДок = Fields[МійДокумент2_Const.ДатаДок].ToString() ?? "",
                             Коментар = Fields[МійДокумент2_Const.Коментар].ToString() ?? "",
+                            Поле1 = Fields[МійДокумент2_Const.Поле1].ToString() ?? "",
+                            Поле2 = Fields[МійДокумент2_Const.Поле2].ToString() ?? "",
                             
                     };
 

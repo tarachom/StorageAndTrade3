@@ -139,6 +139,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public <xsl:value-of select="$RegisterInformationName"/>_Елемент() : base() 
         { 
+            ///!!!! Event CaptionChange
             <xsl:for-each select="$Fields">
                 <xsl:variable name="FieldName" select="Name" />
                 <xsl:if test="$FormElementField[Name = $FieldName] and Type = 'enum'">
@@ -284,7 +285,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask Save()
         {
             UnigueID = <xsl:value-of select="$RegisterInformationName"/>_Objest.UnigueID;
-            Caption = Період.Value.ToString();
+            Caption = Період.Value.ToString(); ///!!!! DELETE
 
             try
             {
