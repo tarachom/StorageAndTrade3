@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>11.09.2024 20:14:48</DateTimeSave>
+  <DateTimeSave>12.09.2024 18:37:04</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -18302,6 +18302,90 @@ WHERE
               <IsFullTextSearch>0</IsFullTextSearch>
               <Multiline>0</Multiline>
             </Field>
+            <Field>
+              <Name>Поле3</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Поле4</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Поле5</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>boolean</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Поле6</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Поле7</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Поле8</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>datetime</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>Поле9</Name>
+              <NameInTable>col_a9</NameInTable>
+              <Type>time</Type>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>ПолеПоступлення</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
+            <Field>
+              <Name>КомбоБох</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
+              <Desc>
+              </Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+            </Field>
           </Fields>
           <TabularLists>
             <TabularList>
@@ -18332,6 +18416,111 @@ WHERE
                   <Type>string</Type>
                   <Pointer>
                   </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле3</Name>
+                  <Caption>Поле3</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>integer</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле4</Name>
+                  <Caption>Поле4</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>numeric</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле5</Name>
+                  <Caption>Поле5</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>boolean</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле6</Name>
+                  <Caption>Поле6</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Номенклатура</Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле7</Name>
+                  <Caption>Поле7</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>date</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле8</Name>
+                  <Caption>Поле8</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>datetime</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле9</Name>
+                  <Caption>Поле9</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>time</Type>
+                  <Pointer>
+                  </Pointer>
+                </Field>
+                <Field>
+                  <Name>ПолеПоступлення</Name>
+                  <Caption>Поступлення</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>pointer</Type>
+                  <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
+                </Field>
+                <Field>
+                  <Name>КомбоБох</Name>
+                  <Caption>КомбоБох</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <SortField>False</SortField>
+                  <SortDirection>False</SortDirection>
+                  <FilterField>False</FilterField>
+                  <Type>enum</Type>
+                  <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
                 </Field>
               </Fields>
             </TabularList>
@@ -18562,10 +18751,6 @@ WHERE
             <ElementTablePart>
               <Name>Контакти1</Name>
               <Caption>Контакти1</Caption>
-            </ElementTablePart>
-            <ElementTablePart>
-              <Name>Контакти2</Name>
-              <Caption>Контакти2</Caption>
             </ElementTablePart>
           </ElementTableParts>
         </Form>

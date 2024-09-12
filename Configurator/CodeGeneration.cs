@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 11.09.2024 20:14:48
+ * Дата конфігурації: 12.09.2024 18:37:04
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -25677,7 +25677,7 @@ namespace StorageAndTrade_1_0.Документи
     public class МійДокумент2_Контакти1_TablePart : DocumentTablePart
     {
         public МійДокумент2_Контакти1_TablePart(МійДокумент2_Objest owner) : base(Config.Kernel, "tab_b15",
-             ["col_a1", "col_a2", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b1", ])
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -25685,6 +25685,15 @@ namespace StorageAndTrade_1_0.Документи
         
         public const string Поле1 = "col_a1";
         public const string Поле2 = "col_a2";
+        public const string Поле3 = "col_a3";
+        public const string Поле4 = "col_a4";
+        public const string Поле5 = "col_a5";
+        public const string Поле6 = "col_a6";
+        public const string Поле7 = "col_a7";
+        public const string Поле8 = "col_a8";
+        public const string Поле9 = "col_a9";
+        public const string ПолеПоступлення = "col_b2";
+        public const string КомбоБох = "col_b1";
 
         public МійДокумент2_Objest Owner { get; private set; }
         
@@ -25698,7 +25707,9 @@ namespace StorageAndTrade_1_0.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
 
-            
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Поле6, "tab_b15", "join_tab_6", "Поле6");
+                Документи.ПоступленняТоварівТаПослуг_Pointer.GetJoin(QuerySelect, ПолеПоступлення, "tab_b15", "join_tab_10", "ПолеПоступлення");
+                
         }
 
         public async ValueTask Read()
@@ -25713,9 +25724,25 @@ namespace StorageAndTrade_1_0.Документи
                     UID = (Guid)fieldValue["uid"],
                     Поле1 = fieldValue["col_a1"].ToString() ?? "",
                     Поле2 = fieldValue["col_a2"].ToString() ?? "",
+                    Поле3 = (fieldValue["col_a3"] != DBNull.Value) ? (int)fieldValue["col_a3"] : 0,
+                    Поле4 = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0,
+                    Поле5 = (fieldValue["col_a5"] != DBNull.Value) ? (bool)fieldValue["col_a5"] : false,
+                    Поле6 = new Довідники.Номенклатура_Pointer(fieldValue["col_a6"]),
+                    Поле7 = (fieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a7"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue,
+                    Поле8 = (fieldValue["col_a8"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a8"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue,
+                    Поле9 = (fieldValue["col_a9"] != DBNull.Value) ? TimeSpan.Parse(fieldValue["col_a9"]?.ToString() ?? DateTime.MinValue.TimeOfDay.ToString()) : DateTime.MinValue.TimeOfDay,
+                    ПолеПоступлення = new Документи.ПоступленняТоварівТаПослуг_Pointer(fieldValue["col_b2"]),
+                    КомбоБох = (fieldValue["col_b1"] != DBNull.Value) ? (Перелічення.ТипиКонтактноїІнформації)fieldValue["col_b1"] : 0,
                     
                 };
                 Records.Add(record);
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Поле6.Назва = ItemValue["Поле6"];
+                        record.ПолеПоступлення.Назва = ItemValue["ПолеПоступлення"];
+                        
+                  }
                 
             }
             
@@ -25738,6 +25765,15 @@ namespace StorageAndTrade_1_0.Документи
                 {
                     {"col_a1", record.Поле1},
                     {"col_a2", record.Поле2},
+                    {"col_a3", record.Поле3},
+                    {"col_a4", record.Поле4},
+                    {"col_a5", record.Поле5},
+                    {"col_a6", record.Поле6.UnigueID.UGuid},
+                    {"col_a7", record.Поле7},
+                    {"col_a8", record.Поле8},
+                    {"col_a9", record.Поле9},
+                    {"col_b2", record.ПолеПоступлення.UnigueID.UGuid},
+                    {"col_b1", (int)record.КомбоБох},
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
@@ -25787,6 +25823,15 @@ namespace StorageAndTrade_1_0.Документи
         {
             public string Поле1 { get; set; } = "";
             public string Поле2 { get; set; } = "";
+            public int Поле3 { get; set; } = 0;
+            public decimal Поле4 { get; set; } = 0;
+            public bool Поле5 { get; set; } = false;
+            public Довідники.Номенклатура_Pointer Поле6 { get; set; } = new Довідники.Номенклатура_Pointer();
+            public DateTime Поле7 { get; set; } = DateTime.MinValue;
+            public DateTime Поле8 { get; set; } = DateTime.MinValue;
+            public TimeSpan Поле9 { get; set; } = DateTime.MinValue.TimeOfDay;
+            public Документи.ПоступленняТоварівТаПослуг_Pointer ПолеПоступлення { get; set; } = new Документи.ПоступленняТоварівТаПослуг_Pointer();
+            public Перелічення.ТипиКонтактноїІнформації КомбоБох { get; set; } = 0;
             
         }
     }

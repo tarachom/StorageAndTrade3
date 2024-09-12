@@ -89,7 +89,7 @@ namespace StorageAndTrade
                     Характеристика = запис.Характеристика.Copy(),
                     Кількість = запис.Кількість,
                     Ціна = запис.Ціна,
-                    Сума = запис.Сума
+                    Сума = запис.Сума,
                 };
             }
 
@@ -166,7 +166,7 @@ namespace StorageAndTrade
                         Характеристика = record.ХарактеристикаНоменклатури,
                         Кількість = record.Кількість,
                         Ціна = record.Ціна,
-                        Сума = record.Сума
+                        Сума = record.Сума,
                     };
 
                     Записи.Add(запис);
@@ -185,7 +185,7 @@ namespace StorageAndTrade
 
                 foreach (Запис запис in Записи)
                 {
-                    АктВиконанихРобіт_Послуги_TablePart.Record record = new АктВиконанихРобіт_Послуги_TablePart.Record()
+                    ЕлементВласник.Послуги_TablePart.Records.Add(new АктВиконанихРобіт_Послуги_TablePart.Record()
                     {
                         UID = запис.ID,
                         НомерРядка = ++sequenceNumber,
@@ -194,9 +194,7 @@ namespace StorageAndTrade
                         Кількість = запис.Кількість,
                         Ціна = запис.Ціна,
                         Сума = запис.Сума
-                    };
-
-                    ЕлементВласник.Послуги_TablePart.Records.Add(record);
+                    });                    
                 }
 
                 await ЕлементВласник.Послуги_TablePart.Save(true);
@@ -293,7 +291,7 @@ namespace StorageAndTrade
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
 
-        protected override async ValueTask<ДовідникШвидкийВибір?> OpenSelect2(TreeIter iter, int rowNumber, int colNumber)
+        protected override async ValueTask<ФормаЖурнал?> OpenSelect2(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
             switch ((Columns)colNumber)
@@ -330,6 +328,18 @@ namespace StorageAndTrade
                     return null;
             }
         }
+        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, bool newValue)
+        {
+            Запис запис = Записи[rowNumber];
+
+            switch ((Columns)colNumber)
+            {
+                default: break;
+            }
+
+            Store.SetValues(iter, запис.ToArray());
+        }
+
         protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
         {
             Запис запис = Записи[rowNumber];
@@ -395,14 +405,14 @@ namespace StorageAndTrade
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
             CellRendererText cellText = (CellRendererText)cell;
-            if (cellText.Data.Contains("Column"))
+            if (column.Data.Contains("Column"))
             {
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
                 Запис запис = Записи[rowNumber];
 
                 cellText.Foreground = "green";
 
-                switch ((Columns)cellText.Data["Column"]!)
+                switch ((Columns)column.Data["Column"]!)
                 {
                     case Columns.Кількість:
                         {

@@ -24,12 +24,15 @@ namespace StorageAndTrade
         Entry НомерДок = new Entry() { WidthRequest = 500 };
         DateTimeControl ДатаДок = new DateTimeControl();
         Entry Коментар = new Entry() { WidthRequest = 500 };
-        Entry Поле1 = new Entry() { WidthRequest = 200 };
-        TextView Поле2 = new TextView() { WidthRequest = 300, WrapMode = WrapMode.Word };
+        Entry Поле1 = new Entry() { WidthRequest = 500 };
+        Entry Поле2 = new Entry() { WidthRequest = 500 };
 
         #endregion
 
         #region TabularParts
+
+        // Таблична частина "Контакти1" 
+        МійДокумент2_ТабличнаЧастина_Контакти1 Контакти1 = new МійДокумент2_ТабличнаЧастина_Контакти1();
 
         #endregion
 
@@ -41,6 +44,11 @@ namespace StorageAndTrade
             CreateDocName(МійДокумент2_Const.FULLNAME, НомерДок, ДатаДок);
 
             CreateField(HBoxComment, "Коментар:", Коментар);
+
+            // Таблична частина "Контакти1" 
+            NotebookTablePart.InsertPage(Контакти1, new Label("Контакти1"), 0);
+
+            NotebookTablePart.CurrentPage = 0;
 
         }
 
@@ -57,11 +65,11 @@ namespace StorageAndTrade
         protected override void CreateContainer3(Box vBox)
         {
 
-            // Поле2
-            CreateFieldView(vBox, "Поле2:", Поле2, 300, 200);
-
             // Поле1
             CreateField(vBox, "Поле1:", Поле1);
+
+            // Поле2
+            CreateField(vBox, "Поле2:", Поле2);
 
         }
 
@@ -72,13 +80,17 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             НомерДок.Text = Елемент.НомерДок;
             ДатаДок.Value = Елемент.ДатаДок;
             Коментар.Text = Елемент.Коментар;
             Поле1.Text = Елемент.Поле1;
-            Поле2.Buffer.Text = Елемент.Поле2;
+            Поле2.Text = Елемент.Поле2;
+
+            // Таблична частина "Контакти1" 
+            Контакти1.ЕлементВласник = Елемент;
+            await Контакти1.LoadRecords();
 
         }
 
@@ -88,7 +100,7 @@ namespace StorageAndTrade
             Елемент.ДатаДок = ДатаДок.Value;
             Елемент.Коментар = Коментар.Text;
             Елемент.Поле1 = Поле1.Text;
-            Елемент.Поле2 = Поле2.Buffer.Text;
+            Елемент.Поле2 = Поле2.Text;
 
         }
 
@@ -102,6 +114,7 @@ namespace StorageAndTrade
             {
                 if (await Елемент.Save())
                 {
+                    await Контакти1.SaveRecords(); // Таблична частина "Контакти1"
 
                     isSaved = true;
                 }
