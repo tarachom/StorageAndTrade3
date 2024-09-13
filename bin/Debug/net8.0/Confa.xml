@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>12.09.2024 18:37:04</DateTimeSave>
+  <DateTimeSave>13.09.2024 11:49:03</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -496,8 +496,6 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                       <SortDirection>False</SortDirection>
                       <FilterField>False</FilterField>
                       <Type>string</Type>
-                      <Pointer>
-                      </Pointer>
                     </Field>
                     <Field>
                       <Name>ПеріодЗначення</Name>
@@ -508,8 +506,6 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                       <SortDirection>False</SortDirection>
                       <FilterField>False</FilterField>
                       <Type>string</Type>
-                      <Pointer>
-                      </Pointer>
                     </Field>
                     <Field>
                       <Name>ДатаСтарт</Name>
@@ -520,8 +516,6 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                       <SortDirection>False</SortDirection>
                       <FilterField>False</FilterField>
                       <Type>date</Type>
-                      <Pointer>
-                      </Pointer>
                     </Field>
                     <Field>
                       <Name>ДатаСтоп</Name>
@@ -532,8 +526,6 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                       <SortDirection>False</SortDirection>
                       <FilterField>False</FilterField>
                       <Type>date</Type>
-                      <Pointer>
-                      </Pointer>
                     </Field>
                   </Fields>
                 </TabularList>
@@ -1311,8 +1303,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -1323,8 +1313,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -1355,66 +1343,76 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
           <ElementFields>
-            <ElementField>
+            <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>НазваПовна</Name>
               <Caption>Назва повна</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>НазваСкорочена</Name>
               <Caption>Назва скорочена</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>ДатаРеєстрації</Name>
               <Caption>Дата реєстрації</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>date</Type>
+            </Field>
+            <Field>
               <Name>КраїнаРеєстрації</Name>
               <Caption>Країна реєстрації</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>СвідоцтвоСеріяНомер</Name>
               <Caption>Свідоцтво серія номер</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>СвідоцтвоДатаВидачі</Name>
               <Caption>Свідоцтво дата видачі</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>Холдинг</Name>
               <Caption>Холдинг</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
           </ElementFields>
           <ElementTableParts>
-            <ElementTablePart>
+            <TablePart>
               <Name>Контакти</Name>
               <Caption>Контакти</Caption>
-            </ElementTablePart>
+            </TablePart>
           </ElementTableParts>
         </Form>
         <Form>
@@ -1599,8 +1597,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -1611,8 +1607,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ОдиницяВиміру</Name>
@@ -1770,8 +1764,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -1782,8 +1774,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ОдиницяВиміру</Name>
@@ -1942,8 +1932,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -1954,8 +1942,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -1986,18 +1972,20 @@ END]]></Value>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
           <ElementFields>
-            <ElementField>
+            <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
+              <Type>string</Type>
+            </Field>
           </ElementFields>
           <ElementTableParts />
         </Form>
@@ -2086,8 +2074,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -2098,8 +2084,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2117,8 +2101,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2199,8 +2181,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -2211,8 +2191,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КількістьУпаковок</Name>
@@ -2223,8 +2201,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>integer</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НазваПовна</Name>
@@ -2235,8 +2211,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2254,8 +2228,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -2266,8 +2238,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КількістьУпаковок</Name>
@@ -2278,8 +2248,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>integer</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НазваПовна</Name>
@@ -2290,8 +2258,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2381,8 +2347,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -2393,8 +2357,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КороткаНазва</Name>
@@ -2405,8 +2367,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код_R030</Name>
@@ -2417,8 +2377,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ВиводитиКурсНаСтартову</Name>
@@ -2429,8 +2387,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>boolean</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2448,8 +2404,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -2460,8 +2414,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КороткаНазва</Name>
@@ -2472,8 +2424,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код_R030</Name>
@@ -2484,8 +2434,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2730,8 +2678,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -2742,8 +2688,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Папка</Name>
@@ -2765,8 +2709,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>boolean</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Покупець</Name>
@@ -2777,8 +2719,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>boolean</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -2796,8 +2736,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -2808,8 +2746,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3027,8 +2963,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3039,8 +2973,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ТипСкладу</Name>
@@ -3080,8 +3012,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3092,8 +3022,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3164,8 +3092,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3176,8 +3102,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -3206,8 +3130,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3278,8 +3200,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3290,8 +3210,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3309,8 +3227,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3321,8 +3237,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3494,8 +3408,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3506,8 +3418,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3525,8 +3435,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3699,8 +3607,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3711,8 +3617,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3730,8 +3634,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3802,8 +3704,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3814,8 +3714,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3833,8 +3731,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3894,8 +3790,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3906,8 +3800,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -3925,8 +3817,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -3937,8 +3827,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4040,8 +3928,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -4052,8 +3938,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НазваФайлу</Name>
@@ -4064,8 +3948,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Розмір</Name>
@@ -4076,8 +3958,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаСтворення</Name>
@@ -4088,8 +3968,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4107,8 +3985,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4190,8 +4066,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -4213,8 +4087,6 @@ END]]></Value>
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <AdditionalField>
               <Visible>True</Visible>
@@ -4310,8 +4182,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -4333,8 +4203,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <AdditionalField>
               <Visible>True</Visible>
@@ -4484,8 +4352,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -4496,8 +4362,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4515,8 +4379,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -4527,8 +4389,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4600,8 +4460,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -4612,8 +4470,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4631,8 +4487,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -4643,8 +4497,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4716,8 +4568,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -4728,8 +4578,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4747,8 +4595,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -4759,8 +4605,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -4842,8 +4686,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -4854,8 +4696,6 @@ FROM
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -4898,8 +4738,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -4910,8 +4748,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -5116,8 +4952,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -5128,8 +4962,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -5158,8 +4990,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -5170,8 +5000,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -5434,8 +5262,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -5446,8 +5272,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -5487,8 +5311,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -5712,8 +5534,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -5724,8 +5544,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -5754,8 +5572,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -5766,8 +5582,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -5892,8 +5706,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -5904,8 +5716,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КореспондуючийРахунок</Name>
@@ -5916,8 +5726,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ВидРухуКоштів</Name>
@@ -5946,8 +5754,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -6019,8 +5825,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -6038,8 +5842,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -6142,8 +5944,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -6154,8 +5954,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ТипДокументу</Name>
@@ -6206,8 +6004,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -6218,8 +6014,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -6336,8 +6130,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -6348,8 +6140,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -6367,8 +6157,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -6379,8 +6167,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -6727,8 +6513,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -6739,8 +6523,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ПовнаНазва</Name>
@@ -6751,8 +6533,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КодМФО</Name>
@@ -6763,8 +6543,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КодЄДРПОУ</Name>
@@ -6775,8 +6553,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерЛіцензії</Name>
@@ -6787,8 +6563,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаЛіцензії</Name>
@@ -6799,8 +6573,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Статус</Name>
@@ -6811,8 +6583,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ТипНаселеногоПункту</Name>
@@ -6823,8 +6593,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>УнікальнийКодБанку</Name>
@@ -6835,8 +6603,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ПоштовийІндекс</Name>
@@ -6847,8 +6613,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НазваНаселеногоПункту</Name>
@@ -6859,8 +6623,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Адреса</Name>
@@ -6871,8 +6633,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерТелефону</Name>
@@ -6883,8 +6643,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаВідкриттяУстанови</Name>
@@ -6895,8 +6653,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаЗакриттяУстанови</Name>
@@ -6907,8 +6663,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КодНБУ</Name>
@@ -6919,8 +6673,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>КодСтатусу</Name>
@@ -6931,8 +6683,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаЗапису</Name>
@@ -6943,8 +6693,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -6962,8 +6710,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -6974,8 +6720,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -7050,8 +6794,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -7091,8 +6833,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -7254,8 +6994,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Приміщення</Name>
@@ -7277,8 +7015,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Позиція</Name>
@@ -7289,8 +7025,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Стелаж</Name>
@@ -7301,8 +7035,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Ярус</Name>
@@ -7313,8 +7045,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ТипСкладськоїКомірки</Name>
@@ -7365,8 +7095,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Приміщення</Name>
@@ -7452,8 +7180,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Приміщення</Name>
@@ -7575,8 +7301,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Висота</Name>
@@ -7587,8 +7311,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Глибина</Name>
@@ -7599,8 +7321,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Вантажопідйомність</Name>
@@ -7611,8 +7331,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Обєм</Name>
@@ -7623,8 +7341,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Ширина</Name>
@@ -7635,8 +7351,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -7654,8 +7368,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -7739,8 +7451,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -7751,8 +7461,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Власник</Name>
@@ -7781,8 +7489,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -7793,8 +7499,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Власник</Name>
@@ -7897,8 +7601,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -7909,8 +7611,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаЗапису</Name>
@@ -7921,8 +7621,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -7940,8 +7638,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -7952,8 +7648,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаЗапису</Name>
@@ -7964,8 +7658,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -8420,8 +8112,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -8432,8 +8122,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -8444,8 +8132,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -8500,8 +8186,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -8523,8 +8207,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -9062,8 +8744,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>integer</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -9118,8 +8798,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>integer</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -9130,8 +8808,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>numeric</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Ціна</Name>
@@ -9142,8 +8818,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>numeric</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Сума</Name>
@@ -9154,8 +8828,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>numeric</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Склад</Name>
@@ -9188,8 +8860,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>numeric</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Підрозділ</Name>
@@ -9234,8 +8904,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -9246,8 +8914,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -9258,8 +8924,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -9325,8 +8989,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -9348,8 +9010,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -9380,210 +9040,259 @@ WHERE
           <Desc>Елемент</Desc>
           <Type>Element</Type>
           <ElementFields>
-            <ElementField>
+            <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>НомерДок</Name>
               <Caption>НомерДок</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
               <Name>ГосподарськаОперація</Name>
               <Caption>ГосподарськаОперація</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
               <Name>Підрозділ</Name>
               <Caption>Підрозділ</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+            </Field>
+            <Field>
               <Name>Склад</Name>
               <Caption>Склад</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
               <Name>Контрагент</Name>
               <Caption>Контрагент</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+            </Field>
+            <Field>
               <Name>СумаДокументу</Name>
               <Caption>СумаДокументу</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
               <Name>ЗамовленняПостачальнику</Name>
               <Caption>ЗамовленняПостачальнику</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+            </Field>
+            <Field>
               <Name>ДатаОплати</Name>
               <Caption>ДатаОплати</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>date</Type>
+            </Field>
+            <Field>
               <Name>ФормаОплати</Name>
               <Caption>ФормаОплати</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ФормаОплати</Pointer>
+            </Field>
+            <Field>
               <Name>Узгоджений</Name>
               <Caption>Узгоджений</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
               <Name>БанківськийРахунокОрганізації</Name>
               <Caption>БанківськийРахунокОрганізації</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+            </Field>
+            <Field>
               <Name>НомерВхідногоДокументу</Name>
               <Caption>НомерВхідногоДокументу</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>ДатаВхідногоДокументу</Name>
               <Caption>ДатаВхідногоДокументу</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>date</Type>
+            </Field>
+            <Field>
               <Name>БанківськийРахунокКонтрагента</Name>
               <Caption>БанківськийРахунокКонтрагента</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиКонтрагентів</Pointer>
+            </Field>
+            <Field>
               <Name>Договір</Name>
               <Caption>Договір</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+            </Field>
+            <Field>
               <Name>Автор</Name>
               <Caption>Автор</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+            </Field>
+            <Field>
               <Name>ПовернутиТару</Name>
               <Caption>ПовернутиТару</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
               <Name>ДатаПоверненняТари</Name>
               <Caption>ДатаПоверненняТари</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>date</Type>
+            </Field>
+            <Field>
               <Name>СпосібДоставки</Name>
               <Caption>СпосібДоставки</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СпособиДоставки</Pointer>
+            </Field>
+            <Field>
               <Name>Організація</Name>
               <Caption>Організація</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
               <Name>Курс</Name>
               <Caption>Курс</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
               <Name>Кратність</Name>
               <Caption>Кратність</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>integer</Type>
+            </Field>
+            <Field>
               <Name>ЧасДоставкиЗ</Name>
               <Caption>ЧасДоставкиЗ</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>time</Type>
+            </Field>
+            <Field>
               <Name>ЧасДоставкиДо</Name>
               <Caption>ЧасДоставкиДо</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>time</Type>
+            </Field>
+            <Field>
               <Name>Менеджер</Name>
               <Caption>Менеджер</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+            </Field>
+            <Field>
               <Name>СтаттяРухуКоштів</Name>
               <Caption>СтаттяРухуКоштів</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтаттяРухуКоштів</Pointer>
+            </Field>
+            <Field>
               <Name>Каса</Name>
               <Caption>Каса</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+            </Field>
+            <Field>
               <Name>Основа</Name>
               <Caption>Основа</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>КлючовіСловаДляПошуку</Name>
               <Caption>КлючовіСловаДляПошуку</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
+              <Type>string</Type>
+            </Field>
           </ElementFields>
           <ElementTableParts>
-            <ElementTablePart>
+            <TablePart>
               <Name>Товари</Name>
               <Caption>Товари</Caption>
-            </ElementTablePart>
+            </TablePart>
           </ElementTableParts>
         </Form>
       </Forms>
@@ -10048,8 +9757,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -10060,8 +9767,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -10072,8 +9777,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -10139,8 +9842,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -10162,8 +9863,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -10704,8 +10403,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -10716,8 +10413,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -10728,8 +10423,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -10795,8 +10488,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -10818,8 +10509,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -11037,8 +10726,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -11049,8 +10736,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -11061,8 +10746,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -11117,8 +10800,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -11426,8 +11107,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -11438,8 +11117,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -11450,8 +11127,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -11506,8 +11181,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ГосподарськаОперація</Name>
@@ -11540,8 +11213,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -11883,8 +11554,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -11895,8 +11564,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -11907,8 +11574,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -11963,8 +11628,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ГосподарськаОперація</Name>
@@ -11997,8 +11660,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -12360,8 +12021,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -12372,8 +12031,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -12384,8 +12041,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -12440,8 +12095,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -12843,8 +12496,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -12855,8 +12506,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -12867,8 +12516,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -12934,8 +12581,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -12957,8 +12602,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -13330,8 +12973,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -13342,8 +12983,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -13354,8 +12993,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -13421,8 +13058,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -13444,8 +13079,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -13748,8 +13381,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -13760,8 +13391,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -13772,8 +13401,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -13828,8 +13455,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -13851,8 +13476,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -14273,8 +13896,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -14285,8 +13906,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -14297,8 +13916,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -14364,8 +13981,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -14584,8 +14199,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -14596,8 +14209,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -14608,8 +14219,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -14653,8 +14262,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -14874,8 +14481,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -14886,8 +14491,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -14898,8 +14501,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -14943,8 +14544,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -15202,8 +14801,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -15214,8 +14811,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -15226,8 +14821,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -15282,8 +14875,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -15562,8 +15153,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -15574,8 +15163,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -15586,8 +15173,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -15620,8 +15205,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -15643,8 +15226,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -15938,8 +15519,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -15950,8 +15529,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -15962,8 +15539,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -16007,8 +15582,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -16030,8 +15603,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -16412,8 +15983,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -16424,8 +15993,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -16436,8 +16003,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -16503,8 +16068,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>True</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -16526,8 +16089,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -16776,8 +16337,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -16788,8 +16347,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -16800,8 +16357,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -16845,8 +16400,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -17094,8 +16647,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -17106,8 +16657,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -17118,8 +16667,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -17163,8 +16710,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -17413,8 +16958,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -17425,8 +16968,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -17437,8 +16978,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -17482,8 +17021,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -17688,8 +17225,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -17700,8 +17235,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -17712,8 +17245,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -17757,8 +17288,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -17950,8 +17479,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -17962,8 +17489,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -17974,8 +17499,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -18008,8 +17531,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -18096,8 +17617,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -18108,8 +17627,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -18120,8 +17637,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -18132,8 +17647,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -18165,30 +17678,34 @@ WHERE
           <Desc>Елемент</Desc>
           <Type>Element</Type>
           <ElementFields>
-            <ElementField>
+            <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
               <Name>НомерДок</Name>
               <Caption>НомерДок</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
+              <Type>string</Type>
+            </Field>
           </ElementFields>
           <ElementTableParts />
         </Form>
@@ -18402,8 +17919,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>string</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле2</Name>
@@ -18414,8 +17929,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>string</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле3</Name>
@@ -18426,8 +17939,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>integer</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле4</Name>
@@ -18438,8 +17949,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>numeric</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле5</Name>
@@ -18450,8 +17959,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>boolean</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле6</Name>
@@ -18473,8 +17980,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>date</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле8</Name>
@@ -18485,8 +17990,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>datetime</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле9</Name>
@@ -18497,8 +18000,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>time</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>ПолеПоступлення</Name>
@@ -18530,6 +18031,88 @@ WHERE
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <ElementFields>
+                <Field>
+                  <Name>Поле1</Name>
+                  <Caption>Поле1</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>string</Type>
+                </Field>
+                <Field>
+                  <Name>Поле2</Name>
+                  <Caption>Поле2</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>string</Type>
+                </Field>
+                <Field>
+                  <Name>Поле3</Name>
+                  <Caption>Поле3</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>integer</Type>
+                </Field>
+                <Field>
+                  <Name>Поле4</Name>
+                  <Caption>Поле4</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>Поле5</Name>
+                  <Caption>Поле5</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>boolean</Type>
+                </Field>
+                <Field>
+                  <Name>Поле6</Name>
+                  <Caption>Поле6</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Номенклатура</Pointer>
+                </Field>
+                <Field>
+                  <Name>Поле7</Name>
+                  <Caption>Поле7</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>date</Type>
+                </Field>
+                <Field>
+                  <Name>Поле8</Name>
+                  <Caption>Поле8</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>datetime</Type>
+                </Field>
+                <Field>
+                  <Name>Поле9</Name>
+                  <Caption>Поле9</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>time</Type>
+                </Field>
+                <Field>
+                  <Name>ПолеПоступлення</Name>
+                  <Caption>ПолеПоступлення</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
+                </Field>
+                <Field>
+                  <Name>КомбоБох</Name>
+                  <Caption>КомбоБох</Caption>
+                  <Size>0</Size>
+                  <SortNum>100</SortNum>
+                  <Type>enum</Type>
+                  <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
+                </Field>
+              </ElementFields>
             </Form>
             <Form>
               <Name>Список</Name>
@@ -18581,8 +18164,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>string</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Поле2</Name>
@@ -18593,8 +18174,6 @@ WHERE
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>string</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
               </Fields>
             </TabularList>
@@ -18617,8 +18196,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>НомерДок</Name>
@@ -18629,8 +18206,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ДатаДок</Name>
@@ -18641,8 +18216,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -18653,8 +18226,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Поле1</Name>
@@ -18665,8 +18236,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Поле2</Name>
@@ -18677,8 +18246,6 @@ WHERE
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -18710,48 +18277,54 @@ WHERE
           <Desc>Елемент</Desc>
           <Type>Element</Type>
           <ElementFields>
-            <ElementField>
+            <Field>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>НомерДок</Name>
               <Caption>НомерДок</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>Поле1</Name>
               <Caption>Поле1</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>string</Type>
+            </Field>
+            <Field>
               <Name>Поле2</Name>
               <Caption>Поле2</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
+              <Type>string</Type>
+            </Field>
           </ElementFields>
           <ElementTableParts>
-            <ElementTablePart>
+            <TablePart>
               <Name>Контакти1</Name>
               <Caption>Контакти1</Caption>
-            </ElementTablePart>
+            </TablePart>
           </ElementTableParts>
         </Form>
         <Form>
@@ -19594,8 +19167,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -19604,8 +19175,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -19614,8 +19183,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -19668,8 +19235,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -19687,8 +19252,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -19705,8 +19268,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -19715,8 +19276,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -19725,8 +19284,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -19779,8 +19336,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -19798,8 +19353,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -19816,8 +19369,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -19826,8 +19377,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -19836,8 +19385,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -19890,8 +19437,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -19909,8 +19454,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -19927,8 +19470,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -19937,8 +19478,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -19947,8 +19486,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20001,8 +19538,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -20020,8 +19555,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20038,8 +19571,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20048,8 +19579,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20058,8 +19587,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20126,8 +19653,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20144,8 +19669,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20154,8 +19677,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20164,8 +19685,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20217,8 +19736,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -20236,8 +19753,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20254,8 +19769,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20264,8 +19777,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20274,8 +19785,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20327,8 +19836,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -20346,8 +19853,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20364,8 +19869,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20374,8 +19877,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20384,8 +19885,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20452,8 +19951,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20470,8 +19967,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20480,8 +19975,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20490,8 +19983,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20544,8 +20035,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -20563,8 +20052,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20581,8 +20068,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20591,8 +20076,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20601,8 +20084,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20655,8 +20136,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -20674,8 +20153,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20692,8 +20169,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20702,8 +20177,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20712,8 +20185,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20765,8 +20236,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -20784,8 +20253,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -20802,8 +20269,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -20812,8 +20277,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -20822,8 +20285,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -20892,8 +20353,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21084,8 +20543,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21094,8 +20551,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21104,8 +20559,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21173,8 +20626,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21191,8 +20642,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21201,8 +20650,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21211,8 +20658,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21262,8 +20707,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -21281,8 +20724,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21299,8 +20740,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21309,8 +20748,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21319,8 +20756,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21371,8 +20806,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -21390,8 +20823,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21408,8 +20839,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21418,8 +20847,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21428,8 +20855,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21482,8 +20907,6 @@ WHERE
               <SqlType>text</SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -21501,8 +20924,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21519,8 +20940,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21529,8 +20948,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21539,8 +20956,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21607,8 +21022,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21625,8 +21038,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21635,8 +21046,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21645,8 +21054,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21713,8 +21120,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21731,8 +21136,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21741,8 +21144,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21751,8 +21152,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21819,8 +21218,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21837,8 +21234,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21847,8 +21242,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21857,8 +21250,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -21925,8 +21316,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -21943,8 +21332,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -21953,8 +21340,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -21963,8 +21348,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -22030,8 +21413,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22048,8 +21429,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -22058,8 +21437,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -22068,8 +21445,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -22133,8 +21508,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22151,8 +21524,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -22161,8 +21532,6 @@ WHERE
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -22171,8 +21540,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -22236,8 +21603,6 @@ WHERE
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22376,8 +21741,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -22386,8 +21749,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -22396,8 +21757,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -22451,8 +21810,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -22470,8 +21827,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22488,8 +21843,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -22498,8 +21851,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -22508,8 +21859,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -22563,8 +21912,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -22582,8 +21929,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22600,8 +21945,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -22610,8 +21953,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -22620,8 +21961,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -22675,8 +22014,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -22694,8 +22031,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22843,8 +22178,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -22853,8 +22186,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -22863,8 +22194,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -22918,8 +22247,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -22937,8 +22264,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -22955,8 +22280,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -22965,8 +22288,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -22975,8 +22296,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23030,8 +22349,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -23049,8 +22366,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -23067,8 +22382,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -23077,8 +22390,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -23087,8 +22398,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23142,8 +22451,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -23161,8 +22468,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -23179,8 +22484,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -23189,8 +22492,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -23199,8 +22500,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23253,8 +22552,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -23272,8 +22569,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -23290,8 +22585,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -23300,8 +22593,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -23310,8 +22601,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23365,8 +22654,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -23384,8 +22671,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -23519,8 +22804,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -23529,8 +22812,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -23539,8 +22820,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23594,8 +22873,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -23613,8 +22890,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -23631,8 +22906,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -23641,8 +22914,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -23651,8 +22922,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23706,8 +22975,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -23725,8 +22992,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -23845,8 +23110,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -23855,8 +23118,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -23865,8 +23126,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23911,8 +23170,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -23929,8 +23186,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -23939,8 +23194,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -23949,8 +23202,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -23994,8 +23245,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24012,8 +23261,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -24022,8 +23269,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -24032,8 +23277,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -24077,8 +23320,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24095,8 +23336,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -24105,8 +23344,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -24115,8 +23352,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -24160,8 +23395,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24178,8 +23411,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -24188,8 +23419,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -24198,8 +23427,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -24243,8 +23470,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24350,8 +23575,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -24360,8 +23583,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -24370,8 +23591,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -24407,8 +23626,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24425,8 +23642,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -24435,8 +23650,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -24445,8 +23658,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -24482,8 +23693,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24500,8 +23709,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -24510,8 +23717,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -24520,8 +23725,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -24557,8 +23760,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24575,8 +23776,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дата</Name>
@@ -24585,8 +23784,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>1</WherePeriod>
               <Type>datetime</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номер</Name>
@@ -24595,8 +23792,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -24632,8 +23827,6 @@ SQL тип  непотрібно вказувати
               </SqlType>
               <WherePeriod>0</WherePeriod>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24771,8 +23964,6 @@ SQL тип  непотрібно вказувати
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Пакування</Name>
@@ -24806,44 +23997,54 @@ SQL тип  непотрібно вказувати
           </Desc>
           <Type>Element</Type>
           <ElementFields>
-            <ElementField>
+            <Field>
               <Name>Номенклатура</Name>
               <Caption>Номенклатура</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
               <Name>ХарактеристикаНоменклатури</Name>
               <Caption>ХарактеристикаНоменклатури</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+            </Field>
+            <Field>
               <Name>ВидЦіни</Name>
               <Caption>ВидЦіни</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ВидиЦін</Pointer>
+            </Field>
+            <Field>
               <Name>Ціна</Name>
               <Caption>Ціна</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
               <Name>Пакування</Name>
               <Caption>Пакування</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+            </Field>
+            <Field>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
           </ElementFields>
-          <ElementTableParts />
         </Form>
         <Form>
           <Name>Список</Name>
@@ -24928,8 +24129,6 @@ SQL тип  непотрібно вказувати
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Кратність</Name>
@@ -24940,8 +24139,6 @@ SQL тип  непотрібно вказувати
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>integer</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -24953,26 +24150,29 @@ SQL тип  непотрібно вказувати
           </Desc>
           <Type>Element</Type>
           <ElementFields>
-            <ElementField>
+            <Field>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
               <Name>Курс</Name>
               <Caption>Курс</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
-            <ElementField>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
               <Name>Кратність</Name>
               <Caption>Кратність</Caption>
               <Size>0</Size>
               <SortNum>100</SortNum>
-            </ElementField>
+              <Type>integer</Type>
+            </Field>
           </ElementFields>
-          <ElementTableParts />
         </Form>
         <Form>
           <Name>Список</Name>
@@ -25059,8 +24259,6 @@ SQL тип  непотрібно вказувати
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>string</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -25388,8 +24586,6 @@ SQL тип  непотрібно вказувати
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>date</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -25444,8 +24640,6 @@ SQL тип  непотрібно вказувати
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>numeric</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
                 <Field>
                   <Name>ДоВідвантаження</Name>
@@ -25456,8 +24650,6 @@ SQL тип  непотрібно вказувати
                   <SortDirection>False</SortDirection>
                   <FilterField>False</FilterField>
                   <Type>numeric</Type>
-                  <Pointer>
-                  </Pointer>
                 </Field>
               </Fields>
             </TabularList>
@@ -25908,8 +25100,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -26210,8 +25400,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -26222,8 +25410,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -26558,8 +25744,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -26933,8 +26117,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -26945,8 +26127,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Собівартість</Name>
@@ -26957,8 +26137,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -27395,8 +26573,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ВРезервіЗіСкладу</Name>
@@ -27407,8 +26583,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>ВРезервіПідЗамовлення</Name>
@@ -27419,8 +26593,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -27691,8 +26863,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -28026,8 +27196,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -28491,8 +27659,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -29253,8 +28419,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>integer</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -29265,8 +28429,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Собівартість</Name>
@@ -29277,8 +28439,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>СписанаСобівартість</Name>
@@ -29289,8 +28449,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -29686,8 +28844,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -29698,8 +28854,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Дохід</Name>
@@ -29710,8 +28864,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
             <Field>
               <Name>Собівартість</Name>
@@ -29722,8 +28874,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>
@@ -30301,8 +29451,6 @@ HAVING
               <SortDirection>False</SortDirection>
               <FilterField>False</FilterField>
               <Type>numeric</Type>
-              <Pointer>
-              </Pointer>
             </Field>
           </Fields>
         </TabularList>

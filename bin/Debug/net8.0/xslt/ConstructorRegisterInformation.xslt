@@ -55,8 +55,8 @@ limitations under the License.
     <!-- Елемент -->
     <xsl:template name="RegisterInformationElement">
         <xsl:variable name="RegisterInformationName" select="RegisterInformation/Name"/>
-        <xsl:variable name="Fields" select="RegisterInformation/Fields/Field"/>
-        <xsl:variable name="FormElementField" select="RegisterInformation/ElementFields/ElementField"/>
+        <!--<xsl:variable name="Fields" select="RegisterInformation/Fields/Field"/>-->
+        <xsl:variable name="FieldsTL" select="RegisterInformation/ElementFields/Field"/>
 
 /*
         <xsl:value-of select="$RegisterInformationName"/>_Елемент.cs
@@ -72,116 +72,117 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$RegisterInformationName"/>_Елемент : РегістриВідомостейЕлемент
     {
-        public <xsl:value-of select="$RegisterInformationName"/>_Objest <xsl:value-of select="$RegisterInformationName"/>_Objest { get; set; } = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
+        public <xsl:value-of select="$RegisterInformationName"/>_Objest Елемент { get; set; } = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
         DateTimeControl Період = new DateTimeControl();
 
         #region Fields
-
-        <xsl:for-each select="$Fields">
-            <xsl:variable name="FieldName" select="Name" />
-            <xsl:if test="$FormElementField[Name = $FieldName]">
+        <xsl:for-each select="$FieldsTL">
+            <xsl:variable name="Size">
                 <xsl:choose>
-                    <xsl:when test="Type = 'string'">
-                        <xsl:choose>
-                            <xsl:when test="Multiline = '1'">
-                        TextView <xsl:value-of select="Name"/> = new TextView();
-                            </xsl:when>
-                            <xsl:otherwise>
-                        Entry <xsl:value-of select="Name"/> = new Entry() { WidthRequest = 500 };
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                    <xsl:when test="Type = 'integer'">
-                        IntegerControl <xsl:value-of select="Name"/> = new IntegerControl();
-                    </xsl:when>
-                    <xsl:when test="Type = 'numeric'">
-                        NumericControl <xsl:value-of select="Name"/> = new NumericControl();
-                    </xsl:when>
-                    <xsl:when test="Type = 'boolean'">
-                        CheckButton <xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
-                    </xsl:when>
-                    <xsl:when test="Type = 'date' or Type = 'datetime'">
-                        DateTimeControl <xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
-                    </xsl:when>
-                    <xsl:when test="Type = 'time'">
-                        TimeControl <xsl:value-of select="Name"/> = new TimeControl();
-                    </xsl:when>
-                    <xsl:when test="Type = 'composite_pointer'">
-                        CompositePointerControl <xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Довідники.<xsl:value-of select="$RegisterInformationName"/>.<xsl:value-of select="Name"/>" };
-                    </xsl:when>
-                    <xsl:when test="Type = 'pointer'">
-                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                        <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="$FormElementField[Name = $FieldName]/Caption"/>", WidthPresentation = 300 };
-                    </xsl:when>
-                    <xsl:when test="Type = 'enum'">
-                        ComboBoxText <xsl:value-of select="Name"/> = new ComboBoxText();
-                    </xsl:when>
-                    <xsl:when test="Type = 'any_pointer'">
-                        //Guid <xsl:value-of select="Name"/> = new Guid();
-                    </xsl:when>
-                    <xsl:when test="Type = 'bytea'">
-                        //byte[] <xsl:value-of select="Name"/> = new byte[]{ };
-                    </xsl:when>
-                    <xsl:when test="Type = 'string[]'">
-                        //string[] <xsl:value-of select="Name"/> = new string[]{ };
-                    </xsl:when>
-                    <xsl:when test="Type = 'integer'">
-                        //int[] <xsl:value-of select="Name"/> = new int[]{ };
-                    </xsl:when>
-                    <xsl:when test="Type = 'numeric'">
-                        //decimal[] <xsl:value-of select="Name"/> = new decimal[]{ };
-                    </xsl:when>
+                    <xsl:when test="Size != '0'"><xsl:value-of select="Size"/></xsl:when>
+                    <xsl:otherwise>500</xsl:otherwise>
                 </xsl:choose>
-            </xsl:if>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="Type = 'string'">
+                    <xsl:choose>
+                        <xsl:when test="Multiline = '1'">
+                    <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WidthRequest = <xsl:value-of select="$Size"/>, WrapMode = WrapMode.Word };
+                        </xsl:when>
+                        <xsl:otherwise>
+                    <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new Entry() { WidthRequest = <xsl:value-of select="$Size"/> };
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:when test="Type = 'integer'">
+                    <xsl:text>IntegerControl </xsl:text><xsl:value-of select="Name"/> = new IntegerControl();
+                </xsl:when>
+                <xsl:when test="Type = 'numeric'">
+                    <xsl:text>NumericControl </xsl:text><xsl:value-of select="Name"/> = new NumericControl();
+                </xsl:when>
+                <xsl:when test="Type = 'boolean'">
+                    <xsl:text>CheckButton </xsl:text><xsl:value-of select="Name"/> = new CheckButton("<xsl:value-of select="Name"/>");
+                </xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'datetime'">
+                    <xsl:text>DateTimeControl </xsl:text><xsl:value-of select="Name"/> = new DateTimeControl()<xsl:if test="Type = 'date'">{ OnlyDate = true }</xsl:if>;
+                </xsl:when>
+                <xsl:when test="Type = 'time'">
+                    <xsl:text>TimeControl </xsl:text><xsl:value-of select="Name"/> = new TimeControl();
+                </xsl:when>
+                <xsl:when test="Type = 'composite_pointer'">
+                    <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Довідники.<xsl:value-of select="$RegisterInformationName"/>.<xsl:value-of select="Name"/>" };
+                </xsl:when>
+                <xsl:when test="Type = 'pointer'">
+                    <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                    <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="Caption"/>", WidthPresentation = <xsl:value-of select="$Size"/> };
+                </xsl:when>
+                <xsl:when test="Type = 'enum'">
+                    <xsl:text>ComboBoxText </xsl:text><xsl:value-of select="Name"/> = new ComboBoxText();
+                </xsl:when>
+                <xsl:when test="Type = 'any_pointer'">
+                    <xsl:text>//Guid </xsl:text><xsl:value-of select="Name"/> = new Guid();
+                </xsl:when>
+                <xsl:when test="Type = 'bytea'">
+                    <xsl:text>//byte[] </xsl:text><xsl:value-of select="Name"/> = new byte[]{ };
+                </xsl:when>
+                <xsl:when test="Type = 'string[]'">
+                    <xsl:text>//string[] </xsl:text><xsl:value-of select="Name"/> = new string[]{ };
+                </xsl:when>
+                <xsl:when test="Type = 'integer'">
+                    <xsl:text>//int[] </xsl:text><xsl:value-of select="Name"/> = new int[]{ };
+                </xsl:when>
+                <xsl:when test="Type = 'numeric'">
+                    <xsl:text>//decimal[] </xsl:text><xsl:value-of select="Name"/> = new decimal[]{ };
+                </xsl:when>
+            </xsl:choose>
         </xsl:for-each>
 
         #endregion
 
         public <xsl:value-of select="$RegisterInformationName"/>_Елемент() : base() 
         { 
-            ///!!!! Event CaptionChange
-            <xsl:for-each select="$Fields">
-                <xsl:variable name="FieldName" select="Name" />
-                <xsl:if test="$FormElementField[Name = $FieldName] and Type = 'enum'">
-                    <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                    foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_List())
-                        <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
-                </xsl:if>
+            //Елемент.UnigueIDChanged += UnigueIDChanged;
+            //Елемент.CaptionChanged += CaptionChanged;
+
+            <xsl:for-each select="$FieldsTL[Type = 'enum']">
+                foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List())
+                    <xsl:value-of select="Name"/>.Append(field.Value.ToString(), field.Name);
             </xsl:for-each>
         }
 
         protected override void CreatePack1(Box vBox)
         {
-            //Період
-            CreateField(vBox, "Період:", Період);
-            <xsl:for-each select="$Fields">
-                <xsl:variable name="FieldName" select="Name" />
-                <xsl:if test="$FormElementField[Name = $FieldName]">
-                    <xsl:variable name="Caption" select="$FormElementField[Name = $FieldName]/Caption" />
-                    //<xsl:value-of select="Name"/>
-                    <xsl:choose>
-                        <xsl:when test="Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:choose>
-                                <xsl:when test="Type = 'string' and Multiline = '1'">
-                    CreateFieldView(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>, 500, 200);
-                                </xsl:when>
-                                <xsl:otherwise>
-                    CreateField(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>);
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:when>
-                        <xsl:when test="Type = 'composite_pointer' or Type = 'boolean'">
-                    CreateField(vBox, null, <xsl:value-of select="Name"/>);
-                        </xsl:when>
-                        <xsl:when test="Type = 'pointer'">
-
-                    CreateField(vBox, null, <xsl:value-of select="Name"/>);
-                        </xsl:when>
-                        <xsl:when test="Type = 'enum'">
-                    CreateField(vBox, "<xsl:value-of select="$Caption"/>:", <xsl:value-of select="Name"/>);
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:if>
+                //Період
+                CreateField(vBox, "Період:", Період);
+            <xsl:for-each select="$FieldsTL">
+                //<xsl:value-of select="Name"/>
+                <xsl:choose>
+                    <xsl:when test="Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+                        <xsl:choose>
+                            <xsl:when test="Type = 'string' and Multiline = '1'">
+                            <xsl:variable name="Size">
+                                <xsl:choose>
+                                    <xsl:when test="Size != '0'"><xsl:value-of select="Size"/></xsl:when>
+                                    <xsl:otherwise>500</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                CreateFieldView(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>, <xsl:value-of select="$Size"/>, 200);
+                            </xsl:when>
+                            <xsl:otherwise>
+                CreateField(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>);
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="Type = 'composite_pointer' or Type = 'boolean'">
+                CreateField(vBox, null, <xsl:value-of select="Name"/>);
+                    </xsl:when>
+                    <xsl:when test="Type = 'pointer'">
+                CreateField(vBox, null, <xsl:value-of select="Name"/>);
+                    </xsl:when>
+                    <xsl:when test="Type = 'enum'">
+                CreateField(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>);
+                    </xsl:when>
+                </xsl:choose>
             </xsl:for-each>
         }
 
@@ -195,106 +196,98 @@ namespace <xsl:value-of select="$NameSpace"/>
         public override void SetValue()
         {            
             if (IsNew)
-                <xsl:value-of select="$RegisterInformationName"/>_Objest.New();
+                Елемент.New();
 
-            Період.Value = <xsl:value-of select="$RegisterInformationName"/>_Objest.Period;
-            
-            <xsl:for-each select="$Fields">
-                <xsl:variable name="FieldName" select="Name" />
-                <xsl:if test="$FormElementField[Name = $FieldName]">
-                    <xsl:choose>
-                        <xsl:when test="Type = 'string'">
-                            <xsl:choose>
-                                <xsl:when test="Multiline = '1'">
-                                    <xsl:value-of select="Name"/>.Buffer.Text = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>;
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="Name"/>.Text = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>;
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:when>
-                        <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:value-of select="Name"/>.Value = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>;
-                        </xsl:when>
-                        <xsl:when test="Type = 'boolean'">
-                            <xsl:value-of select="Name"/>.Active = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>;
-                        </xsl:when>
-                        <xsl:when test="Type = 'composite_pointer'">
-                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>;
-                        </xsl:when>
-                        <xsl:when test="Type = 'pointer'">
-                            <xsl:value-of select="Name"/>.Pointer = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>;
-                        </xsl:when>
-                        <xsl:when test="Type = 'enum'">
-                            <xsl:value-of select="Name"/>.ActiveId = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>.ToString();
-                            if (<xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
-                        </xsl:when>
-                        <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                            //<xsl:value-of select="Name"/> = <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/>;
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:if>
+            Період.Value = Елемент.Period;
+            <xsl:for-each select="$FieldsTL">
+                <xsl:choose>
+                    <xsl:when test="Type = 'string'">
+                        <xsl:choose>
+                            <xsl:when test="Multiline = '1'">
+                                <xsl:value-of select="Name"/>.Buffer.Text = Елемент.<xsl:value-of select="Name"/>;
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="Name"/>.Text = Елемент.<xsl:value-of select="Name"/>;
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+                        <xsl:value-of select="Name"/>.Value = Елемент.<xsl:value-of select="Name"/>;
+                    </xsl:when>
+                    <xsl:when test="Type = 'boolean'">
+                        <xsl:value-of select="Name"/>.Active = Елемент.<xsl:value-of select="Name"/>;
+                    </xsl:when>
+                    <xsl:when test="Type = 'composite_pointer'">
+                        <xsl:value-of select="Name"/>.Pointer = Елемент.<xsl:value-of select="Name"/>;
+                    </xsl:when>
+                    <xsl:when test="Type = 'pointer'">
+                        <xsl:value-of select="Name"/>.Pointer = Елемент.<xsl:value-of select="Name"/>;
+                    </xsl:when>
+                    <xsl:when test="Type = 'enum'">
+                        <xsl:value-of select="Name"/>.ActiveId = Елемент.ToString();
+                        <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
+                    </xsl:when>
+                    <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
+                        <xsl:text>//</xsl:text><xsl:value-of select="Name"/> = Елемент.<xsl:value-of select="Name"/>;
+                    </xsl:when>
+                </xsl:choose>
             </xsl:for-each>
         }
 
         protected override void GetValue()
         {
-            <xsl:value-of select="$RegisterInformationName"/>_Objest.Period = Період.Value;
-
-            <xsl:for-each select="$Fields">
-                <xsl:variable name="FieldName" select="Name" />
-                <xsl:if test="$FormElementField[Name = $FieldName]">
-                    <xsl:choose>
-                        <xsl:when test="Type = 'string'">
-                            <xsl:choose>
-                                <xsl:when test="Multiline = '1'">
-                                    <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:when>
-                        <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
-                            <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
-                        </xsl:when>
-                        <xsl:when test="Type = 'boolean'">
-                            <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
-                        </xsl:when>
-                        <xsl:when test="Type = 'composite_pointer'">
-                            <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
-                        </xsl:when>
-                        <xsl:when test="Type = 'pointer'">
-                            <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
-                        </xsl:when>
-                        <xsl:when test="Type = 'enum'">
-                            <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-                            <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active != -1) 
-                                <xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
-                        </xsl:when>
-                        <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
-                            //<xsl:value-of select="$RegisterInformationName"/>_Objest.<xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:if>
+            Елемент.Period = Період.Value;
+            <xsl:for-each select="$FieldsTL">
+                <xsl:choose>
+                    <xsl:when test="Type = 'string'">
+                        <xsl:choose>
+                            <xsl:when test="Multiline = '1'">
+                        <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Buffer.Text;
+                            </xsl:when>
+                            <xsl:otherwise>
+                        <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Text;
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+                        <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Value;
+                    </xsl:when>
+                    <xsl:when test="Type = 'boolean'">
+                        <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Active;
+                    </xsl:when>
+                    <xsl:when test="Type = 'composite_pointer'">
+                        <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                    </xsl:when>
+                    <xsl:when test="Type = 'pointer'">
+                        <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>.Pointer;
+                    </xsl:when>
+                    <xsl:when test="Type = 'enum'">
+                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                        <xsl:text>if (</xsl:text><xsl:value-of select="Name"/><xsl:text>.Active != -1) </xsl:text>
+                        <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
+                    </xsl:when>
+                    <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
+                        <xsl:text>//Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
+                    </xsl:when>
+                </xsl:choose>
             </xsl:for-each>
         }
 
         #endregion
 
-        protected override async ValueTask Save()
+        protected override async ValueTask&lt;bool&gt; Save()
         {
-            UnigueID = <xsl:value-of select="$RegisterInformationName"/>_Objest.UnigueID;
-            Caption = Період.Value.ToString(); ///!!!! DELETE
-
+            bool isSaved = false;
             try
             {
-                await <xsl:value-of select="$RegisterInformationName"/>_Objest.Save();
+                await Елемент.Save();
+                isSaved = true;
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(UnigueID.UGuid), Caption, ex);
             }
+            return isSaved;
         }
     }
 }
@@ -340,22 +333,10 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async void LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length &lt; 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
             //period
@@ -370,64 +351,42 @@ namespace <xsl:value-of select="$NameSpace"/>
             await ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
-        protected override async void OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
+            <xsl:value-of select="$RegisterInformationName"/>_Елемент page = new <xsl:value-of select="$RegisterInformationName"/>_Елемент
+            {
+                CallBack_LoadRecords = CallBack_LoadRecords,
+                IsNew = IsNew
+            };
+
             if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{<xsl:value-of select="$RegisterInformationName"/>_Const.FULLNAME} *", () =>
-                {
-                    <xsl:value-of select="$RegisterInformationName"/>_Елемент page = new <xsl:value-of select="$RegisterInformationName"/>_Елемент
-                    {
-                        CallBack_LoadRecords = CallBack_LoadRecords,
-                        IsNew = true
-                    };
-
-                    page.SetValue();
-
-                    return page;
-                });
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
             }
-            else if (unigueID != null)
-            {
-                <xsl:value-of select="$RegisterInformationName"/>_Objest <xsl:value-of select="$RegisterInformationName"/>_Objest = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
-                if (await <xsl:value-of select="$RegisterInformationName"/>_Objest.Read(unigueID))
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{<xsl:value-of select="$RegisterInformationName"/>_Objest.Period}", () =>
-                    {
-                        <xsl:value-of select="$RegisterInformationName"/>_Елемент page = new <xsl:value-of select="$RegisterInformationName"/>_Елемент
-                        {
-                            CallBack_LoadRecords = CallBack_LoadRecords,
-                            IsNew = false,
-                            <xsl:value-of select="$RegisterInformationName"/>_Objest = <xsl:value-of select="$RegisterInformationName"/>_Objest,
-                        };
 
-                        page.SetValue();
-
-                        return page;
-                    });
-                }
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            }
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
+            page.SetValue();
         }
-
         protected override async ValueTask Delete(UnigueID unigueID)
         {
-            <xsl:value-of select="$RegisterInformationName"/>_Objest <xsl:value-of select="$RegisterInformationName"/>_Objest = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
-            if (await <xsl:value-of select="$RegisterInformationName"/>_Objest.Read(unigueID))
-                await <xsl:value-of select="$RegisterInformationName"/>_Objest.Delete();
+            <xsl:value-of select="$RegisterInformationName"/>_Objest Обєкт = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.Delete();
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
         }
 
         protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
         {
-            <xsl:value-of select="$RegisterInformationName"/>_Objest <xsl:value-of select="$RegisterInformationName"/>_Objest = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
-            if (await <xsl:value-of select="$RegisterInformationName"/>_Objest.Read(unigueID))
+            <xsl:value-of select="$RegisterInformationName"/>_Objest Обєкт = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
+            if (await Обєкт.Read(unigueID))
             {
-                <xsl:value-of select="$RegisterInformationName"/>_Objest <xsl:value-of select="$RegisterInformationName"/>_Objest_Новий = <xsl:value-of select="$RegisterInformationName"/>_Objest.Copy();
-                await <xsl:value-of select="$RegisterInformationName"/>_Objest_Новий.Save();
-                return <xsl:value-of select="$RegisterInformationName"/>_Objest_Новий.UnigueID;
+                <xsl:value-of select="$RegisterInformationName"/>_Objest Новий = Обєкт.Copy();
+                await Новий.Save();
+                return Новий.UnigueID;
             }
             else
             {

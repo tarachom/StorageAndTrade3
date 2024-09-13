@@ -92,14 +92,13 @@ limitations under the License.
     <!-- Таблична Частина -->
     <xsl:template name="TablePart">
         <xsl:variable name="TablePartName" select="TablePart/Name"/>
-        <xsl:variable name="TabularList" select="TablePart/TabularList"/><!-- Даний таб. список -->
-        <xsl:variable name="Fields" select="TablePart/Fields/Field"/><!-- Колекція полів -->
-        <xsl:variable name="TabularLists" select="TablePart/TabularLists/TabularList"/><!-- Колекція табличних списків -->
-        <xsl:variable name="FieldsTL" select="$TabularLists[Name = $TabularList]/Fields/Field"/><!-- Колекція полів даного таб. списка -->
+        <!--<xsl:variable name="TabularList" select="TablePart/TabularList"/>--><!-- Даний таб. список -->
+        <!--<xsl:variable name="Fields" select="TablePart/Fields/Field"/>--><!-- Колекція полів -->
+        <!--<xsl:variable name="TabularLists" select="TablePart/TabularLists/TabularList"/>--><!-- Колекція табличних списків -->
+        <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/><!-- Колекція полів -->
 
         <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
         <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
-
         <xsl:variable name="OwnerType">
             <xsl:choose>
                 <xsl:when test="TablePart/OwnerType = 'Directory'">Довідник</xsl:when>
@@ -461,7 +460,7 @@ namespace <xsl:value-of select="$NameSpace"/>
     <!-- Список -->
     <xsl:template name="TablePartList">
         <xsl:variable name="TablePartName" select="TablePart/Name"/>
-        <xsl:variable name="Fields" select="TablePart/Fields/Field"/>
+        <!--<xsl:variable name="Fields" select="TablePart/Fields/Field"/>-->
 /*
         _ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
         Список

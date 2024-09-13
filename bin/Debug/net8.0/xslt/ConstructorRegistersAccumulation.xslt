@@ -82,32 +82,15 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async void LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length &lt; 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
             //period
             ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
-                new Where("period", Comparison.LIKE, searchText)
-                {
-                    FuncToField = "to_char",
-                    FuncToField_Param1 = "'DD.MM.YYYY'"
-                }
-            );
+                new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
