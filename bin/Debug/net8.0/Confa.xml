@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>13.09.2024 19:13:59</DateTimeSave>
+  <DateTimeSave>13.09.2024 20:05:29</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -9405,7 +9405,113 @@ WHERE
               </Fields>
             </TabularList>
           </TabularLists>
-          <Forms />
+          <Forms>
+            <Form>
+              <Name>Таблична частина</Name>
+              <Desc>Таблична частина</Desc>
+              <Type>TablePart</Type>
+              <ElementFields>
+                <Field>
+                  <Name>НомерРядка</Name>
+                  <Caption>№</Caption>
+                  <Size>0</Size>
+                  <SortNum>1</SortNum>
+                  <Type>integer</Type>
+                </Field>
+                <Field>
+                  <Name>Номенклатура</Name>
+                  <Caption>Номенклатура</Caption>
+                  <Size>0</Size>
+                  <SortNum>2</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Номенклатура</Pointer>
+                </Field>
+                <Field>
+                  <Name>ХарактеристикаНоменклатури</Name>
+                  <Caption>Характеристика</Caption>
+                  <Size>0</Size>
+                  <SortNum>3</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                </Field>
+                <Field>
+                  <Name>Серія</Name>
+                  <Caption>Серія</Caption>
+                  <Size>0</Size>
+                  <SortNum>4</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                </Field>
+                <Field>
+                  <Name>КількістьУпаковок</Name>
+                  <Caption>Коєфіціент</Caption>
+                  <Size>0</Size>
+                  <SortNum>5</SortNum>
+                  <Type>integer</Type>
+                </Field>
+                <Field>
+                  <Name>Пакування</Name>
+                  <Caption>Пакування</Caption>
+                  <Size>0</Size>
+                  <SortNum>6</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                </Field>
+                <Field>
+                  <Name>Кількість</Name>
+                  <Caption>Кількість</Caption>
+                  <Size>0</Size>
+                  <SortNum>7</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>ВидЦіни</Name>
+                  <Caption>Вид ціни</Caption>
+                  <Size>0</Size>
+                  <SortNum>8</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ВидиЦін</Pointer>
+                </Field>
+                <Field>
+                  <Name>Ціна</Name>
+                  <Caption>Ціна</Caption>
+                  <Size>0</Size>
+                  <SortNum>9</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>Склад</Name>
+                  <Caption>Склад</Caption>
+                  <Size>0</Size>
+                  <SortNum>10</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Склади</Pointer>
+                </Field>
+                <Field>
+                  <Name>Скидка</Name>
+                  <Caption>Скидка</Caption>
+                  <Size>0</Size>
+                  <SortNum>10</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>Сума</Name>
+                  <Caption>Сума</Caption>
+                  <Size>0</Size>
+                  <SortNum>11</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>ЗамовленняПостачальнику</Name>
+                  <Caption>Замовлення постачальнику</Caption>
+                  <Size>0</Size>
+                  <SortNum>12</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+                </Field>
+              </ElementFields>
+            </Form>
+          </Forms>
         </TablePart>
       </TabularParts>
       <TabularLists>

@@ -319,7 +319,7 @@ LIMIT 1
 
             //ХарактеристикаНоменклатури
             {
-                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200, Visible = Системні.ВестиОблікПоХарактеристикахНоменклатури_Const };
 
                 column.Data.Add("Column", Columns.ХарактеристикаНоменклатури);
                 TreeViewGrid.AppendColumn(column);
@@ -327,7 +327,7 @@ LIMIT 1
 
             //Серія
             {
-                TreeViewColumn column = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія) { Resizable = true, MinWidth = 100, Visible = Системні.ВестиОблікПоСеріяхНоменклатури_Const };
 
                 column.Data.Add("Column", Columns.Серія);
                 TreeViewGrid.AppendColumn(column);
@@ -337,7 +337,7 @@ LIMIT 1
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true };
                 cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Коєфіціент", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("Коєфіціент", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth = 50 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
                 column.Data.Add("Column", Columns.КількістьУпаковок);
@@ -346,7 +346,7 @@ LIMIT 1
 
             //Пакування
             {
-                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Пакування);
                 TreeViewGrid.AppendColumn(column);
@@ -376,7 +376,7 @@ LIMIT 1
 
             //ВидЦіни
             {
-                TreeViewColumn column = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.ВидЦіни);
                 TreeViewGrid.AppendColumn(column);
@@ -433,7 +433,7 @@ LIMIT 1
 
             //Склад
             {
-                TreeViewColumn column = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.Склад) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.Склад) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Склад);
                 TreeViewGrid.AppendColumn(column);
@@ -450,7 +450,7 @@ LIMIT 1
             //Колонка пустишка для заповнення вільного простору
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
-       
+
         #region Load and Save
 
         public override async ValueTask LoadRecords()
@@ -586,6 +586,7 @@ LIMIT 1
                                 Store.SetValues(iter, запис.ToArray());
                             }
                         };
+                        page.НоменклатураВласник.Pointer = запис.Номенклатура;
                         return page;
                     }
                 case Columns.Серія:
@@ -684,6 +685,7 @@ LIMIT 1
                                 Store.SetValues(iter, запис.ToArray());
                             }
                         };
+                        page.НоменклатураВідбір.Pointer = запис.Номенклатура;
                         return page;
                     }
 

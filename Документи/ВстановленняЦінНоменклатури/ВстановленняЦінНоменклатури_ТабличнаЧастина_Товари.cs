@@ -12,6 +12,7 @@ using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.РегістриВідомостей;
+using StorageAndTrade_1_0.Константи;
 
 namespace StorageAndTrade
 {
@@ -155,7 +156,7 @@ namespace StorageAndTrade
 
             //ХарактеристикаНоменклатури
             {
-                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200, Visible = Системні.ВестиОблікПоХарактеристикахНоменклатури_Const };
 
                 column.Data.Add("Column", Columns.ХарактеристикаНоменклатури);
                 TreeViewGrid.AppendColumn(column);
@@ -163,7 +164,7 @@ namespace StorageAndTrade
 
             //Пакування
             {
-                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Пакування);
                 TreeViewGrid.AppendColumn(column);
@@ -171,7 +172,7 @@ namespace StorageAndTrade
 
             //ВидЦіни
             {
-                TreeViewColumn column = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.ВидЦіни);
                 TreeViewGrid.AppendColumn(column);
@@ -298,6 +299,7 @@ namespace StorageAndTrade
                                 Store.SetValues(iter, запис.ToArray());
                             }
                         };
+                        page.НоменклатураВласник.Pointer = запис.Номенклатура;
                         return page;
                     }
                 case Columns.Пакування:

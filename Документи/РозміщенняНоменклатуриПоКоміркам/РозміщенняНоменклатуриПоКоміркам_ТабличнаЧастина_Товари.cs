@@ -12,6 +12,7 @@ using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.РегістриВідомостей;
+using StorageAndTrade_1_0.Константи;
 
 namespace StorageAndTrade
 {
@@ -134,7 +135,7 @@ namespace StorageAndTrade
 
             //Пакування
             {
-                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Пакування);
                 TreeViewGrid.AppendColumn(column);
@@ -142,7 +143,7 @@ namespace StorageAndTrade
 
             //Комірка
             {
-                TreeViewColumn column = new TreeViewColumn("Комірка", new CellRendererText(), "text", (int)Columns.Комірка) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Комірка", new CellRendererText(), "text", (int)Columns.Комірка) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Комірка);
                 TreeViewGrid.AppendColumn(column);

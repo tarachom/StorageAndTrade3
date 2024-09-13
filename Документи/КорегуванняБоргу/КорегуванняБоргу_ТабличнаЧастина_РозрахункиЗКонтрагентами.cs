@@ -161,7 +161,7 @@ namespace StorageAndTrade
 
             //Валюта
             {
-                TreeViewColumn column = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.Валюта) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.Валюта) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Валюта);
                 TreeViewGrid.AppendColumn(column);

@@ -9,7 +9,7 @@ using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0.Константи;
 
 namespace StorageAndTrade
 {
@@ -219,7 +219,7 @@ namespace StorageAndTrade
 
             //ХарактеристикаНоменклатури
             {
-                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200, Visible = Системні.ВестиОблікПоХарактеристикахНоменклатури_Const };
 
                 column.Data.Add("Column", Columns.ХарактеристикаНоменклатури);
                 TreeViewGrid.AppendColumn(column);
@@ -229,7 +229,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true };
                 cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Коєфіціент", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("Коєфіціент", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, MinWidth = 50 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
                 column.Data.Add("Column", Columns.КількістьУпаковок);
@@ -238,7 +238,7 @@ namespace StorageAndTrade
 
             //Пакування
             {
-                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Пакування);
                 TreeViewGrid.AppendColumn(column);
@@ -301,7 +301,7 @@ namespace StorageAndTrade
 
             //Склад
             {
-                TreeViewColumn column = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.Склад) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.Склад) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.Склад);
                 TreeViewGrid.AppendColumn(column);
@@ -406,7 +406,6 @@ namespace StorageAndTrade
 
         #region Func
 
-
         protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
@@ -438,6 +437,7 @@ namespace StorageAndTrade
                                 Store.SetValues(iter, запис.ToArray());
                             }
                         };
+                        page.НоменклатураВласник.Pointer = запис.Номенклатура;
                         return page;
                     }
                 case Columns.Пакування:
