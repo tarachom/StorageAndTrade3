@@ -92,10 +92,7 @@ limitations under the License.
     <!-- Таблична Частина -->
     <xsl:template name="TablePart">
         <xsl:variable name="TablePartName" select="TablePart/Name"/>
-        <!--<xsl:variable name="TabularList" select="TablePart/TabularList"/>--><!-- Даний таб. список -->
-        <!--<xsl:variable name="Fields" select="TablePart/Fields/Field"/>--><!-- Колекція полів -->
-        <!--<xsl:variable name="TabularLists" select="TablePart/TabularLists/TabularList"/>--><!-- Колекція табличних списків -->
-        <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/><!-- Колекція полів -->
+        <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/>
 
         <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
         <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
@@ -220,7 +217,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             {
                 <xsl:choose>
                     <xsl:when test="Type = 'pointer'">
-                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Name"/>", new CellRendererText(), "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 200 };
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", new CellRendererText(), "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 200 };
                     </xsl:when>
                     <xsl:when test="Type = 'enum'">
                 ListStore store = new ListStore(typeof(string), typeof(string));
@@ -230,23 +227,23 @@ namespace <xsl:value-of select="$NameSpace"/>
 
                 CellRendererCombo cellCombo = new CellRendererCombo() { Editable = true, Model = store, TextColumn = 1 };
                 cellCombo.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Name"/>", cellCombo, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellCombo, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                     </xsl:when>
                     <xsl:when test="Type = 'integer' or Type = 'numeric'">
                 CellRendererText cellNumber = new CellRendererText() { Editable = true };
                 cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Name"/>", cellNumber, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellNumber, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
                     </xsl:when>
                     <xsl:when test="Type = 'boolean'">
                 CellRendererToggle cellToggle = new CellRendererToggle() { };
                 cellToggle.Toggled += EditCell;
-                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Name"/>", cellToggle, "active", (int)Columns.<xsl:value-of select="Name"/>);
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellToggle, "active", (int)Columns.<xsl:value-of select="Name"/>);
                     </xsl:when>
                     <xsl:otherwise>
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Name"/>", cellText, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellText, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                     </xsl:otherwise>
                 </xsl:choose>
                 column.Data.Add("Column", Columns.<xsl:value-of select="Name"/>);
@@ -310,7 +307,8 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region Func
 
-        protected override async ValueTask&lt;ФормаЖурнал?&gt; OpenSelect2(TreeIter iter, int rowNumber, int colNumber)
+        <xsl:if test="count($FieldsTL[Type = 'pointer']) != 0">
+        protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
             switch ((Columns)colNumber)
@@ -340,37 +338,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             }
         }
 
-        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
-        {
-            Запис запис = Записи[rowNumber];
-            switch ((Columns)colNumber)
-            {
-                <xsl:for-each select="$FieldsTL[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'enum']">
-                <xsl:text>case Columns.</xsl:text><xsl:value-of select="Name"/>: { <xsl:choose>
-                    <xsl:when test="Type = 'string'">запис.<xsl:value-of select="Name"/> = newText;</xsl:when>
-                    <xsl:when test="Type = 'integer'">var (check, value) = Validate.IsInt(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
-                    <xsl:when test="Type = 'numeric'">var (check, value) = Validate.IsDecimal(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
-                    <xsl:when test="Type = 'enum'">запис.<xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_FindByName(newText) ?? 0;</xsl:when>
-                </xsl:choose>break;}
-                </xsl:for-each>
-                default: break;
-            }
-            Store.SetValues(iter, запис.ToArray());
-        }
-
-        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, bool newValue)
-        {
-            Запис запис = Записи[rowNumber];
-            switch ((Columns)colNumber)
-            {
-                <xsl:for-each select="$FieldsTL[Type = 'boolean']">
-                <xsl:text>case Columns.</xsl:text><xsl:value-of select="Name"/>: { запис.<xsl:value-of select="Name"/> = newValue; break; }
-                </xsl:for-each>
-                default: break;
-            }
-            Store.SetValues(iter, запис.ToArray());
-        }
-
         protected override void ClearCell(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
@@ -383,6 +350,42 @@ namespace <xsl:value-of select="$NameSpace"/>
             }
             Store.SetValues(iter, запис.ToArray());
         }
+        </xsl:if>
+
+        <xsl:if test="count($FieldsTL[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'enum']) != 0">
+        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
+        {
+            Запис запис = Записи[rowNumber];
+            switch ((Columns)colNumber)
+            {
+                <xsl:for-each select="$FieldsTL[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'enum']">
+                <xsl:text>case Columns.</xsl:text><xsl:value-of select="Name"/>: { <xsl:choose>
+                    <xsl:when test="Type = 'string'">запис.<xsl:value-of select="Name"/> = newText;</xsl:when>
+                    <xsl:when test="Type = 'integer'">var (check, value) = Validate.IsInt(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
+                    <xsl:when test="Type = 'numeric'">var (check, value) = Validate.IsDecimal(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
+                    <xsl:when test="Type = 'enum'">запис.<xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_FindByName(newText) ?? 0;</xsl:when>
+                </xsl:choose> break; }
+                </xsl:for-each>
+                default: break;
+            }
+            Store.SetValues(iter, запис.ToArray());
+        }
+        </xsl:if>
+
+        <xsl:if test="count($FieldsTL[Type = 'boolean']) != 0">
+        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, bool newValue)
+        {
+            Запис запис = Записи[rowNumber];
+            switch ((Columns)colNumber)
+            {
+                <xsl:for-each select="$FieldsTL[Type = 'boolean']">
+                <xsl:text>case Columns.</xsl:text><xsl:value-of select="Name"/>: { запис.<xsl:value-of select="Name"/> = newValue; break; }
+                </xsl:for-each>
+                default: break;
+            }
+            Store.SetValues(iter, запис.ToArray());
+        }
+        </xsl:if>
 
         <xsl:if test="count($FieldsTL[Type = 'integer' or Type = 'numeric']) != 0">
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
@@ -428,9 +431,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override void CopyRecord(int rowNumber)
         {
             Запис запис = Записи[rowNumber];
-
             Запис записНовий = Запис.Clone(запис);
-
             Записи.Add(записНовий);
 
             TreeIter iter = Store.AppendValues(записНовий.ToArray());
@@ -440,13 +441,11 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override void DeleteRecord(TreeIter iter, int rowNumber)
         {
             Запис запис = Записи[rowNumber];
-
             Записи.Remove(запис);
             Store.Remove(ref iter);
         }
 
         #endregion
-
     }
 }
     </xsl:template>

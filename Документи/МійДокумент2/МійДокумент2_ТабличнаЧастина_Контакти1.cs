@@ -329,7 +329,7 @@ namespace StorageAndTrade
 
         #region Func
 
-        protected override async ValueTask<ФормаЖурнал?> OpenSelect2(TreeIter iter, int rowNumber, int colNumber)
+        protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
             switch ((Columns)colNumber)

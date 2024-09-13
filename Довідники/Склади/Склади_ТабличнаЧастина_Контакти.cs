@@ -1,40 +1,26 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 /*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+        Склади_ТабличнаЧастина_Контакти.cs
+        Таблична Частина
 */
 
 using Gtk;
-
+using InterfaceGtk;
+using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class Склади_ТабличнаЧастина_Контакти : Box
+    class Склади_ТабличнаЧастина_Контакти : ДовідникТабличнаЧастина
     {
         public Склади_Objest? ЕлементВласник { get; set; }
 
+        #region Записи
+
         enum Columns
         {
-            UID,
             Тип,
             Значення,
             Телефон,
@@ -42,11 +28,12 @@ namespace StorageAndTrade
             Країна,
             Область,
             Район,
-            Місто
+            Місто,
+
         }
 
-        ListStore Store = new ListStore(
-            typeof(string), //UID
+        ListStore Store = new ListStore([
+
             typeof(string), //Тип
             typeof(string), //Значення
             typeof(string), //Телефон
@@ -54,217 +41,278 @@ namespace StorageAndTrade
             typeof(string), //Країна
             typeof(string), //Область
             typeof(string), //Район
-            typeof(string)  //Місто
-        );
+            typeof(string), //Місто
+        ]);
 
-        TreeView TreeViewGrid;
+        List<Запис> Записи = [];
 
-        public Склади_ТабличнаЧастина_Контакти() : base(Orientation.Vertical, 0)
+        private class Запис
         {
-            CreateToolbar();
+            public Guid ID { get; set; } = Guid.Empty;
+            public ТипиКонтактноїІнформації Тип { get; set; } = 0;
+            public string Значення { get; set; } = "";
+            public string Телефон { get; set; } = "";
+            public string ЕлектроннаПошта { get; set; } = "";
+            public string Країна { get; set; } = "";
+            public string Область { get; set; } = "";
+            public string Район { get; set; } = "";
+            public string Місто { get; set; } = "";
 
-            ScrolledWindow scrollTree = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 300 };
-            scrollTree.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
 
-            TreeViewGrid = new TreeView(Store);
+            public object[] ToArray()
+            {
+                return
+                [
+                    ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(Тип),
+                    Значення,
+                    Телефон,
+                    ЕлектроннаПошта,
+                    Країна,
+                    Область,
+                    Район,
+                    Місто,
+                ];
+            }
+
+            public static Запис Clone(Запис запис)
+            {
+                return new Запис
+                {
+                    ID = Guid.Empty,
+                    Тип = запис.Тип,
+                    Значення = запис.Значення,
+                    Телефон = запис.Телефон,
+                    ЕлектроннаПошта = запис.ЕлектроннаПошта,
+                    Країна = запис.Країна,
+                    Область = запис.Область,
+                    Район = запис.Район,
+                    Місто = запис.Місто,
+                };
+            }
+
+        }
+
+        #endregion
+
+        public Склади_ТабличнаЧастина_Контакти()
+        {
+            TreeViewGrid.Model = Store;
             AddColumn();
-
-            TreeViewGrid.Selection.Mode = SelectionMode.Multiple;
-            TreeViewGrid.ActivateOnSingleClick = true;
-
-            scrollTree.Add(TreeViewGrid);
-
-            PackStart(scrollTree, true, false, 0);
-
-            ShowAll();
         }
 
-        void CreateToolbar()
+        void AddColumn()
         {
-            Toolbar toolbar = new Toolbar();
-            PackStart(toolbar, false, false, 0);
+            //Тип
+            {
+                ListStore store = new ListStore(typeof(string), typeof(string));
 
-            ToolButton upButton = new ToolButton(new Image(Stock.Add, IconSize.Menu), "Додати") { TooltipText = "Додати" };
-            upButton.Clicked += OnAddClick;
-            toolbar.Add(upButton);
+                foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_List())
+                    store.AppendValues(field.Value.ToString(), field.Name);
 
-            ToolButton deleteButton = new ToolButton(new Image(Stock.Delete, IconSize.Menu), "Видалити") { TooltipText = "Видалити" };
-            deleteButton.Clicked += OnDeleteClick;
-            toolbar.Add(deleteButton);
+                CellRendererCombo cellCombo = new CellRendererCombo() { Editable = true, Model = store, TextColumn = 1 };
+                cellCombo.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Тип", cellCombo, "text", (int)Columns.Тип) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.Тип);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Значення
+            {
+                CellRendererText cellText = new CellRendererText() { Editable = true };
+                cellText.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Значення", cellText, "text", (int)Columns.Значення) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.Значення);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Телефон
+            {
+                CellRendererText cellText = new CellRendererText() { Editable = true };
+                cellText.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Телефон", cellText, "text", (int)Columns.Телефон) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.Телефон);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //ЕлектроннаПошта
+            {
+                CellRendererText cellText = new CellRendererText() { Editable = true };
+                cellText.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Email", cellText, "text", (int)Columns.ЕлектроннаПошта) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.ЕлектроннаПошта);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Країна
+            {
+                CellRendererText cellText = new CellRendererText() { Editable = true };
+                cellText.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Країна", cellText, "text", (int)Columns.Країна) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.Країна);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Область
+            {
+                CellRendererText cellText = new CellRendererText() { Editable = true };
+                cellText.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Область", cellText, "text", (int)Columns.Область) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.Область);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Район
+            {
+                CellRendererText cellText = new CellRendererText() { Editable = true };
+                cellText.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Район", cellText, "text", (int)Columns.Район) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.Район);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Місто
+            {
+                CellRendererText cellText = new CellRendererText() { Editable = true };
+                cellText.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("Місто", cellText, "text", (int)Columns.Місто) { Resizable = true, MinWidth = 100 };
+
+                column.Data.Add("Column", Columns.Місто);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Колонка пустишка для заповнення вільного простору
+            TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
+        #region Load and Save
 
-        public async void LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             Store.Clear();
+            Записи.Clear();
 
             if (ЕлементВласник != null)
             {
+                ЕлементВласник.Контакти_TablePart.FillJoin([]);
                 await ЕлементВласник.Контакти_TablePart.Read();
 
                 foreach (Склади_Контакти_TablePart.Record record in ЕлементВласник.Контакти_TablePart.Records)
                 {
-                    Store.AppendValues(
-                        record.UID.ToString(),
-                        ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(record.Тип),
-                        record.Значення,
-                        record.Телефон,
-                        record.ЕлектроннаПошта,
-                        record.Країна,
-                        record.Область,
-                        record.Район,
-                        record.Місто
-                    );
+                    Запис запис = new Запис
+                    {
+                        ID = record.UID,
+                        Тип = record.Тип,
+                        Значення = record.Значення,
+                        Телефон = record.Телефон,
+                        ЕлектроннаПошта = record.ЕлектроннаПошта,
+                        Країна = record.Країна,
+                        Область = record.Область,
+                        Район = record.Район,
+                        Місто = record.Місто,
+                    };
+
+                    Записи.Add(запис);
+                    Store.AppendValues(запис.ToArray());
                 }
             }
         }
 
-        public async ValueTask SaveRecords()
+        public override async ValueTask SaveRecords()
         {
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Контакти_TablePart.Records.Clear();
 
-                if (Store.GetIterFirst(out TreeIter iter))
-                    do
+                foreach (Запис запис in Записи)
+                {
+                    ЕлементВласник.Контакти_TablePart.Records.Add(new Склади_Контакти_TablePart.Record()
                     {
-                        Склади_Контакти_TablePart.Record record = new Склади_Контакти_TablePart.Record();
-                        ЕлементВласник.Контакти_TablePart.Records.Add(record);
-
-                        string uid = (string)Store.GetValue(iter, (int)Columns.UID);
-
-                        if (!string.IsNullOrEmpty(uid))
-                            record.UID = Guid.Parse(uid);
-
-                        string type = (string)Store.GetValue(iter, (int)Columns.Тип);
-
-                        //Тип
-                        {
-                            ТипиКонтактноїІнформації? result = ПсевдонімиПерелічення.ТипиКонтактноїІнформації_FindByName(type);
-                            record.Тип = result != null ? (ТипиКонтактноїІнформації)result : ТипиКонтактноїІнформації.Адрес;
-                        }
-
-                        record.Значення = Store.GetValue(iter, (int)Columns.Значення)?.ToString() ?? "";
-                        record.Телефон = Store.GetValue(iter, (int)Columns.Телефон)?.ToString() ?? "";
-                        record.ЕлектроннаПошта = Store.GetValue(iter, (int)Columns.ЕлектроннаПошта)?.ToString() ?? "";
-                        record.Країна = Store.GetValue(iter, (int)Columns.Країна)?.ToString() ?? "";
-                        record.Область = Store.GetValue(iter, (int)Columns.Область)?.ToString() ?? "";
-                        record.Район = Store.GetValue(iter, (int)Columns.Район)?.ToString() ?? "";
-                        record.Місто = Store.GetValue(iter, (int)Columns.Місто)?.ToString() ?? "";
-                    }
-                    while (Store.IterNext(ref iter));
+                        UID = запис.ID,
+                        Тип = запис.Тип,
+                        Значення = запис.Значення,
+                        Телефон = запис.Телефон,
+                        ЕлектроннаПошта = запис.ЕлектроннаПошта,
+                        Країна = запис.Країна,
+                        Область = запис.Область,
+                        Район = запис.Район,
+                        Місто = запис.Місто,
+                    });
+                }
 
                 await ЕлементВласник.Контакти_TablePart.Save(true);
+                await LoadRecords();
             }
         }
 
-        #region TreeView
-
-        void AddColumn()
+        public string КлючовіСловаДляПошуку()
         {
-            TreeViewGrid.AppendColumn(new TreeViewColumn("UID", new CellRendererText(), "text", (int)Columns.UID) { Visible = false });
-
-            //Тип
-            {
-                ListStore storeTypeInfo = new ListStore(typeof(string), typeof(string));
-
-                foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_List())
-                    storeTypeInfo.AppendValues(field.Value.ToString(), field.Name);
-
-                CellRendererCombo TypeInfo = new CellRendererCombo() { Editable = true, Model = storeTypeInfo, TextColumn = 1 };
-                TypeInfo.Edited += TextChanged;
-                TypeInfo.Data.Add("Column", (int)Columns.Тип);
-
-                TreeViewGrid.AppendColumn(new TreeViewColumn("Тип", TypeInfo, "text", (int)Columns.Тип) { MinWidth = 100, Resizable = true });
-            }
-
-            //Значення
-            CellRendererText Значення = new CellRendererText() { Editable = true };
-            Значення.Edited += TextChanged;
-            Значення.Data.Add("Column", (int)Columns.Значення);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Значення", Значення, "text", (int)Columns.Значення) { MinWidth = 200, Resizable = true });
-
-            //Телефон
-            CellRendererText Телефон = new CellRendererText() { Editable = true };
-            Телефон.Edited += TextChanged;
-            Телефон.Data.Add("Column", (int)Columns.Телефон);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Телефон", Телефон, "text", (int)Columns.Телефон) { MinWidth = 150, Resizable = true });
-
-            //Email
-            CellRendererText Email = new CellRendererText() { Editable = true };
-            Email.Edited += TextChanged;
-            Email.Data.Add("Column", (int)Columns.ЕлектроннаПошта);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Email", Email, "text", (int)Columns.ЕлектроннаПошта) { MinWidth = 150, Resizable = true });
-
-            //Країна
-            CellRendererText Країна = new CellRendererText() { Editable = true };
-            Країна.Edited += TextChanged;
-            Країна.Data.Add("Column", (int)Columns.Країна);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Країна", Країна, "text", (int)Columns.Країна) { MinWidth = 150, Resizable = true });
-
-            //Область
-            CellRendererText Область = new CellRendererText() { Editable = true };
-            Область.Edited += TextChanged;
-            Область.Data.Add("Column", (int)Columns.Область);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Область", Область, "text", (int)Columns.Область) { MinWidth = 150, Resizable = true });
-
-            //Район
-            CellRendererText Район = new CellRendererText() { Editable = true };
-            Район.Edited += TextChanged;
-            Район.Data.Add("Column", (int)Columns.Район);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Район", Район, "text", (int)Columns.Район) { MinWidth = 150, Resizable = true });
-
-            //Місто
-            CellRendererText Місто = new CellRendererText() { Editable = true };
-            Місто.Edited += TextChanged;
-            Місто.Data.Add("Column", (int)Columns.Місто);
-
-            TreeViewGrid.AppendColumn(new TreeViewColumn("Місто", Місто, "text", (int)Columns.Місто) { MinWidth = 150, Resizable = true });
+            string ключовіСлова = "";
+            foreach (Запис запис in Записи)
+                ключовіСлова += $"\n {запис.Значення} {запис.Телефон} {запис.ЕлектроннаПошта} {запис.Країна} {запис.Область} {запис.Район} {запис.Місто}";
+            return ключовіСлова;
         }
 
-        void TextChanged(object sender, EditedArgs args)
+        #endregion
+
+        #region Func
+
+
+        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
         {
-            CellRenderer cellRender = (CellRenderer)sender;
-
-            if (cellRender.Data.Contains("Column"))
+            Запис запис = Записи[rowNumber];
+            switch ((Columns)colNumber)
             {
-                int ColumnNum = (int)cellRender.Data["Column"]!;
+                case Columns.Тип: { запис.Тип = ПсевдонімиПерелічення.ТипиКонтактноїІнформації_FindByName(newText) ?? 0; break; }
+                case Columns.Значення: { запис.Значення = newText; break; }
+                case Columns.Телефон: { запис.Телефон = newText; break; }
+                case Columns.ЕлектроннаПошта: { запис.ЕлектроннаПошта = newText; break; }
+                case Columns.Країна: { запис.Країна = newText; break; }
+                case Columns.Область: { запис.Область = newText; break; }
+                case Columns.Район: { запис.Район = newText; break; }
+                case Columns.Місто: { запис.Місто = newText; break; }
 
-                if (Store.GetIterFromString(out TreeIter iter, args.Path))
-                    Store.SetValue(iter, ColumnNum, args.NewText);
+                default: break;
             }
+            Store.SetValues(iter, запис.ToArray());
         }
+
 
         #endregion
 
         #region ToolBar
 
-        void OnAddClick(object? sender, EventArgs args)
+        protected override void AddRecord()
         {
-            Store.AppendValues("", ТипиКонтактноїІнформації.Адрес.ToString());
+            Запис запис = new Запис();
+            Записи.Add(запис);
+
+            TreeIter iter = Store.AppendValues(запис.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
         }
 
-        void OnDeleteClick(object? sender, EventArgs args)
+        protected override void CopyRecord(int rowNumber)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-                for (int i = selectionRows.Length - 1; i >= 0; i--)
-                {
-                    TreePath itemPath = selectionRows[i];
-                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
+            Запис запис = Записи[rowNumber];
+            Запис записНовий = Запис.Clone(запис);
+            Записи.Add(записНовий);
 
-                    Store.Remove(ref iter);
-                }
-            }
+            TreeIter iter = Store.AppendValues(записНовий.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+        }
+
+        protected override void DeleteRecord(TreeIter iter, int rowNumber)
+        {
+            Запис запис = Записи[rowNumber];
+            Записи.Remove(запис);
+            Store.Remove(ref iter);
         }
 
         #endregion
-
     }
 }

@@ -41,7 +41,7 @@ namespace StorageAndTrade
         ComboBoxText ТипСкладу = new ComboBoxText();
         ВидиЦін_PointerControl ВидЦін = new ВидиЦін_PointerControl() { Caption = "Вид цін:" };
         ComboBoxText Налаштування = new ComboBoxText();
-        Склади_ТабличнаЧастина_Контакти Контакти = new Склади_ТабличнаЧастина_Контакти();
+        Склади_ТабличнаЧастина_Контакти Контакти = new Склади_ТабличнаЧастина_Контакти() { HeightRequest = 300 };
 
         #endregion
 
@@ -86,7 +86,7 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             if (IsNew)
                 Елемент.Папка = РодичДляНового;
@@ -105,7 +105,7 @@ namespace StorageAndTrade
                 Налаштування.ActiveId = НалаштуванняАдресногоЗберігання.НеВикористовувати.ToString();
 
             Контакти.ЕлементВласник = Елемент;
-            Контакти.LoadRecords();
+           await Контакти.LoadRecords();
         }
 
         protected override void GetValue()
@@ -116,6 +116,7 @@ namespace StorageAndTrade
             Елемент.ВидЦін = ВидЦін.Pointer;
             Елемент.ТипСкладу = Enum.Parse<ТипиСкладів>(ТипСкладу.ActiveId);
             Елемент.НалаштуванняАдресногоЗберігання = Enum.Parse<НалаштуванняАдресногоЗберігання>(Налаштування.ActiveId);
+            Елемент.КлючовіСловаДляПошуку = Контакти.КлючовіСловаДляПошуку();
         }
 
         #endregion

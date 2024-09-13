@@ -44,11 +44,11 @@ namespace StorageAndTrade
         Entry СвідоцтвоДатаВидачі = new Entry() { WidthRequest = 300 };
         Організації_PointerControl Холдинг = new Організації_PointerControl() { Caption = "Холдинг:" };
 
-        Організації_ТабличнаЧастина_Контакти Контакти = new Організації_ТабличнаЧастина_Контакти();
+        Організації_ТабличнаЧастина_Контакти Контакти = new Організації_ТабличнаЧастина_Контакти() { HeightRequest = 300 };
 
         #endregion
 
-        public Організації_Елемент() 
+        public Організації_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -92,7 +92,7 @@ namespace StorageAndTrade
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
@@ -102,12 +102,12 @@ namespace StorageAndTrade
             СвідоцтвоСеріяНомер.Text = Елемент.СвідоцтвоСеріяНомер;
             СвідоцтвоДатаВидачі.Text = Елемент.СвідоцтвоДатаВидачі;
             НазваПовна.Buffer.Text = Елемент.НазваПовна;
-            
+
             Холдинг.Pointer = Елемент.Холдинг;
             Холдинг.OpenFolder = Елемент.UnigueID;
 
             Контакти.ЕлементВласник = Елемент;
-            Контакти.LoadRecords();
+            await Контакти.LoadRecords();
         }
 
         protected override void GetValue()
@@ -121,6 +121,7 @@ namespace StorageAndTrade
             Елемент.СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі.Text;
             Елемент.НазваПовна = НазваПовна.Buffer.Text;
             Елемент.Холдинг = Холдинг.Pointer;
+            Елемент.КлючовіСловаДляПошуку = Контакти.КлючовіСловаДляПошуку();
         }
 
         #endregion

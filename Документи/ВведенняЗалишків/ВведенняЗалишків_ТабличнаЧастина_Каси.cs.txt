@@ -1,15 +1,32 @@
+/*
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 /*
-        ВведенняЗалишків_ТабличнаЧастина_Каси.cs
-        Таблична Частина
+Автор:    Тарахомин Юрій Іванович
+Адреса:   Україна, м. Львів
+Сайт:     accounting.org.ua
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -23,24 +40,23 @@ namespace StorageAndTrade
         {
             НомерРядка,
             Каса,
-            Сума,
+            Сума
         }
 
-        ListStore Store = new ListStore([
-
-            typeof(int), //НомерРядка
-            typeof(string), //Каса
-            typeof(float), //Сума
-        ]);
+        ListStore Store = new ListStore(
+            typeof(int),      //НомерРядка
+            typeof(string),   //Каса
+            typeof(float)     //Сума
+        );
 
         List<Запис> Записи = [];
 
         private class Запис
         {
             public Guid ID { get; set; } = Guid.Empty;
-            public int НомерРядка { get; set; } = 0;
+            public int НомерРядка { get; set; }
             public Каси_Pointer Каса { get; set; } = new Каси_Pointer();
-            public decimal Сума { get; set; } = 0;
+            public decimal Сума { get; set; }
 
             public object[] ToArray()
             {
@@ -48,7 +64,7 @@ namespace StorageAndTrade
                 [
                     НомерРядка,
                     Каса.Назва,
-                    (float)Сума,
+                    (float)Сума
                 ];
             }
 
@@ -57,9 +73,8 @@ namespace StorageAndTrade
                 return new Запис
                 {
                     ID = Guid.Empty,
-                    НомерРядка = запис.НомерРядка,
                     Каса = запис.Каса.Copy(),
-                    Сума = запис.Сума,
+                    Сума = запис.Сума
                 };
             }
 
@@ -67,22 +82,21 @@ namespace StorageAndTrade
             {
                 await запис.Каса.GetPresentation();
             }
-
         }
 
         #endregion
 
         Label ПідсумокСума = new Label() { Selectable = true };
 
-        public ВведенняЗалишків_ТабличнаЧастина_Каси()
+        public ВведенняЗалишків_ТабличнаЧастина_Каси() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();
 
             CreateBottomBlock();
 
-            Store.RowChanged += (object? sender, RowChangedArgs args) => ОбчислитиПідсумки();
-            Store.RowDeleted += (object? sender, RowDeletedArgs args) => ОбчислитиПідсумки();
+            Store.RowChanged += (object? sender, RowChangedArgs args) => { ОбчислитиПідсумки(); };
+            Store.RowDeleted += (object? sender, RowDeletedArgs args) => { ОбчислитиПідсумки(); };
         }
 
         #region Підсумки
@@ -109,43 +123,6 @@ namespace StorageAndTrade
 
         #endregion
 
-        void AddColumn()
-        {
-            //НомерРядка
-            {
-                CellRendererText cellNumber = new CellRendererText();
-                TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 };
-                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
-
-                column.Data.Add("Column", Columns.НомерРядка);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Каса
-            {
-                TreeViewColumn column = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.Каса) { Resizable = true, MinWidth = 200 };
-
-                column.Data.Add("Column", Columns.Каса);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Сума
-            {
-                CellRendererText cellNumber = new CellRendererText() { Editable = true };
-                cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", (int)Columns.Сума) { Resizable = true, MinWidth = 100 };
-                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
-
-                column.Data.Add("Column", Columns.Сума);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Колонка пустишка для заповнення вільного простору
-            TreeViewGrid.AppendColumn(new TreeViewColumn());
-        }
-
-        #region Load and Save
-
         public override async ValueTask LoadRecords()
         {
             Store.Clear();
@@ -153,6 +130,7 @@ namespace StorageAndTrade
 
             if (ЕлементВласник != null)
             {
+                //ORDER
                 ЕлементВласник.Каси_TablePart.FillJoin([ВведенняЗалишків_Каси_TablePart.НомерРядка]);
                 await ЕлементВласник.Каси_TablePart.Read();
 
@@ -163,7 +141,7 @@ namespace StorageAndTrade
                         ID = record.UID,
                         НомерРядка = record.НомерРядка,
                         Каса = record.Каса,
-                        Сума = record.Сума,
+                        Сума = record.Сума
                     };
 
                     Записи.Add(запис);
@@ -177,19 +155,24 @@ namespace StorageAndTrade
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Каси_TablePart.Records.Clear();
+
                 int sequenceNumber = 0;
+
                 foreach (Запис запис in Записи)
                 {
-                    ЕлементВласник.Каси_TablePart.Records.Add(new ВведенняЗалишків_Каси_TablePart.Record()
+                    ВведенняЗалишків_Каси_TablePart.Record record = new ВведенняЗалишків_Каси_TablePart.Record()
                     {
                         UID = запис.ID,
                         НомерРядка = ++sequenceNumber,
                         Каса = запис.Каса,
-                        Сума = запис.Сума,
-                    });
+                        Сума = запис.Сума
+                    };
+
+                    ЕлементВласник.Каси_TablePart.Records.Add(record);
                 }
 
                 await ЕлементВласник.Каси_TablePart.Save(true);
+
                 await LoadRecords();
             }
         }
@@ -208,77 +191,125 @@ namespace StorageAndTrade
             return ключовіСлова;
         }
 
-        #endregion
+        #region TreeView
 
-        #region Func
+        void AddColumn()
+        {
+            //НомерРядка
+            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 });
 
-        protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
+            //Каса
+            {
+                TreeViewColumn Каса = new TreeViewColumn("Каса", new CellRendererText(), "text", (int)Columns.Каса) { Resizable = true, MinWidth = 200 };
+                Каса.Data.Add("Column", Columns.Каса);
+
+                TreeViewGrid.AppendColumn(Каса);
+            }
+
+            //Сума
+            {
+                CellRendererText Сума = new CellRendererText() { Editable = true };
+                Сума.Edited += TextChanged;
+                Сума.Data.Add("Column", (int)Columns.Сума);
+
+                TreeViewColumn Column = new TreeViewColumn("Сума", Сума, "text", (int)Columns.Сума) { Resizable = true, MinWidth = 100 };
+                Column.SetCellDataFunc(Сума, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
+
+            //Колонка пустишка для заповнення вільного простору
+            TreeViewGrid.AppendColumn(new TreeViewColumn());
+        }
+
+        protected override async  void OpenSelect(TreeIter iter, int rowNumber, int colNumber, Popover popover)
         {
             Запис запис = Записи[rowNumber];
+
             switch ((Columns)colNumber)
             {
                 case Columns.Каса:
                     {
-                        Каси_ШвидкийВибір page = new()
+                        Каси_ШвидкийВибір page = new Каси_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Каса.UnigueID };
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
-                            DirectoryPointerItem = запис.Каса.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.Каса = new Каси_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_Каса(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
+                            запис.Каса = new Каси_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_Каса(запис);
+
+                            Store.SetValues(iter, запис.ToArray());
                         };
-                        return page;
+
+                        popover.Add(page);
+                        popover.ShowAll();
+
+                        await page.SetValue();
+                        break;
                     }
-
-                default: return null;
             }
         }
 
-        protected override void ClearCell(TreeIter iter, int rowNumber, int colNumber)
+        protected override void ButtonPopupClear(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
-            switch ((Columns)colNumber)
-            {
-                case Columns.Каса: { запис.Каса.Clear(); break; }
-                default: break;
-            }
-            Store.SetValues(iter, запис.ToArray());
-        }
 
-        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
-        {
-            Запис запис = Записи[rowNumber];
             switch ((Columns)colNumber)
             {
-                case Columns.Сума: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Сума = value; break; }
-                default: break;
+                case Columns.Каса:
+                    {
+                        запис.Каса.Clear();
+                        break;
+                    }
             }
+
             Store.SetValues(iter, запис.ToArray());
         }
 
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
-            object? objColumn = column.Data["Column"];
-            if (objColumn != null)
+            CellRendererText cellText = (CellRendererText)cell;
+            if (cellText.Data.Contains("Column"))
             {
-                int colNumber = (int)objColumn;
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
                 Запис запис = Записи[rowNumber];
 
-                CellRendererText cellText = (CellRendererText)cell;
                 cellText.Foreground = "green";
 
-                switch ((Columns)colNumber)
+                switch ((Columns)cellText.Data["Column"]!)
                 {
                     case Columns.Сума:
                         {
                             cellText.Text = запис.Сума.ToString();
                             break;
                         }
-                    default: break;
                 }
+            }
+        }
+
+        void TextChanged(object sender, EditedArgs args)
+        {
+            CellRenderer cellRender = (CellRenderer)sender;
+
+            if (cellRender.Data.Contains("Column"))
+            {
+                int ColumnNum = (int)cellRender.Data["Column"]!;
+
+                Store.GetIterFromString(out TreeIter iter, args.Path);
+
+                int rowNumber = int.Parse(args.Path);
+                Запис запис = Записи[rowNumber];
+
+                switch ((Columns)ColumnNum)
+                {
+                    case Columns.Сума:
+                        {
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                                запис.Сума = value;
+
+                            break;
+                        }
+                }
+
+                Store.SetValues(iter, запис.ToArray());
             }
         }
 
@@ -298,7 +329,9 @@ namespace StorageAndTrade
         protected override void CopyRecord(int rowNumber)
         {
             Запис запис = Записи[rowNumber];
+
             Запис записНовий = Запис.Clone(запис);
+
             Записи.Add(записНовий);
 
             TreeIter iter = Store.AppendValues(записНовий.ToArray());
@@ -308,10 +341,12 @@ namespace StorageAndTrade
         protected override void DeleteRecord(TreeIter iter, int rowNumber)
         {
             Запис запис = Записи[rowNumber];
+
             Записи.Remove(запис);
             Store.Remove(ref iter);
         }
 
         #endregion
+
     }
 }

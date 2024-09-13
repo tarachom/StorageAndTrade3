@@ -48,7 +48,7 @@ namespace StorageAndTrade
         ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "Пакування:", WidthPresentation = 300 };
         Файли_PointerControl ОсновнаКартинкаФайл = new Файли_PointerControl() { Caption = "Основна картинка:", WidthPresentation = 300 };
 
-        Номенклатура_ТабличнаЧастина_Файли Файли = new Номенклатура_ТабличнаЧастина_Файли();
+        Номенклатура_ТабличнаЧастина_Файли Файли = new Номенклатура_ТабличнаЧастина_Файли() { HeightRequest = 300 };
 
         //Попередній перегляд картинки
         ScrolledWindow scrollImageView = new ScrolledWindow() { ShadowType = ShadowType.In };

@@ -1,16 +1,35 @@
+/*
+Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 /*
-        ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари.cs
-        Таблична Частина
+Автор:    Тарахомин Юрій Іванович
+Адреса:   Україна, м. Львів
+Сайт:     accounting.org.ua
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
 using StorageAndTrade_1_0;
+using Константи = StorageAndTrade_1_0.Константи;
+using Перелічення = StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
@@ -26,33 +45,32 @@ namespace StorageAndTrade
         {
             НомерРядка,
             Номенклатура,
-            ХарактеристикаНоменклатури,
+            Характеристика,
             Пакування,
             ВидЦіни,
-            Ціна,
+            Ціна
         }
 
-        ListStore Store = new ListStore([
+        ListStore Store = new ListStore(
+            typeof(int),      //НомерРядка
+            typeof(string),   //Номенклатура
+            typeof(string),   //Характеристика
+            typeof(string),   //Пакування
+            typeof(string),   //ВидЦіни
+            typeof(float)     //Ціна
+        );
 
-            typeof(int), //НомерРядка
-            typeof(string), //Номенклатура
-            typeof(string), //ХарактеристикаНоменклатури
-            typeof(string), //Пакування
-            typeof(string), //ВидЦіни
-            typeof(float), //Ціна
-        ]);
-
-        List<Запис> Записи = [];
+        List<Запис> Записи = new List<Запис>();
 
         private class Запис
         {
             public Guid ID { get; set; } = Guid.Empty;
-            public int НомерРядка { get; set; } = 0;
+            public int НомерРядка { get; set; }
             public Номенклатура_Pointer Номенклатура { get; set; } = new Номенклатура_Pointer();
-            public ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new ХарактеристикиНоменклатури_Pointer();
+            public ХарактеристикиНоменклатури_Pointer Характеристика { get; set; } = new ХарактеристикиНоменклатури_Pointer();
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
-            public decimal Ціна { get; set; } = 0;
+            public decimal Ціна { get; set; }
 
             public object[] ToArray()
             {
@@ -60,10 +78,10 @@ namespace StorageAndTrade
                 [
                     НомерРядка,
                     Номенклатура.Назва,
-                    ХарактеристикаНоменклатури.Назва,
+                    Характеристика.Назва,
                     Пакування.Назва,
                     ВидЦіни.Назва,
-                    (float)Ціна,
+                    (float)Ціна
                 ];
             }
 
@@ -72,12 +90,11 @@ namespace StorageAndTrade
                 return new Запис
                 {
                     ID = Guid.Empty,
-                    НомерРядка = запис.НомерРядка,
                     Номенклатура = запис.Номенклатура.Copy(),
-                    ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури.Copy(),
+                    Характеристика = запис.Характеристика.Copy(),
                     Пакування = запис.Пакування.Copy(),
                     ВидЦіни = запис.ВидЦіни.Copy(),
-                    Ціна = запис.Ціна,
+                    Ціна = запис.Ціна
                 };
             }
 
@@ -92,17 +109,14 @@ namespace StorageAndTrade
                     await Запис.ПісляЗміни_Пакування(запис);
                 }
             }
-
-            public static async ValueTask ПісляЗміни_ХарактеристикаНоменклатури(Запис запис)
+            public static async ValueTask ПісляЗміни_Характеристика(Запис запис)
             {
-                await запис.ХарактеристикаНоменклатури.GetPresentation();
+                await запис.Характеристика.GetPresentation();
             }
-
             public static async ValueTask ПісляЗміни_Пакування(Запис запис)
             {
                 await запис.Пакування.GetPresentation();
             }
-
             public static async ValueTask ПісляЗміни_ВидЦіни(Запис запис)
             {
                 await запис.ВидЦіни.GetPresentation();
@@ -111,7 +125,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари()
+        public ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари() 
         {
             TreeViewGrid.Model = Store;
             AddColumn();
@@ -133,67 +147,6 @@ namespace StorageAndTrade
             ToolbarTop.Add(fillRegisterButton);
         }
 
-        void AddColumn()
-        {
-            //НомерРядка
-            {
-                CellRendererText cellNumber = new CellRendererText();
-                TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 };
-                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
-
-                column.Data.Add("Column", Columns.НомерРядка);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Номенклатура
-            {
-                TreeViewColumn column = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { Resizable = true, MinWidth = 200 };
-
-                column.Data.Add("Column", Columns.Номенклатура);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //ХарактеристикаНоменклатури
-            {
-                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200 };
-
-                column.Data.Add("Column", Columns.ХарактеристикаНоменклатури);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Пакування
-            {
-                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 200 };
-
-                column.Data.Add("Column", Columns.Пакування);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //ВидЦіни
-            {
-                TreeViewColumn column = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 200 };
-
-                column.Data.Add("Column", Columns.ВидЦіни);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Ціна
-            {
-                CellRendererText cellNumber = new CellRendererText() { Editable = true };
-                cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Ціна", cellNumber, "text", (int)Columns.Ціна) { Resizable = true, MinWidth = 100 };
-                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
-
-                column.Data.Add("Column", Columns.Ціна);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Колонка пустишка для заповнення вільного простору
-            TreeViewGrid.AppendColumn(new TreeViewColumn());
-        }
-
-        #region Load and Save
-
         public override async ValueTask LoadRecords()
         {
             Store.Clear();
@@ -211,10 +164,10 @@ namespace StorageAndTrade
                         ID = record.UID,
                         НомерРядка = record.НомерРядка,
                         Номенклатура = record.Номенклатура,
-                        ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                        Характеристика = record.ХарактеристикаНоменклатури,
                         Пакування = record.Пакування,
                         ВидЦіни = record.ВидЦіни,
-                        Ціна = record.Ціна,
+                        Ціна = record.Ціна
                     };
 
                     Записи.Add(запис);
@@ -228,23 +181,27 @@ namespace StorageAndTrade
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Товари_TablePart.Records.Clear();
+
                 int sequenceNumber = 0;
+
                 foreach (Запис запис in Записи)
                 {
-                    ЕлементВласник.Товари_TablePart.Records.Add(new ВстановленняЦінНоменклатури_Товари_TablePart.Record()
+                    ВстановленняЦінНоменклатури_Товари_TablePart.Record record = new ВстановленняЦінНоменклатури_Товари_TablePart.Record
                     {
                         UID = запис.ID,
                         НомерРядка = ++sequenceNumber,
                         Номенклатура = запис.Номенклатура,
-                        ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури,
+                        ХарактеристикаНоменклатури = запис.Характеристика,
                         Пакування = запис.Пакування,
                         ВидЦіни = запис.ВидЦіни,
-                        Ціна = запис.Ціна,
+                        Ціна = запис.Ціна
+                    };
 
-                    });
+                    ЕлементВласник.Товари_TablePart.Records.Add(record);
                 }
 
                 await ЕлементВласник.Товари_TablePart.Save(true);
+
                 await LoadRecords();
             }
         }
@@ -257,132 +214,231 @@ namespace StorageAndTrade
             {
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
-                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.ХарактеристикаНоменклатури.Назва} ";
+                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.Характеристика.Назва} ";
             }
 
             return ключовіСлова;
         }
 
-        #endregion
+        #region TreeView
 
-        #region Func
+        void AddColumn()
+        {
+            //НомерРядка
+            TreeViewGrid.AppendColumn(new TreeViewColumn("№", new CellRendererText(), "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 });
 
-        protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
+            //Номенклатура
+            {
+                TreeViewColumn Номенклатура = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { Resizable = true, MinWidth = 200 };
+                Номенклатура.Data.Add("Column", Columns.Номенклатура);
+
+                TreeViewGrid.AppendColumn(Номенклатура);
+            }
+
+            //Характеристика
+            {
+                TreeViewColumn Характеристика = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.Характеристика)
+                {
+                    Resizable = true,
+                    MinWidth = 200,
+                    Visible = Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const
+                };
+
+                Характеристика.Data.Add("Column", Columns.Характеристика);
+
+                TreeViewGrid.AppendColumn(Характеристика);
+            }
+
+            //Пакування
+            {
+                TreeViewColumn Пакування = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
+                Пакування.Data.Add("Column", Columns.Пакування);
+
+                TreeViewGrid.AppendColumn(Пакування);
+            }
+
+            //ВидЦіни
+            {
+                TreeViewColumn ВидЦіни = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 100 };
+                ВидЦіни.Data.Add("Column", Columns.ВидЦіни);
+
+                TreeViewGrid.AppendColumn(ВидЦіни);
+            }
+
+            //Ціна
+            {
+                CellRendererText Ціна = new CellRendererText() { Editable = true };
+                Ціна.Edited += TextChanged;
+                Ціна.Data.Add("Column", (int)Columns.Ціна);
+
+                TreeViewColumn Column = new TreeViewColumn("Ціна", Ціна, "text", (int)Columns.Ціна) { Resizable = true, MinWidth = 100 };
+                Column.SetCellDataFunc(Ціна, new TreeCellDataFunc(NumericCellDataFunc));
+                TreeViewGrid.AppendColumn(Column);
+            }
+
+            //Колонка пустишка для заповнення вільного простору
+            TreeViewGrid.AppendColumn(new TreeViewColumn());
+        }
+
+        protected override async  void OpenSelect(TreeIter iter, int rowNumber, int colNumber, Popover popover)
         {
             Запис запис = Записи[rowNumber];
+
             switch ((Columns)colNumber)
             {
                 case Columns.Номенклатура:
                     {
-                        Номенклатура_ШвидкийВибір page = new()
+                        Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Номенклатура.UnigueID };
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
-                            DirectoryPointerItem = запис.Номенклатура.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_Номенклатура(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
+                            запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_Номенклатура(запис);
+
+                            Store.SetValues(iter, запис.ToArray());
                         };
-                        return page;
+
+                        popover.Add(page);
+                        popover.ShowAll();
+
+                        await page.SetValue();
+                        break;
                     }
-                case Columns.ХарактеристикаНоменклатури:
+                case Columns.Характеристика:
                     {
-                        ХарактеристикиНоменклатури_ШвидкийВибір page = new()
+                        ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Характеристика.UnigueID };
+
+                        page.НоменклатураВласник.Pointer = запис.Номенклатура;
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
-                            DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
+                            запис.Характеристика = new ХарактеристикиНоменклатури_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_Характеристика(запис);
+
+                            Store.SetValues(iter, запис.ToArray());
                         };
-                        return page;
+
+                        popover.Add(page);
+                        popover.ShowAll();
+
+                        await page.SetValue();
+                        break;
                     }
                 case Columns.Пакування:
                     {
-                        ПакуванняОдиниціВиміру_ШвидкийВибір page = new()
+                        ПакуванняОдиниціВиміру_ШвидкийВибір page = new ПакуванняОдиниціВиміру_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.Пакування.UnigueID };
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
-                            DirectoryPointerItem = запис.Пакування.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_Пакування(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
+                            запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_Пакування(запис);
+
+                            Store.SetValues(iter, запис.ToArray());
                         };
-                        return page;
+
+                        popover.Add(page);
+                        popover.ShowAll();
+
+                        await page.SetValue();
+                        break;
                     }
                 case Columns.ВидЦіни:
                     {
-                        ВидиЦін_ШвидкийВибір page = new()
+                        ВидиЦін_ШвидкийВибір page = new ВидиЦін_ШвидкийВибір() { PopoverParent = popover, DirectoryPointerItem = запис.ВидЦіни.UnigueID };
+                        page.CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
                         {
-                            DirectoryPointerItem = запис.ВидЦіни.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.ВидЦіни = new ВидиЦін_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_ВидЦіни(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
+                            запис.ВидЦіни = new ВидиЦін_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_ВидЦіни(запис);
+
+                            Store.SetValues(iter, запис.ToArray());
                         };
-                        return page;
+
+                        popover.Add(page);
+                        popover.ShowAll();
+
+                        await page.SetValue();
+                        break;
                     }
-
-                default: return null;
             }
         }
 
-        protected override void ClearCell(TreeIter iter, int rowNumber, int colNumber)
+        protected override void ButtonPopupClear(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
+
             switch ((Columns)colNumber)
             {
-                case Columns.Номенклатура: { запис.Номенклатура.Clear(); break; }
-                case Columns.ХарактеристикаНоменклатури: { запис.ХарактеристикаНоменклатури.Clear(); break; }
-                case Columns.Пакування: { запис.Пакування.Clear(); break; }
-                case Columns.ВидЦіни: { запис.ВидЦіни.Clear(); break; }
-
-                default: break;
+                case Columns.Номенклатура:
+                    {
+                        запис.Номенклатура.Clear();
+                        break;
+                    }
+                case Columns.Характеристика:
+                    {
+                        запис.Характеристика.Clear();
+                        break;
+                    }
+                case Columns.Пакування:
+                    {
+                        запис.Пакування.Clear();
+                        break;
+                    }
+                case Columns.ВидЦіни:
+                    {
+                        запис.ВидЦіни.Clear();
+                        break;
+                    }
             }
-            Store.SetValues(iter, запис.ToArray());
-        }
 
-        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
-        {
-            Запис запис = Записи[rowNumber];
-            switch ((Columns)colNumber)
-            {
-                case Columns.Ціна: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Ціна = value; break; }
-                default: break;
-            }
             Store.SetValues(iter, запис.ToArray());
         }
 
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
-            object? objColumn = column.Data["Column"];
-            if (objColumn != null)
+            CellRendererText cellText = (CellRendererText)cell;
+            if (cellText.Data.Contains("Column"))
             {
-                int colNumber = (int)objColumn;
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
                 Запис запис = Записи[rowNumber];
 
-                CellRendererText cellText = (CellRendererText)cell;
                 cellText.Foreground = "green";
 
-                switch ((Columns)colNumber)
+                switch ((Columns)cellText.Data["Column"]!)
                 {
                     case Columns.Ціна:
                         {
                             cellText.Text = запис.Ціна.ToString();
                             break;
                         }
-                    default: break;
                 }
             }
         }
 
+        void TextChanged(object sender, EditedArgs args)
+        {
+            CellRenderer cellRender = (CellRenderer)sender;
+
+            if (cellRender.Data.Contains("Column"))
+            {
+                int ColumnNum = (int)cellRender.Data["Column"]!;
+
+                Store.GetIterFromString(out TreeIter iter, args.Path);
+
+                int rowNumber = int.Parse(args.Path);
+                Запис запис = Записи[rowNumber];
+
+                switch ((Columns)ColumnNum)
+                {
+                    case Columns.Ціна:
+                        {
+                            var (check, value) = Validate.IsDecimal(args.NewText);
+                            if (check)
+                                запис.Ціна = value;
+
+                            break;
+                        }
+                }
+
+                Store.SetValues(iter, запис.ToArray());
+            }
+        }
 
         #endregion
 
@@ -400,7 +456,9 @@ namespace StorageAndTrade
         protected override void CopyRecord(int rowNumber)
         {
             Запис запис = Записи[rowNumber];
+
             Запис записНовий = Запис.Clone(запис);
+
             Записи.Add(записНовий);
 
             TreeIter iter = Store.AppendValues(записНовий.ToArray());
@@ -410,6 +468,7 @@ namespace StorageAndTrade
         protected override void DeleteRecord(TreeIter iter, int rowNumber)
         {
             Запис запис = Записи[rowNumber];
+
             Записи.Remove(запис);
             Store.Remove(ref iter);
         }
@@ -443,8 +502,8 @@ FROM
     LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Довідник_ПакуванняОдиниціВиміру ON 
         Довідник_ПакуванняОдиниціВиміру.uid = Номенклатура.{Номенклатура_Const.ОдиницяВиміру}
 WHERE
-    Номенклатура.{Номенклатура_Const.ТипНоменклатури} = {(int)ТипиНоменклатури.Товар} OR
-    Номенклатура.{Номенклатура_Const.ТипНоменклатури} = {(int)ТипиНоменклатури.Послуга}
+    Номенклатура.{Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} OR
+    Номенклатура.{Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Послуга}
 ORDER BY Номенклатура_Назва, Пакування_Назва
 ";
             Store.Clear();
@@ -468,7 +527,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
                     {
                         ID = Guid.Empty,
                         Номенклатура = new Номенклатура_Pointer(row["Номенклатура"]),
-                        ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(),
+                        Характеристика = new ХарактеристикиНоменклатури_Pointer(),
                         Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
                         ВидЦіни = ЕлементВласник.ВидЦіни,
                         Ціна = row["Ціна"] != DBNull.Value ? (decimal)row["Ціна"] : 0
@@ -570,7 +629,7 @@ ORDER BY
                     {
                         ID = Guid.Empty,
                         Номенклатура = new Номенклатура_Pointer(row["Номенклатура"]),
-                        ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(row["ХарактеристикаНоменклатури"]),
+                        Характеристика = new ХарактеристикиНоменклатури_Pointer(row["ХарактеристикаНоменклатури"]),
                         Пакування = new ПакуванняОдиниціВиміру_Pointer(row["Пакування"]),
                         ВидЦіни = new ВидиЦін_Pointer(row["ВидЦіни"]),
                         Ціна = (decimal)row["Ціна"]
@@ -584,6 +643,7 @@ ORDER BY
                     Store.AppendValues(запис.ToArray());
                 }
             }
+
         }
 
         #endregion

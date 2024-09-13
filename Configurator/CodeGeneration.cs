@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "Зберігання та Торгівля 3.0"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 13.09.2024 11:49:03
+ * Дата конфігурації: 13.09.2024 19:13:59
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1797,6 +1797,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string СвідоцтвоСеріяНомер = "col_a7";
         public const string СвідоцтвоДатаВидачі = "col_a8";
         public const string Холдинг = "col_a9";
+        public const string КлючовіСловаДляПошуку = "col_b1";
     }
 
     public class Організації_Objest : DirectoryObject
@@ -1805,7 +1806,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Організації_Objest() : base(Config.Kernel, "tab_a01",
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", ]) 
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ]) 
         {
             
                 //Табличні частини
@@ -1836,6 +1837,7 @@ namespace StorageAndTrade_1_0.Довідники
                 СвідоцтвоСеріяНомер = base.FieldValue["col_a7"].ToString() ?? "";
                 СвідоцтвоДатаВидачі = base.FieldValue["col_a8"].ToString() ?? "";
                 Холдинг = new Довідники.Організації_Pointer(base.FieldValue["col_a9"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_b1"].ToString() ?? "";
                 
                 BaseClear();
                 
@@ -1867,12 +1869,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a7"] = СвідоцтвоСеріяНомер;
             base.FieldValue["col_a8"] = СвідоцтвоДатаВидачі;
             base.FieldValue["col_a9"] = Холдинг.UnigueID.UGuid;
+            base.FieldValue["col_b1"] = КлючовіСловаДляПошуку;
             
             bool result = await BaseSave();
             if (result)
             {
                 
-                await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі, ]);
+                await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, НазваСкорочена, КраїнаРеєстрації, СвідоцтвоСеріяНомер, СвідоцтвоДатаВидачі, КлючовіСловаДляПошуку, ]);
                 
             }
             CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
@@ -1892,6 +1895,7 @@ namespace StorageAndTrade_1_0.Довідники
                 СвідоцтвоСеріяНомер = СвідоцтвоСеріяНомер,
                 СвідоцтвоДатаВидачі = СвідоцтвоДатаВидачі,
                 Холдинг = Холдинг,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
                 
             };
             
@@ -1953,6 +1957,7 @@ namespace StorageAndTrade_1_0.Довідники
         public string СвідоцтвоСеріяНомер { get; set; } = "";
         public string СвідоцтвоДатаВидачі { get; set; } = "";
         public Довідники.Організації_Pointer Холдинг { get; set; } = new Довідники.Організації_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public Організації_Контакти_TablePart Контакти_TablePart { get; set; }
@@ -4104,6 +4109,7 @@ namespace StorageAndTrade_1_0.Довідники
         public const string Підрозділ = "col_a4";
         public const string Папка = "col_a5";
         public const string НалаштуванняАдресногоЗберігання = "col_a6";
+        public const string КлючовіСловаДляПошуку = "col_a7";
     }
 
     public class Склади_Objest : DirectoryObject
@@ -4112,7 +4118,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Склади_Objest() : base(Config.Kernel, "tab_a10",
-             ["col_d9", "col_e1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
+             ["col_d9", "col_e1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ]) 
         {
             
                 //Табличні частини
@@ -4142,6 +4148,7 @@ namespace StorageAndTrade_1_0.Довідники
                 Підрозділ = new Довідники.СтруктураПідприємства_Pointer(base.FieldValue["col_a4"]);
                 Папка = new Довідники.Склади_Папки_Pointer(base.FieldValue["col_a5"]);
                 НалаштуванняАдресногоЗберігання = (base.FieldValue["col_a6"] != DBNull.Value) ? (Перелічення.НалаштуванняАдресногоЗберігання)base.FieldValue["col_a6"] : 0;
+                КлючовіСловаДляПошуку = base.FieldValue["col_a7"].ToString() ?? "";
                 
                 BaseClear();
                 
@@ -4172,12 +4179,13 @@ namespace StorageAndTrade_1_0.Довідники
             base.FieldValue["col_a4"] = Підрозділ.UnigueID.UGuid;
             base.FieldValue["col_a5"] = Папка.UnigueID.UGuid;
             base.FieldValue["col_a6"] = (int)НалаштуванняАдресногоЗберігання;
+            base.FieldValue["col_a7"] = КлючовіСловаДляПошуку;
             
             bool result = await BaseSave();
             if (result)
             {
                 
-                await BaseWriteFullTextSearch(GetBasis(), [Назва, ]);
+                await BaseWriteFullTextSearch(GetBasis(), [Назва, КлючовіСловаДляПошуку, ]);
                 
             }
             CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
@@ -4196,6 +4204,7 @@ namespace StorageAndTrade_1_0.Довідники
                 Підрозділ = Підрозділ,
                 Папка = Папка,
                 НалаштуванняАдресногоЗберігання = НалаштуванняАдресногоЗберігання,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
                 
             };
             
@@ -4256,6 +4265,7 @@ namespace StorageAndTrade_1_0.Довідники
         public Довідники.СтруктураПідприємства_Pointer Підрозділ { get; set; } = new Довідники.СтруктураПідприємства_Pointer();
         public Довідники.Склади_Папки_Pointer Папка { get; set; } = new Довідники.Склади_Папки_Pointer();
         public Перелічення.НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання { get; set; } = 0;
+        public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
         public Склади_Контакти_TablePart Контакти_TablePart { get; set; }
