@@ -84,7 +84,7 @@ namespace StorageAndTrade
 
             //Основний
             {
-                CellRendererToggle cellToggle = new CellRendererToggle() { };
+                CellRendererToggle cellToggle = new CellRendererToggle() {  };
                 cellToggle.Toggled += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Основний", cellToggle, "active", (int)Columns.Основний);
 

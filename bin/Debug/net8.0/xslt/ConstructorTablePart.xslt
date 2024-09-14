@@ -230,13 +230,13 @@ namespace <xsl:value-of select="$NameSpace"/>
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellCombo, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                     </xsl:when>
                     <xsl:when test="Type = 'integer' or Type = 'numeric'">
-                CellRendererText cellNumber = new CellRendererText() { Editable = true };
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellNumber, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellNumber, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
                     </xsl:when>
                     <xsl:when test="Type = 'boolean'">
-                CellRendererToggle cellToggle = new CellRendererToggle() { };
+                CellRendererToggle cellToggle = new CellRendererToggle();
                 cellToggle.Toggled += EditCell;
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellToggle, "active", (int)Columns.<xsl:value-of select="Name"/>);
                     </xsl:when>

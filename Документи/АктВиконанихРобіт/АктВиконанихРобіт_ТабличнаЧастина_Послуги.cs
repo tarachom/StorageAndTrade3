@@ -136,7 +136,7 @@ namespace StorageAndTrade
         {
             //НомерРядка
             {
-                CellRendererText cellNumber = new CellRendererText();
+                CellRendererText cellNumber = new CellRendererText() { Xalign = 1 };
                 TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", Columns.НомерРядка) { Resizable = true, MinWidth = 30 };
                 TreeViewGrid.AppendColumn(column);
             }
@@ -159,9 +159,9 @@ namespace StorageAndTrade
 
             //Кількість
             {
-                CellRendererText cellNumber = new CellRendererText() { Editable = true };
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Кількість", cellNumber, "text", Columns.Кількість) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("Кількість", cellNumber, "text", Columns.Кількість) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
                 SetColIndex(column, Columns.Кількість);
@@ -170,9 +170,9 @@ namespace StorageAndTrade
 
             //Ціна
             {
-                CellRendererText cellNumber = new CellRendererText() { Editable = true };
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Ціна", cellNumber, "text", Columns.Ціна) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("Ціна", cellNumber, "text", Columns.Ціна) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
                 SetColIndex(column, Columns.Ціна);
@@ -181,9 +181,9 @@ namespace StorageAndTrade
 
             //Сума
             {
-                CellRendererText cellNumber = new CellRendererText() { Editable = true };
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", Columns.Сума) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", Columns.Сума) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
                 SetColIndex(column, Columns.Сума);
