@@ -246,7 +246,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellText, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                     </xsl:otherwise>
                 </xsl:choose>
-                column.Data.Add("Column", Columns.<xsl:value-of select="Name"/>);
+                SetColIndex(column, Columns.<xsl:value-of select="Name"/>);
                 TreeViewGrid.AppendColumn(column);
             }
             </xsl:for-each>
@@ -264,7 +264,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             {
                 ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.FillJoin([]);
                 await ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Read();
-
                 foreach (<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.Record record in ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Records)
                 {
                     Запис запис = new Запис
@@ -286,7 +285,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Records.Clear();
-
                 foreach (Запис запис in Записи)
                 {
                     ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Records.Add(new <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.Record()
@@ -297,7 +295,6 @@ namespace <xsl:value-of select="$NameSpace"/>
                         </xsl:for-each>
                     });
                 }
-
                 await ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Save(true);
                 await LoadRecords();
             }
@@ -390,10 +387,8 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:if test="count($FieldsTL[Type = 'integer' or Type = 'numeric']) != 0">
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
-            object? objColumn = column.Data["Column"];
-            if (objColumn != null)
+            if (GetColIndex(column, out int colNumber))
             {
-                int colNumber = (int)objColumn;
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
                 Запис запис = Записи[rowNumber];
 

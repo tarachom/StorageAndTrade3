@@ -129,10 +129,7 @@ namespace StorageAndTrade
             //НомерРядка
             {
                 CellRendererText cellNumber = new CellRendererText();
-                TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 100 };
-                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
-
-                column.Data.Add("Column", Columns.НомерРядка);
+                TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 };
                 TreeViewGrid.AppendColumn(column);
             }
 
@@ -147,7 +144,7 @@ namespace StorageAndTrade
                 cellCombo.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("ТипКонтрагента", cellCombo, "text", (int)Columns.ТипКонтрагента) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.ТипКонтрагента);
+                SetColIndex(column, Columns.ТипКонтрагента);
                 TreeViewGrid.AppendColumn(column);
             }
 
@@ -155,7 +152,7 @@ namespace StorageAndTrade
             {
                 TreeViewColumn column = new TreeViewColumn("Контрагент", new CellRendererText(), "text", (int)Columns.Контрагент) { Resizable = true, MinWidth = 200 };
 
-                column.Data.Add("Column", Columns.Контрагент);
+                SetColIndex(column, Columns.Контрагент);
                 TreeViewGrid.AppendColumn(column);
             }
 
@@ -163,7 +160,7 @@ namespace StorageAndTrade
             {
                 TreeViewColumn column = new TreeViewColumn("Валюта", new CellRendererText(), "text", (int)Columns.Валюта) { Resizable = true, MinWidth = 200 };
 
-                column.Data.Add("Column", Columns.Валюта);
+                SetColIndex(column, Columns.Валюта);
                 TreeViewGrid.AppendColumn(column);
             }
 
@@ -174,7 +171,7 @@ namespace StorageAndTrade
                 TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", (int)Columns.Сума) { Resizable = true, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
-                column.Data.Add("Column", Columns.Сума);
+                SetColIndex(column, Columns.Сума);
                 TreeViewGrid.AppendColumn(column);
             }
 
@@ -320,10 +317,8 @@ namespace StorageAndTrade
 
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
-            object? objColumn = column.Data["Column"];
-            if (objColumn != null)
+            if (GetColIndex(column, out int colNumber))
             {
-                int colNumber = (int)objColumn;
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
                 Запис запис = Записи[rowNumber];
 
