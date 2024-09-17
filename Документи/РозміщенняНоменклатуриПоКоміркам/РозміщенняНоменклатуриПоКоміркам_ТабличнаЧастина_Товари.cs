@@ -118,7 +118,7 @@ namespace StorageAndTrade
         {
             //НомерРядка
             {
-                CellRendererText cellNumber = new CellRendererText();
+                CellRendererText cellNumber = new CellRendererText() { Xalign = 1 };
                 TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 };
                 TreeViewGrid.AppendColumn(column);
             }
