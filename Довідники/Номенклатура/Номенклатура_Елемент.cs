@@ -55,7 +55,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Номенклатура_Елемент() 
+        public Номенклатура_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -160,8 +160,7 @@ namespace StorageAndTrade
             ОдиницяВиміру.Pointer = Елемент.ОдиницяВиміру;
             ОсновнаКартинкаФайл.Pointer = Елемент.ОсновнаКартинкаФайл;
 
-            if (ТипНоменклатури.Active == -1)
-                ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
+            if (ТипНоменклатури.Active == -1) ТипНоменклатури.ActiveId = ТипиНоменклатури.Товар.ToString();
 
             Файли.ЕлементВласник = Елемент;
             await Файли.LoadRecords();

@@ -33,7 +33,7 @@ namespace StorageAndTrade
 {
     public class Каси : ДовідникЖурнал
     {
-        public Каси() 
+        public Каси()
         {
             ТабличніСписки.Каси_Записи.AddColumns(TreeViewGrid);
         }
@@ -53,7 +53,7 @@ namespace StorageAndTrade
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             //Відбори
-            ТабличніСписки.Каси_Записи.ДодатиВідбір(TreeViewGrid, Каси_ВідбориДляПошуку.Відбори(searchText), true);
+            ТабличніСписки.Каси_Записи.ДодатиВідбір(TreeViewGrid, Каси_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.Каси_Записи.LoadRecords(TreeViewGrid);
         }
@@ -65,7 +65,8 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            Каси_Елемент page = new Каси_Елемент
+            await Каси_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            /*Каси_Елемент page = new Каси_Елемент
             {
                 CallBack_LoadRecords = CallBack_LoadRecords,
                 IsNew = IsNew
@@ -81,21 +82,23 @@ namespace StorageAndTrade
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
 
-            page.SetValue();
+            page.SetValue();*/
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Каси_Objest Каси_Objest = new Каси_Objest();
+            await Каси_Функції.SetDeletionLabel(unigueID);
+            /*Каси_Objest Каси_Objest = new Каси_Objest();
             if (await Каси_Objest.Read(unigueID))
                 await Каси_Objest.SetDeletionLabel(!Каси_Objest.DeletionLabel);
             else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");*/
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            Каси_Objest Каси_Objest = new Каси_Objest();
+            return await Каси_Функції.Copy(unigueID);
+            /*Каси_Objest Каси_Objest = new Каси_Objest();
             if (await Каси_Objest.Read(unigueID))
             {
                 Каси_Objest Каси_Objest_Новий = await Каси_Objest.Copy(true);
@@ -107,7 +110,7 @@ namespace StorageAndTrade
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return null;
-            }
+            }*/
         }
 
         #endregion

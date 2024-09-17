@@ -60,7 +60,6 @@ namespace StorageAndTrade
             public decimal КількістьФакт { get; set; } = 1;
             public ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new ПартіяТоварівКомпозит_Pointer();
 
-
             public object[] ToArray()
             {
                 return
@@ -264,7 +263,6 @@ namespace StorageAndTrade
                         Кількість = record.Кількість,
                         КількістьФакт = record.Кількість * record.КількістьУпаковок,
                         Партія = record.Партія,
-
                     };
 
                     Записи.Add(запис);
@@ -292,7 +290,6 @@ namespace StorageAndTrade
                         Пакування = запис.Пакування,
                         Кількість = запис.Кількість,
                         Партія = запис.Партія,
-
                     });
                 }
 

@@ -427,6 +427,7 @@ ORDER BY
 
             TreeView treeView = new TreeView(listStore);
             treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
+            treeView.EnableGridLines = TreeViewGridLines.Both;
 
             ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
             ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);

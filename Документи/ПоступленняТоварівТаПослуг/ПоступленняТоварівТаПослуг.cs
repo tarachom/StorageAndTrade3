@@ -373,7 +373,6 @@ namespace StorageAndTrade
                     //
 
                     ВнутрішнєСпоживанняТоварів_Objest Новий = new ВнутрішнєСпоживанняТоварів_Objest();
-
                     await Новий.New();
                     Новий.Організація = Обєкт.Організація;
                     Новий.Склад = Обєкт.Склад;
@@ -384,11 +383,13 @@ namespace StorageAndTrade
 
                     if (await Новий.Save())
                     {
+                        int sequenceNumber = 0;
                         //Товари
                         foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
                         {
                             Новий.Товари_TablePart.Records.Add(new ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record()
                             {
+                                НомерРядка = ++sequenceNumber,
                                 Номенклатура = record.Номенклатура,
                                 ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
                                 Серія = record.Серія,
@@ -401,19 +402,12 @@ namespace StorageAndTrade
                         }
 
                         await Новий.Товари_TablePart.Save(false);
-
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Новий.Назва}", () =>
-                        {
-                            ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент()
-                            {
-                                IsNew = false,
-                                Елемент = Новий
-                            };
-
-                            page.SetValue();
-                            return page;
-                        });
                     }
+
+                    ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент(); 
+                    await page.Елемент.Read(Новий.UnigueID);
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                    page.SetValue();
                 }
         }
 

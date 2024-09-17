@@ -80,7 +80,6 @@ namespace StorageAndTrade
             }
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
             page.SetValue();
         }
 
@@ -149,10 +148,6 @@ namespace StorageAndTrade
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РозміщенняТоварівНаСкладі_Const.FULLNAME}_{unigueID}.xml");
             await РозміщенняТоварівНаСкладі_Export.ToXmlFile(new РозміщенняТоварівНаСкладі_Pointer(unigueID), pathToSave);
         }
-
-        #endregion
-
-        #region ToolBar
 
         #endregion
     }

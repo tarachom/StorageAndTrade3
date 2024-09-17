@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class ПереміщенняТоварівНаСкладі_Елемент : ДокументЕлемент
     {
-        public ПереміщенняТоварівНаСкладі_Objest Елемент { get; set; } = new ПереміщенняТоварівНаСкладі_Objest();
+        public ПереміщенняТоварівНаСкладі_Objest Елемент { get; init; } = new ПереміщенняТоварівНаСкладі_Objest();
 
         #region Fields
 

@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class Каси_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public Каси_ШвидкийВибір() 
+        public Каси_ШвидкийВибір()
         {
             ТабличніСписки.Каси_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
         }
@@ -50,7 +50,7 @@ namespace StorageAndTrade
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             //Відбори
-            ТабличніСписки.Каси_Записи.ДодатиВідбір(TreeViewGrid, Каси_ВідбориДляПошуку.Відбори(searchText), true);
+            ТабличніСписки.Каси_Записи.ДодатиВідбір(TreeViewGrid, Каси_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.Каси_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
@@ -71,7 +71,8 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            Каси_Елемент page = new Каси_Елемент
+            await Каси_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
+            /*Каси_Елемент page = new Каси_Елемент
             {
                 IsNew = IsNew,
                 CallBack_OnSelectPointer = CallBack_OnSelectPointer
@@ -87,16 +88,17 @@ namespace StorageAndTrade
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
 
-            page.SetValue();
+            page.SetValue();*/
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Каси_Objest Обєкт = new Каси_Objest();
+            await Каси_Функції.SetDeletionLabel(unigueID);
+            /*Каси_Objest Обєкт = new Каси_Objest();
             if (await Обєкт.Read(unigueID))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");*/
         }
     }
 }

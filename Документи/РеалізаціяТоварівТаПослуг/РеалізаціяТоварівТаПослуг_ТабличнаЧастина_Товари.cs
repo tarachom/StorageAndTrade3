@@ -43,7 +43,6 @@ namespace StorageAndTrade
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -83,7 +82,6 @@ namespace StorageAndTrade
             public РахунокФактура_Pointer РахунокФактура { get; set; } = new РахунокФактура_Pointer();
             public Склади_Pointer Склад { get; set; } = new Склади_Pointer();
             public ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new ПартіяТоварівКомпозит_Pointer();
-
 
             public object[] ToArray()
             {
@@ -274,7 +272,7 @@ LIMIT 1
             hBox.PackStart(ПідсумокСума, false, false, 2);
             hBox.PackStart(ПідсумокСкидка, false, false, 2);
 
-            base.PackStart(hBox, false, false, 2);
+            PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()
@@ -299,7 +297,6 @@ LIMIT 1
 
         void AddColumn()
         {
-
             //НомерРядка
             {
                 CellRendererText cellNumber = new CellRendererText();
@@ -482,7 +479,6 @@ LIMIT 1
                         РахунокФактура = record.РахунокФактура,
                         Склад = record.Склад,
                         Партія = record.Партія,
-
                     };
 
                     Записи.Add(запис);
@@ -517,7 +513,6 @@ LIMIT 1
                         РахунокФактура = запис.РахунокФактура,
                         Склад = запис.Склад,
                         Партія = запис.Партія,
-
                     });
                 }
 

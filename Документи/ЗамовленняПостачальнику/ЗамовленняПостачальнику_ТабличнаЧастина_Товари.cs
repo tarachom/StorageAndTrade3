@@ -32,11 +32,9 @@ namespace StorageAndTrade
             Сума,
             Скидка,
             Склад,
-
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -82,7 +80,6 @@ namespace StorageAndTrade
                     (float)Сума,
                     (float)Скидка,
                     Склад.Назва,
-
                 ];
             }
 
@@ -102,7 +99,6 @@ namespace StorageAndTrade
                     Сума = запис.Сума,
                     Скидка = запис.Скидка,
                     Склад = запис.Склад.Copy(),
-
                 };
             }
 
@@ -176,7 +172,7 @@ namespace StorageAndTrade
             hBox.PackStart(ПідсумокСума, false, false, 2);
             hBox.PackStart(ПідсумокСкидка, false, false, 2);
 
-            base.PackStart(hBox, false, false, 2);
+            PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()
@@ -338,7 +334,6 @@ namespace StorageAndTrade
                         Сума = record.Сума,
                         Скидка = record.Скидка,
                         Склад = record.Склад,
-
                     };
 
                     Записи.Add(запис);
@@ -368,7 +363,6 @@ namespace StorageAndTrade
                         Сума = запис.Сума,
                         Скидка = запис.Скидка,
                         Склад = запис.Склад,
-
                     });
                 }
 

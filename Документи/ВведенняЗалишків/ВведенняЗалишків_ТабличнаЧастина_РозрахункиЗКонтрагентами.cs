@@ -29,7 +29,6 @@ namespace StorageAndTrade
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //ТипКонтрагента
             typeof(string), //Контрагент
@@ -108,7 +107,7 @@ namespace StorageAndTrade
             hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
             hBox.PackStart(ПідсумокСума, false, false, 2);
 
-            base.PackStart(hBox, false, false, 2);
+            PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()

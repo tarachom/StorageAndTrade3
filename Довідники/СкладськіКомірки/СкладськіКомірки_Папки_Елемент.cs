@@ -1,80 +1,85 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 /*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+        СкладськіКомірки_Папки_Елемент.cs
+        Елемент
 */
 
 using Gtk;
 using InterfaceGtk;
+
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
     class СкладськіКомірки_Папки_Елемент : ДовідникЕлемент
     {
-        public СкладськіКомірки_Папки_Objest Елемент { get; set; } = new СкладськіКомірки_Папки_Objest();
-        public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
-        public СкладськіПриміщення_Pointer СкладськеПриміщенняДляНового { get; set; } = new СкладськіПриміщення_Pointer();
+        public СкладськіКомірки_Папки_Objest Елемент { get; init; } = new СкладськіКомірки_Папки_Objest();
 
+        public СкладськіПриміщення_Pointer ВласникДляНового = new СкладськіПриміщення_Pointer();
+
+        public СкладськіКомірки_Папки_Pointer РодичДляНового { get; set; } = new СкладськіКомірки_Папки_Pointer();
+
+        #region Fields
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Папка:" };
-        СкладськіПриміщення_PointerControl СкладськеПриміщення = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
+        СкладськіКомірки_Папки_PointerControl Родич = new СкладськіКомірки_Папки_PointerControl() { Caption = "Папка", WidthPresentation = 500 };
+        СкладськіПриміщення_PointerControl Власник = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення", WidthPresentation = 500 };
 
-        public СкладськіКомірки_Папки_Елемент() 
+        #endregion
+
+        #region TabularParts
+
+        #endregion
+
+        public СкладськіКомірки_Папки_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
+
+
         }
 
         protected override void CreatePack1(Box vBox)
         {
-            //Код
+
+            // Код
             CreateField(vBox, "Код:", Код);
 
-            //Назва
+            // Назва
             CreateField(vBox, "Назва:", Назва);
 
-            //СкладськеПриміщення
-            CreateField(vBox, null, СкладськеПриміщення);
-
-            //Родич
+            // Родич
             CreateField(vBox, null, Родич);
+
+            // Власник
+            CreateField(vBox, null, Власник);
+
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+
         }
 
         #region Присвоєння / зчитування значень
 
         public override void SetValue()
         {
+
             if (IsNew)
-            {
+                Елемент.Власник = ВласникДляНового;
+
+            if (IsNew)
                 Елемент.Родич = РодичДляНового;
-                Елемент.Власник = СкладськеПриміщенняДляНового;
-            }
             else
                 Родич.OpenFolder = Елемент.UnigueID;
-
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
             Родич.Pointer = Елемент.Родич;
-            СкладськеПриміщення.Pointer = Елемент.Власник;
+            Власник.Pointer = Елемент.Власник;
+
         }
 
         protected override void GetValue()
@@ -82,22 +87,28 @@ namespace StorageAndTrade
             Елемент.Код = Код.Text;
             Елемент.Назва = Назва.Text;
             Елемент.Родич = Родич.Pointer;
-            Елемент.Власник = СкладськеПриміщення.Pointer;
+            Елемент.Власник = Власник.Pointer;
+
         }
 
         #endregion
 
         protected override async ValueTask<bool> Save()
         {
+            bool isSaved = false;
             try
             {
-                return await Елемент.Save();
+                if (await Елемент.Save())
+                {
+
+                    isSaved = true;
+                }
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-                return false;
             }
+            return isSaved;
         }
     }
 }

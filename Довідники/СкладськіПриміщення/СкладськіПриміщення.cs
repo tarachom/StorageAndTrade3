@@ -1,24 +1,7 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+/*     
+        СкладськіПриміщення.cs
+        Список
 */
 
 using Gtk;
@@ -46,7 +29,7 @@ namespace StorageAndTrade
                 СкладськіКомірки page = new СкладськіКомірки();
 
                 if (SelectPointerItem != null)
-                    page.СкладПриміщенняВласник.Pointer = new СкладськіПриміщення_Pointer(SelectPointerItem);
+                    page.Власник.Pointer = new СкладськіПриміщення_Pointer(SelectPointerItem);
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{СкладськіКомірки_Const.FULLNAME}", () => page);
 
@@ -85,7 +68,7 @@ namespace StorageAndTrade
             }
 
             //Відбори
-            ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid, СкладськіПриміщення_ВідбориДляПошуку.Відбори(searchText));
+            ТабличніСписки.СкладськіПриміщення_Записи.ДодатиВідбір(TreeViewGrid, СкладськіПриміщення_Функції.Відбори(searchText));
 
             await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
         }
@@ -97,49 +80,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await СкладськіПриміщення_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-            if (await СкладськіПриміщення_Objest.Read(unigueID))
-                await СкладськіПриміщення_Objest.SetDeletionLabel(!СкладськіПриміщення_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await СкладськіПриміщення_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            СкладськіПриміщення_Objest СкладськіПриміщення_Objest = new СкладськіПриміщення_Objest();
-            if (await СкладськіПриміщення_Objest.Read(unigueID))
-            {
-                СкладськіПриміщення_Objest СкладськіПриміщення_Objest_Новий = await СкладськіПриміщення_Objest.Copy(true);
-                await СкладськіПриміщення_Objest_Новий.Save();
-
-                return СкладськіПриміщення_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await СкладськіПриміщення_Функції.Copy(unigueID);
         }
 
         #endregion

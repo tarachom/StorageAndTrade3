@@ -1,10 +1,15 @@
 
-
-/*     файл:     Банки_Елемент.cs     */
+/*
+        Банки_Елемент.cs
+        Елемент
+*/
 
 using Gtk;
 using InterfaceGtk;
+
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -13,35 +18,34 @@ namespace StorageAndTrade
         public Банки_Objest Елемент { get; set; } = new Банки_Objest();
 
         #region Fields
-
-        Entry Код = new Entry() { WidthRequest = 500 };
+        Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Entry ТипНаселеногоПункту = new Entry() { WidthRequest = 500 };
-        Entry КодМФО = new Entry() { WidthRequest = 500 };
-        Entry НазваГоловноїУстановиАнг = new Entry() { WidthRequest = 500 };
-        Entry КодЄДРПОУ = new Entry() { WidthRequest = 500 };
         Entry ПовнаНазва = new Entry() { WidthRequest = 500 };
-        Entry УнікальнийКодБанку = new Entry() { WidthRequest = 500 };
-        Entry КодОбластіОпераційноїДіяльності = new Entry() { WidthRequest = 500 };
-        Entry НазваОбластіОпераційноїДіяльності = new Entry() { WidthRequest = 500 };
-        Entry КодОбластіЗгідноСтатуту = new Entry() { WidthRequest = 500 };
-        Entry НазваОбластіЗгідноСтатуту = new Entry() { WidthRequest = 500 };
-        Entry ПоштовийІндекс = new Entry() { WidthRequest = 500 };
-        Entry НазваНаселеногоПункту = new Entry() { WidthRequest = 500 };
-        Entry Адреса = new Entry() { WidthRequest = 500 };
-        Entry КодТелефонногоЗвязку = new Entry() { WidthRequest = 500 };
-        Entry НомерТелефону = new Entry() { WidthRequest = 500 };
-        Entry ЧисловийКодСтануУстанови = new Entry() { WidthRequest = 500 };
-        Entry НазваСтануУстанови = new Entry() { WidthRequest = 500 };
-        Entry ДатаЗміниСтану = new Entry() { WidthRequest = 500 };
-        Entry ДатаВідкриттяУстанови = new Entry() { WidthRequest = 500 };
-        Entry ДатаЗакриттяУстанови = new Entry() { WidthRequest = 500 };
-        Entry КодНБУ = new Entry() { WidthRequest = 500 };
-        Entry НомерЛіцензії = new Entry() { WidthRequest = 500 };
-        Entry ДатаЛіцензії = new Entry() { WidthRequest = 500 };
-        Entry КодСтатусу = new Entry() { WidthRequest = 500 };
-        Entry Статус = new Entry() { WidthRequest = 500 };
-        Entry ДатаЗапису = new Entry() { WidthRequest = 500 };
+        Entry НазваГоловноїУстановиАнг = new Entry() { WidthRequest = 500 };
+        Entry ТипНаселеногоПункту = new Entry() { WidthRequest = 100 };
+        Entry КодМФО = new Entry() { WidthRequest = 100 };
+        Entry КодЄДРПОУ = new Entry() { WidthRequest = 100 };
+        Entry УнікальнийКодБанку = new Entry() { WidthRequest = 100 };
+        Entry КодОбластіОпераційноїДіяльності = new Entry() { WidthRequest = 100 };
+        Entry НазваОбластіОпераційноїДіяльності = new Entry() { WidthRequest = 100 };
+        Entry КодОбластіЗгідноСтатуту = new Entry() { WidthRequest = 100 };
+        Entry НазваОбластіЗгідноСтатуту = new Entry() { WidthRequest = 100 };
+        Entry ПоштовийІндекс = new Entry() { WidthRequest = 100 };
+        Entry НазваНаселеногоПункту = new Entry() { WidthRequest = 100 };
+        Entry Адреса = new Entry() { WidthRequest = 300 };
+        Entry КодТелефонногоЗвязку = new Entry() { WidthRequest = 100 };
+        Entry НомерТелефону = new Entry() { WidthRequest = 100 };
+        Entry ЧисловийКодСтануУстанови = new Entry() { WidthRequest = 100 };
+        Entry НазваСтануУстанови = new Entry() { WidthRequest = 300 };
+        Entry ДатаЗміниСтану = new Entry() { WidthRequest = 100 };
+        Entry ДатаВідкриттяУстанови = new Entry() { WidthRequest = 100 };
+        Entry ДатаЗакриттяУстанови = new Entry() { WidthRequest = 100 };
+        Entry КодНБУ = new Entry() { WidthRequest = 100 };
+        Entry НомерЛіцензії = new Entry() { WidthRequest = 100 };
+        Entry ДатаЛіцензії = new Entry() { WidthRequest = 100 };
+        Entry КодСтатусу = new Entry() { WidthRequest = 100 };
+        Entry Статус = new Entry() { WidthRequest = 300 };
+        Entry ДатаЗапису = new Entry() { WidthRequest = 100 };
 
         #endregion
 
@@ -49,7 +53,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Банки_Елемент()
+        public Банки_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -58,62 +62,89 @@ namespace StorageAndTrade
         protected override void CreatePack1(Box vBox)
         {
 
+            // Код
             CreateField(vBox, "Код:", Код);
 
+            // Назва
             CreateField(vBox, "Назва:", Назва);
 
-            CreateField(vBox, "ТипНаселеногоПункту:", ТипНаселеногоПункту);
+            // ПовнаНазва
+            CreateField(vBox, "Повна назва:", ПовнаНазва);
 
-            CreateField(vBox, "КодМФО:", КодМФО);
+            // НазваГоловноїУстановиАнг
+            CreateField(vBox, "Назва головної установи Анг:", НазваГоловноїУстановиАнг);
 
-            CreateField(vBox, "НазваГоловноїУстановиАнг:", НазваГоловноїУстановиАнг);
+            // ТипНаселеногоПункту
+            CreateField(vBox, "Тип населеного пункту:", ТипНаселеногоПункту);
 
-            CreateField(vBox, "КодЄДРПОУ:", КодЄДРПОУ);
+            // КодМФО
+            CreateField(vBox, "Код МФО:", КодМФО);
 
-            CreateField(vBox, "ПовнаНазва:", ПовнаНазва);
+            // КодЄДРПОУ
+            CreateField(vBox, "Код ЄДРПОУ:", КодЄДРПОУ);
 
-            CreateField(vBox, "УнікальнийКодБанку:", УнікальнийКодБанку);
+            // УнікальнийКодБанку
+            CreateField(vBox, "Унікальний код:", УнікальнийКодБанку);
 
-            CreateField(vBox, "КодОбластіОпераційноїДіяльності:", КодОбластіОпераційноїДіяльності);
+            // КодОбластіОпераційноїДіяльності
+            CreateField(vBox, "Код області операційної діяльності:", КодОбластіОпераційноїДіяльності);
 
-            CreateField(vBox, "НазваОбластіОпераційноїДіяльності:", НазваОбластіОпераційноїДіяльності);
+            // НазваОбластіОпераційноїДіяльності
+            CreateField(vBox, "Назва області операційної діяльності:", НазваОбластіОпераційноїДіяльності);
 
-            CreateField(vBox, "КодОбластіЗгідноСтатуту:", КодОбластіЗгідноСтатуту);
+            // КодОбластіЗгідноСтатуту
+            CreateField(vBox, "Код області згідно статуту:", КодОбластіЗгідноСтатуту);
 
-            CreateField(vBox, "НазваОбластіЗгідноСтатуту:", НазваОбластіЗгідноСтатуту);
+            // НазваОбластіЗгідноСтатуту
+            CreateField(vBox, "Назва області згідно статуту:", НазваОбластіЗгідноСтатуту);
 
-            CreateField(vBox, "ПоштовийІндекс:", ПоштовийІндекс);
+            // ПоштовийІндекс
+            CreateField(vBox, "Поштовий індекс:", ПоштовийІндекс);
 
-            CreateField(vBox, "НазваНаселеногоПункту:", НазваНаселеногоПункту);
+            // НазваНаселеногоПункту
+            CreateField(vBox, "Назва населеного пункту:", НазваНаселеногоПункту);
 
+            // Адреса
             CreateField(vBox, "Адреса:", Адреса);
 
-            CreateField(vBox, "КодТелефонногоЗвязку:", КодТелефонногоЗвязку);
+            // КодТелефонногоЗвязку
+            CreateField(vBox, "Код телефонного зв'язку:", КодТелефонногоЗвязку);
 
-            CreateField(vBox, "НомерТелефону:", НомерТелефону);
+            // НомерТелефону
+            CreateField(vBox, "Номер телефону:", НомерТелефону);
 
-            CreateField(vBox, "ЧисловийКодСтануУстанови:", ЧисловийКодСтануУстанови);
+            // ЧисловийКодСтануУстанови
+            CreateField(vBox, "Числовий код стану установи:", ЧисловийКодСтануУстанови);
 
-            CreateField(vBox, "НазваСтануУстанови:", НазваСтануУстанови);
+            // НазваСтануУстанови
+            CreateField(vBox, "Назва стану установи:", НазваСтануУстанови);
 
-            CreateField(vBox, "ДатаЗміниСтану:", ДатаЗміниСтану);
+            // ДатаЗміниСтану
+            CreateField(vBox, "Дата зміни стану:", ДатаЗміниСтану);
 
-            CreateField(vBox, "ДатаВідкриттяУстанови:", ДатаВідкриттяУстанови);
+            // ДатаВідкриттяУстанови
+            CreateField(vBox, "Дата відкриття установи:", ДатаВідкриттяУстанови);
 
-            CreateField(vBox, "ДатаЗакриттяУстанови:", ДатаЗакриттяУстанови);
+            // ДатаЗакриттяУстанови
+            CreateField(vBox, "Дата закриття установи:", ДатаЗакриттяУстанови);
 
-            CreateField(vBox, "КодНБУ:", КодНБУ);
+            // КодНБУ
+            CreateField(vBox, "Код НБУ:", КодНБУ);
 
-            CreateField(vBox, "НомерЛіцензії:", НомерЛіцензії);
+            // НомерЛіцензії
+            CreateField(vBox, "Номер ліцензії:", НомерЛіцензії);
 
-            CreateField(vBox, "ДатаЛіцензії:", ДатаЛіцензії);
+            // ДатаЛіцензії
+            CreateField(vBox, "Дата ліцензії:", ДатаЛіцензії);
 
-            CreateField(vBox, "КодСтатусу:", КодСтатусу);
+            // КодСтатусу
+            CreateField(vBox, "Код статусу:", КодСтатусу);
 
+            // Статус
             CreateField(vBox, "Статус:", Статус);
 
-            CreateField(vBox, "ДатаЗапису:", ДатаЗапису);
-
+            // ДатаЗапису
+            CreateField(vBox, "Дата запису:", ДатаЗапису);
         }
 
         protected override void CreatePack2(Box vBox)
@@ -127,11 +158,11 @@ namespace StorageAndTrade
         {
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
+            ПовнаНазва.Text = Елемент.ПовнаНазва;
+            НазваГоловноїУстановиАнг.Text = Елемент.НазваГоловноїУстановиАнг;
             ТипНаселеногоПункту.Text = Елемент.ТипНаселеногоПункту;
             КодМФО.Text = Елемент.КодМФО;
-            НазваГоловноїУстановиАнг.Text = Елемент.НазваГоловноїУстановиАнг;
             КодЄДРПОУ.Text = Елемент.КодЄДРПОУ;
-            ПовнаНазва.Text = Елемент.ПовнаНазва;
             УнікальнийКодБанку.Text = Елемент.УнікальнийКодБанку;
             КодОбластіОпераційноїДіяльності.Text = Елемент.КодОбластіОпераційноїДіяльності;
             НазваОбластіОпераційноїДіяльності.Text = Елемент.НазваОбластіОпераційноїДіяльності;
@@ -153,18 +184,17 @@ namespace StorageAndTrade
             КодСтатусу.Text = Елемент.КодСтатусу;
             Статус.Text = Елемент.Статус;
             ДатаЗапису.Text = Елемент.ДатаЗапису;
-
         }
 
         protected override void GetValue()
         {
             Елемент.Код = Код.Text;
             Елемент.Назва = Назва.Text;
+            Елемент.ПовнаНазва = ПовнаНазва.Text;
+            Елемент.НазваГоловноїУстановиАнг = НазваГоловноїУстановиАнг.Text;
             Елемент.ТипНаселеногоПункту = ТипНаселеногоПункту.Text;
             Елемент.КодМФО = КодМФО.Text;
-            Елемент.НазваГоловноїУстановиАнг = НазваГоловноїУстановиАнг.Text;
             Елемент.КодЄДРПОУ = КодЄДРПОУ.Text;
-            Елемент.ПовнаНазва = ПовнаНазва.Text;
             Елемент.УнікальнийКодБанку = УнікальнийКодБанку.Text;
             Елемент.КодОбластіОпераційноїДіяльності = КодОбластіОпераційноїДіяльності.Text;
             Елемент.НазваОбластіОпераційноїДіяльності = НазваОбластіОпераційноїДіяльності.Text;
@@ -186,22 +216,25 @@ namespace StorageAndTrade
             Елемент.КодСтатусу = КодСтатусу.Text;
             Елемент.Статус = Статус.Text;
             Елемент.ДатаЗапису = ДатаЗапису.Text;
-
         }
 
         #endregion
 
         protected override async ValueTask<bool> Save()
         {
+            bool isSaved = false;
             try
             {
-                return await Елемент.Save();
+                if (await Елемент.Save())
+                {
+                    isSaved = true;
+                }
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-                return false;
             }
+            return isSaved;
         }
     }
 }

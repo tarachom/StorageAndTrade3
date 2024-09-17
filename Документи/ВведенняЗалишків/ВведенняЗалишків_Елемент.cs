@@ -35,7 +35,7 @@ namespace StorageAndTrade
 {
     class ВведенняЗалишків_Елемент : ДокументЕлемент
     {
-        public ВведенняЗалишків_Objest Елемент { get; set; } = new ВведенняЗалишків_Objest();
+        public ВведенняЗалишків_Objest Елемент { get; init; } = new ВведенняЗалишків_Objest();
 
         #region Fields
 
@@ -237,7 +237,6 @@ namespace StorageAndTrade
             else
             {
                 await Елемент.ClearSpendTheDocument();
-
                 return true;
             }
         }

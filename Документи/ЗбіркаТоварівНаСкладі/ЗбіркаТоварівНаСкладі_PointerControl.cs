@@ -65,8 +65,7 @@ namespace StorageAndTrade
                 CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ЗбіркаТоварівНаСкладі_Pointer(selectPointer); }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ЗбіркаТоварівНаСкладі_Const.FULLNAME}", () => { return page; });
-
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ЗбіркаТоварівНаСкладі_Const.FULLNAME}", () => page);
             await page.SetValue();
         }
 

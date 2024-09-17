@@ -1,29 +1,15 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 /*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+        БанківськіРахункиКонтрагентів_Елемент.cs
+        Елемент
 */
 
 using Gtk;
 using InterfaceGtk;
+
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -31,30 +17,54 @@ namespace StorageAndTrade
     {
         public БанківськіРахункиКонтрагентів_Objest Елемент { get; set; } = new БанківськіРахункиКонтрагентів_Objest();
 
+        #region Fields
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта:" };
-        Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl() { Caption = "Контрагент:" };
+        Банки_PointerControl Банк = new Банки_PointerControl() { Caption = "Банк", WidthPresentation = 500 };
+        Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl() { Caption = "Контрагент", WidthPresentation = 500 };
+        Entry НомерРахунку = new Entry() { WidthRequest = 500 };
+        Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта", WidthPresentation = 300 };
 
-        public БанківськіРахункиКонтрагентів_Елемент()
+        #endregion
+
+        #region TabularParts
+
+        #endregion
+
+        public БанківськіРахункиКонтрагентів_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
+
+
         }
 
         protected override void CreatePack1(Box vBox)
         {
-            //Код
+
+            // Код
             CreateField(vBox, "Код:", Код);
 
-            //Назва
+            // Назва
             CreateField(vBox, "Назва:", Назва);
 
-            //Валюта
+            // Банк
+            CreateField(vBox, null, Банк);
+
+            // Контрагент
+            CreateField(vBox, null, Контрагент);
+
+            // НомерРахунку
+            CreateField(vBox, "Номер рахунку:", НомерРахунку);
+
+            // Валюта
             CreateField(vBox, null, Валюта);
 
-            //Контрагент
-            CreateField(vBox, null, Контрагент);
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+
         }
 
         #region Присвоєння / зчитування значень
@@ -63,31 +73,42 @@ namespace StorageAndTrade
         {
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
-            Валюта.Pointer = Елемент.Валюта;
+            Банк.Pointer = Елемент.Банк;
             Контрагент.Pointer = Елемент.Контрагент;
+            НомерРахунку.Text = Елемент.НомерРахунку;
+            Валюта.Pointer = Елемент.Валюта;
+
         }
 
         protected override void GetValue()
         {
             Елемент.Код = Код.Text;
             Елемент.Назва = Назва.Text;
-            Елемент.Валюта = Валюта.Pointer;
+            Елемент.Банк = Банк.Pointer;
             Елемент.Контрагент = Контрагент.Pointer;
+            Елемент.НомерРахунку = НомерРахунку.Text;
+            Елемент.Валюта = Валюта.Pointer;
+
         }
 
         #endregion
 
         protected override async ValueTask<bool> Save()
         {
+            bool isSaved = false;
             try
             {
-                return await Елемент.Save();
+                if (await Елемент.Save())
+                {
+
+                    isSaved = true;
+                }
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-                return false;
             }
+            return isSaved;
         }
     }
 }

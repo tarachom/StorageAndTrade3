@@ -32,11 +32,9 @@ namespace StorageAndTrade
             КількістьФакт,
             КоміркаВідправник,
             КоміркаОтримувач,
-
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури

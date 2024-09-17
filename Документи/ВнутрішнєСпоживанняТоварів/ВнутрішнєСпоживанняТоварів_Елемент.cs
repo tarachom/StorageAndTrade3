@@ -34,7 +34,7 @@ namespace StorageAndTrade
 {
     class ВнутрішнєСпоживанняТоварів_Елемент : ДокументЕлемент
     {
-        public ВнутрішнєСпоживанняТоварів_Objest Елемент { get; set; } = new ВнутрішнєСпоживанняТоварів_Objest();
+        public ВнутрішнєСпоживанняТоварів_Objest Елемент { get; init; } = new ВнутрішнєСпоживанняТоварів_Objest();
 
         #region Fields
 
@@ -179,8 +179,8 @@ namespace StorageAndTrade
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-            }           
-
+            }
+          
             return isSave;
         }
 

@@ -1,40 +1,43 @@
 
-/*
+/*     
         Організації.cs
-        Дерево
+        Список
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
-    class Організації : ДовідникЖурнал
+    public class Організації : ДовідникЖурнал
     {
-        public Організації() 
+        public Організації() : base()
         {
             ТабличніСписки.Організації_Записи.AddColumns(TreeViewGrid);
         }
 
+        #region Override
+
         protected override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Організації_Записи.SelectPointerItem = SelectPointerItem; //!+
+            ТабличніСписки.Організації_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Організації_Записи.DirectoryPointerItem = DirectoryPointerItem;
 
             ТабличніСписки.Організації_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Відбори
-            ТабличніСписки.Організації_Записи.ДодатиВідбір(TreeViewGrid, Організації_ВідбориДляПошуку.Відбори(searchText), true);
+            ТабличніСписки.Організації_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
+            //Відбори
+            ТабличніСписки.Організації_Записи.ДодатиВідбір(TreeViewGrid, Організації_Функції.Відбори(searchText), true);
+
+            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -44,54 +47,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            Організації_Елемент page = new Організації_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew,
-                //РодичДляНового = new Організації_Pointer(DirectoryPointerItem ?? new UnigueID())
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await Організації_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
         }
-
-        #region ToolBar
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Організації_Objest Організації_Objest = new Організації_Objest();
-            if (await Організації_Objest.Read(unigueID))
-                await Організації_Objest.SetDeletionLabel(!Організації_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await Організації_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            Організації_Objest Організації_Objest = new Організації_Objest();
-            if (await Організації_Objest.Read(unigueID))
-            {
-                Організації_Objest Організації_Objest_Новий = await Організації_Objest.Copy(true);
-                await Організації_Objest_Новий.Save();
-
-                await Організації_Objest_Новий.Контакти_TablePart.Save(false); // Таблична частина "Контакти"
-
-                return Організації_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await Організації_Функції.Copy(unigueID);
         }
 
         #endregion

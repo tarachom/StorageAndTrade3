@@ -65,8 +65,7 @@ namespace StorageAndTrade
                 CallBack_OnSelectPointer = (UnigueID selectPointer) => { Pointer = new ПрихіднийКасовийОрдер_Pointer(selectPointer); }
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПрихіднийКасовийОрдер_Const.FULLNAME}", () => { return page; });
-
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПрихіднийКасовийОрдер_Const.FULLNAME}", () => page);
             await page.SetValue();
         }
 

@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class ВстановленняЦінНоменклатури_Елемент : ДокументЕлемент
     {
-        public ВстановленняЦінНоменклатури_Objest Елемент { get; set; } = new ВстановленняЦінНоменклатури_Objest();
+        public ВстановленняЦінНоменклатури_Objest Елемент { get; init; } = new ВстановленняЦінНоменклатури_Objest();
 
         #region Fields
 

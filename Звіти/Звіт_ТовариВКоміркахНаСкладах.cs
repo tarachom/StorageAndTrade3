@@ -156,7 +156,7 @@ namespace StorageAndTrade
             CreateField(vBox, null, СкладськаКомірка);
             СкладськаКомірка.BeforeClickOpenFunc = () =>
             {
-                СкладськаКомірка.СкладПриміщенняВласник = СкладськеПриміщення.Pointer;
+                СкладськаКомірка.Власник = СкладськеПриміщення.Pointer;
             };
         }
 

@@ -27,7 +27,6 @@ using AccountingSoftware;
 
 using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -35,7 +34,7 @@ namespace StorageAndTrade
 {
     class ЗамовленняКлієнта_Елемент : ДокументЕлемент
     {
-        public ЗамовленняКлієнта_Objest Елемент { get; set; } = new ЗамовленняКлієнта_Objest();
+        public ЗамовленняКлієнта_Objest Елемент { get; init; } = new ЗамовленняКлієнта_Objest();
 
         #region Fields
 
@@ -160,12 +159,10 @@ namespace StorageAndTrade
             CreateField(vBox, "Дата відвантаження:", ДатаВідгрузки);
 
             //ЧасДоставки
-            Box hBox1 = CreateField(vBox, "Час доставки з", ЧасДоставкиЗ);
-            CreateField(hBox1, "до", ЧасДоставкиДо);
+            CreateField(CreateField(vBox, "Час доставки з", ЧасДоставкиЗ), "до", ЧасДоставкиДо);
 
             //Узгоджений & ВернутиТару
-            Box hBox2 = CreateField(vBox, null, Узгоджений);
-            CreateField(hBox2, null, ПовернутиТару);
+            CreateField(CreateField(vBox, null, Узгоджений), null, ПовернутиТару);
 
             //ДатаПоверненняТари
             CreateField(vBox, "Дата повернення тари:", ДатаПоверненняТари);

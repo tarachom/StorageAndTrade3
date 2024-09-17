@@ -39,7 +39,6 @@ namespace StorageAndTrade
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -71,7 +70,6 @@ namespace StorageAndTrade
             public decimal Сума { get; set; } = 0;
             public decimal Скидка { get; set; } = 0;
             public Склади_Pointer Склад { get; set; } = new Склади_Pointer();
-
 
             public object[] ToArray()
             {
@@ -109,7 +107,6 @@ namespace StorageAndTrade
                     Сума = запис.Сума,
                     Скидка = запис.Скидка,
                     Склад = запис.Склад.Copy(),
-
                 };
             }
 
@@ -237,7 +234,7 @@ LIMIT 1
             hBox.PackStart(ПідсумокСума, false, false, 2);
             hBox.PackStart(ПідсумокСкидка, false, false, 2);
 
-            base.PackStart(hBox, false, false, 2);
+            PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()

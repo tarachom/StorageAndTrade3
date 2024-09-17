@@ -24,7 +24,6 @@ limitations under the License.
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Документи;
 
@@ -32,7 +31,7 @@ namespace StorageAndTrade
 {
     class ПсуванняТоварів_Елемент : ДокументЕлемент
     {
-        public ПсуванняТоварів_Objest Елемент { get; set; } = new ПсуванняТоварів_Objest();
+        public ПсуванняТоварів_Objest Елемент { get; init; } = new ПсуванняТоварів_Objest();
 
         #region Fields
 

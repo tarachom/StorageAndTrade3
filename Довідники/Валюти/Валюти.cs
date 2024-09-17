@@ -1,68 +1,36 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+/*     
+        Валюти.cs
+        Список
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-
 using StorageAndTrade_1_0.Довідники;
-
+using StorageAndTrade_1_0.РегістриВідомостей;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
     public class Валюти : ДовідникЖурнал
     {
-        public Валюти()
+        public Валюти() : base()
         {
-            //Курси валют
+            CreateLink(HBoxTop, КурсиВалют_Const.FULLNAME, async () =>
             {
-                LinkButton linkButtonCurs = new LinkButton(" Курси валют") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkButtonCurs.Clicked += (object? sender, EventArgs args) =>
-                {
-                    КурсиВалют page = new КурсиВалют();
-                    page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID());
+                КурсиВалют page = new КурсиВалют();
+                page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID());
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Курси валют", () => { return page; });
-                    page.SetValue();
-                };
-
-                HBoxTop.PackStart(linkButtonCurs, false, false, 10);
-            }
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, КурсиВалют_Const.FULLNAME, () => page);
+                await page.SetValue();
+            });
 
             //Завантаження курсів валют НБУ
+            CreateLink(HBoxTop, КурсиВалют_Const.FULLNAME, () =>
             {
-                LinkButton linkButtonDownloadCurs = new LinkButton(" Завантаження курсів валют НБУ") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkButtonDownloadCurs.Clicked += (object? sender, EventArgs args) =>
-                {
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () =>
-                    {
-                        return new Обробка_ЗавантаженняКурсівВалют();
-                    });
-                };
-
-                HBoxTop.PackStart(linkButtonDownloadCurs, false, false, 10);
-            }
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => new Обробка_ЗавантаженняКурсівВалют());
+            });
 
             ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
         }
@@ -76,15 +44,17 @@ namespace StorageAndTrade
 
             ТабличніСписки.Валюти_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Відбори
-            ТабличніСписки.Валюти_Записи.ДодатиВідбір(TreeViewGrid, Валюти_ВідбориДляПошуку.Відбори(searchText), true);
+            ТабличніСписки.Валюти_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid);
+            //Відбори
+            ТабличніСписки.Валюти_Записи.ДодатиВідбір(TreeViewGrid, Валюти_Функції.Відбори(searchText), true);
+
+            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -94,49 +64,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            Валюти_Елемент page = new Валюти_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await Валюти_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Валюти_Objest Валюти_Objest = new Валюти_Objest();
-            if (await Валюти_Objest.Read(unigueID))
-                await Валюти_Objest.SetDeletionLabel(!Валюти_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await Валюти_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            Валюти_Objest Валюти_Objest = new Валюти_Objest();
-            if (await Валюти_Objest.Read(unigueID))
-            {
-                Валюти_Objest Валюти_Objest_Новий = await Валюти_Objest.Copy(true);
-                await Валюти_Objest_Новий.Save();
-
-                return Валюти_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await Валюти_Функції.Copy(unigueID);
         }
 
         #endregion

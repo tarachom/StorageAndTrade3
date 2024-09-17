@@ -1,24 +1,7 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 /*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+        Склади_Папки_Елемент.cs
+        Елемент
 */
 
 using Gtk;
@@ -30,13 +13,21 @@ namespace StorageAndTrade
     class Склади_Папки_Елемент : ДовідникЕлемент
     {
         public Склади_Папки_Objest Елемент { get; set; } = new Склади_Папки_Objest();
+
         public Склади_Папки_Pointer РодичДляНового { get; set; } = new Склади_Папки_Pointer();
 
-        Entry Код = new Entry() { WidthRequest = 100 };
-        Entry Назва = new Entry() { WidthRequest = 500 };
-        Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:" };
+        #region Fields
+        Entry Назва = new Entry() { WidthRequest = 100 };
+        Entry Код = new Entry() { WidthRequest = 500 };
+        Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:", WidthPresentation = 500 };
 
-        public Склади_Папки_Елемент()  
+        #endregion
+
+        #region TabularParts
+
+        #endregion
+
+        public Склади_Папки_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -44,14 +35,19 @@ namespace StorageAndTrade
 
         protected override void CreatePack1(Box vBox)
         {
-            //Код
-            CreateField(vBox, "Код:", Код);
-
-            //Назва
+            // Назва
             CreateField(vBox, "Назва:", Назва);
 
-            //Родич
+            // Код
+            CreateField(vBox, "Код:", Код);
+
+            // Родич
             CreateField(vBox, null, Родич);
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+
         }
 
         #region Присвоєння / зчитування значень
@@ -63,15 +59,16 @@ namespace StorageAndTrade
             else
                 Родич.OpenFolder = Елемент.UnigueID;
 
-            Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
+            Код.Text = Елемент.Код;
             Родич.Pointer = Елемент.Родич;
+
         }
 
         protected override void GetValue()
         {
-            Елемент.Код = Код.Text;
             Елемент.Назва = Назва.Text;
+            Елемент.Код = Код.Text;
             Елемент.Родич = Родич.Pointer;
         }
 
@@ -79,15 +76,20 @@ namespace StorageAndTrade
 
         protected override async ValueTask<bool> Save()
         {
+            bool isSaved = false;
             try
             {
-                return await Елемент.Save();
+                if (await Елемент.Save())
+                {
+
+                    isSaved = true;
+                }
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-                return false;
             }
+            return isSaved;
         }
     }
 }

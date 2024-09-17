@@ -72,7 +72,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$RegisterInformationName"/>_Елемент : РегістриВідомостейЕлемент
     {
-        public <xsl:value-of select="$RegisterInformationName"/>_Objest Елемент { get; set; } = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
+        public <xsl:value-of select="$RegisterInformationName"/>_Objest Елемент { get; init; } = new <xsl:value-of select="$RegisterInformationName"/>_Objest();
         DateTimeControl Період = new DateTimeControl();
 
         #region Fields

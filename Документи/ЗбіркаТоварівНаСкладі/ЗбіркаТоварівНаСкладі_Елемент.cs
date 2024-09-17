@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class ЗбіркаТоварівНаСкладі_Елемент : ДокументЕлемент
     {
-        public ЗбіркаТоварівНаСкладі_Objest Елемент { get; set; } = new ЗбіркаТоварівНаСкладі_Objest();
+        public ЗбіркаТоварівНаСкладі_Objest Елемент { get; init; } = new ЗбіркаТоварівНаСкладі_Objest();
 
         #region Fields
 

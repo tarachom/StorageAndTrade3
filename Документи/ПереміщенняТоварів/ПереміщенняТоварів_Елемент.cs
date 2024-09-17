@@ -34,7 +34,7 @@ namespace StorageAndTrade
 {
     class ПереміщенняТоварів_Елемент : ДокументЕлемент
     {
-        public ПереміщенняТоварів_Objest Елемент { get; set; } = new ПереміщенняТоварів_Objest();
+        public ПереміщенняТоварів_Objest Елемент { get; init; } = new ПереміщенняТоварів_Objest();
 
         #region Fields
 

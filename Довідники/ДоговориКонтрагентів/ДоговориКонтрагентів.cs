@@ -74,7 +74,7 @@ namespace StorageAndTrade
             }
 
             //Відбори
-            ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_ВідбориДляПошуку.Відбори(searchText));
+            ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_Функції.Відбори(searchText));
 
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
         }
@@ -86,49 +86,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await ДоговориКонтрагентів_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
-            if (await ДоговориКонтрагентів_Objest.Read(unigueID))
-                await ДоговориКонтрагентів_Objest.SetDeletionLabel(!ДоговориКонтрагентів_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ДоговориКонтрагентів_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest = new ДоговориКонтрагентів_Objest();
-            if (await ДоговориКонтрагентів_Objest.Read(unigueID))
-            {
-                ДоговориКонтрагентів_Objest ДоговориКонтрагентів_Objest_Новий = await ДоговориКонтрагентів_Objest.Copy(true);
-                await ДоговориКонтрагентів_Objest_Новий.Save();
-
-                return ДоговориКонтрагентів_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await ДоговориКонтрагентів_Функції.Copy(unigueID);
         }
 
         #endregion

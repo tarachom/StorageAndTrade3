@@ -1,29 +1,15 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 /*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+        ВидиНоменклатури_Елемент.cs
+        Елемент
 */
 
 using Gtk;
 using InterfaceGtk;
+
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -31,26 +17,53 @@ namespace StorageAndTrade
     {
         public ВидиНоменклатури_Objest Елемент { get; set; } = new ВидиНоменклатури_Objest();
 
+        #region Fields
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
-        ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "Пакування:" };
+        TextView Опис = new TextView() { WidthRequest = 500, WrapMode = WrapMode.Word };
+        ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "Пакування:", WidthPresentation = 300 };
+        ComboBoxText ТипНоменклатури = new ComboBoxText();
 
-        public ВидиНоменклатури_Елемент()
+        #endregion
+
+        #region TabularParts
+
+        #endregion
+
+        public ВидиНоменклатури_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
+
+
+            foreach (var field in ПсевдонімиПерелічення.ТипиНоменклатури_List())
+                ТипНоменклатури.Append(field.Value.ToString(), field.Name);
+
         }
 
         protected override void CreatePack1(Box vBox)
         {
-            //Код
+
+            // Код
             CreateField(vBox, "Код:", Код);
 
-            //Назва
+            // Назва
             CreateField(vBox, "Назва:", Назва);
 
-            //ОдиницяВиміру
+            // Опис
+            CreateFieldView(vBox, "Опис:", Опис, 500, 200);
+
+            // ОдиницяВиміру
             CreateField(vBox, null, ОдиницяВиміру);
+
+            // ТипНоменклатури
+            CreateField(vBox, "Тип:", ТипНоменклатури);
+
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+
         }
 
         #region Присвоєння / зчитування значень
@@ -59,29 +72,40 @@ namespace StorageAndTrade
         {
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
+            Опис.Buffer.Text = Елемент.Опис;
             ОдиницяВиміру.Pointer = Елемент.ОдиницяВиміру;
+            ТипНоменклатури.ActiveId = Елемент.ТипНоменклатури.ToString(); if (ТипНоменклатури.Active == -1) ТипНоменклатури.Active = 0;
+
         }
 
         protected override void GetValue()
         {
             Елемент.Код = Код.Text;
             Елемент.Назва = Назва.Text;
+            Елемент.Опис = Опис.Buffer.Text;
             Елемент.ОдиницяВиміру = ОдиницяВиміру.Pointer;
+            if (ТипНоменклатури.Active != -1) Елемент.ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId);
+
         }
 
         #endregion
 
         protected override async ValueTask<bool> Save()
         {
+            bool isSaved = false;
             try
             {
-                return await Елемент.Save();
+                if (await Елемент.Save())
+                {
+
+                    isSaved = true;
+                }
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-                return false;
             }
+            return isSaved;
         }
     }
 }

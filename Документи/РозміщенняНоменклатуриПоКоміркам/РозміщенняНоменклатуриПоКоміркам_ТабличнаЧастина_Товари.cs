@@ -195,7 +195,6 @@ namespace StorageAndTrade
                         Номенклатура = запис.Номенклатура,
                         Пакування = запис.Пакування,
                         Комірка = запис.Комірка,
-
                     });
                 }
 
@@ -458,7 +457,6 @@ ORDER BY
                     Store.AppendValues(запис.ToArray());
                 }
             }
-
         }
 
         #endregion

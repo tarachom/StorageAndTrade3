@@ -151,10 +151,5 @@ namespace StorageAndTrade
         }
 
         #endregion
-
-        #region ToolBar
-
-
-        #endregion
     }
 }

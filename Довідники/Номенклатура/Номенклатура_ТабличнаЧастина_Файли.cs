@@ -24,7 +24,6 @@ namespace StorageAndTrade
             Image,
             Основний,
             Файл,
-
         }
 
         ListStore Store = new ListStore([

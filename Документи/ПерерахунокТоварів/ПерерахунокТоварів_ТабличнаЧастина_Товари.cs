@@ -30,11 +30,9 @@ namespace StorageAndTrade
             Кількість,
             КількістьФакт,
             Коментар,
-
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -60,7 +58,6 @@ namespace StorageAndTrade
             public decimal Кількість { get; set; } = 1;
             public decimal КількістьФакт { get; set; } = 1;
             public string Коментар { get; set; } = "";
-
 
             public object[] ToArray()
             {
@@ -150,7 +147,7 @@ namespace StorageAndTrade
             hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
             hBox.PackStart(ПідсумокСума, false, false, 2);
 
-            base.PackStart(hBox, false, false, 2);
+            PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()
@@ -283,7 +280,6 @@ namespace StorageAndTrade
                         Кількість = record.Кількість,
                         КількістьФакт = record.КількістьФакт,
                         Коментар = record.Коментар,
-
                     };
 
                     Записи.Add(запис);

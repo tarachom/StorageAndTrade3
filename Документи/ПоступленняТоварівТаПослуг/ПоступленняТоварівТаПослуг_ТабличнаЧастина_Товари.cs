@@ -10,7 +10,6 @@ using AccountingSoftware;
 using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.РегістриВідомостей;
 
@@ -38,11 +37,9 @@ namespace StorageAndTrade
             Сума,
             Склад,
             ЗамовленняПостачальнику,
-
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -79,7 +76,6 @@ namespace StorageAndTrade
             public Склади_Pointer Склад { get; set; } = new Склади_Pointer();
             public ЗамовленняПостачальнику_Pointer ЗамовленняПостачальнику { get; set; } = new ЗамовленняПостачальнику_Pointer();
 
-
             public object[] ToArray()
             {
                 return
@@ -98,7 +94,6 @@ namespace StorageAndTrade
                     (float)Сума,
                     Склад.Назва,
                     ЗамовленняПостачальнику.Назва,
-
                 ];
             }
 
@@ -121,7 +116,6 @@ namespace StorageAndTrade
                     Сума = запис.Сума,
                     Склад = запис.Склад.Copy(),
                     ЗамовленняПостачальнику = запис.ЗамовленняПостачальнику.Copy(),
-
                 };
             }
 
@@ -257,7 +251,7 @@ LIMIT 1
             hBox.PackStart(ПідсумокСума, false, false, 2);
             hBox.PackStart(ПідсумокСкидка, false, false, 2);
 
-            base.PackStart(hBox, false, false, 2);
+            PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()
@@ -282,7 +276,6 @@ LIMIT 1
 
         void AddColumn()
         {
-
             //НомерРядка
             {
                 CellRendererText cellNumber = new CellRendererText();
@@ -447,7 +440,6 @@ LIMIT 1
                         Сума = record.Сума,
                         Склад = record.Склад,
                         ЗамовленняПостачальнику = record.ЗамовленняПостачальнику,
-
                     };
 
                     Записи.Add(запис);
@@ -480,7 +472,6 @@ LIMIT 1
                         Сума = запис.Сума,
                         Склад = запис.Склад,
                         ЗамовленняПостачальнику = запис.ЗамовленняПостачальнику,
-
                     });
                 }
 

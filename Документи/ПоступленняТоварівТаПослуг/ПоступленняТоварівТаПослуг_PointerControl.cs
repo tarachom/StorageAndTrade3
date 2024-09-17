@@ -66,7 +66,6 @@ namespace StorageAndTrade
             };
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ПоступленняТоварівТаПослуг_Const.FULLNAME}", () => page);
-
             await page.SetValue();
         }
 

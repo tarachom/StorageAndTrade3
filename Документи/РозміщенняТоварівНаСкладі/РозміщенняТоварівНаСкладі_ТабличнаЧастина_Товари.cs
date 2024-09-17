@@ -36,7 +36,6 @@ namespace StorageAndTrade
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -583,8 +582,7 @@ FROM
                     запис.Комірка = new СкладськіКомірки_Pointer(value);
                     await Запис.ПісляЗміни_Комірка(запис);
 
-                    TreeIter iter;
-                    Store.GetIterFromString(out iter, sequenceNumber.ToString());
+                    Store.GetIterFromString(out TreeIter iter, sequenceNumber.ToString());
                     Store.SetValues(iter, запис.ToArray());
                 }
 

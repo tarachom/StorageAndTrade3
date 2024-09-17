@@ -34,7 +34,6 @@ namespace StorageAndTrade
         }
 
         ListStore Store = new ListStore([
-
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -118,10 +117,7 @@ namespace StorageAndTrade
             AddColumn();
 
             //Доповнення ToolbarTop новими функціями
-            ToolItem toolItemSeparator = new ToolItem
-            {
-                new Separator(Orientation.Horizontal)
-            };
+            ToolItem toolItemSeparator = new ToolItem { new Separator(Orientation.Horizontal) };
 
             ToolbarTop.Add(toolItemSeparator);
 
@@ -448,7 +444,7 @@ ORDER BY Номенклатура_Назва, Пакування_Назва
 
             if (ЕлементВласник != null)
             {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                Dictionary<string, object> paramQuery = new()
                 {
                     { "valuta", ЕлементВласник.Валюта.UnigueID.UGuid },
                     { "vid_cen", ЕлементВласник.ВидЦіни.UnigueID.UGuid }
@@ -552,7 +548,7 @@ ORDER BY
 
             if (ЕлементВласник != null)
             {
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                Dictionary<string, object> paramQuery = new()
                 {
                     { "valuta", ЕлементВласник.Валюта.UnigueID.UGuid },
                     { "vid_cen", ЕлементВласник.ВидЦіни.UnigueID.UGuid }

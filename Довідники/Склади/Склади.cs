@@ -1,32 +1,13 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+/*     
+        Склади.cs 
+        Список з Деревом
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-
 using StorageAndTrade_1_0.Довідники;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -36,7 +17,7 @@ namespace StorageAndTrade
         CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         Склади_Папки ДеревоПапок;
 
-        public Склади()
+        public Склади() : base()
         {
             //Враховувати ієрархію папок
             checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
@@ -54,12 +35,8 @@ namespace StorageAndTrade
                 await page.SetValue();
             });
 
-            //Дерево папок зправа
-            ДеревоПапок = new Склади_Папки
-            {
-                WidthRequest = 500,
-                CallBack_RowActivated = LoadRecords_TreeCallBack
-            };
+            //Дерево папок
+            ДеревоПапок = new Склади_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack };
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.Склади_Записи.AddColumns(TreeViewGrid);
@@ -71,11 +48,8 @@ namespace StorageAndTrade
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
-                UnigueID? unigueID = SelectPointerItem != null ? SelectPointerItem : DirectoryPointerItem;
-
-                Склади_Objest? контрагенти_Objest = await new Склади_Pointer(unigueID ?? new UnigueID()).GetDirectoryObject();
-                if (контрагенти_Objest != null)
-                    ДеревоПапок.SelectPointerItem = контрагенти_Objest.Папка.UnigueID;
+                Склади_Objest? Обєкт = await new Склади_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
+                if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
             }
 
             await ДеревоПапок.SetValue();
@@ -92,15 +66,17 @@ namespace StorageAndTrade
                 ТабличніСписки.Склади_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(Склади_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Відбори
-            ТабличніСписки.Склади_Записи.ДодатиВідбір(TreeViewGrid, Склади_ВідбориДляПошуку.Відбори(searchText), true);
+            ТабличніСписки.Склади_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid);
+            //Відбори
+            ТабличніСписки.Склади_Записи.ДодатиВідбір(TreeViewGrid, Склади_Функції.Відбори(searchText), true);
+
+            await ТабличніСписки.Склади_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -110,50 +86,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            Склади_Елемент page = new Склади_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await Склади_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Склади_Objest Склади_Objest = new Склади_Objest();
-            if (await Склади_Objest.Read(unigueID))
-                await Склади_Objest.SetDeletionLabel(!Склади_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await Склади_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            Склади_Objest Склади_Objest = new Склади_Objest();
-            if (await Склади_Objest.Read(unigueID))
-            {
-                Склади_Objest Склади_Objest_Новий = await Склади_Objest.Copy(true);
-                await Склади_Objest_Новий.Save();
-                await Склади_Objest_Новий.Контакти_TablePart.Save(false);
-
-                return Склади_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await Склади_Функції.Copy(unigueID);
         }
 
         #endregion

@@ -70,7 +70,7 @@ namespace StorageAndTrade
             }
 
             //Відбори
-            ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_ВідбориДляПошуку.Відбори(searchText));
+            ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_Функції.Відбори(searchText));
 
             await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
@@ -117,11 +117,8 @@ namespace StorageAndTrade
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ДоговориКонтрагентів_Objest Обєкт = new ДоговориКонтрагентів_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ДоговориКонтрагентів_Функції.SetDeletionLabel(unigueID);
+
         }
     }
 }

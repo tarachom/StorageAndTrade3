@@ -80,7 +80,6 @@ namespace StorageAndTrade
             }
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
             page.SetValue();
         }
 
@@ -148,11 +147,6 @@ namespace StorageAndTrade
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ПрихіднийКасовийОрдер_Const.FULLNAME}_{unigueID}.xml");
             await ПрихіднийКасовийОрдер_Export.ToXmlFile(new ПрихіднийКасовийОрдер_Pointer(unigueID), pathToSave);
         }
-
-        #endregion
-
-        #region ToolBar
-
 
         #endregion
     }

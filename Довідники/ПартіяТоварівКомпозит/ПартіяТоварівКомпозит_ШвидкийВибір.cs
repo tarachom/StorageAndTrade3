@@ -84,7 +84,7 @@ WHERE
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             //Відбори
-            ТабличніСписки.ПартіяТоварівКомпозит_Записи.ДодатиВідбір(TreeViewGrid, ПартіяТоварівКомпозит_ВідбориДляПошуку.Відбори(searchText), true);
+            ТабличніСписки.ПартіяТоварівКомпозит_Записи.ДодатиВідбір(TreeViewGrid, ПартіяТоварівКомпозит_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
@@ -105,33 +105,12 @@ WHERE
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            if (!IsNew)
-            {
-                ПартіяТоварівКомпозит_Елемент page = new ПартіяТоварівКомпозит_Елемент
-                {
-                    IsNew = IsNew,
-                    CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                };
-
-                if (unigueID == null || !await page.Елемент.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return;
-                }
-
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-                page.SetValue();
-            }
+            await ПартіяТоварівКомпозит_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ПартіяТоварівКомпозит_Objest Обєкт = new ПартіяТоварівКомпозит_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ПартіяТоварівКомпозит_Функції.SetDeletionLabel(unigueID);
         }
     }
 }

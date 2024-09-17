@@ -1,52 +1,30 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+/*     
+        СкладськіКомірки_ШвидкийВибір.cs
+        ШвидкийВибір
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-
 using StorageAndTrade_1_0.Довідники;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
 {
     class СкладськіКомірки_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public СкладськіПриміщення_PointerControl СкладПриміщенняВласник = new СкладськіПриміщення_PointerControl();
 
-        public СкладськіКомірки_ШвидкийВибір()
+        public СкладськіПриміщення_PointerControl Власник = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
+
+
+        public СкладськіКомірки_ШвидкийВибір() : base()
         {
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
-            //Власник
-            HBoxTop.PackStart(СкладПриміщенняВласник, false, false, 2);
-            СкладПриміщенняВласник.Caption = $"{СкладськіПриміщення_Const.FULLNAME}:";
-            СкладПриміщенняВласник.AfterSelectFunc = async () =>
-            {
-                DirectoryPointerItem?.Clear();
-                await LoadRecords();
-            };
+            HBoxTop.PackStart(Власник, false, false, 2); //Власник
+            Власник.AfterSelectFunc = async () => await LoadRecords();
+
         }
 
         protected override async ValueTask LoadRecords()
@@ -56,29 +34,25 @@ namespace StorageAndTrade
 
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
-            {
+            if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
-            }
+                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
-            await ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            if (!СкладПриміщенняВласник.Pointer.UnigueID.IsEmpty())
-            {
+            if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid,
-                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, СкладПриміщенняВласник.Pointer.UnigueID.UGuid));
-            }
+                    new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
             //Відбори
-            ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid, СкладськіКомірки_ВідбориДляПошуку.Відбори(searchText));
+            ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid, СкладськіКомірки_Функції.Відбори(searchText));
 
-            await ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
@@ -90,44 +64,22 @@ namespace StorageAndTrade
                 OpenFolder = OpenFolder
             };
 
-            page.СкладПриміщенняВласник.Pointer = СкладПриміщенняВласник.Pointer;
+            page.Власник.Pointer = Власник.Pointer;
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {СкладськіКомірки_Const.FULLNAME}", () => page);
-
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, СкладськіКомірки_Const.FULLNAME, () => page);
             await page.SetValue();
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            СкладськіКомірки_Елемент page = new СкладськіКомірки_Елемент
-            {
-                IsNew = IsNew,
-                CallBack_OnSelectPointer = CallBack_OnSelectPointer
-            };
+            await СкладськіКомірки_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer, Власник.Pointer);
 
-            if (IsNew)
-            {
-                await page.Елемент.New();
-                page.СкладськеПриміщенняДляНового = СкладПриміщенняВласник.Pointer;
-            }
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            СкладськіКомірки_Objest Обєкт = new СкладськіКомірки_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await СкладськіКомірки_Функції.SetDeletionLabel(unigueID);
+
         }
     }
 }

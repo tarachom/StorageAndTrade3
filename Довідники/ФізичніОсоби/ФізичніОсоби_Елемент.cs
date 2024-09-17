@@ -1,29 +1,15 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 /*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+        ФізичніОсоби_Елемент.cs
+        Елемент
 */
 
 using Gtk;
 using InterfaceGtk;
+
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -31,51 +17,102 @@ namespace StorageAndTrade
     {
         public ФізичніОсоби_Objest Елемент { get; set; } = new ФізичніОсоби_Objest();
 
+        #region Fields
         Entry Код = new Entry() { WidthRequest = 100 };
         Entry Назва = new Entry() { WidthRequest = 500 };
+        DateTimeControl ДатаНародження = new DateTimeControl() { OnlyDate = true };
+        ComboBoxText Стать = new ComboBoxText();
+        Entry ІПН = new Entry() { WidthRequest = 200 };
 
-        public ФізичніОсоби_Елемент()  
+        #endregion
+
+        #region TabularParts
+
+        // Таблична частина "Контакти" 
+        ФізичніОсоби_ТабличнаЧастина_Контакти Контакти = new ФізичніОсоби_ТабличнаЧастина_Контакти();
+
+        #endregion
+
+        public ФізичніОсоби_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
+
+
+            foreach (var field in ПсевдонімиПерелічення.СтатьФізичноїОсоби_List())
+                Стать.Append(field.Value.ToString(), field.Name);
+
         }
 
         protected override void CreatePack1(Box vBox)
         {
-            //Код
+
+            // Код
             CreateField(vBox, "Код:", Код);
 
-            //Назва
+            // Назва
             CreateField(vBox, "Назва:", Назва);
+
+            // ДатаНародження
+            CreateField(vBox, "Дата народження:", ДатаНародження);
+
+            // Стать
+            CreateField(vBox, "Стать:", Стать);
+
+            // ІПН
+            CreateField(vBox, "ІПН:", ІПН);
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+            // Таблична частина "Контакти" 
+            CreateTablePart(vBox, "Контакти:", Контакти);
         }
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override async void SetValue()
         {
             Код.Text = Елемент.Код;
             Назва.Text = Елемент.Назва;
+            ДатаНародження.Value = Елемент.ДатаНародження;
+            Стать.ActiveId = Елемент.Стать.ToString(); if (Стать.Active == -1) Стать.Active = 0;
+            ІПН.Text = Елемент.ІПН;
+
+            // Таблична частина "Контакти"
+            Контакти.ЕлементВласник = Елемент;
+            await Контакти.LoadRecords();
         }
 
         protected override void GetValue()
         {
             Елемент.Код = Код.Text;
             Елемент.Назва = Назва.Text;
+            Елемент.ДатаНародження = ДатаНародження.Value;
+            if (Стать.Active != -1) Елемент.Стать = Enum.Parse<СтатьФізичноїОсоби>(Стать.ActiveId);
+            Елемент.ІПН = ІПН.Text;
+
         }
 
         #endregion
 
         protected override async ValueTask<bool> Save()
         {
+            bool isSaved = false;
             try
             {
-                return await Елемент.Save();
+                if (await Елемент.Save())
+                {
+                    await Контакти.SaveRecords(); // Таблична частина "Контакти"
+
+                    isSaved = true;
+                }
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-                return false;
             }
+            return isSaved;
         }
     }
 }

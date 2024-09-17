@@ -1,29 +1,15 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 
 /*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+        ТипорозміриКомірок_Елемент.cs
+        Елемент
 */
 
 using Gtk;
 using InterfaceGtk;
+
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -31,6 +17,7 @@ namespace StorageAndTrade
     {
         public ТипорозміриКомірок_Objest Елемент { get; set; } = new ТипорозміриКомірок_Objest();
 
+        #region Fields
         Entry Назва = new Entry() { WidthRequest = 250 };
         Entry Висота = new Entry() { WidthRequest = 100 };
         Entry Ширина = new Entry() { WidthRequest = 100 };
@@ -38,33 +25,42 @@ namespace StorageAndTrade
         Entry Обєм = new Entry() { WidthRequest = 100 };
         Entry Вантажопідйомність = new Entry() { WidthRequest = 100 };
 
-        public ТипорозміриКомірок_Елемент() 
+        #endregion
+
+        #region TabularParts
+
+        #endregion
+
+        public ТипорозміриКомірок_Елемент() : base()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
-
-            HPanedTop.Position = 150;
         }
 
         protected override void CreatePack1(Box vBox)
         {
-            //Назва
+            // Назва
             CreateField(vBox, "Назва:", Назва);
 
-            //Висота
+            // Висота
             CreateField(vBox, "Висота:", Висота);
 
-            //Ширина
+            // Ширина
             CreateField(vBox, "Ширина:", Ширина);
 
-            //Глибина
+            // Глибина
             CreateField(vBox, "Глибина:", Глибина);
 
-            //Обєм
-            CreateField(vBox, "Об'єм:", Обєм);
+            // Обєм
+            CreateField(vBox, "Обєм:", Обєм);
 
-            //Вантажопідйомність
+            // Вантажопідйомність
             CreateField(vBox, "Вантажопідйомність:", Вантажопідйомність);
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+
         }
 
         #region Присвоєння / зчитування значень
@@ -93,15 +89,19 @@ namespace StorageAndTrade
 
         protected override async ValueTask<bool> Save()
         {
+            bool isSaved = false;
             try
             {
-                return await Елемент.Save();
+                if (await Елемент.Save())
+                {
+                    isSaved = true;
+                }
             }
             catch (Exception ex)
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
-                return false;
             }
+            return isSaved;
         }
     }
 }

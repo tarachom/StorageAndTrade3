@@ -34,7 +34,7 @@ namespace StorageAndTrade
 {
     public class ХарактеристикиНоменклатури : ДовідникЖурнал
     {
-        public Номенклатура_PointerControl НоменклатураВласник = new Номенклатура_PointerControl();
+        public Номенклатура_PointerControl НоменклатураВласник { get; init; } = new Номенклатура_PointerControl();
 
         public ХарактеристикиНоменклатури()
         {
@@ -88,7 +88,7 @@ namespace StorageAndTrade
             }
 
             //Відбори
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, ХарактеристикиНоменклатури_ВідбориДляПошуку.Відбори(searchText));
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, ХарактеристикиНоменклатури_Функції.Відбори(searchText));
 
             await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
@@ -100,49 +100,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await ХарактеристикиНоменклатури_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
-            if (await ХарактеристикиНоменклатури_Objest.Read(unigueID))
-                await ХарактеристикиНоменклатури_Objest.SetDeletionLabel(!ХарактеристикиНоменклатури_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ХарактеристикиНоменклатури_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest = new ХарактеристикиНоменклатури_Objest();
-            if (await ХарактеристикиНоменклатури_Objest.Read(unigueID))
-            {
-                ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатури_Objest_Новий = await ХарактеристикиНоменклатури_Objest.Copy(true);
-                await ХарактеристикиНоменклатури_Objest_Новий.Save();
-
-                return ХарактеристикиНоменклатури_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await ХарактеристикиНоменклатури_Функції.Copy(unigueID);
         }
 
         #endregion

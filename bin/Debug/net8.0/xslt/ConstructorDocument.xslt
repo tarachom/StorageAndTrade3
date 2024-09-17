@@ -83,7 +83,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     class <xsl:value-of select="$DocumentName"/>_Елемент : ДокументЕлемент
     {
-        public <xsl:value-of select="$DocumentName"/>_Objest Елемент { get; set; } = new <xsl:value-of select="$DocumentName"/>_Objest();
+        public <xsl:value-of select="$DocumentName"/>_Objest Елемент { get; init; } = new <xsl:value-of select="$DocumentName"/>_Objest();
 
         #region Fields
         <!-- Крім поля Назва -->

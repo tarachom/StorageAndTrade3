@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     class КорегуванняБоргу_Елемент : ДокументЕлемент
     {
-        public КорегуванняБоргу_Objest Елемент { get; set; } = new КорегуванняБоргу_Objest();
+        public КорегуванняБоргу_Objest Елемент { get; init; } = new КорегуванняБоргу_Objest();
 
         #region Fields
 

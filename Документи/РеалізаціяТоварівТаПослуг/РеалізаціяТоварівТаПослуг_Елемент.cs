@@ -27,7 +27,6 @@ using AccountingSoftware;
 
 using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using Перелічення = StorageAndTrade_1_0.Перелічення;
 
@@ -35,7 +34,7 @@ namespace StorageAndTrade
 {
     class РеалізаціяТоварівТаПослуг_Елемент : ДокументЕлемент
     {
-        public РеалізаціяТоварівТаПослуг_Objest Елемент { get; set; } = new РеалізаціяТоварівТаПослуг_Objest();
+        public РеалізаціяТоварівТаПослуг_Objest Елемент { get; init; } = new РеалізаціяТоварівТаПослуг_Objest();
 
         #region Fields
 

@@ -567,7 +567,7 @@ GROUP BY
 HAVING
     SUM(ТовариВКомірках.{ТовариВКомірках_Залишки_TablePart.ВНаявності}) > 0 
 ";
-                Dictionary<string, object> paramQuery = new Dictionary<string, object>
+                Dictionary<string, object> paramQuery = new()
                 {
                     { "Номенклатура", запис.Номенклатура.UnigueID.UGuid },
                     { "ХарактеристикаНоменклатури", запис.ХарактеристикаНоменклатури.UnigueID.UGuid },

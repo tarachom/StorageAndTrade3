@@ -9,7 +9,6 @@ using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
@@ -92,7 +91,7 @@ namespace StorageAndTrade
             hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
             hBox.PackStart(ПідсумокСума, false, false, 2);
 
-            base.PackStart(hBox, false, false, 2);
+            PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()

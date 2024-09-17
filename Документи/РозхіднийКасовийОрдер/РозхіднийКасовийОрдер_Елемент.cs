@@ -35,7 +35,7 @@ namespace StorageAndTrade
 {
     class РозхіднийКасовийОрдер_Елемент : ДокументЕлемент
     {
-        public РозхіднийКасовийОрдер_Objest Елемент { get; set; } = new РозхіднийКасовийОрдер_Objest();
+        public РозхіднийКасовийОрдер_Objest Елемент { get; init; } = new РозхіднийКасовийОрдер_Objest();
 
         #region Fields
 

@@ -16,7 +16,7 @@ namespace StorageAndTrade
 {
     class ПерерахунокТоварів_Елемент : ДокументЕлемент
     {
-        public ПерерахунокТоварів_Objest Елемент { get; set; } = new ПерерахунокТоварів_Objest();
+        public ПерерахунокТоварів_Objest Елемент { get; init; } = new ПерерахунокТоварів_Objest();
 
         #region Fields
 

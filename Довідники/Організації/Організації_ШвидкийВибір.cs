@@ -1,24 +1,7 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+/*     
+        Організації_ШвидкийВибір.cs
+        ШвидкийВибір
 */
 
 using Gtk;
@@ -31,7 +14,7 @@ namespace StorageAndTrade
 {
     class Організації_ШвидкийВибір : ДовідникШвидкийВибір
     {
-        public Організації_ШвидкийВибір() 
+        public Організації_ШвидкийВибір() : base()
         {
             ТабличніСписки.Організації_Записи.AddColumns(TreeViewGrid);
         }
@@ -43,15 +26,17 @@ namespace StorageAndTrade
 
             ТабличніСписки.Організації_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Відбори
-            ТабличніСписки.Організації_Записи.ДодатиВідбір(TreeViewGrid, Організації_ВідбориДляПошуку.Відбори(searchText), true);
+            ТабличніСписки.Організації_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid);
+            //Відбори
+            ТабличніСписки.Організації_Записи.ДодатиВідбір(TreeViewGrid, Організації_Функції.Відбори(searchText), true);
+
+            await ТабличніСписки.Організації_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
@@ -63,39 +48,18 @@ namespace StorageAndTrade
                 OpenFolder = OpenFolder
             };
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {Організації_Const.FULLNAME}", () => page);
-
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, Організації_Const.FULLNAME, () => page);
             await page.SetValue();
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            Організації_Елемент page = new Організації_Елемент
-            {
-                IsNew = IsNew,
-                CallBack_OnSelectPointer = CallBack_OnSelectPointer
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await Організації_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Організації_Objest Обєкт = new Організації_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await Організації_Функції.SetDeletionLabel(unigueID);
         }
     }
 }
