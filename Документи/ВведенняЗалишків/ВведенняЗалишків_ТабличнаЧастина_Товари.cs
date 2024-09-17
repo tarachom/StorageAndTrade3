@@ -393,7 +393,7 @@ namespace StorageAndTrade
                                 Store.SetValues(iter, запис.ToArray());
                             }
                         };
-                        page.НоменклатураВласник.Pointer = запис.Номенклатура;
+                        page.Власник.Pointer = запис.Номенклатура;
                         return page;
                     }
                 case Columns.Серія:

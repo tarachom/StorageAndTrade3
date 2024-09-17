@@ -16,17 +16,23 @@ namespace StorageAndTrade
         {
             return
             [
-                //Код
-                new Where(ХарактеристикиНоменклатури_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
+                
                 //Назва
-                new Where(Comparison.OR, ХарактеристикиНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(ХарактеристикиНоменклатури_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //Код
+                new Where(Comparison.OR, ХарактеристикиНоменклатури_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //НазваПовна
+                new Where(Comparison.OR, ХарактеристикиНоменклатури_Const.НазваПовна, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+
             ];
         }
 
-        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
-            Action<UnigueID?>? сallBack_LoadRecords = null, 
-            Action<UnigueID>? сallBack_OnSelectPointer = null)
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null,
+            Action<UnigueID?>? сallBack_LoadRecords = null,
+            Action<UnigueID>? сallBack_OnSelectPointer = null,
+            Номенклатура_Pointer? Власник = null)
         {
             ХарактеристикиНоменклатури_Елемент page = new ХарактеристикиНоменклатури_Елемент
             {
@@ -36,7 +42,13 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
+            {
                 await page.Елемент.New();
+
+                if (Власник != null)
+                    page.ВласникДляНового = Власник;
+
+            }
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -63,7 +75,7 @@ namespace StorageAndTrade
             {
                 ХарактеристикиНоменклатури_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
-                
+
                 return Новий.UnigueID;
             }
             else
@@ -74,4 +86,3 @@ namespace StorageAndTrade
         }
     }
 }
-    

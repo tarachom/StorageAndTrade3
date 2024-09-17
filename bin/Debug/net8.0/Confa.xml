@@ -6,7 +6,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.09.2024 20:27:06</DateTimeSave>
+  <DateTimeSave>17.09.2024 21:28:23</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -4699,6 +4699,8 @@ END]]></Value>
       <Desc>Характеристики номенклатури</Desc>
       <AutoNum>1</AutoNum>
       <Type>Normal</Type>
+      <DirectoryOwner>Довідники.Номенклатура</DirectoryOwner>
+      <PointerFieldOwner>Номенклатура</PointerFieldOwner>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -4708,7 +4710,7 @@ END]]></Value>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -4719,7 +4721,7 @@ END]]></Value>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -4729,8 +4731,8 @@ END]]></Value>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
-          <Multiline>0</Multiline>
+          <IsSearch>1</IsSearch>
+          <Multiline>1</Multiline>
         </Field>
         <Field>
           <Name>Номенклатура</Name>
@@ -4893,6 +4895,51 @@ FROM
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
           <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>PointerControl</Name>
+          <Desc>PointerControl</Desc>
+          <Type>PointerControl</Type>
+        </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Код</Name>
+              <Caption>Код</Caption>
+              <Size>100</Size>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <Caption>Номенклатура</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+            </Field>
+            <Field>
+              <Name>НазваПовна</Name>
+              <Caption>Повна назва</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <Type>string</Type>
+              <Multiline>1</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts />
         </Form>
       </Forms>
     </Directory>

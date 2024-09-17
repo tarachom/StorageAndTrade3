@@ -1,62 +1,44 @@
-/*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
+/*     
+        ХарактеристикиНоменклатури.cs
+        Список
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-
 using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.РегістриВідомостей;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
+using StorageAndTrade_1_0.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
     public class ХарактеристикиНоменклатури : ДовідникЖурнал
     {
-        public Номенклатура_PointerControl НоменклатураВласник { get; init; } = new Номенклатура_PointerControl();
 
-        public ХарактеристикиНоменклатури()
+        public Номенклатура_PointerControl Власник = new Номенклатура_PointerControl() { Caption = "Номенклатура:" };
+
+
+        public ХарактеристикиНоменклатури() : base()
         {
-            //Власник
-            HBoxTop.PackStart(НоменклатураВласник, false, false, 2);
-            НоменклатураВласник.Caption = $"{Номенклатура_Const.FULLNAME}:";
-            НоменклатураВласник.AfterSelectFunc = async () => await LoadRecords();
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
 
             CreateLink(HBoxTop, ШтрихкодиНоменклатури_Const.FULLNAME, async () =>
-            {
-                ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
-                page.НоменклатураВласник.Pointer = НоменклатураВласник.Pointer;
+                {
+                    ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
+                    page.НоменклатураВласник.Pointer = Власник.Pointer;
 
-                if (SelectPointerItem != null)
-                    page.ХарактеристикиНоменклатуриВласник.Pointer = new ХарактеристикиНоменклатури_Pointer(SelectPointerItem);
+                    if (SelectPointerItem != null)
+                        page.ХарактеристикиНоменклатуриВласник.Pointer = new ХарактеристикиНоменклатури_Pointer(SelectPointerItem);
 
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => page);
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => page);
 
-                await page.SetValue();
-            });
+                    await page.SetValue();
+                });
 
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
+            HBoxTop.PackStart(Власник, false, false, 2);
+            Власник.AfterSelectFunc = async () => await LoadRecords();
+
         }
 
         #region Override
@@ -68,29 +50,25 @@ namespace StorageAndTrade
 
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())
-            {
+            if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
-            }
+                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
-            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (!НоменклатураВласник.Pointer.UnigueID.IsEmpty())
-            {
+            if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
-                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, НоменклатураВласник.Pointer.UnigueID.UGuid));
-            }
+                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
             //Відбори
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, ХарактеристикиНоменклатури_Функції.Відбори(searchText));
 
-            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
         protected override void FilterRecords(Box hBox)
@@ -100,7 +78,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            await ХарактеристикиНоменклатури_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            await ХарактеристикиНоменклатури_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null, Власник.Pointer);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)

@@ -29,7 +29,7 @@ namespace StorageAndTrade
                 ХарактеристикиНоменклатури page = new ХарактеристикиНоменклатури();
 
                 if (SelectPointerItem != null)
-                    page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
+                    page.Власник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => page);
 
