@@ -150,7 +150,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(unigueID, false, true))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -541,7 +541,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
             </xsl:if>
             //Відбори
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
         }
@@ -554,64 +554,16 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             await <xsl:value-of select="$DirectoryName"/>_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null<xsl:if test="normalize-space($DirectoryOwner) != ''">, Власник.Pointer</xsl:if>);
-            <!--
-                <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                {
-                    CallBack_LoadRecords = CallBack_LoadRecords,
-                    IsNew = IsNew
-                };
-
-                if (IsNew)
-                {
-                    await page.Елемент.New();
-                    <xsl:if test="$DirectoryType = 'Hierarchical'">
-                        <xsl:text>page.РодичДляНового = new </xsl:text>
-                        <xsl:value-of select="$DirectoryName"/>_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID());
-                    </xsl:if>
-                }
-                else if (unigueID == null || !await page.Елемент.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return;
-                }
-
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
-                page.SetValue();
-            -->
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             await <xsl:value-of select="$DirectoryName"/>_Функції.SetDeletionLabel(unigueID);
-            <!--
-                <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await Обєкт.Read(unigueID))
-                    await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            -->
         }
 
         protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
         {
             return await <xsl:value-of select="$DirectoryName"/>_Функції.Copy(unigueID);
-            <!--
-            <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await Обєкт.Read(unigueID))
-                {
-                    <xsl:value-of select="$DirectoryName"/>_Objest Новий = await Обєкт.Copy(true);
-                    await Новий.Save();
-                    <xsl:for-each select="$TabularParts">
-                        await Новий.<xsl:value-of select="Name"/>_TablePart.Save(false); // Таблична частина "<xsl:value-of select="Name"/>"
-                    </xsl:for-each>
-                    return Новий.UnigueID;
-                }
-                else
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return null;
-                }
-            -->
         }
 
         #endregion
@@ -689,7 +641,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
             </xsl:if>            
             //Відбори
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
         }
@@ -853,7 +805,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
             </xsl:if>
             //Відбори
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_Записи.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
         }

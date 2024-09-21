@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     public class АктВиконанихРобіт : ДокументЖурнал
     {
-        public АктВиконанихРобіт() 
+        public АктВиконанихРобіт()
         {
             ТабличніСписки.АктВиконанихРобіт_Записи.AddColumns(TreeViewGrid);
         }
@@ -51,9 +51,10 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Назва
-            ТабличніСписки.АктВиконанихРобіт_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(АктВиконанихРобіт_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+            ТабличніСписки.АктВиконанихРобіт_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //Відбори
+            ТабличніСписки.АктВиконанихРобіт_Записи.ДодатиВідбір(TreeViewGrid, АктВиконанихРобіт_Функції.Відбори(searchText));
 
             await ТабличніСписки.АктВиконанихРобіт_Записи.LoadRecords(TreeViewGrid);
         }
@@ -65,50 +66,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await АктВиконанихРобіт_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
-            if (await АктВиконанихРобіт_Objest.Read(unigueID))
-                await АктВиконанихРобіт_Objest.SetDeletionLabel(!АктВиконанихРобіт_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await АктВиконанихРобіт_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest = new АктВиконанихРобіт_Objest();
-            if (await АктВиконанихРобіт_Objest.Read(unigueID))
-            {
-                АктВиконанихРобіт_Objest АктВиконанихРобіт_Objest_Новий = await АктВиконанихРобіт_Objest.Copy(true);
-                await АктВиконанихРобіт_Objest_Новий.Save();
-                await АктВиконанихРобіт_Objest_Новий.Послуги_TablePart.Save(true);
-
-                return АктВиконанихРобіт_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await АктВиконанихРобіт_Функції.Copy(unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Документи.АктВиконанихРобіт";
@@ -126,17 +94,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            АктВиконанихРобіт_Pointer АктВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(unigueID);
-            АктВиконанихРобіт_Objest? АктВиконанихРобіт_Objest = await АктВиконанихРобіт_Pointer.GetDocumentObject(true);
-            if (АктВиконанихРобіт_Objest == null) return;
+            АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await АктВиконанихРобіт_Objest.SpendTheDocument(АктВиконанихРобіт_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(АктВиконанихРобіт_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await АктВиконанихРобіт_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
         protected override void ReportSpendTheDocument(UnigueID unigueID)
@@ -159,64 +126,50 @@ namespace StorageAndTrade
             Menu Menu = new Menu();
 
             {
-                MenuItem doc = new MenuItem($"{ПрихіднийКасовийОрдер_Const.FULLNAME}");
-                doc.Activated += OnNewDocNaOsnovi_KasovyiOrder;
+                MenuItem doc = new MenuItem(ПрихіднийКасовийОрдер_Const.FULLNAME);
+                doc.Activated += НаОснові_ПрихіднийКасовийОрдер;
                 Menu.Append(doc);
             }
 
             Menu.ShowAll();
-            return Menu;
+
+            return Menu; 
         }
 
-        async void OnNewDocNaOsnovi_KasovyiOrder(object? sender, EventArgs args)
+        async void НаОснові_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
             if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-            {
-                TreePath[] selectionRows = TreeViewGrid.Selection.GetSelectedRows();
-
-                foreach (TreePath itemPath in selectionRows)
+                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
                 {
                     TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
-
                     string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
 
-                    АктВиконанихРобіт_Pointer актВиконанихРобіт_Pointer = new АктВиконанихРобіт_Pointer(new UnigueID(uid));
-                    АктВиконанихРобіт_Objest? актВиконанихРобіт_Objest = await актВиконанихРобіт_Pointer.GetDocumentObject(false);
-                    if (актВиконанихРобіт_Objest == null) continue;
+                    АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(new UnigueID(uid)).GetDocumentObject(false);
+                    if (Обєкт == null) continue;
 
                     //
                     //Новий документ
                     //
 
-                    ПрихіднийКасовийОрдер_Objest прихіднийКасовийОрдер_Новий = new ПрихіднийКасовийОрдер_Objest();
-                    await прихіднийКасовийОрдер_Новий.New();
-                    прихіднийКасовийОрдер_Новий.Організація = актВиконанихРобіт_Objest.Організація;
-                    прихіднийКасовийОрдер_Новий.Валюта = актВиконанихРобіт_Objest.Валюта;
-                    прихіднийКасовийОрдер_Новий.Каса = актВиконанихРобіт_Objest.Каса;
-                    прихіднийКасовийОрдер_Новий.Контрагент = актВиконанихРобіт_Objest.Контрагент;
-                    прихіднийКасовийОрдер_Новий.Договір = актВиконанихРобіт_Objest.Договір;
-                    прихіднийКасовийОрдер_Новий.Основа = актВиконанихРобіт_Objest.GetBasis();
-                    прихіднийКасовийОрдер_Новий.СумаДокументу = актВиконанихРобіт_Objest.СумаДокументу;
+                    ПрихіднийКасовийОрдер_Objest Новий = new ПрихіднийКасовийОрдер_Objest();
+                    await Новий.New();
+                    Новий.Організація = Обєкт.Організація;
+                    Новий.Валюта = Обєкт.Валюта;
+                    Новий.Каса = Обєкт.Каса;
+                    Новий.Контрагент = Обєкт.Контрагент;
+                    Новий.Договір = Обєкт.Договір;
+                    Новий.Основа = Обєкт.GetBasis();
+                    Новий.СумаДокументу = Обєкт.СумаДокументу;
 
-                    if (await прихіднийКасовийОрдер_Новий.Save())
-                    {
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{прихіднийКасовийОрдер_Новий.Назва}", () =>
-                        {
-                            ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент
-                            {
-                                IsNew = false,
-                                Елемент = прихіднийКасовийОрдер_Новий,
-                            };
+                    await Новий.Save();
 
-                            page.SetValue();
-
-                            return page;
-                        });
-                    }
+                    ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент();
+                    await page.Елемент.Read(Новий.UnigueID);
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                    page.SetValue();
                 }
-            }
         }
-
-        #endregion
     }
+
+    #endregion
 }

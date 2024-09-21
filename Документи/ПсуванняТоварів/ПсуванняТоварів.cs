@@ -51,9 +51,10 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Назва
-            ТабличніСписки.ПсуванняТоварів_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(ПсуванняТоварів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+            ТабличніСписки.ПсуванняТоварів_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //Відбори
+            ТабличніСписки.ПсуванняТоварів_Записи.ДодатиВідбір(TreeViewGrid, ПсуванняТоварів_Функції.Відбори(searchText));
 
             await ТабличніСписки.ПсуванняТоварів_Записи.LoadRecords(TreeViewGrid);
         }
@@ -65,50 +66,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            ПсуванняТоварів_Елемент page = new ПсуванняТоварів_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await ПсуванняТоварів_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ПсуванняТоварів_Objest ПсуванняТоварів_Objest = new ПсуванняТоварів_Objest();
-            if (await ПсуванняТоварів_Objest.Read(unigueID))
-                await ПсуванняТоварів_Objest.SetDeletionLabel(!ПсуванняТоварів_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ПсуванняТоварів_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            ПсуванняТоварів_Objest ПсуванняТоварів_Objest = new ПсуванняТоварів_Objest();
-            if (await ПсуванняТоварів_Objest.Read(unigueID))
-            {
-                ПсуванняТоварів_Objest ПсуванняТоварів_Objest_Новий = await ПсуванняТоварів_Objest.Copy(true);
-                await ПсуванняТоварів_Objest_Новий.Save();
-                await ПсуванняТоварів_Objest_Новий.Товари_TablePart.Save(true);
-
-                return ПсуванняТоварів_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await ПсуванняТоварів_Функції.Copy(unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ПсуванняТоварів";
@@ -126,17 +94,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            ПсуванняТоварів_Pointer ПсуванняТоварів_Pointer = new ПсуванняТоварів_Pointer(unigueID);
-            ПсуванняТоварів_Objest? ПсуванняТоварів_Objest = await ПсуванняТоварів_Pointer.GetDocumentObject(true);
-            if (ПсуванняТоварів_Objest == null) return;
+            ПсуванняТоварів_Objest? Обєкт = await new ПсуванняТоварів_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await ПсуванняТоварів_Objest.SpendTheDocument(ПсуванняТоварів_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПсуванняТоварів_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await ПсуванняТоварів_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
         protected override void ReportSpendTheDocument(UnigueID unigueID)

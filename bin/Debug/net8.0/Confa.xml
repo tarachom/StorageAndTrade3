@@ -6,8 +6,8 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.09.2024 21:28:23</DateTimeSave>
-  <DictTSearch>ukrainian</DictTSearch>
+  <DateTimeSave>21.09.2024 12:34:52</DateTimeSave>
+  <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>ЗначенняЗаЗамовчуванням</Name>
@@ -929,7 +929,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -940,7 +940,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -961,7 +961,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -990,7 +990,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -1000,7 +1000,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -1020,7 +1020,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -1341,7 +1341,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -1352,7 +1352,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -1362,7 +1362,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -1372,7 +1372,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>1</Multiline>
         </Field>
         <Field>
@@ -1382,7 +1382,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -8959,7 +8959,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -9203,7 +9203,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -9213,7 +9213,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -9540,7 +9540,19 @@ FROM
         <Spend>ЗамовленняПостачальнику_SpendTheDocument.Spend</Spend>
         <ClearSpend>ЗамовленняПостачальнику_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ПоступленняТоварівТаПослуг</Name>
@@ -9555,7 +9567,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -9855,7 +9867,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -9866,7 +9878,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -10672,6 +10684,22 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>PointerControl</Name>
+          <Desc>PointerControl</Desc>
+          <Type>PointerControl</Type>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -10687,7 +10715,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -10947,7 +10975,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -10967,7 +10995,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -11306,7 +11334,19 @@ FROM
         <Spend>ЗамовленняКлієнта_SpendTheDocument.Spend</Spend>
         <ClearSpend>ЗамовленняКлієнта_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>РеалізаціяТоварівТаПослуг</Name>
@@ -11321,7 +11361,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -11600,7 +11640,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -11620,7 +11660,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -12032,7 +12072,19 @@ FROM
         <Spend>РеалізаціяТоварівТаПослуг_SpendTheDocument.Spend</Spend>
         <ClearSpend>РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ВстановленняЦінНоменклатури</Name>
@@ -12048,7 +12100,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -12107,7 +12159,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -12127,7 +12179,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -12354,7 +12406,19 @@ FROM
         <Spend>ВстановленняЦінНоменклатури_SpendTheDocument.Spend</Spend>
         <ClearSpend>ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ПрихіднийКасовийОрдер</Name>
@@ -12369,7 +12433,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -12515,7 +12579,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -12535,7 +12599,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -12744,7 +12808,19 @@ FROM
         <Spend>ПрихіднийКасовийОрдер_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>РозхіднийКасовийОрдер</Name>
@@ -12759,7 +12835,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -12924,8 +13000,8 @@ FROM
           <Type>string</Type>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
-          <IsFullTextSearch>0</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -12945,7 +13021,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -13163,7 +13239,19 @@ FROM
         <Spend>РозхіднийКасовийОрдер_SpendTheDocument.Spend</Spend>
         <ClearSpend>РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ПереміщенняТоварів</Name>
@@ -13179,7 +13267,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -13346,7 +13434,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -13375,7 +13463,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -13639,7 +13727,19 @@ FROM
         <Spend>ПереміщенняТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПереміщенняТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ПоверненняТоварівПостачальнику</Name>
@@ -13654,7 +13754,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -13840,7 +13940,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -13870,7 +13970,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -14197,7 +14297,19 @@ FROM
         <Spend>ПоверненняТоварівПостачальнику_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ПоверненняТоварівВідКлієнта</Name>
@@ -14212,7 +14324,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -14370,7 +14482,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -14726,7 +14838,19 @@ FROM
         <Spend>ПоверненняТоварівВідКлієнта_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>АктВиконанихРобіт</Name>
@@ -14741,7 +14865,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -14869,7 +14993,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -14899,7 +15023,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -15299,6 +15423,17 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -15314,7 +15449,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -15413,7 +15548,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -15433,7 +15568,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -15949,7 +16084,19 @@ FROM
         <Spend>ВведенняЗалишків_SpendTheDocument.Spend</Spend>
         <ClearSpend>ВведенняЗалишків_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>НадлишкиТоварів</Name>
@@ -16491,8 +16638,8 @@ FROM
           <Type>string</Type>
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
-          <IsFullTextSearch>0</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -16540,8 +16687,8 @@ FROM
           <Type>string</Type>
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
-          <IsFullTextSearch>0</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -16561,7 +16708,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -16853,7 +17000,19 @@ FROM
         <Spend>ПерерахунокТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПерерахунокТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ПсуванняТоварів</Name>
@@ -16868,7 +17027,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -16946,7 +17105,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -16966,7 +17125,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -17268,7 +17427,19 @@ FROM
         <Spend>ПсуванняТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПсуванняТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ВнутрішнєСпоживанняТоварів</Name>
@@ -17283,7 +17454,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -17390,7 +17561,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -17400,7 +17571,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -17704,7 +17875,19 @@ FROM
         <Spend>ВнутрішнєСпоживанняТоварів_SpendTheDocument.Spend</Spend>
         <ClearSpend>ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>РахунокФактура</Name>
@@ -17720,7 +17903,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -17888,7 +18071,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -17908,7 +18091,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -18246,7 +18429,19 @@ FROM
         <Spend>РахунокФактура_SpendTheDocument.Spend</Spend>
         <ClearSpend>РахунокФактура_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>РозміщенняТоварівНаСкладі</Name>
@@ -18263,7 +18458,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -18295,7 +18490,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -18364,7 +18559,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -18614,7 +18809,19 @@ FROM
         <Spend>РозміщенняТоварівНаСкладі_SpendTheDocument.Spend</Spend>
         <ClearSpend>РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ПереміщенняТоварівНаСкладі</Name>
@@ -18631,7 +18838,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -18663,7 +18870,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -18722,7 +18929,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -18989,7 +19196,19 @@ FROM
         <Spend>ПереміщенняТоварівНаСкладі_SpendTheDocument.Spend</Spend>
         <ClearSpend>ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>ЗбіркаТоварівНаСкладі</Name>
@@ -19006,7 +19225,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -19038,7 +19257,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -19107,7 +19326,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -19357,7 +19576,19 @@ FROM
         <Spend>ЗбіркаТоварівНаСкладі_SpendTheDocument.Spend</Spend>
         <ClearSpend>ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>РозміщенняНоменклатуриПоКоміркам</Name>
@@ -19372,7 +19603,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -19421,7 +19652,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -19460,7 +19691,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -19644,7 +19875,19 @@ FROM
         <Spend>РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.Spend</Spend>
         <ClearSpend>РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
     <Document>
       <Name>КорегуванняБоргу</Name>
@@ -19659,7 +19902,7 @@ FROM
           <IsPresentation>1</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -19708,7 +19951,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -19728,7 +19971,7 @@ FROM
           <IsPresentation>0</IsPresentation>
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
-          <IsSearch>0</IsSearch>
+          <IsSearch>1</IsSearch>
           <Multiline>0</Multiline>
         </Field>
       </Fields>
@@ -19922,7 +20165,19 @@ FROM
         <Spend>КорегуванняБоргу_SpendTheDocument.Spend</Spend>
         <ClearSpend>КорегуванняБоргу_SpendTheDocument.ClearSpend</ClearSpend>
       </SpendFunctions>
-      <Forms />
+      <Forms>
+        <Form>
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+        </Form>
+        <Form>
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
     </Document>
   </Documents>
   <Enums>

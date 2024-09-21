@@ -36,7 +36,9 @@ limitations under the License.
     <xsl:template match="root">
 
         <xsl:choose>
-
+            <xsl:when test="$File = 'Function'">
+                <xsl:call-template name="DocumentFunction" />
+            </xsl:when>
             <xsl:when test="$File = 'Element'">
                 <xsl:call-template name="DocumentElement" />
             </xsl:when>
@@ -49,6 +51,109 @@ limitations under the License.
 
         </xsl:choose>
 
+    </xsl:template>
+
+
+<!--- 
+//
+// ============================ Function ============================
+//
+-->
+
+    <!-- Елемент -->
+    <xsl:template name="DocumentFunction">
+        <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="Fields" select="Document/Fields/Field"/>
+        <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
+        <xsl:variable name="TabularList" select="Document/TabularList"/>
+
+        <!-- Відфільтровані поля по типу даних -->
+        <xsl:variable name="FieldsFilter" select="$Fields[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'date' or Type = 'datetime' or Type = 'time']"/>
+
+/*
+        <xsl:value-of select="$DocumentName"/>_Функції.cs
+        Функції
+*/
+
+using InterfaceGtk;
+using AccountingSoftware;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
+
+namespace <xsl:value-of select="$NameSpace"/>
+{
+    static class <xsl:value-of select="$DocumentName"/>_Функції
+    {
+        public static List&lt;Where&gt; Відбори(string searchText)
+        {
+            return
+            [
+                <xsl:choose>
+                    <xsl:when test="$FieldsFilter[IsSearch = '1']">
+                        <xsl:for-each select="$FieldsFilter[IsSearch = '1']">
+                //<xsl:value-of select="Name"/>
+                new Where(<xsl:if test="position() != 1">Comparison.OR, </xsl:if><xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test="$FieldsFilter[Name = 'Назва']">
+                //Назва
+                new Where(<xsl:if test="$FieldsFilter[Name = 'Код']">Comparison.OR, </xsl:if><xsl:value-of select="$DocumentName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
+            ];
+        }
+
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
+            Action&lt;UnigueID?&gt;? сallBack_LoadRecords = null)
+        {
+            <xsl:value-of select="$DocumentName"/>_Елемент page = new <xsl:value-of select="$DocumentName"/>_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_LoadRecords = сallBack_LoadRecords
+            };
+
+            if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
+            page.SetValue();
+        }
+
+        public static async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new <xsl:value-of select="$DocumentName"/>_Objest();
+            if (await Обєкт.Read(unigueID, false, true))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+        }
+
+        public static async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
+        {
+            <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new <xsl:value-of select="$DocumentName"/>_Objest();
+            if (await Обєкт.Read(unigueID))
+            {
+                <xsl:value-of select="$DocumentName"/>_Objest Новий = await Обєкт.Copy(true);
+                await Новий.Save();
+                <xsl:for-each select="$TabularParts">
+                    await Новий.<xsl:value-of select="Name"/>_TablePart.Save(false); // Таблична частина "<xsl:value-of select="Name"/>"
+                </xsl:for-each>
+                return Новий.UnigueID;
+            }
+            else
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
+            }
+        }
+    }
+}
     </xsl:template>
 
 <!--- 
@@ -410,10 +515,9 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
-
-            //Назва
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
-                new Where(<xsl:value-of select="$DocumentName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" });
+            
+            //Відбори
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DocumentName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
@@ -425,50 +529,17 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            <xsl:value-of select="$DocumentName"/>_Елемент page = new <xsl:value-of select="$DocumentName"/>_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
-            page.SetValue();
+            await <xsl:value-of select="$DocumentName"/>_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await <xsl:value-of select="$DocumentName"/>_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (await Обєкт.Read(unigueID))
-            {
-                <xsl:value-of select="$DocumentName"/>_Objest Новий = await Обєкт.Copy(true);
-                await Новий.Save();
-                <xsl:for-each select="$TabularParts">
-                    await Новий.<xsl:value-of select="Name"/>_TablePart.Save(false); // Таблична частина "<xsl:value-of select="Name"/>"
-                </xsl:for-each>
-                return Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await <xsl:value-of select="$DocumentName"/>_Функції.Copy(unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Документи.<xsl:value-of select="$DocumentName"/>";

@@ -16,11 +16,13 @@ namespace StorageAndTrade
         {
             return
             [
+                
                 //Код
                 new Where(БанківськіРахункиКонтрагентів_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
+                        
                 //Назва
                 new Where(Comparison.OR, БанківськіРахункиКонтрагентів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+
             ];
         }
 
@@ -36,7 +38,10 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
+            {
                 await page.Елемент.New();
+
+            }
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -50,7 +55,7 @@ namespace StorageAndTrade
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             БанківськіРахункиКонтрагентів_Objest Обєкт = new БанківськіРахункиКонтрагентів_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(unigueID, false, true))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

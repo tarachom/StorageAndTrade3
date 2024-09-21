@@ -309,7 +309,7 @@ WHERE
     КурсиВалют.{РегістриВідомостей.КурсиВалют_Const.Валюта} = @Валюта
 ";
 
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            Dictionary<string, object> paramQuery = new()
             {
                 { "Валюта", ДовідникОбєкт.UnigueID.UGuid }
             };

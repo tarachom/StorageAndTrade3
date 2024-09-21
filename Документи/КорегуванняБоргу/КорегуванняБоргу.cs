@@ -51,9 +51,10 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Назва
-            ТабличніСписки.КорегуванняБоргу_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(КорегуванняБоргу_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+            ТабличніСписки.КорегуванняБоргу_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //Відбори
+            ТабличніСписки.КорегуванняБоргу_Записи.ДодатиВідбір(TreeViewGrid, КорегуванняБоргу_Функції.Відбори(searchText));
 
             await ТабличніСписки.КорегуванняБоргу_Записи.LoadRecords(TreeViewGrid);
         }
@@ -65,50 +66,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            КорегуванняБоргу_Елемент page = new КорегуванняБоргу_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
+            await КорегуванняБоргу_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            КорегуванняБоргу_Objest КорегуванняБоргу_Objest = new КорегуванняБоргу_Objest();
-            if (await КорегуванняБоргу_Objest.Read(unigueID))
-                await КорегуванняБоргу_Objest.SetDeletionLabel(!КорегуванняБоргу_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await КорегуванняБоргу_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            КорегуванняБоргу_Objest КорегуванняБоргу_Objest = new КорегуванняБоргу_Objest();
-            if (await КорегуванняБоргу_Objest.Read(unigueID))
-            {
-                КорегуванняБоргу_Objest КорегуванняБоргу_Objest_Новий = await КорегуванняБоргу_Objest.Copy(true);
-                await КорегуванняБоргу_Objest_Новий.Save();
-                await КорегуванняБоргу_Objest_Новий.РозрахункиЗКонтрагентами_TablePart.Save(true);
-
-                return КорегуванняБоргу_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await КорегуванняБоргу_Функції.Copy(unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Документи.КорегуванняБоргу";
@@ -126,17 +94,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            КорегуванняБоргу_Pointer КорегуванняБоргу_Pointer = new КорегуванняБоргу_Pointer(unigueID);
-            КорегуванняБоргу_Objest? КорегуванняБоргу_Objest = await КорегуванняБоргу_Pointer.GetDocumentObject(true);
-            if (КорегуванняБоргу_Objest == null) return;
+            КорегуванняБоргу_Objest? Обєкт = await new КорегуванняБоргу_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await КорегуванняБоргу_Objest.SpendTheDocument(КорегуванняБоргу_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(КорегуванняБоргу_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await КорегуванняБоргу_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
         protected override void ReportSpendTheDocument(UnigueID unigueID)
@@ -149,10 +116,6 @@ namespace StorageAndTrade
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{КорегуванняБоргу_Const.FULLNAME}_{unigueID}.xml");
             await КорегуванняБоргу_Export.ToXmlFile(new КорегуванняБоргу_Pointer(unigueID), pathToSave);
         }
-
-        #endregion
-
-        #region ToolBar
 
         #endregion
     }

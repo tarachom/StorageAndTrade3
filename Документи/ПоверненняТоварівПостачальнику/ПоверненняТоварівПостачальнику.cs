@@ -51,9 +51,10 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Назва
-            ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(ПоверненняТоварівПостачальнику_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+            ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //Відбори
+            ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.ДодатиВідбір(TreeViewGrid, ПоверненняТоварівПостачальнику_Функції.Відбори(searchText));
 
             await ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.LoadRecords(TreeViewGrid);
         }
@@ -65,49 +66,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-            page.SetValue();
+            await ПоверненняТоварівПостачальнику_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальнику_Objest = new ПоверненняТоварівПостачальнику_Objest();
-            if (await ПоверненняТоварівПостачальнику_Objest.Read(unigueID))
-                await ПоверненняТоварівПостачальнику_Objest.SetDeletionLabel(!ПоверненняТоварівПостачальнику_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ПоверненняТоварівПостачальнику_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальнику_Objest = new ПоверненняТоварівПостачальнику_Objest();
-            if (await ПоверненняТоварівПостачальнику_Objest.Read(unigueID))
-            {
-                ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальнику_Objest_Новий = await ПоверненняТоварівПостачальнику_Objest.Copy(true);
-                await ПоверненняТоварівПостачальнику_Objest_Новий.Save();
-                await ПоверненняТоварівПостачальнику_Objest_Новий.Товари_TablePart.Save(true);
-
-                return ПоверненняТоварівПостачальнику_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await ПоверненняТоварівПостачальнику_Функції.Copy(unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ПоверненняТоварівПостачальнику";
@@ -125,17 +94,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            ПоверненняТоварівПостачальнику_Pointer ПоверненняТоварівПостачальнику_Pointer = new ПоверненняТоварівПостачальнику_Pointer(unigueID);
-            ПоверненняТоварівПостачальнику_Objest? ПоверненняТоварівПостачальнику_Objest = await ПоверненняТоварівПостачальнику_Pointer.GetDocumentObject(true);
-            if (ПоверненняТоварівПостачальнику_Objest == null) return;
+            ПоверненняТоварівПостачальнику_Objest? Обєкт = await new ПоверненняТоварівПостачальнику_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await ПоверненняТоварівПостачальнику_Objest.SpendTheDocument(ПоверненняТоварівПостачальнику_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПоверненняТоварівПостачальнику_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await ПоверненняТоварівПостачальнику_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
         protected override void ReportSpendTheDocument(UnigueID unigueID)

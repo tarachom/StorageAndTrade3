@@ -51,9 +51,10 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Назва
-            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(РозміщенняНоменклатуриПоКоміркам_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //Відбори
+            ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.ДодатиВідбір(TreeViewGrid, РозміщенняНоменклатуриПоКоміркам_Функції.Відбори(searchText));
 
             await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords(TreeViewGrid);
         }
@@ -65,49 +66,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            РозміщенняНоменклатуриПоКоміркам_Елемент page = new РозміщенняНоменклатуриПоКоміркам_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-            page.SetValue();
+            await РозміщенняНоменклатуриПоКоміркам_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
-            if (await РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
-                await РозміщенняНоменклатуриПоКоміркам_Objest.SetDeletionLabel(!РозміщенняНоменклатуриПоКоміркам_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await РозміщенняНоменклатуриПоКоміркам_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest = new РозміщенняНоменклатуриПоКоміркам_Objest();
-            if (await РозміщенняНоменклатуриПоКоміркам_Objest.Read(unigueID))
-            {
-                РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркам_Objest_Новий = await РозміщенняНоменклатуриПоКоміркам_Objest.Copy(true);
-                await РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Save();
-                await РозміщенняНоменклатуриПоКоміркам_Objest_Новий.Товари_TablePart.Save(true);
-
-                return РозміщенняНоменклатуриПоКоміркам_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await РозміщенняНоменклатуриПоКоміркам_Функції.Copy(unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Документи.РозміщенняНоменклатуриПоКоміркам";
@@ -125,17 +94,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            РозміщенняНоменклатуриПоКоміркам_Pointer РозміщенняНоменклатуриПоКоміркам_Pointer = new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID);
-            РозміщенняНоменклатуриПоКоміркам_Objest? РозміщенняНоменклатуриПоКоміркам_Objest = await РозміщенняНоменклатуриПоКоміркам_Pointer.GetDocumentObject(true);
-            if (РозміщенняНоменклатуриПоКоміркам_Objest == null) return;
+            РозміщенняНоменклатуриПоКоміркам_Objest? Обєкт = await new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await РозміщенняНоменклатуриПоКоміркам_Objest.SpendTheDocument(РозміщенняНоменклатуриПоКоміркам_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(РозміщенняНоменклатуриПоКоміркам_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await РозміщенняНоменклатуриПоКоміркам_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
         protected override void ReportSpendTheDocument(UnigueID unigueID)

@@ -24,17 +24,17 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
 
             CreateLink(HBoxTop, ШтрихкодиНоменклатури_Const.FULLNAME, async () =>
-                {
-                    ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
-                    page.НоменклатураВласник.Pointer = Власник.Pointer;
+            {
+                ШтрихкодиНоменклатури page = new ШтрихкодиНоменклатури();
+                page.НоменклатураВласник.Pointer = Власник.Pointer;
 
-                    if (SelectPointerItem != null)
-                        page.ХарактеристикиНоменклатуриВласник.Pointer = new ХарактеристикиНоменклатури_Pointer(SelectPointerItem);
+                if (SelectPointerItem != null)
+                    page.ХарактеристикиНоменклатуриВласник.Pointer = new ХарактеристикиНоменклатури_Pointer(SelectPointerItem);
 
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => page);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => page);
 
-                    await page.SetValue();
-                });
+                await page.SetValue();
+            });
 
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.AfterSelectFunc = async () => await LoadRecords();

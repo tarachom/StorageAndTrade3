@@ -16,17 +16,13 @@ namespace StorageAndTrade
         {
             return
             [
+                
                 //Код
                 new Where(Валюти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
+                        
                 //Назва
                 new Where(Comparison.OR, Валюти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
-                //КороткаНазва
-                new Where(Comparison.OR, Валюти_Const.КороткаНазва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
-                //Код_R030
-                new Where(Comparison.OR, Валюти_Const.Код_R030, Comparison.LIKE, searchText) { FuncToField = "LOWER" }
             ];
         }
 
@@ -42,7 +38,10 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
+            {
                 await page.Елемент.New();
+
+            }
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -56,7 +55,7 @@ namespace StorageAndTrade
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Валюти_Objest Обєкт = new Валюти_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(unigueID, false, true))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

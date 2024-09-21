@@ -137,10 +137,9 @@ namespace StorageAndTrade
 
             //ЕлектроннаПошта
             {
-
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("ЕлектроннаПошта", cellText, "text", (int)Columns.ЕлектроннаПошта) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("Email", cellText, "text", (int)Columns.ЕлектроннаПошта) { Resizable = true, MinWidth = 100 };
 
                 column.Data.Add("Column", Columns.ЕлектроннаПошта);
                 TreeViewGrid.AppendColumn(column);

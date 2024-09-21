@@ -718,17 +718,20 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             </xsl:choose>
         }
 
-        public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readAllTablePart = false)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readAllTablePart = false, bool readOnlyBaseFields = false)
         {
-            if (await BaseRead(uid))
+            if (await BaseRead(uid, readOnlyBaseFields))
             {
-                <xsl:for-each select="Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="ReadFieldValue">
-                    <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
-                  </xsl:call-template>;
-                </xsl:for-each>
+                if (!readOnlyBaseFields)
+                {
+                    <xsl:for-each select="Fields/Field">
+                      <xsl:value-of select="Name"/>
+                      <xsl:text> = </xsl:text>
+                      <xsl:call-template name="ReadFieldValue">
+                        <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
+                      </xsl:call-template>;
+                    </xsl:for-each>
+                }
                 BaseClear();
                 <xsl:if test="count(TabularParts/TablePart) != 0">
                 if (readAllTablePart)
@@ -744,9 +747,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             else
                 return false;
         }
-
-        /* синхронна функція для Read(UnigueID uid) */
-        /* public bool ReadSync(UnigueID uid) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid); }).Result; } */
         
         public async ValueTask&lt;bool&gt; Save()
         {
@@ -821,9 +821,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             </xsl:if>
             await base.BaseDelete([<xsl:for-each select="TabularParts/TablePart">"<xsl:value-of select="Table"/>", </xsl:for-each>]);
         }
-
-        /* синхронна функція для Delete() */
-        /* public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } */
         
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
         {
@@ -839,10 +836,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         {
             return await base.BasePresentation(<xsl:value-of select="$DirectoryName"/>_Const.PRESENTATION_FIELDS);
         }
-        
-        /* синхронна функція для GetPresentation() */
-        /* public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; } */
-        
+                
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />
@@ -873,11 +867,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             base.Init(uid, fields);
         }
         
-        public async ValueTask&lt;<xsl:value-of select="$DirectoryName"/>_Objest?&gt; GetDirectoryObject()
+        public async ValueTask&lt;<xsl:value-of select="$DirectoryName"/>_Objest?&gt; GetDirectoryObject(bool readOnlyBaseFields = false)
         {
             if (this.IsEmpty()) return null;
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            return await <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
+            return await <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID, readOnlyBaseFields) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
         }
 
         public <xsl:value-of select="$DirectoryName"/>_Pointer Copy()
@@ -901,12 +895,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             querySelect.FieldAndAlias.Add(new NameValue&lt;string&gt;(presentationField.Length switch { 1 =&gt; presentationField[0], &gt;1 =&gt; $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ =&gt; "'#'" }, fieldAlias));
         }
 
-        /* синхронна функція для GetPresentation() */
-        /* public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; } */
-
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            <xsl:value-of select="$DirectoryName"/>_Objest? obj = await GetDirectoryObject();
+            <xsl:value-of select="$DirectoryName"/>_Objest? obj = await GetDirectoryObject(true);
             if (obj != null)
             {
                 <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
@@ -1383,17 +1374,20 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             </xsl:choose>
         }
 
-        public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readAllTablePart = false)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readAllTablePart = false, bool readOnlyBaseFields = false)
         {
-            if (await BaseRead(uid))
+            if (await BaseRead(uid, readOnlyBaseFields))
             {
-                <xsl:for-each select="Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="ReadFieldValue">
-                    <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
-                  </xsl:call-template>;
-                </xsl:for-each>
+                if (!readOnlyBaseFields)
+                {
+                    <xsl:for-each select="Fields/Field">
+                      <xsl:value-of select="Name"/>
+                      <xsl:text> = </xsl:text>
+                      <xsl:call-template name="ReadFieldValue">
+                        <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
+                      </xsl:call-template>;
+                    </xsl:for-each>
+                }
                 BaseClear();
                 <xsl:if test="count(TabularParts/TablePart) != 0">
                 if (readAllTablePart)
@@ -1409,9 +1403,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             else
                 return false;
         }
-
-        /* синхронна функція для Read(UnigueID uid) */
-        /* public bool ReadSync(UnigueID uid, bool readAllTablePart = false) { return Task.Run&lt;bool&gt;(async () =&gt; { return await Read(uid, readAllTablePart); }).Result; } */
         
         public async Task&lt;bool&gt; Save()
         {
@@ -1431,7 +1422,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
               </xsl:choose>;
             </xsl:for-each>
             bool result = await BaseSave();
-            
             if (result)
             {
                 <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != '' and TriggerFunctions/AfterSave[@Action = '1']">
@@ -1441,7 +1431,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                 await BaseWriteFullTextSearch(GetBasis(), [<xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']"><xsl:value-of select="Name"/>, </xsl:for-each>]);
                 </xsl:if>
             }
-
             CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
             return result;
         }
@@ -1463,9 +1452,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                 </xsl:otherwise>
             </xsl:choose>
         }
-
-        /* синхронна функція для SpendTheDocument() */
-        /* public bool SpendTheDocumentSync(DateTime spendDate) { return Task.Run&lt;bool&gt;(async () =&gt; { return await SpendTheDocument(spendDate); }).Result; } */
 
         /* Очищення всіх регістрів */
         async void ClearRegAccum()
@@ -1489,9 +1475,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             </xsl:if>
             await BaseSpend(false, DateTime.MinValue);
         }
-
-        /* синхронна функція для ClearSpendTheDocument() */
-        /* public bool ClearSpendTheDocumentSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await ClearSpendTheDocument(); return true; }).Result; } */
 
         public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest&gt; Copy(bool copyTableParts = false)
         {
@@ -1529,9 +1512,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             await base.BaseDeletionLabel(label);
         }
 
-        /* синхронна функція для SetDeletionLabel() */
-        /* public bool SetDeletionLabelSync(bool label = true) { return Task.Run&lt;bool&gt;(async () =&gt; { await SetDeletionLabel(label); return true; }).Result; } */
-
         public async ValueTask Delete()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != '' and TriggerFunctions/BeforeDelete[@Action = '1']">
@@ -1540,9 +1520,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             await ClearSpendTheDocument();
             await base.BaseDelete([<xsl:for-each select="TabularParts/TablePart">"<xsl:value-of select="Table"/>", </xsl:for-each>]);
         }
-
-        /* синхронна функція для Delete() */
-        /* public bool DeleteSync() { return Task.Run&lt;bool&gt;(async () =&gt; { await Delete(); return true; }).Result; } */
         
         public <xsl:value-of select="$DocumentName"/>_Pointer GetDocumentPointer()
         {
@@ -1604,9 +1581,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             querySelect.FieldAndAlias.Add(new NameValue&lt;string&gt;(presentationField.Length switch { 1 =&gt; presentationField[0], &gt;1 =&gt; $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ =&gt; "'#'" }, fieldAlias));
         }
 
-        /* синхронна функція для GetPresentation() */
-        /* public string GetPresentationSync() { return Task.Run&lt;string&gt;(async () =&gt; { return await GetPresentation(); }).Result; } */
-
         public async ValueTask&lt;bool&gt; SpendTheDocument(DateTime spendDate)
         {
             <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject();
@@ -1622,7 +1596,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             <xsl:if test="(normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']) or (normalize-space(SpendFunctions/ClearSpend) != '')">
-                <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject();
+                <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject(true);
                 if (obj == null) return;
                 <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
                     await <xsl:value-of select="TriggerFunctions/SetDeletionLabel"/>
@@ -1655,18 +1629,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
         }
 
-        public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest?&gt; GetDocumentObject(bool readAllTablePart = false)
+        public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest?&gt; GetDocumentObject(bool readAllTablePart = false, bool readOnlyBaseFields = false)
         {
             if (this.IsEmpty()) return null;
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (!await <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            <!--<xsl:if test="count(TabularParts/TablePart) != 0">
-            if (readAllTablePart)
-            {   
-                <xsl:for-each select="TabularParts/TablePart">
-                await <xsl:value-of select="$DocumentName"/>ObjestItem.<xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
-            }
-            </xsl:if>-->
+            if (!await <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID, readAllTablePart, readOnlyBaseFields)) return null;
             return <xsl:value-of select="$DocumentName"/>ObjestItem;
         }
 
@@ -2008,17 +1975,20 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
             CaptionChanged?.Invoke(this, <xsl:value-of select="$RegisterName"/>_Const.FULLNAME + " *");
         }
 
-        public async ValueTask&lt;bool&gt; Read(UnigueID uid)
+        public async ValueTask&lt;bool&gt; Read(UnigueID uid, bool readOnlyBaseFields = false)
         {
-            if (await BaseRead(uid))
+            if (await BaseRead(uid, readOnlyBaseFields))
             {
-                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="ReadFieldValue">
-                    <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
-                  </xsl:call-template>;
-                </xsl:for-each>
+                if (!readOnlyBaseFields)
+                {
+                    <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                      <xsl:value-of select="Name"/>
+                      <xsl:text> = </xsl:text>
+                      <xsl:call-template name="ReadFieldValue">
+                        <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
+                      </xsl:call-template>;
+                    </xsl:for-each>
+                }
                 BaseClear();
                 UnigueIDChanged?.Invoke(this, base.UnigueID);
                 CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));

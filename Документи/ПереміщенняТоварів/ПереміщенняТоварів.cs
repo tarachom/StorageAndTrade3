@@ -51,9 +51,10 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Назва
-            ТабличніСписки.ПереміщенняТоварів_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(ПереміщенняТоварів_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+            ТабличніСписки.ПереміщенняТоварів_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //Відбори
+            ТабличніСписки.ПереміщенняТоварів_Записи.ДодатиВідбір(TreeViewGrid, ПереміщенняТоварів_Функції.Відбори(searchText));
 
             await ТабличніСписки.ПереміщенняТоварів_Записи.LoadRecords(TreeViewGrid);
         }
@@ -65,49 +66,17 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
-
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-            page.SetValue();
+            await ПереміщенняТоварів_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ПереміщенняТоварів_Objest ПереміщенняТоварів_Objest = new ПереміщенняТоварів_Objest();
-            if (await ПереміщенняТоварів_Objest.Read(unigueID))
-                await ПереміщенняТоварів_Objest.SetDeletionLabel(!ПереміщенняТоварів_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ПереміщенняТоварів_Функції.SetDeletionLabel(unigueID);
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            ПереміщенняТоварів_Objest ПереміщенняТоварів_Objest = new ПереміщенняТоварів_Objest();
-            if (await ПереміщенняТоварів_Objest.Read(unigueID))
-            {
-                ПереміщенняТоварів_Objest ПереміщенняТоварів_Objest_Новий = await ПереміщенняТоварів_Objest.Copy(true);
-                await ПереміщенняТоварів_Objest_Новий.Save();
-                await ПереміщенняТоварів_Objest_Новий.Товари_TablePart.Save(true);
-
-                return ПереміщенняТоварів_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
+            return await ПереміщенняТоварів_Функції.Copy(unigueID);
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ПереміщенняТоварів";
@@ -125,17 +94,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            ПереміщенняТоварів_Pointer ПереміщенняТоварів_Pointer = new ПереміщенняТоварів_Pointer(unigueID);
-            ПереміщенняТоварів_Objest? ПереміщенняТоварів_Objest = await ПереміщенняТоварів_Pointer.GetDocumentObject(true);
-            if (ПереміщенняТоварів_Objest == null) return;
+            ПереміщенняТоварів_Objest? Обєкт = await new ПереміщенняТоварів_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await ПереміщенняТоварів_Objest.SpendTheDocument(ПереміщенняТоварів_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПереміщенняТоварів_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await ПереміщенняТоварів_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
         protected override void ReportSpendTheDocument(UnigueID unigueID)
@@ -148,11 +116,6 @@ namespace StorageAndTrade
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ПереміщенняТоварів_Const.FULLNAME}_{unigueID}.xml");
             await ПереміщенняТоварів_Export.ToXmlFile(new ПереміщенняТоварів_Pointer(unigueID), pathToSave);
         }
-
-        #endregion
-
-        #region ToolBar
-
 
         #endregion
     }

@@ -52,9 +52,10 @@ namespace StorageAndTrade
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            //Назва
-            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where(ПоступленняТоварівТаПослуг_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" }, true);
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //Відбори
+            ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.ДодатиВідбір(TreeViewGrid, ПоступленняТоварівТаПослуг_Функції.Відбори(searchText));
 
             await ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.LoadRecords(TreeViewGrid);
         }
@@ -66,50 +67,20 @@ namespace StorageAndTrade
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            ПоступленняТоварівТаПослуг_Елемент page = new ПоступленняТоварівТаПослуг_Елемент
-            {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
-            };
+            await ПоступленняТоварівТаПослуг_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
 
-            if (IsNew)
-                await page.Елемент.New();
-            else if (unigueID == null || !await page.Елемент.Read(unigueID))
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return;
-            }
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
-            page.SetValue();
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
-            if (await ПоступленняТоварівТаПослуг_Objest.Read(unigueID))
-                await ПоступленняТоварівТаПослуг_Objest.SetDeletionLabel(!ПоступленняТоварівТаПослуг_Objest.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            await ПоступленняТоварівТаПослуг_Функції.SetDeletionLabel(unigueID);
+
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest = new ПоступленняТоварівТаПослуг_Objest();
-            if (await ПоступленняТоварівТаПослуг_Objest.Read(unigueID))
-            {
-                ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослуг_Objest_Новий = await ПоступленняТоварівТаПослуг_Objest.Copy(true);
-                await ПоступленняТоварівТаПослуг_Objest_Новий.Save();
-                await ПоступленняТоварівТаПослуг_Objest_Новий.Товари_TablePart.Save(true);
+            return await ПоступленняТоварівТаПослуг_Функції.Copy(unigueID);
 
-                return ПоступленняТоварівТаПослуг_Objest_Новий.UnigueID;
-            }
-            else
-            {
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                return null;
-            }
         }
 
         const string КлючНалаштуванняКористувача = "Документи.ПоступленняТоварівТаПослуг";
@@ -127,17 +98,16 @@ namespace StorageAndTrade
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
         {
-            ПоступленняТоварівТаПослуг_Pointer ПоступленняТоварівТаПослуг_Pointer = new ПоступленняТоварівТаПослуг_Pointer(unigueID);
-            ПоступленняТоварівТаПослуг_Objest? ПоступленняТоварівТаПослуг_Objest = await ПоступленняТоварівТаПослуг_Pointer.GetDocumentObject(true);
-            if (ПоступленняТоварівТаПослуг_Objest == null) return;
+            ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
 
             if (spendDoc)
             {
-                if (!await ПоступленняТоварівТаПослуг_Objest.SpendTheDocument(ПоступленняТоварівТаПослуг_Objest.ДатаДок))
-                    ФункціїДляПовідомлень.ПоказатиПовідомлення(ПоступленняТоварівТаПослуг_Objest.UnigueID);
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
             }
             else
-                await ПоступленняТоварівТаПослуг_Objest.ClearSpendTheDocument();
+                await Обєкт.ClearSpendTheDocument();
         }
 
         protected override void ReportSpendTheDocument(UnigueID unigueID)
@@ -160,31 +130,31 @@ namespace StorageAndTrade
             Menu Menu = new Menu();
 
             {
-                MenuItem doc = new MenuItem($"{РозхіднийКасовийОрдер_Const.FULLNAME}");
+                MenuItem doc = new MenuItem(РозхіднийКасовийОрдер_Const.FULLNAME);
                 doc.Activated += НаОснові_РозхіднийКасовийОрдер;
                 Menu.Append(doc);
             }
 
             {
-                MenuItem doc = new MenuItem($"{ПоверненняТоварівПостачальнику_Const.FULLNAME}");
+                MenuItem doc = new MenuItem(ПоверненняТоварівПостачальнику_Const.FULLNAME);
                 doc.Activated += НаОснові_ПоверненняТоварівПостачальнику;
                 Menu.Append(doc);
             }
 
             {
-                MenuItem doc = new MenuItem($"{РозміщенняТоварівНаСкладі_Const.FULLNAME}");
+                MenuItem doc = new MenuItem(РозміщенняТоварівНаСкладі_Const.FULLNAME);
                 doc.Activated += НаОснові_РозміщенняТоварівНаСкладі;
                 Menu.Append(doc);
             }
 
             {
-                MenuItem doc = new MenuItem($"{ВнутрішнєСпоживанняТоварів_Const.FULLNAME}");
+                MenuItem doc = new MenuItem(ВнутрішнєСпоживанняТоварів_Const.FULLNAME);
                 doc.Activated += НаОснові_ВнутрішнєСпоживанняТоварів;
                 Menu.Append(doc);
             }
 
             {
-                MenuItem doc = new MenuItem($"{ПереміщенняТоварів_Const.FULLNAME}");
+                MenuItem doc = new MenuItem(ПереміщенняТоварів_Const.FULLNAME);
                 doc.Activated += НаОснові_ПереміщенняТоварів;
                 Menu.Append(doc);
             }
@@ -219,20 +189,12 @@ namespace StorageAndTrade
                     Новий.Основа = Обєкт.GetBasis();
                     Новий.ГосподарськаОперація = ГосподарськіОперації.ОплатаПостачальнику;
 
-                    if (await Новий.Save())
-                    {
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Новий.Назва}", () =>
-                        {
-                            РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
-                            {
-                                IsNew = false,
-                                Елемент = Новий,
-                            };
+                    await Новий.Save();
 
-                            page.SetValue();
-                            return page;
-                        });
-                    }
+                    РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент();
+                    await page.Елемент.Read(Новий.UnigueID);
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                    page.SetValue();
                 }
         }
 
@@ -282,19 +244,12 @@ namespace StorageAndTrade
                         }
 
                         await Новий.Товари_TablePart.Save(false);
-
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Новий.Назва}", () =>
-                        {
-                            ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент
-                            {
-                                IsNew = false,
-                                Елемент = Новий
-                            };
-
-                            page.SetValue();
-                            return page;
-                        });
                     }
+
+                    ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент();
+                    await page.Елемент.Read(Новий.UnigueID);
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                    page.SetValue();
                 }
         }
 
@@ -339,19 +294,12 @@ namespace StorageAndTrade
                         }
 
                         await Новий.Товари_TablePart.Save(false);
-
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Новий.Назва}", () =>
-                        {
-                            РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент
-                            {
-                                IsNew = false,
-                                Елемент = Новий
-                            };
-
-                            page.SetValue();
-                            return page;
-                        });
                     }
+
+                    РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент();
+                    await page.Елемент.Read(Новий.UnigueID);
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                    page.SetValue();
                 }
         }
 
@@ -404,7 +352,7 @@ namespace StorageAndTrade
                         await Новий.Товари_TablePart.Save(false);
                     }
 
-                    ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент(); 
+                    ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент();
                     await page.Елемент.Read(Новий.UnigueID);
                     NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
                     page.SetValue();
@@ -451,19 +399,12 @@ namespace StorageAndTrade
                         }
 
                         await Новий.Товари_TablePart.Save(false);
-
-                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Новий.Назва}", () =>
-                        {
-                            ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
-                            {
-                                IsNew = false,
-                                Елемент = Новий
-                            };
-
-                            page.SetValue();
-                            return page;
-                        });
                     }
+
+                    ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент();
+                    await page.Елемент.Read(Новий.UnigueID);
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                    page.SetValue();
                 }
         }
 

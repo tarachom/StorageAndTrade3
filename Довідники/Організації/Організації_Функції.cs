@@ -16,11 +16,25 @@ namespace StorageAndTrade
         {
             return
             [
-                //Код
-                new Where(Організації_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
+                
                 //Назва
-                new Where(Comparison.OR, Організації_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(Організації_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //Код
+                new Where(Comparison.OR, Організації_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //НазваСкорочена
+                new Where(Comparison.OR, Організації_Const.НазваСкорочена, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //СвідоцтвоСеріяНомер
+                new Where(Comparison.OR, Організації_Const.СвідоцтвоСеріяНомер, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //СвідоцтвоДатаВидачі
+                new Where(Comparison.OR, Організації_Const.СвідоцтвоДатаВидачі, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //КлючовіСловаДляПошуку
+                new Where(Comparison.OR, Організації_Const.КлючовіСловаДляПошуку, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+
             ];
         }
 
@@ -36,7 +50,10 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
+            {
                 await page.Елемент.New();
+
+            }
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -50,7 +67,7 @@ namespace StorageAndTrade
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Організації_Objest Обєкт = new Організації_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(unigueID, false, true))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

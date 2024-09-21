@@ -16,6 +16,7 @@ namespace StorageAndTrade
         {
             return
             [
+                
                 //Код
                 new Where(Блокнот_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
                         
@@ -27,6 +28,7 @@ namespace StorageAndTrade
                         
                 //Лінк
                 new Where(Comparison.OR, Блокнот_Const.Лінк, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+
             ];
         }
 
@@ -42,7 +44,10 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
+            {
                 await page.Елемент.New();
+
+            }
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -56,7 +61,7 @@ namespace StorageAndTrade
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Блокнот_Objest Обєкт = new Блокнот_Objest();
-            if (await Обєкт.Read(unigueID))
+            if (await Обєкт.Read(unigueID, false, true))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
