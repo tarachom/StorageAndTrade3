@@ -290,7 +290,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         #region TabularParts
         <xsl:for-each select="$TabularPartsTL">
             // Таблична частина "<xsl:value-of select="Name"/>" 
-            <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> = new <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>();
+            <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> = new <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>() { HeightRequest = 300 };
         </xsl:for-each>
         #endregion
 
@@ -349,7 +349,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region Присвоєння / зчитування значень
 
-        public override void SetValue()
+        public override <xsl:if test="count($TabularPartsTL) != 0">async</xsl:if> void SetValue()
         {
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             if (IsNew) 
