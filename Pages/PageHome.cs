@@ -29,6 +29,10 @@ limitations under the License.
 
 using Gtk;
 
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+
 namespace StorageAndTrade
 {
     class PageHome : Box
@@ -49,6 +53,57 @@ namespace StorageAndTrade
                 Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(АктивніКористувачі, false, false, 5);
                 PackStart(hBox, false, false, 5);
+            }
+
+            {
+                QuestPDF.Settings.License = LicenseType.Community;
+                
+                var doc = Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(10, QuestPDF.Infrastructure.Unit.Point);
+
+                        page.Content().Column(x =>
+                        {
+                            x.Item().Text("Поступлення товарів та послуг №0000000454 від 12.10.2024 р.")
+                                .FontSize(12).FontFamily("Arial").Bold();
+
+                            x.Item().PaddingVertical(5).LineHorizontal(1);
+
+                            x.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(cols =>
+                                {
+                                    cols.ConstantColumn(20);
+                                    cols.ConstantColumn(150);
+                                    cols.ConstantColumn(250);
+                                    cols.ConstantColumn(50);
+                                    cols.ConstantColumn(50);
+                                });
+
+                                table.Header(cell =>
+                                {
+                                    cell.Cell().Border(1).Padding(1).Text("№").AlignCenter();
+                                    cell.Cell().Border(1).Padding(1).Text("Назва").AlignCenter();
+                                    cell.Cell().Border(1).Padding(1).Text("Опис").AlignCenter();
+                                    cell.Cell().Border(1).Padding(1).Text("Ціна").AlignCenter();
+                                    cell.Cell().Border(1).Padding(1).Text("Сума").AlignCenter();
+                                });
+
+                                for (int i = 1; i < 5; i++)
+                                    foreach (var font in new string[] { i.ToString(), "text text text text text text text text text text text text text text text text ", "test", "test", "test" })
+                                    {
+                                        var a = table.Cell().Border(1).Padding(1).Text(font).FontSize(8).FontFamily("Arial");
+                                        //a.AlignCenter(); //
+                                    }
+                            });
+                        });
+                    });
+                });
+
+                doc.GeneratePdf("lines.pdf");
             }
 
             ShowAll();

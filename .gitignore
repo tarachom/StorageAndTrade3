@@ -27,6 +27,8 @@ InformationSchema.xml
 ConfigurationParam.xml
 
 old
+bin/Debug/net8.0/LatoFont
+bin/Debug/net8.0/runtimes
 
 #StorageAndTrade3
 StorageAndTrade3
