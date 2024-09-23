@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.3" />
     <PackageReference Include="GtkSharp" Version="3.24.24.117-develop" />
   </ItemGroup>
 
