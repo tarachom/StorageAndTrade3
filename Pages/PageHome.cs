@@ -28,7 +28,6 @@ limitations under the License.
 */
 
 using Gtk;
-using ClosedXML.Excel;
 
 namespace StorageAndTrade
 {
@@ -50,45 +49,6 @@ namespace StorageAndTrade
                 Box hBox = new Box(Orientation.Horizontal, 0);
                 hBox.PackStart(АктивніКористувачі, false, false, 5);
                 PackStart(hBox, false, false, 5);
-            }
-
-            {
-                using var wbook = new XLWorkbook();
-
-                var ws = wbook.Worksheets.Add("Sheet1");
-
-                ws.Cell("A1").Value = "Sunny day";
-                ws.Cell("A1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                ws.Cell("A1").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
-
-                ws.Range("A1:F1").Merge();
-
-                ws.Column("B").Width = 3;
-                ws.Column("C").Width = 30;
-
-                ws.Cell("B3").Value = "war";
-                ws.Cell("B4").Value = "snow";
-                ws.Cell("B5").Value = "tree";
-                ws.Cell("B6").Value = "ten";
-                ws.Cell("B7").Value = "ten";
-
-                ws.Cell("C3").Value = "book";
-                ws.Cell("C4").Value = "cup";
-                ws.Cell("C5").Value = "snake";
-                ws.Cell("C6").Value = "falcon";
-                ws.Cell("C7").Value = "cloud";
-
-                var r = ws.Range("B3:C7");
-
-                r.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
-                r.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
-
-                r.Style.Border.OutsideBorderColor = XLColor.Gray;
-                r.Style.Border.InsideBorderColor = XLColor.Gray;
-
-                string path = System.IO.Path.Combine(AppContext.BaseDirectory, "../../../merged.xlsx");
-
-                wbook.SaveAs(path);
             }
 
             ShowAll();
