@@ -71,10 +71,8 @@ namespace StorageAndTrade
                     Active = Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const
                 };
 
-                autoDownloadCursOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) =>
-                {
+                autoDownloadCursOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => 
                     Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = !autoDownloadCursOnStart.Active;
-                };
 
                 hBoxSwitch.PackStart(new Label("Авто"), false, false, 10);
                 hBoxSwitch.PackStart(autoDownloadCursOnStart, false, false, 0);
@@ -110,48 +108,6 @@ namespace StorageAndTrade
             });
 
             Link.AddLink(hBoxInfo, "Історія завантажень", КурсиВалют_Історія);
-
-            Link.AddLink(vBoxDirectory, "ТовариНаСкладах", async () =>
-            {
-                ТовариНаСкладах page = new ТовариНаСкладах();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ТовариНаСкладах_Const.FULLNAME}", () => { return page; });
-                await page.SetValue();
-            });
-
-            Link.AddLink(vBoxDirectory, "ЗамовленняКлієнтів", async () =>
-            {
-                ЗамовленняКлієнтів page = new ЗамовленняКлієнтів();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЗамовленняКлієнтів_Const.FULLNAME}", () => { return page; });
-                await page.SetValue();
-            });
-
-            Link.AddLink(vBoxDirectory, "РухКоштів", async () =>
-            {
-                РухКоштів page = new РухКоштів();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{РухКоштів_Const.FULLNAME}", () => { return page; });
-                await page.SetValue();
-            });
-
-            Link.AddLink(vBoxDirectory, "ПартіїТоварів", async () =>
-            {
-                ПартіїТоварів page = new ПартіїТоварів();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ПартіїТоварів_Const.FULLNAME}", () => { return page; });
-                await page.SetValue();
-            });
-
-            Link.AddLink(vBoxDirectory, "Закупівлі", async () =>
-            {
-                Закупівлі page = new Закупівлі();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Закупівлі_Const.FULLNAME}", () => { return page; });
-                await page.SetValue();
-            });
-
-            Link.AddLink(vBoxDirectory, "ЦіниНоменклатури", async () =>
-            {
-                ЦіниНоменклатури page = new ЦіниНоменклатури();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ЦіниНоменклатури_Const.FULLNAME}", () => { return page; });
-                await page.SetValue();
-            });
         }
 
         void OnDownloadCurs(object? sender, EventArgs args)
