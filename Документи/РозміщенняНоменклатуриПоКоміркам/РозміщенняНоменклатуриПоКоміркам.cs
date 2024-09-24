@@ -111,7 +111,7 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID));
         }
 
-        protected override async void ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}_{unigueID}.xml");
             await РозміщенняНоменклатуриПоКоміркам_Export.ToXmlFile(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID), pathToSave);

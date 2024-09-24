@@ -111,10 +111,15 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПереміщенняТоварів_Pointer(unigueID));
         }
 
-        protected override async void ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ПереміщенняТоварів_Const.FULLNAME}_{unigueID}.xml");
             await ПереміщенняТоварів_Export.ToXmlFile(new ПереміщенняТоварів_Pointer(unigueID), pathToSave);
+        }
+
+        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        {
+            await ПереміщенняТоварів_Друк.PDF(unigueID);
         }
 
         #endregion

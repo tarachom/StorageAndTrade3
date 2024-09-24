@@ -111,10 +111,15 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new АктВиконанихРобіт_Pointer(unigueID));
         }
 
-        protected override async void ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{АктВиконанихРобіт_Const.FULLNAME}_{unigueID}.xml");
             await АктВиконанихРобіт_Export.ToXmlFile(new АктВиконанихРобіт_Pointer(unigueID), pathToSave);
+        }
+
+        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        {
+            await АктВиконанихРобіт_Друк.PDF(unigueID);
         }
 
         #endregion
@@ -133,7 +138,7 @@ namespace StorageAndTrade
 
             Menu.ShowAll();
 
-            return Menu; 
+            return Menu;
         }
 
         async void НаОснові_ПрихіднийКасовийОрдер(object? sender, EventArgs args)

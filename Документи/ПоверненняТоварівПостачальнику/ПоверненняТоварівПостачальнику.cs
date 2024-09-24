@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     public class ПоверненняТоварівПостачальнику : ДокументЖурнал
     {
-        public ПоверненняТоварівПостачальнику() 
+        public ПоверненняТоварівПостачальнику()
         {
             ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.AddColumns(TreeViewGrid);
         }
@@ -111,10 +111,15 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПоверненняТоварівПостачальнику_Pointer(unigueID));
         }
 
-        protected override async void ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{ПоверненняТоварівПостачальнику_Const.FULLNAME}_{unigueID}.xml");
             await ПоверненняТоварівПостачальнику_Export.ToXmlFile(new ПоверненняТоварівПостачальнику_Pointer(unigueID), pathToSave);
+        }
+
+        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        {
+            await ПоверненняТоварівПостачальнику_Друк.PDF(unigueID);
         }
 
         #endregion

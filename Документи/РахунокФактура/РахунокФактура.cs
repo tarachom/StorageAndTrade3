@@ -112,10 +112,15 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РахунокФактура_Pointer(unigueID));
         }
 
-        protected override async void ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID)
         {
             string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РахунокФактура_Const.FULLNAME}_{unigueID}.xml");
             await РахунокФактура_Export.ToXmlFile(new РахунокФактура_Pointer(unigueID), pathToSave);
+        }
+
+        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        {
+            await РахунокФактура_Друк.PDF(unigueID);
         }
 
         #endregion
