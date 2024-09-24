@@ -1236,108 +1236,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
 
-    public static class <xsl:value-of select="$DocumentName"/>_Export
-    {
-        public static async ValueTask ToXmlFile(<xsl:value-of select="$DocumentName"/>_Pointer <xsl:value-of select="$DocumentName"/>, string pathToSave)
-        {
-            await ValueTask.FromResult(true);
-            <!--
-            <xsl:value-of select="$DocumentName"/>_Objest? obj = await <xsl:value-of select="$DocumentName"/>.GetDocumentObject(true);
-            if (obj == null) return;
-
-            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement("root");
-            xmlWriter.WriteAttributeString("uid", obj.UnigueID.ToString());
-            <xsl:for-each select="Fields/Field">
-            xmlWriter.WriteStartElement("<xsl:value-of select="Name"/>");
-            xmlWriter.WriteAttributeString("type", "<xsl:value-of select="Type"/>");
-            <xsl:choose>
-              <xsl:when test="Type = 'pointer'">
-                <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
-                <xsl:choose>
-                  <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
-                    xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
-                    xmlWriter.WriteAttributeString("uid", obj.<xsl:value-of select="Name"/>.UnigueID.ToString());
-                    xmlWriter.WriteString(await obj.<xsl:value-of select="Name"/>.GetPresentation());
-                  </xsl:when>
-                </xsl:choose>
-              </xsl:when>
-              <xsl:when test="Type = 'enum'">
-                xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
-                xmlWriter.WriteAttributeString("uid", ((int)obj.<xsl:value-of select="Name"/>).ToString());
-                xmlWriter.WriteString(obj.<xsl:value-of select="Name"/>.ToString());
-              </xsl:when>
-              <xsl:when test="Type = 'composite_pointer'">
-                xmlWriter.WriteRaw(((UuidAndText)obj.<xsl:value-of select="Name"/>).ToXml());
-              </xsl:when>
-              <xsl:otherwise>
-                xmlWriter.WriteValue(obj.<xsl:value-of select="Name"/>);
-              </xsl:otherwise>
-            </xsl:choose>
-            xmlWriter.WriteEndElement(); //<xsl:value-of select="Name"/>
-            </xsl:for-each>
-
-            <xsl:if test="count(TabularParts/TablePart) &gt; 0">
-
-                /* 
-                Табличні частини
-                */
-
-                xmlWriter.WriteStartElement("TabularParts");
-                <xsl:for-each select="TabularParts/TablePart">
-                    <xsl:variable name="TablePartName" select="Name"/>
-                    <xsl:variable name="TablePartFullName" select="concat($DocumentName, '_', $TablePartName)"/>
-                    xmlWriter.WriteStartElement("TablePart");
-                    xmlWriter.WriteAttributeString("name", "<xsl:value-of select="Name"/>");
-
-                    foreach(<xsl:value-of select="$TablePartFullName"/>_TablePart.Record record in obj.<xsl:value-of select="$TablePartName"/>_TablePart.Records)
-                    {
-                        xmlWriter.WriteStartElement("row");
-                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
-                        <xsl:for-each select="Fields/Field">
-                        xmlWriter.WriteStartElement("<xsl:value-of select="Name"/>");
-                        xmlWriter.WriteAttributeString("type", "<xsl:value-of select="Type"/>");
-                        <xsl:choose>
-                          <xsl:when test="Type = 'pointer'">
-                            <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
-                            <xsl:choose>
-                              <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
-                                xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
-                                xmlWriter.WriteAttributeString("uid", record.<xsl:value-of select="Name"/>.UnigueID.ToString());
-                                xmlWriter.WriteString(await record.<xsl:value-of select="Name"/>.GetPresentation());
-                              </xsl:when>
-                            </xsl:choose>
-                          </xsl:when>
-                          <xsl:when test="Type = 'enum'">
-                            xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
-                            xmlWriter.WriteAttributeString("uid", ((int)record.<xsl:value-of select="Name"/>).ToString());
-                            xmlWriter.WriteString(record.<xsl:value-of select="Name"/>.ToString());
-                          </xsl:when>
-                          <xsl:when test="Type = 'composite_pointer'">
-                            xmlWriter.WriteRaw(((UuidAndText)record.<xsl:value-of select="Name"/>).ToXml());
-                          </xsl:when>
-                          <xsl:otherwise>
-                            xmlWriter.WriteValue(record.<xsl:value-of select="Name"/>);
-                          </xsl:otherwise>
-                        </xsl:choose>
-                        xmlWriter.WriteEndElement(); //<xsl:value-of select="Name"/>
-                        </xsl:for-each>
-                        xmlWriter.WriteEndElement(); //row
-                    }
-
-                    xmlWriter.WriteEndElement(); //TablePart
-                </xsl:for-each>
-                xmlWriter.WriteEndElement(); //TabularParts
-            </xsl:if>
-
-            xmlWriter.WriteEndElement(); //root
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
-            -->
-        }
-    }
-
     public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
         public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
@@ -1810,6 +1708,130 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     }
       </xsl:for-each> <!-- TableParts -->
     
+    public static class <xsl:value-of select="$DocumentName"/>_Export
+    {
+        public static async ValueTask ToXmlFile(<xsl:value-of select="$DocumentName"/>_Pointer <xsl:value-of select="$DocumentName"/>, string pathToSave)
+        {
+        <xsl:choose>
+          <xsl:when test="ExportXml = '1'">
+            <xsl:value-of select="$DocumentName"/>_Objest? obj = await <xsl:value-of select="$DocumentName"/>.GetDocumentObject(true);
+            if (obj == null) return;
+
+            XmlWriter xmlWriter = XmlWriter.Create(pathToSave, new XmlWriterSettings() { Indent = true, Encoding = System.Text.Encoding.UTF8 });
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("Document");
+            xmlWriter.WriteAttributeString("uid", obj.UnigueID.ToString());
+            <xsl:for-each select="Fields/Field[IsExport = '1']">
+            xmlWriter.WriteStartElement("<xsl:value-of select="Name"/>");
+            xmlWriter.WriteAttributeString("type", "<xsl:value-of select="Type"/>");
+            <xsl:choose>
+              <xsl:when test="Type = 'pointer'">
+                <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
+                <xsl:choose>
+                  <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
+                    xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
+                    xmlWriter.WriteAttributeString("uid", obj.<xsl:value-of select="Name"/>.UnigueID.ToString());
+                    xmlWriter.WriteCData(await obj.<xsl:value-of select="Name"/>.GetPresentation());
+                  </xsl:when>
+                </xsl:choose>
+              </xsl:when>
+              <xsl:when test="Type = 'string'">
+                xmlWriter.WriteCData(obj.<xsl:value-of select="Name"/>);
+              </xsl:when>
+              <xsl:when test="Type = 'date'">
+                xmlWriter.WriteValue(obj.<xsl:value-of select="Name"/>.ToString("dd.MM.yyyy"));
+              </xsl:when>
+              <xsl:when test="Type = 'datetime'">
+                xmlWriter.WriteValue(obj.<xsl:value-of select="Name"/>.ToString("dd.MM.yyyy HH:mm:ss"));
+              </xsl:when>
+              <xsl:when test="Type = 'time'">
+                xmlWriter.WriteValue(obj.<xsl:value-of select="Name"/>.ToString(@"hh\:mm\:ss"));
+              </xsl:when>
+              <xsl:when test="Type = 'enum'">
+                xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
+                xmlWriter.WriteAttributeString("uid", ((int)obj.<xsl:value-of select="Name"/>).ToString());
+                xmlWriter.WriteString(obj.<xsl:value-of select="Name"/>.ToString());
+              </xsl:when>
+              <xsl:when test="Type = 'composite_pointer'">
+                xmlWriter.WriteRaw(((UuidAndText)obj.<xsl:value-of select="Name"/>).ToXml());
+              </xsl:when>
+              <xsl:otherwise>
+                xmlWriter.WriteValue(obj.<xsl:value-of select="Name"/>);
+              </xsl:otherwise>
+            </xsl:choose>
+            xmlWriter.WriteEndElement(); //<xsl:value-of select="Name"/>
+            </xsl:for-each>
+
+            <xsl:if test="count(TabularParts/TablePart) &gt; 0">
+                /*  Табличні частини */
+                xmlWriter.WriteStartElement("TabularParts");
+                <xsl:for-each select="TabularParts/TablePart">
+                    <xsl:variable name="TablePartName" select="Name"/>
+                    <xsl:variable name="TablePartFullName" select="concat($DocumentName, '_', $TablePartName)"/>
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", "<xsl:value-of select="Name"/>");
+
+                    foreach(<xsl:value-of select="$TablePartFullName"/>_TablePart.Record record in obj.<xsl:value-of select="$TablePartName"/>_TablePart.Records)
+                    {
+                        xmlWriter.WriteStartElement("row");
+                        xmlWriter.WriteAttributeString("uid", record.UID.ToString());
+                        <xsl:for-each select="Fields/Field[IsExport = '1']">
+                        xmlWriter.WriteStartElement("<xsl:value-of select="Name"/>");
+                        xmlWriter.WriteAttributeString("type", "<xsl:value-of select="Type"/>");
+                        <xsl:choose>
+                          <xsl:when test="Type = 'pointer'">
+                            <xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
+                            <xsl:choose>
+                              <xsl:when test="$groupPointer = 'Довідники' or $groupPointer = 'Документи'">
+                                xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
+                                xmlWriter.WriteAttributeString("uid", record.<xsl:value-of select="Name"/>.UnigueID.ToString());
+                                xmlWriter.WriteCData(await record.<xsl:value-of select="Name"/>.GetPresentation());
+                              </xsl:when>
+                            </xsl:choose>
+                          </xsl:when>
+                          <xsl:when test="Type = 'string'">
+                            xmlWriter.WriteCData(record.<xsl:value-of select="Name"/>);
+                          </xsl:when>
+                          <xsl:when test="Type = 'date'">
+                            xmlWriter.WriteValue(record.<xsl:value-of select="Name"/>.ToString("dd.MM.yyyy"));
+                          </xsl:when>
+                          <xsl:when test="Type = 'datetime'">
+                            xmlWriter.WriteValue(record.<xsl:value-of select="Name"/>.ToString("dd.MM.yyyy HH:mm:ss"));
+                          </xsl:when>
+                          <xsl:when test="Type = 'time'">
+                            xmlWriter.WriteValue(record.<xsl:value-of select="Name"/>.ToString(@"hh\:mm\:ss"));
+                          </xsl:when>
+                          <xsl:when test="Type = 'enum'">
+                            xmlWriter.WriteAttributeString("pointer", "<xsl:value-of select="Pointer"/>");
+                            xmlWriter.WriteAttributeString("uid", ((int)record.<xsl:value-of select="Name"/>).ToString());
+                            xmlWriter.WriteString(record.<xsl:value-of select="Name"/>.ToString());
+                          </xsl:when>
+                          <xsl:when test="Type = 'composite_pointer'">
+                            xmlWriter.WriteRaw(((UuidAndText)record.<xsl:value-of select="Name"/>).ToXml());
+                          </xsl:when>
+                          <xsl:otherwise>
+                            xmlWriter.WriteValue(record.<xsl:value-of select="Name"/>);
+                          </xsl:otherwise>
+                        </xsl:choose>
+                        xmlWriter.WriteEndElement(); //<xsl:value-of select="Name"/>
+                        </xsl:for-each>
+                        xmlWriter.WriteEndElement(); //row
+                    }
+
+                    xmlWriter.WriteEndElement(); //TablePart
+                </xsl:for-each>
+                xmlWriter.WriteEndElement(); //TabularParts
+            </xsl:if>
+
+            xmlWriter.WriteEndElement(); //root
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
+          </xsl:when>
+          <xsl:otherwise>await ValueTask.FromResult(true);</xsl:otherwise>
+        </xsl:choose>
+        }
+    }
+
     #endregion
     </xsl:for-each>
 }

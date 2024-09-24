@@ -111,10 +111,12 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозхіднийКасовийОрдер_Pointer(unigueID));
         }
 
-        protected override async ValueTask ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
         {
-            string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РозхіднийКасовийОрдер_Const.FULLNAME}_{unigueID}.xml");
-            await РозхіднийКасовийОрдер_Export.ToXmlFile(new РозхіднийКасовийОрдер_Pointer(unigueID), pathToSave);
+            РозхіднийКасовийОрдер_Pointer Вказівник = new РозхіднийКасовийОрдер_Pointer(unigueID);
+            await Вказівник.GetPresentation();
+
+            await РозхіднийКасовийОрдер_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));
         }
 
         protected override async ValueTask PrintingDoc(UnigueID unigueID)

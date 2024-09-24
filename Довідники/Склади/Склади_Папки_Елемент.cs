@@ -17,8 +17,8 @@ namespace StorageAndTrade
         public Склади_Папки_Pointer РодичДляНового { get; set; } = new Склади_Папки_Pointer();
 
         #region Fields
-        Entry Назва = new Entry() { WidthRequest = 100 };
-        Entry Код = new Entry() { WidthRequest = 500 };
+        Entry Код = new Entry() { WidthRequest = 100 };
+        Entry Назва = new Entry() { WidthRequest = 500 };
         Склади_Папки_PointerControl Родич = new Склади_Папки_PointerControl() { Caption = "Папка:", WidthPresentation = 500 };
 
         #endregion
@@ -35,11 +35,11 @@ namespace StorageAndTrade
 
         protected override void CreatePack1(Box vBox)
         {
-            // Назва
-            CreateField(vBox, "Назва:", Назва);
-
             // Код
             CreateField(vBox, "Код:", Код);
+
+            // Назва
+            CreateField(vBox, "Назва:", Назва);
 
             // Родич
             CreateField(vBox, null, Родич);
@@ -62,7 +62,6 @@ namespace StorageAndTrade
             Назва.Text = Елемент.Назва;
             Код.Text = Елемент.Код;
             Родич.Pointer = Елемент.Родич;
-
         }
 
         protected override void GetValue()

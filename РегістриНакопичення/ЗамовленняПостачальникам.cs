@@ -15,7 +15,7 @@ namespace StorageAndTrade
 {
     public class ЗамовленняПостачальникам : РегістриНакопиченняЖурнал
     {
-        public ЗамовленняПостачальникам() 
+        public ЗамовленняПостачальникам() : base()
         {
             ТабличніСписки.ЗамовленняПостачальникам_Записи.AddColumns(TreeViewGrid);
         }
@@ -28,32 +28,15 @@ namespace StorageAndTrade
             ТабличніСписки.ЗамовленняПостачальникам_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ЗамовленняПостачальникам_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ЗамовленняПостачальникам_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняПостачальникам_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.ЗамовленняПостачальникам_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ЗамовленняПостачальникам_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.ЗамовленняПостачальникам_Записи.ОчиститиВідбір(TreeViewGrid);
 
             //period
             ТабличніСписки.ЗамовленняПостачальникам_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where("period", Comparison.LIKE, searchText)
-                {
-                    FuncToField = "to_char",
-                    FuncToField_Param1 = "'DD.MM.YYYY'"
-                }
-            );
+                new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.ЗамовленняПостачальникам_Записи.LoadRecords(TreeViewGrid);
         }

@@ -15,7 +15,7 @@ namespace StorageAndTrade
 {
     public class РозрахункиЗПостачальниками : РегістриНакопиченняЖурнал
     {
-        public РозрахункиЗПостачальниками() 
+        public РозрахункиЗПостачальниками() : base()
         {
             ТабличніСписки.РозрахункиЗПостачальниками_Записи.AddColumns(TreeViewGrid);
         }
@@ -28,32 +28,15 @@ namespace StorageAndTrade
             ТабличніСписки.РозрахункиЗПостачальниками_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.РозрахункиЗПостачальниками_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.РозрахункиЗПостачальниками_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.РозрахункиЗПостачальниками_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.РозрахункиЗПостачальниками_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.РозрахункиЗПостачальниками_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            searchText = searchText.ToLower().Trim();
-
-            if (searchText.Length < 1)
-                return;
-
-            searchText = "%" + searchText.Replace(" ", "%") + "%";
-
             ТабличніСписки.РозрахункиЗПостачальниками_Записи.ОчиститиВідбір(TreeViewGrid);
 
             //period
             ТабличніСписки.РозрахункиЗПостачальниками_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where("period", Comparison.LIKE, searchText)
-                {
-                    FuncToField = "to_char",
-                    FuncToField_Param1 = "'DD.MM.YYYY'"
-                }
-            );
+                new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.РозрахункиЗПостачальниками_Записи.LoadRecords(TreeViewGrid);
         }

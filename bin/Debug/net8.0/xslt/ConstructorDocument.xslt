@@ -574,11 +574,20 @@ namespace <xsl:value-of select="$NameSpace"/>
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID));
         }
 
-        protected override async void ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
         {
-            string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}_{unigueID}.xml");
-            await <xsl:value-of select="$DocumentName"/>_Export.ToXmlFile(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID), pathToSave);
+            <xsl:value-of select="$DocumentName"/>_Pointer Вказівник = new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID);
+            await Вказівник.GetPresentation();
+
+            await <xsl:value-of select="$DocumentName"/>_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));
         }
+
+        /*
+        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        {
+            await <xsl:value-of select="$DocumentName"/>_Друк.PDF(unigueID);
+        }
+        */
 
         #endregion
     }

@@ -37,7 +37,7 @@ limitations under the License.
 
         <xsl:choose>
             <xsl:when test="$File = 'List'">
-                <xsl:call-template name="RegistersAccumulationList" />
+                <xsl:call-template name="RegisterAccumulationList" />
             </xsl:when>
         </xsl:choose>
 
@@ -50,12 +50,15 @@ limitations under the License.
 -->
 
     <!-- Список -->
-    <xsl:template name="RegistersAccumulationList">
-        <xsl:variable name="RegistersAccumulationName" select="RegistersAccumulation/Name"/>
-        <xsl:variable name="TabularList" select="RegistersAccumulation/TabularList"/>
+    <xsl:template name="RegisterAccumulationList">
+        <xsl:variable name="RegisterAccumulationName" select="RegisterAccumulation/Name"/>
+        <xsl:variable name="TabularList" select="RegisterAccumulation/TabularList"/>
+
+        <!-- Додатова інформація -->
+        <xsl:variable name="RegisterAccumulationType" select="RegisterAccumulation/Type"/>
 
 /*     
-        <xsl:value-of select="$RegistersAccumulationName"/>.cs
+        <xsl:value-of select="$RegisterAccumulationName"/>.cs
         Список
 
         Табличний список - <xsl:value-of select="$TabularList"/>
@@ -67,35 +70,36 @@ using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationC
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    public class <xsl:value-of select="$RegistersAccumulationName"/> : РегістриНакопиченняЖурнал
+    public class <xsl:value-of select="$RegisterAccumulationName"/> : РегістриНакопиченняЖурнал
     {
-        public <xsl:value-of select="$RegistersAccumulationName"/>() : base()
+        public <xsl:value-of select="$RegisterAccumulationName"/>() : base()
         {
-            ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid<xsl:if test="$RegisterAccumulationType = 'Turnover'">, ["income"]</xsl:if>);
+            //<xsl:value-of select="$RegisterAccumulationType"/>
         }
 
         #region Override
 
         protected override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
+            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
+            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
 
             //period
-            ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
+            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
-            await ТабличніСписки.<xsl:value-of select="$RegistersAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
         
-        const string КлючНалаштуванняКористувача = "РегістриНакопичення.<xsl:value-of select="$RegistersAccumulationName"/>";
+        const string КлючНалаштуванняКористувача = "РегістриНакопичення.<xsl:value-of select="$RegisterAccumulationName"/>";
 
         protected override async ValueTask BeforeSetValue()
         {

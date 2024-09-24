@@ -32,10 +32,9 @@ namespace StorageAndTrade
 {
     class FormStorageAndTrade : FormGeneral
     {
-        public FormStorageAndTrade()
-        {
+        public FormStorageAndTrade() : base(Config.Kernel) { }
 
-        }
+        #region Override
 
         protected override void ButtonMessageClicked()
         {
@@ -48,6 +47,58 @@ namespace StorageAndTrade
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Пошук", () => page);
             page.Find(text);
         }
+
+        protected override void ВідкритиДокументВідповідноДоВиду(string name)
+        {
+            new ФункціїДляДинамічногоВідкриття().ВідкритиДокументВідповідноДоВиду(name, null);
+        }
+
+        protected override void ВідкритиДовідникВідповідноДоВиду(string name)
+        {
+            new ФункціїДляДинамічногоВідкриття().ВідкритиДовідникВідповідноДоВиду(name, null);
+        }
+
+        protected override void ВідкритиЖурналВідповідноДоВиду(string name)
+        {
+            new ФункціїДляДинамічногоВідкриття().ВідкритиЖурналВідповідноДоВиду(name, null);
+        }
+
+        protected override void ВідкритиРегістрВідомостейВідповідноДоВиду(string name)
+        {
+            new ФункціїДляДинамічногоВідкриття().ВідкритиРегістрВідомостейВідповідноДоВиду(name, null);
+        }
+
+        protected override void ВідкритиРегістрНакопиченняВідповідноДоВиду(string name)
+        {
+            new ФункціїДляДинамічногоВідкриття().ВідкритиРегістрНакопиченняВідповідноДоВиду(name, null);
+        }
+
+        protected override void МенюДокументи(Box vBox)
+        {
+            vBox.PackStart(new Menu_Document(), false, false, 0);
+        }
+
+        protected override void МенюДовідники(Box vBox)
+        {
+            vBox.PackStart(new Menu_Directory(), false, false, 0);
+        }
+
+        protected override void МенюЖурнали(Box vBox)
+        {
+            vBox.PackStart(new Menu_Journal(), false, false, 0);
+        }
+
+        protected override void МенюЗвіти(Box vBox)
+        {
+            vBox.PackStart(new Menu_Report(), false, false, 0);
+        }
+
+        protected override void МенюРегістри(Box vBox)
+        {
+            vBox.PackStart(new Menu_Register(), false, false, 0);
+        }
+
+        #endregion
 
         public void OpenFirstPages()
         {
@@ -87,39 +138,6 @@ namespace StorageAndTrade
             }
             else
                 Program.Користувач = ЗнайденийКористувач;
-        }
-
-        protected override void Документи(LinkButton lb)
-        {
-            Popover po = new Popover(lb) { Position = PositionType.Right };
-            po.Add(new PageDocuments());
-            po.ShowAll();
-        }
-
-        protected override void Журнали(LinkButton lb)
-        {
-            Popover po = new Popover(lb) { Position = PositionType.Right };
-            po.Add(new PageJournals());
-            po.ShowAll();
-        }
-
-        protected override void Звіти(LinkButton lb)
-        {
-            Popover po = new Popover(lb) { Position = PositionType.Right };
-            po.Add(new PageReports());
-            po.ShowAll();
-        }
-
-        protected override void Довідники(LinkButton lb)
-        {
-            Popover po = new Popover(lb) { Position = PositionType.Right };
-            po.Add(new PageDirectory());
-            po.ShowAll();
-        }
-
-        protected override void Регістри(LinkButton lb)
-        {
-
         }
 
         protected override void Налаштування(LinkButton lb)

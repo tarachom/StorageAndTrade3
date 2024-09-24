@@ -32,7 +32,7 @@ namespace StorageAndTrade
 {
     public class РозміщенняНоменклатуриПоКоміркам : ДокументЖурнал
     {
-        public РозміщенняНоменклатуриПоКоміркам() 
+        public РозміщенняНоменклатуриПоКоміркам()
         {
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.AddColumns(TreeViewGrid);
         }
@@ -111,10 +111,12 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID));
         }
 
-        protected override async ValueTask ExportXML(UnigueID unigueID)
+        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
         {
-            string pathToSave = System.IO.Path.Combine(AppContext.BaseDirectory, $"{РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME}_{unigueID}.xml");
-            await РозміщенняНоменклатуриПоКоміркам_Export.ToXmlFile(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID), pathToSave);
+            РозміщенняНоменклатуриПоКоміркам_Pointer Вказівник = new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID);
+            await Вказівник.GetPresentation();
+
+            await РозміщенняНоменклатуриПоКоміркам_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));
         }
 
         #endregion

@@ -15,7 +15,7 @@ namespace StorageAndTrade
 {
     public class ВільніЗалишки : РегістриНакопиченняЖурнал
     {
-        public ВільніЗалишки() 
+        public ВільніЗалишки() : base()
         {
             ТабличніСписки.ВільніЗалишки_Записи.AddColumns(TreeViewGrid);
         }
@@ -28,11 +28,6 @@ namespace StorageAndTrade
             ТабличніСписки.ВільніЗалишки_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ВільніЗалишки_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ВільніЗалишки_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВільніЗалишки_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.ВільніЗалишки_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ВільніЗалишки_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
         protected override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -41,12 +36,7 @@ namespace StorageAndTrade
 
             //period
             ТабличніСписки.ВільніЗалишки_Записи.ДодатиВідбір(TreeViewGrid,
-                new Where("period", Comparison.LIKE, searchText)
-                {
-                    FuncToField = "to_char",
-                    FuncToField_Param1 = "'DD.MM.YYYY'"
-                }
-            );
+                new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.ВільніЗалишки_Записи.LoadRecords(TreeViewGrid);
         }

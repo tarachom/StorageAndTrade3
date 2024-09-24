@@ -24,9 +24,9 @@ limitations under the License.
   
 /*
  *
- * Конфігурації "Зберігання та Торгівля 3.0"
+ * Конфігурації "Зберігання та Торгівля 3.1"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 22.09.2024 20:49:59
+ * Дата конфігурації: 24.09.2024 18:43:23
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -16412,6 +16412,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -16514,6 +16518,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -16621,6 +16629,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -16713,6 +16725,10 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    
@@ -16721,6 +16737,112 @@ namespace StorageAndTrade_1_0.РегістриВідомостей.Таблич�
     #region REGISTER "РозміщенняНоменклатуриПоКоміркамНаСкладі"
     
       
+    public class РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи : ТабличнийСписок
+    {
+        string ID = "";
+        string Період = "";
+        
+        string Номенклатура = "";
+        string Склад = "";
+        string Приміщення = "";
+        string Комірка = "";
+
+        Array ToArray()
+        {
+            return new object[] 
+            { 
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
+                ID, 
+                Період,
+                /*Номенклатура*/ Номенклатура,
+                /*Склад*/ Склад,
+                /*Приміщення*/ Приміщення,
+                /*Комірка*/ Комірка,
+                 
+            };
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Період*/ typeof(string),
+                /*Номенклатура*/ typeof(string),
+                /*Склад*/ typeof(string),
+                /*Приміщення*/ typeof(string),
+                /*Комірка*/ typeof(string),
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 2));
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Номенклатура", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Номенклатура*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Приміщення", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Приміщення*/
+            treeView.AppendColumn(new TreeViewColumn("Комірка", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*Комірка*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду("period", типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            SelectPath = CurrentPath = null;
+
+            РегістриВідомостей.РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet = new РегістриВідомостей.РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet();
+            РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.FillJoin(["period"]);
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.QuerySelect.Where = (List<Where>)where;
+
+            await РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.Read();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
+            foreach (РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.Record record in РозміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.Records)
+            {
+                РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи row = new РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи
+                {
+                    ID = record.UID.ToString(),
+                    Період = record.Period.ToString(),
+                    Номенклатура = record.Номенклатура.Назва,
+                        Склад = record.Склад.Назва,
+                        Приміщення = record.Приміщення.Назва,
+                        Комірка = record.Комірка.Назва,
+                        
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(row.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+
+                if (SelectPointerItem != null)
+                    if (row.ID == SelectPointerItem.ToString())
+                        SelectPath = CurrentPath;
+            }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
+        }
+    }
+	    
     #endregion
     
 }
@@ -16813,7 +16935,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -16852,6 +16974,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -16947,7 +17076,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -16987,6 +17116,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -17070,7 +17206,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -17107,6 +17243,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -17214,7 +17357,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -17257,6 +17400,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -17352,7 +17502,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -17392,6 +17542,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -17483,7 +17640,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -17522,6 +17679,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -17605,7 +17769,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -17642,6 +17806,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -17729,7 +17900,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -17767,6 +17938,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -17878,7 +18056,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -17922,6 +18100,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -18033,7 +18218,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -18077,6 +18262,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
@@ -18172,7 +18364,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -18212,6 +18404,13 @@ namespace StorageAndTrade_1_0.РегістриНакопичення.Табли�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }

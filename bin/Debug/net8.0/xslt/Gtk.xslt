@@ -1101,6 +1101,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
             }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
 	    </xsl:for-each>
@@ -1188,7 +1192,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
         public static TreePath? SelectPath;
         public static TreePath? CurrentPath;
 
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true)
+        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
             SelectPath = CurrentPath = null;
 
@@ -1239,6 +1243,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
                 if (SelectPointerItem != null)
                     if (row.ID == SelectPointerItem.ToString())
                         SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                else if (CurrentPath != null)
+                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
             }
         }
     }
