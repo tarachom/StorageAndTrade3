@@ -60,9 +60,9 @@ namespace StorageAndTrade
             await ТабличніСписки.РахунокФактура_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.РахунокФактура_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.РахунокФактура_Записи.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

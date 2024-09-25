@@ -73,9 +73,9 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.СкладськіПриміщення_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.СкладськіПриміщення_Записи.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

@@ -35,7 +35,7 @@ namespace StorageAndTrade
         {
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи.ОчиститиВідбір(TreeViewGrid);
 
-             //period
+            //period
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи.ДодатиВідбір(TreeViewGrid,
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
@@ -60,6 +60,7 @@ namespace StorageAndTrade
 
             // NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
             // page.SetValue();
+            await ValueTask.FromResult(true);
         }
         protected override async ValueTask Delete(UnigueID unigueID)
         {
@@ -102,4 +103,3 @@ namespace StorageAndTrade
         #endregion
     }
 }
-    

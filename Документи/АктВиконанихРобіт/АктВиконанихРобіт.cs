@@ -59,9 +59,9 @@ namespace StorageAndTrade
             await ТабличніСписки.АктВиконанихРобіт_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.АктВиконанихРобіт_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.АктВиконанихРобіт_Записи.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

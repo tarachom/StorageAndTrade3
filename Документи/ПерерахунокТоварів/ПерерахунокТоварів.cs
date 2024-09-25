@@ -43,9 +43,9 @@ namespace StorageAndTrade
             await ТабличніСписки.ПерерахунокТоварів_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.ПерерахунокТоварів_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.ПерерахунокТоварів_Записи.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

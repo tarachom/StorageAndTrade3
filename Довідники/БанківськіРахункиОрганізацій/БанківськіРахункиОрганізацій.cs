@@ -40,9 +40,9 @@ namespace StorageAndTrade
             await ТабличніСписки.БанківськіРахункиОрганізацій_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.БанківськіРахункиОрганізацій_Записи.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.БанківськіРахункиОрганізацій_Записи.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
