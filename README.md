@@ -34,7 +34,7 @@
     sudo apt-get update
     sudo apt-get install postgresql
 
-Встановити пароль для PostgreSQL
+    # Встановити пароль для PostgreSQL
 
     sudo -u postgres psql
     \password postgres
