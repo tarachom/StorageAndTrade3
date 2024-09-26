@@ -49,4 +49,4 @@
 1. Встановити набір бібліотек GTK [gtk3-runtime](https://accounting.org.ua/download/gtk3-runtime-3.24.31-2022-01-04-ts-win64.exe)
 2. Встановити dotnet 8.0 SDK [Download .NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 3. Встановити базу даних [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
-4. Скачати архів з програмою [Зберігання та Торгівля (β-версія)](https://accounting.org.ua/download/StorageAndTrade3.zip)
+4. Скачати архів з програмою [Зберігання та Торгівля](https://accounting.org.ua/download/StorageAndTrade3.zip)
