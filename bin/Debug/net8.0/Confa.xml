@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>24.09.2024 18:43:23</DateTimeSave>
+  <DateTimeSave>26.09.2024 14:26:50</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -15495,7 +15495,7 @@ FROM
       <FullName>Акт виконаних робіт</FullName>
       <Table>tab_a81</Table>
       <AutoNum>1</AutoNum>
-      <ExportXml>0</ExportXml>
+      <ExportXml>1</ExportXml>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -15505,7 +15505,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
           <IsSearch>1</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -15516,7 +15516,7 @@ FROM
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -15527,7 +15527,7 @@ FROM
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Валюта</Name>
@@ -15538,7 +15538,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>ЗамовленняКлієнта</Name>
@@ -15560,7 +15560,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Контрагент</Name>
@@ -15571,7 +15571,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Організація</Name>
@@ -15582,7 +15582,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Підрозділ</Name>
@@ -15603,7 +15603,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>ФормаОплати</Name>
@@ -15695,7 +15695,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -15705,7 +15705,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>ХарактеристикаНоменклатури</Name>
@@ -15715,7 +15715,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -15724,7 +15724,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Ціна</Name>
@@ -15733,7 +15733,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -15742,7 +15742,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
           </Fields>
           <TabularLists />
@@ -18690,7 +18690,7 @@ FROM
       <Table>tab_b10</Table>
       <Desc>Рахунок фактура</Desc>
       <AutoNum>1</AutoNum>
-      <ExportXml>0</ExportXml>
+      <ExportXml>1</ExportXml>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -18700,7 +18700,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
           <IsSearch>1</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -18711,7 +18711,7 @@ FROM
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>1</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
           <Multiline>0</Multiline>
         </Field>
         <Field>
@@ -18722,7 +18722,7 @@ FROM
           <IsIndex>1</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Контрагент</Name>
@@ -18733,7 +18733,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Організація</Name>
@@ -18744,7 +18744,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Валюта</Name>
@@ -18755,7 +18755,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>СумаДокументу</Name>
@@ -18765,7 +18765,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Склад</Name>
@@ -18776,7 +18776,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>Статус</Name>
@@ -18831,7 +18831,7 @@ FROM
           <IsIndex>0</IsIndex>
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
-          <IsExport>0</IsExport>
+          <IsExport>1</IsExport>
         </Field>
         <Field>
           <Name>ГосподарськаОперація</Name>
@@ -18923,7 +18923,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -18933,7 +18933,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>ХарактеристикаНоменклатури</Name>
@@ -18943,7 +18943,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Пакування</Name>
@@ -18953,7 +18953,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>КількістьУпаковок</Name>
@@ -18962,7 +18962,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -18971,7 +18971,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>ВидЦіни</Name>
@@ -18990,7 +18990,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Сума</Name>
@@ -18999,7 +18999,7 @@ FROM
               <IsIndex>0</IsIndex>
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
-              <IsExport>0</IsExport>
+              <IsExport>1</IsExport>
             </Field>
             <Field>
               <Name>Скидка</Name>

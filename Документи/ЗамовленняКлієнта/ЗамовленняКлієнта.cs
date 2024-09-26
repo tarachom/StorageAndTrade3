@@ -112,12 +112,16 @@ namespace StorageAndTrade
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗамовленняКлієнта_Pointer(unigueID));
         }
 
+        protected override bool IsExportXML() { return true; } //Дозволити експорт документу
+
         protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
         {
             ЗамовленняКлієнта_Pointer Вказівник = new ЗамовленняКлієнта_Pointer(unigueID);
             await Вказівник.GetPresentation();
+            string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml");
 
-            await ЗамовленняКлієнта_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));
+            await ЗамовленняКлієнта_Export.ToXmlFile(Вказівник, path);
+            ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
         }
 
         protected override async ValueTask PrintingDoc(UnigueID unigueID)

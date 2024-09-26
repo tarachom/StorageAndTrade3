@@ -546,9 +546,9 @@ namespace <xsl:value-of select="$NameSpace"/>
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -810,9 +810,9 @@ namespace <xsl:value-of select="$NameSpace"/>
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

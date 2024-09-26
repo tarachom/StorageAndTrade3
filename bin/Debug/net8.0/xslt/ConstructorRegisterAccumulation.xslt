@@ -75,7 +75,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$RegisterAccumulationName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid<xsl:if test="$RegisterAccumulationType = 'Turnover'">, ["income"]</xsl:if>);
-            //<xsl:value-of select="$RegisterAccumulationType"/>
         }
 
         #region Override

@@ -268,7 +268,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
             CreateDocName(<xsl:value-of select="$DocumentName"/>_Const.FULLNAME, НомерДок, ДатаДок);
             <xsl:if test="$FieldsTL[Name = 'Коментар']">
-            CreateField(HBoxComment, "<xsl:value-of select="Caption"/>:", Коментар);
+            CreateField(HBoxComment, "<xsl:value-of select="$FieldsTL[Name = 'Коментар']/Caption"/>:", Коментар);
             </xsl:if>
 
             <xsl:if test="count($TabularPartsTL) != 0">
@@ -339,7 +339,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region Присвоєння / зчитування значень
 
-        public override async void SetValue()
+        public override <xsl:if test="count($TabularPartsTL) != 0">async</xsl:if> void SetValue()
         {
             <!-- Крім скритого поля Назва яке формується перед збереженням -->
             <xsl:for-each select="$FieldsTL[Name != 'Назва']">
@@ -479,6 +479,9 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
         <xsl:variable name="TabularList" select="Document/TabularList"/>
 
+        <!-- Додатова інформація -->
+        <xsl:variable name="DocumentExportXML" select="Document/ExportXML"/>
+
 /*     
         <xsl:value-of select="$DocumentName"/>.cs
         Список
@@ -522,9 +525,9 @@ namespace <xsl:value-of select="$NameSpace"/>
             await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
-        protected override void FilterRecords(Box hBox)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            hBox.PackStart(ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid), false, false, 5);
+            return ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -573,13 +576,16 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID));
         }
-
+        
+        protected override bool IsExportXML() { return <xsl:choose><xsl:when test="$DocumentExportXML = '1'">true</xsl:when><xsl:otherwise>false</xsl:otherwise></xsl:choose>; } //Дозволити експорт документу
         protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
         {
             <xsl:value-of select="$DocumentName"/>_Pointer Вказівник = new <xsl:value-of select="$DocumentName"/>_Pointer(unigueID);
             await Вказівник.GetPresentation();
+            string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml");
 
-            await <xsl:value-of select="$DocumentName"/>_Export.ToXmlFile(Вказівник, System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml"));
+            await <xsl:value-of select="$DocumentName"/>_Export.ToXmlFile(Вказівник, path);
+            ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
         }
 
         /*
