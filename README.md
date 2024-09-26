@@ -7,6 +7,7 @@
 В програмі події фіксуються документами (Поступлення товарів, Замовлення, Реалізація і т.д).
 Документи відображаються у журналах для кожного виду документу, документи можна вводити на основі інших документів, також можна подивитись рух документу по регістрах. 
 
+    # Запуск програми з вихідних кодів
     git clone https://github.com/tarachom/StorageAndTrade3.git
     git clone https://github.com/tarachom/Configurator3.git
     git clone https://github.com/tarachom/AccountingSoftwareLib.git
