@@ -9,7 +9,10 @@
 
     git clone https://github.com/tarachom/StorageAndTrade3.git
     git clone https://github.com/tarachom/Configurator3.git
-    git clone https://github.com/tarachom/AccountingSoftwareLib.git   
+    git clone https://github.com/tarachom/AccountingSoftwareLib.git
+
+    cd StorageAndTrade3
+    dotnet run
 
 <hr />
  
