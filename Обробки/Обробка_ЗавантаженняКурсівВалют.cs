@@ -57,7 +57,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Обробка_ЗавантаженняКурсівВалют() 
+        public Обробка_ЗавантаженняКурсівВалют()
         {
             //Кнопки
             Box hBoxTop = new Box(Orientation.Horizontal, 0);
@@ -157,7 +157,7 @@ namespace StorageAndTrade
                     string НазваВалюти = КурсВалюти?.Current?.SelectSingleNode("txt")?.Value ?? "";
                     string Коротко = КурсВалюти?.Current?.SelectSingleNode("cc")?.Value ?? "";
                     decimal Курс = decimal.Parse(КурсВалюти?.Current?.SelectSingleNode("rate")?.Value.Replace(".", ",") ?? "");
-                    DateTime ДатаКурсу = DateTime.Parse(КурсВалюти?.Current?.SelectSingleNode("exchangedate")?.Value ?? DateTime.Now.ToString());
+                    DateTime.TryParse(КурсВалюти?.Current?.SelectSingleNode("exchangedate")?.Value ?? DateTime.Now.ToString(), out DateTime ДатаКурсу);
 
                     if (ДатаКурсу != ПоточнаДатаКурсу)
                     {

@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Обробка_ПочатковеЗаповнення() 
+        public Обробка_ПочатковеЗаповнення()
         {
             //Кнопки
             Box hBoxTop = new Box(Orientation.Horizontal, 0);
@@ -76,7 +76,7 @@ namespace StorageAndTrade
             vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
 
             visibleOnStart = new Switch() { HeightRequest = 20, Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
-            visibleOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => { Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnStart.Active; };
+            visibleOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnStart.Active;
 
             hBoxSwitch.PackStart(visibleOnStart, false, false, 0);
             hBoxSwitch.PackStart(new Label("Показувати при запуску"), false, false, 10);
