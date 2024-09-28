@@ -92,6 +92,7 @@ limitations under the License.
     <!-- Таблична Частина -->
     <xsl:template name="TablePart">
         <xsl:variable name="TablePartName" select="TablePart/Name"/>
+        <xsl:variable name="IncludeIconColumn" select="TablePart/IncludeIconColumn"/>
         <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/>
 
         <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
@@ -114,6 +115,7 @@ using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Перелічення;
+<xsl:if test="$IncludeIconColumn = '1'">using InterfaceGtk.Іконки;</xsl:if>
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
@@ -125,12 +127,14 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         enum Columns
         {
-        <xsl:for-each select="$FieldsTL">
-            <xsl:value-of select="Name"/>,
-        </xsl:for-each>
+            <xsl:if test="$IncludeIconColumn = '1'">Image,</xsl:if>
+            <xsl:for-each select="$FieldsTL">
+                <xsl:value-of select="Name"/>,
+            </xsl:for-each>
         }
 
         ListStore Store = new ListStore([
+            <xsl:if test="$IncludeIconColumn = '1'">typeof(Gdk.Pixbuf),</xsl:if>
         <xsl:for-each select="$FieldsTL">
             typeof(<xsl:choose>
                 <xsl:when test="Type = 'string'">string</xsl:when>
@@ -159,7 +163,8 @@ namespace <xsl:value-of select="$NameSpace"/>
             public object[] ToArray()
             {
                 return
-                [
+                [   
+                    <xsl:if test="$IncludeIconColumn = '1'">ДляТабличногоСписку.Normal,</xsl:if>
                     <xsl:for-each select="$FieldsTL">
                         <xsl:choose>
                             <xsl:when test="Type = 'numeric'">(float)</xsl:when>
@@ -212,6 +217,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         void AddColumn()
         {
+            <xsl:if test="$IncludeIconColumn = '1'">TreeViewGrid.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", (int)Columns.Image));</xsl:if>
             <xsl:for-each select="$FieldsTL">
             //<xsl:value-of select="Name"/>
             {
@@ -299,6 +305,21 @@ namespace <xsl:value-of select="$NameSpace"/>
                 await LoadRecords();
             }
         }
+
+        /*public string КлючовіСловаДляПошуку()
+        {
+            <xsl:variable name="FieldsForKeyWords" select="$FieldsTL[Type = 'string' or Type = 'pointer']" />
+            string keyWords = "";
+            foreach (Запис запис in Записи)<xsl:if test="count($FieldsForKeyWords) != 0">
+                keyWords += $"\n<xsl:for-each select="$FieldsForKeyWords">
+                    <xsl:choose>
+                        <xsl:when test="Type = 'pointer'"> {запис.<xsl:value-of select="Name"/>.Назва}</xsl:when>
+                        <xsl:when test="Type = 'string'"> {запис.<xsl:value-of select="Name"/>}</xsl:when>
+                    </xsl:choose>
+                </xsl:for-each>";
+            </xsl:if>
+            return keyWords;
+        }*/
 
         #endregion
 

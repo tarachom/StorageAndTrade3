@@ -50,7 +50,7 @@ namespace StorageAndTrade
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             Номенклатура_Папки_Objest Обєкт = new Номенклатура_Папки_Objest();
-            if (await Обєкт.Read(unigueID, false, true))
+            if (await Обєкт.Read(unigueID))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");

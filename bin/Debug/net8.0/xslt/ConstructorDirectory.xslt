@@ -150,7 +150,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            if (await Обєкт.Read(unigueID, false, true))
+            if (await Обєкт.Read(unigueID))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -236,7 +236,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 <xsl:when test="Type = 'string'">
                     <xsl:choose>
                         <xsl:when test="Multiline = '1'">
-                    <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WidthRequest = <xsl:value-of select="$Size"/>, WrapMode = WrapMode.Word };
+                    <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
                         </xsl:when>
                         <xsl:otherwise>
                     <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new Entry() { WidthRequest = <xsl:value-of select="$Size"/> };
@@ -289,8 +289,20 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region TabularParts
         <xsl:for-each select="$TabularPartsTL">
-            // Таблична частина "<xsl:value-of select="Name"/>" 
-            <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> = new <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>() { HeightRequest = 300 };
+            <xsl:variable name="Size">
+                <xsl:choose>
+                    <xsl:when test="Size != '0'"><xsl:value-of select="Size"/></xsl:when>
+                    <xsl:otherwise>500</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:variable name="Height">
+                <xsl:choose>
+                    <xsl:when test="Height != '0'"><xsl:value-of select="Height"/></xsl:when>
+                    <xsl:otherwise>300</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            // Таблична частина "<xsl:value-of select="Name"/>"
+            <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> = new <xsl:value-of select="$DirectoryName"/>_ТабличнаЧастина_<xsl:value-of select="Name"/>() { WidthRequest = <xsl:value-of select="$Size"/>, HeightRequest = <xsl:value-of select="$Height"/> };
         </xsl:for-each>
         #endregion
 
@@ -319,7 +331,13 @@ namespace <xsl:value-of select="$NameSpace"/>
                                     <xsl:otherwise>500</xsl:otherwise>
                                 </xsl:choose>
                             </xsl:variable>
-                CreateFieldView(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>, <xsl:value-of select="$Size"/>, 200);
+                            <xsl:variable name="Height">
+                                <xsl:choose>
+                                    <xsl:when test="Height != '0'"><xsl:value-of select="Height"/></xsl:when>
+                                    <xsl:otherwise>200</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                CreateFieldView(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>, <xsl:value-of select="$Size"/>, <xsl:value-of select="$Height"/>);
                             </xsl:when>
                             <xsl:otherwise>
                 CreateField(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>);

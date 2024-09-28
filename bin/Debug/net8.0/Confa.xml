@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
-  <Name>Зберігання та Торгівля 3.1</Name>
-  <Subtitle>Облік складу, торгівлі та фінансів</Subtitle>
+  <Name>"Зберігання та Торгівля" для України</Name>
+  <Subtitle>Облік складу, торгівлі та фінансів. Версія 3.1</Subtitle>
   <NameSpaceGenerationCode>StorageAndTrade_1_0</NameSpaceGenerationCode>
   <NameSpace>StorageAndTrade</NameSpace>
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>26.09.2024 14:26:50</DateTimeSave>
+  <DateTimeSave>28.09.2024 19:06:04</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1172,6 +1172,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Тип</Name>
                   <Caption>Тип</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>enum</Type>
                   <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
@@ -1180,6 +1181,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Значення</Name>
                   <Caption>Значення</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -1188,6 +1190,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Телефон</Name>
                   <Caption>Телефон</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -1196,6 +1199,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>ЕлектроннаПошта</Name>
                   <Caption>Email</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -1204,6 +1208,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Країна</Name>
                   <Caption>Країна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -1212,6 +1217,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Область</Name>
                   <Caption>Область</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -1220,6 +1226,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Район</Name>
                   <Caption>Район</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -1228,11 +1235,13 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Місто</Name>
                   <Caption>Місто</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -1296,6 +1305,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1304,6 +1314,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1312,6 +1323,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>НазваПовна</Name>
               <Caption>Назва повна</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1320,6 +1332,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>НазваСкорочена</Name>
               <Caption>Назва скорочена</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1328,6 +1341,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>ДатаРеєстрації</Name>
               <Caption>Дата реєстрації</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>date</Type>
             </Field>
@@ -1335,6 +1349,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>КраїнаРеєстрації</Name>
               <Caption>Країна реєстрації</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1343,6 +1358,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>СвідоцтвоСеріяНомер</Name>
               <Caption>Свідоцтво серія номер</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1351,6 +1367,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>СвідоцтвоДатаВидачі</Name>
               <Caption>Свідоцтво дата видачі</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1359,6 +1376,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <Name>Холдинг</Name>
               <Caption>Холдинг</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
@@ -1368,6 +1386,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             <TablePart>
               <Name>Контакти</Name>
               <Caption>Контакти</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
             </TablePart>
           </ElementTableParts>
         </Form>
@@ -1552,6 +1573,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Основний</Name>
                   <Caption>Основний</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>boolean</Type>
                 </Field>
@@ -1559,11 +1581,13 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Name>Файл</Name>
                   <Caption>Файл</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Файли</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>1</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -1903,6 +1927,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1910,7 +1935,8 @@ END]]></Value>
             <Field>
               <Name>Код</Name>
               <Caption>Код</Caption>
-              <Size>0</Size>
+              <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1919,6 +1945,7 @@ END]]></Value>
               <Name>НазваПовна</Name>
               <Caption>НазваПовна</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1927,6 +1954,7 @@ END]]></Value>
               <Name>Опис</Name>
               <Caption>Опис</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>1</Multiline>
@@ -1935,6 +1963,7 @@ END]]></Value>
               <Name>Артикул</Name>
               <Caption>Артикул</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -1943,6 +1972,7 @@ END]]></Value>
               <Name>ТипНоменклатури</Name>
               <Caption>ТипНоменклатури</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиНоменклатури</Pointer>
@@ -1951,6 +1981,7 @@ END]]></Value>
               <Name>Виробник</Name>
               <Caption>Виробник</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Виробники</Pointer>
@@ -1959,6 +1990,7 @@ END]]></Value>
               <Name>ВидНоменклатури</Name>
               <Caption>ВидНоменклатури</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиНоменклатури</Pointer>
@@ -1967,6 +1999,7 @@ END]]></Value>
               <Name>ОдиницяВиміру</Name>
               <Caption>ОдиницяВиміру</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -1975,6 +2008,7 @@ END]]></Value>
               <Name>Папка</Name>
               <Caption>Папка</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура_Папки</Pointer>
@@ -1983,6 +2017,7 @@ END]]></Value>
               <Name>ОсновнаКартинкаФайл</Name>
               <Caption>ОсновнаКартинкаФайл</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Файли</Pointer>
@@ -1992,6 +2027,9 @@ END]]></Value>
             <TablePart>
               <Name>Файли</Name>
               <Caption>Файли</Caption>
+              <Size>0</Size>
+              <Height>300</Height>
+              <SortNum>100</SortNum>
             </TablePart>
           </ElementTableParts>
         </Form>
@@ -2090,6 +2128,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2098,6 +2137,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2253,6 +2293,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2261,6 +2302,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2269,6 +2311,7 @@ END]]></Value>
               <Name>Опис</Name>
               <Caption>Опис</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>string</Type>
               <Multiline>1</Multiline>
@@ -2277,6 +2320,7 @@ END]]></Value>
               <Name>ОдиницяВиміру</Name>
               <Caption>Пакування:</Caption>
               <Size>300</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -2285,6 +2329,7 @@ END]]></Value>
               <Name>ТипНоменклатури</Name>
               <Caption>Тип</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>5</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиНоменклатури</Pointer>
@@ -2439,6 +2484,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2447,6 +2493,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2455,6 +2502,7 @@ END]]></Value>
               <Name>НазваПовна</Name>
               <Caption>НазваПовна</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2463,6 +2511,7 @@ END]]></Value>
               <Name>КількістьУпаковок</Name>
               <Caption>КількістьУпаковок</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>integer</Type>
             </Field>
@@ -2678,6 +2727,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2686,6 +2736,7 @@ END]]></Value>
               <Name>КороткаНазва</Name>
               <Caption>КороткаНазва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2694,6 +2745,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2702,6 +2754,7 @@ END]]></Value>
               <Name>Код_R030</Name>
               <Caption>Код_R030</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -2710,6 +2763,7 @@ END]]></Value>
               <Name>ВиводитиКурсНаСтартову</Name>
               <Caption>ВиводитиКурсНаСтартову</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>boolean</Type>
             </Field>
@@ -2926,6 +2980,7 @@ END]]></Value>
                   <Name>Тип</Name>
                   <Caption>Тип</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>enum</Type>
                   <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
@@ -2934,6 +2989,7 @@ END]]></Value>
                   <Name>Значення</Name>
                   <Caption>Значення</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -2942,6 +2998,7 @@ END]]></Value>
                   <Name>Телефон</Name>
                   <Caption>Телефон</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -2950,6 +3007,7 @@ END]]></Value>
                   <Name>ЕлектроннаПошта</Name>
                   <Caption>ЕлектроннаПошта</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -2958,6 +3016,7 @@ END]]></Value>
                   <Name>Країна</Name>
                   <Caption>Країна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -2966,6 +3025,7 @@ END]]></Value>
                   <Name>Область</Name>
                   <Caption>Область</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -2974,6 +3034,7 @@ END]]></Value>
                   <Name>Район</Name>
                   <Caption>Район</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -2982,11 +3043,13 @@ END]]></Value>
                   <Name>Місто</Name>
                   <Caption>Місто</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -3016,11 +3079,13 @@ END]]></Value>
                   <Name>Файл</Name>
                   <Caption>Файл</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Файли</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -3353,6 +3418,7 @@ END]]></Value>
                   <Name>Тип</Name>
                   <Caption>Тип</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>enum</Type>
                   <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
@@ -3361,6 +3427,7 @@ END]]></Value>
                   <Name>Значення</Name>
                   <Caption>Значення</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -3369,6 +3436,7 @@ END]]></Value>
                   <Name>Телефон</Name>
                   <Caption>Телефон</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -3377,6 +3445,7 @@ END]]></Value>
                   <Name>ЕлектроннаПошта</Name>
                   <Caption>Email</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -3385,6 +3454,7 @@ END]]></Value>
                   <Name>Країна</Name>
                   <Caption>Країна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -3393,6 +3463,7 @@ END]]></Value>
                   <Name>Область</Name>
                   <Caption>Область</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -3401,6 +3472,7 @@ END]]></Value>
                   <Name>Район</Name>
                   <Caption>Район</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -3409,11 +3481,13 @@ END]]></Value>
                   <Name>Місто</Name>
                   <Caption>Місто</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -3536,6 +3610,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -3544,6 +3619,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -3552,6 +3628,7 @@ END]]></Value>
               <Name>ТипСкладу</Name>
               <Caption>ТипСкладу</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиСкладів</Pointer>
@@ -3560,6 +3637,7 @@ END]]></Value>
               <Name>Відповідальний</Name>
               <Caption>Відповідальний</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ФізичніОсоби</Pointer>
@@ -3568,6 +3646,7 @@ END]]></Value>
               <Name>ВидЦін</Name>
               <Caption>ВидЦін</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
@@ -3576,6 +3655,7 @@ END]]></Value>
               <Name>Підрозділ</Name>
               <Caption>Підрозділ</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
@@ -3584,6 +3664,7 @@ END]]></Value>
               <Name>Папка</Name>
               <Caption>Папка</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади_Папки</Pointer>
@@ -3592,6 +3673,7 @@ END]]></Value>
               <Name>НалаштуванняАдресногоЗберігання</Name>
               <Caption>НалаштуванняАдресногоЗберігання</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.НалаштуванняАдресногоЗберігання</Pointer>
@@ -3600,6 +3682,7 @@ END]]></Value>
               <Name>КлючовіСловаДляПошуку</Name>
               <Caption>КлючовіСловаДляПошуку</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -3609,6 +3692,9 @@ END]]></Value>
             <TablePart>
               <Name>Контакти</Name>
               <Caption>Контакти</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
             </TablePart>
           </ElementTableParts>
         </Form>
@@ -3755,6 +3841,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -3763,6 +3850,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -3771,6 +3859,7 @@ END]]></Value>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -3894,6 +3983,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -3902,6 +3992,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -3910,6 +4001,7 @@ END]]></Value>
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -4289,6 +4381,7 @@ END]]></Value>
                   <Name>Тип</Name>
                   <Caption>Тип</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>enum</Type>
                   <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
@@ -4297,6 +4390,7 @@ END]]></Value>
                   <Name>Значення</Name>
                   <Caption>Значення</Caption>
                   <Size>200</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -4305,6 +4399,7 @@ END]]></Value>
                   <Name>Телефон</Name>
                   <Caption>Телефон</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -4313,6 +4408,7 @@ END]]></Value>
                   <Name>ЕлектроннаПошта</Name>
                   <Caption>Email</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -4321,6 +4417,7 @@ END]]></Value>
                   <Name>Країна</Name>
                   <Caption>Країна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -4329,6 +4426,7 @@ END]]></Value>
                   <Name>Область</Name>
                   <Caption>Область</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -4337,6 +4435,7 @@ END]]></Value>
                   <Name>Район</Name>
                   <Caption>Район</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
@@ -4345,11 +4444,13 @@ END]]></Value>
                   <Name>Місто</Name>
                   <Caption>Місто</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -4418,6 +4519,7 @@ END]]></Value>
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -4426,6 +4528,7 @@ END]]></Value>
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -4434,6 +4537,7 @@ END]]></Value>
               <Name>ДатаНародження</Name>
               <Caption>Дата народження</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>date</Type>
             </Field>
@@ -4441,6 +4545,7 @@ END]]></Value>
               <Name>Стать</Name>
               <Caption>Стать</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.СтатьФізичноїОсоби</Pointer>
@@ -4449,6 +4554,7 @@ END]]></Value>
               <Name>ІПН</Name>
               <Caption>ІПН</Caption>
               <Size>200</Size>
+              <Height>0</Height>
               <SortNum>5</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -4458,6 +4564,9 @@ END]]></Value>
             <TablePart>
               <Name>Контакти</Name>
               <Caption>Контакти</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
             </TablePart>
           </ElementTableParts>
         </Form>
@@ -5079,6 +5188,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5087,6 +5197,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5095,6 +5206,7 @@ FROM
               <Name>Номенклатура</Name>
               <Caption>Номенклатура</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
@@ -5103,6 +5215,7 @@ FROM
               <Name>НазваПовна</Name>
               <Caption>Повна назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>string</Type>
               <Multiline>1</Multiline>
@@ -5255,6 +5368,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5263,6 +5377,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5271,6 +5386,7 @@ FROM
               <Name>Родич</Name>
               <Caption>Папка</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура_Папки</Pointer>
@@ -5396,6 +5512,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5404,6 +5521,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5412,6 +5530,7 @@ FROM
               <Name>Родич</Name>
               <Caption>Родич</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти_Папки</Pointer>
@@ -5537,6 +5656,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5545,6 +5665,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5553,6 +5674,7 @@ FROM
               <Name>Родич</Name>
               <Caption>Папка:</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади_Папки</Pointer>
@@ -5921,6 +6043,7 @@ WHERE
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5929,6 +6052,7 @@ WHERE
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5937,6 +6061,7 @@ WHERE
               <Name>Банк</Name>
               <Caption>Банк</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Банки</Pointer>
@@ -5945,6 +6070,7 @@ WHERE
               <Name>Організація</Name>
               <Caption>Організація</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
@@ -5953,6 +6079,7 @@ WHERE
               <Name>НомерРахунку</Name>
               <Caption>Номер рахунку</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>5</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -5961,6 +6088,7 @@ WHERE
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>300</Size>
+              <Height>0</Height>
               <SortNum>6</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -5969,6 +6097,7 @@ WHERE
               <Name>Підрозділ</Name>
               <Caption>Підрозділ</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>7</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
@@ -6488,6 +6617,7 @@ WHERE
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -6496,6 +6626,7 @@ WHERE
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -6504,6 +6635,7 @@ WHERE
               <Name>Банк</Name>
               <Caption>Банк</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Банки</Pointer>
@@ -6512,6 +6644,7 @@ WHERE
               <Name>Контрагент</Name>
               <Caption>Контрагент</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
@@ -6520,6 +6653,7 @@ WHERE
               <Name>НомерРахунку</Name>
               <Caption>Номер рахунку</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>5</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -6528,6 +6662,7 @@ WHERE
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>300</Size>
+              <Height>0</Height>
               <SortNum>6</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -6711,7 +6846,7 @@ WHERE
       <Name>СеріїНоменклатури</Name>
       <FullName>Серії</FullName>
       <Table>tab_b02</Table>
-      <AutoNum>1</AutoNum>
+      <AutoNum>0</AutoNum>
       <Type>Normal</Type>
       <Fields>
         <Field>
@@ -7175,6 +7310,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7183,6 +7319,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7191,6 +7328,7 @@ FROM
               <Name>Організація</Name>
               <Caption>Організація</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
@@ -7199,6 +7337,7 @@ FROM
               <Name>ТипЗапасів</Name>
               <Caption>ТипЗапасів</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипЗапасів</Pointer>
@@ -7207,6 +7346,7 @@ FROM
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>5</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -7215,6 +7355,7 @@ FROM
               <Name>Контрагент</Name>
               <Caption>Контрагент</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>6</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
@@ -7223,6 +7364,7 @@ FROM
               <Name>Договір</Name>
               <Caption>Договір</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>7</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
@@ -7834,6 +7976,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7842,6 +7985,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7850,6 +7994,7 @@ FROM
               <Name>ПовнаНазва</Name>
               <Caption>Повна назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7858,6 +8003,7 @@ FROM
               <Name>НазваГоловноїУстановиАнг</Name>
               <Caption>Назва головної установи Анг</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7866,6 +8012,7 @@ FROM
               <Name>ТипНаселеногоПункту</Name>
               <Caption>Тип населеного пункту</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7874,6 +8021,7 @@ FROM
               <Name>КодМФО</Name>
               <Caption>Код МФО</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7882,6 +8030,7 @@ FROM
               <Name>КодЄДРПОУ</Name>
               <Caption>Код ЄДРПОУ</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7890,6 +8039,7 @@ FROM
               <Name>УнікальнийКодБанку</Name>
               <Caption>Унікальний код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7898,6 +8048,7 @@ FROM
               <Name>КодОбластіОпераційноїДіяльності</Name>
               <Caption>Код області операційної діяльності</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7906,6 +8057,7 @@ FROM
               <Name>НазваОбластіОпераційноїДіяльності</Name>
               <Caption>Назва області операційної діяльності</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7914,6 +8066,7 @@ FROM
               <Name>КодОбластіЗгідноСтатуту</Name>
               <Caption>Код області згідно статуту</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7922,6 +8075,7 @@ FROM
               <Name>НазваОбластіЗгідноСтатуту</Name>
               <Caption>Назва області згідно статуту</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7930,6 +8084,7 @@ FROM
               <Name>ПоштовийІндекс</Name>
               <Caption>Поштовий індекс</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7938,6 +8093,7 @@ FROM
               <Name>НазваНаселеногоПункту</Name>
               <Caption>Назва населеного пункту</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7946,6 +8102,7 @@ FROM
               <Name>Адреса</Name>
               <Caption>Адреса</Caption>
               <Size>300</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7954,6 +8111,7 @@ FROM
               <Name>КодТелефонногоЗвязку</Name>
               <Caption>Код телефонного зв'язку</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7962,6 +8120,7 @@ FROM
               <Name>НомерТелефону</Name>
               <Caption>Номер телефону</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7970,6 +8129,7 @@ FROM
               <Name>ЧисловийКодСтануУстанови</Name>
               <Caption>Числовий код стану установи</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7978,6 +8138,7 @@ FROM
               <Name>НазваСтануУстанови</Name>
               <Caption>Назва стану установи</Caption>
               <Size>300</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7986,6 +8147,7 @@ FROM
               <Name>ДатаЗміниСтану</Name>
               <Caption>Дата зміни стану</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -7994,6 +8156,7 @@ FROM
               <Name>ДатаВідкриттяУстанови</Name>
               <Caption>Дата відкриття установи</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8002,6 +8165,7 @@ FROM
               <Name>ДатаЗакриттяУстанови</Name>
               <Caption>Дата закриття установи</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8010,6 +8174,7 @@ FROM
               <Name>КодНБУ</Name>
               <Caption>Код НБУ</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8018,6 +8183,7 @@ FROM
               <Name>НомерЛіцензії</Name>
               <Caption>Номер ліцензії</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8026,6 +8192,7 @@ FROM
               <Name>ДатаЛіцензії</Name>
               <Caption>Дата ліцензії</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8034,6 +8201,7 @@ FROM
               <Name>КодСтатусу</Name>
               <Caption>Код статусу</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8042,6 +8210,7 @@ FROM
               <Name>Статус</Name>
               <Caption>Статус</Caption>
               <Size>300</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8050,6 +8219,7 @@ FROM
               <Name>ДатаЗапису</Name>
               <Caption>Дата запису</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8069,6 +8239,8 @@ FROM
 Підпорядковується складу</Desc>
       <AutoNum>0</AutoNum>
       <Type>Normal</Type>
+      <DirectoryOwner>Довідники.Склади</DirectoryOwner>
+      <PointerFieldOwner>Склад</PointerFieldOwner>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -8479,6 +8651,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8487,6 +8660,7 @@ FROM
               <Name>Приміщення</Name>
               <Caption>Приміщення</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
@@ -8495,6 +8669,7 @@ FROM
               <Name>Папка</Name>
               <Caption>Папка</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
@@ -8503,6 +8678,7 @@ FROM
               <Name>Лінія</Name>
               <Caption>Лінія</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8511,6 +8687,7 @@ FROM
               <Name>Позиція</Name>
               <Caption>Позиція</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>5</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8519,6 +8696,7 @@ FROM
               <Name>Стелаж</Name>
               <Caption>Стелаж</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>6</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8527,6 +8705,7 @@ FROM
               <Name>Ярус</Name>
               <Caption>Ярус</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>7</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8535,6 +8714,7 @@ FROM
               <Name>ТипСкладськоїКомірки</Name>
               <Caption>Тип</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>8</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ТипиСкладськихКомірок</Pointer>
@@ -8543,6 +8723,7 @@ FROM
               <Name>Типорозмір</Name>
               <Caption>Типорозмір</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>9</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ТипорозміриКомірок</Pointer>
@@ -8834,6 +9015,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>250</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8842,6 +9024,7 @@ FROM
               <Name>Висота</Name>
               <Caption>Висота</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8850,6 +9033,7 @@ FROM
               <Name>Ширина</Name>
               <Caption>Ширина</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8858,6 +9042,7 @@ FROM
               <Name>Глибина</Name>
               <Caption>Глибина</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8866,6 +9051,7 @@ FROM
               <Name>Обєм</Name>
               <Caption>Обєм</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>5</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -8874,6 +9060,7 @@ FROM
               <Name>Вантажопідйомність</Name>
               <Caption>Вантажопідйомність</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>6</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -9011,6 +9198,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>100</Size>
+              <Height>0</Height>
               <SortNum>1</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -9019,6 +9207,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>2</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -9027,6 +9216,7 @@ FROM
               <Name>Родич</Name>
               <Caption>Папка</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
@@ -9035,6 +9225,7 @@ FROM
               <Name>Власник</Name>
               <Caption>Приміщення</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
@@ -9200,6 +9391,7 @@ FROM
               <Name>Код</Name>
               <Caption>Код</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -9208,6 +9400,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -9216,6 +9409,7 @@ FROM
               <Name>ДатаЗапису</Name>
               <Caption>ДатаЗапису</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>datetime</Type>
             </Field>
@@ -9223,6 +9417,7 @@ FROM
               <Name>Опис</Name>
               <Caption>Опис</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>1</Multiline>
@@ -9231,6 +9426,7 @@ FROM
               <Name>Лінк</Name>
               <Caption>Лінк</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -9671,6 +9867,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -9678,6 +9875,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -9686,6 +9884,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -9694,6 +9893,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -9701,6 +9901,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -9709,6 +9910,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -9716,6 +9918,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -9723,6 +9926,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -9730,6 +9934,7 @@ FROM
                   <Name>Скидка</Name>
                   <Caption>Скидка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -9737,11 +9942,13 @@ FROM
                   <Name>Склад</Name>
                   <Caption>Склад</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -10557,6 +10764,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -10564,6 +10772,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -10572,6 +10781,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -10580,6 +10790,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -10588,6 +10799,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -10595,6 +10807,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -10603,6 +10816,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -10610,6 +10824,7 @@ FROM
                   <Name>ВидЦіни</Name>
                   <Caption>Вид ціни</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
@@ -10618,6 +10833,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -10625,6 +10841,7 @@ FROM
                   <Name>Склад</Name>
                   <Caption>Склад</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
@@ -10633,6 +10850,7 @@ FROM
                   <Name>Скидка</Name>
                   <Caption>Скидка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -10640,6 +10858,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>11</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -10647,11 +10866,13 @@ FROM
                   <Name>ЗамовленняПостачальнику</Name>
                   <Caption>Замовлення постачальнику</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>12</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -10812,6 +11033,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -10820,6 +11042,7 @@ FROM
               <Name>НомерДок</Name>
               <Caption>НомерДок</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -10828,6 +11051,7 @@ FROM
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>datetime</Type>
             </Field>
@@ -10835,6 +11059,7 @@ FROM
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -10843,6 +11068,7 @@ FROM
               <Name>ГосподарськаОперація</Name>
               <Caption>ГосподарськаОперація</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ГосподарськіОперації</Pointer>
@@ -10851,6 +11077,7 @@ FROM
               <Name>Підрозділ</Name>
               <Caption>Підрозділ</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
@@ -10859,6 +11086,7 @@ FROM
               <Name>Склад</Name>
               <Caption>Склад</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
@@ -10867,6 +11095,7 @@ FROM
               <Name>Контрагент</Name>
               <Caption>Контрагент</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
@@ -10875,6 +11104,7 @@ FROM
               <Name>СумаДокументу</Name>
               <Caption>СумаДокументу</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>numeric</Type>
             </Field>
@@ -10882,6 +11112,7 @@ FROM
               <Name>ЗамовленняПостачальнику</Name>
               <Caption>ЗамовленняПостачальнику</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
@@ -10890,6 +11121,7 @@ FROM
               <Name>ДатаОплати</Name>
               <Caption>ДатаОплати</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>date</Type>
             </Field>
@@ -10897,6 +11129,7 @@ FROM
               <Name>ФормаОплати</Name>
               <Caption>ФормаОплати</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ФормаОплати</Pointer>
@@ -10905,6 +11138,7 @@ FROM
               <Name>Узгоджений</Name>
               <Caption>Узгоджений</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>boolean</Type>
             </Field>
@@ -10912,6 +11146,7 @@ FROM
               <Name>БанківськийРахунокОрганізації</Name>
               <Caption>БанківськийРахунокОрганізації</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
@@ -10920,6 +11155,7 @@ FROM
               <Name>НомерВхідногоДокументу</Name>
               <Caption>НомерВхідногоДокументу</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -10928,6 +11164,7 @@ FROM
               <Name>ДатаВхідногоДокументу</Name>
               <Caption>ДатаВхідногоДокументу</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>date</Type>
             </Field>
@@ -10935,6 +11172,7 @@ FROM
               <Name>БанківськийРахунокКонтрагента</Name>
               <Caption>БанківськийРахунокКонтрагента</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.БанківськіРахункиКонтрагентів</Pointer>
@@ -10943,6 +11181,7 @@ FROM
               <Name>Договір</Name>
               <Caption>Договір</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
@@ -10951,6 +11190,7 @@ FROM
               <Name>Автор</Name>
               <Caption>Автор</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
@@ -10959,6 +11199,7 @@ FROM
               <Name>ПовернутиТару</Name>
               <Caption>ПовернутиТару</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>boolean</Type>
             </Field>
@@ -10966,6 +11207,7 @@ FROM
               <Name>ДатаПоверненняТари</Name>
               <Caption>ДатаПоверненняТари</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>date</Type>
             </Field>
@@ -10973,6 +11215,7 @@ FROM
               <Name>СпосібДоставки</Name>
               <Caption>СпосібДоставки</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.СпособиДоставки</Pointer>
@@ -10981,6 +11224,7 @@ FROM
               <Name>Організація</Name>
               <Caption>Організація</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
@@ -10989,6 +11233,7 @@ FROM
               <Name>Курс</Name>
               <Caption>Курс</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>numeric</Type>
             </Field>
@@ -10996,6 +11241,7 @@ FROM
               <Name>Кратність</Name>
               <Caption>Кратність</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>integer</Type>
             </Field>
@@ -11003,6 +11249,7 @@ FROM
               <Name>ЧасДоставкиЗ</Name>
               <Caption>ЧасДоставкиЗ</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>time</Type>
             </Field>
@@ -11010,6 +11257,7 @@ FROM
               <Name>ЧасДоставкиДо</Name>
               <Caption>ЧасДоставкиДо</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>time</Type>
             </Field>
@@ -11017,6 +11265,7 @@ FROM
               <Name>Менеджер</Name>
               <Caption>Менеджер</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
@@ -11025,6 +11274,7 @@ FROM
               <Name>СтаттяРухуКоштів</Name>
               <Caption>СтаттяРухуКоштів</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтаттяРухуКоштів</Pointer>
@@ -11033,6 +11283,7 @@ FROM
               <Name>Каса</Name>
               <Caption>Каса</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
@@ -11041,6 +11292,7 @@ FROM
               <Name>Основа</Name>
               <Caption>Основа</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>composite_pointer</Type>
             </Field>
@@ -11048,6 +11300,7 @@ FROM
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -11056,6 +11309,7 @@ FROM
               <Name>КлючовіСловаДляПошуку</Name>
               <Caption>КлючовіСловаДляПошуку</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -11065,6 +11319,9 @@ FROM
             <TablePart>
               <Name>Товари</Name>
               <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
             </TablePart>
           </ElementTableParts>
         </Form>
@@ -11535,6 +11792,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -11542,6 +11800,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -11550,6 +11809,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -11558,6 +11818,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -11565,6 +11826,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -11573,6 +11835,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -11580,6 +11843,7 @@ FROM
                   <Name>ВидЦіни</Name>
                   <Caption>Вид ціни</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
@@ -11588,6 +11852,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -11595,6 +11860,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -11602,6 +11868,7 @@ FROM
                   <Name>Скидка</Name>
                   <Caption>Скидка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -11609,11 +11876,13 @@ FROM
                   <Name>Склад</Name>
                   <Caption>Склад</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>11</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -12285,6 +12554,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -12292,6 +12562,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -12300,6 +12571,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -12308,6 +12580,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -12316,6 +12589,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -12323,6 +12597,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -12331,6 +12606,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -12338,6 +12614,7 @@ FROM
                   <Name>ВидЦіни</Name>
                   <Caption>Вид ціни</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
@@ -12346,6 +12623,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -12353,6 +12631,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -12360,6 +12639,7 @@ FROM
                   <Name>Скидка</Name>
                   <Caption>Скидка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>11</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -12367,6 +12647,7 @@ FROM
                   <Name>ЗамовленняКлієнта</Name>
                   <Caption>Замовлення клієнта</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>12</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.ЗамовленняКлієнта</Pointer>
@@ -12375,6 +12656,7 @@ FROM
                   <Name>РахунокФактура</Name>
                   <Caption>Рахунок фактура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>13</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.РахунокФактура</Pointer>
@@ -12383,6 +12665,7 @@ FROM
                   <Name>Склад</Name>
                   <Caption>Склад</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>14</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
@@ -12391,11 +12674,13 @@ FROM
                   <Name>Партія</Name>
                   <Caption>Партія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>15</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -12742,6 +13027,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -12749,6 +13035,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -12757,6 +13044,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -12765,6 +13053,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -12773,6 +13062,7 @@ FROM
                   <Name>ВидЦіни</Name>
                   <Caption>Вид ціни</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
@@ -12781,10 +13071,12 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>numeric</Type>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -14127,6 +14419,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -14134,6 +14427,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -14142,6 +14436,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -14150,6 +14445,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -14158,6 +14454,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -14165,6 +14462,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -14173,6 +14471,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -14180,11 +14479,13 @@ FROM
                   <Name>Партія</Name>
                   <Caption>Партія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -14683,6 +14984,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -14690,6 +14992,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -14698,6 +15001,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -14706,6 +15010,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -14714,6 +15019,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -14721,6 +15027,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -14729,6 +15036,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -14736,6 +15044,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -14743,6 +15052,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -14750,11 +15060,13 @@ FROM
                   <Name>ДокументПоступлення</Name>
                   <Caption>ДокументПоступлення</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -15255,6 +15567,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -15262,6 +15575,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -15270,6 +15584,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -15278,6 +15593,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -15286,6 +15602,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -15293,6 +15610,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -15301,6 +15619,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -15308,6 +15627,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -15315,6 +15635,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -15322,11 +15643,13 @@ FROM
                   <Name>ДокументРеалізації</Name>
                   <Caption>Документ реалізації</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -15756,6 +16079,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -15763,6 +16087,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -15771,6 +16096,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -15779,6 +16105,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -15786,6 +16113,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -15793,10 +16121,12 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>numeric</Type>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -15947,6 +16277,7 @@ FROM
               <Name>Назва</Name>
               <Caption>Назва</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -15955,6 +16286,7 @@ FROM
               <Name>НомерДок</Name>
               <Caption>НомерДок</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -15963,6 +16295,7 @@ FROM
               <Name>ДатаДок</Name>
               <Caption>ДатаДок</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>datetime</Type>
             </Field>
@@ -15970,6 +16303,7 @@ FROM
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -15978,6 +16312,7 @@ FROM
               <Name>ЗамовленняКлієнта</Name>
               <Caption>ЗамовленняКлієнта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Документи.ЗамовленняКлієнта</Pointer>
@@ -15986,6 +16321,7 @@ FROM
               <Name>Каса</Name>
               <Caption>Каса</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
@@ -15994,6 +16330,7 @@ FROM
               <Name>Контрагент</Name>
               <Caption>Контрагент</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
@@ -16002,6 +16339,7 @@ FROM
               <Name>Організація</Name>
               <Caption>Організація</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
@@ -16010,6 +16348,7 @@ FROM
               <Name>Підрозділ</Name>
               <Caption>Підрозділ</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
@@ -16018,6 +16357,7 @@ FROM
               <Name>СумаДокументу</Name>
               <Caption>СумаДокументу</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>numeric</Type>
             </Field>
@@ -16025,6 +16365,7 @@ FROM
               <Name>ФормаОплати</Name>
               <Caption>ФормаОплати</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ФормаОплати</Pointer>
@@ -16033,6 +16374,7 @@ FROM
               <Name>Договір</Name>
               <Caption>Договір</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
@@ -16041,6 +16383,7 @@ FROM
               <Name>ГосподарськаОперація</Name>
               <Caption>ГосподарськаОперація</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>enum</Type>
               <Pointer>Перелічення.ГосподарськіОперації</Pointer>
@@ -16049,6 +16392,7 @@ FROM
               <Name>Коментар</Name>
               <Caption>Коментар</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -16057,6 +16401,7 @@ FROM
               <Name>Автор</Name>
               <Caption>Автор</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
@@ -16065,6 +16410,7 @@ FROM
               <Name>Менеджер</Name>
               <Caption>Менеджер</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
@@ -16073,6 +16419,7 @@ FROM
               <Name>КлючовіСловаДляПошуку</Name>
               <Caption>КлючовіСловаДляПошуку</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>string</Type>
               <Multiline>0</Multiline>
@@ -16082,6 +16429,9 @@ FROM
             <TablePart>
               <Name>Послуги</Name>
               <Caption>Послуги</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
             </TablePart>
           </ElementTableParts>
         </Form>
@@ -16350,6 +16700,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -16357,6 +16708,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -16365,6 +16717,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -16373,6 +16726,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -16381,6 +16735,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -16388,6 +16743,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -16396,6 +16752,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -16403,6 +16760,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -16410,10 +16768,12 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -16461,6 +16821,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -16468,6 +16829,7 @@ FROM
                   <Name>Каса</Name>
                   <Caption>Каса</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Каси</Pointer>
@@ -16476,10 +16838,12 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>numeric</Type>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -16527,6 +16891,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -16534,6 +16899,7 @@ FROM
                   <Name>БанківськийРахунок</Name>
                   <Caption>Банківський рахунок</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
@@ -16542,10 +16908,12 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>numeric</Type>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -16616,6 +16984,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -16623,6 +16992,7 @@ FROM
                   <Name>ТипКонтрагента</Name>
                   <Caption>ТипКонтрагента</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>enum</Type>
                   <Pointer>Перелічення.ТипиКонтрагентів</Pointer>
@@ -16631,6 +17001,7 @@ FROM
                   <Name>Контрагент</Name>
                   <Caption>Контрагент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Контрагенти</Pointer>
@@ -16639,6 +17010,7 @@ FROM
                   <Name>Валюта</Name>
                   <Caption>Валюта</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Валюти</Pointer>
@@ -16647,10 +17019,12 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>numeric</Type>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -17573,6 +17947,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -17580,6 +17955,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -17588,6 +17964,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -17596,6 +17973,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Пак</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -17603,6 +17981,7 @@ FROM
                   <Name>КількістьУпаковокФакт</Name>
                   <Caption>Пак факт</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -17610,6 +17989,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -17618,6 +17998,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -17625,6 +18006,7 @@ FROM
                   <Name>КількістьФакт</Name>
                   <Caption>Кількість факт</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -17632,11 +18014,13 @@ FROM
                   <Name>Коментар</Name>
                   <Caption>Коментар</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -18012,6 +18396,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -18019,6 +18404,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -18027,6 +18413,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -18035,6 +18422,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -18043,6 +18431,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -18050,6 +18439,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -18058,6 +18448,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -18065,6 +18456,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -18072,6 +18464,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -18079,11 +18472,13 @@ FROM
                   <Name>Партія</Name>
                   <Caption>Партія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -18473,6 +18868,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -18480,6 +18876,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -18488,6 +18885,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -18496,6 +18894,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -18504,6 +18903,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -18511,6 +18911,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -18519,6 +18920,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -18526,6 +18928,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -18533,6 +18936,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -18540,11 +18944,13 @@ FROM
                   <Name>Партія</Name>
                   <Caption>Партія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -19032,6 +19438,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -19039,6 +19446,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -19047,6 +19455,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -19055,6 +19464,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -19062,6 +19472,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -19070,6 +19481,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -19077,6 +19489,7 @@ FROM
                   <Name>ВидЦіни</Name>
                   <Caption>Вид ціни</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
@@ -19085,6 +19498,7 @@ FROM
                   <Name>Ціна</Name>
                   <Caption>Ціна</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -19092,6 +19506,7 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -19099,6 +19514,7 @@ FROM
                   <Name>Скидка</Name>
                   <Caption>Скидка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>10</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -19106,11 +19522,13 @@ FROM
                   <Name>Склад</Name>
                   <Caption>Склад</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>11</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -19496,6 +19914,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -19503,6 +19922,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -19511,6 +19931,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -19519,6 +19940,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -19527,6 +19949,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -19534,6 +19957,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -19542,6 +19966,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -19549,11 +19974,13 @@ FROM
                   <Name>Комірка</Name>
                   <Caption>Комірка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -19895,6 +20322,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -19902,6 +20330,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -19910,6 +20339,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -19918,6 +20348,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -19926,6 +20357,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -19933,6 +20365,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -19941,6 +20374,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -19948,6 +20382,7 @@ FROM
                   <Name>КоміркаВідправник</Name>
                   <Caption>Комірка відправник</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
@@ -19956,11 +20391,13 @@ FROM
                   <Name>КоміркаОтримувач</Name>
                   <Caption>Комірка отримувач</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>9</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -20303,6 +20740,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -20310,6 +20748,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -20318,6 +20757,7 @@ FROM
                   <Name>ХарактеристикаНоменклатури</Name>
                   <Caption>Характеристика</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -20326,6 +20766,7 @@ FROM
                   <Name>Серія</Name>
                   <Caption>Серія</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
@@ -20334,6 +20775,7 @@ FROM
                   <Name>КількістьУпаковок</Name>
                   <Caption>Коєфіціент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -20341,6 +20783,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -20349,6 +20792,7 @@ FROM
                   <Name>Кількість</Name>
                   <Caption>Кількість</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>7</SortNum>
                   <Type>numeric</Type>
                 </Field>
@@ -20356,11 +20800,13 @@ FROM
                   <Name>Комірка</Name>
                   <Caption>Комірка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -20649,6 +21095,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -20656,6 +21103,7 @@ FROM
                   <Name>Номенклатура</Name>
                   <Caption>Номенклатура</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
@@ -20664,6 +21112,7 @@ FROM
                   <Name>Пакування</Name>
                   <Caption>Пакування</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -20672,11 +21121,13 @@ FROM
                   <Name>Комірка</Name>
                   <Caption>Комірка</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -20954,6 +21405,7 @@ FROM
                   <Name>НомерРядка</Name>
                   <Caption>№</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
                 </Field>
@@ -20961,6 +21413,7 @@ FROM
                   <Name>ТипКонтрагента</Name>
                   <Caption>ТипКонтрагента</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>2</SortNum>
                   <Type>enum</Type>
                   <Pointer>Перелічення.ТипиКонтрагентів</Pointer>
@@ -20969,6 +21422,7 @@ FROM
                   <Name>Контрагент</Name>
                   <Caption>Контрагент</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Контрагенти</Pointer>
@@ -20977,6 +21431,7 @@ FROM
                   <Name>Валюта</Name>
                   <Caption>Валюта</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Валюти</Pointer>
@@ -20985,10 +21440,12 @@ FROM
                   <Name>Сума</Name>
                   <Caption>Сума</Caption>
                   <Size>0</Size>
+                  <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>numeric</Type>
                 </Field>
               </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
@@ -26422,6 +26879,7 @@ SQL тип  непотрібно вказувати
               <Name>Номенклатура</Name>
               <Caption>Номенклатура</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
@@ -26430,6 +26888,7 @@ SQL тип  непотрібно вказувати
               <Name>ХарактеристикаНоменклатури</Name>
               <Caption>ХарактеристикаНоменклатури</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
@@ -26438,6 +26897,7 @@ SQL тип  непотрібно вказувати
               <Name>ВидЦіни</Name>
               <Caption>ВидЦіни</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
@@ -26446,6 +26906,7 @@ SQL тип  непотрібно вказувати
               <Name>Ціна</Name>
               <Caption>Ціна</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>numeric</Type>
             </Field>
@@ -26453,6 +26914,7 @@ SQL тип  непотрібно вказувати
               <Name>Пакування</Name>
               <Caption>Пакування</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
@@ -26461,6 +26923,7 @@ SQL тип  непотрібно вказувати
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -26567,6 +27030,7 @@ SQL тип  непотрібно вказувати
               <Name>Валюта</Name>
               <Caption>Валюта</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
@@ -26575,6 +27039,7 @@ SQL тип  непотрібно вказувати
               <Name>Курс</Name>
               <Caption>Курс</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>numeric</Type>
             </Field>
@@ -26582,6 +27047,7 @@ SQL тип  непотрібно вказувати
               <Name>Кратність</Name>
               <Caption>Кратність</Caption>
               <Size>0</Size>
+              <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>integer</Type>
             </Field>

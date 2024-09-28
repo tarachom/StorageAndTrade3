@@ -10,6 +10,7 @@ using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
+using InterfaceGtk.Іконки;
 
 namespace StorageAndTrade
 {
@@ -21,7 +22,7 @@ namespace StorageAndTrade
 
         enum Columns
         {
-            Тип,
+            Image, Тип,
             Значення,
             Телефон,
             ЕлектроннаПошта,
@@ -29,10 +30,10 @@ namespace StorageAndTrade
             Область,
             Район,
             Місто,
+
         }
 
-        ListStore Store = new ListStore([
-
+        ListStore Store = new ListStore([typeof(Gdk.Pixbuf),
             typeof(string), //Тип
             typeof(string), //Значення
             typeof(string), //Телефон
@@ -61,8 +62,7 @@ namespace StorageAndTrade
             public object[] ToArray()
             {
                 return
-                [
-                    ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(Тип),
+                [   ДляТабличногоСписку.Normal,ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(Тип),
                     Значення,
                     Телефон,
                     ЕлектроннаПошта,
@@ -70,6 +70,7 @@ namespace StorageAndTrade
                     Область,
                     Район,
                     Місто,
+
                 ];
             }
 
@@ -86,6 +87,7 @@ namespace StorageAndTrade
                     Область = запис.Область,
                     Район = запис.Район,
                     Місто = запис.Місто,
+
                 };
             }
 
@@ -101,8 +103,10 @@ namespace StorageAndTrade
 
         void AddColumn()
         {
+            TreeViewGrid.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", (int)Columns.Image));
             //Тип
             {
+
                 ListStore store = new ListStore(typeof(string), typeof(string));
 
                 foreach (var field in ПсевдонімиПерелічення.ТипиКонтактноїІнформації_List())
@@ -112,84 +116,90 @@ namespace StorageAndTrade
                 cellCombo.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Тип", cellCombo, "text", (int)Columns.Тип) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.Тип);
+                SetColIndex(column, Columns.Тип);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //Значення
             {
+
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Значення", cellText, "text", (int)Columns.Значення) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.Значення);
+                SetColIndex(column, Columns.Значення);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //Телефон
             {
+
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Телефон", cellText, "text", (int)Columns.Телефон) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.Телефон);
+                SetColIndex(column, Columns.Телефон);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //ЕлектроннаПошта
             {
+
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Email", cellText, "text", (int)Columns.ЕлектроннаПошта) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.ЕлектроннаПошта);
+                SetColIndex(column, Columns.ЕлектроннаПошта);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //Країна
             {
+
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Країна", cellText, "text", (int)Columns.Країна) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.Країна);
+                SetColIndex(column, Columns.Країна);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //Область
             {
+
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Область", cellText, "text", (int)Columns.Область) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.Область);
+                SetColIndex(column, Columns.Область);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //Район
             {
+
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Район", cellText, "text", (int)Columns.Район) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.Район);
+                SetColIndex(column, Columns.Район);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //Місто
             {
+
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Місто", cellText, "text", (int)Columns.Місто) { Resizable = true, MinWidth = 100 };
 
-                column.Data.Add("Column", Columns.Місто);
+                SetColIndex(column, Columns.Місто);
                 TreeViewGrid.AppendColumn(column);
             }
 
             //Колонка пустишка для заповнення вільного простору
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
-       
         #region Load and Save
 
         public override async ValueTask LoadRecords()
@@ -201,7 +211,6 @@ namespace StorageAndTrade
             {
                 ЕлементВласник.Контакти_TablePart.FillJoin([]);
                 await ЕлементВласник.Контакти_TablePart.Read();
-
                 foreach (Організації_Контакти_TablePart.Record record in ЕлементВласник.Контакти_TablePart.Records)
                 {
                     Запис запис = new Запис
@@ -223,13 +232,12 @@ namespace StorageAndTrade
                 }
             }
         }
-        
+
         public override async ValueTask SaveRecords()
         {
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Контакти_TablePart.Records.Clear();
-
                 foreach (Запис запис in Записи)
                 {
                     ЕлементВласник.Контакти_TablePart.Records.Add(new Організації_Контакти_TablePart.Record()
@@ -246,7 +254,6 @@ namespace StorageAndTrade
 
                     });
                 }
-
                 await ЕлементВласник.Контакти_TablePart.Save(true);
                 await LoadRecords();
             }
@@ -254,12 +261,14 @@ namespace StorageAndTrade
 
         public string КлючовіСловаДляПошуку()
         {
-            string ключовіСлова = "";
+
+            string keyWords = "";
             foreach (Запис запис in Записи)
-                ключовіСлова += $"\n {запис.Значення} {запис.Телефон} {запис.ЕлектроннаПошта} {запис.Країна} {запис.Область} {запис.Район} {запис.Місто}";
-            return ключовіСлова;
+                keyWords += $"\n {запис.Значення} {запис.Телефон} {запис.ЕлектроннаПошта} {запис.Країна} {запис.Область} {запис.Район} {запис.Місто}";
+
+            return keyWords;
         }
-        
+
         #endregion
 
         #region Func

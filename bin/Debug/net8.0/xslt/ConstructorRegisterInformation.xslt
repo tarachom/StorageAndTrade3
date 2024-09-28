@@ -87,7 +87,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 <xsl:when test="Type = 'string'">
                     <xsl:choose>
                         <xsl:when test="Multiline = '1'">
-                    <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WidthRequest = <xsl:value-of select="$Size"/>, WrapMode = WrapMode.Word };
+                    <xsl:text>TextView </xsl:text><xsl:value-of select="Name"/> = new TextView() { WrapMode = WrapMode.Word };
                         </xsl:when>
                         <xsl:otherwise>
                     <xsl:text>Entry </xsl:text><xsl:value-of select="Name"/> = new Entry() { WidthRequest = <xsl:value-of select="$Size"/> };
@@ -166,7 +166,13 @@ namespace <xsl:value-of select="$NameSpace"/>
                                     <xsl:otherwise>500</xsl:otherwise>
                                 </xsl:choose>
                             </xsl:variable>
-                CreateFieldView(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>, <xsl:value-of select="$Size"/>, 200);
+                            <xsl:variable name="Height">
+                                <xsl:choose>
+                                    <xsl:when test="Height != '0'"><xsl:value-of select="Height"/></xsl:when>
+                                    <xsl:otherwise>200</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                CreateFieldView(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>, <xsl:value-of select="$Size"/>, <xsl:value-of select="$Height"/>);
                             </xsl:when>
                             <xsl:otherwise>
                 CreateField(vBox, "<xsl:value-of select="Caption"/>:", <xsl:value-of select="Name"/>);
