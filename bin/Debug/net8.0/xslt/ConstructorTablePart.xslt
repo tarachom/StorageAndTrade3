@@ -241,6 +241,12 @@ namespace <xsl:value-of select="$NameSpace"/>
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellNumber, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
                     </xsl:when>
+                    <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+                CellRendererText cellDateTime = new CellRendererText() { Editable = true };
+                cellDateTime.Edited += EditCell;
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellDateTime, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
+                column.SetCellDataFunc(cellDateTime, new TreeCellDataFunc(DateTimeCellDataFunc));
+                    </xsl:when>
                     <xsl:when test="Type = 'boolean'">
                 CellRendererToggle cellToggle = new CellRendererToggle();
                 cellToggle.Toggled += EditCell;
@@ -370,18 +376,21 @@ namespace <xsl:value-of select="$NameSpace"/>
         }
         </xsl:if>
 
-        <xsl:if test="count($FieldsTL[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'enum']) != 0">
+        <xsl:variable name="FieldsTL_Select" select="$FieldsTL[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'enum' or Type = 'date' or Type = 'datetime' or Type = 'time']" />
+        <xsl:if test="count($FieldsTL_Select) != 0">
         protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
         {
             Запис запис = Записи[rowNumber];
             switch ((Columns)colNumber)
             {
-                <xsl:for-each select="$FieldsTL[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'enum']">
+                <xsl:for-each select="$FieldsTL_Select">
                 <xsl:text>case Columns.</xsl:text><xsl:value-of select="Name"/>: { <xsl:choose>
                     <xsl:when test="Type = 'string'">запис.<xsl:value-of select="Name"/> = newText;</xsl:when>
                     <xsl:when test="Type = 'integer'">var (check, value) = Validate.IsInt(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
                     <xsl:when test="Type = 'numeric'">var (check, value) = Validate.IsDecimal(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
                     <xsl:when test="Type = 'enum'">запис.<xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_FindByName(newText) ?? 0;</xsl:when>
+                    <xsl:when test="Type = 'date' or Type = 'datetime'">var (check, value) = Validate.IsDateTime(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
+                    <xsl:when test="Type = 'time'">var (check, value) = Validate.IsTime(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
                 </xsl:choose> break; }
                 </xsl:for-each>
                 default: break;
@@ -422,6 +431,36 @@ namespace <xsl:value-of select="$NameSpace"/>
                     case Columns.<xsl:value-of select="Name"/>:
                     {
                         cellText.Text = запис.<xsl:value-of select="Name"/>.ToString();
+                        break;
+                    }
+                    </xsl:for-each>
+                    default: break;
+                }
+            }
+        }
+        </xsl:if>
+
+        <xsl:if test="count($FieldsTL[Type = 'date' or Type = 'datetime' or Type = 'time']) != 0">
+        void DateTimeCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            if (GetColIndex(column, out int colNumber))
+            {
+                int rowNumber = int.Parse(Store.GetPath(iter).ToString());
+                Запис запис = Записи[rowNumber];
+
+                CellRendererText cellText = (CellRendererText)cell;
+                cellText.Foreground = "green";
+
+                switch ((Columns)colNumber)
+                {
+                    <xsl:for-each select="$FieldsTL[Type = 'date' or Type = 'datetime' or Type = 'time']">
+                    case Columns.<xsl:value-of select="Name"/>:
+                    {
+                        cellText.Text = запис.<xsl:value-of select="Name"/>.ToString(<xsl:choose>
+                                <xsl:when test="Type = 'date'">"dd.MM.yyyy"</xsl:when>
+                                <xsl:when test="Type = 'datetime'">"dd.MM.yyyy HH:mm:ss"</xsl:when>
+                                <xsl:when test="Type = 'time'">@"hh\:mm\:ss"</xsl:when>
+                            </xsl:choose>);
                         break;
                     }
                     </xsl:for-each>

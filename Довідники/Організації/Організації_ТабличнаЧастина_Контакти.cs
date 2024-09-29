@@ -33,7 +33,8 @@ namespace StorageAndTrade
 
         }
 
-        ListStore Store = new ListStore([typeof(Gdk.Pixbuf),
+        ListStore Store = new ListStore([
+            typeof(Gdk.Pixbuf),
             typeof(string), //Тип
             typeof(string), //Значення
             typeof(string), //Телефон
@@ -62,7 +63,8 @@ namespace StorageAndTrade
             public object[] ToArray()
             {
                 return
-                [   ДляТабличногоСписку.Normal,ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(Тип),
+                [
+                    ДляТабличногоСписку.Normal,ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(Тип),
                     Значення,
                     Телефон,
                     ЕлектроннаПошта,
@@ -261,11 +263,11 @@ namespace StorageAndTrade
 
         public string КлючовіСловаДляПошуку()
         {
-
+            
             string keyWords = "";
             foreach (Запис запис in Записи)
                 keyWords += $"\n {запис.Значення} {запис.Телефон} {запис.ЕлектроннаПошта} {запис.Країна} {запис.Область} {запис.Район} {запис.Місто}";
-
+            
             return keyWords;
         }
 

@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>28.09.2024 19:06:04</DateTimeSave>
+  <DateTimeSave>29.09.2024 23:55:20</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1173,7 +1173,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Caption>Тип</Caption>
                   <Size>0</Size>
                   <Height>0</Height>
-                  <SortNum>1</SortNum>
+                  <SortNum>2</SortNum>
                   <Type>enum</Type>
                   <Pointer>Перелічення.ТипиКонтактноїІнформації</Pointer>
                 </Field>
@@ -1182,7 +1182,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Caption>Значення</Caption>
                   <Size>0</Size>
                   <Height>0</Height>
-                  <SortNum>2</SortNum>
+                  <SortNum>99</SortNum>
                   <Type>string</Type>
                   <Multiline>0</Multiline>
                 </Field>
@@ -1241,7 +1241,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Multiline>0</Multiline>
                 </Field>
               </ElementFields>
-              <IncludeIconColumn>0</IncludeIconColumn>
+              <IncludeIconColumn>1</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>
