@@ -4,8 +4,6 @@
     Тригери для довідника СкладськіКомірки
 */
 
-using StorageAndTrade_1_0.Константи;
-
 namespace StorageAndTrade_1_0.Довідники
 {
     class СкладськіКомірки_Triggers

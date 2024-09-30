@@ -37,7 +37,7 @@ namespace StorageAndTrade_1_0.Довідники
         {
             // Помітка на видалення всіх характеристик елементу номенклатури у випадку label = true
             // Якщо мітка знімається, то з характеристик мітка не має зніматися
-            if (label == true)
+            if (label)
             {
                 ХарактеристикиНоменклатури_Select select = new ХарактеристикиНоменклатури_Select();
                 select.QuerySelect.Where.Add(new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));

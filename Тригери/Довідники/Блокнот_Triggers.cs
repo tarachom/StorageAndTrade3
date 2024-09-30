@@ -13,6 +13,7 @@ namespace StorageAndTrade_1_0.Довідники
         public static async ValueTask New(Блокнот_Objest ДовідникОбєкт)
         {
             ДовідникОбєкт.Код = (++НумераціяДовідників.Блокнот_Const).ToString("D6");
+            ДовідникОбєкт.ДатаЗапису = DateTime.Now;
             await ValueTask.FromResult(true);
         }
 
