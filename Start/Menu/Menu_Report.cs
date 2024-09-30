@@ -19,10 +19,11 @@ namespace StorageAndTrade
             Box vLeft = new Box(Orientation.Vertical, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
-            CreateLink(vLeft, "Товари на складах", () =>
+            CreateLink(vLeft, "Товари на складах", async () =>
             {
                 Звіт_ТовариНаСкладах page = new Звіт_ТовариНаСкладах();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Товари на складах", () => page);
+                await page.SetValue();
             });
 
             CreateLink(vLeft, "Вільні залишки", () =>
