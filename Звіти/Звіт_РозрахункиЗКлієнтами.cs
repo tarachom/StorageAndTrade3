@@ -24,19 +24,15 @@ limitations under the License.
 using Gtk;
 using InterfaceGtk;
 
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_РозрахункиЗКлієнтами : ФормаЗвіт
+    class Звіт_РозрахункиЗКлієнтами : ФормаЗвіт2
     {
-        Notebook reportNotebook;
-
         #region Filters
 
-        PeriodControl Період = new PeriodControl() { Period = ПеріодДляЖурналу.ТипПеріоду.Місяць, SensitiveSelectButton = false };
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
         Контрагенти_Папки_PointerControl Контрагент_Папка = new Контрагенти_Папки_PointerControl();
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
@@ -55,71 +51,24 @@ namespace StorageAndTrade
         public Звіт_РозрахункиЗКлієнтами() 
         {
             //Кнопки
-            Box hBoxTop = new Box(Orientation.Horizontal, 0);
-            PackStart(hBoxTop, false, false, 10);
-
-            //2
             Button bOstatok = new Button("Залишки");
-            bOstatok.Clicked += OnReport_Залишки;
+            bOstatok.Clicked += (object? sender, EventArgs args) => Залишки();
+            HBoxTop.PackStart(bOstatok, false, false, 10);
 
-            hBoxTop.PackStart(bOstatok, false, false, 10);
-
-            //3
             Button bOborot = new Button("Залишки та обороти");
-            bOborot.Clicked += OnReport_ЗалишкиТаОбороти;
+            bOborot.Clicked += (object? sender, EventArgs args) => ЗалишкиТаОбороти();
+            HBoxTop.PackStart(bOborot, false, false, 10);
 
-            hBoxTop.PackStart(bOborot, false, false, 10);
-
-            //4
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += OnReport_Документи;
-
-            hBoxTop.PackStart(bDocuments, false, false, 10);
-
-            CreatePeriod();
-            CreateFilters();
-
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
-            PackStart(reportNotebook, true, true, 0);
+            bDocuments.Clicked += (object? sender, EventArgs args) => Документи();
+            HBoxTop.PackStart(bDocuments, false, false, 10);
 
             ShowAll();
         }
 
         #region Filters
 
-        void CreatePeriod()
-        {
-            Box hBox = new Box(Orientation.Horizontal, 0);
-
-            //Період
-            CreateField(hBox, null, Період);
-
-            PackStart(hBox, false, false, 5);
-        }
-
-        void CreateFilters()
-        {
-            Box hBoxContainer = new Box(Orientation.Horizontal, 0);
-
-            Expander expander = new Expander("Відбори") { Expanded = true };
-            expander.Add(hBoxContainer);
-
-            //Container1
-            Box vBoxContainer1 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
-
-            CreateContainer1(vBoxContainer1);
-
-            //Container2
-            Box vBoxContainer2 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
-
-            CreateContainer2(vBoxContainer2);
-
-            PackStart(expander, false, false, 10);
-        }
-
-        void CreateContainer1(Box vBox)
+        protected override void CreateContainer1(Box vBox)
         {
             //Контрагент
             CreateField(vBox, null, Контрагент);
@@ -128,10 +77,26 @@ namespace StorageAndTrade
             CreateField(vBox, null, Контрагент_Папка);
         }
 
-        void CreateContainer2(Box vBox)
+        protected override void CreateContainer2(Box vBox)
         {
             //Валюта
             CreateField(vBox, null, Валюта);
+        }
+
+        #endregion
+
+        #region Period
+
+        const string КлючНалаштуванняКористувача = "Звіт.РозрахункиЗКлієнтами";
+
+        public override async ValueTask SetValue()
+        {
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
+        }
+
+        protected override void PeriodChanged()
+        {
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
         }
 
         #endregion
@@ -185,24 +150,9 @@ namespace StorageAndTrade
             return hBoxCaption;
         }
 
-        void OnReport_Залишки(object? sender, EventArgs args)
+        async void Залишки()
         {
-            Залишки(СформуватиФільтр());
-        }
-
-        void OnReport_ЗалишкиТаОбороти(object? sender, EventArgs args)
-        {
-            ЗалишкиТаОбороти(СформуватиФільтр());
-        }
-
-        void OnReport_Документи(object? sender, EventArgs args)
-        {
-            Документи(СформуватиФільтр());
-        }
-
-        async void Залишки(object? Параметри, bool refreshPage = false)
-        {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр();
 
             #region SELECT
 
@@ -233,18 +183,18 @@ FROM
 
                 query += $@"
 Довідник_Контрагенти.{Контрагенти_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Контрагенти_Папки_Const.TABLE}
-            WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Контрагенти_Папки_Const.TABLE}.uid
-            FROM {Контрагенти_Папки_Const.TABLE}
-                JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Контрагенти_Папки_Const.TABLE}
+        WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Контрагенти_Папки_Const.TABLE}.uid
+        FROM {Контрагенти_Папки_Const.TABLE}
+            JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
             }
 
@@ -284,51 +234,27 @@ ORDER BY
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            ЗвітСторінка Звіт = new ЗвітСторінка()
             {
-                { "Контрагент_Назва", "Контрагент" },
-                { "Валюта_Назва", "Валюта" },
-                { "Сума", "Сума" }
+                Caption = "Залишки",
+                Query = query,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
             };
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Контрагент_Назва", "Контрагент" },
-                { "Валюта_Назва", "Валюта" }
-            };
+            Звіт.ColumnSettings.Add("Контрагент_Назва", new("Контрагент", "Контрагент", Контрагенти_Const.POINTER));
+            Звіт.ColumnSettings.Add("Валюта_Назва", new("Валюта", "Валюта", Валюти_Const.POINTER));
+            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Контрагент_Назва", Контрагенти_Const.POINTER },
-                { "Валюта_Назва", Валюти_Const.POINTER }
-            };
+            await Звіт.Select();
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "Сума", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
-
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
-
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
-
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", await ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
 
-        async void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
+        async void ЗалишкиТаОбороти()
         {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр();
 
             #region SELECT
 
@@ -435,18 +361,18 @@ LEFT JOIN {Валюти_Const.TABLE} AS Довідник_Валюти ON Дов�
 
                 query += $@"
 Довідник_Контрагенти.{Контрагенти_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Контрагенти_Папки_Const.TABLE}
-            WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Контрагенти_Папки_Const.TABLE}.uid
-            FROM {Контрагенти_Папки_Const.TABLE}
-                JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Контрагенти_Папки_Const.TABLE}
+        WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Контрагенти_Папки_Const.TABLE}.uid
+        FROM {Контрагенти_Папки_Const.TABLE}
+            JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
             }
 
@@ -492,66 +418,37 @@ ORDER BY
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
-            {
-                { "Контрагент_Назва", "Контрагент" },
-                { "Валюта_Назва", "Валюта" },
-                { "ПочатковийЗалишок", "На початок" },
-                { "Прихід", "Прихід" },
-                { "Розхід", "Розхід" },
-                { "КінцевийЗалишок", "На кінець" }
-            };
-
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Контрагент_Назва", "Контрагент" },
-                { "Валюта_Назва", "Валюта" }
-            };
-
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Контрагент_Назва", Контрагенти_Const.POINTER },
-                { "Валюта_Назва", Валюти_Const.POINTER }
-            };
-
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "ПочатковийЗалишок", 1 },
-                { "Прихід", 1 },
-                { "Розхід", 1 },
-                { "КінцевийЗалишок", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "ПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "Прихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "Розхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "КінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
-
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
             {
                 { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
+            ЗвітСторінка Звіт = new ЗвітСторінка()
+            {
+                Caption = "Залишки та обороти",
+                Query = query,
+                ParamQuery = paramQuery,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр)
+            };
 
-            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
+            Звіт.ColumnSettings.Add("Контрагент_Назва", new("Контрагент", "Контрагент", Контрагенти_Const.POINTER));
+            Звіт.ColumnSettings.Add("Валюта_Назва", new("Валюта", "Валюта", Валюти_Const.POINTER));
+            Звіт.ColumnSettings.Add("ПочатковийЗалишок", new("На початок", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("Прихід", new("Прихід", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("Розхід", new("Розхід", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("КінцевийЗалишок", new("На кінець", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
+            await Звіт.Select();
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
-
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", await ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
 
-        async void Документи(object? Параметри, bool refreshPage = false)
+        async void Документи()
         {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр();
 
             #region SELECT
 
@@ -608,13 +505,12 @@ documents AS
             {
                 string docType = РозрахункиЗКлієнтами_Const.AllowDocumentSpendType[counter];
 
-                string union = (counter > 0 ? "UNION" : "");
+                string union = counter > 0 ? "UNION" : "";
                 query += $@"
 {union}
 SELECT 
-    '{docType}' AS doctype,
-    {table}.uid, 
-    {table}.docname, 
+    CONCAT({table}.uid, ':{docType}') AS Документ,
+    {table}.docname AS Документ_Назва,
     register.period, 
     register.income, 
     register.Сума,
@@ -639,18 +535,18 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
 
                     query += $@"
 Довідник_Контрагенти.{Контрагенти_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Контрагенти_Папки_Const.TABLE}
-            WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Контрагенти_Папки_Const.TABLE}.uid
-            FROM {Контрагенти_Папки_Const.TABLE}
-                JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Контрагенти_Папки_Const.TABLE}
+        WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Контрагенти_Папки_Const.TABLE}.uid
+        FROM {Контрагенти_Папки_Const.TABLE}
+            JOIN r ON {Контрагенти_Папки_Const.TABLE}.{Контрагенти_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
                 }
 
@@ -662,11 +558,9 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
             query += $@"
 )
 SELECT 
-    CONCAT(uid, ':', doctype) AS uid_and_text,
-    uid,
-    period,
-    (CASE WHEN income = true THEN '+' ELSE '-' END) AS income, 
-    docname AS Документ, 
+    Документ,
+    (CASE WHEN income = true THEN '+' ELSE '-' END) AS Рух,
+    Документ_Назва, 
     Контрагент,
     Контрагент_Назва,
     Валюта,
@@ -678,58 +572,31 @@ ORDER BY period ASC
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
-            {
-                { "income", "Рух" },
-                { "Документ", "Документ" },
-                { "Контрагент_Назва", "Контрагент" },
-                { "Валюта_Назва", "Валюта" },
-                { "Сума", "Сума" }
-            };
-
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Документ", "uid_and_text" },
-                { "Контрагент_Назва", "Контрагент" },
-                { "Валюта_Назва", "Валюта" }
-            };
-
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Документ", "Документ.*" },
-                { "Контрагент_Назва", Контрагенти_Const.POINTER },
-                { "Валюта_Назва", Валюти_Const.POINTER }
-            };
-
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "income", 0.5f },
-                { "Сума", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "Сума", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
-
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
             {
                 { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
+            ЗвітСторінка Звіт = new ЗвітСторінка()
+            {
+                Caption = "Документи",
+                Query = query,
+                ParamQuery = paramQuery,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("Документи", Фільтр)
+            };
 
-            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
+            Звіт.ColumnSettings.Add("Рух", new("Рух", "", "", 0.5f));
+            Звіт.ColumnSettings.Add("Документ_Назва", new("Документ", "Документ", "Документи.*"));
+            Звіт.ColumnSettings.Add("Контрагент_Назва", new("Контрагент", "Контрагент", Контрагенти_Const.POINTER));
+            Звіт.ColumnSettings.Add("Валюта_Назва", new("Валюта", "Валюта", Валюти_Const.POINTER));
+            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
+            await Звіт.Select();
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
-
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", await ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
-
     }
 }

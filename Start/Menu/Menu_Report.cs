@@ -26,70 +26,81 @@ namespace StorageAndTrade
                 await page.SetValue();
             });
 
-            CreateLink(vLeft, "Вільні залишки", () =>
+            CreateLink(vLeft, "Вільні залишки", async () =>
             {
                 Звіт_ВільніЗалишки page = new Звіт_ВільніЗалишки();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Вільні залишки", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Партії товарів", () =>
+            CreateLink(vLeft, "Партії товарів", async () =>
             {
                 Звіт_ПартіїТоварів page = new Звіт_ПартіїТоварів();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Партії товарів", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Рух коштів", () =>
+            CreateLink(vLeft, "Рух коштів", async () =>
             {
                 Звіт_РухКоштів page = new Звіт_РухКоштів();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Рух коштів", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Розрахунки з контрагентами", () =>
+            CreateLink(vLeft, "Розрахунки з контрагентами", async () =>
             {
                 Звіт_РозрахункиЗКонтрагентами page = new Звіт_РозрахункиЗКонтрагентами();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Розрахунки з контрагентами", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Розрахунки з клієнтами", () =>
+            CreateLink(vLeft, "Розрахунки з клієнтами", async () =>
             {
                 Звіт_РозрахункиЗКлієнтами page = new Звіт_РозрахункиЗКлієнтами();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Розрахунки з клієнтами", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Розрахунки з постачальниками", () =>
+            CreateLink(vLeft, "Розрахунки з постачальниками", async () =>
             {
                 Звіт_РозрахункиЗПостачальниками page = new Звіт_РозрахункиЗПостачальниками();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Розрахунки з постачальниками", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Замовлення клієнтів", () =>
+            CreateLink(vLeft, "Замовлення клієнтів", async () =>
             {
                 Звіт_ЗамовленняКлієнтів page = new Звіт_ЗамовленняКлієнтів();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Замовлення клієнтів", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Замовлення постачальникам", () =>
+            CreateLink(vLeft, "Замовлення постачальникам", async () =>
             {
                 Звіт_ЗамовленняПостачальникам page = new Звіт_ЗамовленняПостачальникам();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Замовлення постачальникам", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Закупівлі", () =>
+            CreateLink(vLeft, "Закупівлі", async () =>
             {
                 Звіт_Закупівлі page = new Звіт_Закупівлі();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Закупівлі", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Продажі", () =>
+            CreateLink(vLeft, "Продажі", async () =>
             {
                 Звіт_Продажі page = new Звіт_Продажі();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Продажі", () => page);
+                await page.SetValue();
             });
 
-            CreateLink(vLeft, "Товари в комірках на складах", () =>
+            CreateLink(vLeft, "Товари в комірках на складах", async () =>
             {
                 Звіт_ТовариВКоміркахНаСкладах page = new Звіт_ТовариВКоміркахНаСкладах();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Звіт - Товари в комірках на складах", () => page);
+                await page.SetValue();
             });
 
             PackStart(hBoxList, false, false, 10);

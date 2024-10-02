@@ -619,7 +619,7 @@ ORDER BY
 
             Звіт.ColumnSettings.Add("ПочатковийЗалишок", new("На початок", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
             Звіт.ColumnSettings.Add("Прихід", new("Прихід", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
-            Звіт.ColumnSettings.Add("Розхід", new("Прихід", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("Розхід", new("Розхід", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
             Звіт.ColumnSettings.Add("КінцевийЗалишок", new("На кінець", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
             await Звіт.Select();
@@ -713,13 +713,12 @@ documents AS
             {
                 string docType = ТовариНаСкладах_Const.AllowDocumentSpendType[counter];
 
-                string union = (counter > 0 ? "UNION" : "");
+                string union = counter > 0 ? "UNION" : "";
                 query += $@"
 {union}
 SELECT 
-    '{docType}' AS doctype,
-    {table}.uid, 
-    {table}.docname, 
+    CONCAT({table}.uid, ':{docType}') AS Документ,
+    {table}.docname AS Документ_Назва, 
     register.period, 
     register.income, 
     register.ВНаявності,
@@ -799,11 +798,9 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
             query += $@"
 )
 SELECT 
-    CONCAT(uid, ':', doctype) AS uid_and_text,
-    uid,
-    period,
-    (CASE WHEN income = true THEN '+' ELSE '-' END) AS income,
-    docname AS Документ,  
+    Документ,
+    (CASE WHEN income = true THEN '+' ELSE '-' END) AS Рух,
+    Документ_Назва,
     Номенклатура,
     Номенклатура_Назва,
     ХарактеристикаНоменклатури,
@@ -835,11 +832,11 @@ ORDER BY
                 Query = query,
                 ParamQuery = paramQuery,
                 ParamReport = Фільтр,
-                GetBoxInfo = () => ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр)
+                GetBoxInfo = () => ВідобразитиФільтр("Документи", Фільтр)
             };
 
-            Звіт.ColumnSettings.Add("income", new("Рух", "", "", 0.5f));
-            Звіт.ColumnSettings.Add("Документ", new("Документ", "uid_and_text", "Документи.*"));
+            Звіт.ColumnSettings.Add("Рух", new("Рух", "", "", 0.5f));
+            Звіт.ColumnSettings.Add("Документ_Назва", new("Документ", "Документ", "Документи.*"));
             Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
 
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)

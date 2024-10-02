@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>29.09.2024 23:55:20</DateTimeSave>
+  <DateTimeSave>01.10.2024 10:27:41</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1241,7 +1241,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <Multiline>0</Multiline>
                 </Field>
               </ElementFields>
-              <IncludeIconColumn>1</IncludeIconColumn>
+              <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
           </Forms>
         </TablePart>

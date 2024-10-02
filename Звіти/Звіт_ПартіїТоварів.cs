@@ -24,20 +24,16 @@ limitations under the License.
 using Gtk;
 using InterfaceGtk;
 
-using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_ПартіїТоварів : ФормаЗвіт
+    class Звіт_ПартіїТоварів : ФормаЗвіт2
     {
-        Notebook reportNotebook;
-
         #region Filters
 
-        PeriodControl Період = new PeriodControl() { Period = ПеріодДляЖурналу.ТипПеріоду.Місяць, SensitiveSelectButton = false };
         Організації_PointerControl Організація = new Організації_PointerControl();
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
         Номенклатура_Папки_PointerControl Номенклатура_Папка = new Номенклатура_Папки_PointerControl() { Caption = "Номенклатура папка:" };
@@ -61,74 +57,27 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Звіт_ПартіїТоварів() 
+        public Звіт_ПартіїТоварів()
         {
             //Кнопки
-            Box hBoxTop = new Box(Orientation.Horizontal, 0);
-            PackStart(hBoxTop, false, false, 10);
-
-            //2
             Button bOstatok = new Button("Залишки");
-            bOstatok.Clicked += OnReport_Залишки;
+            bOstatok.Clicked += (object? sender, EventArgs args) => Залишки();
+            HBoxTop.PackStart(bOstatok, false, false, 10);
 
-            hBoxTop.PackStart(bOstatok, false, false, 10);
-
-            //3
             Button bOborot = new Button("Залишки та обороти");
-            bOborot.Clicked += OnReport_ЗалишкиТаОбороти;
+            bOborot.Clicked += (object? sender, EventArgs args) => ЗалишкиТаОбороти();
+            HBoxTop.PackStart(bOborot, false, false, 10);
 
-            hBoxTop.PackStart(bOborot, false, false, 10);
-
-            //4
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += OnReport_Документи;
-
-            hBoxTop.PackStart(bDocuments, false, false, 10);
-
-            CreatePeriod();
-            CreateFilters();
-
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
-            PackStart(reportNotebook, true, true, 0);
+            bDocuments.Clicked += (object? sender, EventArgs args) => Документи();
+            HBoxTop.PackStart(bDocuments, false, false, 10);
 
             ShowAll();
         }
 
         #region Filters
 
-        void CreatePeriod()
-        {
-            Box hBox = new Box(Orientation.Horizontal, 0);
-
-            //Період
-            CreateField(hBox, null, Період);
-
-            PackStart(hBox, false, false, 5);
-        }
-
-        void CreateFilters()
-        {
-            Box hBoxContainer = new Box(Orientation.Horizontal, 0);
-
-            Expander expander = new Expander("Відбори") { Expanded = true };
-            expander.Add(hBoxContainer);
-
-            //Container1
-            Box vBoxContainer1 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
-
-            CreateContainer1(vBoxContainer1);
-
-            //Container2
-            Box vBoxContainer2 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
-
-            CreateContainer2(vBoxContainer2);
-
-            PackStart(expander, false, false, 10);
-        }
-
-        void CreateContainer1(Box vBox)
+        protected override void CreateContainer1(Box vBox)
         {
             //Організація
             CreateField(vBox, null, Організація);
@@ -138,16 +87,13 @@ namespace StorageAndTrade
 
             //ХарактеристикиНоменклатури
             CreateField(vBox, null, ХарактеристикиНоменклатури);
-            ХарактеристикиНоменклатури.BeforeClickOpenFunc = () =>
-            {
-                ХарактеристикиНоменклатури.Власник = Номенклатура.Pointer;
-            };
+            ХарактеристикиНоменклатури.BeforeClickOpenFunc = () => ХарактеристикиНоменклатури.Власник = Номенклатура.Pointer;
 
             //Склад
             CreateField(vBox, null, Склад);
         }
 
-        void CreateContainer2(Box vBox)
+        protected override void CreateContainer2(Box vBox)
         {
             //Номенклатура папка
             CreateField(vBox, null, Номенклатура_Папка);
@@ -157,6 +103,22 @@ namespace StorageAndTrade
 
             //Серія
             CreateField(vBox, null, Серія);
+        }
+
+        #endregion
+
+        #region Period
+
+        const string КлючНалаштуванняКористувача = "Звіт.ПартіїТоварів";
+
+        public override async ValueTask SetValue()
+        {
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
+        }
+
+        protected override void PeriodChanged()
+        {
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
         }
 
         #endregion
@@ -223,24 +185,9 @@ namespace StorageAndTrade
             return hBoxCaption;
         }
 
-        void OnReport_Залишки(object? sender, EventArgs args)
+        async void Залишки()
         {
-            Залишки(СформуватиФільтр());
-        }
-
-        void OnReport_ЗалишкиТаОбороти(object? sender, EventArgs args)
-        {
-            ЗалишкиТаОбороти(СформуватиФільтр());
-        }
-
-        void OnReport_Документи(object? sender, EventArgs args)
-        {
-            Документи(СформуватиФільтр());
-        }
-
-        async void Залишки(object? Параметри, bool refreshPage = false)
-        {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр();
 
             #region SELECT
 
@@ -262,10 +209,10 @@ SELECT
     ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Склад} AS Склад,
     Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
     ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Рядок} AS Рядок,
-    ROUND(SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}), 2) AS Кількість,
-    ROUND(SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Собівартість}), 2) AS Собівартість,
     Довідник_ПакуванняОдиниціВиміру.uid AS ОдиницяВиміру,
-    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS ОдиницяВиміру_Назва
+    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS ОдиницяВиміру_Назва,
+    ROUND(SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Кількість}), 2) AS Кількість,
+    ROUND(SUM(ПартіїТоварів.{ПартіїТоварів_Залишки_TablePart.Собівартість}), 2) AS Собівартість
 FROM 
     {ПартіїТоварів_Залишки_TablePart.TABLE} AS ПартіїТоварів
     LEFT JOIN {Організації_Const.TABLE} AS Довідник_Організації ON Довідник_Організації.uid = 
@@ -305,18 +252,18 @@ FROM
 
                 query += $@"
 Довідник_Номенклатура.{Номенклатура_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Номенклатура_Папки_Const.TABLE}
-            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Номенклатура_Папки_Const.TABLE}.uid
-            FROM {Номенклатура_Папки_Const.TABLE}
-                JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Номенклатура_Папки_Const.TABLE}
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Номенклатура_Папки_Const.TABLE}.uid
+        FROM {Номенклатура_Папки_Const.TABLE}
+            JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
             }
 
@@ -350,18 +297,18 @@ FROM
 
                 query += $@"
 Довідник_Склади.{Склади_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Склади_Папки_Const.TABLE}
-            WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Склади_Папки_Const.TABLE}.uid
-            FROM {Склади_Папки_Const.TABLE}
-                JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Склади_Папки_Const.TABLE}
+        WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Склади_Папки_Const.TABLE}.uid
+        FROM {Склади_Папки_Const.TABLE}
+            JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
             }
 
@@ -414,76 +361,39 @@ ORDER BY
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            ЗвітСторінка Звіт = new ЗвітСторінка()
             {
-                { "Організація_Назва", "Організація" },
-                { "ПартіяТоварівКомпозит_Назва", "Партія" },
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "Рядок", "Рядок" },
-                { "Кількість", "Кількість" },
-                { "Собівартість", "Собівартість" },
-                { "ОдиницяВиміру_Назва", "Пакування" }
+                Caption = "Залишки",
+                Query = query,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
             };
+
+            Звіт.ColumnSettings.Add("Організація_Назва", new("Організація", "Організація", Організації_Const.POINTER));
+            Звіт.ColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія", "ПартіяТоварівКомпозит", ПартіяТоварівКомпозит_Const.POINTER));
+            Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
+
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+                Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
+
             if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
-                ВидиміКолонки.Add("Серія_Номер", "Серія");
+                Звіт.ColumnSettings.Add("Серія_Номер", new("Серія", "Серія", СеріїНоменклатури_Const.POINTER));
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Організація_Назва", "Організація" },
-                { "ПартіяТоварівКомпозит_Назва", "ПартіяТоварівКомпозит" },
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "ОдиницяВиміру_Назва", "ОдиницяВиміру" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
-                КолонкиДаних.Add("Серія_Номер", "Серія");
+            Звіт.ColumnSettings.Add("Склад_Назва", new("Склад", "Склад", Склади_Const.POINTER));
+            Звіт.ColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування", "ОдиницяВиміру", ПакуванняОдиниціВиміру_Const.POINTER));
+            Звіт.ColumnSettings.Add("Рядок", new("Рядок", "Рядок", Склади_Const.POINTER, 0.1f, CellDataFunc));
+            Звіт.ColumnSettings.Add("Кількість", new("Кількість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("Собівартість", new("Собівартість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Організація_Назва", Організації_Const.POINTER },
-                { "ПартіяТоварівКомпозит_Назва", ПартіяТоварівКомпозит_Const.POINTER },
-                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
-                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
-                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
-                { "Склад_Назва", Склади_Const.POINTER },
-                { "ОдиницяВиміру_Назва", ПакуванняОдиниціВиміру_Const.POINTER }
-            };
+            await Звіт.Select();
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "Рядок", 0.1f },
-                { "Кількість", 1 },
-                { "Собівартість", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "Рядок", CellDataFunc },
-                { "Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
-
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
-
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
-
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", await ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
 
-        async void ЗалишкиТаОбороти(object? Параметри, bool refreshPage = false)
+        async void ЗалишкиТаОбороти()
         {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр();
 
             #region SELECT
 
@@ -575,6 +485,8 @@ SELECT
     Склад,
     Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
     Рядок,
+    Довідник_ПакуванняОдиниціВиміру.uid AS ОдиницяВиміру,
+    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS ОдиницяВиміру_Назва,
     ROUND(SUM(КількістьПочатковийЗалишок), 2) AS КількістьПочатковийЗалишок,
     ROUND(SUM(СобівартістьПочатковийЗалишок), 2) AS СобівартістьПочатковийЗалишок,
     ROUND(SUM(КількістьПрихід), 2) AS КількістьПрихід,
@@ -582,9 +494,7 @@ SELECT
     ROUND(SUM(СобівартістьПрихід), 2) AS СобівартістьПрихід,
     ROUND(SUM(СобівартістьРозхід), 2) AS СобівартістьРозхід,
     ROUND(SUM(КількістьКінцевийЗалишок), 2) AS КількістьКінцевийЗалишок,
-    ROUND(SUM(СобівартістьКінцевийЗалишок), 2) AS СобівартістьКінцевийЗалишок,
-    Довідник_ПакуванняОдиниціВиміру.uid AS ОдиницяВиміру,
-    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS ОдиницяВиміру_Назва
+    ROUND(SUM(СобівартістьКінцевийЗалишок), 2) AS СобівартістьКінцевийЗалишок
 FROM 
 (
     SELECT 
@@ -675,18 +585,18 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
 
                 query += $@"
 Довідник_Номенклатура.{Номенклатура_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Номенклатура_Папки_Const.TABLE}
-            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Номенклатура_Папки_Const.TABLE}.uid
-            FROM {Номенклатура_Папки_Const.TABLE}
-                JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Номенклатура_Папки_Const.TABLE}
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Номенклатура_Папки_Const.TABLE}.uid
+        FROM {Номенклатура_Папки_Const.TABLE}
+            JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
             }
 
@@ -720,18 +630,18 @@ LEFT JOIN {ПакуванняОдиниціВиміру_Const.TABLE} AS Дові
 
                 query += $@"
 Довідник_Склади.{Склади_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Склади_Папки_Const.TABLE}
-            WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Склади_Папки_Const.TABLE}.uid
-            FROM {Склади_Папки_Const.TABLE}
-                JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Склади_Папки_Const.TABLE}
+        WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Склади_Папки_Const.TABLE}.uid
+        FROM {Склади_Папки_Const.TABLE}
+            JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
             }
 
@@ -786,96 +696,52 @@ ORDER BY
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
-            {
-                { "Організація_Назва", "Організація" },
-                { "ПартіяТоварівКомпозит_Назва", "Партія" },
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "Рядок", "Рядок" },
-                { "КількістьПочатковийЗалишок", "Кількість" },
-                { "СобівартістьПочатковийЗалишок", "Собівартість" },
-                { "КількістьПрихід", "Кількість +" },
-                { "КількістьРозхід", "Кількість -" },
-                { "СобівартістьПрихід", "Собівартість +" },
-                { "СобівартістьРозхід", "Собівартість -" },
-                { "КількістьКінцевийЗалишок", "Кількість" },
-                { "СобівартістьКінцевийЗалишок", "Собівартість" },
-                { "ОдиницяВиміру_Назва", "Пакування" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
-                ВидиміКолонки.Add("Серія_Номер", "Серія");
-
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "ОдиницяВиміру_Назва", "ОдиницяВиміру" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
-                КолонкиДаних.Add("Серія_Номер", "Серія");
-
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
-                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
-                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
-                { "Склад_Назва", Склади_Const.POINTER },
-                { "ОдиницяВиміру_Назва", ПакуванняОдиниціВиміру_Const.POINTER }
-            };
-
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "Рядок", 0.1f },
-                { "КількістьПочатковийЗалишок", 1 },
-                { "СобівартістьПочатковийЗалишок", 1 },
-                { "КількістьПрихід", 1 },
-                { "КількістьРозхід", 1 },
-                { "СобівартістьПрихід", 1 },
-                { "СобівартістьРозхід", 1 },
-                { "КількістьКінцевийЗалишок", 1 },
-                { "СобівартістьКінцевийЗалишок", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "Рядок", CellDataFunc },
-                { "КількістьПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "СобівартістьПочатковийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "КількістьПрихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "КількістьРозхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "СобівартістьПрихід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "СобівартістьРозхід", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "КількістьКінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "СобівартістьКінцевийЗалишок", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
-
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
             {
                 { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
+            ЗвітСторінка Звіт = new ЗвітСторінка()
+            {
+                Caption = "Залишки та обороти",
+                Query = query,
+                ParamQuery = paramQuery,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр)
+            };
 
-            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
+            Звіт.ColumnSettings.Add("Організація_Назва", new("Організація", "Організація", Організації_Const.POINTER));
+            Звіт.ColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія", "ПартіяТоварівКомпозит", ПартіяТоварівКомпозит_Const.POINTER));
+            Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
 
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                Звіт.ColumnSettings.Add("Серія_Номер", new("Серія", "Серія", СеріїНоменклатури_Const.POINTER));
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки та обороти", await ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр), treeView, ЗалишкиТаОбороти, Фільтр, refreshPage);
+            Звіт.ColumnSettings.Add("Склад_Назва", new("Склад", "Склад", Склади_Const.POINTER));
+            Звіт.ColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування", "ОдиницяВиміру", ПакуванняОдиниціВиміру_Const.POINTER));
+            Звіт.ColumnSettings.Add("Рядок", new("Рядок", "Рядок", Склади_Const.POINTER, 0.1f, CellDataFunc));
+            Звіт.ColumnSettings.Add("КількістьПочатковийЗалишок", new("Кількість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("СобівартістьПочатковийЗалишок", new("Собівартість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("КількістьПрихід", new("Кількість +", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("КількістьРозхід", new("Кількість -", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("СобівартістьПрихід", new("Собівартість +", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("СобівартістьРозхід", new("Собівартість -", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("КількістьКінцевийЗалишок", new("Кількість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("СобівартістьКінцевийЗалишок", new("Собівартість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+
+            await Звіт.Select();
+
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
 
-        async void Документи(object? Параметри, bool refreshPage = false)
+        async void Документи()
         {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр(); ;
 
             #region SELECT
 
@@ -975,13 +841,12 @@ documents AS
             {
                 string docType = ПартіїТоварів_Const.AllowDocumentSpendType[counter];
 
-                string union = (counter > 0 ? "UNION" : "");
+                string union = counter > 0 ? "UNION" : "";
                 query += $@"
 {union}
 SELECT 
-    '{docType}' AS doctype,
-    {table}.uid, 
-    {table}.docname, 
+    CONCAT({table}.uid, ':{docType}') AS Документ,
+    {table}.docname AS Документ_Назва,
     register.period, 
     register.income, 
     register.Кількість,
@@ -1023,18 +888,18 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
 
                     query += $@"
 Довідник_Номенклатура.{Номенклатура_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Номенклатура_Папки_Const.TABLE}
-            WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Номенклатура_Папки_Const.TABLE}.uid
-            FROM {Номенклатура_Папки_Const.TABLE}
-                JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Номенклатура_Папки_Const.TABLE}
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Номенклатура_Папки_Const.TABLE}.uid
+        FROM {Номенклатура_Папки_Const.TABLE}
+            JOIN r ON {Номенклатура_Папки_Const.TABLE}.{Номенклатура_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
                 }
 
@@ -1046,18 +911,18 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
 
                     query += $@"
 Довідник_Склади.{Склади_Const.Папка} IN 
+(
+    WITH RECURSIVE r AS 
     (
-        WITH RECURSIVE r AS 
-        (
-            SELECT uid
-            FROM {Склади_Папки_Const.TABLE}
-            WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
-            UNION ALL
-            SELECT {Склади_Папки_Const.TABLE}.uid
-            FROM {Склади_Папки_Const.TABLE}
-                JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid
-        ) SELECT uid FROM r
-    )
+        SELECT uid
+        FROM {Склади_Папки_Const.TABLE}
+        WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
+        UNION ALL
+        SELECT {Склади_Папки_Const.TABLE}.uid
+        FROM {Склади_Папки_Const.TABLE}
+            JOIN r ON {Склади_Папки_Const.TABLE}.{Склади_Папки_Const.Родич} = r.uid
+    ) SELECT uid FROM r
+)
 ";
                 }
 
@@ -1069,11 +934,9 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
             query += $@"
 )
 SELECT 
-    CONCAT(uid, ':', doctype) AS uid_and_text,
-    uid,
-    period,
-    (CASE WHEN income = true THEN '+' ELSE '-' END) AS income, 
-    docname AS Документ,
+    Документ,
+    (CASE WHEN income = true THEN '+' ELSE '-' END) AS Рух,
+    Документ_Назва,
     Організація,
     Організація_Назва,
     ПартіяТоварівКомпозит,
@@ -1087,10 +950,10 @@ SELECT
     Склад,
     Склад_Назва,
     Рядок,
-    ROUND(Кількість, 2) AS Кількість, 
-    ROUND(Собівартість, 2) AS Собівартість,
     ОдиницяВиміру,
-    ОдиницяВиміру_Назва
+    ОдиницяВиміру_Назва,
+    ROUND(Кількість, 2) AS Кількість, 
+    ROUND(Собівартість, 2) AS Собівартість
 FROM documents
 ORDER BY 
     period ASC, 
@@ -1101,82 +964,43 @@ ORDER BY
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
-            {
-                { "income", "Рух" },
-                { "Документ", "Документ" },
-                { "Організація_Назва", "Організація" },
-                { "ПартіяТоварівКомпозит_Назва", "Партія" },
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "Рядок", "Рядок" },
-                { "Кількість", "Кількість" },
-                { "Собівартість", "Собівартість" },
-                { "ОдиницяВиміру_Назва", "Пакування" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
-                ВидиміКолонки.Add("Серія_Номер", "Серія");
-
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Документ", "uid_and_text" },
-                { "Організація_Назва", "Організація" },
-                { "ПартіяТоварівКомпозит_Назва", "ПартіяТоварівКомпозит" },
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "ОдиницяВиміру_Назва", "ОдиницяВиміру" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
-                КолонкиДаних.Add("Серія_Номер", "Серія");
-
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Документ", "Документи.*" },
-                { "Організація_Назва", Організації_Const.POINTER },
-                { "ПартіяТоварівКомпозит_Назва", ПартіяТоварівКомпозит_Const.POINTER },
-                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
-                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
-                { "Серія_Номер", СеріїНоменклатури_Const.POINTER },
-                { "Склад_Назва", Склади_Const.POINTER },
-                { "ОдиницяВиміру_Назва", ПакуванняОдиниціВиміру_Const.POINTER }
-            };
-
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "income", 0.5f },
-                { "Рядок", 0.1f },
-                { "Кількість", 1 },
-                { "Собівартість", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "Рядок", CellDataFunc },
-                { "Кількість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "Собівартість", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
-
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
             {
                 { "ПочатокПеріоду", Фільтр.ДатаПочатокПеріоду },
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
+            ЗвітСторінка Звіт = new ЗвітСторінка()
+            {
+                Caption = "Документи",
+                Query = query,
+                ParamQuery = paramQuery,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("Документи", Фільтр)
+            };
 
-            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
+            Звіт.ColumnSettings.Add("Рух", new("Рух", "", "", 0.5f));
+            Звіт.ColumnSettings.Add("Документ_Назва", new("Документ", "Документ", "Документи.*"));
+            Звіт.ColumnSettings.Add("Організація_Назва", new("Організація", "Організація", Організації_Const.POINTER));
+            Звіт.ColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія", "ПартіяТоварівКомпозит", ПартіяТоварівКомпозит_Const.POINTER));
+            Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
 
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
+            if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                Звіт.ColumnSettings.Add("Серія_Номер", new("Серія", "Серія", СеріїНоменклатури_Const.POINTER));
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", await ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
+            Звіт.ColumnSettings.Add("Склад_Назва", new("Склад", "Склад", Склади_Const.POINTER));
+            Звіт.ColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування", "ОдиницяВиміру", ПакуванняОдиниціВиміру_Const.POINTER));
+            Звіт.ColumnSettings.Add("Рядок", new("Рядок", "Рядок", Склади_Const.POINTER, 0.1f, CellDataFunc));
+            Звіт.ColumnSettings.Add("Кількість", new("Кількість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("Собівартість", new("Собівартість", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+
+            await Звіт.Select();
+
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
 
         //Функція Для Колонки
@@ -1197,6 +1021,5 @@ ORDER BY
                 }
             }
         }
-
     }
 }

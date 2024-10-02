@@ -10,7 +10,7 @@ using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
-using InterfaceGtk.Іконки;
+
 
 namespace StorageAndTrade
 {
@@ -22,7 +22,7 @@ namespace StorageAndTrade
 
         enum Columns
         {
-            Image, Тип,
+            Тип,
             Значення,
             Телефон,
             ЕлектроннаПошта,
@@ -34,7 +34,7 @@ namespace StorageAndTrade
         }
 
         ListStore Store = new ListStore([
-            typeof(Gdk.Pixbuf),
+
             typeof(string), //Тип
             typeof(string), //Значення
             typeof(string), //Телефон
@@ -64,7 +64,7 @@ namespace StorageAndTrade
             {
                 return
                 [
-                    ДляТабличногоСписку.Normal,ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(Тип),
+                    ПсевдонімиПерелічення.ТипиКонтактноїІнформації_Alias(Тип),
                     Значення,
                     Телефон,
                     ЕлектроннаПошта,
@@ -105,7 +105,7 @@ namespace StorageAndTrade
 
         void AddColumn()
         {
-            TreeViewGrid.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", (int)Columns.Image));
+
             //Тип
             {
 

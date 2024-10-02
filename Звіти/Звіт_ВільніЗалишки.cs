@@ -24,20 +24,16 @@ limitations under the License.
 using Gtk;
 using InterfaceGtk;
 
-using StorageAndTrade_1_0;
 using Константи = StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_ВільніЗалишки : ФормаЗвіт
+    class Звіт_ВільніЗалишки : ФормаЗвіт2
     {
-        Notebook reportNotebook;
-
         #region Filters
 
-        PeriodControl Період = new PeriodControl() { Period = ПеріодДляЖурналу.ТипПеріоду.Місяць, SensitiveSelectButton = false };
         Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
         Номенклатура_Папки_PointerControl Номенклатура_Папка = new Номенклатура_Папки_PointerControl() { Caption = "Номенклатура папка:" };
         ХарактеристикиНоменклатури_PointerControl ХарактеристикиНоменклатури = new ХарактеристикиНоменклатури_PointerControl();
@@ -57,90 +53,58 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Звіт_ВільніЗалишки() 
+        public Звіт_ВільніЗалишки()
         {
             //Кнопки
-            Box hBoxTop = new Box(Orientation.Horizontal, 0);
-            PackStart(hBoxTop, false, false, 10);
-
-            //2
             Button bOstatok = new Button("Залишки");
-            bOstatok.Clicked += OnReport_Залишки;
+            bOstatok.Clicked += (object? sender, EventArgs args) => Залишки();
+            HBoxTop.PackStart(bOstatok, false, false, 10);
 
-            hBoxTop.PackStart(bOstatok, false, false, 10);
-
-            //3
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += OnReport_Документи;
-
-            hBoxTop.PackStart(bDocuments, false, false, 10);
-
-            CreatePeriod();
-            CreateFilters();
-
-            reportNotebook = new Notebook() { Scrollable = true, EnablePopup = true, BorderWidth = 0, ShowBorder = false, TabPos = PositionType.Top };
-            PackStart(reportNotebook, true, true, 0);
+            bDocuments.Clicked += (object? sender, EventArgs args) => Документи();
+            HBoxTop.PackStart(bDocuments, false, false, 10);
 
             ShowAll();
         }
 
         #region Filters
 
-        void CreatePeriod()
-        {
-            Box hBox = new Box(Orientation.Horizontal, 0);
-
-            //Період
-            CreateField(hBox, null, Період);
-
-            PackStart(hBox, false, false, 5);
-        }
-
-        void CreateFilters()
-        {
-            Box hBoxContainer = new Box(Orientation.Horizontal, 0);
-
-            Expander expander = new Expander("Відбори") { Expanded = true };
-            expander.Add(hBoxContainer);
-
-            //Container1
-            Box vBoxContainer1 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer1, false, false, 5);
-
-            CreateContainer1(vBoxContainer1);
-
-            //Container2
-            Box vBoxContainer2 = new Box(Orientation.Vertical, 0) { WidthRequest = 500 };
-            hBoxContainer.PackStart(vBoxContainer2, false, false, 5);
-
-            CreateContainer2(vBoxContainer2);
-
-            PackStart(expander, false, false, 10);
-        }
-
-        void CreateContainer1(Box vBox)
+        protected override void CreateContainer1(Box vBox)
         {
             //Номенклатура
             CreateField(vBox, null, Номенклатура);
 
             //ХарактеристикиНоменклатури
             CreateField(vBox, null, ХарактеристикиНоменклатури);
-            ХарактеристикиНоменклатури.BeforeClickOpenFunc = () =>
-            {
-                ХарактеристикиНоменклатури.Власник = Номенклатура.Pointer;
-            };
+            ХарактеристикиНоменклатури.BeforeClickOpenFunc = () => ХарактеристикиНоменклатури.Власник = Номенклатура.Pointer;
 
             //Склад
             CreateField(vBox, null, Склад);
         }
 
-        void CreateContainer2(Box vBox)
+        protected override void CreateContainer2(Box vBox)
         {
             //Номенклатура папка
             CreateField(vBox, null, Номенклатура_Папка);
 
             //Склад папка
             CreateField(vBox, null, Склад_Папка);
+        }
+
+        #endregion
+
+        #region Period
+
+        const string КлючНалаштуванняКористувача = "Звіт.ВільніЗалишки";
+
+        public override async ValueTask SetValue()
+        {
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
+        }
+
+        protected override void PeriodChanged()
+        {
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
         }
 
         #endregion
@@ -202,19 +166,9 @@ namespace StorageAndTrade
             return hBoxCaption;
         }
 
-        void OnReport_Залишки(object? sender, EventArgs args)
+        async void Залишки()
         {
-            Залишки(СформуватиФільтр());
-        }
-
-        void OnReport_Документи(object? sender, EventArgs args)
-        {
-            Документи(СформуватиФільтр());
-        }
-
-        async void Залишки(object? Параметри, bool refreshPage = false)
-        {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр();
 
             #region SELECT
 
@@ -228,11 +182,11 @@ SELECT
     Довідник_ХарактеристикиНоменклатури.{ХарактеристикиНоменклатури_Const.Назва} AS ХарактеристикаНоменклатури_Назва,
     ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.Склад} AS Склад,
     Довідник_Склади.{Склади_Const.Назва} AS Склад_Назва,
+    Довідник_ПакуванняОдиниціВиміру.uid AS ОдиницяВиміру,
+    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS ОдиницяВиміру_Назва,
     ROUND(SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВНаявності}), 2) AS ВНаявності,
     ROUND(SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіЗіСкладу}), 2) AS ВРезервіЗіСкладу,
-    ROUND(SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення}), 2) AS ВРезервіПідЗамовлення,
-    Довідник_ПакуванняОдиниціВиміру.uid AS ОдиницяВиміру,
-    Довідник_ПакуванняОдиниціВиміру.{ПакуванняОдиниціВиміру_Const.Назва} AS ОдиницяВиміру_Назва
+    ROUND(SUM(ВільніЗалишки.{ВільніЗалишки_Залишки_TablePart.ВРезервіПідЗамовлення}), 2) AS ВРезервіПідЗамовлення
 FROM 
     {ВільніЗалишки_Залишки_TablePart.TABLE} AS ВільніЗалишки
     LEFT JOIN {Номенклатура_Const.TABLE} AS Довідник_Номенклатура ON Довідник_Номенклатура.uid = 
@@ -347,65 +301,34 @@ ORDER BY
 
             #endregion
 
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
+            ЗвітСторінка Звіт = new ЗвітСторінка()
             {
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "ВНаявності", "В наявності" },
-                { "ВРезервіЗіСкладу", "В резерві зі складу" },
-                { "ВРезервіПідЗамовлення", "В резерві під замовлення" },
-                { "ОдиницяВиміру_Назва", "Пакування" }
+                Caption = "Залишки",
+                Query = query,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
             };
+
+            Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
+
             if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
+                Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
 
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "ОдиницяВиміру_Назва", "ОдиницяВиміру" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
+            Звіт.ColumnSettings.Add("Склад_Назва", new("Склад", "Склад", Склади_Const.POINTER));
+            Звіт.ColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування", "ОдиницяВиміру", ПакуванняОдиниціВиміру_Const.POINTER));
+            Звіт.ColumnSettings.Add("ВНаявності", new("В наявності", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("ВРезервіЗіСкладу", new("В резерві зі складу", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("ВРезервіПідЗамовлення", new("В резерві під замовлення", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
-                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
-                { "Склад_Назва", Склади_Const.POINTER },
-                { "ОдиницяВиміру_Назва", ПакуванняОдиниціВиміру_Const.POINTER }
-            };
+            await Звіт.Select();
 
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "ВНаявності", 1 },
-                { "ВРезервіЗіСкладу", 1 },
-                { "ВРезервіПідЗамовлення", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            ФункціїДляЗвітів.СтворитиМодельДаних(out ListStore listStore, recordResult.ColumnsName);
-
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
-
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
-
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Залишки", await ВідобразитиФільтр("Залишки", Фільтр), treeView, Залишки, Фільтр, refreshPage);
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
 
-        async void Документи(object? Параметри, bool refreshPage = false)
+        async void Документи()
         {
-            ПараметриФільтр Фільтр = Параметри != null ? (ПараметриФільтр)Параметри : new ПараметриФільтр();
+            ПараметриФільтр Фільтр = СформуватиФільтр();
 
             #region SELECT
 
@@ -478,15 +401,14 @@ documents AS
             {
                 string docType = ВільніЗалишки_Const.AllowDocumentSpendType[counter];
 
-                string union = (counter > 0 ? "UNION" : "");
+                string union = counter > 0 ? "UNION" : "";
                 query += $@"
 {union}
 SELECT 
-    '{docType}' AS doctype,
-    {table}.uid, 
-    {table}.docname, 
-    register.period, 
-    register.income, 
+    CONCAT({table}.uid, ':{docType}') AS Документ,
+    {table}.docname AS Документ_Назва,
+    register.period,
+    register.income,
     register.ВНаявності,
     register.ВРезервіЗіСкладу,
     register.ВРезервіПідЗамовлення,
@@ -563,75 +485,25 @@ FROM register INNER JOIN {table} ON {table}.uid = register.owner
             query += $@"
 )
 SELECT 
-    CONCAT(uid, ':', doctype) AS uid_and_text,
-    uid,
-    period,
-    (CASE WHEN income = true THEN '+' ELSE '-' END) AS income,
-    docname AS Документ, 
+    Документ,
+    (CASE WHEN income = true THEN '+' ELSE '-' END) AS Рух,
+    Документ_Назва,
     Номенклатура,
     Номенклатура_Назва,
     ХарактеристикаНоменклатури,
     ХарактеристикаНоменклатури_Назва,
     Склад,
     Склад_Назва,
+    ОдиницяВиміру,
+    ОдиницяВиміру_Назва,
     ВНаявності,
     ВРезервіЗіСкладу, 
-    ВРезервіПідЗамовлення,
-    ОдиницяВиміру,
-    ОдиницяВиміру_Назва
+    ВРезервіПідЗамовлення
 FROM documents
 ORDER BY period ASC
 ";
 
             #endregion
-
-            Dictionary<string, string> ВидиміКолонки = new Dictionary<string, string>
-            {
-                { "income", "Рух" },
-                { "Документ", "Документ" },
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "ВНаявності", "В наявності" },
-                { "ВРезервіЗіСкладу", "В резерві зі складу" },
-                { "ВРезервіПідЗамовлення", "В резерві під замовлення" },
-                { "ОдиницяВиміру_Назва", "Пакування" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                ВидиміКолонки.Add("ХарактеристикаНоменклатури_Назва", "Характеристика");
-
-            Dictionary<string, string> КолонкиДаних = new Dictionary<string, string>
-            {
-                { "Документ", "uid_and_text" },
-                { "Номенклатура_Назва", "Номенклатура" },
-                { "Склад_Назва", "Склад" },
-                { "ОдиницяВиміру_Назва", "ОдиницяВиміру" }
-            };
-            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
-                КолонкиДаних.Add("ХарактеристикаНоменклатури_Назва", "ХарактеристикаНоменклатури");
-
-            Dictionary<string, string> ТипиДаних = new Dictionary<string, string>
-            {
-                { "Документ", "Документи.*" },
-                { "Номенклатура_Назва", Номенклатура_Const.POINTER },
-                { "ХарактеристикаНоменклатури_Назва", ХарактеристикиНоменклатури_Const.POINTER },
-                { "Склад_Назва", Склади_Const.POINTER },
-                { "ОдиницяВиміру_Назва", ПакуванняОдиниціВиміру_Const.POINTER }
-            };
-
-            Dictionary<string, float> ПозиціяТекстуВКолонці = new Dictionary<string, float>
-            {
-                { "income", 0.5f },
-                { "ВНаявності", 1 },
-                { "ВРезервіЗіСкладу", 1 },
-                { "ВРезервіПідЗамовлення", 1 }
-            };
-
-            Dictionary<string, TreeCellDataFunc> ФункціяДляКолонки = new Dictionary<string, TreeCellDataFunc>
-            {
-                { "ВНаявності", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "ВРезервіЗіСкладу", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним },
-                { "ВРезервіПідЗамовлення", ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним }
-            };
 
             Dictionary<string, object> paramQuery = new Dictionary<string, object>
             {
@@ -639,19 +511,33 @@ ORDER BY period ASC
                 { "КінецьПеріоду", Фільтр.ДатаКінецьПеріоду }
             };
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query, paramQuery);
+            ЗвітСторінка Звіт = new ЗвітСторінка()
+            {
+                Caption = "Документи",
+                Query = query,
+                ParamQuery = paramQuery,
+                ParamReport = Фільтр,
+                GetBoxInfo = () => ВідобразитиФільтр("Документи", Фільтр)
+            };
 
-            ListStore listStore;
-            ФункціїДляЗвітів.СтворитиМодельДаних(out listStore, recordResult.ColumnsName);
+            Звіт.ColumnSettings.Add("Рух", new("Рух", "", "", 0.5f));
+            Звіт.ColumnSettings.Add("Документ_Назва", new("Документ", "Документ", "Документи.*"));
+            Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
 
-            TreeView treeView = new TreeView(listStore);
-            treeView.ButtonPressEvent += ФункціїДляЗвітів.OpenPageDirectoryOrDocument;
+            if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
 
-            ФункціїДляЗвітів.СтворитиКолонкиДляДерева(treeView, recordResult.ColumnsName, ВидиміКолонки, КолонкиДаних, ТипиДаних, ПозиціяТекстуВКолонці, ФункціяДляКолонки);
-            ФункціїДляЗвітів.ЗаповнитиМодельДаними(listStore, recordResult.ColumnsName, recordResult.ListRow);
+            Звіт.ColumnSettings.Add("Склад_Назва", new("Склад", "Склад", Склади_Const.POINTER));
+            Звіт.ColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування", "ОдиницяВиміру", ПакуванняОдиниціВиміру_Const.POINTER));
 
-            ФункціїДляЗвітів.CreateReportNotebookPage(reportNotebook, "Документи", await ВідобразитиФільтр("Документи", Фільтр), treeView, Документи, Фільтр, refreshPage);
+            Звіт.ColumnSettings.Add("ВНаявності", new("В наявності", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("ВРезервіЗіСкладу", new("В резерві зі складу", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+            Звіт.ColumnSettings.Add("ВРезервіПідЗамовлення", new("В резерві під замовлення", "", "", 1, ФункціїДляЗвітів.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+
+            await Звіт.Select();
+
+            Звіт.FillTreeView();
+            Звіт.View(Notebook);
         }
-
     }
 }
