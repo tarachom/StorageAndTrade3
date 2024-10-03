@@ -26,6 +26,10 @@ using StorageAndTrade_1_0;
 using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
 
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+
 namespace StorageAndTrade
 {
     class ЗвітСторінка : InterfaceGtk.ЗвітСторінка
@@ -42,6 +46,61 @@ namespace StorageAndTrade
             new ФункціїДляДинамічногоВідкриття().ВідкритиДовідникВідповідноДоВиду(name, unigueID);
         }
 
+        protected override async ValueTask ВигрузитиВФайл_PDF(InterfaceGtk.ЗвітСторінка звіт, List<string[]> rows)
+        {
+            const float MarginPage = 10;
+
+            //Назва та розмір колонок
+            Dictionary<string, int> Columns = [];
+            if (rows.Count > 0)
+            {
+                string[] НазвиКолонок = rows[0];
+                int СереднійРозмірКолонки = (int)Math.Round((PageSizes.A4.Width - MarginPage * 2) / НазвиКолонок.Length, 0) - 1;
+
+                foreach (var item in НазвиКолонок)
+                    Columns.Add(item, СереднійРозмірКолонки);
+            }
+
+            string Назва = звіт.ReportName + " - " + звіт.Caption;
+            string ДодатковаІнформація = звіт.GetInfo != null ? await звіт.GetInfo() : "";
+
+            QuestPDF.Settings.License = LicenseType.Community;
+            Document doc = Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4);
+                    page.Margin(MarginPage, Unit.Point);
+
+                    page.Content().Column(x =>
+                    {
+                        //Назва
+                        x.Item().Text(Назва).FontSize(10).Bold();
+
+                        //Параметри
+                        x.Item().Text(ДодатковаІнформація).FontSize(8).Bold();
+
+                        x.Item().Table(table =>
+                        {
+                            table.ColumnsDefinition(cols =>
+                            {
+                                foreach (var item in Columns.Values)
+                                    cols.ConstantColumn(item);
+                            });
+
+                            foreach (string[] cols in rows)
+                                for (int i = 0; i < cols.Length; i++)
+                                {
+                                    var cell = table.Cell().Border(1).Padding(1).Text(cols[i]).FontSize(6);
+                                }
+                        });
+                    });
+                });
+            });
+
+            doc.GeneratePdfAndShow();
+        }
+
         protected override async ValueTask ВідкритиЗбереженіЗвіти()
         {
             ЗбереженіЗвіти page = new ЗбереженіЗвіти();
@@ -55,7 +114,9 @@ namespace StorageAndTrade
             await Новий.New();
 
             Новий.Назва = звіт.ReportName + " - " + звіт.Caption;
-            Новий.Інформація = await звіт.GetInfo();
+
+            if (звіт.GetInfo != null)
+                Новий.Інформація = await звіт.GetInfo();
 
             foreach (string[] cols in rows)
             {

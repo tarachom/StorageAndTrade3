@@ -467,7 +467,6 @@ ORDER BY " +
                 Caption = "Обороти",
                 Query = query,
                 ParamQuery = paramQuery,
-                ParamReport = Фільтр,
                 GetInfo = () => ВідобразитиФільтр("Обороти", Фільтр)
             };
 

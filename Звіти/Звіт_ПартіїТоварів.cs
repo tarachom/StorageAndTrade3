@@ -362,7 +362,6 @@ ORDER BY
                 ReportName = "Партії товарів",
                 Caption = "Залишки",
                 Query = query,
-                ParamReport = Фільтр,
                 GetInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
             };
 
@@ -705,7 +704,6 @@ ORDER BY
                 Caption = "Залишки та обороти",
                 Query = query,
                 ParamQuery = paramQuery,
-                ParamReport = Фільтр,
                 GetInfo = () => ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр)
             };
 
@@ -974,7 +972,6 @@ ORDER BY
                 Caption = "Документи",
                 Query = query,
                 ParamQuery = paramQuery,
-                ParamReport = Фільтр,
                 GetInfo = () => ВідобразитиФільтр("Документи", Фільтр)
             };
 

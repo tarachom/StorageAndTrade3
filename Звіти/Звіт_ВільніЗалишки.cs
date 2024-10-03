@@ -302,7 +302,6 @@ ORDER BY
                 ReportName = "Вільні залишки",
                 Caption = "Залишки",
                 Query = query,
-                ParamReport = Фільтр,
                 GetInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
             };
 
@@ -514,7 +513,6 @@ ORDER BY period ASC
                 Caption = "Документи",
                 Query = query,
                 ParamQuery = paramQuery,
-                ParamReport = Фільтр,
                 GetInfo = () => ВідобразитиФільтр("Документи", Фільтр)
             };
 
