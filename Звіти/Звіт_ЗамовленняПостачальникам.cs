@@ -124,10 +124,8 @@ namespace StorageAndTrade
             };
         }
 
-        async ValueTask<Box> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        async ValueTask<string> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
         {
-            Box hBoxCaption = new Box(Orientation.Horizontal, 0);
-
             string text = "";
 
             switch (typeReport)
@@ -161,9 +159,7 @@ namespace StorageAndTrade
             if (!Фільтр.Склад_Папка.IsEmpty())
                 text += "Склад папка: <b>" + await Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
 
-            hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
-
-            return hBoxCaption;
+            return text;
         }
 
         async void Залишки()
@@ -298,10 +294,11 @@ ORDER BY
 
             ЗвітСторінка Звіт = new ЗвітСторінка()
             {
+                ReportName = "Замовлення постачальникам",
                 Caption = "Залишки",
                 Query = query,
                 ParamReport = Фільтр,
-                GetBoxInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
+                GetInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
             };
 
             Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
@@ -506,11 +503,12 @@ ORDER BY period ASC
 
             ЗвітСторінка Звіт = new ЗвітСторінка()
             {
+                ReportName = "Замовлення постачальникам",
                 Caption = "Документи",
                 Query = query,
                 ParamQuery = paramQuery,
                 ParamReport = Фільтр,
-                GetBoxInfo = () => ВідобразитиФільтр("Документи", Фільтр)
+                GetInfo = () => ВідобразитиФільтр("Документи", Фільтр)
             };
 
             Звіт.ColumnSettings.Add("Рух", new("Рух", "", "", 0.5f));

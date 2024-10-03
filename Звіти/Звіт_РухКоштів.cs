@@ -114,10 +114,8 @@ namespace StorageAndTrade
             };
         }
 
-        async ValueTask<Box> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        async ValueTask<string> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
         {
-            Box hBoxCaption = new Box(Orientation.Horizontal, 0);
-
             string text = "";
 
             switch (typeReport)
@@ -146,9 +144,7 @@ namespace StorageAndTrade
             if (!Фільтр.Валюта.IsEmpty())
                 text += "Валюта: <b>" + await Фільтр.Валюта.GetPresentation() + "</b>; ";
 
-            hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
-
-            return hBoxCaption;
+            return text;
         }
 
         async void Залишки()
@@ -237,10 +233,11 @@ ORDER BY
 
             ЗвітСторінка Звіт = new ЗвітСторінка()
             {
+                ReportName = "Рух коштів",
                 Caption = "Залишки",
                 Query = query,
                 ParamReport = Фільтр,
-                GetBoxInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
+                GetInfo = () => ВідобразитиФільтр("Залишки", Фільтр)
             };
 
             Звіт.ColumnSettings.Add("Організація_Назва", new("Організація", "Організація", Організації_Const.POINTER));
@@ -432,11 +429,12 @@ ORDER BY
 
             ЗвітСторінка Звіт = new ЗвітСторінка()
             {
-                Caption = "Залишки",
+                ReportName = "Рух коштів",
+                Caption = "Залишки та обороти",
                 Query = query,
                 ParamQuery = paramQuery,
                 ParamReport = Фільтр,
-                GetBoxInfo = () => ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр)
+                GetInfo = () => ВідобразитиФільтр("ЗалишкиТаОбороти", Фільтр)
             };
 
             Звіт.ColumnSettings.Add("Організація_Назва", new("Організація", "Організація", Організації_Const.POINTER));
@@ -575,11 +573,12 @@ ORDER BY period ASC
 
             ЗвітСторінка Звіт = new ЗвітСторінка()
             {
+                ReportName = "Рух коштів",
                 Caption = "Документи",
                 Query = query,
                 ParamQuery = paramQuery,
                 ParamReport = Фільтр,
-                GetBoxInfo = () => ВідобразитиФільтр("Документи", Фільтр)
+                GetInfo = () => ВідобразитиФільтр("Документи", Фільтр)
             };
 
             Звіт.ColumnSettings.Add("Рух", new("Рух", "", "", 0.5f));

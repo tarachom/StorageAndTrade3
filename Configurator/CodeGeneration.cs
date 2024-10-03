@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 01.10.2024 10:27:41
+ * Дата конфігурації: 03.10.2024 16:11:16
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -148,6 +148,7 @@ namespace StorageAndTrade_1_0
                         "ТипорозміриКомірок" => await new Довідники.ТипорозміриКомірок_Pointer(uuidAndText.Uuid).GetPresentation(),
                         "СкладськіКомірки_Папки" => await new Довідники.СкладськіКомірки_Папки_Pointer(uuidAndText.Uuid).GetPresentation(),
                         "Блокнот" => await new Довідники.Блокнот_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ЗбереженіЗвіти" => await new Довідники.ЗбереженіЗвіти_Pointer(uuidAndText.Uuid).GetPresentation(),
                         _ => ""
                         };
                     }
@@ -1559,6 +1560,18 @@ namespace StorageAndTrade_1_0.Константи
             set
             {
                 Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i4", value);
+            }
+        }
+        public static int ЗбереженіЗвіти_Const
+        {
+            get 
+            {
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i7"); } ).Result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+            }
+            set
+            {
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i7", value);
             }
         }
              
@@ -10895,6 +10908,494 @@ namespace StorageAndTrade_1_0.Довідники
    
     #endregion
     
+    #region DIRECTORY "ЗбереженіЗвіти"
+    public static class ЗбереженіЗвіти_Const
+    {
+        public const string TABLE = "tab_b04";
+        public const string POINTER = "Довідники.ЗбереженіЗвіти"; /* Повна назва вказівника */
+        public const string FULLNAME = "Збережені звіти"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public readonly static string[] PRESENTATION_FIELDS = ["col_a2", ];
+        
+        public const string Додано = "col_a1";
+        public const string Назва = "col_a2";
+        public const string Користувач = "col_a3";
+        public const string Опис = "col_a4";
+        public const string Інформація = "col_a5";
+        public const string Код = "col_a6";
+    }
+
+    public class ЗбереженіЗвіти_Objest : DirectoryObject
+    {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
+        public ЗбереженіЗвіти_Objest() : base(Config.Kernel, "tab_b04",
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
+        {
+            
+                //Табличні частини
+                ЗвітСторінка_TablePart = new ЗбереженіЗвіти_ЗвітСторінка_TablePart(this);
+                
+        }
+        
+        public async ValueTask New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ЗбереженіЗвіти_Const.FULLNAME + " *");
+            
+                await ЗбереженіЗвіти_Triggers.New(this);
+              
+        }
+
+        public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
+        {
+            if (await BaseRead(uid))
+            {
+                Додано = (base.FieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a1"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Назва = base.FieldValue["col_a2"].ToString() ?? "";
+                Користувач = new Довідники.Користувачі_Pointer(base.FieldValue["col_a3"]);
+                Опис = base.FieldValue["col_a4"].ToString() ?? "";
+                Інформація = base.FieldValue["col_a5"].ToString() ?? "";
+                Код = base.FieldValue["col_a6"].ToString() ?? "";
+                
+                BaseClear();
+                
+                if (readAllTablePart)
+                {
+                    
+                    await ЗвітСторінка_TablePart.Read();
+                }
+                
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public async ValueTask<bool> Save()
+        {
+            base.FieldValue["col_a1"] = Додано;
+            base.FieldValue["col_a2"] = Назва;
+            base.FieldValue["col_a3"] = Користувач.UnigueID.UGuid;
+            base.FieldValue["col_a4"] = Опис;
+            base.FieldValue["col_a5"] = Інформація;
+            base.FieldValue["col_a6"] = Код;
+            
+            bool result = await BaseSave();
+            if (result)
+            {
+                
+            }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+            return result;
+        }
+
+        public async ValueTask<ЗбереженіЗвіти_Objest> Copy(bool copyTableParts = false)
+        {
+            ЗбереженіЗвіти_Objest copy = new ЗбереженіЗвіти_Objest()
+            {
+                Додано = Додано,
+                Назва = Назва,
+                Користувач = Користувач,
+                Опис = Опис,
+                Інформація = Інформація,
+                Код = Код,
+                
+            };
+            
+            if (copyTableParts)
+            {
+            
+                //ЗвітСторінка - Таблична частина
+                await ЗвітСторінка_TablePart.Read();
+                copy.ЗвітСторінка_TablePart.Records = ЗвітСторінка_TablePart.Copy();
+            
+            }
+            
+
+            await copy.New();
+            
+            await ЗбереженіЗвіти_Triggers.Copying(copy, this);
+            return copy;
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            
+            await base.BaseDeletionLabel(label);
+        }
+
+        public async ValueTask Delete()
+        {
+            
+            await base.BaseDelete(["tab_b15", ]);
+        }
+        
+        public ЗбереженіЗвіти_Pointer GetDirectoryPointer()
+        {
+            return new ЗбереженіЗвіти_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, ЗбереженіЗвіти_Const.POINTER);
+        }
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return await base.BasePresentation(ЗбереженіЗвіти_Const.PRESENTATION_FIELDS);
+        }
+                
+        public DateTime Додано { get; set; } = DateTime.MinValue;
+        public string Назва { get; set; } = "";
+        public Довідники.Користувачі_Pointer Користувач { get; set; } = new Довідники.Користувачі_Pointer();
+        public string Опис { get; set; } = "";
+        public string Інформація { get; set; } = "";
+        public string Код { get; set; } = "";
+        
+        //Табличні частини
+        public ЗбереженіЗвіти_ЗвітСторінка_TablePart ЗвітСторінка_TablePart { get; set; }
+        
+    }
+
+    public class ЗбереженіЗвіти_Pointer : DirectoryPointer
+    {
+        public ЗбереженіЗвіти_Pointer(object? uid = null) : base(Config.Kernel, "tab_b04")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public ЗбереженіЗвіти_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b04")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public async ValueTask<ЗбереженіЗвіти_Objest?> GetDirectoryObject(bool readAllTablePart = false)
+        {
+            if (this.IsEmpty()) return null;
+            ЗбереженіЗвіти_Objest ЗбереженіЗвітиObjestItem = new ЗбереженіЗвіти_Objest();
+            return await ЗбереженіЗвітиObjestItem.Read(base.UnigueID, readAllTablePart) ? ЗбереженіЗвітиObjestItem : null;
+        }
+
+        public ЗбереженіЗвіти_Pointer Copy()
+        {
+            return new ЗбереженіЗвіти_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+        }
+
+        public string Назва { get; set; } = "";
+
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return Назва = await base.BasePresentation(ЗбереженіЗвіти_Const.PRESENTATION_FIELDS);
+        }
+
+        public static void GetJoin(Query querySelect, string joinField, string parentTable, string joinTableAlias, string fieldAlias)
+        {
+            string[] presentationField = new string [ЗбереженіЗвіти_Const.PRESENTATION_FIELDS.Length];
+            for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗбереженіЗвіти_Const.PRESENTATION_FIELDS[i]}";
+            querySelect.Joins.Add(new Join(ЗбереженіЗвіти_Const.TABLE, joinField, parentTable, joinTableAlias));
+            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            ЗбереженіЗвіти_Objest? obj = await GetDirectoryObject();
+            if (obj != null)
+            {
+                
+                await base.BaseDeletionLabel(label);
+            }
+        }
+		
+        public ЗбереженіЗвіти_Pointer GetEmptyPointer()
+        {
+            return new ЗбереженіЗвіти_Pointer();
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, ЗбереженіЗвіти_Const.POINTER);
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
+        }
+    }
+    
+    public class ЗбереженіЗвіти_Select : DirectorySelect
+    {
+        public ЗбереженіЗвіти_Select() : base(Config.Kernel, "tab_b04") { }        
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DirectoryPointerPosition.HasValue) { Current = new ЗбереженіЗвіти_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
+        public ЗбереженіЗвіти_Pointer? Current { get; private set; }
+        
+        public async ValueTask<ЗбереженіЗвіти_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ЗбереженіЗвіти_Pointer(pointer) : new ЗбереженіЗвіти_Pointer();
+        }
+        
+        public async ValueTask<List<ЗбереженіЗвіти_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ЗбереженіЗвіти_Pointer> directoryPointerList = [];
+            foreach (var directoryPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ЗбереженіЗвіти_Pointer(directoryPointer.UnigueID, directoryPointer.Fields));
+            return directoryPointerList;
+        }
+    }
+
+    
+    
+    public class ЗбереженіЗвіти_ЗвітСторінка_TablePart : DirectoryTablePart
+    {
+        public ЗбереженіЗвіти_ЗвітСторінка_TablePart(ЗбереженіЗвіти_Objest owner) : base(Config.Kernel, "tab_b15",
+             ["col_a2", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", ])
+        {
+            if (owner == null) throw new Exception("owner null");
+            Owner = owner;
+        }
+        
+        public const string А = "col_a2";
+        public const string Б = "col_a5";
+        public const string В = "col_a6";
+        public const string Г = "col_a7";
+        public const string Ґ = "col_a8";
+        public const string Д = "col_a9";
+        public const string Е = "col_b1";
+        public const string Є = "col_b2";
+        public const string Ж = "col_b3";
+        public const string З = "col_b4";
+        public const string И = "col_b5";
+        public const string І = "col_b6";
+        public const string Ї = "col_b7";
+        public const string Й = "col_b8";
+        public const string К = "col_b9";
+        public const string Л = "col_c1";
+        public const string М = "col_c2";
+        public const string Н = "col_c3";
+        public const string О = "col_c4";
+        public const string П = "col_c5";
+        public const string Р = "col_c6";
+        public const string С = "col_c7";
+        public const string Т = "col_c8";
+        public const string У = "col_c9";
+        public const string Ф = "col_d1";
+        public const string Х = "col_d2";
+        public const string Ц = "col_d3";
+        public const string Ч = "col_d4";
+        public const string Ш = "col_d5";
+        public const string Щ = "col_d6";
+        public const string Ь = "col_d7";
+        public const string Ю = "col_d8";
+        public const string Я = "col_d9";
+
+        public ЗбереженіЗвіти_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; } = [];
+        
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            
+        }
+
+        public async ValueTask Read()
+        {
+            Records.Clear();
+            await base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record()
+                {
+                    UID = (Guid)fieldValue["uid"],
+                    А = fieldValue["col_a2"].ToString() ?? "",
+                    Б = fieldValue["col_a5"].ToString() ?? "",
+                    В = fieldValue["col_a6"].ToString() ?? "",
+                    Г = fieldValue["col_a7"].ToString() ?? "",
+                    Ґ = fieldValue["col_a8"].ToString() ?? "",
+                    Д = fieldValue["col_a9"].ToString() ?? "",
+                    Е = fieldValue["col_b1"].ToString() ?? "",
+                    Є = fieldValue["col_b2"].ToString() ?? "",
+                    Ж = fieldValue["col_b3"].ToString() ?? "",
+                    З = fieldValue["col_b4"].ToString() ?? "",
+                    И = fieldValue["col_b5"].ToString() ?? "",
+                    І = fieldValue["col_b6"].ToString() ?? "",
+                    Ї = fieldValue["col_b7"].ToString() ?? "",
+                    Й = fieldValue["col_b8"].ToString() ?? "",
+                    К = fieldValue["col_b9"].ToString() ?? "",
+                    Л = fieldValue["col_c1"].ToString() ?? "",
+                    М = fieldValue["col_c2"].ToString() ?? "",
+                    Н = fieldValue["col_c3"].ToString() ?? "",
+                    О = fieldValue["col_c4"].ToString() ?? "",
+                    П = fieldValue["col_c5"].ToString() ?? "",
+                    Р = fieldValue["col_c6"].ToString() ?? "",
+                    С = fieldValue["col_c7"].ToString() ?? "",
+                    Т = fieldValue["col_c8"].ToString() ?? "",
+                    У = fieldValue["col_c9"].ToString() ?? "",
+                    Ф = fieldValue["col_d1"].ToString() ?? "",
+                    Х = fieldValue["col_d2"].ToString() ?? "",
+                    Ц = fieldValue["col_d3"].ToString() ?? "",
+                    Ч = fieldValue["col_d4"].ToString() ?? "",
+                    Ш = fieldValue["col_d5"].ToString() ?? "",
+                    Щ = fieldValue["col_d6"].ToString() ?? "",
+                    Ь = fieldValue["col_d7"].ToString() ?? "",
+                    Ю = fieldValue["col_d8"].ToString() ?? "",
+                    Я = fieldValue["col_d9"].ToString() ?? "",
+                    
+                };
+                Records.Add(record);
+                
+            }
+            
+            base.BaseClear();
+        }
+        
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b04"))
+                throw new Exception("Owner not exist");
+                
+            await base.BaseBeginTransaction();
+                
+            if (clear_all_before_save)
+                await base.BaseDelete(Owner.UnigueID);
+            
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new()
+                {
+                    {"col_a2", record.А},
+                    {"col_a5", record.Б},
+                    {"col_a6", record.В},
+                    {"col_a7", record.Г},
+                    {"col_a8", record.Ґ},
+                    {"col_a9", record.Д},
+                    {"col_b1", record.Е},
+                    {"col_b2", record.Є},
+                    {"col_b3", record.Ж},
+                    {"col_b4", record.З},
+                    {"col_b5", record.И},
+                    {"col_b6", record.І},
+                    {"col_b7", record.Ї},
+                    {"col_b8", record.Й},
+                    {"col_b9", record.К},
+                    {"col_c1", record.Л},
+                    {"col_c2", record.М},
+                    {"col_c3", record.Н},
+                    {"col_c4", record.О},
+                    {"col_c5", record.П},
+                    {"col_c6", record.Р},
+                    {"col_c7", record.С},
+                    {"col_c8", record.Т},
+                    {"col_c9", record.У},
+                    {"col_d1", record.Ф},
+                    {"col_d2", record.Х},
+                    {"col_d3", record.Ц},
+                    {"col_d4", record.Ч},
+                    {"col_d5", record.Ш},
+                    {"col_d6", record.Щ},
+                    {"col_d7", record.Ь},
+                    {"col_d8", record.Ю},
+                    {"col_d9", record.Я},
+                    
+                };
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+            }
+                
+            await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+        
+        public async ValueTask Delete()
+        {
+            await base.BaseDelete(Owner.UnigueID);
+        }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in Records)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
+        
+        public class Record : DirectoryTablePartRecord
+        {
+            public string А { get; set; } = "";
+            public string Б { get; set; } = "";
+            public string В { get; set; } = "";
+            public string Г { get; set; } = "";
+            public string Ґ { get; set; } = "";
+            public string Д { get; set; } = "";
+            public string Е { get; set; } = "";
+            public string Є { get; set; } = "";
+            public string Ж { get; set; } = "";
+            public string З { get; set; } = "";
+            public string И { get; set; } = "";
+            public string І { get; set; } = "";
+            public string Ї { get; set; } = "";
+            public string Й { get; set; } = "";
+            public string К { get; set; } = "";
+            public string Л { get; set; } = "";
+            public string М { get; set; } = "";
+            public string Н { get; set; } = "";
+            public string О { get; set; } = "";
+            public string П { get; set; } = "";
+            public string Р { get; set; } = "";
+            public string С { get; set; } = "";
+            public string Т { get; set; } = "";
+            public string У { get; set; } = "";
+            public string Ф { get; set; } = "";
+            public string Х { get; set; } = "";
+            public string Ц { get; set; } = "";
+            public string Ч { get; set; } = "";
+            public string Ш { get; set; } = "";
+            public string Щ { get; set; } = "";
+            public string Ь { get; set; } = "";
+            public string Ю { get; set; } = "";
+            public string Я { get; set; } = "";
+            
+        }
+    }
+      
+   
+    #endregion
+    
 }
 
 namespace StorageAndTrade_1_0.Перелічення
@@ -12417,9 +12918,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -13205,9 +13704,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -13954,9 +14451,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -14738,9 +15233,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -15360,9 +15853,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -15870,9 +16361,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -16393,9 +16882,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -16929,9 +17416,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -17490,9 +17975,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -18036,9 +18519,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -18540,9 +19021,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -19198,9 +19677,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -19333,9 +19810,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -19462,9 +19937,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -19599,9 +20072,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -20037,9 +20508,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -20475,9 +20944,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -20943,9 +21410,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -21442,9 +21907,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -21947,9 +22410,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -22482,9 +22943,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -23112,9 +23571,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -23591,9 +24048,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -24071,9 +24526,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -24527,9 +24980,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 
@@ -24976,9 +25427,7 @@ namespace StorageAndTrade_1_0.Документи
 
         public List<Record> Copy()
         {
-            List<Record> copyRecords = new List<Record>();
-            copyRecords = Records;
-
+            List<Record> copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 01.10.2024 10:27:41
+ * Дата конфігурації: 03.10.2024 16:11:16
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -7573,6 +7573,155 @@ FROM
                         Код = Fields[Блокнот_Const.Код].ToString() ?? "",
                             Назва = Fields[Блокнот_Const.Назва].ToString() ?? "",
                             ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "",
+                            
+                    };
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
+
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DirectoryPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+        }
+    }
+	    
+    #endregion
+    
+    #region DIRECTORY "ЗбереженіЗвіти"
+      
+    public class ЗбереженіЗвіти_Записи : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        string ID = "";
+        
+        string Код = "";
+        
+        string Додано = "";
+        
+        string Назва = "";
+        
+        string Користувач = "";
+        
+
+        Array ToArray()
+        {
+            return new object[] 
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
+                ID,
+                /*Код*/ Код,
+                /*Додано*/ Додано,
+                /*Назва*/ Назва,
+                /*Користувач*/ Користувач,
+                
+            };
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Код*/ typeof(string),  
+                /*Додано*/ typeof(string),  
+                /*Назва*/ typeof(string),  
+                /*Користувач*/ typeof(string),  
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Код", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Код*/
+            treeView.AppendColumn(new TreeViewColumn("Додано", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Додано*/
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Користувач", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Користувач*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static UnigueID? DirectoryPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static ListBox CreateFilter(TreeView treeView)
+        {
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
+                
+            return listBox;
+        }
+
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Довідники.ЗбереженіЗвіти_Select ЗбереженіЗвіти_Select = new Довідники.ЗбереженіЗвіти_Select();
+            ЗбереженіЗвіти_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Код*/ Довідники.ЗбереженіЗвіти_Const.Код,
+                /*Додано*/ Довідники.ЗбереженіЗвіти_Const.Додано,
+                /*Назва*/ Довідники.ЗбереженіЗвіти_Const.Назва,
+                
+            ]);
+
+            
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) ЗбереженіЗвіти_Select.QuerySelect.Where = (List<Where>)where;
+
+            ЗбереженіЗвіти_Select.QuerySelect.Order.Add(
+               Довідники.ЗбереженіЗвіти_Const.Код, SelectOrder.DESC);
+            Довідники.Користувачі_Pointer.GetJoin(ЗбереженіЗвіти_Select.QuerySelect, Довідники.ЗбереженіЗвіти_Const.Користувач,
+                ЗбереженіЗвіти_Select.QuerySelect.Table, "join_tab_1", "Користувач");
+            
+
+            /* SELECT */
+            await ЗбереженіЗвіти_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
+            
+
+            while (ЗбереженіЗвіти_Select.MoveNext())
+            {
+                Довідники.ЗбереженіЗвіти_Pointer? cur = ЗбереженіЗвіти_Select.Current;
+                
+                if (cur != null)
+                {
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    ЗбереженіЗвіти_Записи Record = new ЗбереженіЗвіти_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Код = Fields[ЗбереженіЗвіти_Const.Код].ToString() ?? "",
+                            Додано = Fields[ЗбереженіЗвіти_Const.Додано].ToString() ?? "",
+                            Назва = Fields[ЗбереженіЗвіти_Const.Назва].ToString() ?? "",
+                            Користувач = Fields["Користувач"].ToString() ?? "",
                             
                     };
                     

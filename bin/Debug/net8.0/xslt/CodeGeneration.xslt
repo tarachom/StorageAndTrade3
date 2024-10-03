@@ -1679,9 +1679,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
         public List&lt;Record&gt; Copy()
         {
-            List&lt;Record&gt; copyRecords = new List&lt;Record&gt;();
-            copyRecords = Records;
-
+            List&lt;Record&gt; copyRecords = new(Records);
             foreach (Record copyRecordItem in copyRecords)
                 copyRecordItem.UID = Guid.Empty;
 

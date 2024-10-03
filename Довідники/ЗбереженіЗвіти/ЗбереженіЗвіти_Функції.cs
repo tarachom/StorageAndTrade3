@@ -1,6 +1,6 @@
 
 /*
-        Контрагенти_Функції.cs
+        ЗбереженіЗвіти_Функції.cs
         Функції
 */
 
@@ -10,7 +10,7 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    static class Контрагенти_Функції
+    static class ЗбереженіЗвіти_Функції
     {
         public static List<Where> Відбори(string searchText)
         {
@@ -18,25 +18,19 @@ namespace StorageAndTrade
             [
                 
                 //Назва
-                new Where(Контрагенти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-                        
-                //Код
-                new Where(Comparison.OR, Контрагенти_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-                        
-                //НазваПовна
-                new Where(Comparison.OR, Контрагенти_Const.НазваПовна, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(ЗбереженіЗвіти_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
                         
                 //Опис
-                new Where(Comparison.OR, Контрагенти_Const.Опис, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
+                new Where(Comparison.OR, ЗбереженіЗвіти_Const.Опис, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
             ];
         }
 
-        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null,
-            Action<UnigueID?>? сallBack_LoadRecords = null,
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
+            Action<UnigueID?>? сallBack_LoadRecords = null, 
             Action<UnigueID>? сallBack_OnSelectPointer = null)
         {
-            Контрагенти_Елемент page = new Контрагенти_Елемент
+            ЗбереженіЗвіти_Елемент page = new ЗбереженіЗвіти_Елемент
             {
                 IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
@@ -46,7 +40,7 @@ namespace StorageAndTrade
             if (IsNew)
             {
                 await page.Елемент.New();
-
+                
             }
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
@@ -60,7 +54,7 @@ namespace StorageAndTrade
 
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Контрагенти_Objest Обєкт = new Контрагенти_Objest();
+            ЗбереженіЗвіти_Objest Обєкт = new ЗбереженіЗвіти_Objest();
             if (await Обєкт.Read(unigueID))
                 await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
             else
@@ -69,16 +63,14 @@ namespace StorageAndTrade
 
         public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            Контрагенти_Objest Обєкт = new Контрагенти_Objest();
+            ЗбереженіЗвіти_Objest Обєкт = new ЗбереженіЗвіти_Objest();
             if (await Обєкт.Read(unigueID))
             {
-                Контрагенти_Objest Новий = await Обєкт.Copy(true);
+                ЗбереженіЗвіти_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
-
-                await Новий.Контакти_TablePart.Save(false); // Таблична частина "Контакти"
-
-                await Новий.Файли_TablePart.Save(false); // Таблична частина "Файли"
-
+                
+                    await Новий.ЗвітСторінка_TablePart.Save(false); // Таблична частина "ЗвітСторінка"
+                
                 return Новий.UnigueID;
             }
             else
@@ -89,3 +81,4 @@ namespace StorageAndTrade
         }
     }
 }
+    

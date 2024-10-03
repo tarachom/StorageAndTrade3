@@ -178,10 +178,8 @@ namespace StorageAndTrade
             };
         }
 
-        async ValueTask<Box> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
+        async ValueTask<string> ВідобразитиФільтр(string typeReport, ПараметриФільтр Фільтр)
         {
-            Box hBoxCaption = new Box(Orientation.Horizontal, 0);
-
             string text = "";
 
             text += "З <b>" +
@@ -221,9 +219,7 @@ namespace StorageAndTrade
             if (!Фільтр.ВидНоменклатури.IsEmpty())
                 text += "Вид: <b>" + await Фільтр.ВидНоменклатури.GetPresentation() + "</b>; ";
 
-            hBoxCaption.PackStart(new Label(text) { Wrap = true, UseMarkup = true }, false, false, 2);
-
-            return hBoxCaption;
+            return text;
         }
 
         async void Обороти()
@@ -467,11 +463,12 @@ ORDER BY " +
 
             ЗвітСторінка Звіт = new ЗвітСторінка()
             {
+                ReportName = "Закупівлі",
                 Caption = "Обороти",
                 Query = query,
                 ParamQuery = paramQuery,
                 ParamReport = Фільтр,
-                GetBoxInfo = () => ВідобразитиФільтр("Обороти", Фільтр)
+                GetInfo = () => ВідобразитиФільтр("Обороти", Фільтр)
             };
 
             Звіт.ColumnSettings.Add("Період_Назва", new("Період"));
