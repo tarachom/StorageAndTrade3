@@ -31,7 +31,7 @@ using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_Закупівлі : ФормаЗвіт2
+    class Звіт_Закупівлі : ФормаЗвіт
     {
         #region Filters
 

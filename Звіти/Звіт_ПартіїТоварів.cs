@@ -30,7 +30,7 @@ using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_ПартіїТоварів : ФормаЗвіт2
+    class Звіт_ПартіїТоварів : ФормаЗвіт
     {
         #region Filters
 

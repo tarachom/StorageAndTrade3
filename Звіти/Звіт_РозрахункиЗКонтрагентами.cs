@@ -29,7 +29,7 @@ using StorageAndTrade_1_0.РегістриНакопичення;
 
 namespace StorageAndTrade
 {
-    class Звіт_РозрахункиЗКонтрагентами : ФормаЗвіт2
+    class Звіт_РозрахункиЗКонтрагентами : ФормаЗвіт
     {
         #region Filters
 
