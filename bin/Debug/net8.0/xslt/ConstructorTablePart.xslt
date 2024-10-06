@@ -43,6 +43,9 @@ limitations under the License.
             <xsl:when test="$File = 'List'">
                 <xsl:call-template name="TablePartList" />
             </xsl:when>
+            <xsl:when test="$File = 'Report'">
+                <xsl:call-template name="TablePartReport" />
+            </xsl:when>
             
         </xsl:choose>
 
@@ -517,8 +520,91 @@ namespace <xsl:value-of select="$NameSpace"/>
         <!--<xsl:variable name="Fields" select="TablePart/Fields/Field"/>-->
 /*
         _ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
-        Список
+        Таблична Частина Список
 */
+    </xsl:template>
+
+<!--- 
+//
+// ============================ Звіт ============================
+//
+-->
+
+    <!-- Список -->
+    <xsl:template name="TablePartReport">
+        <xsl:variable name="TablePartName" select="TablePart/Name"/>
+        <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/>
+
+        <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
+        <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
+        <xsl:variable name="OwnerType">
+            <xsl:choose>
+                <xsl:when test="TablePart/OwnerType = 'Directory'">Довідник</xsl:when>
+                <xsl:when test="TablePart/OwnerType = 'Document'">Документ</xsl:when>
+                <xsl:otherwise>[...]</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+/*
+        <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Звіт.cs
+        Звіт
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриНакопичення;
+
+namespace <xsl:value-of select="$NameSpace"/>
+{
+    public class <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Звіт()
+    {
+        public async ValueTask Create()
+        {
+            <xsl:variable name="CountFieldsTL" select="count(TablePart/ElementFields/Field)"/>
+            string query = $@"
+SELECT
+<xsl:for-each select="$FieldsTL">
+    <xsl:value-of select="$TablePartName"/>.{<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>} AS <xsl:value-of select="Name"/><xsl:if test="position() != $CountFieldsTL">,
+    </xsl:if>
+    <xsl:choose>
+        <xsl:when test="Type = 'pointer'">
+            <xsl:variable name="nameGroup" select="substring-before(Pointer, '.')" />
+            <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+            <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/>.{<xsl:value-of select="$namePointer"/>_Const.Назва} AS <xsl:value-of select="Name"/>_Назва<xsl:if test="position() != $CountFieldsTL">,
+            </xsl:if>
+        </xsl:when>
+    </xsl:choose>
+</xsl:for-each>
+FROM
+    {<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.TABLE} AS <xsl:value-of select="$TablePartName"/>
+    <xsl:for-each select="$FieldsTL[Type = 'pointer']">
+        <xsl:variable name="nameGroup" select="substring-before(Pointer, '.')" />
+        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+    LEFT JOIN {<xsl:value-of select="$namePointer"/>_Const.TABLE} AS <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/> ON <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/>.uid = 
+        <xsl:value-of select="$TablePartName"/>.{<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>}
+    </xsl:for-each>
+";
+            ЗвітСторінка Звіт = new ЗвітСторінка()
+            {
+                ReportName = "<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart",
+                Caption = "<xsl:value-of select="$TablePartName"/>",
+                Query = query,
+                GetInfo = () =&gt; ValueTask.FromResult("Test")
+            };
+
+            <xsl:for-each select="$FieldsTL">
+            <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>", new("<xsl:value-of select="Name"/>"));
+            </xsl:for-each>
+            await Звіт.Select();
+
+            Звіт.FillTreeView();
+            Звіт.View(Program.GeneralNotebook);
+        }
+    }
+}
+
     </xsl:template>
 
 </xsl:stylesheet>
