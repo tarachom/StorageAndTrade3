@@ -712,6 +712,8 @@ namespace <xsl:value-of select="$NameSpace"/>
 //
 -->
 
+    <!--<xsl:key name="preg" match="/root/Document/ElementFields/Field[Type = 'pointer']" use="substring-after(Pointer, '.')"/>-->
+
     <!-- Список -->
     <xsl:template name="DocumentReport">
         <xsl:variable name="DocumentName" select="Document/Name"/>
@@ -740,17 +742,23 @@ SELECT
 <xsl:for-each select="$FieldsTL">
     <xsl:choose>
         <xsl:when test="Type = 'pointer'">
+            <xsl:variable name="name" select="Name" />
             <xsl:variable name="nameGroup" select="substring-before(Pointer, '.')" />
             <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+            <xsl:variable name="index">
+                <xsl:for-each select="$FieldsTL[Type = 'pointer' and $namePointer = substring-after(Pointer, '.')]">
+                    <xsl:if test="$name = Name and position() &gt; 1"><xsl:value-of select="position()"/></xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
             <xsl:value-of select="$DocumentName"/>.{<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>} AS <xsl:value-of select="Name"/>,
             <xsl:choose>
                 <xsl:when test="PresetntationFields/@Count = 1">
-                    <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/>.{<xsl:value-of select="$namePointer"/>_Const.<xsl:value-of select="PresetntationFields/Field"/><xsl:text>}</xsl:text>
+                    <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/><xsl:value-of select="$index"/>.{<xsl:value-of select="$namePointer"/>_Const.<xsl:value-of select="PresetntationFields/Field"/><xsl:text>}</xsl:text>
                 </xsl:when>
                 <xsl:when test="PresetntationFields/@Count &gt; 1">
                     <xsl:text>concat_ws (', '</xsl:text>
                     <xsl:for-each select="PresetntationFields/Field">
-                        <xsl:value-of select="concat(', ', $nameGroup, '_', $namePointer, '.{', $namePointer, '_Const.', text(), '}')"/>
+                        <xsl:value-of select="concat(', ', $nameGroup, '_', $namePointer, $index, '.{', $namePointer, '_Const.', text(), '}')"/>
                     </xsl:for-each>
                     <xsl:text>)</xsl:text>
                 </xsl:when>
@@ -767,9 +775,15 @@ SELECT
 FROM
     {<xsl:value-of select="$DocumentName"/>_Const.TABLE} AS <xsl:value-of select="$DocumentName"/>
     <xsl:for-each select="$FieldsTL[Type = 'pointer']">
+        <xsl:variable name="name" select="Name" />
         <xsl:variable name="nameGroup" select="substring-before(Pointer, '.')" />
         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-    LEFT JOIN {<xsl:value-of select="$namePointer"/>_Const.TABLE} AS <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/> ON <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/>.uid = 
+        <xsl:variable name="index">
+            <xsl:for-each select="$FieldsTL[Type = 'pointer' and $namePointer = substring-after(Pointer, '.')]">
+                <xsl:if test="$name = Name and position() &gt; 1"><xsl:value-of select="position()"/></xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+    LEFT JOIN {<xsl:value-of select="$namePointer"/>_Const.TABLE} AS <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/><xsl:value-of select="$index"/> ON <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/><xsl:value-of select="$index"/>.uid = 
         <xsl:value-of select="$DocumentName"/>.{<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>}
     </xsl:for-each>
 ";

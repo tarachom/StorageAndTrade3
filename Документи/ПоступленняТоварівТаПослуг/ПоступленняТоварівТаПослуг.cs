@@ -36,7 +36,6 @@ namespace StorageAndTrade
         public ПоступленняТоварівТаПослуг()
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
-            CreateLink(HBoxTop, "Звіт", async () => await ПоступленняТоварівТаПослуг_Звіт.Сформувати());
         }
 
         #region Override
