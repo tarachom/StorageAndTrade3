@@ -976,6 +976,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
         }
+
+        public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
 
@@ -1560,6 +1562,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
         }
+
+        public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
 

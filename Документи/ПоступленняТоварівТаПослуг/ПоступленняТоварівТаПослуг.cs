@@ -36,6 +36,7 @@ namespace StorageAndTrade
         public ПоступленняТоварівТаПослуг()
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
+            CreateLink(HBoxTop, "Звіт", async () => await ПоступленняТоварівТаПослуг_Звіт.Сформувати());
         }
 
         #region Override
@@ -176,247 +177,227 @@ namespace StorageAndTrade
 
         async void НаОснові_РозхіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
-                {
-                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(false);
+                if (Обєкт == null) continue;
 
-                    ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid)).GetDocumentObject(false);
-                    if (Обєкт == null) continue;
+                //
+                //Новий документ
+                //
 
-                    //
-                    //Новий документ
-                    //
+                РозхіднийКасовийОрдер_Objest Новий = new РозхіднийКасовийОрдер_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Каса = Обєкт.Каса;
+                Новий.Контрагент = Обєкт.Контрагент;
+                Новий.Договір = Обєкт.Договір;
+                Новий.СумаДокументу = Обєкт.СумаДокументу;
+                Новий.Основа = Обєкт.GetBasis();
+                Новий.ГосподарськаОперація = ГосподарськіОперації.ОплатаПостачальнику;
 
-                    РозхіднийКасовийОрдер_Objest Новий = new РозхіднийКасовийОрдер_Objest();
-                    await Новий.New();
-                    Новий.Організація = Обєкт.Організація;
-                    Новий.Валюта = Обєкт.Валюта;
-                    Новий.Каса = Обєкт.Каса;
-                    Новий.Контрагент = Обєкт.Контрагент;
-                    Новий.Договір = Обєкт.Договір;
-                    Новий.СумаДокументу = Обєкт.СумаДокументу;
-                    Новий.Основа = Обєкт.GetBasis();
-                    Новий.ГосподарськаОперація = ГосподарськіОперації.ОплатаПостачальнику;
+                await Новий.Save();
 
-                    await Новий.Save();
-
-                    РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент();
-                    await page.Елемент.Read(Новий.UnigueID);
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                    page.SetValue();
-                }
+                РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
         }
 
         async void НаОснові_ПоверненняТоварівПостачальнику(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                ПоверненняТоварівПостачальнику_Objest Новий = new ПоверненняТоварівПостачальнику_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Каса = Обєкт.Каса;
+                Новий.Контрагент = Обєкт.Контрагент;
+                Новий.Договір = Обєкт.Договір;
+                Новий.Склад = Обєкт.Склад;
+                Новий.СумаДокументу = Обєкт.СумаДокументу;
+                Новий.Основа = Обєкт.GetBasis();
+
+                if (await Новий.Save())
                 {
-                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid)).GetDocumentObject(true);
-                    if (Обєкт == null) continue;
-
-                    //
-                    //Новий документ
-                    //
-
-                    ПоверненняТоварівПостачальнику_Objest Новий = new ПоверненняТоварівПостачальнику_Objest();
-                    await Новий.New();
-                    Новий.Організація = Обєкт.Організація;
-                    Новий.Валюта = Обєкт.Валюта;
-                    Новий.Каса = Обєкт.Каса;
-                    Новий.Контрагент = Обєкт.Контрагент;
-                    Новий.Договір = Обєкт.Договір;
-                    Новий.Склад = Обєкт.Склад;
-                    Новий.СумаДокументу = Обєкт.СумаДокументу;
-                    Новий.Основа = Обєкт.GetBasis();
-
-                    if (await Новий.Save())
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
                     {
-                        //Товари
-                        foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
+                        Новий.Товари_TablePart.Records.Add(new ПоверненняТоварівПостачальнику_Товари_TablePart.Record()
                         {
-                            Новий.Товари_TablePart.Records.Add(new ПоверненняТоварівПостачальнику_Товари_TablePart.Record()
-                            {
-                                Номенклатура = record.Номенклатура,
-                                ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
-                                Серія = record.Серія,
-                                Пакування = record.Пакування,
-                                КількістьУпаковок = record.КількістьУпаковок,
-                                Кількість = record.Кількість,
-                                Ціна = record.Ціна,
-                                Сума = record.Сума,
-                                ДокументПоступлення = Обєкт.GetDocumentPointer()
-                            });
-                        }
-
-                        await Новий.Товари_TablePart.Save(false);
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість,
+                            Ціна = record.Ціна,
+                            Сума = record.Сума,
+                            ДокументПоступлення = Обєкт.GetDocumentPointer()
+                        });
                     }
 
-                    ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент();
-                    await page.Елемент.Read(Новий.UnigueID);
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                    page.SetValue();
+                    await Новий.Товари_TablePart.Save(false);
                 }
+
+                ПоверненняТоварівПостачальнику_Елемент page = new ПоверненняТоварівПостачальнику_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
         }
 
         async void НаОснові_РозміщенняТоварівНаСкладі(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                РозміщенняТоварівНаСкладі_Objest Новий = new РозміщенняТоварівНаСкладі_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Склад = Обєкт.Склад;
+                Новий.Автор = Обєкт.Автор;
+                Новий.Підрозділ = Обєкт.Підрозділ;
+                Новий.Основа = Обєкт.GetBasis();
+                Новий.ДокументПоступлення = Обєкт.GetDocumentPointer();
+
+                if (await Новий.Save())
                 {
-                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid)).GetDocumentObject(true);
-                    if (Обєкт == null) continue;
-
-                    //
-                    //Новий документ
-                    //
-
-                    РозміщенняТоварівНаСкладі_Objest Новий = new РозміщенняТоварівНаСкладі_Objest();
-                    await Новий.New();
-                    Новий.Організація = Обєкт.Організація;
-                    Новий.Склад = Обєкт.Склад;
-                    Новий.Автор = Обєкт.Автор;
-                    Новий.Підрозділ = Обєкт.Підрозділ;
-                    Новий.Основа = Обєкт.GetBasis();
-                    Новий.ДокументПоступлення = Обєкт.GetDocumentPointer();
-
-                    if (await Новий.Save())
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
                     {
-                        //Товари
-                        foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
+                        Новий.Товари_TablePart.Records.Add(new РозміщенняТоварівНаСкладі_Товари_TablePart.Record()
                         {
-                            Новий.Товари_TablePart.Records.Add(new РозміщенняТоварівНаСкладі_Товари_TablePart.Record()
-                            {
-                                Номенклатура = record.Номенклатура,
-                                ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
-                                Серія = record.Серія,
-                                Пакування = record.Пакування,
-                                КількістьУпаковок = record.КількістьУпаковок,
-                                Кількість = record.Кількість
-                            });
-                        }
-
-                        await Новий.Товари_TablePart.Save(false);
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість
+                        });
                     }
 
-                    РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент();
-                    await page.Елемент.Read(Новий.UnigueID);
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                    page.SetValue();
+                    await Новий.Товари_TablePart.Save(false);
                 }
+
+                РозміщенняТоварівНаСкладі_Елемент page = new РозміщенняТоварівНаСкладі_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
         }
 
         async void НаОснові_ВнутрішнєСпоживанняТоварів(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                ВнутрішнєСпоживанняТоварів_Objest Новий = new ВнутрішнєСпоживанняТоварів_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Склад = Обєкт.Склад;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Автор = Обєкт.Автор;
+                Новий.Підрозділ = Обєкт.Підрозділ;
+                Новий.Основа = Обєкт.GetBasis();
+
+                if (await Новий.Save())
                 {
-                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid)).GetDocumentObject(true);
-
-                    if (Обєкт == null)
-                        continue;
-
-                    //
-                    //Новий документ
-                    //
-
-                    ВнутрішнєСпоживанняТоварів_Objest Новий = new ВнутрішнєСпоживанняТоварів_Objest();
-                    await Новий.New();
-                    Новий.Організація = Обєкт.Організація;
-                    Новий.Склад = Обєкт.Склад;
-                    Новий.Валюта = Обєкт.Валюта;
-                    Новий.Автор = Обєкт.Автор;
-                    Новий.Підрозділ = Обєкт.Підрозділ;
-                    Новий.Основа = Обєкт.GetBasis();
-
-                    if (await Новий.Save())
+                    int sequenceNumber = 0;
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
                     {
-                        int sequenceNumber = 0;
-                        //Товари
-                        foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
+                        Новий.Товари_TablePart.Records.Add(new ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record()
                         {
-                            Новий.Товари_TablePart.Records.Add(new ВнутрішнєСпоживанняТоварів_Товари_TablePart.Record()
-                            {
-                                НомерРядка = ++sequenceNumber,
-                                Номенклатура = record.Номенклатура,
-                                ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
-                                Серія = record.Серія,
-                                Пакування = record.Пакування,
-                                КількістьУпаковок = record.КількістьУпаковок,
-                                Кількість = record.Кількість,
-                                Ціна = record.Ціна,
-                                Сума = record.Сума
-                            });
-                        }
-
-                        await Новий.Товари_TablePart.Save(false);
+                            НомерРядка = ++sequenceNumber,
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість,
+                            Ціна = record.Ціна,
+                            Сума = record.Сума
+                        });
                     }
 
-                    ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент();
-                    await page.Елемент.Read(Новий.UnigueID);
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                    page.SetValue();
+                    await Новий.Товари_TablePart.Save(false);
                 }
+
+                ВнутрішнєСпоживанняТоварів_Елемент page = new ВнутрішнєСпоживанняТоварів_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
         }
 
         async void НаОснові_ПереміщенняТоварів(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(unigueID).GetDocumentObject(true);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                ПереміщенняТоварів_Objest Новий = new ПереміщенняТоварів_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.СкладВідправник = Обєкт.Склад;
+                Новий.Автор = Обєкт.Автор;
+                Новий.Підрозділ = Обєкт.Підрозділ;
+                Новий.Основа = Обєкт.GetBasis();
+
+                if (await Новий.Save())
                 {
-                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
-
-                    ПоступленняТоварівТаПослуг_Objest? Обєкт = await new ПоступленняТоварівТаПослуг_Pointer(new UnigueID(uid)).GetDocumentObject(true);
-                    if (Обєкт == null) continue;
-
-                    //
-                    //Новий документ
-                    //
-
-                    ПереміщенняТоварів_Objest Новий = new ПереміщенняТоварів_Objest();
-                    await Новий.New();
-                    Новий.Організація = Обєкт.Організація;
-                    Новий.СкладВідправник = Обєкт.Склад;
-                    Новий.Автор = Обєкт.Автор;
-                    Новий.Підрозділ = Обєкт.Підрозділ;
-                    Новий.Основа = Обєкт.GetBasis();
-
-                    if (await Новий.Save())
+                    int sequenceNumber = 0;
+                    //Товари
+                    foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
                     {
-                        //Товари
-                        foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
+                        Новий.Товари_TablePart.Records.Add(new ПереміщенняТоварів_Товари_TablePart.Record()
                         {
-                            Новий.Товари_TablePart.Records.Add(new ПереміщенняТоварів_Товари_TablePart.Record()
-                            {
-                                Номенклатура = record.Номенклатура,
-                                ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
-                                Серія = record.Серія,
-                                Пакування = record.Пакування,
-                                КількістьУпаковок = record.КількістьУпаковок,
-                                Кількість = record.Кількість
-                            });
-                        }
-
-                        await Новий.Товари_TablePart.Save(false);
+                            НомерРядка = ++sequenceNumber,
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Серія = record.Серія,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість
+                        });
                     }
 
-                    ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент();
-                    await page.Елемент.Read(Новий.UnigueID);
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                    page.SetValue();
+                    await Новий.Товари_TablePart.Save(false);
                 }
+
+                ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
         }
 
         #endregion

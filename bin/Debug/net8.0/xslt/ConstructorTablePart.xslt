@@ -535,14 +535,11 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="TablePartName" select="TablePart/Name"/>
         <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/>
 
-        <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
         <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
-        <xsl:variable name="OwnerType">
-            <xsl:choose>
-                <xsl:when test="TablePart/OwnerType = 'Directory'">Довідник</xsl:when>
-                <xsl:when test="TablePart/OwnerType = 'Document'">Документ</xsl:when>
-                <xsl:otherwise>[...]</xsl:otherwise>
-            </xsl:choose>
+        <xsl:variable name="OwnerBlockName">
+            <xsl:if test="TablePart/OwnerType = 'Constants' and normalize-space(TablePart/OwnerBlockName) != ''">
+                <xsl:value-of select="concat(normalize-space(TablePart/OwnerBlockName), '.')"/>
+            </xsl:if>
         </xsl:variable>
 /*
         <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Звіт.cs
@@ -552,50 +549,77 @@ namespace <xsl:value-of select="$NameSpace"/>
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Константи;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриНакопичення;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    public class <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Звіт()
+    public static class <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Звіт
     {
-        public async ValueTask Create()
+        public static async ValueTask Сформувати()
         {
             <xsl:variable name="CountFieldsTL" select="count(TablePart/ElementFields/Field)"/>
             string query = $@"
 SELECT
 <xsl:for-each select="$FieldsTL">
-    <xsl:value-of select="$TablePartName"/>.{<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>} AS <xsl:value-of select="Name"/><xsl:if test="position() != $CountFieldsTL">,
-    </xsl:if>
     <xsl:choose>
         <xsl:when test="Type = 'pointer'">
             <xsl:variable name="nameGroup" select="substring-before(Pointer, '.')" />
             <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
-            <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/>.{<xsl:value-of select="$namePointer"/>_Const.Назва} AS <xsl:value-of select="Name"/>_Назва<xsl:if test="position() != $CountFieldsTL">,
-            </xsl:if>
+            <xsl:value-of select="$TablePartName"/>.{<xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>} AS <xsl:value-of select="Name"/>,
+            <xsl:choose>
+                <xsl:when test="PresetntationFields/@Count = 1">
+                    <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/>.{<xsl:value-of select="$namePointer"/>_Const.<xsl:value-of select="PresetntationFields/Field"/><xsl:text>}</xsl:text>
+                </xsl:when>
+                <xsl:when test="PresetntationFields/@Count &gt; 1">
+                    <xsl:text>concat_ws (', '</xsl:text>
+                    <xsl:for-each select="PresetntationFields/Field">
+                        <xsl:value-of select="concat(', ', $nameGroup, '_', $namePointer, '.{', $namePointer, '_Const.', text(), '}')"/>
+                    </xsl:for-each>
+                    <xsl:text>)</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>'#'</xsl:otherwise>
+            </xsl:choose> AS <xsl:value-of select="concat(Name, '_Назва')"/>
         </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="$TablePartName"/>.{<xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>} AS <xsl:value-of select="Name"/>
+        </xsl:otherwise>
     </xsl:choose>
+    <xsl:if test="position() != $CountFieldsTL">,
+    </xsl:if>
 </xsl:for-each>
 FROM
-    {<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.TABLE} AS <xsl:value-of select="$TablePartName"/>
+    {<xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.TABLE} AS <xsl:value-of select="$TablePartName"/>
     <xsl:for-each select="$FieldsTL[Type = 'pointer']">
         <xsl:variable name="nameGroup" select="substring-before(Pointer, '.')" />
         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
     LEFT JOIN {<xsl:value-of select="$namePointer"/>_Const.TABLE} AS <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/> ON <xsl:value-of select="$nameGroup"/>_<xsl:value-of select="$namePointer"/>.uid = 
-        <xsl:value-of select="$TablePartName"/>.{<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>}
+        <xsl:value-of select="$TablePartName"/>.{<xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>}
     </xsl:for-each>
 ";
             ЗвітСторінка Звіт = new ЗвітСторінка()
             {
-                ReportName = "<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart",
+                ReportName = "<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Звіт",
                 Caption = "<xsl:value-of select="$TablePartName"/>",
                 Query = query,
                 GetInfo = () =&gt; ValueTask.FromResult("Test")
             };
 
             <xsl:for-each select="$FieldsTL">
-            <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>", new("<xsl:value-of select="Name"/>"));
+                <xsl:choose>
+                    <xsl:when test="Type = 'pointer'">
+                        <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
+                        <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>_Назва", new("<xsl:value-of select="Caption"/>", "<xsl:value-of select="Name"/>", <xsl:value-of select="$namePointer"/>_Const.POINTER));
+                    </xsl:when>
+                    <xsl:when test="Type = 'integer' or Type = 'numeric'">
+                        <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>", new("<xsl:value-of select="Caption"/>", "", "", 1));
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>", new("<xsl:value-of select="Caption"/>"));
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:for-each>
             await Звіт.Select();
 

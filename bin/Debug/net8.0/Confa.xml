@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>06.10.2024 11:51:12</DateTimeSave>
+  <DateTimeSave>07.10.2024 11:59:08</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1386,6 +1386,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts>
@@ -1591,6 +1594,9 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Файли</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>1</IncludeIconColumn>
@@ -1991,6 +1997,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Виробники</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ВидНоменклатури</Name>
@@ -2000,6 +2009,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиНоменклатури</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ОдиницяВиміру</Name>
@@ -2009,6 +2021,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Папка</Name>
@@ -2018,6 +2033,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура_Папки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ОсновнаКартинкаФайл</Name>
@@ -2027,6 +2045,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Файли</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts>
@@ -2330,6 +2351,9 @@ END]]></Value>
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ТипНоменклатури</Name>
@@ -3089,6 +3113,9 @@ END]]></Value>
                   <SortNum>100</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Файли</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -3647,6 +3674,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ФізичніОсоби</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ВидЦін</Name>
@@ -3656,6 +3686,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Підрозділ</Name>
@@ -3665,6 +3698,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Папка</Name>
@@ -3674,6 +3710,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади_Папки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>НалаштуванняАдресногоЗберігання</Name>
@@ -3869,6 +3908,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -4011,6 +4053,9 @@ END]]></Value>
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -5216,6 +5261,9 @@ FROM
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>НазваПовна</Name>
@@ -5396,6 +5444,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура_Папки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -5540,6 +5591,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти_Папки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -5684,6 +5738,9 @@ FROM
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади_Папки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -6071,6 +6128,9 @@ WHERE
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Банки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -6080,6 +6140,9 @@ WHERE
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>НомерРахунку</Name>
@@ -6098,6 +6161,9 @@ WHERE
               <SortNum>6</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Підрозділ</Name>
@@ -6107,6 +6173,9 @@ WHERE
               <SortNum>7</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -6645,6 +6714,9 @@ WHERE
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Банки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -6654,6 +6726,9 @@ WHERE
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>НомерРахунку</Name>
@@ -6672,6 +6747,9 @@ WHERE
               <SortNum>6</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -7338,6 +7416,9 @@ FROM
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ТипЗапасів</Name>
@@ -7356,6 +7437,9 @@ FROM
               <SortNum>5</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -7365,6 +7449,9 @@ FROM
               <SortNum>6</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Договір</Name>
@@ -7374,6 +7461,10 @@ FROM
               <SortNum>7</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -8670,6 +8761,9 @@ FROM
               <SortNum>2</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Папка</Name>
@@ -8679,6 +8773,9 @@ FROM
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Лінія</Name>
@@ -8733,6 +8830,9 @@ FROM
               <SortNum>9</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ТипорозміриКомірок</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -9226,6 +9326,9 @@ FROM
               <SortNum>3</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіКомірки_Папки</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Власник</Name>
@@ -9235,6 +9338,9 @@ FROM
               <SortNum>4</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СкладськіПриміщення</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -10734,6 +10840,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -10743,6 +10852,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -10760,6 +10872,9 @@ FROM
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -10801,6 +10916,9 @@ FROM
                   <SortNum>9</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -11631,6 +11749,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -11640,6 +11761,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -11649,6 +11773,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -11666,6 +11793,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -11683,6 +11813,9 @@ FROM
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Ціна</Name>
@@ -11700,6 +11833,9 @@ FROM
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Скидка</Name>
@@ -11725,6 +11861,9 @@ FROM
                   <SortNum>12</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -11918,6 +12057,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ГосподарськаОперація</Name>
@@ -11936,6 +12078,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Склад</Name>
@@ -11945,6 +12090,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -11954,6 +12102,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -11971,6 +12122,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Документи.ЗамовленняПостачальнику</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ДатаОплати</Name>
@@ -12005,6 +12159,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>НомерВхідногоДокументу</Name>
@@ -12031,6 +12188,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.БанківськіРахункиКонтрагентів</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Договір</Name>
@@ -12040,6 +12200,10 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Автор</Name>
@@ -12049,6 +12213,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ПовернутиТару</Name>
@@ -12083,6 +12250,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Курс</Name>
@@ -12124,6 +12294,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>СтаттяРухуКоштів</Name>
@@ -12133,6 +12306,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтаттяРухуКоштів</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -12142,6 +12318,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Основа</Name>
@@ -12659,6 +12838,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -12668,6 +12850,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -12685,6 +12870,9 @@ FROM
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -12702,6 +12890,9 @@ FROM
                   <SortNum>7</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Ціна</Name>
@@ -12735,6 +12926,9 @@ FROM
                   <SortNum>11</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -13421,6 +13615,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -13430,6 +13627,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -13439,6 +13639,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -13456,6 +13659,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -13473,6 +13679,9 @@ FROM
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Ціна</Name>
@@ -13506,6 +13715,9 @@ FROM
                   <SortNum>12</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.ЗамовленняКлієнта</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>РахунокФактура</Name>
@@ -13515,6 +13727,9 @@ FROM
                   <SortNum>13</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.РахунокФактура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Склад</Name>
@@ -13524,6 +13739,9 @@ FROM
                   <SortNum>14</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Партія</Name>
@@ -13533,6 +13751,9 @@ FROM
                   <SortNum>15</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -13894,6 +14115,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -13903,6 +14127,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -13912,6 +14139,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ВидЦіни</Name>
@@ -13921,6 +14151,9 @@ FROM
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Ціна</Name>
@@ -15286,6 +15519,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -15295,6 +15531,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -15304,6 +15543,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -15321,6 +15563,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -15338,6 +15583,9 @@ FROM
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -15851,6 +16099,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -15860,6 +16111,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -15869,6 +16123,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -15886,6 +16143,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -15919,6 +16179,9 @@ FROM
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -16434,6 +16697,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -16443,6 +16709,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -16452,6 +16721,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -16469,6 +16741,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -16502,6 +16777,9 @@ FROM
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -16946,6 +17224,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -16955,6 +17236,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -17162,6 +17446,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ЗамовленняКлієнта</Name>
@@ -17171,6 +17458,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Документи.ЗамовленняКлієнта</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -17180,6 +17470,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -17189,6 +17482,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Організація</Name>
@@ -17198,6 +17494,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Підрозділ</Name>
@@ -17207,6 +17506,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>СумаДокументу</Name>
@@ -17233,6 +17535,10 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ГосподарськаОперація</Name>
@@ -17260,6 +17566,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Менеджер</Name>
@@ -17269,6 +17578,9 @@ FROM
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>КлючовіСловаДляПошуку</Name>
@@ -17567,6 +17879,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -17576,6 +17891,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -17585,6 +17903,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -17602,6 +17923,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -17688,6 +18012,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Каси</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Сума</Name>
@@ -17758,6 +18085,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Сума</Name>
@@ -17860,6 +18190,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Контрагенти</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Валюта</Name>
@@ -17869,6 +18202,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Валюти</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Сума</Name>
@@ -18814,6 +19150,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -18823,6 +19162,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -18848,6 +19190,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -19263,6 +19608,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -19272,6 +19620,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -19281,6 +19632,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -19298,6 +19652,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -19331,6 +19688,9 @@ FROM
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -19735,6 +20095,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -19744,6 +20107,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -19753,6 +20119,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -19770,6 +20139,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -19803,6 +20175,9 @@ FROM
                   <SortNum>10</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПартіяТоварівКомпозит</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -20305,6 +20680,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -20314,6 +20692,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -20331,6 +20712,9 @@ FROM
                   <SortNum>5</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -20348,6 +20732,9 @@ FROM
                   <SortNum>7</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ВидиЦін</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Ціна</Name>
@@ -20381,6 +20768,9 @@ FROM
                   <SortNum>11</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Склади</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -20781,6 +21171,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -20790,6 +21183,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -20799,6 +21195,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -20816,6 +21215,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -20833,6 +21235,9 @@ FROM
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -21189,6 +21594,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -21198,6 +21606,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -21207,6 +21618,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -21224,6 +21638,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -21241,6 +21658,9 @@ FROM
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КоміркаОтримувач</Name>
@@ -21250,6 +21670,9 @@ FROM
                   <SortNum>9</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -21607,6 +22030,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>ХарактеристикаНоменклатури</Name>
@@ -21616,6 +22042,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Серія</Name>
@@ -21625,6 +22054,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковок</Name>
@@ -21642,6 +22074,9 @@ FROM
                   <SortNum>6</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Кількість</Name>
@@ -21659,6 +22094,9 @@ FROM
                   <SortNum>8</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -21962,6 +22400,9 @@ FROM
                   <SortNum>2</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -21971,6 +22412,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Комірка</Name>
@@ -21980,6 +22424,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.СкладськіКомірки</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
@@ -22281,6 +22728,9 @@ FROM
                   <SortNum>3</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Контрагенти</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Валюта</Name>
@@ -22290,6 +22740,9 @@ FROM
                   <SortNum>4</SortNum>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Валюти</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
                 </Field>
                 <Field>
                   <Name>Сума</Name>
@@ -27738,6 +28191,9 @@ SQL тип  непотрібно вказувати
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Номенклатура</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ХарактеристикаНоменклатури</Name>
@@ -27747,6 +28203,9 @@ SQL тип  непотрібно вказувати
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>ВидЦіни</Name>
@@ -27756,6 +28215,9 @@ SQL тип  непотрібно вказувати
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ВидиЦін</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Ціна</Name>
@@ -27773,6 +28235,9 @@ SQL тип  непотрібно вказувати
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Валюта</Name>
@@ -27782,6 +28247,9 @@ SQL тип  непотрібно вказувати
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
           </ElementFields>
         </Form>
@@ -27889,6 +28357,9 @@ SQL тип  непотрібно вказувати
               <SortNum>100</SortNum>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
             </Field>
             <Field>
               <Name>Курс</Name>

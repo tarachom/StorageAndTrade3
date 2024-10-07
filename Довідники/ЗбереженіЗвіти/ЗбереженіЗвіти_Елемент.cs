@@ -62,7 +62,8 @@ namespace StorageAndTrade
             Назва.Text = Елемент.Назва;
             Опис.Buffer.Text = Елемент.Опис;
             Інформація.LabelMarkup = Елемент.Інформація;
-
+            Інформація.Visible = !string.IsNullOrEmpty(Елемент.Інформація);
+            
             // Таблична частина "ЗвітСторінка"
             ЗвітСторінка.ЕлементВласник = Елемент;
             await ЗвітСторінка.LoadRecords();

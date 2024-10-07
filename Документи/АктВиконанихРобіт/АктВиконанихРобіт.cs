@@ -149,36 +149,32 @@ namespace StorageAndTrade
 
         async void НаОснові_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
         {
-            if (TreeViewGrid.Selection.CountSelectedRows() != 0)
-                foreach (TreePath itemPath in TreeViewGrid.Selection.GetSelectedRows())
-                {
-                    TreeViewGrid.Model.GetIter(out TreeIter iter, itemPath);
-                    string uid = (string)TreeViewGrid.Model.GetValue(iter, 1);
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(unigueID).GetDocumentObject(false);
+                if (Обєкт == null) continue;
 
-                    АктВиконанихРобіт_Objest? Обєкт = await new АктВиконанихРобіт_Pointer(new UnigueID(uid)).GetDocumentObject(false);
-                    if (Обєкт == null) continue;
+                //
+                //Новий документ
+                //
 
-                    //
-                    //Новий документ
-                    //
+                ПрихіднийКасовийОрдер_Objest Новий = new ПрихіднийКасовийОрдер_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Каса = Обєкт.Каса;
+                Новий.Контрагент = Обєкт.Контрагент;
+                Новий.Договір = Обєкт.Договір;
+                Новий.Основа = Обєкт.GetBasis();
+                Новий.СумаДокументу = Обєкт.СумаДокументу;
 
-                    ПрихіднийКасовийОрдер_Objest Новий = new ПрихіднийКасовийОрдер_Objest();
-                    await Новий.New();
-                    Новий.Організація = Обєкт.Організація;
-                    Новий.Валюта = Обєкт.Валюта;
-                    Новий.Каса = Обєкт.Каса;
-                    Новий.Контрагент = Обєкт.Контрагент;
-                    Новий.Договір = Обєкт.Договір;
-                    Новий.Основа = Обєкт.GetBasis();
-                    Новий.СумаДокументу = Обєкт.СумаДокументу;
+                await Новий.Save();
 
-                    await Новий.Save();
-
-                    ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент();
-                    await page.Елемент.Read(Новий.UnigueID);
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                    page.SetValue();
-                }
+                ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
         }
     }
 

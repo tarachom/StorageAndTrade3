@@ -10,12 +10,12 @@ using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
-    class PageHome : Box
+    class PageHome : Форма
     {
         public БлокДляСторінки_КурсиВалют БлокКурсиВалют = new БлокДляСторінки_КурсиВалют() { WidthRequest = 500 };
         public БлокДляСторінки_АктивніКористувачі АктивніКористувачі = new БлокДляСторінки_АктивніКористувачі(Config.Kernel) { WidthRequest = 500 };
 
-        public PageHome() : base(Orientation.Vertical, 0)
+        public PageHome() : base()
         {
             {
                 Box hBox = new Box(Orientation.Horizontal, 0);

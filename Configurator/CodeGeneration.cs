@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.10.2024 11:51:12
+ * Дата конфігурації: 07.10.2024 11:59:08
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -13555,7 +13555,8 @@ namespace StorageAndTrade_1_0.Документи
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
         }
-        
+
+        public const string TABLE = "tab_a33";
         public const string НомерРядка = "col_b3";
         public const string Номенклатура = "col_a9";
         public const string ХарактеристикаНоменклатури = "col_b1";
