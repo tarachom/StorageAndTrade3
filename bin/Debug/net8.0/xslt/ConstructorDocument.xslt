@@ -712,8 +712,6 @@ namespace <xsl:value-of select="$NameSpace"/>
 //
 -->
 
-    <!--<xsl:key name="preg" match="/root/Document/ElementFields/Field[Type = 'pointer']" use="substring-after(Pointer, '.')"/>-->
-
     <!-- Список -->
     <xsl:template name="DocumentReport">
         <xsl:variable name="DocumentName" select="Document/Name"/>
@@ -739,7 +737,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             <xsl:variable name="CountFieldsTL" select="count($FieldsTL)"/>
             string query = $@"
 SELECT
-<xsl:for-each select="$FieldsTL">
+    <xsl:for-each select="$FieldsTL">
     <xsl:choose>
         <xsl:when test="Type = 'pointer'">
             <xsl:variable name="name" select="Name" />
@@ -771,7 +769,7 @@ SELECT
     </xsl:choose>
     <xsl:if test="position() != $CountFieldsTL">,
     </xsl:if>
-</xsl:for-each>
+    </xsl:for-each>
 FROM
     {<xsl:value-of select="$DocumentName"/>_Const.TABLE} AS <xsl:value-of select="$DocumentName"/>
     <xsl:for-each select="$FieldsTL[Type = 'pointer']">
@@ -816,7 +814,6 @@ FROM
         }
     }
 }
-
     </xsl:template>
 
 </xsl:stylesheet>

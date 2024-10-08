@@ -1021,7 +1021,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             <xsl:variable name="CountFieldsTL" select="count($FieldsTL)"/>
             string query = $@"
 SELECT
-<xsl:for-each select="$FieldsTL">
+    <xsl:for-each select="$FieldsTL">
     <xsl:choose>
         <xsl:when test="Type = 'pointer'">
             <xsl:variable name="name" select="Name" />
@@ -1053,7 +1053,7 @@ SELECT
     </xsl:choose>
     <xsl:if test="position() != $CountFieldsTL">,
     </xsl:if>
-</xsl:for-each>
+    </xsl:for-each>
 FROM
     {<xsl:value-of select="$DirectoryName"/>_Const.TABLE} AS <xsl:value-of select="$DirectoryName"/>
     <xsl:for-each select="$FieldsTL[Type = 'pointer']">
@@ -1098,7 +1098,6 @@ FROM
         }
     }
 }
-
     </xsl:template>
 
 </xsl:stylesheet>
