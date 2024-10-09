@@ -84,7 +84,7 @@ ORDER BY ЗалишкиТаОбороти.{ТовариНаСкладах_Зал
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Program.GeneralNotebook);
+            await Звіт.View(Program.GeneralNotebook);
         }
     }
 }

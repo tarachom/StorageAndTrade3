@@ -67,7 +67,7 @@ ORDER BY Залишки.{РозрахункиЗКлієнтами_Залишки
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Program.GeneralNotebook);
+            await Звіт.View(Program.GeneralNotebook);
         }
     }
 }

@@ -269,7 +269,7 @@ ORDER BY
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Notebook);
+            await Звіт.View(Notebook);
         }
 
         async void ЗалишкиТаОбороти()
@@ -497,7 +497,7 @@ ORDER BY Контрагент_Назва, Валюта_Назва
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Notebook);
+            await Звіт.View(Notebook);
         }
 
         async void Документи()
@@ -692,7 +692,7 @@ ORDER BY period ASC
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Notebook);
+            await Звіт.View(Notebook);
         }
     }
 }

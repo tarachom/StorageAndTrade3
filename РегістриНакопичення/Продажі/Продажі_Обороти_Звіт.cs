@@ -99,7 +99,7 @@ ORDER BY Обороти.{Продажі_Обороти_TablePart.Період}
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Program.GeneralNotebook);
+            await Звіт.View(Program.GeneralNotebook);
         }
     }
 }

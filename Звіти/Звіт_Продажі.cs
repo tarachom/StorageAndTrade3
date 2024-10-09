@@ -492,7 +492,7 @@ ORDER BY " +
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Notebook);
+            await Звіт.View(Notebook);
         }
 
     }

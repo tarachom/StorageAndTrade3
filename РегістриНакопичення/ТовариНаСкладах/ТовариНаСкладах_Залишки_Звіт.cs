@@ -80,7 +80,7 @@ ORDER BY Залишки.{ТовариНаСкладах_Залишки_TablePart
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Program.GeneralNotebook);
+            await Звіт.View(Program.GeneralNotebook);
         }
     }
 }

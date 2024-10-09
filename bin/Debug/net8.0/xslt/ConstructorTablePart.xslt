@@ -100,6 +100,11 @@ limitations under the License.
 
         <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
         <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
+        <xsl:variable name="OwnerBlockName">
+            <xsl:if test="TablePart/OwnerType = 'Constants' and normalize-space(TablePart/OwnerBlockName) != ''">
+                <xsl:value-of select="concat(normalize-space(TablePart/OwnerBlockName), '.')"/>
+            </xsl:if>
+        </xsl:variable>
         <xsl:variable name="OwnerType">
             <xsl:choose>
                 <xsl:when test="TablePart/OwnerType = 'Directory'">Довідник</xsl:when>
@@ -522,6 +527,9 @@ namespace <xsl:value-of select="$NameSpace"/>
         _ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
         Таблична Частина Список
 */
+
+
+
     </xsl:template>
 
 <!--- 
@@ -636,7 +644,7 @@ FROM
             await Звіт.Select();
 
             Звіт.FillTreeView();
-            Звіт.View(Program.GeneralNotebook);
+            await Звіт.View(Program.GeneralNotebook);
         }
     }
 }
