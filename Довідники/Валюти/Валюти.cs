@@ -27,10 +27,8 @@ namespace StorageAndTrade
             });
 
             //Завантаження курсів валют НБУ
-            CreateLink(HBoxTop, КурсиВалют_Const.FULLNAME, () =>
-            {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => new Обробка_ЗавантаженняКурсівВалют());
-            });
+            CreateLink(HBoxTop, "Завантаження курсів валют НБУ", () => 
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => new Обробка_ЗавантаженняКурсівВалют()));
 
             ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
         }

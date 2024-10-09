@@ -13,13 +13,13 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    class БлокДляСторінки_КурсиВалют : Box
+    class БлокДляСторінки_КурсиВалют : Форма
     {
         Label lbDateLastDownload = new Label();
         Switch autoDownloadCursOnStart;
         Box vBoxCursyValut;
 
-        public БлокДляСторінки_КурсиВалют() : base(Orientation.Vertical, 0)
+        public БлокДляСторінки_КурсиВалют() : base()
         {
             Box hBoxCaption = new Box(Orientation.Horizontal, 0);
             hBoxCaption.PackStart(new Label("<b>Курси валют НБУ</b>") { UseMarkup = true }, false, false, 5);
@@ -76,14 +76,14 @@ namespace StorageAndTrade
             Box hBoxInfo = new Box(Orientation.Horizontal, 0);
             vBoxDirectory.PackStart(hBoxInfo, false, false, 5);
 
-            Link.AddLink(hBoxInfo, "Довідник - Валюти", async () =>
+            CreateLink(hBoxInfo, "Довідник - Валюти", async () =>
             {
                 Валюти page = new Валюти();
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Валюти_Const.FULLNAME}", () => { return page; });
                 await page.SetValue();
             });
 
-            Link.AddLink(hBoxInfo, "Історія завантажень", КурсиВалют_Історія);
+            CreateLink(hBoxInfo, "Історія завантажень", КурсиВалют_Історія);
         }
 
         void OnDownloadCurs(object? sender, EventArgs args)

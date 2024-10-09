@@ -35,19 +35,17 @@ using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
-    class ФункціїДляПовідомлень : InterfaceGtk.ФункціїДляПовідомлень
+    static class ФункціїДляПовідомлень
     {
-        public ФункціїДляПовідомлень() : base(Config.Kernel) { }
-
         public static async void ДодатиПовідомлення(UuidAndText basis, string НазваОбєкту, Exception exception)
         {
-            await new ФункціїДляПовідомлень().ДодатиПовідомленняПроПомилку("Запис", basis.Uuid, basis.Text, НазваОбєкту, exception.Message);
+            await Config.Kernel.MessageErrorAdd("Запис", basis.Uuid, basis.Text, НазваОбєкту, exception.Message);
             ПоказатиПовідомлення(basis.UnigueID());
         }
 
         public static async void ДодатиІнформаційнеПовідомлення(UuidAndText basis, string НазваОбєкту, string Повідомлення)
         {
-            await new ФункціїДляПовідомлень().ДодатиПовідомленняПроПомилку("Інформація", basis.Uuid, basis.Text, НазваОбєкту, Повідомлення, 'I');
+            await Config.Kernel.MessageInfoAdd("Інформація", basis.Uuid, basis.Text, НазваОбєкту, Повідомлення);
             ПоказатиПовідомлення();
         }
 
@@ -60,9 +58,9 @@ namespace StorageAndTrade
 
         public static async void ПоказатиПовідомлення(UnigueID? ВідбірПоОбєкту = null, int? limit = null)
         {
-            СпільніФорми_ВивідПовідомленняПроПомилки_ШвидкийВивід page = new();
+            СпільніФорми_ВивідПовідомленняПроПомилки page = new();
 
-            Popover popover = new Popover(Program.GeneralForm?.ButtonMessage) { Position = PositionType.Bottom, BorderWidth = 5 };
+            Popover popover = new Popover(Program.GeneralForm?.ButtonMessage) { Position = PositionType.Bottom, BorderWidth = 5, WidthRequest = 600, HeightRequest = 600 };
             popover.Add(page);
             popover.Show();
 

@@ -7,6 +7,7 @@
         Табличний список - Записи
 */
 
+using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = StorageAndTrade_1_0.РегістриНакопичення.ТабличніСписки;
@@ -18,6 +19,9 @@ namespace StorageAndTrade
         public ЗамовленняПостачальникам() : base()
         {
             ТабличніСписки.ЗамовленняПостачальникам_Записи.AddColumns(TreeViewGrid);
+
+            HBoxTop.PackStart(new Label("Таблиці розрахунків:"), false, false, 0);
+            CreateLink(HBoxTop, "Залишки", async () => await ЗамовленняПостачальникам_Залишки_Звіт.Сформувати(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня()));
         }
 
         #region Override
