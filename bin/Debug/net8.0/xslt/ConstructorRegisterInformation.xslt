@@ -504,7 +504,7 @@ FROM
                 ReportName = "<xsl:value-of select="$RegisterInformationName"/>_Звіт",
                 Caption = "<xsl:value-of select="$RegisterInformationName"/>",
                 Query = query,
-                GetInfo = () =&gt; ValueTask.FromResult("Test")
+                GetInfo = () =&gt; ValueTask.FromResult("")
             };
 
             Звіт.ColumnSettings.Add("period", new("Період"));
@@ -516,7 +516,7 @@ FROM
                         <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>_Назва", new("<xsl:value-of select="Caption"/>", "<xsl:value-of select="Name"/>", <xsl:value-of select="$namePointer"/>_Const.POINTER));
                     </xsl:when>
                     <xsl:when test="Type = 'integer' or Type = 'numeric'">
-                        <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>", new("<xsl:value-of select="Caption"/>", "", "", 1));
+                        <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>", new("<xsl:value-of select="Caption"/>", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:text>Звіт.ColumnSettings.Add("</xsl:text><xsl:value-of select="Name"/>", new("<xsl:value-of select="Caption"/>"));
