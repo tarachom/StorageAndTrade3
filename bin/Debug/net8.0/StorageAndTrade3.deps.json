@@ -12,7 +12,7 @@
           "Configurator3": "3.1.0",
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0",
-          "QuestPDF": "2024.7.3"
+          "QuestPDF": "2024.10.1"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -116,14 +116,14 @@
           }
         }
       },
-      "Npgsql/8.0.4": {
+      "Npgsql/8.0.5": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
         },
         "runtime": {
           "lib/net8.0/Npgsql.dll": {
-            "assemblyVersion": "8.0.4.0",
-            "fileVersion": "8.0.4.0"
+            "assemblyVersion": "8.0.5.0",
+            "fileVersion": "8.0.5.0"
           }
         }
       },
@@ -139,11 +139,11 @@
           }
         }
       },
-      "QuestPDF/2024.7.3": {
+      "QuestPDF/2024.10.1": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2024.7.3.0",
-            "fileVersion": "2024.7.3.0"
+            "assemblyVersion": "2024.10.1.0",
+            "fileVersion": "2024.10.1.0"
           }
         },
         "runtimeTargets": {
@@ -186,7 +186,7 @@
       },
       "AccountingSoftware/3.1.0": {
         "dependencies": {
-          "Npgsql": "8.0.4"
+          "Npgsql": "8.0.5"
         },
         "runtime": {
           "AccountingSoftware.dll": {
@@ -292,12 +292,12 @@
       "path": "microsoft.extensions.logging.abstractions/8.0.0",
       "hashPath": "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
     },
-    "Npgsql/8.0.4": {
+    "Npgsql/8.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-vaYEUlF/pB9m8bs21wQv3Da0kMHT4A9USe47VfY/L2BO97xz5KfIxhEu22QS9d68ZrLxvtL3wQDfDLPr2OjbjA==",
-      "path": "npgsql/8.0.4",
-      "hashPath": "npgsql.8.0.4.nupkg.sha512"
+      "sha512": "sha512-zRG5V8cyeZLpzJlKzFKjEwkRMYIYnHWJvEor2lWXeccS2E1G2nIWYYhnukB51iz5XsWSVEtqg3AxTWM0QJ6vfg==",
+      "path": "npgsql/8.0.5",
+      "hashPath": "npgsql.8.0.5.nupkg.sha512"
     },
     "PangoSharp/3.24.24.117-develop": {
       "type": "package",
@@ -306,12 +306,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2024.7.3": {
+    "QuestPDF/2024.10.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-e3M+8ZsTAxhYAEBlELq4q9MFUDK8j/eZeZ9m7C4HT62IGL/VwqoEWjJmbZSJlXj+VNxUwktBI+bJtwqxZeYUJA==",
-      "path": "questpdf/2024.7.3",
-      "hashPath": "questpdf.2024.7.3.nupkg.sha512"
+      "sha512": "sha512-pjPmQ/K5yI9EDuLceHa+HTPYMLAN0Lgpfmhsf4SxNhkU/nJ3Qc9k2d9wSg+1DNrub6hh2uJZx5xOk2jN6CNlew==",
+      "path": "questpdf/2024.10.1",
+      "hashPath": "questpdf.2024.10.1.nupkg.sha512"
     },
     "AccountingSoftware/3.1.0": {
       "type": "project",

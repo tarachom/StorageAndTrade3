@@ -103,10 +103,11 @@ namespace StorageAndTrade
                                     Сума += record.Сума;
                                 }
 
-                                for (int i = 1; i < Columns.Count; i++)
+                                for (int i = 1; i < Columns.Count - 1; i++)
                                     table.Cell().Border(0).Padding(1);
 
-                                table.Cell().Border(1).Padding(1).Text(Сума.ToString()).FontSize(8).AlignRight();
+                                table.Cell().Padding(1).Text("Разом:").FontSize(8).AlignRight();
+                                table.Cell().Padding(1).Text(Сума.ToString()).FontSize(8).AlignRight();
                             });
                         });
                     });
