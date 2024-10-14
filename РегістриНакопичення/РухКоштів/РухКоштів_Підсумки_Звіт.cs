@@ -49,7 +49,7 @@ FROM
             Звіт.ColumnSettings.Add("Організація_Назва", new("Організація", "Організація", Організації_Const.POINTER));
             Звіт.ColumnSettings.Add("Каса_Назва", new("Каса", "Каса", Каси_Const.POINTER));
             Звіт.ColumnSettings.Add("Валюта_Назва", new("Валюта", "Валюта", Валюти_Const.POINTER));
-            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1));
+            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
 
             await Звіт.Select();
 

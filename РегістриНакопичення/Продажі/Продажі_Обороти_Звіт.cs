@@ -65,7 +65,7 @@ WHERE
 
 ORDER BY Обороти.{Продажі_Обороти_TablePart.Період}
 ";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            Dictionary<string, object> paramQuery = new()
             {
                 { "ПочатокПеріоду", ДатаПочатокПеріоду },
                 { "КінецьПеріоду", ДатаКінецьПеріоду }
@@ -91,9 +91,9 @@ ORDER BY Обороти.{Продажі_Обороти_TablePart.Період}
             Звіт.ColumnSettings.Add("Договір_Назва", new("Договір", "Договір", ДоговориКонтрагентів_Const.POINTER));
             Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
             Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
-            Звіт.ColumnSettings.Add("Кількість", new("Кількість", "", "", 1));
-            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1));
-            Звіт.ColumnSettings.Add("Дохід", new("Дохід", "", "", 1));
+            Звіт.ColumnSettings.Add("Кількість", new("Кількість", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            Звіт.ColumnSettings.Add("Дохід", new("Дохід", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
             Звіт.ColumnSettings.Add("Собівартість", new("Собівартість", "", "", 1));
 
             await Звіт.Select();

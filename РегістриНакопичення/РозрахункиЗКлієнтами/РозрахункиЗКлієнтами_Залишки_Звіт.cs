@@ -40,7 +40,7 @@ WHERE
 
 ORDER BY Залишки.{РозрахункиЗКлієнтами_Залишки_TablePart.Період}
 ";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            Dictionary<string, object> paramQuery = new()
             {
                 { "ПочатокПеріоду", ДатаПочатокПеріоду },
                 { "КінецьПеріоду", ДатаКінецьПеріоду }
@@ -62,7 +62,7 @@ ORDER BY Залишки.{РозрахункиЗКлієнтами_Залишки
             Звіт.ColumnSettings.Add("Період", new("Період"));
             Звіт.ColumnSettings.Add("Валюта_Назва", new("Валюта", "Валюта", Валюти_Const.POINTER));
             Звіт.ColumnSettings.Add("Контрагент_Назва", new("Контрагент", "Контрагент", Контрагенти_Const.POINTER));
-            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1));
+            Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
 
             await Звіт.Select();
 

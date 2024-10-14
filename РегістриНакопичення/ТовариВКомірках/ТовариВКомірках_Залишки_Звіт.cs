@@ -56,7 +56,7 @@ WHERE
 
 ORDER BY Залишки.{ТовариВКомірках_Залишки_TablePart.Період}
 ";
-            Dictionary<string, object> paramQuery = new Dictionary<string, object>
+            Dictionary<string, object> paramQuery = new()
             {
                 { "ПочатокПеріоду", ДатаПочатокПеріоду },
                 { "КінецьПеріоду", ДатаКінецьПеріоду }
@@ -81,7 +81,7 @@ ORDER BY Залишки.{ТовариВКомірках_Залишки_TablePart
             Звіт.ColumnSettings.Add("Пакування_Назва", new("Пакування", "Пакування", ПакуванняОдиниціВиміру_Const.POINTER));
             Звіт.ColumnSettings.Add("Комірка_Назва", new("Комірка", "Комірка", СкладськіКомірки_Const.POINTER));
             Звіт.ColumnSettings.Add("Серія_Назва", new("Серія", "Серія", СеріїНоменклатури_Const.POINTER));
-            Звіт.ColumnSettings.Add("ВНаявності", new("В наявності", "", "", 1));
+            Звіт.ColumnSettings.Add("ВНаявності", new("В наявності", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
 
             await Звіт.Select();
 
