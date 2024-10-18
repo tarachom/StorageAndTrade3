@@ -7,6 +7,7 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.РегістриНакопичення;
@@ -72,9 +73,15 @@ ORDER BY Залишки.{ТовариНаСкладах_Залишки_TablePart
 
             Звіт.ColumnSettings.Add("Період", new("Період"));
             Звіт.ColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", "Номенклатура", Номенклатура_Const.POINTER));
-            Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("ХарактеристикаНоменклатури", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
+
+            if (Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                Звіт.ColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", "ХарактеристикаНоменклатури", ХарактеристикиНоменклатури_Const.POINTER));
+
             Звіт.ColumnSettings.Add("Склад_Назва", new("Склад", "Склад", Склади_Const.POINTER));
-            Звіт.ColumnSettings.Add("Серія_Назва", new("Серія", "Серія", СеріїНоменклатури_Const.POINTER));
+
+            if (Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                Звіт.ColumnSettings.Add("Серія_Назва", new("Серія", "Серія", СеріїНоменклатури_Const.POINTER));
+
             Звіт.ColumnSettings.Add("ВНаявності", new("В наявності", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
 
             await Звіт.Select();

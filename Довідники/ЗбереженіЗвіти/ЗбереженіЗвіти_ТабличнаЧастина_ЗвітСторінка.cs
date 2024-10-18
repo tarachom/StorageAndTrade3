@@ -225,6 +225,7 @@ namespace StorageAndTrade
         public ЗбереженіЗвіти_ТабличнаЧастина_ЗвітСторінка()
         {
             TreeViewGrid.Model = Store;
+            TreeViewGrid.StyleContext.AddClass("report");
             AddColumn();
         }
 

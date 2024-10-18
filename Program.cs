@@ -51,6 +51,15 @@ namespace StorageAndTrade
         {
             Application.Init();
             _ = new FormConfigurationSelection();
+
+            string styleDefaultFile = System.IO.Path.Combine(AppContext.BaseDirectory, "Default.css");
+            if (File.Exists(styleDefaultFile))
+            {
+                CssProvider provider = new CssProvider();
+                provider.LoadFromPath(styleDefaultFile);
+                StyleContext.AddProviderForScreen(Gdk.Screen.Default, provider, 800);
+            }
+
             Application.Run();
         }
     }
