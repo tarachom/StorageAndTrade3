@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <!-- Excel -->
-    <ProjectReference Include="..\Npoi\solution\NPOI.Pack.csproj" />
+    <ProjectReference Include="..\AccountingSoftwareLib\Npoi\solution\NPOI.Pack.csproj" />
   </ItemGroup>
 
 </Project>

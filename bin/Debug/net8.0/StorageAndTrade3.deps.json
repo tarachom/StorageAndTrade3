@@ -12,12 +12,12 @@
           "Configurator3": "3.1.0.1",
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0.2",
-          "NPOI": "2.7.1",
+          "NPOI": "1.0.0",
           "QuestPDF": "2024.10.2",
-          "NPOI.OOXML.Reference": "2.7.1.0",
-          "NPOI.OpenXml4Net.Reference": "2.7.1.0",
-          "NPOI.OpenXmlFormats.Reference": "2.7.1.0",
-          "NPOI.Pack": "2.7.1.0"
+          "NPOI.OOXML.Reference": "1.0.0.0",
+          "NPOI.OpenXml4Net.Reference": "1.0.0.0",
+          "NPOI.OpenXmlFormats.Reference": "1.0.0.0",
+          "NPOI.Pack": "1.0.0.0"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -434,21 +434,21 @@
           }
         }
       },
-      "NPOI/2.7.1": {
+      "NPOI/1.0.0": {
         "dependencies": {
-          "NPOI.Core": "2.7.1",
-          "NPOI.OOXML": "2.7.1",
-          "NPOI.OpenXml4Net": "2.7.1",
-          "NPOI.OpenXmlFormats": "2.7.1"
+          "NPOI.Core": "1.0.0",
+          "NPOI.OOXML": "1.0.0",
+          "NPOI.OpenXml4Net": "1.0.0",
+          "NPOI.OpenXmlFormats": "1.0.0"
         },
         "runtime": {
           "NPOI.Pack.dll": {
-            "assemblyVersion": "2.7.1",
-            "fileVersion": "2.7.1.0"
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
-      "NPOI.Core/2.7.1": {
+      "NPOI.Core/1.0.0": {
         "dependencies": {
           "BouncyCastle.Cryptography": "2.3.1",
           "Enums.NET": "4.0.1",
@@ -462,78 +462,78 @@
         },
         "runtime": {
           "NPOI.Core.dll": {
-            "assemblyVersion": "2.7.1",
-            "fileVersion": "2.7.1.0"
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
-      "NPOI.OOXML/2.7.1": {
+      "NPOI.OOXML/1.0.0": {
         "dependencies": {
-          "NPOI.Core": "2.7.1",
-          "NPOI.OpenXml4Net": "2.7.1",
-          "NPOI.OpenXmlFormats": "2.7.1",
+          "NPOI.Core": "1.0.0",
+          "NPOI.OpenXml4Net": "1.0.0",
+          "NPOI.OpenXmlFormats": "1.0.0",
           "System.Security.Cryptography.Pkcs": "6.0.3",
           "System.Security.Cryptography.Xml": "6.0.1"
         },
         "runtime": {
           "NPOI.OOXML.dll": {
-            "assemblyVersion": "2.7.1",
+            "assemblyVersion": "1.0.0",
             "fileVersion": ""
           }
         }
       },
-      "NPOI.OpenXml4Net/2.7.1": {
+      "NPOI.OpenXml4Net/1.0.0": {
         "dependencies": {
-          "NPOI.Core": "2.7.1"
+          "NPOI.Core": "1.0.0"
         },
         "runtime": {
           "NPOI.OpenXml4Net.dll": {
-            "assemblyVersion": "2.7.1",
+            "assemblyVersion": "1.0.0",
             "fileVersion": ""
           }
         }
       },
-      "NPOI.OpenXmlFormats/2.7.1": {
+      "NPOI.OpenXmlFormats/1.0.0": {
         "dependencies": {
-          "NPOI.Core": "2.7.1",
-          "NPOI.OpenXml4Net": "2.7.1"
+          "NPOI.Core": "1.0.0",
+          "NPOI.OpenXml4Net": "1.0.0"
         },
         "runtime": {
           "NPOI.OpenXmlFormats.dll": {
-            "assemblyVersion": "2.7.1",
+            "assemblyVersion": "1.0.0",
             "fileVersion": ""
           }
         }
       },
-      "NPOI.OOXML.Reference/2.7.1.0": {
+      "NPOI.OOXML.Reference/1.0.0.0": {
         "runtime": {
           "NPOI.OOXML.dll": {
-            "assemblyVersion": "2.7.1.0",
-            "fileVersion": "2.7.1.0"
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
-      "NPOI.OpenXml4Net.Reference/2.7.1.0": {
+      "NPOI.OpenXml4Net.Reference/1.0.0.0": {
         "runtime": {
           "NPOI.OpenXml4Net.dll": {
-            "assemblyVersion": "2.7.1.0",
-            "fileVersion": "2.7.1.0"
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
-      "NPOI.OpenXmlFormats.Reference/2.7.1.0": {
+      "NPOI.OpenXmlFormats.Reference/1.0.0.0": {
         "runtime": {
           "NPOI.OpenXmlFormats.dll": {
-            "assemblyVersion": "2.7.1.0",
-            "fileVersion": "2.7.1.0"
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
-      "NPOI.Pack/2.7.1.0": {
+      "NPOI.Pack/1.0.0.0": {
         "runtime": {
           "NPOI.Pack.dll": {
-            "assemblyVersion": "2.7.1.0",
-            "fileVersion": "2.7.1.0"
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -791,47 +791,47 @@
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI/2.7.1": {
+    "NPOI/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.Core/2.7.1": {
+    "NPOI.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.OOXML/2.7.1": {
+    "NPOI.OOXML/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.OpenXml4Net/2.7.1": {
+    "NPOI.OpenXml4Net/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.OpenXmlFormats/2.7.1": {
+    "NPOI.OpenXmlFormats/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.OOXML.Reference/2.7.1.0": {
+    "NPOI.OOXML.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.OpenXml4Net.Reference/2.7.1.0": {
+    "NPOI.OpenXml4Net.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.OpenXmlFormats.Reference/2.7.1.0": {
+    "NPOI.OpenXmlFormats.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "NPOI.Pack/2.7.1.0": {
+    "NPOI.Pack/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
