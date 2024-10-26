@@ -1,24 +1,7 @@
 /*
-Copyright (C) 2019-2024 TARAKHOMYN YURIY IVANOVYCH
-All rights reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Побудова сторінки звіту
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
-/*
-Автор:    Тарахомин Юрій Іванович
-Адреса:   Україна, м. Львів
-Сайт:     accounting.org.ua
 */
 
 using InterfaceGtk;
@@ -29,6 +12,10 @@ using StorageAndTrade_1_0.Довідники;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
+
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using MathNet.Numerics;
 
 namespace StorageAndTrade
 {
@@ -101,6 +88,77 @@ namespace StorageAndTrade
             doc.GeneratePdfAndShow();
         }
 
+        protected override async ValueTask ВигрузитиВФайл_Excel(InterfaceGtk.ЗвітСторінка звіт, List<string[]> rows)
+        {
+            static void CreateCell(IRow CurrentRow, int CellIndex, string Value, XSSFCellStyle Style)
+            {
+                ICell Cell = CurrentRow.CreateCell(CellIndex);
+                Cell.SetCellValue(Value);
+                Cell.CellStyle = Style;
+            }
+
+            IWorkbook workbook = new XSSFWorkbook();
+            ISheet sheet = workbook.CreateSheet("Звіт");
+
+            if (rows.Count > 0)
+            {
+                string[] nameCols = rows[0];
+
+                //Header
+                {
+                    XSSFFont font = (XSSFFont)workbook.CreateFont();
+                    font.FontHeightInPoints = 11;
+                    font.FontName = "Arial";
+                    font.IsBold = true;
+
+                    XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
+                    cellStyle.SetFont(font);
+
+                    cellStyle.BorderLeft = BorderStyle.Dashed;
+                    cellStyle.BorderTop = BorderStyle.Dashed;
+                    cellStyle.BorderRight = BorderStyle.Dashed;
+                    cellStyle.BorderBottom = BorderStyle.Dashed;
+                    cellStyle.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;
+
+                    IRow row = sheet.CreateRow(0);
+
+                    for (int i = 0; i < nameCols.Length; i++)
+                        CreateCell(row, i, nameCols[i], cellStyle);
+                }
+
+                //Body
+                {
+                    XSSFFont font = (XSSFFont)workbook.CreateFont();
+                    font.FontHeightInPoints = 10;
+                    font.FontName = "Arial";
+
+                    XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
+                    cellStyle.SetFont(font);
+
+                    for (int r = 1; r < rows.Count; r++)
+                    {
+                        IRow row = sheet.CreateRow(r);
+
+                        string[] Значення = rows[r];
+                        for (int i = 0; i < Значення.Length; i++)
+                            CreateCell(row, i, Значення[i], cellStyle);
+                    }
+                }
+
+                for (int i = 0; i < nameCols.Length; i++)
+                    sheet.AutoSizeColumn(i);
+
+                sheet.SetAutoFilter(new NPOI.SS.Util.CellRangeAddress(0, rows.Count - 1, 0, nameCols.Length - 1));
+
+                GC.Collect();
+            }
+
+            using FileStream stream = new FileStream("Excel.xlsx", FileMode.Create, FileAccess.Write);
+            workbook.Write(stream);
+
+            await ValueTask.FromResult(true);
+        }
+
         protected override async ValueTask ВідкритиЗбереженіЗвіти()
         {
             ЗбереженіЗвіти page = new ЗбереженіЗвіти();
@@ -166,5 +224,7 @@ namespace StorageAndTrade
             if (await Новий.Save())
                 await Новий.ЗвітСторінка_TablePart.Save(false);
         }
+
+
     }
 }

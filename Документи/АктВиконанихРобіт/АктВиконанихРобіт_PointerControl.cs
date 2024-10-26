@@ -1,9 +1,9 @@
 
-
 /*     
         АктВиконанихРобіт_PointerControl.cs
         PointerControl
 */
+
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;

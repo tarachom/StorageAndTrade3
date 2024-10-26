@@ -1,4 +1,3 @@
-
 /*     
         Контрагенти_Папки_PointerControl.cs
         PointerControl (Список)
