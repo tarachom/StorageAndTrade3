@@ -224,7 +224,5 @@ namespace StorageAndTrade
             if (await Новий.Save())
                 await Новий.ЗвітСторінка_TablePart.Save(false);
         }
-
-
     }
 }

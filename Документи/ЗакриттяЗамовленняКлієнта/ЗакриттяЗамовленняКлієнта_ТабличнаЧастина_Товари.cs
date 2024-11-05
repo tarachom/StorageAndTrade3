@@ -1,24 +1,23 @@
 
 /*
-        ЗамовленняКлієнта_ТабличнаЧастина_Товари.cs
+        ЗакриттяЗамовленняКлієнта_ТабличнаЧастина_Товари.cs
         Таблична Частина
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Документи;
 using StorageAndTrade_1_0.Перелічення;
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.РегістриВідомостей;
+
 
 namespace StorageAndTrade
 {
-    class ЗамовленняКлієнта_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
+    class ЗакриттяЗамовленняКлієнта_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public ЗамовленняКлієнта_Objest? ЕлементВласник { get; set; }
+        public ЗакриттяЗамовленняКлієнта_Objest? ЕлементВласник { get; set; }
+        public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
         #region Записи
 
@@ -31,14 +30,13 @@ namespace StorageAndTrade
             Пакування,
             Кількість,
             КількістьФакт,
-            ВидЦіни,
             Ціна,
             Сума,
-            Скидка,
             Склад,
         }
 
         ListStore Store = new ListStore([
+
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -46,10 +44,8 @@ namespace StorageAndTrade
             typeof(string), //Пакування
             typeof(float), //Кількість
             typeof(float),    //КількістьФакт
-            typeof(string), //ВидЦіни
             typeof(float), //Ціна
             typeof(float), //Сума
-            typeof(float), //Скидка
             typeof(string), //Склад
         ]);
 
@@ -65,11 +61,10 @@ namespace StorageAndTrade
             public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
             public decimal Кількість { get; set; } = 1;
             public decimal КількістьФакт { get; set; } = 1;
-            public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
             public decimal Ціна { get; set; } = 0;
             public decimal Сума { get; set; } = 0;
-            public decimal Скидка { get; set; } = 0;
             public Склади_Pointer Склад { get; set; } = new Склади_Pointer();
+
 
             public object[] ToArray()
             {
@@ -82,10 +77,8 @@ namespace StorageAndTrade
                     Пакування.Назва,
                     (float)Кількість,
                     (float)КількістьФакт,
-                    ВидЦіни.Назва,
                     (float)Ціна,
                     (float)Сума,
-                    (float)Скидка,
                     Склад.Назва,
                 ];
             }
@@ -102,18 +95,10 @@ namespace StorageAndTrade
                     Пакування = запис.Пакування.Copy(),
                     Кількість = запис.Кількість,
                     КількістьФакт = запис.КількістьФакт,
-                    ВидЦіни = запис.ВидЦіни.Copy(),
                     Ціна = запис.Ціна,
                     Сума = запис.Сума,
-                    Скидка = запис.Скидка,
                     Склад = запис.Склад.Copy(),
                 };
-            }
-
-            public static async ValueTask ПісляДодаванняНового(Запис запис)
-            {
-                запис.ВидЦіни = ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const;
-                await ПісляЗміни_ВидЦіни(запис);
             }
 
             public static async ValueTask ПісляЗміни_Номенклатура(Запис запис)
@@ -149,11 +134,6 @@ namespace StorageAndTrade
                 Запис.ПісляЗміни_КількістьАбоЦіна(запис);
             }
 
-            public static async ValueTask ПісляЗміни_ВидЦіни(Запис запис)
-            {
-                await запис.ВидЦіни.GetPresentation();
-            }
-
             public static async ValueTask ПісляЗміни_Склад(Запис запис)
             {
                 await запис.Склад.GetPresentation();
@@ -164,58 +144,13 @@ namespace StorageAndTrade
                 запис.КількістьФакт = запис.Кількість * запис.КількістьУпаковок;
                 запис.Сума = запис.Кількість * запис.Ціна;
             }
-            
-            public static async ValueTask ОтриматиЦіну(Запис запис)
-            {
-                if (запис.Номенклатура.IsEmpty())
-                    return;
-
-                if (запис.ВидЦіни.IsEmpty())
-                    return;
-
-                string query = $@"
-SELECT
-    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Ціна} AS Ціна
-FROM 
-    {ЦіниНоменклатури_Const.TABLE} AS ЦіниНоменклатури
-WHERE
-    ЦіниНоменклатури.{ЦіниНоменклатури_Const.ВидЦіни} = '{запис.ВидЦіни.UnigueID}' AND
-    ЦіниНоменклатури.{ЦіниНоменклатури_Const.Номенклатура} = '{запис.Номенклатура.UnigueID}'
-";
-
-                #region WHERE
-
-                if (!запис.ХарактеристикаНоменклатури.IsEmpty())
-                {
-                    query += $@"
-AND ЦіниНоменклатури.{ЦіниНоменклатури_Const.ХарактеристикаНоменклатури} = '{запис.ХарактеристикаНоменклатури.UnigueID}'
-";
-                }
-
-                #endregion
-
-                query += $@"
-ORDER BY 
-    ЦіниНоменклатури.period DESC 
-LIMIT 1
-";
-
-                var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-                if (recordResult.Result)
-                    foreach (Dictionary<string, object> row in recordResult.ListRow)
-                    {
-                        запис.Ціна = (decimal)row["Ціна"];
-                        запис.Сума = запис.Кількість * запис.Ціна;
-                    }
-            }
         }
 
         #endregion
 
         Label ПідсумокСума = new Label() { Selectable = true };
-        Label ПідсумокСкидка = new Label() { Selectable = true };
 
-        public ЗамовленняКлієнта_ТабличнаЧастина_Товари()
+        public ЗакриттяЗамовленняКлієнта_ТабличнаЧастина_Товари()
         {
             TreeViewGrid.Model = Store;
             AddColumn();
@@ -224,6 +159,14 @@ LIMIT 1
 
             Store.RowChanged += (object? sender, RowChangedArgs args) => ОбчислитиПідсумки();
             Store.RowDeleted += (object? sender, RowDeletedArgs args) => ОбчислитиПідсумки();
+
+            //
+            //
+            //
+
+            ToolButton fill = new ToolButton(new Image(Stock.Convert, IconSize.Menu), "Заповнити із замовлення клієнта") { IsImportant = true };
+            fill.Clicked += OnFill;
+            ToolbarTop.Add(fill);
         }
 
         #region Підсумки
@@ -233,7 +176,6 @@ LIMIT 1
             Box hBox = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
             hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
             hBox.PackStart(ПідсумокСума, false, false, 2);
-            hBox.PackStart(ПідсумокСкидка, false, false, 2);
 
             PackStart(hBox, false, false, 2);
         }
@@ -241,27 +183,55 @@ LIMIT 1
         void ОбчислитиПідсумки()
         {
             decimal Сума = 0;
-            decimal Скидка = 0;
 
             foreach (Запис запис in Записи)
-            {
                 Сума += запис.Сума;
-                Скидка += запис.Скидка;
-            }
 
             ПідсумокСума.Text = $"Сума: <b>{Сума}</b>";
             ПідсумокСума.UseMarkup = true;
-
-            ПідсумокСкидка.Text = $"Скидка: <b>{Скидка}</b>";
-            ПідсумокСкидка.UseMarkup = true;
         }
 
         #endregion
+
+        async void OnFill(object? sender, EventArgs args)
+        {
+            ОбновитиЗначенняДокумента?.Invoke();
+
+            if (ЕлементВласник != null)
+                if (!ЕлементВласник.ЗамовленняКлієнта.IsEmpty())
+                {
+                    ЗамовленняКлієнта_Objest? ЗамовленняКлієнта = await ЕлементВласник.ЗамовленняКлієнта.GetDocumentObject(true);
+                    if (ЗамовленняКлієнта != null)
+                        foreach (ЗамовленняКлієнта_Товари_TablePart.Record record in ЗамовленняКлієнта.Товари_TablePart.Records)
+                        {
+                            Запис запис = new Запис
+                            {
+                                Номенклатура = record.Номенклатура,
+                                ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                                КількістьУпаковок = record.КількістьУпаковок,
+                                Пакування = record.Пакування,
+                                Кількість = record.Кількість,
+                                Ціна = record.Ціна,
+                                Сума = record.Сума,
+                                Склад = record.Склад,
+                            };
+
+                            await Запис.ПісляЗміни_Номенклатура(запис);
+                            await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
+                            await Запис.ПісляЗміни_Пакування(запис);
+                            await Запис.ПісляЗміни_Склад(запис);
+
+                            Записи.Add(запис);
+                            Store.AppendValues(запис.ToArray());
+                        }
+                }
+        }
 
         void AddColumn()
         {
             //НомерРядка
             {
+
                 CellRendererText cellNumber = new CellRendererText() { Xalign = 1 };
                 TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 };
                 TreeViewGrid.AppendColumn(column);
@@ -269,6 +239,7 @@ LIMIT 1
 
             //Номенклатура
             {
+
                 TreeViewColumn column = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { Resizable = true, MinWidth = 200 };
 
                 SetColIndex(column, Columns.Номенклатура);
@@ -277,7 +248,8 @@ LIMIT 1
 
             //ХарактеристикаНоменклатури
             {
-                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200, Visible = Системні.ВестиОблікПоХарактеристикахНоменклатури_Const };
+
+                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200 };
 
                 SetColIndex(column, Columns.ХарактеристикаНоменклатури);
                 TreeViewGrid.AppendColumn(column);
@@ -285,6 +257,7 @@ LIMIT 1
 
             //КількістьУпаковок
             {
+
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Коєфіціент", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, Alignment = 1, MinWidth = 50 };
@@ -296,6 +269,7 @@ LIMIT 1
 
             //Пакування
             {
+
                 TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Пакування);
@@ -304,6 +278,7 @@ LIMIT 1
 
             //Кількість
             {
+
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Кількість", cellNumber, "text", (int)Columns.Кількість) { Resizable = true, Alignment = 1, MinWidth = 100 };
@@ -324,16 +299,9 @@ LIMIT 1
                 TreeViewGrid.AppendColumn(column);
             }
 
-            //ВидЦіни
-            {
-                TreeViewColumn column = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 100 };
-
-                SetColIndex(column, Columns.ВидЦіни);
-                TreeViewGrid.AppendColumn(column);
-            }
-
             //Ціна
             {
+
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Ціна", cellNumber, "text", (int)Columns.Ціна) { Resizable = true, Alignment = 1, MinWidth = 100 };
@@ -345,6 +313,7 @@ LIMIT 1
 
             //Сума
             {
+
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
                 TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", (int)Columns.Сума) { Resizable = true, Alignment = 1, MinWidth = 100 };
@@ -354,19 +323,9 @@ LIMIT 1
                 TreeViewGrid.AppendColumn(column);
             }
 
-            //Скидка
-            {
-                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
-                cellNumber.Edited += EditCell;
-                TreeViewColumn column = new TreeViewColumn("Скидка", cellNumber, "text", (int)Columns.Скидка) { Resizable = true, Alignment = 1, MinWidth = 100 };
-                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
-
-                SetColIndex(column, Columns.Скидка);
-                TreeViewGrid.AppendColumn(column);
-            }
-
             //Склад
             {
+
                 TreeViewColumn column = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.Склад) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Склад);
@@ -386,10 +345,9 @@ LIMIT 1
 
             if (ЕлементВласник != null)
             {
-                ЕлементВласник.Товари_TablePart.FillJoin([ЗамовленняКлієнта_Товари_TablePart.НомерРядка]);
+                ЕлементВласник.Товари_TablePart.FillJoin([ЗакриттяЗамовленняКлієнта_Товари_TablePart.НомерРядка]);
                 await ЕлементВласник.Товари_TablePart.Read();
-
-                foreach (ЗамовленняКлієнта_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
+                foreach (ЗакриттяЗамовленняКлієнта_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -400,11 +358,8 @@ LIMIT 1
                         КількістьУпаковок = record.КількістьУпаковок,
                         Пакування = record.Пакування,
                         Кількість = record.Кількість,
-                        КількістьФакт = record.Кількість * record.КількістьУпаковок,
-                        ВидЦіни = record.ВидЦіни,
                         Ціна = record.Ціна,
                         Сума = record.Сума,
-                        Скидка = record.Скидка,
                         Склад = record.Склад,
                     };
 
@@ -422,7 +377,7 @@ LIMIT 1
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
                 {
-                    ЕлементВласник.Товари_TablePart.Records.Add(new ЗамовленняКлієнта_Товари_TablePart.Record()
+                    ЕлементВласник.Товари_TablePart.Records.Add(new ЗакриттяЗамовленняКлієнта_Товари_TablePart.Record()
                     {
                         UID = запис.ID,
                         НомерРядка = ++sequenceNumber,
@@ -431,15 +386,11 @@ LIMIT 1
                         КількістьУпаковок = запис.КількістьУпаковок,
                         Пакування = запис.Пакування,
                         Кількість = запис.Кількість,
-                        ВидЦіни = запис.ВидЦіни,
                         Ціна = запис.Ціна,
                         Сума = запис.Сума,
-                        Скидка = запис.Скидка,
                         Склад = запис.Склад,
-
                     });
                 }
-
                 await ЕлементВласник.Товари_TablePart.Save(true);
                 await LoadRecords();
             }
@@ -457,21 +408,18 @@ LIMIT 1
 
         public string КлючовіСловаДляПошуку()
         {
-            string ключовіСлова = "";
 
-            if (ЕлементВласник != null)
-            {
-                int sequenceNumber = 0;
-                foreach (Запис запис in Записи)
-                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.ХарактеристикаНоменклатури.Назва} ";
-            }
+            string keyWords = "";
+            foreach (Запис запис in Записи)
+                keyWords += $"\n {запис.Номенклатура.Назва} {запис.ХарактеристикаНоменклатури.Назва} {запис.Пакування.Назва} {запис.Склад.Назва}";
 
-            return ключовіСлова;
+            return keyWords;
         }
 
         #endregion
 
         #region Func
+
 
         protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
         {
@@ -521,20 +469,6 @@ LIMIT 1
                         };
                         return page;
                     }
-                case Columns.ВидЦіни:
-                    {
-                        ВидиЦін_ШвидкийВибір page = new()
-                        {
-                            DirectoryPointerItem = запис.ВидЦіни.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.ВидЦіни = new ВидиЦін_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_ВидЦіни(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
-                        };
-                        return page;
-                    }
                 case Columns.Склад:
                     {
                         Склади_ШвидкийВибір page = new()
@@ -562,7 +496,6 @@ LIMIT 1
                 case Columns.Номенклатура: { запис.Номенклатура.Clear(); break; }
                 case Columns.ХарактеристикаНоменклатури: { запис.ХарактеристикаНоменклатури.Clear(); break; }
                 case Columns.Пакування: { запис.Пакування.Clear(); break; }
-                case Columns.ВидЦіни: { запис.ВидЦіни.Clear(); break; }
                 case Columns.Склад: { запис.Склад.Clear(); break; }
 
                 default: break;
@@ -608,7 +541,6 @@ LIMIT 1
                         break;
                     }
                 case Columns.Сума: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Сума = value; break; }
-                case Columns.Скидка: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Скидка = value; break; }
 
                 default: break;
             }
@@ -632,46 +564,45 @@ LIMIT 1
                             cellText.Text = запис.КількістьУпаковок.ToString();
                             break;
                         }
+
                     case Columns.Кількість:
                         {
                             cellText.Text = запис.Кількість.ToString();
                             break;
                         }
+
                     case Columns.КількістьФакт:
                         {
                             cellText.Text = запис.КількістьФакт.ToString();
                             break;
                         }
+
                     case Columns.Ціна:
                         {
                             cellText.Text = запис.Ціна.ToString();
                             break;
                         }
+
                     case Columns.Сума:
                         {
                             cellText.Text = запис.Сума.ToString();
                             break;
                         }
-                    case Columns.Скидка:
-                        {
-                            cellText.Text = запис.Скидка.ToString();
-                            break;
-                        }
+
                     default: break;
                 }
             }
         }
 
+
         #endregion
 
         #region ToolBar
 
-        protected override async void AddRecord()
+        protected override void AddRecord()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
-
-            await Запис.ПісляДодаванняНового(запис);
 
             TreeIter iter = Store.AppendValues(запис.ToArray());
             TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);

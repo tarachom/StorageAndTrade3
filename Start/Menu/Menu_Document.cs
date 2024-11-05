@@ -20,6 +20,7 @@ namespace StorageAndTrade
             Box vLeft = new Box(Orientation.Vertical, 0);
             hBoxList.PackStart(vLeft, false, false, 5);
 
+            //Продажі
             {
                 CreateCaptionLink(vLeft, "Продажі", async () =>
                 {
@@ -28,12 +29,26 @@ namespace StorageAndTrade
                     await page.SetValue();
                 });
 
-                CreateLink(vLeft, ЗамовленняКлієнта_Const.FULLNAME, async () =>
+                //ЗамовленняКлієнта та ЗакриттяЗамовленняКлієнта
                 {
-                    ЗамовленняКлієнта page = new ЗамовленняКлієнта();
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗамовленняКлієнта_Const.FULLNAME, () => page);
-                    await page.SetValue();
-                });
+                    Box hBox = CreateField(vLeft, null, null, Align.Start);
+
+                    CreateLink(hBox, ЗамовленняКлієнта_Const.FULLNAME, async () =>
+                    {
+                        ЗамовленняКлієнта page = new ЗамовленняКлієнта();
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗамовленняКлієнта_Const.FULLNAME, () => page);
+                        await page.SetValue();
+                    });
+
+                    CreateField(hBox, " | ", null);
+
+                    CreateLink(hBox, "Закриття замовлення", async () =>
+                    {
+                        ЗакриттяЗамовленняКлієнта page = new ЗакриттяЗамовленняКлієнта();
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяЗамовленняКлієнта_Const.FULLNAME, () => page);
+                        await page.SetValue();
+                    });
+                }
 
                 CreateLink(vLeft, РахунокФактура_Const.FULLNAME, async () =>
                 {

@@ -145,6 +145,12 @@ namespace StorageAndTrade
                 Menu.Append(doc);
             }
 
+            {
+                MenuItem doc = new MenuItem(ЗакриттяЗамовленняКлієнта_Const.FULLNAME);
+                doc.Activated += НаОснові_ЗакриттяЗамовленняКлієнта;
+                Menu.Append(doc);
+            }
+
             Menu.ShowAll();
 
             return Menu;
@@ -341,6 +347,59 @@ namespace StorageAndTrade
                 await Новий.Save();
 
                 ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
+        }
+
+        async void НаОснові_ЗакриттяЗамовленняКлієнта(object? sender, EventArgs args)
+        {
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ЗамовленняКлієнта_Objest? Обєкт = await new ЗамовленняКлієнта_Pointer(unigueID).GetDocumentObject(true);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                ЗакриттяЗамовленняКлієнта_Objest Новий = new ЗакриттяЗамовленняКлієнта_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Каса = Обєкт.Каса;
+                Новий.Контрагент = Обєкт.Контрагент;
+                Новий.Договір = Обєкт.Договір;
+                Новий.Склад = Обєкт.Склад;
+                Новий.СумаДокументу = Обєкт.СумаДокументу;
+                Новий.ЗамовленняКлієнта = Обєкт.GetDocumentPointer();
+                Новий.Основа = Обєкт.GetBasis();
+
+                if (await Новий.Save())
+                {
+                    int sequenceNumber = 0;
+                    //Товари
+                    foreach (ЗамовленняКлієнта_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
+                    {
+                        Новий.Товари_TablePart.Records.Add(new ЗакриттяЗамовленняКлієнта_Товари_TablePart.Record()
+                        {
+                            НомерРядка = ++sequenceNumber,
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість,
+                            Ціна = record.Ціна,
+                            Сума = record.Сума,
+                            Склад = Обєкт.Склад
+                        });
+                    }
+
+                    await Новий.Товари_TablePart.Save(false);
+                }
+
+                ЗакриттяЗамовленняКлієнта_Елемент page = new ЗакриттяЗамовленняКлієнта_Елемент();
                 await page.Елемент.Read(Новий.UnigueID);
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
                 page.SetValue();
