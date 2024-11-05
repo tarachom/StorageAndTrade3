@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.11.2024 14:56:28
+ * Дата конфігурації: 05.11.2024 20:31:20
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -13876,6 +13876,292 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
 	    
     #endregion
     
+    #region DOCUMENT "ЗакриттяРахункуФактури"
+    
+      
+    public class ЗакриттяРахункуФактури_Записи : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Контрагент = "";
+        string Валюта = "";
+        string Каса = "";
+        string Склад = "";
+        string СумаДокументу = "";
+        string Автор = "";
+        string Коментар = "";
+
+        Array ToArray()
+        {
+            return new object[] 
+            { 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
+                ID, 
+                /*Проведений документ*/ Spend, 
+                /*Назва*/ Назва,
+                /*НомерДок*/ НомерДок,
+                /*ДатаДок*/ ДатаДок,
+                /*Організація*/ Організація,
+                /*Контрагент*/ Контрагент,
+                /*Валюта*/ Валюта,
+                /*Каса*/ Каса,
+                /*Склад*/ Склад,
+                /*СумаДокументу*/ СумаДокументу,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                
+            };
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Spend Проведений документ*/ typeof(bool),
+                /*Назва*/ typeof(string),  
+                /*НомерДок*/ typeof(string),  
+                /*ДатаДок*/ typeof(string),  
+                /*Організація*/ typeof(string),  
+                /*Контрагент*/ typeof(string),  
+                /*Валюта*/ typeof(string),  
+                /*Каса*/ typeof(string),  
+                /*Склад*/ typeof(string),  
+                /*СумаДокументу*/ typeof(string),  
+                /*Автор*/ typeof(string),  
+                /*Коментар*/ typeof(string),  
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Контрагент", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true } ); /*Контрагент*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true } ); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true } ); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true } ); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяРахункуФактури_Const.ДатаДок, типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
+        public static UnigueID? DocumentPointerItem { get; set; }
+        public static UnigueID? SelectPointerItem { get; set; }
+        public static TreePath? FirstPath;
+        public static TreePath? SelectPath;
+        public static TreePath? CurrentPath;
+
+        public static ListBox CreateFilter(TreeView treeView)
+        {
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+            
+                  List<Tuple<string, Widget, Switch>> widgets = [];
+                  
+                  { /* Організація, pointer */
+                      Switch sw = new();
+                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                      widgets.Add(new("Організація", Організація, sw));
+                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
+                  }
+                  
+                  { /* Контрагент, pointer */
+                      Switch sw = new();
+                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                      widgets.Add(new("Контрагент", Контрагент, sw));
+                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
+                  }
+                  
+                  { /* Валюта, pointer */
+                      Switch sw = new();
+                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                      widgets.Add(new("Валюта", Валюта, sw));
+                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
+                  }
+                  
+                  { /* Каса, pointer */
+                      Switch sw = new();
+                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                      widgets.Add(new("Каса", Каса, sw));
+                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
+                  }
+                  
+                  { /* Склад, pointer */
+                      Switch sw = new();
+                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                      widgets.Add(new("Склад", Склад, sw));
+                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
+                  }
+                  
+                  { /* СумаДокументу, numeric */
+                      Switch sw = new();
+                      NumericControl СумаДокументу = new();
+                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
+                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
+                  }
+                  
+                  { /* Автор, pointer */
+                      Switch sw = new();
+                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                      widgets.Add(new("Автор", Автор, sw));
+                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
+                  }
+                  
+                  {
+                      Button bOn = new Button("Фільтрувати");
+                      bOn.Clicked += async (object? sender, EventArgs args) =>
+                      {
+                          List<Where> listWhere = [];
+                          foreach (var widget in widgets)
+                              if (widget.Item3.Active)
+                              {
+                                  string? field = widget.Item1 switch { "Організація" => ЗакриттяРахункуФактури_Const.Організація,
+                                  "Контрагент" => ЗакриттяРахункуФактури_Const.Контрагент,
+                                  "Валюта" => ЗакриттяРахункуФактури_Const.Валюта,
+                                  "Каса" => ЗакриттяРахункуФактури_Const.Каса,
+                                  "Склад" => ЗакриттяРахункуФактури_Const.Склад,
+                                  "СумаДокументу" => ЗакриттяРахункуФактури_Const.СумаДокументу,
+                                  "Автор" => ЗакриттяРахункуФактури_Const.Автор,
+                                   _ => null };
+                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
+                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
+                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
+                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
+                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
+                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
+                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
+                                   _ => null };
+                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
+                              }
+                          if (listWhere.Count != 0)
+                          {
+                              ДодатиВідбір(treeView, listWhere, true);
+                              await LoadRecords(treeView);
+                          }
+                      };
+
+                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
+                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
+                      vBox.PackStart(hBox, false, false, 5);
+                      hBox.PackStart(bOn, false, false, 5);
+                      
+                      listBox.Add(new ListBoxRow() { vBox });
+                  }
+                
+            return listBox;
+        }
+
+        public static async ValueTask LoadRecords(TreeView treeView)
+        {
+            FirstPath = SelectPath = CurrentPath = null;
+
+            Документи.ЗакриттяРахункуФактури_Select ЗакриттяРахункуФактури_Select = new Документи.ЗакриттяРахункуФактури_Select();
+            ЗакриттяРахункуФактури_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Проведений документ*/ "spend",
+                /*Назва*/ Документи.ЗакриттяРахункуФактури_Const.Назва,
+                /*НомерДок*/ Документи.ЗакриттяРахункуФактури_Const.НомерДок,
+                /*ДатаДок*/ Документи.ЗакриттяРахункуФактури_Const.ДатаДок,
+                /*СумаДокументу*/ Документи.ЗакриттяРахункуФактури_Const.СумаДокументу,
+                /*Коментар*/ Документи.ЗакриттяРахункуФактури_Const.Коментар,
+                
+            ]);
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) ЗакриттяРахункуФактури_Select.QuerySelect.Where = (List<Where>)where;
+
+            ЗакриттяРахункуФактури_Select.QuerySelect.Order.Add(
+               Документи.ЗакриттяРахункуФактури_Const.ДатаДок, SelectOrder.ASC);
+            Довідники.Організації_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Організація,
+                ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_1", "Організація");
+            Довідники.Контрагенти_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Контрагент,
+                ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+            Довідники.Валюти_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Валюта,
+                ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+            Довідники.Каси_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Каса,
+                ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_4", "Каса");
+            Довідники.Склади_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Склад,
+                ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_5", "Склад");
+            Довідники.Користувачі_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Автор,
+                ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_6", "Автор");
+            
+
+            /* SELECT */
+            await ЗакриттяРахункуФактури_Select.Select();
+
+            ListStore Store = (ListStore)treeView.Model;
+            Store.Clear();
+
+            while (ЗакриттяРахункуФактури_Select.MoveNext())
+            {
+                Документи.ЗакриттяРахункуФактури_Pointer? cur = ЗакриттяРахункуФактури_Select.Current;
+
+                if (cur != null)
+                {
+                    Dictionary<string, object> Fields = cur.Fields!;
+                    ЗакриттяРахункуФактури_Записи Record = new ЗакриттяРахункуФактури_Записи
+                    {
+                        ID = cur.UnigueID.ToString(),
+                        Spend = (bool)Fields["spend"], /*Проведений документ*/
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[ЗакриттяРахункуФактури_Const.Назва].ToString() ?? "",
+                            НомерДок = Fields[ЗакриттяРахункуФактури_Const.НомерДок].ToString() ?? "",
+                            ДатаДок = Fields[ЗакриттяРахункуФактури_Const.ДатаДок].ToString() ?? "",
+                            Організація = Fields["Організація"].ToString() ?? "",
+                            Контрагент = Fields["Контрагент"].ToString() ?? "",
+                            Валюта = Fields["Валюта"].ToString() ?? "",
+                            Каса = Fields["Каса"].ToString() ?? "",
+                            Склад = Fields["Склад"].ToString() ?? "",
+                            СумаДокументу = Fields[ЗакриттяРахункуФактури_Const.СумаДокументу].ToString() ?? "",
+                            Автор = Fields["Автор"].ToString() ?? "",
+                            Коментар = Fields[ЗакриттяРахункуФактури_Const.Коментар].ToString() ?? "",
+                            
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+
+                    if (DocumentPointerItem != null || SelectPointerItem != null)
+                    {
+                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
+                        if (Record.ID == UidSelect)
+                            SelectPath = CurrentPath;
+                    }
+                }
+            }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null)
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
+        }
+    }
+	    
+    #endregion
+    
 
     //
     // Журнали
@@ -14089,6 +14375,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 if (where != null) WhereDict.Add("ЗакриттяЗамовленняКлієнта", [where]);
             }
               
+            {
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяРахункуФактури_Const.ДатаДок, типПеріоду, start, stop);
+                if (where != null) WhereDict.Add("ЗакриттяРахункуФактури", [where]);
+            }
+              
         }
 
         public static void ОчиститиВідбір(TreeView treeView)
@@ -14124,6 +14415,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 {"РозміщенняНоменклатуриПоКоміркам", "Розміщення номенклатури по коміркам"},
                 {"КорегуванняБоргу", "Корегування боргу контрагентів"},
                 {"ЗакриттяЗамовленняКлієнта", "Закриття замовлення клієнта"},
+                {"ЗакриттяРахункуФактури", "Закриття рахунку фактури"},
                 
             };
         }
@@ -15054,6 +15346,46 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                   allQuery.Add(query.Construct());
               }
               
+              //Документ: ЗакриттяРахункуФактури
+              {
+                  Query query = new Query(Документи.ЗакриттяРахункуФактури_Const.TABLE);
+
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
+                  {
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗакриттяРахункуФактури", out List<Where>? listWhere))
+                      {
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
+                      }
+                  }
+                  
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяРахункуФактури'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Валюта, query.Table, "join_tab_8", "Валюта");
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.СумаДокументу + "::text", "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Автор, query.Table, "join_tab_10", "Автор");
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Коментар, "Коментар"));
+                            
+                  allQuery.Add(query.Construct());
+              }
+              
 
             string unionAllQuery = string.Join("\nUNION\n", allQuery);
 
@@ -15546,6 +15878,11 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 if (where != null) WhereDict.Add("ЗакриттяЗамовленняКлієнта", [where]);
             }
               
+            {
+                Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяРахункуФактури_Const.ДатаДок, типПеріоду, start, stop);
+                if (where != null) WhereDict.Add("ЗакриттяРахункуФактури", [where]);
+            }
+              
         }
 
         public static void ОчиститиВідбір(TreeView treeView)
@@ -15565,6 +15902,7 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                 {"АктВиконанихРобіт", "Акт виконаних робіт"},
                 {"РахунокФактура", "Рахунок фактура"},
                 {"ЗакриттяЗамовленняКлієнта", "Закриття замовлення клієнта"},
+                {"ЗакриттяРахункуФактури", "Закриття рахунку фактури"},
                 
             };
         }
@@ -15819,6 +16157,46 @@ namespace StorageAndTrade_1_0.Документи.ТабличніСписки
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
                               query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                            
+                  allQuery.Add(query.Construct());
+              }
+              
+              //Документ: ЗакриттяРахункуФактури
+              {
+                  Query query = new Query(Документи.ЗакриттяРахункуФактури_Const.TABLE);
+
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
+                  {
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЗакриттяРахункуФактури", out List<Where>? listWhere))
+                      {
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
+                      }
+                  }
+                  
+                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяРахункуФактури'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Склад, query.Table, "join_tab_6", "Склад");
+                            Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Каса, query.Table, "join_tab_7", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Валюта, query.Table, "join_tab_8", "Валюта");
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Автор, query.Table, "join_tab_10", "Автор");
+                            
+                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }

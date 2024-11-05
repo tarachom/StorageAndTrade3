@@ -133,6 +133,12 @@ namespace StorageAndTrade
                 Menu.Append(doc);
             }
 
+            {
+                MenuItem doc = new MenuItem(ЗакриттяРахункуФактури_Const.FULLNAME);
+                doc.Activated += НаОснові_ЗакриттяРахункуФактури;
+                Menu.Append(doc);
+            }
+
             Menu.ShowAll();
 
             return Menu;
@@ -244,6 +250,58 @@ namespace StorageAndTrade
                 }
 
                 ЗамовленняПостачальнику_Елемент page = new ЗамовленняПостачальнику_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
+        }
+
+        async void НаОснові_ЗакриттяРахункуФактури(object? sender, EventArgs args)
+        {
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                РахунокФактура_Objest? Обєкт = await new РахунокФактура_Pointer(unigueID).GetDocumentObject(true);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                ЗакриттяРахункуФактури_Objest Новий = new ЗакриттяРахункуФактури_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Каса = Обєкт.Каса;
+                Новий.Контрагент = Обєкт.Контрагент;
+                Новий.Договір = Обєкт.Договір;
+                Новий.Склад = Обєкт.Склад;
+                Новий.СумаДокументу = Обєкт.СумаДокументу;
+                Новий.РахунокФактура = Обєкт.GetDocumentPointer();
+                Новий.Основа = Обєкт.GetBasis();
+
+                if (await Новий.Save())
+                {
+                    int sequenceNumber = 0;
+                    //Товари
+                    foreach (РахунокФактура_Товари_TablePart.Record record in Обєкт.Товари_TablePart.Records)
+                    {
+                        Новий.Товари_TablePart.Records.Add(new ЗакриттяРахункуФактури_Товари_TablePart.Record()
+                        {
+                            НомерРядка = ++sequenceNumber,
+                            Номенклатура = record.Номенклатура,
+                            ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                            Пакування = record.Пакування,
+                            КількістьУпаковок = record.КількістьУпаковок,
+                            Кількість = record.Кількість,
+                            Ціна = record.Ціна,
+                            Сума = record.Сума
+                        });
+                    }
+
+                    await Новий.Товари_TablePart.Save(false);
+                }
+
+                ЗакриттяРахункуФактури_Елемент page = new ЗакриттяРахункуФактури_Елемент();
                 await page.Елемент.Read(Новий.UnigueID);
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
                 page.SetValue();

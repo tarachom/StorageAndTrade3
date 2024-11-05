@@ -31,7 +31,8 @@ namespace StorageAndTrade
 
                 //ЗамовленняКлієнта та ЗакриттяЗамовленняКлієнта
                 {
-                    Box hBox = CreateField(vLeft, null, null, Align.Start);
+                    Box hBox = new Box(Orientation.Horizontal, 0);
+                    vLeft.PackStart(hBox, false, false, 0);
 
                     CreateLink(hBox, ЗамовленняКлієнта_Const.FULLNAME, async () =>
                     {
@@ -40,7 +41,7 @@ namespace StorageAndTrade
                         await page.SetValue();
                     });
 
-                    CreateField(hBox, " | ", null);
+                    hBox.PackStart(new Label(", "), false, false, 0);
 
                     CreateLink(hBox, "Закриття замовлення", async () =>
                     {
@@ -50,12 +51,27 @@ namespace StorageAndTrade
                     });
                 }
 
-                CreateLink(vLeft, РахунокФактура_Const.FULLNAME, async () =>
+                //РахунокФактура та ЗакриттяРахункуФактури
                 {
-                    РахунокФактура page = new РахунокФактура();
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, РахунокФактура_Const.FULLNAME, () => page);
-                    await page.SetValue();
-                });
+                    Box hBox = new Box(Orientation.Horizontal, 0);
+                    vLeft.PackStart(hBox, false, false, 0);
+
+                    CreateLink(hBox, РахунокФактура_Const.FULLNAME, async () =>
+                    {
+                        РахунокФактура page = new РахунокФактура();
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, РахунокФактура_Const.FULLNAME, () => page);
+                        await page.SetValue();
+                    });
+
+                    hBox.PackStart(new Label(", "), false, false, 0);
+
+                    CreateLink(hBox, "Закриття рахунку", async () =>
+                    {
+                        ЗакриттяРахункуФактури page = new ЗакриттяРахункуФактури();
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяРахункуФактури_Const.FULLNAME, () => page);
+                        await page.SetValue();
+                    });
+                }
 
                 CreateLink(vLeft, РеалізаціяТоварівТаПослуг_Const.FULLNAME, async () =>
                 {

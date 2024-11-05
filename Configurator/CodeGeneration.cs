@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 05.11.2024 14:56:28
+ * Дата конфігурації: 05.11.2024 20:31:20
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -157,6 +157,7 @@ namespace StorageAndTrade_1_0
                         "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(uuidAndText.Uuid).GetPresentation(),
                         "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(uuidAndText.Uuid).GetPresentation(),
                         "ЗакриттяЗамовленняКлієнта" => await new Документи.ЗакриттяЗамовленняКлієнта_Pointer(uuidAndText.Uuid).GetPresentation(),
+                        "ЗакриттяРахункуФактури" => await new Документи.ЗакриттяРахункуФактури_Pointer(uuidAndText.Uuid).GetPresentation(),
                         _ => ""
                         };
                     }
@@ -1207,6 +1208,18 @@ namespace StorageAndTrade_1_0.Константи
             set
             {
                 Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i8", value);
+            }
+        }
+        public static int ЗакриттяРахункуФактури_Const
+        {
+            get 
+            {
+                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_i9"); } ).Result;
+                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (int)recordResult.Value : 0) : 0;
+            }
+            set
+            {
+                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_i9", value);
             }
         }
              
@@ -11628,6 +11641,14 @@ namespace StorageAndTrade_1_0.Перелічення
     }
     #endregion
     
+    #region ENUM "ПричиниЗакриттяРахункуФактури"
+    public enum ПричиниЗакриттяРахункуФактури
+    {
+         Відмова = 1,
+         Інше = 2
+    }
+    #endregion
+    
 
     public static class ПсевдонімиПерелічення
     {
@@ -12417,6 +12438,36 @@ namespace StorageAndTrade_1_0.Перелічення
             return new List<NameValue<ПричиниЗакриттяЗамовленняКлієнта>>() {
             new NameValue<ПричиниЗакриттяЗамовленняКлієнта>("Відмова", ПричиниЗакриттяЗамовленняКлієнта.Відмова),
             new NameValue<ПричиниЗакриттяЗамовленняКлієнта>("Інше", ПричиниЗакриттяЗамовленняКлієнта.Інше),
+            };
+        }
+        #endregion
+    
+        #region ENUM "ПричиниЗакриттяРахункуФактури"
+        public static string ПричиниЗакриттяРахункуФактури_Alias(ПричиниЗакриттяРахункуФактури value)
+        {
+            return value switch
+            {
+                ПричиниЗакриттяРахункуФактури.Відмова => "Відмова",
+                ПричиниЗакриттяРахункуФактури.Інше => "Інше",
+                _ => ""
+            };
+        }
+
+        public static ПричиниЗакриттяРахункуФактури? ПричиниЗакриттяРахункуФактури_FindByName(string name)
+        {
+            return name switch
+            {
+                "Відмова" => ПричиниЗакриттяРахункуФактури.Відмова,
+                "Інше" => ПричиниЗакриттяРахункуФактури.Інше,
+                _ => null
+            };
+        }
+
+        public static List<NameValue<ПричиниЗакриттяРахункуФактури>> ПричиниЗакриттяРахункуФактури_List()
+        {
+            return new List<NameValue<ПричиниЗакриттяРахункуФактури>>() {
+            new NameValue<ПричиниЗакриттяРахункуФактури>("Відмова", ПричиниЗакриттяРахункуФактури.Відмова),
+            new NameValue<ПричиниЗакриттяРахункуФактури>("Інше", ПричиниЗакриттяРахункуФактури.Інше),
             };
         }
         #endregion
@@ -26069,6 +26120,517 @@ namespace StorageAndTrade_1_0.Документи
 
     #endregion
     
+    #region DOCUMENT "ЗакриттяРахункуФактури"
+    public static class ЗакриттяРахункуФактури_Const
+    {
+        public const string TABLE = "tab_b41";
+        public const string POINTER = "Документи.ЗакриттяРахункуФактури"; /* Повна назва вказівника */
+        public const string FULLNAME = "Закриття рахунку фактури"; /* Повна назва об'єкта */
+        public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
+        public const string SPEND = "spend"; /* Проведений true|false */
+        public const string SPEND_DATE = "spend_date"; /* Дата проведення DateTime */
+        public readonly static string[] PRESENTATION_FIELDS = ["docname", ];
+        
+        
+        public const string Назва = "docname";
+        public const string НомерДок = "docnomer";
+        public const string ДатаДок = "docdate";
+        public const string Контрагент = "col_b4";
+        public const string Організація = "col_b5";
+        public const string Валюта = "col_b6";
+        public const string ПричинаЗакриттяРахунку = "col_a2";
+        public const string Склад = "col_b8";
+        public const string РахунокФактура = "col_a1";
+        public const string Каса = "col_a6";
+        public const string Договір = "col_c2";
+        public const string Автор = "col_c4";
+        public const string Коментар = "col_c1";
+        public const string Менеджер = "col_b2";
+        public const string КлючовіСловаДляПошуку = "col_b3";
+        public const string СумаДокументу = "col_a3";
+        public const string Основа = "col_a4";
+    }
+
+    public class ЗакриттяРахункуФактури_Objest : DocumentObject
+    {
+        public event EventHandler<UnigueID>? UnigueIDChanged;
+        public event EventHandler<string>? CaptionChanged;
+
+        public ЗакриттяРахункуФактури_Objest() : base(Config.Kernel, "tab_b41", "ЗакриттяРахункуФактури",
+             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ])
+        {
+            
+                //Табличні частини
+                Товари_TablePart = new ЗакриттяРахункуФактури_Товари_TablePart(this);
+                
+        }
+        
+        public async ValueTask New()
+        {
+            BaseNew();
+            UnigueIDChanged?.Invoke(this, base.UnigueID);
+            CaptionChanged?.Invoke(this, ЗакриттяРахункуФактури_Const.FULLNAME + " *");
+            
+                await ЗакриттяРахункуФактури_Triggers.New(this);
+              
+        }
+
+        public async ValueTask<bool> Read(UnigueID uid, bool readAllTablePart = false)
+        {
+            if (await BaseRead(uid))
+            {
+                Назва = base.FieldValue["docname"].ToString() ?? "";
+                НомерДок = base.FieldValue["docnomer"].ToString() ?? "";
+                ДатаДок = (base.FieldValue["docdate"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["docdate"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
+                Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_b4"]);
+                Організація = new Довідники.Організації_Pointer(base.FieldValue["col_b5"]);
+                Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_b6"]);
+                ПричинаЗакриттяРахунку = (base.FieldValue["col_a2"] != DBNull.Value) ? (Перелічення.ПричиниЗакриттяРахункуФактури)base.FieldValue["col_a2"] : 0;
+                Склад = new Довідники.Склади_Pointer(base.FieldValue["col_b8"]);
+                РахунокФактура = new Документи.РахунокФактура_Pointer(base.FieldValue["col_a1"]);
+                Каса = new Довідники.Каси_Pointer(base.FieldValue["col_a6"]);
+                Договір = new Довідники.ДоговориКонтрагентів_Pointer(base.FieldValue["col_c2"]);
+                Автор = new Довідники.Користувачі_Pointer(base.FieldValue["col_c4"]);
+                Коментар = base.FieldValue["col_c1"].ToString() ?? "";
+                Менеджер = new Довідники.Користувачі_Pointer(base.FieldValue["col_b2"]);
+                КлючовіСловаДляПошуку = base.FieldValue["col_b3"].ToString() ?? "";
+                СумаДокументу = (base.FieldValue["col_a3"] != DBNull.Value) ? (decimal)base.FieldValue["col_a3"] : 0;
+                Основа = (base.FieldValue["col_a4"] != DBNull.Value) ? (UuidAndText)base.FieldValue["col_a4"] : new UuidAndText();
+                
+                BaseClear();
+                
+                if (readAllTablePart)
+                {
+                    
+                    await Товари_TablePart.Read();
+                }
+                
+                UnigueIDChanged?.Invoke(this, base.UnigueID);
+                CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public async Task<bool> Save()
+        {
+            
+                await ЗакриттяРахункуФактури_Triggers.BeforeSave(this);
+            base.FieldValue["docname"] = Назва;
+            base.FieldValue["docnomer"] = НомерДок;
+            base.FieldValue["docdate"] = ДатаДок;
+            base.FieldValue["col_b4"] = Контрагент.UnigueID.UGuid;
+            base.FieldValue["col_b5"] = Організація.UnigueID.UGuid;
+            base.FieldValue["col_b6"] = Валюта.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = (int)ПричинаЗакриттяРахунку;
+            base.FieldValue["col_b8"] = Склад.UnigueID.UGuid;
+            base.FieldValue["col_a1"] = РахунокФактура.UnigueID.UGuid;
+            base.FieldValue["col_a6"] = Каса.UnigueID.UGuid;
+            base.FieldValue["col_c2"] = Договір.UnigueID.UGuid;
+            base.FieldValue["col_c4"] = Автор.UnigueID.UGuid;
+            base.FieldValue["col_c1"] = Коментар;
+            base.FieldValue["col_b2"] = Менеджер.UnigueID.UGuid;
+            base.FieldValue["col_b3"] = КлючовіСловаДляПошуку;
+            base.FieldValue["col_a3"] = СумаДокументу;
+            base.FieldValue["col_a4"] = Основа;
+            
+            bool result = await BaseSave();
+            if (result)
+            {
+                
+                await BaseWriteFullTextSearch(GetBasis(), [Назва, НомерДок, Коментар, КлючовіСловаДляПошуку, ]);
+                
+            }
+            CaptionChanged?.Invoke(this, string.Join(", ", [Назва, ]));
+            return result;
+        }
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            
+            await BaseAddIgnoreDocumentList();
+            bool spend = await ЗакриттяРахункуФактури_SpendTheDocument.Spend(this);
+            if (!spend) ClearRegAccum();
+            await BaseSpend(spend, spend ? spendDate : DateTime.MinValue);
+            await BaseRemoveIgnoreDocumentList();
+            return spend;
+                
+        }
+
+        /* Очищення всіх регістрів */
+        async void ClearRegAccum()
+        {
+            
+            /* ВільніЗалишки */
+            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ClearRegAccum();
+            
+            await ЗакриттяРахункуФактури_SpendTheDocument.ClearSpend(this);
+            
+            await BaseSpend(false, DateTime.MinValue);
+        }
+
+        public async ValueTask<ЗакриттяРахункуФактури_Objest> Copy(bool copyTableParts = false)
+        {
+            ЗакриттяРахункуФактури_Objest copy = new ЗакриттяРахункуФактури_Objest()
+            {
+                Назва = Назва,
+                НомерДок = НомерДок,
+                ДатаДок = ДатаДок,
+                Контрагент = Контрагент,
+                Організація = Організація,
+                Валюта = Валюта,
+                ПричинаЗакриттяРахунку = ПричинаЗакриттяРахунку,
+                Склад = Склад,
+                РахунокФактура = РахунокФактура,
+                Каса = Каса,
+                Договір = Договір,
+                Автор = Автор,
+                Коментар = Коментар,
+                Менеджер = Менеджер,
+                КлючовіСловаДляПошуку = КлючовіСловаДляПошуку,
+                СумаДокументу = СумаДокументу,
+                Основа = Основа,
+                
+            };
+            
+            if (copyTableParts)
+            {
+            
+                //Товари - Таблична частина
+                await Товари_TablePart.Read();
+                copy.Товари_TablePart.Records = Товари_TablePart.Copy();
+            
+            }
+            
+
+            await copy.New();
+            
+            return copy;
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDeletionLabel(label);
+        }
+
+        public async ValueTask Delete()
+        {
+            
+            await ClearSpendTheDocument();
+            await base.BaseDelete(["tab_b42", ]);
+        }
+        
+        public ЗакриттяРахункуФактури_Pointer GetDocumentPointer()
+        {
+            return new ЗакриттяРахункуФактури_Pointer(UnigueID.UGuid);
+        }
+
+        public UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, ЗакриттяРахункуФактури_Const.POINTER);
+        }
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return await base.BasePresentation(ЗакриттяРахункуФактури_Const.PRESENTATION_FIELDS);
+        }
+        
+        public string Назва { get; set; } = "";
+        public string НомерДок { get; set; } = "";
+        public DateTime ДатаДок { get; set; } = DateTime.MinValue;
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; } = new Довідники.Контрагенти_Pointer();
+        public Довідники.Організації_Pointer Організація { get; set; } = new Довідники.Організації_Pointer();
+        public Довідники.Валюти_Pointer Валюта { get; set; } = new Довідники.Валюти_Pointer();
+        public Перелічення.ПричиниЗакриттяРахункуФактури ПричинаЗакриттяРахунку { get; set; } = 0;
+        public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+        public Документи.РахунокФактура_Pointer РахунокФактура { get; set; } = new Документи.РахунокФактура_Pointer();
+        public Довідники.Каси_Pointer Каса { get; set; } = new Довідники.Каси_Pointer();
+        public Довідники.ДоговориКонтрагентів_Pointer Договір { get; set; } = new Довідники.ДоговориКонтрагентів_Pointer();
+        public Довідники.Користувачі_Pointer Автор { get; set; } = new Довідники.Користувачі_Pointer();
+        public string Коментар { get; set; } = "";
+        public Довідники.Користувачі_Pointer Менеджер { get; set; } = new Довідники.Користувачі_Pointer();
+        public string КлючовіСловаДляПошуку { get; set; } = "";
+        public decimal СумаДокументу { get; set; } = 0;
+        public UuidAndText Основа { get; set; } = new UuidAndText();
+        
+        //Табличні частини
+        public ЗакриттяРахункуФактури_Товари_TablePart Товари_TablePart { get; set; }
+        
+    }
+    
+    public class ЗакриттяРахункуФактури_Pointer : DocumentPointer
+    {
+        public ЗакриттяРахункуФактури_Pointer(object? uid = null) : base(Config.Kernel, "tab_b41", "ЗакриттяРахункуФактури")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public ЗакриттяРахункуФактури_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b41", "ЗакриттяРахункуФактури")
+        {
+            base.Init(uid, fields);
+        }
+
+        public string Назва { get; set; } = "";
+
+        public async ValueTask<string> GetPresentation()
+        {
+            return Назва = await base.BasePresentation(ЗакриттяРахункуФактури_Const.PRESENTATION_FIELDS);
+        }
+
+        public static void GetJoin(Query querySelect, string joinField, string parentTable, string joinTableAlias, string fieldAlias)
+        {
+            string[] presentationField = new string [ЗакриттяРахункуФактури_Const.PRESENTATION_FIELDS.Length];
+            for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗакриттяРахункуФактури_Const.PRESENTATION_FIELDS[i]}";
+            querySelect.Joins.Add(new Join(ЗакриттяРахункуФактури_Const.TABLE, joinField, parentTable, joinTableAlias));
+            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+        }
+
+        public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
+        {
+            ЗакриттяРахункуФактури_Objest? obj = await GetDocumentObject();
+            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+        }
+
+        public async ValueTask ClearSpendTheDocument()
+        {
+            ЗакриттяРахункуФактури_Objest? obj = await GetDocumentObject();
+            if (obj != null) await obj.ClearSpendTheDocument();
+        }
+
+        public async ValueTask SetDeletionLabel(bool label = true)
+        {
+            ЗакриттяРахункуФактури_Objest? obj = await GetDocumentObject();
+                if (obj == null) return;
+                
+                if (label)
+                {
+                    await ЗакриттяРахункуФактури_SpendTheDocument.ClearSpend(obj);
+                    await BaseSpend(false, DateTime.MinValue);
+                }
+                
+            await base.BaseDeletionLabel(label);
+        }
+
+        public ЗакриттяРахункуФактури_Pointer Copy()
+        {
+            return new ЗакриттяРахункуФактури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+        }
+
+        public ЗакриттяРахункуФактури_Pointer GetEmptyPointer()
+        {
+            return new ЗакриттяРахункуФактури_Pointer();
+        }
+
+        public override UuidAndText GetBasis()
+        {
+            return new UuidAndText(UnigueID.UGuid, ЗакриттяРахункуФактури_Const.POINTER);
+        }
+
+        public async ValueTask<ЗакриттяРахункуФактури_Objest?> GetDocumentObject(bool readAllTablePart = false)
+        {
+            if (this.IsEmpty()) return null;
+            ЗакриттяРахункуФактури_Objest ЗакриттяРахункуФактуриObjestItem = new ЗакриттяРахункуФактури_Objest();
+            if (!await ЗакриттяРахункуФактуриObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
+            return ЗакриттяРахункуФактуриObjestItem;
+        }
+
+        public void Clear()
+        {
+            Init(new UnigueID(), null);
+            Назва = "";
+        }
+    }
+
+    public class ЗакриттяРахункуФактури_Select : DocumentSelect
+    {		
+        public ЗакриттяРахункуФактури_Select() : base(Config.Kernel, "tab_b41") { }
+        public async ValueTask<bool> Select() { return await base.BaseSelect(); }
+        public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() && base.DocumentPointerPosition.HasValue) { Current = new ЗакриттяРахункуФактури_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
+        public ЗакриттяРахункуФактури_Pointer? Current { get; private set; }
+    }
+
+      
+    
+    public class ЗакриттяРахункуФактури_Товари_TablePart : DocumentTablePart
+    {
+        public ЗакриттяРахункуФактури_Товари_TablePart(ЗакриттяРахункуФактури_Objest owner) : base(Config.Kernel, "tab_b42",
+             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_a1", "col_a3", "col_a4", ])
+        {
+            if (owner == null) throw new Exception("owner null");
+            Owner = owner;
+        }
+
+        public const string TABLE = "tab_b42";
+        
+        public const string НомерРядка = "col_a2";
+        public const string Номенклатура = "col_b9";
+        public const string ХарактеристикаНоменклатури = "col_c1";
+        public const string Пакування = "col_c2";
+        public const string КількістьУпаковок = "col_c3";
+        public const string Кількість = "col_c4";
+        public const string Склад = "col_a1";
+        public const string Ціна = "col_a3";
+        public const string Сума = "col_a4";
+
+        public ЗакриттяРахункуФактури_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; } = [];
+        
+        public void FillJoin(string[]? orderFields = null)
+        {
+            QuerySelect.Clear();
+
+            if (orderFields!=null)
+              foreach(string field in orderFields)
+                QuerySelect.Order.Add(field, SelectOrder.ASC);
+
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b42", "join_tab_2", "Номенклатура");
+                Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b42", "join_tab_3", "ХарактеристикаНоменклатури");
+                Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b42", "join_tab_4", "Пакування");
+                Довідники.Склади_Pointer.GetJoin(QuerySelect, Склад, "tab_b42", "join_tab_7", "Склад");
+                
+        }
+
+        public async ValueTask Read()
+        {
+            Records.Clear();
+            await base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record()
+                {
+                    UID = (Guid)fieldValue["uid"],
+                    НомерРядка = (fieldValue["col_a2"] != DBNull.Value) ? (int)fieldValue["col_a2"] : 0,
+                    Номенклатура = new Довідники.Номенклатура_Pointer(fieldValue["col_b9"]),
+                    ХарактеристикаНоменклатури = new Довідники.ХарактеристикиНоменклатури_Pointer(fieldValue["col_c1"]),
+                    Пакування = new Довідники.ПакуванняОдиниціВиміру_Pointer(fieldValue["col_c2"]),
+                    КількістьУпаковок = (fieldValue["col_c3"] != DBNull.Value) ? (int)fieldValue["col_c3"] : 0,
+                    Кількість = (fieldValue["col_c4"] != DBNull.Value) ? (decimal)fieldValue["col_c4"] : 0,
+                    Склад = new Довідники.Склади_Pointer(fieldValue["col_a1"]),
+                    Ціна = (fieldValue["col_a3"] != DBNull.Value) ? (decimal)fieldValue["col_a3"] : 0,
+                    Сума = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0,
+                    
+                };
+                Records.Add(record);
+                
+                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                  {
+                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Назва = ItemValue["Пакування"];
+                        record.Склад.Назва = ItemValue["Склад"];
+                        
+                  }
+                
+            }
+            
+            base.BaseClear();
+        }
+        
+        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (!await base.IsExistOwner(Owner.UnigueID, "tab_b41"))
+                throw new Exception("Owner not exist");
+
+            await base.BaseBeginTransaction();
+                
+            if (clear_all_before_save)
+                await base.BaseDelete(Owner.UnigueID);
+
+            foreach (Record record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                {
+                    {"col_a2", record.НомерРядка},
+                    {"col_b9", record.Номенклатура.UnigueID.UGuid},
+                    {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
+                    {"col_c2", record.Пакування.UnigueID.UGuid},
+                    {"col_c3", record.КількістьУпаковок},
+                    {"col_c4", record.Кількість},
+                    {"col_a1", record.Склад.UnigueID.UGuid},
+                    {"col_a3", record.Ціна},
+                    {"col_a4", record.Сума},
+                    
+                };
+                record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+            }
+            
+            await base.BaseCommitTransaction();
+        }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID, Owner.UnigueID);
+            Records.RemoveAll((Record item) => record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List<Record> records)
+        {
+            List<Guid> removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID, Owner.UnigueID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+        }
+
+        public async ValueTask Delete()
+        {
+            await base.BaseDelete(Owner.UnigueID);
+        }
+
+        public List<Record> Copy()
+        {
+            List<Record> copyRecords = new(Records);
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
+
+        public class Record : DocumentTablePartRecord
+        {
+            public int НомерРядка { get; set; } = 0;
+            public Довідники.Номенклатура_Pointer Номенклатура { get; set; } = new Довідники.Номенклатура_Pointer();
+            public Довідники.ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new Довідники.ХарактеристикиНоменклатури_Pointer();
+            public Довідники.ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new Довідники.ПакуванняОдиниціВиміру_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public decimal Кількість { get; set; } = 0;
+            public Довідники.Склади_Pointer Склад { get; set; } = new Довідники.Склади_Pointer();
+            public decimal Ціна { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            
+        }
+    }
+      
+    
+    public static class ЗакриттяРахункуФактури_Export
+    {
+        public static async ValueTask ToXmlFile(ЗакриттяРахункуФактури_Pointer ЗакриттяРахункуФактури, string pathToSave)
+        {
+        await ValueTask.FromResult(true);
+        }
+    }
+
+    #endregion
+    
 }
 
 namespace StorageAndTrade_1_0.Журнали
@@ -26077,8 +26639,8 @@ namespace StorageAndTrade_1_0.Журнали
     public class JournalSelect: AccountingSoftware.JournalSelect
     {
         public JournalSelect() : base(Config.Kernel,
-             ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", "tab_a65", "tab_a96", ],
-             ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", "КорегуванняБоргу", "ЗакриттяЗамовленняКлієнта", ]) { }
+             ["tab_a25", "tab_a32", "tab_a34", "tab_a36", "tab_a42", "tab_a44", "tab_a48", "tab_a31", "tab_a51", "tab_a53", "tab_a81", "tab_a83", "tab_a88", "tab_a90", "tab_a92", "tab_a94", "tab_b07", "tab_b10", "tab_a64", "tab_b09", "tab_b27", "tab_b29", "tab_a65", "tab_a96", "tab_b41", ],
+             ["ЗамовленняПостачальнику", "ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ВстановленняЦінНоменклатури", "ПрихіднийКасовийОрдер", "РозхіднийКасовийОрдер", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "АктВиконанихРобіт", "ВведенняЗалишків", "НадлишкиТоварів", "ПересортицяТоварів", "ПерерахунокТоварів", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "РозміщенняТоварівНаСкладі", "ПереміщенняТоварівНаСкладі", "ЗбіркаТоварівНаСкладі", "РозміщенняНоменклатуриПоКоміркам", "КорегуванняБоргу", "ЗакриттяЗамовленняКлієнта", "ЗакриттяРахункуФактури", ]) { }
 
         public async ValueTask<DocumentObject?> GetDocumentObject(bool readAllTablePart = true)
         {
@@ -26109,6 +26671,7 @@ namespace StorageAndTrade_1_0.Журнали
                 "РозміщенняНоменклатуриПоКоміркам" => await new Документи.РозміщенняНоменклатуриПоКоміркам_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
                 "КорегуванняБоргу" => await new Документи.КорегуванняБоргу_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
                 "ЗакриттяЗамовленняКлієнта" => await new Документи.ЗакриттяЗамовленняКлієнта_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
+                "ЗакриттяРахункуФактури" => await new Документи.ЗакриттяРахункуФактури_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart),
                 _ => null
             };
         }
@@ -28543,8 +29106,8 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
     {
         public const string FULLNAME = "ВільніЗалишки";
         public const string TABLE = "tab_a58";
-		    public static readonly string[] AllowDocumentSpendTable = ["tab_a32", "tab_a34", "tab_a36", "tab_a31", "tab_a51", "tab_a53", "tab_a83", "tab_a94", "tab_b07", "tab_b10", "tab_a96", ];
-		    public static readonly string[] AllowDocumentSpendType = ["ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "ВведенняЗалишків", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "ЗакриттяЗамовленняКлієнта", ];
+		    public static readonly string[] AllowDocumentSpendTable = ["tab_a32", "tab_a34", "tab_a36", "tab_a31", "tab_a51", "tab_a53", "tab_a83", "tab_a94", "tab_b07", "tab_b10", "tab_a96", "tab_b41", ];
+		    public static readonly string[] AllowDocumentSpendType = ["ПоступленняТоварівТаПослуг", "ЗамовленняКлієнта", "РеалізаціяТоварівТаПослуг", "ПереміщенняТоварів", "ПоверненняТоварівПостачальнику", "ПоверненняТоварівВідКлієнта", "ВведенняЗалишків", "ПсуванняТоварів", "ВнутрішнєСпоживанняТоварів", "РахунокФактура", "ЗакриттяЗамовленняКлієнта", "ЗакриттяРахункуФактури", ];
         
         public const string Номенклатура = "col_a5";
         public const string ХарактеристикаНоменклатури = "col_a6";
@@ -28581,7 +29144,7 @@ namespace StorageAndTrade_1_0.РегістриНакопичення
             //Назва документу
             if (docname_required)
             {
-              string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ЗамовленняКлієнта_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_9.uid IS NOT NULL THEN join_doc_9.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} WHEN join_doc_10.uid IS NOT NULL THEN join_doc_10.{Документи.РахунокФактура_Const.Назва} WHEN join_doc_11.uid IS NOT NULL THEN join_doc_11.{Документи.ЗакриттяЗамовленняКлієнта_Const.Назва} END";
+              string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ЗамовленняКлієнта_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_9.uid IS NOT NULL THEN join_doc_9.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} WHEN join_doc_10.uid IS NOT NULL THEN join_doc_10.{Документи.РахунокФактура_Const.Назва} WHEN join_doc_11.uid IS NOT NULL THEN join_doc_11.{Документи.ЗакриттяЗамовленняКлієнта_Const.Назва} WHEN join_doc_12.uid IS NOT NULL THEN join_doc_12.{Документи.ЗакриттяРахункуФактури_Const.Назва} END";
               QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
 
               int i = 0;
