@@ -107,6 +107,26 @@ namespace StorageAndTrade
             ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
         }
 
+        protected override bool IsExportExcel() { return true; } //Дозволити експорт документу
+
+        protected override async ValueTask ExportExcel(UnigueID unigueID, string pathToFolder)
+        {
+            АктВиконанихРобіт_Pointer Вказівник = new АктВиконанихРобіт_Pointer(unigueID);
+            await Вказівник.GetPresentation();
+            string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xslx");
+
+            АктВиконанихРобіт_Objest? Обєкт = await Вказівник.GetDocumentObject(true);
+            if (Обєкт != null)
+            {
+                foreach (АктВиконанихРобіт_Послуги_TablePart.Record record in Обєкт.Послуги_TablePart.Records)
+                {
+                    
+                }
+            }
+
+            ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
+        }
+
         protected override async ValueTask PrintingDoc(UnigueID unigueID)
         {
             await АктВиконанихРобіт_Друк.PDF(unigueID);

@@ -1,6 +1,6 @@
 
 /*
-        ЗакриттяРахункуФактури_ТабличнаЧастина_Товари.cs
+        ЗакриттяЗамовленняПостачальнику_ТабличнаЧастина_Товари.cs
         Таблична Частина
 */
 
@@ -14,9 +14,9 @@ using StorageAndTrade_1_0.Перелічення;
 
 namespace StorageAndTrade
 {
-    class ЗакриттяРахункуФактури_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
+    class ЗакриттяЗамовленняПостачальнику_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public ЗакриттяРахункуФактури_Objest? ЕлементВласник { get; set; }
+        public ЗакриттяЗамовленняПостачальнику_Objest? ЕлементВласник { get; set; }
         public System.Action? ОбновитиЗначенняДокумента { get; set; }
 
         #region Записи
@@ -150,7 +150,7 @@ namespace StorageAndTrade
 
         Label ПідсумокСума = new Label() { Selectable = true };
 
-        public ЗакриттяРахункуФактури_ТабличнаЧастина_Товари()
+        public ЗакриттяЗамовленняПостачальнику_ТабличнаЧастина_Товари()
         {
             TreeViewGrid.Model = Store;
             AddColumn();
@@ -164,7 +164,7 @@ namespace StorageAndTrade
             //
             //
 
-            ToolButton fill = new ToolButton(new Image(Stock.Convert, IconSize.Menu), "Заповнити із рахунку фактури") { IsImportant = true };
+            ToolButton fill = new ToolButton(new Image(Stock.Convert, IconSize.Menu), "Заповнити із замовлення постачальнику") { IsImportant = true };
             fill.Clicked += OnFill;
             ToolbarTop.Add(fill);
         }
@@ -198,11 +198,11 @@ namespace StorageAndTrade
             ОбновитиЗначенняДокумента?.Invoke();
 
             if (ЕлементВласник != null)
-                if (!ЕлементВласник.РахунокФактура.IsEmpty())
+                if (!ЕлементВласник.ЗамовленняПостачальнику.IsEmpty())
                 {
-                    РахунокФактура_Objest? РахунокФактура = await ЕлементВласник.РахунокФактура.GetDocumentObject(true);
-                    if (РахунокФактура != null)
-                        foreach (РахунокФактура_Товари_TablePart.Record record in РахунокФактура.Товари_TablePart.Records)
+                    ЗамовленняПостачальнику_Objest? ЗамовленняПостачальнику = await ЕлементВласник.ЗамовленняПостачальнику.GetDocumentObject(true);
+                    if (ЗамовленняПостачальнику != null)
+                        foreach (ЗамовленняПостачальнику_Товари_TablePart.Record record in ЗамовленняПостачальнику.Товари_TablePart.Records)
                         {
                             Запис запис = new Запис
                             {
@@ -345,9 +345,9 @@ namespace StorageAndTrade
 
             if (ЕлементВласник != null)
             {
-                ЕлементВласник.Товари_TablePart.FillJoin([ЗакриттяРахункуФактури_Товари_TablePart.НомерРядка]);
+                ЕлементВласник.Товари_TablePart.FillJoin([ЗакриттяЗамовленняПостачальнику_Товари_TablePart.НомерРядка]);
                 await ЕлементВласник.Товари_TablePart.Read();
-                foreach (ЗакриттяРахункуФактури_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
+                foreach (ЗакриттяЗамовленняПостачальнику_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -377,7 +377,7 @@ namespace StorageAndTrade
                 int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
                 {
-                    ЕлементВласник.Товари_TablePart.Records.Add(new ЗакриттяРахункуФактури_Товари_TablePart.Record()
+                    ЕлементВласник.Товари_TablePart.Records.Add(new ЗакриттяЗамовленняПостачальнику_Товари_TablePart.Record()
                     {
                         UID = запис.ID,
                         НомерРядка = ++sequenceNumber,

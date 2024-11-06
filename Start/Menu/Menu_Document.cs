@@ -41,8 +41,6 @@ namespace StorageAndTrade
                         await page.SetValue();
                     });
 
-                    hBox.PackStart(new Label(", "), false, false, 0);
-
                     CreateLink(hBox, "Закриття замовлення", async () =>
                     {
                         ЗакриттяЗамовленняКлієнта page = new ЗакриттяЗамовленняКлієнта();
@@ -62,8 +60,6 @@ namespace StorageAndTrade
                         NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, РахунокФактура_Const.FULLNAME, () => page);
                         await page.SetValue();
                     });
-
-                    hBox.PackStart(new Label(", "), false, false, 0);
 
                     CreateLink(hBox, "Закриття рахунку", async () =>
                     {
@@ -103,12 +99,25 @@ namespace StorageAndTrade
                     await page.SetValue();
                 });
 
-                CreateLink(vLeft, ЗамовленняПостачальнику_Const.FULLNAME, async () =>
+                //ЗамовленняПостачальнику та ЗакриттяЗамовленняПостачальнику
                 {
-                    ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
-                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗамовленняПостачальнику_Const.FULLNAME, () => page);
-                    await page.SetValue();
-                });
+                    Box hBox = new Box(Orientation.Horizontal, 0);
+                    vLeft.PackStart(hBox, false, false, 0);
+
+                    CreateLink(hBox, ЗамовленняПостачальнику_Const.FULLNAME, async () =>
+                    {
+                        ЗамовленняПостачальнику page = new ЗамовленняПостачальнику();
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗамовленняПостачальнику_Const.FULLNAME, () => page);
+                        await page.SetValue();
+                    });
+
+                    CreateLink(hBox, "Закриття замовлення", async () =>
+                    {
+                        ЗакриттяЗамовленняПостачальнику page = new ЗакриттяЗамовленняПостачальнику();
+                        NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяЗамовленняПостачальнику_Const.FULLNAME, () => page);
+                        await page.SetValue();
+                    });
+                }
 
                 CreateLink(vLeft, ПоступленняТоварівТаПослуг_Const.FULLNAME, async () =>
                 {

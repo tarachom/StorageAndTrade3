@@ -15,7 +15,6 @@ using QuestPDF.Infrastructure;
 
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using MathNet.Numerics;
 
 namespace StorageAndTrade
 {
