@@ -8,8 +8,8 @@ using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
-
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
 namespace StorageAndTrade
@@ -37,6 +37,11 @@ namespace StorageAndTrade
             });
 
             ТабличніСписки.СкладськіПриміщення_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
+            {
+                if (directory.Any((x) => x.Key == СкладськіПриміщення_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override

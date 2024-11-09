@@ -7,7 +7,10 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
+using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
@@ -16,6 +19,11 @@ namespace StorageAndTrade
         public Каси() : base()
         {
             ТабличніСписки.Каси_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
+            {
+                if (directory.Any((x) => x.Key == Каси_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override

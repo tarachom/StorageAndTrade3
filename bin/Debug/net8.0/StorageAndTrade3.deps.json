@@ -13,7 +13,7 @@
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0.3",
           "NPOI": "1.0.0",
-          "QuestPDF": "2024.10.2",
+          "QuestPDF": "2024.10.3",
           "NPOI.OOXML.Reference": "1.0.0.0",
           "NPOI.OpenXml4Net.Reference": "1.0.0.0",
           "NPOI.OpenXmlFormats.Reference": "1.0.0.0",
@@ -201,11 +201,11 @@
           }
         }
       },
-      "QuestPDF/2024.10.2": {
+      "QuestPDF/2024.10.3": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2024.10.2.0",
-            "fileVersion": "2024.10.2.0"
+            "assemblyVersion": "2024.10.3.0",
+            "fileVersion": "2024.10.3.0"
           }
         },
         "runtimeTargets": {
@@ -671,12 +671,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2024.10.2": {
+    "QuestPDF/2024.10.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-2Dsbm4nu6G9ObRgIHn6pf4wyGpIbpvIP5V5FmoJF5aH9fw4D+liC9fFXky16APx+EWnFbmOkRlAGZ9VkmvOpGA==",
-      "path": "questpdf/2024.10.2",
-      "hashPath": "questpdf.2024.10.2.nupkg.sha512"
+      "sha512": "sha512-pYqotWAm9XncO0c63zGXf2yPKnghP7uTiO6OJFX7jEHZrlApBFzViXSvWPAC5Yjark4MVztiq+4l5nZjYWIIUg==",
+      "path": "questpdf/2024.10.3",
+      "hashPath": "questpdf.2024.10.3.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",

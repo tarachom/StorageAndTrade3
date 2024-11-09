@@ -645,6 +645,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
+        public const string TYPE = "<xsl:value-of select="$DirectoryName"/>"; /* Назва вказівника */
         public const string POINTER = "Довідники.<xsl:value-of select="$DirectoryName"/>"; /* Повна назва вказівника */
         public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -661,7 +662,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
         public event EventHandler&lt;string&gt;? CaptionChanged;
 
-        public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+        public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", <xsl:value-of select="$DirectoryName"/>_Const.TYPE,
              <xsl:text>[</xsl:text>
              <xsl:for-each select="Fields/Field">
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
@@ -1195,6 +1196,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
+        public const string TYPE = "<xsl:value-of select="$DocumentName"/>"; /* Назва вказівника */
         public const string POINTER = "Документи.<xsl:value-of select="$DocumentName"/>"; /* Повна назва вказівника */
         public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -1214,7 +1216,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
         public event EventHandler&lt;string&gt;? CaptionChanged;
 
-        public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>",
+        public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", <xsl:value-of select="$DocumentName"/>_Const.TYPE,
              <xsl:text>[</xsl:text>
              <xsl:for-each select="Fields/Field">
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>

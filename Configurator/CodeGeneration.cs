@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.11.2024 17:43:52
+ * Дата конфігурації: 09.11.2024 15:04:58
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1810,6 +1810,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Організації_Const
     {
         public const string TABLE = "tab_a01";
+        public const string TYPE = "Організації"; /* Назва вказівника */
         public const string POINTER = "Довідники.Організації"; /* Повна назва вказівника */
         public const string FULLNAME = "Організації"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -1832,7 +1833,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Організації_Objest() : base(Config.Kernel, "tab_a01",
+        public Організації_Objest() : base(Config.Kernel, "tab_a01", Організації_Const.TYPE,
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ]) 
         {
             
@@ -2222,6 +2223,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Номенклатура_Const
     {
         public const string TABLE = "tab_a03";
+        public const string TYPE = "Номенклатура"; /* Назва вказівника */
         public const string POINTER = "Довідники.Номенклатура"; /* Повна назва вказівника */
         public const string FULLNAME = "Номенклатура"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -2245,7 +2247,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Номенклатура_Objest() : base(Config.Kernel, "tab_a03",
+        public Номенклатура_Objest() : base(Config.Kernel, "tab_a03", Номенклатура_Const.TYPE,
              ["col_b1", "col_b2", "col_b4", "col_a1", "col_b3", "col_b5", "col_a2", "col_a3", "col_a4", "col_a5", "col_a7", ]) 
         {
             
@@ -2626,6 +2628,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Виробники_Const
     {
         public const string TABLE = "tab_a04";
+        public const string TYPE = "Виробники"; /* Назва вказівника */
         public const string POINTER = "Довідники.Виробники"; /* Повна назва вказівника */
         public const string FULLNAME = "Виробники"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -2640,7 +2643,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Виробники_Objest() : base(Config.Kernel, "tab_a04",
+        public Виробники_Objest() : base(Config.Kernel, "tab_a04", Виробники_Const.TYPE,
              ["col_b6", "col_b7", ]) 
         {
             
@@ -2835,6 +2838,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиНоменклатури_Const
     {
         public const string TABLE = "tab_a05";
+        public const string TYPE = "ВидиНоменклатури"; /* Назва вказівника */
         public const string POINTER = "Довідники.ВидиНоменклатури"; /* Повна назва вказівника */
         public const string FULLNAME = "Види номенклатури"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -2852,7 +2856,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ВидиНоменклатури_Objest() : base(Config.Kernel, "tab_a05",
+        public ВидиНоменклатури_Objest() : base(Config.Kernel, "tab_a05", ВидиНоменклатури_Const.TYPE,
              ["col_b8", "col_b9", "col_a2", "col_a1", "col_a4", ]) 
         {
             
@@ -3059,6 +3063,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ПакуванняОдиниціВиміру_Const
     {
         public const string TABLE = "tab_a06";
+        public const string TYPE = "ПакуванняОдиниціВиміру"; /* Назва вказівника */
         public const string POINTER = "Довідники.ПакуванняОдиниціВиміру"; /* Повна назва вказівника */
         public const string FULLNAME = "Одиниці виміру"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -3075,7 +3080,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПакуванняОдиниціВиміру_Objest() : base(Config.Kernel, "tab_a06",
+        public ПакуванняОдиниціВиміру_Objest() : base(Config.Kernel, "tab_a06", ПакуванняОдиниціВиміру_Const.TYPE,
              ["col_c1", "col_c2", "col_c3", "col_c4", ]) 
         {
             
@@ -3280,6 +3285,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Валюти_Const
     {
         public const string TABLE = "tab_a07";
+        public const string TYPE = "Валюти"; /* Назва вказівника */
         public const string POINTER = "Довідники.Валюти"; /* Повна назва вказівника */
         public const string FULLNAME = "Валюти"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -3297,7 +3303,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Валюти_Objest() : base(Config.Kernel, "tab_a07",
+        public Валюти_Objest() : base(Config.Kernel, "tab_a07", Валюти_Const.TYPE,
              ["col_c5", "col_a2", "col_c6", "col_a1", "col_a3", ]) 
         {
             
@@ -3508,6 +3514,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Контрагенти_Const
     {
         public const string TABLE = "tab_a08";
+        public const string TYPE = "Контрагенти"; /* Назва вказівника */
         public const string POINTER = "Довідники.Контрагенти"; /* Повна назва вказівника */
         public const string FULLNAME = "Контрагенти"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -3529,7 +3536,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Контрагенти_Objest() : base(Config.Kernel, "tab_a08",
+        public Контрагенти_Objest() : base(Config.Kernel, "tab_a08", Контрагенти_Const.TYPE,
              ["col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) 
         {
             
@@ -4047,6 +4054,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Склади_Const
     {
         public const string TABLE = "tab_a10";
+        public const string TYPE = "Склади"; /* Назва вказівника */
         public const string POINTER = "Довідники.Склади"; /* Повна назва вказівника */
         public const string FULLNAME = "Склади"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -4068,7 +4076,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Склади_Objest() : base(Config.Kernel, "tab_a10",
+        public Склади_Objest() : base(Config.Kernel, "tab_a10", Склади_Const.TYPE,
              ["col_d9", "col_e1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ]) 
         {
             
@@ -4454,6 +4462,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЦін_Const
     {
         public const string TABLE = "tab_a12";
+        public const string TYPE = "ВидиЦін"; /* Назва вказівника */
         public const string POINTER = "Довідники.ВидиЦін"; /* Повна назва вказівника */
         public const string FULLNAME = "Види цін"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -4469,7 +4478,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ВидиЦін_Objest() : base(Config.Kernel, "tab_a12",
+        public ВидиЦін_Objest() : base(Config.Kernel, "tab_a12", ВидиЦін_Const.TYPE,
              ["col_e9", "col_f1", "col_f2", ]) 
         {
             
@@ -4668,6 +4677,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЦінПостачальників_Const
     {
         public const string TABLE = "tab_a13";
+        public const string TYPE = "ВидиЦінПостачальників"; /* Назва вказівника */
         public const string POINTER = "Довідники.ВидиЦінПостачальників"; /* Повна назва вказівника */
         public const string FULLNAME = "Види цін постачальників"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -4683,7 +4693,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ВидиЦінПостачальників_Objest() : base(Config.Kernel, "tab_a13",
+        public ВидиЦінПостачальників_Objest() : base(Config.Kernel, "tab_a13", ВидиЦінПостачальників_Const.TYPE,
              ["col_f3", "col_f4", "col_f5", ]) 
         {
             
@@ -4882,6 +4892,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Користувачі_Const
     {
         public const string TABLE = "tab_a14";
+        public const string TYPE = "Користувачі"; /* Назва вказівника */
         public const string POINTER = "Довідники.Користувачі"; /* Повна назва вказівника */
         public const string FULLNAME = "Користувачі"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -4899,7 +4910,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Користувачі_Objest() : base(Config.Kernel, "tab_a14",
+        public Користувачі_Objest() : base(Config.Kernel, "tab_a14", Користувачі_Const.TYPE,
              ["col_f6", "col_f7", "col_a1", "col_g6", "col_a2", ]) 
         {
             
@@ -5265,6 +5276,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ФізичніОсоби_Const
     {
         public const string TABLE = "tab_a16";
+        public const string TYPE = "ФізичніОсоби"; /* Назва вказівника */
         public const string POINTER = "Довідники.ФізичніОсоби"; /* Повна назва вказівника */
         public const string FULLNAME = "Фізичні особи"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -5282,7 +5294,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ФізичніОсоби_Objest() : base(Config.Kernel, "tab_a16",
+        public ФізичніОсоби_Objest() : base(Config.Kernel, "tab_a16", ФізичніОсоби_Const.TYPE,
              ["col_g7", "col_g8", "col_g9", "col_a1", "col_a2", ]) 
         {
             
@@ -5652,6 +5664,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СтруктураПідприємства_Const
     {
         public const string TABLE = "tab_a18";
+        public const string TYPE = "СтруктураПідприємства"; /* Назва вказівника */
         public const string POINTER = "Довідники.СтруктураПідприємства"; /* Повна назва вказівника */
         public const string FULLNAME = "Структура підприємства"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -5667,7 +5680,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public СтруктураПідприємства_Objest() : base(Config.Kernel, "tab_a18",
+        public СтруктураПідприємства_Objest() : base(Config.Kernel, "tab_a18", СтруктураПідприємства_Const.TYPE,
              ["col_h8", "col_h9", "col_i1", ]) 
         {
             
@@ -5866,6 +5879,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class КраїниСвіту_Const
     {
         public const string TABLE = "tab_a19";
+        public const string TYPE = "КраїниСвіту"; /* Назва вказівника */
         public const string POINTER = "Довідники.КраїниСвіту"; /* Повна назва вказівника */
         public const string FULLNAME = "Країни світу"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -5880,7 +5894,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public КраїниСвіту_Objest() : base(Config.Kernel, "tab_a19",
+        public КраїниСвіту_Objest() : base(Config.Kernel, "tab_a19", КраїниСвіту_Const.TYPE,
              ["col_i2", "col_i3", ]) 
         {
             
@@ -6075,6 +6089,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Файли_Const
     {
         public const string TABLE = "tab_a20";
+        public const string TYPE = "Файли"; /* Назва вказівника */
         public const string POINTER = "Довідники.Файли"; /* Повна назва вказівника */
         public const string FULLNAME = "Файли"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -6093,7 +6108,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Файли_Objest() : base(Config.Kernel, "tab_a20",
+        public Файли_Objest() : base(Config.Kernel, "tab_a20", Файли_Const.TYPE,
              ["col_i6", "col_i5", "col_a2", "col_a1", "col_a3", "col_a4", ]) 
         {
             
@@ -6304,6 +6319,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ХарактеристикиНоменклатури_Const
     {
         public const string TABLE = "tab_a21";
+        public const string TYPE = "ХарактеристикиНоменклатури"; /* Назва вказівника */
         public const string POINTER = "Довідники.ХарактеристикиНоменклатури"; /* Повна назва вказівника */
         public const string FULLNAME = "Характеристики"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -6320,7 +6336,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ХарактеристикиНоменклатури_Objest() : base(Config.Kernel, "tab_a21",
+        public ХарактеристикиНоменклатури_Objest() : base(Config.Kernel, "tab_a21", ХарактеристикиНоменклатури_Const.TYPE,
              ["col_i7", "col_i8", "col_i9", "col_a1", ]) 
         {
             
@@ -6523,6 +6539,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Номенклатура_Папки_Const
     {
         public const string TABLE = "tab_a22";
+        public const string TYPE = "Номенклатура_Папки"; /* Назва вказівника */
         public const string POINTER = "Довідники.Номенклатура_Папки"; /* Повна назва вказівника */
         public const string FULLNAME = "Номенклатура папки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -6538,7 +6555,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Номенклатура_Папки_Objest() : base(Config.Kernel, "tab_a22",
+        public Номенклатура_Папки_Objest() : base(Config.Kernel, "tab_a22", Номенклатура_Папки_Const.TYPE,
              ["col_j1", "col_j2", "col_j3", ]) 
         {
             
@@ -6755,6 +6772,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Контрагенти_Папки_Const
     {
         public const string TABLE = "tab_a23";
+        public const string TYPE = "Контрагенти_Папки"; /* Назва вказівника */
         public const string POINTER = "Довідники.Контрагенти_Папки"; /* Повна назва вказівника */
         public const string FULLNAME = "Контрагенти папки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -6770,7 +6788,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Контрагенти_Папки_Objest() : base(Config.Kernel, "tab_a23",
+        public Контрагенти_Папки_Objest() : base(Config.Kernel, "tab_a23", Контрагенти_Папки_Const.TYPE,
              ["col_j4", "col_j5", "col_j6", ]) 
         {
             
@@ -6987,6 +7005,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Склади_Папки_Const
     {
         public const string TABLE = "tab_a24";
+        public const string TYPE = "Склади_Папки"; /* Назва вказівника */
         public const string POINTER = "Довідники.Склади_Папки"; /* Повна назва вказівника */
         public const string FULLNAME = "Склади папки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -7002,7 +7021,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Склади_Папки_Objest() : base(Config.Kernel, "tab_a24",
+        public Склади_Папки_Objest() : base(Config.Kernel, "tab_a24", Склади_Папки_Const.TYPE,
              ["col_j7", "col_j8", "col_a1", ]) 
         {
             
@@ -7219,6 +7238,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Каси_Const
     {
         public const string TABLE = "tab_a26";
+        public const string TYPE = "Каси"; /* Назва вказівника */
         public const string POINTER = "Довідники.Каси"; /* Повна назва вказівника */
         public const string FULLNAME = "Каси"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -7235,7 +7255,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Каси_Objest() : base(Config.Kernel, "tab_a26",
+        public Каси_Objest() : base(Config.Kernel, "tab_a26", Каси_Const.TYPE,
              ["col_k8", "col_k9", "col_a2", "col_a1", ]) 
         {
             
@@ -7438,6 +7458,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class БанківськіРахункиОрганізацій_Const
     {
         public const string TABLE = "tab_a27";
+        public const string TYPE = "БанківськіРахункиОрганізацій"; /* Назва вказівника */
         public const string POINTER = "Довідники.БанківськіРахункиОрганізацій"; /* Повна назва вказівника */
         public const string FULLNAME = "Банківські рахунки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -7457,7 +7478,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public БанківськіРахункиОрганізацій_Objest() : base(Config.Kernel, "tab_a27",
+        public БанківськіРахункиОрганізацій_Objest() : base(Config.Kernel, "tab_a27", БанківськіРахункиОрганізацій_Const.TYPE,
              ["col_l1", "col_l2", "col_l3", "col_l4", "col_l5", "col_l7", "col_a1", ]) 
         {
             
@@ -7672,6 +7693,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ДоговориКонтрагентів_Const
     {
         public const string TABLE = "tab_a28";
+        public const string TYPE = "ДоговориКонтрагентів"; /* Назва вказівника */
         public const string POINTER = "Довідники.ДоговориКонтрагентів"; /* Повна назва вказівника */
         public const string FULLNAME = "Договори"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -7704,7 +7726,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ДоговориКонтрагентів_Objest() : base(Config.Kernel, "tab_a28",
+        public ДоговориКонтрагентів_Objest() : base(Config.Kernel, "tab_a28", ДоговориКонтрагентів_Const.TYPE,
              ["col_n4", "col_n5", "col_n6", "col_a1", "col_a2", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b8", "col_b6", "col_b7", "col_a3", ]) 
         {
             
@@ -7973,6 +7995,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class БанківськіРахункиКонтрагентів_Const
     {
         public const string TABLE = "tab_a29";
+        public const string TYPE = "БанківськіРахункиКонтрагентів"; /* Назва вказівника */
         public const string POINTER = "Довідники.БанківськіРахункиКонтрагентів"; /* Повна назва вказівника */
         public const string FULLNAME = "Банківські рахунки контрагентів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -7991,7 +8014,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public БанківськіРахункиКонтрагентів_Objest() : base(Config.Kernel, "tab_a29",
+        public БанківськіРахункиКонтрагентів_Objest() : base(Config.Kernel, "tab_a29", БанківськіРахункиКонтрагентів_Const.TYPE,
              ["col_n7", "col_n8", "col_n9", "col_m1", "col_m5", "col_o3", ]) 
         {
             
@@ -8202,6 +8225,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СтаттяРухуКоштів_Const
     {
         public const string TABLE = "tab_a45";
+        public const string TYPE = "СтаттяРухуКоштів"; /* Назва вказівника */
         public const string POINTER = "Довідники.СтаттяРухуКоштів"; /* Повна назва вказівника */
         public const string FULLNAME = "Стаття руху коштів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -8219,7 +8243,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public СтаттяРухуКоштів_Objest() : base(Config.Kernel, "tab_a45",
+        public СтаттяРухуКоштів_Objest() : base(Config.Kernel, "tab_a45", СтаттяРухуКоштів_Const.TYPE,
              ["col_i7", "col_i8", "col_i9", "col_j2", "col_j1", ]) 
         {
             
@@ -8561,6 +8585,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СеріїНоменклатури_Const
     {
         public const string TABLE = "tab_b02";
+        public const string TYPE = "СеріїНоменклатури"; /* Назва вказівника */
         public const string POINTER = "Довідники.СеріїНоменклатури"; /* Повна назва вказівника */
         public const string FULLNAME = "Серії"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -8576,7 +8601,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public СеріїНоменклатури_Objest() : base(Config.Kernel, "tab_b02",
+        public СеріїНоменклатури_Objest() : base(Config.Kernel, "tab_b02", СеріїНоменклатури_Const.TYPE,
              ["col_a3", "col_a1", "col_a2", ]) 
         {
             
@@ -8777,6 +8802,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ПартіяТоварівКомпозит_Const
     {
         public const string TABLE = "tab_b06";
+        public const string TYPE = "ПартіяТоварівКомпозит"; /* Назва вказівника */
         public const string POINTER = "Довідники.ПартіяТоварівКомпозит"; /* Повна назва вказівника */
         public const string FULLNAME = "Партія товарів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -8795,7 +8821,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПартіяТоварівКомпозит_Objest() : base(Config.Kernel, "tab_b06",
+        public ПартіяТоварівКомпозит_Objest() : base(Config.Kernel, "tab_b06", ПартіяТоварівКомпозит_Const.TYPE,
              ["col_a1", "col_a2", "col_a3", "col_a6", "col_a4", "col_a5", ]) 
         {
             
@@ -9005,6 +9031,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ВидиЗапасів_Const
     {
         public const string TABLE = "tab_b13";
+        public const string TYPE = "ВидиЗапасів"; /* Назва вказівника */
         public const string POINTER = "Довідники.ВидиЗапасів"; /* Повна назва вказівника */
         public const string FULLNAME = "Види запасів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -9024,7 +9051,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ВидиЗапасів_Objest() : base(Config.Kernel, "tab_b13",
+        public ВидиЗапасів_Objest() : base(Config.Kernel, "tab_b13", ВидиЗапасів_Const.TYPE,
              ["col_a5", "col_b3", "col_a7", "col_a9", "col_b1", "col_b2", "col_a1", ]) 
         {
             
@@ -9239,6 +9266,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Банки_Const
     {
         public const string TABLE = "tab_a39";
+        public const string TYPE = "Банки"; /* Назва вказівника */
         public const string POINTER = "Довідники.Банки"; /* Повна назва вказівника */
         public const string FULLNAME = "Банки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -9279,7 +9307,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Банки_Objest() : base(Config.Kernel, "tab_a39",
+        public Банки_Objest() : base(Config.Kernel, "tab_a39", Банки_Const.TYPE,
              ["col_a1", "col_a2", "col_b4", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", ]) 
         {
             
@@ -9578,6 +9606,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіПриміщення_Const
     {
         public const string TABLE = "tab_a71";
+        public const string TYPE = "СкладськіПриміщення"; /* Назва вказівника */
         public const string POINTER = "Довідники.СкладськіПриміщення"; /* Повна назва вказівника */
         public const string FULLNAME = "Складські приміщення"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -9593,7 +9622,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public СкладськіПриміщення_Objest() : base(Config.Kernel, "tab_a71",
+        public СкладськіПриміщення_Objest() : base(Config.Kernel, "tab_a71", СкладськіПриміщення_Const.TYPE,
              ["col_a2", "col_a3", "col_a1", ]) 
         {
             
@@ -9792,6 +9821,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіКомірки_Const
     {
         public const string TABLE = "tab_a72";
+        public const string TYPE = "СкладськіКомірки"; /* Назва вказівника */
         public const string POINTER = "Довідники.СкладськіКомірки"; /* Повна назва вказівника */
         public const string FULLNAME = "Складські комірки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -9814,7 +9844,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public СкладськіКомірки_Objest() : base(Config.Kernel, "tab_a72",
+        public СкладськіКомірки_Objest() : base(Config.Kernel, "tab_a72", СкладськіКомірки_Const.TYPE,
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ]) 
         {
             
@@ -10041,6 +10071,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ОбластьЗберігання_Const
     {
         public const string TABLE = "tab_a73";
+        public const string TYPE = "ОбластьЗберігання"; /* Назва вказівника */
         public const string POINTER = "Довідники.ОбластьЗберігання"; /* Повна назва вказівника */
         public const string FULLNAME = "Область зберігання"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -10056,7 +10087,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ОбластьЗберігання_Objest() : base(Config.Kernel, "tab_a73",
+        public ОбластьЗберігання_Objest() : base(Config.Kernel, "tab_a73", ОбластьЗберігання_Const.TYPE,
              ["col_a2", "col_a3", "col_a4", ]) 
         {
             
@@ -10254,6 +10285,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ТипорозміриКомірок_Const
     {
         public const string TABLE = "tab_a75";
+        public const string TYPE = "ТипорозміриКомірок"; /* Назва вказівника */
         public const string POINTER = "Довідники.ТипорозміриКомірок"; /* Повна назва вказівника */
         public const string FULLNAME = "Типорозміри комірок"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -10272,7 +10304,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ТипорозміриКомірок_Objest() : base(Config.Kernel, "tab_a75",
+        public ТипорозміриКомірок_Objest() : base(Config.Kernel, "tab_a75", ТипорозміриКомірок_Const.TYPE,
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
         {
             
@@ -10483,6 +10515,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class СкладськіКомірки_Папки_Const
     {
         public const string TABLE = "tab_a76";
+        public const string TYPE = "СкладськіКомірки_Папки"; /* Назва вказівника */
         public const string POINTER = "Довідники.СкладськіКомірки_Папки"; /* Повна назва вказівника */
         public const string FULLNAME = "Складські комірки папки"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -10499,7 +10532,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public СкладськіКомірки_Папки_Objest() : base(Config.Kernel, "tab_a76",
+        public СкладськіКомірки_Папки_Objest() : base(Config.Kernel, "tab_a76", СкладськіКомірки_Папки_Const.TYPE,
              ["col_j1", "col_j2", "col_j3", "col_a1", ]) 
         {
             
@@ -10720,6 +10753,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class Блокнот_Const
     {
         public const string TABLE = "tab_a41";
+        public const string TYPE = "Блокнот"; /* Назва вказівника */
         public const string POINTER = "Довідники.Блокнот"; /* Повна назва вказівника */
         public const string FULLNAME = "Блокнот"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -10737,7 +10771,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public Блокнот_Objest() : base(Config.Kernel, "tab_a41",
+        public Блокнот_Objest() : base(Config.Kernel, "tab_a41", Блокнот_Const.TYPE,
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) 
         {
             
@@ -10944,6 +10978,7 @@ namespace StorageAndTrade_1_0.Довідники
     public static class ЗбереженіЗвіти_Const
     {
         public const string TABLE = "tab_b04";
+        public const string TYPE = "ЗбереженіЗвіти"; /* Назва вказівника */
         public const string POINTER = "Довідники.ЗбереженіЗвіти"; /* Повна назва вказівника */
         public const string FULLNAME = "Збережені звіти"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -10962,7 +10997,7 @@ namespace StorageAndTrade_1_0.Довідники
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ЗбереженіЗвіти_Objest() : base(Config.Kernel, "tab_b04",
+        public ЗбереженіЗвіти_Objest() : base(Config.Kernel, "tab_b04", ЗбереженіЗвіти_Const.TYPE,
              ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ]) 
         {
             
@@ -12533,6 +12568,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗамовленняПостачальнику_Const
     {
         public const string TABLE = "tab_a25";
+        public const string TYPE = "ЗамовленняПостачальнику"; /* Назва вказівника */
         public const string POINTER = "Документи.ЗамовленняПостачальнику"; /* Повна назва вказівника */
         public const string FULLNAME = "Замовлення постачальнику"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -12575,7 +12611,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_a25", "ЗамовленняПостачальнику",
+        public ЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_a25", ЗамовленняПостачальнику_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_k4", "col_k5", "col_k6", "col_k7", "col_a1", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_a6", "col_b5", "col_b6", "col_b7", "col_b8", "col_a2", "col_b9", ])
         {
             
@@ -13256,6 +13292,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоступленняТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a32";
+        public const string TYPE = "ПоступленняТоварівТаПослуг"; /* Назва вказівника */
         public const string POINTER = "Документи.ПоступленняТоварівТаПослуг"; /* Повна назва вказівника */
         public const string FULLNAME = "Поступлення товарів та послуг"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -13304,7 +13341,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПоступленняТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a32", "ПоступленняТоварівТаПослуг",
+        public ПоступленняТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a32", ПоступленняТоварівТаПослуг_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_a1", "col_b1", "col_a2", ])
         {
             
@@ -14054,6 +14091,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗамовленняКлієнта_Const
     {
         public const string TABLE = "tab_a34";
+        public const string TYPE = "ЗамовленняКлієнта"; /* Назва вказівника */
         public const string POINTER = "Документи.ЗамовленняКлієнта"; /* Повна назва вказівника */
         public const string FULLNAME = "Замовлення клієнта"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -14099,7 +14137,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a34", "ЗамовленняКлієнта",
+        public ЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a34", ЗамовленняКлієнта_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_a9", "col_b9", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_c1", "col_b2", "col_b3", ])
         {
             
@@ -14792,6 +14830,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РеалізаціяТоварівТаПослуг_Const
     {
         public const string TABLE = "tab_a36";
+        public const string TYPE = "РеалізаціяТоварівТаПослуг"; /* Назва вказівника */
         public const string POINTER = "Документи.РеалізаціяТоварівТаПослуг"; /* Повна назва вказівника */
         public const string FULLNAME = "Реалізація товарів та послуг"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -14839,7 +14878,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a36", "РеалізаціяТоварівТаПослуг",
+        public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a36", РеалізаціяТоварівТаПослуг_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9", "col_d1", ])
         {
             
@@ -15588,6 +15627,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВстановленняЦінНоменклатури_Const
     {
         public const string TABLE = "tab_a42";
+        public const string TYPE = "ВстановленняЦінНоменклатури"; /* Назва вказівника */
         public const string POINTER = "Документи.ВстановленняЦінНоменклатури"; /* Повна назва вказівника */
         public const string FULLNAME = "Встановлення цін номенклатури"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -15612,7 +15652,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ВстановленняЦінНоменклатури_Objest() : base(Config.Kernel, "tab_a42", "ВстановленняЦінНоменклатури",
+        public ВстановленняЦінНоменклатури_Objest() : base(Config.Kernel, "tab_a42", ВстановленняЦінНоменклатури_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_a3", "col_g9", "col_a4", "col_a5", ])
         {
             
@@ -16045,6 +16085,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПрихіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a44";
+        public const string TYPE = "ПрихіднийКасовийОрдер"; /* Назва вказівника */
         public const string POINTER = "Документи.ПрихіднийКасовийОрдер"; /* Повна назва вказівника */
         public const string FULLNAME = "Прихідний касовий ордер"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -16078,7 +16119,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a44", "ПрихіднийКасовийОрдер",
+        public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a44", ПрихіднийКасовийОрдер_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_h8", "col_h9", "col_i1", "col_i2", "col_i3", "col_i4", "col_a6", "col_i5", "col_i6", "col_a1", "col_a2", "col_a4", "col_a3", "col_a5", "col_a7", ])
         {
             
@@ -16555,6 +16596,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозхіднийКасовийОрдер_Const
     {
         public const string TABLE = "tab_a48";
+        public const string TYPE = "РозхіднийКасовийОрдер"; /* Назва вказівника */
         public const string POINTER = "Документи.РозхіднийКасовийОрдер"; /* Повна назва вказівника */
         public const string FULLNAME = "Розхідний касовий ордер"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -16590,7 +16632,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a48", "РозхіднийКасовийОрдер",
+        public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a48", РозхіднийКасовийОрдер_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_a3", "col_a5", "col_k5", "col_k4", "col_k7", "col_a4", "col_k8", "col_k9", "col_l2", "col_k6", "col_a2", "col_a1", "col_l1", "col_a6", "col_a7", ])
         {
             
@@ -17079,6 +17121,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПереміщенняТоварів_Const
     {
         public const string TABLE = "tab_a31";
+        public const string TYPE = "ПереміщенняТоварів"; /* Назва вказівника */
         public const string POINTER = "Документи.ПереміщенняТоварів"; /* Повна назва вказівника */
         public const string FULLNAME = "Переміщення товарів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -17115,7 +17158,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПереміщенняТоварів_Objest() : base(Config.Kernel, "tab_a31", "ПереміщенняТоварів",
+        public ПереміщенняТоварів_Objest() : base(Config.Kernel, "tab_a31", ПереміщенняТоварів_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2", "col_b9", ])
         {
             
@@ -17616,6 +17659,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоверненняТоварівПостачальнику_Const
     {
         public const string TABLE = "tab_a51";
+        public const string TYPE = "ПоверненняТоварівПостачальнику"; /* Назва вказівника */
         public const string POINTER = "Документи.ПоверненняТоварівПостачальнику"; /* Повна назва вказівника */
         public const string FULLNAME = "Повернення товарів постачальнику"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -17654,7 +17698,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel, "tab_a51", "ПоверненняТоварівПостачальнику",
+        public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel, "tab_a51", ПоверненняТоварівПостачальнику_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4", "col_a5", ])
         {
             
@@ -18179,6 +18223,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПоверненняТоварівВідКлієнта_Const
     {
         public const string TABLE = "tab_a53";
+        public const string TYPE = "ПоверненняТоварівВідКлієнта"; /* Назва вказівника */
         public const string POINTER = "Документи.ПоверненняТоварівВідКлієнта"; /* Повна назва вказівника */
         public const string FULLNAME = "Повернення товарів від клієнта"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -18213,7 +18258,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПоверненняТоварівВідКлієнта_Objest() : base(Config.Kernel, "tab_a53", "ПоверненняТоварівВідКлієнта",
+        public ПоверненняТоварівВідКлієнта_Objest() : base(Config.Kernel, "tab_a53", ПоверненняТоварівВідКлієнта_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f5", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_a1", "col_a2", "col_f6", "col_a3", "col_a4", ])
         {
             
@@ -18726,6 +18771,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class АктВиконанихРобіт_Const
     {
         public const string TABLE = "tab_a81";
+        public const string TYPE = "АктВиконанихРобіт"; /* Назва вказівника */
         public const string POINTER = "Документи.АктВиконанихРобіт"; /* Повна назва вказівника */
         public const string FULLNAME = "Акт виконаних робіт"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -18758,7 +18804,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public АктВиконанихРобіт_Objest() : base(Config.Kernel, "tab_a81", "АктВиконанихРобіт",
+        public АктВиконанихРобіт_Objest() : base(Config.Kernel, "tab_a81", АктВиконанихРобіт_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8", "col_a9", ])
         {
             
@@ -19351,6 +19397,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВведенняЗалишків_Const
     {
         public const string TABLE = "tab_a83";
+        public const string TYPE = "ВведенняЗалишків"; /* Назва вказівника */
         public const string POINTER = "Документи.ВведенняЗалишків"; /* Повна назва вказівника */
         public const string FULLNAME = "Введення залишків"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -19379,7 +19426,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ВведенняЗалишків_Objest() : base(Config.Kernel, "tab_a83", "ВведенняЗалишків",
+        public ВведенняЗалишків_Objest() : base(Config.Kernel, "tab_a83", ВведенняЗалишків_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3", "col_a2", ])
         {
             
@@ -20283,6 +20330,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class НадлишкиТоварів_Const
     {
         public const string TABLE = "tab_a88";
+        public const string TYPE = "НадлишкиТоварів"; /* Назва вказівника */
         public const string POINTER = "Документи.НадлишкиТоварів"; /* Повна назва вказівника */
         public const string FULLNAME = "Надлишки товарів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -20308,7 +20356,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public НадлишкиТоварів_Objest() : base(Config.Kernel, "tab_a88", "НадлишкиТоварів",
+        public НадлишкиТоварів_Objest() : base(Config.Kernel, "tab_a88", НадлишкиТоварів_Const.TYPE,
              ["col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "docnomer", "docdate", "docname", "col_a1", "col_a2", ])
         {
             
@@ -20721,6 +20769,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПересортицяТоварів_Const
     {
         public const string TABLE = "tab_a90";
+        public const string TYPE = "ПересортицяТоварів"; /* Назва вказівника */
         public const string POINTER = "Документи.ПересортицяТоварів"; /* Повна назва вказівника */
         public const string FULLNAME = "Пересортиця товарів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -20746,7 +20795,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПересортицяТоварів_Objest() : base(Config.Kernel, "tab_a90", "ПересортицяТоварів",
+        public ПересортицяТоварів_Objest() : base(Config.Kernel, "tab_a90", ПересортицяТоварів_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_h2", "col_h3", "col_h4", "col_h5", "col_h6", "col_a1", "col_a2", ])
         {
             
@@ -21159,6 +21208,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПерерахунокТоварів_Const
     {
         public const string TABLE = "tab_a92";
+        public const string TYPE = "ПерерахунокТоварів"; /* Назва вказівника */
         public const string POINTER = "Документи.ПерерахунокТоварів"; /* Повна назва вказівника */
         public const string FULLNAME = "Перерахунок товарів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -21184,7 +21234,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПерерахунокТоварів_Objest() : base(Config.Kernel, "tab_a92", "ПерерахунокТоварів",
+        public ПерерахунокТоварів_Objest() : base(Config.Kernel, "tab_a92", ПерерахунокТоварів_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2", "col_a3", "col_a4", ])
         {
             
@@ -21631,6 +21681,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПсуванняТоварів_Const
     {
         public const string TABLE = "tab_a94";
+        public const string TYPE = "ПсуванняТоварів"; /* Назва вказівника */
         public const string POINTER = "Документи.ПсуванняТоварів"; /* Повна назва вказівника */
         public const string FULLNAME = "Псування товарів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -21658,7 +21709,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПсуванняТоварів_Objest() : base(Config.Kernel, "tab_a94", "ПсуванняТоварів",
+        public ПсуванняТоварів_Objest() : base(Config.Kernel, "tab_a94", ПсуванняТоварів_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_a1", "col_a5", "col_a2", "col_a3", "col_b2", ])
         {
             
@@ -22131,6 +22182,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ВнутрішнєСпоживанняТоварів_Const
     {
         public const string TABLE = "tab_b07";
+        public const string TYPE = "ВнутрішнєСпоживанняТоварів"; /* Назва вказівника */
         public const string POINTER = "Документи.ВнутрішнєСпоживанняТоварів"; /* Повна назва вказівника */
         public const string FULLNAME = "Внутрішнє споживання товарів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -22159,7 +22211,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ВнутрішнєСпоживанняТоварів_Objest() : base(Config.Kernel, "tab_b07", "ВнутрішнєСпоживанняТоварів",
+        public ВнутрішнєСпоживанняТоварів_Objest() : base(Config.Kernel, "tab_b07", ВнутрішнєСпоживанняТоварів_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_a1", "col_b1", "col_a2", "col_a9", "col_a8", "col_b7", "col_b9", "col_b4", "col_b2", "col_a3", ])
         {
             
@@ -22636,6 +22688,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РахунокФактура_Const
     {
         public const string TABLE = "tab_b10";
+        public const string TYPE = "РахунокФактура"; /* Назва вказівника */
         public const string POINTER = "Документи.РахунокФактура"; /* Повна назва вказівника */
         public const string FULLNAME = "Рахунок фактура"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -22671,7 +22724,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public РахунокФактура_Objest() : base(Config.Kernel, "tab_b10", "РахунокФактура",
+        public РахунокФактура_Objest() : base(Config.Kernel, "tab_b10", РахунокФактура_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a3", "col_a4", "col_a5", "col_a6", "col_b9", "col_c2", "col_c3", "col_c4", "col_c1", "col_a2", "col_a7", ])
         {
             
@@ -23320,6 +23373,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_a64";
+        public const string TYPE = "РозміщенняТоварівНаСкладі"; /* Назва вказівника */
         public const string POINTER = "Документи.РозміщенняТоварівНаСкладі"; /* Повна назва вказівника */
         public const string FULLNAME = "Розміщення товарів на складі"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -23346,7 +23400,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_a64", "РозміщенняТоварівНаСкладі",
+        public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_a64", РозміщенняТоварівНаСкладі_Const.TYPE,
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
         {
             
@@ -23799,6 +23853,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ПереміщенняТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b09";
+        public const string TYPE = "ПереміщенняТоварівНаСкладі"; /* Назва вказівника */
         public const string POINTER = "Документи.ПереміщенняТоварівНаСкладі"; /* Повна назва вказівника */
         public const string FULLNAME = "Переміщення товарів на складі"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -23824,7 +23879,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ПереміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b09", "ПереміщенняТоварівНаСкладі",
+        public ПереміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b09", ПереміщенняТоварівНаСкладі_Const.TYPE,
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ])
         {
             
@@ -24279,6 +24334,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗбіркаТоварівНаСкладі_Const
     {
         public const string TABLE = "tab_b27";
+        public const string TYPE = "ЗбіркаТоварівНаСкладі"; /* Назва вказівника */
         public const string POINTER = "Документи.ЗбіркаТоварівНаСкладі"; /* Повна назва вказівника */
         public const string FULLNAME = "Збірка товарів на складі"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -24305,7 +24361,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b27", "ЗбіркаТоварівНаСкладі",
+        public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b27", ЗбіркаТоварівНаСкладі_Const.TYPE,
              ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
         {
             
@@ -24758,6 +24814,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class РозміщенняНоменклатуриПоКоміркам_Const
     {
         public const string TABLE = "tab_b29";
+        public const string TYPE = "РозміщенняНоменклатуриПоКоміркам"; /* Назва вказівника */
         public const string POINTER = "Документи.РозміщенняНоменклатуриПоКоміркам"; /* Повна назва вказівника */
         public const string FULLNAME = "Розміщення номенклатури по коміркам"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -24783,7 +24840,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel, "tab_b29", "РозміщенняНоменклатуриПоКоміркам",
+        public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel, "tab_b29", РозміщенняНоменклатуриПоКоміркам_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5", "col_a6", ])
         {
             
@@ -25210,6 +25267,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class КорегуванняБоргу_Const
     {
         public const string TABLE = "tab_a65";
+        public const string TYPE = "КорегуванняБоргу"; /* Назва вказівника */
         public const string POINTER = "Документи.КорегуванняБоргу"; /* Повна назва вказівника */
         public const string FULLNAME = "Корегування боргу контрагентів"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -25233,7 +25291,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public КорегуванняБоргу_Objest() : base(Config.Kernel, "tab_a65", "КорегуванняБоргу",
+        public КорегуванняБоргу_Objest() : base(Config.Kernel, "tab_a65", КорегуванняБоргу_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_d1", "col_a3", "col_a2", ])
         {
             
@@ -25660,6 +25718,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗакриттяЗамовленняКлієнта_Const
     {
         public const string TABLE = "tab_a96";
+        public const string TYPE = "ЗакриттяЗамовленняКлієнта"; /* Назва вказівника */
         public const string POINTER = "Документи.ЗакриттяЗамовленняКлієнта"; /* Повна назва вказівника */
         public const string FULLNAME = "Закриття замовлення клієнта"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -25692,7 +25751,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ЗакриттяЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a96", "ЗакриттяЗамовленняКлієнта",
+        public ЗакриттяЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a96", ЗакриттяЗамовленняКлієнта_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ])
         {
             
@@ -26175,6 +26234,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗакриттяРахункуФактури_Const
     {
         public const string TABLE = "tab_b41";
+        public const string TYPE = "ЗакриттяРахункуФактури"; /* Назва вказівника */
         public const string POINTER = "Документи.ЗакриттяРахункуФактури"; /* Повна назва вказівника */
         public const string FULLNAME = "Закриття рахунку фактури"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -26207,7 +26267,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ЗакриттяРахункуФактури_Objest() : base(Config.Kernel, "tab_b41", "ЗакриттяРахункуФактури",
+        public ЗакриттяРахункуФактури_Objest() : base(Config.Kernel, "tab_b41", ЗакриттяРахункуФактури_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ])
         {
             
@@ -26686,6 +26746,7 @@ namespace StorageAndTrade_1_0.Документи
     public static class ЗакриттяЗамовленняПостачальнику_Const
     {
         public const string TABLE = "tab_b44";
+        public const string TYPE = "ЗакриттяЗамовленняПостачальнику"; /* Назва вказівника */
         public const string POINTER = "Документи.ЗакриттяЗамовленняПостачальнику"; /* Повна назва вказівника */
         public const string FULLNAME = "Закриття замовлення постачальнику"; /* Повна назва об'єкта */
         public const string DELETION_LABEL = "deletion_label"; /* Помітка на видалення true|false */
@@ -26718,7 +26779,7 @@ namespace StorageAndTrade_1_0.Документи
         public event EventHandler<UnigueID>? UnigueIDChanged;
         public event EventHandler<string>? CaptionChanged;
 
-        public ЗакриттяЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_b44", "ЗакриттяЗамовленняПостачальнику",
+        public ЗакриттяЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_b44", ЗакриттяЗамовленняПостачальнику_Const.TYPE,
              ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ])
         {
             

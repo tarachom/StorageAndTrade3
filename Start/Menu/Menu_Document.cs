@@ -41,7 +41,7 @@ namespace StorageAndTrade
                         await page.SetValue();
                     });
 
-                    CreateLink(hBox, "Закриття замовлення", async () =>
+                    CreateLink(hBox, "Закриття", async () =>
                     {
                         ЗакриттяЗамовленняКлієнта page = new ЗакриттяЗамовленняКлієнта();
                         NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяЗамовленняКлієнта_Const.FULLNAME, () => page);
@@ -61,7 +61,7 @@ namespace StorageAndTrade
                         await page.SetValue();
                     });
 
-                    CreateLink(hBox, "Закриття рахунку", async () =>
+                    CreateLink(hBox, "Закриття", async () =>
                     {
                         ЗакриттяРахункуФактури page = new ЗакриттяРахункуФактури();
                         NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяРахункуФактури_Const.FULLNAME, () => page);
@@ -111,7 +111,7 @@ namespace StorageAndTrade
                         await page.SetValue();
                     });
 
-                    CreateLink(hBox, "Закриття замовлення", async () =>
+                    CreateLink(hBox, "Закриття", async () =>
                     {
                         ЗакриттяЗамовленняПостачальнику page = new ЗакриттяЗамовленняПостачальнику();
                         NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяЗамовленняПостачальнику_Const.FULLNAME, () => page);

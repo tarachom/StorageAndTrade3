@@ -7,6 +7,8 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -31,6 +33,11 @@ namespace StorageAndTrade
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.СкладськіКомірки_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
+            {
+                if (directory.Any((x) => x.Key == СкладськіКомірки_Const.TYPE))
+                    await LoadRecords();
+            };
 
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = () => ДеревоПапок.Власник.Pointer = Власник.Pointer;

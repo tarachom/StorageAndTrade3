@@ -492,6 +492,8 @@ namespace <xsl:value-of select="$NameSpace"/>
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
+using <xsl:value-of select="$NameSpaceGenerationCode"/>;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники.ТабличніСписки;
 
@@ -507,6 +509,11 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary&lt;string, List&lt;Guid&gt;&gt; directory) =&gt;
+            {
+                if (directory.Any((x) =&gt; x.Key == <xsl:value-of select="$DirectoryName"/>_Const.TYPE))
+                    await LoadRecords();
+            };
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.AfterSelectFunc = async () =&gt; await LoadRecords();

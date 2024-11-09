@@ -11,6 +11,7 @@ using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -19,6 +20,11 @@ namespace StorageAndTrade
         public ВстановленняЦінНоменклатури() 
         {
             ТабличніСписки.ВстановленняЦінНоменклатури_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
+            {
+                if (document.Any((x) => x.Key == ВстановленняЦінНоменклатури_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override

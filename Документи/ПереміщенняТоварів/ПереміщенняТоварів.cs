@@ -11,6 +11,7 @@ using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -19,6 +20,11 @@ namespace StorageAndTrade
         public ПереміщенняТоварів() 
         {
             ТабличніСписки.ПереміщенняТоварів_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
+            {
+                if (document.Any((x) => x.Key == ПереміщенняТоварів_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override

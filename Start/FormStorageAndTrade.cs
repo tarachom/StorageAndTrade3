@@ -87,9 +87,6 @@ namespace StorageAndTrade
             PageHome page = new PageHome();
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Стартова", () => page);
 
-            //Активні користувачі
-            page.АктивніКористувачі.AutoRefreshRun();
-
             //Останні завантажені курси валют
             Task.Run(page.БлокКурсиВалют.StartDesktop);
 

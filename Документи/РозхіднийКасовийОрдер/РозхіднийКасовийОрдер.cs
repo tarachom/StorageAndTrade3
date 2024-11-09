@@ -9,14 +9,20 @@ using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
     public class РозхіднийКасовийОрдер : ДокументЖурнал
     {
-        public РозхіднийКасовийОрдер() 
+        public РозхіднийКасовийОрдер()
         {
             ТабличніСписки.РозхіднийКасовийОрдер_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
+            {
+                if (document.Any((x) => x.Key == РозхіднийКасовийОрдер_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override

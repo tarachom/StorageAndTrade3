@@ -7,6 +7,8 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 using StorageAndTrade_1_0.РегістриВідомостей;
@@ -15,13 +17,16 @@ namespace StorageAndTrade
 {
     public class ХарактеристикиНоменклатури : ДовідникЖурнал
     {
-
         public Номенклатура_PointerControl Власник = new Номенклатура_PointerControl() { Caption = "Номенклатура:" };
-
 
         public ХарактеристикиНоменклатури() : base()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
+            {
+                if (directory.Any((x) => x.Key == ХарактеристикиНоменклатури_Const.TYPE))
+                    await LoadRecords();
+            };
 
             CreateLink(HBoxTop, ШтрихкодиНоменклатури_Const.FULLNAME, async () =>
             {
@@ -38,7 +43,6 @@ namespace StorageAndTrade
 
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.AfterSelectFunc = async () => await LoadRecords();
-
         }
 
         #region Override

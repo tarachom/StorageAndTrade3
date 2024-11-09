@@ -17,6 +17,13 @@ namespace StorageAndTrade
         public Журнал_Закупівлі() : base(Config.NameSpageCodeGeneration)
         {
             ТабличніСписки.Журнали_Закупівлі.AddColumns(TreeViewGrid);
+            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
+            {
+                var allowDocument = ТабличніСписки.Журнали_Закупівлі.AllowDocument();
+
+                if (document.Any((x) => allowDocument.ContainsKey(x.Key)))
+                    await LoadRecords();
+            };
         }
 
         protected override async ValueTask LoadRecords()

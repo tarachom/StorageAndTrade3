@@ -7,6 +7,8 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
 
@@ -21,10 +23,14 @@ namespace StorageAndTrade
         public СкладськіКомірки_Папки() : base()
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
+            {
+                if (directory.Any((x) => x.Key == СкладськіКомірки_Папки_Const.TYPE))
+                    await LoadRecords();
+            };
 
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.AfterSelectFunc = async () => await LoadRecords();
-
         }
 
         #region Override

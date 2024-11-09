@@ -497,6 +497,7 @@ using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
+using <xsl:value-of select="$NameSpaceGenerationCode"/>;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи.ТабличніСписки;
 using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
 
@@ -507,6 +508,11 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DocumentName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
+            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary&lt;string, List&lt;Guid&gt;&gt; document) =&gt;
+            {
+                if (document.Any((x) =&gt; x.Key == <xsl:value-of select="$DocumentName"/>_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override

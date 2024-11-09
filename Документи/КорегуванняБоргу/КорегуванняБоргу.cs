@@ -9,6 +9,7 @@ using AccountingSoftware;
 
 using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
 using StorageAndTrade_1_0.Документи;
+using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -17,6 +18,11 @@ namespace StorageAndTrade
         public КорегуванняБоргу() 
         {
             ТабличніСписки.КорегуванняБоргу_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
+            {
+                if (document.Any((x) => x.Key == КорегуванняБоргу_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override

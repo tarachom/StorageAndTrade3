@@ -7,6 +7,8 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
+
+using StorageAndTrade_1_0;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.РегістриВідомостей;
 using ТабличніСписки = StorageAndTrade_1_0.Довідники.ТабличніСписки;
@@ -31,6 +33,11 @@ namespace StorageAndTrade
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => new Обробка_ЗавантаженняКурсівВалют()));
 
             ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
+            {
+                if (directory.Any((x) => x.Key == Валюти_Const.TYPE))
+                    await LoadRecords();
+            };
         }
 
         #region Override
