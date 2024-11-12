@@ -1,13 +1,9 @@
 /*
 
-CompositePointerControl - контрол тип якого оприділяється в процесі
-Використовується для Довідників та Документів
-В базі даних цей тип представлений композитним типом UuidAndText
+Заблоковані об'єкти
 
 */
 
-using Gtk;
-using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0;
 
