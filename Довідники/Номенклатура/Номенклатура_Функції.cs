@@ -7,6 +7,7 @@
 using InterfaceGtk;
 using AccountingSoftware;
 using StorageAndTrade_1_0.Довідники;
+using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -57,7 +58,10 @@ namespace StorageAndTrade
                 return;
             }
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page, false,
+                async () => await page.Елемент.Lock(),
+                async () => await page.Елемент.UnLock());
+
             page.SetValue();
         }
 

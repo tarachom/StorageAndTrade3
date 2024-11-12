@@ -10,6 +10,7 @@ using InterfaceGtk;
 using StorageAndTrade_1_0.Константи;
 using StorageAndTrade_1_0.Довідники;
 using StorageAndTrade_1_0.Перелічення;
+using StorageAndTrade_1_0;
 
 namespace StorageAndTrade
 {
@@ -43,6 +44,11 @@ namespace StorageAndTrade
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
+            Config.Kernel.UpdateSession += async (_, _) =>
+            {
+                await Елемент.Lock();
+                LockInfo(await Елемент.IsLockInfo());
+            };
 
             ОсновнаКартинкаФайл.AfterSelectFunc = async () =>
             {
@@ -175,6 +181,7 @@ namespace StorageAndTrade
             {
                 if (await Елемент.Save())
                     await Файли.SaveRecords();
+
                 return true;
             }
             catch (Exception ex)
