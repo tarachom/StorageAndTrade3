@@ -44,11 +44,6 @@ namespace StorageAndTrade
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
-            Config.Kernel.UpdateSession += async (_, _) =>
-            {
-                await Елемент.Lock();
-                LockInfo(await Елемент.IsLockInfo());
-            };
 
             ОсновнаКартинкаФайл.AfterSelectFunc = async () =>
             {
@@ -189,6 +184,11 @@ namespace StorageAndTrade
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
                 return false;
             }
+        }
+
+        protected override async void Lock()
+        {
+            LockInfo(await Елемент.IsLockInfo());
         }
     }
 }

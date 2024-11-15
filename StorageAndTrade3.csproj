@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Version>3.1.0.3</Version>
@@ -11,17 +11,13 @@
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.117-develop" />
     <PackageReference Include="QuestPDF" Version="2024.10.3" />
+    <PackageReference Include="NPOI" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftwareLib\AccountingSoftware\AccountingSoftware.csproj" />
     <ProjectReference Include="..\AccountingSoftwareLib\InterfaceGtk\InterfaceGtk.csproj" />
     <ProjectReference Include="..\Configurator3\Configurator3.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- Excel -->
-    <ProjectReference Include="..\AccountingSoftwareLib\Npoi\solution\NPOI.Pack.csproj" />
   </ItemGroup>
 
 </Project>

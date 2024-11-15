@@ -1,0 +1,565 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "StorageAndTrade3/3.1.0.3": {
+        "dependencies": {
+          "AccountingSoftware": "3.1.0.1",
+          "Configurator3": "3.1.0.1",
+          "GtkSharp": "3.24.24.117-develop",
+          "InterfaceGtk": "3.1.0.3",
+          "NPOI": "2.7.2",
+          "QuestPDF": "2024.10.3"
+        },
+        "runtime": {
+          "StorageAndTrade3.dll": {}
+        }
+      },
+      "AtkSharp/3.24.24.117-develop": {
+        "dependencies": {
+          "GLibSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "lib/net8.0/AtkSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
+          }
+        }
+      },
+      "BouncyCastle.Cryptography/2.3.1": {
+        "runtime": {
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.3.1.17862"
+          }
+        }
+      },
+      "CairoSharp/3.24.24.117-develop": {
+        "runtime": {
+          "lib/net8.0/CairoSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
+          }
+        }
+      },
+      "Enums.NET/4.0.1": {
+        "runtime": {
+          "lib/netcoreapp3.0/Enums.NET.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.1.0"
+          }
+        }
+      },
+      "ExtendedNumerics.BigDecimal/2025.1001.2.129": {
+        "runtime": {
+          "lib/net8.0/ExtendedNumerics.BigDecimal.dll": {
+            "assemblyVersion": "2025.1001.2.129",
+            "fileVersion": "2025.1001.2.129"
+          }
+        }
+      },
+      "GdkSharp/3.24.24.117-develop": {
+        "dependencies": {
+          "CairoSharp": "3.24.24.117-develop",
+          "GLibSharp": "3.24.24.117-develop",
+          "GioSharp": "3.24.24.117-develop",
+          "PangoSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "lib/net8.0/GdkSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
+          }
+        }
+      },
+      "GioSharp/3.24.24.117-develop": {
+        "dependencies": {
+          "GLibSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "lib/net8.0/GioSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
+          }
+        }
+      },
+      "GLibSharp/3.24.24.117-develop": {
+        "runtime": {
+          "lib/net8.0/GLibSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
+          }
+        }
+      },
+      "GtkSharp/3.24.24.117-develop": {
+        "dependencies": {
+          "AtkSharp": "3.24.24.117-develop",
+          "CairoSharp": "3.24.24.117-develop",
+          "GLibSharp": "3.24.24.117-develop",
+          "GdkSharp": "3.24.24.117-develop",
+          "GioSharp": "3.24.24.117-develop",
+          "PangoSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "lib/net8.0/GtkSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
+          }
+        }
+      },
+      "GtkSourceSharp/3.24.24.95": {
+        "dependencies": {
+          "GtkSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "lib/net6.0/GtkSourceSharp.dll": {
+            "assemblyVersion": "3.24.24.95",
+            "fileVersion": "3.24.24.95"
+          }
+        }
+      },
+      "MathNet.Numerics.Signed/5.0.0": {
+        "runtime": {
+          "lib/net6.0/MathNet.Numerics.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/3.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.0.0"
+          }
+        }
+      },
+      "Microsoft.NETCore.Platforms/5.0.0": {},
+      "Npgsql/8.0.5": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Npgsql.dll": {
+            "assemblyVersion": "8.0.5.0",
+            "fileVersion": "8.0.5.0"
+          }
+        }
+      },
+      "NPOI/2.7.2": {
+        "dependencies": {
+          "BouncyCastle.Cryptography": "2.3.1",
+          "Enums.NET": "4.0.1",
+          "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
+          "MathNet.Numerics.Signed": "5.0.0",
+          "Microsoft.IO.RecyclableMemoryStream": "3.0.0",
+          "SharpZipLib": "1.4.2",
+          "SixLabors.Fonts": "1.0.1",
+          "SixLabors.ImageSharp": "2.1.9",
+          "System.Security.Cryptography.Pkcs": "8.0.1",
+          "System.Security.Cryptography.Xml": "8.0.2"
+        },
+        "runtime": {
+          "lib/net6.0/NPOI.Core.dll": {
+            "assemblyVersion": "2.7.2.0",
+            "fileVersion": "2.7.2.0"
+          },
+          "lib/net6.0/NPOI.OOXML.dll": {
+            "assemblyVersion": "2.7.2.0",
+            "fileVersion": "2.7.2.0"
+          },
+          "lib/net6.0/NPOI.OpenXml4Net.dll": {
+            "assemblyVersion": "2.7.2.0",
+            "fileVersion": "2.7.2.0"
+          },
+          "lib/net6.0/NPOI.OpenXmlFormats.dll": {
+            "assemblyVersion": "2.7.2.0",
+            "fileVersion": "2.7.2.0"
+          }
+        }
+      },
+      "PangoSharp/3.24.24.117-develop": {
+        "dependencies": {
+          "CairoSharp": "3.24.24.117-develop",
+          "GLibSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "lib/net8.0/PangoSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
+          }
+        }
+      },
+      "QuestPDF/2024.10.3": {
+        "runtime": {
+          "lib/net8.0/QuestPDF.dll": {
+            "assemblyVersion": "2024.10.3.0",
+            "fileVersion": "2024.10.3.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm64/native/libQuestPdfSkia.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-x64/native/libQuestPdfSkia.so": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libQuestPdfSkia.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-arm64/native/libQuestPdfSkia.dylib": {
+            "rid": "osx-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libQuestPdfSkia.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/QuestPdfSkia.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/QuestPdfSkia.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SharpZipLib/1.4.2": {
+        "runtime": {
+          "lib/net6.0/ICSharpCode.SharpZipLib.dll": {
+            "assemblyVersion": "1.4.2.13",
+            "fileVersion": "1.4.2.13"
+          }
+        }
+      },
+      "SixLabors.Fonts/1.0.1": {
+        "runtime": {
+          "lib/netcoreapp3.1/SixLabors.Fonts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.1.0"
+          }
+        }
+      },
+      "SixLabors.ImageSharp/2.1.9": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
+          "System.Text.Encoding.CodePages": "5.0.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.9.0"
+          }
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {},
+      "System.Security.Cryptography.Pkcs/8.0.1": {
+        "runtime": {
+          "lib/net8.0/System.Security.Cryptography.Pkcs.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          }
+        }
+      },
+      "System.Security.Cryptography.Xml/8.0.2": {
+        "dependencies": {
+          "System.Security.Cryptography.Pkcs": "8.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/System.Security.Cryptography.Xml.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          }
+        }
+      },
+      "System.Text.Encoding.CodePages/5.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0"
+        }
+      },
+      "AccountingSoftware/3.1.0.1": {
+        "dependencies": {
+          "Npgsql": "8.0.5"
+        },
+        "runtime": {
+          "AccountingSoftware.dll": {
+            "assemblyVersion": "3.1.0.1",
+            "fileVersion": "3.1.0.1"
+          }
+        }
+      },
+      "Configurator3/3.1.0.1": {
+        "dependencies": {
+          "AccountingSoftware": "3.1.0.1",
+          "GtkSharp": "3.24.24.117-develop",
+          "GtkSourceSharp": "3.24.24.95",
+          "InterfaceGtk": "3.1.0.3"
+        },
+        "runtime": {
+          "Configurator3.dll": {
+            "assemblyVersion": "3.1.0.1",
+            "fileVersion": "3.1.0.1"
+          }
+        }
+      },
+      "InterfaceGtk/3.1.0.3": {
+        "dependencies": {
+          "AccountingSoftware": "3.1.0.1",
+          "GtkSharp": "3.24.24.117-develop"
+        },
+        "runtime": {
+          "InterfaceGtk.dll": {
+            "assemblyVersion": "3.1.0.3",
+            "fileVersion": "3.1.0.3"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "StorageAndTrade3/3.1.0.3": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AtkSharp/3.24.24.117-develop": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LqhUEqLkNC4Uybx/IKQenGDSvDFrjGE6w9uQ1zZwyHuGyDSZhiqeg6PyzU1FaQ3NF+uGwbFxDcDYJCVM2JoTpw==",
+      "path": "atksharp/3.24.24.117-develop",
+      "hashPath": "atksharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "BouncyCastle.Cryptography/2.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-buwoISwecYke3CmgG1AQSg+sNZjJeIb93vTAtJiHZX35hP/teYMxsfg0NDXGUKjGx6BKBTNKc77O2M3vKvlXZQ==",
+      "path": "bouncycastle.cryptography/2.3.1",
+      "hashPath": "bouncycastle.cryptography.2.3.1.nupkg.sha512"
+    },
+    "CairoSharp/3.24.24.117-develop": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5zsEUuksviQPiZHdXyiuzVbn2wVnaBURTyENkVmZuHzr5T8mONAm+15LUu19Z3xbFCKx0CH4GJzuO7qW14nNQw==",
+      "path": "cairosharp/3.24.24.117-develop",
+      "hashPath": "cairosharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "Enums.NET/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OUGCd5L8zHZ61GAf436G0gf/H6yrSUkEpV5vm2CbCUuz9Rx7iLFLP5iHSSfmOtqNpuyo4vYte0CvYEmPZXRmRQ==",
+      "path": "enums.net/4.0.1",
+      "hashPath": "enums.net.4.0.1.nupkg.sha512"
+    },
+    "ExtendedNumerics.BigDecimal/2025.1001.2.129": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+woGT1lsBtwkntOpx2EZbdbySv0aWPefE0vrfvclxVdbi4oa2bbtphFPWgMiQe+kRCPICbfFJwp6w1DuR7Ge2Q==",
+      "path": "extendednumerics.bigdecimal/2025.1001.2.129",
+      "hashPath": "extendednumerics.bigdecimal.2025.1001.2.129.nupkg.sha512"
+    },
+    "GdkSharp/3.24.24.117-develop": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-M7N7gMqjrW2NnAWcqR2E5/x5JUuz2jT3mFTTD7raHWF6llW7fiP3zxJfIiJHwHIOjSd8pfu7G8bVdCHwAd8t8g==",
+      "path": "gdksharp/3.24.24.117-develop",
+      "hashPath": "gdksharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "GioSharp/3.24.24.117-develop": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PxXTbBumyzJHt/h6qED0MYO3vEAY4vBHbgDrWFp1Kap5uUSpIMV8GPH2UaswX0wEtgdkMrVdhYGdeSllMwHWHw==",
+      "path": "giosharp/3.24.24.117-develop",
+      "hashPath": "giosharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "GLibSharp/3.24.24.117-develop": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NPHNJBR0FTZRMREP7ZtdFOlPFTRJwecYSCIWiJMvRybasH5xyavf7UmPkMzrGGJdt5ne4ZEZ3Yj+uOcqVKnkqg==",
+      "path": "glibsharp/3.24.24.117-develop",
+      "hashPath": "glibsharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "GtkSharp/3.24.24.117-develop": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qc4oBmHw4VoMk+tTurM6g2FRCl8yot/oOAy9ytmvzQ2+zI9T/SLF+Q534R1q8z3uz4q9sm46QOJOQOfAyOlKnQ==",
+      "path": "gtksharp/3.24.24.117-develop",
+      "hashPath": "gtksharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "GtkSourceSharp/3.24.24.95": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IoFpgWFxoqfcthyLoQ4871J3B7OLCBRcjTH776s2Qj8VKbjTGCk1sUg253WgfOhPiovKsyWApZSSt6IV5yS2ww==",
+      "path": "gtksourcesharp/3.24.24.95",
+      "hashPath": "gtksourcesharp.3.24.24.95.nupkg.sha512"
+    },
+    "MathNet.Numerics.Signed/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PSrHBVMf41SjbhlnpOMnoir8YgkyEJ6/nwxvjYpH+vJCexNcx2ms6zRww5yLVqLet1xLJgZ39swtKRTLhWdnAw==",
+      "path": "mathnet.numerics.signed/5.0.0",
+      "hashPath": "mathnet.numerics.signed.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+      "path": "microsoft.extensions.logging.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.IO.RecyclableMemoryStream/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-irv0HuqoH8Ig5i2fO+8dmDNdFdsrO+DoQcedwIlb810qpZHBNQHZLW7C/AHBQDgLLpw2T96vmMAy/aE4Yj55Sg==",
+      "path": "microsoft.io.recyclablememorystream/3.0.0",
+      "hashPath": "microsoft.io.recyclablememorystream.3.0.0.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
+      "path": "microsoft.netcore.platforms/5.0.0",
+      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
+    },
+    "Npgsql/8.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zRG5V8cyeZLpzJlKzFKjEwkRMYIYnHWJvEor2lWXeccS2E1G2nIWYYhnukB51iz5XsWSVEtqg3AxTWM0QJ6vfg==",
+      "path": "npgsql/8.0.5",
+      "hashPath": "npgsql.8.0.5.nupkg.sha512"
+    },
+    "NPOI/2.7.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hKJeAQOuVl8b2qiQQg0ph8uhqm5ihq94SDSnmPu5ytCLIRTVcg2rFA274ow+IacrORImdvo0Q3K51L1t3vLqpw==",
+      "path": "npoi/2.7.2",
+      "hashPath": "npoi.2.7.2.nupkg.sha512"
+    },
+    "PangoSharp/3.24.24.117-develop": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WycHWMa+cd07LrbFMi4ulvFYbzz2WrjNw2F2MsJTZKW63J7Yxw9gHA5vMAkF6h/jT0beAi0+0FLqDyFm4xJszg==",
+      "path": "pangosharp/3.24.24.117-develop",
+      "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "QuestPDF/2024.10.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pYqotWAm9XncO0c63zGXf2yPKnghP7uTiO6OJFX7jEHZrlApBFzViXSvWPAC5Yjark4MVztiq+4l5nZjYWIIUg==",
+      "path": "questpdf/2024.10.3",
+      "hashPath": "questpdf.2024.10.3.nupkg.sha512"
+    },
+    "SharpZipLib/1.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yjj+3zgz8zgXpiiC3ZdF/iyTBbz2fFvMxZFEBPUcwZjIvXOf37Ylm+K58hqMfIBt5JgU/Z2uoUS67JmTLe973A==",
+      "path": "sharpziplib/1.4.2",
+      "hashPath": "sharpziplib.1.4.2.nupkg.sha512"
+    },
+    "SixLabors.Fonts/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ljezRHWc7N0azdQViib7Aa5v+DagRVkKI2/93kEbtjVczLs+yTkSq6gtGmvOcx4IqyNbO3GjLt7SAQTpLkySNw==",
+      "path": "sixlabors.fonts/1.0.1",
+      "hashPath": "sixlabors.fonts.1.0.1.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/2.1.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VcjfKbOExie3RgZGrQL1jJMI4iZ3J9B6ifDo2QpDVJUYhTZKVcKnBhpNOHqbvNjHgadAks1jzhRjB7OZet1PJA==",
+      "path": "sixlabors.imagesharp/2.1.9",
+      "hashPath": "sixlabors.imagesharp.2.1.9.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Pkcs/8.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CoCRHFym33aUSf/NtWSVSZa99dkd0Hm7OCZUxORBjRB16LNhIEOf8THPqzIYlvKM0nNDAPTRBa1FxEECrgaxxA==",
+      "path": "system.security.cryptography.pkcs/8.0.1",
+      "hashPath": "system.security.cryptography.pkcs.8.0.1.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Xml/8.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aDM/wm0ZGEZ6ZYJLzgqjp2FZdHbDHh6/OmpGfb7AdZ105zYmPn/83JRU2xLIbwgoNz9U1SLUTJN0v5th3qmvjA==",
+      "path": "system.security.cryptography.xml/8.0.2",
+      "hashPath": "system.security.cryptography.xml.8.0.2.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NyscU59xX6Uo91qvhOs2Ccho3AR2TnZPomo1Z0K6YpyztBPM/A5VbkzOO19sy3A3i1TtEnTxA7bCe3Us+r5MWg==",
+      "path": "system.text.encoding.codepages/5.0.0",
+      "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
+    },
+    "AccountingSoftware/3.1.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Configurator3/3.1.0.1": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InterfaceGtk/3.1.0.3": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
