@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "Configurator3/3.1.0.1": {
+      "Configurator3/3.1.0.2": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.1",
+          "AccountingSoftware": "3.1.0.2",
           "GtkSharp": "3.24.24.117-develop",
           "GtkSourceSharp": "3.24.24.95",
-          "InterfaceGtk": "3.1.0.3"
+          "InterfaceGtk": "3.1.0.4"
         },
         "runtime": {
           "Configurator3.dll": {}
@@ -138,33 +138,33 @@
           }
         }
       },
-      "AccountingSoftware/3.1.0.1": {
+      "AccountingSoftware/3.1.0.2": {
         "dependencies": {
           "Npgsql": "8.0.5"
         },
         "runtime": {
           "AccountingSoftware.dll": {
-            "assemblyVersion": "3.1.0.1",
-            "fileVersion": "3.1.0.1"
+            "assemblyVersion": "3.1.0.2",
+            "fileVersion": "3.1.0.2"
           }
         }
       },
-      "InterfaceGtk/3.1.0.3": {
+      "InterfaceGtk/3.1.0.4": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.1",
+          "AccountingSoftware": "3.1.0.2",
           "GtkSharp": "3.24.24.117-develop"
         },
         "runtime": {
           "InterfaceGtk.dll": {
-            "assemblyVersion": "3.1.0.3",
-            "fileVersion": "3.1.0.3"
+            "assemblyVersion": "3.1.0.4",
+            "fileVersion": "3.1.0.4"
           }
         }
       }
     }
   },
   "libraries": {
-    "Configurator3/3.1.0.1": {
+    "Configurator3/3.1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -246,12 +246,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "AccountingSoftware/3.1.0.1": {
+    "AccountingSoftware/3.1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "InterfaceGtk/3.1.0.3": {
+    "InterfaceGtk/3.1.0.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
