@@ -188,6 +188,7 @@ namespace StorageAndTrade
 
         protected override async void Lock()
         {
+            //await Елемент.Lock();
             LockInfo(await Елемент.IsLockInfo());
         }
     }

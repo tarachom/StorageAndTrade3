@@ -14,15 +14,15 @@ namespace StorageAndTrade
 {
     static class ФункціїДляПовідомлень
     {
-        public static async void ДодатиПовідомлення(UuidAndText basis, string НазваОбєкту, Exception exception)
+        public static async void ДодатиПовідомлення(UuidAndText? basis, string НазваОбєкту, Exception exception)
         {
-            await Config.Kernel.MessageErrorAdd("Запис", basis.Uuid, basis.Text, НазваОбєкту, exception.Message);
-            ПоказатиПовідомлення(basis.UnigueID());
+            await Config.Kernel.MessageErrorAdd("Запис", basis?.Uuid, basis?.Text, НазваОбєкту, exception.Message);
+            ПоказатиПовідомлення(basis?.UnigueID());
         }
 
-        public static async void ДодатиІнформаційнеПовідомлення(UuidAndText basis, string НазваОбєкту, string Повідомлення)
+        public static async void ДодатиІнформаційнеПовідомлення(UuidAndText? basis, string НазваОбєкту, string Повідомлення)
         {
-            await Config.Kernel.MessageInfoAdd("Інформація", basis.Uuid, basis.Text, НазваОбєкту, Повідомлення);
+            await Config.Kernel.MessageInfoAdd("Інформація", basis?.Uuid, basis?.Text, НазваОбєкту, Повідомлення);
             ПоказатиПовідомлення();
         }
 

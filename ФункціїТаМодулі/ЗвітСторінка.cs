@@ -4,6 +4,7 @@
 
 */
 
+using Gtk;
 using InterfaceGtk;
 using StorageAndTrade_1_0;
 using AccountingSoftware;
@@ -56,7 +57,7 @@ namespace StorageAndTrade
                 container.Page(page =>
                 {
                     page.Size(PageSizes.A4);
-                    page.Margin(MarginPage, Unit.Point);
+                    page.Margin(MarginPage, QuestPDF.Infrastructure.Unit.Point);
 
                     page.Content().Column(x =>
                     {
@@ -89,71 +90,111 @@ namespace StorageAndTrade
 
         protected override async ValueTask ВигрузитиВФайл_Excel(InterfaceGtk.ЗвітСторінка звіт, List<string[]> rows)
         {
-            static void CreateCell(IRow CurrentRow, int CellIndex, string Value, XSSFCellStyle Style)
+            string currentFolder = "";
+
+            FileChooserDialog fc = new FileChooserDialog("Виберіть каталог", Program.GeneralForm,
+                FileChooserAction.SelectFolder, "Закрити", ResponseType.Cancel, "Вибрати", ResponseType.Accept);
+
+            if (fc.Run() == (int)ResponseType.Accept)
+                currentFolder = fc.CurrentFolder;
+
+            fc.Dispose();
+            fc.Destroy();
+
+            if (!string.IsNullOrEmpty(currentFolder) && Directory.Exists(currentFolder))
             {
-                ICell Cell = CurrentRow.CreateCell(CellIndex);
-                Cell.SetCellValue(Value);
-                Cell.CellStyle = Style;
-            }
+                string reportFileName = звіт.ReportName + "_" + звіт.Caption;
+                string extension = ".xlsx";
+                string fullPath = "";
 
-            IWorkbook workbook = new XSSFWorkbook();
-            ISheet sheet = workbook.CreateSheet("Звіт");
-
-            if (rows.Count > 0)
-            {
-                string[] nameCols = rows[0];
-
-                //Header
+                //Підбір назви файлу на випадок наявності вже такого файлу
+                //До назви добавляється номер версії. Максимально 100
                 {
-                    XSSFFont font = (XSSFFont)workbook.CreateFont();
-                    font.FontHeightInPoints = 11;
-                    font.FontName = "Arial";
-                    font.IsBold = true;
+                    for (int i = 0; i < 100; i++)
+                    {
+                        string version = i != 0 ? "_" + i.ToString() + "_" : "";
+                        string tmpFullPath = System.IO.Path.Combine(currentFolder, reportFileName + version + extension);
 
-                    XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
-                    cellStyle.SetFont(font);
+                        if (!File.Exists(tmpFullPath))
+                        {
+                            fullPath = tmpFullPath;
+                            break;
+                        }
+                    }
 
-                    cellStyle.BorderLeft = BorderStyle.Dashed;
-                    cellStyle.BorderTop = BorderStyle.Dashed;
-                    cellStyle.BorderRight = BorderStyle.Dashed;
-                    cellStyle.BorderBottom = BorderStyle.Dashed;
-                    cellStyle.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;
+                    //Якщо невдалось підібрати назву файлу, тоді випадкова назва
+                    if (string.IsNullOrEmpty(fullPath))
+                        fullPath = System.IO.Path.Combine(currentFolder, reportFileName + Guid.NewGuid().ToString().Replace("-", "") + extension);
+                }
 
-                    IRow row = sheet.CreateRow(0);
+                static void CreateCell(IRow CurrentRow, int CellIndex, string Value, XSSFCellStyle Style)
+                {
+                    ICell Cell = CurrentRow.CreateCell(CellIndex);
+                    Cell.SetCellValue(Value);
+                    Cell.CellStyle = Style;
+                }
+
+                IWorkbook workbook = new XSSFWorkbook();
+                ISheet sheet = workbook.CreateSheet(звіт.Caption.Length >= 30 ? звіт.Caption[..30] : звіт.Caption);
+
+                if (rows.Count > 0)
+                {
+                    string[] nameCols = rows[0];
+
+                    //Header
+                    {
+                        XSSFFont font = (XSSFFont)workbook.CreateFont();
+                        font.FontHeightInPoints = 11;
+                        font.FontName = "Arial";
+                        font.IsBold = true;
+
+                        XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
+                        cellStyle.SetFont(font);
+
+                        cellStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Dashed;
+                        cellStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Dashed;
+                        cellStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Dashed;
+                        cellStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Dashed;
+                        cellStyle.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;
+
+                        IRow row = sheet.CreateRow(0);
+
+                        for (int i = 0; i < nameCols.Length; i++)
+                            CreateCell(row, i, nameCols[i], cellStyle);
+                    }
+
+                    //Body
+                    {
+                        XSSFFont font = (XSSFFont)workbook.CreateFont();
+                        font.FontHeightInPoints = 10;
+                        font.FontName = "Arial";
+
+                        XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
+                        cellStyle.SetFont(font);
+
+                        for (int r = 1; r < rows.Count; r++)
+                        {
+                            IRow row = sheet.CreateRow(r);
+
+                            string[] Значення = rows[r];
+                            for (int i = 0; i < Значення.Length; i++)
+                                CreateCell(row, i, Значення[i], cellStyle);
+                        }
+                    }
 
                     for (int i = 0; i < nameCols.Length; i++)
-                        CreateCell(row, i, nameCols[i], cellStyle);
+                        sheet.AutoSizeColumn(i);
+
+                    sheet.SetAutoFilter(new NPOI.SS.Util.CellRangeAddress(0, rows.Count - 1, 0, nameCols.Length - 1));
+
+                    GC.Collect();
                 }
 
-                //Body
-                {
-                    XSSFFont font = (XSSFFont)workbook.CreateFont();
-                    font.FontHeightInPoints = 10;
-                    font.FontName = "Arial";
+                using FileStream stream = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
+                workbook.Write(stream);
 
-                    XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
-                    cellStyle.SetFont(font);
-
-                    for (int r = 1; r < rows.Count; r++)
-                    {
-                        IRow row = sheet.CreateRow(r);
-
-                        string[] Значення = rows[r];
-                        for (int i = 0; i < Значення.Length; i++)
-                            CreateCell(row, i, Значення[i], cellStyle);
-                    }
-                }
-
-                for (int i = 0; i < nameCols.Length; i++)
-                    sheet.AutoSizeColumn(i);
-
-                sheet.SetAutoFilter(new NPOI.SS.Util.CellRangeAddress(0, rows.Count - 1, 0, nameCols.Length - 1));
-
-                GC.Collect();
+                ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(null, "Вигрузка звіту в Excel", $"Вигружено у файл: {fullPath}");
             }
-
-            using FileStream stream = new FileStream("Excel.xlsx", FileMode.Create, FileAccess.Write);
-            workbook.Write(stream);
 
             await ValueTask.FromResult(true);
         }

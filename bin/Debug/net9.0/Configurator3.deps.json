@@ -10,7 +10,7 @@
         "dependencies": {
           "AccountingSoftware": "3.1.0.2",
           "GtkSharp": "3.24.24.117-develop",
-          "GtkSourceSharp": "3.24.24.95",
+          "GtkSourceSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0.4"
         },
         "runtime": {
@@ -85,44 +85,44 @@
           }
         }
       },
-      "GtkSourceSharp/3.24.24.95": {
+      "GtkSourceSharp/3.24.24.117-develop": {
         "dependencies": {
           "GtkSharp": "3.24.24.117-develop"
         },
         "runtime": {
-          "lib/net6.0/GtkSourceSharp.dll": {
-            "assemblyVersion": "3.24.24.95",
-            "fileVersion": "3.24.24.95"
+          "lib/net8.0/GtkSourceSharp.dll": {
+            "assemblyVersion": "3.24.24.117",
+            "fileVersion": "3.24.24.117"
           }
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
         "runtime": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
+            "fileVersion": "8.0.1024.46610"
           }
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+      "Microsoft.Extensions.Logging.Abstractions/8.0.2": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
         },
         "runtime": {
           "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
+            "fileVersion": "8.0.1024.46610"
           }
         }
       },
-      "Npgsql/8.0.5": {
+      "Npgsql/9.0.1": {
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
         },
         "runtime": {
           "lib/net8.0/Npgsql.dll": {
-            "assemblyVersion": "8.0.5.0",
-            "fileVersion": "8.0.5.0"
+            "assemblyVersion": "9.0.1.0",
+            "fileVersion": "9.0.1.0"
           }
         }
       },
@@ -140,7 +140,7 @@
       },
       "AccountingSoftware/3.1.0.2": {
         "dependencies": {
-          "Npgsql": "8.0.5"
+          "Npgsql": "9.0.1"
         },
         "runtime": {
           "AccountingSoftware.dll": {
@@ -211,33 +211,33 @@
       "path": "gtksharp/3.24.24.117-develop",
       "hashPath": "gtksharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "GtkSourceSharp/3.24.24.95": {
+    "GtkSourceSharp/3.24.24.117-develop": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IoFpgWFxoqfcthyLoQ4871J3B7OLCBRcjTH776s2Qj8VKbjTGCk1sUg253WgfOhPiovKsyWApZSSt6IV5yS2ww==",
-      "path": "gtksourcesharp/3.24.24.95",
-      "hashPath": "gtksourcesharp.3.24.24.95.nupkg.sha512"
+      "sha512": "sha512-/EzwBbjf8ESeT0ECH7+VX6cUikFAxl7WUBxVtQQUvnM0kcTixeH+WwdYSTUb2H/Mk++hnpvKWcgqNGVEYokhCw==",
+      "path": "gtksourcesharp/3.24.24.117-develop",
+      "hashPath": "gtksourcesharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
-      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+      "sha512": "sha512-3iE7UF7MQkCv1cxzCahz+Y/guQbTqieyxyaWKhrRO91itI9cOKO76OHeQDahqG4MmW5umr3CcCvGmK92lWNlbg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.2",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512"
     },
-    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+    "Microsoft.Extensions.Logging.Abstractions/8.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
-      "path": "microsoft.extensions.logging.abstractions/8.0.0",
-      "hashPath": "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+      "sha512": "sha512-nroMDjS7hNBPtkZqVBbSiQaQjWRDxITI8Y7XnDs97rqG3EbzVTNLZQf7bIeUJcaHOV8bca47s1Uxq94+2oGdxA==",
+      "path": "microsoft.extensions.logging.abstractions/8.0.2",
+      "hashPath": "microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512"
     },
-    "Npgsql/8.0.5": {
+    "Npgsql/9.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zRG5V8cyeZLpzJlKzFKjEwkRMYIYnHWJvEor2lWXeccS2E1G2nIWYYhnukB51iz5XsWSVEtqg3AxTWM0QJ6vfg==",
-      "path": "npgsql/8.0.5",
-      "hashPath": "npgsql.8.0.5.nupkg.sha512"
+      "sha512": "sha512-aZrXuBUUjRnvjoS4Lq0ZPYe3pnzAfK7TroGNGVpo4FCMBW1ypD/XfTTYjXpeRI8xcX5Otiv535Dy2jQWi98oeA==",
+      "path": "npgsql/9.0.1",
+      "hashPath": "npgsql.9.0.1.nupkg.sha512"
     },
     "PangoSharp/3.24.24.117-develop": {
       "type": "package",
