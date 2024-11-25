@@ -656,6 +656,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             {
                 DirectoryPointerItem = DirectoryPointerItem,
                 CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                CallBack_OnMultipleSelectPointer = CallBack_OnMultipleSelectPointer,
                 OpenFolder = OpenFolder
             };
             <xsl:if test="normalize-space($DirectoryOwner) != ''">

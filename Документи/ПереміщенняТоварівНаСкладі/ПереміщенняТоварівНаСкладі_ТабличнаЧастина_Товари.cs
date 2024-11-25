@@ -349,10 +349,18 @@ namespace StorageAndTrade
                             {
                                 запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Номенклатура(запис);
-
-                                ОбновитиЗначенняДокумента?.Invoke();
-
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_Номенклатура(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -367,6 +375,26 @@ namespace StorageAndTrade
                                 запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
+
+                                    //Витягую Номенклатуру із Характеристики
+                                    ХарактеристикиНоменклатури_Objest? ХарактеристикаОбєкт = await запис.ХарактеристикаНоменклатури.GetDirectoryObject();
+                                    if (ХарактеристикаОбєкт != null)
+                                    {
+                                        запис.Номенклатура = ХарактеристикаОбєкт.Номенклатура;
+                                        await Запис.ПісляЗміни_Номенклатура(запис);
+                                    }
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         page.Власник.Pointer = запис.Номенклатура;
@@ -382,6 +410,17 @@ namespace StorageAndTrade
                                 запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Серія(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_Серія(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -410,6 +449,17 @@ namespace StorageAndTrade
                                 запис.КоміркаВідправник = new СкладськіКомірки_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_КоміркаВідправник(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.КоміркаВідправник = new СкладськіКомірки_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_КоміркаВідправник(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -424,6 +474,17 @@ namespace StorageAndTrade
                                 запис.КоміркаОтримувач = new СкладськіКомірки_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_КоміркаОтримувач(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.КоміркаОтримувач = new СкладськіКомірки_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_КоміркаОтримувач(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -517,13 +578,20 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-        protected override void AddRecord()
+        (Запис запис, TreeIter iter) НовийЗапис()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
 
             TreeIter iter = Store.AppendValues(запис.ToArray());
             TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+
+            return (запис, iter);
+        }
+
+        protected override void AddRecord()
+        {
+            НовийЗапис();
         }
 
         protected override void CopyRecord(int rowNumber)

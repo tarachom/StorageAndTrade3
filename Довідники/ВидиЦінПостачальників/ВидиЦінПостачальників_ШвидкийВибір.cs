@@ -45,6 +45,7 @@ namespace StorageAndTrade
             {
                 DirectoryPointerItem = DirectoryPointerItem,
                 CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                CallBack_OnMultipleSelectPointer = CallBack_OnMultipleSelectPointer,
                 OpenFolder = OpenFolder
             };
 

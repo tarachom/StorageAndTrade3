@@ -391,7 +391,7 @@ namespace StorageAndTrade
         #endregion
 
         #region Func
-
+        
         protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
@@ -407,6 +407,17 @@ namespace StorageAndTrade
                                 запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Номенклатура(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_Номенклатура(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -421,6 +432,26 @@ namespace StorageAndTrade
                                 запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
+
+                                    //Витягую Номенклатуру із Характеристики
+                                    ХарактеристикиНоменклатури_Objest? ХарактеристикаОбєкт = await запис.ХарактеристикаНоменклатури.GetDirectoryObject();
+                                    if (ХарактеристикаОбєкт != null)
+                                    {
+                                        запис.Номенклатура = ХарактеристикаОбєкт.Номенклатура;
+                                        await Запис.ПісляЗміни_Номенклатура(запис);
+                                    }
+
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         page.Власник.Pointer = запис.Номенклатура;
@@ -436,6 +467,17 @@ namespace StorageAndTrade
                                 запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Серія(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_Серія(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -466,7 +508,6 @@ namespace StorageAndTrade
                                 Store.SetValues(iter, запис.ToArray());
                             }
                         };
-                        page.НоменклатураВідбір.Pointer = запис.Номенклатура;
                         return page;
                     }
 
@@ -580,13 +621,20 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-        protected override void AddRecord()
+        (Запис запис, TreeIter iter) НовийЗапис()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
 
             TreeIter iter = Store.AppendValues(запис.ToArray());
             TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+
+            return (запис, iter);
+        }
+
+        protected override void AddRecord()
+        {
+            НовийЗапис();
         }
 
         protected override void CopyRecord(int rowNumber)

@@ -236,6 +236,17 @@ namespace StorageAndTrade
                                 запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Номенклатура(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_Номенклатура(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -264,6 +275,17 @@ namespace StorageAndTrade
                                 запис.Комірка = new СкладськіКомірки_Pointer(selectPointer);
                                 await Запис.ПісляЗміни_Комірка(запис);
                                 Store.SetValues(iter, запис.ToArray());
+                            },
+                            CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =>
+                            {
+                                foreach (var selectPointer in selectPointers)
+                                {
+                                    (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                    запис.Комірка = new СкладськіКомірки_Pointer(selectPointer);
+                                    await Запис.ПісляЗміни_Комірка(запис);
+                                    Store.SetValues(iter, запис.ToArray());
+                                }
                             }
                         };
                         return page;
@@ -291,13 +313,20 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-        protected override void AddRecord()
+        (Запис запис, TreeIter iter) НовийЗапис()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
 
             TreeIter iter = Store.AppendValues(запис.ToArray());
             TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+
+            return (запис, iter);
+        }
+
+        protected override void AddRecord()
+        {
+            НовийЗапис();
         }
 
         protected override void CopyRecord(int rowNumber)

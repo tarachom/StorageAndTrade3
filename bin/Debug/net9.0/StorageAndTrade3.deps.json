@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "StorageAndTrade3/3.1.0.4": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.2",
+          "AccountingSoftware": "3.1.0.3",
           "Configurator3": "3.1.0.2",
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0.4",
@@ -319,20 +319,20 @@
           "Microsoft.NETCore.Platforms": "5.0.0"
         }
       },
-      "AccountingSoftware/3.1.0.2": {
+      "AccountingSoftware/3.1.0.3": {
         "dependencies": {
           "Npgsql": "9.0.1"
         },
         "runtime": {
           "AccountingSoftware.dll": {
-            "assemblyVersion": "3.1.0.2",
-            "fileVersion": "3.1.0.2"
+            "assemblyVersion": "3.1.0.3",
+            "fileVersion": "3.1.0.3"
           }
         }
       },
       "Configurator3/3.1.0.2": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.2",
+          "AccountingSoftware": "3.1.0.3",
           "GtkSharp": "3.24.24.117-develop",
           "GtkSourceSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0.4"
@@ -346,7 +346,7 @@
       },
       "InterfaceGtk/3.1.0.4": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.2",
+          "AccountingSoftware": "3.1.0.3",
           "GtkSharp": "3.24.24.117-develop"
         },
         "runtime": {
@@ -546,7 +546,7 @@
       "path": "system.text.encoding.codepages/5.0.0",
       "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
     },
-    "AccountingSoftware/3.1.0.2": {
+    "AccountingSoftware/3.1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

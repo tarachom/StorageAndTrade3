@@ -337,6 +337,17 @@ namespace <xsl:value-of select="$NameSpace"/>
                             запис.<xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_Pointer(selectPointer);
                             await Запис.ПісляЗміни_<xsl:value-of select="Name"/>(запис);
                             Store.SetValues(iter, запис.ToArray());
+                        },
+                        CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =&gt;
+                        {
+                            foreach (var selectPointer in selectPointers)
+                            {
+                                (Запис запис, TreeIter iter) = НовийЗапис();
+
+                                запис.<xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_Pointer(selectPointer);
+                                await Запис.ПісляЗміни_<xsl:value-of select="Name"/>(запис);
+                                Store.SetValues(iter, запис.ToArray());
+                            }
                         }
                     };
                     return page;
@@ -458,13 +469,20 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region ToolBar
 
-        protected override void AddRecord()
+        (Запис запис, TreeIter iter) НовийЗапис()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
 
             TreeIter iter = Store.AppendValues(запис.ToArray());
             TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+
+            return (запис, iter);
+        }
+
+        protected override void AddRecord()
+        {
+            НовийЗапис();
         }
 
         protected override void CopyRecord(int rowNumber)
