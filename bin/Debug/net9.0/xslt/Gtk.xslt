@@ -28,7 +28,6 @@ limitations under the License.
   </xsl:template>
 
   <xsl:template match="/">
-    <xsl:call-template name="License" />
 /*
  *
  * Конфігурації "<xsl:value-of select="Configuration/Name"/>"
@@ -139,9 +138,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
         public static UnigueID? DirectoryPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? FirstPath;
-        public static TreePath? SelectPath;
-        public static TreePath? CurrentPath;
+        public static TreePath? FirstPath { get; private set; }
+        public static TreePath? SelectPath { get; private set; }
+        public static TreePath? CurrentPath { get; private set; }
 
         public static ListBox CreateFilter(TreeView treeView)
         {
@@ -288,6 +287,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
             TreePath rootPath = Store.GetPath(rootIter);
             </xsl:if>
 
+            string? UidSelect = SelectPointerItem?.ToString() ?? DirectoryPointerItem?.ToString();
+
             while (<xsl:value-of select="$DirectoryName"/>_Select.MoveNext())
             {
                 Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? cur = <xsl:value-of select="$DirectoryName"/>_Select.Current;
@@ -336,13 +337,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
 
                     CurrentPath = Store.GetPath(CurrentIter);
                     FirstPath ??= CurrentPath;
-
-                    if (DirectoryPointerItem != null || SelectPointerItem != null)
-                    {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DirectoryPointerItem!.ToString();
-                        if (Record.ID == UidSelect)
-                            SelectPath = CurrentPath;
-                    }
+                    if (UidSelect != null &amp;&amp; Record.ID == UidSelect) SelectPath = CurrentPath;
                 }
             }
             <xsl:if test="$DirectoryType = 'Hierarchical'">
@@ -357,165 +352,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
         }
     }
 	    </xsl:for-each>
-
-      <!-- ДЕРЕВО -->
-      <!--
-      <xsl:for-each select="TabularLists/TabularList[IsTree = '11']">
-        <xsl:variable name="TabularListName" select="Name"/>
-    /* ДЕРЕВО */
-    public class <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
-    {
-        bool DeletionLabel = false;
-        string ID = "";
-        string Назва = "";
-
-        Array ToArray()
-        {
-            return new object[] 
-            {
-                DeletionLabel ? InterfaceGtk.Іконки.ДляДерева.Delete : InterfaceGtk.Іконки.ДляДерева.Normal,
-                ID,
-                Назва
-            };
-        }
-
-        public static void AddColumns(TreeView treeView)
-        {
-            treeView.Model = new TreeStore
-            (
-                typeof(Gdk.Pixbuf) /* Image */, 
-                typeof(string)     /* ID */, 
-                typeof(string)     /* Назва */
-            );
-
-            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0));
-            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
-            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText(), "text", 2));
-        }
-
-        /* Шлях до корінної вітки */
-        public static TreePath? RootPath;
-
-        /* Шлях який спозиціонований у функції LoadTree - параметр selectPointer */
-        public static TreePath? SelectPath;
-
-        /*
-        openFolder - відкрита папка, яку потрібно ВИКЛЮЧИТИ з вибірки. 
-                     Також будуть виключені всі папки які входять в дану папку
-        selectPointer - елемент на який потрібно спозиціонуватися
-        owner - Власник (якщо таке поле є в табличному списку)
-        */
-        public static async ValueTask LoadTree(TreeView treeView, UnigueID? openFolder, UnigueID? selectPointer <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">, UnigueID? owner</xsl:if>)
-        {
-            RootPath = SelectPath = null;
-
-            <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> rootRecord = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
-            {
-                ID = Guid.Empty.ToString(),
-                Назва = " Дерево "
-            };
-
-            #region SQL
-
-            string query = $@"
-                WITH RECURSIVE r AS (
-                    SELECT 
-                        uid, 
-                        {<xsl:value-of select="$DirectoryName"/>_Const.Назва}, 
-                        {<xsl:value-of select="$DirectoryName"/>_Const.Родич}, 
-                        1 AS level,
-                        deletion_label
-                    FROM {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}
-                    WHERE {<xsl:value-of select="$DirectoryName"/>_Const.Родич} = '{Guid.Empty}'";
-                -->
-                        <!-- Якщо є поле Власник у табличному списку --><!--
-                        <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">
-                            if (owner != null &amp;&amp; !owner.IsEmpty()) query += $@"
-                        AND {<xsl:value-of select="$DirectoryName"/>_Const.Власник} = '{owner}'";
-                        </xsl:if>
-
-                            if (openFolder != null) query += $@"
-                        AND uid != '{openFolder}'";
-
-                            query += $@"
-                    UNION ALL
-                    SELECT 
-                        {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.uid, 
-                        {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.{<xsl:value-of select="$DirectoryName"/>_Const.Назва}, 
-                        {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.{<xsl:value-of select="$DirectoryName"/>_Const.Родич}, 
-                        r.level + 1 AS level,
-                        {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.deletion_label 
-                    FROM {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}
-                        JOIN r ON {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.{<xsl:value-of select="$DirectoryName"/>_Const.Родич} = r.uid";
-
-                        --><!-- Якщо є поле Власник у табличному списку --><!--
-                        <xsl:if test="count(Fields/Field[Name = 'Власник']) = 1">
-                            if (owner != null &amp;&amp; !owner.IsEmpty()) query += $@"
-                        AND {<xsl:value-of select="$DirectoryName"/>_Const.Власник} = '{owner}'";
-                        </xsl:if>
-
-                            if (openFolder != null) query += $@"
-                    WHERE {<xsl:value-of select="$DirectoryName"/>_Const.TABLE}.uid != '{openFolder}'";
-
-                            query += $@"
-                )
-                SELECT 
-                    uid, 
-                    {<xsl:value-of select="$DirectoryName"/>_Const.Назва} AS Назва, 
-                    {<xsl:value-of select="$DirectoryName"/>_Const.Родич} AS Родич, 
-                    level,
-                    deletion_label
-                FROM r
-                ORDER BY level, {<xsl:value-of select="$DirectoryName"/>_Const.Назва} ASC
-                ";
-
-            #endregion
-
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(query);
-
-            Dictionary&lt;string, TreeIter&gt; nodeDictionary = new Dictionary&lt;string, TreeIter&gt;();
-
-            TreeStore Store = (TreeStore)treeView.Model;
-            Store.Clear();
-
-            TreeIter rootIter = Store.AppendValues(rootRecord.ToArray());
-            RootPath = Store.GetPath(rootIter);
-
-            if (recordResult.Result)
-                foreach (var row in recordResult.ListRow)
-                {
-                    string uid = row["uid"].ToString() ?? Guid.Empty.ToString();
-                    string fieldName = row["Назва"].ToString() ?? "";
-                    string fieldParent = row["Родич"].ToString() ?? Guid.Empty.ToString();
-                    int level = (int)row["level"];
-                    bool deletionLabel = (bool)row["deletion_label"];
-
-                    <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
-                    {
-                        DeletionLabel = deletionLabel,
-                        ID = uid,
-                        Назва = fieldName
-                    };
-                    
-                    TreeIter Iter;
-
-                    if (level == 1)
-                        Iter = Store.AppendValues(rootIter, record.ToArray());
-                    else
-                    {
-                        TreeIter parentIter = nodeDictionary[fieldParent];
-                        Iter = Store.AppendValues(parentIter, record.ToArray());
-                    }
-
-                    nodeDictionary.Add(uid, Iter);
-
-                    if (selectPointer != null)
-                        if (uid == selectPointer.ToString())
-                            SelectPath = Store.GetPath(Iter);
-                }
-        }
-    }
-      </xsl:for-each>-->
     #endregion
     </xsl:for-each>
 }
@@ -584,9 +420,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
         public static UnigueID? DocumentPointerItem { get; set; }
         public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? FirstPath;
-        public static TreePath? SelectPath;
-        public static TreePath? CurrentPath;
+        public static TreePath? FirstPath { get; private set; }
+        public static TreePath? SelectPath { get; private set; }
+        public static TreePath? CurrentPath { get; private set; }
 
         public static ListBox CreateFilter(TreeView treeView)
         {
@@ -714,6 +550,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
             ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            string? UidSelect = SelectPointerItem?.ToString() ?? DocumentPointerItem?.ToString();
+
             while (<xsl:value-of select="$DocumentName"/>_Select.MoveNext())
             {
                 Документи.<xsl:value-of select="$DocumentName"/>_Pointer? cur = <xsl:value-of select="$DocumentName"/>_Select.Current;
@@ -749,13 +587,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
                     FirstPath ??= CurrentPath;
-
-                    if (DocumentPointerItem != null || SelectPointerItem != null)
-                    {
-                        string UidSelect = SelectPointerItem != null ? SelectPointerItem.ToString() : DocumentPointerItem!.ToString();
-                        if (Record.ID == UidSelect)
-                            SelectPath = CurrentPath;
-                    }
+                    if (UidSelect != null &amp;&amp; Record.ID == UidSelect) SelectPath = CurrentPath;
                 }
             }
             if (SelectPath != null)
@@ -869,8 +701,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
         }
 
         public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? SelectPath;
-        public static TreePath? CurrentPath;
+        public static TreePath? SelectPath { get; private set; }
+        public static TreePath? CurrentPath { get; private set; }
 
         // Завантаження даних
         public static async ValueTask LoadRecords(TreeView treeView) 
@@ -969,12 +801,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
-
-                if (SelectPointerItem != null)
-                {
-                    if (record.ID == SelectPointerItem.ToString())
-                        SelectPath = CurrentPath;
-                }
+                if (SelectPointerItem != null &amp;&amp; record.ID == SelectPointerItem.ToString()) SelectPath = CurrentPath;
             }
             if (SelectPath != null)
                 treeView.SetCursor(SelectPath, treeView.Columns[0], false);
@@ -1049,8 +876,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
         }
 
         public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? SelectPath;
-        public static TreePath? CurrentPath;
+        public static TreePath? SelectPath { get; private set; }
+        public static TreePath? CurrentPath { get; private set; }
 
         public static async ValueTask LoadRecords(TreeView treeView)
         {
@@ -1096,10 +923,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 
                 TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
-
-                if (SelectPointerItem != null)
-                    if (row.ID == SelectPointerItem.ToString())
-                        SelectPath = CurrentPath;
+                if (SelectPointerItem != null &amp;&amp; row.ID == SelectPointerItem.ToString()) SelectPath = CurrentPath;
             }
             if (SelectPath != null)
                 treeView.SetCursor(SelectPath, treeView.Columns[0], false);
@@ -1189,8 +1013,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
         }
 
         public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? SelectPath;
-        public static TreePath? CurrentPath;
+        public static TreePath? SelectPath { get; private set; }
+        public static TreePath? CurrentPath { get; private set; }
 
         public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
         {
@@ -1239,10 +1063,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
 
                 TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
-
-                if (SelectPointerItem != null)
-                    if (row.ID == SelectPointerItem.ToString())
-                        SelectPath = CurrentPath;
+                if (SelectPointerItem != null &amp;&amp; row.ID == SelectPointerItem.ToString()) SelectPath = CurrentPath;
             }
             if (position_last)
             {
