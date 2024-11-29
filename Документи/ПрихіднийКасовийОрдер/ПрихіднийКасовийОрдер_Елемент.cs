@@ -38,7 +38,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         СтаттяРухуКоштів_PointerControl СтаттяРухуКоштів = new СтаттяРухуКоштів_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
-        CompositePointerControl Основа = new CompositePointerControl();
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ПрихіднийКасовийОрдер.Основа" };
 
         #endregion
 

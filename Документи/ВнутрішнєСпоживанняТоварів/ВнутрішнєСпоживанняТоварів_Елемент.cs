@@ -32,7 +32,7 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
-        CompositePointerControl Основа = new CompositePointerControl();
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ВнутрішнєСпоживанняТоварів.Основа" };
 
         ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари Товари = new ВнутрішнєСпоживанняТоварів_ТабличнаЧастина_Товари();
 

@@ -28,7 +28,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Entry Причина = new Entry() { WidthRequest = 920 };
         Entry Коментар = new Entry() { WidthRequest = 920 };
-        CompositePointerControl Основа = new CompositePointerControl();
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ПсуванняТоварів.Основа" };
 
         ПсуванняТоварів_ТабличнаЧастина_Товари Товари = new ПсуванняТоварів_ТабличнаЧастина_Товари();
 
@@ -65,14 +65,12 @@ namespace StorageAndTrade
 
             //Автор
             CreateField(vBox, null, Автор);
-
-            //Основа
-            CreateField(vBox, null, Основа);
         }
 
         protected override void CreateContainer4(Box vBox)
         {
-
+            //Основа
+            CreateField(vBox, null, Основа);
         }
 
         #region Присвоєння / зчитування значень

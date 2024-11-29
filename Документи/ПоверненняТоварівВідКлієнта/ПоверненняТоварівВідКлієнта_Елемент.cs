@@ -36,7 +36,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
-        CompositePointerControl Основа = new CompositePointerControl();
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ПоверненняТоварівВідКлієнта.Основа" };
 
         ПоверненняТоварівВідКлієнта_ТабличнаЧастина_Товари Товари = new ПоверненняТоварівВідКлієнта_ТабличнаЧастина_Товари();
 

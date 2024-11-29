@@ -43,7 +43,7 @@ namespace StorageAndTrade
         TimeControl ЧасДоставкиДо = new TimeControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
-        CompositePointerControl Основа = new CompositePointerControl();
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ЗамовленняПостачальнику.Основа" };
         ЗамовленняПостачальнику_ТабличнаЧастина_Товари Товари = new ЗамовленняПостачальнику_ТабличнаЧастина_Товари();
 
         #endregion

@@ -28,6 +28,7 @@ namespace StorageAndTrade
         Організації_PointerControl Організація = new Організації_PointerControl() { Caption = "Організація", WidthPresentation = 300 };
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ", WidthPresentation = 300 };
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ПерерахунокТоварів.Основа" };
 
         ПерерахунокТоварів_ТабличнаЧастина_Товари Товари = new ПерерахунокТоварів_ТабличнаЧастина_Товари();
 
@@ -68,6 +69,9 @@ namespace StorageAndTrade
         {
             //Автор
             CreateField(vBox, null, Автор);
+
+            //Основа
+            CreateField(vBox, null, Основа);
         }
 
         protected override void CreateContainer4(Box vBox)
@@ -95,6 +99,7 @@ namespace StorageAndTrade
             Автор.Pointer = Елемент.Автор;
             Організація.Pointer = Елемент.Організація;
             Підрозділ.Pointer = Елемент.Підрозділ;
+            Основа.Pointer = Елемент.Основа;
 
             //Таблична частина Товари
             Товари.ЕлементВласник = Елемент;
@@ -111,6 +116,7 @@ namespace StorageAndTrade
             Елемент.Автор = Автор.Pointer;
             Елемент.Організація = Організація.Pointer;
             Елемент.Підрозділ = Підрозділ.Pointer;
+            Елемент.Основа = Основа.Pointer;
 
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }

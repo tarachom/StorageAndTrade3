@@ -37,7 +37,7 @@ namespace StorageAndTrade
         TimeControl ЧасДоставкиЗ = new TimeControl();
         TimeControl ЧасДоставкиДо = new TimeControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
-        CompositePointerControl Основа = new CompositePointerControl();
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ПереміщенняТоварів.Основа" };
 
         ПереміщенняТоварів_ТабличнаЧастина_Товари Товари = new ПереміщенняТоварів_ТабличнаЧастина_Товари();
 

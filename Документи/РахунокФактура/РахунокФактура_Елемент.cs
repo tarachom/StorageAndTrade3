@@ -39,6 +39,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.РахунокФактура.Основа" };
 
         РахунокФактура_ТабличнаЧастина_Товари Товари = new РахунокФактура_ТабличнаЧастина_Товари();
 
@@ -115,6 +116,9 @@ namespace StorageAndTrade
 
             //Менеджер
             CreateField(vBox, null, Менеджер);
+
+            //Основа
+            CreateField(vBox, null, Основа);
         }
 
         protected override void CreateContainer4(Box vBox)
@@ -160,6 +164,7 @@ namespace StorageAndTrade
             БанківськийРахунокКонтрагента.Pointer = Елемент.БанківськийРахунокКонтрагента;
             Автор.Pointer = Елемент.Автор;
             Менеджер.Pointer = Елемент.Менеджер;
+            Основа.Pointer = Елемент.Основа;
 
             //Таблична частина
             Товари.ЕлементВласник = Елемент;
@@ -190,7 +195,8 @@ namespace StorageAndTrade
             Елемент.БанківськийРахунокКонтрагента = БанківськийРахунокКонтрагента.Pointer;
             Елемент.Автор = Автор.Pointer;
             Елемент.Менеджер = Менеджер.Pointer;
-
+            Елемент.Основа = Основа.Pointer;
+            
             Елемент.СумаДокументу = Товари.СумаДокументу();
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }

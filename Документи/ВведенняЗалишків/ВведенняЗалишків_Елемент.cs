@@ -35,6 +35,7 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ" };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ВведенняЗалишків.Основа" };
 
         ВведенняЗалишків_ТабличнаЧастина_Товари Товари = new ВведенняЗалишків_ТабличнаЧастина_Товари();
         ВведенняЗалишків_ТабличнаЧастина_Каси Каси = new ВведенняЗалишків_ТабличнаЧастина_Каси();
@@ -110,7 +111,8 @@ namespace StorageAndTrade
 
         protected override void CreateContainer4(Box vBox)
         {
-
+            //Основа
+            CreateField(vBox, null, Основа);
         }
 
         #region Присвоєння / зчитування значень
@@ -137,6 +139,7 @@ namespace StorageAndTrade
             Коментар.Text = Елемент.Коментар;
             Підрозділ.Pointer = Елемент.Підрозділ;
             Автор.Pointer = Елемент.Автор;
+            Основа.Pointer = Елемент.Основа;
 
             Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
@@ -170,7 +173,8 @@ namespace StorageAndTrade
             Елемент.Коментар = Коментар.Text;
             Елемент.Підрозділ = Підрозділ.Pointer;
             Елемент.Автор = Автор.Pointer;
-
+            Елемент.Основа = Основа.Pointer;
+            
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() +
                 Товари.КлючовіСловаДляПошуку() +
                 БанківськіРахунки.КлючовіСловаДляПошуку() +

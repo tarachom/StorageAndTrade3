@@ -45,6 +45,7 @@ namespace StorageAndTrade
         TimeControl ЧасДоставкиДо = new TimeControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ЗамовленняКлієнта.Основа" };
 
         ЗамовленняКлієнта_ТабличнаЧастина_Товари Товари = new ЗамовленняКлієнта_ТабличнаЧастина_Товари();
 
@@ -130,6 +131,9 @@ namespace StorageAndTrade
 
             //Менеджер
             CreateField(vBox, null, Менеджер);
+
+            // Основа
+            CreateField(vBox, null, Основа);
         }
 
         protected override void CreateContainer4(Box vBox)
@@ -189,6 +193,7 @@ namespace StorageAndTrade
             ЧасДоставкиЗ.Value = Елемент.ЧасДоставкиЗ;
             ЧасДоставкиДо.Value = Елемент.ЧасДоставкиДо;
             Менеджер.Pointer = Елемент.Менеджер;
+            Основа.Pointer = Елемент.Основа;
 
             //Таблична частина
             Товари.ЕлементВласник = Елемент;
@@ -225,7 +230,8 @@ namespace StorageAndTrade
             Елемент.ЧасДоставкиЗ = ЧасДоставкиЗ.Value;
             Елемент.ЧасДоставкиДо = ЧасДоставкиДо.Value;
             Елемент.Менеджер = Менеджер.Pointer;
-
+            Елемент.Основа = Основа.Pointer;
+            
             Елемент.СумаДокументу = Товари.СумаДокументу();
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }

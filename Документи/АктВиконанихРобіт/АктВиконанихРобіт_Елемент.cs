@@ -35,6 +35,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         Користувачі_PointerControl Менеджер = new Користувачі_PointerControl() { Caption = "Менеджер" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.АктВиконанихРобіт.Основа" };
 
         АктВиконанихРобіт_ТабличнаЧастина_Послуги Послуги = new АктВиконанихРобіт_ТабличнаЧастина_Послуги();
 
@@ -114,6 +115,9 @@ namespace StorageAndTrade
         {
             //ФормаОплати
             CreateField(vBox, "Форма оплати:", ФормаОплати);
+
+            //Основа
+            CreateField(vBox, null, Основа);
         }
 
         #region Присвоєння / зчитування значень
@@ -142,6 +146,7 @@ namespace StorageAndTrade
             Підрозділ.Pointer = Елемент.Підрозділ;
             Автор.Pointer = Елемент.Автор;
             Менеджер.Pointer = Елемент.Менеджер;
+            Основа.Pointer = Елемент.Основа;
 
             //Таблична частина
             Послуги.ЕлементВласник = Елемент;
@@ -169,7 +174,8 @@ namespace StorageAndTrade
             Елемент.Підрозділ = Підрозділ.Pointer;
             Елемент.Автор = Автор.Pointer;
             Елемент.Менеджер = Менеджер.Pointer;
-
+            Елемент.Основа = Основа.Pointer;
+            
             Елемент.СумаДокументу = Послуги.СумаДокументу();
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Послуги.КлючовіСловаДляПошуку();
         }

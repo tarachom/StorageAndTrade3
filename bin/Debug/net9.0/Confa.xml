@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>25.11.2024 20:09:41</DateTimeSave>
+  <DateTimeSave>29.11.2024 20:54:27</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -11086,6 +11086,289 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунок</Name>
+              <Caption>БанківськийРахунок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ДатаПоступлення</Name>
+              <Caption>ДатаПоступлення</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>date</Type>
+            </Field>
+            <Field>
+              <Name>АдресаДоставкиДляПостачальника</Name>
+              <Caption>АдресаДоставкиДляПостачальника</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>15</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ПовернутиТару</Name>
+              <Caption>ПовернутиТару</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>16</SortNum>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
+              <Name>СпосібДоставки</Name>
+              <Caption>СпосібДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>17</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СпособиДоставки</Pointer>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиЗ</Name>
+              <Caption>ЧасДоставкиЗ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>18</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиДо</Name>
+              <Caption>ЧасДоставкиДо</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>19</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>АдресаДоставки</Name>
+              <Caption>АдресаДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>20</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>21</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Статус</Name>
+              <Caption>Статус</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>22</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СтатусиЗамовленьПостачальникам</Pointer>
+            </Field>
+            <Field>
+              <Name>ФормаОплати</Name>
+              <Caption>ФормаОплати</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>23</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ФормаОплати</Pointer>
+            </Field>
+            <Field>
+              <Name>Менеджер</Name>
+              <Caption>Менеджер</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>24</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>25</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>26</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>27</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -12722,6 +13005,17 @@ FROM
           <IsExport>0</IsExport>
           <Multiline>0</Multiline>
         </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_d1</NameInTable>
+          <Type>composite_pointer</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -13113,6 +13407,324 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Статус</Name>
+              <Caption>Статус</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СтатусиЗамовленьКлієнтів</Pointer>
+            </Field>
+            <Field>
+              <Name>Узгоджений</Name>
+              <Caption>Узгоджений</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
+              <Name>ФормаОплати</Name>
+              <Caption>ФормаОплати</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ФормаОплати</Pointer>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунок</Name>
+              <Caption>БанківськийРахунок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунокКонтрагента</Name>
+              <Caption>БанківськийРахунокКонтрагента</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиКонтрагентів</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаАвансуДоЗабезпечення</Name>
+              <Caption>СумаАвансуДоЗабезпечення</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>15</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>СумаПередоплатиДоВідгрузки</Name>
+              <Caption>СумаПередоплатиДоВідгрузки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>16</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>ДатаВідгрузки</Name>
+              <Caption>ДатаВідгрузки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>17</SortNum>
+              <Type>date</Type>
+            </Field>
+            <Field>
+              <Name>АдресаДоставки</Name>
+              <Caption>АдресаДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>18</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>19</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>20</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>21</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>22</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СпосібДоставки</Name>
+              <Caption>СпосібДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>23</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СпособиДоставки</Pointer>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиЗ</Name>
+              <Caption>ЧасДоставкиЗ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>24</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиДо</Name>
+              <Caption>ЧасДоставкиДо</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>25</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>ПовернутиТару</Name>
+              <Caption>ПовернутиТару</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>26</SortNum>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
+              <Name>ДатаПоверненняТари</Name>
+              <Caption>ДатаПоверненняТари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>27</SortNum>
+              <Type>date</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>28</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Менеджер</Name>
+              <Caption>Менеджер</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>29</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>30</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>31</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -13316,6 +13928,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Статус</Name>
@@ -14050,6 +14663,17 @@ FROM
           <IsExport>0</IsExport>
           <Multiline>0</Multiline>
         </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>composite_pointer</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -14311,6 +14935,122 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ВидЦіни</Name>
+              <Caption>ВидЦіни</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ВидиЦін</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -14404,6 +15144,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Контрагент</Name>
@@ -14738,6 +15479,208 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунок</Name>
+              <Caption>БанківськийРахунок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СтаттяРухуКоштів</Name>
+              <Caption>СтаттяРухуКоштів</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтаттяРухуКоштів</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КасаВідправник</Name>
+              <Caption>КасаВідправник</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Курс</Name>
+              <Caption>Курс</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>15</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>16</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>17</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>18</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>РозшифруванняПлатежу</Name>
+              <Caption>РозшифруванняПлатежу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -14929,6 +15872,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -15422,6 +16366,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>КлючовіСловаДляПошуку</Name>
@@ -15739,6 +16684,234 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунокОрганізації</Name>
+              <Caption>БанківськийРахунокОрганізації</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ВидЦіни</Name>
+              <Caption>ВидЦіни</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ВидиЦін</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ОрганізаціяОтримувач</Name>
+              <Caption>ОрганізаціяОтримувач</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Відповідальний</Name>
+              <Caption>Відповідальний</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СкладВідправник</Name>
+              <Caption>СкладВідправник</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СкладОтримувач</Name>
+              <Caption>СкладОтримувач</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Статус</Name>
+              <Caption>Статус</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СтатусиПереміщенняТоварів</Pointer>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>СпосібДоставки</Name>
+              <Caption>СпосібДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СпособиДоставки</Pointer>
+            </Field>
+            <Field>
+              <Name>АдресДоставки</Name>
+              <Caption>АдресДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>15</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиЗ</Name>
+              <Caption>ЧасДоставкиЗ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>16</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиДо</Name>
+              <Caption>ЧасДоставкиДо</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>17</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>18</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>19</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>20</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>21</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -15952,6 +17125,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -16369,6 +17543,258 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунокОрганізації</Name>
+              <Caption>БанківськийРахунокОрганізації</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунокКонтрагента</Name>
+              <Caption>БанківськийРахунокКонтрагента</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиКонтрагентів</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СпосібДоставки</Name>
+              <Caption>СпосібДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СпособиДоставки</Pointer>
+            </Field>
+            <Field>
+              <Name>АдресДоставки</Name>
+              <Caption>АдресДоставки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>15</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиЗ</Name>
+              <Caption>ЧасДоставкиЗ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>16</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>ЧасДоставкиДо</Name>
+              <Caption>ЧасДоставкиДо</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>17</SortNum>
+              <Type>time</Type>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>18</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>19</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>20</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>21</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Менеджер</Name>
+              <Caption>Менеджер</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>22</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>23</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -16551,6 +17977,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -16967,6 +18394,221 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Менеджер</Name>
+              <Caption>Менеджер</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ДокументПродажу</Name>
+              <Caption>ДокументПродажу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ПричинаПовернення</Name>
+              <Caption>ПричинаПовернення</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>15</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>16</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>17</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>18</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>19</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -17160,6 +18802,17 @@ FROM
           <IsSearch>1</IsSearch>
           <IsExport>0</IsExport>
           <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>composite_pointer</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
       </Fields>
       <TabularParts>
@@ -17614,6 +19267,14 @@ FROM
               <Type>string</Type>
               <Multiline>0</Multiline>
             </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
           </ElementFields>
           <ElementTableParts>
             <TablePart>
@@ -17786,6 +19447,17 @@ FROM
           <IsSearch>1</IsSearch>
           <IsExport>0</IsExport>
           <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>composite_pointer</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
       </Fields>
       <TabularParts>
@@ -18379,6 +20051,189 @@ FROM
           <Desc>Список</Desc>
           <Type>List</Type>
           <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+            <TablePart>
+              <Name>Каси</Name>
+              <Caption>Каси</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+            </TablePart>
+            <TablePart>
+              <Name>БанківськіРахунки</Name>
+              <Caption>БанківськіРахунки</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+            </TablePart>
+            <TablePart>
+              <Name>РозрахункиЗКонтрагентами</Name>
+              <Caption>РозрахункиЗКонтрагентами</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+            </TablePart>
+          </ElementTableParts>
         </Form>
       </Forms>
     </Document>
@@ -19058,6 +20913,17 @@ FROM
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
         </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>composite_pointer</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -19367,6 +21233,134 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Відповідальний</Name>
+              <Caption>Відповідальний</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ФізичніОсоби</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -19504,6 +21498,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
       </Fields>
       <TabularParts>
@@ -19843,6 +21838,139 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Причина</Name>
+              <Caption>Причина</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -19947,6 +22075,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Автор</Name>
@@ -20341,6 +22470,151 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -20568,6 +22842,17 @@ FROM
           <IsSearch>1</IsSearch>
           <IsExport>0</IsExport>
           <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>composite_pointer</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
       </Fields>
       <TabularParts>
@@ -20954,6 +23239,242 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Контрагент</Name>
+              <Caption>Контрагент</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Статус</Name>
+              <Caption>Статус</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.СтатусиЗамовленьКлієнтів</Pointer>
+            </Field>
+            <Field>
+              <Name>ФормаОплати</Name>
+              <Caption>ФормаОплати</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ФормаОплати</Pointer>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунок</Name>
+              <Caption>БанківськийРахунок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиОрганізацій</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>БанківськийРахунокКонтрагента</Name>
+              <Caption>БанківськийРахунокКонтрагента</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>12</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.БанківськіРахункиКонтрагентів</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <Caption>Каса</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>13</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Каси</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ГосподарськаОперація</Name>
+              <Caption>ГосподарськаОперація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>14</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ГосподарськіОперації</Pointer>
+            </Field>
+            <Field>
+              <Name>Договір</Name>
+              <Caption>Договір</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>15</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ДоговориКонтрагентів</Pointer>
+              <PresetntationFields Count="2">
+                <Field>Назва</Field>
+                <Field>ТипДоговоруПредставлення</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>16</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>17</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>18</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Менеджер</Name>
+              <Caption>Менеджер</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>19</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>20</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>21</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -21020,6 +23541,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Склад</Name>
@@ -21378,6 +23900,134 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ДокументПоступлення</Name>
+              <Caption>ДокументПоступлення</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Документи.ПоступленняТоварівТаПослуг</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -21444,6 +24094,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Склад</Name>
@@ -21813,6 +24464,122 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -21879,6 +24646,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>Склад</Name>
@@ -22237,6 +25005,134 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>ДокументРеалізації</Name>
+              <Caption>ДокументРеалізації</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Документи.РеалізаціяТоварівТаПослуг</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -22342,6 +25238,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
         <Field>
           <Name>КлючовіСловаДляПошуку</Name>
@@ -22565,6 +25462,122 @@ FROM
           <Type>List</Type>
           <TabularList>Записи</TabularList>
         </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>10</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
       </Forms>
     </Document>
     <Document>
@@ -22660,6 +25673,17 @@ FROM
           <IsSearch>1</IsSearch>
           <IsExport>0</IsExport>
           <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Основа</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>composite_pointer</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <CompositePointerNotUseDirectories>1</CompositePointerNotUseDirectories>
         </Field>
       </Fields>
       <TabularParts>
@@ -22880,6 +25904,110 @@ FROM
           <Desc>Список</Desc>
           <Type>List</Type>
           <TabularList>Записи</TabularList>
+        </Form>
+        <Form>
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Підрозділ</Name>
+              <Caption>Підрозділ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СтруктураПідприємства</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КлючовіСловаДляПошуку</Name>
+              <Caption>КлючовіСловаДляПошуку</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>РозрахункиЗКонтрагентами</Name>
+              <Caption>РозрахункиЗКонтрагентами</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
         </Form>
       </Forms>
     </Document>

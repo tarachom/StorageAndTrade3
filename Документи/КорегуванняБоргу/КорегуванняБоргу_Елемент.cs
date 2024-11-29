@@ -27,6 +27,7 @@ namespace StorageAndTrade
         СтруктураПідприємства_PointerControl Підрозділ = new СтруктураПідприємства_PointerControl() { Caption = "Підрозділ:" };
         Користувачі_PointerControl Автор = new Користувачі_PointerControl() { Caption = "Автор:" };
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.КорегуванняБоргу.Основа" };
 
         КорегуванняБоргу_ТабличнаЧастина_РозрахункиЗКонтрагентами РозрахункиЗКонтрагентами = new КорегуванняБоргу_ТабличнаЧастина_РозрахункиЗКонтрагентами();
 
@@ -66,7 +67,8 @@ namespace StorageAndTrade
 
         protected override void CreateContainer4(Box vBox)
         {
-
+            //Основа
+            CreateField(vBox, null, Основа);
         }
 
         #region Присвоєння / зчитування значень
@@ -85,6 +87,7 @@ namespace StorageAndTrade
             Коментар.Text = Елемент.Коментар;
             Підрозділ.Pointer = Елемент.Підрозділ;
             Автор.Pointer = Елемент.Автор;
+            Основа.Pointer = Елемент.Основа;
 
             РозрахункиЗКонтрагентами.ЕлементВласник = Елемент;
             await РозрахункиЗКонтрагентами.LoadRecords();
@@ -98,7 +101,8 @@ namespace StorageAndTrade
             Елемент.Коментар = Коментар.Text;
             Елемент.Підрозділ = Підрозділ.Pointer;
             Елемент.Автор = Автор.Pointer;
-
+            Елемент.Основа = Основа.Pointer;
+            
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + РозрахункиЗКонтрагентами.КлючовіСловаДляПошуку();
         }
 

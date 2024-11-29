@@ -28,6 +28,7 @@ namespace StorageAndTrade
         Користувачі_PointerControl Автор = new Користувачі_PointerControl();
         ВидиЦін_PointerControl ВидЦіни = new ВидиЦін_PointerControl();
         Entry Коментар = new Entry() { WidthRequest = 920 };
+        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ВстановленняЦінНоменклатури.Основа" };
 
         ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари Товари = new ВстановленняЦінНоменклатури_ТабличнаЧастина_Товари();
 
@@ -68,7 +69,8 @@ namespace StorageAndTrade
 
         protected override void CreateContainer4(Box vBox)
         {
-
+            //Основа
+            CreateField(vBox, null, Основа);
         }
 
         #region Присвоєння / зчитування значень
@@ -88,6 +90,7 @@ namespace StorageAndTrade
             ВидЦіни.Pointer = Елемент.ВидЦіни;
             Коментар.Text = Елемент.Коментар;
             Автор.Pointer = Елемент.Автор;
+            Основа.Pointer = Елемент.Основа;
 
             Товари.ЕлементВласник = Елемент;
             await Товари.LoadRecords();
@@ -104,7 +107,8 @@ namespace StorageAndTrade
             Елемент.ВидЦіни = ВидЦіни.Pointer;
             Елемент.Коментар = Коментар.Text;
             Елемент.Автор = Автор.Pointer;
-
+            Елемент.Основа = Основа.Pointer;
+            
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }
 

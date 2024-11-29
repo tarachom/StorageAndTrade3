@@ -115,5 +115,90 @@ namespace StorageAndTrade
         }
 
         #endregion
+
+        #region ToolBar
+
+        protected override Menu? ToolbarNaOsnoviSubMenu()
+        {
+            Menu Menu = new Menu();
+
+            {
+                MenuItem doc = new MenuItem(РозхіднийКасовийОрдер_Const.FULLNAME);
+                doc.Activated += НаОснові_РозхіднийКасовийОрдер;
+                Menu.Append(doc);
+            }
+
+            {
+                MenuItem doc = new MenuItem(ПрихіднийКасовийОрдер_Const.FULLNAME);
+                doc.Activated += НаОснові_ПрихіднийКасовийОрдер;
+                Menu.Append(doc);
+            }
+
+            Menu.ShowAll();
+            return Menu;
+        }
+
+        async void НаОснові_РозхіднийКасовийОрдер(object? sender, EventArgs args)
+        {
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ПрихіднийКасовийОрдер_Objest? Обєкт = await new ПрихіднийКасовийОрдер_Pointer(unigueID).GetDocumentObject(false);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                РозхіднийКасовийОрдер_Objest Новий = new РозхіднийКасовийОрдер_Objest();
+                await Новий.New();
+                Новий.Організація = Обєкт.Організація;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Каса = Обєкт.Каса;
+                Новий.Контрагент = Обєкт.Контрагент;
+                Новий.Договір = Обєкт.Договір;
+                Новий.СумаДокументу = Обєкт.СумаДокументу;
+                Новий.Основа = Обєкт.GetBasis();
+
+                await Новий.Save();
+
+                РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
+        }
+
+        async void НаОснові_ПрихіднийКасовийОрдер(object? sender, EventArgs args)
+        {
+            foreach (UnigueID unigueID in GetSelectedRows())
+            {
+                ПрихіднийКасовийОрдер_Objest? Обєкт = await new ПрихіднийКасовийОрдер_Pointer(unigueID).GetDocumentObject(false);
+                if (Обєкт == null) continue;
+
+                //
+                //Новий документ
+                //
+
+                ПрихіднийКасовийОрдер_Objest Новий = new ПрихіднийКасовийОрдер_Objest();
+                await Новий.New();
+                Новий.ГосподарськаОперація = Обєкт.ГосподарськаОперація;
+                Новий.Організація = Обєкт.Організація;
+                Новий.Валюта = Обєкт.Валюта;
+                Новий.Каса = Обєкт.Каса;
+                Новий.Контрагент = Обєкт.Контрагент;
+                Новий.Договір = Обєкт.Договір;
+                Новий.СумаДокументу = Обєкт.СумаДокументу;
+                Новий.Основа = Обєкт.GetBasis();
+
+                await Новий.Save();
+
+                ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент();
+                await page.Елемент.Read(Новий.UnigueID);
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+                page.SetValue();
+            }
+        }
+
+        #endregion
     }
 }
