@@ -56,7 +56,11 @@ namespace StorageAndTrade
                 {
                     Pointer = new Каси_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();
-                }
+                }/*,
+                CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointer) =>
+                {
+                    Console.WriteLine(1);
+                }*/
             };
 
             popover.Add(page);

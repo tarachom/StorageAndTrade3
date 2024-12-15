@@ -18,6 +18,7 @@ namespace StorageAndTrade
 
         Організації_PointerControl Організація = new Організації_PointerControl();
         Каси_PointerControl Каса = new Каси_PointerControl();
+        Каси_MultiplePointerControl Каса2 = new Каси_MultiplePointerControl();
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
 
         struct ПараметриФільтр
@@ -58,6 +59,9 @@ namespace StorageAndTrade
 
             //Каса
             CreateField(vBox, null, Каса);
+
+            //Каса2
+            CreateField(vBox, null, Каса2);
         }
 
         protected override void CreateContainer2(Box vBox)

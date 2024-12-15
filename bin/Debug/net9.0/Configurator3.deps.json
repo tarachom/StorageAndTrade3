@@ -115,14 +115,14 @@
           }
         }
       },
-      "Npgsql/9.0.1": {
+      "Npgsql/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
         },
         "runtime": {
           "lib/net8.0/Npgsql.dll": {
-            "assemblyVersion": "9.0.1.0",
-            "fileVersion": "9.0.1.0"
+            "assemblyVersion": "9.0.2.0",
+            "fileVersion": "9.0.2.0"
           }
         }
       },
@@ -140,7 +140,7 @@
       },
       "AccountingSoftware/3.1.0.3": {
         "dependencies": {
-          "Npgsql": "9.0.1"
+          "Npgsql": "9.0.2"
         },
         "runtime": {
           "AccountingSoftware.dll": {
@@ -232,12 +232,12 @@
       "path": "microsoft.extensions.logging.abstractions/8.0.2",
       "hashPath": "microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512"
     },
-    "Npgsql/9.0.1": {
+    "Npgsql/9.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aZrXuBUUjRnvjoS4Lq0ZPYe3pnzAfK7TroGNGVpo4FCMBW1ypD/XfTTYjXpeRI8xcX5Otiv535Dy2jQWi98oeA==",
-      "path": "npgsql/9.0.1",
-      "hashPath": "npgsql.9.0.1.nupkg.sha512"
+      "sha512": "sha512-hCbO8box7i/XXiTFqCJ3GoowyLqx3JXxyrbOJ6om7dr+eAknvBNhhUHeJVGAQo44sySZTfdVffp4BrtPeLZOAA==",
+      "path": "npgsql/9.0.2",
+      "hashPath": "npgsql.9.0.2.nupkg.sha512"
     },
     "PangoSharp/3.24.24.117-develop": {
       "type": "package",
