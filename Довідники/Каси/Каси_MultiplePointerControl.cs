@@ -41,7 +41,9 @@ namespace StorageAndTrade
 
         void Add(Каси_Pointer Каса)
         {
-            pointers.Add(Каса);
+            if (!pointers.Exists((Каси_Pointer x) => x.UnigueID.ToString() == Каса.UnigueID.ToString()))
+                pointers.Add(Каса);
+
             PointersChanged?.Invoke(null, new());
         }
 
