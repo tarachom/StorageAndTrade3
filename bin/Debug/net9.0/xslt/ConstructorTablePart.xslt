@@ -44,6 +44,7 @@
             <xsl:when test="Type = 'composite_pointer'">UuidAndText</xsl:when>
             <xsl:when test="Type = 'enum'"><xsl:value-of select="substring-after(Pointer, '.')"/></xsl:when>
             <xsl:when test="Type = 'bytea'">byte[]</xsl:when>
+            <xsl:when test="Type = 'uuid[]'">Guid[]</xsl:when>
         </xsl:choose>    
     </xsl:template>
 
@@ -51,7 +52,7 @@
     <xsl:template name="DefaultFieldValue">
         <xsl:choose>
             <xsl:when test="Type = 'string'">""</xsl:when>
-            <xsl:when test="Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'bytea'">[]</xsl:when>
+            <xsl:when test="Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'bytea' or Type = 'uuid[]'">[]</xsl:when>
             <xsl:when test="Type = 'integer' or Type = 'numeric' or Type = 'enum'">0</xsl:when>
             <xsl:when test="Type = 'boolean'">false</xsl:when>
             <xsl:when test="Type = 'time'">DateTime.MinValue.TimeOfDay</xsl:when>
@@ -337,7 +338,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                             запис.<xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_Pointer(selectPointer);
                             await Запис.ПісляЗміни_<xsl:value-of select="Name"/>(запис);
                             Store.SetValues(iter, запис.ToArray());
-                        },
+                        }<xsl:if test="MultipleSelect = '1'">,
                         CallBack_OnMultipleSelectPointer = async (UnigueID[] selectPointers) =&gt;
                         {
                             foreach (var selectPointer in selectPointers)
@@ -348,7 +349,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                                 await Запис.ПісляЗміни_<xsl:value-of select="Name"/>(запис);
                                 Store.SetValues(iter, запис.ToArray());
                             }
-                        }
+                        }</xsl:if>
                     };
                     return page;
                 }

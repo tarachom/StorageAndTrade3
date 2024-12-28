@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 29.11.2024 21:39:49
+ * Дата конфігурації: 27.12.2024 18:56:32
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -68,23 +68,17 @@ namespace StorageAndTrade_1_0
     {
         /*
           Функція для типу який задається користувачем.
-          Повертає презентацію для uuidAndText.
-          В @pointer - повертає групу (Документи або Довідники)
-            @type - повертає назву типу
+          Повертає презентацію для uuidAndText
         */
         public static async ValueTask<CompositePointerPresentation_Record> CompositePointerPresentation(UuidAndText uuidAndText)
         {
             CompositePointerPresentation_Record record = new();
 
-            if (string.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
-                return record;
-
-            string[] pointer_and_type = uuidAndText.Text.Split(".", StringSplitOptions.None);
-
-            if (pointer_and_type.Length == 2)
+            (bool result, string pointerGroup, string pointerType) = Configuration.PointerParse(uuidAndText.Text, out Exception? _);
+            if (result)
             {
-                record.pointer = pointer_and_type[0];
-                record.type = pointer_and_type[1];
+                record.pointer = pointerGroup;
+                record.type = pointerType;
 
                 if (!uuidAndText.IsEmpty())
                     if (record.pointer == "Довідники") 
@@ -6131,7 +6125,7 @@ namespace StorageAndTrade_1_0.Довідники
                 Код = base.FieldValue["col_i6"].ToString() ?? "";
                 Назва = base.FieldValue["col_i5"].ToString() ?? "";
                 НазваФайлу = base.FieldValue["col_a2"].ToString() ?? "";
-                БінарніДані = (base.FieldValue["col_a1"] != DBNull.Value) ? (byte[])base.FieldValue["col_a1"] : new byte[] { };
+                БінарніДані = (base.FieldValue["col_a1"] != DBNull.Value) ? (byte[])base.FieldValue["col_a1"] : [];
                 Розмір = base.FieldValue["col_a3"].ToString() ?? "";
                 ДатаСтворення = (base.FieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a4"].ToString() ?? DateTime.MinValue.ToString()) : DateTime.MinValue;
                 

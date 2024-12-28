@@ -15,55 +15,56 @@ namespace StorageAndTrade
 {
     class Каси_MultiplePointerControl : MultiplePointerControl
     {
-        event EventHandler<List<Каси_Pointer>> PointerChanged;
+        event EventHandler PointersChanged;
 
         public Каси_MultiplePointerControl()
         {
-            Pointer = [];
             WidthPresentation = 300;
             Caption = $"{Каси_Const.FULLNAME}:";
-            PointerChanged += (object? _, List<Каси_Pointer> pointer) =>
+            PointersChanged += (object? sender, EventArgs args) =>
             {
-                //Presentation = pointer != null ? await pointer.GetPresentation() : "";
+                Presentation = pointers.Count + " елементів";
             };
+
+            PointersChanged.Invoke(null, new());
         }
 
-        public List<Каси_Pointer> Pointer;
-        
-        // public List<Каси_Pointer> Pointer
-        // {
-        //     get
-        //     {
-        //         return pointer;
-        //     }
-        //     set
-        //     {
-        //         pointer = value;
-        //         PointerChanged?.Invoke(null, pointer);
-        //     }
-        // }
+        List<Каси_Pointer> pointers = [];
+
+        public List<Каси_Pointer> Pointers
+        {
+            get
+            {
+                return pointers;
+            }
+        }
+
+        void Add(Каси_Pointer Каса)
+        {
+            pointers.Add(Каса);
+            PointersChanged?.Invoke(null, new());
+        }
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            BeforeClickOpenFunc?.Invoke();
-
             Каси_ШвидкийВибір page = new Каси_ШвидкийВибір
             {
                 PopoverParent = popover,
-                //DirectoryPointerItem = Pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
-                    Pointer.Add(new Каси_Pointer(selectPointer));
-                    AfterSelectFunc?.Invoke();
+                    Add(new Каси_Pointer(selectPointer));
                 },
                 CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =>
                 {
                     foreach (var selectPointer in selectPointers)
-                        Pointer.Add(new Каси_Pointer(selectPointer));
+                        Add(new Каси_Pointer(selectPointer));
                 }
             };
+
+            if (pointers.Count != 0)
+                page.DirectoryPointerItem = pointers[^1].UnigueID;
 
             popover.Add(page);
             popover.ShowAll();
@@ -71,9 +72,50 @@ namespace StorageAndTrade
             await page.SetValue();
         }
 
+        public async ValueTask Додати(ListBox listBox, Каси_Pointer Каса)
+        {
+            Box hBox = new Box(Orientation.Horizontal, 0);
+
+            ListBoxRow listBoxRow = [hBox];
+            listBox.Add(listBoxRow);
+
+            //Presentation
+            hBox.PackStart(new Label(await Каса.GetPresentation()) { Halign = Align.Start }, true, true, 0);
+
+            //Remove
+            LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
+            linkRemove.Clicked += (object? sender, EventArgs args) =>
+            {
+                pointers.Remove(Каса);
+                listBox.Remove(listBoxRow);
+
+                PointersChanged.Invoke(null, new());
+            };
+
+            hBox.PackEnd(linkRemove, false, false, 0);
+        }
+
+        protected override async void OnMultiple(object? sender, EventArgs args)
+        {
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 4 };
+
+            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+
+            foreach (Каси_Pointer Каса in Pointers)
+                await Додати(listBox, Каса);
+
+            ScrolledWindow scroll = new ScrolledWindow() { ShadowType = ShadowType.In, HeightRequest = 300, WidthRequest = 500 };
+            scroll.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
+            scroll.Add(listBox);
+
+            popover.Add(scroll);
+            popover.ShowAll();
+        }
+
         protected override void OnClear(object? sender, EventArgs args)
         {
-            Pointer = [];
+            pointers = [];
+            PointersChanged?.Invoke(null, new());
         }
     }
 }

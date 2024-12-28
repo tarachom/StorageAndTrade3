@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>29.11.2024 21:39:49</DateTimeSave>
+  <DateTimeSave>27.12.2024 18:56:32</DateTimeSave>
   <DictTSearch>ukrainian</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -12049,6 +12049,7 @@ FROM
                   <Size>0</Size>
                   <Height>0</Height>
                   <SortNum>2</SortNum>
+                  <MultipleSelect>1</MultipleSelect>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
                   <PresetntationFields Count="1">

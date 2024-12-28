@@ -18,14 +18,14 @@
         <NameInTable>
           <xsl:value-of select="$ConfFieldName"/>
         </NameInTable>
-		<Index>
-			<xsl:value-of select="IsIndex"/>
-		</Index>
-		<IndexExist>
-			<xsl:if test="$InfoSchemaIndexList[Name = concat($TableName , '_', $ConfFieldName, '_idx')]">
-				<xsl:text>yes</xsl:text>
-			</xsl:if>
-		</IndexExist>
+        <Index>
+          <xsl:value-of select="IsIndex"/>
+        </Index>
+        <IndexExist>
+          <xsl:if test="$InfoSchemaIndexList[Name = concat($TableName , '_', $ConfFieldName, '_idx')]">
+            <xsl:text>yes</xsl:text>
+          </xsl:if>
+        </IndexExist>
         <xsl:choose>
           <xsl:when test="$InfoSchemaFieldList[Name = $ConfFieldName]">
             <IsExist>yes</IsExist>
@@ -178,20 +178,6 @@
                 </xsl:choose>
               </xsl:if>
 
-              <!--
-              <xsl:if test="$ConfFieldType = 'empty_pointer'">
-                <xsl:choose>
-                  <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
-                    <Coincide>yes</Coincide>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <Coincide>no</Coincide>
-                    <DataTypeCreate>uuid</DataTypeCreate>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:if>
-              -->
-
 			        <xsl:if test="$ConfFieldType = 'any_pointer'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
@@ -239,6 +225,18 @@
                   </xsl:otherwise>
                 </xsl:choose>
              </xsl:if>
+
+             <xsl:if test="$ConfFieldType = 'uuid[]'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_uuid'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>uuid[]</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
 				
             </Type>
           </xsl:when>
@@ -314,22 +312,20 @@
           <xsl:when test="Type = 'pointer'">
             <xsl:text>uuid</xsl:text>
           </xsl:when>
-          <!--
-          <xsl:when test="Type = 'empty_pointer'">
+		      <xsl:when test="Type = 'any_pointer'">
             <xsl:text>uuid</xsl:text>
           </xsl:when>
-          -->
-		  <xsl:when test="Type = 'any_pointer'">
-            <xsl:text>uuid</xsl:text>
-          </xsl:when>
-		  <xsl:when test="Type = 'composite_pointer'">
+		      <xsl:when test="Type = 'composite_pointer'">
             <xsl:text>uuidtext</xsl:text>
           </xsl:when>
           <xsl:when test="Type = 'enum'">
             <xsl:text>integer</xsl:text>
           </xsl:when>
-		  <xsl:when test="Type = 'bytea'">
+		      <xsl:when test="Type = 'bytea'">
             <xsl:text>bytea</xsl:text>
+          </xsl:when>
+          <xsl:when test="Type = 'uuid[]'">
+            <xsl:text>uuid[]</xsl:text>
           </xsl:when>
         </xsl:choose>
       </DataType>

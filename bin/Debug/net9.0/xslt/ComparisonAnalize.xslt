@@ -2,9 +2,6 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes" />
 
-  <!-- Заміщати існуючу колонку новою колонкою у випадку неможливості провести реструктуризацію даних (yes/no) -->
-  <xsl:param name="ReplacementColumn" /> 
-
   <!-- Унікальний ключ для створення копій колонок -->
   <xsl:param name="KeyUID" />
 
@@ -123,25 +120,18 @@
                     </xsl:call-template>
 
                     <!--
-                    UPDATE public.test
-                          SET text_mas = (SELECT array_agg(test2.text) FROM public.test AS test2 
-                    WHERE test2.uid = test.uid) 
+                    UPDATE test
+                        SET text_mas = 
+                        (
+                          SELECT array_agg(t.text) FROM test AS t 
+                          WHERE t.uid = test.uid AND t.text != NULL
+                        ) 
                     -->
 
                     <sql>
-                      <xsl:text>UPDATE </xsl:text>
-                      <xsl:value-of select="$TableName"/>
-                      <xsl:text> SET </xsl:text>
-                      <xsl:value-of select="NameInTable"/>
-                      <xsl:value-of select="concat(' = (SELECT array_agg(', 't.', NameInTable, '_old_', $KeyUID, ') FROM ')"/>
-                      <xsl:value-of select="$TableName"/>
-                      <xsl:text> AS t WHERE t.uid = </xsl:text>
-                      <xsl:value-of select="$TableName"/>
-                      <xsl:text>.uid AND t.</xsl:text>
-                      <xsl:value-of select="NameInTable"/>
-                      <xsl:text>_old_</xsl:text>
-                      <xsl:value-of select="$KeyUID"/>
-                      <xsl:text> != NULL);</xsl:text>
+                      <xsl:value-of select="concat('UPDATE ', $TableName, ' SET ', NameInTable, ' = (')"/>
+                      <xsl:value-of select="concat('SELECT array_agg(t.', NameInTable, '_old_', $KeyUID, ') FROM ', $TableName, ' AS t WHERE t.uid = ', $TableName, '.uid ')"/>
+                      <xsl:value-of select="concat('AND t.', NameInTable, '_old_', $KeyUID, ' != NULL)')"/>
                     </sql>
 
                     <xsl:call-template name="Template_DropOldColumn">
@@ -153,36 +143,18 @@
                   </xsl:when>
                   <xsl:otherwise>
 
-                    <xsl:choose>
-                      <xsl:when test="$ReplacementColumn = 'yes'">
-
-                        <info>Заміна колонки! Втрата даних!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_DropColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                        </xsl:call-template>
-                        <xsl:call-template name="Template_AddColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-
-                      </xsl:when>
-                      <xsl:otherwise>
-
-                        <info>Реструкторизація неможлива, створення копії колонки!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_CopyColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-
-                      </xsl:otherwise>
-                    </xsl:choose>
+                    <info>Заміна колонки! Втрата даних!</info>
+                    <sql>BEGIN;</sql>
+                    <xsl:call-template name="Template_DropColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+                    <xsl:call-template name="Template_AddColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+                    <sql>COMMIT;</sql>
 
                   </xsl:otherwise>
                 </xsl:choose>
@@ -297,36 +269,18 @@
                   </xsl:when>
                   <xsl:otherwise>
 
-                    <xsl:choose>
-                      <xsl:when test="$ReplacementColumn = 'yes'">
-
-                        <info>Заміна колонки! Втрата даних!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_DropColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                        </xsl:call-template>
-                        <xsl:call-template name="Template_AddColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-
-                      </xsl:when>
-                      <xsl:otherwise>
-
-                        <info>Реструкторизація неможлива, створення копії колонки!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_CopyColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-
-                      </xsl:otherwise>
-                    </xsl:choose>
+                    <info>Заміна колонки! Втрата даних!</info>
+                    <sql>BEGIN;</sql>
+                    <xsl:call-template name="Template_DropColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+                    <xsl:call-template name="Template_AddColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+                    <sql>COMMIT;</sql>
 
                   </xsl:otherwise>
                 </xsl:choose>
@@ -334,7 +288,8 @@
 
               <xsl:when test="(Type/DataType = 'ARRAY' and Type/UdtName = '_text') or
                               (Type/DataType = 'ARRAY' and Type/UdtName = '_int4') or 
-                              (Type/DataType = 'ARRAY' and Type/UdtName = '_numeric')">
+                              (Type/DataType = 'ARRAY' and Type/UdtName = '_numeric') or
+                              (Type/DataType = 'ARRAY' and Type/UdtName = '_uuid')">
                 <xsl:choose>
                   <!-- Масив в текст -->
                   <xsl:when test="Type/ConfType = 'string'">
@@ -378,36 +333,18 @@
                   </xsl:when>
                   <xsl:otherwise>
                     
-                    <xsl:choose>
-                      <xsl:when test="$ReplacementColumn = 'yes'">
-
-                        <info>Заміна колонки! Втрата даних!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_DropColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                        </xsl:call-template>
-                        <xsl:call-template name="Template_AddColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-
-                      </xsl:when>
-                      <xsl:otherwise>
-
-                        <info>Реструкторизація неможлива, створення копії колонки!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_CopyColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-
-                      </xsl:otherwise>
-                    </xsl:choose>
+                    <info>Заміна колонки! Втрата даних!</info>
+                    <sql>BEGIN;</sql>
+                    <xsl:call-template name="Template_DropColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+                    <xsl:call-template name="Template_AddColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+                    <sql>COMMIT;</sql>
                     
                   </xsl:otherwise>
                 </xsl:choose>
@@ -558,72 +495,36 @@
                   </xsl:when>
                   <xsl:otherwise>
 
-                    <xsl:choose>
-                      <xsl:when test="$ReplacementColumn = 'yes'">
-
-                        <info>Заміна колонки! Втрата даних!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_DropColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                        </xsl:call-template>
-                        <xsl:call-template name="Template_AddColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-                        
-                      </xsl:when>
-                      <xsl:otherwise>
-
-                        <info>Реструкторизація неможлива, створення копії колонки!</info>
-                        <sql>BEGIN;</sql>
-                        <xsl:call-template name="Template_CopyColumn">
-                          <xsl:with-param name="TableName" select="$TableName" />
-                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                        </xsl:call-template>
-                        <sql>COMMIT;</sql>
-                        
-                      </xsl:otherwise>
-                    </xsl:choose>
+                    <info>Заміна колонки! Втрата даних!</info>
+                    <sql>BEGIN;</sql>
+                    <xsl:call-template name="Template_DropColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+                    <xsl:call-template name="Template_AddColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+                    <sql>COMMIT;</sql>
                     
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
 			  
 			        <xsl:when test="Type/DataType = 'bytea'">				  
-                <xsl:choose>
-                    <xsl:when test="$ReplacementColumn = 'yes'">
-
-                    <info>Заміна колонки! Втрата даних!</info>
-                    <sql>BEGIN;</sql>
-                    <xsl:call-template name="Template_DropColumn">
-                        <xsl:with-param name="TableName" select="$TableName" />
-                        <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                    </xsl:call-template>
-                    <xsl:call-template name="Template_AddColumn">
-                        <xsl:with-param name="TableName" select="$TableName" />
-                        <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                        <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                    </xsl:call-template>
-                    <sql>COMMIT;</sql>
-
-                    </xsl:when>
-                    <xsl:otherwise>
-
-                    <info>Реструкторизація неможлива, створення копії колонки!</info>
-                    <sql>BEGIN;</sql>
-                    <xsl:call-template name="Template_CopyColumn">
-                        <xsl:with-param name="TableName" select="$TableName" />
-                        <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                        <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                    </xsl:call-template>
-                    <sql>COMMIT;</sql>
-
-                    </xsl:otherwise>
-                 </xsl:choose>
+                <info>Заміна колонки! Втрата даних!</info>
+                <sql>BEGIN;</sql>
+                <xsl:call-template name="Template_DropColumn">
+                    <xsl:with-param name="TableName" select="$TableName" />
+                    <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                </xsl:call-template>
+                <xsl:call-template name="Template_AddColumn">
+                    <xsl:with-param name="TableName" select="$TableName" />
+                    <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                </xsl:call-template>
+                <sql>COMMIT;</sql>
               </xsl:when>
 				
               <xsl:otherwise>
@@ -636,30 +537,16 @@
             
             <info>Таблиця <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>), поле <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/><xsl:text>). </xsl:text></info>
             
-            <xsl:choose>
-              <xsl:when test="$ReplacementColumn = 'yes'">
-                <info>Очищення колонки! Втрата даних!</info>
-                <sql>BEGIN;</sql>
-                <sql>
-                  <xsl:text>UPDATE </xsl:text>
-                  <xsl:value-of select="$TableName"/>
-                  <xsl:text> SET </xsl:text>
-                  <xsl:value-of select="NameInTable"/>
-                  <xsl:text> = NULL;</xsl:text>
-                </sql>
-                <sql>COMMIT;</sql>
-              </xsl:when>
-              <xsl:otherwise>
-                <info>Реструкторизація неможлива, створення копії колонки!</info>
-                <sql>BEGIN;</sql>
-                <xsl:call-template name="Template_CopyColumn">
-                  <xsl:with-param name="TableName" select="$TableName" />
-                  <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                  <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                </xsl:call-template>
-                <sql>COMMIT;</sql>
-              </xsl:otherwise>
-            </xsl:choose>
+            <info>Очищення колонки! Втрата даних!</info>
+            <sql>BEGIN;</sql>
+            <sql>
+              <xsl:text>UPDATE </xsl:text>
+              <xsl:value-of select="$TableName"/>
+              <xsl:text> SET </xsl:text>
+              <xsl:value-of select="NameInTable"/>
+              <xsl:text> = NULL;</xsl:text>
+            </sql>
+            <sql>COMMIT;</sql>
             
           </xsl:when>
         </xsl:choose>

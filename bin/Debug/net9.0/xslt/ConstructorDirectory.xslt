@@ -251,16 +251,19 @@ namespace <xsl:value-of select="$NameSpace"/>
                     <xsl:text>//Guid </xsl:text><xsl:value-of select="Name"/> = new Guid();
                 </xsl:when>
                 <xsl:when test="Type = 'bytea'">
-                    <xsl:text>//byte[] </xsl:text><xsl:value-of select="Name"/> = new byte[]{ };
+                    <xsl:text>//byte[] </xsl:text><xsl:value-of select="Name"/> = [];
                 </xsl:when>
                 <xsl:when test="Type = 'string[]'">
-                    <xsl:text>//string[] </xsl:text><xsl:value-of select="Name"/> = new string[]{ };
+                    <xsl:text>//string[] </xsl:text><xsl:value-of select="Name"/> = [];
                 </xsl:when>
-                <xsl:when test="Type = 'integer'">
-                    <xsl:text>//int[] </xsl:text><xsl:value-of select="Name"/> = new int[]{ };
+                <xsl:when test="Type = 'integer[]'">
+                    <xsl:text>//int[] </xsl:text><xsl:value-of select="Name"/> = [];
                 </xsl:when>
-                <xsl:when test="Type = 'numeric'">
-                    <xsl:text>//decimal[] </xsl:text><xsl:value-of select="Name"/> = new decimal[]{ };
+                <xsl:when test="Type = 'numeric[]'">
+                    <xsl:text>//decimal[] </xsl:text><xsl:value-of select="Name"/> = [];
+                </xsl:when>
+                <xsl:when test="Type = 'uuid[]'">
+                    <xsl:text>//Guid[] </xsl:text><xsl:value-of select="Name"/> = [];
                 </xsl:when>
             </xsl:choose>
         </xsl:for-each>
@@ -389,7 +392,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:value-of select="Name"/>.ActiveId = Елемент.<xsl:value-of select="Name"/><xsl:text>.ToString(); </xsl:text>
                         <xsl:text>if (</xsl:text><xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
                     </xsl:when>
-                    <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
+                    <xsl:when test="Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
                         <xsl:text>//</xsl:text><xsl:value-of select="Name"/> = Елемент.<xsl:value-of select="Name"/>;
                     </xsl:when>
                 </xsl:choose>
@@ -433,7 +436,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:text>if (</xsl:text><xsl:value-of select="Name"/><xsl:text>.Active != -1) </xsl:text>
                         <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = Enum.Parse&lt;<xsl:value-of select="$namePointer"/>&gt;(<xsl:value-of select="Name"/>.ActiveId);
                     </xsl:when>
-                    <xsl:when test="Type = 'boolean' or Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer' or Type = 'numeric'">
+                    <xsl:when test="Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
                         <xsl:text>//Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
                     </xsl:when>
                 </xsl:choose>

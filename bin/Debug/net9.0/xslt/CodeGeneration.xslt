@@ -38,7 +38,7 @@
       </xsl:when>
       <xsl:when test="Type = 'any_pointer'">
         <xsl:text>Guid</xsl:text>
-        </xsl:when>
+      </xsl:when>
       <xsl:when test="Type = 'composite_pointer'">
         <xsl:text>UuidAndText</xsl:text>
       </xsl:when>
@@ -47,8 +47,11 @@
       </xsl:when>
       <xsl:when test="Type = 'bytea'">
         <xsl:text>byte[]</xsl:text>
-        </xsl:when>
-      </xsl:choose>    
+      </xsl:when>
+      <xsl:when test="Type = 'uuid[]'">
+        <xsl:text>Guid[]</xsl:text>
+      </xsl:when>
+    </xsl:choose>
   </xsl:template>
   
   <!-- Для конструкторів. Значення поля по замовчуванню відповідно до типу -->
@@ -88,7 +91,7 @@
       </xsl:when>
       <xsl:when test="Type = 'any_pointer'">
         <xsl:text>new Guid()</xsl:text>
-        </xsl:when>
+      </xsl:when>
       <xsl:when test="Type = 'composite_pointer'">
         <xsl:text>new UuidAndText()</xsl:text>
       </xsl:when>
@@ -97,8 +100,11 @@
       </xsl:when>
       <xsl:when test="Type = 'bytea'">
         <xsl:text>[]</xsl:text>
-        </xsl:when>
-      </xsl:choose>
+      </xsl:when>
+      <xsl:when test="Type = 'uuid[]'">
+        <xsl:text>[]</xsl:text>
+      </xsl:when>
+    </xsl:choose>
   </xsl:template>
 
   <!-- Для параметрів функцій. Значення параметра по замовчуванню відповідно до типу -->
@@ -146,6 +152,9 @@
 	    <xsl:when test="Type = 'bytea'">
         <xsl:text>null</xsl:text>
       </xsl:when>
+      <xsl:when test="Type = 'uuid[]'">
+        <xsl:text>null</xsl:text>
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
   
@@ -160,7 +169,7 @@
         <xsl:when test="Type = 'string[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
-          <xsl:text> : new string[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
        <xsl:when test="Type = 'integer'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -170,7 +179,7 @@
         <xsl:when test="Type = 'integer[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
-          <xsl:text> : new int[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'numeric'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -180,7 +189,7 @@
         <xsl:when test="Type = 'numeric[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
-          <xsl:text> : new decimal[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'boolean'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -220,7 +229,12 @@
 		    <xsl:when test="Type = 'bytea'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(byte[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
-          <xsl:text> : new byte[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'uuid[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(Guid[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
      </xsl:choose>
   </xsl:template>
@@ -236,9 +250,9 @@
         <xsl:when test="Type = 'string[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
           <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
-          <xsl:text> : new string[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
-       <xsl:when test="Type = 'integer'">
+        <xsl:when test="Type = 'integer'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
           <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
           <xsl:text> : 0</xsl:text>
@@ -246,7 +260,7 @@
         <xsl:when test="Type = 'integer[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
           <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
-          <xsl:text> : new int[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'numeric'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
@@ -256,7 +270,7 @@
         <xsl:when test="Type = 'numeric[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
           <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
-          <xsl:text> : new decimal[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'boolean'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
@@ -296,7 +310,12 @@
 		    <xsl:when test="Type = 'bytea'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
           <xsl:text>(byte[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
-          <xsl:text> : new byte[] { }</xsl:text>
+          <xsl:text> : []</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'uuid[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text> != DBNull.Value) ? </xsl:text>
+          <xsl:text>(Guid[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/>
+          <xsl:text> : []</xsl:text>
         </xsl:when>
      </xsl:choose>
   </xsl:template>
@@ -323,6 +342,9 @@
       <xsl:when test="Type = 'numeric[]'">
         <xsl:text>ArrayToXml&lt;decimal&gt;.Convert(</xsl:text>
       </xsl:when>
+      <xsl:when test="Type = 'uuid[]'">
+        <xsl:text>ArrayToXml&lt;Guid&gt;.Convert(</xsl:text>
+      </xsl:when>
     </xsl:choose>
     <xsl:value-of select="Name"/>
     <xsl:choose>
@@ -340,7 +362,7 @@
       <xsl:when test="Type = 'string'">
         <xsl:text> + "]]&gt;"</xsl:text>
       </xsl:when>
-      <xsl:when test="Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]'">
+      <xsl:when test="Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
         <xsl:text>).ToString()</xsl:text>
       </xsl:when>
     </xsl:choose> 
@@ -428,23 +450,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
     {
         /*
           Функція для типу який задається користувачем.
-          Повертає презентацію для uuidAndText.
-          В @pointer - повертає групу (Документи або Довідники)
-            @type - повертає назву типу
+          Повертає презентацію для uuidAndText
         */
         public static async ValueTask&lt;CompositePointerPresentation_Record&gt; CompositePointerPresentation(UuidAndText uuidAndText)
         {
             CompositePointerPresentation_Record record = new();
 
-            if (string.IsNullOrEmpty(uuidAndText.Text) || uuidAndText.Text.IndexOf(".") == -1)
-                return record;
-
-            string[] pointer_and_type = uuidAndText.Text.Split(".", StringSplitOptions.None);
-
-            if (pointer_and_type.Length == 2)
+            (bool result, string pointerGroup, string pointerType) = Configuration.PointerParse(uuidAndText.Text, out Exception? _);
+            if (result)
             {
-                record.pointer = pointer_and_type[0];
-                record.type = pointer_and_type[1];
+                record.pointer = pointerGroup;
+                record.type = pointerType;
 
                 if (!uuidAndText.IsEmpty())
                     if (record.pointer == "Довідники") 
