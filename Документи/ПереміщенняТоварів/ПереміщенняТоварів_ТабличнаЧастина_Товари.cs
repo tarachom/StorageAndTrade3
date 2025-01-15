@@ -241,13 +241,13 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Товари_TablePart.FillJoin([ПереміщенняТоварів_Товари_TablePart.НомерРядка]);
                 await ЕлементВласник.Товари_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
 
                 foreach (ПереміщенняТоварів_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
@@ -268,6 +268,8 @@ namespace StorageAndTrade
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 

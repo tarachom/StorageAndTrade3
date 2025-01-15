@@ -254,13 +254,14 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.FillJoin([]);
                 await ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
+                
                 foreach (<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.Record record in ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Records)
                 {
                     Запис запис = new Запис
@@ -274,6 +275,8 @@ namespace <xsl:value-of select="$NameSpace"/>
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 

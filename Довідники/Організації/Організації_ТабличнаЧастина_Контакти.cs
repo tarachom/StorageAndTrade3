@@ -206,13 +206,14 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Контакти_TablePart.FillJoin([]);
                 await ЕлементВласник.Контакти_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
+
                 foreach (Організації_Контакти_TablePart.Record record in ЕлементВласник.Контакти_TablePart.Records)
                 {
                     Запис запис = new Запис
@@ -232,6 +233,8 @@ namespace StorageAndTrade
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 
@@ -263,11 +266,11 @@ namespace StorageAndTrade
 
         public string КлючовіСловаДляПошуку()
         {
-            
+
             string keyWords = "";
             foreach (Запис запис in Записи)
                 keyWords += $"\n {запис.Значення} {запис.Телефон} {запис.ЕлектроннаПошта} {запис.Країна} {запис.Область} {запис.Район} {запис.Місто}";
-            
+
             return keyWords;
         }
 

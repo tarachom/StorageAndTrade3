@@ -91,13 +91,13 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Файли_TablePart.FillJoin([]);
                 await ЕлементВласник.Файли_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
 
                 foreach (Контрагенти_Файли_TablePart.Record record in ЕлементВласник.Файли_TablePart.Records)
                 {
@@ -110,6 +110,8 @@ namespace StorageAndTrade
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 

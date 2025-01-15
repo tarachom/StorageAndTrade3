@@ -413,13 +413,13 @@ LIMIT 1
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Товари_TablePart.FillJoin([ПоступленняТоварівТаПослуг_Товари_TablePart.НомерРядка]);
                 await ЕлементВласник.Товари_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
 
                 foreach (ПоступленняТоварівТаПослуг_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
@@ -445,6 +445,8 @@ LIMIT 1
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 
@@ -507,7 +509,7 @@ LIMIT 1
         #endregion
 
         #region Func
-        
+
         protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];

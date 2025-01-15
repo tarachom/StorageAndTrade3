@@ -602,13 +602,14 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.ЗвітСторінка_TablePart.FillJoin([]);
                 await ЕлементВласник.ЗвітСторінка_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
+
                 foreach (ЗбереженіЗвіти_ЗвітСторінка_TablePart.Record record in ЕлементВласник.ЗвітСторінка_TablePart.Records)
                 {
                     Запис запис = new Запис
@@ -653,6 +654,8 @@ namespace StorageAndTrade
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 

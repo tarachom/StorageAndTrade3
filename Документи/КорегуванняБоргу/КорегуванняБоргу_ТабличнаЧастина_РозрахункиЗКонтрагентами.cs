@@ -182,13 +182,13 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.FillJoin([КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.НомерРядка]);
                 await ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
 
                 foreach (КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart.Record record in ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Records)
                 {
@@ -206,6 +206,8 @@ namespace StorageAndTrade
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 

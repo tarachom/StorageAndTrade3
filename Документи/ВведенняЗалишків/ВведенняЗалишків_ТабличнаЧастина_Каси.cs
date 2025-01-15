@@ -145,13 +145,13 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Каси_TablePart.FillJoin([ВведенняЗалишків_Каси_TablePart.НомерРядка]);
                 await ЕлементВласник.Каси_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
 
                 foreach (ВведенняЗалишків_Каси_TablePart.Record record in ЕлементВласник.Каси_TablePart.Records)
                 {
@@ -166,6 +166,8 @@ namespace StorageAndTrade
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 

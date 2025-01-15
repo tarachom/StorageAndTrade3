@@ -196,13 +196,13 @@ namespace StorageAndTrade
         #region Load and Save
         public override async ValueTask LoadRecords()
         {
-            Store.Clear();
-            Записи.Clear();
-
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Послуги_TablePart.FillJoin([АктВиконанихРобіт_Послуги_TablePart.НомерРядка]);
                 await ЕлементВласник.Послуги_TablePart.Read();
+
+                Записи.Clear();
+                Store.Clear();
 
                 foreach (АктВиконанихРобіт_Послуги_TablePart.Record record in ЕлементВласник.Послуги_TablePart.Records)
                 {
@@ -221,6 +221,8 @@ namespace StorageAndTrade
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
+
+                SelectRowActivated();
             }
         }
 
