@@ -17,8 +17,7 @@ namespace StorageAndTrade
         #region Filters
 
         Організації_PointerControl Організація = new Організації_PointerControl();
-        Каси_PointerControl Каса = new Каси_PointerControl();
-        Каси_MultiplePointerControl Каса2 = new Каси_MultiplePointerControl();
+        Каси_MultiplePointerControl Каса = new Каси_MultiplePointerControl();
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
 
         struct ПараметриФільтр
@@ -26,7 +25,7 @@ namespace StorageAndTrade
             public DateTime ДатаПочатокПеріоду;
             public DateTime ДатаКінецьПеріоду;
             public Організації_Pointer Організація;
-            public Каси_Pointer Каса;
+            public Каси_Pointer[] Каса;
             public Валюти_Pointer Валюта;
         }
 
@@ -59,9 +58,6 @@ namespace StorageAndTrade
 
             //Каса
             CreateField(vBox, null, Каса);
-
-            //Каса2
-            CreateField(vBox, null, Каса2);
         }
 
         protected override void CreateContainer2(Box vBox)
@@ -95,7 +91,7 @@ namespace StorageAndTrade
                 ДатаПочатокПеріоду = Період.DateStartControl.ПочатокДня(),
                 ДатаКінецьПеріоду = Період.DateStopControl.КінецьДня(),
                 Організація = Організація.Pointer,
-                Каса = Каса.Pointer,
+                Каса = Каса.GetPointers(),
                 Валюта = Валюта.Pointer
             };
         }
@@ -124,8 +120,13 @@ namespace StorageAndTrade
             if (!Фільтр.Організація.IsEmpty())
                 text += "Організація: <b>" + await Фільтр.Організація.GetPresentation() + "</b>; ";
 
-            if (!Фільтр.Каса.IsEmpty())
-                text += "Каса: <b>" + await Фільтр.Каса.GetPresentation() + "</b>; ";
+            if (Фільтр.Каса.Length > 0)
+            {
+                foreach (var item in Фільтр.Каса)
+                    await item.GetPresentation();
+
+                text += "Каса: " + string.Join(", ", Фільтр.Каса.Select(x => x.Назва));
+            }
 
             if (!Фільтр.Валюта.IsEmpty())
                 text += "Валюта: <b>" + await Фільтр.Валюта.GetPresentation() + "</b>; ";
@@ -173,15 +174,16 @@ FROM
 ";
             }
 
-            //Відбір по вибраному елементу Каса
-            if (!Фільтр.Каса.IsEmpty())
+            //Відбір по вибраних елементах Каса
+            if (Фільтр.Каса.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Каси.uid = '{Фільтр.Каса.UnigueID}'
+Довідник_Каси.uid IN ('{string.Join("', '", Фільтр.Каса.Select(x => x.UnigueID.UGuid))}')
 ";
+
             }
 
             //Відбір по вибраному елементу Склади
@@ -358,15 +360,16 @@ LEFT JOIN {Валюти_Const.TABLE} AS Довідник_Валюти ON Дов�
 ";
             }
 
-            //Відбір по вибраному елементу Валюти
-            if (!Фільтр.Каса.IsEmpty())
+            //Відбір по вибраних елементах Каса
+            if (Фільтр.Каса.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Каси.uid = '{Фільтр.Каса.UnigueID}'
+Довідник_Каси.uid IN ('{string.Join("', '", Фільтр.Каса.Select(x => x.UnigueID.UGuid))}')
 ";
+
             }
 
             //Відбір по вибраному елементу Валюти
@@ -473,15 +476,16 @@ WITH register AS
 ";
             }
 
-            //Відбір по вибраному елементу Валюти
-            if (!Фільтр.Каса.IsEmpty())
+            //Відбір по вибраних елементах Каса
+            if (Фільтр.Каса.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-РухКоштів.{РухКоштів_Const.Каса} = '{Фільтр.Каса.UnigueID}'
+РухКоштів.{РухКоштів_Const.Каса} IN ('{string.Join("', '", Фільтр.Каса.Select(x => x.UnigueID.UGuid))}')
 ";
+
             }
 
             //Відбір по вибраному елементу Валюти

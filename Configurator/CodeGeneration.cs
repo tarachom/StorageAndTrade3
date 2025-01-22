@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 02.01.2025 13:25:08
+ * Дата конфігурації: 22.01.2025 20:39:25
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
@@ -1930,7 +1930,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Організації_Triggers.Copying(copy, this);
+            await Організації_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -2347,21 +2348,24 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Номенклатура_Triggers.Copying(copy, this);
+            await Номенклатура_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Номенклатура_Triggers.SetDeletionLabel(this, label);
+                await Номенклатура_Triggers.SetDeletionLabel(this, label);      
+            
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Номенклатура_Triggers.BeforeDelete(this);
+                await Номенклатура_Triggers.BeforeDelete(this);      
+            
             await base.BaseDelete(["tab_b19", ]);
         }
         
@@ -2698,7 +2702,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Виробники_Triggers.Copying(copy, this);
+            await Виробники_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -2920,7 +2925,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ВидиНоменклатури_Triggers.Copying(copy, this);
+            await ВидиНоменклатури_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -3143,7 +3149,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);
+            await ПакуванняОдиниціВиміру_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -3367,21 +3374,24 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Валюти_Triggers.Copying(copy, this);
+            await Валюти_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Валюти_Triggers.SetDeletionLabel(this, label);
+                await Валюти_Triggers.SetDeletionLabel(this, label);      
+            
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Валюти_Triggers.BeforeDelete(this);
+                await Валюти_Triggers.BeforeDelete(this);      
+            
             await base.BaseDelete([]);
         }
         
@@ -3597,7 +3607,8 @@ namespace StorageAndTrade_1_0.Довідники
             if (result)
             {
                 
-                await Контрагенти_Triggers.AfterSave(this);
+                await Контрагенти_Triggers.AfterSave(this);     
+                
                 await BaseWriteFullTextSearch(GetBasis(), [Назва, НазваПовна, РеєстраційнийНомер, Опис, КлючовіСловаДляПошуку, ]);
                 
             }
@@ -3637,14 +3648,16 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Контрагенти_Triggers.Copying(copy, this);
+            await Контрагенти_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Контрагенти_Triggers.SetDeletionLabel(this, label);
+                await Контрагенти_Triggers.SetDeletionLabel(this, label);      
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -4170,7 +4183,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Склади_Triggers.Copying(copy, this);
+            await Склади_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -4536,7 +4550,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ВидиЦін_Triggers.Copying(copy, this);
+            await ВидиЦін_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -4751,7 +4766,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ВидиЦінПостачальників_Triggers.Copying(copy, this);
+            await ВидиЦінПостачальників_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -4992,7 +5008,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Користувачі_Triggers.Copying(copy, this);
+            await Користувачі_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -5376,7 +5393,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ФізичніОсоби_Triggers.Copying(copy, this);
+            await ФізичніОсоби_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -5738,7 +5756,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await СтруктураПідприємства_Triggers.Copying(copy, this);
+            await СтруктураПідприємства_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -5949,7 +5968,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await КраїниСвіту_Triggers.Copying(copy, this);
+            await КраїниСвіту_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -6175,7 +6195,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Файли_Triggers.Copying(copy, this);
+            await Файли_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -6397,7 +6418,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ХарактеристикиНоменклатури_Triggers.Copying(copy, this);
+            await ХарактеристикиНоменклатури_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -6613,21 +6635,24 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Номенклатура_Папки_Triggers.Copying(copy, this);
+            await Номенклатура_Папки_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Номенклатура_Папки_Triggers.SetDeletionLabel(this, label);
+                await Номенклатура_Папки_Triggers.SetDeletionLabel(this, label);      
+            
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Номенклатура_Папки_Triggers.BeforeDelete(this);
+                await Номенклатура_Папки_Triggers.BeforeDelete(this);      
+            
             await base.BaseDelete([]);
         }
         
@@ -6846,21 +6871,24 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Контрагенти_Папки_Triggers.Copying(copy, this);
+            await Контрагенти_Папки_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Контрагенти_Папки_Triggers.SetDeletionLabel(this, label);
+                await Контрагенти_Папки_Triggers.SetDeletionLabel(this, label);      
+            
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Контрагенти_Папки_Triggers.BeforeDelete(this);
+                await Контрагенти_Папки_Triggers.BeforeDelete(this);      
+            
             await base.BaseDelete([]);
         }
         
@@ -7079,21 +7107,24 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Склади_Папки_Triggers.Copying(copy, this);
+            await Склади_Папки_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await Склади_Папки_Triggers.SetDeletionLabel(this, label);
+                await Склади_Папки_Triggers.SetDeletionLabel(this, label);      
+            
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await Склади_Папки_Triggers.BeforeDelete(this);
+                await Склади_Папки_Triggers.BeforeDelete(this);      
+            
             await base.BaseDelete([]);
         }
         
@@ -7316,7 +7347,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Каси_Triggers.Copying(copy, this);
+            await Каси_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -7548,7 +7580,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);
+            await БанківськіРахункиОрганізацій_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -7837,7 +7870,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ДоговориКонтрагентів_Triggers.Copying(copy, this);
+            await ДоговориКонтрагентів_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -8081,7 +8115,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);
+            await БанківськіРахункиКонтрагентів_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -8325,7 +8360,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await СтаттяРухуКоштів_Triggers.Copying(copy, this);
+            await СтаттяРухуКоштів_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -8661,7 +8697,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await СеріїНоменклатури_Triggers.Copying(copy, this);
+            await СеріїНоменклатури_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -9121,7 +9158,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ВидиЗапасів_Triggers.Copying(copy, this);
+            await ВидиЗапасів_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -9440,7 +9478,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Банки_Triggers.Copying(copy, this);
+            await Банки_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -9680,7 +9719,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await СкладськіПриміщення_Triggers.Copying(copy, this);
+            await СкладськіПриміщення_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -9923,7 +9963,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await СкладськіКомірки_Triggers.Copying(copy, this);
+            await СкладськіКомірки_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -10371,7 +10412,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ТипорозміриКомірок_Triggers.Copying(copy, this);
+            await ТипорозміриКомірок_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -10593,21 +10635,24 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await СкладськіКомірки_Папки_Triggers.Copying(copy, this);
+            await СкладськіКомірки_Папки_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await СкладськіКомірки_Папки_Triggers.SetDeletionLabel(this, label);
+                await СкладськіКомірки_Папки_Triggers.SetDeletionLabel(this, label);      
+            
             await base.BaseDeletionLabel(label);
         }
 
         public async ValueTask Delete()
         {
             
-                await СкладськіКомірки_Папки_Triggers.BeforeDelete(this);
+                await СкладськіКомірки_Папки_Triggers.BeforeDelete(this);      
+            
             await base.BaseDelete([]);
         }
         
@@ -10835,7 +10880,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await Блокнот_Triggers.Copying(copy, this);
+            await Блокнот_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -11080,7 +11126,8 @@ namespace StorageAndTrade_1_0.Довідники
 
             await copy.New();
             
-            await ЗбереженіЗвіти_Triggers.Copying(copy, this);
+            await ЗбереженіЗвіти_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -12731,9 +12778,11 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ЗамовленняПостачальникам */
-            РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-            await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
+            // ЗамовленняПостачальникам
+            {
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -12791,6 +12840,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ЗамовленняПостачальнику_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -12887,7 +12938,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -12903,10 +12954,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -13473,29 +13526,41 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* Закупівлі */
-            РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-            await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
+            // Закупівлі
+            {
+                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ЗамовленняПостачальникам */
-            РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-            await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
+            // ЗамовленняПостачальникам
+            {
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗПостачальниками */
-            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -13560,13 +13625,16 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
+                await ПоступленняТоварівТаПослуг_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);
+                await ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(this, label);      
+            
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -13662,7 +13730,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -13680,10 +13748,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -14266,13 +14336,17 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ЗамовленняКлієнтів */
-            РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-            await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
+            // ЗамовленняКлієнтів
+            {
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -14334,6 +14408,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ЗамовленняКлієнта_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -14434,7 +14510,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -14450,10 +14526,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -15013,29 +15091,41 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ЗамовленняКлієнтів */
-            РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-            await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
+            // ЗамовленняКлієнтів
+            {
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗКлієнтами */
-            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* Продажі */
-            РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-            await Продажі_regAccum.Delete(this.UnigueID.UGuid);
+            // Продажі
+            {
+                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -15098,6 +15188,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await РеалізаціяТоварівТаПослуг_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -15199,7 +15291,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -15215,10 +15307,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -15786,6 +15880,8 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
+                await ВстановленняЦінНоменклатури_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -15864,7 +15960,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -15880,10 +15976,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -16231,17 +16329,23 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* РозрахункиЗКлієнтами */
-            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗПостачальниками */
-            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РухКоштів */
-            РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-            await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
+            // РухКоштів
+            {
+                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -16290,6 +16394,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ПрихіднийКасовийОрдер_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -16377,7 +16483,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -16393,10 +16499,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -16748,17 +16856,23 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* РозрахункиЗКлієнтами */
-            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗПостачальниками */
-            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РухКоштів */
-            РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-            await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
+            // РухКоштів
+            {
+                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -16809,6 +16923,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await РозхіднийКасовийОрдер_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -16898,7 +17014,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -16914,10 +17030,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -17276,17 +17394,23 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -17338,6 +17462,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ПереміщенняТоварів_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -17428,7 +17554,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -17444,10 +17570,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПереміщенняТоварів_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -17820,25 +17948,35 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* Закупівлі */
-            РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-            await Закупівлі_regAccum.Delete(this.UnigueID.UGuid);
+            // Закупівлі
+            {
+                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗПостачальниками */
-            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -17892,6 +18030,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ПоверненняТоварівПостачальнику_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -17984,7 +18124,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -18000,10 +18140,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -18372,25 +18514,35 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗКлієнтами */
-            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* Продажі */
-            РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-            await Продажі_regAccum.Delete(this.UnigueID.UGuid);
+            // Продажі
+            {
+                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -18440,6 +18592,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ПоверненняТоварівВідКлієнта_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -18528,7 +18682,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -18544,10 +18698,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -18917,13 +19073,17 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* РозрахункиЗКлієнтами */
-            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* Продажі */
-            РегістриНакопичення.Продажі_RecordsSet Продажі_regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-            await Продажі_regAccum.Delete(this.UnigueID.UGuid);
+            // Продажі
+            {
+                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -18972,6 +19132,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await АктВиконанихРобіт_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -19059,7 +19221,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -19075,10 +19237,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await АктВиконанихРобіт_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -19542,29 +19706,41 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗКлієнтами */
-            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗПостачальниками */
-            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РухКоштів */
-            РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-            await РухКоштів_regAccum.Delete(this.UnigueID.UGuid);
+            // РухКоштів
+            {
+                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -19622,13 +19798,16 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
+                await ВведенняЗалишків_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
-                await ВведенняЗалишків_Triggers.SetDeletionLabel(this, label);
+                await ВведенняЗалишків_Triggers.SetDeletionLabel(this, label);      
+            
             await ClearSpendTheDocument();
             await base.BaseDeletionLabel(label);
         }
@@ -19708,7 +19887,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВведенняЗалишків_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -19726,10 +19905,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ВведенняЗалишків_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -20574,7 +20755,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             НадлишкиТоварів_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -21013,7 +21194,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПересортицяТоварів_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -21386,6 +21567,8 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
+                await ПерерахунокТоварів_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -21465,7 +21648,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -21481,10 +21664,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПерерахунокТоварів_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -21824,17 +22009,23 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -21877,6 +22068,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ПсуванняТоварів_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -21958,7 +22151,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПсуванняТоварів_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -21974,10 +22167,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПсуванняТоварів_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -22328,17 +22523,23 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариНаСкладах */
-            РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-            await ТовариНаСкладах_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ПартіїТоварів */
-            РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-            await ПартіїТоварів_regAccum.Delete(this.UnigueID.UGuid);
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -22382,6 +22583,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ВнутрішнєСпоживанняТоварів_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -22464,7 +22667,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -22480,10 +22683,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -22858,9 +23063,11 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -22912,6 +23119,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await РахунокФактура_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -23002,7 +23211,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РахунокФактура_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -23018,10 +23227,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await РахунокФактура_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -23518,9 +23729,11 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариВКомірках */
-            РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-            await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариВКомірках
+            {
+                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -23562,6 +23775,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await РозміщенняТоварівНаСкладі_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -23642,7 +23857,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -23658,10 +23873,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -23995,9 +24212,11 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариВКомірках */
-            РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-            await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариВКомірках
+            {
+                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -24038,6 +24257,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ПереміщенняТоварівНаСкладі_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -24117,7 +24338,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -24133,10 +24354,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -24479,9 +24702,11 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ТовариВКомірках */
-            РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-            await ТовариВКомірках_regAccum.Delete(this.UnigueID.UGuid);
+            // ТовариВКомірках
+            {
+                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -24523,6 +24748,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ЗбіркаТоварівНаСкладі_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -24603,7 +24830,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -24619,10 +24846,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -24998,6 +25227,8 @@ namespace StorageAndTrade_1_0.Документи
 
             await copy.New();
             
+                await РозміщенняНоменклатуриПоКоміркам_Triggers.Copying(copy, this);      
+            
             return copy;
         }
 
@@ -25076,7 +25307,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -25092,10 +25323,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -25406,13 +25639,17 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* РозрахункиЗКлієнтами */
-            РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-            await РозрахункиЗКлієнтами_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* РозрахункиЗПостачальниками */
-            РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-            await РозрахункиЗПостачальниками_regAccum.Delete(this.UnigueID.UGuid);
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -25452,6 +25689,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await КорегуванняБоргу_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -25530,7 +25769,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             КорегуванняБоргу_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -25546,10 +25785,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await КорегуванняБоргу_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -25886,13 +26127,17 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ЗамовленняКлієнтів */
-            РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-            await ЗамовленняКлієнтів_regAccum.Delete(this.UnigueID.UGuid);
+            // ЗамовленняКлієнтів
+            {
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -25940,6 +26185,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ЗакриттяЗамовленняКлієнта_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -26026,7 +26273,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗакриттяЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -26042,10 +26289,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ЗакриттяЗамовленняКлієнта_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -26402,9 +26651,11 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ВільніЗалишки */
-            РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-            await ВільніЗалишки_regAccum.Delete(this.UnigueID.UGuid);
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -26452,6 +26703,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ЗакриттяРахункуФактури_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -26538,7 +26791,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗакриттяРахункуФактури_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -26554,10 +26807,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ЗакриттяРахункуФактури_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 
@@ -26914,9 +27169,11 @@ namespace StorageAndTrade_1_0.Документи
         async void ClearRegAccum()
         {
             
-            /* ЗамовленняПостачальникам */
-            РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-            await ЗамовленняПостачальникам_regAccum.Delete(this.UnigueID.UGuid);
+            // ЗамовленняПостачальникам
+            {
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
             
         }
 
@@ -26964,6 +27221,8 @@ namespace StorageAndTrade_1_0.Документи
             
 
             await copy.New();
+            
+                await ЗакриттяЗамовленняПостачальнику_Triggers.Copying(copy, this);      
             
             return copy;
         }
@@ -27050,7 +27309,7 @@ namespace StorageAndTrade_1_0.Документи
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗакриттяЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
-            return (obj != null ? await obj.SpendTheDocument(spendDate) : false);
+            return obj != null && await obj.SpendTheDocument(spendDate);;
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -27066,10 +27325,12 @@ namespace StorageAndTrade_1_0.Документи
                 
                 if (label)
                 {
+                    
                     await ЗакриттяЗамовленняПостачальнику_SpendTheDocument.ClearSpend(obj);
                     await BaseSpend(false, DateTime.MinValue);
                 }
                 
+            
             await base.BaseDeletionLabel(label);
         }
 

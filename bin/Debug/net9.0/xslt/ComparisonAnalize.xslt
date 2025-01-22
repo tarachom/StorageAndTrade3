@@ -580,6 +580,7 @@
               <xsl:value-of select="NameInTable"/>
               <xsl:text>" </xsl:text>
               <xsl:value-of select="DataType"/>
+              <xsl:if test="NotNull = '1'"> NOT NULL</xsl:if>
               <xsl:text>;</xsl:text>
             </sql>
             <xsl:if test="Index = '1'">

@@ -224,9 +224,9 @@
                     <DataTypeCreate>bytea</DataTypeCreate>
                   </xsl:otherwise>
                 </xsl:choose>
-             </xsl:if>
+              </xsl:if>
 
-             <xsl:if test="$ConfFieldType = 'uuid[]'">
+              <xsl:if test="$ConfFieldType = 'uuid[]'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_uuid'">
                     <Coincide>yes</Coincide>
@@ -247,7 +247,8 @@
               <xsl:with-param name="ConfFieldName" select="Name" />
               <xsl:with-param name="ConfFieldNameInTable" select="$ConfFieldName" />
               <xsl:with-param name="ConfFieldType" select="Type" />
-		      <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+		          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+              <xsl:with-param name="ConfFieldNotNull" select="IsNotNull" />
             </xsl:call-template>
 
           </xsl:otherwise>
@@ -263,6 +264,7 @@
     <xsl:param name="ConfFieldNameInTable" />
     <xsl:param name="ConfFieldType" />
 	  <xsl:param name="ConfFieldIndex" />
+    <xsl:param name="ConfFieldNotNull" />
 	  
     <FieldCreate>
       <Name>
@@ -331,8 +333,12 @@
       </DataType>
 
       <Index>
-		  <xsl:value-of select="$ConfFieldIndex"/>
+		    <xsl:value-of select="$ConfFieldIndex"/>
       </Index>
+
+      <NotNull>
+		    <xsl:value-of select="$ConfFieldNotNull"/>
+      </NotNull>
     </FieldCreate>
 
   </xsl:template>
@@ -360,6 +366,28 @@
           <xsl:when test="$InfoSchemaTableList[Name = $ConfTablePartTable]">
             <IsExist>yes</IsExist>
 
+            <xsl:choose>
+              <xsl:when test="$IsCreateOwner = 'yes'">
+                <xsl:call-template name="FieldsControl">
+                  <xsl:with-param name="TableName" select="$ConfTablePartTable" />
+                  <xsl:with-param name="ConfigurationFieldList" select="PredefinedFields/PredefinedField[Name != 'uid']" />
+                  <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfTablePartTable]/Column" />
+                  <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfTablePartTable]/Index" />
+                </xsl:call-template>
+              </xsl:when>
+              <!-- 
+              В табличній частині на даний момент два поля, тому цей блок непотрібний, бо полів для перевірки немає
+              <xsl:otherwise>
+                <xsl:call-template name="FieldsControl">
+                  <xsl:with-param name="TableName" select="$ConfTablePartTable" />
+                  <xsl:with-param name="ConfigurationFieldList" select="PredefinedFields/PredefinedField[Name != 'uid' and Name != 'owner']" />
+                  <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfTablePartTable]/Column" />
+                  <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfTablePartTable]/Index" />
+                </xsl:call-template>
+              </xsl:otherwise>
+              -->
+            </xsl:choose>
+
             <xsl:call-template name="FieldsControl">
 			        <xsl:with-param name="TableName" select="$ConfTablePartTable" />
               <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
@@ -379,6 +407,7 @@
                   <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                   <xsl:with-param name="ConfFieldType" select="Type" />
 				          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+                  <xsl:with-param name="ConfFieldNotNull" select="IsNotNull" />
                 </xsl:call-template>
               </xsl:for-each>
 
@@ -647,6 +676,7 @@
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
 					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+                    <xsl:with-param name="ConfFieldNotNull" select="IsNotNull" />
 				          </xsl:call-template>
                 </xsl:for-each>
 
@@ -716,11 +746,19 @@
             <xsl:when test="$InfoSchemaTableList[Name = $ConfDirectoryTable]">
               <IsExist>yes</IsExist>
 
+              <!-- Перевірка наперед визначених полів, окрім первинного ключа -->
               <xsl:call-template name="FieldsControl">
-				      <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+                <xsl:with-param name="ConfigurationFieldList" select="PredefinedFields/PredefinedField[Name != 'uid']" />
+                <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
+				        <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+              </xsl:call-template>
+
+              <xsl:call-template name="FieldsControl">
+				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
-				      <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+				        <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
               </xsl:call-template>
 
             </xsl:when>
@@ -735,6 +773,7 @@
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
 					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+                    <xsl:with-param name="ConfFieldNotNull" select="IsNotNull" />
                   </xsl:call-template>
                 </xsl:for-each>
 
@@ -777,11 +816,19 @@
             <xsl:when test="$InfoSchemaTableList[Name = $ConfDirectoryTable]">
               <IsExist>yes</IsExist>
 
+               <!-- Перевірка наперед визначених полів, окрім первинного ключа -->
               <xsl:call-template name="FieldsControl">
-				      <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+                <xsl:with-param name="ConfigurationFieldList" select="PredefinedFields/PredefinedField[Name != 'uid']" />
+                <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
+				        <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+              </xsl:call-template>
+
+              <xsl:call-template name="FieldsControl">
+				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
-				      <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />				  
+				        <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />				  
               </xsl:call-template>
 
             </xsl:when>
@@ -796,6 +843,7 @@
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
 					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+                    <xsl:with-param name="ConfFieldNotNull" select="IsNotNull" />
                   </xsl:call-template>
                 </xsl:for-each>
 
@@ -838,11 +886,19 @@
             <xsl:when test="$InfoSchemaTableList[Name = $ConfDirectoryTable]">
               <IsExist>yes</IsExist>
 
+               <!-- Перевірка наперед визначених полів, окрім первинного ключа -->
               <xsl:call-template name="FieldsControl">
-				      <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+                <xsl:with-param name="ConfigurationFieldList" select="PredefinedFields/PredefinedField[Name != 'uid']" />
+                <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
+				        <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+              </xsl:call-template>
+
+              <xsl:call-template name="FieldsControl">
+				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
-				      <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+				        <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
               </xsl:call-template>
 
             </xsl:when>
@@ -857,6 +913,7 @@
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
 					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+                    <xsl:with-param name="ConfFieldNotNull" select="IsNotNull" />
                   </xsl:call-template>
                 </xsl:for-each>
 
@@ -902,6 +959,14 @@
             <xsl:when test="$InfoSchemaTableList[Name = $ConfDirectoryTable]">
               <IsExist>yes</IsExist>
 
+               <!-- Перевірка наперед визначених полів, окрім первинного ключа -->
+              <xsl:call-template name="FieldsControl">
+				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+                <xsl:with-param name="ConfigurationFieldList" select="PredefinedFields/PredefinedField[Name != 'uid']" />
+                <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
+				        <xsl:with-param name="InfoSchemaIndexList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Index" />
+              </xsl:call-template>
+
               <xsl:call-template name="FieldsControl">
 				        <xsl:with-param name="TableName" select="$ConfDirectoryTable" />
                 <xsl:with-param name="ConfigurationFieldList" select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field" />
@@ -921,6 +986,7 @@
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
 					          <xsl:with-param name="ConfFieldIndex" select="IsIndex" />
+                    <xsl:with-param name="ConfFieldNotNull" select="IsNotNull" />
                   </xsl:call-template>
                 </xsl:for-each>
 

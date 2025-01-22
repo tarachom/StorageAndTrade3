@@ -77,7 +77,7 @@ namespace StorageAndTrade
                                 table.Header(cell =>
                                 {
                                     foreach (var item in Columns.Keys)
-                                        cell.Cell().Border(1).Padding(1).Text(item).FontSize(8).AlignCenter();
+                                        cell.Cell().Border(1).Padding(1).AlignMiddle().Text(item).FontSize(8).AlignCenter();
                                 });
 
                                 decimal Сума = 0;
@@ -91,9 +91,9 @@ namespace StorageAndTrade
                                         table.Cell().Border(1).Padding(1).Text(record.ХарактеристикаНоменклатури.Назва).FontSize(8);
 
                                     table.Cell().Border(1).Padding(1).Text(record.Пакування.Назва).FontSize(8).AlignCenter();
-                                    table.Cell().Border(1).Padding(1).Text(record.Кількість.ToString()).FontSize(8).AlignCenter();
-                                    table.Cell().Border(1).Padding(1).Text(record.Ціна.ToString()).FontSize(8).AlignRight();
-                                    table.Cell().Border(1).Padding(1).Text(record.Сума.ToString()).FontSize(8).AlignRight();
+                                    table.Cell().Border(1).Padding(1).AlignMiddle().Text(record.Кількість.ToString()).FontSize(8).AlignCenter();
+                                    table.Cell().Border(1).Padding(1).AlignMiddle().Text(record.Ціна.ToString()).FontSize(8).AlignRight();
+                                    table.Cell().Border(1).Padding(1).AlignMiddle().Text(record.Сума.ToString()).FontSize(8).AlignRight();
                                     Сума += record.Сума;
                                 }
 

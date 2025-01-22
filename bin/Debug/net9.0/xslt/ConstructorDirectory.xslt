@@ -12,6 +12,9 @@
     <xsl:template match="root">
 
         <xsl:choose>
+            <xsl:when test="$File = 'Triggers'">
+                <xsl:call-template name="DirectoryTriggers" />
+            </xsl:when>
             <xsl:when test="$File = 'Function'">
                 <xsl:call-template name="DirectoryFunction" />
             </xsl:when>
@@ -27,6 +30,9 @@
             <xsl:when test="$File = 'PointerControl'">
                 <xsl:call-template name="DirectoryPointerControl" />
             </xsl:when>
+            <xsl:when test="$File = 'MultiplePointerControl'">
+                <xsl:call-template name="DirectoryMultiplePointerControl" />
+            </xsl:when>
             <xsl:when test="$File = 'ListAndTree'">
                 <xsl:call-template name="DirectoryListAndTree" />
             </xsl:when>
@@ -35,6 +41,70 @@
             </xsl:when>
         </xsl:choose>
 
+    </xsl:template>
+
+<!--- 
+//
+// ============================ Triggers ============================
+//
+-->
+
+    <xsl:template name="DirectoryTriggers">
+        <xsl:variable name="DirectoryName" select="Directory/Name"/>
+        <xsl:variable name="DirectoryAutomaticNumeration" select="Directory/AutomaticNumeration"/>
+
+        <!-- Назви функцій -->
+        <xsl:variable name="TriggerFunctions" select="Directory/TriggerFunctions"/>
+
+/*
+        <xsl:value-of select="$DirectoryName"/>_Triggers.cs
+        Тригери
+*/
+
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Константи;
+using AccountingSoftware;
+
+namespace <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники
+{
+    static class <xsl:value-of select="$DirectoryName"/>_Triggers
+    {
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/New"/>(<xsl:value-of select="$DirectoryName"/>_Objest ДовідникОбєкт)
+        {
+            <xsl:if test="$DirectoryAutomaticNumeration = '1'">
+                <xsl:text>ДовідникОбєкт.Код = (++НумераціяДовідників.</xsl:text>
+                <xsl:value-of select="$DirectoryName"/>
+                <xsl:text>_Const).ToString("D6");</xsl:text>
+            </xsl:if>
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/Copying"/>(<xsl:value-of select="$DirectoryName"/>_Objest ДовідникОбєкт, <xsl:value-of select="$DirectoryName"/>_Objest Основа)
+        {
+            ДовідникОбєкт.Назва += " - Копія";
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/BeforeSave"/>(<xsl:value-of select="$DirectoryName"/>_Objest ДовідникОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/AfterSave"/>(<xsl:value-of select="$DirectoryName"/>_Objest ДовідникОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/SetDeletionLabel"/>(<xsl:value-of select="$DirectoryName"/>_Objest ДовідникОбєкт, bool label)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/BeforeDelete"/>(<xsl:value-of select="$DirectoryName"/>_Objest ДовідникОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+}
     </xsl:template>
 
 <!--- 
@@ -907,7 +977,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="PointerFieldOwner" select="Directory/PointerFieldOwner"/>
 /*     
         <xsl:value-of select="$DirectoryName"/>_PointerControl.cs
-        PointerControl (Список)
+        PointerControl
 */
 
 using Gtk;
@@ -980,6 +1050,146 @@ namespace <xsl:value-of select="$NameSpace"/>
             Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
             AfterSelectFunc?.Invoke();
             AfterClearFunc?.Invoke();
+        }
+    }
+}
+    </xsl:template>
+
+<!--- 
+//
+// ============================ MultiplePointerControl ============================
+//
+-->
+
+    <!-- MultiplePointerControl -->
+    <xsl:template name="DirectoryMultiplePointerControl">
+        <xsl:variable name="DirectoryName" select="Directory/Name"/>
+
+/*     
+        <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl.cs
+        MultiplePointerControl
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
+
+namespace <xsl:value-of select="$NameSpace"/>
+{
+    public class <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl : MultiplePointerControl
+    {
+        event EventHandler&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; PointerChanged;
+
+        public <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl()
+        {
+            pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
+            WidthPresentation = 300;
+            Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
+            PointerChanged += async (object? _, <xsl:value-of select="$DirectoryName"/>_Pointer pointer) =&gt;
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+                if (pointers.Count &gt; 1) Presentation += $" ... {pointers.Count}";
+            };
+        }
+
+        <xsl:value-of select="$DirectoryName"/>_Pointer pointer;
+        List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; pointers = [];
+        public <xsl:value-of select="$DirectoryName"/>_Pointer Pointer
+        {
+            get
+            {
+                return pointer;
+            }
+            set
+            {
+                pointer = value;
+                PointerChanged?.Invoke(null, pointer);
+            }
+        }
+
+        public <xsl:value-of select="$DirectoryName"/>_Pointer[] GetPointers()
+        {
+            <xsl:value-of select="$DirectoryName"/>_Pointer[] copy = new <xsl:value-of select="$DirectoryName"/>_Pointer[pointers.Count];
+            pointers.CopyTo(copy);
+
+            return copy;
+        }
+
+        void Add(<xsl:value-of select="$DirectoryName"/>_Pointer item)
+        {
+            if (!pointers.Exists((<xsl:value-of select="$DirectoryName"/>_Pointer x) =&gt; x.UnigueID.ToString() == item.UnigueID.ToString()))
+                pointers.Add(item);
+
+            Pointer = item;
+        }
+
+        protected override async void OpenSelect(object? sender, EventArgs args)
+        {
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+
+            <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір
+            {
+                PopoverParent = popover,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
+                {
+                    Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
+                },
+                CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =&gt;
+                {
+                    foreach (var selectPointer in selectPointers)
+                        Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
+                }
+            };
+
+            page.DirectoryPointerItem = pointer.UnigueID;
+
+            popover.Add(page);
+            popover.ShowAll();
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask FillList(ListBox listBox)
+        {
+            foreach (<xsl:value-of select="$DirectoryName"/>_Pointer item in pointers)
+            {
+                Box hBox = new Box(Orientation.Horizontal, 0);
+                ListBoxRow listBoxRow = [hBox];
+
+                LinkButton linkName = new LinkButton("", await item.GetPresentation()) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
+                linkName.Clicked += (object? sender, EventArgs args) =&gt;
+                {
+                    if (Pointer.UnigueID.ToString() != item.UnigueID.ToString())
+                        Pointer = item;
+                };
+
+                hBox.PackStart(linkName, true, true, 0);
+
+                //Remove
+                LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
+                linkRemove.Clicked += (object? sender, EventArgs args) =&gt;
+                {
+                    pointers.Remove(item);
+                    listBox.Remove(listBoxRow);
+
+                    if (Pointer.UnigueID.ToString() == item.UnigueID.ToString())
+                        Pointer = pointers.Count &gt; 0 ? pointers[0] : new <xsl:value-of select="$DirectoryName"/>_Pointer();
+                    else
+                        PointerChanged?.Invoke(null, pointer);
+                };
+
+                hBox.PackEnd(linkRemove, false, false, 0);
+
+                listBox.Add(listBoxRow);
+                listBox.ShowAll();
+            }
+        }
+
+        protected override void OnClear(object? sender, EventArgs args)
+        {
+            pointers = [];
+            Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
         }
     }
 }

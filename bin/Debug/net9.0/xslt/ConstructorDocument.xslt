@@ -12,6 +12,12 @@
     <xsl:template match="root">
 
         <xsl:choose>
+            <xsl:when test="$File = 'Triggers'">
+                <xsl:call-template name="DocumentTriggers" />
+            </xsl:when>
+            <xsl:when test="$File = 'SpendTheDocument'">
+                <xsl:call-template name="DocumentSpendTheDocument" />
+            </xsl:when>
             <xsl:when test="$File = 'Function'">
                 <xsl:call-template name="DocumentFunction" />
             </xsl:when>
@@ -31,6 +37,124 @@
 
     </xsl:template>
 
+<!--- 
+//
+// ============================ Triggers ============================
+//
+-->
+
+    <xsl:template name="DocumentTriggers">
+        <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="DocumentAutomaticNumeration" select="Document/AutomaticNumeration"/>
+
+        <!-- Назви функцій -->
+        <xsl:variable name="TriggerFunctions" select="Document/TriggerFunctions"/>
+
+/*
+        <xsl:value-of select="$DocumentName"/>_Triggers.cs
+        Тригери
+*/
+
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Константи;
+using AccountingSoftware;
+
+namespace <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи
+{
+    static class <xsl:value-of select="$DocumentName"/>_Triggers
+    {
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/New"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт)
+        {
+            <xsl:if test="$DocumentAutomaticNumeration = '1'">
+                <xsl:text>ДокументОбєкт.Код = (++НумераціяДокументів.</xsl:text>
+                <xsl:value-of select="$DocumentName"/>
+                <xsl:text>_Const).ToString("D6");</xsl:text>
+            </xsl:if>
+            ДокументОбєкт.ДатаДок = DateTime.Now;
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/Copying"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт, <xsl:value-of select="$DocumentName"/>_Objest Основа)
+        {
+            ДокументОбєкт.Назва += " - Копія";
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/BeforeSave"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.Назва = $"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToString("dd.MM.yyyy")}";
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/AfterSave"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/SetDeletionLabel"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт, bool label)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/BeforeDelete"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+}
+    </xsl:template>
+
+
+    <!--- 
+//
+// ============================ SpendTheDocument ============================
+//
+-->
+
+    <xsl:template name="DocumentSpendTheDocument">
+        <xsl:variable name="DocumentName" select="Document/Name"/>
+
+        <!-- Назви функцій -->
+        <xsl:variable name="SpendFunctions" select="Document/SpendFunctions"/>
+
+/*
+        <xsl:value-of select="$DocumentName"/>_SpendTheDocument.cs
+        Модуль проведення документу
+*/
+
+using AccountingSoftware;
+using StorageAndTrade;
+
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриНакопичення;
+using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриВідомостей;
+
+namespace <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи
+{
+    static class <xsl:value-of select="$DocumentName"/>_SpendTheDocument
+    {
+        public static async ValueTask&lt;bool&gt; <xsl:value-of select="$SpendFunctions/Spend"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт)
+        {
+            try
+            {
+                // Проведення документу
+                // ...
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
+                return false;
+            }
+        }
+
+        public static async ValueTask <xsl:value-of select="$SpendFunctions/ClearSpend"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+}
+    </xsl:template>
 
 <!--- 
 //

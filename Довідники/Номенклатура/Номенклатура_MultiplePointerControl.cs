@@ -1,7 +1,7 @@
 
 
 /*     
-        Каси_MultiplePointerControl.cs
+        Номенклатура_MultiplePointerControl.cs
         MultiplePointerControl
 */
 
@@ -12,25 +12,25 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    public class Каси_MultiplePointerControl : MultiplePointerControl
+    public class Номенклатура_MultiplePointerControl : MultiplePointerControl
     {
-        event EventHandler<Каси_Pointer> PointerChanged;
+        event EventHandler<Номенклатура_Pointer> PointerChanged;
 
-        public Каси_MultiplePointerControl()
+        public Номенклатура_MultiplePointerControl()
         {
-            pointer = new Каси_Pointer();
+            pointer = new Номенклатура_Pointer();
             WidthPresentation = 300;
-            Caption = $"{Каси_Const.FULLNAME}:";
-            PointerChanged += async (object? _, Каси_Pointer pointer) =>
+            Caption = $"{Номенклатура_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Номенклатура_Pointer pointer) =>
             {
                 Presentation = pointer != null ? await pointer.GetPresentation() : "";
                 if (pointers.Count > 1) Presentation += $" ... {pointers.Count}";
             };
         }
 
-        Каси_Pointer pointer;
-        List<Каси_Pointer> pointers = [];
-        public Каси_Pointer Pointer
+        Номенклатура_Pointer pointer;
+        List<Номенклатура_Pointer> pointers = [];
+        public Номенклатура_Pointer Pointer
         {
             get
             {
@@ -43,17 +43,17 @@ namespace StorageAndTrade
             }
         }
 
-        public Каси_Pointer[] GetPointers()
+        public Номенклатура_Pointer[] GetPointers()
         {
-            Каси_Pointer[] copy = new Каси_Pointer[pointers.Count];
+            Номенклатура_Pointer[] copy = new Номенклатура_Pointer[pointers.Count];
             pointers.CopyTo(copy);
 
             return copy;
         }
 
-        void Add(Каси_Pointer item)
+        void Add(Номенклатура_Pointer item)
         {
-            if (!pointers.Exists((Каси_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
+            if (!pointers.Exists((Номенклатура_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
                 pointers.Add(item);
 
             Pointer = item;
@@ -63,17 +63,17 @@ namespace StorageAndTrade
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
 
-            Каси_ШвидкийВибір page = new Каси_ШвидкийВибір
+            Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір
             {
                 PopoverParent = popover,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
-                    Add(new Каси_Pointer(selectPointer));
+                    Add(new Номенклатура_Pointer(selectPointer));
                 },
                 CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =>
                 {
                     foreach (var selectPointer in selectPointers)
-                        Add(new Каси_Pointer(selectPointer));
+                        Add(new Номенклатура_Pointer(selectPointer));
                 }
             };
 
@@ -87,7 +87,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask FillList(ListBox listBox)
         {
-            foreach (Каси_Pointer item in pointers)
+            foreach (Номенклатура_Pointer item in pointers)
             {
                 Box hBox = new Box(Orientation.Horizontal, 0);
                 ListBoxRow listBoxRow = [hBox];
@@ -109,7 +109,7 @@ namespace StorageAndTrade
                     listBox.Remove(listBoxRow);
 
                     if (Pointer.UnigueID.ToString() == item.UnigueID.ToString())
-                        Pointer = pointers.Count > 0 ? pointers[0] : new Каси_Pointer();
+                        Pointer = pointers.Count > 0 ? pointers[0] : new Номенклатура_Pointer();
                     else
                         PointerChanged?.Invoke(null, pointer);
                 };
@@ -124,7 +124,7 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             pointers = [];
-            Pointer = new Каси_Pointer();
+            Pointer = new Номенклатура_Pointer();
         }
     }
 }

@@ -1,15 +1,17 @@
 
+
 /*
-    Номенклатура_Triggers.cs
-    Тригери для довідника Номенклатура
+        Номенклатура_Triggers.cs
+        Тригери
 */
+
 
 using StorageAndTrade_1_0.Константи;
 using AccountingSoftware;
 
 namespace StorageAndTrade_1_0.Довідники
 {
-    class Номенклатура_Triggers
+    static class Номенклатура_Triggers
     {
         public static async ValueTask New(Номенклатура_Objest ДовідникОбєкт)
         {
@@ -84,3 +86,4 @@ WHERE
         }
     }
 }
+    
