@@ -7,7 +7,7 @@ using InterfaceGtk;
 using AccountingSoftware;
 
 using GeneratedCode;
-using Константи = GeneratedCode.Константи;
+using GeneratedCode.Константи;
 
 namespace StorageAndTrade
 {
@@ -26,8 +26,8 @@ namespace StorageAndTrade
                 Config.StartBackgroundTask();
 
                 //Значення констант за замовчуванням
-                if (string.IsNullOrEmpty(Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const))
-                    Константи.ЖурналиДокументів.ОсновнийТипПеріоду_Const = ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод.ToString();
+                if (string.IsNullOrEmpty(ЖурналиДокументів.ОсновнийТипПеріоду_Const))
+                    ЖурналиДокументів.ОсновнийТипПеріоду_Const = ПеріодДляЖурналу.ТипПеріоду.ВесьПеріод.ToString();
 
                 Program.GeneralForm = new FormStorageAndTrade() { OpenConfigurationParam = openConfigurationParam };
                 Program.GeneralNotebook = Program.GeneralForm.Notebook;

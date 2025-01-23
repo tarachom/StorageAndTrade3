@@ -1,4 +1,3 @@
-
 /*
 
 Блоку курсів валют
@@ -8,7 +7,7 @@
 using Gtk;
 using InterfaceGtk;
 
-using Константи = GeneratedCode.Константи;
+using GeneratedCode.Константи;
 using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
@@ -44,11 +43,11 @@ namespace StorageAndTrade
                 autoDownloadCursOnStart = new Switch()
                 {
                     HeightRequest = 20,
-                    Active = Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const
+                    Active = ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const
                 };
 
-                autoDownloadCursOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => 
-                    Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = !autoDownloadCursOnStart.Active;
+                autoDownloadCursOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) =>
+                    ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const = !autoDownloadCursOnStart.Active;
 
                 hBoxSwitch.PackStart(new Label("Авто"), false, false, 10);
                 hBoxSwitch.PackStart(autoDownloadCursOnStart, false, false, 0);
@@ -79,7 +78,7 @@ namespace StorageAndTrade
             CreateLink(hBoxInfo, "Довідник - Валюти", async () =>
             {
                 Валюти page = new Валюти();
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Валюти_Const.FULLNAME}", () => { return page; });
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{Валюти_Const.FULLNAME}", () => page);
                 await page.SetValue();
             });
 
@@ -89,12 +88,9 @@ namespace StorageAndTrade
         void OnDownloadCurs(object? sender, EventArgs args)
         {
             Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => page);
 
-            Task.Run(() =>
-            {
-                page.OnDownload(null, new EventArgs());
-            });
+            Task.Run(() => page.OnDownload(null, new EventArgs()));
         }
 
         /// <summary>
@@ -126,7 +122,7 @@ namespace StorageAndTrade
         /// </summary>
         public void StartAutoWork()
         {
-            if (Константи.ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const)
+            if (ЗавантаженняДанихІзСайтів.АвтоматичноЗавантажуватиКурсиВалютПриЗапуску_Const)
             {
                 //Завантаження кожного разу при запуску
                 Обробка_ЗавантаженняКурсівВалют page = new Обробка_ЗавантаженняКурсівВалют { CallBack_EndBackgroundWork = StartDesktop };
@@ -158,7 +154,7 @@ namespace StorageAndTrade
         {
             КурсиВалют_ІсторіяЗавантаження page = new КурсиВалют_ІсторіяЗавантаження();
             page.LoadRecords();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Курси валют - історія завантаження", () => { return page; });
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Курси валют - історія завантаження", () => page);
         }
     }
 }

@@ -72,36 +72,3 @@ namespace StorageAndTrade
         }
     }
 }
-
-/*
-// ТабличніСписки.Журнали_Повний.Limit = 50;
-// ТабличніСписки.Журнали_Повний.Offset = 0;
-
-// ScrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
-// {
-//     Console.WriteLine(
-//     ScrollTree.Vadjustment.Value + " - " +
-//     ScrollTree.Vadjustment.Upper + " - " +
-//     (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize) + " - " +
-//     ScrollTree.Vadjustment.PageSize);
-
-//     if (ScrollTree.Vadjustment.Upper - ScrollTree.Vadjustment.PageSize == ScrollTree.Vadjustment.Value)
-//     {
-//         ТабличніСписки.Журнали_Повний.Offset += 50;
-//         ТабличніСписки.Журнали_Повний.LoadRecords();
-//     }
-// };
-
-
-
-
-scrollTree.Vadjustment.ValueChanged += (object? sender, EventArgs args) =>
-{
-    Console.WriteLine(
-        scrollTree.Vadjustment.Value + " " + 
-        scrollTree.Vadjustment.Upper + " " + 
-        scrollTree.Vadjustment.PageIncrement + " " + 
-        scrollTree.Vadjustment.PageSize);
-};
-
-*/
