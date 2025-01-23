@@ -4,12 +4,12 @@
     Тригери для документу ВведенняЗалишків
 */
 
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
+using GeneratedCode.Константи;
+using GeneratedCode.Довідники;
 using StorageAndTrade;
 using AccountingSoftware;
 
-namespace StorageAndTrade_1_0.Документи
+namespace GeneratedCode.Документи
 {
     class ВведенняЗалишків_Triggers
     {

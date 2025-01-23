@@ -6,10 +6,10 @@
 using Gtk;
 using InterfaceGtk;
 
-using Константи = StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.РегістриНакопичення;
+using Константи = GeneratedCode.Константи;
+using GeneratedCode.Довідники;
+using GeneratedCode.Документи;
+using GeneratedCode.РегістриНакопичення;
 
 namespace StorageAndTrade
 {

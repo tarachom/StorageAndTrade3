@@ -4,11 +4,11 @@
     Тригери для довідника Контрагенти
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using AccountingSoftware;
 using StorageAndTrade;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class Контрагенти_Triggers
     {

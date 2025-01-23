@@ -4,7 +4,7 @@
     Тригери для довідника СкладськіПриміщення
 */
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class СкладськіПриміщення_Triggers
     {

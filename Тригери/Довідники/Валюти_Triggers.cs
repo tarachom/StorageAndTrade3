@@ -4,9 +4,9 @@
     Тригери для довідника Валюти
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class Валюти_Triggers
     {

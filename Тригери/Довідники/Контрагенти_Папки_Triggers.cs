@@ -4,10 +4,10 @@
     Тригери для довідника Контрагенти_Папки
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using AccountingSoftware;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class Контрагенти_Папки_Triggers
     {

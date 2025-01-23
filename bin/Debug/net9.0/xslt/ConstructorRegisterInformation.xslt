@@ -6,7 +6,7 @@
     <xsl:param name="File" />
 
     <!-- Простори імен -->
-    <xsl:param name="NameSpaceGenerationCode" />
+    <xsl:param name="NameSpaceGeneratedCode" />
     <xsl:param name="NameSpace" />
 
     <xsl:template match="root">
@@ -45,7 +45,7 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриВідомостей;
+using <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриВідомостей;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
@@ -301,8 +301,8 @@ namespace <xsl:value-of select="$NameSpace"/>
 
 using InterfaceGtk;
 using AccountingSoftware;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриВідомостей;
-using ТабличніСписки = <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриВідомостей.ТабличніСписки;
+using <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриВідомостей;
+using ТабличніСписки = <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриВідомостей.ТабличніСписки;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
@@ -415,9 +415,9 @@ namespace <xsl:value-of select="$NameSpace"/>
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.Довідники;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.Документи;
-using <xsl:value-of select="$NameSpaceGenerationCode"/>.РегістриВідомостей;
+using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
+using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;
+using <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриВідомостей;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {

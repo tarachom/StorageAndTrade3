@@ -6,7 +6,7 @@
 
 */
 
-using StorageAndTrade_1_0;
+using GeneratedCode;
 
 namespace StorageAndTrade
 {

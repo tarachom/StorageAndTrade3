@@ -5,7 +5,7 @@
 
 using AccountingSoftware;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class СеріїНоменклатури_Triggers
     {

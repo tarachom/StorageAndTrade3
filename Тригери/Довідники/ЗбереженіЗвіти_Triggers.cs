@@ -4,10 +4,10 @@
     Тригери для довідника ЗбереженіЗвіти
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using StorageAndTrade;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class ЗбереженіЗвіти_Triggers
     {

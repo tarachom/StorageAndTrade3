@@ -6,8 +6,8 @@
 
 using InterfaceGtk;
 using AccountingSoftware;
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0;
+using GeneratedCode.Довідники;
+using GeneratedCode;
 
 namespace StorageAndTrade
 {

@@ -9,10 +9,10 @@ using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
-using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
-using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
-using StorageAndTrade_1_0;
+using ТабличніСписки = GeneratedCode.Документи.ТабличніСписки;
+using GeneratedCode.Документи;
+using GeneratedCode.Перелічення;
+using GeneratedCode;
 
 namespace StorageAndTrade
 {

@@ -1,6 +1,6 @@
 ﻿
 using Gtk;
-using StorageAndTrade_1_0.Довідники;
+using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
 {

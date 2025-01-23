@@ -4,7 +4,7 @@
     Тригери для довідника ПартіяТоварівКомпозит
 */
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class ПартіяТоварівКомпозит_Triggers
     {

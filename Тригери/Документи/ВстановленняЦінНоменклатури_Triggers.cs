@@ -4,10 +4,10 @@
     Тригери для документу ВстановленняЦінНоменклатури
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using StorageAndTrade;
 
-namespace StorageAndTrade_1_0.Документи
+namespace GeneratedCode.Документи
 {
     class ВстановленняЦінНоменклатури_Triggers
     {

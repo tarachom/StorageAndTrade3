@@ -6,9 +6,9 @@
 using Gtk;
 using InterfaceGtk;
 
-using Константи = StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using Константи = GeneratedCode.Константи;
+using GeneratedCode.Довідники;
+using Перелічення = GeneratedCode.Перелічення;
 
 using System.Xml.XPath;
 

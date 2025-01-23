@@ -9,8 +9,8 @@ using InterfaceGtk;
 using System.Text;
 
 using AccountingSoftware;
-using Константи = StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
+using Константи = GeneratedCode.Константи;
+using GeneratedCode.Довідники;
 
 using System.Xml.XPath;
 

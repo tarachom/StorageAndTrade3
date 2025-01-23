@@ -8,7 +8,7 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using StorageAndTrade_1_0.РегістриВідомостей;
+using GeneratedCode.РегістриВідомостей;
 
 namespace StorageAndTrade
 {

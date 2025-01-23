@@ -4,10 +4,10 @@
     Тригери для довідника Номенклатура_Папки
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using AccountingSoftware;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class Номенклатура_Папки_Triggers
     {

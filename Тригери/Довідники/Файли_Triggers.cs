@@ -4,9 +4,9 @@
     Тригери для довідника Файли
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class Файли_Triggers
     {

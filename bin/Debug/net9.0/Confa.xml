@@ -2,12 +2,12 @@
 <Configuration>
   <Name>"Зберігання та Торгівля" для України</Name>
   <Subtitle>Облік складу, торгівлі та фінансів. Версія 3.1</Subtitle>
-  <NameSpaceGenerationCode>StorageAndTrade_1_0</NameSpaceGenerationCode>
+  <NameSpaceGeneratedCode>GeneratedCode</NameSpaceGeneratedCode>
   <NameSpace>StorageAndTrade</NameSpace>
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>23.01.2025 11:31:46</DateTimeSave>
+  <DateTimeSave>23.01.2025 20:32:01</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1072,13 +1072,6 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>ПрограмаЗаповненаПочатковимиДаними</Name>
           <NameInTable>col_h7</NameInTable>
           <Desc>Відкрити форму початкового заповнення довідників</Desc>
-          <Type>boolean</Type>
-          <TabularParts />
-        </Constant>
-        <Constant>
-          <Name>ВідкриватиРобочийСтіл</Name>
-          <NameInTable>col_h6</NameInTable>
-          <Desc>Не використовується! </Desc>
           <Type>boolean</Type>
           <TabularParts />
         </Constant>

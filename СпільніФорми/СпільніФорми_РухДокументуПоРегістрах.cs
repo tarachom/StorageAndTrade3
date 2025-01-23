@@ -8,8 +8,8 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using StorageAndTrade_1_0;
-using ТабличніСписки = StorageAndTrade_1_0.РегістриНакопичення.ТабличніСписки;
+using GeneratedCode;
+using ТабличніСписки = GeneratedCode.РегістриНакопичення.ТабличніСписки;
 
 namespace StorageAndTrade
 {

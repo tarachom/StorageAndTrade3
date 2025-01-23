@@ -6,13 +6,13 @@
 */
 
 using AccountingSoftware;
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Документи;
+using GeneratedCode.Константи;
+using GeneratedCode.Документи;
 
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
-using StorageAndTrade_1_0.Перелічення;
+using GeneratedCode.Перелічення;
 
 namespace StorageAndTrade
 {

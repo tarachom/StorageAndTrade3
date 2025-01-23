@@ -4,9 +4,9 @@
     Тригери для довідника БанківськіРахункиКонтрагентів
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class БанківськіРахункиКонтрагентів_Triggers
     {

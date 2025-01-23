@@ -7,12 +7,12 @@
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Документи;
-using StorageAndTrade_1_0.Перелічення;
-using StorageAndTrade_1_0.РегістриВідомостей;
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode;
+using GeneratedCode.Довідники;
+using GeneratedCode.Документи;
+using GeneratedCode.Перелічення;
+using GeneratedCode.РегістриВідомостей;
+using GeneratedCode.Константи;
 
 namespace StorageAndTrade
 {

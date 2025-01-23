@@ -6,10 +6,10 @@
 */
 
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using AccountingSoftware;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     static class Номенклатура_Triggers
     {

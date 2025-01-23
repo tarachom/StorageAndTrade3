@@ -6,8 +6,8 @@
 using Gtk;
 using InterfaceGtk;
 
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.РегістриНакопичення;
+using GeneratedCode.Довідники;
+using GeneratedCode.РегістриНакопичення;
 
 namespace StorageAndTrade
 {

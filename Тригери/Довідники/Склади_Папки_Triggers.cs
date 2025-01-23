@@ -4,10 +4,10 @@
     Тригери для довідника Склади_Папки
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using AccountingSoftware;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class Склади_Папки_Triggers
     {

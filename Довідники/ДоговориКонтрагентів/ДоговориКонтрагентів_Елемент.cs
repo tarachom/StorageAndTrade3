@@ -8,8 +8,8 @@
 using Gtk;
 using InterfaceGtk;
 
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Перелічення;
+using GeneratedCode.Довідники;
+using GeneratedCode.Перелічення;
 
 namespace StorageAndTrade
 {

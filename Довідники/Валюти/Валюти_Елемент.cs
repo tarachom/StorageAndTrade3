@@ -5,7 +5,7 @@
 
 using Gtk;
 using InterfaceGtk;
-using StorageAndTrade_1_0.Довідники;
+using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
 {

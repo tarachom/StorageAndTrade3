@@ -4,10 +4,10 @@
 
 */
 
-using Конфа = StorageAndTrade_1_0;
-using Константи = StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.РегістриВідомостей;
+using Конфа = GeneratedCode;
+using Константи = GeneratedCode.Константи;
+using GeneratedCode.Довідники;
+using GeneratedCode.РегістриВідомостей;
 using AccountingSoftware;
 
 namespace StorageAndTrade

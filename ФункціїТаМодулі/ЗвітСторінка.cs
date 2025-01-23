@@ -6,9 +6,9 @@
 
 using Gtk;
 using InterfaceGtk;
-using StorageAndTrade_1_0;
+using GeneratedCode;
 using AccountingSoftware;
-using StorageAndTrade_1_0.Довідники;
+using GeneratedCode.Довідники;
 
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;

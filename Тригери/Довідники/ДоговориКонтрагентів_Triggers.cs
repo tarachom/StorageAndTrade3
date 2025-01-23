@@ -4,10 +4,10 @@
     Тригери для довідника ДоговориКонтрагентів
 */
 
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Перелічення;
+using GeneratedCode.Константи;
+using GeneratedCode.Перелічення;
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class ДоговориКонтрагентів_Triggers
     {

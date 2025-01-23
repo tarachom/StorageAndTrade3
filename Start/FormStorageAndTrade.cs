@@ -6,9 +6,9 @@
 using Gtk;
 using InterfaceGtk;
 
-using StorageAndTrade_1_0;
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
+using GeneratedCode;
+using GeneratedCode.Константи;
+using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
 {
@@ -85,7 +85,7 @@ namespace StorageAndTrade
         public void OpenFirstPages()
         {
             PageHome page = new PageHome();
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Стартова", () => page);
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Стартова", () => page, false, null, null, true);
 
             //Останні завантажені курси валют
             Task.Run(page.БлокКурсиВалют.StartDesktop);

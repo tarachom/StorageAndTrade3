@@ -6,8 +6,8 @@
 
 using AccountingSoftware;
 
-using Довідники = StorageAndTrade_1_0.Довідники;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using Довідники = GeneratedCode.Довідники;
+using Перелічення = GeneratedCode.Перелічення;
 
 namespace StorageAndTrade
 {

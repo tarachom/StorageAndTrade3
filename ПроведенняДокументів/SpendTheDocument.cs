@@ -8,11 +8,11 @@
 using AccountingSoftware;
 using StorageAndTrade;
 
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.РегістриНакопичення;
-using StorageAndTrade_1_0.РегістриВідомостей;
+using GeneratedCode.Довідники;
+using GeneratedCode.РегістриНакопичення;
+using GeneratedCode.РегістриВідомостей;
 
-namespace StorageAndTrade_1_0.Документи
+namespace GeneratedCode.Документи
 {
     class СпільніФункції
     {

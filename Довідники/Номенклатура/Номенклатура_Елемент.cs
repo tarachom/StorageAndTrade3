@@ -7,10 +7,10 @@
 
 using Gtk;
 using InterfaceGtk;
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
-using StorageAndTrade_1_0.Перелічення;
-using StorageAndTrade_1_0;
+using GeneratedCode.Константи;
+using GeneratedCode.Довідники;
+using GeneratedCode.Перелічення;
+using GeneratedCode;
 
 namespace StorageAndTrade
 {
@@ -188,7 +188,6 @@ namespace StorageAndTrade
 
         protected override async void Lock()
         {
-            //await Елемент.Lock();
             LockInfo(await Елемент.IsLockInfo());
         }
     }

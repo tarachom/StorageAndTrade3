@@ -4,7 +4,7 @@
 
   <xsl:template name="License">
 /*
-Copyright (C) 2019-2023 TARAKHOMYN YURIY IVANOVYCH
+Copyright (C) 2019-2025 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,10 +42,10 @@ limitations under the License.
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Перелічення;
+using <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Перелічення;
 using <xsl:value-of select="Configuration/NameSpace"/>;
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Довідники.ТабличніСписки
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Довідники.ТабличніСписки
 {
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
@@ -356,7 +356,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Документи.ТабличніСписки
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Документи.ТабличніСписки
 {
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
@@ -814,7 +814,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриВідомостей.ТабличніСписки
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.РегістриВідомостей.ТабличніСписки
 {
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
       <xsl:variable name="RegisterName" select="Name"/>
@@ -936,7 +936,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриНакопичення.ТабличніСписки
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.РегістриНакопичення.ТабличніСписки
 {
     <xsl:for-each select="Configuration/RegistersAccumulation/RegisterAccumulation">
       <xsl:variable name="RegisterName" select="Name"/>

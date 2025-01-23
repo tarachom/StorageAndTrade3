@@ -5,11 +5,11 @@
 */
 
 using AccountingSoftware;
-using StorageAndTrade_1_0;
-using Довідники = StorageAndTrade_1_0.Довідники;
-using Документи = StorageAndTrade_1_0.Документи;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
-using РегістриВідомостей = StorageAndTrade_1_0.РегістриВідомостей;
+using GeneratedCode;
+using Довідники = GeneratedCode.Довідники;
+using Документи = GeneratedCode.Документи;
+using Перелічення = GeneratedCode.Перелічення;
+using РегістриВідомостей = GeneratedCode.РегістриВідомостей;
 
 namespace StorageAndTrade
 {

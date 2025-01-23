@@ -4,12 +4,12 @@
     Тригери для документу ПоступленняТоварівТаПослуг
 */
 
-using StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
+using GeneratedCode.Константи;
+using GeneratedCode.Довідники;
 using AccountingSoftware;
 using StorageAndTrade;
 
-namespace StorageAndTrade_1_0.Документи
+namespace GeneratedCode.Документи
 {
     class ПоступленняТоварівТаПослуг_Triggers
     {

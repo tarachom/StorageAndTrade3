@@ -8,9 +8,9 @@ using Gtk;
 using InterfaceGtk;
 
 using AccountingSoftware;
-using StorageAndTrade_1_0;
-using Константи = StorageAndTrade_1_0.Константи;
-using Перелічення = StorageAndTrade_1_0.Перелічення;
+using GeneratedCode;
+using Константи = GeneratedCode.Константи;
+using Перелічення = GeneratedCode.Перелічення;
 
 namespace StorageAndTrade
 {

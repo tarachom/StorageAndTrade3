@@ -7,7 +7,7 @@
 using InterfaceGtk;
 
 using AccountingSoftware;
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 
 namespace StorageAndTrade
 {

@@ -4,10 +4,10 @@
     Тригери для документу РозхіднийКасовийОрдер
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 using StorageAndTrade;
 
-namespace StorageAndTrade_1_0.Документи
+namespace GeneratedCode.Документи
 {
     class РозхіднийКасовийОрдер_Triggers
     {

@@ -8,8 +8,8 @@
 using Gtk;
 using InterfaceGtk;
 
-using Константи = StorageAndTrade_1_0.Константи;
-using StorageAndTrade_1_0.Довідники;
+using Константи = GeneratedCode.Константи;
+using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
 {

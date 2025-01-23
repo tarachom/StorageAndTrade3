@@ -388,21 +388,21 @@
  * Дата конфігурації: <xsl:value-of select="Configuration/DateTimeSave"/>
  *
  *
- * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
+ * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
  *
  */
 
 using AccountingSoftware;
 using System.Xml;
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>
 {
     public static class Config
     {
         #region Const
 
         //Простір імен згенерованого коду
-        public const string NameSpageCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGenerationCode"/>";
+        public const string NameSpageCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>";
 
         //Простір імен програми
         public const string NameSpageProgram = "<xsl:value-of select="Configuration/NameSpace"/>";
@@ -491,7 +491,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>
     }
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Константи
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Константи
 {
     <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
 	  #region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
@@ -652,7 +652,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Кон�
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Довідники
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Довідники
 {
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
@@ -1113,7 +1113,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Дов�
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Перелічення
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Перелічення
 {
     <xsl:for-each select="Configuration/Enums/Enum">
     #region ENUM "<xsl:value-of select="Name"/>"
@@ -1203,7 +1203,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Пер�
     }
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Документи
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Документи
 {
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
@@ -1825,7 +1825,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Док�
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Журнали
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Журнали
 {
     #region Journal
     public class JournalSelect: AccountingSoftware.JournalSelect
@@ -1849,7 +1849,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Жур�
     #endregion
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриВідомостей
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.РегістриВідомостей
 {
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
        <xsl:variable name="RegisterName" select="Name"/>
@@ -2056,7 +2056,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.Рег�
   </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpaceGenerationCode"/>.РегістриНакопичення
+namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.РегістриНакопичення
 {
     public static class VirtualTablesСalculation
     {

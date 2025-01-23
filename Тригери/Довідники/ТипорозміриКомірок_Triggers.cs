@@ -4,7 +4,7 @@
     Тригери для довідника ТипорозміриКомірок
 */
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     class ТипорозміриКомірок_Triggers
     {

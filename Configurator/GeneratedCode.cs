@@ -3,24 +3,24 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 23.01.2025 11:31:46
+ * Дата конфігурації: 23.01.2025 20:32:01
  *
  *
- * Цей код згенерований в Конфігураторі 3. Шаблон CodeGeneration.xslt
+ * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
  *
  */
 
 using AccountingSoftware;
 using System.Xml;
 
-namespace StorageAndTrade_1_0
+namespace GeneratedCode
 {
     public static class Config
     {
         #region Const
 
         //Простір імен згенерованого коду
-        public const string NameSpageCodeGeneration = "StorageAndTrade_1_0";
+        public const string NameSpageCodeGeneration = "GeneratedCode";
 
         //Простір імен програми
         public const string NameSpageProgram = "StorageAndTrade";
@@ -162,7 +162,7 @@ namespace StorageAndTrade_1_0
     }
 }
 
-namespace StorageAndTrade_1_0.Константи
+namespace GeneratedCode.Константи
 {
     
 	  #region CONSTANTS BLOCK "ЗначенняЗаЗамовчуванням"
@@ -1779,25 +1779,13 @@ namespace StorageAndTrade_1_0.Константи
                 Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h7", value);
             }
         }
-        public static bool ВідкриватиРобочийСтіл_Const
-        {
-            get 
-            {
-                var recordResult = Task.Run( async () => { return await Config.Kernel.DataBase.SelectConstants(SpecialTables.Constants, "col_h6"); } ).Result;
-                return recordResult.Result ? ((recordResult.Value != DBNull.Value) ? (bool)recordResult.Value : false) : false;
-            }
-            set
-            {
-                Config.Kernel.DataBase.SaveConstants(SpecialTables.Constants, "col_h6", value);
-            }
-        }
              
     }
     #endregion
     
 }
 
-namespace StorageAndTrade_1_0.Довідники
+namespace GeneratedCode.Довідники
 {
     
     #region DIRECTORY "Організації"
@@ -11508,7 +11496,7 @@ namespace StorageAndTrade_1_0.Довідники
     
 }
 
-namespace StorageAndTrade_1_0.Перелічення
+namespace GeneratedCode.Перелічення
 {
     
     #region ENUM "ТипиКонтактноїІнформації"
@@ -12602,7 +12590,7 @@ namespace StorageAndTrade_1_0.Перелічення
     }
 }
 
-namespace StorageAndTrade_1_0.Документи
+namespace GeneratedCode.Документи
 {
     
     #region DOCUMENT "ЗамовленняПостачальнику"
@@ -27546,7 +27534,7 @@ namespace StorageAndTrade_1_0.Документи
     
 }
 
-namespace StorageAndTrade_1_0.Журнали
+namespace GeneratedCode.Журнали
 {
     #region Journal
     public class JournalSelect: AccountingSoftware.JournalSelect
@@ -27593,7 +27581,7 @@ namespace StorageAndTrade_1_0.Журнали
     #endregion
 }
 
-namespace StorageAndTrade_1_0.РегістриВідомостей
+namespace GeneratedCode.РегістриВідомостей
 {
     
     #region REGISTER "ЦіниНоменклатури"
@@ -28459,7 +28447,7 @@ namespace StorageAndTrade_1_0.РегістриВідомостей
   
 }
 
-namespace StorageAndTrade_1_0.РегістриНакопичення
+namespace GeneratedCode.РегістриНакопичення
 {
     public static class VirtualTablesСalculation
     {

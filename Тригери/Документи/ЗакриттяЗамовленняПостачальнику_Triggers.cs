@@ -4,9 +4,9 @@
     Тригери для документу ЗакриттяЗамовленняПостачальнику
 */
 
-using StorageAndTrade_1_0.Константи;
+using GeneratedCode.Константи;
 
-namespace StorageAndTrade_1_0.Документи
+namespace GeneratedCode.Документи
 {
     class ЗакриттяЗамовленняПостачальнику_Triggers
     {

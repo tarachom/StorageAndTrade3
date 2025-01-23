@@ -7,8 +7,8 @@ using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
 
-using StorageAndTrade_1_0;
-using ТабличніСписки = StorageAndTrade_1_0.Документи.ТабличніСписки;
+using GeneratedCode;
+using ТабличніСписки = GeneratedCode.Документи.ТабличніСписки;
 
 namespace StorageAndTrade
 {
