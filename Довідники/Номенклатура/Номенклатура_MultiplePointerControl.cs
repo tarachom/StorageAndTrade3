@@ -57,15 +57,19 @@ namespace StorageAndTrade
                 pointers.Add(item);
 
             Pointer = item;
+            //AfterSelectFunc?.Invoke();
         }
+
+
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
-
+            BeforeClickOpenFunc?.Invoke();
             Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір
             {
                 PopoverParent = popover,
+                DirectoryPointerItem = pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
                     Add(new Номенклатура_Pointer(selectPointer));
@@ -76,8 +80,6 @@ namespace StorageAndTrade
                         Add(new Номенклатура_Pointer(selectPointer));
                 }
             };
-
-            page.DirectoryPointerItem = pointer.UnigueID;
 
             popover.Add(page);
             popover.ShowAll();
@@ -125,6 +127,8 @@ namespace StorageAndTrade
         {
             pointers = [];
             Pointer = new Номенклатура_Pointer();
+            AfterSelectFunc?.Invoke();
+            AfterClearFunc?.Invoke();
         }
     }
 }

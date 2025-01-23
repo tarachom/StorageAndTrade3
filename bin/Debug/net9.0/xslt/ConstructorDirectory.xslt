@@ -1065,6 +1065,10 @@ namespace <xsl:value-of select="$NameSpace"/>
     <xsl:template name="DirectoryMultiplePointerControl">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
 
+        <!-- Додатова інформація про підпорядкування довідника -->
+        <xsl:variable name="DirectoryOwner" select="Directory/DirectoryOwner"/>
+        <xsl:variable name="PointerFieldOwner" select="Directory/PointerFieldOwner"/>
+
 /*     
         <xsl:value-of select="$DirectoryName"/>_MultiplePointerControl.cs
         MultiplePointerControl
@@ -1122,15 +1126,22 @@ namespace <xsl:value-of select="$NameSpace"/>
                 pointers.Add(item);
 
             Pointer = item;
+            //AfterSelectFunc?.Invoke();
         }
+
+        <xsl:if test="normalize-space($DirectoryOwner) != ''">
+        <xsl:variable name="namePointer" select="substring-after($DirectoryOwner, '.')" />
+        public <xsl:value-of select="$namePointer"/>_Pointer Власник { get; set; } = new <xsl:value-of select="$namePointer"/>_Pointer();
+        </xsl:if>
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
-
+            BeforeClickOpenFunc?.Invoke();
             <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір page = new <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір
             {
                 PopoverParent = popover,
+                DirectoryPointerItem = pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
                 {
                     Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
@@ -1141,9 +1152,9 @@ namespace <xsl:value-of select="$NameSpace"/>
                         Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
                 }
             };
-
-            page.DirectoryPointerItem = pointer.UnigueID;
-
+            <xsl:if test="normalize-space($DirectoryOwner) != ''">
+            page.Власник.Pointer = Власник;
+            </xsl:if>
             popover.Add(page);
             popover.ShowAll();
 
@@ -1190,6 +1201,8 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             pointers = [];
             Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
+            AfterSelectFunc?.Invoke();
+            AfterClearFunc?.Invoke();
         }
     }
 }

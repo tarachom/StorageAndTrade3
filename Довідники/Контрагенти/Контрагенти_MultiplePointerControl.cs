@@ -1,7 +1,7 @@
 
 
 /*     
-        Каси_MultiplePointerControl.cs
+        Контрагенти_MultiplePointerControl.cs
         MultiplePointerControl
 */
 
@@ -12,25 +12,25 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    public class Каси_MultiplePointerControl : MultiplePointerControl
+    public class Контрагенти_MultiplePointerControl : MultiplePointerControl
     {
-        event EventHandler<Каси_Pointer> PointerChanged;
+        event EventHandler<Контрагенти_Pointer> PointerChanged;
 
-        public Каси_MultiplePointerControl()
+        public Контрагенти_MultiplePointerControl()
         {
-            pointer = new Каси_Pointer();
+            pointer = new Контрагенти_Pointer();
             WidthPresentation = 300;
-            Caption = $"{Каси_Const.FULLNAME}:";
-            PointerChanged += async (object? _, Каси_Pointer pointer) =>
+            Caption = $"{Контрагенти_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Контрагенти_Pointer pointer) =>
             {
                 Presentation = pointer != null ? await pointer.GetPresentation() : "";
                 if (pointers.Count > 1) Presentation += $" ... {pointers.Count}";
             };
         }
 
-        Каси_Pointer pointer;
-        List<Каси_Pointer> pointers = [];
-        public Каси_Pointer Pointer
+        Контрагенти_Pointer pointer;
+        List<Контрагенти_Pointer> pointers = [];
+        public Контрагенти_Pointer Pointer
         {
             get
             {
@@ -43,44 +43,44 @@ namespace StorageAndTrade
             }
         }
 
-        public Каси_Pointer[] GetPointers()
+        public Контрагенти_Pointer[] GetPointers()
         {
-            Каси_Pointer[] copy = new Каси_Pointer[pointers.Count];
+            Контрагенти_Pointer[] copy = new Контрагенти_Pointer[pointers.Count];
             pointers.CopyTo(copy);
 
             return copy;
         }
 
-        void Add(Каси_Pointer item)
+        void Add(Контрагенти_Pointer item)
         {
-            if (!pointers.Exists((Каси_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
+            if (!pointers.Exists((Контрагенти_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
                 pointers.Add(item);
 
             Pointer = item;
             //AfterSelectFunc?.Invoke();
         }
 
-
+        
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
             BeforeClickOpenFunc?.Invoke();
-            Каси_ШвидкийВибір page = new Каси_ШвидкийВибір
+            Контрагенти_ШвидкийВибір page = new Контрагенти_ШвидкийВибір
             {
                 PopoverParent = popover,
                 DirectoryPointerItem = pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
-                    Add(new Каси_Pointer(selectPointer));
+                    Add(new Контрагенти_Pointer(selectPointer));
                 },
                 CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =>
                 {
                     foreach (var selectPointer in selectPointers)
-                        Add(new Каси_Pointer(selectPointer));
+                        Add(new Контрагенти_Pointer(selectPointer));
                 }
             };
-
+            
             popover.Add(page);
             popover.ShowAll();
 
@@ -89,7 +89,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask FillList(ListBox listBox)
         {
-            foreach (Каси_Pointer item in pointers)
+            foreach (Контрагенти_Pointer item in pointers)
             {
                 Box hBox = new Box(Orientation.Horizontal, 0);
                 ListBoxRow listBoxRow = [hBox];
@@ -111,7 +111,7 @@ namespace StorageAndTrade
                     listBox.Remove(listBoxRow);
 
                     if (Pointer.UnigueID.ToString() == item.UnigueID.ToString())
-                        Pointer = pointers.Count > 0 ? pointers[0] : new Каси_Pointer();
+                        Pointer = pointers.Count > 0 ? pointers[0] : new Контрагенти_Pointer();
                     else
                         PointerChanged?.Invoke(null, pointer);
                 };
@@ -126,9 +126,10 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             pointers = [];
-            Pointer = new Каси_Pointer();
+            Pointer = new Контрагенти_Pointer();
             AfterSelectFunc?.Invoke();
             AfterClearFunc?.Invoke();
         }
     }
 }
+    

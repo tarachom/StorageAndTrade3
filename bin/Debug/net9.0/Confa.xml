@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>22.01.2025 20:39:25</DateTimeSave>
+  <DateTimeSave>23.01.2025 11:31:46</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -3570,6 +3570,11 @@ END]]></Value>
           <Type>ListSmallSelect</Type>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
+        <Form>
+          <Name>MultiplePointerControl</Name>
+          <Desc>MultiplePointerControl</Desc>
+          <Type>MultiplePointerControl</Type>
+        </Form>
       </Forms>
     </Directory>
     <Directory>
@@ -4107,6 +4112,11 @@ END]]></Value>
               <SortNum>100</SortNum>
             </TablePart>
           </ElementTableParts>
+        </Form>
+        <Form>
+          <Name>MultiplePointerControl</Name>
+          <Desc>MultiplePointerControl</Desc>
+          <Type>MultiplePointerControl</Type>
         </Form>
       </Forms>
     </Directory>
@@ -5822,6 +5832,11 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
+        <Form>
+          <Name>MultiplePointerControl</Name>
+          <Desc>MultiplePointerControl</Desc>
+          <Type>MultiplePointerControl</Type>
+        </Form>
       </Forms>
     </Directory>
     <Directory>
@@ -6014,6 +6029,11 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
+        <Form>
+          <Name>MultiplePointerControl</Name>
+          <Desc>MultiplePointerControl</Desc>
+          <Type>MultiplePointerControl</Type>
+        </Form>
       </Forms>
     </Directory>
     <Directory>
@@ -6179,6 +6199,11 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
+        <Form>
+          <Name>MultiplePointerControl</Name>
+          <Desc>MultiplePointerControl</Desc>
+          <Type>MultiplePointerControl</Type>
+        </Form>
       </Forms>
     </Directory>
     <Directory>
@@ -6343,6 +6368,11 @@ FROM
             </Field>
           </ElementFields>
           <ElementTableParts />
+        </Form>
+        <Form>
+          <Name>MultiplePointerControl</Name>
+          <Desc>MultiplePointerControl</Desc>
+          <Type>MultiplePointerControl</Type>
         </Form>
       </Forms>
     </Directory>

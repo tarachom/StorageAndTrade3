@@ -1,7 +1,7 @@
 
 
 /*     
-        Каси_MultiplePointerControl.cs
+        ХарактеристикиНоменклатури_MultiplePointerControl.cs
         MultiplePointerControl
 */
 
@@ -12,25 +12,25 @@ using StorageAndTrade_1_0.Довідники;
 
 namespace StorageAndTrade
 {
-    public class Каси_MultiplePointerControl : MultiplePointerControl
+    public class ХарактеристикиНоменклатури_MultiplePointerControl : MultiplePointerControl
     {
-        event EventHandler<Каси_Pointer> PointerChanged;
+        event EventHandler<ХарактеристикиНоменклатури_Pointer> PointerChanged;
 
-        public Каси_MultiplePointerControl()
+        public ХарактеристикиНоменклатури_MultiplePointerControl()
         {
-            pointer = new Каси_Pointer();
+            pointer = new ХарактеристикиНоменклатури_Pointer();
             WidthPresentation = 300;
-            Caption = $"{Каси_Const.FULLNAME}:";
-            PointerChanged += async (object? _, Каси_Pointer pointer) =>
+            Caption = $"{ХарактеристикиНоменклатури_Const.FULLNAME}:";
+            PointerChanged += async (object? _, ХарактеристикиНоменклатури_Pointer pointer) =>
             {
                 Presentation = pointer != null ? await pointer.GetPresentation() : "";
                 if (pointers.Count > 1) Presentation += $" ... {pointers.Count}";
             };
         }
 
-        Каси_Pointer pointer;
-        List<Каси_Pointer> pointers = [];
-        public Каси_Pointer Pointer
+        ХарактеристикиНоменклатури_Pointer pointer;
+        List<ХарактеристикиНоменклатури_Pointer> pointers = [];
+        public ХарактеристикиНоменклатури_Pointer Pointer
         {
             get
             {
@@ -43,43 +43,45 @@ namespace StorageAndTrade
             }
         }
 
-        public Каси_Pointer[] GetPointers()
+        public ХарактеристикиНоменклатури_Pointer[] GetPointers()
         {
-            Каси_Pointer[] copy = new Каси_Pointer[pointers.Count];
+            ХарактеристикиНоменклатури_Pointer[] copy = new ХарактеристикиНоменклатури_Pointer[pointers.Count];
             pointers.CopyTo(copy);
 
             return copy;
         }
 
-        void Add(Каси_Pointer item)
+        void Add(ХарактеристикиНоменклатури_Pointer item)
         {
-            if (!pointers.Exists((Каси_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
+            if (!pointers.Exists((ХарактеристикиНоменклатури_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
                 pointers.Add(item);
 
             Pointer = item;
             //AfterSelectFunc?.Invoke();
         }
 
-
+        public Номенклатура_Pointer Власник { get; set; } = new Номенклатура_Pointer();
 
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
             BeforeClickOpenFunc?.Invoke();
-            Каси_ШвидкийВибір page = new Каси_ШвидкийВибір
+            ХарактеристикиНоменклатури_ШвидкийВибір page = new ХарактеристикиНоменклатури_ШвидкийВибір
             {
                 PopoverParent = popover,
                 DirectoryPointerItem = pointer.UnigueID,
                 CallBack_OnSelectPointer = (UnigueID selectPointer) =>
                 {
-                    Add(new Каси_Pointer(selectPointer));
+                    Add(new ХарактеристикиНоменклатури_Pointer(selectPointer));
                 },
                 CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =>
                 {
                     foreach (var selectPointer in selectPointers)
-                        Add(new Каси_Pointer(selectPointer));
+                        Add(new ХарактеристикиНоменклатури_Pointer(selectPointer));
                 }
             };
+
+            page.Власник.Pointer = Власник;
 
             popover.Add(page);
             popover.ShowAll();
@@ -89,7 +91,7 @@ namespace StorageAndTrade
 
         protected override async ValueTask FillList(ListBox listBox)
         {
-            foreach (Каси_Pointer item in pointers)
+            foreach (ХарактеристикиНоменклатури_Pointer item in pointers)
             {
                 Box hBox = new Box(Orientation.Horizontal, 0);
                 ListBoxRow listBoxRow = [hBox];
@@ -111,7 +113,7 @@ namespace StorageAndTrade
                     listBox.Remove(listBoxRow);
 
                     if (Pointer.UnigueID.ToString() == item.UnigueID.ToString())
-                        Pointer = pointers.Count > 0 ? pointers[0] : new Каси_Pointer();
+                        Pointer = pointers.Count > 0 ? pointers[0] : new ХарактеристикиНоменклатури_Pointer();
                     else
                         PointerChanged?.Invoke(null, pointer);
                 };
@@ -126,7 +128,7 @@ namespace StorageAndTrade
         protected override void OnClear(object? sender, EventArgs args)
         {
             pointers = [];
-            Pointer = new Каси_Pointer();
+            Pointer = new ХарактеристикиНоменклатури_Pointer();
             AfterSelectFunc?.Invoke();
             AfterClearFunc?.Invoke();
         }

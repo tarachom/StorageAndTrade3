@@ -22,14 +22,14 @@ namespace StorageAndTrade
         CheckButton СобівартістьЗакупки = new CheckButton("Собівартість закупки");
 
         Організації_PointerControl Організація = new Організації_PointerControl();
-        Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
-        Контрагенти_Папки_PointerControl Контрагент_Папка = new Контрагенти_Папки_PointerControl() { Caption = "Контрагент папка:" };
+        Контрагенти_MultiplePointerControl Контрагент = new Контрагенти_MultiplePointerControl();
+        Контрагенти_Папки_MultiplePointerControl Контрагент_Папка = new Контрагенти_Папки_MultiplePointerControl() { Caption = "Контрагент папка:" };
         ДоговориКонтрагентів_PointerControl ДоговірКонтрагента = new ДоговориКонтрагентів_PointerControl() { Caption = "Договір:" };
-        Номенклатура_PointerControl Номенклатура = new Номенклатура_PointerControl();
-        Номенклатура_Папки_PointerControl Номенклатура_Папка = new Номенклатура_Папки_PointerControl() { Caption = "Номенклатура папка:" };
-        ХарактеристикиНоменклатури_PointerControl ХарактеристикиНоменклатури = new ХарактеристикиНоменклатури_PointerControl();
-        Склади_PointerControl Склад = new Склади_PointerControl();
-        Склади_Папки_PointerControl Склад_Папка = new Склади_Папки_PointerControl() { Caption = "Склад папка:" };
+        Номенклатура_MultiplePointerControl Номенклатура = new Номенклатура_MultiplePointerControl();
+        Номенклатура_Папки_MultiplePointerControl Номенклатура_Папка = new Номенклатура_Папки_MultiplePointerControl() { Caption = "Номенклатура папка:" };
+        ХарактеристикиНоменклатури_MultiplePointerControl ХарактеристикиНоменклатури = new ХарактеристикиНоменклатури_MultiplePointerControl();
+        Склади_MultiplePointerControl Склад = new Склади_MultiplePointerControl();
+        Склади_Папки_MultiplePointerControl Склад_Папка = new Склади_Папки_MultiplePointerControl() { Caption = "Склад папка:" };
         ComboBoxText ТипНоменклатури = new ComboBoxText();
         Switch ТипНоменклатури_Включено = new Switch();
         ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "Вид:" };
@@ -41,14 +41,14 @@ namespace StorageAndTrade
             public bool ГрупуватиПоПеріоду;
             public bool СобівартістьЗакупки;
             public Організації_Pointer Організація;
-            public Контрагенти_Pointer Контрагент;
-            public Контрагенти_Папки_Pointer Контрагент_Папка;
+            public Контрагенти_Pointer[] Контрагент;
+            public Контрагенти_Папки_Pointer[] Контрагент_Папка;
             public ДоговориКонтрагентів_Pointer ДоговірКонтрагента;
-            public Номенклатура_Pointer Номенклатура;
-            public Номенклатура_Папки_Pointer Номенклатура_Папка;
-            public ХарактеристикиНоменклатури_Pointer ХарактеристикиНоменклатури;
-            public Склади_Pointer Склад;
-            public Склади_Папки_Pointer Склад_Папка;
+            public Номенклатура_Pointer[] Номенклатура;
+            public Номенклатура_Папки_Pointer[] Номенклатура_Папка;
+            public ХарактеристикиНоменклатури_Pointer[] ХарактеристикиНоменклатури;
+            public Склади_Pointer[] Склад;
+            public Склади_Папки_Pointer[] Склад_Папка;
             public ТипиНоменклатури ТипНоменклатури;
             public bool ТипНоменклатури_Включено;
             public ВидиНоменклатури_Pointer ВидНоменклатури;
@@ -56,7 +56,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Звіт_Продажі() 
+        public Звіт_Продажі()
         {
             //Кнопки
             Button bOborot = new Button("Обороти");
@@ -147,14 +147,14 @@ namespace StorageAndTrade
                 ГрупуватиПоПеріоду = ГрупуватиПоПеріоду.Active,
                 СобівартістьЗакупки = СобівартістьЗакупки.Active,
                 Організація = Організація.Pointer,
-                Контрагент = Контрагент.Pointer,
-                Контрагент_Папка = Контрагент_Папка.Pointer,
+                Контрагент = Контрагент.GetPointers(),
+                Контрагент_Папка = Контрагент_Папка.GetPointers(),
                 ДоговірКонтрагента = ДоговірКонтрагента.Pointer,
-                Номенклатура = Номенклатура.Pointer,
-                Номенклатура_Папка = Номенклатура_Папка.Pointer,
-                ХарактеристикиНоменклатури = ХарактеристикиНоменклатури.Pointer,
-                Склад = Склад.Pointer,
-                Склад_Папка = Склад_Папка.Pointer,
+                Номенклатура = Номенклатура.GetPointers(),
+                Номенклатура_Папка = Номенклатура_Папка.GetPointers(),
+                ХарактеристикиНоменклатури = ХарактеристикиНоменклатури.GetPointers(),
+                Склад = Склад.GetPointers(),
+                Склад_Папка = Склад_Папка.GetPointers(),
                 ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId),
                 ТипНоменклатури_Включено = ТипНоменклатури_Включено.Active,
                 ВидНоменклатури = ВидНоменклатури.Pointer
@@ -165,42 +165,77 @@ namespace StorageAndTrade
         {
             string text = "";
 
-            text += "З <b>" +
-                Фільтр.ДатаПочатокПеріоду.ToString("dd.MM.yyyy") + "</b> по <b>" +
-                Фільтр.ДатаКінецьПеріоду.ToString("dd.MM.yyyy") + "</b>; ";
+            text += "З " +
+                Фільтр.ДатаПочатокПеріоду.ToString("dd.MM.yyyy") + " по " +
+                Фільтр.ДатаКінецьПеріоду.ToString("dd.MM.yyyy") + "; ";
 
             if (!Фільтр.Організація.IsEmpty())
-                text += "Організація: <b>" + await Фільтр.Організація.GetPresentation() + "</b>; ";
+                text += "Організація: " + await Фільтр.Організація.GetPresentation() + "; ";
 
-            if (!Фільтр.Контрагент.IsEmpty())
-                text += "Контрагент: <b>" + await Фільтр.Контрагент.GetPresentation() + "</b>; ";
+            if (Фільтр.Контрагент.Length > 0)
+            {
+                foreach (var item in Фільтр.Контрагент)
+                    await item.GetPresentation();
+
+                text += "Контрагент: " + string.Join(", ", Фільтр.Контрагент.Select(x => x.Назва)) + "; ";
+            }
 
             if (!Фільтр.ДоговірКонтрагента.IsEmpty())
-                text += "Договір: <b>" + await Фільтр.ДоговірКонтрагента.GetPresentation() + "</b>; ";
+                text += "Договір: " + await Фільтр.ДоговірКонтрагента.GetPresentation() + "; ";
 
-            if (!Фільтр.Контрагент_Папка.IsEmpty())
-                text += "Контрагент папка: <b>" + await Фільтр.Контрагент_Папка.GetPresentation() + "</b>; ";
+            if (Фільтр.Контрагент_Папка.Length > 0)
+            {
+                foreach (var item in Фільтр.Контрагент_Папка)
+                    await item.GetPresentation();
 
-            if (!Фільтр.Номенклатура.IsEmpty())
-                text += "Номенклатура: <b>" + await Фільтр.Номенклатура.GetPresentation() + "</b>; ";
+                text += "Контрагент папка: " + string.Join(", ", Фільтр.Контрагент_Папка.Select(x => x.Назва)) + "; ";
+            }
 
-            if (!Фільтр.Номенклатура_Папка.IsEmpty())
-                text += "Номенклатура папка: <b>" + await Фільтр.Номенклатура_Папка.GetPresentation() + "</b>; ";
+            if (Фільтр.Номенклатура.Length > 0)
+            {
+                foreach (var item in Фільтр.Номенклатура)
+                    await item.GetPresentation();
 
-            if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
-                text += "Характеристика: <b>" + await Фільтр.ХарактеристикиНоменклатури.GetPresentation() + "</b>; ";
+                text += "Номенклатура: " + string.Join(", ", Фільтр.Номенклатура.Select(x => x.Назва)) + "; ";
+            }
 
-            if (!Фільтр.Склад.IsEmpty())
-                text += "Склад: <b>" + await Фільтр.Склад.GetPresentation() + "</b>; ";
+            if (Фільтр.Номенклатура_Папка.Length > 0)
+            {
+                foreach (var item in Фільтр.Номенклатура_Папка)
+                    await item.GetPresentation();
 
-            if (!Фільтр.Склад_Папка.IsEmpty())
-                text += "Склад папка: <b>" + await Фільтр.Склад_Папка.GetPresentation() + "</b>; ";
+                text += "Номенклатура папка: " + string.Join(", ", Фільтр.Номенклатура_Папка.Select(x => x.Назва)) + "; ";
+            }
+
+            if (Фільтр.ХарактеристикиНоменклатури.Length > 0)
+            {
+                foreach (var item in Фільтр.ХарактеристикиНоменклатури)
+                    await item.GetPresentation();
+
+                text += "Характеристика: " + string.Join(", ", Фільтр.ХарактеристикиНоменклатури.Select(x => x.Назва)) + "; ";
+            }
+
+            if (Фільтр.Склад.Length > 0)
+            {
+                foreach (var item in Фільтр.Склад)
+                    await item.GetPresentation();
+
+                text += "Склад: " + string.Join(", ", Фільтр.Склад.Select(x => x.Назва)) + "; ";
+            }
+
+            if (Фільтр.Склад_Папка.Length > 0)
+            {
+                foreach (var item in Фільтр.Склад_Папка)
+                    await item.GetPresentation();
+
+                text += "Склад папка: " + string.Join(", ", Фільтр.Склад_Папка.Select(x => x.Назва)) + "; ";
+            }
 
             if (Фільтр.ТипНоменклатури_Включено)
-                text += "Тип: <b>" + Фільтр.ТипНоменклатури.ToString() + "</b>; ";
+                text += "Тип: " + Фільтр.ТипНоменклатури.ToString() + "; ";
 
             if (!Фільтр.ВидНоменклатури.IsEmpty())
-                text += "Вид: <b>" + await Фільтр.ВидНоменклатури.GetPresentation() + "</b>; ";
+                text += "Вид: " + await Фільтр.ВидНоменклатури.GetPresentation() + "; ";
 
             return text;
         }
@@ -272,7 +307,7 @@ WHERE
             }
 
             //Відбір по всіх вкладених папках вибраної папки Склади
-            if (!Фільтр.Склад_Папка.IsEmpty())
+            if (Фільтр.Склад_Папка.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -284,7 +319,7 @@ WHERE
     (
         SELECT uid
         FROM {Склади_Папки_Const.TABLE}
-        WHERE {Склади_Папки_Const.TABLE}.uid = '{Фільтр.Склад_Папка.UnigueID}' 
+        WHERE {Склади_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Склад_Папка.Select(x => x.UnigueID.UGuid))}')
         UNION ALL
         SELECT {Склади_Папки_Const.TABLE}.uid
         FROM {Склади_Папки_Const.TABLE}
@@ -295,18 +330,18 @@ WHERE
             }
 
             //Відбір по вибраному елементу Склади
-            if (!Фільтр.Склад.IsEmpty())
+            if (Фільтр.Склад.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Склади.uid = '{Фільтр.Склад.UnigueID}'
+Довідник_Склади.uid IN ('{string.Join("', '", Фільтр.Склад.Select(x => x.UnigueID.UGuid))}')
 ";
             }
 
             //Відбір по всіх вкладених папках вибраної папки Контрагент
-            if (!Фільтр.Контрагент_Папка.IsEmpty())
+            if (Фільтр.Контрагент_Папка.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -318,7 +353,7 @@ WHERE
     (
         SELECT uid
         FROM {Контрагенти_Папки_Const.TABLE}
-        WHERE {Контрагенти_Папки_Const.TABLE}.uid = '{Фільтр.Контрагент_Папка.UnigueID}' 
+        WHERE {Контрагенти_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Контрагент_Папка.Select(x => x.UnigueID.UGuid))}')
         UNION ALL
         SELECT {Контрагенти_Папки_Const.TABLE}.uid
         FROM {Контрагенти_Папки_Const.TABLE}
@@ -329,13 +364,13 @@ WHERE
             }
 
             //Відбір по вибраному елементу Контрагент
-            if (!Фільтр.Контрагент.IsEmpty())
+            if (Фільтр.Контрагент.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Контрагенти.uid = '{Фільтр.Контрагент.UnigueID}'
+Довідник_Контрагенти.uid IN ('{string.Join("', '", Фільтр.Контрагент.Select(x => x.UnigueID.UGuid))}')
 ";
             }
 
@@ -351,7 +386,7 @@ WHERE
             }
 
             //Відбір по всіх вкладених папках вибраної папки Номенклатури
-            if (!Фільтр.Номенклатура_Папка.IsEmpty())
+            if (Фільтр.Номенклатура_Папка.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
@@ -363,7 +398,7 @@ WHERE
     (
         SELECT uid
         FROM {Номенклатура_Папки_Const.TABLE}
-        WHERE {Номенклатура_Папки_Const.TABLE}.uid = '{Фільтр.Номенклатура_Папка.UnigueID}' 
+        WHERE {Номенклатура_Папки_Const.TABLE}.uid IN ('{string.Join("', '", Фільтр.Номенклатура_Папка.Select(x => x.UnigueID.UGuid))}') 
         UNION ALL
         SELECT {Номенклатура_Папки_Const.TABLE}.uid
         FROM {Номенклатура_Папки_Const.TABLE}
@@ -374,24 +409,24 @@ WHERE
             }
 
             //Відбір по вибраному елементу Номенклатура
-            if (!Фільтр.Номенклатура.IsEmpty())
+            if (Фільтр.Номенклатура.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_Номенклатура.uid = '{Фільтр.Номенклатура.UnigueID}'
+Довідник_Номенклатура.uid IN ('{string.Join("', '", Фільтр.Номенклатура.Select(x => x.UnigueID.UGuid))}') 
 ";
             }
 
             //Відбір по вибраному елементу Характеристики Номенклатури
-            if (!Фільтр.ХарактеристикиНоменклатури.IsEmpty())
+            if (Фільтр.ХарактеристикиНоменклатури.Length > 0)
             {
                 query += isExistParent ? "AND" : "WHERE";
                 isExistParent = true;
 
                 query += $@"
-Довідник_ХарактеристикиНоменклатури.uid = '{Фільтр.ХарактеристикиНоменклатури.UnigueID}'
+Довідник_ХарактеристикиНоменклатури.uid IN ('{string.Join("', '", Фільтр.ХарактеристикиНоменклатури.Select(x => x.UnigueID.UGuid))}') 
 ";
             }
 
@@ -476,6 +511,5 @@ ORDER BY " +
             Звіт.FillTreeView();
             await Звіт.View(Notebook);
         }
-
     }
 }
