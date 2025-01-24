@@ -60,8 +60,6 @@ namespace StorageAndTrade
             //AfterSelectFunc?.Invoke();
         }
 
-
-
         protected override async void OpenSelect(object? sender, EventArgs args)
         {
             Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
