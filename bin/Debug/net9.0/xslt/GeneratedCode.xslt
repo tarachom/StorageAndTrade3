@@ -814,12 +814,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         {
             return new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID.UGuid);
         }
-
+        <!--
         public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
         }
-
+        -->
         public async ValueTask&lt;string&gt; GetPresentation()
         {
             return await base.BasePresentation(<xsl:value-of select="$DirectoryName"/>_Const.PRESENTATION_FIELDS);
@@ -845,12 +845,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
 
     public class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
-        public <xsl:value-of select="$DirectoryName"/>_Pointer(object? uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        public <xsl:value-of select="$DirectoryName"/>_Pointer(object? uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>", <xsl:value-of select="$DirectoryName"/>_Const.TYPE)
         {
             base.Init(new UnigueID(uid), null);
         }
         
-        public <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt;? fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        public <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt;? fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>", <xsl:value-of select="$DirectoryName"/>_Const.TYPE)
         {
             base.Init(uid, fields);
         }
@@ -867,12 +867,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             return new <xsl:value-of select="$DirectoryName"/>_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
         }
 
-        public string Назва { get; set; } = "";
-
+        public string Назва
+        {
+            get { return Name; } set { Name = value; }
+        }
 
         public async ValueTask&lt;string&gt; GetPresentation()
         {
-            return Назва = await base.BasePresentation(<xsl:value-of select="$DirectoryName"/>_Const.PRESENTATION_FIELDS);
+            return Name = await base.BasePresentation(<xsl:value-of select="$DirectoryName"/>_Const.PRESENTATION_FIELDS);
         }
 
         public static void GetJoin(Query querySelect, string joinField, string parentTable, string joinTableAlias, string fieldAlias)
@@ -885,26 +887,23 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            <xsl:value-of select="$DirectoryName"/>_Objest? obj = await GetDirectoryObject();
-            if (obj != null)
-            {
-                <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
-                    await <xsl:value-of select="$DirectoryName"/>_Triggers.<xsl:value-of select="TriggerFunctions/SetDeletionLabel"/>(obj, label);
-                </xsl:if>
-                await base.BaseDeletionLabel(label);
-            }
+            <xsl:if test="normalize-space(TriggerFunctions/SetDeletionLabel) != '' and TriggerFunctions/SetDeletionLabel[@Action = '1']">
+              <xsl:value-of select="$DirectoryName"/>_Objest? obj = await GetDirectoryObject();
+              if (obj != null) await <xsl:value-of select="$DirectoryName"/>_Triggers.<xsl:value-of select="TriggerFunctions/SetDeletionLabel"/>(obj, label);
+            </xsl:if>
+            await base.BaseDeletionLabel(label);
         }
 		
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetEmptyPointer()
         {
             return new <xsl:value-of select="$DirectoryName"/>_Pointer();
         }
-
+        <!--
         public UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
         }
-
+        -->
         public void Clear()
         {
             Init(new UnigueID(), null);
@@ -1290,7 +1289,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                 return false;
         }
         
-        public async Task&lt;bool&gt; Save()
+        public async ValueTask&lt;bool&gt; Save()
         {
             <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != '' and TriggerFunctions/BeforeSave[@Action = '1']">
                 await <xsl:value-of select="$DocumentName"/>_Triggers.<xsl:value-of select="TriggerFunctions/BeforeSave"/>(this);
@@ -1339,7 +1338,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             </xsl:choose>
         }
 
-        /* Очищення всіх регістрів */
+        /* Очищення регістрів */
         async void ClearRegAccum()
         {
             <xsl:for-each select="AllowRegisterAccumulation/Name">
@@ -1413,12 +1412,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         {
             return new <xsl:value-of select="$DocumentName"/>_Pointer(UnigueID.UGuid);
         }
-
+        <!--
         public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
         }
-
+        -->
         public async ValueTask&lt;string&gt; GetPresentation()
         {
             return await base.BasePresentation(<xsl:value-of select="$DocumentName"/>_Const.PRESENTATION_FIELDS);
@@ -1444,7 +1443,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
     
     public class <xsl:value-of select="$DocumentName"/>_Pointer : DocumentPointer
     {
-        public <xsl:value-of select="$DocumentName"/>_Pointer(object? uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>")
+        public <xsl:value-of select="$DocumentName"/>_Pointer(object? uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>", <xsl:value-of select="$DocumentName"/>_Const.TYPE)
         {
             base.Init(new UnigueID(uid), null);
         }
@@ -1454,11 +1453,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             base.Init(uid, fields);
         }
 
-        public string Назва { get; set; } = "";
+        public string Назва
+        {
+            get { return Name; } set { Name = value; }
+        }
 
         public async ValueTask&lt;string&gt; GetPresentation()
         {
-            return Назва = await base.BasePresentation(<xsl:value-of select="$DocumentName"/>_Const.PRESENTATION_FIELDS);
+            return Name = await base.BasePresentation(<xsl:value-of select="$DocumentName"/>_Const.PRESENTATION_FIELDS);
         }
 
         public static void GetJoin(Query querySelect, string joinField, string parentTable, string joinTableAlias, string fieldAlias)
@@ -1472,7 +1474,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         public async ValueTask&lt;bool&gt; SpendTheDocument(DateTime spendDate)
         {
             <xsl:value-of select="$DocumentName"/>_Objest? obj = await GetDocumentObject();
-            return obj != null &amp;&amp; await obj.SpendTheDocument(spendDate);;
+            return obj != null &amp;&amp; await obj.SpendTheDocument(spendDate);
         }
 
         public async ValueTask ClearSpendTheDocument()
@@ -1510,12 +1512,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         {
             return new <xsl:value-of select="$DocumentName"/>_Pointer();
         }
-
+        <!--
         public override UuidAndText GetBasis()
         {
             return new UuidAndText(UnigueID.UGuid, <xsl:value-of select="$DocumentName"/>_Const.POINTER);
         }
-
+        -->
         public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Objest?&gt; GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
@@ -1949,6 +1951,27 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             }
             await base.BaseCommitTransaction();
         }
+
+        public async ValueTask Remove(Record record)
+        {
+            await base.BaseRemove(record.UID);
+            Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+        }
+
+        public async ValueTask RemoveAll(List&lt;Record&gt; records)
+        {
+            List&lt;Guid&gt; removeList = [];
+
+            await base.BaseBeginTransaction();
+            foreach (Record record in records)
+            {
+                removeList.Add(record.UID);
+                await base.BaseRemove(record.UID);
+            }
+            await base.BaseCommitTransaction();
+
+            Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
+        }
         
         public async ValueTask Delete(Guid owner)
         {
@@ -2006,7 +2029,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 return false;
         }
         
-        public async ValueTask Save()
+        public async ValueTask&lt;bool&gt; Save()
         {
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
@@ -2020,8 +2043,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
-            await BaseSave();
+            bool result = await BaseSave();
             CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
+            return result;
         }
 
         public <xsl:value-of select="$RegisterName"/>_Objest Copy()

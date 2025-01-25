@@ -42,17 +42,16 @@ namespace GeneratedCode.Довідники
             if (label)
             {
                 ХарактеристикиНоменклатури_Select select = new ХарактеристикиНоменклатури_Select();
-                select.QuerySelect.Where.Add(new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
-                select.QuerySelect.Where.Add(new Where(ХарактеристикиНоменклатури_Const.DELETION_LABEL, Comparison.NOT, true));
+                select.QuerySelect.Where.AddRange([
+                    new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid),
+                    new Where(ХарактеристикиНоменклатури_Const.DELETION_LABEL, Comparison.NOT, true)
+                ]);
+
                 await select.Select();
 
                 while (select.MoveNext())
                     if (select.Current != null)
-                    {
-                        ХарактеристикиНоменклатури_Objest? Обєкт = await select.Current.GetDirectoryObject();
-                        if (Обєкт != null)
-                            await Обєкт.SetDeletionLabel();
-                    }
+                        await select.Current.SetDeletionLabel();
             }
 
             await ValueTask.FromResult(true);
@@ -60,24 +59,34 @@ namespace GeneratedCode.Довідники
 
         public static async ValueTask BeforeDelete(Номенклатура_Objest ДовідникОбєкт)
         {
+            await ValueTask.FromResult(true);
+            
+            /*
+            РегістриВідомостей.ШтрихкодиНоменклатури_RecordsSet r = new();
+            r.QuerySelect.Where.Add(new Where(РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура, Comparison.EQ, ДовідникОбєкт.UnigueID.UGuid));
+
+            await r.Read();
+            await r.RemoveAll(r.Records);
+            */
+
             //
             //Очистити регістр штрих-кодів
             //
+            /*
+                        string query = $@"
+            DELETE FROM 
+                {РегістриВідомостей.ШтрихкодиНоменклатури_Const.TABLE} AS ШтрихкодиНоменклатури
+            WHERE
+                ШтрихкодиНоменклатури.{РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура} = @Номенклатура
+            ";
 
-            string query = $@"
-DELETE FROM 
-	{РегістриВідомостей.ШтрихкодиНоменклатури_Const.TABLE} AS ШтрихкодиНоменклатури
-WHERE
-    ШтрихкодиНоменклатури.{РегістриВідомостей.ШтрихкодиНоменклатури_Const.Номенклатура} = @Номенклатура
-";
+                        Dictionary<string, object> paramQuery = new()
+                        {
+                            { "Номенклатура", ДовідникОбєкт.UnigueID.UGuid }
+                        };
 
-            Dictionary<string, object> paramQuery = new()
-            {
-                { "Номенклатура", ДовідникОбєкт.UnigueID.UGuid }
-            };
-
-            await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
-
+                        await Config.Kernel.DataBase.ExecuteSQL(query, paramQuery);
+            */
             //
             //Очистка характеристик
             //
@@ -86,4 +95,3 @@ WHERE
         }
     }
 }
-    
