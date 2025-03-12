@@ -16,18 +16,11 @@ namespace StorageAndTrade
 {
     public class СкладськіКомірки_Папки : ДовідникЖурнал
     {
-
         public СкладськіПриміщення_PointerControl Власник = new СкладськіПриміщення_PointerControl() { Caption = "Власник:" };
-
 
         public СкладськіКомірки_Папки() : base()
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == СкладськіКомірки_Папки_Const.TYPE))
-                    await LoadRecords();
-            };
 
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.AfterSelectFunc = async () => await LoadRecords();
@@ -35,7 +28,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СкладськіКомірки_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -49,7 +42,7 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -71,19 +64,22 @@ namespace StorageAndTrade
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             await СкладськіКомірки_Папки_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null, Власник.Pointer);
-
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             await СкладськіКомірки_Папки_Функції.SetDeletionLabel(unigueID);
-
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await СкладськіКомірки_Папки_Функції.Copy(unigueID);
+        }
 
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, СкладськіКомірки_Папки_Const.POINTER);
+            if (!LiteMode) await LoadRecords();
         }
 
         #endregion

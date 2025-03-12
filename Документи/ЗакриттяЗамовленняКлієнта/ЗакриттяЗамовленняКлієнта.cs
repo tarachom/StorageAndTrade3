@@ -20,16 +20,11 @@ namespace StorageAndTrade
         public ЗакриттяЗамовленняКлієнта() : base()
         {
             ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
-            {
-                if (document.Any((x) => x.Key == ЗакриттяЗамовленняКлієнта_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.DocumentPointerItem = DocumentPointerItem;
@@ -39,7 +34,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.ОчиститиВідбір(TreeViewGrid);
             
@@ -74,6 +69,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ЗакриттяЗамовленняКлієнта_Const.POINTER);
         }
 
         protected override async void PeriodChanged()

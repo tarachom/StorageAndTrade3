@@ -17,23 +17,16 @@ namespace StorageAndTrade
         public Журнал_АдреснеЗберігання() : base(Config.NameSpageCodeGeneration)
         {
             ТабличніСписки.Журнали_АдреснеЗберігання.AddColumns(TreeViewGrid);
-            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
-            {
-                var allowDocument = ТабличніСписки.Журнали_АдреснеЗберігання.AllowDocument();
-
-                if (document.Any((x) => allowDocument.ContainsKey(x.Key)))
-                    await LoadRecords();
-            };
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Журнали_АдреснеЗберігання.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Журнали_АдреснеЗберігання.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period);
             await ТабличніСписки.Журнали_АдреснеЗберігання.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             await ValueTask.FromResult(true);
         }
@@ -63,6 +56,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
+            NotebookFunction.AddChangeFuncJournal(Program.GeneralNotebook, Name, LoadRecords, [.. ТабличніСписки.Журнали_АдреснеЗберігання.AllowDocument().Keys]);
         }
 
         protected override async void PeriodChanged()

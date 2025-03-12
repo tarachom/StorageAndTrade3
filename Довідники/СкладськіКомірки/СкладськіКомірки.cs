@@ -29,15 +29,11 @@ namespace StorageAndTrade
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Дерево папок
-            ДеревоПапок = new СкладськіКомірки_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack };
+            ДеревоПапок = new СкладськіКомірки_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack, LiteMode = true };
+            ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.СкладськіКомірки_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == СкладськіКомірки_Const.TYPE))
-                    await LoadRecords();
-            };
 
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = () => ДеревоПапок.Власник.Pointer = Власник.Pointer;
@@ -45,7 +41,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -53,7 +49,7 @@ namespace StorageAndTrade
                 if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
             }
 
-            await ДеревоПапок.SetValue();
+            await ДеревоПапок.LoadRecords();
         }
 
         async void LoadRecords_TreeCallBack()
@@ -74,7 +70,7 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.СкладськіКомірки_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -96,19 +92,22 @@ namespace StorageAndTrade
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             await СкладськіКомірки_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null, Власник.Pointer);
-
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             await СкладськіКомірки_Функції.SetDeletionLabel(unigueID);
-
         }
 
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await СкладськіКомірки_Функції.Copy(unigueID);
+        }
 
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, СкладськіКомірки_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

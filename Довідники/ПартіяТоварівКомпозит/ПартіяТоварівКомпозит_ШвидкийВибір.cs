@@ -29,7 +29,7 @@ namespace StorageAndTrade
             НоменклатураВідбір.AfterSelectFunc = async () => { await LoadRecords(); };
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
@@ -65,7 +65,7 @@ WHERE
             await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             //Відбори
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.ДодатиВідбір(TreeViewGrid, ПартіяТоварівКомпозит_Функції.Відбори(searchText), true);

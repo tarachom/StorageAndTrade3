@@ -20,16 +20,11 @@ namespace StorageAndTrade
         public ПерерахунокТоварів() 
         {
             ТабличніСписки.ПерерахунокТоварів_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
-            {
-                if (document.Any((x) => x.Key == ПерерахунокТоварів_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ПерерахунокТоварів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПерерахунокТоварів_Записи.DocumentPointerItem = DocumentPointerItem;
@@ -39,7 +34,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ПерерахунокТоварів_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ПерерахунокТоварів_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -74,6 +69,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ПерерахунокТоварів_Const.POINTER);
         }
 
         protected override async void PeriodChanged()

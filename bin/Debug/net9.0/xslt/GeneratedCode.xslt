@@ -916,7 +916,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }        
         public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
         public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.DirectoryPointerPosition.HasValue) { Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.CurrentPointerPosition.HasValue) { Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Current { get; private set; }
         
         public async ValueTask&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; FindByField(string name, object value)
@@ -941,10 +941,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         public <xsl:value-of select="$DirectoryName"/>_SelectHierarchical() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="Fields/Field[Name = $ParentField]/NameInTable"/>") { }        
         public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
         public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.DirectoryPointerPosition.HasValue) { 
-          Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.UnigueID, base.DirectoryPointerPosition.Value.Fields); 
-          Parent = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.Value.Parent); 
-          Level = base.DirectoryPointerPosition.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.CurrentPointerPositionHierarchical.HasValue) { 
+          Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.CurrentPointerPositionHierarchical.Value.UnigueID, base.CurrentPointerPositionHierarchical.Value.Fields); 
+          Parent = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.CurrentPointerPositionHierarchical.Value.Parent); 
+          Level = base.CurrentPointerPositionHierarchical.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Current { get; private set; }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Parent { get; private set; }
         public int Level { get; private set; } = 0;
@@ -1538,7 +1538,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
         public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
         public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.DocumentPointerPosition.HasValue) { Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.DocumentPointerPosition.Value.UnigueID, base.DocumentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.CurrentPointerPosition.HasValue) { Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public <xsl:value-of select="$DocumentName"/>_Pointer? Current { get; private set; }
     }
 

@@ -21,7 +21,7 @@ namespace StorageAndTrade
             ТабличніСписки.Каси_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Каси_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.Каси_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
@@ -31,7 +31,7 @@ namespace StorageAndTrade
             await ТабличніСписки.Каси_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             //Відбори
             ТабличніСписки.Каси_Записи.ДодатиВідбір(TreeViewGrid, Каси_Функції.Відбори(searchText), true);

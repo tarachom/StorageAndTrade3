@@ -27,7 +27,7 @@ namespace StorageAndTrade
             КонтрагентВласник.AfterSelectFunc = async () => await LoadRecords();
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
@@ -43,7 +43,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 

@@ -43,7 +43,7 @@ namespace StorageAndTrade
             };
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
 
@@ -69,7 +69,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ШтрихкодиНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ШтрихкодиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 

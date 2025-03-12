@@ -29,20 +29,15 @@ namespace StorageAndTrade
             });
 
             //Завантаження курсів валют НБУ
-            CreateLink(HBoxTop, "Завантаження курсів валют НБУ", () => 
+            CreateLink(HBoxTop, "Завантаження курсів валют НБУ", () =>
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження курсів валют НБУ", () => new Обробка_ЗавантаженняКурсівВалют()));
 
             ТабличніСписки.Валюти_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == Валюти_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Валюти_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Валюти_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -52,7 +47,7 @@ namespace StorageAndTrade
             await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.Валюти_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -80,6 +75,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await Валюти_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Валюти_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

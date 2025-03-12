@@ -19,7 +19,7 @@ namespace StorageAndTrade
             ТабличніСписки.КраїниСвіту_Записи.AddColumns(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.КраїниСвіту_Записи.SelectPointerItem = null;
             ТабличніСписки.КраїниСвіту_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -29,7 +29,7 @@ namespace StorageAndTrade
             await ТабличніСписки.КраїниСвіту_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.КраїниСвіту_Записи.ОчиститиВідбір(TreeViewGrid);
 

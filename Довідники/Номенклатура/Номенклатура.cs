@@ -23,7 +23,7 @@ namespace StorageAndTrade
         public Номенклатура() : base()
         {
             //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
+            checkButtonIsHierarchy.Clicked += async (sender, args) => await LoadRecords();
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             CreateLink(HBoxTop, ХарактеристикиНоменклатури_Const.FULLNAME, async () =>
@@ -51,20 +51,16 @@ namespace StorageAndTrade
             });
 
             //Дерево папок
-            ДеревоПапок = new Номенклатура_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack };
+            ДеревоПапок = new Номенклатура_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack, LiteMode = true };
+            ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.Номенклатура_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == Номенклатура_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -72,7 +68,7 @@ namespace StorageAndTrade
                 if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
             }
 
-            await ДеревоПапок.SetValue();
+            await ДеревоПапок.LoadRecords();
         }
 
         async void LoadRecords_TreeCallBack()
@@ -89,7 +85,7 @@ namespace StorageAndTrade
             await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.Номенклатура_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -117,6 +113,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await Номенклатура_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Номенклатура_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

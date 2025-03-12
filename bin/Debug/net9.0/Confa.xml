@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>25.01.2025 12:54:45</DateTimeSave>
+  <DateTimeSave>12.03.2025 12:33:25</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1324,10 +1324,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>Тип</Name>
@@ -1445,22 +1447,28 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -1556,15 +1564,19 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -1764,10 +1776,12 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>Основний</Name>
@@ -2099,32 +2113,539 @@ END]]></Value>
         <BeforeDelete Action="1">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[
+/*
+        Номенклатура_Функції.cs
+        Функції
+*/
+
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+
+namespace StorageAndTrade
+{
+    static class Номенклатура_Функції
+    {
+        public static List<Where> Відбори(string searchText)
+        {
+            return
+            [
+                //Назва
+                new Where(Номенклатура_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //Код
+                new Where(Comparison.OR, Номенклатура_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //НазваПовна
+                new Where(Comparison.OR, Номенклатура_Const.НазваПовна, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //Опис
+                new Where(Comparison.OR, Номенклатура_Const.Опис, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
+                //Артикул
+                new Where(Comparison.OR, Номенклатура_Const.Артикул, Comparison.LIKE, searchText) { FuncToField = "LOWER" }
+            ];
+        }
+
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
+            Action<UnigueID?>? сallBack_LoadRecords = null, 
+            Action<UnigueID>? сallBack_OnSelectPointer = null)
+        {
+            Номенклатура_Елемент page = new Номенклатура_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_LoadRecords = сallBack_LoadRecords,
+                CallBack_OnSelectPointer = сallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+            {
+                await page.Елемент.New();
+                
+            }
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+            page.SetValue();
+        }
+
+        public static async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            Номенклатура_Objest Обєкт = new Номенклатура_Objest();
+            if (await Обєкт.Read(unigueID))
+                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
+            else
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+        }
+
+        public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        {
+            Номенклатура_Objest Обєкт = new Номенклатура_Objest();
+            if (await Обєкт.Read(unigueID))
+            {
+                Номенклатура_Objest Новий = await Обєкт.Copy(true);
+                await Новий.Save();
+                
+                    await Новий.Файли_TablePart.Save(false); // Таблична частина "Файли"
+                
+                return Новий.UnigueID;
+            }
+            else
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
+            }
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список з Деревом</Name>
           <Desc>Список з Деревом</Desc>
           <Type>ListAndTree</Type>
+          <GeneratedCode><![CDATA[
+/*     
+        Номенклатура.cs 
+        Список з Деревом
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode;
+using GeneratedCode.Довідники;
+using ТабличніСписки = GeneratedCode.Довідники.ТабличніСписки;
+
+namespace StorageAndTrade
+{
+    public class Номенклатура : ДовідникЖурнал
+    {
+        CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
+        Номенклатура_Папки ДеревоПапок;
+        
+
+        public Номенклатура()
+        {
+            //Враховувати ієрархію папок
+            checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) => await LoadRecords();
+            HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
+
+            //Дерево папок
+            ДеревоПапок = new Номенклатура_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack };
+            HPanedTable.Pack2(ДеревоПапок, false, true);
+
+            ТабличніСписки.Номенклатура_Записи.AddColumns(TreeViewGrid);
+            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
+            {
+                if (directory.Any((x) => x.Key == Номенклатура_Const.TYPE))
+                    await LoadRecords();
+            };
+
+            
+        }
+
+        #region Override
+
+        protected override async ValueTask LoadRecords()
+        {
+            if (DirectoryPointerItem != null || SelectPointerItem != null)
+            {
+                Номенклатура_Objest? Обєкт = await new Номенклатура_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
+                if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
+            }
+
+            await ДеревоПапок.SetValue();
+        }
+
+        async void LoadRecords_TreeCallBack()
+        {
+            ТабличніСписки.Номенклатура_Записи.SelectPointerItem = SelectPointerItem;
+            ТабличніСписки.Номенклатура_Записи.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.Номенклатура_Записи.ОчиститиВідбір(TreeViewGrid);
+            
+            if (checkButtonIsHierarchy.Active)
+                ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid,
+                    new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
+
+            await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+        }
+
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            ТабличніСписки.Номенклатура_Записи.ОчиститиВідбір(TreeViewGrid);
+            
+            //Відбори
+            ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid, Номенклатура_Функції.Відбори(searchText));
+
+            await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+        }
+
+        protected override Widget? FilterRecords(Box hBox)
+        {
+            return ТабличніСписки.Номенклатура_Записи.CreateFilter(TreeViewGrid);
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            await  Номенклатура_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+            
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            await  Номенклатура_Функції.SetDeletionLabel(unigueID);
+            
+        }
+
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        {
+            return await  Номенклатура_Функції.Copy(unigueID);
+            
+        }
+
+        #endregion
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[
+/*     
+        Номенклатура_ШвидкийВибір.cs
+        ШвидкийВибір
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+using ТабличніСписки = GeneratedCode.Довідники.ТабличніСписки;
+
+namespace StorageAndTrade
+{
+    class Номенклатура_ШвидкийВибір : ДовідникШвидкийВибір
+    {
+        
+        
+        public Номенклатура_ШвидкийВибір() : base()
+        {
+            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
+            
+        }
+
+        protected override async ValueTask LoadRecords()
+        {
+            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.SelectPointerItem = null;
+            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
+
+            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
+            
+            await ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
+        }
+
+        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
+                        
+            //Відбори
+            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.ДодатиВідбір(TreeViewGrid, Номенклатура_Функції.Відбори(searchText));
+
+            await ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            Номенклатура page = new Номенклатура()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                CallBack_OnMultipleSelectPointer = CallBack_OnMultipleSelectPointer,
+                OpenFolder = OpenFolder
+            };
+            
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, Номенклатура_Const.FULLNAME, () => page);
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            await  Номенклатура_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
+            
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            await Номенклатура_Функції.SetDeletionLabel(unigueID);
+            
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[
+/*     
+        Номенклатура_PointerControl.cs
+        PointerControl
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+
+namespace StorageAndTrade
+{
+    class Номенклатура_PointerControl : PointerControl
+    {
+        event EventHandler<Номенклатура_Pointer> PointerChanged;
+
+        public Номенклатура_PointerControl()
+        {
+            pointer = new Номенклатура_Pointer();
+            WidthPresentation = 300;
+            Caption = $"{Номенклатура_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Номенклатура_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+            };
+        }
+
+        Номенклатура_Pointer pointer;
+        public Номенклатура_Pointer Pointer
+        {
+            get
+            {
+                return pointer;
+            }
+            set
+            {
+                pointer = value;
+                PointerChanged?.Invoke(null, pointer);
+            }
+        }
+
+        
+
+        protected override async void OpenSelect(object? sender, EventArgs args)
+        {
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            BeforeClickOpenFunc?.Invoke();
+            Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір() 
+            { 
+                PopoverParent = popover, 
+                DirectoryPointerItem = Pointer.UnigueID,
+                OpenFolder = OpenFolder,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Pointer = new Номенклатура_Pointer(selectPointer);
+                    AfterSelectFunc?.Invoke();
+                }
+            };
+            
+            popover.Add(page);
+            popover.ShowAll();
+
+            await page.SetValue();
+        }
+
+        protected override void OnClear(object? sender, EventArgs args)
+        {
+            Pointer = new Номенклатура_Pointer();
+            AfterSelectFunc?.Invoke();
+            AfterClearFunc?.Invoke();
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[
+/*
+        Номенклатура_Елемент.cs
+        Елемент
+*/
+
+using Gtk;
+using InterfaceGtk;
+
+using GeneratedCode.Довідники;
+using GeneratedCode.Документи;
+using GeneratedCode.Перелічення;
+
+namespace StorageAndTrade
+{
+    class Номенклатура_Елемент : ДовідникЕлемент
+    {
+        public Номенклатура_Objest Елемент { get; init; } = new Номенклатура_Objest();
+        
+        #region Fields
+        Entry Назва = new Entry() { WidthRequest = 500 };
+                        Entry Код = new Entry() { WidthRequest = 100 };
+                        Entry НазваПовна = new Entry() { WidthRequest = 500 };
+                        TextView Опис = new TextView() { WrapMode = WrapMode.Word };
+                        Entry Артикул = new Entry() { WidthRequest = 500 };
+                        ComboBoxText ТипНоменклатури = new ComboBoxText();
+                Виробники_PointerControl Виробник = new Виробники_PointerControl() { Caption = "Виробник", WidthPresentation = 500 };
+                ВидиНоменклатури_PointerControl ВидНоменклатури = new ВидиНоменклатури_PointerControl() { Caption = "ВидНоменклатури", WidthPresentation = 500 };
+                ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new ПакуванняОдиниціВиміру_PointerControl() { Caption = "ОдиницяВиміру", WidthPresentation = 500 };
+                Номенклатура_Папки_PointerControl Папка = new Номенклатура_Папки_PointerControl() { Caption = "Папка", WidthPresentation = 500 };
+                Файли_PointerControl ОсновнаКартинкаФайл = new Файли_PointerControl() { Caption = "ОсновнаКартинкаФайл", WidthPresentation = 500 };
+                
+        #endregion
+
+        #region TabularParts
+        
+            // Таблична частина "Файли"
+            Номенклатура_ТабличнаЧастина_Файли Файли = new Номенклатура_ТабличнаЧастина_Файли() { WidthRequest = 500, HeightRequest = 300 };
+        
+        #endregion
+
+        public Номенклатура_Елемент() : base() 
+        { 
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
+
+            
+                foreach (var field in ПсевдонімиПерелічення.ТипиНоменклатури_List())
+                    ТипНоменклатури.Append(field.Value.ToString(), field.Name);
+            
+        }
+
+        protected override void CreatePack1(Box vBox)
+        {
+            
+                // Назва
+                CreateField(vBox, "Назва:", Назва);
+                            
+                // Код
+                CreateField(vBox, "Код:", Код);
+                            
+                // НазваПовна
+                CreateField(vBox, "НазваПовна:", НазваПовна);
+                            
+                // Опис
+                CreateFieldView(vBox, "Опис:", Опис, 500, 200);
+                            
+                // Артикул
+                CreateField(vBox, "Артикул:", Артикул);
+                            
+                // ТипНоменклатури
+                CreateField(vBox, "ТипНоменклатури:", ТипНоменклатури);
+                    
+                // Виробник
+                CreateField(vBox, null, Виробник);
+                    
+                // ВидНоменклатури
+                CreateField(vBox, null, ВидНоменклатури);
+                    
+                // ОдиницяВиміру
+                CreateField(vBox, null, ОдиницяВиміру);
+                    
+                // Папка
+                CreateField(vBox, null, Папка);
+                    
+                // ОсновнаКартинкаФайл
+                CreateField(vBox, null, ОсновнаКартинкаФайл);
+                    
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+            
+                // Таблична частина "Файли" 
+                CreateTablePart(vBox, "Файли:", Файли);
+            
+        }
+
+        #region Присвоєння / зчитування значень
+
+        public override async void SetValue()
+        {
+            Назва.Text = Елемент.Назва;
+                            Код.Text = Елемент.Код;
+                            НазваПовна.Text = Елемент.НазваПовна;
+                            Опис.Buffer.Text = Елемент.Опис;
+                            Артикул.Text = Елемент.Артикул;
+                            ТипНоменклатури.ActiveId = Елемент.ТипНоменклатури.ToString(); if (ТипНоменклатури.Active == -1) ТипНоменклатури.Active = 0;
+                    Виробник.Pointer = Елемент.Виробник;
+                    ВидНоменклатури.Pointer = Елемент.ВидНоменклатури;
+                    ОдиницяВиміру.Pointer = Елемент.ОдиницяВиміру;
+                    Папка.Pointer = Елемент.Папка;
+                    ОсновнаКартинкаФайл.Pointer = Елемент.ОсновнаКартинкаФайл;
+                    
+                // Таблична частина "Файли"
+                Файли.ЕлементВласник = Елемент;
+                await Файли.LoadRecords();
+            
+        }
+
+        protected override void GetValue()
+        {
+            Елемент.Назва = Назва.Text;
+                            Елемент.Код = Код.Text;
+                            Елемент.НазваПовна = НазваПовна.Text;
+                            Елемент.Опис = Опис.Buffer.Text;
+                            Елемент.Артикул = Артикул.Text;
+                            if (ТипНоменклатури.Active != -1) Елемент.ТипНоменклатури = Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId);
+                    Елемент.Виробник = Виробник.Pointer;
+                    Елемент.ВидНоменклатури = ВидНоменклатури.Pointer;
+                    Елемент.ОдиницяВиміру = ОдиницяВиміру.Pointer;
+                    Елемент.Папка = Папка.Pointer;
+                    Елемент.ОсновнаКартинкаФайл = ОсновнаКартинкаФайл.Pointer;
+                    
+        }
+
+        #endregion
+
+        protected override async ValueTask<bool> Save()
+        {
+            bool isSaved = false;
+            try
+            {
+                if (await Елемент.Save())
+                {
+                    await Файли.SaveRecords(); // Таблична частина "Файли"
+                    
+                    isSaved = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+            }
+            return isSaved;
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -2251,10 +2772,146 @@ END]]></Value>
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[
+
+/*     
+        Номенклатура_MultiplePointerControl.cs
+        MultiplePointerControl
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+
+namespace StorageAndTrade
+{
+    public class Номенклатура_MultiplePointerControl : MultiplePointerControl
+    {
+        event EventHandler<Номенклатура_Pointer> PointerChanged;
+
+        public Номенклатура_MultiplePointerControl()
+        {
+            pointer = new Номенклатура_Pointer();
+            WidthPresentation = 300;
+            Caption = $"{Номенклатура_Const.FULLNAME}:";
+            PointerChanged += async (object? _, Номенклатура_Pointer pointer) =>
+            {
+                Presentation = pointer != null ? await pointer.GetPresentation() : "";
+                if (pointers.Count > 1) Presentation += $" ... {pointers.Count}";
+            };
+        }
+
+        Номенклатура_Pointer pointer;
+        List<Номенклатура_Pointer> pointers = [];
+        public Номенклатура_Pointer Pointer
+        {
+            get
+            {
+                return pointer;
+            }
+            set
+            {
+                pointer = value;
+                PointerChanged?.Invoke(null, pointer);
+            }
+        }
+
+        public Номенклатура_Pointer[] GetPointers()
+        {
+            Номенклатура_Pointer[] copy = new Номенклатура_Pointer[pointers.Count];
+            pointers.CopyTo(copy);
+
+            return copy;
+        }
+
+        void Add(Номенклатура_Pointer item)
+        {
+            if (!pointers.Exists((Номенклатура_Pointer x) => x.UnigueID.ToString() == item.UnigueID.ToString()))
+                pointers.Add(item);
+
+            Pointer = item;
+            //AfterSelectFunc?.Invoke();
+        }
+
+        
+
+        protected override async void OpenSelect(object? sender, EventArgs args)
+        {
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            BeforeClickOpenFunc?.Invoke();
+            Номенклатура_ШвидкийВибір page = new Номенклатура_ШвидкийВибір
+            {
+                PopoverParent = popover,
+                DirectoryPointerItem = pointer.UnigueID,
+                CallBack_OnSelectPointer = (UnigueID selectPointer) =>
+                {
+                    Add(new Номенклатура_Pointer(selectPointer));
+                },
+                CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =>
+                {
+                    foreach (var selectPointer in selectPointers)
+                        Add(new Номенклатура_Pointer(selectPointer));
+                }
+            };
+            
+            popover.Add(page);
+            popover.ShowAll();
+
+            await page.SetValue();
+        }
+
+        protected override async ValueTask FillList(ListBox listBox)
+        {
+            foreach (Номенклатура_Pointer item in pointers)
+            {
+                Box hBox = new Box(Orientation.Horizontal, 0);
+                ListBoxRow listBoxRow = [hBox];
+
+                LinkButton linkName = new LinkButton("", await item.GetPresentation()) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
+                linkName.Clicked += (object? sender, EventArgs args) =>
+                {
+                    if (Pointer.UnigueID.ToString() != item.UnigueID.ToString())
+                        Pointer = item;
+                };
+
+                hBox.PackStart(linkName, true, true, 0);
+
+                //Remove
+                LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
+                linkRemove.Clicked += (object? sender, EventArgs args) =>
+                {
+                    pointers.Remove(item);
+                    listBox.Remove(listBoxRow);
+
+                    if (Pointer.UnigueID.ToString() == item.UnigueID.ToString())
+                        Pointer = pointers.Count > 0 ? pointers[0] : new Номенклатура_Pointer();
+                    else
+                        PointerChanged?.Invoke(null, pointer);
+                };
+
+                hBox.PackEnd(linkRemove, false, false, 0);
+
+                listBox.Add(listBoxRow);
+                listBox.ShowAll();
+            }
+        }
+
+        protected override void OnClear(object? sender, EventArgs args)
+        {
+            pointers = [];
+            Pointer = new Номенклатура_Pointer();
+            AfterSelectFunc?.Invoke();
+            AfterClearFunc?.Invoke();
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -2348,22 +3005,28 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -2386,15 +3049,19 @@ END]]></Value>
           </ElementFields>
           <ElementTableParts />
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -2521,32 +3188,42 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -2733,32 +3410,42 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -2994,32 +3681,42 @@ END]]></Value>
         <BeforeDelete Action="1">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -3305,10 +4002,12 @@ END]]></Value>
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>Тип</Name>
@@ -3422,10 +4121,12 @@ END]]></Value>
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>Файл</Name>
@@ -3541,32 +4242,42 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список з Деревом</Name>
           <Desc>Список з Деревом</Desc>
           <Type>ListAndTree</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -3805,10 +4516,12 @@ END]]></Value>
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>Тип</Name>
@@ -3975,32 +4688,42 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список з Деревом</Name>
           <Desc>Список з Деревом</Desc>
           <Type>ListAndTree</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -4106,10 +4829,12 @@ END]]></Value>
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -4241,32 +4966,42 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -4404,32 +5139,42 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -4686,27 +5431,35 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -4899,10 +5652,12 @@ END]]></Value>
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>Тип</Name>
@@ -5020,27 +5775,35 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -5097,10 +5860,12 @@ END]]></Value>
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -5205,27 +5970,35 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -5319,27 +6092,35 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -5523,27 +6304,35 @@ END]]></Value>
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -5756,32 +6545,42 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -5825,10 +6624,12 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -5962,32 +6763,42 @@ FROM
         <BeforeDelete Action="1">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -6022,10 +6833,12 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -6132,32 +6945,42 @@ FROM
         <BeforeDelete Action="1">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -6192,10 +7015,12 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -6302,32 +7127,42 @@ FROM
         <BeforeDelete Action="1">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -6362,10 +7197,12 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -6558,27 +7395,35 @@ WHERE
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>MultiplePointerControl</Name>
           <Desc>MultiplePointerControl</Desc>
           <Type>MultiplePointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -6738,32 +7583,42 @@ WHERE
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -7191,27 +8046,35 @@ WHERE
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -7360,32 +8223,42 @@ WHERE
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -7637,27 +8510,35 @@ WHERE
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -7748,27 +8629,35 @@ WHERE
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -7985,27 +8874,35 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -8152,32 +9049,42 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -8849,32 +9756,42 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -9249,27 +10166,35 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -9560,32 +10485,42 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список з Деревом</Name>
           <Desc>Список з Деревом</Desc>
           <Type>ListAndTree</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -9969,32 +10904,42 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -10181,21 +11126,27 @@ FROM
         <BeforeDelete Action="1">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -10242,16 +11193,20 @@ FROM
           </ElementFields>
           <ElementTableParts />
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -10387,32 +11342,42 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Код</Name>
@@ -10915,10 +11880,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>А</Name>
@@ -11282,15 +12249,19 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Додано</Name>
@@ -11329,22 +12300,28 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Швидкий вибір</Name>
           <Desc>Швидкий вибір</Desc>
           <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Directory>
@@ -11823,10 +12800,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -12061,21 +13040,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -13067,10 +14052,12 @@ FROM
             </TabularList>
           </TabularLists>
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -13358,10 +14345,12 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -13699,21 +14688,27 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Document>
@@ -14220,10 +15215,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -14336,10 +15333,12 @@ FROM
               </ElementFields>
               <IncludeIconColumn>0</IncludeIconColumn>
             </Form>
-            <Form>
+            <Form Modified="0">
               <Name>Звіт</Name>
               <Desc>Звіт</Desc>
               <Type>Report</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
             </Form>
           </Forms>
         </TablePart>
@@ -14487,21 +15486,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -15373,10 +16378,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -15687,15 +16694,19 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -15936,10 +16947,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -16119,21 +17132,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -16715,21 +17734,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -17429,15 +18454,19 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -17817,10 +18846,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -18024,21 +19055,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -18678,10 +19715,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -18935,21 +19974,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -19581,10 +20626,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -19838,21 +20885,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -20386,10 +21439,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -20585,15 +21640,19 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -20793,15 +21852,19 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -21112,10 +22175,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -21263,10 +22328,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -21354,10 +22421,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -21468,10 +22537,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -21654,21 +22725,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -22787,10 +23864,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -22991,21 +24070,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -23426,10 +24511,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -23648,21 +24735,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -24099,10 +25192,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -24332,21 +25427,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -24892,10 +25993,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -25153,21 +26256,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -25672,10 +26781,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -25866,21 +26977,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -26276,10 +27393,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -26482,21 +27601,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -26881,10 +28006,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -27075,21 +28202,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -27432,10 +28565,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -27584,21 +28719,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -27930,10 +29071,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -28079,21 +29222,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -28537,10 +29686,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -28790,21 +29941,27 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -28978,10 +30135,12 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Document>
@@ -29326,10 +30485,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -29567,22 +30728,28 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>
           </TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -29735,10 +30902,12 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Document>
@@ -30083,10 +31252,12 @@ FROM
           </Fields>
           <TabularLists />
           <Forms>
-            <Form>
+            <Form Modified="0">
               <Name>Таблична частина</Name>
               <Desc>Таблична частина</Desc>
               <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
               <ElementFields>
                 <Field>
                   <Name>НомерРядка</Name>
@@ -30335,22 +31506,28 @@ FROM
         <ClearSpend>ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Функції</Name>
           <Desc>Функції</Desc>
           <Type>Function</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>
           </TabularList>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Desc>Елемент</Desc>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Назва</Name>
@@ -30512,10 +31689,12 @@ FROM
             </TablePart>
           </ElementTableParts>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>PointerControl</Name>
           <Desc>PointerControl</Desc>
           <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
         </Form>
       </Forms>
     </Document>
@@ -36533,9 +37712,11 @@ SQL тип  непотрібно вказувати
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Номенклатура</Name>
@@ -36607,9 +37788,11 @@ SQL тип  непотрібно вказувати
             </Field>
           </ElementFields>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -36725,9 +37908,11 @@ SQL тип  непотрібно вказувати
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Елемент</Name>
           <Type>Element</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <ElementFields>
             <Field>
               <Name>Валюта</Name>
@@ -36759,9 +37944,11 @@ SQL тип  непотрібно вказувати
             </Field>
           </ElementFields>
         </Form>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -36974,10 +38161,12 @@ SQL тип  непотрібно вказувати
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -37120,10 +38309,12 @@ SQL тип  непотрібно вказувати
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Desc>Список</Desc>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -37907,9 +39098,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -38266,9 +39459,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -38664,9 +39859,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -39103,9 +40300,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -39627,9 +40826,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -39944,9 +41145,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -40341,9 +41544,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -40886,9 +42091,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -41762,9 +42969,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -42233,9 +43442,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>
@@ -42892,9 +44103,11 @@ HAVING
         </TabularList>
       </TabularLists>
       <Forms>
-        <Form>
+        <Form Modified="0">
           <Name>Список</Name>
           <Type>List</Type>
+          <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>
       </Forms>

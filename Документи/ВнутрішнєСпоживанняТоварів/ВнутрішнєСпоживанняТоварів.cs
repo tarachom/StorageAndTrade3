@@ -17,19 +17,14 @@ namespace StorageAndTrade
 {
     public class ВнутрішнєСпоживанняТоварів : ДокументЖурнал
     {
-        public ВнутрішнєСпоживанняТоварів() 
+        public ВнутрішнєСпоживанняТоварів()
         {
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
-            {
-                if (document.Any((x) => x.Key == ВнутрішнєСпоживанняТоварів_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.DocumentPointerItem = DocumentPointerItem;
@@ -39,7 +34,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ВнутрішнєСпоживанняТоварів_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -74,6 +69,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ВнутрішнєСпоживанняТоварів_Const.POINTER);
         }
 
         protected override async void PeriodChanged()

@@ -19,16 +19,11 @@ namespace StorageAndTrade
         public ФізичніОсоби() : base()
         {
             ТабличніСписки.ФізичніОсоби_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == ФізичніОсоби_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ФізичніОсоби_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ФізичніОсоби_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -38,7 +33,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ФізичніОсоби_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ФізичніОсоби_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -66,6 +61,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await ФізичніОсоби_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ФізичніОсоби_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

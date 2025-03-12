@@ -29,7 +29,7 @@ namespace StorageAndTrade
             };
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.КурсиВалют_Записи.SelectPointerItem = SelectPointerItem;
 
@@ -49,7 +49,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
                 return;

@@ -27,7 +27,7 @@ namespace StorageAndTrade
             СкладВласник.AfterSelectFunc = async () => { await LoadRecords(); };
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.СкладськіПриміщення_Записи.SelectPointerItem = null;
             ТабличніСписки.СкладськіПриміщення_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -43,7 +43,7 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 

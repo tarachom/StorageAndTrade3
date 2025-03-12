@@ -27,7 +27,7 @@ namespace StorageAndTrade
 
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
@@ -41,7 +41,7 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.СкладськіКомірки_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 

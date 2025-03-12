@@ -22,11 +22,6 @@ namespace StorageAndTrade
         public ХарактеристикиНоменклатури() : base()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == ХарактеристикиНоменклатури_Const.TYPE))
-                    await LoadRecords();
-            };
 
             CreateLink(HBoxTop, ШтрихкодиНоменклатури_Const.FULLNAME, async () =>
             {
@@ -47,7 +42,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -61,7 +56,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -93,6 +88,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await ХарактеристикиНоменклатури_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ХарактеристикиНоменклатури_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

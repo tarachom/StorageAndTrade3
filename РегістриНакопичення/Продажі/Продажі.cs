@@ -26,7 +26,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Продажі_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Продажі_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
@@ -34,7 +34,7 @@ namespace StorageAndTrade
             await ТабличніСписки.Продажі_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.Продажі_Записи.ОчиститиВідбір(TreeViewGrid);
 

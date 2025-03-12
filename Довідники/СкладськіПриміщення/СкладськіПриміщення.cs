@@ -37,16 +37,11 @@ namespace StorageAndTrade
             });
 
             ТабличніСписки.СкладськіПриміщення_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == СкладськіПриміщення_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.СкладськіПриміщення_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.СкладськіПриміщення_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -62,7 +57,7 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -96,6 +91,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await СкладськіПриміщення_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, СкладськіПриміщення_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

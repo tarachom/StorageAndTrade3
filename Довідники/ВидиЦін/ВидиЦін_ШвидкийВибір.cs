@@ -19,7 +19,7 @@ namespace StorageAndTrade
             ТабличніСписки.ВидиЦін_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ВидиЦін_ЗаписиШвидкийВибір.SelectPointerItem = null;
             ТабличніСписки.ВидиЦін_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
@@ -29,7 +29,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ВидиЦін_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ВидиЦін_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 

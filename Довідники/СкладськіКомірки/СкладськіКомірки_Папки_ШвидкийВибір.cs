@@ -24,10 +24,9 @@ namespace StorageAndTrade
             
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = async () => await LoadRecords();
-            
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.SelectPointerItem = null;
             ТабличніСписки.СкладськіКомірки_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -41,7 +40,7 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіКомірки_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
             
@@ -74,13 +73,11 @@ namespace StorageAndTrade
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             await  СкладськіКомірки_Папки_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer, Власник.Pointer);
-            
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             await СкладськіКомірки_Папки_Функції.SetDeletionLabel(unigueID);
-            
         }
     }
 }

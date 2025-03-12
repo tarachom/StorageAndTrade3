@@ -19,16 +19,11 @@ namespace StorageAndTrade
         public ПакуванняОдиниціВиміру() : base()
         {
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == ПакуванняОдиниціВиміру_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -38,7 +33,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ПакуванняОдиниціВиміру_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ПакуванняОдиниціВиміру_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -66,6 +61,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await ПакуванняОдиниціВиміру_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ПакуванняОдиниціВиміру_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

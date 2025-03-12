@@ -38,20 +38,16 @@ namespace StorageAndTrade
             });
 
             //Дерево папок
-            ДеревоПапок = new Контрагенти_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack };
+            ДеревоПапок = new Контрагенти_Папки() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack, LiteMode = true };
+            ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.Контрагенти_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == Контрагенти_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -59,7 +55,7 @@ namespace StorageAndTrade
                 if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.Папка.UnigueID;
             }
 
-            await ДеревоПапок.SetValue();
+            await ДеревоПапок.LoadRecords();
         }
 
         async void LoadRecords_TreeCallBack()
@@ -76,7 +72,7 @@ namespace StorageAndTrade
             await ТабличніСписки.Контрагенти_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.Контрагенти_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -104,6 +100,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await Контрагенти_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Контрагенти_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

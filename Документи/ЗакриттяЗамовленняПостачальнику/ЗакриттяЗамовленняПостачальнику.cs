@@ -20,16 +20,11 @@ namespace StorageAndTrade
         public ЗакриттяЗамовленняПостачальнику() : base()
         {
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DocumentObjectChanged += async (object? sender, Dictionary<string, List<Guid>> document) =>
-            {
-                if (document.Any((x) => x.Key == ЗакриттяЗамовленняПостачальнику_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.DocumentPointerItem = DocumentPointerItem;
@@ -39,10 +34,10 @@ namespace StorageAndTrade
             await ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.ОчиститиВідбір(TreeViewGrid);
-            
+
             //Відбори
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.ДодатиВідбір(TreeViewGrid, ЗакриттяЗамовленняПостачальнику_Функції.Відбори(searchText));
 
@@ -74,6 +69,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ЗакриттяЗамовленняПостачальнику_Const.POINTER);
         }
 
         protected override async void PeriodChanged()
@@ -100,7 +96,7 @@ namespace StorageAndTrade
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗакриттяЗамовленняПостачальнику_Pointer(unigueID));
         }
-        
+
         protected override bool IsExportXML() { return false; } //Дозволити експорт документу
         protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
         {
@@ -122,4 +118,3 @@ namespace StorageAndTrade
         #endregion
     }
 }
-    

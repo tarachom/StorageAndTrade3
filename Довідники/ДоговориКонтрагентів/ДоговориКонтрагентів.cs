@@ -18,7 +18,7 @@ namespace StorageAndTrade
     {
         public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl();
 
-        public ДоговориКонтрагентів() 
+        public ДоговориКонтрагентів()
         {
             //Власник
             HBoxTop.PackStart(КонтрагентВласник, false, false, 2);
@@ -26,16 +26,11 @@ namespace StorageAndTrade
             КонтрагентВласник.AfterSelectFunc = async () => await LoadRecords();
 
             ТабличніСписки.ДоговориКонтрагентів_Записи.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary<string, List<Guid>> directory) =>
-            {
-                if (directory.Any((x) => x.Key == ДоговориКонтрагентів_Const.TYPE))
-                    await LoadRecords();
-            };
         }
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ДоговориКонтрагентів_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -51,7 +46,7 @@ namespace StorageAndTrade
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ДоговориКонтрагентів_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -85,6 +80,12 @@ namespace StorageAndTrade
         protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
             return await ДоговориКонтрагентів_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ДоговориКонтрагентів_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion

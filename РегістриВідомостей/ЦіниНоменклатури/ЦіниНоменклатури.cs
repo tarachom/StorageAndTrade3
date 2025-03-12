@@ -24,7 +24,7 @@ namespace StorageAndTrade
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.ЦіниНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЦіниНоменклатури_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
@@ -37,7 +37,7 @@ namespace StorageAndTrade
                 TreeViewGrid.SetCursor(ТабличніСписки.ЦіниНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ЦіниНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 

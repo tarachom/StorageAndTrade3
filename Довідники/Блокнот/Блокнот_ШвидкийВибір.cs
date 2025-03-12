@@ -19,7 +19,7 @@ namespace StorageAndTrade
             ТабличніСписки.Блокнот_Записи.AddColumns(TreeViewGrid);
         }
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             ТабличніСписки.Блокнот_Записи.SelectPointerItem = null;
             ТабличніСписки.Блокнот_Записи.DirectoryPointerItem = DirectoryPointerItem;
@@ -29,7 +29,7 @@ namespace StorageAndTrade
             await ТабличніСписки.Блокнот_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.Блокнот_Записи.ОчиститиВідбір(TreeViewGrid);
 
