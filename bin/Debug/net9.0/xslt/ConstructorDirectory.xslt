@@ -582,11 +582,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary&lt;string, List&lt;Guid&gt;&gt; directory) =&gt;
-            {
-                if (directory.Any((x) =&gt; x.Key == <xsl:value-of select="$DirectoryName"/>_Const.TYPE))
-                    await LoadRecords();
-            };
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.AfterSelectFunc = async () =&gt; await LoadRecords();
@@ -641,6 +636,12 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
         {
             return await <xsl:value-of select="$DirectoryName"/>_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
+            <xsl:if test="normalize-space($DirectoryType) = 'Hierarchical'">if (!LiteMode)</xsl:if> await LoadRecords();
         }
 
         #endregion
@@ -834,16 +835,11 @@ namespace <xsl:value-of select="$NameSpace"/>
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Дерево папок
-            ДеревоПапок = new <xsl:value-of select="$PointerFolders"/>() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack };
+            ДеревоПапок = new <xsl:value-of select="$PointerFolders"/>() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack, LiteMode = true };
+            ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            Config.Kernel.DirectoryObjectChanged += async (object? sender, Dictionary&lt;string, List&lt;Guid&gt;&gt; directory) =&gt;
-            {
-                if (directory.Any((x) =&gt; x.Key == <xsl:value-of select="$DirectoryName"/>_Const.TYPE))
-                    await LoadRecords();
-            };
-
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = () =&gt; ДеревоПапок.Власник.Pointer = Власник.Pointer;
@@ -852,7 +848,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         #region Override
 
-        protected override async ValueTask LoadRecords()
+        public override async ValueTask LoadRecords()
         {
             if (DirectoryPointerItem != null || SelectPointerItem != null)
             {
@@ -860,7 +856,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.<xsl:value-of select="$FieldFolder"/>.UnigueID;
             }
 
-            await ДеревоПапок.SetValue();
+            await ДеревоПапок.LoadRecords();
         }
 
         async void LoadRecords_TreeCallBack()
@@ -881,7 +877,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask LoadRecords_OnSearch(string searchText)
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
@@ -955,6 +951,12 @@ namespace <xsl:value-of select="$NameSpace"/>
                     return null;
                 }
             -->
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
+            await LoadRecords();
         }
 
         #endregion
