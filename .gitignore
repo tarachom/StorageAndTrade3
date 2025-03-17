@@ -21,6 +21,9 @@ mono_crash.*
 *.sh
 
 #Configurator3
+*.so
+*.8
+*.dylib
 *.dll
 Comparison.xml
 ComparisonAllData.xml
