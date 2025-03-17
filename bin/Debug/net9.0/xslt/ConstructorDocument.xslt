@@ -65,9 +65,9 @@ namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи
         public static async ValueTask <xsl:value-of select="$TriggerFunctions/New"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт)
         {
             <xsl:if test="$DocumentAutomaticNumeration = '1'">
-                <xsl:text>ДокументОбєкт.Код = (++НумераціяДокументів.</xsl:text>
+                <xsl:text>ДокументОбєкт.НомерДок = (++НумераціяДокументів.</xsl:text>
                 <xsl:value-of select="$DocumentName"/>
-                <xsl:text>_Const).ToString("D6");</xsl:text>
+                <xsl:text>_Const).ToString("D8");</xsl:text>
             </xsl:if>
             ДокументОбєкт.ДатаДок = DateTime.Now;
             await ValueTask.FromResult(true);
@@ -545,6 +545,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>
         }
 
+        <xsl:if test="count($FieldsTL[Type = 'pointer']) != 0 or count($TabularPartsTL) != 0">
         /*string КлючовіСловаДляПошуку()
         {
             return "\n<xsl:for-each select="$FieldsTL[Type = 'pointer']">
@@ -554,6 +555,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:for-each>"
             <xsl:for-each select="$TabularPartsTL"> + <xsl:value-of select="Name"/>.КлючовіСловаДляПошуку()</xsl:for-each>;
         }*/
+        </xsl:if>
 
         #endregion
         
