@@ -16,7 +16,7 @@ namespace StorageAndTrade
         public БлокДляСторінки_АктивніКористувачі АктивніКористувачі = new БлокДляСторінки_АктивніКористувачі(Config.Kernel) { WidthRequest = 600, HeightRequest = 200 };
         public БлокДляСторінки_ЗаблокованіОбєкти ЗаблокованіОбєкти = new БлокДляСторінки_ЗаблокованіОбєкти() { WidthRequest = 600, HeightRequest = 200 };
 
-        public PageHome() : base()
+        public PageHome()
         {
             {
                 Box hBox = new Box(Orientation.Horizontal, 0);

@@ -13,7 +13,7 @@
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0.4",
           "NPOI": "2.7.2",
-          "QuestPDF": "2024.12.2"
+          "QuestPDF": "2025.1.6"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -213,15 +213,25 @@
           }
         }
       },
-      "QuestPDF/2024.12.2": {
+      "QuestPDF/2025.1.6": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2024.12.2.0",
-            "fileVersion": "2024.12.2.0"
+            "assemblyVersion": "2025.1.6.0",
+            "fileVersion": "2025.1.6.0"
           }
         },
         "runtimeTargets": {
           "runtimes/linux-arm64/native/libQuestPdfSkia.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libcrypto.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libjpeg.so.8": {
             "rid": "linux-arm64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
@@ -236,12 +246,32 @@
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
+          "runtimes/linux-musl-x64/native/libcrypto.so": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-x64/native/libjpeg.so.8": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
           "runtimes/linux-musl-x64/native/libqpdf.so": {
             "rid": "linux-musl-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
           "runtimes/linux-x64/native/libQuestPdfSkia.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libcrypto.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libjpeg.so.8": {
             "rid": "linux-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
@@ -555,12 +585,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2024.12.2": {
+    "QuestPDF/2025.1.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-tVKd0zv1tqCvwEWGhtm437hnN3zh+h1M0Catba6RALAyMr96tKo6/8QlHvpjfwbm9unKYxTW/F/O2WSwRW2EWg==",
-      "path": "questpdf/2024.12.2",
-      "hashPath": "questpdf.2024.12.2.nupkg.sha512"
+      "sha512": "sha512-ynhzEtx2iEtkqIC4i3JWH+5ce5FCeJajPrsjAivNYo60jhd09kFnGmvvUwPksszXG6AzYD06dzS5XiBqPTRNdg==",
+      "path": "questpdf/2025.1.6",
+      "hashPath": "questpdf.2025.1.6.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
