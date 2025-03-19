@@ -185,10 +185,5 @@ namespace StorageAndTrade
                 return false;
             }
         }
-
-        protected override async void Lock()
-        {
-            LockInfo(await Елемент.IsLockInfo());
-        }
     }
 }

@@ -58,10 +58,9 @@ namespace StorageAndTrade
                 return;
             }
 
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page, false,
-                async () => await page.Елемент.Lock(),
-                async () => await page.Елемент.UnLock());
-
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+            await NotebookFunction.AddLockObjectFunc(Program.GeneralNotebook, page.Name, page.Елемент);
+            await page.LockInfo(page.Елемент);
             page.SetValue();
         }
 

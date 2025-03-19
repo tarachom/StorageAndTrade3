@@ -193,6 +193,8 @@ namespace <xsl:value-of select="$NameSpace"/>
             }
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
+            await NotebookFunction.AddLockObjectFunc(Program.GeneralNotebook, page.Name, page.Елемент);
+            await page.LockInfo(page.Елемент);
             page.SetValue();
         }
 

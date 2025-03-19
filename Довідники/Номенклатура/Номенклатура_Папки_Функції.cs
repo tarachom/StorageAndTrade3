@@ -24,8 +24,8 @@ namespace StorageAndTrade
             ];
         }
 
-        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
-            Action<UnigueID?>? сallBack_LoadRecords = null, 
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null,
+            Action<UnigueID?>? сallBack_LoadRecords = null,
             Action<UnigueID>? сallBack_OnSelectPointer = null)
         {
             Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
@@ -44,6 +44,8 @@ namespace StorageAndTrade
             }
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+            await NotebookFunction.AddLockObjectFunc(Program.GeneralNotebook, page.Name, page.Елемент);
+            await page.LockInfo(page.Елемент);
             page.SetValue();
         }
 
@@ -63,7 +65,7 @@ namespace StorageAndTrade
             {
                 Номенклатура_Папки_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
-                
+
                 return Новий.UnigueID;
             }
             else
@@ -74,4 +76,3 @@ namespace StorageAndTrade
         }
     }
 }
-    
