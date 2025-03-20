@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "Configurator3/3.1.0.2": {
+      "Configurator3/3.1.0.5": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.3",
+          "AccountingSoftware": "3.1.0.5",
           "GtkSharp": "3.24.24.117-develop",
           "GtkSourceSharp": "3.24.24.117-develop",
-          "InterfaceGtk": "3.1.0.4"
+          "InterfaceGtk": "3.1.0.5"
         },
         "runtime": {
           "Configurator3.dll": {}
@@ -138,33 +138,33 @@
           }
         }
       },
-      "AccountingSoftware/3.1.0.3": {
+      "AccountingSoftware/3.1.0.5": {
         "dependencies": {
           "Npgsql": "9.0.3"
         },
         "runtime": {
           "AccountingSoftware.dll": {
-            "assemblyVersion": "3.1.0.3",
-            "fileVersion": "3.1.0.3"
+            "assemblyVersion": "3.1.0.5",
+            "fileVersion": "3.1.0.5"
           }
         }
       },
-      "InterfaceGtk/3.1.0.4": {
+      "InterfaceGtk/3.1.0.5": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.3",
+          "AccountingSoftware": "3.1.0.5",
           "GtkSharp": "3.24.24.117-develop"
         },
         "runtime": {
           "InterfaceGtk.dll": {
-            "assemblyVersion": "3.1.0.4",
-            "fileVersion": "3.1.0.4"
+            "assemblyVersion": "3.1.0.5",
+            "fileVersion": "3.1.0.5"
           }
         }
       }
     }
   },
   "libraries": {
-    "Configurator3/3.1.0.2": {
+    "Configurator3/3.1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -246,12 +246,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "AccountingSoftware/3.1.0.3": {
+    "AccountingSoftware/3.1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "InterfaceGtk/3.1.0.4": {
+    "InterfaceGtk/3.1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

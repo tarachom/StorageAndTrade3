@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "StorageAndTrade3/3.1.0.4": {
+      "StorageAndTrade3/3.1.0.5": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.3",
-          "Configurator3": "3.1.0.2",
+          "AccountingSoftware": "3.1.0.5",
+          "Configurator3": "3.1.0.5",
           "GtkSharp": "3.24.24.117-develop",
-          "InterfaceGtk": "3.1.0.4",
+          "InterfaceGtk": "3.1.0.5",
           "NPOI": "2.7.2",
           "QuestPDF": "2025.1.6"
         },
@@ -414,47 +414,47 @@
           "Microsoft.NETCore.Platforms": "5.0.0"
         }
       },
-      "AccountingSoftware/3.1.0.3": {
+      "AccountingSoftware/3.1.0.5": {
         "dependencies": {
           "Npgsql": "9.0.3"
         },
         "runtime": {
           "AccountingSoftware.dll": {
-            "assemblyVersion": "3.1.0.3",
-            "fileVersion": "3.1.0.3"
+            "assemblyVersion": "3.1.0.5",
+            "fileVersion": "3.1.0.5"
           }
         }
       },
-      "Configurator3/3.1.0.2": {
+      "Configurator3/3.1.0.5": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.3",
+          "AccountingSoftware": "3.1.0.5",
           "GtkSharp": "3.24.24.117-develop",
           "GtkSourceSharp": "3.24.24.117-develop",
-          "InterfaceGtk": "3.1.0.4"
+          "InterfaceGtk": "3.1.0.5"
         },
         "runtime": {
           "Configurator3.dll": {
-            "assemblyVersion": "3.1.0.2",
-            "fileVersion": "3.1.0.2"
+            "assemblyVersion": "3.1.0.5",
+            "fileVersion": "3.1.0.5"
           }
         }
       },
-      "InterfaceGtk/3.1.0.4": {
+      "InterfaceGtk/3.1.0.5": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.3",
+          "AccountingSoftware": "3.1.0.5",
           "GtkSharp": "3.24.24.117-develop"
         },
         "runtime": {
           "InterfaceGtk.dll": {
-            "assemblyVersion": "3.1.0.4",
-            "fileVersion": "3.1.0.4"
+            "assemblyVersion": "3.1.0.5",
+            "fileVersion": "3.1.0.5"
           }
         }
       }
     }
   },
   "libraries": {
-    "StorageAndTrade3/3.1.0.4": {
+    "StorageAndTrade3/3.1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -641,17 +641,17 @@
       "path": "system.text.encoding.codepages/5.0.0",
       "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
     },
-    "AccountingSoftware/3.1.0.3": {
+    "AccountingSoftware/3.1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Configurator3/3.1.0.2": {
+    "Configurator3/3.1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "InterfaceGtk/3.1.0.4": {
+    "InterfaceGtk/3.1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
