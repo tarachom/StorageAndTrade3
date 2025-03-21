@@ -48,6 +48,13 @@ namespace StorageAndTrade
                 Columns.Add("Ціна", 50);
                 Columns.Add("Сума", 50);
 
+                //Колонки які мають відносний розмір
+                Dictionary<string, int> ColumnsRelative = new()
+                {
+                    {"Номенклатура", 5 },
+                    {"Характеристика", 5 }
+                };
+
                 QuestPDF.Settings.License = LicenseType.Community;
                 Document doc = Document.Create(container =>
                 {
@@ -76,8 +83,11 @@ namespace StorageAndTrade
                             {
                                 table.ColumnsDefinition(cols =>
                                 {
-                                    foreach (var item in Columns.Values)
-                                        cols.ConstantColumn(item);
+                                    foreach (var item in Columns)
+                                        if (ColumnsRelative.TryGetValue(item.Key, out int value))
+                                            cols.RelativeColumn(value);
+                                        else
+                                            cols.ConstantColumn(item.Value);
                                 });
 
                                 table.Header(cell =>
