@@ -991,7 +991,7 @@ using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    class <xsl:value-of select="$DirectoryName"/>_PointerControl : PointerControl
+    public class <xsl:value-of select="$DirectoryName"/>_PointerControl : PointerControl
     {
         event EventHandler&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; PointerChanged;
 

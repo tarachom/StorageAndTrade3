@@ -760,7 +760,7 @@ using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerControl
+    public class <xsl:value-of select="$DocumentName"/>_PointerControl : PointerControl
     {
         event EventHandler&lt;<xsl:value-of select="$DocumentName"/>_Pointer&gt; PointerChanged;
 
