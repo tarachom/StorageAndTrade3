@@ -33,23 +33,12 @@ namespace StorageAndTrade
             new ФункціїДляДинамічногоВідкриття().ВідкритиДовідникВідповідноДоВиду(name, unigueID);
         }
 
-        protected override async ValueTask ВигрузитиВФайл_PDF(InterfaceGtk.ЗвітСторінка звіт, List<string[]> rows)
+        protected override async ValueTask ВигрузитиВФайл_PDF(InterfaceGtk.ЗвітСторінка звіт, (Dictionary<string, PDFColumnsSettings> Settings, List<string[]> Rows) settingsAndRows)
         {
-            const float MarginPage = 10;
-
-            //Назва та розмір колонок
-            Dictionary<string, int> Columns = [];
-            if (rows.Count > 0)
-            {
-                string[] НазвиКолонок = rows[0];
-                int СереднійРозмірКолонки = (int)Math.Round((PageSizes.A4.Width - MarginPage * 2) / НазвиКолонок.Length, 0) - 1;
-
-                foreach (var item in НазвиКолонок)
-                    Columns.Add(item, СереднійРозмірКолонки);
-            }
-
-            string Назва = звіт.ReportName + " - " + звіт.Caption;
+            string Назва = "Звіт: " + звіт.ReportName + " / " + звіт.Caption;
             string ДодатковаІнформація = звіт.GetInfo != null ? await звіт.GetInfo() : "";
+
+            ЗвітСторінка.PDFColumnsSettings[] settings = [.. settingsAndRows.Settings.Values];
 
             QuestPDF.Settings.License = LicenseType.Community;
             Document doc = Document.Create(container =>
@@ -57,28 +46,57 @@ namespace StorageAndTrade
                 container.Page(page =>
                 {
                     page.Size(PageSizes.A4);
-                    page.Margin(MarginPage, QuestPDF.Infrastructure.Unit.Point);
+                    page.Margin(10, QuestPDF.Infrastructure.Unit.Point);
 
                     page.Content().Column(x =>
                     {
                         //Назва
-                        x.Item().Text(Назва).FontSize(10).Bold();
+                        x.Item().Text(Назва).FontSize(8).Bold();
 
                         //Параметри
-                        x.Item().Text(ДодатковаІнформація).FontSize(8).Bold();
+                        x.Item().Text(ДодатковаІнформація).FontSize(6).Bold();
+
+                        //Пустий рядок
+                        x.Item().Text("");
 
                         x.Item().Table(table =>
                         {
                             table.ColumnsDefinition(cols =>
                             {
-                                foreach (var item in Columns.Values)
-                                    cols.ConstantColumn(item);
+                                if (settings.Length > 0)
+                                {
+                                    foreach (var item in settings)
+                                        if (item.Type == ЗвітСторінка.TypePDFColumn.Relative)
+                                            cols.RelativeColumn(item.Width >= 1 ? item.Width : 1);
+                                        else if (item.Type == ЗвітСторінка.TypePDFColumn.Constant)
+                                            cols.ConstantColumn(item.Width);
+                                }
+                                else
+                                    cols.RelativeColumn();
                             });
 
-                            foreach (string[] cols in rows)
+                            table.Header(header =>
+                            {
+                                if (settings.Length > 0)
+                                    foreach (var item in settings)
+                                        header.Cell().Border(1).Padding(2).Text(item.Caption).Bold().FontSize(6).AlignCenter();
+                                else
+                                    header.Cell().Border(1).Text("Для звіту не задані налаштування колонок").FontSize(6).AlignCenter();
+                            });
+
+                            foreach (string[] cols in settingsAndRows.Rows)
                                 for (int i = 0; i < cols.Length; i++)
                                 {
+                                    ЗвітСторінка.PDFColumnsSettings settingsItem = settings[i];
+
                                     var cell = table.Cell().Border(1).Padding(1).Text(cols[i]).FontSize(6);
+
+                                    if (settingsItem.Xalign == 0)
+                                        cell.AlignLeft();
+                                    else if (settingsItem.Xalign == 0.5f)
+                                        cell.AlignCenter();
+                                    else if (settingsItem.Xalign == 1f)
+                                        cell.AlignRight();
                                 }
                         });
                     });
@@ -112,7 +130,7 @@ namespace StorageAndTrade
                 {
                     for (int i = 0; i < 100; i++)
                     {
-                        string version = i != 0 ? "_" + i.ToString() + "_" : "";
+                        string version = i != 0 ? "_" + i.ToString() : "";
                         string tmpFullPath = System.IO.Path.Combine(currentFolder, reportFileName + version + extension);
 
                         if (!File.Exists(tmpFullPath))
@@ -137,9 +155,32 @@ namespace StorageAndTrade
                 IWorkbook workbook = new XSSFWorkbook();
                 ISheet sheet = workbook.CreateSheet(звіт.Caption.Length >= 30 ? звіт.Caption[..30] : звіт.Caption);
 
+                string Назва = "Звіт: " + звіт.ReportName + " / " + звіт.Caption;
+                string ДодатковаІнформація = звіт.GetInfo != null ? await звіт.GetInfo() : "";
+
                 if (rows.Count > 0)
                 {
+                    int currRow = 0;
+                    int rowAutoFilter;
                     string[] nameCols = rows[0];
+
+                    //Caption
+                    {
+                        XSSFFont font = (XSSFFont)workbook.CreateFont();
+                        font.FontHeightInPoints = 12;
+                        font.FontName = "Arial";
+
+                        XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
+                        cellStyle.SetFont(font);
+
+                        CreateCell(sheet.CreateRow(currRow++), 0, Назва, cellStyle);
+                        sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(currRow - 1, currRow - 1, 0, nameCols.Length - 1));
+                        
+                        CreateCell(sheet.CreateRow(currRow++), 0, ДодатковаІнформація, cellStyle);
+                        sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(currRow - 1, currRow - 1, 0, nameCols.Length - 1));
+
+                        CreateCell(sheet.CreateRow(currRow++), 0, "", cellStyle);
+                    }
 
                     //Header
                     {
@@ -157,7 +198,8 @@ namespace StorageAndTrade
                         cellStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Dashed;
                         cellStyle.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;
 
-                        IRow row = sheet.CreateRow(0);
+                        rowAutoFilter = currRow;
+                        IRow row = sheet.CreateRow(currRow++);
 
                         for (int i = 0; i < nameCols.Length; i++)
                             CreateCell(row, i, nameCols[i], cellStyle);
@@ -174,7 +216,7 @@ namespace StorageAndTrade
 
                         for (int r = 1; r < rows.Count; r++)
                         {
-                            IRow row = sheet.CreateRow(r);
+                            IRow row = sheet.CreateRow(currRow++);
 
                             string[] Значення = rows[r];
                             for (int i = 0; i < Значення.Length; i++)
@@ -185,7 +227,7 @@ namespace StorageAndTrade
                     for (int i = 0; i < nameCols.Length; i++)
                         sheet.AutoSizeColumn(i);
 
-                    sheet.SetAutoFilter(new NPOI.SS.Util.CellRangeAddress(0, rows.Count - 1, 0, nameCols.Length - 1));
+                    sheet.SetAutoFilter(new NPOI.SS.Util.CellRangeAddress(rowAutoFilter, rowAutoFilter + rows.Count - 1, 0, nameCols.Length - 1));
 
                     GC.Collect();
                 }

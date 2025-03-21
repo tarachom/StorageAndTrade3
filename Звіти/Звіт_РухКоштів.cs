@@ -237,6 +237,14 @@ ORDER BY
             Звіт.ColumnSettings.Add("Валюта_Назва", new("Валюта", "Валюта", Валюти_Const.POINTER));
             Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
+            //PDF
+            {
+                Звіт.PDFColumnSettings.Add("Організація_Назва", new("Організація", 3));
+                Звіт.PDFColumnSettings.Add("Каса_Назва", new("Каса", 3));
+                Звіт.PDFColumnSettings.Add("Валюта_Назва", new("Валюта"));
+                Звіт.PDFColumnSettings.Add("Сума", new("Сума", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -437,6 +445,17 @@ ORDER BY
             Звіт.ColumnSettings.Add("Розхід", new("Розхід", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиВідємнеЧислоЧервоним));
             Звіт.ColumnSettings.Add("КінцевийЗалишок", new("На кінець", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
+            //PDF
+            {
+                Звіт.PDFColumnSettings.Add("Організація_Назва", new("Організація", 3));
+                Звіт.PDFColumnSettings.Add("Каса_Назва", new("Каса", 3));
+                Звіт.PDFColumnSettings.Add("Валюта_Назва", new("Валюта"));
+                Звіт.PDFColumnSettings.Add("ПочатковийЗалишок", new("На початок", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+                Звіт.PDFColumnSettings.Add("Прихід", new("Прихід", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+                Звіт.PDFColumnSettings.Add("Розхід", new("Розхід", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+                Звіт.PDFColumnSettings.Add("КінцевийЗалишок", new("На кінець", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -579,6 +598,16 @@ ORDER BY period ASC
             Звіт.ColumnSettings.Add("Каса_Назва", new("Каса", "Каса", Каси_Const.POINTER));
             Звіт.ColumnSettings.Add("Валюта_Назва", new("Валюта", "Валюта", Валюти_Const.POINTER));
             Звіт.ColumnSettings.Add("Сума", new("Сума", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+
+            //PDF
+            {
+                Звіт.PDFColumnSettings.Add("Рух", new("Рух", 15, ЗвітСторінка.TypePDFColumn.Constant, 0.5f));
+                Звіт.PDFColumnSettings.Add("Документ_Назва", new("Документ", 6));
+                Звіт.PDFColumnSettings.Add("Організація_Назва", new("Організація", 3));
+                Звіт.PDFColumnSettings.Add("Каса_Назва", new("Каса", 3));
+                Звіт.PDFColumnSettings.Add("Валюта_Назва", new("Валюта"));
+                Звіт.PDFColumnSettings.Add("Сума", new("Сума", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
 
             await Звіт.Select();
 

@@ -41,15 +41,15 @@ namespace StorageAndTrade
         {
             //Кнопки
             Button bOstatok = new Button("Залишки");
-            bOstatok.Clicked += (object? sender, EventArgs args) => Залишки();
+            bOstatok.Clicked += (sender, args) => Залишки();
             HBoxTop.PackStart(bOstatok, false, false, 10);
 
             Button bOborot = new Button("Залишки та обороти");
-            bOborot.Clicked += (object? sender, EventArgs args) => ЗалишкиТаОбороти();
+            bOborot.Clicked += (sender, args) => ЗалишкиТаОбороти();
             HBoxTop.PackStart(bOborot, false, false, 10);
 
             Button bDocuments = new Button("Документи");
-            bDocuments.Clicked += (object? sender, EventArgs args) => Документи();
+            bDocuments.Clicked += (sender, args) => Документи();
             HBoxTop.PackStart(bDocuments, false, false, 10);
 
             ShowAll();
@@ -347,6 +347,21 @@ ORDER BY
             Звіт.ColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування", "ОдиницяВиміру", ПакуванняОдиниціВиміру_Const.POINTER));
             Звіт.ColumnSettings.Add("ВНаявності", new("В наявності", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
 
+            //PDF
+            {
+                Звіт.PDFColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", 5));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.PDFColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", 4));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.PDFColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.PDFColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.PDFColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+                Звіт.PDFColumnSettings.Add("ВНаявності", new("В наявності", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -625,6 +640,25 @@ ORDER BY
             Звіт.ColumnSettings.Add("Розхід", new("Розхід", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиВідємнеЧислоЧервоним));
             Звіт.ColumnSettings.Add("КінцевийЗалишок", new("На кінець", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиВідємнеЧислоЧервоним));
 
+            //PDF
+            {
+                Звіт.PDFColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", 5));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.PDFColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", 4));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.PDFColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.PDFColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.PDFColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+
+                Звіт.PDFColumnSettings.Add("ПочатковийЗалишок", new("На початок", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+                Звіт.PDFColumnSettings.Add("Прихід", new("Прихід", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+                Звіт.PDFColumnSettings.Add("Розхід", new("Розхід", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+                Звіт.PDFColumnSettings.Add("КінцевийЗалишок", new("На кінець", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -852,6 +886,24 @@ ORDER BY
             Звіт.ColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування", "ОдиницяВиміру", ПакуванняОдиниціВиміру_Const.POINTER));
 
             Звіт.ColumnSettings.Add("ВНаявності", new("В наявності", "", "", 1, ЗвітСторінка.ФункціяДляКолонкиВідємнеЧислоЧервоним));
+
+            //PDF
+            {
+                Звіт.PDFColumnSettings.Add("Рух", new("Рух", 15, ЗвітСторінка.TypePDFColumn.Constant, 0.5f));
+                Звіт.PDFColumnSettings.Add("Документ_Назва", new("Документ", 6));
+                Звіт.PDFColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", 5));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.PDFColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика", 4));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.PDFColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.PDFColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.PDFColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+
+                Звіт.PDFColumnSettings.Add("ВНаявності", new("В наявності", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
 
             await Звіт.Select();
 
