@@ -172,10 +172,11 @@ namespace StorageAndTrade
 
                         XSSFCellStyle cellStyle = (XSSFCellStyle)workbook.CreateCellStyle();
                         cellStyle.SetFont(font);
+                        cellStyle.WrapText = true;
 
                         CreateCell(sheet.CreateRow(currRow++), 0, Назва, cellStyle);
                         sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(currRow - 1, currRow - 1, 0, nameCols.Length - 1));
-                        
+
                         CreateCell(sheet.CreateRow(currRow++), 0, ДодатковаІнформація, cellStyle);
                         sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(currRow - 1, currRow - 1, 0, nameCols.Length - 1));
 
@@ -203,7 +204,11 @@ namespace StorageAndTrade
 
                         for (int i = 0; i < nameCols.Length; i++)
                             CreateCell(row, i, nameCols[i], cellStyle);
+
+                        //Закріпити заголовок
+                        sheet.CreateFreezePane(0, currRow);                        
                     }
+
 
                     //Body
                     {
@@ -224,10 +229,10 @@ namespace StorageAndTrade
                         }
                     }
 
+                    sheet.SetAutoFilter(new NPOI.SS.Util.CellRangeAddress(rowAutoFilter, rowAutoFilter + rows.Count - 1, 0, nameCols.Length - 1));
+
                     for (int i = 0; i < nameCols.Length; i++)
                         sheet.AutoSizeColumn(i);
-
-                    sheet.SetAutoFilter(new NPOI.SS.Util.CellRangeAddress(rowAutoFilter, rowAutoFilter + rows.Count - 1, 0, nameCols.Length - 1));
 
                     GC.Collect();
                 }

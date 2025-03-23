@@ -12,8 +12,8 @@
           "Configurator3": "3.1.0.5",
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtk": "3.1.0.6",
-          "NPOI": "2.7.2",
-          "QuestPDF": "2025.1.6"
+          "NPOI": "2.7.3",
+          "QuestPDF": "2025.1.7"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -169,7 +169,7 @@
           }
         }
       },
-      "NPOI/2.7.2": {
+      "NPOI/2.7.3": {
         "dependencies": {
           "BouncyCastle.Cryptography": "2.3.1",
           "Enums.NET": "4.0.1",
@@ -178,26 +178,26 @@
           "Microsoft.IO.RecyclableMemoryStream": "3.0.0",
           "SharpZipLib": "1.4.2",
           "SixLabors.Fonts": "1.0.1",
-          "SixLabors.ImageSharp": "2.1.9",
+          "SixLabors.ImageSharp": "2.1.10",
           "System.Security.Cryptography.Pkcs": "8.0.1",
           "System.Security.Cryptography.Xml": "8.0.2"
         },
         "runtime": {
-          "lib/net6.0/NPOI.Core.dll": {
-            "assemblyVersion": "2.7.2.0",
-            "fileVersion": "2.7.2.0"
+          "lib/net8.0/NPOI.Core.dll": {
+            "assemblyVersion": "2.7.3.0",
+            "fileVersion": "2.7.3.0"
           },
-          "lib/net6.0/NPOI.OOXML.dll": {
-            "assemblyVersion": "2.7.2.0",
-            "fileVersion": "2.7.2.0"
+          "lib/net8.0/NPOI.OOXML.dll": {
+            "assemblyVersion": "2.7.3.0",
+            "fileVersion": "2.7.3.0"
           },
-          "lib/net6.0/NPOI.OpenXml4Net.dll": {
-            "assemblyVersion": "2.7.2.0",
-            "fileVersion": "2.7.2.0"
+          "lib/net8.0/NPOI.OpenXml4Net.dll": {
+            "assemblyVersion": "2.7.3.0",
+            "fileVersion": "2.7.3.0"
           },
-          "lib/net6.0/NPOI.OpenXmlFormats.dll": {
-            "assemblyVersion": "2.7.2.0",
-            "fileVersion": "2.7.2.0"
+          "lib/net8.0/NPOI.OpenXmlFormats.dll": {
+            "assemblyVersion": "2.7.3.0",
+            "fileVersion": "2.7.3.0"
           }
         }
       },
@@ -213,11 +213,11 @@
           }
         }
       },
-      "QuestPDF/2025.1.6": {
+      "QuestPDF/2025.1.7": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2025.1.6.0",
-            "fileVersion": "2025.1.6.0"
+            "assemblyVersion": "2025.1.7.0",
+            "fileVersion": "2025.1.7.0"
           }
         },
         "runtimeTargets": {
@@ -286,12 +286,32 @@
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
+          "runtimes/osx-arm64/native/libcrypto.dylib": {
+            "rid": "osx-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-arm64/native/libjpeg.dylib": {
+            "rid": "osx-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
           "runtimes/osx-arm64/native/libqpdf.dylib": {
             "rid": "osx-arm64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
           "runtimes/osx-x64/native/libQuestPdfSkia.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libcrypto.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libjpeg.dylib": {
             "rid": "osx-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
@@ -369,7 +389,7 @@
           }
         }
       },
-      "SixLabors.ImageSharp/2.1.9": {
+      "SixLabors.ImageSharp/2.1.10": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0",
           "System.Text.Encoding.CodePages": "5.0.0"
@@ -377,7 +397,7 @@
         "runtime": {
           "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.1.9.0"
+            "fileVersion": "2.1.10.0"
           }
         }
       },
@@ -571,12 +591,12 @@
       "path": "npgsql/9.0.3",
       "hashPath": "npgsql.9.0.3.nupkg.sha512"
     },
-    "NPOI/2.7.2": {
+    "NPOI/2.7.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hKJeAQOuVl8b2qiQQg0ph8uhqm5ihq94SDSnmPu5ytCLIRTVcg2rFA274ow+IacrORImdvo0Q3K51L1t3vLqpw==",
-      "path": "npoi/2.7.2",
-      "hashPath": "npoi.2.7.2.nupkg.sha512"
+      "sha512": "sha512-iCZx3DSwUSwaV61E8tXgPlPuxYmcYV/Zi405nGlxQvWaGTAbuc0KvSBjsLucQUJ92iMeetT8iK9makLfF4uZ3g==",
+      "path": "npoi/2.7.3",
+      "hashPath": "npoi.2.7.3.nupkg.sha512"
     },
     "PangoSharp/3.24.24.117-develop": {
       "type": "package",
@@ -585,12 +605,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2025.1.6": {
+    "QuestPDF/2025.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ynhzEtx2iEtkqIC4i3JWH+5ce5FCeJajPrsjAivNYo60jhd09kFnGmvvUwPksszXG6AzYD06dzS5XiBqPTRNdg==",
-      "path": "questpdf/2025.1.6",
-      "hashPath": "questpdf.2025.1.6.nupkg.sha512"
+      "sha512": "sha512-dHkeKzFb9l3Znkqf6nK34/Z+9ML3pf54v92t3uekLoV3DuYn7//GIChzZa0TeYlH7uTBADwQZ8ixXlhel7BLEQ==",
+      "path": "questpdf/2025.1.7",
+      "hashPath": "questpdf.2025.1.7.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
@@ -606,12 +626,12 @@
       "path": "sixlabors.fonts/1.0.1",
       "hashPath": "sixlabors.fonts.1.0.1.nupkg.sha512"
     },
-    "SixLabors.ImageSharp/2.1.9": {
+    "SixLabors.ImageSharp/2.1.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-VcjfKbOExie3RgZGrQL1jJMI4iZ3J9B6ifDo2QpDVJUYhTZKVcKnBhpNOHqbvNjHgadAks1jzhRjB7OZet1PJA==",
-      "path": "sixlabors.imagesharp/2.1.9",
-      "hashPath": "sixlabors.imagesharp.2.1.9.nupkg.sha512"
+      "sha512": "sha512-hk1E7U3RSlxrBVo6Gb6OjeM52fChpFYH+SZvyT/M2vzSGlzAaKE33hc3V/Pvnjcnn1opT8/Z+0QfqdM5HsIaeA==",
+      "path": "sixlabors.imagesharp/2.1.10",
+      "hashPath": "sixlabors.imagesharp.2.1.10.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/5.0.0": {
       "type": "package",
