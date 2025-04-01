@@ -176,10 +176,7 @@ namespace StorageAndTrade
 
                 await Новий.Save();
 
-                ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент();
-                await page.Елемент.Read(Новий.UnigueID);
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                page.SetValue();
+                await ПрихіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UnigueID);
             }
         }
     }

@@ -168,10 +168,7 @@ namespace StorageAndTrade
 
                 await Новий.Save();
 
-                ПрихіднийКасовийОрдер_Елемент page = new ПрихіднийКасовийОрдер_Елемент();
-                await page.Елемент.Read(Новий.UnigueID);
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                page.SetValue();
+                await ПрихіднийКасовийОрдер_Функції.OpenPageElement(false, Новий.UnigueID);
             }
         }
 
@@ -221,10 +218,7 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                ПоверненняТоварівВідКлієнта_Елемент page = new ПоверненняТоварівВідКлієнта_Елемент();
-                await page.Елемент.Read(Новий.UnigueID);
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                page.SetValue();
+                await ПоверненняТоварівВідКлієнта_Функції.OpenPageElement(false, Новий.UnigueID);
             }
         }
 
@@ -267,10 +261,7 @@ namespace StorageAndTrade
                     await Новий.Товари_TablePart.Save(false);
                 }
 
-                ЗбіркаТоварівНаСкладі_Елемент page = new ЗбіркаТоварівНаСкладі_Елемент();
-                await page.Елемент.Read(Новий.UnigueID);
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-                page.SetValue();
+                await ЗбіркаТоварівНаСкладі_Функції.OpenPageElement(false, Новий.UnigueID);
             }
         }
 
