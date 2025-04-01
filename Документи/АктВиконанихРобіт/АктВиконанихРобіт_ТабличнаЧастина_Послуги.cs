@@ -103,8 +103,8 @@ namespace StorageAndTrade
 
             CreateBottomBlock();
 
-            Store.RowChanged += (object? sender, RowChangedArgs args) => ОбчислитиПідсумки();
-            Store.RowDeleted += (object? sender, RowDeletedArgs args) => ОбчислитиПідсумки();
+            Store.RowChanged += (sender, args) => ОбчислитиПідсумки();
+            Store.RowDeleted += (sender, args) => ОбчислитиПідсумки();
         }
 
         #region Підсумки

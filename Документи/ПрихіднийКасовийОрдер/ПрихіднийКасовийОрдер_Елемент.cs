@@ -29,8 +29,8 @@ namespace StorageAndTrade
         Валюти_PointerControl Валюта = new Валюти_PointerControl();
         Каси_PointerControl Каса = new Каси_PointerControl();
         Каси_PointerControl КасаВідправник = new Каси_PointerControl() { Caption = "Каса відправник:" };
-        NumericControl Курс = new NumericControl() { Caption = "Курс:" };
-        NumericControl СумаДокументу = new NumericControl() { Caption = "Сума:" };
+        NumericControl Курс = new NumericControl();
+        NumericControl СумаДокументу = new NumericControl();
         Контрагенти_PointerControl Контрагент = new Контрагенти_PointerControl();
         ДоговориКонтрагентів_PointerControl Договір = new ДоговориКонтрагентів_PointerControl();
         ComboBoxText ГосподарськаОперація = new ComboBoxText();
@@ -112,7 +112,7 @@ namespace StorageAndTrade
             CreateField(vBox, null, БанківськийРахунок);
 
             //СумаДокументу & Курс
-            CreateField(CreateField(vBox, null, СумаДокументу), null, Курс);
+            CreateField(CreateField(vBox, "Сума:", СумаДокументу), "Курс:", Курс);
         }
 
         protected override void CreateContainer3(Box vBox)

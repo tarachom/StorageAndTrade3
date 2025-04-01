@@ -45,6 +45,7 @@
 
     <xsl:template name="DocumentTriggers">
         <xsl:variable name="DocumentName" select="Document/Name"/>
+        <xsl:variable name="Fields" select="Document/Fields/Field"/>
         <xsl:variable name="DocumentAutomaticNumeration" select="Document/AutomaticNumeration"/>
 
         <!-- Назви функцій -->
@@ -75,7 +76,9 @@ namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи
 
         public static async ValueTask <xsl:value-of select="$TriggerFunctions/Copying"/>(<xsl:value-of select="$DocumentName"/>_Objest ДокументОбєкт, <xsl:value-of select="$DocumentName"/>_Objest Основа)
         {
+            <xsl:if test="$Fields[Name = 'Назва']">
             ДокументОбєкт.Назва += " - Копія";
+            </xsl:if>
             await ValueTask.FromResult(true);
         }
 
@@ -122,7 +125,7 @@ namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи
 */
 
 using AccountingSoftware;
-using StorageAndTrade;
+using <xsl:value-of select="$NameSpaceGeneratedCode"/>;
 
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриНакопичення;

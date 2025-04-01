@@ -41,23 +41,19 @@ namespace StorageAndTrade
 
         public Обробка_ЗавантаженняКурсівВалют()
         {
-            //Кнопки
-            Box hBoxTop = new Box(Orientation.Horizontal, 0);
-            PackStart(hBoxTop, false, false, 10);
-
             bDownload = new Button("Завантаження");
             bDownload.Clicked += OnDownload;
 
-            hBoxTop.PackStart(bDownload, false, false, 10);
+            HBoxTop.PackStart(bDownload, false, false, 10);
 
             bStop = new Button("Зупинити") { Sensitive = false };
             bStop.Clicked += OnStopClick;
 
-            hBoxTop.PackStart(bStop, false, false, 10);
+            HBoxTop.PackStart(bStop, false, false, 10);
 
             //Дата
-            hBoxTop.PackStart(ЗавантаженняНаВказануДату, false, false, 5);
-            hBoxTop.PackStart(ДатаЗавантаженняКурсу, false, false, 5);
+            HBoxTop.PackStart(ЗавантаженняНаВказануДату, false, false, 5);
+            HBoxTop.PackStart(ДатаЗавантаженняКурсу, false, false, 5);
 
             ЗавантаженняНаВказануДату.Activated += OnЗавантаженняНаВказануДату_Activated;
 

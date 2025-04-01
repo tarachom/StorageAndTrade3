@@ -51,6 +51,7 @@
 
     <xsl:template name="DirectoryTriggers">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
+        <xsl:variable name="Fields" select="Directory/Fields/Field"/>
         <xsl:variable name="DirectoryAutomaticNumeration" select="Directory/AutomaticNumeration"/>
 
         <!-- Назви функцій -->
@@ -80,7 +81,9 @@ namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники
 
         public static async ValueTask <xsl:value-of select="$TriggerFunctions/Copying"/>(<xsl:value-of select="$DirectoryName"/>_Objest ДовідникОбєкт, <xsl:value-of select="$DirectoryName"/>_Objest Основа)
         {
+            <xsl:if test="$Fields[Name = 'Назва']">
             ДовідникОбєкт.Назва += " - Копія";
+            </xsl:if>
             await ValueTask.FromResult(true);
         }
 

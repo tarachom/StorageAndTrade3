@@ -37,19 +37,15 @@ namespace StorageAndTrade
 
         public Обробка_ПочатковеЗаповнення()
         {
-            //Кнопки
-            Box hBoxTop = new Box(Orientation.Horizontal, 0);
-            PackStart(hBoxTop, false, false, 10);
-
             bFilling = new Button("Заповнити");
             bFilling.Clicked += OnFilling;
 
-            hBoxTop.PackStart(bFilling, false, false, 10);
+            HBoxTop.PackStart(bFilling, false, false, 10);
 
             bStop = new Button("Зупинити") { Sensitive = false };
             bStop.Clicked += OnStopClick;
 
-            hBoxTop.PackStart(bStop, false, false, 10);
+            HBoxTop.PackStart(bStop, false, false, 10);
 
             //Показувати при запуску -->
             Box vBoxSwitch = new Box(Orientation.Vertical, 0);
@@ -63,7 +59,7 @@ namespace StorageAndTrade
             hBoxSwitch.PackStart(visibleOnStart, false, false, 0);
             hBoxSwitch.PackStart(new Label("Показувати при запуску"), false, false, 10);
 
-            hBoxTop.PackEnd(vBoxSwitch, false, false, 10);
+            HBoxTop.PackEnd(vBoxSwitch, false, false, 10);
             //<-- Показувати при запуску
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };

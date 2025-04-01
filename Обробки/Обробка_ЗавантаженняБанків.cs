@@ -38,19 +38,15 @@ namespace StorageAndTrade
 
         public Обробка_ЗавантаженняБанків() 
         {
-            //Кнопки
-            Box hBoxTop = new Box(Orientation.Horizontal, 0);
-            PackStart(hBoxTop, false, false, 10);
-
             bDownload = new Button("Завантаження");
             bDownload.Clicked += OnDownload;
 
-            hBoxTop.PackStart(bDownload, false, false, 10);
+            HBoxTop.PackStart(bDownload, false, false, 10);
 
             bStop = new Button("Зупинити") { Sensitive = false };
             bStop.Clicked += OnStopClick;
 
-            hBoxTop.PackStart(bStop, false, false, 10);
+            HBoxTop.PackStart(bStop, false, false, 10);
 
             scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
             scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);

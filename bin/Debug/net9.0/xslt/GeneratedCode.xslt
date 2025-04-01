@@ -1540,6 +1540,20 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.CurrentPointerPosition.HasValue) { Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public <xsl:value-of select="$DocumentName"/>_Pointer? Current { get; private set; }
+
+        public async ValueTask&lt;<xsl:value-of select="$DocumentName"/>_Pointer&gt; FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new <xsl:value-of select="$DocumentName"/>_Pointer(pointer) : new <xsl:value-of select="$DocumentName"/>_Pointer();
+        }
+        
+        public async ValueTask&lt;List&lt;<xsl:value-of select="$DocumentName"/>_Pointer&gt;&gt; FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List&lt;<xsl:value-of select="$DocumentName"/>_Pointer&gt; documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new <xsl:value-of select="$DocumentName"/>_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       <xsl:for-each select="TabularParts/TablePart"> <!-- TableParts -->

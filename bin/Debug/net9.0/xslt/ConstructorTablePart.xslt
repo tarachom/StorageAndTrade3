@@ -419,21 +419,24 @@ namespace <xsl:value-of select="$NameSpace"/>
             if (GetColIndex(column, out int colNumber))
             {
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
-                Запис запис = Записи[rowNumber];
-
-                CellRendererText cellText = (CellRendererText)cell;
-                cellText.Foreground = "green";
-
-                switch ((Columns)colNumber)
+                if (rowNumber &gt;= 0 &amp;&amp; rowNumber &lt; Записи.Count)
                 {
-                    <xsl:for-each select="$FieldsTL[Type = 'integer' or Type = 'numeric']">
-                    case Columns.<xsl:value-of select="Name"/>:
+                    Запис запис = Записи[rowNumber];
+
+                    CellRendererText cellText = (CellRendererText)cell;
+                    cellText.Foreground = "green";
+
+                    switch ((Columns)colNumber)
                     {
-                        cellText.Text = запис.<xsl:value-of select="Name"/>.ToString();
-                        break;
+                        <xsl:for-each select="$FieldsTL[Type = 'integer' or Type = 'numeric']">
+                        case Columns.<xsl:value-of select="Name"/>:
+                        {
+                            cellText.Text = запис.<xsl:value-of select="Name"/>.ToString();
+                            break;
+                        }
+                        </xsl:for-each>
+                        default: break;
                     }
-                    </xsl:for-each>
-                    default: break;
                 }
             }
         }
@@ -445,25 +448,28 @@ namespace <xsl:value-of select="$NameSpace"/>
             if (GetColIndex(column, out int colNumber))
             {
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
-                Запис запис = Записи[rowNumber];
-
-                CellRendererText cellText = (CellRendererText)cell;
-                cellText.Foreground = "green";
-
-                switch ((Columns)colNumber)
+                if (rowNumber &gt;= 0 &amp;&amp; rowNumber &lt; Записи.Count)
                 {
-                    <xsl:for-each select="$FieldsTL[Type = 'date' or Type = 'datetime' or Type = 'time']">
-                    case Columns.<xsl:value-of select="Name"/>:
+                    Запис запис = Записи[rowNumber];
+
+                    CellRendererText cellText = (CellRendererText)cell;
+                    cellText.Foreground = "green";
+
+                    switch ((Columns)colNumber)
                     {
-                        cellText.Text = запис.<xsl:value-of select="Name"/>.ToString(<xsl:choose>
-                                <xsl:when test="Type = 'date'">"dd.MM.yyyy"</xsl:when>
-                                <xsl:when test="Type = 'datetime'">"dd.MM.yyyy HH:mm:ss"</xsl:when>
-                                <xsl:when test="Type = 'time'">@"hh\:mm\:ss"</xsl:when>
-                            </xsl:choose>);
-                        break;
+                        <xsl:for-each select="$FieldsTL[Type = 'date' or Type = 'datetime' or Type = 'time']">
+                        case Columns.<xsl:value-of select="Name"/>:
+                        {
+                            cellText.Text = запис.<xsl:value-of select="Name"/>.ToString(<xsl:choose>
+                                    <xsl:when test="Type = 'date'">"dd.MM.yyyy"</xsl:when>
+                                    <xsl:when test="Type = 'datetime'">"dd.MM.yyyy HH:mm:ss"</xsl:when>
+                                    <xsl:when test="Type = 'time'">@"hh\:mm\:ss"</xsl:when>
+                                </xsl:choose>);
+                            break;
+                        }
+                        </xsl:for-each>
+                        default: break;
                     }
-                    </xsl:for-each>
-                    default: break;
                 }
             }
         }
