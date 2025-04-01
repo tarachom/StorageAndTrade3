@@ -20,18 +20,7 @@ namespace StorageAndTrade
 
         Button bFilling;
         Button bStop;
-        Switch visibleOnStart;
-        ScrolledWindow scrollMessage;
-        Box vBoxMessage;
-        CancellationTokenSource? CancellationTokenThread { get; set; }
-
-        enum TypeMessage
-        {
-            Ok,
-            Error,
-            Info,
-            None
-        }
+        CancellationTokenSource? CancellationToken { get; set; }
 
         #endregion
 
@@ -47,46 +36,45 @@ namespace StorageAndTrade
 
             HBoxTop.PackStart(bStop, false, false, 10);
 
-            //Показувати при запуску -->
-            Box vBoxSwitch = new Box(Orientation.Vertical, 0);
+            //Показувати при запуску
+            {
+                Switch visibleOnStart = new Switch()
+                {
+                    HeightRequest = 20,
+                    Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const
+                };
 
-            Box hBoxSwitch = new Box(Orientation.Horizontal, 0);
-            vBoxSwitch.PackStart(hBoxSwitch, false, false, 0);
+                visibleOnStart.ButtonReleaseEvent += (sender, args) =>
+                   Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnStart.Active;
 
-            visibleOnStart = new Switch() { HeightRequest = 20, Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
-            visibleOnStart.ButtonReleaseEvent += (object? sender, ButtonReleaseEventArgs args) => Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnStart.Active;
+                Box vBox = new Box(Orientation.Vertical, 0);
+                CreateField(vBox, "Показувати при запуску", visibleOnStart);
 
-            hBoxSwitch.PackStart(visibleOnStart, false, false, 0);
-            hBoxSwitch.PackStart(new Label("Показувати при запуску"), false, false, 10);
+                HBoxTop.PackEnd(vBox, false, false, 10);
+            }
 
-            HBoxTop.PackEnd(vBoxSwitch, false, false, 10);
-            //<-- Показувати при запуску
-
-            scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollMessage.Add(vBoxMessage = new Box(Orientation.Vertical, 0));
-
-            PackStart(scrollMessage, true, true, 0);
+            Button bClear = new Button("Очистити");
+            bClear.Clicked += (sender, e) => Лог.ClearMessage();
+            HBoxTop.PackEnd(bClear, false, false, 10);
 
             ShowAll();
         }
 
         async void OnFilling(object? sender, EventArgs args)
         {
-            CancellationTokenThread = new CancellationTokenSource();
+            CancellationToken = new CancellationTokenSource();
             await Filling();
         }
 
         async ValueTask Filling()
         {
             ButtonSensitive(false);
-            ClearMessage();
 
             string initialFillingXmlFilePath = System.IO.Path.Combine(AppContext.BaseDirectory, "template/InitialFilling.xml");
 
             if (File.Exists(initialFillingXmlFilePath))
             {
-                CreateMessage(TypeMessage.Ok, "Файл - " + initialFillingXmlFilePath);
+                Лог.CreateMessage("Файл - " + initialFillingXmlFilePath, LogMessage.TypeMessage.Ok);
 
                 XPathDocument xPathDoc = new XPathDocument(initialFillingXmlFilePath);
                 XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
@@ -94,11 +82,10 @@ namespace StorageAndTrade
                 XPathNavigator? rootДовідники = rootNode?.SelectSingleNode("Довідники");
 
                 //Валюти
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Валюти";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Валюти_Select валюти_Select = new Валюти_Select();
 
@@ -131,19 +118,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаВалюта_Const = валюти_Objest.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}, код {Код_R030}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}, код {Код_R030}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва} з кодом {Код_R030}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва} з кодом {Код_R030}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // Організації
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Організації";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Організації_Select організації_Select = new Організації_Select();
 
@@ -167,19 +153,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const = організації_Objest.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // Каси
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Каси";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Каси_Select вибірка = new Каси_Select();
 
@@ -209,19 +194,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаКаса_Const = обєкт.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // ПакуванняОдиниціВиміру
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Пакування";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     ПакуванняОдиниціВиміру_Select вибірка = new ПакуванняОдиниціВиміру_Select();
 
@@ -251,19 +235,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнаОдиницяПакування_Const = обєкт.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // ВидиНоменклатури
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Види номенклатури";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     ВидиНоменклатури_Select вибірка = new ВидиНоменклатури_Select();
 
@@ -296,19 +279,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидНоменклатури_Const = обєкт.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // ВидиЦін
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Види цін";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     ВидиЦін_Select вибірка = new ВидиЦін_Select();
 
@@ -340,19 +322,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "2")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіниЗакупівлі_Const = обєкт.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // Склади
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Склади";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Склади_Select склади_Select = new Склади_Select();
 
@@ -376,19 +357,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "1")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const = склади_Objest.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // Контрагенти
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Контрагенти";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Контрагенти_Select контрагенти_Select = new Контрагенти_Select();
 
@@ -415,19 +395,18 @@ namespace StorageAndTrade
                                 if (ЗначенняЗаЗамовчуванням == "2")
                                     Константи.ЗначенняЗаЗамовчуванням.ОсновнийПостачальник_Const = контрагенти_Objest.GetDirectoryPointer();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // Контрагенти Папки
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Контрагенти папки";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Контрагенти_Папки_Select контрагенти_Папки_Select = new Контрагенти_Папки_Select();
 
@@ -447,19 +426,18 @@ namespace StorageAndTrade
                                 await контрагенти_Папки_Objest.New();
                                 await контрагенти_Папки_Objest.Save();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}и: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}и: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // Номенклатура Папки
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Номенклатура папки";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Номенклатура_Папки_Select номенклатура_Папки_Select = new Номенклатура_Папки_Select();
 
@@ -479,19 +457,18 @@ namespace StorageAndTrade
                                 await номенклатура_Папки_Objest.New();
                                 await номенклатура_Папки_Objest.Save();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
 
                 // Номенклатура
-                if (!CancellationTokenThread!.IsCancellationRequested)
+                if (!CancellationToken!.IsCancellationRequested)
                 {
                     string name = "Номенклатура";
-
-                    CreateMessage(TypeMessage.None, $"\n{name}\n");
+                    Лог.CreateMessage($"<b>{name}</b>", LogMessage.TypeMessage.None);
 
                     Номенклатура_Select вибірка = new Номенклатура_Select();
 
@@ -507,8 +484,7 @@ namespace StorageAndTrade
                             string ТипНоменклатуриТекст = currentNode?.SelectSingleNode("ТипНоменклатури")?.Value ?? "";
                             string ПакуванняОдиниціВиміру = currentNode?.SelectSingleNode("ПакуванняОдиниціВиміру")?.Value ?? "";
 
-                            Перелічення.ТипиНоменклатури ТипНоменклатури;
-                            if (!Enum.TryParse<Перелічення.ТипиНоменклатури>(ТипНоменклатуриТекст, true, out ТипНоменклатури))
+                            if (!Enum.TryParse<Перелічення.ТипиНоменклатури>(ТипНоменклатуриТекст, true, out Перелічення.ТипиНоменклатури ТипНоменклатури))
                                 ТипНоменклатури = Перелічення.ТипиНоменклатури.Товар;
 
                             Номенклатура_Pointer вказівник = await вибірка.FindByField(Номенклатура_Const.Назва, Назва);
@@ -524,24 +500,25 @@ namespace StorageAndTrade
                                 await обєкт.New();
                                 await обєкт.Save();
 
-                                CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
                             else
-                                CreateMessage(TypeMessage.Info, $"Знайдено елемент довідника {name}: {Назва}");
+                                Лог.CreateMessage($"Знайдено елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Info);
                         }
                 }
             }
             else
             {
-                CreateMessage(TypeMessage.Error, $"Не знайдений файл {initialFillingXmlFilePath}");
-                CreateMessage(TypeMessage.None, "Початкове заповнення перервано!");
+                Лог.CreateMessage($"Не знайдений файл {initialFillingXmlFilePath}", LogMessage.TypeMessage.Error);
+                Лог.CreateMessage("Початкове заповнення перервано!", LogMessage.TypeMessage.None);
             }
 
             ButtonSensitive(true);
 
-            CreateMessage(TypeMessage.None, "\n\n\nГотово\n\n\n");
+            Лог.CreateMessage("Готово", LogMessage.TypeMessage.None);
+
             await Task.Delay(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n\n");
+            Лог.CreateEmptyMsg();
         }
 
         void ButtonSensitive(bool sensitive)
@@ -550,50 +527,9 @@ namespace StorageAndTrade
             bStop.Sensitive = !sensitive;
         }
 
-        void CreateMessage(TypeMessage typeMsg, string message)
-        {
-            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
-            vBoxMessage.PackStart(hBoxInfo, false, false, 2);
-
-            switch (typeMsg)
-            {
-                case TypeMessage.Ok:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Error:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Info:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.None:
-                    {
-                        hBoxInfo.PackStart(new Label(""), false, false, 5);
-                        break;
-                    }
-            }
-
-            hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
-            hBoxInfo.ShowAll();
-
-            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-        }
-
-        void ClearMessage()
-        {
-            foreach (Widget Child in vBoxMessage.Children)
-                vBoxMessage.Remove(Child);
-        }
-
         void OnStopClick(object? sender, EventArgs args)
         {
-            CancellationTokenThread?.Cancel();
+            CancellationToken?.Cancel();
         }
 
     }
