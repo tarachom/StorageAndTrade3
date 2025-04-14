@@ -203,11 +203,9 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            <xsl:value-of select="$DirectoryName"/>_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
         public static async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
@@ -554,6 +552,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
         <!--<xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>-->
         <xsl:variable name="TabularList" select="Directory/TabularList"/>
+        <xsl:variable name="UsePages" select="Directory/UsePages"/>
 
         <!-- Додатова інформація для ієрархічного довідника -->
         <xsl:variable name="DirectoryType" select="Directory/Type"/>
@@ -587,9 +586,16 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
+            <xsl:if test="$UsePages = '1'">
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
+            </xsl:if>
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2);
-            Власник.AfterSelectFunc = async () =&gt; await LoadRecords();
+            Власник.AfterSelectFunc = async () =&gt; 
+            {
+                ClearPages();
+                await LoadRecords();
+            };
             </xsl:if>
         }
 
@@ -597,16 +603,16 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
             </xsl:if>
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(LoadRecords);
+            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -621,11 +627,20 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
+            </xsl:if>
+        }
+
+        async ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            PagesShow(LoadRecords_OnFilter);
         }
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid);
+            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, () =&gt; PagesShow(LoadRecords_OnFilter));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -646,7 +661,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
-            <xsl:if test="normalize-space($DirectoryType) = 'Hierarchical'">if (!LiteMode)</xsl:if> await LoadRecords();
+            <xsl:if test="normalize-space($DirectoryType) = 'Hierarchical'">if (!CompositeMode)</xsl:if> await LoadRecords();
         }
 
         #endregion
@@ -664,6 +679,7 @@ namespace <xsl:value-of select="$NameSpace"/>
     <xsl:template name="DirectoryListSmallSelect">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
         <xsl:variable name="TabularList" select="Directory/TabularList"/>
+        <xsl:variable name="UsePages" select="Directory/UsePages"/>
 
         <!-- Додатова інформація для ієрархічного довідника -->
         <xsl:variable name="DirectoryType" select="Directory/Type"/>
@@ -695,24 +711,31 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
+            <xsl:if test="$UsePages = '1'">
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
+            </xsl:if>
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
-            Власник.AfterSelectFunc = async () =&gt; await LoadRecords();
+            Власник.AfterSelectFunc = async () =&gt; 
+            {
+                ClearPages();
+                await LoadRecords();
+            };
             </xsl:if>
         }
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = null;
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
             </xsl:if>
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(LoadRecords);
+            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -727,6 +750,9 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
+            </xsl:if>
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
@@ -794,6 +820,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
         <!--<xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>-->
         <xsl:variable name="TabularList" select="Directory/TabularList"/>
+        <xsl:variable name="UsePages" select="Directory/UsePages"/>
 
         <!-- Додатова інформація для ієрархічного довідника -->
         <xsl:variable name="DirectoryType" select="Directory/Type"/>
@@ -836,15 +863,38 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>()
         {
             //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += async (object? sender, EventArgs args) =&gt; await LoadRecords();
+            checkButtonIsHierarchy.Clicked += async (sender, args) =&gt;
+            {
+                ClearPages();
+                if (checkButtonIsHierarchy.Active)
+                    await LoadRecords();
+                else
+                    await LoadRecords_TreeCallBack();
+            };
+
             HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
 
             //Дерево папок
-            ДеревоПапок = new <xsl:value-of select="$PointerFolders"/>() { WidthRequest = 500, CallBack_RowActivated = LoadRecords_TreeCallBack, LiteMode = true };
+            ДеревоПапок = new <xsl:value-of select="$PointerFolders"/>()
+            {
+                WidthRequest = 500,
+                CallBack_RowActivated = async () =&gt;
+                {
+                    if (checkButtonIsHierarchy.Active)
+                    {
+                        ClearPages();
+                        await LoadRecords_TreeCallBack();
+                    }
+                },
+                CompositeMode = true
+            };
             ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
+            <xsl:if test="$UsePages = '1'">
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
+            </xsl:if>
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = () =&gt; ДеревоПапок.Власник.Pointer = Власник.Pointer;
@@ -855,20 +905,22 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public override async ValueTask LoadRecords()
         {
-            if (DirectoryPointerItem != null || SelectPointerItem != null)
+            if (checkButtonIsHierarchy.Active)
             {
-                <xsl:value-of select="$DirectoryName"/>_Objest? Обєкт = await new <xsl:value-of select="$DirectoryName"/>_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
-                if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.<xsl:value-of select="$FieldFolder"/>.UnigueID;
-            }
+                if (DirectoryPointerItem != null || SelectPointerItem != null)
+                {
+                    <xsl:value-of select="$DirectoryName"/>_Objest? Обєкт = await new <xsl:value-of select="$DirectoryName"/>_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID()).GetDirectoryObject();
+                    if (Обєкт != null) ДеревоПапок.SelectPointerItem = Обєкт.<xsl:value-of select="$FieldFolder"/>.UnigueID;
+                }
 
-            await ДеревоПапок.LoadRecords();
+                await ДеревоПапок.LoadRecords();
+            }
+            else
+                await LoadRecords_TreeCallBack();
         }
 
-        async void LoadRecords_TreeCallBack()
+        async ValueTask LoadRecords_TreeCallBack()
         {
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ОчиститиВідбір(TreeViewGrid);
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             if (!Власник.Pointer.UnigueID.IsEmpty())
@@ -879,7 +931,10 @@ namespace <xsl:value-of select="$NameSpace"/>
                 ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid,
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$FieldFolder"/>, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(LoadRecords_TreeCallBack);
+            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -894,68 +949,35 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
+            </xsl:if>
+        }
+
+        async ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            PagesShow(LoadRecords_OnFilter);
         }
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid);
+            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, () =&gt; PagesShow(LoadRecords_OnFilter));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             await  <xsl:value-of select="$DirectoryName"/>_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null<xsl:if test="normalize-space($DirectoryOwner) != ''">, Власник.Pointer</xsl:if>);
-            <!--
-                <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                {
-                    CallBack_LoadRecords = CallBack_LoadRecords,
-                    IsNew = IsNew
-                };
-
-                if (IsNew)
-                    await page.Елемент.New();
-                else if (unigueID == null || !await page.Елемент.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return;
-                }
-
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
-                page.SetValue();
-            -->
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             await  <xsl:value-of select="$DirectoryName"/>_Функції.SetDeletionLabel(unigueID);
-            <!--
-                <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await Обєкт.Read(unigueID))
-                    await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            -->
         }
 
         protected override async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
         {
             return await  <xsl:value-of select="$DirectoryName"/>_Функції.Copy(unigueID);
-            <!--
-                <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await Обєкт.Read(unigueID))
-                {
-                    <xsl:value-of select="$DirectoryName"/>_Objest Новий = await Обєкт.Copy(true);
-                    await Новий.Save();
-                    <xsl:for-each select="$TabularParts">
-                        await Новий.<xsl:value-of select="Name"/>_TablePart.Save(false); // Таблична частина "<xsl:value-of select="Name"/>"
-                    </xsl:for-each>
-                    return Новий.UnigueID;
-                }
-                else
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return null;
-                }
-            -->
         }
 
         protected override async ValueTask BeforeSetValue()

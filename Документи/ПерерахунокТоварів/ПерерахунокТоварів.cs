@@ -17,21 +17,20 @@ namespace StorageAndTrade
 {
     public class ПерерахунокТоварів : ДокументЖурнал
     {
-        public ПерерахунокТоварів() 
+        public ПерерахунокТоварів()
         {
             ТабличніСписки.ПерерахунокТоварів_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.ПерерахунокТоварів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ПерерахунокТоварів_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.ПерерахунокТоварів_Записи.DocumentPointerItem = DocumentPointerItem;
-
             ТабличніСписки.ПерерахунокТоварів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.ПерерахунокТоварів_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ПерерахунокТоварів_Записи.LoadRecords(TreeViewGrid, SelectPointerItem, DocumentPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -42,11 +41,18 @@ namespace StorageAndTrade
             ТабличніСписки.ПерерахунокТоварів_Записи.ДодатиВідбір(TreeViewGrid, ПерерахунокТоварів_Функції.Відбори(searchText));
 
             await ТабличніСписки.ПерерахунокТоварів_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
+        }
+
+        async ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.ПерерахунокТоварів_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(LoadRecords_OnFilter);
         }
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.ПерерахунокТоварів_Записи.CreateFilter(TreeViewGrid);
+            return ТабличніСписки.ПерерахунокТоварів_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -75,6 +81,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
 

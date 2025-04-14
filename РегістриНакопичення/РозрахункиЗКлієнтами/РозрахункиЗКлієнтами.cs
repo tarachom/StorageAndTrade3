@@ -12,13 +12,14 @@ using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = GeneratedCode.РегістриНакопичення.ТабличніСписки;
 
-namespace StorageAndTrade
+namespace StorageAndTrade.РегістриНакопичення
 {
     public class РозрахункиЗКлієнтами : РегістриНакопиченняЖурнал
     {
         public РозрахункиЗКлієнтами() : base()
         {
             ТабличніСписки.РозрахункиЗКлієнтами_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.РозрахункиЗКлієнтами_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриНакопичення });
 
             HBoxTop.PackStart(new Label("Таблиці розрахунків:"), false, false, 0);
             CreateLink(HBoxTop, "Залишки", async () => await РозрахункиЗКлієнтами_Залишки_Звіт.Сформувати(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня()));
@@ -29,10 +30,10 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.РозрахункиЗКлієнтами_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.РозрахункиЗКлієнтами_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.РозрахункиЗКлієнтами_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.РозрахункиЗКлієнтами_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -44,6 +45,7 @@ namespace StorageAndTrade
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.РозрахункиЗКлієнтами_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         const string КлючНалаштуванняКористувача = "РегістриНакопичення.РозрахункиЗКлієнтами";
@@ -56,6 +58,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
 

@@ -234,11 +234,9 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            <xsl:value-of select="$DocumentName"/>_Objest Обєкт = new <xsl:value-of select="$DocumentName"/>_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            <xsl:value-of select="$DocumentName"/>_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
         public static async ValueTask&lt;UnigueID?&gt; Copy(UnigueID unigueID)
@@ -618,6 +616,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="DocumentName" select="Document/Name"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
         <xsl:variable name="TabularList" select="Document/TabularList"/>
+        <xsl:variable name="UsePages" select="Document/UsePages"/>
 
         <!-- Додатова інформація -->
         <xsl:variable name="DocumentExportXML" select="Document/ExportXML"/>
@@ -642,18 +641,21 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DocumentName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
+            <xsl:if test="$UsePages = '1'">
+            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { Тип = Сторінки.ТипЖурналу.Документи });
+            </xsl:if>
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.DocumentPointerItem = DocumentPointerItem;
-
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, SelectPointerItem, DocumentPointerItem);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(LoadRecords);
+            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -664,11 +666,20 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DocumentName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
+            </xsl:if>
+        }
+
+        async ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            PagesShow(LoadRecords_OnFilter);
         }
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid);
+            return ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, () =&gt; PagesShow(LoadRecords_OnFilter));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -697,6 +708,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
 

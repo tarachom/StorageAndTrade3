@@ -17,18 +17,14 @@ namespace StorageAndTrade
         public Журнал_Склад() : base(Config.NameSpageCodeGeneration)
         {
             ТабличніСписки.Журнали_Склад.AddColumns(TreeViewGrid);
+            ТабличніСписки.Журнали_Склад.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Журнали });
         }
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Журнали_Склад.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.Журнали_Склад.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period);
-            await ТабличніСписки.Журнали_Склад.LoadRecords(TreeViewGrid);
-        }
-
-        public override async ValueTask LoadRecords_OnSearch(string searchText)
-        {
-            await ValueTask.FromResult(true);
+            await ТабличніСписки.Журнали_Склад.LoadRecords(TreeViewGrid, SelectPointerItem);
+            PagesShow(LoadRecords);
         }
 
         protected override void OpenTypeListDocs(Widget relative_to)
@@ -62,6 +58,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
     }

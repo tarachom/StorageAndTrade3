@@ -43,7 +43,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.ТовариНаСкладах_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.ТовариНаСкладах_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.ТовариНаСкладах_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.ТовариНаСкладах_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -53,7 +53,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.ПартіїТоварів_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.ПартіїТоварів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.ПартіїТоварів_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.ПартіїТоварів_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -63,7 +63,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.ЗамовленняКлієнтів_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.ЗамовленняКлієнтів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.ЗамовленняКлієнтів_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.ЗамовленняКлієнтів_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -73,7 +73,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.РозрахункиЗКлієнтами_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.РозрахункиЗКлієнтами_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.РозрахункиЗКлієнтами_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.РозрахункиЗКлієнтами_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -83,7 +83,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.ВільніЗалишки_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.ВільніЗалишки_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.ВільніЗалишки_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.ВільніЗалишки_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -93,7 +93,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.ЗамовленняПостачальникам_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.ЗамовленняПостачальникам_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.ЗамовленняПостачальникам_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.ЗамовленняПостачальникам_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -103,7 +103,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.РозрахункиЗПостачальниками_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.РозрахункиЗПостачальниками_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.РозрахункиЗПостачальниками_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.РозрахункиЗПостачальниками_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -113,7 +113,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.РухКоштів_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.РухКоштів_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.РухКоштів_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.РухКоштів_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -123,7 +123,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.Закупівлі_Записи.AddColumns(treeView, ["period", "owner", "income"]);
                             ТабличніСписки.Закупівлі_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.Закупівлі_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.Закупівлі_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -133,7 +133,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.Продажі_Записи.AddColumns(treeView, ["period", "owner", "income"]);
                             ТабличніСписки.Продажі_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.Продажі_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.Продажі_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }
@@ -143,7 +143,7 @@ namespace StorageAndTrade
 
                             ТабличніСписки.ТовариВКомірках_Записи.AddColumns(treeView, ["period", "owner"]);
                             ТабличніСписки.ТовариВКомірках_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
-                            await ТабличніСписки.ТовариВКомірках_Записи.LoadRecords(treeView, false, false);
+                            await ТабличніСписки.ТовариВКомірках_Записи.LoadRecords(treeView, null, false, false);
 
                             break;
                         }

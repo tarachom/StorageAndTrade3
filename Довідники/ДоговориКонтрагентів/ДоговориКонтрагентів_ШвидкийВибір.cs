@@ -18,7 +18,7 @@ namespace StorageAndTrade
     {
         public Контрагенти_PointerControl КонтрагентВласник = new Контрагенти_PointerControl() { Caption = "Контрагент:", WidthPresentation = 100 };
 
-        public ДоговориКонтрагентів_ШвидкийВибір() 
+        public ДоговориКонтрагентів_ШвидкийВибір()
         {
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
 
@@ -29,9 +29,6 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.SelectPointerItem = null;
-            ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
@@ -40,7 +37,7 @@ namespace StorageAndTrade
                     new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ДоговориКонтрагентів_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)

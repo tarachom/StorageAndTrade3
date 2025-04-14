@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 20.03.2025 10:04:31
+ * Дата конфігурації: 14.04.2025 20:44:32
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -1939,7 +1939,7 @@ namespace GeneratedCode.Довідники
         {
             return new Організації_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Організації_Const.PRESENTATION_FIELDS);
@@ -1957,7 +1957,7 @@ namespace GeneratedCode.Довідники
         public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
-        public Організації_Контакти_TablePart Контакти_TablePart { get; set; }
+        public Організації_Контакти_TablePart Контакти_TablePart { get; private set; }
         
     }
 
@@ -1965,7 +1965,7 @@ namespace GeneratedCode.Довідники
     {
         public Організації_Pointer(object? uid = null) : base(Config.Kernel, "tab_a01", Організації_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Організації_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a01", Організації_Const.TYPE)
@@ -1976,13 +1976,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Організації_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Організації_Objest ОрганізаціїObjestItem = new Організації_Objest();
-            return await ОрганізаціїObjestItem.Read(base.UnigueID, readAllTablePart) ? ОрганізаціїObjestItem : null;
+            Організації_Objest obj = new Організації_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Організації_Pointer Copy()
         {
-            return new Організації_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Організації_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -2003,6 +2003,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -2012,12 +2017,6 @@ namespace GeneratedCode.Довідники
         public Організації_Pointer GetEmptyPointer()
         {
             return new Організації_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -2349,7 +2348,7 @@ namespace GeneratedCode.Довідники
         {
             return new Номенклатура_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Номенклатура_Const.PRESENTATION_FIELDS);
@@ -2368,7 +2367,7 @@ namespace GeneratedCode.Довідники
         public Довідники.Файли_Pointer ОсновнаКартинкаФайл { get; set; } = new Довідники.Файли_Pointer();
         
         //Табличні частини
-        public Номенклатура_Файли_TablePart Файли_TablePart { get; set; }
+        public Номенклатура_Файли_TablePart Файли_TablePart { get; private set; }
         
     }
 
@@ -2376,7 +2375,7 @@ namespace GeneratedCode.Довідники
     {
         public Номенклатура_Pointer(object? uid = null) : base(Config.Kernel, "tab_a03", Номенклатура_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Номенклатура_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a03", Номенклатура_Const.TYPE)
@@ -2387,13 +2386,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Номенклатура_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Номенклатура_Objest НоменклатураObjestItem = new Номенклатура_Objest();
-            return await НоменклатураObjestItem.Read(base.UnigueID, readAllTablePart) ? НоменклатураObjestItem : null;
+            Номенклатура_Objest obj = new Номенклатура_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Номенклатура_Pointer Copy()
         {
-            return new Номенклатура_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Номенклатура_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -2414,6 +2413,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             Номенклатура_Objest? obj = await GetDirectoryObject();
@@ -2425,12 +2429,6 @@ namespace GeneratedCode.Довідники
         public Номенклатура_Pointer GetEmptyPointer()
         {
             return new Номенклатура_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -2505,11 +2503,12 @@ namespace GeneratedCode.Довідники
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Файл.Назва = ItemValue["Файл"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Файл.Name = ItemValue["Файл"];
+                      
+                }
                 
             }
             
@@ -2687,7 +2686,7 @@ namespace GeneratedCode.Довідники
         {
             return new Виробники_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Виробники_Const.PRESENTATION_FIELDS);
@@ -2702,7 +2701,7 @@ namespace GeneratedCode.Довідники
     {
         public Виробники_Pointer(object? uid = null) : base(Config.Kernel, "tab_a04", Виробники_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Виробники_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a04", Виробники_Const.TYPE)
@@ -2713,13 +2712,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Виробники_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Виробники_Objest ВиробникиObjestItem = new Виробники_Objest();
-            return await ВиробникиObjestItem.Read(base.UnigueID, readAllTablePart) ? ВиробникиObjestItem : null;
+            Виробники_Objest obj = new Виробники_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Виробники_Pointer Copy()
         {
-            return new Виробники_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Виробники_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -2740,6 +2739,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -2749,12 +2753,6 @@ namespace GeneratedCode.Довідники
         public Виробники_Pointer GetEmptyPointer()
         {
             return new Виробники_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -2898,7 +2896,7 @@ namespace GeneratedCode.Довідники
         {
             return new ВидиНоменклатури_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ВидиНоменклатури_Const.PRESENTATION_FIELDS);
@@ -2916,7 +2914,7 @@ namespace GeneratedCode.Довідники
     {
         public ВидиНоменклатури_Pointer(object? uid = null) : base(Config.Kernel, "tab_a05", ВидиНоменклатури_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ВидиНоменклатури_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a05", ВидиНоменклатури_Const.TYPE)
@@ -2927,13 +2925,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ВидиНоменклатури_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ВидиНоменклатури_Objest ВидиНоменклатуриObjestItem = new ВидиНоменклатури_Objest();
-            return await ВидиНоменклатуриObjestItem.Read(base.UnigueID, readAllTablePart) ? ВидиНоменклатуриObjestItem : null;
+            ВидиНоменклатури_Objest obj = new ВидиНоменклатури_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ВидиНоменклатури_Pointer Copy()
         {
-            return new ВидиНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ВидиНоменклатури_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -2954,6 +2952,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -2963,12 +2966,6 @@ namespace GeneratedCode.Довідники
         public ВидиНоменклатури_Pointer GetEmptyPointer()
         {
             return new ВидиНоменклатури_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -3110,7 +3107,7 @@ namespace GeneratedCode.Довідники
         {
             return new ПакуванняОдиниціВиміру_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПакуванняОдиниціВиміру_Const.PRESENTATION_FIELDS);
@@ -3127,7 +3124,7 @@ namespace GeneratedCode.Довідники
     {
         public ПакуванняОдиниціВиміру_Pointer(object? uid = null) : base(Config.Kernel, "tab_a06", ПакуванняОдиниціВиміру_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПакуванняОдиниціВиміру_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a06", ПакуванняОдиниціВиміру_Const.TYPE)
@@ -3138,13 +3135,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ПакуванняОдиниціВиміру_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПакуванняОдиниціВиміру_Objest ПакуванняОдиниціВиміруObjestItem = new ПакуванняОдиниціВиміру_Objest();
-            return await ПакуванняОдиниціВиміруObjestItem.Read(base.UnigueID, readAllTablePart) ? ПакуванняОдиниціВиміруObjestItem : null;
+            ПакуванняОдиниціВиміру_Objest obj = new ПакуванняОдиниціВиміру_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ПакуванняОдиниціВиміру_Pointer Copy()
         {
-            return new ПакуванняОдиниціВиміру_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПакуванняОдиниціВиміру_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -3165,6 +3162,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -3174,12 +3176,6 @@ namespace GeneratedCode.Довідники
         public ПакуванняОдиниціВиміру_Pointer GetEmptyPointer()
         {
             return new ПакуванняОдиниціВиміру_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -3327,7 +3323,7 @@ namespace GeneratedCode.Довідники
         {
             return new Валюти_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Валюти_Const.PRESENTATION_FIELDS);
@@ -3345,7 +3341,7 @@ namespace GeneratedCode.Довідники
     {
         public Валюти_Pointer(object? uid = null) : base(Config.Kernel, "tab_a07", Валюти_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Валюти_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a07", Валюти_Const.TYPE)
@@ -3356,13 +3352,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Валюти_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Валюти_Objest ВалютиObjestItem = new Валюти_Objest();
-            return await ВалютиObjestItem.Read(base.UnigueID, readAllTablePart) ? ВалютиObjestItem : null;
+            Валюти_Objest obj = new Валюти_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Валюти_Pointer Copy()
         {
-            return new Валюти_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Валюти_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -3383,6 +3379,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             Валюти_Objest? obj = await GetDirectoryObject();
@@ -3394,12 +3395,6 @@ namespace GeneratedCode.Довідники
         public Валюти_Pointer GetEmptyPointer()
         {
             return new Валюти_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -3587,7 +3582,7 @@ namespace GeneratedCode.Довідники
         {
             return new Контрагенти_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Контрагенти_Const.PRESENTATION_FIELDS);
@@ -3604,8 +3599,8 @@ namespace GeneratedCode.Довідники
         public bool Покупець { get; set; } = false;
         
         //Табличні частини
-        public Контрагенти_Контакти_TablePart Контакти_TablePart { get; set; }
-        public Контрагенти_Файли_TablePart Файли_TablePart { get; set; }
+        public Контрагенти_Контакти_TablePart Контакти_TablePart { get; private set; }
+        public Контрагенти_Файли_TablePart Файли_TablePart { get; private set; }
         
     }
 
@@ -3613,7 +3608,7 @@ namespace GeneratedCode.Довідники
     {
         public Контрагенти_Pointer(object? uid = null) : base(Config.Kernel, "tab_a08", Контрагенти_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Контрагенти_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a08", Контрагенти_Const.TYPE)
@@ -3624,13 +3619,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Контрагенти_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Контрагенти_Objest КонтрагентиObjestItem = new Контрагенти_Objest();
-            return await КонтрагентиObjestItem.Read(base.UnigueID, readAllTablePart) ? КонтрагентиObjestItem : null;
+            Контрагенти_Objest obj = new Контрагенти_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Контрагенти_Pointer Copy()
         {
-            return new Контрагенти_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Контрагенти_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -3651,6 +3646,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             Контрагенти_Objest? obj = await GetDirectoryObject();
@@ -3662,12 +3662,6 @@ namespace GeneratedCode.Довідники
         public Контрагенти_Pointer GetEmptyPointer()
         {
             return new Контрагенти_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -3882,11 +3876,12 @@ namespace GeneratedCode.Довідники
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Файл.Назва = ItemValue["Файл"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Файл.Name = ItemValue["Файл"];
+                      
+                }
                 
             }
             
@@ -4108,7 +4103,7 @@ namespace GeneratedCode.Довідники
         {
             return new Склади_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Склади_Const.PRESENTATION_FIELDS);
@@ -4125,7 +4120,7 @@ namespace GeneratedCode.Довідники
         public string КлючовіСловаДляПошуку { get; set; } = "";
         
         //Табличні частини
-        public Склади_Контакти_TablePart Контакти_TablePart { get; set; }
+        public Склади_Контакти_TablePart Контакти_TablePart { get; private set; }
         
     }
 
@@ -4133,7 +4128,7 @@ namespace GeneratedCode.Довідники
     {
         public Склади_Pointer(object? uid = null) : base(Config.Kernel, "tab_a10", Склади_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Склади_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a10", Склади_Const.TYPE)
@@ -4144,13 +4139,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Склади_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Склади_Objest СкладиObjestItem = new Склади_Objest();
-            return await СкладиObjestItem.Read(base.UnigueID, readAllTablePart) ? СкладиObjestItem : null;
+            Склади_Objest obj = new Склади_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Склади_Pointer Copy()
         {
-            return new Склади_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Склади_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -4171,6 +4166,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -4180,12 +4180,6 @@ namespace GeneratedCode.Довідники
         public Склади_Pointer GetEmptyPointer()
         {
             return new Склади_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -4463,7 +4457,7 @@ namespace GeneratedCode.Довідники
         {
             return new ВидиЦін_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ВидиЦін_Const.PRESENTATION_FIELDS);
@@ -4479,7 +4473,7 @@ namespace GeneratedCode.Довідники
     {
         public ВидиЦін_Pointer(object? uid = null) : base(Config.Kernel, "tab_a12", ВидиЦін_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ВидиЦін_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a12", ВидиЦін_Const.TYPE)
@@ -4490,13 +4484,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ВидиЦін_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ВидиЦін_Objest ВидиЦінObjestItem = new ВидиЦін_Objest();
-            return await ВидиЦінObjestItem.Read(base.UnigueID, readAllTablePart) ? ВидиЦінObjestItem : null;
+            ВидиЦін_Objest obj = new ВидиЦін_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ВидиЦін_Pointer Copy()
         {
-            return new ВидиЦін_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ВидиЦін_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -4517,6 +4511,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -4526,12 +4525,6 @@ namespace GeneratedCode.Довідники
         public ВидиЦін_Pointer GetEmptyPointer()
         {
             return new ВидиЦін_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -4667,7 +4660,7 @@ namespace GeneratedCode.Довідники
         {
             return new ВидиЦінПостачальників_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ВидиЦінПостачальників_Const.PRESENTATION_FIELDS);
@@ -4683,7 +4676,7 @@ namespace GeneratedCode.Довідники
     {
         public ВидиЦінПостачальників_Pointer(object? uid = null) : base(Config.Kernel, "tab_a13", ВидиЦінПостачальників_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ВидиЦінПостачальників_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a13", ВидиЦінПостачальників_Const.TYPE)
@@ -4694,13 +4687,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ВидиЦінПостачальників_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ВидиЦінПостачальників_Objest ВидиЦінПостачальниківObjestItem = new ВидиЦінПостачальників_Objest();
-            return await ВидиЦінПостачальниківObjestItem.Read(base.UnigueID, readAllTablePart) ? ВидиЦінПостачальниківObjestItem : null;
+            ВидиЦінПостачальників_Objest obj = new ВидиЦінПостачальників_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ВидиЦінПостачальників_Pointer Copy()
         {
-            return new ВидиЦінПостачальників_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ВидиЦінПостачальників_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -4721,6 +4714,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -4730,12 +4728,6 @@ namespace GeneratedCode.Довідники
         public ВидиЦінПостачальників_Pointer GetEmptyPointer()
         {
             return new ВидиЦінПостачальників_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -4897,7 +4889,7 @@ namespace GeneratedCode.Довідники
         {
             return new Користувачі_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Користувачі_Const.PRESENTATION_FIELDS);
@@ -4910,7 +4902,7 @@ namespace GeneratedCode.Довідники
         public Guid КодВСпеціальнійТаблиці { get; set; } = new Guid();
         
         //Табличні частини
-        public Користувачі_Контакти_TablePart Контакти_TablePart { get; set; }
+        public Користувачі_Контакти_TablePart Контакти_TablePart { get; private set; }
         
     }
 
@@ -4918,7 +4910,7 @@ namespace GeneratedCode.Довідники
     {
         public Користувачі_Pointer(object? uid = null) : base(Config.Kernel, "tab_a14", Користувачі_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Користувачі_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a14", Користувачі_Const.TYPE)
@@ -4929,13 +4921,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Користувачі_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Користувачі_Objest КористувачіObjestItem = new Користувачі_Objest();
-            return await КористувачіObjestItem.Read(base.UnigueID, readAllTablePart) ? КористувачіObjestItem : null;
+            Користувачі_Objest obj = new Користувачі_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Користувачі_Pointer Copy()
         {
-            return new Користувачі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Користувачі_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -4956,6 +4948,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -4965,12 +4962,6 @@ namespace GeneratedCode.Довідники
         public Користувачі_Pointer GetEmptyPointer()
         {
             return new Користувачі_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -5270,7 +5261,7 @@ namespace GeneratedCode.Довідники
         {
             return new ФізичніОсоби_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ФізичніОсоби_Const.PRESENTATION_FIELDS);
@@ -5283,7 +5274,7 @@ namespace GeneratedCode.Довідники
         public string ІПН { get; set; } = "";
         
         //Табличні частини
-        public ФізичніОсоби_Контакти_TablePart Контакти_TablePart { get; set; }
+        public ФізичніОсоби_Контакти_TablePart Контакти_TablePart { get; private set; }
         
     }
 
@@ -5291,7 +5282,7 @@ namespace GeneratedCode.Довідники
     {
         public ФізичніОсоби_Pointer(object? uid = null) : base(Config.Kernel, "tab_a16", ФізичніОсоби_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ФізичніОсоби_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a16", ФізичніОсоби_Const.TYPE)
@@ -5302,13 +5293,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ФізичніОсоби_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ФізичніОсоби_Objest ФізичніОсобиObjestItem = new ФізичніОсоби_Objest();
-            return await ФізичніОсобиObjestItem.Read(base.UnigueID, readAllTablePart) ? ФізичніОсобиObjestItem : null;
+            ФізичніОсоби_Objest obj = new ФізичніОсоби_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ФізичніОсоби_Pointer Copy()
         {
-            return new ФізичніОсоби_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ФізичніОсоби_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -5329,6 +5320,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -5338,12 +5334,6 @@ namespace GeneratedCode.Довідники
         public ФізичніОсоби_Pointer GetEmptyPointer()
         {
             return new ФізичніОсоби_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -5621,7 +5611,7 @@ namespace GeneratedCode.Довідники
         {
             return new СтруктураПідприємства_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(СтруктураПідприємства_Const.PRESENTATION_FIELDS);
@@ -5637,7 +5627,7 @@ namespace GeneratedCode.Довідники
     {
         public СтруктураПідприємства_Pointer(object? uid = null) : base(Config.Kernel, "tab_a18", СтруктураПідприємства_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public СтруктураПідприємства_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a18", СтруктураПідприємства_Const.TYPE)
@@ -5648,13 +5638,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<СтруктураПідприємства_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            СтруктураПідприємства_Objest СтруктураПідприємстваObjestItem = new СтруктураПідприємства_Objest();
-            return await СтруктураПідприємстваObjestItem.Read(base.UnigueID, readAllTablePart) ? СтруктураПідприємстваObjestItem : null;
+            СтруктураПідприємства_Objest obj = new СтруктураПідприємства_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public СтруктураПідприємства_Pointer Copy()
         {
-            return new СтруктураПідприємства_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new СтруктураПідприємства_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -5675,6 +5665,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -5684,12 +5679,6 @@ namespace GeneratedCode.Довідники
         public СтруктураПідприємства_Pointer GetEmptyPointer()
         {
             return new СтруктураПідприємства_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -5821,7 +5810,7 @@ namespace GeneratedCode.Довідники
         {
             return new КраїниСвіту_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(КраїниСвіту_Const.PRESENTATION_FIELDS);
@@ -5836,7 +5825,7 @@ namespace GeneratedCode.Довідники
     {
         public КраїниСвіту_Pointer(object? uid = null) : base(Config.Kernel, "tab_a19", КраїниСвіту_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public КраїниСвіту_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a19", КраїниСвіту_Const.TYPE)
@@ -5847,13 +5836,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<КраїниСвіту_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            КраїниСвіту_Objest КраїниСвітуObjestItem = new КраїниСвіту_Objest();
-            return await КраїниСвітуObjestItem.Read(base.UnigueID, readAllTablePart) ? КраїниСвітуObjestItem : null;
+            КраїниСвіту_Objest obj = new КраїниСвіту_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public КраїниСвіту_Pointer Copy()
         {
-            return new КраїниСвіту_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new КраїниСвіту_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -5874,6 +5863,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -5883,12 +5877,6 @@ namespace GeneratedCode.Довідники
         public КраїниСвіту_Pointer GetEmptyPointer()
         {
             return new КраїниСвіту_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -6036,7 +6024,7 @@ namespace GeneratedCode.Довідники
         {
             return new Файли_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Файли_Const.PRESENTATION_FIELDS);
@@ -6055,7 +6043,7 @@ namespace GeneratedCode.Довідники
     {
         public Файли_Pointer(object? uid = null) : base(Config.Kernel, "tab_a20", Файли_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Файли_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a20", Файли_Const.TYPE)
@@ -6066,13 +6054,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Файли_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Файли_Objest ФайлиObjestItem = new Файли_Objest();
-            return await ФайлиObjestItem.Read(base.UnigueID, readAllTablePart) ? ФайлиObjestItem : null;
+            Файли_Objest obj = new Файли_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Файли_Pointer Copy()
         {
-            return new Файли_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Файли_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -6093,6 +6081,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -6102,12 +6095,6 @@ namespace GeneratedCode.Довідники
         public Файли_Pointer GetEmptyPointer()
         {
             return new Файли_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -6247,7 +6234,7 @@ namespace GeneratedCode.Довідники
         {
             return new ХарактеристикиНоменклатури_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ХарактеристикиНоменклатури_Const.PRESENTATION_FIELDS);
@@ -6264,7 +6251,7 @@ namespace GeneratedCode.Довідники
     {
         public ХарактеристикиНоменклатури_Pointer(object? uid = null) : base(Config.Kernel, "tab_a21", ХарактеристикиНоменклатури_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ХарактеристикиНоменклатури_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a21", ХарактеристикиНоменклатури_Const.TYPE)
@@ -6275,13 +6262,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ХарактеристикиНоменклатури_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ХарактеристикиНоменклатури_Objest ХарактеристикиНоменклатуриObjestItem = new ХарактеристикиНоменклатури_Objest();
-            return await ХарактеристикиНоменклатуриObjestItem.Read(base.UnigueID, readAllTablePart) ? ХарактеристикиНоменклатуриObjestItem : null;
+            ХарактеристикиНоменклатури_Objest obj = new ХарактеристикиНоменклатури_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ХарактеристикиНоменклатури_Pointer Copy()
         {
-            return new ХарактеристикиНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ХарактеристикиНоменклатури_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -6302,6 +6289,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -6311,12 +6303,6 @@ namespace GeneratedCode.Довідники
         public ХарактеристикиНоменклатури_Pointer GetEmptyPointer()
         {
             return new ХарактеристикиНоменклатури_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -6456,7 +6442,7 @@ namespace GeneratedCode.Довідники
         {
             return new Номенклатура_Папки_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Номенклатура_Папки_Const.PRESENTATION_FIELDS);
@@ -6472,7 +6458,7 @@ namespace GeneratedCode.Довідники
     {
         public Номенклатура_Папки_Pointer(object? uid = null) : base(Config.Kernel, "tab_a22", Номенклатура_Папки_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Номенклатура_Папки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a22", Номенклатура_Папки_Const.TYPE)
@@ -6483,13 +6469,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Номенклатура_Папки_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Номенклатура_Папки_Objest Номенклатура_ПапкиObjestItem = new Номенклатура_Папки_Objest();
-            return await Номенклатура_ПапкиObjestItem.Read(base.UnigueID, readAllTablePart) ? Номенклатура_ПапкиObjestItem : null;
+            Номенклатура_Папки_Objest obj = new Номенклатура_Папки_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Номенклатура_Папки_Pointer Copy()
         {
-            return new Номенклатура_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Номенклатура_Папки_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -6510,6 +6496,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             Номенклатура_Папки_Objest? obj = await GetDirectoryObject();
@@ -6521,12 +6512,6 @@ namespace GeneratedCode.Довідники
         public Номенклатура_Папки_Pointer GetEmptyPointer()
         {
             return new Номенклатура_Папки_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -6680,7 +6665,7 @@ namespace GeneratedCode.Довідники
         {
             return new Контрагенти_Папки_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Контрагенти_Папки_Const.PRESENTATION_FIELDS);
@@ -6696,7 +6681,7 @@ namespace GeneratedCode.Довідники
     {
         public Контрагенти_Папки_Pointer(object? uid = null) : base(Config.Kernel, "tab_a23", Контрагенти_Папки_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Контрагенти_Папки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a23", Контрагенти_Папки_Const.TYPE)
@@ -6707,13 +6692,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Контрагенти_Папки_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Контрагенти_Папки_Objest Контрагенти_ПапкиObjestItem = new Контрагенти_Папки_Objest();
-            return await Контрагенти_ПапкиObjestItem.Read(base.UnigueID, readAllTablePart) ? Контрагенти_ПапкиObjestItem : null;
+            Контрагенти_Папки_Objest obj = new Контрагенти_Папки_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Контрагенти_Папки_Pointer Copy()
         {
-            return new Контрагенти_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Контрагенти_Папки_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -6734,6 +6719,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             Контрагенти_Папки_Objest? obj = await GetDirectoryObject();
@@ -6745,12 +6735,6 @@ namespace GeneratedCode.Довідники
         public Контрагенти_Папки_Pointer GetEmptyPointer()
         {
             return new Контрагенти_Папки_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -6904,7 +6888,7 @@ namespace GeneratedCode.Довідники
         {
             return new Склади_Папки_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Склади_Папки_Const.PRESENTATION_FIELDS);
@@ -6920,7 +6904,7 @@ namespace GeneratedCode.Довідники
     {
         public Склади_Папки_Pointer(object? uid = null) : base(Config.Kernel, "tab_a24", Склади_Папки_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Склади_Папки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a24", Склади_Папки_Const.TYPE)
@@ -6931,13 +6915,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Склади_Папки_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Склади_Папки_Objest Склади_ПапкиObjestItem = new Склади_Папки_Objest();
-            return await Склади_ПапкиObjestItem.Read(base.UnigueID, readAllTablePart) ? Склади_ПапкиObjestItem : null;
+            Склади_Папки_Objest obj = new Склади_Папки_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Склади_Папки_Pointer Copy()
         {
-            return new Склади_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Склади_Папки_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -6958,6 +6942,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             Склади_Папки_Objest? obj = await GetDirectoryObject();
@@ -6969,12 +6958,6 @@ namespace GeneratedCode.Довідники
         public Склади_Папки_Pointer GetEmptyPointer()
         {
             return new Склади_Папки_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -7128,7 +7111,7 @@ namespace GeneratedCode.Довідники
         {
             return new Каси_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Каси_Const.PRESENTATION_FIELDS);
@@ -7145,7 +7128,7 @@ namespace GeneratedCode.Довідники
     {
         public Каси_Pointer(object? uid = null) : base(Config.Kernel, "tab_a26", Каси_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Каси_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a26", Каси_Const.TYPE)
@@ -7156,13 +7139,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Каси_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Каси_Objest КасиObjestItem = new Каси_Objest();
-            return await КасиObjestItem.Read(base.UnigueID, readAllTablePart) ? КасиObjestItem : null;
+            Каси_Objest obj = new Каси_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Каси_Pointer Copy()
         {
-            return new Каси_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Каси_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -7183,6 +7166,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -7192,12 +7180,6 @@ namespace GeneratedCode.Довідники
         public Каси_Pointer GetEmptyPointer()
         {
             return new Каси_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -7349,7 +7331,7 @@ namespace GeneratedCode.Довідники
         {
             return new БанківськіРахункиОрганізацій_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(БанківськіРахункиОрганізацій_Const.PRESENTATION_FIELDS);
@@ -7369,7 +7351,7 @@ namespace GeneratedCode.Довідники
     {
         public БанківськіРахункиОрганізацій_Pointer(object? uid = null) : base(Config.Kernel, "tab_a27", БанківськіРахункиОрганізацій_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public БанківськіРахункиОрганізацій_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a27", БанківськіРахункиОрганізацій_Const.TYPE)
@@ -7380,13 +7362,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<БанківськіРахункиОрганізацій_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            БанківськіРахункиОрганізацій_Objest БанківськіРахункиОрганізаційObjestItem = new БанківськіРахункиОрганізацій_Objest();
-            return await БанківськіРахункиОрганізаційObjestItem.Read(base.UnigueID, readAllTablePart) ? БанківськіРахункиОрганізаційObjestItem : null;
+            БанківськіРахункиОрганізацій_Objest obj = new БанківськіРахункиОрганізацій_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public БанківськіРахункиОрганізацій_Pointer Copy()
         {
-            return new БанківськіРахункиОрганізацій_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new БанківськіРахункиОрганізацій_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -7407,6 +7389,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -7416,12 +7403,6 @@ namespace GeneratedCode.Довідники
         public БанківськіРахункиОрганізацій_Pointer GetEmptyPointer()
         {
             return new БанківськіРахункиОрганізацій_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -7627,7 +7608,7 @@ namespace GeneratedCode.Довідники
         {
             return new ДоговориКонтрагентів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ДоговориКонтрагентів_Const.PRESENTATION_FIELDS);
@@ -7660,7 +7641,7 @@ namespace GeneratedCode.Довідники
     {
         public ДоговориКонтрагентів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a28", ДоговориКонтрагентів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ДоговориКонтрагентів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a28", ДоговориКонтрагентів_Const.TYPE)
@@ -7671,13 +7652,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ДоговориКонтрагентів_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ДоговориКонтрагентів_Objest ДоговориКонтрагентівObjestItem = new ДоговориКонтрагентів_Objest();
-            return await ДоговориКонтрагентівObjestItem.Read(base.UnigueID, readAllTablePart) ? ДоговориКонтрагентівObjestItem : null;
+            ДоговориКонтрагентів_Objest obj = new ДоговориКонтрагентів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ДоговориКонтрагентів_Pointer Copy()
         {
-            return new ДоговориКонтрагентів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ДоговориКонтрагентів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -7698,6 +7679,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -7707,12 +7693,6 @@ namespace GeneratedCode.Довідники
         public ДоговориКонтрагентів_Pointer GetEmptyPointer()
         {
             return new ДоговориКонтрагентів_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -7860,7 +7840,7 @@ namespace GeneratedCode.Довідники
         {
             return new БанківськіРахункиКонтрагентів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(БанківськіРахункиКонтрагентів_Const.PRESENTATION_FIELDS);
@@ -7879,7 +7859,7 @@ namespace GeneratedCode.Довідники
     {
         public БанківськіРахункиКонтрагентів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a29", БанківськіРахункиКонтрагентів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public БанківськіРахункиКонтрагентів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a29", БанківськіРахункиКонтрагентів_Const.TYPE)
@@ -7890,13 +7870,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<БанківськіРахункиКонтрагентів_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            БанківськіРахункиКонтрагентів_Objest БанківськіРахункиКонтрагентівObjestItem = new БанківськіРахункиКонтрагентів_Objest();
-            return await БанківськіРахункиКонтрагентівObjestItem.Read(base.UnigueID, readAllTablePart) ? БанківськіРахункиКонтрагентівObjestItem : null;
+            БанківськіРахункиКонтрагентів_Objest obj = new БанківськіРахункиКонтрагентів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public БанківськіРахункиКонтрагентів_Pointer Copy()
         {
-            return new БанківськіРахункиКонтрагентів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new БанківськіРахункиКонтрагентів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -7917,6 +7897,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -7926,12 +7911,6 @@ namespace GeneratedCode.Довідники
         public БанківськіРахункиКонтрагентів_Pointer GetEmptyPointer()
         {
             return new БанківськіРахункиКонтрагентів_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -8093,7 +8072,7 @@ namespace GeneratedCode.Довідники
         {
             return new СтаттяРухуКоштів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(СтаттяРухуКоштів_Const.PRESENTATION_FIELDS);
@@ -8106,7 +8085,7 @@ namespace GeneratedCode.Довідники
         public string Опис { get; set; } = "";
         
         //Табличні частини
-        public СтаттяРухуКоштів_ГосподарськіОперації_TablePart ГосподарськіОперації_TablePart { get; set; }
+        public СтаттяРухуКоштів_ГосподарськіОперації_TablePart ГосподарськіОперації_TablePart { get; private set; }
         
     }
 
@@ -8114,7 +8093,7 @@ namespace GeneratedCode.Довідники
     {
         public СтаттяРухуКоштів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a45", СтаттяРухуКоштів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public СтаттяРухуКоштів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a45", СтаттяРухуКоштів_Const.TYPE)
@@ -8125,13 +8104,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<СтаттяРухуКоштів_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            СтаттяРухуКоштів_Objest СтаттяРухуКоштівObjestItem = new СтаттяРухуКоштів_Objest();
-            return await СтаттяРухуКоштівObjestItem.Read(base.UnigueID, readAllTablePart) ? СтаттяРухуКоштівObjestItem : null;
+            СтаттяРухуКоштів_Objest obj = new СтаттяРухуКоштів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public СтаттяРухуКоштів_Pointer Copy()
         {
-            return new СтаттяРухуКоштів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new СтаттяРухуКоштів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -8152,6 +8131,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -8161,12 +8145,6 @@ namespace GeneratedCode.Довідники
         public СтаттяРухуКоштів_Pointer GetEmptyPointer()
         {
             return new СтаттяРухуКоштів_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -8418,7 +8396,7 @@ namespace GeneratedCode.Довідники
         {
             return new СеріїНоменклатури_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(СеріїНоменклатури_Const.PRESENTATION_FIELDS);
@@ -8434,7 +8412,7 @@ namespace GeneratedCode.Довідники
     {
         public СеріїНоменклатури_Pointer(object? uid = null) : base(Config.Kernel, "tab_b02", СеріїНоменклатури_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public СеріїНоменклатури_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b02", СеріїНоменклатури_Const.TYPE)
@@ -8445,13 +8423,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<СеріїНоменклатури_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            СеріїНоменклатури_Objest СеріїНоменклатуриObjestItem = new СеріїНоменклатури_Objest();
-            return await СеріїНоменклатуриObjestItem.Read(base.UnigueID, readAllTablePart) ? СеріїНоменклатуриObjestItem : null;
+            СеріїНоменклатури_Objest obj = new СеріїНоменклатури_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public СеріїНоменклатури_Pointer Copy()
         {
-            return new СеріїНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new СеріїНоменклатури_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -8472,6 +8450,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -8481,12 +8464,6 @@ namespace GeneratedCode.Довідники
         public СеріїНоменклатури_Pointer GetEmptyPointer()
         {
             return new СеріїНоменклатури_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -8632,7 +8609,7 @@ namespace GeneratedCode.Довідники
         {
             return new ПартіяТоварівКомпозит_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПартіяТоварівКомпозит_Const.PRESENTATION_FIELDS);
@@ -8651,7 +8628,7 @@ namespace GeneratedCode.Довідники
     {
         public ПартіяТоварівКомпозит_Pointer(object? uid = null) : base(Config.Kernel, "tab_b06", ПартіяТоварівКомпозит_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПартіяТоварівКомпозит_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b06", ПартіяТоварівКомпозит_Const.TYPE)
@@ -8662,13 +8639,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ПартіяТоварівКомпозит_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПартіяТоварівКомпозит_Objest ПартіяТоварівКомпозитObjestItem = new ПартіяТоварівКомпозит_Objest();
-            return await ПартіяТоварівКомпозитObjestItem.Read(base.UnigueID, readAllTablePart) ? ПартіяТоварівКомпозитObjestItem : null;
+            ПартіяТоварівКомпозит_Objest obj = new ПартіяТоварівКомпозит_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ПартіяТоварівКомпозит_Pointer Copy()
         {
-            return new ПартіяТоварівКомпозит_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПартіяТоварівКомпозит_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -8689,6 +8666,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -8698,12 +8680,6 @@ namespace GeneratedCode.Довідники
         public ПартіяТоварівКомпозит_Pointer GetEmptyPointer()
         {
             return new ПартіяТоварівКомпозит_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -8855,7 +8831,7 @@ namespace GeneratedCode.Довідники
         {
             return new ВидиЗапасів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ВидиЗапасів_Const.PRESENTATION_FIELDS);
@@ -8875,7 +8851,7 @@ namespace GeneratedCode.Довідники
     {
         public ВидиЗапасів_Pointer(object? uid = null) : base(Config.Kernel, "tab_b13", ВидиЗапасів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ВидиЗапасів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b13", ВидиЗапасів_Const.TYPE)
@@ -8886,13 +8862,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ВидиЗапасів_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ВидиЗапасів_Objest ВидиЗапасівObjestItem = new ВидиЗапасів_Objest();
-            return await ВидиЗапасівObjestItem.Read(base.UnigueID, readAllTablePart) ? ВидиЗапасівObjestItem : null;
+            ВидиЗапасів_Objest obj = new ВидиЗапасів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ВидиЗапасів_Pointer Copy()
         {
-            return new ВидиЗапасів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ВидиЗапасів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -8913,6 +8889,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -8922,12 +8903,6 @@ namespace GeneratedCode.Довідники
         public ВидиЗапасів_Pointer GetEmptyPointer()
         {
             return new ВидиЗапасів_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -9163,7 +9138,7 @@ namespace GeneratedCode.Довідники
         {
             return new Банки_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Банки_Const.PRESENTATION_FIELDS);
@@ -9204,7 +9179,7 @@ namespace GeneratedCode.Довідники
     {
         public Банки_Pointer(object? uid = null) : base(Config.Kernel, "tab_a39", Банки_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Банки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a39", Банки_Const.TYPE)
@@ -9215,13 +9190,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Банки_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Банки_Objest БанкиObjestItem = new Банки_Objest();
-            return await БанкиObjestItem.Read(base.UnigueID, readAllTablePart) ? БанкиObjestItem : null;
+            Банки_Objest obj = new Банки_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Банки_Pointer Copy()
         {
-            return new Банки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Банки_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -9242,6 +9217,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -9251,12 +9231,6 @@ namespace GeneratedCode.Довідники
         public Банки_Pointer GetEmptyPointer()
         {
             return new Банки_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -9392,7 +9366,7 @@ namespace GeneratedCode.Довідники
         {
             return new СкладськіПриміщення_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(СкладськіПриміщення_Const.PRESENTATION_FIELDS);
@@ -9408,7 +9382,7 @@ namespace GeneratedCode.Довідники
     {
         public СкладськіПриміщення_Pointer(object? uid = null) : base(Config.Kernel, "tab_a71", СкладськіПриміщення_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public СкладськіПриміщення_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a71", СкладськіПриміщення_Const.TYPE)
@@ -9419,13 +9393,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<СкладськіПриміщення_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            СкладськіПриміщення_Objest СкладськіПриміщенняObjestItem = new СкладськіПриміщення_Objest();
-            return await СкладськіПриміщенняObjestItem.Read(base.UnigueID, readAllTablePart) ? СкладськіПриміщенняObjestItem : null;
+            СкладськіПриміщення_Objest obj = new СкладськіПриміщення_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public СкладськіПриміщення_Pointer Copy()
         {
-            return new СкладськіПриміщення_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new СкладськіПриміщення_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -9446,6 +9420,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -9455,12 +9434,6 @@ namespace GeneratedCode.Довідники
         public СкладськіПриміщення_Pointer GetEmptyPointer()
         {
             return new СкладськіПриміщення_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -9624,7 +9597,7 @@ namespace GeneratedCode.Довідники
         {
             return new СкладськіКомірки_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(СкладськіКомірки_Const.PRESENTATION_FIELDS);
@@ -9647,7 +9620,7 @@ namespace GeneratedCode.Довідники
     {
         public СкладськіКомірки_Pointer(object? uid = null) : base(Config.Kernel, "tab_a72", СкладськіКомірки_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public СкладськіКомірки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a72", СкладськіКомірки_Const.TYPE)
@@ -9658,13 +9631,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<СкладськіКомірки_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            СкладськіКомірки_Objest СкладськіКоміркиObjestItem = new СкладськіКомірки_Objest();
-            return await СкладськіКоміркиObjestItem.Read(base.UnigueID, readAllTablePart) ? СкладськіКоміркиObjestItem : null;
+            СкладськіКомірки_Objest obj = new СкладськіКомірки_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public СкладськіКомірки_Pointer Copy()
         {
-            return new СкладськіКомірки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new СкладськіКомірки_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -9685,6 +9658,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -9694,12 +9672,6 @@ namespace GeneratedCode.Довідники
         public СкладськіКомірки_Pointer GetEmptyPointer()
         {
             return new СкладськіКомірки_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -9833,7 +9805,7 @@ namespace GeneratedCode.Довідники
         {
             return new ОбластьЗберігання_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ОбластьЗберігання_Const.PRESENTATION_FIELDS);
@@ -9849,7 +9821,7 @@ namespace GeneratedCode.Довідники
     {
         public ОбластьЗберігання_Pointer(object? uid = null) : base(Config.Kernel, "tab_a73", ОбластьЗберігання_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ОбластьЗберігання_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a73", ОбластьЗберігання_Const.TYPE)
@@ -9860,13 +9832,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ОбластьЗберігання_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ОбластьЗберігання_Objest ОбластьЗберіганняObjestItem = new ОбластьЗберігання_Objest();
-            return await ОбластьЗберіганняObjestItem.Read(base.UnigueID, readAllTablePart) ? ОбластьЗберіганняObjestItem : null;
+            ОбластьЗберігання_Objest obj = new ОбластьЗберігання_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ОбластьЗберігання_Pointer Copy()
         {
-            return new ОбластьЗберігання_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ОбластьЗберігання_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -9887,6 +9859,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -9896,12 +9873,6 @@ namespace GeneratedCode.Довідники
         public ОбластьЗберігання_Pointer GetEmptyPointer()
         {
             return new ОбластьЗберігання_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -10049,7 +10020,7 @@ namespace GeneratedCode.Довідники
         {
             return new ТипорозміриКомірок_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ТипорозміриКомірок_Const.PRESENTATION_FIELDS);
@@ -10068,7 +10039,7 @@ namespace GeneratedCode.Довідники
     {
         public ТипорозміриКомірок_Pointer(object? uid = null) : base(Config.Kernel, "tab_a75", ТипорозміриКомірок_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ТипорозміриКомірок_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a75", ТипорозміриКомірок_Const.TYPE)
@@ -10079,13 +10050,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ТипорозміриКомірок_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ТипорозміриКомірок_Objest ТипорозміриКомірокObjestItem = new ТипорозміриКомірок_Objest();
-            return await ТипорозміриКомірокObjestItem.Read(base.UnigueID, readAllTablePart) ? ТипорозміриКомірокObjestItem : null;
+            ТипорозміриКомірок_Objest obj = new ТипорозміриКомірок_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ТипорозміриКомірок_Pointer Copy()
         {
-            return new ТипорозміриКомірок_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ТипорозміриКомірок_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -10106,6 +10077,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -10115,12 +10091,6 @@ namespace GeneratedCode.Довідники
         public ТипорозміриКомірок_Pointer GetEmptyPointer()
         {
             return new ТипорозміриКомірок_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -10264,7 +10234,7 @@ namespace GeneratedCode.Довідники
         {
             return new СкладськіКомірки_Папки_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(СкладськіКомірки_Папки_Const.PRESENTATION_FIELDS);
@@ -10281,7 +10251,7 @@ namespace GeneratedCode.Довідники
     {
         public СкладськіКомірки_Папки_Pointer(object? uid = null) : base(Config.Kernel, "tab_a76", СкладськіКомірки_Папки_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public СкладськіКомірки_Папки_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a76", СкладськіКомірки_Папки_Const.TYPE)
@@ -10292,13 +10262,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<СкладськіКомірки_Папки_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            СкладськіКомірки_Папки_Objest СкладськіКомірки_ПапкиObjestItem = new СкладськіКомірки_Папки_Objest();
-            return await СкладськіКомірки_ПапкиObjestItem.Read(base.UnigueID, readAllTablePart) ? СкладськіКомірки_ПапкиObjestItem : null;
+            СкладськіКомірки_Папки_Objest obj = new СкладськіКомірки_Папки_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public СкладськіКомірки_Папки_Pointer Copy()
         {
-            return new СкладськіКомірки_Папки_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new СкладськіКомірки_Папки_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -10319,6 +10289,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             СкладськіКомірки_Папки_Objest? obj = await GetDirectoryObject();
@@ -10330,12 +10305,6 @@ namespace GeneratedCode.Довідники
         public СкладськіКомірки_Папки_Pointer GetEmptyPointer()
         {
             return new СкладськіКомірки_Папки_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -10493,7 +10462,7 @@ namespace GeneratedCode.Довідники
         {
             return new Блокнот_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(Блокнот_Const.PRESENTATION_FIELDS);
@@ -10511,7 +10480,7 @@ namespace GeneratedCode.Довідники
     {
         public Блокнот_Pointer(object? uid = null) : base(Config.Kernel, "tab_a41", Блокнот_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public Блокнот_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a41", Блокнот_Const.TYPE)
@@ -10522,13 +10491,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<Блокнот_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            Блокнот_Objest БлокнотObjestItem = new Блокнот_Objest();
-            return await БлокнотObjestItem.Read(base.UnigueID, readAllTablePart) ? БлокнотObjestItem : null;
+            Блокнот_Objest obj = new Блокнот_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public Блокнот_Pointer Copy()
         {
-            return new Блокнот_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new Блокнот_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -10549,6 +10518,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -10558,12 +10532,6 @@ namespace GeneratedCode.Довідники
         public Блокнот_Pointer GetEmptyPointer()
         {
             return new Блокнот_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -10727,7 +10695,7 @@ namespace GeneratedCode.Довідники
         {
             return new ЗбереженіЗвіти_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ЗбереженіЗвіти_Const.PRESENTATION_FIELDS);
@@ -10741,7 +10709,7 @@ namespace GeneratedCode.Довідники
         public string Код { get; set; } = "";
         
         //Табличні частини
-        public ЗбереженіЗвіти_ЗвітСторінка_TablePart ЗвітСторінка_TablePart { get; set; }
+        public ЗбереженіЗвіти_ЗвітСторінка_TablePart ЗвітСторінка_TablePart { get; private set; }
         
     }
 
@@ -10749,7 +10717,7 @@ namespace GeneratedCode.Довідники
     {
         public ЗбереженіЗвіти_Pointer(object? uid = null) : base(Config.Kernel, "tab_b04", ЗбереженіЗвіти_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ЗбереженіЗвіти_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b04", ЗбереженіЗвіти_Const.TYPE)
@@ -10760,13 +10728,13 @@ namespace GeneratedCode.Довідники
         public async ValueTask<ЗбереженіЗвіти_Objest?> GetDirectoryObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ЗбереженіЗвіти_Objest ЗбереженіЗвітиObjestItem = new ЗбереженіЗвіти_Objest();
-            return await ЗбереженіЗвітиObjestItem.Read(base.UnigueID, readAllTablePart) ? ЗбереженіЗвітиObjestItem : null;
+            ЗбереженіЗвіти_Objest obj = new ЗбереженіЗвіти_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
 
         public ЗбереженіЗвіти_Pointer Copy()
         {
-            return new ЗбереженіЗвіти_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ЗбереженіЗвіти_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public string Назва
@@ -10787,6 +10755,11 @@ namespace GeneratedCode.Довідники
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
         public async ValueTask SetDeletionLabel(bool label = true)
         {
             
@@ -10796,12 +10769,6 @@ namespace GeneratedCode.Довідники
         public ЗбереженіЗвіти_Pointer GetEmptyPointer()
         {
             return new ЗбереженіЗвіти_Pointer();
-        }
-        
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
         }
     }
     
@@ -12342,7 +12309,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -12353,12 +12321,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -12432,7 +12399,7 @@ namespace GeneratedCode.Документи
         {
             return new ЗамовленняПостачальнику_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ЗамовленняПостачальнику_Const.PRESENTATION_FIELDS);
@@ -12475,7 +12442,7 @@ namespace GeneratedCode.Документи
     {
         public ЗамовленняПостачальнику_Pointer(object? uid = null) : base(Config.Kernel, "tab_a25", ЗамовленняПостачальнику_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ЗамовленняПостачальнику_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a25", "ЗамовленняПостачальнику")
@@ -12501,6 +12468,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
@@ -12509,48 +12486,58 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ЗамовленняПостачальникам
+            {
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ЗамовленняПостачальнику_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ЗамовленняПостачальнику_Pointer Copy()
         {
-            return new ЗамовленняПостачальнику_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ЗамовленняПостачальнику_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ЗамовленняПостачальнику_Pointer GetEmptyPointer()
         {
             return new ЗамовленняПостачальнику_Pointer();
         }
-        
+
         public async ValueTask<ЗамовленняПостачальнику_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ЗамовленняПостачальнику_Objest ЗамовленняПостачальникуObjestItem = new ЗамовленняПостачальнику_Objest();
-            if (!await ЗамовленняПостачальникуObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ЗамовленняПостачальникуObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ЗамовленняПостачальнику_Objest obj = new ЗамовленняПостачальнику_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -12561,6 +12548,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗамовленняПостачальнику_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗамовленняПостачальнику_Pointer? Current { get; private set; }
+
+        public async ValueTask<ЗамовленняПостачальнику_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ЗамовленняПостачальнику_Pointer(pointer) : new ЗамовленняПостачальнику_Pointer();
+        }
+        
+        public async ValueTask<List<ЗамовленняПостачальнику_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ЗамовленняПостачальнику_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ЗамовленняПостачальнику_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -12635,15 +12636,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      record.Підрозділ.Name = ItemValue["Підрозділ"];
+                      
+                }
                 
             }
             
@@ -12660,11 +12662,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_b2", record.НомерРядка},
+                    {"col_b2", ++sequenceNumber_НомерРядка},
                     {"col_o4", record.Номенклатура.UnigueID.UGuid},
                     {"col_a1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a2", record.Пакування.UnigueID.UGuid},
@@ -13083,7 +13089,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -13124,12 +13131,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -13211,7 +13217,7 @@ namespace GeneratedCode.Документи
         {
             return new ПоступленняТоварівТаПослуг_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПоступленняТоварівТаПослуг_Const.PRESENTATION_FIELDS);
@@ -13260,7 +13266,7 @@ namespace GeneratedCode.Документи
     {
         public ПоступленняТоварівТаПослуг_Pointer(object? uid = null) : base(Config.Kernel, "tab_a32", ПоступленняТоварівТаПослуг_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПоступленняТоварівТаПослуг_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a32", "ПоступленняТоварівТаПослуг")
@@ -13286,6 +13292,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
@@ -13294,50 +13310,88 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // Закупівлі
+            {
+                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ЗамовленняПостачальникам
+            {
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                    await ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
-                
-                if (label)
-                {
-                    
-                    await ПоступленняТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          ПоступленняТоварівТаПослуг_Objest? obj = await GetDocumentObject();
+            if (obj == null) return;
             
-            await base.BaseDeletionLabel(label);
+                await ПоступленняТоварівТаПослуг_Triggers.SetDeletionLabel(obj, label);
+            
+            if (label) await obj.ClearSpendTheDocument();
+            
+          await base.BaseDeletionLabel(label);
         }
 
         public ПоступленняТоварівТаПослуг_Pointer Copy()
         {
-            return new ПоступленняТоварівТаПослуг_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПоступленняТоварівТаПослуг_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПоступленняТоварівТаПослуг_Pointer GetEmptyPointer()
         {
             return new ПоступленняТоварівТаПослуг_Pointer();
         }
-        
+
         public async ValueTask<ПоступленняТоварівТаПослуг_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПоступленняТоварівТаПослуг_Objest ПоступленняТоварівТаПослугObjestItem = new ПоступленняТоварівТаПослуг_Objest();
-            if (!await ПоступленняТоварівТаПослугObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПоступленняТоварівТаПослугObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПоступленняТоварівТаПослуг_Objest obj = new ПоступленняТоварівТаПослуг_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -13348,6 +13402,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПоступленняТоварівТаПослуг_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоступленняТоварівТаПослуг_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПоступленняТоварівТаПослуг_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПоступленняТоварівТаПослуг_Pointer(pointer) : new ПоступленняТоварівТаПослуг_Pointer();
+        }
+        
+        public async ValueTask<List<ПоступленняТоварівТаПослуг_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПоступленняТоварівТаПослуг_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПоступленняТоварівТаПослуг_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -13429,18 +13497,19 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        record.ЗамовленняПостачальнику.Назва = ItemValue["ЗамовленняПостачальнику"];
-                        record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      record.ЗамовленняПостачальнику.Name = ItemValue["ЗамовленняПостачальнику"];
+                      record.Підрозділ.Name = ItemValue["Підрозділ"];
+                      record.ВидЦіни.Name = ItemValue["ВидЦіни"];
+                      
+                }
                 
             }
             
@@ -13457,11 +13526,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_b3", record.НомерРядка},
+                    {"col_b3", ++sequenceNumber_НомерРядка},
                     {"col_a9", record.Номенклатура.UnigueID.UGuid},
                     {"col_b1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_b4", record.Серія.UnigueID.UGuid},
@@ -13886,7 +13959,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -13903,12 +13977,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -13986,7 +14059,7 @@ namespace GeneratedCode.Документи
         {
             return new ЗамовленняКлієнта_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ЗамовленняКлієнта_Const.PRESENTATION_FIELDS);
@@ -14033,7 +14106,7 @@ namespace GeneratedCode.Документи
     {
         public ЗамовленняКлієнта_Pointer(object? uid = null) : base(Config.Kernel, "tab_a34", ЗамовленняКлієнта_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ЗамовленняКлієнта_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a34", "ЗамовленняКлієнта")
@@ -14059,6 +14132,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
@@ -14067,48 +14150,64 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ЗамовленняКлієнтів
+            {
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ЗамовленняКлієнта_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ЗамовленняКлієнта_Pointer Copy()
         {
-            return new ЗамовленняКлієнта_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ЗамовленняКлієнта_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ЗамовленняКлієнта_Pointer GetEmptyPointer()
         {
             return new ЗамовленняКлієнта_Pointer();
         }
-        
+
         public async ValueTask<ЗамовленняКлієнта_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ЗамовленняКлієнта_Objest ЗамовленняКлієнтаObjestItem = new ЗамовленняКлієнта_Objest();
-            if (!await ЗамовленняКлієнтаObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ЗамовленняКлієнтаObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ЗамовленняКлієнта_Objest obj = new ЗамовленняКлієнта_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -14119,6 +14218,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗамовленняКлієнта_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗамовленняКлієнта_Pointer? Current { get; private set; }
+
+        public async ValueTask<ЗамовленняКлієнта_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ЗамовленняКлієнта_Pointer(pointer) : new ЗамовленняКлієнта_Pointer();
+        }
+        
+        public async ValueTask<List<ЗамовленняКлієнта_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ЗамовленняКлієнта_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ЗамовленняКлієнта_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -14191,15 +14304,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.ВидЦіни.Name = ItemValue["ВидЦіни"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      
+                }
                 
             }
             
@@ -14216,11 +14330,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", record.НомерРядка},
+                    {"col_a2", ++sequenceNumber_НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -14634,7 +14752,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -14675,12 +14794,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -14759,7 +14877,7 @@ namespace GeneratedCode.Документи
         {
             return new РеалізаціяТоварівТаПослуг_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(РеалізаціяТоварівТаПослуг_Const.PRESENTATION_FIELDS);
@@ -14807,7 +14925,7 @@ namespace GeneratedCode.Документи
     {
         public РеалізаціяТоварівТаПослуг_Pointer(object? uid = null) : base(Config.Kernel, "tab_a36", РеалізаціяТоварівТаПослуг_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public РеалізаціяТоварівТаПослуг_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a36", "РеалізаціяТоварівТаПослуг")
@@ -14833,6 +14951,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
@@ -14841,48 +14969,88 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ЗамовленняКлієнтів
+            {
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // Продажі
+            {
+                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РеалізаціяТоварівТаПослуг_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await РеалізаціяТоварівТаПослуг_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public РеалізаціяТоварівТаПослуг_Pointer Copy()
         {
-            return new РеалізаціяТоварівТаПослуг_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new РеалізаціяТоварівТаПослуг_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public РеалізаціяТоварівТаПослуг_Pointer GetEmptyPointer()
         {
             return new РеалізаціяТоварівТаПослуг_Pointer();
         }
-        
+
         public async ValueTask<РеалізаціяТоварівТаПослуг_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            РеалізаціяТоварівТаПослуг_Objest РеалізаціяТоварівТаПослугObjestItem = new РеалізаціяТоварівТаПослуг_Objest();
-            if (!await РеалізаціяТоварівТаПослугObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return РеалізаціяТоварівТаПослугObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            РеалізаціяТоварівТаПослуг_Objest obj = new РеалізаціяТоварівТаПослуг_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -14893,6 +15061,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РеалізаціяТоварівТаПослуг_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РеалізаціяТоварівТаПослуг_Pointer? Current { get; private set; }
+
+        public async ValueTask<РеалізаціяТоварівТаПослуг_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new РеалізаціяТоварівТаПослуг_Pointer(pointer) : new РеалізаціяТоварівТаПослуг_Pointer();
+        }
+        
+        public async ValueTask<List<РеалізаціяТоварівТаПослуг_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<РеалізаціяТоварівТаПослуг_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new РеалізаціяТоварівТаПослуг_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -14977,19 +15159,20 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        record.ЗамовленняКлієнта.Назва = ItemValue["ЗамовленняКлієнта"];
-                        record.РахунокФактура.Назва = ItemValue["РахунокФактура"];
-                        record.Партія.Назва = ItemValue["Партія"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.ВидЦіни.Name = ItemValue["ВидЦіни"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      record.ЗамовленняКлієнта.Name = ItemValue["ЗамовленняКлієнта"];
+                      record.РахунокФактура.Name = ItemValue["РахунокФактура"];
+                      record.Партія.Name = ItemValue["Партія"];
+                      
+                }
                 
             }
             
@@ -15006,11 +15189,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_d2", record.Номенклатура.UnigueID.UGuid},
                     {"col_d3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a2", record.Серія.UnigueID.UGuid},
@@ -15374,19 +15561,19 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
             await ValueTask.FromResult(true);
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -15443,7 +15630,7 @@ namespace GeneratedCode.Документи
         {
             return new ВстановленняЦінНоменклатури_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ВстановленняЦінНоменклатури_Const.PRESENTATION_FIELDS);
@@ -15469,7 +15656,7 @@ namespace GeneratedCode.Документи
     {
         public ВстановленняЦінНоменклатури_Pointer(object? uid = null) : base(Config.Kernel, "tab_a42", ВстановленняЦінНоменклатури_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ВстановленняЦінНоменклатури_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a42", "ВстановленняЦінНоменклатури")
@@ -15495,6 +15682,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
@@ -15503,48 +15700,54 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            await ValueTask.FromResult(true);
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВстановленняЦінНоменклатури_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ВстановленняЦінНоменклатури_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ВстановленняЦінНоменклатури_Pointer Copy()
         {
-            return new ВстановленняЦінНоменклатури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ВстановленняЦінНоменклатури_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ВстановленняЦінНоменклатури_Pointer GetEmptyPointer()
         {
             return new ВстановленняЦінНоменклатури_Pointer();
         }
-        
+
         public async ValueTask<ВстановленняЦінНоменклатури_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ВстановленняЦінНоменклатури_Objest ВстановленняЦінНоменклатуриObjestItem = new ВстановленняЦінНоменклатури_Objest();
-            if (!await ВстановленняЦінНоменклатуриObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ВстановленняЦінНоменклатуриObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ВстановленняЦінНоменклатури_Objest obj = new ВстановленняЦінНоменклатури_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -15555,6 +15758,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВстановленняЦінНоменклатури_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВстановленняЦінНоменклатури_Pointer? Current { get; private set; }
+
+        public async ValueTask<ВстановленняЦінНоменклатури_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ВстановленняЦінНоменклатури_Pointer(pointer) : new ВстановленняЦінНоменклатури_Pointer();
+        }
+        
+        public async ValueTask<List<ВстановленняЦінНоменклатури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ВстановленняЦінНоменклатури_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ВстановленняЦінНоменклатури_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -15616,14 +15833,15 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.ВидЦіни.Name = ItemValue["ВидЦіни"];
+                      
+                }
                 
             }
             
@@ -15640,11 +15858,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_h1", record.Номенклатура.UnigueID.UGuid},
                     {"col_h2", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_h3", record.Пакування.UnigueID.UGuid},
@@ -15858,7 +16080,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -15881,12 +16104,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -15951,7 +16173,7 @@ namespace GeneratedCode.Документи
         {
             return new ПрихіднийКасовийОрдер_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПрихіднийКасовийОрдер_Const.PRESENTATION_FIELDS);
@@ -15985,7 +16207,7 @@ namespace GeneratedCode.Документи
     {
         public ПрихіднийКасовийОрдер_Pointer(object? uid = null) : base(Config.Kernel, "tab_a44", ПрихіднийКасовийОрдер_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПрихіднийКасовийОрдер_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a44", "ПрихіднийКасовийОрдер")
@@ -16011,6 +16233,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
@@ -16019,48 +16251,70 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РухКоштів
+            {
+                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПрихіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ПрихіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПрихіднийКасовийОрдер_Pointer Copy()
         {
-            return new ПрихіднийКасовийОрдер_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПрихіднийКасовийОрдер_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПрихіднийКасовийОрдер_Pointer GetEmptyPointer()
         {
             return new ПрихіднийКасовийОрдер_Pointer();
         }
-        
+
         public async ValueTask<ПрихіднийКасовийОрдер_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдерObjestItem = new ПрихіднийКасовийОрдер_Objest();
-            if (!await ПрихіднийКасовийОрдерObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПрихіднийКасовийОрдерObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПрихіднийКасовийОрдер_Objest obj = new ПрихіднийКасовийОрдер_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -16071,6 +16325,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПрихіднийКасовийОрдер_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПрихіднийКасовийОрдер_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПрихіднийКасовийОрдер_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПрихіднийКасовийОрдер_Pointer(pointer) : new ПрихіднийКасовийОрдер_Pointer();
+        }
+        
+        public async ValueTask<List<ПрихіднийКасовийОрдер_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПрихіднийКасовийОрдер_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПрихіднийКасовийОрдер_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -16131,13 +16399,14 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                        record.ВалютаВзаєморозрахунків.Назва = ItemValue["ВалютаВзаєморозрахунків"];
-                        record.Організація.Назва = ItemValue["Організація"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Підрозділ.Name = ItemValue["Підрозділ"];
+                      record.ВалютаВзаєморозрахунків.Name = ItemValue["ВалютаВзаєморозрахунків"];
+                      record.Організація.Name = ItemValue["Організація"];
+                      
+                }
                 
             }
             
@@ -16154,11 +16423,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_j4", record.Замовлення},
                     {"col_j5", record.Сума},
                     {"col_j6", record.Підрозділ.UnigueID.UGuid},
@@ -16378,7 +16651,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -16401,12 +16675,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -16473,7 +16746,7 @@ namespace GeneratedCode.Документи
         {
             return new РозхіднийКасовийОрдер_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(РозхіднийКасовийОрдер_Const.PRESENTATION_FIELDS);
@@ -16509,7 +16782,7 @@ namespace GeneratedCode.Документи
     {
         public РозхіднийКасовийОрдер_Pointer(object? uid = null) : base(Config.Kernel, "tab_a48", РозхіднийКасовийОрдер_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public РозхіднийКасовийОрдер_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a48", "РозхіднийКасовийОрдер")
@@ -16535,6 +16808,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
@@ -16543,48 +16826,70 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РухКоштів
+            {
+                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозхіднийКасовийОрдер_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await РозхіднийКасовийОрдер_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public РозхіднийКасовийОрдер_Pointer Copy()
         {
-            return new РозхіднийКасовийОрдер_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new РозхіднийКасовийОрдер_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public РозхіднийКасовийОрдер_Pointer GetEmptyPointer()
         {
             return new РозхіднийКасовийОрдер_Pointer();
         }
-        
+
         public async ValueTask<РозхіднийКасовийОрдер_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдерObjestItem = new РозхіднийКасовийОрдер_Objest();
-            if (!await РозхіднийКасовийОрдерObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return РозхіднийКасовийОрдерObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            РозхіднийКасовийОрдер_Objest obj = new РозхіднийКасовийОрдер_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -16595,6 +16900,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РозхіднийКасовийОрдер_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозхіднийКасовийОрдер_Pointer? Current { get; private set; }
+
+        public async ValueTask<РозхіднийКасовийОрдер_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new РозхіднийКасовийОрдер_Pointer(pointer) : new РозхіднийКасовийОрдер_Pointer();
+        }
+        
+        public async ValueTask<List<РозхіднийКасовийОрдер_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<РозхіднийКасовийОрдер_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new РозхіднийКасовийОрдер_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -16657,13 +16976,14 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.ВалютаВзаєморозрахунків.Назва = ItemValue["ВалютаВзаєморозрахунків"];
-                        record.Підрозділ.Назва = ItemValue["Підрозділ"];
-                        record.Організація.Назва = ItemValue["Організація"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.ВалютаВзаєморозрахунків.Name = ItemValue["ВалютаВзаєморозрахунків"];
+                      record.Підрозділ.Name = ItemValue["Підрозділ"];
+                      record.Організація.Name = ItemValue["Організація"];
+                      
+                }
                 
             }
             
@@ -16680,11 +17000,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_l4", record.Замовлення},
                     {"col_l5", record.Сума},
                     {"col_l6", record.ВалютаВзаєморозрахунків.UnigueID.UGuid},
@@ -16909,7 +17233,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -16932,12 +17257,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПереміщенняТоварів_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -17005,7 +17329,7 @@ namespace GeneratedCode.Документи
         {
             return new ПереміщенняТоварів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПереміщенняТоварів_Const.PRESENTATION_FIELDS);
@@ -17042,7 +17366,7 @@ namespace GeneratedCode.Документи
     {
         public ПереміщенняТоварів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a31", ПереміщенняТоварів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПереміщенняТоварів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a31", "ПереміщенняТоварів")
@@ -17068,6 +17392,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
@@ -17076,48 +17410,70 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварів_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ПереміщенняТоварів_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПереміщенняТоварів_Pointer Copy()
         {
-            return new ПереміщенняТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПереміщенняТоварів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПереміщенняТоварів_Pointer GetEmptyPointer()
         {
             return new ПереміщенняТоварів_Pointer();
         }
-        
+
         public async ValueTask<ПереміщенняТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПереміщенняТоварів_Objest ПереміщенняТоварівObjestItem = new ПереміщенняТоварів_Objest();
-            if (!await ПереміщенняТоварівObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПереміщенняТоварівObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПереміщенняТоварів_Objest obj = new ПереміщенняТоварів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -17128,6 +17484,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПереміщенняТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварів_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПереміщенняТоварів_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПереміщенняТоварів_Pointer(pointer) : new ПереміщенняТоварів_Pointer();
+        }
+        
+        public async ValueTask<List<ПереміщенняТоварів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПереміщенняТоварів_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПереміщенняТоварів_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -17194,15 +17564,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Партія.Назва = ItemValue["Партія"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Партія.Name = ItemValue["Партія"];
+                      
+                }
                 
             }
             
@@ -17219,11 +17590,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_b8", record.НомерРядка},
+                    {"col_b8", ++sequenceNumber_НомерРядка},
                     {"col_b3", record.Номенклатура.UnigueID.UGuid},
                     {"col_b4", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -17456,7 +17831,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -17491,12 +17867,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -17566,7 +17941,7 @@ namespace GeneratedCode.Документи
         {
             return new ПоверненняТоварівПостачальнику_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПоверненняТоварівПостачальнику_Const.PRESENTATION_FIELDS);
@@ -17605,7 +17980,7 @@ namespace GeneratedCode.Документи
     {
         public ПоверненняТоварівПостачальнику_Pointer(object? uid = null) : base(Config.Kernel, "tab_a51", ПоверненняТоварівПостачальнику_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПоверненняТоварівПостачальнику_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a51", "ПоверненняТоварівПостачальнику")
@@ -17631,6 +18006,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
@@ -17639,48 +18024,82 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // Закупівлі
+            {
+                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівПостачальнику_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ПоверненняТоварівПостачальнику_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПоверненняТоварівПостачальнику_Pointer Copy()
         {
-            return new ПоверненняТоварівПостачальнику_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПоверненняТоварівПостачальнику_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПоверненняТоварівПостачальнику_Pointer GetEmptyPointer()
         {
             return new ПоверненняТоварівПостачальнику_Pointer();
         }
-        
+
         public async ValueTask<ПоверненняТоварівПостачальнику_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПоверненняТоварівПостачальнику_Objest ПоверненняТоварівПостачальникуObjestItem = new ПоверненняТоварівПостачальнику_Objest();
-            if (!await ПоверненняТоварівПостачальникуObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПоверненняТоварівПостачальникуObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПоверненняТоварівПостачальнику_Objest obj = new ПоверненняТоварівПостачальнику_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -17691,6 +18110,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПоверненняТоварівПостачальнику_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівПостачальнику_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПоверненняТоварівПостачальнику_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПоверненняТоварівПостачальнику_Pointer(pointer) : new ПоверненняТоварівПостачальнику_Pointer();
+        }
+        
+        public async ValueTask<List<ПоверненняТоварівПостачальнику_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПоверненняТоварівПостачальнику_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПоверненняТоварівПостачальнику_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -17761,15 +18194,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.ДокументПоступлення.Назва = ItemValue["ДокументПоступлення"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.ДокументПоступлення.Name = ItemValue["ДокументПоступлення"];
+                      
+                }
                 
             }
             
@@ -17786,11 +18220,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_d8", record.Номенклатура.UnigueID.UGuid},
                     {"col_d9", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a3", record.Серія.UnigueID.UGuid},
@@ -18015,7 +18453,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -18050,12 +18489,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -18121,7 +18559,7 @@ namespace GeneratedCode.Документи
         {
             return new ПоверненняТоварівВідКлієнта_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПоверненняТоварівВідКлієнта_Const.PRESENTATION_FIELDS);
@@ -18156,7 +18594,7 @@ namespace GeneratedCode.Документи
     {
         public ПоверненняТоварівВідКлієнта_Pointer(object? uid = null) : base(Config.Kernel, "tab_a53", ПоверненняТоварівВідКлієнта_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПоверненняТоварівВідКлієнта_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a53", "ПоверненняТоварівВідКлієнта")
@@ -18182,6 +18620,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
@@ -18190,48 +18638,82 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // Продажі
+            {
+                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПоверненняТоварівВідКлієнта_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ПоверненняТоварівВідКлієнта_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПоверненняТоварівВідКлієнта_Pointer Copy()
         {
-            return new ПоверненняТоварівВідКлієнта_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПоверненняТоварівВідКлієнта_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПоверненняТоварівВідКлієнта_Pointer GetEmptyPointer()
         {
             return new ПоверненняТоварівВідКлієнта_Pointer();
         }
-        
+
         public async ValueTask<ПоверненняТоварівВідКлієнта_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПоверненняТоварівВідКлієнта_Objest ПоверненняТоварівВідКлієнтаObjestItem = new ПоверненняТоварівВідКлієнта_Objest();
-            if (!await ПоверненняТоварівВідКлієнтаObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПоверненняТоварівВідКлієнтаObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПоверненняТоварівВідКлієнта_Objest obj = new ПоверненняТоварівВідКлієнта_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -18242,6 +18724,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПоверненняТоварівВідКлієнта_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівВідКлієнта_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПоверненняТоварівВідКлієнта_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПоверненняТоварівВідКлієнта_Pointer(pointer) : new ПоверненняТоварівВідКлієнта_Pointer();
+        }
+        
+        public async ValueTask<List<ПоверненняТоварівВідКлієнта_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПоверненняТоварівВідКлієнта_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПоверненняТоварівВідКлієнта_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -18314,15 +18810,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.ДокументРеалізації.Назва = ItemValue["ДокументРеалізації"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.ДокументРеалізації.Name = ItemValue["ДокументРеалізації"];
+                      
+                }
                 
             }
             
@@ -18339,11 +18836,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_h2", record.НомерРядка},
+                    {"col_h2", ++sequenceNumber_НомерРядка},
                     {"col_g3", record.Номенклатура.UnigueID.UGuid},
                     {"col_g4", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -18567,7 +19068,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -18584,12 +19086,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await АктВиконанихРобіт_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -18654,7 +19155,7 @@ namespace GeneratedCode.Документи
         {
             return new АктВиконанихРобіт_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(АктВиконанихРобіт_Const.PRESENTATION_FIELDS);
@@ -18688,7 +19189,7 @@ namespace GeneratedCode.Документи
     {
         public АктВиконанихРобіт_Pointer(object? uid = null) : base(Config.Kernel, "tab_a81", АктВиконанихРобіт_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public АктВиконанихРобіт_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a81", "АктВиконанихРобіт")
@@ -18714,6 +19215,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
@@ -18722,48 +19233,64 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // Продажі
+            {
+                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            АктВиконанихРобіт_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await АктВиконанихРобіт_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public АктВиконанихРобіт_Pointer Copy()
         {
-            return new АктВиконанихРобіт_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new АктВиконанихРобіт_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public АктВиконанихРобіт_Pointer GetEmptyPointer()
         {
             return new АктВиконанихРобіт_Pointer();
         }
-        
+
         public async ValueTask<АктВиконанихРобіт_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            АктВиконанихРобіт_Objest АктВиконанихРобітObjestItem = new АктВиконанихРобіт_Objest();
-            if (!await АктВиконанихРобітObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return АктВиконанихРобітObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            АктВиконанихРобіт_Objest obj = new АктВиконанихРобіт_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -18774,6 +19301,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new АктВиконанихРобіт_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public АктВиконанихРобіт_Pointer? Current { get; private set; }
+
+        public async ValueTask<АктВиконанихРобіт_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new АктВиконанихРобіт_Pointer(pointer) : new АктВиконанихРобіт_Pointer();
+        }
+        
+        public async ValueTask<List<АктВиконанихРобіт_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<АктВиконанихРобіт_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new АктВиконанихРобіт_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -18833,12 +19374,13 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      
+                }
                 
             }
             
@@ -18855,11 +19397,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_c4", record.НомерРядка},
+                    {"col_c4", ++sequenceNumber_НомерРядка},
                     {"col_b8", record.Номенклатура.UnigueID.UGuid},
                     {"col_b9", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c1", record.Кількість},
@@ -19193,7 +19739,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -19234,12 +19781,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ВведенняЗалишків_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -19314,7 +19860,7 @@ namespace GeneratedCode.Документи
         {
             return new ВведенняЗалишків_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ВведенняЗалишків_Const.PRESENTATION_FIELDS);
@@ -19347,7 +19893,7 @@ namespace GeneratedCode.Документи
     {
         public ВведенняЗалишків_Pointer(object? uid = null) : base(Config.Kernel, "tab_a83", ВведенняЗалишків_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ВведенняЗалишків_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a83", "ВведенняЗалишків")
@@ -19373,6 +19919,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВведенняЗалишків_Objest? obj = await GetDocumentObject();
@@ -19381,50 +19937,88 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ВведенняЗалишків_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РухКоштів
+            {
+                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВведенняЗалишків_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                    await ВведенняЗалишків_Triggers.SetDeletionLabel(obj, label);
-                
-                if (label)
-                {
-                    
-                    await ВведенняЗалишків_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          ВведенняЗалишків_Objest? obj = await GetDocumentObject();
+            if (obj == null) return;
             
-            await base.BaseDeletionLabel(label);
+                await ВведенняЗалишків_Triggers.SetDeletionLabel(obj, label);
+            
+            if (label) await obj.ClearSpendTheDocument();
+            
+          await base.BaseDeletionLabel(label);
         }
 
         public ВведенняЗалишків_Pointer Copy()
         {
-            return new ВведенняЗалишків_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ВведенняЗалишків_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ВведенняЗалишків_Pointer GetEmptyPointer()
         {
             return new ВведенняЗалишків_Pointer();
         }
-        
+
         public async ValueTask<ВведенняЗалишків_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ВведенняЗалишків_Objest ВведенняЗалишківObjestItem = new ВведенняЗалишків_Objest();
-            if (!await ВведенняЗалишківObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ВведенняЗалишківObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ВведенняЗалишків_Objest obj = new ВведенняЗалишків_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -19435,6 +20029,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВведенняЗалишків_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВведенняЗалишків_Pointer? Current { get; private set; }
+
+        public async ValueTask<ВведенняЗалишків_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ВведенняЗалишків_Pointer(pointer) : new ВведенняЗалишків_Pointer();
+        }
+        
+        public async ValueTask<List<ВведенняЗалишків_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ВведенняЗалишків_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ВведенняЗалишків_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -19502,14 +20110,15 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      
+                }
                 
             }
             
@@ -19526,11 +20135,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_e4", record.НомерРядка},
+                    {"col_e4", ++sequenceNumber_НомерРядка},
                     {"col_d6", record.Номенклатура.UnigueID.UGuid},
                     {"col_d7", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -19646,11 +20259,12 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Каса.Назва = ItemValue["Каса"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Каса.Name = ItemValue["Каса"];
+                      
+                }
                 
             }
             
@@ -19667,11 +20281,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_e5", record.Каса.UnigueID.UGuid},
                     {"col_e6", record.Сума},
                     
@@ -19775,11 +20393,12 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.БанківськийРахунок.Назва = ItemValue["БанківськийРахунок"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.БанківськийРахунок.Name = ItemValue["БанківськийРахунок"];
+                      
+                }
                 
             }
             
@@ -19796,11 +20415,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_e7", record.БанківськийРахунок.UnigueID.UGuid},
                     {"col_e8", record.Сума},
                     
@@ -19909,12 +20532,13 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Контрагент.Назва = ItemValue["Контрагент"];
-                        record.Валюта.Назва = ItemValue["Валюта"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Контрагент.Name = ItemValue["Контрагент"];
+                      record.Валюта.Name = ItemValue["Валюта"];
+                      
+                }
                 
             }
             
@@ -19931,11 +20555,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_e9", record.Контрагент.UnigueID.UGuid},
                     {"col_f1", record.Валюта.UnigueID.UGuid},
                     {"col_f2", record.Сума},
@@ -20117,13 +20745,15 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
             await ValueTask.FromResult(true);
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
@@ -20182,7 +20812,7 @@ namespace GeneratedCode.Документи
         {
             return new НадлишкиТоварів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(НадлишкиТоварів_Const.PRESENTATION_FIELDS);
@@ -20208,7 +20838,7 @@ namespace GeneratedCode.Документи
     {
         public НадлишкиТоварів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a88", НадлишкиТоварів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public НадлишкиТоварів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a88", "НадлишкиТоварів")
@@ -20234,6 +20864,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             НадлишкиТоварів_Objest? obj = await GetDocumentObject();
@@ -20242,38 +20882,54 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            НадлишкиТоварів_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            await ValueTask.FromResult(true);
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public НадлишкиТоварів_Pointer Copy()
         {
-            return new НадлишкиТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new НадлишкиТоварів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public НадлишкиТоварів_Pointer GetEmptyPointer()
         {
             return new НадлишкиТоварів_Pointer();
         }
-        
+
         public async ValueTask<НадлишкиТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            НадлишкиТоварів_Objest НадлишкиТоварівObjestItem = new НадлишкиТоварів_Objest();
-            if (!await НадлишкиТоварівObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return НадлишкиТоварівObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            НадлишкиТоварів_Objest obj = new НадлишкиТоварів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -20284,6 +20940,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new НадлишкиТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public НадлишкиТоварів_Pointer? Current { get; private set; }
+
+        public async ValueTask<НадлишкиТоварів_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new НадлишкиТоварів_Pointer(pointer) : new НадлишкиТоварів_Pointer();
+        }
+        
+        public async ValueTask<List<НадлишкиТоварів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<НадлишкиТоварів_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new НадлишкиТоварів_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -20341,12 +21011,13 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      
+                }
                 
             }
             
@@ -20362,6 +21033,8 @@ namespace GeneratedCode.Документи
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
 
             foreach (Record record in Records)
             {
@@ -20549,13 +21222,15 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
             await ValueTask.FromResult(true);
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
@@ -20614,7 +21289,7 @@ namespace GeneratedCode.Документи
         {
             return new ПересортицяТоварів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПересортицяТоварів_Const.PRESENTATION_FIELDS);
@@ -20640,7 +21315,7 @@ namespace GeneratedCode.Документи
     {
         public ПересортицяТоварів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a90", ПересортицяТоварів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПересортицяТоварів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a90", "ПересортицяТоварів")
@@ -20666,6 +21341,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПересортицяТоварів_Objest? obj = await GetDocumentObject();
@@ -20674,38 +21359,54 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПересортицяТоварів_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            await ValueTask.FromResult(true);
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПересортицяТоварів_Pointer Copy()
         {
-            return new ПересортицяТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПересортицяТоварів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПересортицяТоварів_Pointer GetEmptyPointer()
         {
             return new ПересортицяТоварів_Pointer();
         }
-        
+
         public async ValueTask<ПересортицяТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПересортицяТоварів_Objest ПересортицяТоварівObjestItem = new ПересортицяТоварів_Objest();
-            if (!await ПересортицяТоварівObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПересортицяТоварівObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПересортицяТоварів_Objest obj = new ПересортицяТоварів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -20716,6 +21417,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПересортицяТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПересортицяТоварів_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПересортицяТоварів_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПересортицяТоварів_Pointer(pointer) : new ПересортицяТоварів_Pointer();
+        }
+        
+        public async ValueTask<List<ПересортицяТоварів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПересортицяТоварів_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПересортицяТоварів_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -20773,12 +21488,13 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      
+                }
                 
             }
             
@@ -20795,11 +21511,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_h7", record.Номенклатура.UnigueID.UGuid},
                     {"col_h8", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_i1", record.Кількість},
@@ -20990,19 +21710,19 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
             await ValueTask.FromResult(true);
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПерерахунокТоварів_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -21060,7 +21780,7 @@ namespace GeneratedCode.Документи
         {
             return new ПерерахунокТоварів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПерерахунокТоварів_Const.PRESENTATION_FIELDS);
@@ -21087,7 +21807,7 @@ namespace GeneratedCode.Документи
     {
         public ПерерахунокТоварів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a92", ПерерахунокТоварів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПерерахунокТоварів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a92", "ПерерахунокТоварів")
@@ -21113,6 +21833,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
@@ -21121,48 +21851,54 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            await ValueTask.FromResult(true);
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПерерахунокТоварів_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ПерерахунокТоварів_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПерерахунокТоварів_Pointer Copy()
         {
-            return new ПерерахунокТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПерерахунокТоварів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПерерахунокТоварів_Pointer GetEmptyPointer()
         {
             return new ПерерахунокТоварів_Pointer();
         }
-        
+
         public async ValueTask<ПерерахунокТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПерерахунокТоварів_Objest ПерерахунокТоварівObjestItem = new ПерерахунокТоварів_Objest();
-            if (!await ПерерахунокТоварівObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПерерахунокТоварівObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПерерахунокТоварів_Objest obj = new ПерерахунокТоварів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -21173,6 +21909,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПерерахунокТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПерерахунокТоварів_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПерерахунокТоварів_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПерерахунокТоварів_Pointer(pointer) : new ПерерахунокТоварів_Pointer();
+        }
+        
+        public async ValueTask<List<ПерерахунокТоварів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПерерахунокТоварів_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПерерахунокТоварів_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -21239,13 +21989,14 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      
+                }
                 
             }
             
@@ -21262,6 +22013,10 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
@@ -21273,7 +22028,7 @@ namespace GeneratedCode.Документи
                     {"col_j4", record.Номенклатура.UnigueID.UGuid},
                     {"col_j5", record.Пакування.UnigueID.UGuid},
                     {"col_j6", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_a2", record.Коментар},
                     
                 };
@@ -21468,7 +22223,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -21491,12 +22247,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПсуванняТоварів_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -21555,7 +22310,7 @@ namespace GeneratedCode.Документи
         {
             return new ПсуванняТоварів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПсуванняТоварів_Const.PRESENTATION_FIELDS);
@@ -21583,7 +22338,7 @@ namespace GeneratedCode.Документи
     {
         public ПсуванняТоварів_Pointer(object? uid = null) : base(Config.Kernel, "tab_a94", ПсуванняТоварів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПсуванняТоварів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a94", "ПсуванняТоварів")
@@ -21609,6 +22364,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПсуванняТоварів_Objest? obj = await GetDocumentObject();
@@ -21617,48 +22382,70 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПсуванняТоварів_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПсуванняТоварів_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ПсуванняТоварів_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПсуванняТоварів_Pointer Copy()
         {
-            return new ПсуванняТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПсуванняТоварів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПсуванняТоварів_Pointer GetEmptyPointer()
         {
             return new ПсуванняТоварів_Pointer();
         }
-        
+
         public async ValueTask<ПсуванняТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПсуванняТоварів_Objest ПсуванняТоварівObjestItem = new ПсуванняТоварів_Objest();
-            if (!await ПсуванняТоварівObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПсуванняТоварівObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПсуванняТоварів_Objest obj = new ПсуванняТоварів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -21669,6 +22456,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПсуванняТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПсуванняТоварів_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПсуванняТоварів_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПсуванняТоварів_Pointer(pointer) : new ПсуванняТоварів_Pointer();
+        }
+        
+        public async ValueTask<List<ПсуванняТоварів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПсуванняТоварів_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПсуванняТоварів_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -21739,15 +22540,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Партія.Назва = ItemValue["Партія"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Партія.Name = ItemValue["Партія"];
+                      
+                }
                 
             }
             
@@ -21764,11 +22566,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a3", record.НомерРядка},
+                    {"col_a3", ++sequenceNumber_НомерРядка},
                     {"col_b2", record.Номенклатура.UnigueID.UGuid},
                     {"col_b3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -21975,7 +22781,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -21998,12 +22805,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -22063,7 +22869,7 @@ namespace GeneratedCode.Документи
         {
             return new ВнутрішнєСпоживанняТоварів_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ВнутрішнєСпоживанняТоварів_Const.PRESENTATION_FIELDS);
@@ -22092,7 +22898,7 @@ namespace GeneratedCode.Документи
     {
         public ВнутрішнєСпоживанняТоварів_Pointer(object? uid = null) : base(Config.Kernel, "tab_b07", ВнутрішнєСпоживанняТоварів_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ВнутрішнєСпоживанняТоварів_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b07", "ВнутрішнєСпоживанняТоварів")
@@ -22118,6 +22924,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
@@ -22126,48 +22942,70 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариНаСкладах
+            {
+                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ПартіїТоварів
+            {
+                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ВнутрішнєСпоживанняТоварів_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ВнутрішнєСпоживанняТоварів_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ВнутрішнєСпоживанняТоварів_Pointer Copy()
         {
-            return new ВнутрішнєСпоживанняТоварів_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ВнутрішнєСпоживанняТоварів_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ВнутрішнєСпоживанняТоварів_Pointer GetEmptyPointer()
         {
             return new ВнутрішнєСпоживанняТоварів_Pointer();
         }
-        
+
         public async ValueTask<ВнутрішнєСпоживанняТоварів_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ВнутрішнєСпоживанняТоварів_Objest ВнутрішнєСпоживанняТоварівObjestItem = new ВнутрішнєСпоживанняТоварів_Objest();
-            if (!await ВнутрішнєСпоживанняТоварівObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ВнутрішнєСпоживанняТоварівObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ВнутрішнєСпоживанняТоварів_Objest obj = new ВнутрішнєСпоживанняТоварів_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -22178,6 +23016,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВнутрішнєСпоживанняТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВнутрішнєСпоживанняТоварів_Pointer? Current { get; private set; }
+
+        public async ValueTask<ВнутрішнєСпоживанняТоварів_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ВнутрішнєСпоживанняТоварів_Pointer(pointer) : new ВнутрішнєСпоживанняТоварів_Pointer();
+        }
+        
+        public async ValueTask<List<ВнутрішнєСпоживанняТоварів_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ВнутрішнєСпоживанняТоварів_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ВнутрішнєСпоживанняТоварів_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -22248,15 +23100,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Партія.Назва = ItemValue["Партія"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Партія.Name = ItemValue["Партія"];
+                      
+                }
                 
             }
             
@@ -22273,11 +23126,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_d2", record.Номенклатура.UnigueID.UGuid},
                     {"col_d3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a2", record.Серія.UnigueID.UGuid},
@@ -22508,7 +23365,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -22519,12 +23377,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await РахунокФактура_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -22592,7 +23449,7 @@ namespace GeneratedCode.Документи
         {
             return new РахунокФактура_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(РахунокФактура_Const.PRESENTATION_FIELDS);
@@ -22629,7 +23486,7 @@ namespace GeneratedCode.Документи
     {
         public РахунокФактура_Pointer(object? uid = null) : base(Config.Kernel, "tab_b10", РахунокФактура_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public РахунокФактура_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b10", "РахунокФактура")
@@ -22655,6 +23512,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РахунокФактура_Objest? obj = await GetDocumentObject();
@@ -22663,48 +23530,58 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РахунокФактура_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РахунокФактура_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await РахунокФактура_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public РахунокФактура_Pointer Copy()
         {
-            return new РахунокФактура_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new РахунокФактура_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public РахунокФактура_Pointer GetEmptyPointer()
         {
             return new РахунокФактура_Pointer();
         }
-        
+
         public async ValueTask<РахунокФактура_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            РахунокФактура_Objest РахунокФактураObjestItem = new РахунокФактура_Objest();
-            if (!await РахунокФактураObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return РахунокФактураObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            РахунокФактура_Objest obj = new РахунокФактура_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -22715,6 +23592,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РахунокФактура_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РахунокФактура_Pointer? Current { get; private set; }
+
+        public async ValueTask<РахунокФактура_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new РахунокФактура_Pointer(pointer) : new РахунокФактура_Pointer();
+        }
+        
+        public async ValueTask<List<РахунокФактура_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<РахунокФактура_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new РахунокФактура_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -22787,15 +23678,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.ВидЦіни.Name = ItemValue["ВидЦіни"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      
+                }
                 
             }
             
@@ -22812,11 +23704,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", record.НомерРядка},
+                    {"col_a2", ++sequenceNumber_НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -23167,7 +24063,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -23178,12 +24075,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -23241,7 +24137,7 @@ namespace GeneratedCode.Документи
         {
             return new РозміщенняТоварівНаСкладі_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(РозміщенняТоварівНаСкладі_Const.PRESENTATION_FIELDS);
@@ -23268,7 +24164,7 @@ namespace GeneratedCode.Документи
     {
         public РозміщенняТоварівНаСкладі_Pointer(object? uid = null) : base(Config.Kernel, "tab_a64", РозміщенняТоварівНаСкладі_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public РозміщенняТоварівНаСкладі_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a64", "РозміщенняТоварівНаСкладі")
@@ -23294,6 +24190,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
@@ -23302,48 +24208,58 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариВКомірках
+            {
+                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await РозміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public РозміщенняТоварівНаСкладі_Pointer Copy()
         {
-            return new РозміщенняТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new РозміщенняТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public РозміщенняТоварівНаСкладі_Pointer GetEmptyPointer()
         {
             return new РозміщенняТоварівНаСкладі_Pointer();
         }
-        
+
         public async ValueTask<РозміщенняТоварівНаСкладі_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            РозміщенняТоварівНаСкладі_Objest РозміщенняТоварівНаСкладіObjestItem = new РозміщенняТоварівНаСкладі_Objest();
-            if (!await РозміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return РозміщенняТоварівНаСкладіObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            РозміщенняТоварівНаСкладі_Objest obj = new РозміщенняТоварівНаСкладі_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -23354,6 +24270,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РозміщенняТоварівНаСкладі_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
+
+        public async ValueTask<РозміщенняТоварівНаСкладі_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new РозміщенняТоварівНаСкладі_Pointer(pointer) : new РозміщенняТоварівНаСкладі_Pointer();
+        }
+        
+        public async ValueTask<List<РозміщенняТоварівНаСкладі_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<РозміщенняТоварівНаСкладі_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new РозміщенняТоварівНаСкладі_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -23420,15 +24350,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Комірка.Назва = ItemValue["Комірка"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Комірка.Name = ItemValue["Комірка"];
+                      
+                }
                 
             }
             
@@ -23445,11 +24376,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
                     {"col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a4", record.Серія.UnigueID.UGuid},
@@ -23643,7 +24578,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -23654,12 +24590,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -23716,7 +24651,7 @@ namespace GeneratedCode.Документи
         {
             return new ПереміщенняТоварівНаСкладі_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ПереміщенняТоварівНаСкладі_Const.PRESENTATION_FIELDS);
@@ -23742,7 +24677,7 @@ namespace GeneratedCode.Документи
     {
         public ПереміщенняТоварівНаСкладі_Pointer(object? uid = null) : base(Config.Kernel, "tab_b09", ПереміщенняТоварівНаСкладі_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ПереміщенняТоварівНаСкладі_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b09", "ПереміщенняТоварівНаСкладі")
@@ -23768,6 +24703,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
@@ -23776,48 +24721,58 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариВКомірках
+            {
+                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ПереміщенняТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ПереміщенняТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ПереміщенняТоварівНаСкладі_Pointer Copy()
         {
-            return new ПереміщенняТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ПереміщенняТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ПереміщенняТоварівНаСкладі_Pointer GetEmptyPointer()
         {
             return new ПереміщенняТоварівНаСкладі_Pointer();
         }
-        
+
         public async ValueTask<ПереміщенняТоварівНаСкладі_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ПереміщенняТоварівНаСкладі_Objest ПереміщенняТоварівНаСкладіObjestItem = new ПереміщенняТоварівНаСкладі_Objest();
-            if (!await ПереміщенняТоварівНаСкладіObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ПереміщенняТоварівНаСкладіObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ПереміщенняТоварівНаСкладі_Objest obj = new ПереміщенняТоварівНаСкладі_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -23828,6 +24783,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПереміщенняТоварівНаСкладі_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
+
+        public async ValueTask<ПереміщенняТоварівНаСкладі_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ПереміщенняТоварівНаСкладі_Pointer(pointer) : new ПереміщенняТоварівНаСкладі_Pointer();
+        }
+        
+        public async ValueTask<List<ПереміщенняТоварівНаСкладі_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ПереміщенняТоварівНаСкладі_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ПереміщенняТоварівНаСкладі_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -23897,16 +24866,17 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.КоміркаВідправник.Назва = ItemValue["КоміркаВідправник"];
-                        record.КоміркаОтримувач.Назва = ItemValue["КоміркаОтримувач"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.КоміркаВідправник.Name = ItemValue["КоміркаВідправник"];
+                      record.КоміркаОтримувач.Name = ItemValue["КоміркаОтримувач"];
+                      
+                }
                 
             }
             
@@ -23923,11 +24893,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
                     {"col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a4", record.Серія.UnigueID.UGuid},
@@ -24126,7 +25100,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -24137,12 +25112,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -24200,7 +25174,7 @@ namespace GeneratedCode.Документи
         {
             return new ЗбіркаТоварівНаСкладі_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ЗбіркаТоварівНаСкладі_Const.PRESENTATION_FIELDS);
@@ -24227,7 +25201,7 @@ namespace GeneratedCode.Документи
     {
         public ЗбіркаТоварівНаСкладі_Pointer(object? uid = null) : base(Config.Kernel, "tab_b27", ЗбіркаТоварівНаСкладі_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ЗбіркаТоварівНаСкладі_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b27", "ЗбіркаТоварівНаСкладі")
@@ -24253,6 +25227,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
@@ -24261,48 +25245,58 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ТовариВКомірках
+            {
+                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗбіркаТоварівНаСкладі_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ЗбіркаТоварівНаСкладі_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ЗбіркаТоварівНаСкладі_Pointer Copy()
         {
-            return new ЗбіркаТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ЗбіркаТоварівНаСкладі_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ЗбіркаТоварівНаСкладі_Pointer GetEmptyPointer()
         {
             return new ЗбіркаТоварівНаСкладі_Pointer();
         }
-        
+
         public async ValueTask<ЗбіркаТоварівНаСкладі_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ЗбіркаТоварівНаСкладі_Objest ЗбіркаТоварівНаСкладіObjestItem = new ЗбіркаТоварівНаСкладі_Objest();
-            if (!await ЗбіркаТоварівНаСкладіObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ЗбіркаТоварівНаСкладіObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ЗбіркаТоварівНаСкладі_Objest obj = new ЗбіркаТоварівНаСкладі_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -24313,6 +25307,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗбіркаТоварівНаСкладі_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗбіркаТоварівНаСкладі_Pointer? Current { get; private set; }
+
+        public async ValueTask<ЗбіркаТоварівНаСкладі_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ЗбіркаТоварівНаСкладі_Pointer(pointer) : new ЗбіркаТоварівНаСкладі_Pointer();
+        }
+        
+        public async ValueTask<List<ЗбіркаТоварівНаСкладі_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ЗбіркаТоварівНаСкладі_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ЗбіркаТоварівНаСкладі_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -24379,15 +25387,16 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Серія.Назва = ItemValue["Серія"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Комірка.Назва = ItemValue["Комірка"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Серія.Name = ItemValue["Серія"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Комірка.Name = ItemValue["Комірка"];
+                      
+                }
                 
             }
             
@@ -24404,11 +25413,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
                     {"col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a4", record.Серія.UnigueID.UGuid},
@@ -24602,19 +25615,19 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
             await ValueTask.FromResult(true);
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -24671,7 +25684,7 @@ namespace GeneratedCode.Документи
         {
             return new РозміщенняНоменклатуриПоКоміркам_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(РозміщенняНоменклатуриПоКоміркам_Const.PRESENTATION_FIELDS);
@@ -24697,7 +25710,7 @@ namespace GeneratedCode.Документи
     {
         public РозміщенняНоменклатуриПоКоміркам_Pointer(object? uid = null) : base(Config.Kernel, "tab_b29", РозміщенняНоменклатуриПоКоміркам_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public РозміщенняНоменклатуриПоКоміркам_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b29", "РозміщенняНоменклатуриПоКоміркам")
@@ -24723,6 +25736,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
@@ -24731,48 +25754,54 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            await ValueTask.FromResult(true);
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            РозміщенняНоменклатуриПоКоміркам_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await РозміщенняНоменклатуриПоКоміркам_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public РозміщенняНоменклатуриПоКоміркам_Pointer Copy()
         {
-            return new РозміщенняНоменклатуриПоКоміркам_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new РозміщенняНоменклатуриПоКоміркам_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public РозміщенняНоменклатуриПоКоміркам_Pointer GetEmptyPointer()
         {
             return new РозміщенняНоменклатуриПоКоміркам_Pointer();
         }
-        
+
         public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            РозміщенняНоменклатуриПоКоміркам_Objest РозміщенняНоменклатуриПоКоміркамObjestItem = new РозміщенняНоменклатуриПоКоміркам_Objest();
-            if (!await РозміщенняНоменклатуриПоКоміркамObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return РозміщенняНоменклатуриПоКоміркамObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            РозміщенняНоменклатуриПоКоміркам_Objest obj = new РозміщенняНоменклатуриПоКоміркам_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -24783,6 +25812,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РозміщенняНоменклатуриПоКоміркам_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозміщенняНоменклатуриПоКоміркам_Pointer? Current { get; private set; }
+
+        public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new РозміщенняНоменклатуриПоКоміркам_Pointer(pointer) : new РозміщенняНоменклатуриПоКоміркам_Pointer();
+        }
+        
+        public async ValueTask<List<РозміщенняНоменклатуриПоКоміркам_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<РозміщенняНоменклатуриПоКоміркам_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new РозміщенняНоменклатуриПоКоміркам_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -24839,13 +25882,14 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.Комірка.Назва = ItemValue["Комірка"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.Комірка.Name = ItemValue["Комірка"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      
+                }
                 
             }
             
@@ -24862,11 +25906,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_h1", record.Номенклатура.UnigueID.UGuid},
                     {"col_a2", record.Комірка.UnigueID.UGuid},
                     {"col_h3", record.Пакування.UnigueID.UGuid},
@@ -25049,7 +26097,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -25066,12 +26115,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await КорегуванняБоргу_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -25127,7 +26175,7 @@ namespace GeneratedCode.Документи
         {
             return new КорегуванняБоргу_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(КорегуванняБоргу_Const.PRESENTATION_FIELDS);
@@ -25152,7 +26200,7 @@ namespace GeneratedCode.Документи
     {
         public КорегуванняБоргу_Pointer(object? uid = null) : base(Config.Kernel, "tab_a65", КорегуванняБоргу_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public КорегуванняБоргу_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a65", "КорегуванняБоргу")
@@ -25178,6 +26226,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             КорегуванняБоргу_Objest? obj = await GetDocumentObject();
@@ -25186,48 +26244,64 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            КорегуванняБоргу_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // РозрахункиЗКлієнтами
+            {
+                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // РозрахункиЗПостачальниками
+            {
+                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            КорегуванняБоргу_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await КорегуванняБоргу_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public КорегуванняБоргу_Pointer Copy()
         {
-            return new КорегуванняБоргу_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new КорегуванняБоргу_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public КорегуванняБоргу_Pointer GetEmptyPointer()
         {
             return new КорегуванняБоргу_Pointer();
         }
-        
+
         public async ValueTask<КорегуванняБоргу_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            КорегуванняБоргу_Objest КорегуванняБоргуObjestItem = new КорегуванняБоргу_Objest();
-            if (!await КорегуванняБоргуObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return КорегуванняБоргуObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            КорегуванняБоргу_Objest obj = new КорегуванняБоргу_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -25238,6 +26312,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new КорегуванняБоргу_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public КорегуванняБоргу_Pointer? Current { get; private set; }
+
+        public async ValueTask<КорегуванняБоргу_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new КорегуванняБоргу_Pointer(pointer) : new КорегуванняБоргу_Pointer();
+        }
+        
+        public async ValueTask<List<КорегуванняБоргу_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<КорегуванняБоргу_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new КорегуванняБоргу_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -25295,12 +26383,13 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Контрагент.Назва = ItemValue["Контрагент"];
-                        record.Валюта.Назва = ItemValue["Валюта"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Контрагент.Name = ItemValue["Контрагент"];
+                      record.Валюта.Name = ItemValue["Валюта"];
+                      
+                }
                 
             }
             
@@ -25317,11 +26406,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", record.НомерРядка},
+                    {"col_a1", ++sequenceNumber_НомерРядка},
                     {"col_e9", record.Контрагент.UnigueID.UGuid},
                     {"col_f1", record.Валюта.UnigueID.UGuid},
                     {"col_f2", record.Сума},
@@ -25530,7 +26623,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -25547,12 +26641,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ЗакриттяЗамовленняКлієнта_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -25616,7 +26709,7 @@ namespace GeneratedCode.Документи
         {
             return new ЗакриттяЗамовленняКлієнта_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ЗакриттяЗамовленняКлієнта_Const.PRESENTATION_FIELDS);
@@ -25649,7 +26742,7 @@ namespace GeneratedCode.Документи
     {
         public ЗакриттяЗамовленняКлієнта_Pointer(object? uid = null) : base(Config.Kernel, "tab_a96", ЗакриттяЗамовленняКлієнта_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ЗакриттяЗамовленняКлієнта_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_a96", "ЗакриттяЗамовленняКлієнта")
@@ -25675,6 +26768,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗакриттяЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
@@ -25683,48 +26786,64 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗакриттяЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ЗамовленняКлієнтів
+            {
+                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗакриттяЗамовленняКлієнта_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ЗакриттяЗамовленняКлієнта_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ЗакриттяЗамовленняКлієнта_Pointer Copy()
         {
-            return new ЗакриттяЗамовленняКлієнта_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ЗакриттяЗамовленняКлієнта_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ЗакриттяЗамовленняКлієнта_Pointer GetEmptyPointer()
         {
             return new ЗакриттяЗамовленняКлієнта_Pointer();
         }
-        
+
         public async ValueTask<ЗакриттяЗамовленняКлієнта_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ЗакриттяЗамовленняКлієнта_Objest ЗакриттяЗамовленняКлієнтаObjestItem = new ЗакриттяЗамовленняКлієнта_Objest();
-            if (!await ЗакриттяЗамовленняКлієнтаObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ЗакриттяЗамовленняКлієнтаObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ЗакриттяЗамовленняКлієнта_Objest obj = new ЗакриттяЗамовленняКлієнта_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -25735,6 +26854,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗакриттяЗамовленняКлієнта_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗакриттяЗамовленняКлієнта_Pointer? Current { get; private set; }
+
+        public async ValueTask<ЗакриттяЗамовленняКлієнта_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ЗакриттяЗамовленняКлієнта_Pointer(pointer) : new ЗакриттяЗамовленняКлієнта_Pointer();
+        }
+        
+        public async ValueTask<List<ЗакриттяЗамовленняКлієнта_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ЗакриттяЗамовленняКлієнта_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ЗакриттяЗамовленняКлієнта_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -25802,14 +26935,15 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      
+                }
                 
             }
             
@@ -25826,11 +26960,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", record.НомерРядка},
+                    {"col_a2", ++sequenceNumber_НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -26047,7 +27185,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -26058,12 +27197,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ЗакриттяРахункуФактури_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -26127,7 +27265,7 @@ namespace GeneratedCode.Документи
         {
             return new ЗакриттяРахункуФактури_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ЗакриттяРахункуФактури_Const.PRESENTATION_FIELDS);
@@ -26160,7 +27298,7 @@ namespace GeneratedCode.Документи
     {
         public ЗакриттяРахункуФактури_Pointer(object? uid = null) : base(Config.Kernel, "tab_b41", ЗакриттяРахункуФактури_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ЗакриттяРахункуФактури_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b41", "ЗакриттяРахункуФактури")
@@ -26186,6 +27324,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗакриттяРахункуФактури_Objest? obj = await GetDocumentObject();
@@ -26194,48 +27342,58 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗакриттяРахункуФактури_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ВільніЗалишки
+            {
+                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗакриттяРахункуФактури_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ЗакриттяРахункуФактури_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ЗакриттяРахункуФактури_Pointer Copy()
         {
-            return new ЗакриттяРахункуФактури_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ЗакриттяРахункуФактури_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ЗакриттяРахункуФактури_Pointer GetEmptyPointer()
         {
             return new ЗакриттяРахункуФактури_Pointer();
         }
-        
+
         public async ValueTask<ЗакриттяРахункуФактури_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ЗакриттяРахункуФактури_Objest ЗакриттяРахункуФактуриObjestItem = new ЗакриттяРахункуФактури_Objest();
-            if (!await ЗакриттяРахункуФактуриObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ЗакриттяРахункуФактуриObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ЗакриттяРахункуФактури_Objest obj = new ЗакриттяРахункуФактури_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -26246,6 +27404,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗакриттяРахункуФактури_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗакриттяРахункуФактури_Pointer? Current { get; private set; }
+
+        public async ValueTask<ЗакриттяРахункуФактури_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ЗакриттяРахункуФактури_Pointer(pointer) : new ЗакриттяРахункуФактури_Pointer();
+        }
+        
+        public async ValueTask<List<ЗакриттяРахункуФактури_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ЗакриттяРахункуФактури_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ЗакриттяРахункуФактури_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -26313,14 +27485,15 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      
+                }
                 
             }
             
@@ -26337,11 +27510,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", record.НомерРядка},
+                    {"col_a2", ++sequenceNumber_НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -26558,7 +27735,8 @@ namespace GeneratedCode.Документи
                 
         }
 
-        /* Очищення регістрів */
+        
+        /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
             
@@ -26569,12 +27747,11 @@ namespace GeneratedCode.Документи
             }
             
         }
+  
 
         public async ValueTask ClearSpendTheDocument()
         {
             ClearRegAccum();
-            
-            await ЗакриттяЗамовленняПостачальнику_SpendTheDocument.ClearSpend(this);
             
             await BaseSpend(false, DateTime.MinValue);
         }
@@ -26638,7 +27815,7 @@ namespace GeneratedCode.Документи
         {
             return new ЗакриттяЗамовленняПостачальнику_Pointer(UnigueID.UGuid);
         }
-        
+
         public async ValueTask<string> GetPresentation()
         {
             return await base.BasePresentation(ЗакриттяЗамовленняПостачальнику_Const.PRESENTATION_FIELDS);
@@ -26671,7 +27848,7 @@ namespace GeneratedCode.Документи
     {
         public ЗакриттяЗамовленняПостачальнику_Pointer(object? uid = null) : base(Config.Kernel, "tab_b44", ЗакриттяЗамовленняПостачальнику_Const.TYPE)
         {
-            base.Init(new UnigueID(uid), null);
+            base.Init(new UnigueID(uid));
         }
         
         public ЗакриттяЗамовленняПостачальнику_Pointer(UnigueID uid, Dictionary<string, object>? fields = null) : base(Config.Kernel, "tab_b44", "ЗакриттяЗамовленняПостачальнику")
@@ -26697,6 +27874,16 @@ namespace GeneratedCode.Документи
             querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
+        public async ValueTask<bool?> IsSpend()
+        {
+            return await base.BaseIsSpend();
+        }
+
+        public async ValueTask<(bool? Spend, DateTime SpendDate)> GetSpend()
+        {
+            return await base.BaseGetSpend();
+        }
+
         public async ValueTask<bool> SpendTheDocument(DateTime spendDate)
         {
             ЗакриттяЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
@@ -26705,48 +27892,58 @@ namespace GeneratedCode.Документи
 
         public async ValueTask ClearSpendTheDocument()
         {
-            ЗакриттяЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
-            if (obj != null) await obj.ClearSpendTheDocument();
+            
+            ClearRegAccum();
+            await BaseSpend(false, DateTime.MinValue);
+                
         }
+
+        public async ValueTask<bool?> GetDeletionLabel()
+        {
+            return await base.BaseGetDeletionLabel();
+        }
+
+        
+        /* Очищення регістрів накопичення */
+        async void ClearRegAccum()
+        {
+            
+            // ЗамовленняПостачальникам
+            {
+                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
+                await regAccum.Delete(this.UnigueID.UGuid);
+            }
+            
+        }
+  
 
         public async ValueTask SetDeletionLabel(bool label = true)
         {
-            ЗакриттяЗамовленняПостачальнику_Objest? obj = await GetDocumentObject();
-                if (obj == null) return;
-                
-                if (label)
-                {
-                    
-                    await ЗакриттяЗамовленняПостачальнику_SpendTheDocument.ClearSpend(obj);
-                    await BaseSpend(false, DateTime.MinValue);
-                }
-                
+          
+            if (label)
+            {
+                ClearRegAccum();
+                await BaseSpend(false, DateTime.MinValue);
+            }
             
-            await base.BaseDeletionLabel(label);
+          await base.BaseDeletionLabel(label);
         }
 
         public ЗакриттяЗамовленняПостачальнику_Pointer Copy()
         {
-            return new ЗакриттяЗамовленняПостачальнику_Pointer(base.UnigueID, base.Fields) { Назва = Назва };
+            return new ЗакриттяЗамовленняПостачальнику_Pointer(base.UnigueID, base.Fields) { Name = Name };
         }
 
         public ЗакриттяЗамовленняПостачальнику_Pointer GetEmptyPointer()
         {
             return new ЗакриттяЗамовленняПостачальнику_Pointer();
         }
-        
+
         public async ValueTask<ЗакриттяЗамовленняПостачальнику_Objest?> GetDocumentObject(bool readAllTablePart = false)
         {
             if (this.IsEmpty()) return null;
-            ЗакриттяЗамовленняПостачальнику_Objest ЗакриттяЗамовленняПостачальникуObjestItem = new ЗакриттяЗамовленняПостачальнику_Objest();
-            if (!await ЗакриттяЗамовленняПостачальникуObjestItem.Read(base.UnigueID, readAllTablePart)) return null;
-            return ЗакриттяЗамовленняПостачальникуObjestItem;
-        }
-
-        public void Clear()
-        {
-            Init(new UnigueID(), null);
-            Назва = "";
+            ЗакриттяЗамовленняПостачальнику_Objest obj = new ЗакриттяЗамовленняПостачальнику_Objest();
+            return await obj.Read(base.UnigueID, readAllTablePart) ? obj : null;
         }
     }
 
@@ -26757,6 +27954,20 @@ namespace GeneratedCode.Документи
         public async ValueTask<bool> SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗакриттяЗамовленняПостачальнику_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗакриттяЗамовленняПостачальнику_Pointer? Current { get; private set; }
+
+        public async ValueTask<ЗакриттяЗамовленняПостачальнику_Pointer> FindByField(string name, object value)
+        {
+            UnigueID? pointer = await base.BaseFindByField(name, value);
+            return pointer != null ? new ЗакриттяЗамовленняПостачальнику_Pointer(pointer) : new ЗакриттяЗамовленняПостачальнику_Pointer();
+        }
+        
+        public async ValueTask<List<ЗакриттяЗамовленняПостачальнику_Pointer>> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ЗакриттяЗамовленняПостачальнику_Pointer> documentPointerList = [];
+            foreach (var documentPointer in await base.BaseFindListByField(name, value, limit, offset)) 
+                documentPointerList.Add(new ЗакриттяЗамовленняПостачальнику_Pointer(documentPointer.UnigueID, documentPointer.Fields));
+            return documentPointerList;
+        }
     }
 
       
@@ -26824,14 +28035,15 @@ namespace GeneratedCode.Документи
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                  record.JoinItemValue = ItemValue;
+                  record.Номенклатура.Name = ItemValue["Номенклатура"];
+                      record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                      record.Пакування.Name = ItemValue["Пакування"];
+                      record.Склад.Name = ItemValue["Склад"];
+                      
+                }
                 
             }
             
@@ -26848,11 +28060,15 @@ namespace GeneratedCode.Документи
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
 
+            
+            int sequenceNumber_НомерРядка = 0;
+            
+
             foreach (Record record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", record.НомерРядка},
+                    {"col_a2", ++sequenceNumber_НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -27047,11 +28263,11 @@ namespace GeneratedCode.РегістриВідомостей
                 
                   if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                   {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.ВидЦіни.Назва = ItemValue["ВидЦіни"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
-                        record.Валюта.Назва = ItemValue["Валюта"];
+                    record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.ВидЦіни.Name = ItemValue["ВидЦіни"];
+                        record.Пакування.Name = ItemValue["Пакування"];
+                        record.Валюта.Name = ItemValue["Валюта"];
                         
                   }
                 
@@ -27253,7 +28469,7 @@ namespace GeneratedCode.РегістриВідомостей
                 
                   if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                   {
-                    record.Валюта.Назва = ItemValue["Валюта"];
+                    record.Валюта.Name = ItemValue["Валюта"];
                         
                   }
                 
@@ -27443,9 +28659,9 @@ namespace GeneratedCode.РегістриВідомостей
                 
                   if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                   {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                        record.Пакування.Назва = ItemValue["Пакування"];
+                    record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Name = ItemValue["Пакування"];
                         
                   }
                 
@@ -27631,7 +28847,7 @@ namespace GeneratedCode.РегістриВідомостей
                 
                   if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                   {
-                    record.Файл.Назва = ItemValue["Файл"];
+                    record.Файл.Name = ItemValue["Файл"];
                         
                   }
                 
@@ -27811,10 +29027,10 @@ namespace GeneratedCode.РегістриВідомостей
                 
                   if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                   {
-                    record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                        record.Склад.Назва = ItemValue["Склад"];
-                        record.Приміщення.Назва = ItemValue["Приміщення"];
-                        record.Комірка.Назва = ItemValue["Комірка"];
+                    record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        record.Приміщення.Name = ItemValue["Приміщення"];
+                        record.Комірка.Name = ItemValue["Комірка"];
                         
                   }
                 
@@ -28331,15 +29547,16 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          record.Склад.Назва = ItemValue["Склад"];
-                          record.Серія.Назва = ItemValue["Серія"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        record.Серія.Name = ItemValue["Серія"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -28781,15 +29998,16 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.ЗамовленняКлієнта.Назва = ItemValue["ЗамовленняКлієнта"];
-                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          record.Склад.Назва = ItemValue["Склад"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.ЗамовленняКлієнта.Name = ItemValue["ЗамовленняКлієнта"];
+                        record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -29007,13 +30225,14 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Валюта.Назва = ItemValue["Валюта"];
-                          record.Контрагент.Назва = ItemValue["Контрагент"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Валюта.Name = ItemValue["Валюта"];
+                        record.Контрагент.Name = ItemValue["Контрагент"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -29330,17 +30549,18 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Організація.Назва = ItemValue["Організація"];
-                          record.Склад.Назва = ItemValue["Склад"];
-                          record.Контрагент.Назва = ItemValue["Контрагент"];
-                          record.Договір.Назва = ItemValue["Договір"];
-                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Організація.Name = ItemValue["Організація"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        record.Контрагент.Name = ItemValue["Контрагент"];
+                        record.Договір.Name = ItemValue["Договір"];
+                        record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -29586,14 +30806,15 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          record.Склад.Назва = ItemValue["Склад"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -29918,15 +31139,16 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.ЗамовленняПостачальнику.Назва = ItemValue["ЗамовленняПостачальнику"];
-                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          record.Склад.Назва = ItemValue["Склад"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.ЗамовленняПостачальнику.Name = ItemValue["ЗамовленняПостачальнику"];
+                        record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -30138,13 +31360,14 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Контрагент.Назва = ItemValue["Контрагент"];
-                          record.Валюта.Назва = ItemValue["Валюта"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Контрагент.Name = ItemValue["Контрагент"];
+                        record.Валюта.Name = ItemValue["Валюта"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -30445,14 +31668,15 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Організація.Назва = ItemValue["Організація"];
-                          record.Каса.Назва = ItemValue["Каса"];
-                          record.Валюта.Назва = ItemValue["Валюта"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Організація.Name = ItemValue["Організація"];
+                        record.Каса.Name = ItemValue["Каса"];
+                        record.Валюта.Name = ItemValue["Валюта"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -30870,17 +32094,18 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Організація.Назва = ItemValue["Організація"];
-                          record.ПартіяТоварівКомпозит.Назва = ItemValue["ПартіяТоварівКомпозит"];
-                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          record.Серія.Назва = ItemValue["Серія"];
-                          record.Склад.Назва = ItemValue["Склад"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Організація.Name = ItemValue["Організація"];
+                        record.ПартіяТоварівКомпозит.Name = ItemValue["ПартіяТоварівКомпозит"];
+                        record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Серія.Name = ItemValue["Серія"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -31370,17 +32595,18 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Організація.Назва = ItemValue["Організація"];
-                          record.Склад.Назва = ItemValue["Склад"];
-                          record.Контрагент.Назва = ItemValue["Контрагент"];
-                          record.Договір.Назва = ItemValue["Договір"];
-                          record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Організація.Name = ItemValue["Організація"];
+                        record.Склад.Name = ItemValue["Склад"];
+                        record.Контрагент.Name = ItemValue["Контрагент"];
+                        record.Договір.Name = ItemValue["Договір"];
+                        record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        
+                }
                 
             }
             base.BaseClear();
@@ -31634,16 +32860,17 @@ namespace GeneratedCode.РегістриНакопичення
                 };
                 Records.Add(record);
                 
-                  if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
-                  {
-                      if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
-                      record.Номенклатура.Назва = ItemValue["Номенклатура"];
-                          record.ХарактеристикаНоменклатури.Назва = ItemValue["ХарактеристикаНоменклатури"];
-                          record.Пакування.Назва = ItemValue["Пакування"];
-                          record.Комірка.Назва = ItemValue["Комірка"];
-                          record.Серія.Назва = ItemValue["Серія"];
-                          
-                  }
+                if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
+                {
+                    //record.JoinItemValue = ItemValue;
+                    if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
+                    record.Номенклатура.Name = ItemValue["Номенклатура"];
+                        record.ХарактеристикаНоменклатури.Name = ItemValue["ХарактеристикаНоменклатури"];
+                        record.Пакування.Name = ItemValue["Пакування"];
+                        record.Комірка.Name = ItemValue["Комірка"];
+                        record.Серія.Name = ItemValue["Серія"];
+                        
+                }
                 
             }
             base.BaseClear();

@@ -187,13 +187,11 @@ namespace StorageAndTrade
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Товари_TablePart.Records.Clear();
-                int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
                 {
                     ЕлементВласник.Товари_TablePart.Records.Add(new РозміщенняНоменклатуриПоКоміркам_Товари_TablePart.Record()
                     {
                         UID = запис.ID,
-                        НомерРядка = ++sequenceNumber,
                         Номенклатура = запис.Номенклатура,
                         Пакування = запис.Пакування,
                         Комірка = запис.Комірка,

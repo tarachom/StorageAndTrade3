@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>20.03.2025 10:04:31</DateTimeSave>
+  <DateTimeSave>14.04.2025 20:44:32</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1454,6 +1454,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -1462,6 +1463,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -2321,6 +2323,7 @@ namespace StorageAndTrade
     ]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -2400,6 +2403,7 @@ namespace StorageAndTrade
     ]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -3012,6 +3016,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Список</Name>
@@ -3020,6 +3025,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -3202,6 +3208,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -3210,6 +3217,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -3348,6 +3356,7 @@ namespace StorageAndTrade
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <AutomaticNumbering>0</AutomaticNumbering>
         </Field>
       </Fields>
       <TabularParts />
@@ -3424,6 +3433,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -3432,6 +3442,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -3695,6 +3706,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -3703,6 +3715,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -4256,6 +4269,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -4271,6 +4285,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>MultiplePointerControl</Name>
@@ -4702,6 +4717,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -4710,6 +4726,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -4980,6 +4997,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -4988,6 +5006,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -5153,6 +5172,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -5161,6 +5181,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -5445,6 +5466,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -5453,6 +5475,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -5789,6 +5812,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -5797,6 +5821,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -5984,6 +6009,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -5992,6 +6018,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -6106,6 +6133,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -6114,6 +6142,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -6318,6 +6347,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -6326,6 +6356,7 @@ namespace StorageAndTrade
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -6559,6 +6590,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -6567,6 +6599,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -6777,6 +6810,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -6792,6 +6826,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -6959,6 +6994,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -6967,6 +7003,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -7141,6 +7178,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -7149,6 +7187,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -7409,6 +7448,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -7417,6 +7457,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>MultiplePointerControl</Name>
@@ -7597,6 +7638,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -7605,6 +7647,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -8060,6 +8103,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -8068,6 +8112,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -8237,6 +8282,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -8245,6 +8291,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -8524,6 +8571,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -8532,6 +8580,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -8643,6 +8692,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -8651,6 +8701,7 @@ WHERE
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -8888,6 +8939,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -8896,6 +8948,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -9063,6 +9116,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -9071,6 +9125,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -9770,6 +9825,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -9778,6 +9834,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -10180,6 +10237,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -10188,6 +10246,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -10499,6 +10558,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -10507,6 +10567,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>ЗаписиШвидкийВибір</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -10918,6 +10979,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -10926,6 +10988,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -11140,6 +11203,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -11200,6 +11264,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -11356,6 +11421,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -11364,6 +11430,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -12307,6 +12374,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Швидкий вибір</Name>
@@ -12315,6 +12383,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -12692,6 +12761,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -12731,6 +12801,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -13036,8 +13107,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -13054,6 +13125,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -13648,6 +13720,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <AutomaticNumbering>0</AutomaticNumbering>
         </Field>
         <Field>
           <Name>ЧасДоставкиЗ</Name>
@@ -13769,6 +13842,7 @@ FROM
               <IsFullTextSearch>1</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -13818,6 +13892,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -14341,8 +14416,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -14702,6 +14777,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>PointerControl</Name>
@@ -15116,6 +15192,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -15155,6 +15232,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -15482,8 +15560,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -15500,6 +15578,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -16172,6 +16251,7 @@ FROM
           <IsFullTextSearch>0</IsFullTextSearch>
           <IsSearch>0</IsSearch>
           <IsExport>0</IsExport>
+          <AutomaticNumbering>0</AutomaticNumbering>
         </Field>
         <Field>
           <Name>Коментар</Name>
@@ -16238,6 +16318,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -16287,6 +16368,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -16690,8 +16772,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -16708,6 +16790,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </Document>
@@ -16894,6 +16977,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -17128,8 +17212,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -17146,6 +17230,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -17535,6 +17620,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Замовлення</Name>
@@ -17730,8 +17816,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -17748,6 +17834,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -18245,6 +18332,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Замовлення</Name>
@@ -18450,8 +18538,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -18468,6 +18556,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </Document>
@@ -18773,6 +18862,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -18822,6 +18912,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -19051,8 +19142,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -19069,6 +19160,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -19625,6 +19717,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -19674,6 +19767,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -19970,8 +20064,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -19988,6 +20082,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -20526,6 +20621,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -20575,6 +20671,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -20881,8 +20978,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -20899,6 +20996,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -21388,6 +21486,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -21636,8 +21735,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -21866,6 +21965,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </Document>
@@ -22095,6 +22195,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -22144,6 +22245,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -22305,6 +22407,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Каса</Name>
@@ -22398,6 +22501,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>БанківськийРахунок</Name>
@@ -22491,6 +22595,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -22721,8 +22826,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -22739,6 +22844,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -23252,9 +23358,9 @@ FROM
         </BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>
+        <Spend Action="0">
         </Spend>
-        <ClearSpend>
+        <ClearSpend Action="0">
         </ClearSpend>
       </SpendFunctions>
       <Forms />
@@ -23441,6 +23547,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -23584,9 +23691,9 @@ FROM
         </BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>
+        <Spend Action="0">
         </Spend>
-        <ClearSpend>
+        <ClearSpend Action="0">
         </ClearSpend>
       </SpendFunctions>
       <Forms />
@@ -23802,6 +23909,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>КількістьУпаковокФакт</Name>
@@ -23811,6 +23919,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -23850,6 +23959,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Коментар</Name>
@@ -24066,8 +24176,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -24084,6 +24194,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -24420,6 +24531,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -24469,6 +24581,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -24731,8 +24844,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -24749,6 +24862,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -25101,6 +25215,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -25150,6 +25265,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -25423,8 +25539,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -25441,6 +25557,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -25894,6 +26011,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -25933,6 +26051,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>1</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -26252,8 +26371,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -26270,6 +26389,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -26709,6 +26829,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -26758,6 +26879,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -26973,8 +27095,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -26991,6 +27113,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -27311,6 +27434,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -27360,6 +27484,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -27597,8 +27722,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -27615,6 +27740,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -27934,6 +28060,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -27983,6 +28110,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -28198,8 +28326,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -28216,6 +28344,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -28531,6 +28660,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -28715,8 +28845,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -28733,6 +28863,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -29025,6 +29156,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Контрагент</Name>
@@ -29218,8 +29350,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -29236,6 +29368,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -29606,6 +29739,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -29645,6 +29779,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -29937,8 +30072,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -29955,6 +30090,7 @@ FROM
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -30405,6 +30541,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -30444,6 +30581,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -30724,8 +30862,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -30743,6 +30881,7 @@ FROM
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>
           </TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -31172,6 +31311,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Номенклатура</Name>
@@ -31211,6 +31351,7 @@ FROM
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -31502,8 +31643,8 @@ FROM
         <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
       </TriggerFunctions>
       <SpendFunctions>
-        <Spend>Spend</Spend>
-        <ClearSpend>ClearSpend</ClearSpend>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -31521,6 +31662,7 @@ FROM
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>
           </TabularList>
+          <UsePages>0</UsePages>
         </Form>
         <Form Modified="0">
           <Name>Елемент</Name>
@@ -37794,6 +37936,7 @@ SQL тип  непотрібно вказувати
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterInformation>
@@ -37863,6 +38006,7 @@ SQL тип  непотрібно вказувати
             <IsFullTextSearch>0</IsFullTextSearch>
             <IsSearch>0</IsSearch>
             <IsExport>0</IsExport>
+            <AutomaticNumbering>0</AutomaticNumbering>
           </Field>
         </Fields>
       </ResourcesFields>
@@ -37950,6 +38094,7 @@ SQL тип  непотрібно вказувати
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterInformation>
@@ -38168,6 +38313,7 @@ SQL тип  непотрібно вказувати
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterInformation>
@@ -38316,6 +38462,7 @@ SQL тип  непотрібно вказувати
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterInformation>
@@ -39104,6 +39251,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -39465,6 +39613,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -39865,6 +40014,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -40306,6 +40456,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -40832,6 +40983,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -41151,6 +41303,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -41550,6 +41703,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -42097,6 +42251,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -42212,6 +42367,7 @@ HAVING
             <IsFullTextSearch>0</IsFullTextSearch>
             <IsSearch>0</IsSearch>
             <IsExport>0</IsExport>
+            <AutomaticNumbering>0</AutomaticNumbering>
           </Field>
         </Fields>
       </DimensionFields>
@@ -42364,6 +42520,7 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>Кількість</Name>
@@ -42489,6 +42646,7 @@ HAVING
               <IsFullTextSearch>0</IsFullTextSearch>
               <IsSearch>0</IsSearch>
               <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>КількістьПрихід</Name>
@@ -42975,6 +43133,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -43448,6 +43607,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>
@@ -44109,6 +44269,7 @@ HAVING
           <GeneratedCode><![CDATA[]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
+          <UsePages>0</UsePages>
         </Form>
       </Forms>
     </RegisterAccumulation>

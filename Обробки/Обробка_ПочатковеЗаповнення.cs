@@ -38,17 +38,11 @@ namespace StorageAndTrade
 
             //Показувати при запуску
             {
-                Switch visibleOnStart = new Switch()
-                {
-                    HeightRequest = 20,
-                    Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const
-                };
-
-                visibleOnStart.ButtonReleaseEvent += (sender, args) =>
-                   Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = visibleOnStart.Active;
+                Switch onStart = new Switch() { Active = !Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const };
+                onStart.ButtonReleaseEvent += (sender, args) => Константи.ПриЗапускуПрограми.ПрограмаЗаповненаПочатковимиДаними_Const = onStart.Active;
 
                 Box vBox = new Box(Orientation.Vertical, 0);
-                CreateField(vBox, "Показувати при запуску", visibleOnStart);
+                CreateField(vBox, "Показувати при запуску", onStart);
 
                 HBoxTop.PackEnd(vBox, false, false, 10);
             }

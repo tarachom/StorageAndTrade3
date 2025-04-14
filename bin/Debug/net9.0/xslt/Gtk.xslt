@@ -83,10 +83,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         <xsl:for-each select="Fields/AdditionalField[Visible = 'True']">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
-        Array ToArray()
+        object[] ToArray()
         {
-            return new object[] 
-            { 
+            return
+            [
                 DeletionLabel ? InterfaceGtk.Іконки.<xsl:value-of select="$IconTree"/>.Delete : InterfaceGtk.Іконки.<xsl:value-of select="$IconTree"/>.Normal,
                 ID,
                 <xsl:for-each select="Fields/Field">
@@ -95,7 +95,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                 <xsl:for-each select="Fields/AdditionalField[Visible = 'True']">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
                 </xsl:for-each>
-            };
+            ];
         }
 
         public static void AddColumns(TreeView treeView)
@@ -136,13 +136,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static UnigueID? DirectoryPointerItem { get; set; }
-        public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? FirstPath { get; private set; }
-        public static TreePath? SelectPath { get; private set; }
-        public static TreePath? CurrentPath { get; private set; }
-
-        public static ListBox CreateFilter(TreeView treeView)
+        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
             <xsl:choose>
@@ -152,7 +146,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                   { /* <xsl:value-of select="Name"/>, <xsl:value-of select="Type"/> */
                       Switch sw = new();
                       <xsl:choose>
-                          <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
+                          <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 300 };</xsl:when>
                           <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();
                           <xsl:value-of select="Name"/>.Clicked += (object? sender, EventArgs args) =&gt; sw.Active = <xsl:value-of select="Name"/>.Active;
                           </xsl:when>
@@ -201,7 +195,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                           if (listWhere.Count != 0)
                           {
                               ДодатиВідбір(treeView, listWhere, true);
+                              ОчиститиСторінки(treeView);
                               await LoadRecords(treeView);
+                              funcPagesShow?.Invoke();
                           }
                       };
 
@@ -220,10 +216,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? OpenFolder = null)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
+          UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            FirstPath = SelectPath = CurrentPath = null;
-
+            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
+            <xsl:value-of select="$StoreType"/> Store = (<xsl:value-of select="$StoreType"/>)treeView.Model;           
+            
             Довідники.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$SelectType"/><xsl:text> </xsl:text><xsl:value-of select="$DirectoryName"/>_Select = new Довідники.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$SelectType"/>();
             <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Field.AddRange(
             [
@@ -238,8 +237,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             ]);
 
             <xsl:if test="$DirectoryType = 'Hierarchical'">
-            if (OpenFolder != null) 
-              ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, OpenFolder.UGuid));
+            if (openFolder != null) 
+                  ДодатиВідбір(treeView, new Where("uid", Comparison.NOT, openFolder.UGuid));
             </xsl:if>
 
             /* Where */
@@ -275,10 +274,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                 */
             </xsl:for-each>
 
+            <xsl:if test="$DirectoryType != 'Hierarchical'">
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+                await ЗаповнитиСторінки(<xsl:value-of select="$DirectoryName"/>_Select.SplitSelectToPages, settingsPages, <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect, unigueIDSelect);
+            </xsl:if>
+
             /* SELECT */
             await <xsl:value-of select="$DirectoryName"/>_Select.Select();
-
-            <xsl:value-of select="$StoreType"/> Store = (<xsl:value-of select="$StoreType"/>)treeView.Model;
             Store.Clear();
 
             <xsl:if test="$DirectoryType = 'Hierarchical'">
@@ -287,8 +292,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             TreePath rootPath = Store.GetPath(rootIter);
             </xsl:if>
 
-            string? UidSelect = SelectPointerItem?.ToString() ?? DirectoryPointerItem?.ToString();
-
+            string? uidSelect = unigueIDSelect?.ToString();
             while (<xsl:value-of select="$DirectoryName"/>_Select.MoveNext())
             {
                 Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? cur = <xsl:value-of select="$DirectoryName"/>_Select.Current;
@@ -337,7 +341,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
 
                     CurrentPath = Store.GetPath(CurrentIter);
                     FirstPath ??= CurrentPath;
-                    if (UidSelect != null &amp;&amp; Record.ID == UidSelect) SelectPath = CurrentPath;
+                    if (uidSelect != null &amp;&amp; Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
             <xsl:if test="$DirectoryType = 'Hierarchical'">
@@ -372,17 +376,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         <xsl:for-each select="Fields/Field">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
-        Array ToArray()
+        object[] ToArray()
         {
-            return new object[] 
-            { 
+            return
+            [ 
                 DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
                 </xsl:for-each>
-            };
+            ];
         }
 
         public static void AddColumns(TreeView treeView)
@@ -418,13 +422,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static UnigueID? DocumentPointerItem { get; set; }
-        public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? FirstPath { get; private set; }
-        public static TreePath? SelectPath { get; private set; }
-        public static TreePath? CurrentPath { get; private set; }
-
-        public static ListBox CreateFilter(TreeView treeView)
+        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
         {
             ListBox listBox = new() { SelectionMode = SelectionMode.None };
             <xsl:choose>
@@ -434,7 +432,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                   { /* <xsl:value-of select="Name"/>, <xsl:value-of select="Type"/> */
                       Switch sw = new();
                       <xsl:choose>
-                          <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 400 };</xsl:when>
+                          <xsl:when test="Type = 'string'">Entry <xsl:value-of select="Name"/> = new() { WidthRequest = 300 };</xsl:when>
                           <xsl:when test="Type = 'boolean'">CheckButton <xsl:value-of select="Name"/> = new();
                           <xsl:value-of select="Name"/>.Clicked += (object? sender, EventArgs args) =&gt; sw.Active = <xsl:value-of select="Name"/>.Active;
                           </xsl:when>
@@ -483,7 +481,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                           if (listWhere.Count != 0)
                           {
                               ДодатиВідбір(treeView, listWhere, true);
+                              ОчиститиСторінки(treeView);
                               await LoadRecords(treeView);
+                              funcPagesShow?.Invoke();
                           }
                       };
 
@@ -502,9 +502,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             return listBox;
         }
 
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            FirstPath = SelectPath = CurrentPath = null;
+            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
+            ListStore Store = (ListStore)treeView.Model;
 
             Документи.<xsl:value-of select="$DocumentName"/>_Select <xsl:value-of select="$DocumentName"/>_Select = new Документи.<xsl:value-of select="$DocumentName"/>_Select();
             <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Field.AddRange(
@@ -544,14 +546,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                 <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Table, "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
             </xsl:for-each>
 
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+                await ЗаповнитиСторінки(<xsl:value-of select="$DocumentName"/>_Select.SplitSelectToPages, settingsPages, <xsl:value-of select="$DocumentName"/>_Select.QuerySelect, unigueIDSelect);
+
             /* SELECT */
             await <xsl:value-of select="$DocumentName"/>_Select.Select();
-
-            ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
-            string? UidSelect = SelectPointerItem?.ToString() ?? DocumentPointerItem?.ToString();
-
+            string? uidSelect = unigueIDSelect?.ToString();
             while (<xsl:value-of select="$DocumentName"/>_Select.MoveNext())
             {
                 Документи.<xsl:value-of select="$DocumentName"/>_Pointer? cur = <xsl:value-of select="$DocumentName"/>_Select.Current;
@@ -587,12 +592,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
                     FirstPath ??= CurrentPath;
-                    if (UidSelect != null &amp;&amp; Record.ID == UidSelect) SelectPath = CurrentPath;
+                    if (uidSelect != null &amp;&amp; Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
             if (SelectPath != null)
                 treeView.SetCursor(SelectPath, treeView.Columns[0], false);
-            else if (CurrentPath != null)
+            else if (CurrentPath != null &amp;&amp; settingsPages != null &amp;&amp; settingsPages.CurrentPage == settingsPages.Record.Pages) //Для останньої сторінки
                 treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
@@ -609,7 +614,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
       <xsl:variable name="AllowDocument" select="AllowDocument"/>
     #region JOURNAL "<xsl:value-of select="$JournalName"/>"
     
-    public class Журнали_<xsl:value-of select="$JournalName"/>
+    public class Журнали_<xsl:value-of select="$JournalName"/> : ТабличнийСписок
     {
         bool DeletionLabel = false;
         bool Spend = false;
@@ -619,10 +624,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
         // Масив для запису стрічки в Store
-        Array ToArray()
+        object[] ToArray()
         {
-            return new object[] 
-            { 
+            return 
+            [
                 DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
@@ -631,7 +636,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
                   <xsl:value-of select="Name"/>,
                 </xsl:for-each> 
-            };
+            ];
         }
 
         // Добавлення колонок в список
@@ -683,11 +688,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             </xsl:for-each>
         }
 
-        public static void ОчиститиВідбір(TreeView treeView)
+        <!--public static void ОчиститиВідбір(TreeView treeView)
         {
             if (treeView.Data.ContainsKey("Where"))
                 treeView.Data["Where"] = null;
-        }
+        }-->
 
         // Список документів які входять в журнал
         public static Dictionary&lt;string, string&gt; AllowDocument()
@@ -700,14 +705,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             };
         }
 
-        public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? SelectPath { get; private set; }
-        public static TreePath? CurrentPath { get; private set; }
-
         // Завантаження даних
-        public static async ValueTask LoadRecords(TreeView treeView) 
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null) 
         {
-            SelectPath = CurrentPath = null;
+            TreePath? SelectPath = null, CurrentPath = null;
+            ListStore Store = (ListStore)treeView.Model;
 
             List&lt;string&gt; allQuery = [];
             Dictionary&lt;string, object&gt; paramQuery = [];
@@ -781,11 +783,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                 <xsl:text>";</xsl:text>
             </xsl:if>
 
-            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+               unionAllQuery = await ЗаповнитиСторінки(Config.Kernel.DataBase.SplitSelectToPagesForJournal, settingsPages, unionAllQuery, paramQuery);
 
-            ListStore Store = (ListStore)treeView.Model;
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
             Store.Clear();
 
+            string? uidSelect = selectPointerItem?.ToString();
             foreach (Dictionary&lt;string, object&gt; row in recordResult.ListRow)
             {
                 Журнали_<xsl:value-of select="$JournalName"/> record = new Журнали_<xsl:value-of select="$JournalName"/>
@@ -801,11 +808,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
 
                 TreeIter CurrentIter = Store.AppendValues(record.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
-                if (SelectPointerItem != null &amp;&amp; record.ID == SelectPointerItem.ToString()) SelectPath = CurrentPath;
+                if (uidSelect != null &amp;&amp; record.ID == uidSelect) SelectPath = CurrentPath;
             }
             if (SelectPath != null)
                 treeView.SetCursor(SelectPath, treeView.Columns[0], false);
-            else if (CurrentPath != null)
+            else if (CurrentPath != null &amp;&amp; settingsPages != null &amp;&amp; settingsPages.CurrentPage == settingsPages.Record.Pages) //Для останньої сторінки
                 treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
           </xsl:if>
         }
@@ -829,17 +836,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
         <xsl:for-each select="Fields/Field">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
-        Array ToArray()
+        object[] ToArray()
         {
-            return new object[] 
-            { 
+            return
+            [
                 InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Період,
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text><xsl:value-of select="Name"/>,
                 </xsl:for-each> 
-            };
+            ];
         }
 
         public static void AddColumns(TreeView treeView)
@@ -875,13 +882,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? SelectPath { get; private set; }
-        public static TreePath? CurrentPath { get; private set; }
-
-        public static async ValueTask LoadRecords(TreeView treeView)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null)
         {
-            SelectPath = CurrentPath = null;
+            TreePath? SelectPath = null, CurrentPath = null;
+            ListStore Store = (ListStore)treeView.Model;
 
             РегістриВідомостей.<xsl:value-of select="$RegisterName"/>_RecordsSet <xsl:value-of select="$RegisterName"/>_RecordsSet = new РегістриВідомостей.<xsl:value-of select="$RegisterName"/>_RecordsSet();
             <xsl:value-of select="$RegisterName"/>_RecordsSet.FillJoin(["period"]);
@@ -890,11 +894,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             var where = treeView.Data["Where"];
             if (where != null) <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Where = (List&lt;Where&gt;)where;
 
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+                await ЗаповнитиСторінки(<xsl:value-of select="$RegisterName"/>_RecordsSet.SplitSelectToPages, settingsPages, <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect, selectPointerItem);
+
             await <xsl:value-of select="$RegisterName"/>_RecordsSet.Read();
-
-            ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
-
+            
+            string? uidSelect = selectPointerItem?.ToString();
             foreach (<xsl:value-of select="$RegisterName"/>_RecordsSet.Record record in <xsl:value-of select="$RegisterName"/>_RecordsSet.Records)
             {
                 <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/> row = new <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/>
@@ -923,11 +932,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
 
                 TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
-                if (SelectPointerItem != null &amp;&amp; row.ID == SelectPointerItem.ToString()) SelectPath = CurrentPath;
+                if (uidSelect != null &amp;&amp; row.ID == uidSelect) SelectPath = CurrentPath;
             }
             if (SelectPath != null)
                 treeView.SetCursor(SelectPath, treeView.Columns[0], false);
-            else if (CurrentPath != null)
+            else if (CurrentPath != null &amp;&amp; settingsPages != null &amp;&amp; settingsPages.CurrentPage == settingsPages.Record.Pages) //Для останньої сторінки
                 treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
         }
     }
@@ -948,24 +957,24 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
     {
         string ID = "";
         bool Income = false;
-        string Період = "";
-        string Документ = "";
+        string Period = "";
+        string OwnerName = "";
         <xsl:for-each select="Fields/Field">
         string <xsl:value-of select="Name"/> = "";</xsl:for-each>
 
-        Array ToArray()
+        object[] ToArray()
         {
-            return new object[] 
-            { 
+            return
+            [
                 InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Income ? "+" : "-", 
-                Період, 
-                Документ,
+                Period, 
+                OwnerName,
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text><xsl:value-of select="Name"/>,
                 </xsl:for-each> 
-            };
+            ];
         }
 
         public static void AddColumns(TreeView treeView, string[]? hiddenColumn = null)
@@ -975,8 +984,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 /*Image*/ typeof(Gdk.Pixbuf), 
                 /*ID*/ typeof(string), 
                 /*Income*/ typeof(string), 
-                /*Період*/ typeof(string),
-                /*Документ*/ typeof(string),
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ typeof(string),
                 </xsl:for-each>
@@ -988,7 +997,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
             treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
             treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
-            treeView.AppendColumn(new TreeViewColumn("Документ", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
             /* */
             <xsl:for-each select="Fields/Field">
               <xsl:text>treeView.AppendColumn(new TreeViewColumn("</xsl:text><xsl:value-of select="normalize-space(Caption)"/>
@@ -1012,13 +1021,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
         }
 
-        public static UnigueID? SelectPointerItem { get; set; }
-        public static TreePath? SelectPath { get; private set; }
-        public static TreePath? CurrentPath { get; private set; }
-
-        public static async ValueTask LoadRecords(TreeView treeView, bool docname_required = true, bool position_last = true)
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
         {
-            SelectPath = CurrentPath = null;
+            TreePath? SelectPath = null, CurrentPath = null;
+            ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.<xsl:value-of select="$RegisterName"/>_RecordsSet <xsl:value-of select="$RegisterName"/>_RecordsSet = new РегістриНакопичення.<xsl:value-of select="$RegisterName"/>_RecordsSet();
              <xsl:value-of select="$RegisterName"/>_RecordsSet.FillJoin(["period"], docname_required);
@@ -1027,20 +1033,40 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             var where = treeView.Data["Where"];
             if (where != null) <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Where = (List&lt;Where&gt;)where;
 
+            <xsl:for-each select="Fields/Field[SortField = 'True']">
+              <xsl:variable name="SortDirection">
+                  <xsl:choose>
+                      <xsl:when test="SortDirection = 'True'">SelectOrder.DESC</xsl:when>
+                      <xsl:otherwise>SelectOrder.ASC</xsl:otherwise>
+                  </xsl:choose>
+              </xsl:variable>
+              <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect.Order.Add(
+              <xsl:choose>
+                  <xsl:when test="Type = 'pointer'">"<xsl:value-of select="Name"/>"</xsl:when>
+                  <xsl:otherwise>РегістриНакопичення.<xsl:value-of select="$RegisterName"/>_Const.<xsl:value-of select="Name"/></xsl:otherwise>
+              </xsl:choose>
+              <xsl:text>, </xsl:text><xsl:value-of select="$SortDirection"/>);
+            </xsl:for-each>
+
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+                await ЗаповнитиСторінки(<xsl:value-of select="$RegisterName"/>_RecordsSet.SplitSelectToPages, settingsPages, <xsl:value-of select="$RegisterName"/>_RecordsSet.QuerySelect, selectPointerItem);
+                
             /* Read */
             await <xsl:value-of select="$RegisterName"/>_RecordsSet.Read();
-
-            ListStore Store = (ListStore)treeView.Model;
             Store.Clear();
 
+            string? uidSelect = selectPointerItem?.ToString();
             foreach (<xsl:value-of select="$RegisterName"/>_RecordsSet.Record record in <xsl:value-of select="$RegisterName"/>_RecordsSet.Records)
             {
                 <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/> row = new <xsl:value-of select="$RegisterName"/>_<xsl:value-of select="$TabularListName"/>
                 {
                     ID = record.UID.ToString(),
-                    Період = record.Period.ToString(),
+                    Period = record.Period.ToString(),
                     Income = record.Income,
-                    Документ = record.OwnerName,
+                    OwnerName = record.OwnerName,
                     <xsl:for-each select="Fields/Field">
                       <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
                       <xsl:choose>
@@ -1063,14 +1089,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
 
                 TreeIter CurrentIter = Store.AppendValues(row.ToArray());
                 CurrentPath = Store.GetPath(CurrentIter);
-                if (SelectPointerItem != null &amp;&amp; row.ID == SelectPointerItem.ToString()) SelectPath = CurrentPath;
+                if (uidSelect != null &amp;&amp; row.ID == uidSelect) SelectPath = CurrentPath;
             }
             if (position_last)
             {
                 if (SelectPath != null)
                     treeView.SetCursor(SelectPath, treeView.Columns[0], false);
-                else if (CurrentPath != null)
-                    treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
+                /*else if (CurrentPath != null &amp;&amp; settingsPages != null &amp;&amp; settingsPages.CurrentPage == settingsPages.Record.Pages) //Для останньої сторінки
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);*/
             }
         }
     }

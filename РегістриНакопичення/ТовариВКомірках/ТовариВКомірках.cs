@@ -12,13 +12,14 @@ using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = GeneratedCode.РегістриНакопичення.ТабличніСписки;
 
-namespace StorageAndTrade
+namespace StorageAndTrade.РегістриНакопичення
 {
     public class ТовариВКомірках : РегістриНакопиченняЖурнал
     {
         public ТовариВКомірках() : base()
         {
             ТабличніСписки.ТовариВКомірках_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.ТовариВКомірках_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриНакопичення });
 
             HBoxTop.PackStart(new Label("Таблиці розрахунків:"), false, false, 0);
             CreateLink(HBoxTop, "Залишки", async () => await ТовариВКомірках_Залишки_Звіт.Сформувати(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня()));
@@ -30,10 +31,10 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ТовариВКомірках_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ТовариВКомірках_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.ТовариВКомірках_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ТовариВКомірках_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -45,6 +46,7 @@ namespace StorageAndTrade
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.ТовариВКомірках_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(() => LoadRecords_OnSearch(searchText));
         }
 
         const string КлючНалаштуванняКористувача = "РегістриНакопичення.ТовариВКомірках";
@@ -57,6 +59,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
 

@@ -11,28 +11,28 @@ using AccountingSoftware;
 using ТабличніСписки = GeneratedCode.РегістриВідомостей.ТабличніСписки;
 using GeneratedCode.РегістриВідомостей;
 
-namespace StorageAndTrade
+namespace StorageAndTrade.РегістриВідомостей
 {
     class КурсиВалют : РегістриВідомостейЖурнал
     {
         public Валюти_PointerControl ВалютаВласник = new Валюти_PointerControl();
 
-        public КурсиВалют() 
+        public КурсиВалют()
         {
             ТабличніСписки.КурсиВалют_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.КурсиВалют_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриВідомостей });
 
             HBoxTop.PackStart(ВалютаВласник, false, false, 2);
             ВалютаВласник.AfterSelectFunc = async () =>
             {
                 SelectPointerItem?.Clear();
+                ClearPages();
                 await LoadRecords();
             };
         }
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.КурсиВалют_Записи.SelectPointerItem = SelectPointerItem;
-
             ТабличніСписки.КурсиВалют_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
@@ -41,19 +41,12 @@ namespace StorageAndTrade
                     new Where(КурсиВалют_Const.Валюта, Comparison.EQ, ВалютаВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.КурсиВалют_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.КурсиВалют_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.КурсиВалют_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
-            if (ВалютаВласник.Pointer.UnigueID.IsEmpty())
-                return;
-
             ТабличніСписки.КурсиВалют_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!ВалютаВласник.Pointer.UnigueID.IsEmpty())
@@ -72,6 +65,7 @@ namespace StorageAndTrade
             );
 
             await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -131,6 +125,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
     }

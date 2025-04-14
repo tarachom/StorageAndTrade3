@@ -31,16 +31,13 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ЗбереженіЗвіти_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.ЗбереженіЗвіти_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.ЗбереженіЗвіти_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.ЗбереженіЗвіти_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(ЗбереженіЗвіти_Const.Користувач, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
-            await ТабличніСписки.ЗбереженіЗвіти_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.ЗбереженіЗвіти_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)

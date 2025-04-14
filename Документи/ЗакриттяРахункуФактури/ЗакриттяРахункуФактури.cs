@@ -20,33 +20,39 @@ namespace StorageAndTrade
         public ЗакриттяРахункуФактури() : base()
         {
             ТабличніСписки.ЗакриттяРахункуФактури_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.ЗакриттяРахункуФактури_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ЗакриттяРахункуФактури_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.ЗакриттяРахункуФактури_Записи.DocumentPointerItem = DocumentPointerItem;
-
             ТабличніСписки.ЗакриттяРахункуФактури_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.ЗакриттяРахункуФактури_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ЗакриттяРахункуФактури_Записи.LoadRecords(TreeViewGrid, SelectPointerItem, DocumentPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
         {
             ТабличніСписки.ЗакриттяРахункуФактури_Записи.ОчиститиВідбір(TreeViewGrid);
-            
+
             //Відбори
             ТабличніСписки.ЗакриттяРахункуФактури_Записи.ДодатиВідбір(TreeViewGrid, ЗакриттяРахункуФактури_Функції.Відбори(searchText));
 
             await ТабличніСписки.ЗакриттяРахункуФактури_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
+        }
+
+        async ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.ЗакриттяРахункуФактури_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(LoadRecords_OnFilter);
         }
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.ЗакриттяРахункуФактури_Записи.CreateFilter(TreeViewGrid);
+            return ТабличніСписки.ЗакриттяРахункуФактури_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -75,6 +81,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
 
@@ -96,7 +103,7 @@ namespace StorageAndTrade
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗакриттяРахункуФактури_Pointer(unigueID));
         }
-        
+
         protected override bool IsExportXML() { return false; } //Дозволити експорт документу
         protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
         {
@@ -118,4 +125,3 @@ namespace StorageAndTrade
         #endregion
     }
 }
-    

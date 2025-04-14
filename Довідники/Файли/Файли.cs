@@ -19,18 +19,17 @@ namespace StorageAndTrade
         public Файли() : base()
         {
             ТабличніСписки.Файли_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.Файли_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Файли_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.Файли_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.Файли_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Файли_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.Файли_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -41,11 +40,18 @@ namespace StorageAndTrade
             ТабличніСписки.Файли_Записи.ДодатиВідбір(TreeViewGrid, Файли_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.Файли_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
+        }
+
+        async ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.Файли_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(LoadRecords_OnFilter);
         }
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.Файли_Записи.CreateFilter(TreeViewGrid);
+            return ТабличніСписки.Файли_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

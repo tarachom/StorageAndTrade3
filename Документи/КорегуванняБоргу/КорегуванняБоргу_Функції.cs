@@ -26,11 +26,11 @@ namespace StorageAndTrade
                         
                 //КлючовіСловаДляПошуку
                 new Where(Comparison.OR, КорегуванняБоргу_Const.КлючовіСловаДляПошуку, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-                        
+
             ];
         }
 
-        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null,
             Action<UnigueID?>? сallBack_LoadRecords = null)
         {
             КорегуванняБоргу_Елемент page = new КорегуванняБоргу_Елемент
@@ -55,11 +55,9 @@ namespace StorageAndTrade
 
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            КорегуванняБоргу_Objest Обєкт = new КорегуванняБоргу_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            КорегуванняБоргу_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
         public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
@@ -69,9 +67,9 @@ namespace StorageAndTrade
             {
                 КорегуванняБоргу_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
-                
-                    await Новий.РозрахункиЗКонтрагентами_TablePart.Save(false); // Таблична частина "РозрахункиЗКонтрагентами"
-                
+
+                await Новий.РозрахункиЗКонтрагентами_TablePart.Save(false); // Таблична частина "РозрахункиЗКонтрагентами"
+
                 return Новий.UnigueID;
             }
             else
@@ -82,4 +80,3 @@ namespace StorageAndTrade
         }
     }
 }
-    

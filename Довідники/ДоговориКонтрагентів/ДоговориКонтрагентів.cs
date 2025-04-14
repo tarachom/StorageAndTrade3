@@ -23,18 +23,20 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(КонтрагентВласник, false, false, 2);
             КонтрагентВласник.Caption = $"{Контрагенти_Const.FULLNAME}:";
-            КонтрагентВласник.AfterSelectFunc = async () => await LoadRecords();
+            КонтрагентВласник.AfterSelectFunc = async () =>
+            {
+                ClearPages();
+                await LoadRecords();
+            };
 
             ТабличніСписки.ДоговориКонтрагентів_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.ДоговориКонтрагентів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ДоговориКонтрагентів_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.ДоговориКонтрагентів_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.ДоговориКонтрагентів_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!КонтрагентВласник.Pointer.UnigueID.IsEmpty())
@@ -43,7 +45,8 @@ namespace StorageAndTrade
                     new Where(ДоговориКонтрагентів_Const.Контрагент, Comparison.EQ, КонтрагентВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -60,11 +63,18 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_Функції.Відбори(searchText));
 
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
+        }
+
+        async ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(LoadRecords_OnFilter);
         }
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.ДоговориКонтрагентів_Записи.CreateFilter(TreeViewGrid);
+            return ТабличніСписки.ДоговориКонтрагентів_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

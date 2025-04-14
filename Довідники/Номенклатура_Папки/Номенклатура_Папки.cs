@@ -25,12 +25,9 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Номенклатура_Папки_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.Номенклатура_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.Номенклатура_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.Номенклатура_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -66,7 +63,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Номенклатура_Папки_Const.POINTER);
-            if (!LiteMode) await LoadRecords();
+            if (!CompositeMode) await LoadRecords();
         }
 
         #endregion

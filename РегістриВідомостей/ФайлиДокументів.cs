@@ -12,23 +12,24 @@ using AccountingSoftware;
 using GeneratedCode.РегістриВідомостей;
 using ТабличніСписки = GeneratedCode.РегістриВідомостей.ТабличніСписки;
 
-namespace StorageAndTrade
+namespace StorageAndTrade.РегістриВідомостей
 {
     public class ФайлиДокументів : РегістриВідомостейЖурнал
     {
         public ФайлиДокументів() : base()
         {
             ТабличніСписки.ФайлиДокументів_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.ФайлиДокументів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриВідомостей });
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ФайлиДокументів_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ФайлиДокументів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.ФайлиДокументів_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ФайлиДокументів_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -40,6 +41,7 @@ namespace StorageAndTrade
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.ФайлиДокументів_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -97,6 +99,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
 

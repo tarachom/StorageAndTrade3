@@ -224,13 +224,11 @@ namespace StorageAndTrade
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Товари_TablePart.Records.Clear();
-                int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
                 {
                     ЕлементВласник.Товари_TablePart.Records.Add(new ВстановленняЦінНоменклатури_Товари_TablePart.Record()
                     {
                         UID = запис.ID,
-                        НомерРядка = ++sequenceNumber,
                         Номенклатура = запис.Номенклатура,
                         ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури,
                         Пакування = запис.Пакування,
@@ -392,19 +390,22 @@ namespace StorageAndTrade
             if (GetColIndex(column, out int colNumber))
             {
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
-                Запис запис = Записи[rowNumber];
-
-                CellRendererText cellText = (CellRendererText)cell;
-                cellText.Foreground = "green";
-
-                switch ((Columns)colNumber)
+                if (rowNumber >= 0 && rowNumber < Записи.Count)
                 {
-                    case Columns.Ціна:
-                        {
-                            cellText.Text = запис.Ціна.ToString();
-                            break;
-                        }
-                    default: break;
+                    Запис запис = Записи[rowNumber];
+
+                    CellRendererText cellText = (CellRendererText)cell;
+                    cellText.Foreground = "green";
+
+                    switch ((Columns)colNumber)
+                    {
+                        case Columns.Ціна:
+                            {
+                                cellText.Text = запис.Ціна.ToString();
+                                break;
+                            }
+                        default: break;
+                    }
                 }
             }
         }

@@ -32,6 +32,7 @@
     <xsl:template name="RegisterAccumulationList">
         <xsl:variable name="RegisterAccumulationName" select="RegisterAccumulation/Name"/>
         <xsl:variable name="TabularList" select="RegisterAccumulation/TabularList"/>
+        <xsl:variable name="UsePages" select="RegisterAccumulation/UsePages"/>
 
         <!-- Додатова інформація -->
         <xsl:variable name="RegisterAccumulationType" select="RegisterAccumulation/Type"/>
@@ -47,23 +48,28 @@ using InterfaceGtk;
 using AccountingSoftware;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриНакопичення.ТабличніСписки;
 
-namespace <xsl:value-of select="$NameSpace"/>
+namespace <xsl:value-of select="$NameSpace"/>.РегістриНакопичення
 {
     public class <xsl:value-of select="$RegisterAccumulationName"/> : РегістриНакопиченняЖурнал
     {
         public <xsl:value-of select="$RegisterAccumulationName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid<xsl:if test="$RegisterAccumulationType = 'Turnover'">, ["income"]</xsl:if>);
+            <xsl:if test="$UsePages = '1'">
+            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { Тип = Сторінки.ТипЖурналу.РегістриНакопичення });
+            </xsl:if>
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, SelectPointerItem);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(LoadRecords);
+            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -75,6 +81,9 @@ namespace <xsl:value-of select="$NameSpace"/>
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            <xsl:if test="$UsePages = '1'">
+            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
+            </xsl:if>
         }
         
         const string КлючНалаштуванняКористувача = "РегістриНакопичення.<xsl:value-of select="$RegisterAccumulationName"/>";
@@ -87,7 +96,8 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            await LoadRecords();           
+            ClearPages();
+            await LoadRecords();
         }
 
         #endregion

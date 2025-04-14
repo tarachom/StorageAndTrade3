@@ -157,8 +157,8 @@ namespace StorageAndTrade
 
             CreateBottomBlock();
 
-            Store.RowChanged += (object? sender, RowChangedArgs args) => ОбчислитиПідсумки();
-            Store.RowDeleted += (object? sender, RowDeletedArgs args) => ОбчислитиПідсумки();
+            Store.RowChanged += (sender, args) => ОбчислитиПідсумки();
+            Store.RowDeleted += (sender, args) => ОбчислитиПідсумки();
 
             //
             //
@@ -377,13 +377,11 @@ namespace StorageAndTrade
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Товари_TablePart.Records.Clear();
-                int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
                 {
                     ЕлементВласник.Товари_TablePart.Records.Add(new ЗакриттяЗамовленняКлієнта_Товари_TablePart.Record()
                     {
                         UID = запис.ID,
-                        НомерРядка = ++sequenceNumber,
                         Номенклатура = запис.Номенклатура,
                         ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури,
                         КількістьУпаковок = запис.КількістьУпаковок,
@@ -585,44 +583,47 @@ namespace StorageAndTrade
             if (GetColIndex(column, out int colNumber))
             {
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
-                Запис запис = Записи[rowNumber];
-
-                CellRendererText cellText = (CellRendererText)cell;
-                cellText.Foreground = "green";
-
-                switch ((Columns)colNumber)
+                if (rowNumber >= 0 && rowNumber < Записи.Count)
                 {
-                    case Columns.КількістьУпаковок:
-                        {
-                            cellText.Text = запис.КількістьУпаковок.ToString();
-                            break;
-                        }
+                    Запис запис = Записи[rowNumber];
 
-                    case Columns.Кількість:
-                        {
-                            cellText.Text = запис.Кількість.ToString();
-                            break;
-                        }
+                    CellRendererText cellText = (CellRendererText)cell;
+                    cellText.Foreground = "green";
 
-                    case Columns.КількістьФакт:
-                        {
-                            cellText.Text = запис.КількістьФакт.ToString();
-                            break;
-                        }
+                    switch ((Columns)colNumber)
+                    {
+                        case Columns.КількістьУпаковок:
+                            {
+                                cellText.Text = запис.КількістьУпаковок.ToString();
+                                break;
+                            }
 
-                    case Columns.Ціна:
-                        {
-                            cellText.Text = запис.Ціна.ToString();
-                            break;
-                        }
+                        case Columns.Кількість:
+                            {
+                                cellText.Text = запис.Кількість.ToString();
+                                break;
+                            }
 
-                    case Columns.Сума:
-                        {
-                            cellText.Text = запис.Сума.ToString();
-                            break;
-                        }
+                        case Columns.КількістьФакт:
+                            {
+                                cellText.Text = запис.КількістьФакт.ToString();
+                                break;
+                            }
 
-                    default: break;
+                        case Columns.Ціна:
+                            {
+                                cellText.Text = запис.Ціна.ToString();
+                                break;
+                            }
+
+                        case Columns.Сума:
+                            {
+                                cellText.Text = запис.Сума.ToString();
+                                break;
+                            }
+
+                        default: break;
+                    }
                 }
             }
         }

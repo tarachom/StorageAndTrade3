@@ -19,23 +19,26 @@ namespace StorageAndTrade
         public ХарактеристикиНоменклатури_ШвидкийВибір() : base()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
 
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
-            Власник.AfterSelectFunc = async () => await LoadRecords();
+            Власник.AfterSelectFunc = async () =>
+            {
+                ClearPages();
+                await LoadRecords();
+            };
         }
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.SelectPointerItem = null;
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!Власник.Pointer.UnigueID.IsEmpty())
                 ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
-            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -50,6 +53,7 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, ХарактеристикиНоменклатури_Функції.Відбори(searchText));
 
             await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)

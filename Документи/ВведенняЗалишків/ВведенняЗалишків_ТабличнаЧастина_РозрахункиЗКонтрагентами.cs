@@ -95,8 +95,8 @@ namespace StorageAndTrade
 
             CreateBottomBlock();
 
-            Store.RowChanged += (object? sender, RowChangedArgs args) => ОбчислитиПідсумки();
-            Store.RowDeleted += (object? sender, RowDeletedArgs args) => ОбчислитиПідсумки();
+            Store.RowChanged += (sender, args) => ОбчислитиПідсумки();
+            Store.RowDeleted += (sender, args) => ОбчислитиПідсумки();
         }
 
         #region Підсумки
@@ -215,13 +215,11 @@ namespace StorageAndTrade
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Records.Clear();
-                int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
                 {
                     ЕлементВласник.РозрахункиЗКонтрагентами_TablePart.Records.Add(new ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart.Record()
                     {
                         UID = запис.ID,
-                        НомерРядка = ++sequenceNumber,
                         ТипКонтрагента = запис.ТипКонтрагента,
                         Контрагент = запис.Контрагент,
                         Валюта = запис.Валюта,
@@ -343,19 +341,22 @@ namespace StorageAndTrade
             if (GetColIndex(column, out int colNumber))
             {
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
-                Запис запис = Записи[rowNumber];
-
-                CellRendererText cellText = (CellRendererText)cell;
-                cellText.Foreground = "green";
-
-                switch ((Columns)colNumber)
+                if (rowNumber >= 0 && rowNumber < Записи.Count)
                 {
-                    case Columns.Сума:
-                        {
-                            cellText.Text = запис.Сума.ToString();
-                            break;
-                        }
-                    default: break;
+                    Запис запис = Записи[rowNumber];
+
+                    CellRendererText cellText = (CellRendererText)cell;
+                    cellText.Foreground = "green";
+
+                    switch ((Columns)colNumber)
+                    {
+                        case Columns.Сума:
+                            {
+                                cellText.Text = запис.Сума.ToString();
+                                break;
+                            }
+                        default: break;
+                    }
                 }
             }
         }

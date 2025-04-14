@@ -51,11 +51,9 @@ namespace StorageAndTrade
 
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Файли_Objest Обєкт = new Файли_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            Файли_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
         public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)

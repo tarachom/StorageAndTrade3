@@ -21,12 +21,9 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Блокнот_Записи.SelectPointerItem = null;
-            ТабличніСписки.Блокнот_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.Блокнот_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Блокнот_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.Блокнот_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)

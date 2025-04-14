@@ -1,6 +1,6 @@
 
 /*
-        Номенклатура_Папки_Функції.cs
+        Склади_Папки_Функції.cs
         Функції
 */
 
@@ -10,17 +10,17 @@ using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
 {
-    static class Номенклатура_Папки_Функції
+    static class Склади_Папки_Функції
     {
         public static List<Where> Відбори(string searchText)
         {
             return
             [
                 //Код
-                new Where(Номенклатура_Папки_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(Склади_Папки_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
 
                 //Назва
-                new Where(Comparison.OR, Номенклатура_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(Comparison.OR, Склади_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
             ];
         }
 
@@ -28,7 +28,7 @@ namespace StorageAndTrade
             Action<UnigueID?>? сallBack_LoadRecords = null,
             Action<UnigueID>? сallBack_OnSelectPointer = null)
         {
-            Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
+            Склади_Папки_Елемент page = new Склади_Папки_Елемент
             {
                 IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
@@ -51,19 +51,17 @@ namespace StorageAndTrade
 
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Номенклатура_Папки_Objest Обєкт = new Номенклатура_Папки_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            Склади_Папки_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
         public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            Номенклатура_Папки_Objest Обєкт = new Номенклатура_Папки_Objest();
+            Склади_Папки_Objest Обєкт = new Склади_Папки_Objest();
             if (await Обєкт.Read(unigueID))
             {
-                Номенклатура_Папки_Objest Новий = await Обєкт.Copy(true);
+                Склади_Папки_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
 
                 return Новий.UnigueID;

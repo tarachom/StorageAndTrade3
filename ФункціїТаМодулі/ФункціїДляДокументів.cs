@@ -9,7 +9,7 @@ using GeneratedCode;
 using Довідники = GeneratedCode.Довідники;
 using Документи = GeneratedCode.Документи;
 using Перелічення = GeneratedCode.Перелічення;
-using РегістриВідомостей = GeneratedCode.РегістриВідомостей;
+using РегВідомостей = GeneratedCode.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
@@ -119,11 +119,11 @@ namespace StorageAndTrade
 
             string query = @$"
 SELECT
-    КурсиВалют.{РегістриВідомостей.КурсиВалют_Const.Курс} AS Курс
+    КурсиВалют.{РегВідомостей.КурсиВалют_Const.Курс} AS Курс
 FROM
-    {РегістриВідомостей.КурсиВалют_Const.TABLE} AS КурсиВалют
+    {РегВідомостей.КурсиВалют_Const.TABLE} AS КурсиВалют
 WHERE
-    КурсиВалют.{РегістриВідомостей.КурсиВалют_Const.Валюта} = @valuta AND
+    КурсиВалют.{РегВідомостей.КурсиВалют_Const.Валюта} = @valuta AND
     КурсиВалют.period <= @date_curs
 ORDER BY КурсиВалют.period DESC
 LIMIT 1

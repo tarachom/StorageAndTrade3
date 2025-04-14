@@ -17,16 +17,15 @@ namespace StorageAndTrade
         public Контрагенти_ШвидкийВибір() : base()
         {
             ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
+            ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.SelectPointerItem = null;
-            ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -37,6 +36,7 @@ namespace StorageAndTrade
             ТабличніСписки.Контрагенти_Записи.ДодатиВідбір(TreeViewGrid, Контрагенти_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)

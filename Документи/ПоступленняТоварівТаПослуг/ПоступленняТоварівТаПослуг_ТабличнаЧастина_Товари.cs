@@ -238,8 +238,8 @@ LIMIT 1
 
             CreateBottomBlock();
 
-            Store.RowChanged += (object? sender, RowChangedArgs args) => ОбчислитиПідсумки();
-            Store.RowDeleted += (object? sender, RowDeletedArgs args) => ОбчислитиПідсумки();
+            Store.RowChanged += (sender, args) => ОбчислитиПідсумки();
+            Store.RowDeleted += (sender, args) => ОбчислитиПідсумки();
         }
 
         #region Підсумки
@@ -455,13 +455,11 @@ LIMIT 1
             if (ЕлементВласник != null)
             {
                 ЕлементВласник.Товари_TablePart.Records.Clear();
-                int sequenceNumber = 0;
                 foreach (Запис запис in Записи)
                 {
                     ЕлементВласник.Товари_TablePart.Records.Add(new ПоступленняТоварівТаПослуг_Товари_TablePart.Record()
                     {
                         UID = запис.ID,
-                        НомерРядка = ++sequenceNumber,
                         Номенклатура = запис.Номенклатура,
                         ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури,
                         Серія = запис.Серія,
@@ -728,44 +726,47 @@ LIMIT 1
             if (GetColIndex(column, out int colNumber))
             {
                 int rowNumber = int.Parse(Store.GetPath(iter).ToString());
-                Запис запис = Записи[rowNumber];
-
-                CellRendererText cellText = (CellRendererText)cell;
-                cellText.Foreground = "green";
-
-                switch ((Columns)colNumber)
+                if (rowNumber >= 0 && rowNumber < Записи.Count)
                 {
-                    case Columns.КількістьУпаковок:
-                        {
-                            cellText.Text = запис.КількістьУпаковок.ToString();
-                            break;
-                        }
-                    case Columns.Кількість:
-                        {
-                            cellText.Text = запис.Кількість.ToString();
-                            break;
-                        }
-                    case Columns.КількістьФакт:
-                        {
-                            cellText.Text = запис.КількістьФакт.ToString();
-                            break;
-                        }
-                    case Columns.Ціна:
-                        {
-                            cellText.Text = запис.Ціна.ToString();
-                            break;
-                        }
-                    case Columns.Скидка:
-                        {
-                            cellText.Text = запис.Скидка.ToString();
-                            break;
-                        }
-                    case Columns.Сума:
-                        {
-                            cellText.Text = запис.Сума.ToString();
-                            break;
-                        }
-                    default: break;
+                    Запис запис = Записи[rowNumber];
+
+                    CellRendererText cellText = (CellRendererText)cell;
+                    cellText.Foreground = "green";
+
+                    switch ((Columns)colNumber)
+                    {
+                        case Columns.КількістьУпаковок:
+                            {
+                                cellText.Text = запис.КількістьУпаковок.ToString();
+                                break;
+                            }
+                        case Columns.Кількість:
+                            {
+                                cellText.Text = запис.Кількість.ToString();
+                                break;
+                            }
+                        case Columns.КількістьФакт:
+                            {
+                                cellText.Text = запис.КількістьФакт.ToString();
+                                break;
+                            }
+                        case Columns.Ціна:
+                            {
+                                cellText.Text = запис.Ціна.ToString();
+                                break;
+                            }
+                        case Columns.Скидка:
+                            {
+                                cellText.Text = запис.Скидка.ToString();
+                                break;
+                            }
+                        case Columns.Сума:
+                            {
+                                cellText.Text = запис.Сума.ToString();
+                                break;
+                            }
+                        default: break;
+                    }
                 }
             }
         }

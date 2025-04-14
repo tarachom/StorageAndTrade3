@@ -21,7 +21,7 @@ namespace StorageAndTrade
         {
             CreateLink(HBoxTop, КурсиВалют_Const.FULLNAME, async () =>
             {
-                КурсиВалют page = new КурсиВалют();
+                РегістриВідомостей.КурсиВалют page = new РегістриВідомостей.КурсиВалют();
                 page.ВалютаВласник.Pointer = new Валюти_Pointer(SelectPointerItem ?? DirectoryPointerItem ?? new UnigueID());
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, КурсиВалют_Const.FULLNAME, () => page);
@@ -39,12 +39,9 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Валюти_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.Валюти_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.Валюти_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.Валюти_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)

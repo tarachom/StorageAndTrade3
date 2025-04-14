@@ -43,9 +43,6 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.СкладськіПриміщення_Записи.SelectPointerItem = SelectPointerItem;
-            ТабличніСписки.СкладськіПриміщення_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.СкладськіПриміщення_Записи.ОчиститиВідбір(TreeViewGrid);
 
             if (!СкладВласник.Pointer.UnigueID.IsEmpty())
@@ -54,7 +51,7 @@ namespace StorageAndTrade
                     new Where(СкладськіПриміщення_Const.Склад, Comparison.EQ, СкладВласник.Pointer.UnigueID.UGuid));
             }
 
-            await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.СкладськіПриміщення_Записи.LoadRecords(TreeViewGrid, SelectPointerItem, DirectoryPointerItem);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)

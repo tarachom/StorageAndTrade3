@@ -1,31 +1,32 @@
 /*     
-        Контрагенти_Папки_ШвидкийВибір.cs
-        ШвидкийВибір
+        Контрагенти_Папки.cs
+        Список
 */
 
 using Gtk;
 using InterfaceGtk;
 using AccountingSoftware;
-using GeneratedCode.Довідники;
+
+using GeneratedCode;
 using ТабличніСписки = GeneratedCode.Довідники.ТабличніСписки;
+using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
 {
-    class Контрагенти_Папки_ШвидкийВибір : ДовідникШвидкийВибір
+    public class Контрагенти_Папки : ДовідникЖурнал
     {
-        public Контрагенти_Папки_ШвидкийВибір() : base()
+        public Контрагенти_Папки() : base()
         {
             ТабличніСписки.Контрагенти_Папки_Записи.AddColumns(TreeViewGrid);
         }
 
+        #region Override
+
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.Контрагенти_Папки_Записи.SelectPointerItem = null;
-            ТабличніСписки.Контрагенти_Папки_Записи.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.Контрагенти_Папки_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            await ТабличніСписки.Контрагенти_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+            await ТабличніСписки.Контрагенти_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -38,28 +39,32 @@ namespace StorageAndTrade
             await ТабличніСписки.Контрагенти_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        protected override Widget? FilterRecords(Box hBox)
         {
-            Контрагенти_Папки page = new Контрагенти_Папки()
-            {
-                DirectoryPointerItem = DirectoryPointerItem,
-                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
-                CallBack_OnMultipleSelectPointer = CallBack_OnMultipleSelectPointer,
-                OpenFolder = OpenFolder
-            };
-
-            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, Контрагенти_Папки_Const.FULLNAME, () => page);
-            await page.SetValue();
+            return ТабличніСписки.Контрагенти_Папки_Записи.CreateFilter(TreeViewGrid);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
-            await Контрагенти_Папки_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
+            await Контрагенти_Папки_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             await Контрагенти_Папки_Функції.SetDeletionLabel(unigueID);
         }
+
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        {
+            return await Контрагенти_Папки_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Контрагенти_Папки_Const.POINTER);
+            if (!CompositeMode) await LoadRecords();
+        }
+
+        #endregion
     }
 }

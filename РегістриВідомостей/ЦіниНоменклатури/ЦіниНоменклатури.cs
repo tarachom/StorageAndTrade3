@@ -13,28 +13,24 @@ using AccountingSoftware;
 using GeneratedCode.РегістриВідомостей;
 using ТабличніСписки = GeneratedCode.РегістриВідомостей.ТабличніСписки;
 
-namespace StorageAndTrade
+namespace StorageAndTrade.РегістриВідомостей
 {
     public class ЦіниНоменклатури : РегістриВідомостейЖурнал
     {
-        public ЦіниНоменклатури() 
+        public ЦіниНоменклатури()
         {
             ТабличніСписки.ЦіниНоменклатури_Записи.AddColumns(TreeViewGrid);
+            ТабличніСписки.ЦіниНоменклатури_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриВідомостей });
         }
 
         #region Override
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ЦіниНоменклатури_Записи.SelectPointerItem = SelectPointerItem;
             ТабличніСписки.ЦіниНоменклатури_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
-            await ТабличніСписки.ЦіниНоменклатури_Записи.LoadRecords(TreeViewGrid);
-
-            if (ТабличніСписки.ЦіниНоменклатури_Записи.SelectPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ЦіниНоменклатури_Записи.SelectPath, TreeViewGrid.Columns[0], false);
-            else if (ТабличніСписки.ЦіниНоменклатури_Записи.CurrentPath != null)
-                TreeViewGrid.SetCursor(ТабличніСписки.ЦіниНоменклатури_Записи.CurrentPath, TreeViewGrid.Columns[0], false);
+            await ТабличніСписки.ЦіниНоменклатури_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -51,6 +47,7 @@ namespace StorageAndTrade
             );
 
             await ТабличніСписки.ЦіниНоменклатури_Записи.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -70,7 +67,6 @@ namespace StorageAndTrade
             }
 
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
-
             page.SetValue();
         }
 
@@ -109,6 +105,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            ClearPages();
             await LoadRecords();
         }
 

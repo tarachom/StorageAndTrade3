@@ -1,6 +1,6 @@
 
 /*
-        Склади_Папки_Функції.cs
+        СкладськіКомірки_Папки_Функції.cs
         Функції
 */
 
@@ -10,25 +10,29 @@ using GeneratedCode.Довідники;
 
 namespace StorageAndTrade
 {
-    static class Склади_Папки_Функції
+    static class СкладськіКомірки_Папки_Функції
     {
         public static List<Where> Відбори(string searchText)
         {
             return
             [
+                
                 //Код
-                new Where(Склади_Папки_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
-
+                new Where(СкладськіКомірки_Папки_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                        
                 //Назва
-                new Where(Comparison.OR, Склади_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(Comparison.OR, СкладськіКомірки_Папки_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+
             ];
         }
 
         public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null,
             Action<UnigueID?>? сallBack_LoadRecords = null,
-            Action<UnigueID>? сallBack_OnSelectPointer = null)
+            Action<UnigueID>? сallBack_OnSelectPointer = null,
+            СкладськіПриміщення_Pointer? Власник = null
+            )
         {
-            Склади_Папки_Елемент page = new Склади_Папки_Елемент
+            СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
             {
                 IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
@@ -36,7 +40,13 @@ namespace StorageAndTrade
             };
 
             if (IsNew)
+            {
                 await page.Елемент.New();
+
+                if (Власник != null)
+                    page.ВласникДляНового = Власник;
+
+            }
             else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
@@ -51,19 +61,17 @@ namespace StorageAndTrade
 
         public static async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
-            Склади_Папки_Objest Обєкт = new Склади_Папки_Objest();
-            if (await Обєкт.Read(unigueID))
-                await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-            else
-                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+            СкладськіКомірки_Папки_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
         }
 
         public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
         {
-            Склади_Папки_Objest Обєкт = new Склади_Папки_Objest();
+            СкладськіКомірки_Папки_Objest Обєкт = new СкладськіКомірки_Папки_Objest();
             if (await Обєкт.Read(unigueID))
             {
-                Склади_Папки_Objest Новий = await Обєкт.Copy(true);
+                СкладськіКомірки_Папки_Objest Новий = await Обєкт.Copy(true);
                 await Новий.Save();
 
                 return Новий.UnigueID;

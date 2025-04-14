@@ -22,6 +22,7 @@ namespace StorageAndTrade
         public ПартіяТоварівКомпозит_ШвидкийВибір()
         {
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
+            ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
 
             //Відбір
             HBoxTop.PackStart(НоменклатураВідбір, false, false, 2);
@@ -31,9 +32,6 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.SelectPointerItem = null;
-            ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.DirectoryPointerItem = DirectoryPointerItem;
-
             ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.ОчиститиВідбір(TreeViewGrid);
 
             if (!НоменклатураВідбір.Pointer.IsEmpty())
@@ -62,7 +60,8 @@ WHERE
                     new Where("uid", Comparison.IN, query, true));
             }
 
-            await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -71,6 +70,7 @@ WHERE
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.ДодатиВідбір(TreeViewGrid, ПартіяТоварівКомпозит_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
+            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
