@@ -671,15 +671,17 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:if>
         }
 
+        <xsl:if test="$UsePages = '1'">
         async ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
             PagesShow(LoadRecords_OnFilter);
         }
+        </xsl:if>
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, () =&gt; PagesShow(LoadRecords_OnFilter));
+            return ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid<xsl:if test="$UsePages = '1'">, () =&gt; PagesShow(LoadRecords_OnFilter)</xsl:if>);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

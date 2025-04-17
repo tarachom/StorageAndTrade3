@@ -3,3 +3,7 @@ treeview.report {
     margin: 0;
     padding: 0;
 }
+
+textview.text_terminal {
+    font: 11px Arial;
+}

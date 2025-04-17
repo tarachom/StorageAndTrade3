@@ -631,16 +631,18 @@ namespace <xsl:value-of select="$NameSpace"/>
             PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
             </xsl:if>
         }
-
+        
+        <xsl:if test="$UsePages = '1'">
         async ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
             PagesShow(LoadRecords_OnFilter);
         }
+        </xsl:if>
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, () =&gt; PagesShow(LoadRecords_OnFilter));
+            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid<xsl:if test="$UsePages = '1'">, () =&gt; PagesShow(LoadRecords_OnFilter)</xsl:if>);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -774,36 +776,11 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
         {
             await  <xsl:value-of select="$DirectoryName"/>_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer<xsl:if test="normalize-space($DirectoryOwner) != ''">, Власник.Pointer</xsl:if>);
-            <!--
-                <xsl:value-of select="$DirectoryName"/>_Елемент page = new <xsl:value-of select="$DirectoryName"/>_Елемент
-                {
-                    IsNew = IsNew,
-                    CallBack_OnSelectPointer = CallBack_OnSelectPointer
-                };
-
-                if (IsNew)
-                    await page.Елемент.New();
-                else if (unigueID == null || !await page.Елемент.Read(unigueID))
-                {
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-                    return;
-                }
-
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () =&gt; page);
-                page.SetValue();
-            -->
         }
 
         protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
         {
             await <xsl:value-of select="$DirectoryName"/>_Функції.SetDeletionLabel(unigueID);
-            <!--
-                <xsl:value-of select="$DirectoryName"/>_Objest Обєкт = new <xsl:value-of select="$DirectoryName"/>_Objest();
-                if (await Обєкт.Read(unigueID))
-                    await Обєкт.SetDeletionLabel(!Обєкт.DeletionLabel);
-                else
-                    Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
-            -->
         }
     }
 }
@@ -954,15 +931,17 @@ namespace <xsl:value-of select="$NameSpace"/>
             </xsl:if>
         }
 
+        <xsl:if test="$UsePages = '1'">
         async ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
             PagesShow(LoadRecords_OnFilter);
         }
+        </xsl:if>
 
         protected override Widget? FilterRecords(Box hBox)
         {
-            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, () =&gt; PagesShow(LoadRecords_OnFilter));
+            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid<xsl:if test="$UsePages = '1'">, () =&gt; PagesShow(LoadRecords_OnFilter)</xsl:if>);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)

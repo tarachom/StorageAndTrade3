@@ -385,17 +385,17 @@
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            <xsl:for-each select="AllowRegisterAccumulation/Name">
-                <xsl:variable name="RegName" select="text()"/>
-            // <xsl:value-of select="$RegName"/>
+          <xsl:choose>
+            <xsl:when test="count(AllowRegisterAccumulation/Name) &gt; 0">
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet regAccum = new РегістриНакопичення.<xsl:value-of select="$RegName"/>_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              <xsl:for-each select="AllowRegisterAccumulation/Name">
+                await new РегістриНакопичення.<xsl:value-of select="text()"/>_RecordsSet().Delete(this.UnigueID.UGuid);
+              </xsl:for-each>
             }
-            </xsl:for-each>
-            <xsl:if test="count(AllowRegisterAccumulation/Name) = 0">
-            await ValueTask.FromResult(true);
-            </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>await ValueTask.FromResult(true);</xsl:otherwise>
+          </xsl:choose>
         }
   </xsl:template>
 
@@ -601,8 +601,15 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Конс
                 if (clear_all_before_save)
                     await base.BaseDelete();
 
+                <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+                int sequenceNumber_<xsl:value-of select="Name"/> = 0;
+                </xsl:for-each>
+
                 foreach (Record record in Records)
                 {
+                    <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+                    record.<xsl:value-of select="Name"/> = ++sequenceNumber_<xsl:value-of select="Name"/>;
+                    </xsl:for-each>
                     Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;()
                     {
                         <xsl:for-each select="Fields/Field">
@@ -610,12 +617,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Конс
                             <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
                             <xsl:if test="Type = 'enum'">
                                 <xsl:text>(int)</xsl:text>
-                              </xsl:if>
+                            </xsl:if>
                             <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                             <xsl:choose>
-                            <xsl:when test="Type = 'pointer'">
-                                <xsl:text>.UnigueID.UGuid</xsl:text>
-                            </xsl:when>
+                                <xsl:when test="Type = 'pointer'">
+                                    <xsl:text>.UnigueID.UGuid</xsl:text>
+                                </xsl:when>
                             </xsl:choose>
                             <xsl:text>}</xsl:text>,
                         </xsl:for-each>
@@ -1033,7 +1040,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "<xsl:value-of select="$DirectoryTable"/>"))
                 throw new Exception("Owner not exist");
@@ -1042,9 +1049,16 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+            int sequenceNumber_<xsl:value-of select="Name"/> = 0;
+            </xsl:for-each>
             
             foreach (Record record in Records)
             {
+                <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+                record.<xsl:value-of select="Name"/> = ++sequenceNumber_<xsl:value-of select="Name"/>;
+                </xsl:for-each>
                 Dictionary&lt;string, object&gt; fieldValue = new()
                 {
                     <xsl:for-each select="Fields/Field">
@@ -1055,9 +1069,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                         </xsl:if>
                         <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                         <xsl:choose>
-                        <xsl:when test="Type = 'pointer'">
-                            <xsl:text>.UnigueID.UGuid</xsl:text>
-                        </xsl:when>
+                            <xsl:when test="Type = 'pointer'">
+                                <xsl:text>.UnigueID.UGuid</xsl:text>
+                            </xsl:when>
                         </xsl:choose>
                         <xsl:text>}</xsl:text>,
                     </xsl:for-each>
@@ -1638,7 +1652,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "<xsl:value-of select="$DocumentTable"/>"))
                 throw new Exception("Owner not exist");
@@ -1654,6 +1668,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
 
             foreach (Record record in Records)
             {
+                <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+                record.<xsl:value-of select="Name"/> = ++sequenceNumber_<xsl:value-of select="Name"/>;
+                </xsl:for-each>
                 Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;()
                 {
                     <xsl:for-each select="Fields/Field">
@@ -1662,15 +1679,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                         <xsl:if test="Type = 'enum'">
                           <xsl:text>(int)</xsl:text>
                         </xsl:if>
-                        <xsl:choose>
-                            <xsl:when test="Type = 'integer' and AutomaticNumbering = '1'">
-                                <xsl:text>++sequenceNumber_</xsl:text>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:text>record.</xsl:text>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                        <xsl:value-of select="Name"/>
+                        <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                         <xsl:choose>
                             <xsl:when test="Type = 'pointer'">
                                 <xsl:text>.UnigueID.UGuid</xsl:text>
