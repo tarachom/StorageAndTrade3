@@ -268,7 +268,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             <xsl:for-each select="Fields/AdditionalField[Visible = 'True']">
                 /* Additional Field */
                 <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue&lt;string&gt;(@$"(<xsl:value-of select="normalize-space(Value)"/>)", "<xsl:value-of select="Name"/>"));
+                  new ValueName&lt;string&gt;(@$"(<xsl:value-of select="normalize-space(Value)"/>)", "<xsl:value-of select="Name"/>"));
                 /*
                 <xsl:value-of select="Value"/>
                 */
@@ -295,17 +295,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             string? uidSelect = unigueIDSelect?.ToString();
             while (<xsl:value-of select="$DirectoryName"/>_Select.MoveNext())
             {
-                Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? cur = <xsl:value-of select="$DirectoryName"/>_Select.Current;
+                Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? current = <xsl:value-of select="$DirectoryName"/>_Select.Current;
                 <xsl:if test="$DirectoryType = 'Hierarchical'">
                 string Parent = <xsl:value-of select="$DirectoryName"/>_Select.Parent?.ToString() ?? Guid.Empty.ToString();
                 int Level = <xsl:value-of select="$DirectoryName"/>_Select.Level;
                 </xsl:if>
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary&lt;string, object&gt; Fields = cur.Fields!;
+                    Dictionary&lt;string, object&gt; Fields = current.Fields;
                     <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         <xsl:for-each select="Fields/Field">
                           <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
@@ -559,14 +559,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             string? uidSelect = unigueIDSelect?.ToString();
             while (<xsl:value-of select="$DocumentName"/>_Select.MoveNext())
             {
-                Документи.<xsl:value-of select="$DocumentName"/>_Pointer? cur = <xsl:value-of select="$DocumentName"/>_Select.Current;
+                Документи.<xsl:value-of select="$DocumentName"/>_Pointer? current = <xsl:value-of select="$DocumentName"/>_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary&lt;string, object&gt; Fields = cur.Fields!;
+                    Dictionary&lt;string, object&gt; Fields = current.Fields;
                     <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         <xsl:for-each select="Fields/Field">
@@ -737,7 +737,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue&lt;string&gt;("'<xsl:value-of select="$DocumentName"/>'", "type"));
+                  query.FieldAndAlias.Add(new ValueName&lt;string&gt;("'<xsl:value-of select="$DocumentName"/>'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   <xsl:for-each select="Fields/Field">
@@ -756,12 +756,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                               <xsl:value-of select="substring-before(Pointer, '.')"/>.<xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer.GetJoin(query, Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="DocField"/>, query.Table, "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
                             </xsl:when>
                             <xsl:otherwise>
-                              query.FieldAndAlias.Add(new NameValue&lt;string&gt;(Документи.<xsl:value-of select="$DocumentName"/>_Const.TABLE + "." + Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="DocField"/><xsl:value-of select="$SqlType"/>, "<xsl:value-of select="Name"/>"));
+                              query.FieldAndAlias.Add(new ValueName&lt;string&gt;(Документи.<xsl:value-of select="$DocumentName"/>_Const.TABLE + "." + Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="DocField"/><xsl:value-of select="$SqlType"/>, "<xsl:value-of select="Name"/>"));
                             </xsl:otherwise>
                           </xsl:choose>
                         </xsl:when>
                         <xsl:otherwise>
-                          query.FieldAndAlias.Add(new NameValue&lt;string&gt;("''", "<xsl:value-of select="Name"/>")); /* Empty Field - <xsl:value-of select="Name"/>*/
+                          query.FieldAndAlias.Add(new ValueName&lt;string&gt;("''", "<xsl:value-of select="Name"/>")); /* Empty Field - <xsl:value-of select="Name"/>*/
                         </xsl:otherwise>
                       </xsl:choose>
                   </xsl:for-each>

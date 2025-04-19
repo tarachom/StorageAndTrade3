@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 14.04.2025 20:44:32
+ * Дата конфігурації: 19.04.2025 14:00:07
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -119,14 +119,14 @@ namespace GeneratedCode.Довідники.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (Організації_Select.MoveNext())
             {
-                Довідники.Організації_Pointer? cur = Організації_Select.Current;
+                Довідники.Організації_Pointer? current = Організації_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Організації_Записи Record = new Організації_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Організації_Const.Код].ToString() ?? "",
                             Назва = Fields[Організації_Const.Назва].ToString() ?? "",
@@ -314,7 +314,7 @@ namespace GeneratedCode.Довідники.ТабличніСписки
             
                 /* Additional Field */
                 Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "Залишок"));
+                  new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "Залишок"));
                 /*
                 CASE WHEN 
 {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
@@ -342,7 +342,7 @@ END
             
                 /* Additional Field */
                 Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки ) END)", "ВРезерві"));
+                  new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки ) END)", "ВРезерві"));
                 /*
                 CASE WHEN 
 {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
@@ -369,7 +369,7 @@ END
             
                 /* Additional Field */
                 Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки ) END)", "ВРезервіПідЗамовлення"));
+                  new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки ) END)", "ВРезервіПідЗамовлення"));
                 /*
                 CASE WHEN 
 {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
@@ -396,7 +396,7 @@ END
             
                 /* Additional Field */
                 Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках WHERE ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "ЗалишокВКомірках"));
+                  new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках WHERE ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "ЗалишокВКомірках"));
                 /*
                 CASE WHEN 
 {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар}
@@ -438,14 +438,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Номенклатура_Select.MoveNext())
             {
-                Довідники.Номенклатура_Pointer? cur = Номенклатура_Select.Current;
+                Довідники.Номенклатура_Pointer? current = Номенклатура_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Номенклатура_Записи Record = new Номенклатура_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Номенклатура_Const.Код].ToString() ?? "",
                             Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "",
@@ -576,7 +576,7 @@ END
             
                 /* Additional Field */
                 Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "Залишок"));
+                  new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "Залишок"));
                 /*
                 CASE WHEN 
 {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
@@ -604,7 +604,7 @@ END
             
                 /* Additional Field */
                 Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки ) END)", "ВРезерві"));
+                  new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки ) END)", "ВРезерві"));
                 /*
                 CASE WHEN 
 {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
@@ -631,7 +631,7 @@ END
             
                 /* Additional Field */
                 Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки ) END)", "ВРезервіПідЗамовлення"));
+                  new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки ) END)", "ВРезервіПідЗамовлення"));
                 /*
                 CASE WHEN 
 {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} 
@@ -672,14 +672,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Номенклатура_Select.MoveNext())
             {
-                Довідники.Номенклатура_Pointer? cur = Номенклатура_Select.Current;
+                Довідники.Номенклатура_Pointer? current = Номенклатура_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Номенклатура_ЗаписиШвидкийВибір Record = new Номенклатура_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Номенклатура_Const.Код].ToString() ?? "",
                             Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "",
@@ -806,14 +806,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Виробники_Select.MoveNext())
             {
-                Довідники.Виробники_Pointer? cur = Виробники_Select.Current;
+                Довідники.Виробники_Pointer? current = Виробники_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Виробники_Записи Record = new Виробники_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Виробники_Const.Код].ToString() ?? "",
                             Назва = Fields[Виробники_Const.Назва].ToString() ?? "",
@@ -936,14 +936,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВидиНоменклатури_Select.MoveNext())
             {
-                Довідники.ВидиНоменклатури_Pointer? cur = ВидиНоменклатури_Select.Current;
+                Довідники.ВидиНоменклатури_Pointer? current = ВидиНоменклатури_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВидиНоменклатури_Записи Record = new ВидиНоменклатури_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ВидиНоменклатури_Const.Код].ToString() ?? "",
                             Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "",
@@ -1078,14 +1078,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПакуванняОдиниціВиміру_Select.MoveNext())
             {
-                Довідники.ПакуванняОдиниціВиміру_Pointer? cur = ПакуванняОдиниціВиміру_Select.Current;
+                Довідники.ПакуванняОдиниціВиміру_Pointer? current = ПакуванняОдиниціВиміру_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПакуванняОдиниціВиміру_Записи Record = new ПакуванняОдиниціВиміру_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "",
                             Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "",
@@ -1277,14 +1277,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Валюти_Select.MoveNext())
             {
-                Довідники.Валюти_Pointer? cur = Валюти_Select.Current;
+                Довідники.Валюти_Pointer? current = Валюти_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Валюти_Записи Record = new Валюти_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Валюти_Const.Код].ToString() ?? "",
                             Назва = Fields[Валюти_Const.Назва].ToString() ?? "",
@@ -1412,14 +1412,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Валюти_Select.MoveNext())
             {
-                Довідники.Валюти_Pointer? cur = Валюти_Select.Current;
+                Довідники.Валюти_Pointer? current = Валюти_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Валюти_ЗаписиШвидкийВибір Record = new Валюти_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Валюти_Const.Код].ToString() ?? "",
                             Назва = Fields[Валюти_Const.Назва].ToString() ?? "",
@@ -1613,14 +1613,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Контрагенти_Select.MoveNext())
             {
-                Довідники.Контрагенти_Pointer? cur = Контрагенти_Select.Current;
+                Довідники.Контрагенти_Pointer? current = Контрагенти_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Контрагенти_Записи Record = new Контрагенти_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Контрагенти_Const.Код].ToString() ?? "",
                             Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
@@ -1742,14 +1742,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Контрагенти_Select.MoveNext())
             {
-                Довідники.Контрагенти_Pointer? cur = Контрагенти_Select.Current;
+                Довідники.Контрагенти_Pointer? current = Контрагенти_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Контрагенти_ЗаписиШвидкийВибір Record = new Контрагенти_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Контрагенти_Const.Код].ToString() ?? "",
                             Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
@@ -1937,14 +1937,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Склади_Select.MoveNext())
             {
-                Довідники.Склади_Pointer? cur = Склади_Select.Current;
+                Довідники.Склади_Pointer? current = Склади_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Склади_Записи Record = new Склади_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Склади_Const.Код].ToString() ?? "",
                             Назва = Fields[Склади_Const.Назва].ToString() ?? "",
@@ -2067,14 +2067,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Склади_Select.MoveNext())
             {
-                Довідники.Склади_Pointer? cur = Склади_Select.Current;
+                Довідники.Склади_Pointer? current = Склади_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Склади_ЗаписиШвидкийВибір Record = new Склади_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Склади_Const.Код].ToString() ?? "",
                             Назва = Fields[Склади_Const.Назва].ToString() ?? "",
@@ -2242,14 +2242,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВидиЦін_Select.MoveNext())
             {
-                Довідники.ВидиЦін_Pointer? cur = ВидиЦін_Select.Current;
+                Довідники.ВидиЦін_Pointer? current = ВидиЦін_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВидиЦін_Записи Record = new ВидиЦін_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ВидиЦін_Const.Код].ToString() ?? "",
                             Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "",
@@ -2363,14 +2363,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВидиЦін_Select.MoveNext())
             {
-                Довідники.ВидиЦін_Pointer? cur = ВидиЦін_Select.Current;
+                Довідники.ВидиЦін_Pointer? current = ВидиЦін_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВидиЦін_ЗаписиШвидкийВибір Record = new ВидиЦін_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "",
                             
@@ -2492,14 +2492,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВидиЦінПостачальників_Select.MoveNext())
             {
-                Довідники.ВидиЦінПостачальників_Pointer? cur = ВидиЦінПостачальників_Select.Current;
+                Довідники.ВидиЦінПостачальників_Pointer? current = ВидиЦінПостачальників_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВидиЦінПостачальників_Записи Record = new ВидиЦінПостачальників_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ВидиЦінПостачальників_Const.Код].ToString() ?? "",
                             Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "",
@@ -2622,14 +2622,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Користувачі_Select.MoveNext())
             {
-                Довідники.Користувачі_Pointer? cur = Користувачі_Select.Current;
+                Довідники.Користувачі_Pointer? current = Користувачі_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Користувачі_Записи Record = new Користувачі_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Користувачі_Const.Код].ToString() ?? "",
                             Назва = Fields[Користувачі_Const.Назва].ToString() ?? "",
@@ -2752,14 +2752,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (ФізичніОсоби_Select.MoveNext())
             {
-                Довідники.ФізичніОсоби_Pointer? cur = ФізичніОсоби_Select.Current;
+                Довідники.ФізичніОсоби_Pointer? current = ФізичніОсоби_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ФізичніОсоби_Записи Record = new ФізичніОсоби_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ФізичніОсоби_Const.Код].ToString() ?? "",
                             Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "",
@@ -2882,14 +2882,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (СтруктураПідприємства_Select.MoveNext())
             {
-                Довідники.СтруктураПідприємства_Pointer? cur = СтруктураПідприємства_Select.Current;
+                Довідники.СтруктураПідприємства_Pointer? current = СтруктураПідприємства_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     СтруктураПідприємства_Записи Record = new СтруктураПідприємства_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[СтруктураПідприємства_Const.Код].ToString() ?? "",
                             Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "",
@@ -3012,14 +3012,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (КраїниСвіту_Select.MoveNext())
             {
-                Довідники.КраїниСвіту_Pointer? cur = КраїниСвіту_Select.Current;
+                Довідники.КраїниСвіту_Pointer? current = КраїниСвіту_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     КраїниСвіту_Записи Record = new КраїниСвіту_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[КраїниСвіту_Const.Код].ToString() ?? "",
                             Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "",
@@ -3160,14 +3160,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Файли_Select.MoveNext())
             {
-                Довідники.Файли_Pointer? cur = Файли_Select.Current;
+                Довідники.Файли_Pointer? current = Файли_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Файли_Записи Record = new Файли_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Файли_Const.Код].ToString() ?? "",
                             Назва = Fields[Файли_Const.Назва].ToString() ?? "",
@@ -3283,14 +3283,14 @@ END
             string? uidSelect = unigueIDSelect?.ToString();
             while (Файли_Select.MoveNext())
             {
-                Довідники.Файли_Pointer? cur = Файли_Select.Current;
+                Довідники.Файли_Pointer? current = Файли_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Файли_ЗаписиШвидкийВибір Record = new Файли_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[Файли_Const.Назва].ToString() ?? "",
                             
@@ -3417,7 +3417,7 @@ END
             
                 /* Additional Field */
                 ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності}) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВНаявності, 1) FROM Залишки)", "Залишки"));
+                  new ValueName<string>(@$"(WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності}) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВНаявності, 1) FROM Залишки)", "Залишки"));
                 /*
                 WITH Залишки AS
 (
@@ -3445,7 +3445,7 @@ FROM
             
                 /* Additional Field */
                 ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу}) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки)", "ВРезерві"));
+                  new ValueName<string>(@$"(WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу}) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки)", "ВРезерві"));
                 /*
                 WITH Залишки AS
 (
@@ -3470,7 +3470,7 @@ FROM
             
                 /* Additional Field */
                 ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення}) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки)", "ВРезервіПідЗамовлення"));
+                  new ValueName<string>(@$"(WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення}) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки)", "ВРезервіПідЗамовлення"));
                 /*
                 WITH Залишки AS
 (
@@ -3509,14 +3509,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (ХарактеристикиНоменклатури_Select.MoveNext())
             {
-                Довідники.ХарактеристикиНоменклатури_Pointer? cur = ХарактеристикиНоменклатури_Select.Current;
+                Довідники.ХарактеристикиНоменклатури_Pointer? current = ХарактеристикиНоменклатури_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ХарактеристикиНоменклатури_Записи Record = new ХарактеристикиНоменклатури_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ХарактеристикиНоменклатури_Const.Код].ToString() ?? "",
                             Номенклатура = Fields["Номенклатура"].ToString() ?? "",
@@ -3644,17 +3644,17 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (Номенклатура_Папки_Select.MoveNext())
             {
-                Довідники.Номенклатура_Папки_Pointer? cur = Номенклатура_Папки_Select.Current;
+                Довідники.Номенклатура_Папки_Pointer? current = Номенклатура_Папки_Select.Current;
                 
                 string Parent = Номенклатура_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
                 int Level = Номенклатура_Папки_Select.Level;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Номенклатура_Папки_Записи Record = new Номенклатура_Папки_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[Номенклатура_Папки_Const.Назва].ToString() ?? "",
                             Код = Fields[Номенклатура_Папки_Const.Код].ToString() ?? "",
@@ -3781,17 +3781,17 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (Номенклатура_Папки_Select.MoveNext())
             {
-                Довідники.Номенклатура_Папки_Pointer? cur = Номенклатура_Папки_Select.Current;
+                Довідники.Номенклатура_Папки_Pointer? current = Номенклатура_Папки_Select.Current;
                 
                 string Parent = Номенклатура_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
                 int Level = Номенклатура_Папки_Select.Level;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Номенклатура_Папки_ЗаписиШвидкийВибір Record = new Номенклатура_Папки_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[Номенклатура_Папки_Const.Назва].ToString() ?? "",
                             Код = Fields[Номенклатура_Папки_Const.Код].ToString() ?? "",
@@ -3922,17 +3922,17 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (Контрагенти_Папки_Select.MoveNext())
             {
-                Довідники.Контрагенти_Папки_Pointer? cur = Контрагенти_Папки_Select.Current;
+                Довідники.Контрагенти_Папки_Pointer? current = Контрагенти_Папки_Select.Current;
                 
                 string Parent = Контрагенти_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
                 int Level = Контрагенти_Папки_Select.Level;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Контрагенти_Папки_Записи Record = new Контрагенти_Папки_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[Контрагенти_Папки_Const.Назва].ToString() ?? "",
                             Код = Fields[Контрагенти_Папки_Const.Код].ToString() ?? "",
@@ -4063,17 +4063,17 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (Склади_Папки_Select.MoveNext())
             {
-                Довідники.Склади_Папки_Pointer? cur = Склади_Папки_Select.Current;
+                Довідники.Склади_Папки_Pointer? current = Склади_Папки_Select.Current;
                 
                 string Parent = Склади_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
                 int Level = Склади_Папки_Select.Level;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Склади_Папки_Записи Record = new Склади_Папки_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[Склади_Папки_Const.Назва].ToString() ?? "",
                             Код = Fields[Склади_Папки_Const.Код].ToString() ?? "",
@@ -4238,7 +4238,7 @@ FROM
             
                 /* Additional Field */
                 Каси_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(SELECT ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума FROM {РегістриНакопичення.РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів WHERE РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid)", "Залишок"));
+                  new ValueName<string>(@$"(SELECT ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума FROM {РегістриНакопичення.РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів WHERE РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid)", "Залишок"));
                 /*
                 SELECT
         ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума
@@ -4264,14 +4264,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (Каси_Select.MoveNext())
             {
-                Довідники.Каси_Pointer? cur = Каси_Select.Current;
+                Довідники.Каси_Pointer? current = Каси_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Каси_Записи Record = new Каси_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Каси_Const.Код].ToString() ?? "",
                             Назва = Fields[Каси_Const.Назва].ToString() ?? "",
@@ -4399,14 +4399,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (Каси_Select.MoveNext())
             {
-                Довідники.Каси_Pointer? cur = Каси_Select.Current;
+                Довідники.Каси_Pointer? current = Каси_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Каси_ЗаписиШвидкийВибір Record = new Каси_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Каси_Const.Код].ToString() ?? "",
                             Назва = Fields[Каси_Const.Назва].ToString() ?? "",
@@ -4575,14 +4575,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (БанківськіРахункиОрганізацій_Select.MoveNext())
             {
-                Довідники.БанківськіРахункиОрганізацій_Pointer? cur = БанківськіРахункиОрганізацій_Select.Current;
+                Довідники.БанківськіРахункиОрганізацій_Pointer? current = БанківськіРахункиОрганізацій_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     БанківськіРахункиОрганізацій_Записи Record = new БанківськіРахункиОрганізацій_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[БанківськіРахункиОрганізацій_Const.Код].ToString() ?? "",
                             Назва = Fields[БанківськіРахункиОрганізацій_Const.Назва].ToString() ?? "",
@@ -4769,14 +4769,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (ДоговориКонтрагентів_Select.MoveNext())
             {
-                Довідники.ДоговориКонтрагентів_Pointer? cur = ДоговориКонтрагентів_Select.Current;
+                Довідники.ДоговориКонтрагентів_Pointer? current = ДоговориКонтрагентів_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ДоговориКонтрагентів_Записи Record = new ДоговориКонтрагентів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ДоговориКонтрагентів_Const.Код].ToString() ?? "",
                             Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "",
@@ -4905,14 +4905,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (ДоговориКонтрагентів_Select.MoveNext())
             {
-                Довідники.ДоговориКонтрагентів_Pointer? cur = ДоговориКонтрагентів_Select.Current;
+                Довідники.ДоговориКонтрагентів_Pointer? current = ДоговориКонтрагентів_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ДоговориКонтрагентів_ЗаписиШвидкийВибір Record = new ДоговориКонтрагентів_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "",
                             Контрагент = Fields["Контрагент"].ToString() ?? "",
@@ -5082,14 +5082,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (БанківськіРахункиКонтрагентів_Select.MoveNext())
             {
-                Довідники.БанківськіРахункиКонтрагентів_Pointer? cur = БанківськіРахункиКонтрагентів_Select.Current;
+                Довідники.БанківськіРахункиКонтрагентів_Pointer? current = БанківськіРахункиКонтрагентів_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     БанківськіРахункиКонтрагентів_Записи Record = new БанківськіРахункиКонтрагентів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[БанківськіРахункиКонтрагентів_Const.Код].ToString() ?? "",
                             Назва = Fields[БанківськіРахункиКонтрагентів_Const.Назва].ToString() ?? "",
@@ -5266,14 +5266,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (СтаттяРухуКоштів_Select.MoveNext())
             {
-                Довідники.СтаттяРухуКоштів_Pointer? cur = СтаттяРухуКоштів_Select.Current;
+                Довідники.СтаттяРухуКоштів_Pointer? current = СтаттяРухуКоштів_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     СтаттяРухуКоштів_Записи Record = new СтаттяРухуКоштів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[СтаттяРухуКоштів_Const.Назва].ToString() ?? "",
                             Код = Fields[СтаттяРухуКоштів_Const.Код].ToString() ?? "",
@@ -5393,14 +5393,14 @@ WHERE
             string? uidSelect = unigueIDSelect?.ToString();
             while (СеріїНоменклатури_Select.MoveNext())
             {
-                Довідники.СеріїНоменклатури_Pointer? cur = СеріїНоменклатури_Select.Current;
+                Довідники.СеріїНоменклатури_Pointer? current = СеріїНоменклатури_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     СеріїНоменклатури_Записи Record = new СеріїНоменклатури_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "",
                             
@@ -5573,7 +5573,7 @@ WHERE
             
                 /* Additional Field */
                 ПартіяТоварівКомпозит_Select.QuerySelect.FieldAndAlias.Add(
-                  new NameValue<string>(@$"(WITH Залишки AS ( SELECT ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, SUM(ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.Кількість} ) AS Кількість FROM {РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.TABLE} AS ПартіїТоварів WHERE ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит} = {Довідники.ПартіяТоварівКомпозит_Const.TABLE}.uid GROUP BY ПартіяТоварівКомпозит ) SELECT ROUND(Кількість, 1) FROM Залишки)", "Залишки"));
+                  new ValueName<string>(@$"(WITH Залишки AS ( SELECT ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, SUM(ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.Кількість} ) AS Кількість FROM {РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.TABLE} AS ПартіїТоварів WHERE ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит} = {Довідники.ПартіяТоварівКомпозит_Const.TABLE}.uid GROUP BY ПартіяТоварівКомпозит ) SELECT ROUND(Кількість, 1) FROM Залишки)", "Залишки"));
                 /*
                 WITH Залишки AS 
 (
@@ -5609,14 +5609,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПартіяТоварівКомпозит_Select.MoveNext())
             {
-                Довідники.ПартіяТоварівКомпозит_Pointer? cur = ПартіяТоварівКомпозит_Select.Current;
+                Довідники.ПартіяТоварівКомпозит_Pointer? current = ПартіяТоварівКомпозит_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПартіяТоварівКомпозит_Записи Record = new ПартіяТоварівКомпозит_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "",
                             Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "",
@@ -5740,14 +5740,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПартіяТоварівКомпозит_Select.MoveNext())
             {
-                Довідники.ПартіяТоварівКомпозит_Pointer? cur = ПартіяТоварівКомпозит_Select.Current;
+                Довідники.ПартіяТоварівКомпозит_Pointer? current = ПартіяТоварівКомпозит_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПартіяТоварівКомпозит_ЗаписиШвидкийВибір Record = new ПартіяТоварівКомпозит_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "",
                             Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "",
@@ -5870,14 +5870,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВидиЗапасів_Select.MoveNext())
             {
-                Довідники.ВидиЗапасів_Pointer? cur = ВидиЗапасів_Select.Current;
+                Довідники.ВидиЗапасів_Pointer? current = ВидиЗапасів_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВидиЗапасів_Записи Record = new ВидиЗапасів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ВидиЗапасів_Const.Код].ToString() ?? "",
                             Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "",
@@ -6102,14 +6102,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (Банки_Select.MoveNext())
             {
-                Довідники.Банки_Pointer? cur = Банки_Select.Current;
+                Довідники.Банки_Pointer? current = Банки_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Банки_Записи Record = new Банки_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Банки_Const.Код].ToString() ?? "",
                             Назва = Fields[Банки_Const.Назва].ToString() ?? "",
@@ -6245,14 +6245,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (Банки_Select.MoveNext())
             {
-                Довідники.Банки_Pointer? cur = Банки_Select.Current;
+                Довідники.Банки_Pointer? current = Банки_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Банки_ЗаписиШвидкийВибір Record = new Банки_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Банки_Const.Код].ToString() ?? "",
                             Назва = Fields[Банки_Const.Назва].ToString() ?? "",
@@ -6432,14 +6432,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (СкладськіПриміщення_Select.MoveNext())
             {
-                Довідники.СкладськіПриміщення_Pointer? cur = СкладськіПриміщення_Select.Current;
+                Довідники.СкладськіПриміщення_Pointer? current = СкладськіПриміщення_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     СкладськіПриміщення_Записи Record = new СкладськіПриміщення_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[СкладськіПриміщення_Const.Назва].ToString() ?? "",
                             Склад = Fields["Склад"].ToString() ?? "",
@@ -6647,14 +6647,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (СкладськіКомірки_Select.MoveNext())
             {
-                Довідники.СкладськіКомірки_Pointer? cur = СкладськіКомірки_Select.Current;
+                Довідники.СкладськіКомірки_Pointer? current = СкладськіКомірки_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     СкладськіКомірки_Записи Record = new СкладськіКомірки_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "",
                             Приміщення = Fields["Приміщення"].ToString() ?? "",
@@ -6782,14 +6782,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (СкладськіКомірки_Select.MoveNext())
             {
-                Довідники.СкладськіКомірки_Pointer? cur = СкладськіКомірки_Select.Current;
+                Довідники.СкладськіКомірки_Pointer? current = СкладськіКомірки_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     СкладськіКомірки_ЗаписиШвидкийВибір Record = new СкладськіКомірки_ЗаписиШвидкийВибір
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "",
                             Приміщення = Fields["Приміщення"].ToString() ?? "",
@@ -6913,14 +6913,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (ОбластьЗберігання_Select.MoveNext())
             {
-                Довідники.ОбластьЗберігання_Pointer? cur = ОбластьЗберігання_Select.Current;
+                Довідники.ОбластьЗберігання_Pointer? current = ОбластьЗберігання_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ОбластьЗберігання_Записи Record = new ОбластьЗберігання_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ОбластьЗберігання_Const.Назва].ToString() ?? "",
                             Приміщення = Fields["Приміщення"].ToString() ?? "",
@@ -7067,14 +7067,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (ТипорозміриКомірок_Select.MoveNext())
             {
-                Довідники.ТипорозміриКомірок_Pointer? cur = ТипорозміриКомірок_Select.Current;
+                Довідники.ТипорозміриКомірок_Pointer? current = ТипорозміриКомірок_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ТипорозміриКомірок_Записи Record = new ТипорозміриКомірок_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ТипорозміриКомірок_Const.Назва].ToString() ?? "",
                             Висота = Fields[ТипорозміриКомірок_Const.Висота].ToString() ?? "",
@@ -7209,17 +7209,17 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (СкладськіКомірки_Папки_Select.MoveNext())
             {
-                Довідники.СкладськіКомірки_Папки_Pointer? cur = СкладськіКомірки_Папки_Select.Current;
+                Довідники.СкладськіКомірки_Папки_Pointer? current = СкладськіКомірки_Папки_Select.Current;
                 
                 string Parent = СкладськіКомірки_Папки_Select.Parent?.ToString() ?? Guid.Empty.ToString();
                 int Level = СкладськіКомірки_Папки_Select.Level;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     СкладськіКомірки_Папки_Записи Record = new СкладськіКомірки_Папки_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[СкладськіКомірки_Папки_Const.Назва].ToString() ?? "",
                             Код = Fields[СкладськіКомірки_Папки_Const.Код].ToString() ?? "",
@@ -7356,14 +7356,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (Блокнот_Select.MoveNext())
             {
-                Довідники.Блокнот_Pointer? cur = Блокнот_Select.Current;
+                Довідники.Блокнот_Pointer? current = Блокнот_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     Блокнот_Записи Record = new Блокнот_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[Блокнот_Const.Код].ToString() ?? "",
                             Назва = Fields[Блокнот_Const.Назва].ToString() ?? "",
@@ -7500,14 +7500,14 @@ FROM
             string? uidSelect = unigueIDSelect?.ToString();
             while (ЗбереженіЗвіти_Select.MoveNext())
             {
-                Довідники.ЗбереженіЗвіти_Pointer? cur = ЗбереженіЗвіти_Select.Current;
+                Довідники.ЗбереженіЗвіти_Pointer? current = ЗбереженіЗвіти_Select.Current;
                 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ЗбереженіЗвіти_Записи Record = new ЗбереженіЗвіти_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Код = Fields[ЗбереженіЗвіти_Const.Код].ToString() ?? "",
                             Додано = Fields[ЗбереженіЗвіти_Const.Додано].ToString() ?? "",
@@ -7766,14 +7766,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ЗамовленняПостачальнику_Select.MoveNext())
             {
-                Документи.ЗамовленняПостачальнику_Pointer? cur = ЗамовленняПостачальнику_Select.Current;
+                Документи.ЗамовленняПостачальнику_Pointer? current = ЗамовленняПостачальнику_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ЗамовленняПостачальнику_Записи Record = new ЗамовленняПостачальнику_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ЗамовленняПостачальнику_Const.Назва].ToString() ?? "",
@@ -8048,14 +8048,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПоступленняТоварівТаПослуг_Select.MoveNext())
             {
-                Документи.ПоступленняТоварівТаПослуг_Pointer? cur = ПоступленняТоварівТаПослуг_Select.Current;
+                Документи.ПоступленняТоварівТаПослуг_Pointer? current = ПоступленняТоварівТаПослуг_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПоступленняТоварівТаПослуг_Записи Record = new ПоступленняТоварівТаПослуг_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПоступленняТоварівТаПослуг_Const.Назва].ToString() ?? "",
@@ -8331,14 +8331,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ЗамовленняКлієнта_Select.MoveNext())
             {
-                Документи.ЗамовленняКлієнта_Pointer? cur = ЗамовленняКлієнта_Select.Current;
+                Документи.ЗамовленняКлієнта_Pointer? current = ЗамовленняКлієнта_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ЗамовленняКлієнта_Записи Record = new ЗамовленняКлієнта_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ЗамовленняКлієнта_Const.Назва].ToString() ?? "",
@@ -8614,14 +8614,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (РеалізаціяТоварівТаПослуг_Select.MoveNext())
             {
-                Документи.РеалізаціяТоварівТаПослуг_Pointer? cur = РеалізаціяТоварівТаПослуг_Select.Current;
+                Документи.РеалізаціяТоварівТаПослуг_Pointer? current = РеалізаціяТоварівТаПослуг_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     РеалізаціяТоварівТаПослуг_Записи Record = new РеалізаціяТоварівТаПослуг_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[РеалізаціяТоварівТаПослуг_Const.Назва].ToString() ?? "",
@@ -8853,14 +8853,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВстановленняЦінНоменклатури_Select.MoveNext())
             {
-                Документи.ВстановленняЦінНоменклатури_Pointer? cur = ВстановленняЦінНоменклатури_Select.Current;
+                Документи.ВстановленняЦінНоменклатури_Pointer? current = ВстановленняЦінНоменклатури_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВстановленняЦінНоменклатури_Записи Record = new ВстановленняЦінНоменклатури_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ВстановленняЦінНоменклатури_Const.Назва].ToString() ?? "",
@@ -9123,14 +9123,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПрихіднийКасовийОрдер_Select.MoveNext())
             {
-                Документи.ПрихіднийКасовийОрдер_Pointer? cur = ПрихіднийКасовийОрдер_Select.Current;
+                Документи.ПрихіднийКасовийОрдер_Pointer? current = ПрихіднийКасовийОрдер_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПрихіднийКасовийОрдер_Записи Record = new ПрихіднийКасовийОрдер_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПрихіднийКасовийОрдер_Const.Назва].ToString() ?? "",
@@ -9397,14 +9397,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (РозхіднийКасовийОрдер_Select.MoveNext())
             {
-                Документи.РозхіднийКасовийОрдер_Pointer? cur = РозхіднийКасовийОрдер_Select.Current;
+                Документи.РозхіднийКасовийОрдер_Pointer? current = РозхіднийКасовийОрдер_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     РозхіднийКасовийОрдер_Записи Record = new РозхіднийКасовийОрдер_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[РозхіднийКасовийОрдер_Const.Назва].ToString() ?? "",
@@ -9637,14 +9637,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПереміщенняТоварів_Select.MoveNext())
             {
-                Документи.ПереміщенняТоварів_Pointer? cur = ПереміщенняТоварів_Select.Current;
+                Документи.ПереміщенняТоварів_Pointer? current = ПереміщенняТоварів_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПереміщенняТоварів_Записи Record = new ПереміщенняТоварів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПереміщенняТоварів_Const.Назва].ToString() ?? "",
@@ -9917,14 +9917,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПоверненняТоварівПостачальнику_Select.MoveNext())
             {
-                Документи.ПоверненняТоварівПостачальнику_Pointer? cur = ПоверненняТоварівПостачальнику_Select.Current;
+                Документи.ПоверненняТоварівПостачальнику_Pointer? current = ПоверненняТоварівПостачальнику_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПоверненняТоварівПостачальнику_Записи Record = new ПоверненняТоварівПостачальнику_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПоверненняТоварівПостачальнику_Const.Назва].ToString() ?? "",
@@ -10200,14 +10200,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПоверненняТоварівВідКлієнта_Select.MoveNext())
             {
-                Документи.ПоверненняТоварівВідКлієнта_Pointer? cur = ПоверненняТоварівВідКлієнта_Select.Current;
+                Документи.ПоверненняТоварівВідКлієнта_Pointer? current = ПоверненняТоварівВідКлієнта_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПоверненняТоварівВідКлієнта_Записи Record = new ПоверненняТоварівВідКлієнта_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПоверненняТоварівВідКлієнта_Const.Назва].ToString() ?? "",
@@ -10468,14 +10468,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (АктВиконанихРобіт_Select.MoveNext())
             {
-                Документи.АктВиконанихРобіт_Pointer? cur = АктВиконанихРобіт_Select.Current;
+                Документи.АктВиконанихРобіт_Pointer? current = АктВиконанихРобіт_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     АктВиконанихРобіт_Записи Record = new АктВиконанихРобіт_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[АктВиконанихРобіт_Const.Назва].ToString() ?? "",
@@ -10721,14 +10721,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВведенняЗалишків_Select.MoveNext())
             {
-                Документи.ВведенняЗалишків_Pointer? cur = ВведенняЗалишків_Select.Current;
+                Документи.ВведенняЗалишків_Pointer? current = ВведенняЗалишків_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВведенняЗалишків_Записи Record = new ВведенняЗалишків_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ВведенняЗалишків_Const.Назва].ToString() ?? "",
@@ -10943,14 +10943,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (НадлишкиТоварів_Select.MoveNext())
             {
-                Документи.НадлишкиТоварів_Pointer? cur = НадлишкиТоварів_Select.Current;
+                Документи.НадлишкиТоварів_Pointer? current = НадлишкиТоварів_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     НадлишкиТоварів_Записи Record = new НадлишкиТоварів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[НадлишкиТоварів_Const.Назва].ToString() ?? "",
@@ -11163,14 +11163,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПересортицяТоварів_Select.MoveNext())
             {
-                Документи.ПересортицяТоварів_Pointer? cur = ПересортицяТоварів_Select.Current;
+                Документи.ПересортицяТоварів_Pointer? current = ПересортицяТоварів_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПересортицяТоварів_Записи Record = new ПересортицяТоварів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПересортицяТоварів_Const.Назва].ToString() ?? "",
@@ -11398,14 +11398,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПерерахунокТоварів_Select.MoveNext())
             {
-                Документи.ПерерахунокТоварів_Pointer? cur = ПерерахунокТоварів_Select.Current;
+                Документи.ПерерахунокТоварів_Pointer? current = ПерерахунокТоварів_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПерерахунокТоварів_Записи Record = new ПерерахунокТоварів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПерерахунокТоварів_Const.Назва].ToString() ?? "",
@@ -11633,14 +11633,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПсуванняТоварів_Select.MoveNext())
             {
-                Документи.ПсуванняТоварів_Pointer? cur = ПсуванняТоварів_Select.Current;
+                Документи.ПсуванняТоварів_Pointer? current = ПсуванняТоварів_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПсуванняТоварів_Записи Record = new ПсуванняТоварів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПсуванняТоварів_Const.Назва].ToString() ?? "",
@@ -11883,14 +11883,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ВнутрішнєСпоживанняТоварів_Select.MoveNext())
             {
-                Документи.ВнутрішнєСпоживанняТоварів_Pointer? cur = ВнутрішнєСпоживанняТоварів_Select.Current;
+                Документи.ВнутрішнєСпоживанняТоварів_Pointer? current = ВнутрішнєСпоживанняТоварів_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ВнутрішнєСпоживанняТоварів_Записи Record = new ВнутрішнєСпоживанняТоварів_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ВнутрішнєСпоживанняТоварів_Const.Назва].ToString() ?? "",
@@ -12164,14 +12164,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (РахунокФактура_Select.MoveNext())
             {
-                Документи.РахунокФактура_Pointer? cur = РахунокФактура_Select.Current;
+                Документи.РахунокФактура_Pointer? current = РахунокФактура_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     РахунокФактура_Записи Record = new РахунокФактура_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[РахунокФактура_Const.Назва].ToString() ?? "",
@@ -12388,14 +12388,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (РозміщенняТоварівНаСкладі_Select.MoveNext())
             {
-                Документи.РозміщенняТоварівНаСкладі_Pointer? cur = РозміщенняТоварівНаСкладі_Select.Current;
+                Документи.РозміщенняТоварівНаСкладі_Pointer? current = РозміщенняТоварівНаСкладі_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     РозміщенняТоварівНаСкладі_Записи Record = new РозміщенняТоварівНаСкладі_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[РозміщенняТоварівНаСкладі_Const.Назва].ToString() ?? "",
@@ -12608,14 +12608,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ПереміщенняТоварівНаСкладі_Select.MoveNext())
             {
-                Документи.ПереміщенняТоварівНаСкладі_Pointer? cur = ПереміщенняТоварівНаСкладі_Select.Current;
+                Документи.ПереміщенняТоварівНаСкладі_Pointer? current = ПереміщенняТоварівНаСкладі_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ПереміщенняТоварівНаСкладі_Записи Record = new ПереміщенняТоварівНаСкладі_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ПереміщенняТоварівНаСкладі_Const.Назва].ToString() ?? "",
@@ -12828,14 +12828,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ЗбіркаТоварівНаСкладі_Select.MoveNext())
             {
-                Документи.ЗбіркаТоварівНаСкладі_Pointer? cur = ЗбіркаТоварівНаСкладі_Select.Current;
+                Документи.ЗбіркаТоварівНаСкладі_Pointer? current = ЗбіркаТоварівНаСкладі_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ЗбіркаТоварівНаСкладі_Записи Record = new ЗбіркаТоварівНаСкладі_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ЗбіркаТоварівНаСкладі_Const.Назва].ToString() ?? "",
@@ -13048,14 +13048,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (РозміщенняНоменклатуриПоКоміркам_Select.MoveNext())
             {
-                Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? cur = РозміщенняНоменклатуриПоКоміркам_Select.Current;
+                Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? current = РозміщенняНоменклатуриПоКоміркам_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     РозміщенняНоменклатуриПоКоміркам_Записи Record = new РозміщенняНоменклатуриПоКоміркам_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[РозміщенняНоменклатуриПоКоміркам_Const.Назва].ToString() ?? "",
@@ -13253,14 +13253,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (КорегуванняБоргу_Select.MoveNext())
             {
-                Документи.КорегуванняБоргу_Pointer? cur = КорегуванняБоргу_Select.Current;
+                Документи.КорегуванняБоргу_Pointer? current = КорегуванняБоргу_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     КорегуванняБоргу_Записи Record = new КорегуванняБоргу_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[КорегуванняБоргу_Const.Назва].ToString() ?? "",
@@ -13548,14 +13548,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ЗакриттяЗамовленняКлієнта_Select.MoveNext())
             {
-                Документи.ЗакриттяЗамовленняКлієнта_Pointer? cur = ЗакриттяЗамовленняКлієнта_Select.Current;
+                Документи.ЗакриттяЗамовленняКлієнта_Pointer? current = ЗакриттяЗамовленняКлієнта_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ЗакриттяЗамовленняКлієнта_Записи Record = new ЗакриттяЗамовленняКлієнта_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ЗакриттяЗамовленняКлієнта_Const.Назва].ToString() ?? "",
@@ -13833,14 +13833,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ЗакриттяРахункуФактури_Select.MoveNext())
             {
-                Документи.ЗакриттяРахункуФактури_Pointer? cur = ЗакриттяРахункуФактури_Select.Current;
+                Документи.ЗакриттяРахункуФактури_Pointer? current = ЗакриттяРахункуФактури_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ЗакриттяРахункуФактури_Записи Record = new ЗакриттяРахункуФактури_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ЗакриттяРахункуФактури_Const.Назва].ToString() ?? "",
@@ -14133,14 +14133,14 @@ namespace GeneratedCode.Документи.ТабличніСписки
             string? uidSelect = unigueIDSelect?.ToString();
             while (ЗакриттяЗамовленняПостачальнику_Select.MoveNext())
             {
-                Документи.ЗакриттяЗамовленняПостачальнику_Pointer? cur = ЗакриттяЗамовленняПостачальнику_Select.Current;
+                Документи.ЗакриттяЗамовленняПостачальнику_Pointer? current = ЗакриттяЗамовленняПостачальнику_Select.Current;
 
-                if (cur != null)
+                if (current != null)
                 {
-                    Dictionary<string, object> Fields = cur.Fields!;
+                    Dictionary<string, object> Fields = current.Fields;
                     ЗакриттяЗамовленняПостачальнику_Записи Record = new ЗакриттяЗамовленняПостачальнику_Записи
                     {
-                        ID = cur.UnigueID.ToString(),
+                        ID = current.UnigueID.ToString(),
                         Spend = (bool)Fields["spend"], /*Проведений документ*/
                         DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
                         Назва = Fields[ЗакриттяЗамовленняПостачальнику_Const.Назва].ToString() ?? "",
@@ -14461,25 +14461,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗамовленняПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14501,25 +14501,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПоступленняТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14541,25 +14541,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗамовленняКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14581,25 +14581,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РеалізаціяТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14621,28 +14621,28 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ВстановленняЦінНоменклатури'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ВстановленняЦінНоменклатури'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Склад")); /* Empty Field - Склад*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         Довідники.Валюти_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВстановленняЦінНоменклатури_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВстановленняЦінНоменклатури_Const.TABLE + "." + Документи.ВстановленняЦінНоменклатури_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14664,26 +14664,26 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПрихіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Склад")); /* Empty Field - Склад*/
                         Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14705,26 +14705,26 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РозхіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Склад")); /* Empty Field - Склад*/
                         Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14746,28 +14746,28 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПереміщенняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладВідправник, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14789,25 +14789,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПоверненняТоварівПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14829,25 +14829,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПоверненняТоварівВідКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14869,26 +14869,26 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'АктВиконанихРобіт'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Склад")); /* Empty Field - Склад*/
                         Довідники.Каси_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14910,26 +14910,26 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ВведенняЗалишків'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         Довідники.Валюти_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14951,27 +14951,27 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПерерахунокТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПерерахунокТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.ФізичніОсоби_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Відповідальний, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -14993,28 +14993,28 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПсуванняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15036,27 +15036,27 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         Довідники.Валюти_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15078,25 +15078,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РахунокФактура'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15118,28 +15118,28 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РозміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15161,28 +15161,28 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПереміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15204,28 +15204,28 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗбіркаТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15247,28 +15247,28 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад, query.Table, "join_tab_6", "Склад");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15290,29 +15290,29 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'КорегуванняБоргу'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'КорегуванняБоргу'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.КорегуванняБоргу_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Контрагент")); /* Empty Field - Контрагент*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Склад")); /* Empty Field - Склад*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Каса")); /* Empty Field - Каса*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Каса")); /* Empty Field - Каса*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Валюта")); /* Empty Field - Валюта*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Валюта")); /* Empty Field - Валюта*/
                         
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Сума")); /* Empty Field - Сума*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Сума")); /* Empty Field - Сума*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.КорегуванняБоргу_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.КорегуванняБоргу_Const.TABLE + "." + Документи.КорегуванняБоргу_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15334,25 +15334,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяЗамовленняКлієнта'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗакриттяЗамовленняКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15374,25 +15374,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяРахункуФактури'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗакриттяРахункуФактури'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15414,25 +15414,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяЗамовленняПостачальнику'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗакриттяЗамовленняПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу + "::text", "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу + "::text", "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15648,25 +15648,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняПостачальнику'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗамовленняПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗамовленняПостачальнику_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15688,25 +15688,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПоступленняТоварівТаПослуг'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПоступленняТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоступленняТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоступленняТоварівТаПослуг_Const.TABLE + "." + Документи.ПоступленняТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15728,25 +15728,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівПостачальнику'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПоверненняТоварівПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівПостачальнику_Const.TABLE + "." + Документи.ПоверненняТоварівПостачальнику_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -15768,25 +15768,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяЗамовленняПостачальнику'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗакриттяЗамовленняПостачальнику'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняПостачальнику_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняПостачальнику_Const.TABLE + "." + Документи.ЗакриттяЗамовленняПостачальнику_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16020,25 +16020,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗамовленняКлієнта'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗамовленняКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗамовленняКлієнта_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16060,25 +16060,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РеалізаціяТоварівТаПослуг'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РеалізаціяТоварівТаПослуг'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РеалізаціяТоварівТаПослуг_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РеалізаціяТоварівТаПослуг_Const.TABLE + "." + Документи.РеалізаціяТоварівТаПослуг_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16100,25 +16100,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПоверненняТоварівВідКлієнта'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПоверненняТоварівВідКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПоверненняТоварівВідКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПоверненняТоварівВідКлієнта_Const.TABLE + "." + Документи.ПоверненняТоварівВідКлієнта_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16140,26 +16140,26 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'АктВиконанихРобіт'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'АктВиконанихРобіт'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "Склад")); /* Empty Field - Склад*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "Склад")); /* Empty Field - Склад*/
                         Довідники.Каси_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.АктВиконанихРобіт_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.АктВиконанихРобіт_Const.TABLE + "." + Документи.АктВиконанихРобіт_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16181,25 +16181,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РахунокФактура'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РахунокФактура'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РахунокФактура_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РахунокФактура_Const.TABLE + "." + Документи.РахунокФактура_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16221,25 +16221,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяЗамовленняКлієнта'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗакриттяЗамовленняКлієнта'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяЗамовленняКлієнта_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяЗамовленняКлієнта_Const.TABLE + "." + Документи.ЗакриттяЗамовленняКлієнта_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16261,25 +16261,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗакриттяРахункуФактури'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗакриттяРахункуФактури'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Склад, query.Table, "join_tab_6", "Склад");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Каса, query.Table, "join_tab_7", "Каса");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗакриттяРахункуФактури_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗакриттяРахункуФактури_Const.TABLE + "." + Документи.ЗакриттяРахункуФактури_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16483,25 +16483,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПрихіднийКасовийОрдер'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПрихіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_6", "Каса");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.КасаВідправник, query.Table, "join_tab_7", "Каса2");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПрихіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПрихіднийКасовийОрдер_Const.TABLE + "." + Документи.ПрихіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16523,25 +16523,25 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РозхіднийКасовийОрдер'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РозхіднийКасовийОрдер'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Контрагенти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Контрагент, query.Table, "join_tab_5", "Контрагент");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Каса, query.Table, "join_tab_6", "Каса");
                             Довідники.Каси_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.КасаОтримувач, query.Table, "join_tab_7", "Каса2");
                             Довідники.Валюти_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Валюта, query.Table, "join_tab_8", "Валюта");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.СумаДокументу, "Сума"));
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозхіднийКасовийОрдер_Const.Автор, query.Table, "join_tab_10", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозхіднийКасовийОрдер_Const.TABLE + "." + Документи.РозхіднийКасовийОрдер_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16751,21 +16751,21 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПереміщенняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладВідправник, query.Table, "join_tab_5", "СкладВідправник");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.СкладОтримувач, query.Table, "join_tab_6", "СкладОтримувач");
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварів_Const.TABLE + "." + Документи.ПереміщенняТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16787,22 +16787,22 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ВведенняЗалишків'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ВведенняЗалишків'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник")); /* Empty Field - СкладВідправник*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "СкладВідправник")); /* Empty Field - СкладВідправник*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Склад, query.Table, "join_tab_6", "СкладОтримувач");
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВведенняЗалишків_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВведенняЗалишків_Const.TABLE + "." + Документи.ВведенняЗалишків_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16824,22 +16824,22 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ВнутрішнєСпоживанняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладВідправник")); /* Empty Field - СкладВідправник*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "СкладВідправник")); /* Empty Field - СкладВідправник*/
                         Довідники.Склади_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад, query.Table, "join_tab_6", "СкладОтримувач");
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ВнутрішнєСпоживанняТоварів_Const.TABLE + "." + Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16861,22 +16861,22 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПсуванняТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПсуванняТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Склад, query.Table, "join_tab_5", "СкладВідправник");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач")); /* Empty Field - СкладОтримувач*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "СкладОтримувач")); /* Empty Field - СкладОтримувач*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПсуванняТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПсуванняТоварів_Const.TABLE + "." + Документи.ПсуванняТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -16898,22 +16898,22 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПерерахунокТоварів'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПерерахунокТоварів'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Склад, query.Table, "join_tab_5", "СкладВідправник");
                             
-                          query.FieldAndAlias.Add(new NameValue<string>("''", "СкладОтримувач")); /* Empty Field - СкладОтримувач*/
+                          query.FieldAndAlias.Add(new ValueName<string>("''", "СкладОтримувач")); /* Empty Field - СкладОтримувач*/
                         Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПерерахунокТоварів_Const.Автор, query.Table, "join_tab_7", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПерерахунокТоварів_Const.TABLE + "." + Документи.ПерерахунокТоварів_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -17110,20 +17110,20 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняТоварівНаСкладі'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РозміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_5", "Склад");
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.РозміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -17145,20 +17145,20 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ПереміщенняТоварівНаСкладі'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ПереміщенняТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Склад, query.Table, "join_tab_5", "Склад");
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ПереміщенняТоварівНаСкладі_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ПереміщенняТоварівНаСкладі_Const.TABLE + "." + Документи.ПереміщенняТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -17180,20 +17180,20 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'ЗбіркаТоварівНаСкладі'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЗбіркаТоварівНаСкладі'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Склад, query.Table, "join_tab_5", "Склад");
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЗбіркаТоварівНаСкладі_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЗбіркаТоварівНаСкладі_Const.TABLE + "." + Документи.ЗбіркаТоварівНаСкладі_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }
@@ -17215,20 +17215,20 @@ namespace GeneratedCode.Документи.ТабличніСписки
                       }
                   }
                   
-                  query.FieldAndAlias.Add(new NameValue<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
+                  query.FieldAndAlias.Add(new ValueName<string>("'РозміщенняНоменклатуриПоКоміркам'", "type"));
                   query.Field.Add("deletion_label");
                   query.Field.Add("spend");
                   
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва, "Назва"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, "Дата"));
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок, "Номер"));
                             Довідники.Організації_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація, query.Table, "join_tab_4", "Організація");
                             Довідники.Склади_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад, query.Table, "join_tab_5", "Склад");
                             Довідники.Користувачі_Pointer.GetJoin(query, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор, query.Table, "join_tab_6", "Автор");
                             
-                              query.FieldAndAlias.Add(new NameValue<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.РозміщенняНоменклатуриПоКоміркам_Const.TABLE + "." + Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар, "Коментар"));
                             
                   allQuery.Add(query.Construct());
               }

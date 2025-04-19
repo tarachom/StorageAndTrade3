@@ -903,7 +903,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             string[] presentationField = new string [<xsl:value-of select="$DirectoryName"/>_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i &lt; presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{<xsl:value-of select="$DirectoryName"/>_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(<xsl:value-of select="$DirectoryName"/>_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue&lt;string&gt;(presentationField.Length switch { 1 =&gt; presentationField[0], &gt;1 =&gt; $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ =&gt; "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName&lt;string&gt;(presentationField.Length switch { 1 =&gt; presentationField[0], &gt;1 =&gt; $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ =&gt; "'#'" }, fieldAlias));
         }
 
         public async ValueTask&lt;bool?&gt; GetDeletionLabel()
@@ -1205,7 +1205,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Пере
 
         public static List&lt;NameValue&lt;<xsl:value-of select="$EnumName"/>&gt;&gt; <xsl:value-of select="$EnumName"/>_List()
         {
-            return new List&lt;NameValue&lt;<xsl:value-of select="$EnumName"/>&gt;&gt;() {
+            return [
             <xsl:for-each select="Fields/Field">
               <xsl:variable name="ReturnValue">
                   <xsl:choose>
@@ -1218,7 +1218,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Пере
                   </xsl:choose>
               </xsl:variable>
               <xsl:text>new NameValue&lt;</xsl:text><xsl:value-of select="$EnumName"/>&gt;("<xsl:value-of select="$ReturnValue"/>", <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>),
-            </xsl:for-each>};
+            </xsl:for-each>];
         }
         #endregion
     </xsl:for-each>
@@ -1473,7 +1473,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             string[] presentationField = new string [<xsl:value-of select="$DocumentName"/>_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i &lt; presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{<xsl:value-of select="$DocumentName"/>_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(<xsl:value-of select="$DocumentName"/>_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue&lt;string&gt;(presentationField.Length switch { 1 =&gt; presentationField[0], &gt;1 =&gt; $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ =&gt; "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName&lt;string&gt;(presentationField.Length switch { 1 =&gt; presentationField[0], &gt;1 =&gt; $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ =&gt; "'#'" }, fieldAlias));
         }
 
         public async ValueTask&lt;bool?&gt; IsSpend()
@@ -2258,7 +2258,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 <xsl:value-of select="concat('WHEN join_doc_', position(), '.uid IS NOT NULL THEN join_doc_', position(), '.{Документи.', $AllowDocumentSpendName, '_Const.Назва} ')"/>
               </xsl:for-each>
               <xsl:text>END</xsl:text>";
-              QuerySelect.FieldAndAlias.Add(new NameValue&lt;string&gt;(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName&lt;string&gt;(query_case, "docname"));
 
               int i = 0;
               foreach (string table in <xsl:value-of select="$RegisterName"/>_Const.AllowDocumentSpendTable)

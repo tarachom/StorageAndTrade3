@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 14.04.2025 20:44:32
+ * Дата конфігурації: 19.04.2025 14:00:07
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -459,8 +459,11 @@ namespace GeneratedCode.Константи
                 if (clear_all_before_save)
                     await base.BaseDelete();
 
+                
+
                 foreach (Record record in Records)
                 {
+                    
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                     {
                         {"col_a7", record.Дата},
@@ -558,8 +561,11 @@ namespace GeneratedCode.Константи
                 if (clear_all_before_save)
                     await base.BaseDelete();
 
+                
+
                 foreach (Record record in Records)
                 {
+                    
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                     {
                         {"col_a2", record.Назва},
@@ -657,8 +663,11 @@ namespace GeneratedCode.Константи
                 if (clear_all_before_save)
                     await base.BaseDelete();
 
+                
+
                 foreach (Record record in Records)
                 {
+                    
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                     {
                         {"col_a1", record.Обєкт},
@@ -756,8 +765,11 @@ namespace GeneratedCode.Константи
                 if (clear_all_before_save)
                     await base.BaseDelete();
 
+                
+
                 foreach (Record record in Records)
                 {
+                    
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                     {
                         {"col_a2", record.Дата},
@@ -857,8 +869,11 @@ namespace GeneratedCode.Константи
                 if (clear_all_before_save)
                     await base.BaseDelete();
 
+                
+
                 foreach (Record record in Records)
                 {
+                    
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                     {
                         {"col_a1", record.Користувач.UnigueID.UGuid},
@@ -1709,8 +1724,11 @@ namespace GeneratedCode.Константи
                 if (clear_all_before_save)
                     await base.BaseDelete();
 
+                
+
                 foreach (Record record in Records)
                 {
+                    
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                     {
                         {"col_a1", record.Дата},
@@ -2000,7 +2018,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Організації_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Організації_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Організації_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -2107,7 +2125,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a01"))
                 throw new Exception("Owner not exist");
@@ -2116,9 +2134,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a9", (int)record.Тип},
@@ -2410,7 +2431,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Номенклатура_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Номенклатура_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Номенклатура_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -2515,7 +2536,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a03"))
                 throw new Exception("Owner not exist");
@@ -2524,9 +2545,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.Файл.UnigueID.UGuid},
@@ -2736,7 +2760,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Виробники_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Виробники_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Виробники_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -2949,7 +2973,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ВидиНоменклатури_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ВидиНоменклатури_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ВидиНоменклатури_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -3159,7 +3183,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ПакуванняОдиниціВиміру_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПакуванняОдиниціВиміру_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПакуванняОдиниціВиміру_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -3376,7 +3400,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Валюти_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Валюти_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Валюти_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -3643,7 +3667,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Контрагенти_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Контрагенти_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Контрагенти_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -3752,7 +3776,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
@@ -3761,9 +3785,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_d2", (int)record.Тип},
@@ -3888,7 +3915,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
@@ -3897,9 +3924,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.Файл.UnigueID.UGuid},
@@ -4163,7 +4193,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Склади_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Склади_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Склади_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -4270,7 +4300,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a10"))
                 throw new Exception("Owner not exist");
@@ -4279,9 +4309,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_e2", (int)record.Тип},
@@ -4508,7 +4541,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ВидиЦін_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ВидиЦін_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ВидиЦін_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -4711,7 +4744,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ВидиЦінПостачальників_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ВидиЦінПостачальників_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ВидиЦінПостачальників_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -4945,7 +4978,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Користувачі_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Користувачі_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Користувачі_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -5050,7 +5083,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a14"))
                 throw new Exception("Owner not exist");
@@ -5059,9 +5092,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_f8", (int)record.Тип},
@@ -5317,7 +5353,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ФізичніОсоби_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ФізичніОсоби_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ФізичніОсоби_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -5424,7 +5460,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a16"))
                 throw new Exception("Owner not exist");
@@ -5433,9 +5469,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_h1", (int)record.Тип},
@@ -5662,7 +5701,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [СтруктураПідприємства_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{СтруктураПідприємства_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(СтруктураПідприємства_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -5860,7 +5899,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [КраїниСвіту_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{КраїниСвіту_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(КраїниСвіту_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -6078,7 +6117,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Файли_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Файли_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Файли_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -6286,7 +6325,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ХарактеристикиНоменклатури_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ХарактеристикиНоменклатури_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ХарактеристикиНоменклатури_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -6493,7 +6532,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Номенклатура_Папки_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Номенклатура_Папки_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Номенклатура_Папки_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -6716,7 +6755,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Контрагенти_Папки_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Контрагенти_Папки_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Контрагенти_Папки_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -6939,7 +6978,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Склади_Папки_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Склади_Папки_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Склади_Папки_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -7163,7 +7202,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Каси_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Каси_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Каси_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -7386,7 +7425,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [БанківськіРахункиОрганізацій_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{БанківськіРахункиОрганізацій_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(БанківськіРахункиОрганізацій_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -7676,7 +7715,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ДоговориКонтрагентів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ДоговориКонтрагентів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ДоговориКонтрагентів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -7894,7 +7933,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [БанківськіРахункиКонтрагентів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{БанківськіРахункиКонтрагентів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(БанківськіРахункиКонтрагентів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -8128,7 +8167,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [СтаттяРухуКоштів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{СтаттяРухуКоштів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(СтаттяРухуКоштів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -8221,7 +8260,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a45"))
                 throw new Exception("Owner not exist");
@@ -8230,9 +8269,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_j3", (int)record.ГосподарськаОперація},
@@ -8447,7 +8489,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [СеріїНоменклатури_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{СеріїНоменклатури_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(СеріїНоменклатури_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -8663,7 +8705,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ПартіяТоварівКомпозит_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПартіяТоварівКомпозит_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПартіяТоварівКомпозит_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -8886,7 +8928,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ВидиЗапасів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ВидиЗапасів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ВидиЗапасів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -9214,7 +9256,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Банки_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Банки_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Банки_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -9417,7 +9459,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [СкладськіПриміщення_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{СкладськіПриміщення_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(СкладськіПриміщення_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -9655,7 +9697,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [СкладськіКомірки_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{СкладськіКомірки_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(СкладськіКомірки_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -9856,7 +9898,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ОбластьЗберігання_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ОбластьЗберігання_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ОбластьЗберігання_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -10074,7 +10116,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ТипорозміриКомірок_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ТипорозміриКомірок_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ТипорозміриКомірок_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -10286,7 +10328,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [СкладськіКомірки_Папки_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{СкладськіКомірки_Папки_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(СкладськіКомірки_Папки_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -10515,7 +10557,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [Блокнот_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{Блокнот_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(Блокнот_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -10752,7 +10794,7 @@ namespace GeneratedCode.Довідники
             string[] presentationField = new string [ЗбереженіЗвіти_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗбереженіЗвіти_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ЗбереженіЗвіти_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> GetDeletionLabel()
@@ -10909,7 +10951,7 @@ namespace GeneratedCode.Довідники
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b04"))
                 throw new Exception("Owner not exist");
@@ -10918,9 +10960,12 @@ namespace GeneratedCode.Довідники
                 
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
+            
             
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a2", record.А},
@@ -11316,14 +11361,14 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипиКонтактноїІнформації>> ТипиКонтактноїІнформації_List()
         {
-            return new List<NameValue<ТипиКонтактноїІнформації>>() {
+            return [
             new NameValue<ТипиКонтактноїІнформації>("Адрес", ТипиКонтактноїІнформації.Адрес),
             new NameValue<ТипиКонтактноїІнформації>("Телефон", ТипиКонтактноїІнформації.Телефон),
             new NameValue<ТипиКонтактноїІнформації>("Електронна пошта", ТипиКонтактноїІнформації.ЕлектроннаПошта),
             new NameValue<ТипиКонтактноїІнформації>("Сайт", ТипиКонтактноїІнформації.Сайт),
             new NameValue<ТипиКонтактноїІнформації>("Skype", ТипиКонтактноїІнформації.Skype),
             new NameValue<ТипиКонтактноїІнформації>("Інше", ТипиКонтактноїІнформації.Інше),
-            };
+            ];
         }
         #endregion
     
@@ -11356,13 +11401,13 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипиНоменклатури>> ТипиНоменклатури_List()
         {
-            return new List<NameValue<ТипиНоменклатури>>() {
+            return [
             new NameValue<ТипиНоменклатури>("Товар", ТипиНоменклатури.Товар),
             new NameValue<ТипиНоменклатури>("Послуга", ТипиНоменклатури.Послуга),
             new NameValue<ТипиНоменклатури>("Робота", ТипиНоменклатури.Робота),
             new NameValue<ТипиНоменклатури>("Тара", ТипиНоменклатури.Тара),
             new NameValue<ТипиНоменклатури>("Набір", ТипиНоменклатури.Набір),
-            };
+            ];
         }
         #endregion
     
@@ -11389,10 +11434,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипиСкладів>> ТипиСкладів_List()
         {
-            return new List<NameValue<ТипиСкладів>>() {
+            return [
             new NameValue<ТипиСкладів>("Гуртовий", ТипиСкладів.Гуртовий),
             new NameValue<ТипиСкладів>("Роздрібний", ТипиСкладів.Роздрібний),
-            };
+            ];
         }
         #endregion
     
@@ -11419,10 +11464,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<СтатьФізичноїОсоби>> СтатьФізичноїОсоби_List()
         {
-            return new List<NameValue<СтатьФізичноїОсоби>>() {
+            return [
             new NameValue<СтатьФізичноїОсоби>("Чоловік", СтатьФізичноїОсоби.Чоловік),
             new NameValue<СтатьФізичноїОсоби>("Жінка", СтатьФізичноїОсоби.Жінка),
-            };
+            ];
         }
         #endregion
     
@@ -11451,11 +11496,11 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<СтатусиДоговорівКонтрагентів>> СтатусиДоговорівКонтрагентів_List()
         {
-            return new List<NameValue<СтатусиДоговорівКонтрагентів>>() {
+            return [
             new NameValue<СтатусиДоговорівКонтрагентів>("Не узгоджений", СтатусиДоговорівКонтрагентів.НеУзгоджений),
             new NameValue<СтатусиДоговорівКонтрагентів>("Діє", СтатусиДоговорівКонтрагентів.Діє),
             new NameValue<СтатусиДоговорівКонтрагентів>("Закритий", СтатусиДоговорівКонтрагентів.Закритий),
-            };
+            ];
         }
         #endregion
     
@@ -11528,7 +11573,7 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ГосподарськіОперації>> ГосподарськіОперації_List()
         {
-            return new List<NameValue<ГосподарськіОперації>>() {
+            return [
             new NameValue<ГосподарськіОперації>("Замовлення в постачальника", ГосподарськіОперації.ЗамовленняВПостачальника),
             new NameValue<ГосподарськіОперації>("Оплата постачальнику", ГосподарськіОперації.ОплатаПостачальнику),
             new NameValue<ГосподарськіОперації>("Оприбуткування товарів", ГосподарськіОперації.ОприбуткуванняТоварів),
@@ -11554,7 +11599,7 @@ namespace GeneratedCode.Перелічення
             new NameValue<ГосподарськіОперації>("Повернення товарів постачальнику", ГосподарськіОперації.ПоверненняТоварівПостачальнику),
             new NameValue<ГосподарськіОперації>("Введення залишків", ГосподарськіОперації.ВведенняЗалишків),
             new NameValue<ГосподарськіОперації>("Внутрішнє споживання товарів", ГосподарськіОперації.ВнутрішнєСпоживанняТоварів),
-            };
+            ];
         }
         #endregion
     
@@ -11581,10 +11626,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипДоговорів>> ТипДоговорів_List()
         {
-            return new List<NameValue<ТипДоговорів>>() {
+            return [
             new NameValue<ТипДоговорів>("З покупцями", ТипДоговорів.ЗПокупцями),
             new NameValue<ТипДоговорів>("З постачальниками", ТипДоговорів.ЗПостачальниками),
-            };
+            ];
         }
         #endregion
     
@@ -11617,13 +11662,13 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<СпособиДоставки>> СпособиДоставки_List()
         {
-            return new List<NameValue<СпособиДоставки>>() {
+            return [
             new NameValue<СпособиДоставки>("Самовивіз", СпособиДоставки.Самовивіз),
             new NameValue<СпособиДоставки>("До клієнта", СпособиДоставки.ДоКлієнта),
             new NameValue<СпособиДоставки>("Силами перевізника", СпособиДоставки.СиламиПеревізника),
             new NameValue<СпособиДоставки>("Нашими силами", СпособиДоставки.НашимиСиламиЗАдресиВідправника),
             new NameValue<СпособиДоставки>("Поручення експедитору", СпособиДоставки.ПорученняЕкспедитору),
-            };
+            ];
         }
         #endregion
     
@@ -11652,11 +11697,11 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ФормаОплати>> ФормаОплати_List()
         {
-            return new List<NameValue<ФормаОплати>>() {
+            return [
             new NameValue<ФормаОплати>("Готівка", ФормаОплати.Готівка),
             new NameValue<ФормаОплати>("Безготівка", ФормаОплати.Безготівка),
             new NameValue<ФормаОплати>("Взаєморозрахунок", ФормаОплати.Взаєморозрахунок),
-            };
+            ];
         }
         #endregion
     
@@ -11687,12 +11732,12 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<СтатусиЗамовленьКлієнтів>> СтатусиЗамовленьКлієнтів_List()
         {
-            return new List<NameValue<СтатусиЗамовленьКлієнтів>>() {
+            return [
             new NameValue<СтатусиЗамовленьКлієнтів>("НеУзгоджений", СтатусиЗамовленьКлієнтів.НеУзгоджений),
             new NameValue<СтатусиЗамовленьКлієнтів>("ДоЗабезпечення", СтатусиЗамовленьКлієнтів.ДоЗабезпечення),
             new NameValue<СтатусиЗамовленьКлієнтів>("ДоВідгрузки", СтатусиЗамовленьКлієнтів.ДоВідгрузки),
             new NameValue<СтатусиЗамовленьКлієнтів>("Закритий", СтатусиЗамовленьКлієнтів.Закритий),
-            };
+            ];
         }
         #endregion
     
@@ -11721,11 +11766,11 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<СтатусиРеалізаціїТоварівТаПослуг>> СтатусиРеалізаціїТоварівТаПослуг_List()
         {
-            return new List<NameValue<СтатусиРеалізаціїТоварівТаПослуг>>() {
+            return [
             new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("ДоОплати", СтатусиРеалізаціїТоварівТаПослуг.ДоОплати),
             new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("ВДорозі", СтатусиРеалізаціїТоварівТаПослуг.ВДорозі),
             new NameValue<СтатусиРеалізаціїТоварівТаПослуг>("Відгружено", СтатусиРеалізаціїТоварівТаПослуг.Відгружено),
-            };
+            ];
         }
         #endregion
     
@@ -11754,11 +11799,11 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ВидиРухуКоштів>> ВидиРухуКоштів_List()
         {
-            return new List<NameValue<ВидиРухуКоштів>>() {
+            return [
             new NameValue<ВидиРухуКоштів>("Оплата праці", ВидиРухуКоштів.ОплатаПраці),
             new NameValue<ВидиРухуКоштів>("Податок на прибуток", ВидиРухуКоштів.ПодатокНаПрибуток),
             new NameValue<ВидиРухуКоштів>("Оплата оборотних активів", ВидиРухуКоштів.ОплатаОборотнихАктивів),
-            };
+            ];
         }
         #endregion
     
@@ -11785,10 +11830,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<СтатусиПереміщенняТоварів>> СтатусиПереміщенняТоварів_List()
         {
-            return new List<NameValue<СтатусиПереміщенняТоварів>>() {
+            return [
             new NameValue<СтатусиПереміщенняТоварів>("Відгружено", СтатусиПереміщенняТоварів.Відгружено),
             new NameValue<СтатусиПереміщенняТоварів>("Принято", СтатусиПереміщенняТоварів.Принято),
-            };
+            ];
         }
         #endregion
     
@@ -11819,12 +11864,12 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<СтатусиЗамовленьПостачальникам>> СтатусиЗамовленьПостачальникам_List()
         {
-            return new List<NameValue<СтатусиЗамовленьПостачальникам>>() {
+            return [
             new NameValue<СтатусиЗамовленьПостачальникам>("НеУзгоджений", СтатусиЗамовленьПостачальникам.НеУзгоджений),
             new NameValue<СтатусиЗамовленьПостачальникам>("Узгоджений", СтатусиЗамовленьПостачальникам.Узгоджений),
             new NameValue<СтатусиЗамовленьПостачальникам>("Підтверджений", СтатусиЗамовленьПостачальникам.Підтверджений),
             new NameValue<СтатусиЗамовленьПостачальникам>("Закритий", СтатусиЗамовленьПостачальникам.Закритий),
-            };
+            ];
         }
         #endregion
     
@@ -11851,10 +11896,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипДокументуПартіяТоварівКомпозит>> ТипДокументуПартіяТоварівКомпозит_List()
         {
-            return new List<NameValue<ТипДокументуПартіяТоварівКомпозит>>() {
+            return [
             new NameValue<ТипДокументуПартіяТоварівКомпозит>("Поступлення товарів та послуг", ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг),
             new NameValue<ТипДокументуПартіяТоварівКомпозит>("Введення залишків", ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків),
-            };
+            ];
         }
         #endregion
     
@@ -11881,10 +11926,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипЗапасів>> ТипЗапасів_List()
         {
-            return new List<NameValue<ТипЗапасів>>() {
+            return [
             new NameValue<ТипЗапасів>("Товар", ТипЗапасів.Товар),
             new NameValue<ТипЗапасів>("Послуга", ТипЗапасів.Послуга),
-            };
+            ];
         }
         #endregion
     
@@ -11913,11 +11958,11 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипДокументуПродажіДокументКомпозит>> ТипДокументуПродажіДокументКомпозит_List()
         {
-            return new List<NameValue<ТипДокументуПродажіДокументКомпозит>>() {
+            return [
             new NameValue<ТипДокументуПродажіДокументКомпозит>("ЗамовленняКлієнта", ТипДокументуПродажіДокументКомпозит.ЗамовленняКлієнта),
             new NameValue<ТипДокументуПродажіДокументКомпозит>("АктВиконанихРобіт", ТипДокументуПродажіДокументКомпозит.АктВиконанихРобіт),
             new NameValue<ТипДокументуПродажіДокументКомпозит>("РеалізаціяТоварівТаПослуг", ТипДокументуПродажіДокументКомпозит.РеалізаціяТоварівТаПослуг),
-            };
+            ];
         }
         #endregion
     
@@ -11944,10 +11989,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<МетодиСписанняПартій>> МетодиСписанняПартій_List()
         {
-            return new List<NameValue<МетодиСписанняПартій>>() {
+            return [
             new NameValue<МетодиСписанняПартій>("FIFO (спочатку списуються партії які прийшли першими)", МетодиСписанняПартій.FIFO),
             new NameValue<МетодиСписанняПартій>("LIFO (спочатку списуються партії які прийшли останніми)", МетодиСписанняПартій.LIFO),
-            };
+            ];
         }
         #endregion
     
@@ -11974,10 +12019,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипиКонтрагентів>> ТипиКонтрагентів_List()
         {
-            return new List<NameValue<ТипиКонтрагентів>>() {
+            return [
             new NameValue<ТипиКонтрагентів>("Постачальник", ТипиКонтрагентів.Постачальник),
             new NameValue<ТипиКонтрагентів>("Клієнт", ТипиКонтрагентів.Клієнт),
-            };
+            ];
         }
         #endregion
     
@@ -12004,10 +12049,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<НалаштуванняАдресногоЗберігання>> НалаштуванняАдресногоЗберігання_List()
         {
-            return new List<NameValue<НалаштуванняАдресногоЗберігання>>() {
+            return [
             new NameValue<НалаштуванняАдресногоЗберігання>("Не використовувати", НалаштуванняАдресногоЗберігання.НеВикористовувати),
             new NameValue<НалаштуванняАдресногоЗберігання>("Комірка", НалаштуванняАдресногоЗберігання.Комірка),
-            };
+            ];
         }
         #endregion
     
@@ -12036,11 +12081,11 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ТипиСкладськихКомірок>> ТипиСкладськихКомірок_List()
         {
-            return new List<NameValue<ТипиСкладськихКомірок>>() {
+            return [
             new NameValue<ТипиСкладськихКомірок>("Приймання", ТипиСкладськихКомірок.Приймання),
             new NameValue<ТипиСкладськихКомірок>("Відвантаження", ТипиСкладськихКомірок.Відвантаження),
             new NameValue<ТипиСкладськихКомірок>("Зберігання", ТипиСкладськихКомірок.Зберігання),
-            };
+            ];
         }
         #endregion
     
@@ -12067,10 +12112,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ПричиниЗакриттяЗамовленняКлієнта>> ПричиниЗакриттяЗамовленняКлієнта_List()
         {
-            return new List<NameValue<ПричиниЗакриттяЗамовленняКлієнта>>() {
+            return [
             new NameValue<ПричиниЗакриттяЗамовленняКлієнта>("Відмова", ПричиниЗакриттяЗамовленняКлієнта.Відмова),
             new NameValue<ПричиниЗакриттяЗамовленняКлієнта>("Інше", ПричиниЗакриттяЗамовленняКлієнта.Інше),
-            };
+            ];
         }
         #endregion
     
@@ -12097,10 +12142,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ПричиниЗакриттяРахункуФактури>> ПричиниЗакриттяРахункуФактури_List()
         {
-            return new List<NameValue<ПричиниЗакриттяРахункуФактури>>() {
+            return [
             new NameValue<ПричиниЗакриттяРахункуФактури>("Відмова", ПричиниЗакриттяРахункуФактури.Відмова),
             new NameValue<ПричиниЗакриттяРахункуФактури>("Інше", ПричиниЗакриттяРахункуФактури.Інше),
-            };
+            ];
         }
         #endregion
     
@@ -12127,10 +12172,10 @@ namespace GeneratedCode.Перелічення
 
         public static List<NameValue<ПричиниЗакриттяЗамовленняПостачальнику>> ПричиниЗакриттяЗамовленняПостачальнику_List()
         {
-            return new List<NameValue<ПричиниЗакриттяЗамовленняПостачальнику>>() {
+            return [
             new NameValue<ПричиниЗакриттяЗамовленняПостачальнику>("Відмова", ПричиниЗакриттяЗамовленняПостачальнику.Відмова),
             new NameValue<ПричиниЗакриттяЗамовленняПостачальнику>("Інше", ПричиниЗакриттяЗамовленняПостачальнику.Інше),
-            };
+            ];
         }
         #endregion
     
@@ -12313,11 +12358,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняПостачальникам
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -12465,7 +12511,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ЗамовленняПостачальнику_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗамовленняПостачальнику_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ЗамовленняПостачальнику_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -12501,11 +12547,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняПостачальникам
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -12652,7 +12699,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a25"))
                 throw new Exception("Owner not exist");
@@ -12668,9 +12715,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_b2", ++sequenceNumber_НомерРядка},
+                    {"col_b2", record.НомерРядка},
                     {"col_o4", record.Номенклатура.UnigueID.UGuid},
                     {"col_a1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a2", record.Пакування.UnigueID.UGuid},
@@ -13093,41 +13143,22 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Закупівлі
-            {
-                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ЗамовленняПостачальникам
-            {
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Закупівлі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -13289,7 +13320,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПоступленняТоварівТаПослуг_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПоступленняТоварівТаПослуг_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПоступленняТоварівТаПослуг_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -13325,41 +13356,22 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Закупівлі
-            {
-                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ЗамовленняПостачальникам
-            {
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Закупівлі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -13516,7 +13528,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a32"))
                 throw new Exception("Owner not exist");
@@ -13532,9 +13544,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_b3", ++sequenceNumber_НомерРядка},
+                    {"col_b3", record.НомерРядка},
                     {"col_a9", record.Номенклатура.UnigueID.UGuid},
                     {"col_b1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_b4", record.Серія.UnigueID.UGuid},
@@ -13963,17 +13978,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняКлієнтів
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -14129,7 +14141,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ЗамовленняКлієнта_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗамовленняКлієнта_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ЗамовленняКлієнта_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -14165,17 +14177,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняКлієнтів
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -14320,7 +14329,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a34"))
                 throw new Exception("Owner not exist");
@@ -14336,9 +14345,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", ++sequenceNumber_НомерРядка},
+                    {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -14756,41 +14768,22 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ЗамовленняКлієнтів
-            {
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗКлієнтами
-            {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Продажі
-            {
-                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Продажі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -14948,7 +14941,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [РеалізаціяТоварівТаПослуг_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{РеалізаціяТоварівТаПослуг_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(РеалізаціяТоварівТаПослуг_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -14984,41 +14977,22 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ЗамовленняКлієнтів
-            {
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗКлієнтами
-            {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Продажі
-            {
-                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Продажі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -15179,7 +15153,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a36"))
                 throw new Exception("Owner not exist");
@@ -15195,9 +15169,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_d2", record.Номенклатура.UnigueID.UGuid},
                     {"col_d3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a2", record.Серія.UnigueID.UGuid},
@@ -15565,9 +15542,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -15679,7 +15654,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ВстановленняЦінНоменклатури_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ВстановленняЦінНоменклатури_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ВстановленняЦінНоменклатури_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -15715,9 +15690,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -15848,7 +15821,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a42"))
                 throw new Exception("Owner not exist");
@@ -15864,9 +15837,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_h1", record.Номенклатура.UnigueID.UGuid},
                     {"col_h2", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_h3", record.Пакування.UnigueID.UGuid},
@@ -16084,23 +16060,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РухКоштів
-            {
-                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РухКоштів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -16230,7 +16199,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПрихіднийКасовийОрдер_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПрихіднийКасовийОрдер_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПрихіднийКасовийОрдер_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -16266,23 +16235,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РухКоштів
-            {
-                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РухКоштів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -16413,7 +16375,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a44"))
                 throw new Exception("Owner not exist");
@@ -16429,9 +16391,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_j4", record.Замовлення},
                     {"col_j5", record.Сума},
                     {"col_j6", record.Підрозділ.UnigueID.UGuid},
@@ -16655,23 +16620,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РухКоштів
-            {
-                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РухКоштів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -16805,7 +16763,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [РозхіднийКасовийОрдер_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{РозхіднийКасовийОрдер_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(РозхіднийКасовийОрдер_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -16841,23 +16799,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РухКоштів
-            {
-                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РухКоштів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -16990,7 +16941,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a48"))
                 throw new Exception("Owner not exist");
@@ -17006,9 +16957,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_l4", record.Замовлення},
                     {"col_l5", record.Сума},
                     {"col_l6", record.ВалютаВзаєморозрахунків.UnigueID.UGuid},
@@ -17237,23 +17191,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -17389,7 +17336,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПереміщенняТоварів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПереміщенняТоварів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПереміщенняТоварів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -17425,23 +17372,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -17580,7 +17520,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a31"))
                 throw new Exception("Owner not exist");
@@ -17596,9 +17536,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_b8", ++sequenceNumber_НомерРядка},
+                    {"col_b8", record.НомерРядка},
                     {"col_b3", record.Номенклатура.UnigueID.UGuid},
                     {"col_b4", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -17835,35 +17778,20 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Закупівлі
-            {
-                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Закупівлі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -18003,7 +17931,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПоверненняТоварівПостачальнику_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПоверненняТоварівПостачальнику_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПоверненняТоварівПостачальнику_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -18039,35 +17967,20 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Закупівлі
-            {
-                РегістриНакопичення.Закупівлі_RecordsSet regAccum = new РегістриНакопичення.Закупівлі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Закупівлі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -18210,7 +18123,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a51"))
                 throw new Exception("Owner not exist");
@@ -18226,9 +18139,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_d8", record.Номенклатура.UnigueID.UGuid},
                     {"col_d9", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a3", record.Серія.UnigueID.UGuid},
@@ -18457,35 +18373,20 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗКлієнтами
-            {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Продажі
-            {
-                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Продажі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -18617,7 +18518,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПоверненняТоварівВідКлієнта_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПоверненняТоварівВідКлієнта_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПоверненняТоварівВідКлієнта_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -18653,35 +18554,20 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗКлієнтами
-            {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Продажі
-            {
-                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Продажі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -18826,7 +18712,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a53"))
                 throw new Exception("Owner not exist");
@@ -18842,9 +18728,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_h2", ++sequenceNumber_НомерРядка},
+                    {"col_h2", record.НомерРядка},
                     {"col_g3", record.Номенклатура.UnigueID.UGuid},
                     {"col_g4", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -19072,17 +18961,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Продажі
-            {
-                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Продажі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -19212,7 +19098,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [АктВиконанихРобіт_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{АктВиконанихРобіт_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(АктВиконанихРобіт_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -19248,17 +19134,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // Продажі
-            {
-                РегістриНакопичення.Продажі_RecordsSet regAccum = new РегістриНакопичення.Продажі_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.Продажі_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -19387,7 +19270,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a81"))
                 throw new Exception("Owner not exist");
@@ -19403,9 +19286,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_c4", ++sequenceNumber_НомерРядка},
+                    {"col_c4", record.НомерРядка},
                     {"col_b8", record.Номенклатура.UnigueID.UGuid},
                     {"col_b9", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c1", record.Кількість},
@@ -19743,41 +19629,22 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗКлієнтами
-            {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РухКоштів
-            {
-                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РухКоштів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -19916,7 +19783,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ВведенняЗалишків_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ВведенняЗалишків_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ВведенняЗалишків_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -19952,41 +19819,22 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗКлієнтами
-            {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РухКоштів
-            {
-                РегістриНакопичення.РухКоштів_RecordsSet regAccum = new РегістриНакопичення.РухКоштів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РухКоштів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -20125,7 +19973,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
@@ -20141,9 +19989,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_e4", ++sequenceNumber_НомерРядка},
+                    {"col_e4", record.НомерРядка},
                     {"col_d6", record.Номенклатура.UnigueID.UGuid},
                     {"col_d7", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -20271,7 +20122,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
@@ -20287,9 +20138,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_e5", record.Каса.UnigueID.UGuid},
                     {"col_e6", record.Сума},
                     
@@ -20405,7 +20259,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
@@ -20421,9 +20275,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_e7", record.БанківськийРахунок.UnigueID.UGuid},
                     {"col_e8", record.Сума},
                     
@@ -20545,7 +20402,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
@@ -20561,9 +20418,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_e9", record.Контрагент.UnigueID.UGuid},
                     {"col_f1", record.Валюта.UnigueID.UGuid},
                     {"col_f2", record.Сума},
@@ -20749,9 +20609,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -20861,7 +20719,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [НадлишкиТоварів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{НадлишкиТоварів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(НадлишкиТоварів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -20897,9 +20755,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -21024,7 +20880,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a88"))
                 throw new Exception("Owner not exist");
@@ -21038,6 +20894,7 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
                     {"col_g2", record.Номенклатура.UnigueID.UGuid},
@@ -21226,9 +21083,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -21338,7 +21193,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПересортицяТоварів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПересортицяТоварів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПересортицяТоварів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -21374,9 +21229,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -21501,7 +21354,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a90"))
                 throw new Exception("Owner not exist");
@@ -21517,9 +21370,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_h7", record.Номенклатура.UnigueID.UGuid},
                     {"col_h8", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_i1", record.Кількість},
@@ -21714,9 +21570,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -21830,7 +21684,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПерерахунокТоварів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПерерахунокТоварів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПерерахунокТоварів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -21866,9 +21720,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -22003,7 +21855,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a92"))
                 throw new Exception("Owner not exist");
@@ -22019,6 +21871,9 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
                     {"col_i8", record.Кількість},
@@ -22028,7 +21883,7 @@ namespace GeneratedCode.Документи
                     {"col_j4", record.Номенклатура.UnigueID.UGuid},
                     {"col_j5", record.Пакування.UnigueID.UGuid},
                     {"col_j6", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_a2", record.Коментар},
                     
                 };
@@ -22227,23 +22082,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -22361,7 +22209,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПсуванняТоварів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПсуванняТоварів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПсуванняТоварів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -22397,23 +22245,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -22556,7 +22397,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a94"))
                 throw new Exception("Owner not exist");
@@ -22572,9 +22413,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a3", ++sequenceNumber_НомерРядка},
+                    {"col_a3", record.НомерРядка},
                     {"col_b2", record.Номенклатура.UnigueID.UGuid},
                     {"col_b3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a1", record.Серія.UnigueID.UGuid},
@@ -22785,23 +22629,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -22921,7 +22758,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ВнутрішнєСпоживанняТоварів_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ВнутрішнєСпоживанняТоварів_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ВнутрішнєСпоживанняТоварів_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -22957,23 +22794,16 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариНаСкладах
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариНаСкладах_RecordsSet regAccum = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ПартіїТоварів
-            {
-                РегістриНакопичення.ПартіїТоварів_RecordsSet regAccum = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариНаСкладах_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ПартіїТоварів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -23116,7 +22946,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b07"))
                 throw new Exception("Owner not exist");
@@ -23132,9 +22962,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_d2", record.Номенклатура.UnigueID.UGuid},
                     {"col_d3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a2", record.Серія.UnigueID.UGuid},
@@ -23369,11 +23202,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ВільніЗалишки
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -23509,7 +23343,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [РахунокФактура_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{РахунокФактура_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(РахунокФактура_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -23545,11 +23379,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ВільніЗалишки
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -23694,7 +23529,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b10"))
                 throw new Exception("Owner not exist");
@@ -23710,9 +23545,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", ++sequenceNumber_НомерРядка},
+                    {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -24067,11 +23905,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариВКомірках
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариВКомірках_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -24187,7 +24026,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [РозміщенняТоварівНаСкладі_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{РозміщенняТоварівНаСкладі_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(РозміщенняТоварівНаСкладі_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -24223,11 +24062,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариВКомірках
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариВКомірках_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -24366,7 +24206,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a64"))
                 throw new Exception("Owner not exist");
@@ -24382,9 +24222,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
                     {"col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a4", record.Серія.UnigueID.UGuid},
@@ -24582,11 +24425,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариВКомірках
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариВКомірках_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -24700,7 +24544,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ПереміщенняТоварівНаСкладі_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ПереміщенняТоварівНаСкладі_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ПереміщенняТоварівНаСкладі_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -24736,11 +24580,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариВКомірках
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариВКомірках_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -24883,7 +24728,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b09"))
                 throw new Exception("Owner not exist");
@@ -24899,9 +24744,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
                     {"col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a4", record.Серія.UnigueID.UGuid},
@@ -25104,11 +24952,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариВКомірках
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариВКомірках_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -25224,7 +25073,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ЗбіркаТоварівНаСкладі_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗбіркаТоварівНаСкладі_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ЗбіркаТоварівНаСкладі_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -25260,11 +25109,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ТовариВКомірках
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ТовариВКомірках_RecordsSet regAccum = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ТовариВКомірках_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -25403,7 +25253,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b27"))
                 throw new Exception("Owner not exist");
@@ -25419,9 +25269,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
                     {"col_a3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_a4", record.Серія.UnigueID.UGuid},
@@ -25619,9 +25472,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -25733,7 +25584,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [РозміщенняНоменклатуриПоКоміркам_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{РозміщенняНоменклатуриПоКоміркам_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(РозміщенняНоменклатуриПоКоміркам_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -25769,9 +25620,7 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            await ValueTask.FromResult(true);
-            
+          await ValueTask.FromResult(true);
         }
   
 
@@ -25896,7 +25745,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b29"))
                 throw new Exception("Owner not exist");
@@ -25912,9 +25761,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_h1", record.Номенклатура.UnigueID.UGuid},
                     {"col_a2", record.Комірка.UnigueID.UGuid},
                     {"col_h3", record.Пакування.UnigueID.UGuid},
@@ -26101,17 +25953,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -26223,7 +26072,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [КорегуванняБоргу_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{КорегуванняБоргу_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(КорегуванняБоргу_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -26259,17 +26108,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // РозрахункиЗКлієнтами
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // РозрахункиЗПостачальниками
-            {
-                РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet regAccum = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -26396,7 +26242,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a65"))
                 throw new Exception("Owner not exist");
@@ -26412,9 +26258,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a1", ++sequenceNumber_НомерРядка},
+                    {"col_a1", record.НомерРядка},
                     {"col_e9", record.Контрагент.UnigueID.UGuid},
                     {"col_f1", record.Валюта.UnigueID.UGuid},
                     {"col_f2", record.Сума},
@@ -26627,17 +26476,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняКлієнтів
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -26765,7 +26611,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ЗакриттяЗамовленняКлієнта_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗакриттяЗамовленняКлієнта_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ЗакриттяЗамовленняКлієнта_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -26801,17 +26647,14 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняКлієнтів
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
-            }
-            
-            // ВільніЗалишки
-            {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet().Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -26950,7 +26793,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a96"))
                 throw new Exception("Owner not exist");
@@ -26966,9 +26809,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", ++sequenceNumber_НомерРядка},
+                    {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -27189,11 +27035,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ВільніЗалишки
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -27321,7 +27168,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ЗакриттяРахункуФактури_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗакриттяРахункуФактури_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ЗакриттяРахункуФактури_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -27357,11 +27204,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ВільніЗалишки
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ВільніЗалишки_RecordsSet regAccum = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ВільніЗалишки_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -27500,7 +27348,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b41"))
                 throw new Exception("Owner not exist");
@@ -27516,9 +27364,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", ++sequenceNumber_НомерРядка},
+                    {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -27739,11 +27590,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняПостачальникам
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -27871,7 +27723,7 @@ namespace GeneratedCode.Документи
             string[] presentationField = new string [ЗакриттяЗамовленняПостачальнику_Const.PRESENTATION_FIELDS.Length];
             for (int i = 0; i < presentationField.Length; i++) presentationField[i] = $"{joinTableAlias}.{ЗакриттяЗамовленняПостачальнику_Const.PRESENTATION_FIELDS[i]}";
             querySelect.Joins.Add(new Join(ЗакриттяЗамовленняПостачальнику_Const.TABLE, joinField, parentTable, joinTableAlias));
-            querySelect.FieldAndAlias.Add(new NameValue<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
+            querySelect.FieldAndAlias.Add(new ValueName<string>(presentationField.Length switch { 1 => presentationField[0], >1 => $"concat_ws (', ', " + string.Join(", ", presentationField) + ")", _ => "'#'" }, fieldAlias));
         }
 
         public async ValueTask<bool?> IsSpend()
@@ -27907,11 +27759,12 @@ namespace GeneratedCode.Документи
         /* Очищення регістрів накопичення */
         async void ClearRegAccum()
         {
-            
-            // ЗамовленняПостачальникам
+          
+            if(!this.UnigueID.IsEmpty())
             {
-                РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet regAccum = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-                await regAccum.Delete(this.UnigueID.UGuid);
+              
+                await new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet().Delete(this.UnigueID.UGuid);
+              
             }
             
         }
@@ -28050,7 +27903,7 @@ namespace GeneratedCode.Документи
             base.BaseClear();
         }
         
-        public async ValueTask Save(bool clear_all_before_save /*= true*/) 
+        public async ValueTask Save(bool clear_all_before_save) 
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b44"))
                 throw new Exception("Owner not exist");
@@ -28066,9 +27919,12 @@ namespace GeneratedCode.Документи
 
             foreach (Record record in Records)
             {
+                
+                record.НомерРядка = ++sequenceNumber_НомерРядка;
+                
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>()
                 {
-                    {"col_a2", ++sequenceNumber_НомерРядка},
+                    {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
                     {"col_c1", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
                     {"col_c2", record.Пакування.UnigueID.UGuid},
@@ -29517,7 +29373,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in ТовариНаСкладах_Const.AllowDocumentSpendTable)
@@ -29968,7 +29824,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ЗамовленняКлієнта_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ЗакриттяЗамовленняКлієнта_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in ЗамовленняКлієнтів_Const.AllowDocumentSpendTable)
@@ -30198,7 +30054,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПрихіднийКасовийОрдер_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РозхіднийКасовийОрдер_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.АктВиконанихРобіт_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.КорегуванняБоргу_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in РозрахункиЗКлієнтами_Const.AllowDocumentSpendTable)
@@ -30516,7 +30372,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in Закупівлі_Const.AllowDocumentSpendTable)
@@ -30775,7 +30631,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ЗамовленняКлієнта_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_9.uid IS NOT NULL THEN join_doc_9.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} WHEN join_doc_10.uid IS NOT NULL THEN join_doc_10.{Документи.РахунокФактура_Const.Назва} WHEN join_doc_11.uid IS NOT NULL THEN join_doc_11.{Документи.ЗакриттяЗамовленняКлієнта_Const.Назва} WHEN join_doc_12.uid IS NOT NULL THEN join_doc_12.{Документи.ЗакриттяРахункуФактури_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in ВільніЗалишки_Const.AllowDocumentSpendTable)
@@ -31110,7 +30966,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ЗамовленняПостачальнику_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ЗакриттяЗамовленняПостачальнику_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in ЗамовленняПостачальникам_Const.AllowDocumentSpendTable)
@@ -31333,7 +31189,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПрихіднийКасовийОрдер_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.РозхіднийКасовийОрдер_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.КорегуванняБоргу_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in РозрахункиЗПостачальниками_Const.AllowDocumentSpendTable)
@@ -31640,7 +31496,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПрихіднийКасовийОрдер_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РозхіднийКасовийОрдер_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ВведенняЗалишків_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in РухКоштів_Const.AllowDocumentSpendTable)
@@ -32060,7 +31916,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.ПоступленняТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ПереміщенняТоварів_Const.Назва} WHEN join_doc_4.uid IS NOT NULL THEN join_doc_4.{Документи.ПоверненняТоварівПостачальнику_Const.Назва} WHEN join_doc_5.uid IS NOT NULL THEN join_doc_5.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_6.uid IS NOT NULL THEN join_doc_6.{Документи.ВведенняЗалишків_Const.Назва} WHEN join_doc_7.uid IS NOT NULL THEN join_doc_7.{Документи.ПсуванняТоварів_Const.Назва} WHEN join_doc_8.uid IS NOT NULL THEN join_doc_8.{Документи.ВнутрішнєСпоживанняТоварів_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in ПартіїТоварів_Const.AllowDocumentSpendTable)
@@ -32561,7 +32417,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.РеалізаціяТоварівТаПослуг_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПоверненняТоварівВідКлієнта_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.АктВиконанихРобіт_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in Продажі_Const.AllowDocumentSpendTable)
@@ -32830,7 +32686,7 @@ namespace GeneratedCode.РегістриНакопичення
             if (docname_required)
             {
               string query_case = $"CASE WHEN join_doc_1.uid IS NOT NULL THEN join_doc_1.{Документи.РозміщенняТоварівНаСкладі_Const.Назва} WHEN join_doc_2.uid IS NOT NULL THEN join_doc_2.{Документи.ПереміщенняТоварівНаСкладі_Const.Назва} WHEN join_doc_3.uid IS NOT NULL THEN join_doc_3.{Документи.ЗбіркаТоварівНаСкладі_Const.Назва} END";
-              QuerySelect.FieldAndAlias.Add(new NameValue<string>(query_case, "docname"));
+              QuerySelect.FieldAndAlias.Add(new ValueName<string>(query_case, "docname"));
 
               int i = 0;
               foreach (string table in ТовариВКомірках_Const.AllowDocumentSpendTable)
