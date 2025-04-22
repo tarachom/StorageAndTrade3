@@ -24,7 +24,7 @@ namespace StorageAndTrade
 
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.Pointer = Program.Користувач;
-            Власник.AfterSelectFunc = async () => await LoadRecords();
+            Власник.AfterSelectFunc = async () => await BeforeLoadRecords();
         }
 
         #region Override
@@ -54,9 +54,14 @@ namespace StorageAndTrade
             await ТабличніСписки.ЗбереженіЗвіти_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        public async override ValueTask LoadRecords_OnFilter()
         {
-            return ТабличніСписки.ЗбереженіЗвіти_Записи.CreateFilter(TreeViewGrid);
+            await ТабличніСписки.ЗбереженіЗвіти_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        protected override void FillFilterList(ListFilterControl filterControl)
+        {
+            ТабличніСписки.ЗбереженіЗвіти_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -77,7 +82,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ЗбереженіЗвіти_Const.POINTER);
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

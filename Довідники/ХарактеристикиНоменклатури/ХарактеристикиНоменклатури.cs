@@ -33,16 +33,11 @@ namespace StorageAndTrade
                     page.ХарактеристикиНоменклатуриВласник.Pointer = new ХарактеристикиНоменклатури_Pointer(SelectPointerItem);
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => page);
-
                 await page.SetValue();
             });
 
             HBoxTop.PackStart(Власник, false, false, 2);
-            Власник.AfterSelectFunc = async () =>
-            {
-                ClearPages();
-                await LoadRecords();
-            };
+            Власник.AfterSelectFunc = async () => await BeforeLoadRecords();
         }
 
         #region Override
@@ -56,7 +51,6 @@ namespace StorageAndTrade
                     new Where(ХарактеристикиНоменклатури_Const.Номенклатура, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
             await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -71,18 +65,16 @@ namespace StorageAndTrade
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.ДодатиВідбір(TreeViewGrid, ХарактеристикиНоменклатури_Функції.Відбори(searchText));
 
             await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid, OpenFolder);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
-        async ValueTask LoadRecords_OnFilter()
+        public async override ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(LoadRecords_OnFilter);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        protected override void FillFilterList(ListFilterControl filterControl)
         {
-            return ТабличніСписки.ХарактеристикиНоменклатури_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
+            ТабличніСписки.ХарактеристикиНоменклатури_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -103,8 +95,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ХарактеристикиНоменклатури_Const.POINTER);
-            ClearPages();
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

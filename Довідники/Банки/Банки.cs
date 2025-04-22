@@ -18,10 +18,7 @@ namespace StorageAndTrade
     {
         public Банки() : base()
         {
-            CreateLink(HBoxTop, "Завантаження списку банків", () =>
-            {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження списку Банків", () => new Обробка_ЗавантаженняБанків());
-            });
+            CreateLink(HBoxTop, "Завантаження списку банків", () => NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Завантаження списку Банків", () => new Обробка_ЗавантаженняБанків()));
 
             ТабличніСписки.Банки_Записи.AddColumns(TreeViewGrid);
         }
@@ -45,9 +42,14 @@ namespace StorageAndTrade
             await ТабличніСписки.Банки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        public async override ValueTask LoadRecords_OnFilter()
         {
-            return ТабличніСписки.Банки_Записи.CreateFilter(TreeViewGrid);
+            await ТабличніСписки.Банки_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        protected override void FillFilterList(ListFilterControl filterControl)
+        {
+            ТабличніСписки.Банки_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -68,7 +70,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Банки_Const.POINTER);
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

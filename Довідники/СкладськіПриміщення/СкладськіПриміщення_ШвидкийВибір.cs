@@ -24,7 +24,7 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(СкладВласник, false, false, 2);
             СкладВласник.Caption = "Склад:";
-            СкладВласник.AfterSelectFunc = async () => { await LoadRecords(); };
+            СкладВласник.AfterSelectFunc = async () =>  await BeforeLoadRecords(); 
         }
 
         public override async ValueTask LoadRecords()

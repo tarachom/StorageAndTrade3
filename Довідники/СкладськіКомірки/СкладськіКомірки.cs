@@ -17,39 +17,23 @@ namespace StorageAndTrade
 {
     public class СкладськіКомірки : ДовідникЖурнал
     {
-        CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         СкладськіКомірки_Папки ДеревоПапок;
-
         public СкладськіПриміщення_PointerControl Власник = new СкладськіПриміщення_PointerControl() { Caption = "Приміщення:" };
-
 
         public СкладськіКомірки()
         {
-            //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += async (sender, args) =>
-            {
-                ClearPages();
-                if (checkButtonIsHierarchy.Active)
-                    await LoadRecords();
-                else
-                    await LoadRecords_TreeCallBack();
-            };
-
-            HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
+            AddIsHierarchy();
 
             //Дерево папок
             ДеревоПапок = new СкладськіКомірки_Папки()
             {
                 WidthRequest = 500,
+                CompositeMode = true,
                 CallBack_RowActivated = async () =>
                 {
-                    if (checkButtonIsHierarchy.Active)
-                    {
-                        ClearPages();
-                        await LoadRecords_TreeCallBack();
-                    }
-                },
-                CompositeMode = true
+                    if (IsHierarchy.Active)
+                        await BeforeLoadRecords_OnTree();
+                }
             };
             ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
@@ -64,7 +48,7 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            if (checkButtonIsHierarchy.Active)
+            if (IsHierarchy.Active)
             {
                 if (DirectoryPointerItem != null || SelectPointerItem != null)
                 {
@@ -75,10 +59,10 @@ namespace StorageAndTrade
                 await ДеревоПапок.LoadRecords();
             }
             else
-                await LoadRecords_TreeCallBack();
+                await BeforeLoadRecords_OnTree();
         }
 
-        async ValueTask LoadRecords_TreeCallBack()
+        public override async ValueTask LoadRecords_OnTree()
         {
             ТабличніСписки.СкладськіКомірки_Записи.ОчиститиВідбір(TreeViewGrid);
 
@@ -86,7 +70,7 @@ namespace StorageAndTrade
                 ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(СкладськіКомірки_Const.Приміщення, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
 
-            if (checkButtonIsHierarchy.Active)
+            if (IsHierarchy.Active)
                 ТабличніСписки.СкладськіКомірки_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(СкладськіКомірки_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
@@ -107,9 +91,14 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        public async override ValueTask LoadRecords_OnFilter()
         {
-            return ТабличніСписки.СкладськіКомірки_Записи.CreateFilter(TreeViewGrid);
+            await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        protected override void FillFilterList(ListFilterControl filterControl)
+        {
+            ТабличніСписки.СкладськіКомірки_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -130,7 +119,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, СкладськіКомірки_Const.POINTER);
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

@@ -27,8 +27,7 @@ namespace StorageAndTrade.РегістриВідомостей
             НоменклатураВласник.AfterSelectFunc = async () =>
             {
                 SelectPointerItem?.Clear();
-                ClearPages();
-                await LoadRecords();
+                await BeforeLoadRecords();
             };
 
             //Характеристика Власник
@@ -38,8 +37,7 @@ namespace StorageAndTrade.РегістриВідомостей
             ХарактеристикиНоменклатуриВласник.AfterSelectFunc = async () =>
             {
                 SelectPointerItem?.Clear();
-                ClearPages();
-                await LoadRecords();
+                await BeforeLoadRecords();
             };
         }
 
@@ -60,7 +58,6 @@ namespace StorageAndTrade.РегістриВідомостей
             }
 
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -84,7 +81,6 @@ namespace StorageAndTrade.РегістриВідомостей
                 new Where(ШтрихкодиНоменклатури_Const.Штрихкод, Comparison.LIKE, searchText));
 
             await ТабличніСписки.ШтрихкодиНоменклатури_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(() => LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -145,8 +141,7 @@ namespace StorageAndTrade.РегістриВідомостей
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            ClearPages();
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
     }
 }

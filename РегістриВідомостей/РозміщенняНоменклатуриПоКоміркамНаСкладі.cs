@@ -29,7 +29,6 @@ namespace StorageAndTrade.РегістриВідомостей
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -41,7 +40,6 @@ namespace StorageAndTrade.РегістриВідомостей
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.РозміщенняНоменклатуриПоКоміркамНаСкладі_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -99,8 +97,7 @@ namespace StorageAndTrade.РегістриВідомостей
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            ClearPages();
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

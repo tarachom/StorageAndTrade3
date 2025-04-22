@@ -127,6 +127,7 @@ namespace StorageAndTrade
 
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Значення", cellText, "text", (int)Columns.Значення) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Значення);
@@ -138,6 +139,7 @@ namespace StorageAndTrade
 
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Телефон", cellText, "text", (int)Columns.Телефон) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Телефон);
@@ -149,6 +151,7 @@ namespace StorageAndTrade
 
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Email", cellText, "text", (int)Columns.ЕлектроннаПошта) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.ЕлектроннаПошта);
@@ -160,6 +163,7 @@ namespace StorageAndTrade
 
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Країна", cellText, "text", (int)Columns.Країна) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Країна);
@@ -171,6 +175,7 @@ namespace StorageAndTrade
 
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Область", cellText, "text", (int)Columns.Область) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Область);
@@ -182,6 +187,7 @@ namespace StorageAndTrade
 
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Район", cellText, "text", (int)Columns.Район) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Район);
@@ -193,6 +199,7 @@ namespace StorageAndTrade
 
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Місто", cellText, "text", (int)Columns.Місто) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Місто);

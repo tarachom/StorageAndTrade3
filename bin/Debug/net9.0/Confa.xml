@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>19.04.2025 14:00:07</DateTimeSave>
+  <DateTimeSave>22.04.2025 16:55:44</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -3492,6 +3492,7 @@ namespace StorageAndTrade
               <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>integer</Type>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
           </ElementFields>
           <ElementTableParts />
@@ -12885,6 +12886,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -12917,6 +12919,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -14141,6 +14144,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -14148,9 +14152,9 @@ FROM
                   <Size>0</Size>
                   <Height>0</Height>
                   <SortNum>2</SortNum>
-                  <MultipleSelect>1</MultipleSelect>
                   <Type>pointer</Type>
                   <Pointer>Довідники.Номенклатура</Pointer>
+                  <MultipleSelect>1</MultipleSelect>
                   <PresetntationFields Count="1">
                     <Field>Назва</Field>
                   </PresetntationFields>
@@ -14186,6 +14190,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -14673,6 +14678,7 @@ FROM
               <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>integer</Type>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
             <Field>
               <Name>ЧасДоставкиЗ</Name>
@@ -15307,6 +15313,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -15339,6 +15346,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -16474,6 +16482,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -16518,6 +16527,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -17045,6 +17055,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -18951,6 +18962,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -18995,6 +19007,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -19823,6 +19836,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -19867,6 +19881,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -20737,6 +20752,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -20781,6 +20797,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -21552,6 +21569,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -22291,6 +22309,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -22335,6 +22354,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -22445,6 +22465,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Каса</Name>
@@ -22539,6 +22560,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>БанківськийРахунок</Name>
@@ -22656,6 +22678,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>ТипКонтрагента</Name>
@@ -23988,6 +24011,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -24020,6 +24044,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>КількістьУпаковокФакт</Name>
@@ -24028,6 +24053,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -24638,6 +24664,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -24682,6 +24709,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -25322,6 +25350,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -25366,6 +25395,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -26126,6 +26156,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -26158,6 +26189,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -26917,6 +26949,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -26961,6 +26994,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -27532,6 +27566,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -27576,6 +27611,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -28148,6 +28184,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -28192,6 +28229,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>5</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -28709,6 +28747,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -29217,6 +29256,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>ТипКонтрагента</Name>
@@ -29835,6 +29875,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>1</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -29867,6 +29908,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>4</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -30637,6 +30679,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -30669,6 +30712,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -31407,6 +31451,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Номенклатура</Name>
@@ -31439,6 +31484,7 @@ FROM
                   <Height>0</Height>
                   <SortNum>100</SortNum>
                   <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
                 </Field>
                 <Field>
                   <Name>Пакування</Name>
@@ -38085,6 +38131,7 @@ SQL тип  непотрібно вказувати
               <Height>0</Height>
               <SortNum>100</SortNum>
               <Type>integer</Type>
+              <AutomaticNumbering>0</AutomaticNumbering>
             </Field>
           </ElementFields>
         </Form>

@@ -17,36 +17,22 @@ namespace StorageAndTrade
 {
     public class Номенклатура : ДовідникЖурнал
     {
-        CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         Номенклатура_Папки ДеревоПапок;
 
         public Номенклатура() : base()
         {
-            //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += async (sender, args) =>
-            {
-                ClearPages();
-                if (checkButtonIsHierarchy.Active)
-                    await LoadRecords();
-                else
-                    await LoadRecords_TreeCallBack();
-            };
-
-            HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
+            AddIsHierarchy();
 
             //Дерево папок
             ДеревоПапок = new Номенклатура_Папки()
             {
                 WidthRequest = 500,
+                CompositeMode = true,
                 CallBack_RowActivated = async () =>
                 {
-                    if (checkButtonIsHierarchy.Active)
-                    {
-                        ClearPages();
-                        await LoadRecords_TreeCallBack();
-                    }
-                },
-                CompositeMode = true
+                    if (IsHierarchy.Active)
+                        await BeforeLoadRecords_OnTree();
+                }
             };
             ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
@@ -59,7 +45,6 @@ namespace StorageAndTrade
                     page.Власник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ХарактеристикиНоменклатури_Const.FULLNAME}", () => page);
-
                 await page.SetValue();
             });
 
@@ -71,7 +56,6 @@ namespace StorageAndTrade
                     page.НоменклатураВласник.Pointer = new Номенклатура_Pointer(SelectPointerItem);
 
                 NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"{ШтрихкодиНоменклатури_Const.FULLNAME}", () => page);
-
                 await page.SetValue();
             });
 
@@ -85,7 +69,7 @@ namespace StorageAndTrade
 
         public override async ValueTask LoadRecords()
         {
-            if (checkButtonIsHierarchy.Active)
+            if (IsHierarchy.Active)
             {
                 if (DirectoryPointerItem != null || SelectPointerItem != null)
                 {
@@ -96,19 +80,18 @@ namespace StorageAndTrade
                 await ДеревоПапок.LoadRecords();
             }
             else
-                await LoadRecords_TreeCallBack();
+                await BeforeLoadRecords_OnTree();
         }
 
-        async ValueTask LoadRecords_TreeCallBack()
+        public override async ValueTask LoadRecords_OnTree()
         {
             ТабличніСписки.Номенклатура_Записи.ОчиститиВідбір(TreeViewGrid);
 
-            if (checkButtonIsHierarchy.Active)
+            if (IsHierarchy.Active)
                 ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid,
                     new Where(Номенклатура_Const.Папка, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
             await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            PagesShow(LoadRecords_TreeCallBack);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -119,18 +102,16 @@ namespace StorageAndTrade
             ТабличніСписки.Номенклатура_Записи.ДодатиВідбір(TreeViewGrid, Номенклатура_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid, OpenFolder);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
-        async ValueTask LoadRecords_OnFilter()
+        public async override ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.Номенклатура_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(LoadRecords_OnFilter);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        protected override void FillFilterList(ListFilterControl filterControl)
         {
-            return ТабличніСписки.Номенклатура_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
+            ТабличніСписки.Номенклатура_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -151,7 +132,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Номенклатура_Const.POINTER);
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

@@ -285,6 +285,7 @@ LIMIT 1
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Коєфіціент", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, Alignment = 1, MinWidth = 50 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -304,6 +305,7 @@ LIMIT 1
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Кількість", cellNumber, "text", (int)Columns.Кількість) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -334,6 +336,7 @@ LIMIT 1
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Ціна", cellNumber, "text", (int)Columns.Ціна) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -345,6 +348,7 @@ LIMIT 1
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", (int)Columns.Сума) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -356,6 +360,7 @@ LIMIT 1
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Скидка", cellNumber, "text", (int)Columns.Скидка) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 

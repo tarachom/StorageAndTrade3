@@ -192,6 +192,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Пак", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -203,6 +204,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Пак факт", cellNumber, "text", (int)Columns.КількістьУпаковокФакт) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -222,6 +224,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Кількість", cellNumber, "text", (int)Columns.Кількість) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -233,6 +236,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Кількість факт", cellNumber, "text", (int)Columns.КількістьФакт) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -244,6 +248,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Коментар", cellText, "text", (int)Columns.Коментар) { Resizable = true, MinWidth = 100 };
 
                 SetColIndex(column, Columns.Коментар);

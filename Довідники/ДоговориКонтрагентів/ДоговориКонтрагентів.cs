@@ -23,11 +23,7 @@ namespace StorageAndTrade
             //Власник
             HBoxTop.PackStart(КонтрагентВласник, false, false, 2);
             КонтрагентВласник.Caption = $"{Контрагенти_Const.FULLNAME}:";
-            КонтрагентВласник.AfterSelectFunc = async () =>
-            {
-                ClearPages();
-                await LoadRecords();
-            };
+            КонтрагентВласник.AfterSelectFunc = async () => await BeforeLoadRecords();
 
             ТабличніСписки.ДоговориКонтрагентів_Записи.AddColumns(TreeViewGrid);
             ТабличніСписки.ДоговориКонтрагентів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
@@ -46,7 +42,6 @@ namespace StorageAndTrade
             }
 
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -63,18 +58,16 @@ namespace StorageAndTrade
             ТабличніСписки.ДоговориКонтрагентів_Записи.ДодатиВідбір(TreeViewGrid, ДоговориКонтрагентів_Функції.Відбори(searchText));
 
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
-        async ValueTask LoadRecords_OnFilter()
+        public async override ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.ДоговориКонтрагентів_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(LoadRecords_OnFilter);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        protected override void FillFilterList(ListFilterControl filterControl)
         {
-            return ТабличніСписки.ДоговориКонтрагентів_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
+            ТабличніСписки.ДоговориКонтрагентів_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -95,7 +88,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ДоговориКонтрагентів_Const.POINTER);
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

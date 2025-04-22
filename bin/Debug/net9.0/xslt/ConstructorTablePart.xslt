@@ -76,18 +76,20 @@
         <xsl:variable name="FieldsTL" select="TablePart/ElementFields/Field"/>
 
         <xsl:variable name="OwnerExist" select="TablePart/OwnerExist"/>
+        <xsl:variable name="OwnerType" select="TablePart/OwnerType"/>
+        <xsl:variable name="OwnerTypeName">
+            <xsl:choose>
+                <xsl:when test="TablePart/OwnerType = 'Directory'">Довідник</xsl:when>
+                <xsl:when test="TablePart/OwnerType = 'Document'">Документ</xsl:when>
+                <xsl:when test="TablePart/OwnerType = 'Constants'">Константа</xsl:when>
+                <xsl:otherwise>[...]</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
         <xsl:variable name="OwnerBlockName">
             <xsl:if test="TablePart/OwnerType = 'Constants' and normalize-space(TablePart/OwnerBlockName) != ''">
                 <xsl:value-of select="concat(normalize-space(TablePart/OwnerBlockName), '.')"/>
             </xsl:if>
-        </xsl:variable>
-        <xsl:variable name="OwnerType">
-            <xsl:choose>
-                <xsl:when test="TablePart/OwnerType = 'Directory'">Довідник</xsl:when>
-                <xsl:when test="TablePart/OwnerType = 'Document'">Документ</xsl:when>
-                <xsl:otherwise>[...]</xsl:otherwise>
-            </xsl:choose>
         </xsl:variable>
 /*
         <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:value-of select="$TablePartName"/>.cs
@@ -104,9 +106,16 @@ using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Перелічення;
 
 namespace <xsl:value-of select="$NameSpace"/>
 {
-    class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:value-of select="$TablePartName"/> : <xsl:value-of select="$OwnerType"/>ТабличнаЧастина
+    class <xsl:value-of select="$OwnerName"/>_ТабличнаЧастина_<xsl:value-of select="$TablePartName"/> : <xsl:value-of select="$OwnerTypeName"/>ТабличнаЧастина
     {
+        <xsl:choose>
+            <xsl:when test="$OwnerType = 'Constants'">
+        <xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart Таблиця { get; set; } = new();
+            </xsl:when>
+            <xsl:otherwise>
         public <xsl:value-of select="$OwnerName"/>_Objest? ЕлементВласник { get; set; }
+            </xsl:otherwise>
+        </xsl:choose>
         
         #region Записи
 
@@ -221,14 +230,23 @@ namespace <xsl:value-of select="$NameSpace"/>
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellCombo, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                     </xsl:when>
                     <xsl:when test="Type = 'integer' or Type = 'numeric'">
+                        <xsl:choose>
+                            <xsl:when test="AutomaticNumbering = '1'">
+                TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", new CellRendererText() { Xalign = 1 }, "text", (int)Columns.<xsl:value-of select="Name"/>) { Alignment = 1, MinWidth = 30 };
+                            </xsl:when>
+                            <xsl:otherwise>
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellNumber, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
                 CellRendererText cellDateTime = new CellRendererText() { Editable = true };
                 cellDateTime.Edited += EditCell;
+                cellDateTime.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellDateTime, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                 column.SetCellDataFunc(cellDateTime, new TreeCellDataFunc(DateTimeCellDataFunc));
                     </xsl:when>
@@ -240,6 +258,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                     <xsl:otherwise>
                 CellRendererText cellText = new CellRendererText() { Editable = true };
                 cellText.Edited += EditCell;
+                cellText.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("<xsl:value-of select="Caption"/>", cellText, "text", (int)Columns.<xsl:value-of select="Name"/>) { Resizable = true, MinWidth = 100 };
                     </xsl:otherwise>
                 </xsl:choose>
@@ -254,50 +273,81 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public override async ValueTask LoadRecords()
         {
-            if (ЕлементВласник != null)
+            <xsl:choose>
+                <xsl:when test="$OwnerType = 'Constants'">
+            Таблиця.QuerySelect.Clear();
+                <xsl:for-each select="$FieldsTL[AutomaticNumbering = '1']">
+            Таблиця.QuerySelect.Order.Add(<xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>, SelectOrder.ASC);
+                </xsl:for-each>
+            await Таблиця.Read();
+                </xsl:when>
+                <xsl:otherwise>
+            if (ЕлементВласник != null) <!-- відкриття if -->
             {
-                ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.FillJoin([]);
+                <xsl:variable name="OrderFields">
+                    <xsl:for-each select="$FieldsTL[AutomaticNumbering = '1']">
+                        <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.<xsl:value-of select="Name"/>
+                        <xsl:text>,</xsl:text>
+                    </xsl:for-each>
+                </xsl:variable>
+                ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.FillJoin([<xsl:value-of select="$OrderFields"/>]);
                 await ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Read();
+                </xsl:otherwise>
+            </xsl:choose>
 
-                Записи.Clear();
-                Store.Clear();
-                
-                foreach (<xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.Record record in ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Records)
+            Записи.Clear();
+            Store.Clear();
+
+            <xsl:variable name="InRecords">
+                <xsl:choose>
+                    <xsl:when test="$OwnerType = 'Constants'">Таблиця</xsl:when>
+                    <xsl:otherwise>ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            foreach (<xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.Record record in <xsl:value-of select="$InRecords"/>.Records)
+            {
+                Запис запис = new Запис
                 {
-                    Запис запис = new Запис
-                    {
-                        ID = record.UID,
-                        <xsl:for-each select="$FieldsTL">
-                        <xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>,
-                        </xsl:for-each>
-                    };
+                    ID = record.UID,
+                    <xsl:for-each select="$FieldsTL">
+                    <xsl:value-of select="Name"/> = record.<xsl:value-of select="Name"/>,
+                    </xsl:for-each>
+                };
 
-                    Записи.Add(запис);
-                    Store.AppendValues(запис.ToArray());
-                }
-
-                SelectRowActivated();
+                Записи.Add(запис);
+                Store.AppendValues(запис.ToArray());
             }
+            <xsl:if test="$OwnerType != 'Constants'">}</xsl:if><!-- закриття if -->
+            SelectRowActivated();
         }
 
         public override async ValueTask SaveRecords()
         {
+            <xsl:if test="$OwnerType != 'Constants'"><!-- відкриття if -->
             if (ЕлементВласник != null)
             {
-                ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Records.Clear();
-                foreach (Запис запис in Записи)
+            </xsl:if>
+
+            <xsl:variable name="Records">
+                <xsl:choose>
+                    <xsl:when test="$OwnerType = 'Constants'">Таблиця</xsl:when>
+                    <xsl:otherwise>ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:value-of select="$Records"/>.Records.Clear();
+            foreach (Запис запис in Записи)
+            {
+                <xsl:value-of select="$Records"/>.Records.Add(new <xsl:value-of select="$OwnerBlockName"/><xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.Record()
                 {
-                    ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Records.Add(new <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart.Record()
-                    {
-                        UID = запис.ID,
-                        <xsl:for-each select="$FieldsTL">
-                        <xsl:value-of select="Name"/> = запис.<xsl:value-of select="Name"/>,
-                        </xsl:for-each>
-                    });
-                }
-                await ЕлементВласник.<xsl:value-of select="$TablePartName"/>_TablePart.Save(true);
-                await LoadRecords();
+                    UID = запис.ID,
+                    <xsl:for-each select="$FieldsTL">
+                    <xsl:value-of select="Name"/> = запис.<xsl:value-of select="Name"/>,
+                    </xsl:for-each>
+                });
             }
+            await <xsl:value-of select="$Records"/>.Save(true);
+            await LoadRecords();
+            <xsl:if test="$OwnerType != 'Constants'">}</xsl:if><!-- закриття if -->
         }
 
         /*public string КлючовіСловаДляПошуку()
@@ -375,7 +425,10 @@ namespace <xsl:value-of select="$NameSpace"/>
         }
         </xsl:if>
 
-        <xsl:variable name="FieldsTL_Select" select="$FieldsTL[Type = 'string' or Type = 'integer' or Type = 'numeric' or Type = 'enum' or Type = 'date' or Type = 'datetime' or Type = 'time']" />
+        <xsl:variable name="FieldsTL_Select" select="$FieldsTL[Type = 'string' or 
+            (Type = 'integer' and AutomaticNumbering != '1') or 
+            Type = 'numeric' or Type = 'enum' or Type = 'date' or Type = 'datetime' or Type = 'time']" />
+
         <xsl:if test="count($FieldsTL_Select) != 0">
         protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
         {
@@ -413,7 +466,9 @@ namespace <xsl:value-of select="$NameSpace"/>
         }
         </xsl:if>
 
-        <xsl:if test="count($FieldsTL[Type = 'integer' or Type = 'numeric']) != 0">
+        <xsl:variable name="FieldsTL_Select_NumFunc" select="$FieldsTL[(Type = 'integer' and AutomaticNumbering != '1') or Type = 'numeric']" />
+
+        <xsl:if test="count($FieldsTL_Select_NumFunc) != 0">
         void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
             if (GetColIndex(column, out int colNumber))
@@ -428,7 +483,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
                     switch ((Columns)colNumber)
                     {
-                        <xsl:for-each select="$FieldsTL[Type = 'integer' or Type = 'numeric']">
+                        <xsl:for-each select="$FieldsTL_Select_NumFunc">
                         case Columns.<xsl:value-of select="Name"/>:
                         {
                             cellText.Text = запис.<xsl:value-of select="Name"/>.ToString();

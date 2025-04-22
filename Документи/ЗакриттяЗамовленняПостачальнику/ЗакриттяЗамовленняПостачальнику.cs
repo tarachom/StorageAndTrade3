@@ -30,7 +30,6 @@ namespace StorageAndTrade
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.LoadRecords(TreeViewGrid, SelectPointerItem, DocumentPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -41,18 +40,16 @@ namespace StorageAndTrade
             ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.ДодатиВідбір(TreeViewGrid, ЗакриттяЗамовленняПостачальнику_Функції.Відбори(searchText));
 
             await ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
-        async ValueTask LoadRecords_OnFilter()
+        public async override ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(LoadRecords_OnFilter);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        protected override void FillFilterList(ListFilterControl filterControl)
         {
-            return ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
+            ТабличніСписки.ЗакриттяЗамовленняПостачальнику_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -81,8 +78,7 @@ namespace StorageAndTrade
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            ClearPages();
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)

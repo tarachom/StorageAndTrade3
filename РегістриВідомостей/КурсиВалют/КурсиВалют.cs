@@ -26,8 +26,7 @@ namespace StorageAndTrade.РегістриВідомостей
             ВалютаВласник.AfterSelectFunc = async () =>
             {
                 SelectPointerItem?.Clear();
-                ClearPages();
-                await LoadRecords();
+                await BeforeLoadRecords();
             };
         }
 
@@ -42,7 +41,6 @@ namespace StorageAndTrade.РегістриВідомостей
             }
 
             await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -65,7 +63,6 @@ namespace StorageAndTrade.РегістриВідомостей
             );
 
             await ТабличніСписки.КурсиВалют_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -125,8 +122,7 @@ namespace StorageAndTrade.РегістриВідомостей
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            ClearPages();
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
     }
 }

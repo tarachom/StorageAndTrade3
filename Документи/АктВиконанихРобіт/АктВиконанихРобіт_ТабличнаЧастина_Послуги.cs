@@ -160,6 +160,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Кількість", cellNumber, "text", Columns.Кількість) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -171,6 +172,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Ціна", cellNumber, "text", Columns.Ціна) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 
@@ -182,6 +184,7 @@ namespace StorageAndTrade
             {
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
                 TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", Columns.Сума) { Resizable = true, Alignment = 1, MinWidth = 100 };
                 column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
 

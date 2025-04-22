@@ -27,7 +27,7 @@ namespace StorageAndTrade
             //Відбір
             HBoxTop.PackStart(НоменклатураВідбір, false, false, 2);
             НоменклатураВідбір.Caption = $"{Номенклатура_Const.FULLNAME}:";
-            НоменклатураВідбір.AfterSelectFunc = async () => { await LoadRecords(); };
+            НоменклатураВідбір.AfterSelectFunc = async () => await BeforeLoadRecords();
         }
 
         public override async ValueTask LoadRecords()
@@ -61,7 +61,6 @@ WHERE
             }
 
             await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -70,7 +69,6 @@ WHERE
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.ДодатиВідбір(TreeViewGrid, ПартіяТоварівКомпозит_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.ПартіяТоварівКомпозит_ЗаписиШвидкийВибір.LoadRecords(TreeViewGrid);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)

@@ -39,9 +39,14 @@ namespace StorageAndTrade
             await ТабличніСписки.Контрагенти_Папки_Записи.LoadRecords(TreeViewGrid, OpenFolder);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        public async override ValueTask LoadRecords_OnFilter()
         {
-            return ТабличніСписки.Контрагенти_Папки_Записи.CreateFilter(TreeViewGrid);
+            await ТабличніСписки.Контрагенти_Папки_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        protected override void FillFilterList(ListFilterControl filterControl)
+        {
+            ТабличніСписки.Контрагенти_Папки_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -62,7 +67,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Контрагенти_Папки_Const.POINTER);
-            if (!CompositeMode) await LoadRecords();
+            if (!CompositeMode) await BeforeLoadRecords();
         }
 
         #endregion

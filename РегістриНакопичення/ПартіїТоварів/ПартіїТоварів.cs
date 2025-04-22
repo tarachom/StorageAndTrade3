@@ -34,7 +34,6 @@ namespace StorageAndTrade.РегістриНакопичення
             ТабличніСписки.ПартіїТоварів_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.ПартіїТоварів_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -46,7 +45,6 @@ namespace StorageAndTrade.РегістриНакопичення
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.ПартіїТоварів_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(() => LoadRecords_OnSearch(searchText));
         }
 
         const string КлючНалаштуванняКористувача = "РегістриНакопичення.ПартіїТоварів";
@@ -59,8 +57,7 @@ namespace StorageAndTrade.РегістриНакопичення
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            ClearPages();
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion

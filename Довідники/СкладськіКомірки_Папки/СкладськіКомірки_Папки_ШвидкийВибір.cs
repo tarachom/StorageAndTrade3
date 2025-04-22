@@ -14,16 +14,14 @@ namespace StorageAndTrade
 {
     class СкладськіКомірки_Папки_ШвидкийВибір : ДовідникШвидкийВибір
     {
-
         public СкладськіПриміщення_PointerControl Власник = new СкладськіПриміщення_PointerControl() { Caption = "Власник:" };
-
 
         public СкладськіКомірки_Папки_ШвидкийВибір() : base()
         {
             ТабличніСписки.СкладськіКомірки_Папки_Записи.AddColumns(TreeViewGrid);
 
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
-            Власник.AfterSelectFunc = async () => await LoadRecords();
+            Власник.AfterSelectFunc = async () => await BeforeLoadRecords();
         }
 
         public override async ValueTask LoadRecords()

@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 19.04.2025 14:00:07
+ * Дата конфігурації: 22.04.2025 16:55:44
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -69,13 +69,9 @@ namespace GeneratedCode.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -225,63 +221,42 @@ namespace GeneratedCode.Довідники.ТабличніСписки
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* ОдиницяВиміру, pointer */
-                      Switch sw = new();
-                      ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("ОдиницяВиміру", ОдиницяВиміру, sw));
-                      ДодатиЕлементВФільтр(listBox, "Пакування:", ОдиницяВиміру, sw);
-                  }
-                  
-                  { /* ТипНоменклатури, enum */
-                      Switch sw = new();
-                      ComboBoxText ТипНоменклатури = new();
-                          foreach (var item in ПсевдонімиПерелічення.ТипиНоменклатури_List()) ТипНоменклатури.Append(item.Value.ToString(), item.Name);
-                          ТипНоменклатури.Active = 0;
-                          
-                      widgets.Add(new("ТипНоменклатури", ТипНоменклатури, sw));
-                      ДодатиЕлементВФільтр(listBox, "Тип:", ТипНоменклатури, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "ОдиницяВиміру" => Номенклатура_Const.ОдиницяВиміру,
-                                  "ТипНоменклатури" => Номенклатура_Const.ТипНоменклатури,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "ОдиницяВиміру" => ((ПакуванняОдиниціВиміру_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "ТипНоменклатури" => (int)Enum.Parse<ТипиНоменклатури>(((ComboBoxText)widget.Item2).ActiveId),
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* ОдиницяВиміру, pointer */
+                Switch sw = new();
+                ПакуванняОдиниціВиміру_PointerControl ОдиницяВиміру = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => ОдиницяВиміру.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(Номенклатура_Const.ОдиницяВиміру, get, sw));
+                filterControl.Append("Пакування:", ОдиницяВиміру, sw);
+            }
+            
+            { /* ТипНоменклатури, enum */
+                Switch sw = new();
                 
-            return listBox;
+                        ComboBoxText ТипНоменклатури = new();
+                        foreach (var item in ПсевдонімиПерелічення.ТипиНоменклатури_List())
+                            ТипНоменклатури.Append(item.Value.ToString(), item.Name);
+                        ТипНоменклатури.Active = 0;
+                        object get() => (int)Enum.Parse<ТипиНоменклатури>(ТипНоменклатури.ActiveId);
+                    
+                filterList.Add(new(Номенклатура_Const.ТипНоменклатури, get, sw));
+                filterControl.Append("Тип:", ТипНоменклатури, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -538,13 +513,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -756,13 +727,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -886,13 +853,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -1026,13 +989,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -1175,62 +1134,41 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Код_R030, string */
-                      Switch sw = new();
-                      Entry Код_R030 = new() { WidthRequest = 300 };
-                      widgets.Add(new("Код_R030", Код_R030, sw));
-                      ДодатиЕлементВФільтр(listBox, "R030:", Код_R030, sw);
-                  }
-                  
-                  { /* ВиводитиКурсНаСтартову, boolean */
-                      Switch sw = new();
-                      CheckButton ВиводитиКурсНаСтартову = new();
-                          ВиводитиКурсНаСтартову.Clicked += (object? sender, EventArgs args) => sw.Active = ВиводитиКурсНаСтартову.Active;
-                          
-                      widgets.Add(new("ВиводитиКурсНаСтартову", ВиводитиКурсНаСтартову, sw));
-                      ДодатиЕлементВФільтр(listBox, "Показувати на стартовій:", ВиводитиКурсНаСтартову, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Код_R030" => Валюти_Const.Код_R030,
-                                  "ВиводитиКурсНаСтартову" => Валюти_Const.ВиводитиКурсНаСтартову,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Код_R030" => ((Entry)widget.Item2).Text,
-                                  "ВиводитиКурсНаСтартову" => ((CheckButton)widget.Item2).Active,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Код_R030, string */
+                Switch sw = new();
                 
-            return listBox;
+                        Entry Код_R030 = new() { WidthRequest = 300 };
+                        object get() => Код_R030.Text;
+                    
+                filterList.Add(new(Валюти_Const.Код_R030, get, sw));
+                filterControl.Append("R030:", Код_R030, sw);
+            }
+            
+            { /* ВиводитиКурсНаСтартову, boolean */
+                Switch sw = new();
+                
+                        CheckButton ВиводитиКурсНаСтартову = new();
+                        ВиводитиКурсНаСтартову.Clicked += (sender, args) => sw.Active = ВиводитиКурсНаСтартову.Active;
+                        object get() => ВиводитиКурсНаСтартову.Active;
+                    
+                filterList.Add(new(Валюти_Const.ВиводитиКурсНаСтартову, get, sw));
+                filterControl.Append("Показувати на стартовій:", ВиводитиКурсНаСтартову, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -1361,13 +1299,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -1508,64 +1442,42 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Постачальник, boolean */
-                      Switch sw = new();
-                      CheckButton Постачальник = new();
-                          Постачальник.Clicked += (object? sender, EventArgs args) => sw.Active = Постачальник.Active;
-                          
-                      widgets.Add(new("Постачальник", Постачальник, sw));
-                      ДодатиЕлементВФільтр(listBox, "Постачальник:", Постачальник, sw);
-                  }
-                  
-                  { /* Покупець, boolean */
-                      Switch sw = new();
-                      CheckButton Покупець = new();
-                          Покупець.Clicked += (object? sender, EventArgs args) => sw.Active = Покупець.Active;
-                          
-                      widgets.Add(new("Покупець", Покупець, sw));
-                      ДодатиЕлементВФільтр(listBox, "Покупець:", Покупець, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Постачальник" => Контрагенти_Const.Постачальник,
-                                  "Покупець" => Контрагенти_Const.Покупець,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Постачальник" => ((CheckButton)widget.Item2).Active,
-                                  "Покупець" => ((CheckButton)widget.Item2).Active,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Постачальник, boolean */
+                Switch sw = new();
                 
-            return listBox;
+                        CheckButton Постачальник = new();
+                        Постачальник.Clicked += (sender, args) => sw.Active = Постачальник.Active;
+                        object get() => Постачальник.Active;
+                    
+                filterList.Add(new(Контрагенти_Const.Постачальник, get, sw));
+                filterControl.Append("Постачальник:", Постачальник, sw);
+            }
+            
+            { /* Покупець, boolean */
+                Switch sw = new();
+                
+                        CheckButton Покупець = new();
+                        Покупець.Clicked += (sender, args) => sw.Active = Покупець.Active;
+                        object get() => Покупець.Active;
+                    
+                filterList.Add(new(Контрагенти_Const.Покупець, get, sw));
+                filterControl.Append("Покупець:", Покупець, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -1692,13 +1604,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -1832,66 +1740,46 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* ТипСкладу, enum */
-                      Switch sw = new();
-                      ComboBoxText ТипСкладу = new();
-                          foreach (var item in ПсевдонімиПерелічення.ТипиСкладів_List()) ТипСкладу.Append(item.Value.ToString(), item.Name);
-                          ТипСкладу.Active = 0;
-                          
-                      widgets.Add(new("ТипСкладу", ТипСкладу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Тип cкладу:", ТипСкладу, sw);
-                  }
-                  
-                  { /* НалаштуванняАдресногоЗберігання, enum */
-                      Switch sw = new();
-                      ComboBoxText НалаштуванняАдресногоЗберігання = new();
-                          foreach (var item in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List()) НалаштуванняАдресногоЗберігання.Append(item.Value.ToString(), item.Name);
-                          НалаштуванняАдресногоЗберігання.Active = 0;
-                          
-                      widgets.Add(new("НалаштуванняАдресногоЗберігання", НалаштуванняАдресногоЗберігання, sw));
-                      ДодатиЕлементВФільтр(listBox, "Адресне зберігання:", НалаштуванняАдресногоЗберігання, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "ТипСкладу" => Склади_Const.ТипСкладу,
-                                  "НалаштуванняАдресногоЗберігання" => Склади_Const.НалаштуванняАдресногоЗберігання,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "ТипСкладу" => (int)Enum.Parse<ТипиСкладів>(((ComboBoxText)widget.Item2).ActiveId),
-                                  "НалаштуванняАдресногоЗберігання" => (int)Enum.Parse<НалаштуванняАдресногоЗберігання>(((ComboBoxText)widget.Item2).ActiveId),
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* ТипСкладу, enum */
+                Switch sw = new();
                 
-            return listBox;
+                        ComboBoxText ТипСкладу = new();
+                        foreach (var item in ПсевдонімиПерелічення.ТипиСкладів_List())
+                            ТипСкладу.Append(item.Value.ToString(), item.Name);
+                        ТипСкладу.Active = 0;
+                        object get() => (int)Enum.Parse<ТипиСкладів>(ТипСкладу.ActiveId);
+                    
+                filterList.Add(new(Склади_Const.ТипСкладу, get, sw));
+                filterControl.Append("Тип cкладу:", ТипСкладу, sw);
+            }
+            
+            { /* НалаштуванняАдресногоЗберігання, enum */
+                Switch sw = new();
+                
+                        ComboBoxText НалаштуванняАдресногоЗберігання = new();
+                        foreach (var item in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List())
+                            НалаштуванняАдресногоЗберігання.Append(item.Value.ToString(), item.Name);
+                        НалаштуванняАдресногоЗберігання.Active = 0;
+                        object get() => (int)Enum.Parse<НалаштуванняАдресногоЗберігання>(НалаштуванняАдресногоЗберігання.ActiveId);
+                    
+                filterList.Add(new(Склади_Const.НалаштуванняАдресногоЗберігання, get, sw));
+                filterControl.Append("Адресне зберігання:", НалаштуванняАдресногоЗберігання, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2017,13 +1905,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2152,51 +2036,29 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Валюта" => ВидиЦін_Const.Валюта,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВидиЦін_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2314,13 +2176,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2442,13 +2300,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2572,13 +2426,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2702,13 +2552,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2832,13 +2678,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -2962,13 +2804,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -3107,13 +2945,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -3234,13 +3068,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -3379,13 +3209,9 @@ END
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -3593,13 +3419,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -3730,13 +3552,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -3871,13 +3689,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -4012,13 +3826,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -4162,51 +3972,29 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Валюта" => Каси_Const.Валюта,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(Каси_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -4347,13 +4135,9 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -4485,51 +4269,29 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Валюта" => БанківськіРахункиОрганізацій_Const.Валюта,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(БанківськіРахункиОрганізацій_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -4666,63 +4428,42 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* ТипДоговору, enum */
-                      Switch sw = new();
-                      ComboBoxText ТипДоговору = new();
-                          foreach (var item in ПсевдонімиПерелічення.ТипДоговорів_List()) ТипДоговору.Append(item.Value.ToString(), item.Name);
-                          ТипДоговору.Active = 0;
-                          
-                      widgets.Add(new("ТипДоговору", ТипДоговору, sw));
-                      ДодатиЕлементВФільтр(listBox, "Тип:", ТипДоговору, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Контрагент" => ДоговориКонтрагентів_Const.Контрагент,
-                                  "ТипДоговору" => ДоговориКонтрагентів_Const.ТипДоговору,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "ТипДоговору" => (int)Enum.Parse<ТипДоговорів>(((ComboBoxText)widget.Item2).ActiveId),
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ДоговориКонтрагентів_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* ТипДоговору, enum */
+                Switch sw = new();
                 
-            return listBox;
+                        ComboBoxText ТипДоговору = new();
+                        foreach (var item in ПсевдонімиПерелічення.ТипДоговорів_List())
+                            ТипДоговору.Append(item.Value.ToString(), item.Name);
+                        ТипДоговору.Active = 0;
+                        object get() => (int)Enum.Parse<ТипДоговорів>(ТипДоговору.ActiveId);
+                    
+                filterList.Add(new(ДоговориКонтрагентів_Const.ТипДоговору, get, sw));
+                filterControl.Append("Тип:", ТипДоговору, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -4853,13 +4594,9 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -4992,51 +4729,29 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Валюта" => БанківськіРахункиКонтрагентів_Const.Валюта,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(БанківськіРахункиКонтрагентів_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -5173,54 +4888,33 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* ВидРухуКоштів, enum */
-                      Switch sw = new();
-                      ComboBoxText ВидРухуКоштів = new();
-                          foreach (var item in ПсевдонімиПерелічення.ВидиРухуКоштів_List()) ВидРухуКоштів.Append(item.Value.ToString(), item.Name);
-                          ВидРухуКоштів.Active = 0;
-                          
-                      widgets.Add(new("ВидРухуКоштів", ВидРухуКоштів, sw));
-                      ДодатиЕлементВФільтр(listBox, "ВидРухуКоштів:", ВидРухуКоштів, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "ВидРухуКоштів" => СтаттяРухуКоштів_Const.ВидРухуКоштів,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "ВидРухуКоштів" => (int)Enum.Parse<ВидиРухуКоштів>(((ComboBoxText)widget.Item2).ActiveId),
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* ВидРухуКоштів, enum */
+                Switch sw = new();
                 
-            return listBox;
+                        ComboBoxText ВидРухуКоштів = new();
+                        foreach (var item in ПсевдонімиПерелічення.ВидиРухуКоштів_List())
+                            ВидРухуКоштів.Append(item.Value.ToString(), item.Name);
+                        ВидРухуКоштів.Active = 0;
+                        object get() => (int)Enum.Parse<ВидиРухуКоштів>(ВидРухуКоштів.ActiveId);
+                    
+                filterList.Add(new(СтаттяРухуКоштів_Const.ВидРухуКоштів, get, sw));
+                filterControl.Append("ВидРухуКоштів:", ВидРухуКоштів, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -5344,13 +5038,9 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -5491,54 +5181,33 @@ WHERE
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* ТипДокументу, enum */
-                      Switch sw = new();
-                      ComboBoxText ТипДокументу = new();
-                          foreach (var item in ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_List()) ТипДокументу.Append(item.Value.ToString(), item.Name);
-                          ТипДокументу.Active = 0;
-                          
-                      widgets.Add(new("ТипДокументу", ТипДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "ТипДокументу:", ТипДокументу, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "ТипДокументу" => ПартіяТоварівКомпозит_Const.ТипДокументу,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "ТипДокументу" => (int)Enum.Parse<ТипДокументуПартіяТоварівКомпозит>(((ComboBoxText)widget.Item2).ActiveId),
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* ТипДокументу, enum */
+                Switch sw = new();
                 
-            return listBox;
+                        ComboBoxText ТипДокументу = new();
+                        foreach (var item in ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_List())
+                            ТипДокументу.Append(item.Value.ToString(), item.Name);
+                        ТипДокументу.Active = 0;
+                        object get() => (int)Enum.Parse<ТипДокументуПартіяТоварівКомпозит>(ТипДокументу.ActiveId);
+                    
+                filterList.Add(new(ПартіяТоварівКомпозит_Const.ТипДокументу, get, sw));
+                filterControl.Append("ТипДокументу:", ТипДокументу, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -5690,13 +5359,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -5820,13 +5485,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -6035,13 +5696,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -6195,13 +5852,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -6330,63 +5983,42 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* НалаштуванняАдресногоЗберігання, enum */
-                      Switch sw = new();
-                      ComboBoxText НалаштуванняАдресногоЗберігання = new();
-                          foreach (var item in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List()) НалаштуванняАдресногоЗберігання.Append(item.Value.ToString(), item.Name);
-                          НалаштуванняАдресногоЗберігання.Active = 0;
-                          
-                      widgets.Add(new("НалаштуванняАдресногоЗберігання", НалаштуванняАдресногоЗберігання, sw));
-                      ДодатиЕлементВФільтр(listBox, "Налаштування:", НалаштуванняАдресногоЗберігання, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Склад" => СкладськіПриміщення_Const.Склад,
-                                  "НалаштуванняАдресногоЗберігання" => СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "НалаштуванняАдресногоЗберігання" => (int)Enum.Parse<НалаштуванняАдресногоЗберігання>(((ComboBoxText)widget.Item2).ActiveId),
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(СкладськіПриміщення_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* НалаштуванняАдресногоЗберігання, enum */
+                Switch sw = new();
                 
-            return listBox;
+                        ComboBoxText НалаштуванняАдресногоЗберігання = new();
+                        foreach (var item in ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_List())
+                            НалаштуванняАдресногоЗберігання.Append(item.Value.ToString(), item.Name);
+                        НалаштуванняАдресногоЗберігання.Active = 0;
+                        object get() => (int)Enum.Parse<НалаштуванняАдресногоЗберігання>(НалаштуванняАдресногоЗберігання.ActiveId);
+                    
+                filterList.Add(new(СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання, get, sw));
+                filterControl.Append("Налаштування:", НалаштуванняАдресногоЗберігання, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -6549,51 +6181,29 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Приміщення, pointer */
-                      Switch sw = new();
-                      СкладськіПриміщення_PointerControl Приміщення = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Приміщення", Приміщення, sw));
-                      ДодатиЕлементВФільтр(listBox, "Приміщення:", Приміщення, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Приміщення" => СкладськіКомірки_Const.Приміщення,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Приміщення" => ((СкладськіПриміщення_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Приміщення, pointer */
+                Switch sw = new();
+                СкладськіПриміщення_PointerControl Приміщення = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Приміщення.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(СкладськіКомірки_Const.Приміщення, get, sw));
+                filterControl.Append("Приміщення:", Приміщення, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -6731,13 +6341,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -6862,13 +6468,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -7013,13 +6615,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -7156,13 +6754,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -7305,13 +6899,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -7447,13 +7037,9 @@ FROM
             treeView.AppendColumn(new TreeViewColumn());
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
-            
-                  listBox.Add(new ListBoxRow() { new Label("Фільтри відсутні") });
-                
-            return listBox;
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
@@ -7624,96 +7210,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ЗамовленняПостачальнику_Const.Організація,
-                                  "Контрагент" => ЗамовленняПостачальнику_Const.Контрагент,
-                                  "Склад" => ЗамовленняПостачальнику_Const.Склад,
-                                  "Валюта" => ЗамовленняПостачальнику_Const.Валюта,
-                                  "СумаДокументу" => ЗамовленняПостачальнику_Const.СумаДокументу,
-                                  "Автор" => ЗамовленняПостачальнику_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняПостачальнику_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняПостачальнику_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняПостачальнику_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняПостачальнику_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ЗамовленняПостачальнику_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняПостачальнику_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -7895,105 +7460,84 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПоступленняТоварівТаПослуг_Const.Організація,
-                                  "Склад" => ПоступленняТоварівТаПослуг_Const.Склад,
-                                  "Контрагент" => ПоступленняТоварівТаПослуг_Const.Контрагент,
-                                  "Валюта" => ПоступленняТоварівТаПослуг_Const.Валюта,
-                                  "Каса" => ПоступленняТоварівТаПослуг_Const.Каса,
-                                  "СумаДокументу" => ПоступленняТоварівТаПослуг_Const.СумаДокументу,
-                                  "Автор" => ПоступленняТоварівТаПослуг_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоступленняТоварівТаПослуг_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоступленняТоварівТаПослуг_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоступленняТоварівТаПослуг_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоступленняТоварівТаПослуг_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоступленняТоварівТаПослуг_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ПоступленняТоварівТаПослуг_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоступленняТоварівТаПослуг_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -8178,105 +7722,84 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ЗамовленняКлієнта_Const.Організація,
-                                  "Контрагент" => ЗамовленняКлієнта_Const.Контрагент,
-                                  "Валюта" => ЗамовленняКлієнта_Const.Валюта,
-                                  "Каса" => ЗамовленняКлієнта_Const.Каса,
-                                  "Склад" => ЗамовленняКлієнта_Const.Склад,
-                                  "СумаДокументу" => ЗамовленняКлієнта_Const.СумаДокументу,
-                                  "Автор" => ЗамовленняКлієнта_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняКлієнта_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняКлієнта_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняКлієнта_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняКлієнта_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняКлієнта_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ЗамовленняКлієнта_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗамовленняКлієнта_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -8461,105 +7984,84 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => РеалізаціяТоварівТаПослуг_Const.Організація,
-                                  "Контрагент" => РеалізаціяТоварівТаПослуг_Const.Контрагент,
-                                  "Валюта" => РеалізаціяТоварівТаПослуг_Const.Валюта,
-                                  "Каса" => РеалізаціяТоварівТаПослуг_Const.Каса,
-                                  "Склад" => РеалізаціяТоварівТаПослуг_Const.Склад,
-                                  "СумаДокументу" => РеалізаціяТоварівТаПослуг_Const.СумаДокументу,
-                                  "Автор" => РеалізаціяТоварівТаПослуг_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РеалізаціяТоварівТаПослуг_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РеалізаціяТоварівТаПослуг_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РеалізаціяТоварівТаПослуг_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РеалізаціяТоварівТаПослуг_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РеалізаціяТоварівТаПослуг_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(РеалізаціяТоварівТаПослуг_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РеалізаціяТоварівТаПослуг_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -8732,78 +8234,56 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* ВидЦіни, pointer */
-                      Switch sw = new();
-                      ВидиЦін_PointerControl ВидЦіни = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("ВидЦіни", ВидЦіни, sw));
-                      ДодатиЕлементВФільтр(listBox, "Вид ціни:", ВидЦіни, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ВстановленняЦінНоменклатури_Const.Організація,
-                                  "Валюта" => ВстановленняЦінНоменклатури_Const.Валюта,
-                                  "ВидЦіни" => ВстановленняЦінНоменклатури_Const.ВидЦіни,
-                                  "Автор" => ВстановленняЦінНоменклатури_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "ВидЦіни" => ((ВидиЦін_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВстановленняЦінНоменклатури_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВстановленняЦінНоменклатури_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* ВидЦіни, pointer */
+                Switch sw = new();
+                ВидиЦін_PointerControl ВидЦіни = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => ВидЦіни.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВстановленняЦінНоменклатури_Const.ВидЦіни, get, sw));
+                filterControl.Append("Вид ціни:", ВидЦіни, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВстановленняЦінНоменклатури_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -8980,96 +8460,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПрихіднийКасовийОрдер_Const.Організація,
-                                  "Валюта" => ПрихіднийКасовийОрдер_Const.Валюта,
-                                  "Каса" => ПрихіднийКасовийОрдер_Const.Каса,
-                                  "Контрагент" => ПрихіднийКасовийОрдер_Const.Контрагент,
-                                  "СумаДокументу" => ПрихіднийКасовийОрдер_Const.СумаДокументу,
-                                  "Автор" => ПрихіднийКасовийОрдер_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПрихіднийКасовийОрдер_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПрихіднийКасовийОрдер_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПрихіднийКасовийОрдер_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПрихіднийКасовийОрдер_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ПрихіднийКасовийОрдер_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПрихіднийКасовийОрдер_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -9254,96 +8713,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => РозхіднийКасовийОрдер_Const.Організація,
-                                  "Контрагент" => РозхіднийКасовийОрдер_Const.Контрагент,
-                                  "Валюта" => РозхіднийКасовийОрдер_Const.Валюта,
-                                  "Каса" => РозхіднийКасовийОрдер_Const.Каса,
-                                  "СумаДокументу" => РозхіднийКасовийОрдер_Const.СумаДокументу,
-                                  "Автор" => РозхіднийКасовийОрдер_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозхіднийКасовийОрдер_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозхіднийКасовийОрдер_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозхіднийКасовийОрдер_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозхіднийКасовийОрдер_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(РозхіднийКасовийОрдер_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозхіднийКасовийОрдер_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -9516,78 +8954,56 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* СкладВідправник, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl СкладВідправник = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("СкладВідправник", СкладВідправник, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад відправник:", СкладВідправник, sw);
-                  }
-                  
-                  { /* СкладОтримувач, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl СкладОтримувач = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("СкладОтримувач", СкладОтримувач, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад отримувач:", СкладОтримувач, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПереміщенняТоварів_Const.Організація,
-                                  "СкладВідправник" => ПереміщенняТоварів_Const.СкладВідправник,
-                                  "СкладОтримувач" => ПереміщенняТоварів_Const.СкладОтримувач,
-                                  "Автор" => ПереміщенняТоварів_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СкладВідправник" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СкладОтримувач" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПереміщенняТоварів_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* СкладВідправник, pointer */
+                Switch sw = new();
+                Склади_PointerControl СкладВідправник = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => СкладВідправник.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПереміщенняТоварів_Const.СкладВідправник, get, sw));
+                filterControl.Append("Склад відправник:", СкладВідправник, sw);
+            }
+            
+            { /* СкладОтримувач, pointer */
+                Switch sw = new();
+                Склади_PointerControl СкладОтримувач = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => СкладОтримувач.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПереміщенняТоварів_Const.СкладОтримувач, get, sw));
+                filterControl.Append("Склад отримувач:", СкладОтримувач, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПереміщенняТоварів_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -9764,105 +9180,84 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПоверненняТоварівПостачальнику_Const.Організація,
-                                  "Контрагент" => ПоверненняТоварівПостачальнику_Const.Контрагент,
-                                  "Валюта" => ПоверненняТоварівПостачальнику_Const.Валюта,
-                                  "Каса" => ПоверненняТоварівПостачальнику_Const.Каса,
-                                  "Склад" => ПоверненняТоварівПостачальнику_Const.Склад,
-                                  "СумаДокументу" => ПоверненняТоварівПостачальнику_Const.СумаДокументу,
-                                  "Автор" => ПоверненняТоварівПостачальнику_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівПостачальнику_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівПостачальнику_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівПостачальнику_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівПостачальнику_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівПостачальнику_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ПоверненняТоварівПостачальнику_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівПостачальнику_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -10047,105 +9442,84 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПоверненняТоварівВідКлієнта_Const.Організація,
-                                  "Валюта" => ПоверненняТоварівВідКлієнта_Const.Валюта,
-                                  "Каса" => ПоверненняТоварівВідКлієнта_Const.Каса,
-                                  "Контрагент" => ПоверненняТоварівВідКлієнта_Const.Контрагент,
-                                  "Склад" => ПоверненняТоварівВідКлієнта_Const.Склад,
-                                  "СумаДокументу" => ПоверненняТоварівВідКлієнта_Const.СумаДокументу,
-                                  "Автор" => ПоверненняТоварівВідКлієнта_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівВідКлієнта_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівВідКлієнта_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівВідКлієнта_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівВідКлієнта_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівВідКлієнта_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ПоверненняТоварівВідКлієнта_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПоверненняТоварівВідКлієнта_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -10326,96 +9700,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => АктВиконанихРобіт_Const.Організація,
-                                  "Валюта" => АктВиконанихРобіт_Const.Валюта,
-                                  "Каса" => АктВиконанихРобіт_Const.Каса,
-                                  "Контрагент" => АктВиконанихРобіт_Const.Контрагент,
-                                  "СумаДокументу" => АктВиконанихРобіт_Const.СумаДокументу,
-                                  "Автор" => АктВиконанихРобіт_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(АктВиконанихРобіт_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(АктВиконанихРобіт_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(АктВиконанихРобіт_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(АктВиконанихРобіт_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(АктВиконанихРобіт_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(АктВиконанихРобіт_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -10589,87 +9942,65 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ВведенняЗалишків_Const.Організація,
-                                  "Склад" => ВведенняЗалишків_Const.Склад,
-                                  "Контрагент" => ВведенняЗалишків_Const.Контрагент,
-                                  "Валюта" => ВведенняЗалишків_Const.Валюта,
-                                  "Автор" => ВведенняЗалишків_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВведенняЗалишків_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВведенняЗалишків_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВведенняЗалишків_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВведенняЗалишків_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВведенняЗалишків_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -10833,69 +10164,47 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => НадлишкиТоварів_Const.Організація,
-                                  "Склад" => НадлишкиТоварів_Const.Склад,
-                                  "Автор" => НадлишкиТоварів_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(НадлишкиТоварів_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(НадлишкиТоварів_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(НадлишкиТоварів_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -11053,69 +10362,47 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПересортицяТоварів_Const.Організація,
-                                  "Склад" => ПересортицяТоварів_Const.Склад,
-                                  "Автор" => ПересортицяТоварів_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПересортицяТоварів_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПересортицяТоварів_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПересортицяТоварів_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -11277,78 +10564,56 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Відповідальний, pointer */
-                      Switch sw = new();
-                      ФізичніОсоби_PointerControl Відповідальний = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Відповідальний", Відповідальний, sw));
-                      ДодатиЕлементВФільтр(listBox, "Відповідальний:", Відповідальний, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПерерахунокТоварів_Const.Організація,
-                                  "Склад" => ПерерахунокТоварів_Const.Склад,
-                                  "Відповідальний" => ПерерахунокТоварів_Const.Відповідальний,
-                                  "Автор" => ПерерахунокТоварів_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Відповідальний" => ((ФізичніОсоби_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПерерахунокТоварів_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПерерахунокТоварів_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Відповідальний, pointer */
+                Switch sw = new();
+                ФізичніОсоби_PointerControl Відповідальний = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Відповідальний.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПерерахунокТоварів_Const.Відповідальний, get, sw));
+                filterControl.Append("Відповідальний:", Відповідальний, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПерерахунокТоварів_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -11513,78 +10778,57 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ПсуванняТоварів_Const.Організація,
-                                  "Склад" => ПсуванняТоварів_Const.Склад,
-                                  "СумаДокументу" => ПсуванняТоварів_Const.СумаДокументу,
-                                  "Автор" => ПсуванняТоварів_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПсуванняТоварів_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПсуванняТоварів_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ПсуванняТоварів_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПсуванняТоварів_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -11752,87 +10996,66 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ВнутрішнєСпоживанняТоварів_Const.Організація,
-                                  "Склад" => ВнутрішнєСпоживанняТоварів_Const.Склад,
-                                  "Валюта" => ВнутрішнєСпоживанняТоварів_Const.Валюта,
-                                  "СумаДокументу" => ВнутрішнєСпоживанняТоварів_Const.СумаДокументу,
-                                  "Автор" => ВнутрішнєСпоживанняТоварів_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВнутрішнєСпоживанняТоварів_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВнутрішнєСпоживанняТоварів_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВнутрішнєСпоживанняТоварів_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ВнутрішнєСпоживанняТоварів_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ВнутрішнєСпоживанняТоварів_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -12011,105 +11234,84 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => РахунокФактура_Const.Організація,
-                                  "Контрагент" => РахунокФактура_Const.Контрагент,
-                                  "Валюта" => РахунокФактура_Const.Валюта,
-                                  "Каса" => РахунокФактура_Const.Каса,
-                                  "Склад" => РахунокФактура_Const.Склад,
-                                  "СумаДокументу" => РахунокФактура_Const.СумаДокументу,
-                                  "Автор" => РахунокФактура_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РахунокФактура_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РахунокФактура_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РахунокФактура_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РахунокФактура_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РахунокФактура_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(РахунокФактура_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РахунокФактура_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -12278,69 +11480,47 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* ДокументПоступлення, pointer */
-                      Switch sw = new();
-                      ПоступленняТоварівТаПослуг_PointerControl ДокументПоступлення = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("ДокументПоступлення", ДокументПоступлення, sw));
-                      ДодатиЕлементВФільтр(listBox, "Документ поступлення:", ДокументПоступлення, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Склад" => РозміщенняТоварівНаСкладі_Const.Склад,
-                                  "ДокументПоступлення" => РозміщенняТоварівНаСкладі_Const.ДокументПоступлення,
-                                  "Автор" => РозміщенняТоварівНаСкладі_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "ДокументПоступлення" => ((ПоступленняТоварівТаПослуг_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозміщенняТоварівНаСкладі_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* ДокументПоступлення, pointer */
+                Switch sw = new();
+                ПоступленняТоварівТаПослуг_PointerControl ДокументПоступлення = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => ДокументПоступлення.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозміщенняТоварівНаСкладі_Const.ДокументПоступлення, get, sw));
+                filterControl.Append("Документ поступлення:", ДокументПоступлення, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозміщенняТоварівНаСкладі_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -12498,69 +11678,47 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Склад" => ПереміщенняТоварівНаСкладі_Const.Склад,
-                                  "Організація" => ПереміщенняТоварівНаСкладі_Const.Організація,
-                                  "Автор" => ПереміщенняТоварівНаСкладі_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПереміщенняТоварівНаСкладі_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПереміщенняТоварівНаСкладі_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ПереміщенняТоварівНаСкладі_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -12718,69 +11876,47 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* ДокументРеалізації, pointer */
-                      Switch sw = new();
-                      РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("ДокументРеалізації", ДокументРеалізації, sw));
-                      ДодатиЕлементВФільтр(listBox, "Документ реалізації:", ДокументРеалізації, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Склад" => ЗбіркаТоварівНаСкладі_Const.Склад,
-                                  "ДокументРеалізації" => ЗбіркаТоварівНаСкладі_Const.ДокументРеалізації,
-                                  "Автор" => ЗбіркаТоварівНаСкладі_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "ДокументРеалізації" => ((РеалізаціяТоварівТаПослуг_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗбіркаТоварівНаСкладі_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* ДокументРеалізації, pointer */
+                Switch sw = new();
+                РеалізаціяТоварівТаПослуг_PointerControl ДокументРеалізації = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => ДокументРеалізації.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗбіркаТоварівНаСкладі_Const.ДокументРеалізації, get, sw));
+                filterControl.Append("Документ реалізації:", ДокументРеалізації, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗбіркаТоварівНаСкладі_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -12938,69 +12074,47 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => РозміщенняНоменклатуриПоКоміркам_Const.Організація,
-                                  "Склад" => РозміщенняНоменклатуриПоКоміркам_Const.Склад,
-                                  "Автор" => РозміщенняНоменклатуриПоКоміркам_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозміщенняНоменклатуриПоКоміркам_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозміщенняНоменклатуриПоКоміркам_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(РозміщенняНоменклатуриПоКоміркам_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -13154,60 +12268,38 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => КорегуванняБоргу_Const.Організація,
-                                  "Автор" => КорегуванняБоргу_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
-                
-            return listBox;
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(КорегуванняБоргу_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(КорегуванняБоргу_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -13382,117 +12474,97 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* ПричинаЗакриттяЗамовлення, enum */
-                      Switch sw = new();
-                      ComboBoxText ПричинаЗакриттяЗамовлення = new();
-                          foreach (var item in ПсевдонімиПерелічення.ПричиниЗакриттяЗамовленняКлієнта_List()) ПричинаЗакриттяЗамовлення.Append(item.Value.ToString(), item.Name);
-                          ПричинаЗакриттяЗамовлення.Active = 0;
-                          
-                      widgets.Add(new("ПричинаЗакриттяЗамовлення", ПричинаЗакриттяЗамовлення, sw));
-                      ДодатиЕлементВФільтр(listBox, "Причина:", ПричинаЗакриттяЗамовлення, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ЗакриттяЗамовленняКлієнта_Const.Організація,
-                                  "Контрагент" => ЗакриттяЗамовленняКлієнта_Const.Контрагент,
-                                  "Валюта" => ЗакриттяЗамовленняКлієнта_Const.Валюта,
-                                  "Каса" => ЗакриттяЗамовленняКлієнта_Const.Каса,
-                                  "Склад" => ЗакриттяЗамовленняКлієнта_Const.Склад,
-                                  "СумаДокументу" => ЗакриттяЗамовленняКлієнта_Const.СумаДокументу,
-                                  "ПричинаЗакриттяЗамовлення" => ЗакриттяЗамовленняКлієнта_Const.ПричинаЗакриттяЗамовлення,
-                                  "Автор" => ЗакриттяЗамовленняКлієнта_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "ПричинаЗакриттяЗамовлення" => (int)Enum.Parse<ПричиниЗакриттяЗамовленняКлієнта>(((ComboBoxText)widget.Item2).ActiveId),
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* ПричинаЗакриттяЗамовлення, enum */
+                Switch sw = new();
+                
+                        ComboBoxText ПричинаЗакриттяЗамовлення = new();
+                        foreach (var item in ПсевдонімиПерелічення.ПричиниЗакриттяЗамовленняКлієнта_List())
+                            ПричинаЗакриттяЗамовлення.Append(item.Value.ToString(), item.Name);
+                        ПричинаЗакриттяЗамовлення.Active = 0;
+                        object get() => (int)Enum.Parse<ПричиниЗакриттяЗамовленняКлієнта>(ПричинаЗакриттяЗамовлення.ActiveId);
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.ПричинаЗакриттяЗамовлення, get, sw));
+                filterControl.Append("Причина:", ПричинаЗакриттяЗамовлення, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняКлієнта_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -13680,105 +12752,84 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ЗакриттяРахункуФактури_Const.Організація,
-                                  "Контрагент" => ЗакриттяРахункуФактури_Const.Контрагент,
-                                  "Валюта" => ЗакриттяРахункуФактури_Const.Валюта,
-                                  "Каса" => ЗакриттяРахункуФактури_Const.Каса,
-                                  "Склад" => ЗакриттяРахункуФактури_Const.Склад,
-                                  "СумаДокументу" => ЗакриттяРахункуФактури_Const.СумаДокументу,
-                                  "Автор" => ЗакриттяРахункуФактури_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяРахункуФактури_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяРахункуФактури_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяРахункуФактури_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяРахункуФактури_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяРахункуФактури_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ЗакриттяРахункуФактури_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяРахункуФактури_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -13967,117 +13018,97 @@ namespace GeneratedCode.Документи.ТабличніСписки
             if (where != null) ДодатиВідбір(treeView, where);               
         }
 
-        public static ListBox CreateFilter(TreeView treeView, System.Action? funcPagesShow = null)
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
         {
-            ListBox listBox = new() { SelectionMode = SelectionMode.None };
+          
+            List<ListFilterControl.FilterListItem> filterList = [];
             
-                  List<Tuple<string, Widget, Switch>> widgets = [];
-                  
-                  { /* Організація, pointer */
-                      Switch sw = new();
-                      Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Організація", Організація, sw));
-                      ДодатиЕлементВФільтр(listBox, "Організація:", Організація, sw);
-                  }
-                  
-                  { /* Контрагент, pointer */
-                      Switch sw = new();
-                      Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Контрагент", Контрагент, sw));
-                      ДодатиЕлементВФільтр(listBox, "Контрагент:", Контрагент, sw);
-                  }
-                  
-                  { /* Валюта, pointer */
-                      Switch sw = new();
-                      Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Валюта", Валюта, sw));
-                      ДодатиЕлементВФільтр(listBox, "Валюта:", Валюта, sw);
-                  }
-                  
-                  { /* Каса, pointer */
-                      Switch sw = new();
-                      Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Каса", Каса, sw));
-                      ДодатиЕлементВФільтр(listBox, "Каса:", Каса, sw);
-                  }
-                  
-                  { /* Склад, pointer */
-                      Switch sw = new();
-                      Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Склад", Склад, sw));
-                      ДодатиЕлементВФільтр(listBox, "Склад:", Склад, sw);
-                  }
-                  
-                  { /* СумаДокументу, numeric */
-                      Switch sw = new();
-                      NumericControl СумаДокументу = new();
-                      widgets.Add(new("СумаДокументу", СумаДокументу, sw));
-                      ДодатиЕлементВФільтр(listBox, "Сума:", СумаДокументу, sw);
-                  }
-                  
-                  { /* ПричинаЗакриттяЗамовлення, enum */
-                      Switch sw = new();
-                      ComboBoxText ПричинаЗакриттяЗамовлення = new();
-                          foreach (var item in ПсевдонімиПерелічення.ПричиниЗакриттяЗамовленняПостачальнику_List()) ПричинаЗакриттяЗамовлення.Append(item.Value.ToString(), item.Name);
-                          ПричинаЗакриттяЗамовлення.Active = 0;
-                          
-                      widgets.Add(new("ПричинаЗакриттяЗамовлення", ПричинаЗакриттяЗамовлення, sw));
-                      ДодатиЕлементВФільтр(listBox, "Причина:", ПричинаЗакриттяЗамовлення, sw);
-                  }
-                  
-                  { /* Автор, pointer */
-                      Switch sw = new();
-                      Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
-                      widgets.Add(new("Автор", Автор, sw));
-                      ДодатиЕлементВФільтр(listBox, "Автор:", Автор, sw);
-                  }
-                  
-                  {
-                      Button bOn = new Button("Фільтрувати");
-                      bOn.Clicked += async (object? sender, EventArgs args) =>
-                      {
-                          List<Where> listWhere = [];
-                          foreach (var widget in widgets)
-                              if (widget.Item3.Active)
-                              {
-                                  string? field = widget.Item1 switch { "Організація" => ЗакриттяЗамовленняПостачальнику_Const.Організація,
-                                  "Контрагент" => ЗакриттяЗамовленняПостачальнику_Const.Контрагент,
-                                  "Валюта" => ЗакриттяЗамовленняПостачальнику_Const.Валюта,
-                                  "Каса" => ЗакриттяЗамовленняПостачальнику_Const.Каса,
-                                  "Склад" => ЗакриттяЗамовленняПостачальнику_Const.Склад,
-                                  "СумаДокументу" => ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу,
-                                  "ПричинаЗакриттяЗамовлення" => ЗакриттяЗамовленняПостачальнику_Const.ПричинаЗакриттяЗамовлення,
-                                  "Автор" => ЗакриттяЗамовленняПостачальнику_Const.Автор,
-                                   _ => null };
-                                  object? value = widget.Item1 switch { "Організація" => ((Організації_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Контрагент" => ((Контрагенти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Валюта" => ((Валюти_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Каса" => ((Каси_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "Склад" => ((Склади_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                  "СумаДокументу" => ((NumericControl)widget.Item2).Value,
-                                  "ПричинаЗакриттяЗамовлення" => (int)Enum.Parse<ПричиниЗакриттяЗамовленняПостачальнику>(((ComboBoxText)widget.Item2).ActiveId),
-                                  "Автор" => ((Користувачі_PointerControl)widget.Item2).Pointer.UnigueID.UGuid,
-                                   _ => null };
-                                  if (field != null && value != null) listWhere.Add(new Where(field, Comparison.EQ, value));
-                              }
-                          if (listWhere.Count != 0)
-                          {
-                              ДодатиВідбір(treeView, listWhere, true);
-                              ОчиститиСторінки(treeView);
-                              await LoadRecords(treeView);
-                              funcPagesShow?.Invoke();
-                          }
-                      };
-
-                      Box vBox = new Box(Orientation.Vertical, 0) { Valign = Align.Center };
-                      Box hBox = new Box(Orientation.Horizontal, 0) { Halign =  Align.Center };
-                      vBox.PackStart(hBox, false, false, 5);
-                      hBox.PackStart(bOn, false, false, 5);
-                      
-                      listBox.Add(new ListBoxRow() { vBox });
-                  }
+            { /* Організація, pointer */
+                Switch sw = new();
+                Організації_PointerControl Організація = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Організація.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.Організація, get, sw));
+                filterControl.Append("Організація:", Організація, sw);
+            }
+            
+            { /* Контрагент, pointer */
+                Switch sw = new();
+                Контрагенти_PointerControl Контрагент = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Контрагент.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.Контрагент, get, sw));
+                filterControl.Append("Контрагент:", Контрагент, sw);
+            }
+            
+            { /* Валюта, pointer */
+                Switch sw = new();
+                Валюти_PointerControl Валюта = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Валюта.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.Валюта, get, sw));
+                filterControl.Append("Валюта:", Валюта, sw);
+            }
+            
+            { /* Каса, pointer */
+                Switch sw = new();
+                Каси_PointerControl Каса = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Каса.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.Каса, get, sw));
+                filterControl.Append("Каса:", Каса, sw);
+            }
+            
+            { /* Склад, pointer */
+                Switch sw = new();
+                Склади_PointerControl Склад = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Склад.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.Склад, get, sw));
+                filterControl.Append("Склад:", Склад, sw);
+            }
+            
+            { /* СумаДокументу, numeric */
+                Switch sw = new();
                 
-            return listBox;
+                        NumericControl СумаДокументу = new();
+                        object get() => СумаДокументу.Value;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу, get, sw));
+                filterControl.Append("Сума:", СумаДокументу, sw);
+            }
+            
+            { /* ПричинаЗакриттяЗамовлення, enum */
+                Switch sw = new();
+                
+                        ComboBoxText ПричинаЗакриттяЗамовлення = new();
+                        foreach (var item in ПсевдонімиПерелічення.ПричиниЗакриттяЗамовленняПостачальнику_List())
+                            ПричинаЗакриттяЗамовлення.Append(item.Value.ToString(), item.Name);
+                        ПричинаЗакриттяЗамовлення.Active = 0;
+                        object get() => (int)Enum.Parse<ПричиниЗакриттяЗамовленняПостачальнику>(ПричинаЗакриттяЗамовлення.ActiveId);
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.ПричинаЗакриттяЗамовлення, get, sw));
+                filterControl.Append("Причина:", ПричинаЗакриттяЗамовлення, sw);
+            }
+            
+            { /* Автор, pointer */
+                Switch sw = new();
+                Користувачі_PointerControl Автор = new() { Caption = "", AfterSelectFunc = () => sw.Active = true };
+                        object get() => Автор.Pointer.UnigueID.UGuid;
+                    
+                filterList.Add(new(ЗакриттяЗамовленняПостачальнику_Const.Автор, get, sw));
+                filterControl.Append("Автор:", Автор, sw);
+            }
+            
+            filterControl.GetWhere = () =>
+            {
+                List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+            };
+          
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)

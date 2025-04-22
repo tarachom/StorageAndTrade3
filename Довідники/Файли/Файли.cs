@@ -29,7 +29,6 @@ namespace StorageAndTrade
             ТабличніСписки.Файли_Записи.ОчиститиВідбір(TreeViewGrid);
 
             await ТабличніСписки.Файли_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            PagesShow(LoadRecords);
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -40,18 +39,16 @@ namespace StorageAndTrade
             ТабличніСписки.Файли_Записи.ДодатиВідбір(TreeViewGrid, Файли_Функції.Відбори(searchText), true);
 
             await ТабличніСписки.Файли_Записи.LoadRecords(TreeViewGrid, OpenFolder);
-            PagesShow(async () => await LoadRecords_OnSearch(searchText));
         }
 
-        async ValueTask LoadRecords_OnFilter()
+        public async override ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.Файли_Записи.LoadRecords(TreeViewGrid);
-            PagesShow(LoadRecords_OnFilter);
         }
 
-        protected override Widget? FilterRecords(Box hBox)
+        protected override void FillFilterList(ListFilterControl filterControl)
         {
-            return ТабличніСписки.Файли_Записи.CreateFilter(TreeViewGrid, () => PagesShow(LoadRecords_OnFilter));
+            ТабличніСписки.Файли_Записи.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -72,7 +69,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, Файли_Const.POINTER);
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion
