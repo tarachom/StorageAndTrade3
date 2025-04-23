@@ -218,7 +218,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                     <xsl:text>_Const.</xsl:text>
                     <xsl:value-of select="Name"/>,
                 </xsl:for-each>
-            ]);
+            ]); //TO_CHAR 'dd.mm.yyyy'
 
             <xsl:if test="$DirectoryType = 'Hierarchical'">
             if (openFolder != null) 

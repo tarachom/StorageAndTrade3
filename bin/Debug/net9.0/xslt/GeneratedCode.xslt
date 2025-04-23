@@ -563,7 +563,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Конс
                  <xsl:text>[</xsl:text>
                  <xsl:for-each select="Fields/Field">
                    <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-                 </xsl:for-each>]) { }
+                 </xsl:for-each>]) 
+            { 
+              <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+              QuerySelect.Order.Add(<xsl:value-of select="Name"/>, SelectOrder.ASC);
+              </xsl:for-each>
+            }
             
             public const string TABLE = "<xsl:value-of select="Table"/>";
             <xsl:for-each select="Fields/Field">
@@ -980,6 +985,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+            QuerySelect.Order.Add(<xsl:value-of select="Name"/>, SelectOrder.ASC);
+            </xsl:for-each>
         }
 
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -994,9 +1002,18 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
+            }<xsl:if test="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+            else
+            {
+              <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+              QuerySelect.Order.Add(<xsl:value-of select="Name"/>, SelectOrder.ASC);
+              </xsl:for-each>
+            }
+            </xsl:if>
 
             <xsl:for-each select="Fields/Field">
                 <xsl:if test="Type = 'pointer'">
@@ -1592,6 +1609,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+            QuerySelect.Order.Add(<xsl:value-of select="Name"/>, SelectOrder.ASC);
+            </xsl:for-each>
         }
 
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -1606,9 +1626,18 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
+            }<xsl:if test="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+            else
+            {
+              <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+              QuerySelect.Order.Add(<xsl:value-of select="Name"/>, SelectOrder.ASC);
+              </xsl:for-each>
+            }
+            </xsl:if>
 
             <xsl:for-each select="Fields/Field">
                 <xsl:if test="Type = 'pointer'">

@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 22.04.2025 16:55:44
+ * Дата конфігурації: 23.04.2025 19:55:09
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -420,7 +420,10 @@ namespace GeneratedCode.Константи
         public class ЖурналРеєстрації_Журнал_TablePart : ConstantsTablePart
         {
             public ЖурналРеєстрації_Журнал_TablePart() : base(Config.Kernel, "tab_a69",
-                 ["col_a7", "col_a8", "col_a1", "col_a2", ]) { }
+                 ["col_a7", "col_a8", "col_a1", "col_a2", ]) 
+            { 
+              
+            }
             
             public const string TABLE = "tab_a69";
             
@@ -518,7 +521,10 @@ namespace GeneratedCode.Константи
         public class ФоновіЗадачі_Задачі_TablePart : ConstantsTablePart
         {
             public ФоновіЗадачі_Задачі_TablePart() : base(Config.Kernel, "tab_a67",
-                 ["col_a2", "col_a1", "col_a5", "col_a3", "col_a4", "col_a6", ]) { }
+                 ["col_a2", "col_a1", "col_a5", "col_a3", "col_a4", "col_a6", ]) 
+            { 
+              
+            }
             
             public const string TABLE = "tab_a67";
             
@@ -624,7 +630,10 @@ namespace GeneratedCode.Константи
         public class ЗаблокованіОбєкти_Документи_TablePart : ConstantsTablePart
         {
             public ЗаблокованіОбєкти_Документи_TablePart() : base(Config.Kernel, "tab_b03",
-                 ["col_a1", "col_a2", "col_a3", "col_a4", ]) { }
+                 ["col_a1", "col_a2", "col_a3", "col_a4", ]) 
+            { 
+              
+            }
             
             public const string TABLE = "tab_b03";
             
@@ -722,7 +731,10 @@ namespace GeneratedCode.Константи
         public class ПовідомленняТаПомилки_Помилки_TablePart : ConstantsTablePart
         {
             public ПовідомленняТаПомилки_Помилки_TablePart() : base(Config.Kernel, "tab_b21",
-                 ["col_a2", "col_a5", "col_a1", "col_a6", "col_a4", "col_a3", ]) { }
+                 ["col_a2", "col_a5", "col_a1", "col_a6", "col_a4", "col_a3", ]) 
+            { 
+              
+            }
             
             public const string TABLE = "tab_b21";
             
@@ -828,7 +840,10 @@ namespace GeneratedCode.Константи
         public class НалаштуванняКористувача_ПеріодиЖурналів_TablePart : ConstantsTablePart
         {
             public НалаштуванняКористувача_ПеріодиЖурналів_TablePart() : base(Config.Kernel, "tab_a80",
-                 ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) { }
+                 ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ]) 
+            { 
+              
+            }
             
             public const string TABLE = "tab_a80";
             
@@ -1685,7 +1700,10 @@ namespace GeneratedCode.Константи
         public class ЗавантаженняКурсівВалют_Історія_TablePart : ConstantsTablePart
         {
             public ЗавантаженняКурсівВалют_Історія_TablePart() : base(Config.Kernel, "tab_b22",
-                 ["col_a1", "col_a2", "col_a3", "col_a4", ]) { }
+                 ["col_a1", "col_a2", "col_a3", "col_a4", ]) 
+            { 
+              
+            }
             
             public const string TABLE = "tab_b22";
             
@@ -2070,6 +2088,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_a02";
@@ -2091,11 +2110,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            
+            }
         }
 
         public async ValueTask Read()
@@ -2485,6 +2504,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_b19";
@@ -2500,11 +2520,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b19", "join_tab_1", "Файл");
+            }Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b19", "join_tab_1", "Файл");
                 
         }
 
@@ -3721,6 +3741,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_a09";
@@ -3742,11 +3763,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            
+            }
         }
 
         public async ValueTask Read()
@@ -3866,6 +3887,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_b20";
@@ -3880,11 +3902,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b20", "join_tab_1", "Файл");
+            }Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b20", "join_tab_1", "Файл");
                 
         }
 
@@ -4245,6 +4267,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_a11";
@@ -4266,11 +4289,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            
+            }
         }
 
         public async ValueTask Read()
@@ -5030,6 +5053,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_a15";
@@ -5050,11 +5074,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            
+            }
         }
 
         public async ValueTask Read()
@@ -5405,6 +5429,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_a17";
@@ -5426,11 +5451,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            
+            }
         }
 
         public async ValueTask Read()
@@ -8219,6 +8244,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_a46";
@@ -8233,11 +8259,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            
+            }
         }
 
         public async ValueTask Read()
@@ -10846,6 +10872,7 @@ namespace GeneratedCode.Довідники
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_b15";
@@ -10892,11 +10919,11 @@ namespace GeneratedCode.Довідники
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            
+            }
         }
 
         public async ValueTask Read()
@@ -12620,6 +12647,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a30";
@@ -12645,10 +12675,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a30", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a30", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a30", "join_tab_4", "Пакування");
@@ -13439,6 +13476,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a33";
@@ -13466,10 +13506,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a33", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a33", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a33", "join_tab_4", "Серія");
@@ -14252,6 +14299,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a35";
@@ -14276,10 +14326,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a35", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a35", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a35", "join_tab_4", "Пакування");
@@ -15060,6 +15117,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a37";
@@ -15088,10 +15148,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a37", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a37", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a37", "join_tab_4", "Серія");
@@ -15756,6 +15823,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a43";
@@ -15775,10 +15845,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a43", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a43", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a43", "join_tab_4", "Пакування");
@@ -16312,6 +16389,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a47";
@@ -16331,10 +16411,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, "tab_a47", "join_tab_4", "Підрозділ");
                 Довідники.Валюти_Pointer.GetJoin(QuerySelect, ВалютаВзаєморозрахунків, "tab_a47", "join_tab_5", "ВалютаВзаєморозрахунків");
                 Довідники.Організації_Pointer.GetJoin(QuerySelect, Організація, "tab_a47", "join_tab_6", "Організація");
@@ -16876,6 +16963,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a49";
@@ -16896,10 +16986,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Валюти_Pointer.GetJoin(QuerySelect, ВалютаВзаєморозрахунків, "tab_a49", "join_tab_4", "ВалютаВзаєморозрахунків");
                 Довідники.СтруктураПідприємства_Pointer.GetJoin(QuerySelect, Підрозділ, "tab_a49", "join_tab_5", "Підрозділ");
                 Довідники.Організації_Pointer.GetJoin(QuerySelect, Організація, "tab_a49", "join_tab_7", "Організація");
@@ -17449,6 +17546,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a50";
@@ -17470,10 +17570,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a50", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a50", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a50", "join_tab_4", "Серія");
@@ -18048,6 +18155,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a52";
@@ -18071,10 +18181,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a52", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a52", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a52", "join_tab_4", "Серія");
@@ -18635,6 +18752,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a54";
@@ -18659,10 +18779,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a54", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a54", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a54", "join_tab_4", "Серія");
@@ -19209,6 +19336,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a82";
@@ -19228,10 +19358,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a82", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a82", "join_tab_3", "ХарактеристикаНоменклатури");
                 
@@ -19902,6 +20039,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a84";
@@ -19924,10 +20064,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a84", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a84", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a84", "join_tab_4", "Серія");
@@ -20069,6 +20216,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a85";
@@ -20085,10 +20235,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Каси_Pointer.GetJoin(QuerySelect, Каса, "tab_a85", "join_tab_2", "Каса");
                 
         }
@@ -20206,6 +20363,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a86";
@@ -20222,10 +20382,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.БанківськіРахункиОрганізацій_Pointer.GetJoin(QuerySelect, БанківськийРахунок, "tab_a86", "join_tab_2", "БанківськийРахунок");
                 
         }
@@ -20343,6 +20510,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a87";
@@ -20361,10 +20531,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, Контрагент, "tab_a87", "join_tab_2", "Контрагент");
                 Довідники.Валюти_Pointer.GetJoin(QuerySelect, Валюта, "tab_a87", "join_tab_3", "Валюта");
                 
@@ -20821,6 +20998,7 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
         }
 
         public const string TABLE = "tab_a89";
@@ -20839,11 +21017,11 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
-            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a89", "join_tab_1", "Номенклатура");
+            }Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a89", "join_tab_1", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a89", "join_tab_2", "ХарактеристикаНоменклатури");
                 
         }
@@ -21295,6 +21473,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a91";
@@ -21313,10 +21494,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a91", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a91", "join_tab_3", "ХарактеристикаНоменклатури");
                 
@@ -21786,6 +21974,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a93";
@@ -21808,10 +21999,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a93", "join_tab_5", "Номенклатура");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_a93", "join_tab_6", "Пакування");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a93", "join_tab_7", "ХарактеристикаНоменклатури");
@@ -22322,6 +22520,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a95";
@@ -22345,10 +22546,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a95", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a95", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a95", "join_tab_4", "Серія");
@@ -22871,6 +23079,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b08";
@@ -22894,10 +23105,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b08", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b08", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_b08", "join_tab_4", "Серія");
@@ -23452,6 +23670,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b11";
@@ -23476,10 +23697,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b11", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b11", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b11", "join_tab_4", "Пакування");
@@ -24135,6 +24363,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_a68";
@@ -24156,10 +24387,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a68", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a68", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_a68", "join_tab_4", "Серія");
@@ -24653,6 +24891,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b26";
@@ -24675,10 +24916,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b26", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b26", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_b26", "join_tab_4", "Серія");
@@ -25182,6 +25430,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b28";
@@ -25203,10 +25454,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b28", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b28", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.СеріїНоменклатури_Pointer.GetJoin(QuerySelect, Серія, "tab_b28", "join_tab_4", "Серія");
@@ -25686,6 +25944,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b32";
@@ -25703,10 +25964,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b32", "join_tab_2", "Номенклатура");
                 Довідники.СкладськіКомірки_Pointer.GetJoin(QuerySelect, Комірка, "tab_b32", "join_tab_3", "Комірка");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b32", "join_tab_4", "Пакування");
@@ -26183,6 +26451,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b12";
@@ -26201,10 +26472,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Контрагенти_Pointer.GetJoin(QuerySelect, Контрагент, "tab_b12", "join_tab_2", "Контрагент");
                 Довідники.Валюти_Pointer.GetJoin(QuerySelect, Валюта, "tab_b12", "join_tab_3", "Валюта");
                 
@@ -26722,6 +27000,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b39";
@@ -26744,10 +27025,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b39", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b39", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b39", "join_tab_4", "Пакування");
@@ -27277,6 +27565,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b42";
@@ -27299,10 +27590,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b42", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b42", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b42", "join_tab_4", "Пакування");
@@ -27832,6 +28130,9 @@ namespace GeneratedCode.Документи
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
+            
+            QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+            
         }
 
         public const string TABLE = "tab_b47";
@@ -27854,10 +28155,17 @@ namespace GeneratedCode.Документи
         {
             QuerySelect.Clear();
 
-            if (orderFields!=null)
+            if (orderFields != null)
+            {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-
+            }
+            else
+            {
+              
+              QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
+              
+            }
             Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_b47", "join_tab_2", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_b47", "join_tab_3", "ХарактеристикаНоменклатури");
                 Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(QuerySelect, Пакування, "tab_b47", "join_tab_4", "Пакування");
