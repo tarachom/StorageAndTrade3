@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.04.2025 13:11:20
+ * Дата конфігурації: 24.04.2025 23:45:06
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -2115,6 +2115,7 @@ namespace GeneratedCode.Довідники
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
         }
 
         public async ValueTask Read()
@@ -2524,7 +2525,8 @@ namespace GeneratedCode.Довідники
             {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-            }Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b19", "join_tab_1", "Файл");
+            }
+            Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b19", "join_tab_1", "Файл");
                 
         }
 
@@ -3768,6 +3770,7 @@ namespace GeneratedCode.Довідники
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
         }
 
         public async ValueTask Read()
@@ -3906,7 +3909,8 @@ namespace GeneratedCode.Довідники
             {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-            }Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b20", "join_tab_1", "Файл");
+            }
+            Довідники.Файли_Pointer.GetJoin(QuerySelect, Файл, "tab_b20", "join_tab_1", "Файл");
                 
         }
 
@@ -4294,6 +4298,7 @@ namespace GeneratedCode.Довідники
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
         }
 
         public async ValueTask Read()
@@ -5079,6 +5084,7 @@ namespace GeneratedCode.Довідники
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
         }
 
         public async ValueTask Read()
@@ -5456,6 +5462,7 @@ namespace GeneratedCode.Довідники
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
         }
 
         public async ValueTask Read()
@@ -8264,6 +8271,7 @@ namespace GeneratedCode.Довідники
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
         }
 
         public async ValueTask Read()
@@ -10924,6 +10932,7 @@ namespace GeneratedCode.Довідники
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
         }
 
         public async ValueTask Read()
@@ -12680,9 +12689,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -13511,9 +13520,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -14331,9 +14340,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -15153,9 +15162,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -15850,9 +15859,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -16416,9 +16425,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -16991,9 +17000,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -17575,9 +17584,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -18186,9 +18195,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -18784,9 +18793,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -19363,9 +19372,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -20069,9 +20078,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -20240,9 +20249,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -20387,9 +20396,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -20536,9 +20545,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -21021,7 +21030,8 @@ namespace GeneratedCode.Документи
             {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-            }Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a89", "join_tab_1", "Номенклатура");
+            }
+            Довідники.Номенклатура_Pointer.GetJoin(QuerySelect, Номенклатура, "tab_a89", "join_tab_1", "Номенклатура");
                 Довідники.ХарактеристикиНоменклатури_Pointer.GetJoin(QuerySelect, ХарактеристикаНоменклатури, "tab_a89", "join_tab_2", "ХарактеристикаНоменклатури");
                 
         }
@@ -21499,9 +21509,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -22004,9 +22014,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -22551,9 +22561,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -23110,9 +23120,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -23702,9 +23712,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -24392,9 +24402,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -24921,9 +24931,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -25459,9 +25469,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -25969,9 +25979,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -26477,9 +26487,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -27030,9 +27040,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -27595,9 +27605,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }
@@ -28160,9 +28170,9 @@ namespace GeneratedCode.Документи
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
             }
+            
             else
-            {
-              
+            { 
               QuerySelect.Order.Add(НомерРядка, SelectOrder.ASC);
               
             }

@@ -1006,9 +1006,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-            }<xsl:if test="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+            }
+            <xsl:if test="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
             else
-            {
+            { <!-- Автоматичне сортування по полях -->
               <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
               QuerySelect.Order.Add(<xsl:value-of select="Name"/>, SelectOrder.ASC);
               </xsl:for-each>
@@ -1630,9 +1631,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             {
               foreach(string field in orderFields)
                 QuerySelect.Order.Add(field, SelectOrder.ASC);
-            }<xsl:if test="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
+            }
+            <xsl:if test="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
             else
-            {
+            { <!-- Автоматичне сортування по полях -->
               <xsl:for-each select="Fields/Field[Type = 'integer' and AutomaticNumbering = '1']">
               QuerySelect.Order.Add(<xsl:value-of select="Name"/>, SelectOrder.ASC);
               </xsl:for-each>
