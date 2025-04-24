@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 23.04.2025 19:55:09
+ * Дата конфігурації: 24.04.2025 13:11:20
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -88,7 +88,7 @@ namespace GeneratedCode.Довідники.ТабличніСписки
                 /*Код*/ Довідники.Організації_Const.Код,
                 /*Назва*/ Довідники.Організації_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -274,7 +274,7 @@ namespace GeneratedCode.Довідники.ТабличніСписки
                 /*Назва*/ Довідники.Номенклатура_Const.Назва,
                 /*ТипНоменклатури*/ Довідники.Номенклатура_Const.ТипНоменклатури,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -532,7 +532,7 @@ END
                 /*Код*/ Довідники.Номенклатура_Const.Код,
                 /*Назва*/ Довідники.Номенклатура_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -746,7 +746,7 @@ END
                 /*Код*/ Довідники.Виробники_Const.Код,
                 /*Назва*/ Довідники.Виробники_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -872,7 +872,7 @@ END
                 /*Код*/ Довідники.ВидиНоменклатури_Const.Код,
                 /*Назва*/ Довідники.ВидиНоменклатури_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -1010,7 +1010,7 @@ END
                 /*КількістьУпаковок*/ Довідники.ПакуванняОдиниціВиміру_Const.КількістьУпаковок,
                 /*НазваПовна*/ Довідники.ПакуванняОдиниціВиміру_Const.НазваПовна,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -1188,7 +1188,7 @@ END
                 /*Код_R030*/ Довідники.Валюти_Const.Код_R030,
                 /*ВиводитиКурсНаСтартову*/ Довідники.Валюти_Const.ВиводитиКурсНаСтартову,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -1319,7 +1319,7 @@ END
                 /*Назва*/ Довідники.Валюти_Const.Назва,
                 /*КороткаНазва*/ Довідники.Валюти_Const.КороткаНазва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -1496,7 +1496,7 @@ END
                 /*Постачальник*/ Довідники.Контрагенти_Const.Постачальник,
                 /*Покупець*/ Довідники.Контрагенти_Const.Покупець,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -1623,7 +1623,7 @@ END
                 /*Код*/ Довідники.Контрагенти_Const.Код,
                 /*Назва*/ Довідники.Контрагенти_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -1798,7 +1798,7 @@ END
                 /*ТипСкладу*/ Довідники.Склади_Const.ТипСкладу,
                 /*НалаштуванняАдресногоЗберігання*/ Довідники.Склади_Const.НалаштуванняАдресногоЗберігання,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -1924,7 +1924,7 @@ END
                 /*Код*/ Довідники.Склади_Const.Код,
                 /*Назва*/ Довідники.Склади_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2075,7 +2075,7 @@ END
                 /*Код*/ Довідники.ВидиЦін_Const.Код,
                 /*Назва*/ Довідники.ВидиЦін_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2194,7 +2194,7 @@ END
                 /*Помітка на видалення*/ "deletion_label",
                 /*Назва*/ Довідники.ВидиЦін_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2319,7 +2319,7 @@ END
                 /*Код*/ Довідники.ВидиЦінПостачальників_Const.Код,
                 /*Назва*/ Довідники.ВидиЦінПостачальників_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2445,7 +2445,7 @@ END
                 /*Код*/ Довідники.Користувачі_Const.Код,
                 /*Назва*/ Довідники.Користувачі_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2571,7 +2571,7 @@ END
                 /*Код*/ Довідники.ФізичніОсоби_Const.Код,
                 /*Назва*/ Довідники.ФізичніОсоби_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2697,7 +2697,7 @@ END
                 /*Код*/ Довідники.СтруктураПідприємства_Const.Код,
                 /*Назва*/ Довідники.СтруктураПідприємства_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2823,7 +2823,7 @@ END
                 /*Код*/ Довідники.КраїниСвіту_Const.Код,
                 /*Назва*/ Довідники.КраїниСвіту_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -2967,7 +2967,7 @@ END
                 /*Розмір*/ Довідники.Файли_Const.Розмір,
                 /*ДатаСтворення*/ Довідники.Файли_Const.ДатаСтворення,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -3086,7 +3086,7 @@ END
                 /*Помітка на видалення*/ "deletion_label",
                 /*Назва*/ Довідники.Файли_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -3228,7 +3228,7 @@ END
                 /*Код*/ Довідники.ХарактеристикиНоменклатури_Const.Код,
                 /*Назва*/ Довідники.ХарактеристикиНоменклатури_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -3438,7 +3438,7 @@ FROM
                 /*Назва*/ Довідники.Номенклатура_Папки_Const.Назва,
                 /*Код*/ Довідники.Номенклатура_Папки_Const.Код,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
             if (openFolder != null) 
@@ -3571,7 +3571,7 @@ FROM
                 /*Назва*/ Довідники.Номенклатура_Папки_Const.Назва,
                 /*Код*/ Довідники.Номенклатура_Папки_Const.Код,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
             if (openFolder != null) 
@@ -3708,7 +3708,7 @@ FROM
                 /*Назва*/ Довідники.Контрагенти_Папки_Const.Назва,
                 /*Код*/ Довідники.Контрагенти_Папки_Const.Код,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
             if (openFolder != null) 
@@ -3845,7 +3845,7 @@ FROM
                 /*Назва*/ Довідники.Склади_Папки_Const.Назва,
                 /*Код*/ Довідники.Склади_Папки_Const.Код,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
             if (openFolder != null) 
@@ -4011,7 +4011,7 @@ FROM
                 /*Код*/ Довідники.Каси_Const.Код,
                 /*Назва*/ Довідники.Каси_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -4154,7 +4154,7 @@ WHERE
                 /*Код*/ Довідники.Каси_Const.Код,
                 /*Назва*/ Довідники.Каси_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -4308,7 +4308,7 @@ WHERE
                 /*Код*/ Довідники.БанківськіРахункиОрганізацій_Const.Код,
                 /*Назва*/ Довідники.БанківськіРахункиОрганізацій_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -4481,7 +4481,7 @@ WHERE
                 /*Назва*/ Довідники.ДоговориКонтрагентів_Const.Назва,
                 /*ТипДоговору*/ Довідники.ДоговориКонтрагентів_Const.ТипДоговору,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -4613,7 +4613,7 @@ WHERE
                 /*Назва*/ Довідники.ДоговориКонтрагентів_Const.Назва,
                 /*ТипДоговору*/ Довідники.ДоговориКонтрагентів_Const.ТипДоговору,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -4768,7 +4768,7 @@ WHERE
                 /*Код*/ Довідники.БанківськіРахункиКонтрагентів_Const.Код,
                 /*Назва*/ Довідники.БанківськіРахункиКонтрагентів_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -4933,7 +4933,7 @@ WHERE
                 /*КореспондуючийРахунок*/ Довідники.СтаттяРухуКоштів_Const.КореспондуючийРахунок,
                 /*ВидРухуКоштів*/ Довідники.СтаттяРухуКоштів_Const.ВидРухуКоштів,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -5056,7 +5056,7 @@ WHERE
                 /*Помітка на видалення*/ "deletion_label",
                 /*Номер*/ Довідники.СеріїНоменклатури_Const.Номер,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -5225,7 +5225,7 @@ WHERE
                 /*Дата*/ Довідники.ПартіяТоварівКомпозит_Const.Дата,
                 /*ТипДокументу*/ Довідники.ПартіяТоварівКомпозит_Const.ТипДокументу,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -5378,7 +5378,7 @@ FROM
                 /*Назва*/ Довідники.ПартіяТоварівКомпозит_Const.Назва,
                 /*Дата*/ Довідники.ПартіяТоварівКомпозит_Const.Дата,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -5504,7 +5504,7 @@ FROM
                 /*Код*/ Довідники.ВидиЗапасів_Const.Код,
                 /*Назва*/ Довідники.ВидиЗапасів_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -5732,7 +5732,7 @@ FROM
                 /*КодСтатусу*/ Довідники.Банки_Const.КодСтатусу,
                 /*ДатаЗапису*/ Довідники.Банки_Const.ДатаЗапису,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -5871,7 +5871,7 @@ FROM
                 /*Код*/ Довідники.Банки_Const.Код,
                 /*Назва*/ Довідники.Банки_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -6035,7 +6035,7 @@ FROM
                 /*Назва*/ Довідники.СкладськіПриміщення_Const.Назва,
                 /*НалаштуванняАдресногоЗберігання*/ Довідники.СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -6224,7 +6224,7 @@ FROM
                 /*Ярус*/ Довідники.СкладськіКомірки_Const.Ярус,
                 /*ТипСкладськоїКомірки*/ Довідники.СкладськіКомірки_Const.ТипСкладськоїКомірки,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -6359,7 +6359,7 @@ FROM
                 /*Помітка на видалення*/ "deletion_label",
                 /*Назва*/ Довідники.СкладськіКомірки_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -6486,7 +6486,7 @@ FROM
                 /*Помітка на видалення*/ "deletion_label",
                 /*Назва*/ Довідники.ОбластьЗберігання_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -6638,7 +6638,7 @@ FROM
                 /*Обєм*/ Довідники.ТипорозміриКомірок_Const.Обєм,
                 /*Ширина*/ Довідники.ТипорозміриКомірок_Const.Ширина,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -6773,7 +6773,7 @@ FROM
                 /*Назва*/ Довідники.СкладськіКомірки_Папки_Const.Назва,
                 /*Код*/ Довідники.СкладськіКомірки_Папки_Const.Код,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
             if (openFolder != null) 
@@ -6919,7 +6919,7 @@ FROM
                 /*Назва*/ Довідники.Блокнот_Const.Назва,
                 /*ДатаЗапису*/ Довідники.Блокнот_Const.ДатаЗапису,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -7057,7 +7057,7 @@ FROM
                 /*Додано*/ Довідники.ЗбереженіЗвіти_Const.Додано,
                 /*Назва*/ Довідники.ЗбереженіЗвіти_Const.Назва,
                 
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
 
             
 
@@ -7207,7 +7207,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -7273,6 +7273,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -7299,6 +7306,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ЗамовленняПостачальнику_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7457,7 +7466,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -7532,6 +7541,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -7558,6 +7574,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПоступленняТоварівТаПослуг_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7719,7 +7737,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -7794,6 +7812,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -7820,6 +7845,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ЗамовленняКлієнта_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -7981,7 +8008,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -8056,6 +8083,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -8082,6 +8116,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.РеалізаціяТоварівТаПослуг_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8231,7 +8267,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -8278,6 +8314,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -8303,6 +8346,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ВстановленняЦінНоменклатури_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8457,7 +8502,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -8523,6 +8568,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -8550,6 +8602,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПрихіднийКасовийОрдер_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8710,7 +8764,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -8776,6 +8830,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -8803,6 +8864,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.РозхіднийКасовийОрдер_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -8951,7 +9014,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -8998,6 +9061,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -9023,6 +9093,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПереміщенняТоварів_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9177,7 +9249,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -9252,6 +9324,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -9278,6 +9357,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПоверненняТоварівПостачальнику_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9439,7 +9520,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -9514,6 +9595,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -9540,6 +9628,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПоверненняТоварівВідКлієнта_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9697,7 +9787,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -9763,6 +9853,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -9789,6 +9886,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.АктВиконанихРобіт_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -9939,7 +10038,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -9995,6 +10094,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -10020,6 +10126,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ВведенняЗалишків_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -10161,7 +10269,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.НадлишкиТоварів_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -10199,6 +10307,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.НадлишкиТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -10224,6 +10339,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.НадлишкиТоварів_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -10359,7 +10476,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПересортицяТоварів_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -10397,6 +10514,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПересортицяТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -10422,6 +10546,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПересортицяТоварів_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -10561,7 +10687,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -10608,6 +10734,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -10633,6 +10766,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПерерахунокТоварів_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -10775,7 +10910,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -10823,6 +10958,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -10849,6 +10991,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПсуванняТоварів_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -10993,7 +11137,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -11050,6 +11194,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -11076,6 +11227,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -11231,7 +11384,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -11306,6 +11459,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -11332,6 +11492,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.РахунокФактура_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -11477,7 +11639,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -11515,6 +11677,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -11540,6 +11709,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.РозміщенняТоварівНаСкладі_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -11675,7 +11846,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -11713,6 +11884,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -11738,6 +11916,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ПереміщенняТоварівНаСкладі_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -11873,7 +12053,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -11911,6 +12091,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -11936,6 +12123,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ЗбіркаТоварівНаСкладі_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -12071,7 +12260,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -12109,6 +12298,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -12134,6 +12330,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -12265,7 +12463,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -12294,6 +12492,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -12319,6 +12524,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.КорегуванняБоргу_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -12471,7 +12678,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -12559,6 +12766,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -12586,6 +12800,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ЗакриттяЗамовленняКлієнта_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -12749,7 +12965,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяРахункуФактури_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -12824,6 +13040,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяРахункуФактури_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -12850,6 +13073,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ЗакриттяРахункуФактури_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -13015,7 +13240,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -13103,6 +13328,13 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+
+                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -13130,6 +13362,8 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 /*Коментар*/ Документи.ЗакриттяЗамовленняПостачальнику_Const.Коментар,
                 
             ]);
+
+            
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -13429,8 +13663,6 @@ namespace GeneratedCode.Документи.ТабличніСписки
             }
               
         }
-
-        
 
         // Список документів які входять в журнал
         public static Dictionary<string, string> AllowDocument()
@@ -14637,8 +14869,6 @@ namespace GeneratedCode.Документи.ТабличніСписки
               
         }
 
-        
-
         // Список документів які входять в журнал
         public static Dictionary<string, string> AllowDocument()
         {
@@ -15005,8 +15235,6 @@ namespace GeneratedCode.Документи.ТабличніСписки
             }
               
         }
-
-        
 
         // Список документів які входять в журнал
         public static Dictionary<string, string> AllowDocument()
@@ -15474,8 +15702,6 @@ namespace GeneratedCode.Документи.ТабличніСписки
               
         }
 
-        
-
         // Список документів які входять в журнал
         public static Dictionary<string, string> AllowDocument()
         {
@@ -15738,8 +15964,6 @@ namespace GeneratedCode.Документи.ТабличніСписки
             }
               
         }
-
-        
 
         // Список документів які входять в журнал
         public static Dictionary<string, string> AllowDocument()
@@ -16098,8 +16322,6 @@ namespace GeneratedCode.Документи.ТабличніСписки
             }
               
         }
-
-        
 
         // Список документів які входять в журнал
         public static Dictionary<string, string> AllowDocument()
@@ -16947,7 +17169,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ТовариНаСкладах_RecordsSet ТовариНаСкладах_RecordsSet = new РегістриНакопичення.ТовариНаСкладах_RecordsSet();
-             ТовариНаСкладах_RecordsSet.FillJoin(["period"], docname_required);
+            ТовариНаСкладах_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -17089,7 +17311,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet ЗамовленняКлієнтів_RecordsSet = new РегістриНакопичення.ЗамовленняКлієнтів_RecordsSet();
-             ЗамовленняКлієнтів_RecordsSet.FillJoin(["period"], docname_required);
+            ЗамовленняКлієнтів_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -17220,7 +17442,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet РозрахункиЗКлієнтами_RecordsSet = new РегістриНакопичення.РозрахункиЗКлієнтами_RecordsSet();
-             РозрахункиЗКлієнтами_RecordsSet.FillJoin(["period"], docname_required);
+            РозрахункиЗКлієнтами_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -17372,7 +17594,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.Закупівлі_RecordsSet Закупівлі_RecordsSet = new РегістриНакопичення.Закупівлі_RecordsSet();
-             Закупівлі_RecordsSet.FillJoin(["period"], docname_required);
+            Закупівлі_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -17518,7 +17740,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ВільніЗалишки_RecordsSet ВільніЗалишки_RecordsSet = new РегістриНакопичення.ВільніЗалишки_RecordsSet();
-             ВільніЗалишки_RecordsSet.FillJoin(["period"], docname_required);
+            ВільніЗалишки_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -17657,7 +17879,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet ЗамовленняПостачальникам_RecordsSet = new РегістриНакопичення.ЗамовленняПостачальникам_RecordsSet();
-             ЗамовленняПостачальникам_RecordsSet.FillJoin(["period"], docname_required);
+            ЗамовленняПостачальникам_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -17787,7 +18009,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet РозрахункиЗПостачальниками_RecordsSet = new РегістриНакопичення.РозрахункиЗПостачальниками_RecordsSet();
-             РозрахункиЗПостачальниками_RecordsSet.FillJoin(["period"], docname_required);
+            РозрахункиЗПостачальниками_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -17919,7 +18141,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.РухКоштів_RecordsSet РухКоштів_RecordsSet = new РегістриНакопичення.РухКоштів_RecordsSet();
-             РухКоштів_RecordsSet.FillJoin(["period"], docname_required);
+            РухКоштів_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -18076,7 +18298,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ПартіїТоварів_RecordsSet ПартіїТоварів_RecordsSet = new РегістриНакопичення.ПартіїТоварів_RecordsSet();
-             ПартіїТоварів_RecordsSet.FillJoin(["period"], docname_required);
+            ПартіїТоварів_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -18239,7 +18461,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.Продажі_RecordsSet Продажі_RecordsSet = new РегістриНакопичення.Продажі_RecordsSet();
-             Продажі_RecordsSet.FillJoin(["period"], docname_required);
+            Продажі_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -18386,7 +18608,7 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.ТовариВКомірках_RecordsSet ТовариВКомірках_RecordsSet = new РегістриНакопичення.ТовариВКомірках_RecordsSet();
-             ТовариВКомірках_RecordsSet.FillJoin(["period"], docname_required);
+            ТовариВКомірках_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];

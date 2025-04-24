@@ -218,7 +218,11 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                     <xsl:text>_Const.</xsl:text>
                     <xsl:value-of select="Name"/>,
                 </xsl:for-each>
-            ]); //TO_CHAR 'dd.mm.yyyy'
+            ]);
+
+            <xsl:for-each select="Fields/Field[Type = 'date']">
+                <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.SqlFunc.Add(new SqlFunc(Довідники.<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>, "TO_CHAR", ["'dd.mm.yyyy'"]));
+            </xsl:for-each>
 
             <xsl:if test="$DirectoryType = 'Hierarchical'">
             if (openFolder != null) 
@@ -403,7 +407,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         {
             ОчиститиВідбір(treeView);
             Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, типПеріоду, start, stop);
-            if (where != null) ДодатиВідбір(treeView, where);               
+            if (where != null) ДодатиВідбір(treeView, where);
         }
 
         public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
@@ -462,6 +466,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             filterControl.GetWhere = () =&gt;
             {
                 List&lt;Where&gt; listWhere = [];
+
+                if (filterControl.Період != null &amp;&amp; filterControl.UsePeriod.Active)
+                {
+                    Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
+                    if (where != null) listWhere.Add(where);
+                }
+
                 ДодатиВідбір(treeView, listWhere, true);
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
@@ -489,6 +500,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                     <xsl:value-of select="Name"/>,
                 </xsl:for-each>
             ]);
+
+            <xsl:for-each select="Fields/Field[Type = 'date']">
+                <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.SqlFunc.Add(new SqlFunc(Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>, "TO_CHAR", ["'dd.mm.yyyy'"]));
+            </xsl:for-each>
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -655,12 +670,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
               </xsl:if>
             </xsl:for-each>
         }
-
-        <!--public static void ОчиститиВідбір(TreeView treeView)
-        {
-            if (treeView.Data.ContainsKey("Where"))
-                treeView.Data["Where"] = null;
-        }-->
 
         // Список документів які входять в журнал
         public static Dictionary&lt;string, string&gt; AllowDocument()
@@ -882,7 +891,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                       <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
                       <xsl:choose>
                         <xsl:when test="Type = 'pointer'">
-                          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва,
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Назва,
                         </xsl:when>
                         <xsl:when test="Type = 'enum'">
                           <xsl:text>Перелічення.ПсевдонімиПерелічення.</xsl:text><xsl:value-of select="substring-after(Pointer, '.')"/>_Alias((
@@ -891,8 +900,14 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                         <xsl:when test="Type = 'boolean'">
                             <xsl:text>(record.</xsl:text><xsl:value-of select="Name"/> != DBNull.Value ? (bool)record.<xsl:value-of select="Name"/> : false) ? "Так" : "",
                         </xsl:when>
+                        <xsl:when test="Type = 'date'">
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString("dd.MM.yyyy") ?? "",
+                        </xsl:when>
+                        <xsl:when test="Type = 'time'">
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString(@"hh\:mm\:ss") ?? "",
+                        </xsl:when>
                         <xsl:otherwise>
-                          <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString() ?? "",
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString() ?? "",
                         </xsl:otherwise>
                       </xsl:choose>
                     </xsl:for-each>
@@ -995,7 +1010,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
             ListStore Store = (ListStore)treeView.Model;
 
             РегістриНакопичення.<xsl:value-of select="$RegisterName"/>_RecordsSet <xsl:value-of select="$RegisterName"/>_RecordsSet = new РегістриНакопичення.<xsl:value-of select="$RegisterName"/>_RecordsSet();
-             <xsl:value-of select="$RegisterName"/>_RecordsSet.FillJoin(["period"], docname_required);
+            <xsl:value-of select="$RegisterName"/>_RecordsSet.FillJoin(["period"], docname_required);
 
             /* Where */
             var where = treeView.Data["Where"];
@@ -1047,6 +1062,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                         </xsl:when>
                         <xsl:when test="Type = 'boolean'">
                             <xsl:text>record.</xsl:text><xsl:value-of select="Name"/> ? "Так" : "",
+                        </xsl:when>
+                        <xsl:when test="Type = 'date'">
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString("dd.MM.yyyy") ?? "",
+                        </xsl:when>
+                        <xsl:when test="Type = 'time'">
+                            <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString(@"hh\:mm\:ss") ?? "",
                         </xsl:when>
                         <xsl:otherwise>
                           <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.ToString() ?? "",
