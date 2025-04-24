@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 24.04.2025 23:45:06
+ * Дата конфігурації: 25.04.2025 00:35:55
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -255,6 +255,8 @@ namespace GeneratedCode.Довідники.ТабличніСписки
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -1167,6 +1169,8 @@ END
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -1476,6 +1480,8 @@ END
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -1778,6 +1784,8 @@ END
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -2057,6 +2065,8 @@ END
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -3993,6 +4003,8 @@ FROM
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -4290,6 +4302,8 @@ WHERE
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -4462,6 +4476,8 @@ WHERE
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -4750,6 +4766,8 @@ WHERE
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -4913,6 +4931,8 @@ WHERE
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -5206,6 +5226,8 @@ WHERE
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -6017,6 +6039,8 @@ FROM
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -6202,6 +6226,8 @@ FROM
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           
         }
@@ -7273,17 +7299,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняПостачальнику_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -7541,17 +7569,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -7812,17 +7842,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗамовленняКлієнта_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -8083,17 +8115,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -8314,17 +8348,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВстановленняЦінНоменклатури_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -8568,17 +8604,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПрихіднийКасовийОрдер_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -8830,17 +8868,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозхіднийКасовийОрдер_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -9061,17 +9101,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -9324,17 +9366,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -9595,17 +9639,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -9853,17 +9899,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.АктВиконанихРобіт_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -10094,17 +10142,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВведенняЗалишків_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -10307,17 +10357,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.НадлишкиТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -10514,17 +10566,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПересортицяТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -10734,17 +10788,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПерерахунокТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -10958,17 +11014,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПсуванняТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -11194,17 +11252,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -11459,17 +11519,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РахунокФактура_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -11677,17 +11739,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -11884,17 +11948,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -12091,17 +12157,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -12298,17 +12366,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -12492,17 +12562,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.КорегуванняБоргу_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -12766,17 +12838,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -13040,17 +13114,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяРахункуФактури_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }
@@ -13328,17 +13404,19 @@ namespace GeneratedCode.Документи.ТабличніСписки
             filterControl.GetWhere = () =>
             {
                 List<Where> listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null && filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter && filterControl.Період != null && filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           
         }

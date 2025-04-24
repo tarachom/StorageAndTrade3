@@ -196,6 +196,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                 foreach (var filter in filterList)
                     if (filter.IsOn.Active)
                         listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+
+                return listWhere.Count != 0;
             };
           </xsl:if>
         }
@@ -466,17 +468,19 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             filterControl.GetWhere = () =&gt;
             {
                 List&lt;Where&gt; listWhere = [];
+                ДодатиВідбір(treeView, listWhere, true);
+                foreach (var filter in filterList)
+                    if (filter.IsOn.Active)
+                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
 
-                if (filterControl.Період != null &amp;&amp; filterControl.UsePeriod.Active)
+                bool existFilter = listWhere.Count != 0;
+                if (existFilter &amp;&amp; filterControl.Період != null &amp;&amp; filterControl.UsePeriod.Active)
                 {
                     Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.<xsl:value-of select="$DocumentName"/>_Const.ДатаДок, filterControl.Період.Period, filterControl.Період.DateStart, filterControl.Період.DateStop);
                     if (where != null) listWhere.Add(where);
                 }
 
-                ДодатиВідбір(treeView, listWhere, true);
-                foreach (var filter in filterList)
-                    if (filter.IsOn.Active)
-                        listWhere.Add(new Where(filter.Field, Comparison.EQ, filter.GetValueFunc.Invoke()));
+                return existFilter;
             };
           </xsl:if>
         }
