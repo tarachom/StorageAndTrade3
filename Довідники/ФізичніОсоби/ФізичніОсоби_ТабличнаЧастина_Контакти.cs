@@ -280,7 +280,7 @@ namespace StorageAndTrade
             Запис запис = Записи[rowNumber];
             switch ((Columns)colNumber)
             {
-                case Columns.Тип: { запис.Тип = ПсевдонімиПерелічення.ТипиКонтактноїІнформації_FindByName(newText) ?? 0; break; }
+                case Columns.Тип: { запис.Тип = ПсевдонімиПерелічення.ТипиКонтактноїІнформації_FindByName(newText); break; }
                 case Columns.Значення: { запис.Значення = newText; break; }
                 case Columns.Телефон: { запис.Телефон = newText; break; }
                 case Columns.ЕлектроннаПошта: { запис.ЕлектроннаПошта = newText; break; }

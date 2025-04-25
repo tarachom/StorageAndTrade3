@@ -329,7 +329,7 @@ namespace StorageAndTrade
             Запис запис = Записи[rowNumber];
             switch ((Columns)colNumber)
             {
-                case Columns.ТипКонтрагента: { запис.ТипКонтрагента = ПсевдонімиПерелічення.ТипиКонтрагентів_FindByName(newText) ?? 0; break; }
+                case Columns.ТипКонтрагента: { запис.ТипКонтрагента = ПсевдонімиПерелічення.ТипиКонтрагентів_FindByName(newText); break; }
                 case Columns.Сума: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Сума = value; break; }
 
                 default: break;

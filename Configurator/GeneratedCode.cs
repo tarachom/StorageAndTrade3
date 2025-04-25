@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.04.2025 00:35:55
+ * Дата конфігурації: 25.04.2025 16:09:10
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -432,6 +432,8 @@ namespace GeneratedCode.Константи
             public const string Обєкт = "col_a1";
             public const string Користувач = "col_a2";
             public List<Record> Records { get; set; } = [];
+
+            public event EventHandler? Saved;
         
             public async ValueTask Read()
             {
@@ -479,12 +481,13 @@ namespace GeneratedCode.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+                Saved?.Invoke(this, new EventArgs());
             }
 
             public async ValueTask Remove(Record record)
             {
                 await base.BaseRemove(record.UID);
-                Records.RemoveAll((Record item) => record.UID == item.UID);
+                Records.RemoveAll(item => record.UID == item.UID);
             }
 
             public async ValueTask RemoveAll(List<Record> records)
@@ -499,7 +502,7 @@ namespace GeneratedCode.Константи
                 }
                 await base.BaseCommitTransaction();
 
-                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+                Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -535,6 +538,8 @@ namespace GeneratedCode.Константи
             public const string Заблоковано = "col_a4";
             public const string Результат = "col_a6";
             public List<Record> Records { get; set; } = [];
+
+            public event EventHandler? Saved;
         
             public async ValueTask Read()
             {
@@ -586,12 +591,13 @@ namespace GeneratedCode.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+                Saved?.Invoke(this, new EventArgs());
             }
 
             public async ValueTask Remove(Record record)
             {
                 await base.BaseRemove(record.UID);
-                Records.RemoveAll((Record item) => record.UID == item.UID);
+                Records.RemoveAll(item => record.UID == item.UID);
             }
 
             public async ValueTask RemoveAll(List<Record> records)
@@ -606,7 +612,7 @@ namespace GeneratedCode.Константи
                 }
                 await base.BaseCommitTransaction();
 
-                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+                Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -642,6 +648,8 @@ namespace GeneratedCode.Константи
             public const string ДатаБлокування = "col_a3";
             public const string ДатаПідтвердженняБлокування = "col_a4";
             public List<Record> Records { get; set; } = [];
+
+            public event EventHandler? Saved;
         
             public async ValueTask Read()
             {
@@ -689,12 +697,13 @@ namespace GeneratedCode.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+                Saved?.Invoke(this, new EventArgs());
             }
 
             public async ValueTask Remove(Record record)
             {
                 await base.BaseRemove(record.UID);
-                Records.RemoveAll((Record item) => record.UID == item.UID);
+                Records.RemoveAll(item => record.UID == item.UID);
             }
 
             public async ValueTask RemoveAll(List<Record> records)
@@ -709,7 +718,7 @@ namespace GeneratedCode.Константи
                 }
                 await base.BaseCommitTransaction();
 
-                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+                Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -745,6 +754,8 @@ namespace GeneratedCode.Константи
             public const string НазваОбєкту = "col_a4";
             public const string Повідомлення = "col_a3";
             public List<Record> Records { get; set; } = [];
+
+            public event EventHandler? Saved;
         
             public async ValueTask Read()
             {
@@ -796,12 +807,13 @@ namespace GeneratedCode.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+                Saved?.Invoke(this, new EventArgs());
             }
 
             public async ValueTask Remove(Record record)
             {
                 await base.BaseRemove(record.UID);
-                Records.RemoveAll((Record item) => record.UID == item.UID);
+                Records.RemoveAll(item => record.UID == item.UID);
             }
 
             public async ValueTask RemoveAll(List<Record> records)
@@ -816,7 +828,7 @@ namespace GeneratedCode.Константи
                 }
                 await base.BaseCommitTransaction();
 
-                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+                Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -853,6 +865,8 @@ namespace GeneratedCode.Константи
             public const string ДатаСтарт = "col_a4";
             public const string ДатаСтоп = "col_a5";
             public List<Record> Records { get; set; } = [];
+
+            public event EventHandler? Saved;
         
             public async ValueTask Read()
             {
@@ -902,12 +916,13 @@ namespace GeneratedCode.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+                Saved?.Invoke(this, new EventArgs());
             }
 
             public async ValueTask Remove(Record record)
             {
                 await base.BaseRemove(record.UID);
-                Records.RemoveAll((Record item) => record.UID == item.UID);
+                Records.RemoveAll(item => record.UID == item.UID);
             }
 
             public async ValueTask RemoveAll(List<Record> records)
@@ -922,7 +937,7 @@ namespace GeneratedCode.Константи
                 }
                 await base.BaseCommitTransaction();
 
-                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+                Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -1712,6 +1727,8 @@ namespace GeneratedCode.Константи
             public const string Посилання = "col_a3";
             public const string Повідомлення = "col_a4";
             public List<Record> Records { get; set; } = [];
+
+            public event EventHandler? Saved;
         
             public async ValueTask Read()
             {
@@ -1759,12 +1776,13 @@ namespace GeneratedCode.Константи
                 }
                 
                 await base.BaseCommitTransaction();
+                Saved?.Invoke(this, new EventArgs());
             }
 
             public async ValueTask Remove(Record record)
             {
                 await base.BaseRemove(record.UID);
-                Records.RemoveAll((Record item) => record.UID == item.UID);
+                Records.RemoveAll(item => record.UID == item.UID);
             }
 
             public async ValueTask RemoveAll(List<Record> records)
@@ -1779,7 +1797,7 @@ namespace GeneratedCode.Константи
                 }
                 await base.BaseCommitTransaction();
 
-                Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+                Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -2105,6 +2123,8 @@ namespace GeneratedCode.Довідники
         public Організації_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -2149,6 +2169,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a01"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -2176,12 +2198,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -2196,7 +2221,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -2516,6 +2541,8 @@ namespace GeneratedCode.Довідники
         public Номенклатура_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -2562,6 +2589,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a03"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -2583,12 +2612,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -2603,7 +2635,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -3760,6 +3792,8 @@ namespace GeneratedCode.Довідники
         public Контрагенти_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -3804,6 +3838,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -3831,12 +3867,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -3851,7 +3890,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -3900,6 +3939,8 @@ namespace GeneratedCode.Довідники
         public Контрагенти_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -3945,6 +3986,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -3965,12 +4008,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -3985,7 +4031,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -4288,6 +4334,8 @@ namespace GeneratedCode.Довідники
         public Склади_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -4332,6 +4380,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a10"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -4359,12 +4409,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -4379,7 +4432,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -5074,6 +5127,8 @@ namespace GeneratedCode.Довідники
         public Користувачі_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -5117,6 +5172,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a14"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -5143,12 +5200,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -5163,7 +5223,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -5452,6 +5512,8 @@ namespace GeneratedCode.Довідники
         public ФізичніОсоби_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -5496,6 +5558,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a16"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -5523,12 +5587,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -5543,7 +5610,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -8261,6 +8328,8 @@ namespace GeneratedCode.Довідники
         public СтаттяРухуКоштів_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -8298,6 +8367,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a45"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -8318,12 +8389,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -8338,7 +8412,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -10922,6 +10996,8 @@ namespace GeneratedCode.Довідники
         public ЗбереженіЗвіти_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -10991,6 +11067,8 @@ namespace GeneratedCode.Довідники
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b04"))
                 throw new Exception("Owner not exist");
+
+            
                 
             await base.BaseBeginTransaction();
                 
@@ -11043,12 +11121,15 @@ namespace GeneratedCode.Довідники
             }
                 
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -11063,7 +11144,7 @@ namespace GeneratedCode.Довідники
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -11381,17 +11462,18 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипиКонтактноїІнформації? ТипиКонтактноїІнформації_FindByName(string name)
+        public static ТипиКонтактноїІнформації ТипиКонтактноїІнформації_FindByName(string name)
         {
             return name switch
             {
                 "Адрес" => ТипиКонтактноїІнформації.Адрес,
-                "Телефон" => ТипиКонтактноїІнформації.Телефон,
-                "Електронна пошта" => ТипиКонтактноїІнформації.ЕлектроннаПошта,
-                "Сайт" => ТипиКонтактноїІнформації.Сайт,
-                "Skype" => ТипиКонтактноїІнформації.Skype,
-                "Інше" => ТипиКонтактноїІнформації.Інше,
-                _ => null
+                  "Телефон" => ТипиКонтактноїІнформації.Телефон,
+                  "ЕлектроннаПошта" => ТипиКонтактноїІнформації.ЕлектроннаПошта,
+                  "Електронна пошта" => ТипиКонтактноїІнформації.ЕлектроннаПошта,
+                  "Сайт" => ТипиКонтактноїІнформації.Сайт,
+                  "Skype" => ТипиКонтактноїІнформації.Skype,
+                  "Інше" => ТипиКонтактноїІнформації.Інше,
+                  _ => 0
             };
         }
 
@@ -11422,16 +11504,16 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипиНоменклатури? ТипиНоменклатури_FindByName(string name)
+        public static ТипиНоменклатури ТипиНоменклатури_FindByName(string name)
         {
             return name switch
             {
                 "Товар" => ТипиНоменклатури.Товар,
-                "Послуга" => ТипиНоменклатури.Послуга,
-                "Робота" => ТипиНоменклатури.Робота,
-                "Тара" => ТипиНоменклатури.Тара,
-                "Набір" => ТипиНоменклатури.Набір,
-                _ => null
+                  "Послуга" => ТипиНоменклатури.Послуга,
+                  "Робота" => ТипиНоменклатури.Робота,
+                  "Тара" => ТипиНоменклатури.Тара,
+                  "Набір" => ТипиНоменклатури.Набір,
+                  _ => 0
             };
         }
 
@@ -11458,13 +11540,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипиСкладів? ТипиСкладів_FindByName(string name)
+        public static ТипиСкладів ТипиСкладів_FindByName(string name)
         {
             return name switch
             {
                 "Гуртовий" => ТипиСкладів.Гуртовий,
-                "Роздрібний" => ТипиСкладів.Роздрібний,
-                _ => null
+                  "Роздрібний" => ТипиСкладів.Роздрібний,
+                  _ => 0
             };
         }
 
@@ -11488,13 +11570,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static СтатьФізичноїОсоби? СтатьФізичноїОсоби_FindByName(string name)
+        public static СтатьФізичноїОсоби СтатьФізичноїОсоби_FindByName(string name)
         {
             return name switch
             {
                 "Чоловік" => СтатьФізичноїОсоби.Чоловік,
-                "Жінка" => СтатьФізичноїОсоби.Жінка,
-                _ => null
+                  "Жінка" => СтатьФізичноїОсоби.Жінка,
+                  _ => 0
             };
         }
 
@@ -11519,14 +11601,15 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static СтатусиДоговорівКонтрагентів? СтатусиДоговорівКонтрагентів_FindByName(string name)
+        public static СтатусиДоговорівКонтрагентів СтатусиДоговорівКонтрагентів_FindByName(string name)
         {
             return name switch
             {
-                "Не узгоджений" => СтатусиДоговорівКонтрагентів.НеУзгоджений,
-                "Діє" => СтатусиДоговорівКонтрагентів.Діє,
-                "Закритий" => СтатусиДоговорівКонтрагентів.Закритий,
-                _ => null
+                "НеУзгоджений" => СтатусиДоговорівКонтрагентів.НеУзгоджений,
+                  "Не узгоджений" => СтатусиДоговорівКонтрагентів.НеУзгоджений,
+                  "Діє" => СтатусиДоговорівКонтрагентів.Діє,
+                  "Закритий" => СтатусиДоговорівКонтрагентів.Закритий,
+                  _ => 0
             };
         }
 
@@ -11574,36 +11657,61 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ГосподарськіОперації? ГосподарськіОперації_FindByName(string name)
+        public static ГосподарськіОперації ГосподарськіОперації_FindByName(string name)
         {
             return name switch
             {
-                "Замовлення в постачальника" => ГосподарськіОперації.ЗамовленняВПостачальника,
-                "Оплата постачальнику" => ГосподарськіОперації.ОплатаПостачальнику,
-                "Оприбуткування товарів" => ГосподарськіОперації.ОприбуткуванняТоварів,
-                "Переміщення товарів" => ГосподарськіОперації.ПереміщенняТоварів,
-                "Надходження послуг" => ГосподарськіОперації.НадходженняПослуг,
-                "Інше надходження товарів" => ГосподарськіОперації.ІншеНадходженняТоварів,
-                "Інші доходи" => ГосподарськіОперації.ІншіДоходи,
-                "Інші витрати" => ГосподарськіОперації.ІншіВитрати,
-                "Реалізація клієнту" => ГосподарськіОперації.РеалізаціяКлієнту,
-                "Списання товарів" => ГосподарськіОперації.СписанняТоварів,
-                "Поступлення оплати від клієнта" => ГосподарськіОперації.ПоступленняОплатиВідКлієнта,
-                "Поступлення коштів з іншої каси" => ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси,
-                "Поступлення коштів з банку" => ГосподарськіОперації.ПоступленняКоштівЗБанку,
-                "Повернення коштів від постачальника" => ГосподарськіОперації.ПоверненняКоштівВідПостачальника,
-                "Повернення коштів постачальнику" => ГосподарськіОперації.ПоверненняКоштівПостачальнику,
-                "Здача коштів в банк" => ГосподарськіОперації.ЗдачаКоштівВБанк,
-                "Повернення оплати клієнту" => ГосподарськіОперації.ПоверненняОплатиКлієнту,
-                "Видача коштів в іншу касу" => ГосподарськіОперації.ВидачаКоштівВІншуКасу,
-                "Закупівля в постачальника" => ГосподарськіОперації.ЗакупівляВПостачальника,
-                "Планування по замовленням постачальнику" => ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику,
-                "Планування по замовленням клієнта" => ГосподарськіОперації.ПлануванняПоЗамовленнямКлієнта,
-                "Повернення товарів від клієнта" => ГосподарськіОперації.ПоверненняТоварівВідКлієнта,
-                "Повернення товарів постачальнику" => ГосподарськіОперації.ПоверненняТоварівПостачальнику,
-                "Введення залишків" => ГосподарськіОперації.ВведенняЗалишків,
-                "Внутрішнє споживання товарів" => ГосподарськіОперації.ВнутрішнєСпоживанняТоварів,
-                _ => null
+                "ЗамовленняВПостачальника" => ГосподарськіОперації.ЗамовленняВПостачальника,
+                  "Замовлення в постачальника" => ГосподарськіОперації.ЗамовленняВПостачальника,
+                  "ОплатаПостачальнику" => ГосподарськіОперації.ОплатаПостачальнику,
+                  "Оплата постачальнику" => ГосподарськіОперації.ОплатаПостачальнику,
+                  "ОприбуткуванняТоварів" => ГосподарськіОперації.ОприбуткуванняТоварів,
+                  "Оприбуткування товарів" => ГосподарськіОперації.ОприбуткуванняТоварів,
+                  "ПереміщенняТоварів" => ГосподарськіОперації.ПереміщенняТоварів,
+                  "Переміщення товарів" => ГосподарськіОперації.ПереміщенняТоварів,
+                  "НадходженняПослуг" => ГосподарськіОперації.НадходженняПослуг,
+                  "Надходження послуг" => ГосподарськіОперації.НадходженняПослуг,
+                  "ІншеНадходженняТоварів" => ГосподарськіОперації.ІншеНадходженняТоварів,
+                  "Інше надходження товарів" => ГосподарськіОперації.ІншеНадходженняТоварів,
+                  "ІншіДоходи" => ГосподарськіОперації.ІншіДоходи,
+                  "Інші доходи" => ГосподарськіОперації.ІншіДоходи,
+                  "ІншіВитрати" => ГосподарськіОперації.ІншіВитрати,
+                  "Інші витрати" => ГосподарськіОперації.ІншіВитрати,
+                  "РеалізаціяКлієнту" => ГосподарськіОперації.РеалізаціяКлієнту,
+                  "Реалізація клієнту" => ГосподарськіОперації.РеалізаціяКлієнту,
+                  "СписанняТоварів" => ГосподарськіОперації.СписанняТоварів,
+                  "Списання товарів" => ГосподарськіОперації.СписанняТоварів,
+                  "ПоступленняОплатиВідКлієнта" => ГосподарськіОперації.ПоступленняОплатиВідКлієнта,
+                  "Поступлення оплати від клієнта" => ГосподарськіОперації.ПоступленняОплатиВідКлієнта,
+                  "ПоступленняКоштівЗІншоїКаси" => ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси,
+                  "Поступлення коштів з іншої каси" => ГосподарськіОперації.ПоступленняКоштівЗІншоїКаси,
+                  "ПоступленняКоштівЗБанку" => ГосподарськіОперації.ПоступленняКоштівЗБанку,
+                  "Поступлення коштів з банку" => ГосподарськіОперації.ПоступленняКоштівЗБанку,
+                  "ПоверненняКоштівВідПостачальника" => ГосподарськіОперації.ПоверненняКоштівВідПостачальника,
+                  "Повернення коштів від постачальника" => ГосподарськіОперації.ПоверненняКоштівВідПостачальника,
+                  "ПоверненняКоштівПостачальнику" => ГосподарськіОперації.ПоверненняКоштівПостачальнику,
+                  "Повернення коштів постачальнику" => ГосподарськіОперації.ПоверненняКоштівПостачальнику,
+                  "ЗдачаКоштівВБанк" => ГосподарськіОперації.ЗдачаКоштівВБанк,
+                  "Здача коштів в банк" => ГосподарськіОперації.ЗдачаКоштівВБанк,
+                  "ПоверненняОплатиКлієнту" => ГосподарськіОперації.ПоверненняОплатиКлієнту,
+                  "Повернення оплати клієнту" => ГосподарськіОперації.ПоверненняОплатиКлієнту,
+                  "ВидачаКоштівВІншуКасу" => ГосподарськіОперації.ВидачаКоштівВІншуКасу,
+                  "Видача коштів в іншу касу" => ГосподарськіОперації.ВидачаКоштівВІншуКасу,
+                  "ЗакупівляВПостачальника" => ГосподарськіОперації.ЗакупівляВПостачальника,
+                  "Закупівля в постачальника" => ГосподарськіОперації.ЗакупівляВПостачальника,
+                  "ПлануванняПоЗамовленнямПостачальнику" => ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику,
+                  "Планування по замовленням постачальнику" => ГосподарськіОперації.ПлануванняПоЗамовленнямПостачальнику,
+                  "ПлануванняПоЗамовленнямКлієнта" => ГосподарськіОперації.ПлануванняПоЗамовленнямКлієнта,
+                  "Планування по замовленням клієнта" => ГосподарськіОперації.ПлануванняПоЗамовленнямКлієнта,
+                  "ПоверненняТоварівВідКлієнта" => ГосподарськіОперації.ПоверненняТоварівВідКлієнта,
+                  "Повернення товарів від клієнта" => ГосподарськіОперації.ПоверненняТоварівВідКлієнта,
+                  "ПоверненняТоварівПостачальнику" => ГосподарськіОперації.ПоверненняТоварівПостачальнику,
+                  "Повернення товарів постачальнику" => ГосподарськіОперації.ПоверненняТоварівПостачальнику,
+                  "ВведенняЗалишків" => ГосподарськіОперації.ВведенняЗалишків,
+                  "Введення залишків" => ГосподарськіОперації.ВведенняЗалишків,
+                  "ВнутрішнєСпоживанняТоварів" => ГосподарськіОперації.ВнутрішнєСпоживанняТоварів,
+                  "Внутрішнє споживання товарів" => ГосподарськіОперації.ВнутрішнєСпоживанняТоварів,
+                  _ => 0
             };
         }
 
@@ -11650,13 +11758,15 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипДоговорів? ТипДоговорів_FindByName(string name)
+        public static ТипДоговорів ТипДоговорів_FindByName(string name)
         {
             return name switch
             {
-                "З покупцями" => ТипДоговорів.ЗПокупцями,
-                "З постачальниками" => ТипДоговорів.ЗПостачальниками,
-                _ => null
+                "ЗПокупцями" => ТипДоговорів.ЗПокупцями,
+                  "З покупцями" => ТипДоговорів.ЗПокупцями,
+                  "ЗПостачальниками" => ТипДоговорів.ЗПостачальниками,
+                  "З постачальниками" => ТипДоговорів.ЗПостачальниками,
+                  _ => 0
             };
         }
 
@@ -11683,16 +11793,20 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static СпособиДоставки? СпособиДоставки_FindByName(string name)
+        public static СпособиДоставки СпособиДоставки_FindByName(string name)
         {
             return name switch
             {
                 "Самовивіз" => СпособиДоставки.Самовивіз,
-                "До клієнта" => СпособиДоставки.ДоКлієнта,
-                "Силами перевізника" => СпособиДоставки.СиламиПеревізника,
-                "Нашими силами" => СпособиДоставки.НашимиСиламиЗАдресиВідправника,
-                "Поручення експедитору" => СпособиДоставки.ПорученняЕкспедитору,
-                _ => null
+                  "ДоКлієнта" => СпособиДоставки.ДоКлієнта,
+                  "До клієнта" => СпособиДоставки.ДоКлієнта,
+                  "СиламиПеревізника" => СпособиДоставки.СиламиПеревізника,
+                  "Силами перевізника" => СпособиДоставки.СиламиПеревізника,
+                  "НашимиСиламиЗАдресиВідправника" => СпособиДоставки.НашимиСиламиЗАдресиВідправника,
+                  "Нашими силами" => СпособиДоставки.НашимиСиламиЗАдресиВідправника,
+                  "ПорученняЕкспедитору" => СпособиДоставки.ПорученняЕкспедитору,
+                  "Поручення експедитору" => СпособиДоставки.ПорученняЕкспедитору,
+                  _ => 0
             };
         }
 
@@ -11720,14 +11834,14 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ФормаОплати? ФормаОплати_FindByName(string name)
+        public static ФормаОплати ФормаОплати_FindByName(string name)
         {
             return name switch
             {
                 "Готівка" => ФормаОплати.Готівка,
-                "Безготівка" => ФормаОплати.Безготівка,
-                "Взаєморозрахунок" => ФормаОплати.Взаєморозрахунок,
-                _ => null
+                  "Безготівка" => ФормаОплати.Безготівка,
+                  "Взаєморозрахунок" => ФормаОплати.Взаєморозрахунок,
+                  _ => 0
             };
         }
 
@@ -11754,15 +11868,15 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static СтатусиЗамовленьКлієнтів? СтатусиЗамовленьКлієнтів_FindByName(string name)
+        public static СтатусиЗамовленьКлієнтів СтатусиЗамовленьКлієнтів_FindByName(string name)
         {
             return name switch
             {
                 "НеУзгоджений" => СтатусиЗамовленьКлієнтів.НеУзгоджений,
-                "ДоЗабезпечення" => СтатусиЗамовленьКлієнтів.ДоЗабезпечення,
-                "ДоВідгрузки" => СтатусиЗамовленьКлієнтів.ДоВідгрузки,
-                "Закритий" => СтатусиЗамовленьКлієнтів.Закритий,
-                _ => null
+                  "ДоЗабезпечення" => СтатусиЗамовленьКлієнтів.ДоЗабезпечення,
+                  "ДоВідгрузки" => СтатусиЗамовленьКлієнтів.ДоВідгрузки,
+                  "Закритий" => СтатусиЗамовленьКлієнтів.Закритий,
+                  _ => 0
             };
         }
 
@@ -11789,14 +11903,14 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static СтатусиРеалізаціїТоварівТаПослуг? СтатусиРеалізаціїТоварівТаПослуг_FindByName(string name)
+        public static СтатусиРеалізаціїТоварівТаПослуг СтатусиРеалізаціїТоварівТаПослуг_FindByName(string name)
         {
             return name switch
             {
                 "ДоОплати" => СтатусиРеалізаціїТоварівТаПослуг.ДоОплати,
-                "ВДорозі" => СтатусиРеалізаціїТоварівТаПослуг.ВДорозі,
-                "Відгружено" => СтатусиРеалізаціїТоварівТаПослуг.Відгружено,
-                _ => null
+                  "ВДорозі" => СтатусиРеалізаціїТоварівТаПослуг.ВДорозі,
+                  "Відгружено" => СтатусиРеалізаціїТоварівТаПослуг.Відгружено,
+                  _ => 0
             };
         }
 
@@ -11822,14 +11936,17 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ВидиРухуКоштів? ВидиРухуКоштів_FindByName(string name)
+        public static ВидиРухуКоштів ВидиРухуКоштів_FindByName(string name)
         {
             return name switch
             {
-                "Оплата праці" => ВидиРухуКоштів.ОплатаПраці,
-                "Податок на прибуток" => ВидиРухуКоштів.ПодатокНаПрибуток,
-                "Оплата оборотних активів" => ВидиРухуКоштів.ОплатаОборотнихАктивів,
-                _ => null
+                "ОплатаПраці" => ВидиРухуКоштів.ОплатаПраці,
+                  "Оплата праці" => ВидиРухуКоштів.ОплатаПраці,
+                  "ПодатокНаПрибуток" => ВидиРухуКоштів.ПодатокНаПрибуток,
+                  "Податок на прибуток" => ВидиРухуКоштів.ПодатокНаПрибуток,
+                  "ОплатаОборотнихАктивів" => ВидиРухуКоштів.ОплатаОборотнихАктивів,
+                  "Оплата оборотних активів" => ВидиРухуКоштів.ОплатаОборотнихАктивів,
+                  _ => 0
             };
         }
 
@@ -11854,13 +11971,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static СтатусиПереміщенняТоварів? СтатусиПереміщенняТоварів_FindByName(string name)
+        public static СтатусиПереміщенняТоварів СтатусиПереміщенняТоварів_FindByName(string name)
         {
             return name switch
             {
                 "Відгружено" => СтатусиПереміщенняТоварів.Відгружено,
-                "Принято" => СтатусиПереміщенняТоварів.Принято,
-                _ => null
+                  "Принято" => СтатусиПереміщенняТоварів.Принято,
+                  _ => 0
             };
         }
 
@@ -11886,15 +12003,15 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static СтатусиЗамовленьПостачальникам? СтатусиЗамовленьПостачальникам_FindByName(string name)
+        public static СтатусиЗамовленьПостачальникам СтатусиЗамовленьПостачальникам_FindByName(string name)
         {
             return name switch
             {
                 "НеУзгоджений" => СтатусиЗамовленьПостачальникам.НеУзгоджений,
-                "Узгоджений" => СтатусиЗамовленьПостачальникам.Узгоджений,
-                "Підтверджений" => СтатусиЗамовленьПостачальникам.Підтверджений,
-                "Закритий" => СтатусиЗамовленьПостачальникам.Закритий,
-                _ => null
+                  "Узгоджений" => СтатусиЗамовленьПостачальникам.Узгоджений,
+                  "Підтверджений" => СтатусиЗамовленьПостачальникам.Підтверджений,
+                  "Закритий" => СтатусиЗамовленьПостачальникам.Закритий,
+                  _ => 0
             };
         }
 
@@ -11920,13 +12037,15 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипДокументуПартіяТоварівКомпозит? ТипДокументуПартіяТоварівКомпозит_FindByName(string name)
+        public static ТипДокументуПартіяТоварівКомпозит ТипДокументуПартіяТоварівКомпозит_FindByName(string name)
         {
             return name switch
             {
-                "Поступлення товарів та послуг" => ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг,
-                "Введення залишків" => ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків,
-                _ => null
+                "ПоступленняТоварівТаПослуг" => ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг,
+                  "Поступлення товарів та послуг" => ТипДокументуПартіяТоварівКомпозит.ПоступленняТоварівТаПослуг,
+                  "ВведенняЗалишків" => ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків,
+                  "Введення залишків" => ТипДокументуПартіяТоварівКомпозит.ВведенняЗалишків,
+                  _ => 0
             };
         }
 
@@ -11950,13 +12069,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипЗапасів? ТипЗапасів_FindByName(string name)
+        public static ТипЗапасів ТипЗапасів_FindByName(string name)
         {
             return name switch
             {
                 "Товар" => ТипЗапасів.Товар,
-                "Послуга" => ТипЗапасів.Послуга,
-                _ => null
+                  "Послуга" => ТипЗапасів.Послуга,
+                  _ => 0
             };
         }
 
@@ -11981,14 +12100,14 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипДокументуПродажіДокументКомпозит? ТипДокументуПродажіДокументКомпозит_FindByName(string name)
+        public static ТипДокументуПродажіДокументКомпозит ТипДокументуПродажіДокументКомпозит_FindByName(string name)
         {
             return name switch
             {
                 "ЗамовленняКлієнта" => ТипДокументуПродажіДокументКомпозит.ЗамовленняКлієнта,
-                "АктВиконанихРобіт" => ТипДокументуПродажіДокументКомпозит.АктВиконанихРобіт,
-                "РеалізаціяТоварівТаПослуг" => ТипДокументуПродажіДокументКомпозит.РеалізаціяТоварівТаПослуг,
-                _ => null
+                  "АктВиконанихРобіт" => ТипДокументуПродажіДокументКомпозит.АктВиконанихРобіт,
+                  "РеалізаціяТоварівТаПослуг" => ТипДокументуПродажіДокументКомпозит.РеалізаціяТоварівТаПослуг,
+                  _ => 0
             };
         }
 
@@ -12013,13 +12132,15 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static МетодиСписанняПартій? МетодиСписанняПартій_FindByName(string name)
+        public static МетодиСписанняПартій МетодиСписанняПартій_FindByName(string name)
         {
             return name switch
             {
-                "FIFO (спочатку списуються партії які прийшли першими)" => МетодиСписанняПартій.FIFO,
-                "LIFO (спочатку списуються партії які прийшли останніми)" => МетодиСписанняПартій.LIFO,
-                _ => null
+                "FIFO" => МетодиСписанняПартій.FIFO,
+                  "FIFO (спочатку списуються партії які прийшли першими)" => МетодиСписанняПартій.FIFO,
+                  "LIFO" => МетодиСписанняПартій.LIFO,
+                  "LIFO (спочатку списуються партії які прийшли останніми)" => МетодиСписанняПартій.LIFO,
+                  _ => 0
             };
         }
 
@@ -12043,13 +12164,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипиКонтрагентів? ТипиКонтрагентів_FindByName(string name)
+        public static ТипиКонтрагентів ТипиКонтрагентів_FindByName(string name)
         {
             return name switch
             {
                 "Постачальник" => ТипиКонтрагентів.Постачальник,
-                "Клієнт" => ТипиКонтрагентів.Клієнт,
-                _ => null
+                  "Клієнт" => ТипиКонтрагентів.Клієнт,
+                  _ => 0
             };
         }
 
@@ -12073,13 +12194,14 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static НалаштуванняАдресногоЗберігання? НалаштуванняАдресногоЗберігання_FindByName(string name)
+        public static НалаштуванняАдресногоЗберігання НалаштуванняАдресногоЗберігання_FindByName(string name)
         {
             return name switch
             {
-                "Не використовувати" => НалаштуванняАдресногоЗберігання.НеВикористовувати,
-                "Комірка" => НалаштуванняАдресногоЗберігання.Комірка,
-                _ => null
+                "НеВикористовувати" => НалаштуванняАдресногоЗберігання.НеВикористовувати,
+                  "Не використовувати" => НалаштуванняАдресногоЗберігання.НеВикористовувати,
+                  "Комірка" => НалаштуванняАдресногоЗберігання.Комірка,
+                  _ => 0
             };
         }
 
@@ -12104,14 +12226,14 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ТипиСкладськихКомірок? ТипиСкладськихКомірок_FindByName(string name)
+        public static ТипиСкладськихКомірок ТипиСкладськихКомірок_FindByName(string name)
         {
             return name switch
             {
                 "Приймання" => ТипиСкладськихКомірок.Приймання,
-                "Відвантаження" => ТипиСкладськихКомірок.Відвантаження,
-                "Зберігання" => ТипиСкладськихКомірок.Зберігання,
-                _ => null
+                  "Відвантаження" => ТипиСкладськихКомірок.Відвантаження,
+                  "Зберігання" => ТипиСкладськихКомірок.Зберігання,
+                  _ => 0
             };
         }
 
@@ -12136,13 +12258,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ПричиниЗакриттяЗамовленняКлієнта? ПричиниЗакриттяЗамовленняКлієнта_FindByName(string name)
+        public static ПричиниЗакриттяЗамовленняКлієнта ПричиниЗакриттяЗамовленняКлієнта_FindByName(string name)
         {
             return name switch
             {
                 "Відмова" => ПричиниЗакриттяЗамовленняКлієнта.Відмова,
-                "Інше" => ПричиниЗакриттяЗамовленняКлієнта.Інше,
-                _ => null
+                  "Інше" => ПричиниЗакриттяЗамовленняКлієнта.Інше,
+                  _ => 0
             };
         }
 
@@ -12166,13 +12288,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ПричиниЗакриттяРахункуФактури? ПричиниЗакриттяРахункуФактури_FindByName(string name)
+        public static ПричиниЗакриттяРахункуФактури ПричиниЗакриттяРахункуФактури_FindByName(string name)
         {
             return name switch
             {
                 "Відмова" => ПричиниЗакриттяРахункуФактури.Відмова,
-                "Інше" => ПричиниЗакриттяРахункуФактури.Інше,
-                _ => null
+                  "Інше" => ПричиниЗакриттяРахункуФактури.Інше,
+                  _ => 0
             };
         }
 
@@ -12196,13 +12318,13 @@ namespace GeneratedCode.Перелічення
             };
         }
 
-        public static ПричиниЗакриттяЗамовленняПостачальнику? ПричиниЗакриттяЗамовленняПостачальнику_FindByName(string name)
+        public static ПричиниЗакриттяЗамовленняПостачальнику ПричиниЗакриттяЗамовленняПостачальнику_FindByName(string name)
         {
             return name switch
             {
                 "Відмова" => ПричиниЗакриттяЗамовленняПостачальнику.Відмова,
-                "Інше" => ПричиниЗакриттяЗамовленняПостачальнику.Інше,
-                _ => null
+                  "Інше" => ПричиниЗакриттяЗамовленняПостачальнику.Інше,
+                  _ => 0
             };
         }
 
@@ -12679,6 +12801,8 @@ namespace GeneratedCode.Документи
         public ЗамовленняПостачальнику_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -12750,6 +12874,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a25"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -12784,12 +12910,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -12804,7 +12933,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -13510,6 +13639,8 @@ namespace GeneratedCode.Документи
         public ПоступленняТоварівТаПослуг_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -13589,6 +13720,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a32"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -13625,12 +13758,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -13645,7 +13781,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -14330,6 +14466,8 @@ namespace GeneratedCode.Документи
         public ЗамовленняКлієнта_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -14400,6 +14538,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a34"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -14433,12 +14573,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -14453,7 +14596,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -15152,6 +15295,8 @@ namespace GeneratedCode.Документи
         public РеалізаціяТоварівТаПослуг_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -15234,6 +15379,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a36"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -15271,12 +15418,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -15291,7 +15441,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -15849,6 +15999,8 @@ namespace GeneratedCode.Документи
         public ВстановленняЦінНоменклатури_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -15912,6 +16064,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a42"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -15940,12 +16094,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -15960,7 +16117,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -16415,6 +16572,8 @@ namespace GeneratedCode.Документи
         public ПрихіднийКасовийОрдер_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -16476,6 +16635,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a44"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -16504,12 +16665,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -16524,7 +16688,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -16990,6 +17154,8 @@ namespace GeneratedCode.Документи
         public РозхіднийКасовийОрдер_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -17052,6 +17218,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a48"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -17081,12 +17249,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -17101,7 +17272,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -17574,6 +17745,8 @@ namespace GeneratedCode.Документи
         public ПереміщенняТоварів_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -17641,6 +17814,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a31"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -17671,12 +17846,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -17691,7 +17869,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -18185,6 +18363,8 @@ namespace GeneratedCode.Документи
         public ПоверненняТоварівПостачальнику_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -18254,6 +18434,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a51"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -18286,12 +18468,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -18306,7 +18491,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -18783,6 +18968,8 @@ namespace GeneratedCode.Документи
         public ПоверненняТоварівВідКлієнта_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -18853,6 +19040,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a53"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -18886,12 +19075,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -18906,7 +19098,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -19362,6 +19554,8 @@ namespace GeneratedCode.Документи
         public АктВиконанихРобіт_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -19421,6 +19615,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a81"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -19449,12 +19645,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -19469,7 +19668,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -20068,6 +20267,8 @@ namespace GeneratedCode.Документи
         public ВведенняЗалишків_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -20134,6 +20335,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -20165,12 +20368,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -20185,7 +20391,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -20239,6 +20445,8 @@ namespace GeneratedCode.Документи
         public ВведенняЗалишків_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -20293,6 +20501,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -20318,12 +20528,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -20338,7 +20551,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -20386,6 +20599,8 @@ namespace GeneratedCode.Документи
         public ВведенняЗалишків_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -20440,6 +20655,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -20465,12 +20682,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -20485,7 +20705,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -20535,6 +20755,8 @@ namespace GeneratedCode.Документи
         public ВведенняЗалишків_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -20593,6 +20815,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -20620,12 +20844,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -20640,7 +20867,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -21021,6 +21248,8 @@ namespace GeneratedCode.Документи
         public НадлишкиТоварів_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -21073,6 +21302,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a88"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -21096,12 +21327,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -21116,7 +21350,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -21499,6 +21733,8 @@ namespace GeneratedCode.Документи
         public ПересортицяТоварів_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -21557,6 +21793,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a90"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -21584,12 +21822,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -21604,7 +21845,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -22004,6 +22245,8 @@ namespace GeneratedCode.Документи
         public ПерерахунокТоварів_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -22068,6 +22311,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a92"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -22099,12 +22344,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -22119,7 +22367,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -22551,6 +22799,8 @@ namespace GeneratedCode.Документи
         public ПсуванняТоварів_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -22620,6 +22870,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a94"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -22652,12 +22904,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -22672,7 +22927,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -23110,6 +23365,8 @@ namespace GeneratedCode.Документи
         public ВнутрішнєСпоживанняТоварів_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -23179,6 +23436,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b07"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -23211,12 +23470,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -23231,7 +23493,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -23702,6 +23964,8 @@ namespace GeneratedCode.Документи
         public РахунокФактура_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -23772,6 +24036,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b10"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -23805,12 +24071,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -23825,7 +24094,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -24392,6 +24661,8 @@ namespace GeneratedCode.Документи
         public РозміщенняТоварівНаСкладі_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -24459,6 +24730,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a64"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -24489,12 +24762,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -24509,7 +24785,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -24921,6 +25197,8 @@ namespace GeneratedCode.Документи
         public ПереміщенняТоварівНаСкладі_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -24991,6 +25269,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b09"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -25022,12 +25302,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -25042,7 +25325,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -25459,6 +25742,8 @@ namespace GeneratedCode.Документи
         public ЗбіркаТоварівНаСкладі_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -25526,6 +25811,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b27"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -25556,12 +25843,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -25576,7 +25866,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -25969,6 +26259,8 @@ namespace GeneratedCode.Документи
         public РозміщенняНоменклатуриПоКоміркам_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -26028,6 +26320,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b29"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -26054,12 +26348,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -26074,7 +26371,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -26477,6 +26774,8 @@ namespace GeneratedCode.Документи
         public КорегуванняБоргу_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -26535,6 +26834,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a65"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -26562,12 +26863,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -26582,7 +26886,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -27030,6 +27334,8 @@ namespace GeneratedCode.Документи
         public ЗакриттяЗамовленняКлієнта_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -27096,6 +27402,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a96"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -27127,12 +27435,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -27147,7 +27458,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -27595,6 +27906,8 @@ namespace GeneratedCode.Документи
         public ЗакриттяРахункуФактури_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -27661,6 +27974,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b41"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -27692,12 +28007,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -27712,7 +28030,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()
@@ -28160,6 +28478,8 @@ namespace GeneratedCode.Документи
         public ЗакриттяЗамовленняПостачальнику_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -28226,6 +28546,8 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b44"))
                 throw new Exception("Owner not exist");
 
+            
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -28257,12 +28579,15 @@ namespace GeneratedCode.Документи
             }
             
             await base.BaseCommitTransaction();
+
+            
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) => record.UID == item.UID);
+            Records.RemoveAll(item => record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List<Record> records)
@@ -28277,7 +28602,7 @@ namespace GeneratedCode.Документи
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) => removeList.Exists((Guid uid) => uid == item.UID));
+            Records.RemoveAll(item => removeList.Exists(uid => uid == item.UID));
         }
 
         public async ValueTask Delete()

@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>25.04.2025 00:35:55</DateTimeSave>
+  <DateTimeSave>25.04.2025 16:09:10</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -175,6 +175,10 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                 </Field>
               </Fields>
               <TabularLists />
+              <TriggerFunctions>
+                <BeforeSave Action="0">BeforeSave</BeforeSave>
+                <AfterSave Action="0">AfterSave</AfterSave>
+              </TriggerFunctions>
               <Forms />
             </TablePart>
           </TabularParts>
@@ -270,6 +274,10 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                 </Field>
               </Fields>
               <TabularLists />
+              <TriggerFunctions>
+                <BeforeSave Action="0">BeforeSave</BeforeSave>
+                <AfterSave Action="0">AfterSave</AfterSave>
+              </TriggerFunctions>
               <Forms />
             </TablePart>
           </TabularParts>
@@ -353,6 +361,10 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                 </Field>
               </Fields>
               <TabularLists />
+              <TriggerFunctions>
+                <BeforeSave Action="0">BeforeSave</BeforeSave>
+                <AfterSave Action="0">AfterSave</AfterSave>
+              </TriggerFunctions>
               <Forms />
             </TablePart>
           </TabularParts>
@@ -447,6 +459,10 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                 </Field>
               </Fields>
               <TabularLists />
+              <TriggerFunctions>
+                <BeforeSave Action="0">BeforeSave</BeforeSave>
+                <AfterSave Action="0">AfterSave</AfterSave>
+              </TriggerFunctions>
               <Forms />
             </TablePart>
           </TabularParts>
@@ -603,6 +619,10 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
                   </Fields>
                 </TabularList>
               </TabularLists>
+              <TriggerFunctions>
+                <BeforeSave Action="0">BeforeSave</BeforeSave>
+                <AfterSave Action="0">AfterSave</AfterSave>
+              </TriggerFunctions>
               <Forms />
             </TablePart>
           </TabularParts>
@@ -1047,6 +1067,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
                 </Field>
               </Fields>
               <TabularLists />
+              <TriggerFunctions>
+                <BeforeSave Action="0">BeforeSave</BeforeSave>
+                <AfterSave Action="0">AfterSave</AfterSave>
+              </TriggerFunctions>
               <Forms />
             </TablePart>
           </TabularParts>
@@ -1323,6 +1347,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -1777,6 +1805,10 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -4015,6 +4047,10 @@ namespace StorageAndTrade
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -4134,6 +4170,10 @@ namespace StorageAndTrade
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -4531,6 +4571,10 @@ namespace StorageAndTrade
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -5412,6 +5456,10 @@ namespace StorageAndTrade
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -5675,6 +5723,10 @@ namespace StorageAndTrade
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -8495,6 +8547,10 @@ WHERE
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -11947,6 +12003,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -12871,6 +12931,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -14129,6 +14193,10 @@ FROM
               </Fields>
             </TabularList>
           </TabularLists>
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -15298,6 +15366,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -16467,6 +16539,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -17040,6 +17116,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -17684,6 +17764,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -18406,6 +18490,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -18947,6 +19035,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -19821,6 +19913,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -20737,6 +20833,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -21554,6 +21654,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -22294,6 +22398,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -22450,6 +22558,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -22545,6 +22657,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -22663,6 +22779,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -23279,6 +23399,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -23612,6 +23736,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -23996,6 +24124,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -24649,6 +24781,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -25335,6 +25471,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -26141,6 +26281,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -26934,6 +27078,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -27551,6 +27699,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -28169,6 +28321,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -28732,6 +28888,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -29241,6 +29401,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -29860,6 +30024,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -30664,6 +30832,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -31436,6 +31608,10 @@ FROM
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms>
             <Form Modified="0">
               <Name>Таблична частина</Name>
@@ -38807,6 +38983,10 @@ SQL тип  непотрібно вказувати
               </Fields>
             </TabularList>
           </TabularLists>
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -38937,6 +39117,10 @@ SQL тип  непотрібно вказувати
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -39022,6 +39206,10 @@ SQL тип  непотрібно вказувати
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -39510,6 +39698,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -39817,6 +40009,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -39900,6 +40096,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -40330,6 +40530,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -40732,6 +40936,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -40816,6 +41024,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -41223,6 +41435,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -41506,6 +41722,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -41589,6 +41809,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -41923,6 +42147,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -42016,6 +42244,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -42082,6 +42314,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -42589,6 +42825,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -42751,6 +42991,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -42847,6 +43091,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -43468,6 +43716,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>
@@ -43885,6 +44137,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -43980,6 +44236,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
         <TablePart>
@@ -44066,6 +44326,10 @@ HAVING
             </Field>
           </Fields>
           <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
           <Forms />
         </TablePart>
       </TabularParts>

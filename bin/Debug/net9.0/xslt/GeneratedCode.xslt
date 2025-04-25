@@ -574,6 +574,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Конс
             <xsl:for-each select="Fields/Field">
             public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
             public List&lt;Record&gt; Records { get; set; } = [];
+
+            public event EventHandler? Saved;
         
             public async ValueTask Read()
             {
@@ -636,12 +638,13 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Конс
                 }
                 
                 await base.BaseCommitTransaction();
+                Saved?.Invoke(this, new EventArgs());
             }
 
             public async ValueTask Remove(Record record)
             {
                 await base.BaseRemove(record.UID);
-                Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+                Records.RemoveAll(item =&gt; record.UID == item.UID);
             }
 
             public async ValueTask RemoveAll(List&lt;Record&gt; records)
@@ -656,7 +659,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Конс
                 }
                 await base.BaseCommitTransaction();
 
-                Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
+                Records.RemoveAll(item =&gt; removeList.Exists(uid =&gt; uid == item.UID));
             }
         
             public async ValueTask Delete()
@@ -997,6 +1000,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; private set; }
         
         public List&lt;Record&gt; Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -1062,6 +1067,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         {
             if (!await base.IsExistOwner(Owner.UnigueID, "<xsl:value-of select="$DirectoryTable"/>"))
                 throw new Exception("Owner not exist");
+
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != '' and TriggerFunctions/BeforeSave[@Action = '1']">
+            await <xsl:value-of select="$TablePartFullName"/>_Triggers.<xsl:value-of select="TriggerFunctions/BeforeSave"/>(Owner, this);
+            </xsl:if>
                 
             await base.BaseBeginTransaction();
                 
@@ -1098,12 +1107,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             }
                 
             await base.BaseCommitTransaction();
+
+            <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != '' and TriggerFunctions/AfterSave[@Action = '1']">
+            await <xsl:value-of select="$TablePartFullName"/>_Triggers.<xsl:value-of select="TriggerFunctions/AfterSave"/>(Owner, this);
+            </xsl:if>
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+            Records.RemoveAll(item =&gt; record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List&lt;Record&gt; records)
@@ -1118,7 +1132,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
+            Records.RemoveAll(item =&gt; removeList.Exists(uid =&gt; uid == item.UID));
         }
         
         public async ValueTask Delete()
@@ -1200,24 +1214,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Пере
             };
         }
 
-        public static <xsl:value-of select="$EnumName"/>? <xsl:value-of select="$EnumName"/>_FindByName(string name)
+        public static <xsl:value-of select="$EnumName"/><xsl:text> </xsl:text><xsl:value-of select="$EnumName"/>_FindByName(string name)
         {
             return name switch
             {
                 <xsl:for-each select="Fields/Field">
-                  <xsl:variable name="ReturnValue">
-                      <xsl:choose>
-                          <xsl:when test="normalize-space(Desc) != ''">
-                              <xsl:value-of select="normalize-space(Desc)"/>
-                          </xsl:when>
-                          <xsl:otherwise>
-                              <xsl:value-of select="normalize-space(Name)"/>
-                          </xsl:otherwise>
-                      </xsl:choose>
-                  </xsl:variable>
-                  <xsl:text>"</xsl:text><xsl:value-of select="$ReturnValue"/>" =&gt; <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>,
+                  <xsl:text>"</xsl:text><xsl:value-of select="normalize-space(Name)"/>" =&gt; <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>,
+                  <xsl:if test="normalize-space(Desc) != '' and normalize-space(Name) != normalize-space(Desc)">
+                      <xsl:text>"</xsl:text><xsl:value-of select="normalize-space(Desc)"/>" =&gt; <xsl:value-of select="$EnumName"/>.<xsl:value-of select="Name"/>,
+                  </xsl:if>
                 </xsl:for-each>
-                <xsl:text>_ =&gt; null</xsl:text>
+                <xsl:text>_ =&gt; 0</xsl:text>
             };
         }
 
@@ -1622,6 +1629,8 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         public <xsl:value-of select="$DocumentName"/>_Objest Owner { get; private set; }
         
         public List&lt;Record&gt; Records { get; set; } = [];
+
+        public event EventHandler? Saved;
         
         public void FillJoin(string[]? orderFields = null)
         {
@@ -1688,6 +1697,10 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             if (!await base.IsExistOwner(Owner.UnigueID, "<xsl:value-of select="$DocumentTable"/>"))
                 throw new Exception("Owner not exist");
 
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != '' and TriggerFunctions/BeforeSave[@Action = '1']">
+            await <xsl:value-of select="$TablePartFullName"/>_Triggers.<xsl:value-of select="TriggerFunctions/BeforeSave"/>(Owner, this);
+            </xsl:if>
+
             await base.BaseBeginTransaction();
                 
             if (clear_all_before_save)
@@ -1723,12 +1736,17 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             }
             
             await base.BaseCommitTransaction();
+
+            <xsl:if test="normalize-space(TriggerFunctions/AfterSave) != '' and TriggerFunctions/AfterSave[@Action = '1']">
+            await <xsl:value-of select="$TablePartFullName"/>_Triggers.<xsl:value-of select="TriggerFunctions/AfterSave"/>(Owner, this);
+            </xsl:if>
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public async ValueTask Remove(Record record)
         {
             await base.BaseRemove(record.UID, Owner.UnigueID);
-            Records.RemoveAll((Record item) =&gt; record.UID == item.UID);
+            Records.RemoveAll(item =&gt; record.UID == item.UID);
         }
 
         public async ValueTask RemoveAll(List&lt;Record&gt; records)
@@ -1743,7 +1761,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
             }
             await base.BaseCommitTransaction();
 
-            Records.RemoveAll((Record item) =&gt; removeList.Exists((Guid uid) =&gt; uid == item.UID));
+            Records.RemoveAll(item =&gt; removeList.Exists(uid =&gt; uid == item.UID));
         }
 
         public async ValueTask Delete()

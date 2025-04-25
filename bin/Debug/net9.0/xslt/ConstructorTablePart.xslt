@@ -13,6 +13,9 @@
 
         <xsl:choose>
 
+            <xsl:when test="$File = 'Triggers'">
+                <xsl:call-template name="TablePartTriggers" />
+            </xsl:when>
             <xsl:when test="$File = 'TablePart'">
                 <xsl:call-template name="TablePart" />
             </xsl:when>
@@ -61,6 +64,58 @@
             <xsl:when test="Type = 'any_pointer'">new Guid()</xsl:when>
             <xsl:when test="Type = 'composite_pointer'">new UuidAndText()</xsl:when>
         </xsl:choose>
+    </xsl:template>
+
+<!--- 
+//
+// ============================ Triggers ============================
+//
+-->
+
+    <xsl:template name="TablePartTriggers">
+        <xsl:variable name="TablePartName" select="TablePart/Name"/>
+
+        <!-- Назви функцій -->
+        <xsl:variable name="TriggerFunctions" select="TablePart/TriggerFunctions"/>
+
+        <xsl:variable name="OwnerTypeName">
+            <xsl:choose>
+                <xsl:when test="TablePart/OwnerType = 'Directory'">Довідник</xsl:when>
+                <xsl:when test="TablePart/OwnerType = 'Document'">Документ</xsl:when>
+                <xsl:otherwise>[...]</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="OwnerTypeNameSpace">
+            <xsl:choose>
+                <xsl:when test="TablePart/OwnerType = 'Directory'">Довідники</xsl:when>
+                <xsl:when test="TablePart/OwnerType = 'Document'">Документи</xsl:when>
+                <xsl:otherwise>[...]</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="OwnerName" select="TablePart/OwnerName"/>
+
+/*
+        <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Triggers.cs
+        Тригери табличної частини <xsl:value-of select="$TablePartName"/>
+*/
+
+using AccountingSoftware;
+
+namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.<xsl:value-of select="$OwnerTypeNameSpace"/>
+{
+    static class <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_Triggers
+    {
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/BeforeSave"/>(<xsl:value-of select="$OwnerName"/>_Objest <xsl:value-of select="$OwnerTypeName"/>Обєкт, <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart ТабличнаЧастина)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask <xsl:value-of select="$TriggerFunctions/AfterSave"/>(<xsl:value-of select="$OwnerName"/>_Objest <xsl:value-of select="$OwnerTypeName"/>Обєкт, <xsl:value-of select="$OwnerName"/>_<xsl:value-of select="$TablePartName"/>_TablePart ТабличнаЧастина)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+}
     </xsl:template>
 
 <!--- 
@@ -440,7 +495,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                     <xsl:when test="Type = 'string'">запис.<xsl:value-of select="Name"/> = newText;</xsl:when>
                     <xsl:when test="Type = 'integer'">var (check, value) = Validate.IsInt(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
                     <xsl:when test="Type = 'numeric'">var (check, value) = Validate.IsDecimal(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
-                    <xsl:when test="Type = 'enum'">запис.<xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_FindByName(newText) ?? 0;</xsl:when>
+                    <xsl:when test="Type = 'enum'">запис.<xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_FindByName(newText);</xsl:when>
                     <xsl:when test="Type = 'date' or Type = 'datetime'">var (check, value) = Validate.IsDateTime(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
                     <xsl:when test="Type = 'time'">var (check, value) = Validate.IsTime(newText); if (check) запис.<xsl:value-of select="Name"/> = value;</xsl:when>
                 </xsl:choose> break; }
