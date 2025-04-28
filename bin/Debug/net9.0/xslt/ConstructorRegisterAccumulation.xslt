@@ -32,7 +32,6 @@
     <xsl:template name="RegisterAccumulationList">
         <xsl:variable name="RegisterAccumulationName" select="RegisterAccumulation/Name"/>
         <xsl:variable name="TabularList" select="RegisterAccumulation/TabularList"/>
-        <xsl:variable name="UsePages" select="RegisterAccumulation/UsePages"/>
 
         <!-- Додатова інформація -->
         <xsl:variable name="RegisterAccumulationType" select="RegisterAccumulation/Type"/>
@@ -55,7 +54,6 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриНакопичен
         public <xsl:value-of select="$RegisterAccumulationName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid<xsl:if test="$RegisterAccumulationType = 'Turnover'">, ["income"]</xsl:if>);
-            ТабличніСписки.<xsl:value-of select="$RegisterAccumulationName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { Тип = Сторінки.ТипЖурналу.РегістриНакопичення });
         }
 
         #region Override

@@ -290,7 +290,6 @@ namespace <xsl:value-of select="$NameSpace"/>
     <xsl:template name="RegisterInformationList">
         <xsl:variable name="RegisterInformationName" select="RegisterInformation/Name"/>
         <xsl:variable name="TabularList" select="RegisterInformation/TabularList"/>
-        <xsl:variable name="UsePages" select="RegisterAccumulation/UsePages"/>
 
 /*     
         <xsl:value-of select="$RegisterInformationName"/>.cs
@@ -311,7 +310,6 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриВідомосте
         public <xsl:value-of select="$RegisterInformationName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { Тип = Сторінки.ТипЖурналу.РегістриВідомостей });
         }
 
         #region Override

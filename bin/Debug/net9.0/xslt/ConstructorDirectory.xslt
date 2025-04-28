@@ -549,9 +549,7 @@ namespace <xsl:value-of select="$NameSpace"/>
     <!-- Список -->
     <xsl:template name="DirectoryList">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
-        <!--<xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>-->
         <xsl:variable name="TabularList" select="Directory/TabularList"/>
-        <xsl:variable name="UsePages" select="Directory/UsePages"/>
 
         <!-- Додатова інформація для ієрархічного довідника -->
         <xsl:variable name="DirectoryType" select="Directory/Type"/>
@@ -585,7 +583,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2);
             Власник.AfterSelectFunc = async () =&gt; await BeforeLoadRecords();
@@ -647,7 +644,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
-            <xsl:if test="normalize-space($DirectoryType) = 'Hierarchical'">if (!CompositeMode)</xsl:if> await LoadRecords();
+            <xsl:if test="normalize-space($DirectoryType) = 'Hierarchical'">if (!CompositeMode)</xsl:if> await BeforeLoadRecords();
         }
 
         #endregion
@@ -665,7 +662,6 @@ namespace <xsl:value-of select="$NameSpace"/>
     <xsl:template name="DirectoryListSmallSelect">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
         <xsl:variable name="TabularList" select="Directory/TabularList"/>
-        <xsl:variable name="UsePages" select="Directory/UsePages"/>
 
         <!-- Додатова інформація для ієрархічного довідника -->
         <xsl:variable name="DirectoryType" select="Directory/Type"/>
@@ -697,7 +693,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = async () =&gt; await BeforeLoadRecords();
@@ -769,7 +764,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
         <!--<xsl:variable name="TabularParts" select="Directory/TabularParts/TablePart"/>-->
         <xsl:variable name="TabularList" select="Directory/TabularList"/>
-        <xsl:variable name="UsePages" select="Directory/UsePages"/>
 
         <!-- Додатова інформація для ієрархічного довідника -->
         <xsl:variable name="DirectoryType" select="Directory/Type"/>
@@ -802,7 +796,6 @@ namespace <xsl:value-of select="$NameSpace"/>
 {
     public class <xsl:value-of select="$DirectoryName"/> : ДовідникЖурнал
     {
-        CheckButton checkButtonIsHierarchy = new CheckButton("Ієрархія папок") { Active = true };
         <xsl:value-of select="$PointerFolders"/> ДеревоПапок;
         <xsl:if test="normalize-space($DirectoryOwner) != ''">
         <xsl:variable name="namePointer" select="substring-after($DirectoryOwner, '.')" />
@@ -811,39 +804,23 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public <xsl:value-of select="$DirectoryName"/>()
         {
-            //Враховувати ієрархію папок
-            checkButtonIsHierarchy.Clicked += async (sender, args) =&gt;
-            {
-                ClearPages();
-                if (checkButtonIsHierarchy.Active)
-                    await LoadRecords();
-                else
-                    await LoadRecords_TreeCallBack();
-            };
-
-            HBoxTop.PackStart(checkButtonIsHierarchy, false, false, 10);
+            AddIsHierarchy();
 
             //Дерево папок
             ДеревоПапок = new <xsl:value-of select="$PointerFolders"/>()
             {
                 WidthRequest = 500,
+                CompositeMode = true,
                 CallBack_RowActivated = async () =&gt;
                 {
-                    if (checkButtonIsHierarchy.Active)
-                    {
-                        ClearPages();
-                        await LoadRecords_TreeCallBack();
-                    }
-                },
-                CompositeMode = true
+                    if (IsHierarchy.Active)
+                        await BeforeLoadRecords_OnTree();
+                }                
             };
             ДеревоПапок.SetValue();
             HPanedTable.Pack2(ДеревоПапок, false, true);
 
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
-            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
-            </xsl:if>
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = () =&gt; ДеревоПапок.Власник.Pointer = Власник.Pointer;
@@ -854,7 +831,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public override async ValueTask LoadRecords()
         {
-            if (checkButtonIsHierarchy.Active)
+            if (IsHierarchy.Active)
             {
                 if (DirectoryPointerItem != null || SelectPointerItem != null)
                 {
@@ -865,7 +842,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 await ДеревоПапок.LoadRecords();
             }
             else
-                await LoadRecords_TreeCallBack();
+                await BeforeLoadRecords_OnTree();
         }
 
         async ValueTask LoadRecords_TreeCallBack()
@@ -881,9 +858,6 @@ namespace <xsl:value-of select="$NameSpace"/>
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$FieldFolder"/>, Comparison.EQ, ДеревоПапок.SelectPointerItem?.UGuid ?? new UnigueID().UGuid));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(LoadRecords_TreeCallBack);
-            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -898,22 +872,16 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
-            </xsl:if>
         }
 
-        <xsl:if test="$UsePages = '1'">
-        async ValueTask LoadRecords_OnFilter()
+        public async override ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
-            PagesShow(LoadRecords_OnFilter);
         }
-        </xsl:if>
 
-        protected override Widget? FilterRecords(Box hBox)
+        protected override void FillFilterList(ListFilterControl filterControl)
         {
-            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid<xsl:if test="$UsePages = '1'">, () =&gt; PagesShow(LoadRecords_OnFilter)</xsl:if>);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -934,7 +902,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         protected override async ValueTask BeforeSetValue()
         {
             NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion
@@ -976,10 +944,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
             WidthPresentation = 300;
             Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
-            PointerChanged += async (object? _, <xsl:value-of select="$DirectoryName"/>_Pointer pointer) =&gt;
-            {
-                Presentation = pointer != null ? await pointer.GetPresentation() : "";
-            };
+            PointerChanged += async (_, pointer) =&gt; Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         <xsl:value-of select="$DirectoryName"/>_Pointer pointer;
@@ -1010,7 +975,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 PopoverParent = popover, 
                 DirectoryPointerItem = Pointer.UnigueID,
                 OpenFolder = OpenFolder,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
+                CallBack_OnSelectPointer = selectPointer =&gt;
                 {
                     Pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();
@@ -1070,7 +1035,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             pointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
             WidthPresentation = 300;
             Caption = $"{<xsl:value-of select="$DirectoryName"/>_Const.FULLNAME}:";
-            PointerChanged += async (object? _, <xsl:value-of select="$DirectoryName"/>_Pointer pointer) =&gt;
+            PointerChanged += async (_, pointer) =&gt;
             {
                 Presentation = pointer != null ? await pointer.GetPresentation() : "";
                 if (pointers.Count &gt; 1) Presentation += $" ... {pointers.Count}";
@@ -1122,11 +1087,11 @@ namespace <xsl:value-of select="$NameSpace"/>
             {
                 PopoverParent = popover,
                 DirectoryPointerItem = pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
+                CallBack_OnSelectPointer = selectPointer =&gt;
                 {
                     Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
                 },
-                CallBack_OnMultipleSelectPointer = (UnigueID[] selectPointers) =&gt;
+                CallBack_OnMultipleSelectPointer = selectPointers =&gt;
                 {
                     foreach (var selectPointer in selectPointers)
                         Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(selectPointer));
@@ -1149,7 +1114,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 ListBoxRow listBoxRow = [hBox];
 
                 LinkButton linkName = new LinkButton("", await item.GetPresentation()) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
-                linkName.Clicked += (object? sender, EventArgs args) =&gt;
+                linkName.Clicked += (sender, args) =&gt;
                 {
                     if (Pointer.UnigueID.ToString() != item.UnigueID.ToString())
                         Pointer = item;
@@ -1159,7 +1124,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
                 //Remove
                 LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
-                linkRemove.Clicked += (object? sender, EventArgs args) =&gt;
+                linkRemove.Clicked += (sender, args) =&gt;
                 {
                     pointers.Remove(item);
                     listBox.Remove(listBoxRow);

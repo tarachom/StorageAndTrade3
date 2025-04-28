@@ -270,8 +270,6 @@ namespace <xsl:value-of select="$NameSpace"/>
     <!-- Елемент -->
     <xsl:template name="DocumentElement">
         <xsl:variable name="DocumentName" select="Document/Name"/>
-        <!--<xsl:variable name="Fields" select="Document/Fields/Field"/>-->
-        <!--<xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>-->
         <xsl:variable name="FieldsTL" select="Document/ElementFields/Field"/>
         <xsl:variable name="TabularPartsTL" select="Document/ElementTableParts/TablePart"/>
 /*
@@ -615,7 +613,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:variable name="DocumentName" select="Document/Name"/>
         <xsl:variable name="TabularParts" select="Document/TabularParts/TablePart"/>
         <xsl:variable name="TabularList" select="Document/TabularList"/>
-        <xsl:variable name="UsePages" select="Document/UsePages"/>
 
         <!-- Додатова інформація -->
         <xsl:variable name="DocumentExportXML" select="Document/ExportXML"/>
@@ -640,7 +637,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DocumentName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override
@@ -773,10 +769,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             pointer = new <xsl:value-of select="$DocumentName"/>_Pointer();
             WidthPresentation = 300;
             Caption = $"{<xsl:value-of select="$DocumentName"/>_Const.FULLNAME}:";
-            PointerChanged += async (object? _, <xsl:value-of select="$DocumentName"/>_Pointer pointer) =&gt;
-            {
-                Presentation = pointer != null ? await pointer.GetPresentation() : "";
-            };
+            PointerChanged += async (_, pointer) =&gt; Presentation = pointer != null ? await pointer.GetPresentation() : "";
         }
 
         <xsl:value-of select="$DocumentName"/>_Pointer pointer;
@@ -799,7 +792,7 @@ namespace <xsl:value-of select="$NameSpace"/>
             <xsl:value-of select="$DocumentName"/> page = new <xsl:value-of select="$DocumentName"/>
             {
                 DocumentPointerItem = Pointer.UnigueID,
-                CallBack_OnSelectPointer = (UnigueID selectPointer) =&gt;
+                CallBack_OnSelectPointer = selectPointer =&gt;
                 {
                     Pointer = new <xsl:value-of select="$DocumentName"/>_Pointer(selectPointer);
                     AfterSelectFunc?.Invoke();
