@@ -48,7 +48,6 @@ namespace StorageAndTrade
             });
 
             ТабличніСписки.Контрагенти_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.Контрагенти_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         #region Override

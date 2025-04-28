@@ -17,7 +17,6 @@ namespace StorageAndTrade
         public Журнал_Закупівлі() : base(Config.NameSpageCodeGeneration)
         {
             ТабличніСписки.Журнали_Закупівлі.AddColumns(TreeViewGrid);
-            ТабличніСписки.Журнали_Закупівлі.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Журнали });
         }
 
         public override async ValueTask LoadRecords()

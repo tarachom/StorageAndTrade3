@@ -585,16 +585,10 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
-            </xsl:if>
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2);
-            Власник.AfterSelectFunc = async () =&gt; 
-            {
-                ClearPages();
-                await LoadRecords();
-            };
+            Власник.AfterSelectFunc = async () =&gt; await BeforeLoadRecords();
             </xsl:if>
         }
 
@@ -609,9 +603,6 @@ namespace <xsl:value-of select="$NameSpace"/>
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
             </xsl:if>
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(LoadRecords);
-            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -626,22 +617,16 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
-            </xsl:if>
         }
         
-        <xsl:if test="$UsePages = '1'">
-        async ValueTask LoadRecords_OnFilter()
+        public async override ValueTask LoadRecords_OnFilter()
         {
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
-            PagesShow(LoadRecords_OnFilter);
         }
-        </xsl:if>
 
-        protected override Widget? FilterRecords(Box hBox)
+        protected override void FillFilterList(ListFilterControl filterControl)
         {
-            return ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid<xsl:if test="$UsePages = '1'">, () =&gt; PagesShow(LoadRecords_OnFilter)</xsl:if>);
+            ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, filterControl);
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -712,16 +697,10 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>_ШвидкийВибір() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування());
-            </xsl:if>
             <xsl:if test="normalize-space($DirectoryOwner) != ''">
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
-            Власник.AfterSelectFunc = async () =&gt; 
-            {
-                ClearPages();
-                await LoadRecords();
-            };
+            Власник.AfterSelectFunc = async () =&gt; await BeforeLoadRecords();
             </xsl:if>
         }
 
@@ -734,9 +713,6 @@ namespace <xsl:value-of select="$NameSpace"/>
                     new Where(<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="$PointerFieldOwner"/>, Comparison.EQ, Власник.Pointer.UnigueID.UGuid));
             </xsl:if>
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(LoadRecords);
-            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -751,9 +727,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DirectoryName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, OpenFolder);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
-            </xsl:if>
         }
 
         protected override async ValueTask OpenPageList(UnigueID? unigueID = null)

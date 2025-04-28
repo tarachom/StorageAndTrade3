@@ -17,7 +17,6 @@ namespace StorageAndTrade
         public Контрагенти_ШвидкийВибір() : base()
         {
             ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-            ТабличніСписки.Контрагенти_ЗаписиШвидкийВибір.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         public override async ValueTask LoadRecords()

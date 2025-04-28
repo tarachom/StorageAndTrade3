@@ -18,7 +18,6 @@ namespace StorageAndTrade
         public КорегуванняБоргу()
         {
             ТабличніСписки.КорегуванняБоргу_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.КорегуванняБоргу_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override

@@ -19,8 +19,7 @@ namespace StorageAndTrade.РегістриНакопичення
         public ЗамовленняКлієнтів() : base()
         {
             ТабличніСписки.ЗамовленняКлієнтів_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ЗамовленняКлієнтів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриНакопичення });
-
+            
             HBoxTop.PackStart(new Label("Таблиці розрахунків:"), false, false, 0);
             CreateLink(HBoxTop, "Залишки", async () => await ЗамовленняКлієнтів_Залишки_Звіт.Сформувати(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня()));
         }

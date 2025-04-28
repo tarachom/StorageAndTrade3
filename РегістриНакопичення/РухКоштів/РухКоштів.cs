@@ -19,8 +19,7 @@ namespace StorageAndTrade.РегістриНакопичення
         public РухКоштів() : base()
         {
             ТабличніСписки.РухКоштів_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.РухКоштів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриНакопичення });
-
+            
             HBoxTop.PackStart(new Label("Таблиці розрахунків:"), false, false, 0);
             CreateLink(HBoxTop, "Залишки", async () => await РухКоштів_Залишки_Звіт.Сформувати(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня()));
             CreateLink(HBoxTop, "Залишки та обороти", async () => await РухКоштів_ЗалишкиТаОбороти_Звіт.Сформувати(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня()));

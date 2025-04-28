@@ -17,7 +17,6 @@ namespace StorageAndTrade
         public Файли_ШвидкийВибір() : base()
         {
             ТабличніСписки.Файли_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-            ТабличніСписки.Файли_ЗаписиШвидкийВибір.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         public override async ValueTask LoadRecords()

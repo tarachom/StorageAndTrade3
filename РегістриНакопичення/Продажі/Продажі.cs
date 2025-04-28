@@ -19,8 +19,7 @@ namespace StorageAndTrade.РегістриНакопичення
         public Продажі() : base()
         {
             ТабличніСписки.Продажі_Записи.AddColumns(TreeViewGrid, ["income"]);
-            ТабличніСписки.Продажі_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриНакопичення });
-
+            
             HBoxTop.PackStart(new Label("Таблиці розрахунків:"), false, false, 0);
             CreateLink(HBoxTop, "Обороти", async () => await Продажі_Обороти_Звіт.Сформувати(Період.DateStartControl.ПочатокДня(), Період.DateStopControl.КінецьДня()));
         }

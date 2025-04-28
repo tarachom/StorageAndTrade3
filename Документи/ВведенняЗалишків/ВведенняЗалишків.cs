@@ -20,7 +20,6 @@ namespace StorageAndTrade
         public ВведенняЗалишків()
         {
             ТабличніСписки.ВведенняЗалишків_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ВведенняЗалишків_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override

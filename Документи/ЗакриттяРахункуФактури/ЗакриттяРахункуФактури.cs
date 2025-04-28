@@ -20,7 +20,6 @@ namespace StorageAndTrade
         public ЗакриттяРахункуФактури() : base()
         {
             ТабличніСписки.ЗакриттяРахункуФактури_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ЗакриттяРахункуФактури_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override

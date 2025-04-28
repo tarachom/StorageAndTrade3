@@ -21,7 +21,6 @@ namespace StorageAndTrade
         public РахунокФактура()
         {
             ТабличніСписки.РахунокФактура_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.РахунокФактура_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override

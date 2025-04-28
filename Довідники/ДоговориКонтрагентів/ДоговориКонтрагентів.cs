@@ -26,7 +26,6 @@ namespace StorageAndTrade
             КонтрагентВласник.AfterSelectFunc = async () => await BeforeLoadRecords();
 
             ТабличніСписки.ДоговориКонтрагентів_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ДоговориКонтрагентів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         #region Override

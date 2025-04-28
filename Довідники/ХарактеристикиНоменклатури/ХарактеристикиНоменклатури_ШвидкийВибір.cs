@@ -19,7 +19,6 @@ namespace StorageAndTrade
         public ХарактеристикиНоменклатури_ШвидкийВибір() : base()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
 
             HBoxTop.PackStart(Власник, false, false, 2); //Власник
             Власник.AfterSelectFunc = async () => await BeforeLoadRecords();

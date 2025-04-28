@@ -22,7 +22,6 @@ namespace StorageAndTrade
         public ХарактеристикиНоменклатури() : base()
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ХарактеристикиНоменклатури_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
 
             CreateLink(HBoxTop, ШтрихкодиНоменклатури_Const.FULLNAME, async () =>
             {

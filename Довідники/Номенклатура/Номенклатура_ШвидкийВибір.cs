@@ -17,7 +17,6 @@ namespace StorageAndTrade
         public Номенклатура_ШвидкийВибір() : base()
         {
             ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.AddColumns(TreeViewGrid);
-            ТабличніСписки.Номенклатура_ЗаписиШвидкийВибір.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         public override async ValueTask LoadRecords()

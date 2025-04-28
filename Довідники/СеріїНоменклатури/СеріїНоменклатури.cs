@@ -19,7 +19,6 @@ namespace StorageAndTrade
         public СеріїНоменклатури() : base()
         {
             ТабличніСписки.СеріїНоменклатури_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.СеріїНоменклатури_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         #region Override

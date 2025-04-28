@@ -20,7 +20,6 @@ namespace StorageAndTrade.РегістриВідомостей
         public КурсиВалют()
         {
             ТабличніСписки.КурсиВалют_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.КурсиВалют_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.РегістриВідомостей });
 
             HBoxTop.PackStart(ВалютаВласник, false, false, 2);
             ВалютаВласник.AfterSelectFunc = async () =>

@@ -20,7 +20,6 @@ namespace StorageAndTrade
         public АктВиконанихРобіт()
         {
             ТабличніСписки.АктВиконанихРобіт_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.АктВиконанихРобіт_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override

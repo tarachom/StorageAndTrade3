@@ -20,7 +20,7 @@ namespace StorageAndTrade
         /// Функція створює договори для контрагента
         /// </summary>
         /// <param name="Контрагент">Контрагент</param>
-        public static async ValueTask СтворитиДоговориКонтрагентаЗаЗамовчуванням(Довідники.Контрагенти_Pointer Контрагент)
+        public static async ValueTask СтворитиДоговориКонтрагентаЗаЗамовчуванням(Довідники.Контрагенти_Pointer Контрагент) //!!ЗаЗамовчуванням
         {
             if (Контрагент.IsEmpty())
                 return;
@@ -71,7 +71,7 @@ namespace StorageAndTrade
         {
             СерійнийНомер = СерійнийНомер.Trim();
 
-            Довідники.СеріїНоменклатури_Select серіїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
+            Довідники.СеріїНоменклатури_Select серіїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select(); //!!!use Find
             серіїНоменклатури_Select.QuerySelect.Where.Add(new Where(Довідники.СеріїНоменклатури_Const.Номер, Comparison.EQ, СерійнийНомер));
 
             if (await серіїНоменклатури_Select.SelectSingle())

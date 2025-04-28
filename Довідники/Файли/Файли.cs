@@ -19,7 +19,6 @@ namespace StorageAndTrade
         public Файли() : base()
         {
             ТабличніСписки.Файли_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.Файли_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         #region Override

@@ -20,7 +20,6 @@ namespace StorageAndTrade
         public ПсуванняТоварів()
         {
             ТабличніСписки.ПсуванняТоварів_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ПсуванняТоварів_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Документи });
         }
 
         #region Override

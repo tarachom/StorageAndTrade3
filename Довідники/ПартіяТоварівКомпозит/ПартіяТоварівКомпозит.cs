@@ -19,7 +19,6 @@ namespace StorageAndTrade
         public ПартіяТоварівКомпозит() : base()
         {
             ТабличніСписки.ПартіяТоварівКомпозит_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.ПартіяТоварівКомпозит_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
         }
 
         #region Override

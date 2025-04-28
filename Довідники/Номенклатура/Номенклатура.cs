@@ -60,8 +60,6 @@ namespace StorageAndTrade
             });
 
             ТабличніСписки.Номенклатура_Записи.AddColumns(TreeViewGrid);
-            ТабличніСписки.Номенклатура_Записи.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { PageSize = 300, Тип = Сторінки.ТипЖурналу.Довідники });
-
             Пошук.MinLength = 2;
         }
 
