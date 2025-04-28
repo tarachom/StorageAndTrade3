@@ -640,9 +640,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         public <xsl:value-of select="$DocumentName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { Тип = Сторінки.ТипЖурналу.Документи });
-            </xsl:if>
         }
 
         #region Override
@@ -652,9 +650,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, SelectPointerItem, DocumentPointerItem);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(LoadRecords);
-            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -665,9 +660,6 @@ namespace <xsl:value-of select="$NameSpace"/>
             ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбір(TreeViewGrid, <xsl:value-of select="$DocumentName"/>_Функції.Відбори(searchText));
 
             await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
-            </xsl:if>
         }
 
         <xsl:if test="$UsePages = '1'">

@@ -132,5 +132,12 @@ namespace StorageAndTrade
             NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Сервіс", () => page);
             page.SetValue();
         }
+
+        protected override void Обробки(LinkButton lb)
+        {
+            PageWorking page = new PageWorking();
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Обробки", () => page);
+            page.SetValue();
+        }
     }
 }

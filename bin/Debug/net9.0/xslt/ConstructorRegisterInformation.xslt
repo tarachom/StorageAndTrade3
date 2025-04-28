@@ -311,9 +311,7 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриВідомосте
         public <xsl:value-of select="$RegisterInformationName"/>() : base()
         {
             ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.AddColumns(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
             ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.Сторінки(TreeViewGrid, new Сторінки.Налаштування() { Тип = Сторінки.ТипЖурналу.РегістриВідомостей });
-            </xsl:if>
         }
 
         #region Override
@@ -324,9 +322,6 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриВідомосте
             ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
 
             await ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(LoadRecords);
-            </xsl:if>
         }
 
         public override async ValueTask LoadRecords_OnSearch(string searchText)
@@ -338,9 +333,6 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриВідомосте
                 new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
 
             await ТабличніСписки.<xsl:value-of select="$RegisterInformationName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
-            <xsl:if test="$UsePages = '1'">
-            PagesShow(async () =&gt; await LoadRecords_OnSearch(searchText));
-            </xsl:if>
         }
 
         protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
@@ -397,8 +389,7 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриВідомосте
         protected override async void PeriodChanged()
         {
             ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
-            ClearPages();
-            await LoadRecords();
+            await BeforeLoadRecords();
         }
 
         #endregion
