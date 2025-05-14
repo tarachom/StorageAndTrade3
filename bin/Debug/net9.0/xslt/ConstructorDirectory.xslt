@@ -631,6 +631,11 @@ namespace <xsl:value-of select="$NameSpace"/>
             await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List&lt;ObjectChanged&gt; recordsChanged)
+        {
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.CreateFilter(TreeViewGrid, filterControl);
@@ -651,9 +656,14 @@ namespace <xsl:value-of select="$NameSpace"/>
             return await <xsl:value-of select="$DirectoryName"/>_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new <xsl:value-of select="$DirectoryName"/>_Pointer(unigueID).GetBasis());
+        }
+
         protected override async ValueTask BeforeSetValue()
         {
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, <xsl:value-of select="$DirectoryName"/>_Const.POINTER);
             <xsl:if test="normalize-space($DirectoryType) = 'Hierarchical'">if (!CompositeMode)</xsl:if> await BeforeLoadRecords();
         }
 
