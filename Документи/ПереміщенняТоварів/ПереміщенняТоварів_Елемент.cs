@@ -43,7 +43,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ПереміщенняТоварів_Елемент() 
+        public ПереміщенняТоварів_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -179,7 +179,7 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            
+
             try
             {
                 if (await Елемент.Save())
@@ -218,6 +218,13 @@ namespace StorageAndTrade
         protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПереміщенняТоварів_Pointer(unigueID));
+        }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ПереміщенняТоварів page = new ПереміщенняТоварів() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ПереміщенняТоварів_Const.FULLNAME, () => page);
+            await page.SetValue();
         }
     }
 }

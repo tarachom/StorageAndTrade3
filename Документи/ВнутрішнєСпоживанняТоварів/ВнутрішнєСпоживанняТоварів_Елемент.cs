@@ -38,14 +38,14 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ВнутрішнєСпоживанняТоварів_Елемент() 
+        public ВнутрішнєСпоживанняТоварів_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
 
             CreateDocName(ВнутрішнєСпоживанняТоварів_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);
-            
+
             NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
             NotebookTablePart.CurrentPage = 0;
 
@@ -152,7 +152,7 @@ namespace StorageAndTrade
         protected override async ValueTask<bool> Save()
         {
             bool isSave = false;
-            
+
             try
             {
                 if (await Елемент.Save())
@@ -165,7 +165,7 @@ namespace StorageAndTrade
             {
                 ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
             }
-          
+
             return isSave;
         }
 
@@ -176,7 +176,7 @@ namespace StorageAndTrade
                 bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
 
                 if (!isSpend)
-                   ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
 
                 return isSpend;
             }
@@ -190,6 +190,13 @@ namespace StorageAndTrade
         protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ВнутрішнєСпоживанняТоварів_Pointer(unigueID));
+        }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ВнутрішнєСпоживанняТоварів page = new ВнутрішнєСпоживанняТоварів() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ВнутрішнєСпоживанняТоварів_Const.FULLNAME, () => page);
+            await page.SetValue();
         }
     }
 }

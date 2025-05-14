@@ -167,5 +167,12 @@ namespace StorageAndTrade
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозміщенняТоварівНаСкладі_Pointer(unigueID));
         }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            РозміщенняТоварівНаСкладі page = new РозміщенняТоварівНаСкладі() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, РозміщенняТоварівНаСкладі_Const.FULLNAME, () => page);
+            await page.SetValue();
+        }
     }
 }

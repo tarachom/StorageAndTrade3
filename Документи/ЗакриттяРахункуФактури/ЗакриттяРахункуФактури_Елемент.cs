@@ -218,5 +218,12 @@ namespace StorageAndTrade
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗакриттяРахункуФактури_Pointer(unigueID));
         }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ЗакриттяРахункуФактури page = new ЗакриттяРахункуФактури() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗакриттяРахункуФактури_Const.FULLNAME, () => page);
+            await page.SetValue();
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public ПерерахунокТоварів_Елемент() 
+        public ПерерахунокТоварів_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -170,6 +170,13 @@ namespace StorageAndTrade
         protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПерерахунокТоварів_Pointer(unigueID));
+        }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ПерерахунокТоварів page = new ПерерахунокТоварів() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ПерерахунокТоварів_Const.FULLNAME, () => page);
+            await page.SetValue();
         }
     }
 }

@@ -108,7 +108,7 @@ namespace StorageAndTrade
             Елемент.Коментар = Коментар.Text;
             Елемент.Автор = Автор.Pointer;
             Елемент.Основа = Основа.Pointer;
-            
+
             Елемент.КлючовіСловаДляПошуку = КлючовіСловаДляПошуку() + Товари.КлючовіСловаДляПошуку();
         }
 
@@ -160,6 +160,13 @@ namespace StorageAndTrade
         protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ВстановленняЦінНоменклатури_Pointer(unigueID));
+        }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ВстановленняЦінНоменклатури page = new ВстановленняЦінНоменклатури() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ВстановленняЦінНоменклатури_Const.FULLNAME, () => page);
+            await page.SetValue();
         }
     }
 }

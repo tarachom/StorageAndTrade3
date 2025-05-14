@@ -104,7 +104,7 @@ namespace StorageAndTrade
             //Контрагент
             CreateField(vBox, null, Контрагент);
             Контрагент.AfterSelectFunc = async () => await Контрагент.ПривязкаДоДоговору(Договір);
- 
+
             //Договір
             CreateField(vBox, null, Договір);
             Договір.BeforeClickOpenFunc = () => Договір.КонтрагентВласник = Контрагент.Pointer;
@@ -321,6 +321,13 @@ namespace StorageAndTrade
         protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПоступленняТоварівТаПослуг_Pointer(unigueID));
+        }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ПоступленняТоварівТаПослуг page = new ПоступленняТоварівТаПослуг() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ПоступленняТоварівТаПослуг_Const.FULLNAME, () => page);
+            await page.SetValue();
         }
     }
 }

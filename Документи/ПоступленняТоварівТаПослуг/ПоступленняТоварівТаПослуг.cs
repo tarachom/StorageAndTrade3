@@ -110,7 +110,7 @@ namespace StorageAndTrade
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ПоступленняТоварівТаПослуг_Pointer(unigueID));
         }
-
+        
         protected override bool IsExportXML() { return true; } //Дозволити експорт документу
 
         protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)

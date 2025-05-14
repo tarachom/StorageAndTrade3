@@ -275,5 +275,12 @@ namespace StorageAndTrade
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЗамовленняПостачальнику_Pointer(unigueID));
         }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ЗамовленняПостачальнику page = new ЗамовленняПостачальнику() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЗамовленняПостачальнику_Const.FULLNAME, () => page);
+            await page.SetValue();
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public РозміщенняНоменклатуриПоКоміркам_Елемент() 
+        public РозміщенняНоменклатуриПоКоміркам_Елемент()
         {
             Елемент.UnigueIDChanged += UnigueIDChanged;
             Елемент.CaptionChanged += CaptionChanged;
@@ -158,6 +158,13 @@ namespace StorageAndTrade
         protected override void ReportSpendTheDocument(UnigueID unigueID)
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID));
+        }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            РозміщенняНоменклатуриПоКоміркам page = new РозміщенняНоменклатуриПоКоміркам() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, РозміщенняНоменклатуриПоКоміркам_Const.FULLNAME, () => page);
+            await page.SetValue();
         }
     }
 }

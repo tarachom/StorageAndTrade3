@@ -275,5 +275,12 @@ namespace StorageAndTrade
         {
             СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new РозхіднийКасовийОрдер_Pointer(unigueID));
         }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            РозхіднийКасовийОрдер page = new РозхіднийКасовийОрдер() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, РозхіднийКасовийОрдер_Const.FULLNAME, () => page);
+            await page.SetValue();
+        }
     }
 }
