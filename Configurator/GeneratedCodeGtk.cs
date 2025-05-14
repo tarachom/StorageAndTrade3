@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 25.04.2025 16:09:10
+ * Дата конфігурації: 14.05.2025 19:44:55
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -74,12 +74,70 @@ namespace GeneratedCode.Довідники.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
+                Організації_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Організації_Const.Код,
+                    /*Назва*/ Довідники.Організації_Const.Назва,
+                    
+                ]);
+
+                Організації_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Організації_Select.Select();
+
+                while (Організації_Select.MoveNext())
+                {
+                    Довідники.Організації_Pointer? current = Організації_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Організації_Записи Record = new Організації_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Організації_Const.Код].ToString() ?? "",
+                                Назва = Fields[Організації_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Організації_Select Організації_Select = new Довідники.Організації_Select();
             Організації_Select.QuerySelect.Field.AddRange(
@@ -261,12 +319,96 @@ namespace GeneratedCode.Довідники.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
+                Номенклатура_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Номенклатура_Const.Код,
+                    /*Назва*/ Довідники.Номенклатура_Const.Назва,
+                    /*ТипНоменклатури*/ Довідники.Номенклатура_Const.ТипНоменклатури,
+                    
+                ]);
+
+                Номенклатура_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(Номенклатура_Select.QuerySelect, Довідники.Номенклатура_Const.ОдиницяВиміру,
+                    Номенклатура_Select.QuerySelect.Table, "join_tab_1", "ОдиницяВиміру");
+                
+                    /* Additional Field */
+                    Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "Залишок"));
+                
+                    /* Additional Field */
+                    Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки ) END)", "ВРезерві"));
+                
+                    /* Additional Field */
+                    Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки ) END)", "ВРезервіПідЗамовлення"));
+                
+                    /* Additional Field */
+                    Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.TABLE} AS ТовариВКомірках WHERE ТовариВКомірках.{РегістриНакопичення.ТовариВКомірках_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "ЗалишокВКомірках"));
+                
+
+                /* SELECT */
+                await Номенклатура_Select.Select();
+
+                while (Номенклатура_Select.MoveNext())
+                {
+                    Довідники.Номенклатура_Pointer? current = Номенклатура_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Номенклатура_Записи Record = new Номенклатура_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Номенклатура_Const.Код].ToString() ?? "",
+                                Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "",
+                                ОдиницяВиміру = Fields["ОдиницяВиміру"].ToString() ?? "",
+                                ТипНоменклатури = Перелічення.ПсевдонімиПерелічення.ТипиНоменклатури_Alias((
+                                (Перелічення.ТипиНоменклатури)(Fields[Номенклатура_Const.ТипНоменклатури] != DBNull.Value ? Fields[Номенклатура_Const.ТипНоменклатури] : 0)) ),
+                                Залишок = Fields["Залишок"].ToString() ?? "",
+                            ВРезерві = Fields["ВРезерві"].ToString() ?? "",
+                            ВРезервіПідЗамовлення = Fields["ВРезервіПідЗамовлення"].ToString() ?? "",
+                            ЗалишокВКомірках = Fields["ЗалишокВКомірках"].ToString() ?? "",
+                            
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -520,12 +662,88 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
+                Номенклатура_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Номенклатура_Const.Код,
+                    /*Назва*/ Довідники.Номенклатура_Const.Назва,
+                    
+                ]);
+
+                Номенклатура_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(Номенклатура_Select.QuerySelect, Довідники.Номенклатура_Const.ОдиницяВиміру,
+                    Номенклатура_Select.QuerySelect.Table, "join_tab_1", "ОдиницяВиміру");
+                
+                    /* Additional Field */
+                    Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності} ) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВНаявності, 1) FROM Залишки ) END)", "Залишок"));
+                
+                    /* Additional Field */
+                    Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу} ) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки ) END)", "ВРезерві"));
+                
+                    /* Additional Field */
+                    Номенклатура_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(CASE WHEN {Довідники.Номенклатура_Const.TABLE}.{Довідники.Номенклатура_Const.ТипНоменклатури} = {(int)Перелічення.ТипиНоменклатури.Товар} THEN ( WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} AS Номенклатура, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення} ) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.Номенклатура_Const.TABLE}.uid GROUP BY Номенклатура ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки ) END)", "ВРезервіПідЗамовлення"));
+                
+
+                /* SELECT */
+                await Номенклатура_Select.Select();
+
+                while (Номенклатура_Select.MoveNext())
+                {
+                    Довідники.Номенклатура_Pointer? current = Номенклатура_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Номенклатура_ЗаписиШвидкийВибір Record = new Номенклатура_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Номенклатура_Const.Код].ToString() ?? "",
+                                Назва = Fields[Номенклатура_Const.Назва].ToString() ?? "",
+                                ОдиницяВиміру = Fields["ОдиницяВиміру"].ToString() ?? "",
+                                Залишок = Fields["Залишок"].ToString() ?? "",
+                            ВРезерві = Fields["ВРезерві"].ToString() ?? "",
+                            ВРезервіПідЗамовлення = Fields["ВРезервіПідЗамовлення"].ToString() ?? "",
+                            
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Номенклатура_Select Номенклатура_Select = new Довідники.Номенклатура_Select();
             Номенклатура_Select.QuerySelect.Field.AddRange(
@@ -734,12 +952,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
+                Виробники_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Виробники_Const.Код,
+                    /*Назва*/ Довідники.Виробники_Const.Назва,
+                    
+                ]);
+
+                Виробники_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Виробники_Select.Select();
+
+                while (Виробники_Select.MoveNext())
+                {
+                    Довідники.Виробники_Pointer? current = Виробники_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Виробники_Записи Record = new Виробники_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Виробники_Const.Код].ToString() ?? "",
+                                Назва = Fields[Виробники_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Виробники_Select Виробники_Select = new Довідники.Виробники_Select();
             Виробники_Select.QuerySelect.Field.AddRange(
@@ -860,12 +1136,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
+                ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ВидиНоменклатури_Const.Код,
+                    /*Назва*/ Довідники.ВидиНоменклатури_Const.Назва,
+                    
+                ]);
+
+                ВидиНоменклатури_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ВидиНоменклатури_Select.Select();
+
+                while (ВидиНоменклатури_Select.MoveNext())
+                {
+                    Довідники.ВидиНоменклатури_Pointer? current = ВидиНоменклатури_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВидиНоменклатури_Записи Record = new ВидиНоменклатури_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ВидиНоменклатури_Const.Код].ToString() ?? "",
+                                Назва = Fields[ВидиНоменклатури_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ВидиНоменклатури_Select ВидиНоменклатури_Select = new Довідники.ВидиНоменклатури_Select();
             ВидиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -996,12 +1330,74 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
+                ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ПакуванняОдиниціВиміру_Const.Код,
+                    /*Назва*/ Довідники.ПакуванняОдиниціВиміру_Const.Назва,
+                    /*КількістьУпаковок*/ Довідники.ПакуванняОдиниціВиміру_Const.КількістьУпаковок,
+                    /*НазваПовна*/ Довідники.ПакуванняОдиниціВиміру_Const.НазваПовна,
+                    
+                ]);
+
+                ПакуванняОдиниціВиміру_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ПакуванняОдиниціВиміру_Select.Select();
+
+                while (ПакуванняОдиниціВиміру_Select.MoveNext())
+                {
+                    Довідники.ПакуванняОдиниціВиміру_Pointer? current = ПакуванняОдиниціВиміру_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПакуванняОдиниціВиміру_Записи Record = new ПакуванняОдиниціВиміру_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ПакуванняОдиниціВиміру_Const.Код].ToString() ?? "",
+                                Назва = Fields[ПакуванняОдиниціВиміру_Const.Назва].ToString() ?? "",
+                                КількістьУпаковок = Fields[ПакуванняОдиниціВиміру_Const.КількістьУпаковок].ToString() ?? "",
+                                НазваПовна = Fields[ПакуванняОдиниціВиміру_Const.НазваПовна].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ПакуванняОдиниціВиміру_Select ПакуванняОдиниціВиміру_Select = new Довідники.ПакуванняОдиниціВиміру_Select();
             ПакуванняОдиниціВиміру_Select.QuerySelect.Field.AddRange(
@@ -1175,12 +1571,76 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
+                Валюти_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Валюти_Const.Код,
+                    /*Назва*/ Довідники.Валюти_Const.Назва,
+                    /*КороткаНазва*/ Довідники.Валюти_Const.КороткаНазва,
+                    /*Код_R030*/ Довідники.Валюти_Const.Код_R030,
+                    /*ВиводитиКурсНаСтартову*/ Довідники.Валюти_Const.ВиводитиКурсНаСтартову,
+                    
+                ]);
+
+                Валюти_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Валюти_Select.Select();
+
+                while (Валюти_Select.MoveNext())
+                {
+                    Довідники.Валюти_Pointer? current = Валюти_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Валюти_Записи Record = new Валюти_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Валюти_Const.Код].ToString() ?? "",
+                                Назва = Fields[Валюти_Const.Назва].ToString() ?? "",
+                                КороткаНазва = Fields[Валюти_Const.КороткаНазва].ToString() ?? "",
+                                Код_R030 = Fields[Валюти_Const.Код_R030].ToString() ?? "",
+                                ВиводитиКурсНаСтартову = (Fields[Валюти_Const.ВиводитиКурсНаСтартову] != DBNull.Value ? (bool)Fields[Валюти_Const.ВиводитиКурсНаСтартову] : false) ? "Так" : "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
@@ -1308,12 +1768,72 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
+                Валюти_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Валюти_Const.Код,
+                    /*Назва*/ Довідники.Валюти_Const.Назва,
+                    /*КороткаНазва*/ Довідники.Валюти_Const.КороткаНазва,
+                    
+                ]);
+
+                Валюти_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Валюти_Select.Select();
+
+                while (Валюти_Select.MoveNext())
+                {
+                    Довідники.Валюти_Pointer? current = Валюти_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Валюти_ЗаписиШвидкийВибір Record = new Валюти_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Валюти_Const.Код].ToString() ?? "",
+                                Назва = Fields[Валюти_Const.Назва].ToString() ?? "",
+                                КороткаНазва = Fields[Валюти_Const.КороткаНазва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Валюти_Select Валюти_Select = new Довідники.Валюти_Select();
             Валюти_Select.QuerySelect.Field.AddRange(
@@ -1486,12 +2006,77 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
+                Контрагенти_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Контрагенти_Const.Код,
+                    /*Назва*/ Довідники.Контрагенти_Const.Назва,
+                    /*Постачальник*/ Довідники.Контрагенти_Const.Постачальник,
+                    /*Покупець*/ Довідники.Контрагенти_Const.Покупець,
+                    
+                ]);
+
+                Контрагенти_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Контрагенти_Папки_Pointer.GetJoin(Контрагенти_Select.QuerySelect, Довідники.Контрагенти_Const.Папка,
+                    Контрагенти_Select.QuerySelect.Table, "join_tab_1", "Папка");
+                
+
+                /* SELECT */
+                await Контрагенти_Select.Select();
+
+                while (Контрагенти_Select.MoveNext())
+                {
+                    Довідники.Контрагенти_Pointer? current = Контрагенти_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Контрагенти_Записи Record = new Контрагенти_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Контрагенти_Const.Код].ToString() ?? "",
+                                Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
+                                Папка = Fields["Папка"].ToString() ?? "",
+                                Постачальник = (Fields[Контрагенти_Const.Постачальник] != DBNull.Value ? (bool)Fields[Контрагенти_Const.Постачальник] : false) ? "Так" : "",
+                                Покупець = (Fields[Контрагенти_Const.Покупець] != DBNull.Value ? (bool)Fields[Контрагенти_Const.Покупець] : false) ? "Так" : "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
@@ -1615,12 +2200,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
+                Контрагенти_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Контрагенти_Const.Код,
+                    /*Назва*/ Довідники.Контрагенти_Const.Назва,
+                    
+                ]);
+
+                Контрагенти_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Контрагенти_Select.Select();
+
+                while (Контрагенти_Select.MoveNext())
+                {
+                    Довідники.Контрагенти_Pointer? current = Контрагенти_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Контрагенти_ЗаписиШвидкийВибір Record = new Контрагенти_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Контрагенти_Const.Код].ToString() ?? "",
+                                Назва = Fields[Контрагенти_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Контрагенти_Select Контрагенти_Select = new Довідники.Контрагенти_Select();
             Контрагенти_Select.QuerySelect.Field.AddRange(
@@ -1790,12 +2433,76 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
+                Склади_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Склади_Const.Код,
+                    /*Назва*/ Довідники.Склади_Const.Назва,
+                    /*ТипСкладу*/ Довідники.Склади_Const.ТипСкладу,
+                    /*НалаштуванняАдресногоЗберігання*/ Довідники.Склади_Const.НалаштуванняАдресногоЗберігання,
+                    
+                ]);
+
+                Склади_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Склади_Select.Select();
+
+                while (Склади_Select.MoveNext())
+                {
+                    Довідники.Склади_Pointer? current = Склади_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Склади_Записи Record = new Склади_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Склади_Const.Код].ToString() ?? "",
+                                Назва = Fields[Склади_Const.Назва].ToString() ?? "",
+                                ТипСкладу = Перелічення.ПсевдонімиПерелічення.ТипиСкладів_Alias((
+                                (Перелічення.ТипиСкладів)(Fields[Склади_Const.ТипСкладу] != DBNull.Value ? Fields[Склади_Const.ТипСкладу] : 0)) ),
+                                НалаштуванняАдресногоЗберігання = Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Alias((
+                                (Перелічення.НалаштуванняАдресногоЗберігання)(Fields[Склади_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[Склади_Const.НалаштуванняАдресногоЗберігання] : 0)) ),
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
@@ -1918,12 +2625,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
+                Склади_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Склади_Const.Код,
+                    /*Назва*/ Довідники.Склади_Const.Назва,
+                    
+                ]);
+
+                Склади_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Склади_Select.Select();
+
+                while (Склади_Select.MoveNext())
+                {
+                    Довідники.Склади_Pointer? current = Склади_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Склади_ЗаписиШвидкийВибір Record = new Склади_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Склади_Const.Код].ToString() ?? "",
+                                Назва = Fields[Склади_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Склади_Select Склади_Select = new Довідники.Склади_Select();
             Склади_Select.QuerySelect.Field.AddRange(
@@ -2071,12 +2836,73 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
+                ВидиЦін_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ВидиЦін_Const.Код,
+                    /*Назва*/ Довідники.ВидиЦін_Const.Назва,
+                    
+                ]);
+
+                ВидиЦін_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Валюти_Pointer.GetJoin(ВидиЦін_Select.QuerySelect, Довідники.ВидиЦін_Const.Валюта,
+                    ВидиЦін_Select.QuerySelect.Table, "join_tab_1", "Валюта");
+                
+
+                /* SELECT */
+                await ВидиЦін_Select.Select();
+
+                while (ВидиЦін_Select.MoveNext())
+                {
+                    Довідники.ВидиЦін_Pointer? current = ВидиЦін_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВидиЦін_Записи Record = new ВидиЦін_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ВидиЦін_Const.Код].ToString() ?? "",
+                                Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
@@ -2191,12 +3017,68 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
+                ВидиЦін_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.ВидиЦін_Const.Назва,
+                    
+                ]);
+
+                ВидиЦін_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ВидиЦін_Select.Select();
+
+                while (ВидиЦін_Select.MoveNext())
+                {
+                    Довідники.ВидиЦін_Pointer? current = ВидиЦін_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВидиЦін_ЗаписиШвидкийВибір Record = new ВидиЦін_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ВидиЦін_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ВидиЦін_Select ВидиЦін_Select = new Довідники.ВидиЦін_Select();
             ВидиЦін_Select.QuerySelect.Field.AddRange(
@@ -2315,12 +3197,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
+                ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ВидиЦінПостачальників_Const.Код,
+                    /*Назва*/ Довідники.ВидиЦінПостачальників_Const.Назва,
+                    
+                ]);
+
+                ВидиЦінПостачальників_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ВидиЦінПостачальників_Select.Select();
+
+                while (ВидиЦінПостачальників_Select.MoveNext())
+                {
+                    Довідники.ВидиЦінПостачальників_Pointer? current = ВидиЦінПостачальників_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВидиЦінПостачальників_Записи Record = new ВидиЦінПостачальників_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ВидиЦінПостачальників_Const.Код].ToString() ?? "",
+                                Назва = Fields[ВидиЦінПостачальників_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ВидиЦінПостачальників_Select ВидиЦінПостачальників_Select = new Довідники.ВидиЦінПостачальників_Select();
             ВидиЦінПостачальників_Select.QuerySelect.Field.AddRange(
@@ -2441,12 +3381,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
+                Користувачі_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Користувачі_Const.Код,
+                    /*Назва*/ Довідники.Користувачі_Const.Назва,
+                    
+                ]);
+
+                Користувачі_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Користувачі_Select.Select();
+
+                while (Користувачі_Select.MoveNext())
+                {
+                    Довідники.Користувачі_Pointer? current = Користувачі_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Користувачі_Записи Record = new Користувачі_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Користувачі_Const.Код].ToString() ?? "",
+                                Назва = Fields[Користувачі_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Користувачі_Select Користувачі_Select = new Довідники.Користувачі_Select();
             Користувачі_Select.QuerySelect.Field.AddRange(
@@ -2567,12 +3565,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
+                ФізичніОсоби_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ФізичніОсоби_Const.Код,
+                    /*Назва*/ Довідники.ФізичніОсоби_Const.Назва,
+                    
+                ]);
+
+                ФізичніОсоби_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ФізичніОсоби_Select.Select();
+
+                while (ФізичніОсоби_Select.MoveNext())
+                {
+                    Довідники.ФізичніОсоби_Pointer? current = ФізичніОсоби_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ФізичніОсоби_Записи Record = new ФізичніОсоби_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ФізичніОсоби_Const.Код].ToString() ?? "",
+                                Назва = Fields[ФізичніОсоби_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ФізичніОсоби_Select ФізичніОсоби_Select = new Довідники.ФізичніОсоби_Select();
             ФізичніОсоби_Select.QuerySelect.Field.AddRange(
@@ -2693,12 +3749,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
+                СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.СтруктураПідприємства_Const.Код,
+                    /*Назва*/ Довідники.СтруктураПідприємства_Const.Назва,
+                    
+                ]);
+
+                СтруктураПідприємства_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await СтруктураПідприємства_Select.Select();
+
+                while (СтруктураПідприємства_Select.MoveNext())
+                {
+                    Довідники.СтруктураПідприємства_Pointer? current = СтруктураПідприємства_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        СтруктураПідприємства_Записи Record = new СтруктураПідприємства_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[СтруктураПідприємства_Const.Код].ToString() ?? "",
+                                Назва = Fields[СтруктураПідприємства_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.СтруктураПідприємства_Select СтруктураПідприємства_Select = new Довідники.СтруктураПідприємства_Select();
             СтруктураПідприємства_Select.QuerySelect.Field.AddRange(
@@ -2819,12 +3933,70 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
+                КраїниСвіту_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.КраїниСвіту_Const.Код,
+                    /*Назва*/ Довідники.КраїниСвіту_Const.Назва,
+                    
+                ]);
+
+                КраїниСвіту_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await КраїниСвіту_Select.Select();
+
+                while (КраїниСвіту_Select.MoveNext())
+                {
+                    Довідники.КраїниСвіту_Pointer? current = КраїниСвіту_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        КраїниСвіту_Записи Record = new КраїниСвіту_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[КраїниСвіту_Const.Код].ToString() ?? "",
+                                Назва = Fields[КраїниСвіту_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.КраїниСвіту_Select КраїниСвіту_Select = new Довідники.КраїниСвіту_Select();
             КраїниСвіту_Select.QuerySelect.Field.AddRange(
@@ -2960,12 +4132,76 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
+                Файли_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Файли_Const.Код,
+                    /*Назва*/ Довідники.Файли_Const.Назва,
+                    /*НазваФайлу*/ Довідники.Файли_Const.НазваФайлу,
+                    /*Розмір*/ Довідники.Файли_Const.Розмір,
+                    /*ДатаСтворення*/ Довідники.Файли_Const.ДатаСтворення,
+                    
+                ]);
+
+                Файли_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Файли_Select.Select();
+
+                while (Файли_Select.MoveNext())
+                {
+                    Довідники.Файли_Pointer? current = Файли_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Файли_Записи Record = new Файли_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Файли_Const.Код].ToString() ?? "",
+                                Назва = Fields[Файли_Const.Назва].ToString() ?? "",
+                                НазваФайлу = Fields[Файли_Const.НазваФайлу].ToString() ?? "",
+                                Розмір = Fields[Файли_Const.Розмір].ToString() ?? "",
+                                ДатаСтворення = Fields[Файли_Const.ДатаСтворення].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
@@ -3083,12 +4319,68 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
+                Файли_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.Файли_Const.Назва,
+                    
+                ]);
+
+                Файли_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Файли_Select.Select();
+
+                while (Файли_Select.MoveNext())
+                {
+                    Довідники.Файли_Pointer? current = Файли_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Файли_ЗаписиШвидкийВибір Record = new Файли_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[Файли_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Файли_Select Файли_Select = new Довідники.Файли_Select();
             Файли_Select.QuerySelect.Field.AddRange(
@@ -3224,12 +4516,88 @@ END
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
+                ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ХарактеристикиНоменклатури_Const.Код,
+                    /*Назва*/ Довідники.ХарактеристикиНоменклатури_Const.Назва,
+                    
+                ]);
+
+                ХарактеристикиНоменклатури_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Номенклатура_Pointer.GetJoin(ХарактеристикиНоменклатури_Select.QuerySelect, Довідники.ХарактеристикиНоменклатури_Const.Номенклатура,
+                    ХарактеристикиНоменклатури_Select.QuerySelect.Table, "join_tab_1", "Номенклатура");
+                
+                    /* Additional Field */
+                    ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(WITH Залишки AS ( SELECT ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ВНаявності}) AS ВНаявності FROM {РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.TABLE} AS ТовариНаСкладах WHERE ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ТовариНаСкладах.{РегістриНакопичення.ТовариНаСкладах_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВНаявності, 1) FROM Залишки)", "Залишки"));
+                
+                    /* Additional Field */
+                    ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіЗіСкладу}) AS ВРезервіЗіСкладу FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВРезервіЗіСкладу, 1) FROM Залишки)", "ВРезерві"));
+                
+                    /* Additional Field */
+                    ХарактеристикиНоменклатури_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(WITH Залишки AS ( SELECT ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} AS Характеристика, SUM(ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ВРезервіПідЗамовлення}) AS ВРезервіПідЗамовлення FROM {РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.TABLE} AS ВільніЗалишки WHERE ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.Номенклатура} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.{Довідники.ХарактеристикиНоменклатури_Const.Номенклатура} AND ВільніЗалишки.{РегістриНакопичення.ВільніЗалишки_Підсумки_TablePart.ХарактеристикаНоменклатури} = {Довідники.ХарактеристикиНоменклатури_Const.TABLE}.uid GROUP BY Характеристика ) SELECT ROUND(ВРезервіПідЗамовлення, 1) FROM Залишки)", "ВРезервіПідЗамовлення"));
+                
+
+                /* SELECT */
+                await ХарактеристикиНоменклатури_Select.Select();
+
+                while (ХарактеристикиНоменклатури_Select.MoveNext())
+                {
+                    Довідники.ХарактеристикиНоменклатури_Pointer? current = ХарактеристикиНоменклатури_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ХарактеристикиНоменклатури_Записи Record = new ХарактеристикиНоменклатури_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ХарактеристикиНоменклатури_Const.Код].ToString() ?? "",
+                                Номенклатура = Fields["Номенклатура"].ToString() ?? "",
+                                Назва = Fields[ХарактеристикиНоменклатури_Const.Назва].ToString() ?? "",
+                                Залишки = Fields["Залишки"].ToString() ?? "",
+                            ВРезерві = Fields["ВРезерві"].ToString() ?? "",
+                            ВРезервіПідЗамовлення = Fields["ВРезервіПідЗамовлення"].ToString() ?? "",
+                            
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ХарактеристикиНоменклатури_Select ХарактеристикиНоменклатури_Select = new Довідники.ХарактеристикиНоменклатури_Select();
             ХарактеристикиНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -3434,12 +4802,72 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            TreeStore Store = (TreeStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                    if (Store.IterChildren(out TreeIter iterChildren, iter)) findIter(iterChildren);
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Номенклатура_Папки_Select Номенклатура_Папки_Select = new Довідники.Номенклатура_Папки_Select();
+                Номенклатура_Папки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.Номенклатура_Папки_Const.Назва,
+                    /*Код*/ Довідники.Номенклатура_Папки_Const.Код,
+                    
+                ]);
+
+                Номенклатура_Папки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Номенклатура_Папки_Select.Select();
+
+                while (Номенклатура_Папки_Select.MoveNext())
+                {
+                    Довідники.Номенклатура_Папки_Pointer? current = Номенклатура_Папки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Номенклатура_Папки_Записи Record = new Номенклатура_Папки_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[Номенклатура_Папки_Const.Назва].ToString() ?? "",
+                                Код = Fields[Номенклатура_Папки_Const.Код].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            TreeStore Store = (TreeStore)treeView.Model;           
+            TreeStore Store = (TreeStore)treeView.Model;
             
             Довідники.Номенклатура_Папки_SelectHierarchical Номенклатура_Папки_Select = new Довідники.Номенклатура_Папки_SelectHierarchical();
             Номенклатура_Папки_Select.QuerySelect.Field.AddRange(
@@ -3567,12 +4995,72 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            TreeStore Store = (TreeStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                    if (Store.IterChildren(out TreeIter iterChildren, iter)) findIter(iterChildren);
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Номенклатура_Папки_Select Номенклатура_Папки_Select = new Довідники.Номенклатура_Папки_Select();
+                Номенклатура_Папки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.Номенклатура_Папки_Const.Назва,
+                    /*Код*/ Довідники.Номенклатура_Папки_Const.Код,
+                    
+                ]);
+
+                Номенклатура_Папки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Номенклатура_Папки_Select.Select();
+
+                while (Номенклатура_Папки_Select.MoveNext())
+                {
+                    Довідники.Номенклатура_Папки_Pointer? current = Номенклатура_Папки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Номенклатура_Папки_ЗаписиШвидкийВибір Record = new Номенклатура_Папки_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[Номенклатура_Папки_Const.Назва].ToString() ?? "",
+                                Код = Fields[Номенклатура_Папки_Const.Код].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            TreeStore Store = (TreeStore)treeView.Model;           
+            TreeStore Store = (TreeStore)treeView.Model;
             
             Довідники.Номенклатура_Папки_SelectHierarchical Номенклатура_Папки_Select = new Довідники.Номенклатура_Папки_SelectHierarchical();
             Номенклатура_Папки_Select.QuerySelect.Field.AddRange(
@@ -3704,12 +5192,72 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            TreeStore Store = (TreeStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                    if (Store.IterChildren(out TreeIter iterChildren, iter)) findIter(iterChildren);
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Контрагенти_Папки_Select Контрагенти_Папки_Select = new Довідники.Контрагенти_Папки_Select();
+                Контрагенти_Папки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.Контрагенти_Папки_Const.Назва,
+                    /*Код*/ Довідники.Контрагенти_Папки_Const.Код,
+                    
+                ]);
+
+                Контрагенти_Папки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Контрагенти_Папки_Select.Select();
+
+                while (Контрагенти_Папки_Select.MoveNext())
+                {
+                    Довідники.Контрагенти_Папки_Pointer? current = Контрагенти_Папки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Контрагенти_Папки_Записи Record = new Контрагенти_Папки_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[Контрагенти_Папки_Const.Назва].ToString() ?? "",
+                                Код = Fields[Контрагенти_Папки_Const.Код].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            TreeStore Store = (TreeStore)treeView.Model;           
+            TreeStore Store = (TreeStore)treeView.Model;
             
             Довідники.Контрагенти_Папки_SelectHierarchical Контрагенти_Папки_Select = new Довідники.Контрагенти_Папки_SelectHierarchical();
             Контрагенти_Папки_Select.QuerySelect.Field.AddRange(
@@ -3841,12 +5389,72 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            TreeStore Store = (TreeStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                    if (Store.IterChildren(out TreeIter iterChildren, iter)) findIter(iterChildren);
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Склади_Папки_Select Склади_Папки_Select = new Довідники.Склади_Папки_Select();
+                Склади_Папки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.Склади_Папки_Const.Назва,
+                    /*Код*/ Довідники.Склади_Папки_Const.Код,
+                    
+                ]);
+
+                Склади_Папки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Склади_Папки_Select.Select();
+
+                while (Склади_Папки_Select.MoveNext())
+                {
+                    Довідники.Склади_Папки_Pointer? current = Склади_Папки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Склади_Папки_Записи Record = new Склади_Папки_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[Склади_Папки_Const.Назва].ToString() ?? "",
+                                Код = Fields[Склади_Папки_Const.Код].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            TreeStore Store = (TreeStore)treeView.Model;           
+            TreeStore Store = (TreeStore)treeView.Model;
             
             Довідники.Склади_Папки_SelectHierarchical Склади_Папки_Select = new Довідники.Склади_Папки_SelectHierarchical();
             Склади_Папки_Select.QuerySelect.Field.AddRange(
@@ -4009,12 +5617,78 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
+                Каси_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Каси_Const.Код,
+                    /*Назва*/ Довідники.Каси_Const.Назва,
+                    
+                ]);
+
+                Каси_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Валюти_Pointer.GetJoin(Каси_Select.QuerySelect, Довідники.Каси_Const.Валюта,
+                    Каси_Select.QuerySelect.Table, "join_tab_1", "Валюта");
+                
+                    /* Additional Field */
+                    Каси_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(SELECT ROUND(РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Сума}, 2) AS Сума FROM {РегістриНакопичення.РухКоштів_Підсумки_TablePart.TABLE} AS РухКоштів WHERE РухКоштів.{РегістриНакопичення.РухКоштів_Підсумки_TablePart.Каса} = {Довідники.Каси_Const.TABLE}.uid)", "Залишок"));
+                
+
+                /* SELECT */
+                await Каси_Select.Select();
+
+                while (Каси_Select.MoveNext())
+                {
+                    Довідники.Каси_Pointer? current = Каси_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Каси_Записи Record = new Каси_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Каси_Const.Код].ToString() ?? "",
+                                Назва = Fields[Каси_Const.Назва].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Залишок = Fields["Залишок"].ToString() ?? "",
+                            
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -4152,12 +5826,73 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
+                Каси_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Каси_Const.Код,
+                    /*Назва*/ Довідники.Каси_Const.Назва,
+                    
+                ]);
+
+                Каси_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Валюти_Pointer.GetJoin(Каси_Select.QuerySelect, Довідники.Каси_Const.Валюта,
+                    Каси_Select.QuerySelect.Table, "join_tab_1", "Валюта");
+                
+
+                /* SELECT */
+                await Каси_Select.Select();
+
+                while (Каси_Select.MoveNext())
+                {
+                    Довідники.Каси_Pointer? current = Каси_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Каси_ЗаписиШвидкийВибір Record = new Каси_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Каси_Const.Код].ToString() ?? "",
+                                Назва = Fields[Каси_Const.Назва].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Каси_Select Каси_Select = new Довідники.Каси_Select();
             Каси_Select.QuerySelect.Field.AddRange(
@@ -4308,12 +6043,73 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
+                БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.БанківськіРахункиОрганізацій_Const.Код,
+                    /*Назва*/ Довідники.БанківськіРахункиОрганізацій_Const.Назва,
+                    
+                ]);
+
+                БанківськіРахункиОрганізацій_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Валюти_Pointer.GetJoin(БанківськіРахункиОрганізацій_Select.QuerySelect, Довідники.БанківськіРахункиОрганізацій_Const.Валюта,
+                    БанківськіРахункиОрганізацій_Select.QuerySelect.Table, "join_tab_1", "Валюта");
+                
+
+                /* SELECT */
+                await БанківськіРахункиОрганізацій_Select.Select();
+
+                while (БанківськіРахункиОрганізацій_Select.MoveNext())
+                {
+                    Довідники.БанківськіРахункиОрганізацій_Pointer? current = БанківськіРахункиОрганізацій_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        БанківськіРахункиОрганізацій_Записи Record = new БанківськіРахункиОрганізацій_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[БанківськіРахункиОрганізацій_Const.Код].ToString() ?? "",
+                                Назва = Fields[БанківськіРахункиОрганізацій_Const.Назва].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.БанківськіРахункиОрганізацій_Select БанківськіРахункиОрганізацій_Select = new Довідники.БанківськіРахункиОрганізацій_Select();
             БанківськіРахункиОрганізацій_Select.QuerySelect.Field.AddRange(
@@ -4482,12 +6278,76 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
+                ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ДоговориКонтрагентів_Const.Код,
+                    /*Назва*/ Довідники.ДоговориКонтрагентів_Const.Назва,
+                    /*ТипДоговору*/ Довідники.ДоговориКонтрагентів_Const.ТипДоговору,
+                    
+                ]);
+
+                ДоговориКонтрагентів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Контрагенти_Pointer.GetJoin(ДоговориКонтрагентів_Select.QuerySelect, Довідники.ДоговориКонтрагентів_Const.Контрагент,
+                    ДоговориКонтрагентів_Select.QuerySelect.Table, "join_tab_1", "Контрагент");
+                
+
+                /* SELECT */
+                await ДоговориКонтрагентів_Select.Select();
+
+                while (ДоговориКонтрагентів_Select.MoveNext())
+                {
+                    Довідники.ДоговориКонтрагентів_Pointer? current = ДоговориКонтрагентів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ДоговориКонтрагентів_Записи Record = new ДоговориКонтрагентів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ДоговориКонтрагентів_Const.Код].ToString() ?? "",
+                                Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias((
+                                (Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ),
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -4615,12 +6475,74 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
+                ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.ДоговориКонтрагентів_Const.Назва,
+                    /*ТипДоговору*/ Довідники.ДоговориКонтрагентів_Const.ТипДоговору,
+                    
+                ]);
+
+                ДоговориКонтрагентів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Контрагенти_Pointer.GetJoin(ДоговориКонтрагентів_Select.QuerySelect, Довідники.ДоговориКонтрагентів_Const.Контрагент,
+                    ДоговориКонтрагентів_Select.QuerySelect.Table, "join_tab_1", "Контрагент");
+                
+
+                /* SELECT */
+                await ДоговориКонтрагентів_Select.Select();
+
+                while (ДоговориКонтрагентів_Select.MoveNext())
+                {
+                    Довідники.ДоговориКонтрагентів_Pointer? current = ДоговориКонтрагентів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ДоговориКонтрагентів_ЗаписиШвидкийВибір Record = new ДоговориКонтрагентів_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ДоговориКонтрагентів_Const.Назва].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                ТипДоговору = Перелічення.ПсевдонімиПерелічення.ТипДоговорів_Alias((
+                                (Перелічення.ТипДоговорів)(Fields[ДоговориКонтрагентів_Const.ТипДоговору] != DBNull.Value ? Fields[ДоговориКонтрагентів_Const.ТипДоговору] : 0)) ),
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ДоговориКонтрагентів_Select ДоговориКонтрагентів_Select = new Довідники.ДоговориКонтрагентів_Select();
             ДоговориКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -4772,12 +6694,73 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
+                БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.БанківськіРахункиКонтрагентів_Const.Код,
+                    /*Назва*/ Довідники.БанківськіРахункиКонтрагентів_Const.Назва,
+                    
+                ]);
+
+                БанківськіРахункиКонтрагентів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Валюти_Pointer.GetJoin(БанківськіРахункиКонтрагентів_Select.QuerySelect, Довідники.БанківськіРахункиКонтрагентів_Const.Валюта,
+                    БанківськіРахункиКонтрагентів_Select.QuerySelect.Table, "join_tab_1", "Валюта");
+                
+
+                /* SELECT */
+                await БанківськіРахункиКонтрагентів_Select.Select();
+
+                while (БанківськіРахункиКонтрагентів_Select.MoveNext())
+                {
+                    Довідники.БанківськіРахункиКонтрагентів_Pointer? current = БанківськіРахункиКонтрагентів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        БанківськіРахункиКонтрагентів_Записи Record = new БанківськіРахункиКонтрагентів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[БанківськіРахункиКонтрагентів_Const.Код].ToString() ?? "",
+                                Назва = Fields[БанківськіРахункиКонтрагентів_Const.Назва].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.БанківськіРахункиКонтрагентів_Select БанківськіРахункиКонтрагентів_Select = new Довідники.БанківськіРахункиКонтрагентів_Select();
             БанківськіРахункиКонтрагентів_Select.QuerySelect.Field.AddRange(
@@ -4937,12 +6920,75 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
+                СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.СтаттяРухуКоштів_Const.Назва,
+                    /*Код*/ Довідники.СтаттяРухуКоштів_Const.Код,
+                    /*КореспондуючийРахунок*/ Довідники.СтаттяРухуКоштів_Const.КореспондуючийРахунок,
+                    /*ВидРухуКоштів*/ Довідники.СтаттяРухуКоштів_Const.ВидРухуКоштів,
+                    
+                ]);
+
+                СтаттяРухуКоштів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await СтаттяРухуКоштів_Select.Select();
+
+                while (СтаттяРухуКоштів_Select.MoveNext())
+                {
+                    Довідники.СтаттяРухуКоштів_Pointer? current = СтаттяРухуКоштів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        СтаттяРухуКоштів_Записи Record = new СтаттяРухуКоштів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[СтаттяРухуКоштів_Const.Назва].ToString() ?? "",
+                                Код = Fields[СтаттяРухуКоштів_Const.Код].ToString() ?? "",
+                                КореспондуючийРахунок = Fields[СтаттяРухуКоштів_Const.КореспондуючийРахунок].ToString() ?? "",
+                                ВидРухуКоштів = Перелічення.ПсевдонімиПерелічення.ВидиРухуКоштів_Alias((
+                                (Перелічення.ВидиРухуКоштів)(Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] != DBNull.Value ? Fields[СтаттяРухуКоштів_Const.ВидРухуКоштів] : 0)) ),
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.СтаттяРухуКоштів_Select СтаттяРухуКоштів_Select = new Довідники.СтаттяРухуКоштів_Select();
             СтаттяРухуКоштів_Select.QuerySelect.Field.AddRange(
@@ -5063,12 +7109,68 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
+                СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Номер*/ Довідники.СеріїНоменклатури_Const.Номер,
+                    
+                ]);
+
+                СеріїНоменклатури_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await СеріїНоменклатури_Select.Select();
+
+                while (СеріїНоменклатури_Select.MoveNext())
+                {
+                    Довідники.СеріїНоменклатури_Pointer? current = СеріїНоменклатури_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        СеріїНоменклатури_Записи Record = new СеріїНоменклатури_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Номер = Fields[СеріїНоменклатури_Const.Номер].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.СеріїНоменклатури_Select СеріїНоменклатури_Select = new Довідники.СеріїНоменклатури_Select();
             СеріїНоменклатури_Select.QuerySelect.Field.AddRange(
@@ -5232,12 +7334,84 @@ WHERE
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
+                ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.ПартіяТоварівКомпозит_Const.Назва,
+                    /*Дата*/ Довідники.ПартіяТоварівКомпозит_Const.Дата,
+                    /*ТипДокументу*/ Довідники.ПартіяТоварівКомпозит_Const.ТипДокументу,
+                    
+                ]);
+
+                ПартіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Документи.ПоступленняТоварівТаПослуг_Pointer.GetJoin(ПартіяТоварівКомпозит_Select.QuerySelect, Довідники.ПартіяТоварівКомпозит_Const.ПоступленняТоварівТаПослуг,
+                    ПартіяТоварівКомпозит_Select.QuerySelect.Table, "join_tab_1", "ПоступленняТоварівТаПослуг");
+                Документи.ВведенняЗалишків_Pointer.GetJoin(ПартіяТоварівКомпозит_Select.QuerySelect, Довідники.ПартіяТоварівКомпозит_Const.ВведенняЗалишків,
+                    ПартіяТоварівКомпозит_Select.QuerySelect.Table, "join_tab_2", "ВведенняЗалишків");
+                
+                    /* Additional Field */
+                    ПартіяТоварівКомпозит_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName<string>(@$"(WITH Залишки AS ( SELECT ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит} AS ПартіяТоварівКомпозит, SUM(ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.Кількість} ) AS Кількість FROM {РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.TABLE} AS ПартіїТоварів WHERE ПартіїТоварів.{РегістриНакопичення.ПартіїТоварів_Підсумки_TablePart.ПартіяТоварівКомпозит} = {Довідники.ПартіяТоварівКомпозит_Const.TABLE}.uid GROUP BY ПартіяТоварівКомпозит ) SELECT ROUND(Кількість, 1) FROM Залишки)", "Залишки"));
+                
+
+                /* SELECT */
+                await ПартіяТоварівКомпозит_Select.Select();
+
+                while (ПартіяТоварівКомпозит_Select.MoveNext())
+                {
+                    Довідники.ПартіяТоварівКомпозит_Pointer? current = ПартіяТоварівКомпозит_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПартіяТоварівКомпозит_Записи Record = new ПартіяТоварівКомпозит_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "",
+                                Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "",
+                                ТипДокументу = Перелічення.ПсевдонімиПерелічення.ТипДокументуПартіяТоварівКомпозит_Alias((
+                                (Перелічення.ТипДокументуПартіяТоварівКомпозит)(Fields[ПартіяТоварівКомпозит_Const.ТипДокументу] != DBNull.Value ? Fields[ПартіяТоварівКомпозит_Const.ТипДокументу] : 0)) ),
+                                ПоступленняТоварівТаПослуг = Fields["ПоступленняТоварівТаПослуг"].ToString() ?? "",
+                                ВведенняЗалишків = Fields["ВведенняЗалишків"].ToString() ?? "",
+                                Залишки = Fields["Залишки"].ToString() ?? "",
+                            
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -5386,12 +7560,70 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
+                ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.ПартіяТоварівКомпозит_Const.Назва,
+                    /*Дата*/ Довідники.ПартіяТоварівКомпозит_Const.Дата,
+                    
+                ]);
+
+                ПартіяТоварівКомпозит_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ПартіяТоварівКомпозит_Select.Select();
+
+                while (ПартіяТоварівКомпозит_Select.MoveNext())
+                {
+                    Довідники.ПартіяТоварівКомпозит_Pointer? current = ПартіяТоварівКомпозит_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПартіяТоварівКомпозит_ЗаписиШвидкийВибір Record = new ПартіяТоварівКомпозит_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПартіяТоварівКомпозит_Const.Назва].ToString() ?? "",
+                                Дата = Fields[ПартіяТоварівКомпозит_Const.Дата].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ПартіяТоварівКомпозит_Select ПартіяТоварівКомпозит_Select = new Довідники.ПартіяТоварівКомпозит_Select();
             ПартіяТоварівКомпозит_Select.QuerySelect.Field.AddRange(
@@ -5512,12 +7744,70 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
+                ВидиЗапасів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ВидиЗапасів_Const.Код,
+                    /*Назва*/ Довідники.ВидиЗапасів_Const.Назва,
+                    
+                ]);
+
+                ВидиЗапасів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ВидиЗапасів_Select.Select();
+
+                while (ВидиЗапасів_Select.MoveNext())
+                {
+                    Довідники.ВидиЗапасів_Pointer? current = ВидиЗапасів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВидиЗапасів_Записи Record = new ВидиЗапасів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ВидиЗапасів_Const.Код].ToString() ?? "",
+                                Назва = Fields[ВидиЗапасів_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ВидиЗапасів_Select ВидиЗапасів_Select = new Довідники.ВидиЗапасів_Select();
             ВидиЗапасів_Select.QuerySelect.Field.AddRange(
@@ -5723,12 +8013,104 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
+                Банки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Банки_Const.Код,
+                    /*Назва*/ Довідники.Банки_Const.Назва,
+                    /*ПовнаНазва*/ Довідники.Банки_Const.ПовнаНазва,
+                    /*КодМФО*/ Довідники.Банки_Const.КодМФО,
+                    /*КодЄДРПОУ*/ Довідники.Банки_Const.КодЄДРПОУ,
+                    /*НомерЛіцензії*/ Довідники.Банки_Const.НомерЛіцензії,
+                    /*ДатаЛіцензії*/ Довідники.Банки_Const.ДатаЛіцензії,
+                    /*Статус*/ Довідники.Банки_Const.Статус,
+                    /*ТипНаселеногоПункту*/ Довідники.Банки_Const.ТипНаселеногоПункту,
+                    /*УнікальнийКодБанку*/ Довідники.Банки_Const.УнікальнийКодБанку,
+                    /*ПоштовийІндекс*/ Довідники.Банки_Const.ПоштовийІндекс,
+                    /*НазваНаселеногоПункту*/ Довідники.Банки_Const.НазваНаселеногоПункту,
+                    /*Адреса*/ Довідники.Банки_Const.Адреса,
+                    /*НомерТелефону*/ Довідники.Банки_Const.НомерТелефону,
+                    /*ДатаВідкриттяУстанови*/ Довідники.Банки_Const.ДатаВідкриттяУстанови,
+                    /*ДатаЗакриттяУстанови*/ Довідники.Банки_Const.ДатаЗакриттяУстанови,
+                    /*КодНБУ*/ Довідники.Банки_Const.КодНБУ,
+                    /*КодСтатусу*/ Довідники.Банки_Const.КодСтатусу,
+                    /*ДатаЗапису*/ Довідники.Банки_Const.ДатаЗапису,
+                    
+                ]);
+
+                Банки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Банки_Select.Select();
+
+                while (Банки_Select.MoveNext())
+                {
+                    Довідники.Банки_Pointer? current = Банки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Банки_Записи Record = new Банки_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Банки_Const.Код].ToString() ?? "",
+                                Назва = Fields[Банки_Const.Назва].ToString() ?? "",
+                                ПовнаНазва = Fields[Банки_Const.ПовнаНазва].ToString() ?? "",
+                                КодМФО = Fields[Банки_Const.КодМФО].ToString() ?? "",
+                                КодЄДРПОУ = Fields[Банки_Const.КодЄДРПОУ].ToString() ?? "",
+                                НомерЛіцензії = Fields[Банки_Const.НомерЛіцензії].ToString() ?? "",
+                                ДатаЛіцензії = Fields[Банки_Const.ДатаЛіцензії].ToString() ?? "",
+                                Статус = Fields[Банки_Const.Статус].ToString() ?? "",
+                                ТипНаселеногоПункту = Fields[Банки_Const.ТипНаселеногоПункту].ToString() ?? "",
+                                УнікальнийКодБанку = Fields[Банки_Const.УнікальнийКодБанку].ToString() ?? "",
+                                ПоштовийІндекс = Fields[Банки_Const.ПоштовийІндекс].ToString() ?? "",
+                                НазваНаселеногоПункту = Fields[Банки_Const.НазваНаселеногоПункту].ToString() ?? "",
+                                Адреса = Fields[Банки_Const.Адреса].ToString() ?? "",
+                                НомерТелефону = Fields[Банки_Const.НомерТелефону].ToString() ?? "",
+                                ДатаВідкриттяУстанови = Fields[Банки_Const.ДатаВідкриттяУстанови].ToString() ?? "",
+                                ДатаЗакриттяУстанови = Fields[Банки_Const.ДатаЗакриттяУстанови].ToString() ?? "",
+                                КодНБУ = Fields[Банки_Const.КодНБУ].ToString() ?? "",
+                                КодСтатусу = Fields[Банки_Const.КодСтатусу].ToString() ?? "",
+                                ДатаЗапису = Fields[Банки_Const.ДатаЗапису].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
             Банки_Select.QuerySelect.Field.AddRange(
@@ -5879,12 +8261,70 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
+                Банки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Банки_Const.Код,
+                    /*Назва*/ Довідники.Банки_Const.Назва,
+                    
+                ]);
+
+                Банки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Банки_Select.Select();
+
+                while (Банки_Select.MoveNext())
+                {
+                    Довідники.Банки_Pointer? current = Банки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Банки_ЗаписиШвидкийВибір Record = new Банки_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Банки_Const.Код].ToString() ?? "",
+                                Назва = Fields[Банки_Const.Назва].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Банки_Select Банки_Select = new Довідники.Банки_Select();
             Банки_Select.QuerySelect.Field.AddRange(
@@ -6045,12 +8485,74 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
+                СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.СкладськіПриміщення_Const.Назва,
+                    /*НалаштуванняАдресногоЗберігання*/ Довідники.СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання,
+                    
+                ]);
+
+                СкладськіПриміщення_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Склади_Pointer.GetJoin(СкладськіПриміщення_Select.QuerySelect, Довідники.СкладськіПриміщення_Const.Склад,
+                    СкладськіПриміщення_Select.QuerySelect.Table, "join_tab_1", "Склад");
+                
+
+                /* SELECT */
+                await СкладськіПриміщення_Select.Select();
+
+                while (СкладськіПриміщення_Select.MoveNext())
+                {
+                    Довідники.СкладськіПриміщення_Pointer? current = СкладськіПриміщення_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        СкладськіПриміщення_Записи Record = new СкладськіПриміщення_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[СкладськіПриміщення_Const.Назва].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                НалаштуванняАдресногоЗберігання = Перелічення.ПсевдонімиПерелічення.НалаштуванняАдресногоЗберігання_Alias((
+                                (Перелічення.НалаштуванняАдресногоЗберігання)(Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] != DBNull.Value ? Fields[СкладськіПриміщення_Const.НалаштуванняАдресногоЗберігання] : 0)) ),
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.СкладськіПриміщення_Select СкладськіПриміщення_Select = new Довідники.СкладськіПриміщення_Select();
             СкладськіПриміщення_Select.QuerySelect.Field.AddRange(
@@ -6232,12 +8734,88 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
+                СкладськіКомірки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.СкладськіКомірки_Const.Назва,
+                    /*Лінія*/ Довідники.СкладськіКомірки_Const.Лінія,
+                    /*Позиція*/ Довідники.СкладськіКомірки_Const.Позиція,
+                    /*Стелаж*/ Довідники.СкладськіКомірки_Const.Стелаж,
+                    /*Ярус*/ Довідники.СкладськіКомірки_Const.Ярус,
+                    /*ТипСкладськоїКомірки*/ Довідники.СкладськіКомірки_Const.ТипСкладськоїКомірки,
+                    
+                ]);
+
+                СкладськіКомірки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.СкладськіПриміщення_Pointer.GetJoin(СкладськіКомірки_Select.QuerySelect, Довідники.СкладськіКомірки_Const.Приміщення,
+                    СкладськіКомірки_Select.QuerySelect.Table, "join_tab_1", "Приміщення");
+                Довідники.ТипорозміриКомірок_Pointer.GetJoin(СкладськіКомірки_Select.QuerySelect, Довідники.СкладськіКомірки_Const.Типорозмір,
+                    СкладськіКомірки_Select.QuerySelect.Table, "join_tab_2", "Типорозмір");
+                Довідники.СкладськіКомірки_Папки_Pointer.GetJoin(СкладськіКомірки_Select.QuerySelect, Довідники.СкладськіКомірки_Const.Папка,
+                    СкладськіКомірки_Select.QuerySelect.Table, "join_tab_3", "Папка");
+                
+
+                /* SELECT */
+                await СкладськіКомірки_Select.Select();
+
+                while (СкладськіКомірки_Select.MoveNext())
+                {
+                    Довідники.СкладськіКомірки_Pointer? current = СкладськіКомірки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        СкладськіКомірки_Записи Record = new СкладськіКомірки_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "",
+                                Приміщення = Fields["Приміщення"].ToString() ?? "",
+                                Лінія = Fields[СкладськіКомірки_Const.Лінія].ToString() ?? "",
+                                Позиція = Fields[СкладськіКомірки_Const.Позиція].ToString() ?? "",
+                                Стелаж = Fields[СкладськіКомірки_Const.Стелаж].ToString() ?? "",
+                                Ярус = Fields[СкладськіКомірки_Const.Ярус].ToString() ?? "",
+                                ТипСкладськоїКомірки = Перелічення.ПсевдонімиПерелічення.ТипиСкладськихКомірок_Alias((
+                                (Перелічення.ТипиСкладськихКомірок)(Fields[СкладськіКомірки_Const.ТипСкладськоїКомірки] != DBNull.Value ? Fields[СкладськіКомірки_Const.ТипСкладськоїКомірки] : 0)) ),
+                                Типорозмір = Fields["Типорозмір"].ToString() ?? "",
+                                Папка = Fields["Папка"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
@@ -6372,12 +8950,71 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
+                СкладськіКомірки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.СкладськіКомірки_Const.Назва,
+                    
+                ]);
+
+                СкладськіКомірки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.СкладськіПриміщення_Pointer.GetJoin(СкладськіКомірки_Select.QuerySelect, Довідники.СкладськіКомірки_Const.Приміщення,
+                    СкладськіКомірки_Select.QuerySelect.Table, "join_tab_1", "Приміщення");
+                
+
+                /* SELECT */
+                await СкладськіКомірки_Select.Select();
+
+                while (СкладськіКомірки_Select.MoveNext())
+                {
+                    Довідники.СкладськіКомірки_Pointer? current = СкладськіКомірки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        СкладськіКомірки_ЗаписиШвидкийВибір Record = new СкладськіКомірки_ЗаписиШвидкийВибір
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[СкладськіКомірки_Const.Назва].ToString() ?? "",
+                                Приміщення = Fields["Приміщення"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.СкладськіКомірки_Select СкладськіКомірки_Select = new Довідники.СкладськіКомірки_Select();
             СкладськіКомірки_Select.QuerySelect.Field.AddRange(
@@ -6499,12 +9136,71 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ОбластьЗберігання_Select ОбластьЗберігання_Select = new Довідники.ОбластьЗберігання_Select();
+                ОбластьЗберігання_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.ОбластьЗберігання_Const.Назва,
+                    
+                ]);
+
+                ОбластьЗберігання_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.СкладськіПриміщення_Pointer.GetJoin(ОбластьЗберігання_Select.QuerySelect, Довідники.ОбластьЗберігання_Const.Приміщення,
+                    ОбластьЗберігання_Select.QuerySelect.Table, "join_tab_1", "Приміщення");
+                
+
+                /* SELECT */
+                await ОбластьЗберігання_Select.Select();
+
+                while (ОбластьЗберігання_Select.MoveNext())
+                {
+                    Довідники.ОбластьЗберігання_Pointer? current = ОбластьЗберігання_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ОбластьЗберігання_Записи Record = new ОбластьЗберігання_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ОбластьЗберігання_Const.Назва].ToString() ?? "",
+                                Приміщення = Fields["Приміщення"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ОбластьЗберігання_Select ОбластьЗберігання_Select = new Довідники.ОбластьЗберігання_Select();
             ОбластьЗберігання_Select.QuerySelect.Field.AddRange(
@@ -6646,12 +9342,78 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
+                ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.ТипорозміриКомірок_Const.Назва,
+                    /*Висота*/ Довідники.ТипорозміриКомірок_Const.Висота,
+                    /*Глибина*/ Довідники.ТипорозміриКомірок_Const.Глибина,
+                    /*Вантажопідйомність*/ Довідники.ТипорозміриКомірок_Const.Вантажопідйомність,
+                    /*Обєм*/ Довідники.ТипорозміриКомірок_Const.Обєм,
+                    /*Ширина*/ Довідники.ТипорозміриКомірок_Const.Ширина,
+                    
+                ]);
+
+                ТипорозміриКомірок_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await ТипорозміриКомірок_Select.Select();
+
+                while (ТипорозміриКомірок_Select.MoveNext())
+                {
+                    Довідники.ТипорозміриКомірок_Pointer? current = ТипорозміриКомірок_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ТипорозміриКомірок_Записи Record = new ТипорозміриКомірок_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ТипорозміриКомірок_Const.Назва].ToString() ?? "",
+                                Висота = Fields[ТипорозміриКомірок_Const.Висота].ToString() ?? "",
+                                Глибина = Fields[ТипорозміриКомірок_Const.Глибина].ToString() ?? "",
+                                Вантажопідйомність = Fields[ТипорозміриКомірок_Const.Вантажопідйомність].ToString() ?? "",
+                                Обєм = Fields[ТипорозміриКомірок_Const.Обєм].ToString() ?? "",
+                                Ширина = Fields[ТипорозміриКомірок_Const.Ширина].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ТипорозміриКомірок_Select ТипорозміриКомірок_Select = new Довідники.ТипорозміриКомірок_Select();
             ТипорозміриКомірок_Select.QuerySelect.Field.AddRange(
@@ -6785,12 +9547,75 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            TreeStore Store = (TreeStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                    if (Store.IterChildren(out TreeIter iterChildren, iter)) findIter(iterChildren);
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.СкладськіКомірки_Папки_Select СкладськіКомірки_Папки_Select = new Довідники.СкладськіКомірки_Папки_Select();
+                СкладськіКомірки_Папки_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.СкладськіКомірки_Папки_Const.Назва,
+                    /*Код*/ Довідники.СкладськіКомірки_Папки_Const.Код,
+                    
+                ]);
+
+                СкладськіКомірки_Папки_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.СкладськіПриміщення_Pointer.GetJoin(СкладськіКомірки_Папки_Select.QuerySelect, Довідники.СкладськіКомірки_Папки_Const.Власник,
+                    СкладськіКомірки_Папки_Select.QuerySelect.Table, "join_tab_1", "Власник");
+                
+
+                /* SELECT */
+                await СкладськіКомірки_Папки_Select.Select();
+
+                while (СкладськіКомірки_Папки_Select.MoveNext())
+                {
+                    Довідники.СкладськіКомірки_Папки_Pointer? current = СкладськіКомірки_Папки_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        СкладськіКомірки_Папки_Записи Record = new СкладськіКомірки_Папки_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[СкладськіКомірки_Папки_Const.Назва].ToString() ?? "",
+                                Код = Fields[СкладськіКомірки_Папки_Const.Код].ToString() ?? "",
+                                Власник = Fields["Власник"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            TreeStore Store = (TreeStore)treeView.Model;           
+            TreeStore Store = (TreeStore)treeView.Model;
             
             Довідники.СкладськіКомірки_Папки_SelectHierarchical СкладськіКомірки_Папки_Select = new Довідники.СкладськіКомірки_Папки_SelectHierarchical();
             СкладськіКомірки_Папки_Select.QuerySelect.Field.AddRange(
@@ -6930,12 +9755,72 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
+                Блокнот_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.Блокнот_Const.Код,
+                    /*Назва*/ Довідники.Блокнот_Const.Назва,
+                    /*ДатаЗапису*/ Довідники.Блокнот_Const.ДатаЗапису,
+                    
+                ]);
+
+                Блокнот_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                
+
+                /* SELECT */
+                await Блокнот_Select.Select();
+
+                while (Блокнот_Select.MoveNext())
+                {
+                    Довідники.Блокнот_Pointer? current = Блокнот_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        Блокнот_Записи Record = new Блокнот_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[Блокнот_Const.Код].ToString() ?? "",
+                                Назва = Fields[Блокнот_Const.Назва].ToString() ?? "",
+                                ДатаЗапису = Fields[Блокнот_Const.ДатаЗапису].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.Блокнот_Select Блокнот_Select = new Довідники.Блокнот_Select();
             Блокнот_Select.QuerySelect.Field.AddRange(
@@ -7068,12 +9953,75 @@ FROM
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.ЗбереженіЗвіти_Select ЗбереженіЗвіти_Select = new Довідники.ЗбереженіЗвіти_Select();
+                ЗбереженіЗвіти_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Код*/ Довідники.ЗбереженіЗвіти_Const.Код,
+                    /*Додано*/ Довідники.ЗбереженіЗвіти_Const.Додано,
+                    /*Назва*/ Довідники.ЗбереженіЗвіти_Const.Назва,
+                    
+                ]);
+
+                ЗбереженіЗвіти_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Користувачі_Pointer.GetJoin(ЗбереженіЗвіти_Select.QuerySelect, Довідники.ЗбереженіЗвіти_Const.Користувач,
+                    ЗбереженіЗвіти_Select.QuerySelect.Table, "join_tab_1", "Користувач");
+                
+
+                /* SELECT */
+                await ЗбереженіЗвіти_Select.Select();
+
+                while (ЗбереженіЗвіти_Select.MoveNext())
+                {
+                    Довідники.ЗбереженіЗвіти_Pointer? current = ЗбереженіЗвіти_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЗбереженіЗвіти_Записи Record = new ЗбереженіЗвіти_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Код = Fields[ЗбереженіЗвіти_Const.Код].ToString() ?? "",
+                                Додано = Fields[ЗбереженіЗвіти_Const.Додано].ToString() ?? "",
+                                Назва = Fields[ЗбереженіЗвіти_Const.Назва].ToString() ?? "",
+                                Користувач = Fields["Користувач"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            ListStore Store = (ListStore)treeView.Model;           
+            ListStore Store = (ListStore)treeView.Model;
             
             Довідники.ЗбереженіЗвіти_Select ЗбереженіЗвіти_Select = new Довідники.ЗбереженіЗвіти_Select();
             ЗбереженіЗвіти_Select.QuerySelect.Field.AddRange(
@@ -7314,6 +10262,83 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ЗамовленняПостачальнику_Select ЗамовленняПостачальнику_Select = new Документи.ЗамовленняПостачальнику_Select();
+                ЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ЗамовленняПостачальнику_Const.Назва,
+                    /*НомерДок*/ Документи.ЗамовленняПостачальнику_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ЗамовленняПостачальнику_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ЗамовленняПостачальнику_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ЗамовленняПостачальнику_Const.Коментар,
+                    
+                ]);
+
+                ЗамовленняПостачальнику_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗамовленняПостачальнику_Const.Організація,
+                    ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(ЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗамовленняПостачальнику_Const.Контрагент,
+                    ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Склади_Pointer.GetJoin(ЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗамовленняПостачальнику_Const.Склад,
+                    ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_3", "Склад");
+                Довідники.Валюти_Pointer.GetJoin(ЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗамовленняПостачальнику_Const.Валюта,
+                    ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_4", "Валюта");
+                Довідники.Користувачі_Pointer.GetJoin(ЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗамовленняПостачальнику_Const.Автор,
+                    ЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_5", "Автор");
+                
+
+                /* SELECT */
+                await ЗамовленняПостачальнику_Select.Select();
+                
+                while (ЗамовленняПостачальнику_Select.MoveNext())
+                {
+                    Документи.ЗамовленняПостачальнику_Pointer? current = ЗамовленняПостачальнику_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЗамовленняПостачальнику_Записи Record = new ЗамовленняПостачальнику_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ЗамовленняПостачальнику_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ЗамовленняПостачальнику_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ЗамовленняПостачальнику_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                СумаДокументу = Fields[ЗамовленняПостачальнику_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ЗамовленняПостачальнику_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -7584,6 +10609,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПоступленняТоварівТаПослуг_Select ПоступленняТоварівТаПослуг_Select = new Документи.ПоступленняТоварівТаПослуг_Select();
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПоступленняТоварівТаПослуг_Const.Назва,
+                    /*НомерДок*/ Документи.ПоступленняТоварівТаПослуг_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПоступленняТоварівТаПослуг_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ПоступленняТоварівТаПослуг_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ПоступленняТоварівТаПослуг_Const.Коментар,
+                    
+                ]);
+
+                ПоступленняТоварівТаПослуг_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПоступленняТоварівТаПослуг_Select.QuerySelect, Документи.ПоступленняТоварівТаПослуг_Const.Організація,
+                    ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(ПоступленняТоварівТаПослуг_Select.QuerySelect, Документи.ПоступленняТоварівТаПослуг_Const.Склад,
+                    ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.Контрагенти_Pointer.GetJoin(ПоступленняТоварівТаПослуг_Select.QuerySelect, Документи.ПоступленняТоварівТаПослуг_Const.Контрагент,
+                    ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_3", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(ПоступленняТоварівТаПослуг_Select.QuerySelect, Документи.ПоступленняТоварівТаПослуг_Const.Валюта,
+                    ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_4", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ПоступленняТоварівТаПослуг_Select.QuerySelect, Документи.ПоступленняТоварівТаПослуг_Const.Каса,
+                    ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_5", "Каса");
+                Довідники.Користувачі_Pointer.GetJoin(ПоступленняТоварівТаПослуг_Select.QuerySelect, Документи.ПоступленняТоварівТаПослуг_Const.Автор,
+                    ПоступленняТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await ПоступленняТоварівТаПослуг_Select.Select();
+                
+                while (ПоступленняТоварівТаПослуг_Select.MoveNext())
+                {
+                    Документи.ПоступленняТоварівТаПослуг_Pointer? current = ПоступленняТоварівТаПослуг_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПоступленняТоварівТаПослуг_Записи Record = new ПоступленняТоварівТаПослуг_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПоступленняТоварівТаПослуг_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПоступленняТоварівТаПослуг_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПоступленняТоварівТаПослуг_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                СумаДокументу = Fields[ПоступленняТоварівТаПослуг_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПоступленняТоварівТаПослуг_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -7859,6 +10964,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ЗамовленняКлієнта_Select ЗамовленняКлієнта_Select = new Документи.ЗамовленняКлієнта_Select();
+                ЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ЗамовленняКлієнта_Const.Назва,
+                    /*НомерДок*/ Документи.ЗамовленняКлієнта_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ЗамовленняКлієнта_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ЗамовленняКлієнта_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ЗамовленняКлієнта_Const.Коментар,
+                    
+                ]);
+
+                ЗамовленняКлієнта_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ЗамовленняКлієнта_Select.QuerySelect, Документи.ЗамовленняКлієнта_Const.Організація,
+                    ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(ЗамовленняКлієнта_Select.QuerySelect, Документи.ЗамовленняКлієнта_Const.Контрагент,
+                    ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(ЗамовленняКлієнта_Select.QuerySelect, Документи.ЗамовленняКлієнта_Const.Валюта,
+                    ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ЗамовленняКлієнта_Select.QuerySelect, Документи.ЗамовленняКлієнта_Const.Каса,
+                    ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Склади_Pointer.GetJoin(ЗамовленняКлієнта_Select.QuerySelect, Документи.ЗамовленняКлієнта_Const.Склад,
+                    ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ЗамовленняКлієнта_Select.QuerySelect, Документи.ЗамовленняКлієнта_Const.Автор,
+                    ЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await ЗамовленняКлієнта_Select.Select();
+                
+                while (ЗамовленняКлієнта_Select.MoveNext())
+                {
+                    Документи.ЗамовленняКлієнта_Pointer? current = ЗамовленняКлієнта_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЗамовленняКлієнта_Записи Record = new ЗамовленняКлієнта_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ЗамовленняКлієнта_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ЗамовленняКлієнта_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ЗамовленняКлієнта_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[ЗамовленняКлієнта_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ЗамовленняКлієнта_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -8132,6 +11317,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.РеалізаціяТоварівТаПослуг_Select РеалізаціяТоварівТаПослуг_Select = new Документи.РеалізаціяТоварівТаПослуг_Select();
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.РеалізаціяТоварівТаПослуг_Const.Назва,
+                    /*НомерДок*/ Документи.РеалізаціяТоварівТаПослуг_Const.НомерДок,
+                    /*ДатаДок*/ Документи.РеалізаціяТоварівТаПослуг_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.РеалізаціяТоварівТаПослуг_Const.СумаДокументу,
+                    /*Коментар*/ Документи.РеалізаціяТоварівТаПослуг_Const.Коментар,
+                    
+                ]);
+
+                РеалізаціяТоварівТаПослуг_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(РеалізаціяТоварівТаПослуг_Select.QuerySelect, Документи.РеалізаціяТоварівТаПослуг_Const.Організація,
+                    РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(РеалізаціяТоварівТаПослуг_Select.QuerySelect, Документи.РеалізаціяТоварівТаПослуг_Const.Контрагент,
+                    РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(РеалізаціяТоварівТаПослуг_Select.QuerySelect, Документи.РеалізаціяТоварівТаПослуг_Const.Валюта,
+                    РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(РеалізаціяТоварівТаПослуг_Select.QuerySelect, Документи.РеалізаціяТоварівТаПослуг_Const.Каса,
+                    РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Склади_Pointer.GetJoin(РеалізаціяТоварівТаПослуг_Select.QuerySelect, Документи.РеалізаціяТоварівТаПослуг_Const.Склад,
+                    РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(РеалізаціяТоварівТаПослуг_Select.QuerySelect, Документи.РеалізаціяТоварівТаПослуг_Const.Автор,
+                    РеалізаціяТоварівТаПослуг_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await РеалізаціяТоварівТаПослуг_Select.Select();
+                
+                while (РеалізаціяТоварівТаПослуг_Select.MoveNext())
+                {
+                    Документи.РеалізаціяТоварівТаПослуг_Pointer? current = РеалізаціяТоварівТаПослуг_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        РеалізаціяТоварівТаПослуг_Записи Record = new РеалізаціяТоварівТаПослуг_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[РеалізаціяТоварівТаПослуг_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[РеалізаціяТоварівТаПослуг_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[РеалізаціяТоварівТаПослуг_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[РеалізаціяТоварівТаПослуг_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[РеалізаціяТоварівТаПослуг_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -8363,6 +11628,78 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ВстановленняЦінНоменклатури_Select ВстановленняЦінНоменклатури_Select = new Документи.ВстановленняЦінНоменклатури_Select();
+                ВстановленняЦінНоменклатури_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ВстановленняЦінНоменклатури_Const.Назва,
+                    /*НомерДок*/ Документи.ВстановленняЦінНоменклатури_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ВстановленняЦінНоменклатури_Const.ДатаДок,
+                    /*Коментар*/ Документи.ВстановленняЦінНоменклатури_Const.Коментар,
+                    
+                ]);
+
+                ВстановленняЦінНоменклатури_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ВстановленняЦінНоменклатури_Select.QuerySelect, Документи.ВстановленняЦінНоменклатури_Const.Організація,
+                    ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Валюти_Pointer.GetJoin(ВстановленняЦінНоменклатури_Select.QuerySelect, Документи.ВстановленняЦінНоменклатури_Const.Валюта,
+                    ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_2", "Валюта");
+                Довідники.ВидиЦін_Pointer.GetJoin(ВстановленняЦінНоменклатури_Select.QuerySelect, Документи.ВстановленняЦінНоменклатури_Const.ВидЦіни,
+                    ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_3", "ВидЦіни");
+                Довідники.Користувачі_Pointer.GetJoin(ВстановленняЦінНоменклатури_Select.QuerySelect, Документи.ВстановленняЦінНоменклатури_Const.Автор,
+                    ВстановленняЦінНоменклатури_Select.QuerySelect.Table, "join_tab_4", "Автор");
+                
+
+                /* SELECT */
+                await ВстановленняЦінНоменклатури_Select.Select();
+                
+                while (ВстановленняЦінНоменклатури_Select.MoveNext())
+                {
+                    Документи.ВстановленняЦінНоменклатури_Pointer? current = ВстановленняЦінНоменклатури_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВстановленняЦінНоменклатури_Записи Record = new ВстановленняЦінНоменклатури_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ВстановленняЦінНоменклатури_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ВстановленняЦінНоменклатури_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ВстановленняЦінНоменклатури_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                ВидЦіни = Fields["ВидЦіни"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ВстановленняЦінНоменклатури_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -8619,6 +11956,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПрихіднийКасовийОрдер_Select ПрихіднийКасовийОрдер_Select = new Документи.ПрихіднийКасовийОрдер_Select();
+                ПрихіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПрихіднийКасовийОрдер_Const.Назва,
+                    /*НомерДок*/ Документи.ПрихіднийКасовийОрдер_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПрихіднийКасовийОрдер_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ПрихіднийКасовийОрдер_Const.СумаДокументу,
+                    /*ГосподарськаОперація*/ Документи.ПрихіднийКасовийОрдер_Const.ГосподарськаОперація,
+                    /*Коментар*/ Документи.ПрихіднийКасовийОрдер_Const.Коментар,
+                    
+                ]);
+
+                ПрихіднийКасовийОрдер_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПрихіднийКасовийОрдер_Select.QuerySelect, Документи.ПрихіднийКасовийОрдер_Const.Організація,
+                    ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Валюти_Pointer.GetJoin(ПрихіднийКасовийОрдер_Select.QuerySelect, Документи.ПрихіднийКасовийОрдер_Const.Валюта,
+                    ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_2", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ПрихіднийКасовийОрдер_Select.QuerySelect, Документи.ПрихіднийКасовийОрдер_Const.Каса,
+                    ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_3", "Каса");
+                Довідники.Контрагенти_Pointer.GetJoin(ПрихіднийКасовийОрдер_Select.QuerySelect, Документи.ПрихіднийКасовийОрдер_Const.Контрагент,
+                    ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_4", "Контрагент");
+                Довідники.Користувачі_Pointer.GetJoin(ПрихіднийКасовийОрдер_Select.QuerySelect, Документи.ПрихіднийКасовийОрдер_Const.Автор,
+                    ПрихіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_5", "Автор");
+                
+
+                /* SELECT */
+                await ПрихіднийКасовийОрдер_Select.Select();
+                
+                while (ПрихіднийКасовийОрдер_Select.MoveNext())
+                {
+                    Документи.ПрихіднийКасовийОрдер_Pointer? current = ПрихіднийКасовийОрдер_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПрихіднийКасовийОрдер_Записи Record = new ПрихіднийКасовийОрдер_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПрихіднийКасовийОрдер_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПрихіднийКасовийОрдер_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПрихіднийКасовийОрдер_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                СумаДокументу = Fields[ПрихіднийКасовийОрдер_Const.СумаДокументу].ToString() ?? "",
+                                ГосподарськаОперація = Перелічення.ПсевдонімиПерелічення.ГосподарськіОперації_Alias((
+                                (Перелічення.ГосподарськіОперації)(Fields[ПрихіднийКасовийОрдер_Const.ГосподарськаОперація] != DBNull.Value ? Fields[ПрихіднийКасовийОрдер_Const.ГосподарськаОперація] : 0)) ),
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПрихіднийКасовийОрдер_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -8885,6 +12302,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.РозхіднийКасовийОрдер_Select РозхіднийКасовийОрдер_Select = new Документи.РозхіднийКасовийОрдер_Select();
+                РозхіднийКасовийОрдер_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.РозхіднийКасовийОрдер_Const.Назва,
+                    /*НомерДок*/ Документи.РозхіднийКасовийОрдер_Const.НомерДок,
+                    /*ДатаДок*/ Документи.РозхіднийКасовийОрдер_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.РозхіднийКасовийОрдер_Const.СумаДокументу,
+                    /*ГосподарськаОперація*/ Документи.РозхіднийКасовийОрдер_Const.ГосподарськаОперація,
+                    /*Коментар*/ Документи.РозхіднийКасовийОрдер_Const.Коментар,
+                    
+                ]);
+
+                РозхіднийКасовийОрдер_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(РозхіднийКасовийОрдер_Select.QuerySelect, Документи.РозхіднийКасовийОрдер_Const.Організація,
+                    РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(РозхіднийКасовийОрдер_Select.QuerySelect, Документи.РозхіднийКасовийОрдер_Const.Контрагент,
+                    РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(РозхіднийКасовийОрдер_Select.QuerySelect, Документи.РозхіднийКасовийОрдер_Const.Валюта,
+                    РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(РозхіднийКасовийОрдер_Select.QuerySelect, Документи.РозхіднийКасовийОрдер_Const.Каса,
+                    РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Користувачі_Pointer.GetJoin(РозхіднийКасовийОрдер_Select.QuerySelect, Документи.РозхіднийКасовийОрдер_Const.Автор,
+                    РозхіднийКасовийОрдер_Select.QuerySelect.Table, "join_tab_5", "Автор");
+                
+
+                /* SELECT */
+                await РозхіднийКасовийОрдер_Select.Select();
+                
+                while (РозхіднийКасовийОрдер_Select.MoveNext())
+                {
+                    Документи.РозхіднийКасовийОрдер_Pointer? current = РозхіднийКасовийОрдер_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        РозхіднийКасовийОрдер_Записи Record = new РозхіднийКасовийОрдер_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[РозхіднийКасовийОрдер_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[РозхіднийКасовийОрдер_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[РозхіднийКасовийОрдер_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                СумаДокументу = Fields[РозхіднийКасовийОрдер_Const.СумаДокументу].ToString() ?? "",
+                                ГосподарськаОперація = Перелічення.ПсевдонімиПерелічення.ГосподарськіОперації_Alias((
+                                (Перелічення.ГосподарськіОперації)(Fields[РозхіднийКасовийОрдер_Const.ГосподарськаОперація] != DBNull.Value ? Fields[РозхіднийКасовийОрдер_Const.ГосподарськаОперація] : 0)) ),
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[РозхіднийКасовийОрдер_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -9116,6 +12613,78 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПереміщенняТоварів_Select ПереміщенняТоварів_Select = new Документи.ПереміщенняТоварів_Select();
+                ПереміщенняТоварів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПереміщенняТоварів_Const.Назва,
+                    /*НомерДок*/ Документи.ПереміщенняТоварів_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПереміщенняТоварів_Const.ДатаДок,
+                    /*Коментар*/ Документи.ПереміщенняТоварів_Const.Коментар,
+                    
+                ]);
+
+                ПереміщенняТоварів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПереміщенняТоварів_Select.QuerySelect, Документи.ПереміщенняТоварів_Const.Організація,
+                    ПереміщенняТоварів_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(ПереміщенняТоварів_Select.QuerySelect, Документи.ПереміщенняТоварів_Const.СкладВідправник,
+                    ПереміщенняТоварів_Select.QuerySelect.Table, "join_tab_2", "СкладВідправник");
+                Довідники.Склади_Pointer.GetJoin(ПереміщенняТоварів_Select.QuerySelect, Документи.ПереміщенняТоварів_Const.СкладОтримувач,
+                    ПереміщенняТоварів_Select.QuerySelect.Table, "join_tab_3", "СкладОтримувач");
+                Довідники.Користувачі_Pointer.GetJoin(ПереміщенняТоварів_Select.QuerySelect, Документи.ПереміщенняТоварів_Const.Автор,
+                    ПереміщенняТоварів_Select.QuerySelect.Table, "join_tab_4", "Автор");
+                
+
+                /* SELECT */
+                await ПереміщенняТоварів_Select.Select();
+                
+                while (ПереміщенняТоварів_Select.MoveNext())
+                {
+                    Документи.ПереміщенняТоварів_Pointer? current = ПереміщенняТоварів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПереміщенняТоварів_Записи Record = new ПереміщенняТоварів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПереміщенняТоварів_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПереміщенняТоварів_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПереміщенняТоварів_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                СкладВідправник = Fields["СкладВідправник"].ToString() ?? "",
+                                СкладОтримувач = Fields["СкладОтримувач"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПереміщенняТоварів_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -9381,6 +12950,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПоверненняТоварівПостачальнику_Select ПоверненняТоварівПостачальнику_Select = new Документи.ПоверненняТоварівПостачальнику_Select();
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПоверненняТоварівПостачальнику_Const.Назва,
+                    /*НомерДок*/ Документи.ПоверненняТоварівПостачальнику_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПоверненняТоварівПостачальнику_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ПоверненняТоварівПостачальнику_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ПоверненняТоварівПостачальнику_Const.Коментар,
+                    
+                ]);
+
+                ПоверненняТоварівПостачальнику_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПоверненняТоварівПостачальнику_Select.QuerySelect, Документи.ПоверненняТоварівПостачальнику_Const.Організація,
+                    ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(ПоверненняТоварівПостачальнику_Select.QuerySelect, Документи.ПоверненняТоварівПостачальнику_Const.Контрагент,
+                    ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(ПоверненняТоварівПостачальнику_Select.QuerySelect, Документи.ПоверненняТоварівПостачальнику_Const.Валюта,
+                    ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ПоверненняТоварівПостачальнику_Select.QuerySelect, Документи.ПоверненняТоварівПостачальнику_Const.Каса,
+                    ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Склади_Pointer.GetJoin(ПоверненняТоварівПостачальнику_Select.QuerySelect, Документи.ПоверненняТоварівПостачальнику_Const.Склад,
+                    ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ПоверненняТоварівПостачальнику_Select.QuerySelect, Документи.ПоверненняТоварівПостачальнику_Const.Автор,
+                    ПоверненняТоварівПостачальнику_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await ПоверненняТоварівПостачальнику_Select.Select();
+                
+                while (ПоверненняТоварівПостачальнику_Select.MoveNext())
+                {
+                    Документи.ПоверненняТоварівПостачальнику_Pointer? current = ПоверненняТоварівПостачальнику_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПоверненняТоварівПостачальнику_Записи Record = new ПоверненняТоварівПостачальнику_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПоверненняТоварівПостачальнику_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПоверненняТоварівПостачальнику_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПоверненняТоварівПостачальнику_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[ПоверненняТоварівПостачальнику_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПоверненняТоварівПостачальнику_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -9656,6 +13305,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПоверненняТоварівВідКлієнта_Select ПоверненняТоварівВідКлієнта_Select = new Документи.ПоверненняТоварівВідКлієнта_Select();
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПоверненняТоварівВідКлієнта_Const.Назва,
+                    /*НомерДок*/ Документи.ПоверненняТоварівВідКлієнта_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПоверненняТоварівВідКлієнта_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ПоверненняТоварівВідКлієнта_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ПоверненняТоварівВідКлієнта_Const.Коментар,
+                    
+                ]);
+
+                ПоверненняТоварівВідКлієнта_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПоверненняТоварівВідКлієнта_Select.QuerySelect, Документи.ПоверненняТоварівВідКлієнта_Const.Організація,
+                    ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Валюти_Pointer.GetJoin(ПоверненняТоварівВідКлієнта_Select.QuerySelect, Документи.ПоверненняТоварівВідКлієнта_Const.Валюта,
+                    ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_2", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ПоверненняТоварівВідКлієнта_Select.QuerySelect, Документи.ПоверненняТоварівВідКлієнта_Const.Каса,
+                    ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_3", "Каса");
+                Довідники.Контрагенти_Pointer.GetJoin(ПоверненняТоварівВідКлієнта_Select.QuerySelect, Документи.ПоверненняТоварівВідКлієнта_Const.Контрагент,
+                    ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_4", "Контрагент");
+                Довідники.Склади_Pointer.GetJoin(ПоверненняТоварівВідКлієнта_Select.QuerySelect, Документи.ПоверненняТоварівВідКлієнта_Const.Склад,
+                    ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ПоверненняТоварівВідКлієнта_Select.QuerySelect, Документи.ПоверненняТоварівВідКлієнта_Const.Автор,
+                    ПоверненняТоварівВідКлієнта_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await ПоверненняТоварівВідКлієнта_Select.Select();
+                
+                while (ПоверненняТоварівВідКлієнта_Select.MoveNext())
+                {
+                    Документи.ПоверненняТоварівВідКлієнта_Pointer? current = ПоверненняТоварівВідКлієнта_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПоверненняТоварівВідКлієнта_Записи Record = new ПоверненняТоварівВідКлієнта_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПоверненняТоварівВідКлієнта_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПоверненняТоварівВідКлієнта_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПоверненняТоварівВідКлієнта_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[ПоверненняТоварівВідКлієнта_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПоверненняТоварівВідКлієнта_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -9916,6 +13645,83 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.АктВиконанихРобіт_Select АктВиконанихРобіт_Select = new Документи.АктВиконанихРобіт_Select();
+                АктВиконанихРобіт_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.АктВиконанихРобіт_Const.Назва,
+                    /*НомерДок*/ Документи.АктВиконанихРобіт_Const.НомерДок,
+                    /*ДатаДок*/ Документи.АктВиконанихРобіт_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.АктВиконанихРобіт_Const.СумаДокументу,
+                    /*Коментар*/ Документи.АктВиконанихРобіт_Const.Коментар,
+                    
+                ]);
+
+                АктВиконанихРобіт_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(АктВиконанихРобіт_Select.QuerySelect, Документи.АктВиконанихРобіт_Const.Організація,
+                    АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Валюти_Pointer.GetJoin(АктВиконанихРобіт_Select.QuerySelect, Документи.АктВиконанихРобіт_Const.Валюта,
+                    АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_2", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(АктВиконанихРобіт_Select.QuerySelect, Документи.АктВиконанихРобіт_Const.Каса,
+                    АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_3", "Каса");
+                Довідники.Контрагенти_Pointer.GetJoin(АктВиконанихРобіт_Select.QuerySelect, Документи.АктВиконанихРобіт_Const.Контрагент,
+                    АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_4", "Контрагент");
+                Довідники.Користувачі_Pointer.GetJoin(АктВиконанихРобіт_Select.QuerySelect, Документи.АктВиконанихРобіт_Const.Автор,
+                    АктВиконанихРобіт_Select.QuerySelect.Table, "join_tab_5", "Автор");
+                
+
+                /* SELECT */
+                await АктВиконанихРобіт_Select.Select();
+                
+                while (АктВиконанихРобіт_Select.MoveNext())
+                {
+                    Документи.АктВиконанихРобіт_Pointer? current = АктВиконанихРобіт_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        АктВиконанихРобіт_Записи Record = new АктВиконанихРобіт_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[АктВиконанихРобіт_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[АктВиконанихРобіт_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[АктВиконанихРобіт_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                СумаДокументу = Fields[АктВиконанихРобіт_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[АктВиконанихРобіт_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -10159,6 +13965,81 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ВведенняЗалишків_Select ВведенняЗалишків_Select = new Документи.ВведенняЗалишків_Select();
+                ВведенняЗалишків_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ВведенняЗалишків_Const.Назва,
+                    /*НомерДок*/ Документи.ВведенняЗалишків_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ВведенняЗалишків_Const.ДатаДок,
+                    /*Коментар*/ Документи.ВведенняЗалишків_Const.Коментар,
+                    
+                ]);
+
+                ВведенняЗалишків_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ВведенняЗалишків_Select.QuerySelect, Документи.ВведенняЗалишків_Const.Організація,
+                    ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(ВведенняЗалишків_Select.QuerySelect, Документи.ВведенняЗалишків_Const.Склад,
+                    ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.Контрагенти_Pointer.GetJoin(ВведенняЗалишків_Select.QuerySelect, Документи.ВведенняЗалишків_Const.Контрагент,
+                    ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_3", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(ВведенняЗалишків_Select.QuerySelect, Документи.ВведенняЗалишків_Const.Валюта,
+                    ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_4", "Валюта");
+                Довідники.Користувачі_Pointer.GetJoin(ВведенняЗалишків_Select.QuerySelect, Документи.ВведенняЗалишків_Const.Автор,
+                    ВведенняЗалишків_Select.QuerySelect.Table, "join_tab_5", "Автор");
+                
+
+                /* SELECT */
+                await ВведенняЗалишків_Select.Select();
+                
+                while (ВведенняЗалишків_Select.MoveNext())
+                {
+                    Документи.ВведенняЗалишків_Pointer? current = ВведенняЗалишків_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВведенняЗалишків_Записи Record = new ВведенняЗалишків_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ВведенняЗалишків_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ВведенняЗалишків_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ВведенняЗалишків_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ВведенняЗалишків_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -10374,6 +14255,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.НадлишкиТоварів_Select НадлишкиТоварів_Select = new Документи.НадлишкиТоварів_Select();
+                НадлишкиТоварів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.НадлишкиТоварів_Const.Назва,
+                    /*НомерДок*/ Документи.НадлишкиТоварів_Const.НомерДок,
+                    /*ДатаДок*/ Документи.НадлишкиТоварів_Const.ДатаДок,
+                    /*Коментар*/ Документи.НадлишкиТоварів_Const.Коментар,
+                    
+                ]);
+
+                НадлишкиТоварів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(НадлишкиТоварів_Select.QuerySelect, Документи.НадлишкиТоварів_Const.Організація,
+                    НадлишкиТоварів_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(НадлишкиТоварів_Select.QuerySelect, Документи.НадлишкиТоварів_Const.Склад,
+                    НадлишкиТоварів_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(НадлишкиТоварів_Select.QuerySelect, Документи.НадлишкиТоварів_Const.Автор,
+                    НадлишкиТоварів_Select.QuerySelect.Table, "join_tab_3", "Автор");
+                
+
+                /* SELECT */
+                await НадлишкиТоварів_Select.Select();
+                
+                while (НадлишкиТоварів_Select.MoveNext())
+                {
+                    Документи.НадлишкиТоварів_Pointer? current = НадлишкиТоварів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        НадлишкиТоварів_Записи Record = new НадлишкиТоварів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[НадлишкиТоварів_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[НадлишкиТоварів_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[НадлишкиТоварів_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[НадлишкиТоварів_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -10581,6 +14531,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПересортицяТоварів_Select ПересортицяТоварів_Select = new Документи.ПересортицяТоварів_Select();
+                ПересортицяТоварів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПересортицяТоварів_Const.Назва,
+                    /*НомерДок*/ Документи.ПересортицяТоварів_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПересортицяТоварів_Const.ДатаДок,
+                    /*Коментар*/ Документи.ПересортицяТоварів_Const.Коментар,
+                    
+                ]);
+
+                ПересортицяТоварів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПересортицяТоварів_Select.QuerySelect, Документи.ПересортицяТоварів_Const.Організація,
+                    ПересортицяТоварів_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(ПересортицяТоварів_Select.QuerySelect, Документи.ПересортицяТоварів_Const.Склад,
+                    ПересортицяТоварів_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ПересортицяТоварів_Select.QuerySelect, Документи.ПересортицяТоварів_Const.Автор,
+                    ПересортицяТоварів_Select.QuerySelect.Table, "join_tab_3", "Автор");
+                
+
+                /* SELECT */
+                await ПересортицяТоварів_Select.Select();
+                
+                while (ПересортицяТоварів_Select.MoveNext())
+                {
+                    Документи.ПересортицяТоварів_Pointer? current = ПересортицяТоварів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПересортицяТоварів_Записи Record = new ПересортицяТоварів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПересортицяТоварів_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПересортицяТоварів_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПересортицяТоварів_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПересортицяТоварів_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -10803,6 +14822,78 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПерерахунокТоварів_Select ПерерахунокТоварів_Select = new Документи.ПерерахунокТоварів_Select();
+                ПерерахунокТоварів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПерерахунокТоварів_Const.Назва,
+                    /*НомерДок*/ Документи.ПерерахунокТоварів_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПерерахунокТоварів_Const.ДатаДок,
+                    /*Коментар*/ Документи.ПерерахунокТоварів_Const.Коментар,
+                    
+                ]);
+
+                ПерерахунокТоварів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПерерахунокТоварів_Select.QuerySelect, Документи.ПерерахунокТоварів_Const.Організація,
+                    ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(ПерерахунокТоварів_Select.QuerySelect, Документи.ПерерахунокТоварів_Const.Склад,
+                    ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.ФізичніОсоби_Pointer.GetJoin(ПерерахунокТоварів_Select.QuerySelect, Документи.ПерерахунокТоварів_Const.Відповідальний,
+                    ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_3", "Відповідальний");
+                Довідники.Користувачі_Pointer.GetJoin(ПерерахунокТоварів_Select.QuerySelect, Документи.ПерерахунокТоварів_Const.Автор,
+                    ПерерахунокТоварів_Select.QuerySelect.Table, "join_tab_4", "Автор");
+                
+
+                /* SELECT */
+                await ПерерахунокТоварів_Select.Select();
+                
+                while (ПерерахунокТоварів_Select.MoveNext())
+                {
+                    Документи.ПерерахунокТоварів_Pointer? current = ПерерахунокТоварів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПерерахунокТоварів_Записи Record = new ПерерахунокТоварів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПерерахунокТоварів_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПерерахунокТоварів_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПерерахунокТоварів_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Відповідальний = Fields["Відповідальний"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПерерахунокТоварів_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -11029,6 +15120,77 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПсуванняТоварів_Select ПсуванняТоварів_Select = new Документи.ПсуванняТоварів_Select();
+                ПсуванняТоварів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПсуванняТоварів_Const.Назва,
+                    /*НомерДок*/ Документи.ПсуванняТоварів_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ПсуванняТоварів_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ПсуванняТоварів_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ПсуванняТоварів_Const.Коментар,
+                    
+                ]);
+
+                ПсуванняТоварів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ПсуванняТоварів_Select.QuerySelect, Документи.ПсуванняТоварів_Const.Організація,
+                    ПсуванняТоварів_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(ПсуванняТоварів_Select.QuerySelect, Документи.ПсуванняТоварів_Const.Склад,
+                    ПсуванняТоварів_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ПсуванняТоварів_Select.QuerySelect, Документи.ПсуванняТоварів_Const.Автор,
+                    ПсуванняТоварів_Select.QuerySelect.Table, "join_tab_3", "Автор");
+                
+
+                /* SELECT */
+                await ПсуванняТоварів_Select.Select();
+                
+                while (ПсуванняТоварів_Select.MoveNext())
+                {
+                    Документи.ПсуванняТоварів_Pointer? current = ПсуванняТоварів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПсуванняТоварів_Записи Record = new ПсуванняТоварів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПсуванняТоварів_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ПсуванняТоварів_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ПсуванняТоварів_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[ПсуванняТоварів_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПсуванняТоварів_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -11267,6 +15429,80 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ВнутрішнєСпоживанняТоварів_Select ВнутрішнєСпоживанняТоварів_Select = new Документи.ВнутрішнєСпоживанняТоварів_Select();
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ВнутрішнєСпоживанняТоварів_Const.Назва,
+                    /*НомерДок*/ Документи.ВнутрішнєСпоживанняТоварів_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ВнутрішнєСпоживанняТоварів_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ВнутрішнєСпоживанняТоварів_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ВнутрішнєСпоживанняТоварів_Const.Коментар,
+                    
+                ]);
+
+                ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ВнутрішнєСпоживанняТоварів_Select.QuerySelect, Документи.ВнутрішнєСпоживанняТоварів_Const.Організація,
+                    ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(ВнутрішнєСпоживанняТоварів_Select.QuerySelect, Документи.ВнутрішнєСпоживанняТоварів_Const.Склад,
+                    ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.Валюти_Pointer.GetJoin(ВнутрішнєСпоживанняТоварів_Select.QuerySelect, Документи.ВнутрішнєСпоживанняТоварів_Const.Валюта,
+                    ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Користувачі_Pointer.GetJoin(ВнутрішнєСпоживанняТоварів_Select.QuerySelect, Документи.ВнутрішнєСпоживанняТоварів_Const.Автор,
+                    ВнутрішнєСпоживанняТоварів_Select.QuerySelect.Table, "join_tab_4", "Автор");
+                
+
+                /* SELECT */
+                await ВнутрішнєСпоживанняТоварів_Select.Select();
+                
+                while (ВнутрішнєСпоживанняТоварів_Select.MoveNext())
+                {
+                    Документи.ВнутрішнєСпоживанняТоварів_Pointer? current = ВнутрішнєСпоживанняТоварів_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ВнутрішнєСпоживанняТоварів_Записи Record = new ВнутрішнєСпоживанняТоварів_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ВнутрішнєСпоживанняТоварів_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ВнутрішнєСпоживанняТоварів_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ВнутрішнєСпоживанняТоварів_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                СумаДокументу = Fields[ВнутрішнєСпоживанняТоварів_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ВнутрішнєСпоживанняТоварів_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -11536,6 +15772,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.РахунокФактура_Select РахунокФактура_Select = new Документи.РахунокФактура_Select();
+                РахунокФактура_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.РахунокФактура_Const.Назва,
+                    /*НомерДок*/ Документи.РахунокФактура_Const.НомерДок,
+                    /*ДатаДок*/ Документи.РахунокФактура_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.РахунокФактура_Const.СумаДокументу,
+                    /*Коментар*/ Документи.РахунокФактура_Const.Коментар,
+                    
+                ]);
+
+                РахунокФактура_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(РахунокФактура_Select.QuerySelect, Документи.РахунокФактура_Const.Організація,
+                    РахунокФактура_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(РахунокФактура_Select.QuerySelect, Документи.РахунокФактура_Const.Контрагент,
+                    РахунокФактура_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(РахунокФактура_Select.QuerySelect, Документи.РахунокФактура_Const.Валюта,
+                    РахунокФактура_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(РахунокФактура_Select.QuerySelect, Документи.РахунокФактура_Const.Каса,
+                    РахунокФактура_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Склади_Pointer.GetJoin(РахунокФактура_Select.QuerySelect, Документи.РахунокФактура_Const.Склад,
+                    РахунокФактура_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(РахунокФактура_Select.QuerySelect, Документи.РахунокФактура_Const.Автор,
+                    РахунокФактура_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await РахунокФактура_Select.Select();
+                
+                while (РахунокФактура_Select.MoveNext())
+                {
+                    Документи.РахунокФактура_Pointer? current = РахунокФактура_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        РахунокФактура_Записи Record = new РахунокФактура_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[РахунокФактура_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[РахунокФактура_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[РахунокФактура_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[РахунокФактура_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[РахунокФактура_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -11756,6 +16072,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.РозміщенняТоварівНаСкладі_Select РозміщенняТоварівНаСкладі_Select = new Документи.РозміщенняТоварівНаСкладі_Select();
+                РозміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.РозміщенняТоварівНаСкладі_Const.Назва,
+                    /*ДатаДок*/ Документи.РозміщенняТоварівНаСкладі_Const.ДатаДок,
+                    /*НомерДок*/ Документи.РозміщенняТоварівНаСкладі_Const.НомерДок,
+                    /*Коментар*/ Документи.РозміщенняТоварівНаСкладі_Const.Коментар,
+                    
+                ]);
+
+                РозміщенняТоварівНаСкладі_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Склади_Pointer.GetJoin(РозміщенняТоварівНаСкладі_Select.QuerySelect, Документи.РозміщенняТоварівНаСкладі_Const.Склад,
+                    РозміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_1", "Склад");
+                Документи.ПоступленняТоварівТаПослуг_Pointer.GetJoin(РозміщенняТоварівНаСкладі_Select.QuerySelect, Документи.РозміщенняТоварівНаСкладі_Const.ДокументПоступлення,
+                    РозміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_2", "ДокументПоступлення");
+                Довідники.Користувачі_Pointer.GetJoin(РозміщенняТоварівНаСкладі_Select.QuerySelect, Документи.РозміщенняТоварівНаСкладі_Const.Автор,
+                    РозміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_3", "Автор");
+                
+
+                /* SELECT */
+                await РозміщенняТоварівНаСкладі_Select.Select();
+                
+                while (РозміщенняТоварівНаСкладі_Select.MoveNext())
+                {
+                    Документи.РозміщенняТоварівНаСкладі_Pointer? current = РозміщенняТоварівНаСкладі_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        РозміщенняТоварівНаСкладі_Записи Record = new РозміщенняТоварівНаСкладі_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[РозміщенняТоварівНаСкладі_Const.Назва].ToString() ?? "",
+                                ДатаДок = Fields[РозміщенняТоварівНаСкладі_Const.ДатаДок].ToString() ?? "",
+                                НомерДок = Fields[РозміщенняТоварівНаСкладі_Const.НомерДок].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                ДокументПоступлення = Fields["ДокументПоступлення"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[РозміщенняТоварівНаСкладі_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -11963,6 +16348,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ПереміщенняТоварівНаСкладі_Select ПереміщенняТоварівНаСкладі_Select = new Документи.ПереміщенняТоварівНаСкладі_Select();
+                ПереміщенняТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ПереміщенняТоварівНаСкладі_Const.Назва,
+                    /*ДатаДок*/ Документи.ПереміщенняТоварівНаСкладі_Const.ДатаДок,
+                    /*НомерДок*/ Документи.ПереміщенняТоварівНаСкладі_Const.НомерДок,
+                    /*Коментар*/ Документи.ПереміщенняТоварівНаСкладі_Const.Коментар,
+                    
+                ]);
+
+                ПереміщенняТоварівНаСкладі_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Склади_Pointer.GetJoin(ПереміщенняТоварівНаСкладі_Select.QuerySelect, Документи.ПереміщенняТоварівНаСкладі_Const.Склад,
+                    ПереміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_1", "Склад");
+                Довідники.Організації_Pointer.GetJoin(ПереміщенняТоварівНаСкладі_Select.QuerySelect, Документи.ПереміщенняТоварівНаСкладі_Const.Організація,
+                    ПереміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_2", "Організація");
+                Довідники.Користувачі_Pointer.GetJoin(ПереміщенняТоварівНаСкладі_Select.QuerySelect, Документи.ПереміщенняТоварівНаСкладі_Const.Автор,
+                    ПереміщенняТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_3", "Автор");
+                
+
+                /* SELECT */
+                await ПереміщенняТоварівНаСкладі_Select.Select();
+                
+                while (ПереміщенняТоварівНаСкладі_Select.MoveNext())
+                {
+                    Документи.ПереміщенняТоварівНаСкладі_Pointer? current = ПереміщенняТоварівНаСкладі_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ПереміщенняТоварівНаСкладі_Записи Record = new ПереміщенняТоварівНаСкладі_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ПереміщенняТоварівНаСкладі_Const.Назва].ToString() ?? "",
+                                ДатаДок = Fields[ПереміщенняТоварівНаСкладі_Const.ДатаДок].ToString() ?? "",
+                                НомерДок = Fields[ПереміщенняТоварівНаСкладі_Const.НомерДок].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ПереміщенняТоварівНаСкладі_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -12174,6 +16628,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ЗбіркаТоварівНаСкладі_Select ЗбіркаТоварівНаСкладі_Select = new Документи.ЗбіркаТоварівНаСкладі_Select();
+                ЗбіркаТоварівНаСкладі_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ЗбіркаТоварівНаСкладі_Const.Назва,
+                    /*ДатаДок*/ Документи.ЗбіркаТоварівНаСкладі_Const.ДатаДок,
+                    /*НомерДок*/ Документи.ЗбіркаТоварівНаСкладі_Const.НомерДок,
+                    /*Коментар*/ Документи.ЗбіркаТоварівНаСкладі_Const.Коментар,
+                    
+                ]);
+
+                ЗбіркаТоварівНаСкладі_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Склади_Pointer.GetJoin(ЗбіркаТоварівНаСкладі_Select.QuerySelect, Документи.ЗбіркаТоварівНаСкладі_Const.Склад,
+                    ЗбіркаТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_1", "Склад");
+                Документи.РеалізаціяТоварівТаПослуг_Pointer.GetJoin(ЗбіркаТоварівНаСкладі_Select.QuerySelect, Документи.ЗбіркаТоварівНаСкладі_Const.ДокументРеалізації,
+                    ЗбіркаТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_2", "ДокументРеалізації");
+                Довідники.Користувачі_Pointer.GetJoin(ЗбіркаТоварівНаСкладі_Select.QuerySelect, Документи.ЗбіркаТоварівНаСкладі_Const.Автор,
+                    ЗбіркаТоварівНаСкладі_Select.QuerySelect.Table, "join_tab_3", "Автор");
+                
+
+                /* SELECT */
+                await ЗбіркаТоварівНаСкладі_Select.Select();
+                
+                while (ЗбіркаТоварівНаСкладі_Select.MoveNext())
+                {
+                    Документи.ЗбіркаТоварівНаСкладі_Pointer? current = ЗбіркаТоварівНаСкладі_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЗбіркаТоварівНаСкладі_Записи Record = new ЗбіркаТоварівНаСкладі_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ЗбіркаТоварівНаСкладі_Const.Назва].ToString() ?? "",
+                                ДатаДок = Fields[ЗбіркаТоварівНаСкладі_Const.ДатаДок].ToString() ?? "",
+                                НомерДок = Fields[ЗбіркаТоварівНаСкладі_Const.НомерДок].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                ДокументРеалізації = Fields["ДокументРеалізації"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ЗбіркаТоварівНаСкладі_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -12383,6 +16906,75 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.РозміщенняНоменклатуриПоКоміркам_Select РозміщенняНоменклатуриПоКоміркам_Select = new Документи.РозміщенняНоменклатуриПоКоміркам_Select();
+                РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.РозміщенняНоменклатуриПоКоміркам_Const.Назва,
+                    /*ДатаДок*/ Документи.РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок,
+                    /*НомерДок*/ Документи.РозміщенняНоменклатуриПоКоміркам_Const.НомерДок,
+                    /*Коментар*/ Документи.РозміщенняНоменклатуриПоКоміркам_Const.Коментар,
+                    
+                ]);
+
+                РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Організація,
+                    РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Склади_Pointer.GetJoin(РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Склад,
+                    РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect, Документи.РозміщенняНоменклатуриПоКоміркам_Const.Автор,
+                    РозміщенняНоменклатуриПоКоміркам_Select.QuerySelect.Table, "join_tab_3", "Автор");
+                
+
+                /* SELECT */
+                await РозміщенняНоменклатуриПоКоміркам_Select.Select();
+                
+                while (РозміщенняНоменклатуриПоКоміркам_Select.MoveNext())
+                {
+                    Документи.РозміщенняНоменклатуриПоКоміркам_Pointer? current = РозміщенняНоменклатуриПоКоміркам_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        РозміщенняНоменклатуриПоКоміркам_Записи Record = new РозміщенняНоменклатуриПоКоміркам_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[РозміщенняНоменклатуриПоКоміркам_Const.Назва].ToString() ?? "",
+                                ДатаДок = Fields[РозміщенняНоменклатуриПоКоміркам_Const.ДатаДок].ToString() ?? "",
+                                НомерДок = Fields[РозміщенняНоменклатуриПоКоміркам_Const.НомерДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[РозміщенняНоменклатуриПоКоміркам_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -12577,6 +17169,72 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.КорегуванняБоргу_Select КорегуванняБоргу_Select = new Документи.КорегуванняБоргу_Select();
+                КорегуванняБоргу_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.КорегуванняБоргу_Const.Назва,
+                    /*НомерДок*/ Документи.КорегуванняБоргу_Const.НомерДок,
+                    /*ДатаДок*/ Документи.КорегуванняБоргу_Const.ДатаДок,
+                    /*Коментар*/ Документи.КорегуванняБоргу_Const.Коментар,
+                    
+                ]);
+
+                КорегуванняБоргу_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(КорегуванняБоргу_Select.QuerySelect, Документи.КорегуванняБоргу_Const.Організація,
+                    КорегуванняБоргу_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Користувачі_Pointer.GetJoin(КорегуванняБоргу_Select.QuerySelect, Документи.КорегуванняБоргу_Const.Автор,
+                    КорегуванняБоргу_Select.QuerySelect.Table, "join_tab_2", "Автор");
+                
+
+                /* SELECT */
+                await КорегуванняБоргу_Select.Select();
+                
+                while (КорегуванняБоргу_Select.MoveNext())
+                {
+                    Документи.КорегуванняБоргу_Pointer? current = КорегуванняБоргу_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        КорегуванняБоргу_Записи Record = new КорегуванняБоргу_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[КорегуванняБоргу_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[КорегуванняБоргу_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[КорегуванняБоргу_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[КорегуванняБоргу_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -12855,6 +17513,89 @@ namespace GeneratedCode.Документи.ТабличніСписки
           
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ЗакриттяЗамовленняКлієнта_Select ЗакриттяЗамовленняКлієнта_Select = new Документи.ЗакриттяЗамовленняКлієнта_Select();
+                ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ЗакриттяЗамовленняКлієнта_Const.Назва,
+                    /*НомерДок*/ Документи.ЗакриттяЗамовленняКлієнта_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ЗакриттяЗамовленняКлієнта_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ЗакриттяЗамовленняКлієнта_Const.СумаДокументу,
+                    /*ПричинаЗакриттяЗамовлення*/ Документи.ЗакриттяЗамовленняКлієнта_Const.ПричинаЗакриттяЗамовлення,
+                    /*Коментар*/ Документи.ЗакриттяЗамовленняКлієнта_Const.Коментар,
+                    
+                ]);
+
+                ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ЗакриттяЗамовленняКлієнта_Select.QuerySelect, Документи.ЗакриттяЗамовленняКлієнта_Const.Організація,
+                    ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(ЗакриттяЗамовленняКлієнта_Select.QuerySelect, Документи.ЗакриттяЗамовленняКлієнта_Const.Контрагент,
+                    ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(ЗакриттяЗамовленняКлієнта_Select.QuerySelect, Документи.ЗакриттяЗамовленняКлієнта_Const.Валюта,
+                    ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ЗакриттяЗамовленняКлієнта_Select.QuerySelect, Документи.ЗакриттяЗамовленняКлієнта_Const.Каса,
+                    ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Склади_Pointer.GetJoin(ЗакриттяЗамовленняКлієнта_Select.QuerySelect, Документи.ЗакриттяЗамовленняКлієнта_Const.Склад,
+                    ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ЗакриттяЗамовленняКлієнта_Select.QuerySelect, Документи.ЗакриттяЗамовленняКлієнта_Const.Автор,
+                    ЗакриттяЗамовленняКлієнта_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await ЗакриттяЗамовленняКлієнта_Select.Select();
+                
+                while (ЗакриттяЗамовленняКлієнта_Select.MoveNext())
+                {
+                    Документи.ЗакриттяЗамовленняКлієнта_Pointer? current = ЗакриттяЗамовленняКлієнта_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЗакриттяЗамовленняКлієнта_Записи Record = new ЗакриттяЗамовленняКлієнта_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ЗакриттяЗамовленняКлієнта_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ЗакриттяЗамовленняКлієнта_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ЗакриттяЗамовленняКлієнта_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[ЗакриттяЗамовленняКлієнта_Const.СумаДокументу].ToString() ?? "",
+                                ПричинаЗакриттяЗамовлення = Перелічення.ПсевдонімиПерелічення.ПричиниЗакриттяЗамовленняКлієнта_Alias((
+                                (Перелічення.ПричиниЗакриттяЗамовленняКлієнта)(Fields[ЗакриттяЗамовленняКлієнта_Const.ПричинаЗакриттяЗамовлення] != DBNull.Value ? Fields[ЗакриттяЗамовленняКлієнта_Const.ПричинаЗакриттяЗамовлення] : 0)) ),
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ЗакриттяЗамовленняКлієнта_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
@@ -13129,6 +17870,86 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ЗакриттяРахункуФактури_Select ЗакриттяРахункуФактури_Select = new Документи.ЗакриттяРахункуФактури_Select();
+                ЗакриттяРахункуФактури_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ЗакриттяРахункуФактури_Const.Назва,
+                    /*НомерДок*/ Документи.ЗакриттяРахункуФактури_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ЗакриттяРахункуФактури_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ЗакриттяРахункуФактури_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ЗакриттяРахункуФактури_Const.Коментар,
+                    
+                ]);
+
+                ЗакриттяРахункуФактури_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Організація,
+                    ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Контрагент,
+                    ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Валюта,
+                    ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Каса,
+                    ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Склади_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Склад,
+                    ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ЗакриттяРахункуФактури_Select.QuerySelect, Документи.ЗакриттяРахункуФактури_Const.Автор,
+                    ЗакриттяРахункуФактури_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await ЗакриттяРахункуФактури_Select.Select();
+                
+                while (ЗакриттяРахункуФактури_Select.MoveNext())
+                {
+                    Документи.ЗакриттяРахункуФактури_Pointer? current = ЗакриттяРахункуФактури_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЗакриттяРахункуФактури_Записи Record = new ЗакриттяРахункуФактури_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ЗакриттяРахункуФактури_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ЗакриттяРахункуФактури_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ЗакриттяРахункуФактури_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[ЗакриттяРахункуФактури_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ЗакриттяРахункуФактури_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
@@ -13419,6 +18240,89 @@ namespace GeneratedCode.Документи.ТабличніСписки
                 return existFilter;
             };
           
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ЗакриттяЗамовленняПостачальнику_Select ЗакриттяЗамовленняПостачальнику_Select = new Документи.ЗакриттяЗамовленняПостачальнику_Select();
+                ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ЗакриттяЗамовленняПостачальнику_Const.Назва,
+                    /*НомерДок*/ Документи.ЗакриттяЗамовленняПостачальнику_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ЗакриттяЗамовленняПостачальнику_Const.ДатаДок,
+                    /*СумаДокументу*/ Документи.ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу,
+                    /*ПричинаЗакриттяЗамовлення*/ Документи.ЗакриттяЗамовленняПостачальнику_Const.ПричинаЗакриттяЗамовлення,
+                    /*Коментар*/ Документи.ЗакриттяЗамовленняПостачальнику_Const.Коментар,
+                    
+                ]);
+
+                ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ЗакриттяЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗакриттяЗамовленняПостачальнику_Const.Організація,
+                    ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Контрагенти_Pointer.GetJoin(ЗакриттяЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗакриттяЗамовленняПостачальнику_Const.Контрагент,
+                    ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_2", "Контрагент");
+                Довідники.Валюти_Pointer.GetJoin(ЗакриттяЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗакриттяЗамовленняПостачальнику_Const.Валюта,
+                    ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_3", "Валюта");
+                Довідники.Каси_Pointer.GetJoin(ЗакриттяЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗакриттяЗамовленняПостачальнику_Const.Каса,
+                    ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_4", "Каса");
+                Довідники.Склади_Pointer.GetJoin(ЗакриттяЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗакриттяЗамовленняПостачальнику_Const.Склад,
+                    ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_5", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ЗакриттяЗамовленняПостачальнику_Select.QuerySelect, Документи.ЗакриттяЗамовленняПостачальнику_Const.Автор,
+                    ЗакриттяЗамовленняПостачальнику_Select.QuerySelect.Table, "join_tab_6", "Автор");
+                
+
+                /* SELECT */
+                await ЗакриттяЗамовленняПостачальнику_Select.Select();
+                
+                while (ЗакриттяЗамовленняПостачальнику_Select.MoveNext())
+                {
+                    Документи.ЗакриттяЗамовленняПостачальнику_Pointer? current = ЗакриттяЗамовленняПостачальнику_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЗакриттяЗамовленняПостачальнику_Записи Record = new ЗакриттяЗамовленняПостачальнику_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ЗакриттяЗамовленняПостачальнику_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ЗакриттяЗамовленняПостачальнику_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ЗакриттяЗамовленняПостачальнику_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Контрагент = Fields["Контрагент"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Каса = Fields["Каса"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаДокументу = Fields[ЗакриттяЗамовленняПостачальнику_Const.СумаДокументу].ToString() ?? "",
+                                ПричинаЗакриттяЗамовлення = Перелічення.ПсевдонімиПерелічення.ПричиниЗакриттяЗамовленняПостачальнику_Alias((
+                                (Перелічення.ПричиниЗакриттяЗамовленняПостачальнику)(Fields[ЗакриттяЗамовленняПостачальнику_Const.ПричинаЗакриттяЗамовлення] != DBNull.Value ? Fields[ЗакриттяЗамовленняПостачальнику_Const.ПричинаЗакриттяЗамовлення] : 0)) ),
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                Коментар = Fields[ЗакриттяЗамовленняПостачальнику_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)

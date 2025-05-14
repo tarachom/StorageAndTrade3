@@ -46,6 +46,11 @@ namespace StorageAndTrade
             await ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.ПоверненняТоварівПостачальнику_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -66,12 +71,17 @@ namespace StorageAndTrade
             return await ПоверненняТоварівПостачальнику_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ПоверненняТоварівПостачальнику_Pointer(unigueID).GetBasis());
+        }
+
         const string КлючНалаштуванняКористувача = "Документи.ПоверненняТоварівПостачальнику";
 
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ПоверненняТоварівПостачальнику_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, ПоверненняТоварівПостачальнику_Const.POINTER);
         }
 
         protected override async void PeriodChanged()

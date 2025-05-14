@@ -202,12 +202,107 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
           </xsl:if>
         }
 
+        public static async ValueTask UpdateRecords(TreeView treeView, List&lt;ObjectChanged&gt; recordsChanged)
+        {
+            <xsl:value-of select="$StoreType"/> Store = (<xsl:value-of select="$StoreType"/>)treeView.Model;
+            Dictionary&lt;Guid, (TreeIter Iter, TypeObjectChanged Type)&gt; records = [];
+
+            //Update
+            List&lt;ObjectChanged&gt; recordsChangedUpdate = [.. recordsChanged.Where(x =&gt; x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x =&gt; x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    <xsl:if test="$DirectoryType = 'Hierarchical'">
+                    if (Store.IterChildren(out TreeIter iterChildren, iter)) findIter(iterChildren);
+                    </xsl:if>
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count &gt; 0)
+            {
+                Довідники.<xsl:value-of select="$DirectoryName"/>_Select<xsl:text> </xsl:text><xsl:value-of select="$DirectoryName"/>_Select = new Довідники.<xsl:value-of select="$DirectoryName"/>_Select();
+                <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    <xsl:for-each select="Fields/Field[Type != 'pointer']">
+                        <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
+                        <xsl:text>Довідники.</xsl:text>
+                        <xsl:value-of select="$DirectoryName"/>
+                        <xsl:text>_Const.</xsl:text>
+                        <xsl:value-of select="Name"/>,
+                    </xsl:for-each>
+                ]);
+
+                <xsl:for-each select="Fields/Field[Type = 'date']">
+                    <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.SqlFunc.Add(new SqlFunc(Довідники.<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>, "TO_CHAR", ["'dd.mm.yyyy'"]));
+                </xsl:for-each>
+
+                <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x =&gt; x.Key)) + "'", true));
+
+                <xsl:for-each select="Fields/Field[Type = 'pointer']">
+                    <xsl:value-of select="substring-before(Pointer, '.')"/>.<xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer.GetJoin(<xsl:value-of select="$DirectoryName"/>_Select.QuerySelect, Довідники.<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>,
+                    <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Table, "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
+                </xsl:for-each>
+
+                <xsl:for-each select="Fields/AdditionalField[Visible = 'True']">
+                    /* Additional Field */
+                    <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.FieldAndAlias.Add(
+                    new ValueName&lt;string&gt;(@$"(<xsl:value-of select="normalize-space(Value)"/>)", "<xsl:value-of select="Name"/>"));
+                </xsl:for-each>
+
+                /* SELECT */
+                await <xsl:value-of select="$DirectoryName"/>_Select.Select();
+
+                while (<xsl:value-of select="$DirectoryName"/>_Select.MoveNext())
+                {
+                    Довідники.<xsl:value-of select="$DirectoryName"/>_Pointer? current = <xsl:value-of select="$DirectoryName"/>_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary&lt;string, object&gt; Fields = current.Fields;
+                        <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularListName"/>
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            <xsl:for-each select="Fields/Field">
+                            <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
+                            <xsl:choose>
+                                <xsl:when test="Type = 'pointer'">
+                                <xsl:text>Fields["</xsl:text><xsl:value-of select="Name"/>"].ToString() ?? "",
+                                </xsl:when>
+                                <xsl:when test="Type = 'enum'">
+                                <xsl:text>Перелічення.ПсевдонімиПерелічення.</xsl:text><xsl:value-of select="substring-after(Pointer, '.')"/>_Alias((
+                                <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/>)(Fields[<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>] != DBNull.Value ? Fields[<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>] : 0)) ),
+                                </xsl:when>
+                                <xsl:when test="Type = 'boolean'">
+                                <xsl:text>(Fields[</xsl:text><xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>] != DBNull.Value ? (bool)Fields[<xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>] : false) ? "Так" : "",
+                                </xsl:when>
+                                <xsl:otherwise>
+                                <xsl:text>Fields[</xsl:text><xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>].ToString() ?? "",
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            </xsl:for-each>
+                            <xsl:for-each select="Fields/AdditionalField[Visible = 'True']">
+                                <xsl:value-of select="Name"/> = Fields["<xsl:value-of select="Name"/>"].ToString() ?? "",
+                            </xsl:for-each>
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
             TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
-            <xsl:value-of select="$StoreType"/> Store = (<xsl:value-of select="$StoreType"/>)treeView.Model;           
+            <xsl:value-of select="$StoreType"/> Store = (<xsl:value-of select="$StoreType"/>)treeView.Model;
             
             Довідники.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$SelectType"/><xsl:text> </xsl:text><xsl:value-of select="$DirectoryName"/>_Select = new Довідники.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$SelectType"/>();
             <xsl:value-of select="$DirectoryName"/>_Select.QuerySelect.Field.AddRange(
@@ -483,6 +578,88 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                 return existFilter;
             };
           </xsl:if>
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List&lt;ObjectChanged&gt; recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary&lt;Guid, (TreeIter Iter, TypeObjectChanged Type)&gt; records = [];
+
+            //Update
+            List&lt;ObjectChanged&gt; recordsChangedUpdate = [.. recordsChanged.Where(x =&gt; x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x =&gt; x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count &gt; 0)
+            {
+                Документи.<xsl:value-of select="$DocumentName"/>_Select <xsl:value-of select="$DocumentName"/>_Select = new Документи.<xsl:value-of select="$DocumentName"/>_Select();
+                <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    <xsl:for-each select="Fields/Field[Type != 'pointer']">
+                        <xsl:text>/*</xsl:text><xsl:value-of select="Name"/><xsl:text>*/ </xsl:text>
+                        <xsl:text>Документи.</xsl:text>
+                        <xsl:value-of select="$DocumentName"/>
+                        <xsl:text>_Const.</xsl:text>
+                        <xsl:value-of select="Name"/>,
+                    </xsl:for-each>
+                ]);
+
+                <xsl:for-each select="Fields/Field[Type = 'date']">
+                    <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.SqlFunc.Add(new SqlFunc(Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>, "TO_CHAR", ["'dd.mm.yyyy'"]));
+                </xsl:for-each>
+
+                <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x =&gt; x.Key)) + "'", true));
+
+                <xsl:for-each select="Fields/Field[Type = 'pointer']">
+                    <xsl:value-of select="substring-before(Pointer, '.')"/>.<xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer.GetJoin(<xsl:value-of select="$DocumentName"/>_Select.QuerySelect, Документи.<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>,
+                    <xsl:value-of select="$DocumentName"/>_Select.QuerySelect.Table, "join_tab_<xsl:value-of select="position()"/>", "<xsl:value-of select="Name"/>");
+                </xsl:for-each>
+
+                /* SELECT */
+                await <xsl:value-of select="$DocumentName"/>_Select.Select();
+                
+                while (<xsl:value-of select="$DocumentName"/>_Select.MoveNext())
+                {
+                    Документи.<xsl:value-of select="$DocumentName"/>_Pointer? current = <xsl:value-of select="$DocumentName"/>_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary&lt;string, object&gt; Fields = current.Fields;
+                        <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/> Record = new <xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularListName"/>
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            <xsl:for-each select="Fields/Field">
+                            <xsl:value-of select="Name"/><xsl:text> = </xsl:text>
+                            <xsl:choose>
+                                <xsl:when test="Type = 'pointer'">
+                                <xsl:text>Fields["</xsl:text><xsl:value-of select="Name"/>"].ToString() ?? "",
+                                </xsl:when>
+                                <xsl:when test="Type = 'enum'">
+                                <xsl:text>Перелічення.ПсевдонімиПерелічення.</xsl:text><xsl:value-of select="substring-after(Pointer, '.')"/>_Alias((
+                                <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/>)(Fields[<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>] != DBNull.Value ? Fields[<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>] : 0)) ),
+                                </xsl:when>
+                                <xsl:when test="Type = 'boolean'">
+                                <xsl:text>(Fields[</xsl:text><xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>] != DBNull.Value ? (bool)Fields[<xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>] : false) ? "Так" : "",
+                                </xsl:when>
+                                <xsl:otherwise>
+                                <xsl:text>Fields[</xsl:text><xsl:value-of select="$DocumentName"/>_Const.<xsl:value-of select="Name"/>].ToString() ?? "",
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            </xsl:for-each>
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
         }
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)

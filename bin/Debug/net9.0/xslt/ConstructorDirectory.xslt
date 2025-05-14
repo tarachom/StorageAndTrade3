@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:output method="text" indent="yes" />
+    <xsl:output method="text" indent="yes" />    
 
     <!-- Файл -->
     <xsl:param name="File" />
@@ -116,6 +116,13 @@ namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники
 //
 -->
 
+    <xsl:template name="Function_FuncToField">
+        <xsl:choose>
+            <xsl:when test="Type = 'string'">FuncToField = "LOWER"</xsl:when>
+            <xsl:otherwise>FuncToField = "TO_CHAR", FuncToField_Param1 = "''"</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <!-- Елемент -->
     <xsl:template name="DirectoryFunction">
         <xsl:variable name="DirectoryName" select="Directory/Name"/>
@@ -150,17 +157,17 @@ namespace <xsl:value-of select="$NameSpace"/>
                     <xsl:when test="$FieldsFilter[IsSearch = '1']">
                         <xsl:for-each select="$FieldsFilter[IsSearch = '1']">
                 //<xsl:value-of select="Name"/>
-                new Where(<xsl:if test="position() != 1">Comparison.OR, </xsl:if><xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(<xsl:if test="position() != 1">Comparison.OR, </xsl:if><xsl:value-of select="$DirectoryName"/>_Const.<xsl:value-of select="Name"/>, Comparison.LIKE, searchText) { <xsl:call-template name="Function_FuncToField" /> },
                         </xsl:for-each>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:if test="$FieldsFilter[Name = 'Код']">
                 //Код
-                new Where(<xsl:value-of select="$DirectoryName"/>_Const.Код, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(<xsl:value-of select="$DirectoryName"/>_Const.Код, Comparison.LIKE, searchText) { <xsl:call-template name="Function_FuncToField" /> },
                         </xsl:if>
                         <xsl:if test="$FieldsFilter[Name = 'Назва']">
                 //Назва
-                new Where(<xsl:if test="$FieldsFilter[Name = 'Код']">Comparison.OR, </xsl:if><xsl:value-of select="$DirectoryName"/>_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "LOWER" },
+                new Where(<xsl:if test="$FieldsFilter[Name = 'Код']">Comparison.OR, </xsl:if><xsl:value-of select="$DirectoryName"/>_Const.Назва, Comparison.LIKE, searchText) { <xsl:call-template name="Function_FuncToField" /> },
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -312,6 +319,9 @@ namespace <xsl:value-of select="$NameSpace"/>
                 </xsl:when>
                 <xsl:when test="Type = 'composite_pointer'">
                     <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Довідники.<xsl:value-of select="$DirectoryName"/>.<xsl:value-of select="Name"/>" };
+                </xsl:when>
+                <xsl:when test="Type = 'composite_text'">
+                    <xsl:text>//NameAndText </xsl:text><xsl:value-of select="Name"/> = new NameAndText();
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
                     <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
@@ -465,7 +475,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:value-of select="Name"/>.ActiveId = Елемент.<xsl:value-of select="Name"/><xsl:text>.ToString(); </xsl:text>
                         <xsl:text>//if (</xsl:text><xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
                     </xsl:when>
-                    <xsl:when test="Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
+                    <xsl:when test="Type = 'any_pointer' or Type = 'composite_text' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
                         <xsl:text>//</xsl:text><xsl:value-of select="Name"/> = Елемент.<xsl:value-of select="Name"/>;
                     </xsl:when>
                 </xsl:choose>
@@ -508,7 +518,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
                         <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_FindByName(<xsl:value-of select="Name"/>.ActiveId);
                     </xsl:when>
-                    <xsl:when test="Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
+                    <xsl:when test="Type = 'any_pointer' or Type = 'composite_text' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
                         <xsl:text>//Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
                     </xsl:when>
                 </xsl:choose>

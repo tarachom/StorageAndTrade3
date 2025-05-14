@@ -45,6 +45,11 @@ namespace StorageAndTrade
             await ТабличніСписки.ВидиЦінПостачальників_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.ВидиЦінПостачальників_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.ВидиЦінПостачальників_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -65,9 +70,14 @@ namespace StorageAndTrade
             return await ВидиЦінПостачальників_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ВидиЦінПостачальників_Pointer(unigueID).GetBasis());
+        }
+
         protected override async ValueTask BeforeSetValue()
         {
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ВидиЦінПостачальників_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, ВидиЦінПостачальників_Const.POINTER);
             await BeforeLoadRecords();
         }
 

@@ -45,6 +45,11 @@ namespace StorageAndTrade
             await ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.БанківськіРахункиКонтрагентів_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -65,9 +70,14 @@ namespace StorageAndTrade
             return await БанківськіРахункиКонтрагентів_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new БанківськіРахункиКонтрагентів_Pointer(unigueID).GetBasis());
+        }
+
         protected override async ValueTask BeforeSetValue()
         {
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, БанківськіРахункиКонтрагентів_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, БанківськіРахункиКонтрагентів_Const.POINTER);
             await BeforeLoadRecords();
         }
 

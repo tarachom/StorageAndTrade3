@@ -45,6 +45,7 @@
             <xsl:when test="Type = 'pointer'"><xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer</xsl:when>
             <xsl:when test="Type = 'any_pointer'">Guid</xsl:when>
             <xsl:when test="Type = 'composite_pointer'">UuidAndText</xsl:when>
+            <xsl:when test="Type = 'composite_text'">NameAndText</xsl:when>
             <xsl:when test="Type = 'enum'"><xsl:value-of select="substring-after(Pointer, '.')"/></xsl:when>
             <xsl:when test="Type = 'bytea'">byte[]</xsl:when>
             <xsl:when test="Type = 'uuid[]'">Guid[]</xsl:when>
@@ -63,6 +64,7 @@
             <xsl:when test="Type = 'pointer'">new <xsl:value-of select="substring-after(Pointer, '.')"/>_Pointer()</xsl:when>
             <xsl:when test="Type = 'any_pointer'">new Guid()</xsl:when>
             <xsl:when test="Type = 'composite_pointer'">new UuidAndText()</xsl:when>
+            <xsl:when test="Type = 'composite_text'">new NameAndText()</xsl:when>
         </xsl:choose>
     </xsl:template>
 

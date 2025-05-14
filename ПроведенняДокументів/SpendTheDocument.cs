@@ -534,7 +534,7 @@ FROM
                     }
                 }
 
-                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -578,7 +578,7 @@ FROM
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -721,7 +721,7 @@ WHERE
                     }
                 }
 
-                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -761,7 +761,7 @@ WHERE
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -866,7 +866,7 @@ WHERE
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -980,7 +980,7 @@ WHERE
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1194,7 +1194,7 @@ WHERE
                     }
                 }
 
-                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1281,7 +1281,7 @@ WHERE
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1308,7 +1308,7 @@ WHERE
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1430,8 +1430,8 @@ WHERE
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-                await продажі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
+                await продажі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1454,7 +1454,7 @@ WHERE
 
                 розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
 
-                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1506,7 +1506,7 @@ WHERE
                 };
 
                 розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
-                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1532,7 +1532,7 @@ WHERE
                     продажі_RecordsSet.Records.Add(record);
                 }
 
-                await продажі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await продажі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1643,7 +1643,7 @@ WHERE
                     }
                 }
 
-                await замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1670,7 +1670,7 @@ WHERE
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1707,7 +1707,7 @@ WHERE
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1733,7 +1733,7 @@ WHERE
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1755,7 +1755,7 @@ WHERE
                     розрахункиЗПостачальниками_RecordsSet.Records.Add(recordContragent);
                 }
 
-                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1782,7 +1782,7 @@ WHERE
                     закупівлі_RecordsSet.Records.Add(record);
                 }
 
-                await закупівлі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await закупівлі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1850,7 +1850,7 @@ WHERE
                     }
                 }
 
-                await замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await замовленняПостачальникам_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -1964,7 +1964,7 @@ WHERE
                     }
                 }
 
-                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await замовленняКлієнтів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2069,7 +2069,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2096,7 +2096,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2194,8 +2194,8 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-                await продажі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
+                await продажі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2212,7 +2212,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 };
 
                 розрахункиЗКлієнтами_RecordsSet.Records.Add(розрахункиЗКлієнтами_Record);
-                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2317,7 +2317,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2374,7 +2374,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2400,7 +2400,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2417,7 +2417,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 };
 
                 розрахункиЗПостачальниками_RecordsSet.Records.Add(розрахункиЗПостачальниками_Record);
-                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2444,7 +2444,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     закупівлі_RecordsSet.Records.Add(record);
                 }
 
-                await закупівлі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await закупівлі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2495,7 +2495,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
                 }
 
-                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2517,7 +2517,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
                 }
 
-                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2559,7 +2559,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 };
 
                 рухКоштів_RecordsSet.Records.Add(record_РухКоштів);
-                await рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2606,7 +2606,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     розрахункиЗКлієнтами_RecordsSet.Records.Add(record_Клієнт);
                 }
 
-                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2628,7 +2628,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     розрахункиЗПостачальниками_RecordsSet.Records.Add(record_Постачальник);
                 }
 
-                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2670,7 +2670,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                 };
 
                 рухКоштів_RecordsSet.Records.Add(record_РухКоштів);
-                await рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2813,7 +2813,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2859,7 +2859,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2952,7 +2952,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -2999,7 +2999,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await ціниНоменклатури_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await ціниНоменклатури_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3067,7 +3067,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3093,7 +3093,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3130,7 +3130,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3155,7 +3155,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     рухКоштів_RecordsSet.Records.Add(record_Каса);
                 }
 
-                await рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await рухКоштів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3195,8 +3195,8 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
+                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3314,7 +3314,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3340,7 +3340,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3416,7 +3416,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3534,7 +3534,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариНаСкладах_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3560,7 +3560,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await вільніЗалишки_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3636,7 +3636,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await партіїТоварів_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3737,8 +3737,8 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
-                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розрахункиЗКлієнтами_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
+                await розрахункиЗПостачальниками_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3817,7 +3817,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариВКомірках_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариВКомірках_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -3946,7 +3946,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариВКомірках_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариВКомірках_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -4058,7 +4058,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     }
                 }
 
-                await товариВКомірках_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await товариВКомірках_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 
@@ -4100,7 +4100,7 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
                     розміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.Records.Add(record);
                 }
 
-                await розміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.UnigueID.UGuid);
+                await розміщенняНоменклатуриПоКоміркамНаСкладі_RecordsSet.Save(ДокументОбєкт.ДатаДок, ДокументОбєкт.GetBasis());
 
                 #endregion
 

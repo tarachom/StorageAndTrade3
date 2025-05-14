@@ -25,6 +25,11 @@ namespace StorageAndTrade
             await ТабличніСписки.Журнали_Каса.LoadRecords(TreeViewGrid, SelectPointerItem);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ValueTask.FromResult(true);
+        }
+
         protected override void OpenTypeListDocs(Widget relative_to)
         {
             new ФункціїДляДинамічногоВідкриття().ВідкритиСписокДокументівДляЖурналу(relative_to, ТабличніСписки.Журнали_Каса.AllowDocument());
@@ -50,7 +55,7 @@ namespace StorageAndTrade
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
-            NotebookFunction.AddChangeFuncJournal(Program.GeneralNotebook, Name, LoadRecords, [.. ТабличніСписки.Журнали_Каса.AllowDocument().Keys]);
+            NotebookFunction.AddChangeFuncJournal(Program.GeneralNotebook, Name, UpdateRecords, [.. ТабличніСписки.Журнали_Каса.AllowDocument().Keys]);
         }
 
         protected override async void PeriodChanged()

@@ -71,6 +71,11 @@ namespace StorageAndTrade
             await ТабличніСписки.ХарактеристикиНоменклатури_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.ХарактеристикиНоменклатури_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.ХарактеристикиНоменклатури_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -91,9 +96,14 @@ namespace StorageAndTrade
             return await ХарактеристикиНоменклатури_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ХарактеристикиНоменклатури_Pointer(unigueID).GetBasis());
+        }
+
         protected override async ValueTask BeforeSetValue()
         {
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ХарактеристикиНоменклатури_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, ХарактеристикиНоменклатури_Const.POINTER);
             await BeforeLoadRecords();
         }
 

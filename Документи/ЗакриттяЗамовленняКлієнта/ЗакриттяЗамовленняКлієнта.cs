@@ -46,6 +46,11 @@ namespace StorageAndTrade
             await ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.ЗакриттяЗамовленняКлієнта_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -66,12 +71,17 @@ namespace StorageAndTrade
             return await ЗакриттяЗамовленняКлієнта_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ЗакриттяЗамовленняКлієнта_Pointer(unigueID).GetBasis());
+        }
+
         const string КлючНалаштуванняКористувача = "Документи.ЗакриттяЗамовленняКлієнта";
 
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, ЗакриттяЗамовленняКлієнта_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, ЗакриттяЗамовленняКлієнта_Const.POINTER);
         }
 
         protected override async void PeriodChanged()

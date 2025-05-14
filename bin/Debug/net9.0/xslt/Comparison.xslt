@@ -201,6 +201,18 @@
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'composite_text'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'USER-DEFINED' and $InfoSchemaFieldUdtName = 'nametext'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>nametext</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
 				
               <xsl:if test="$ConfFieldType = 'enum'">
                 <xsl:choose>
@@ -319,6 +331,9 @@
           </xsl:when>
 		      <xsl:when test="Type = 'composite_pointer'">
             <xsl:text>uuidtext</xsl:text>
+          </xsl:when>
+          <xsl:when test="Type = 'composite_text'">
+            <xsl:text>nametext</xsl:text>
           </xsl:when>
           <xsl:when test="Type = 'enum'">
             <xsl:text>integer</xsl:text>

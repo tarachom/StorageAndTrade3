@@ -45,6 +45,11 @@ namespace StorageAndTrade
             await ТабличніСписки.РозхіднийКасовийОрдер_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.РозхіднийКасовийОрдер_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.РозхіднийКасовийОрдер_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -65,12 +70,17 @@ namespace StorageAndTrade
             return await РозхіднийКасовийОрдер_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new РозхіднийКасовийОрдер_Pointer(unigueID).GetBasis());
+        }
+
         const string КлючНалаштуванняКористувача = "Документи.РозхіднийКасовийОрдер";
 
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, РозхіднийКасовийОрдер_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, РозхіднийКасовийОрдер_Const.POINTER);
         }
 
         protected override async void PeriodChanged()

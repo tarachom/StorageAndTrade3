@@ -355,7 +355,8 @@
                               Type/DataType = 'time without time zone' or 
                               Type/DataType = 'timestamp without time zone' or 
                               Type/DataType = 'uuid' or
-						      (Type/DataType = 'USER-DEFINED' and Type/UdtName = 'uuidtext') ">
+						                  (Type/DataType = 'USER-DEFINED' and Type/UdtName = 'uuidtext') or
+						                  (Type/DataType = 'USER-DEFINED' and Type/UdtName = 'nametext') ">
                 <xsl:choose>
                   <!-- Значення в Текст -->
                   <xsl:when test="Type/ConfType = 'string'">
@@ -650,11 +651,13 @@
                 <xsl:if test="$TableType = 'RegisterInformation'">
                   <xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
                   <xsl:text>owner uuid NOT NULL, </xsl:text>
+                  <xsl:text>ownertype nametext NOT NULL, </xsl:text>
                 </xsl:if>
                 <xsl:if test="$TableType = 'RegisterAccumulation'">
                   <xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
                   <xsl:text>income bool NOT NULL, </xsl:text>
                   <xsl:text>owner uuid NOT NULL, </xsl:text>
+                  <xsl:text>ownertype nametext NOT NULL, </xsl:text>
                 </xsl:if>
                 <xsl:for-each select="FieldCreate">
                   <xsl:text> "</xsl:text>
@@ -687,20 +690,26 @@
                 <sql>
                     <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
                 </sql>
-              <sql>
-                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
-              </sql>
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
+                </sql>
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_ownertype_idx ON ', $TableName, ' (ownertype);')"/>
+                </sql>
               </xsl:if>
               <xsl:if test="$TableType = 'RegisterAccumulation'">
-              <sql>
-                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
-              </sql>
-              <sql>
-                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_income_idx ON ', $TableName, ' (income);')"/>
-              </sql>
-              <sql>
-                <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
-              </sql>
+                <sql>
+                    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
+                </sql>
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_income_idx ON ', $TableName, ' (income);')"/>
+                </sql>
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
+                </sql>
+                <sql>
+                  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_ownertype_idx ON ', $TableName, ' (ownertype);')"/>
+                </sql>
               </xsl:if>
             </xsl:for-each>
 

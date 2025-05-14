@@ -96,6 +96,11 @@ namespace StorageAndTrade
             await ТабличніСписки.СкладськіКомірки_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.СкладськіКомірки_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.СкладськіКомірки_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -116,9 +121,14 @@ namespace StorageAndTrade
             return await СкладськіКомірки_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new СкладськіКомірки_Pointer(unigueID).GetBasis());
+        }
+
         protected override async ValueTask BeforeSetValue()
         {
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, СкладськіКомірки_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, СкладськіКомірки_Const.POINTER);
             await BeforeLoadRecords();
         }
 

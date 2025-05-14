@@ -91,6 +91,9 @@ namespace <xsl:value-of select="$NameSpace"/>
                 <xsl:when test="Type = 'composite_pointer'">
                     <xsl:text>CompositePointerControl </xsl:text><xsl:value-of select="Name"/> = new CompositePointerControl() { BoundConfType = "Довідники.<xsl:value-of select="$RegisterInformationName"/>.<xsl:value-of select="Name"/>" };
                 </xsl:when>
+                <xsl:when test="Type = 'composite_text'">
+                    <xsl:text>//NameAndText </xsl:text><xsl:value-of select="Name"/> = new NameAndText();
+                </xsl:when>
                 <xsl:when test="Type = 'pointer'">
                     <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
                     <xsl:value-of select="$namePointer"/>_PointerControl <xsl:value-of select="Name"/> = new <xsl:value-of select="$namePointer"/>_PointerControl() { Caption = "<xsl:value-of select="Caption"/>", WidthPresentation = <xsl:value-of select="$Size"/> };
@@ -215,7 +218,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:value-of select="Name"/>.ActiveId = Елемент.ToString();
                         <xsl:text>//if (</xsl:text><xsl:value-of select="Name"/>.Active == -1) <xsl:value-of select="Name"/>.Active = 0;
                     </xsl:when>
-                    <xsl:when test="Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
+                    <xsl:when test="Type = 'any_pointer' or Type = 'composite_text' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
                         <xsl:text>//</xsl:text><xsl:value-of select="Name"/> = Елемент.<xsl:value-of select="Name"/>;
                     </xsl:when>
                 </xsl:choose>
@@ -253,7 +256,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                         <xsl:variable name="namePointer" select="substring-after(Pointer, '.')" />
                         <xsl:text>Елемент.</xsl:text><xsl:value-of select="Name"/> = ПсевдонімиПерелічення.<xsl:value-of select="$namePointer"/>_FindByName(<xsl:value-of select="Name"/>.ActiveId);
                     </xsl:when>
-                    <xsl:when test="Type = 'any_pointer' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
+                    <xsl:when test="Type = 'any_pointer' or Type = 'composite_text' or Type = 'bytea' or Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]' or Type = 'uuid[]'">
                         <xsl:text>//Елемент.</xsl:text><xsl:value-of select="Name"/> = <xsl:value-of select="Name"/>;
                     </xsl:when>
                 </xsl:choose>

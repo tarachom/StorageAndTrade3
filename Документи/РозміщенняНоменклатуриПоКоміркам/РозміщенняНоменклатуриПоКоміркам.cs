@@ -44,6 +44,11 @@ namespace StorageAndTrade
             await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.LoadRecords(TreeViewGrid);
         }
 
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
         protected override void FillFilterList(ListFilterControl filterControl)
         {
             ТабличніСписки.РозміщенняНоменклатуриПоКоміркам_Записи.CreateFilter(TreeViewGrid, filterControl);
@@ -64,12 +69,17 @@ namespace StorageAndTrade
             return await РозміщенняНоменклатуриПоКоміркам_Функції.Copy(unigueID);
         }
 
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new РозміщенняНоменклатуриПоКоміркам_Pointer(unigueID).GetBasis());
+        }
+
         const string КлючНалаштуванняКористувача = "Документи.РозміщенняНоменклатуриПоКоміркам";
 
         protected override async ValueTask BeforeSetValue()
         {
             await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
-            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, LoadRecords, РозміщенняНоменклатуриПоКоміркам_Const.POINTER);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, РозміщенняНоменклатуриПоКоміркам_Const.POINTER);
         }
 
         protected override async void PeriodChanged()
