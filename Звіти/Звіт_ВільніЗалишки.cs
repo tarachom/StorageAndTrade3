@@ -338,6 +338,21 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("ВРезервіПідЗамовлення", new("В резерві під замовлення", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
             }
 
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+
+                Звіт.ExcelColumnSettings.Add("ВНаявності", new("В наявності", "N"));
+                Звіт.ExcelColumnSettings.Add("ВРезервіЗіСкладу", new("В резерві зі складу", "N"));
+                Звіт.ExcelColumnSettings.Add("ВРезервіПідЗамовлення", new("В резерві під замовлення", "N"));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -567,6 +582,23 @@ ORDER BY period ASC
                 Звіт.PDFColumnSettings.Add("ВНаявності", new("В наявності", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
                 Звіт.PDFColumnSettings.Add("ВРезервіЗіСкладу", new("В резерві зі складу", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
                 Звіт.PDFColumnSettings.Add("ВРезервіПідЗамовлення", new("В резерві під замовлення", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Рух", new("Рух"));
+                Звіт.ExcelColumnSettings.Add("Документ_Назва", new("Документ"));
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+
+                Звіт.ExcelColumnSettings.Add("ВНаявності", new("В наявності", "N"));
+                Звіт.ExcelColumnSettings.Add("ВРезервіЗіСкладу", new("В резерві зі складу", "N"));
+                Звіт.ExcelColumnSettings.Add("ВРезервіПідЗамовлення", new("В резерві під замовлення", "N"));
             }
 
             await Звіт.Select();

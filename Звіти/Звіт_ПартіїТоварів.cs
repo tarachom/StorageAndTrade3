@@ -390,7 +390,6 @@ ORDER BY
 
             //PDF
             {
-                //Звіт.PDFColumnSettings.Add("Організація_Назва", new("Організація", 2));
                 Звіт.PDFColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія", 6));
                 Звіт.PDFColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", 5));
 
@@ -404,6 +403,23 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
                 Звіт.PDFColumnSettings.Add("Кількість", new("Кількість", 30, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
                 Звіт.PDFColumnSettings.Add("Собівартість", new("Собівартість", 30, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія"));
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+                Звіт.ExcelColumnSettings.Add("Кількість", new("Кількість", "N"));
+                Звіт.ExcelColumnSettings.Add("Собівартість", new("Собівартість", "N"));
             }
 
             await Звіт.Select();
@@ -756,7 +772,6 @@ ORDER BY
 
             //PDF
             {
-                //Звіт.PDFColumnSettings.Add("Організація_Назва", new("Організація", 2));
                 Звіт.PDFColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія", 6));
                 Звіт.PDFColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", 5));
 
@@ -778,6 +793,28 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("СобівартістьКінцевийЗалишок", new("Собівартість", 30, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
             }
 
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія"));
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+                Звіт.ExcelColumnSettings.Add("КількістьПочатковийЗалишок", new("Кількість", "N"));
+                Звіт.ExcelColumnSettings.Add("СобівартістьПочатковийЗалишок", new("Собівартість", "N"));
+                Звіт.ExcelColumnSettings.Add("КількістьПрихід", new("Кількість +", "N"));
+                Звіт.ExcelColumnSettings.Add("КількістьРозхід", new("Кількість -", "N"));
+                Звіт.ExcelColumnSettings.Add("СобівартістьПрихід", new("Собівартість +", "N"));
+                Звіт.ExcelColumnSettings.Add("СобівартістьРозхід", new("Собівартість -", "N"));
+                Звіт.ExcelColumnSettings.Add("КількістьКінцевийЗалишок", new("Кількість", "N"));
+                Звіт.ExcelColumnSettings.Add("СобівартістьКінцевийЗалишок", new("Собівартість", "N"));
+            }
 
             await Звіт.Select();
 
@@ -1047,7 +1084,6 @@ ORDER BY
             {
                 Звіт.PDFColumnSettings.Add("Рух", new("Рух", 15, ЗвітСторінка.TypePDFColumn.Constant, 0.5f));
                 Звіт.PDFColumnSettings.Add("Документ_Назва", new("Документ", 6));
-                //Звіт.PDFColumnSettings.Add("Організація_Назва", new("Організація", 2));
                 Звіт.PDFColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія", 6));
                 Звіт.PDFColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", 5));
 
@@ -1063,6 +1099,25 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("Собівартість", new("Собівартість", 30, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
             }
 
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Рух", new("Рух"));
+                Звіт.ExcelColumnSettings.Add("Документ_Назва", new("Документ"));
+                Звіт.ExcelColumnSettings.Add("ПартіяТоварівКомпозит_Назва", new("Партія"));
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+                Звіт.ExcelColumnSettings.Add("Кількість", new("Кількість", "N"));
+                Звіт.ExcelColumnSettings.Add("Собівартість", new("Собівартість", "N"));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -1070,7 +1125,7 @@ ORDER BY
         }
 
         //Функція Для Колонки
-        //Викликається для кожної ячейки колонки
+        //Викликається для кожної клітинки
         void CellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
             CellRendererText cellText = (CellRendererText)cell;

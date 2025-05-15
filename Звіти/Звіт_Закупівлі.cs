@@ -508,7 +508,6 @@ ORDER BY " +
                 Звіт.PDFColumnSettings.Add("Організація_Назва", new("Організація", 2));
                 Звіт.PDFColumnSettings.Add("Склад_Назва", new("Склад"));
                 Звіт.PDFColumnSettings.Add("Контрагент_Назва", new("Контрагент", 2));
-                //Звіт.PDFColumnSettings.Add("Договір_Назва", new("Договір"));
                 Звіт.PDFColumnSettings.Add("Номенклатура_Назва", new("Номенклатура", 5));
 
                 if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
@@ -518,6 +517,23 @@ ORDER BY " +
                 Звіт.PDFColumnSettings.Add("Кількість", new("Кількість", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
                 Звіт.PDFColumnSettings.Add("Сума", new("Сума", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
                 Звіт.PDFColumnSettings.Add("Собівартість", new("Собівартість", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Період_Назва", new("Період"));
+                Звіт.ExcelColumnSettings.Add("Організація_Назва", new("Організація"));
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("Контрагент_Назва", new("Контрагент"));
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+                Звіт.ExcelColumnSettings.Add("Кількість", new("Кількість", "N"));
+                Звіт.ExcelColumnSettings.Add("Сума", new("Сума", "N"));
+                Звіт.ExcelColumnSettings.Add("Собівартість", new("Собівартість", "N"));
             }
 
             await Звіт.Select();

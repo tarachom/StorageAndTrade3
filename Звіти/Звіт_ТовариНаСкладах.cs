@@ -362,6 +362,21 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("ВНаявності", new("В наявності", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
             }
 
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+                Звіт.ExcelColumnSettings.Add("ВНаявності", new("В наявності", "N"));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -659,6 +674,25 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("КінцевийЗалишок", new("На кінець", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
             }
 
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+
+                Звіт.ExcelColumnSettings.Add("ПочатковийЗалишок", new("На початок", "N"));
+                Звіт.ExcelColumnSettings.Add("Прихід", new("Прихід", "N"));
+                Звіт.ExcelColumnSettings.Add("Розхід", new("Розхід", "N"));
+                Звіт.ExcelColumnSettings.Add("КінцевийЗалишок", new("На кінець", "N"));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -903,6 +937,24 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
 
                 Звіт.PDFColumnSettings.Add("ВНаявності", new("В наявності", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Рух", new("Рух"));
+                Звіт.ExcelColumnSettings.Add("Документ_Назва", new("Документ"));
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                if (Константи.Системні.ВестиОблікПоСеріяхНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("Серія_Номер", new("Серія"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+
+                Звіт.ExcelColumnSettings.Add("ВНаявності", new("В наявності", "N"));
             }
 
             await Звіт.Select();

@@ -332,6 +332,19 @@ ORDER BY
                 Звіт.PDFColumnSettings.Add("Сума", new("Сума", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
             }
 
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+                Звіт.ExcelColumnSettings.Add("Замовлено", new("Замовлено", "N"));
+                Звіт.ExcelColumnSettings.Add("Сума", new("Сума", "N"));
+            }
+
             await Звіт.Select();
 
             Звіт.FillTreeView();
@@ -563,6 +576,23 @@ ORDER BY period ASC
 
                 Звіт.PDFColumnSettings.Add("Замовлено", new("Замовлено", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
                 Звіт.PDFColumnSettings.Add("Сума", new("Сума", 40, ЗвітСторінка.TypePDFColumn.Constant, 1, ЗвітСторінка.ФункціяДляКолонкиБазоваДляЧисла));
+            }
+
+            //Excel
+            {
+                Звіт.ExcelColumnSettings.Add("Рух", new("Рух"));
+                Звіт.ExcelColumnSettings.Add("Документ_Назва", new("Документ"));
+                Звіт.ExcelColumnSettings.Add("ЗамовленняКлієнта_Назва", new("Замовлення клієнта"));
+                Звіт.ExcelColumnSettings.Add("Номенклатура_Назва", new("Номенклатура"));
+
+                if (Константи.Системні.ВестиОблікПоХарактеристикахНоменклатури_Const)
+                    Звіт.ExcelColumnSettings.Add("ХарактеристикаНоменклатури_Назва", new("Характеристика"));
+
+                Звіт.ExcelColumnSettings.Add("Склад_Назва", new("Склад"));
+                Звіт.ExcelColumnSettings.Add("ОдиницяВиміру_Назва", new("Пакування"));
+
+                Звіт.ExcelColumnSettings.Add("Замовлено", new("Замовлено", "N"));
+                Звіт.ExcelColumnSettings.Add("Сума", new("Сума", "N"));
             }
 
             await Звіт.Select();
