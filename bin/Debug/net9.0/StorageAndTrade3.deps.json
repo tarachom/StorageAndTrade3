@@ -6,14 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "StorageAndTrade3/3.1.0.6": {
+      "StorageAndTrade3/3.1.0.7": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.5",
-          "Configurator3": "3.1.0.5",
+          "AccountingSoftware": "3.1.0.7",
+          "Configurator3": "3.1.0.7",
           "GtkSharp": "3.24.24.117-develop",
-          "InterfaceGtk": "3.1.0.6",
+          "InterfaceGtk": "3.1.0.7",
           "NPOI": "2.7.3",
-          "QuestPDF": "2025.1.7"
+          "QuestPDF": "2025.4.4"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -213,11 +213,11 @@
           }
         }
       },
-      "QuestPDF/2025.1.7": {
+      "QuestPDF/2025.4.4": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2025.1.7.0",
-            "fileVersion": "2025.1.7.0"
+            "assemblyVersion": "2025.4.4.0",
+            "fileVersion": "2025.4.4.0"
           }
         },
         "runtimeTargets": {
@@ -434,47 +434,47 @@
           "Microsoft.NETCore.Platforms": "5.0.0"
         }
       },
-      "AccountingSoftware/3.1.0.5": {
+      "AccountingSoftware/3.1.0.7": {
         "dependencies": {
           "Npgsql": "9.0.3"
         },
         "runtime": {
           "AccountingSoftware.dll": {
-            "assemblyVersion": "3.1.0.5",
-            "fileVersion": "3.1.0.5"
+            "assemblyVersion": "3.1.0.7",
+            "fileVersion": "3.1.0.7"
           }
         }
       },
-      "Configurator3/3.1.0.5": {
+      "Configurator3/3.1.0.7": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.5",
+          "AccountingSoftware": "3.1.0.7",
           "GtkSharp": "3.24.24.117-develop",
           "GtkSourceSharp": "3.24.24.117-develop",
-          "InterfaceGtk": "3.1.0.6"
+          "InterfaceGtk": "3.1.0.7"
         },
         "runtime": {
           "Configurator3.dll": {
-            "assemblyVersion": "3.1.0.5",
-            "fileVersion": "3.1.0.5"
+            "assemblyVersion": "3.1.0.7",
+            "fileVersion": "3.1.0.7"
           }
         }
       },
-      "InterfaceGtk/3.1.0.6": {
+      "InterfaceGtk/3.1.0.7": {
         "dependencies": {
-          "AccountingSoftware": "3.1.0.5",
+          "AccountingSoftware": "3.1.0.7",
           "GtkSharp": "3.24.24.117-develop"
         },
         "runtime": {
           "InterfaceGtk.dll": {
-            "assemblyVersion": "3.1.0.6",
-            "fileVersion": "3.1.0.6"
+            "assemblyVersion": "3.1.0.7",
+            "fileVersion": "3.1.0.7"
           }
         }
       }
     }
   },
   "libraries": {
-    "StorageAndTrade3/3.1.0.6": {
+    "StorageAndTrade3/3.1.0.7": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -605,12 +605,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2025.1.7": {
+    "QuestPDF/2025.4.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-dHkeKzFb9l3Znkqf6nK34/Z+9ML3pf54v92t3uekLoV3DuYn7//GIChzZa0TeYlH7uTBADwQZ8ixXlhel7BLEQ==",
-      "path": "questpdf/2025.1.7",
-      "hashPath": "questpdf.2025.1.7.nupkg.sha512"
+      "sha512": "sha512-ZHPAcemDniL/eJN6Kz4YmO5Mg7jhHuIUy77eCcYFP8Yf8q0nL5BSOkKb3xSPYC/mJD0ypR+X85THFaCwBZe3YQ==",
+      "path": "questpdf/2025.4.4",
+      "hashPath": "questpdf.2025.4.4.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
@@ -661,17 +661,17 @@
       "path": "system.text.encoding.codepages/5.0.0",
       "hashPath": "system.text.encoding.codepages.5.0.0.nupkg.sha512"
     },
-    "AccountingSoftware/3.1.0.5": {
+    "AccountingSoftware/3.1.0.7": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Configurator3/3.1.0.5": {
+    "Configurator3/3.1.0.7": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "InterfaceGtk/3.1.0.6": {
+    "InterfaceGtk/3.1.0.7": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
