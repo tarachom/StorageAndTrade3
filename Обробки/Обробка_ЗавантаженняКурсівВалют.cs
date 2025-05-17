@@ -22,8 +22,6 @@ namespace StorageAndTrade
 
         Button bDownload;
         Button bStop;
-        ScrolledWindow scrollMessage;
-        Box vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
 
         CheckButton ЗавантаженняНаВказануДату = new CheckButton("Завантажити на дату:");
@@ -57,12 +55,6 @@ namespace StorageAndTrade
 
             ЗавантаженняНаВказануДату.Activated += OnЗавантаженняНаВказануДату_Activated;
 
-            scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollMessage.Add(vBoxMessage = new Box(Orientation.Vertical, 0));
-
-            PackStart(scrollMessage, true, true, 0);
-
             ShowAll();
         }
 
@@ -80,7 +72,6 @@ namespace StorageAndTrade
         async ValueTask DownloadExCurr()
         {
             ButtonSensitive(false);
-            ClearMessage();
 
             bool isOK = false;
 
@@ -98,7 +89,7 @@ namespace StorageAndTrade
                 link += "?date=" + ДатаКурсу.Year.ToString() + ДатаКурсу.Month.ToString("D2") + ДатаКурсу.Day.ToString("D2");
             }
 
-            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу з курсами валют з офіційного сайту: bank.gov.ua");
+            Лог.CreateMessage($"Завантаження ХМЛ файлу з курсами валют з офіційного сайту: bank.gov.ua", LogMessage.TypeMessage.Info);
 
             XPathDocument xPathDoc;
             XPathNavigator? xPathDocNavigator = null;
@@ -110,12 +101,12 @@ namespace StorageAndTrade
 
                 isOK = true;
 
-                CreateMessage(TypeMessage.Ok, "OK");
+                Лог.CreateMessage("OK", LogMessage.TypeMessage.Ok);
                 await ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("OK", link);
             }
             catch (Exception ex)
             {
-                CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
+                Лог.CreateMessage("Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message, LogMessage.TypeMessage.Error);
                 await ФункціїДляФоновихЗавдань.ДодатиЗаписВІсторіюЗавантаженняКурсуВалют("Помилка", link, ex.Message);
             }
 
@@ -139,7 +130,7 @@ namespace StorageAndTrade
 
                     if (ДатаКурсу != ПоточнаДатаКурсу)
                     {
-                        CreateMessage(TypeMessage.Ok, $"Курс на дату: {ДатаКурсу}");
+                        Лог.CreateMessage($"Курс на дату: {ДатаКурсу}", LogMessage.TypeMessage.Ok);
 
                         ПоточнаДатаКурсу = ДатаКурсу;
                     }
@@ -156,7 +147,7 @@ namespace StorageAndTrade
 
                         валюти_Pointer = валюти_Objest.GetDirectoryPointer();
 
-                        CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Валюти: {НазваВалюти}, код {Код_R030}");
+                        Лог.CreateMessage($"Додано новий елемент довідника Валюти: {НазваВалюти}, код {Код_R030}", LogMessage.TypeMessage.Ok);
                     }
 
                     string query = $@"
@@ -188,7 +179,7 @@ LIMIT 1
                         курсиВалют_Objest.New();
                         await курсиВалют_Objest.Save();
 
-                        CreateMessage(TypeMessage.Ok, $"Додано новий курс валюти: {НазваВалюти} - курс {Курс}");
+                        Лог.CreateMessage($"Додано новий курс валюти: {НазваВалюти} - курс {Курс}", LogMessage.TypeMessage.Ok);
                     }
                     else
                     {
@@ -200,7 +191,7 @@ LIMIT 1
                             курсиВалют_Objest.Курс = Курс;
                             await курсиВалют_Objest.Save();
 
-                            CreateMessage(TypeMessage.Ok, $"Перезаписано курс валюти: {НазваВалюти} - курс {Курс}");
+                            Лог.CreateMessage($"Перезаписано курс валюти: {НазваВалюти} - курс {Курс}", LogMessage.TypeMessage.Ok);
                         }
                     }
                 }
@@ -210,56 +201,17 @@ LIMIT 1
 
             CallBack_EndBackgroundWork?.Invoke();
 
-            CreateMessage(TypeMessage.None, "\n\n\nГотово!\n\n\n");
+            Лог.CreateEmptyMsg();
+            Лог.CreateMessage("Готово!");
+            
             await Task.Delay(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n\n");
+            Лог.CreateEmptyMsg();
         }
 
         void ButtonSensitive(bool sensitive)
         {
             bDownload.Sensitive = sensitive;
             bStop.Sensitive = !sensitive;
-        }
-
-        void CreateMessage(TypeMessage typeMsg, string message)
-        {
-            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
-            vBoxMessage.PackStart(hBoxInfo, false, false, 2);
-
-            switch (typeMsg)
-            {
-                case TypeMessage.Ok:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Error:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Info:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.None:
-                    {
-                        hBoxInfo.PackStart(new Label(""), false, false, 5);
-                        break;
-                    }
-            }
-
-            hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
-            hBoxInfo.ShowAll();
-
-            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-        }
-
-        void ClearMessage()
-        {
-            foreach (Widget Child in vBoxMessage.Children)
-                vBoxMessage.Remove(Child);
         }
 
         void OnStopClick(object? sender, EventArgs args)

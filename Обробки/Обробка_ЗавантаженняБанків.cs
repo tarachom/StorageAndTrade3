@@ -22,8 +22,6 @@ namespace StorageAndTrade
 
         Button bDownload;
         Button bStop;
-        ScrolledWindow scrollMessage;
-        Box vBoxMessage;
         CancellationTokenSource? CancellationTokenThread { get; set; }
 
         enum TypeMessage
@@ -36,7 +34,7 @@ namespace StorageAndTrade
 
         #endregion
 
-        public Обробка_ЗавантаженняБанків() 
+        public Обробка_ЗавантаженняБанків()
         {
             bDownload = new Button("Завантаження");
             bDownload.Clicked += OnDownload;
@@ -47,12 +45,6 @@ namespace StorageAndTrade
             bStop.Clicked += OnStopClick;
 
             HBoxTop.PackStart(bStop, false, false, 10);
-
-            scrollMessage = new ScrolledWindow() { ShadowType = ShadowType.In };
-            scrollMessage.SetPolicy(PolicyType.Automatic, PolicyType.Automatic);
-            scrollMessage.Add(vBoxMessage = new Box(Orientation.Vertical, 0));
-
-            PackStart(scrollMessage, true, true, 0);
 
             ShowAll();
         }
@@ -71,7 +63,6 @@ namespace StorageAndTrade
         async ValueTask DownloadExCurr()
         {
             ButtonSensitive(false);
-            ClearMessage();
 
             bool isOK = false;
 
@@ -83,8 +74,8 @@ namespace StorageAndTrade
                 link = "https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank";
             }
 
-            CreateMessage(TypeMessage.Info, $"Завантаження ХМЛ файлу");
-            CreateMessage(TypeMessage.None, " --> " + link);
+            Лог.CreateMessage($"Завантаження ХМЛ файлу", LogMessage.TypeMessage.Info);
+            Лог.CreateMessage(" --> " + link, LogMessage.TypeMessage.None);
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             Encoding.GetEncoding("windows-1251");
@@ -98,11 +89,11 @@ namespace StorageAndTrade
 
                 isOK = true;
 
-                CreateMessage(TypeMessage.Ok, "OK");
+                Лог.CreateMessage("OK", LogMessage.TypeMessage.Ok);
             }
             catch (Exception ex)
             {
-                CreateMessage(TypeMessage.Ok, "Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message);
+                Лог.CreateMessage("Помилка завантаження або аналізу ХМЛ файлу: " + ex.Message, LogMessage.TypeMessage.Ok);
             }
 
             if (isOK)
@@ -131,7 +122,7 @@ namespace StorageAndTrade
 
                     if (string.IsNullOrEmpty(КодМФО))
                     {
-                        CreateMessage(TypeMessage.Error, "Відсутній КодМФО");
+                        Лог.CreateMessage("Відсутній КодМФО", LogMessage.TypeMessage.Error);
                         break;
                     }
 
@@ -171,12 +162,12 @@ namespace StorageAndTrade
                         await банки_Objest.New();
                         банки_Objest.КодМФО = КодМФО;
 
-                        CreateMessage(TypeMessage.Ok, $"Додано новий елемент довідника Банки: {Назва}");
+                        Лог.CreateMessage($"Додано новий елемент довідника Банки: {Назва}", LogMessage.TypeMessage.Ok);
                     }
                     else
                     {
                         банки_Objest = await банки_Pointer.GetDirectoryObject();
-                        CreateMessage(TypeMessage.Info, $"Знайдено банк {Назва} з кодом МФО: {КодМФО}");
+                        Лог.CreateMessage($"Знайдено банк {Назва} з кодом МФО: {КодМФО}", LogMessage.TypeMessage.Info);
                     }
 
                     if (банки_Objest != null)
@@ -219,56 +210,17 @@ namespace StorageAndTrade
 
             ButtonSensitive(true);
 
-            CreateMessage(TypeMessage.None, "\n\n\nГотово!\n\n\n");
+            Лог.CreateEmptyMsg();
+            Лог.CreateMessage("Готово!");
+
             await Task.Delay(1000);
-            CreateMessage(TypeMessage.None, "\n\n\n\n");
+            Лог.CreateEmptyMsg();
         }
 
         void ButtonSensitive(bool sensitive)
         {
             bDownload.Sensitive = sensitive;
             bStop.Sensitive = !sensitive;
-        }
-
-        void CreateMessage(TypeMessage typeMsg, string message)
-        {
-            Box hBoxInfo = new Box(Orientation.Horizontal, 0);
-            vBoxMessage.PackStart(hBoxInfo, false, false, 2);
-
-            switch (typeMsg)
-            {
-                case TypeMessage.Ok:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/ok.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Error:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/error.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.Info:
-                    {
-                        hBoxInfo.PackStart(new Image(AppContext.BaseDirectory + "images/16/info.png"), false, false, 5);
-                        break;
-                    }
-                case TypeMessage.None:
-                    {
-                        hBoxInfo.PackStart(new Label(""), false, false, 5);
-                        break;
-                    }
-            }
-
-            hBoxInfo.PackStart(new Label(message) { Wrap = true }, false, false, 0);
-            hBoxInfo.ShowAll();
-
-            scrollMessage.Vadjustment.Value = scrollMessage.Vadjustment.Upper;
-        }
-
-        void ClearMessage()
-        {
-            foreach (Widget Child in vBoxMessage.Children)
-                vBoxMessage.Remove(Child);
         }
 
         void OnStopClick(object? sender, EventArgs args)

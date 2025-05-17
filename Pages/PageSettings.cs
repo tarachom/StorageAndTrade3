@@ -100,10 +100,6 @@ namespace StorageAndTrade
 
             CreateJournalBlock(vBox);
 
-            vBox.PackStart(new Separator(Orientation.Horizontal), false, false, 10);
-
-            CreateLinkBlock(vBox);
-
             hPaned.Pack1(vBox, false, false);
         }
 
@@ -249,32 +245,6 @@ namespace StorageAndTrade
             AddCaptionAndControl(vBox, new Label("Період для журналів документів:"), ОсновнийТипПеріоду_ДляЖурналівДокументів);
 
             vBoxTop.PackStart(expander, false, false, 10);
-        }
-
-        void CreateLinkBlock(Box vBoxTop)
-        {
-            Box vBox = new Box(Orientation.Vertical, 0);
-
-            Expander expander = new Expander("Додатково") { Expanded = true };
-            expander.Add(vBox);
-
-            AddLink(vBox, "Заповнення початковими даними", (object? sender, EventArgs args) =>
-            {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Початкове заповнення", () =>
-                {
-                    return new Обробка_ПочатковеЗаповнення();
-                });
-            });
-
-            AddLink(vBox, "Завантаження курсів валют НБУ", (object? sender, EventArgs args) =>
-            {
-                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook,"Завантаження курсів валют НБУ", () =>
-                {
-                    return new Обробка_ЗавантаженняКурсівВалют();
-                });
-            });
-
-            vBoxTop.PackStart(expander, false, false, 0);
         }
 
         void AddPointerControl(Box vBox, Widget wgPointerControl)
