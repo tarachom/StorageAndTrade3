@@ -1096,7 +1096,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                 
             await base.BaseBeginTransaction();
             <xsl:if test="VersionsHistory = '1'">
-            await IsExistOwnerVersion();
+            await BeforeSaveOwnerVersion();
             </xsl:if>
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -1729,7 +1729,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
 
             await base.BaseBeginTransaction();
             <xsl:if test="VersionsHistory = '1'">
-            await IsExistOwnerVersion();
+            await BeforeSaveOwnerVersion();
             </xsl:if>
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
