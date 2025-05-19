@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>17.05.2025 19:19:08</DateTimeSave>
+  <DateTimeSave>19.05.2025 16:58:23</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -1150,7 +1150,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <Table>tab_a01</Table>
       <Desc>Юридичні особи та підприємці нашої організації</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -1299,7 +1299,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Контакти</Name>
           <FullName>Контакти</FullName>
           <Table>tab_a02</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -1676,7 +1676,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
       <Table>tab_a03</Table>
       <Desc>Товари та послуги</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>HierarchyInAnotherDirectory</Type>
       <PointerFolders>Довідники.Номенклатура_Папки</PointerFolders>
       <PredefinedFields>
@@ -1838,7 +1838,7 @@ https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange</Desc>
           <Name>Файли</Name>
           <FullName>Файли</FullName>
           <Table>tab_b19</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -3031,7 +3031,7 @@ namespace StorageAndTrade
       <Table>tab_a04</Table>
       <Desc>Виробники</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -3184,7 +3184,7 @@ namespace StorageAndTrade
       <Table>tab_a05</Table>
       <Desc>Види номенклатури</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -3403,7 +3403,7 @@ namespace StorageAndTrade
       <Table>tab_a06</Table>
       <Desc>Одиниці виміру</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -3619,7 +3619,7 @@ namespace StorageAndTrade
       <Table>tab_a07</Table>
       <Desc>Валюти</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -3905,7 +3905,7 @@ namespace StorageAndTrade
       <Table>tab_a08</Table>
       <Desc>Контрагенти</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>HierarchyInAnotherDirectory</Type>
       <PointerFolders>Довідники.Контрагенти_Папки</PointerFolders>
       <PredefinedFields>
@@ -4043,7 +4043,7 @@ namespace StorageAndTrade
           <Name>Контакти</Name>
           <FullName>Контакти</FullName>
           <Table>tab_a09</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -4246,7 +4246,7 @@ namespace StorageAndTrade
           <Name>Файли</Name>
           <FullName>Файли</FullName>
           <Table>tab_b20</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -4450,7 +4450,7 @@ namespace StorageAndTrade
       <Table>tab_a10</Table>
       <Desc>Склади</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>HierarchyInAnotherDirectory</Type>
       <PointerFolders>Довідники.Склади_Папки</PointerFolders>
       <PredefinedFields>
@@ -4588,7 +4588,7 @@ namespace StorageAndTrade
           <Name>Контакти</Name>
           <FullName>Контакти</FullName>
           <Table>tab_a11</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -5031,7 +5031,7 @@ namespace StorageAndTrade
       <Table>tab_a12</Table>
       <Desc>Види цін</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -5235,7 +5235,7 @@ namespace StorageAndTrade
       <Table>tab_a13</Table>
       <Desc>Види цін постачальників</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -5412,7 +5412,7 @@ namespace StorageAndTrade
       <Table>tab_a14</Table>
       <Desc>Користувачі</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -5683,7 +5683,7 @@ namespace StorageAndTrade
       <Table>tab_a16</Table>
       <Desc>Фізичні особи</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -5771,7 +5771,7 @@ namespace StorageAndTrade
           <Name>Контакти</Name>
           <FullName>Контакти</FullName>
           <Table>tab_a17</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -6109,7 +6109,7 @@ namespace StorageAndTrade
       <Table>tab_a18</Table>
       <Desc>Структура підприємства</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -6246,7 +6246,7 @@ namespace StorageAndTrade
       <Table>tab_a19</Table>
       <Desc>Країни світу</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -6371,7 +6371,7 @@ namespace StorageAndTrade
       <Table>tab_a20</Table>
       <Desc>Файли</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -6590,7 +6590,7 @@ namespace StorageAndTrade
       <Table>tab_a21</Table>
       <Desc>Характеристики номенклатури</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <DirectoryOwner>Довідники.Номенклатура</DirectoryOwner>
       <PointerFieldOwner>Номенклатура</PointerFieldOwner>
@@ -6892,7 +6892,7 @@ FROM
       <Table>tab_a22</Table>
       <Desc>Номенклатура папки</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Hierarchical</Type>
       <ParentField>Родич</ParentField>
       <IconTree>Folder</IconTree>
@@ -7105,7 +7105,7 @@ FROM
       <Table>tab_a23</Table>
       <Desc>Контрагенти папки</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Hierarchical</Type>
       <ParentField>Родич</ParentField>
       <IconTree>Folder</IconTree>
@@ -7291,7 +7291,7 @@ FROM
       <Table>tab_a24</Table>
       <Desc>Склади папки</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Hierarchical</Type>
       <ParentField>Родич</ParentField>
       <IconTree>Folder</IconTree>
@@ -7477,7 +7477,7 @@ FROM
       <Table>tab_a26</Table>
       <Desc>Каси</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -7703,7 +7703,7 @@ WHERE
       <Table>tab_a27</Table>
       <Desc>Банківські рахунки організацій</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -7985,7 +7985,7 @@ WHERE
       <Desc>Договори контрагентів. 
 Договори підпорядковані контрагенту</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <DirectoryOwner>Довідники.Контрагенти</DirectoryOwner>
       <PointerFieldOwner>Контрагент</PointerFieldOwner>
@@ -8383,7 +8383,7 @@ WHERE
       <Table>tab_a29</Table>
       <Desc>Банківські рахунки контрагентів</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -8640,7 +8640,7 @@ WHERE
       <Table>tab_a45</Table>
       <Desc>Стаття руху коштів</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -8866,7 +8866,7 @@ WHERE
       <FullName>Серії</FullName>
       <Table>tab_b02</Table>
       <AutoNum>0</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -8990,7 +8990,7 @@ WHERE
       <Table>tab_b06</Table>
       <Desc>Композитний тип для регістру ПартіїТоварів</Desc>
       <AutoNum>0</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -9241,7 +9241,7 @@ FROM
       <FullName>Види запасів</FullName>
       <Table>tab_b13</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -9510,7 +9510,7 @@ FROM
       <FullName>Банки</FullName>
       <Table>tab_a39</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -10426,7 +10426,7 @@ FROM
 
 Підпорядковується складу</Desc>
       <AutoNum>0</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <DirectoryOwner>Довідники.Склади</DirectoryOwner>
       <PointerFieldOwner>Склад</PointerFieldOwner>
@@ -10577,7 +10577,7 @@ FROM
 
 Підпорядковується приміщенню</Desc>
       <AutoNum>0</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>HierarchyInAnotherDirectory</Type>
       <PointerFolders>Довідники.СкладськіКомірки_Папки</PointerFolders>
       <DirectoryOwner>Довідники.СкладськіПриміщення</DirectoryOwner>
@@ -11008,7 +11008,7 @@ FROM
 --------------------------
 Не використовується</Desc>
       <AutoNum>0</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -11119,7 +11119,7 @@ FROM
       <Table>tab_a75</Table>
       <Desc>Опис комірки по параметрах</Desc>
       <AutoNum>0</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -11398,7 +11398,7 @@ FROM
       <FullName>Складські комірки папки</FullName>
       <Table>tab_a76</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Hierarchical</Type>
       <ParentField>Родич</ParentField>
       <IconTree>Folder</IconTree>
@@ -11614,7 +11614,7 @@ FROM
       <Table>tab_a41</Table>
       <Desc>Блокнот для записів</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <PredefinedFields>
         <PredefinedField>
@@ -11838,7 +11838,7 @@ FROM
       <Table>tab_b04</Table>
       <Desc>Збережені звіти користувача</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <Type>Normal</Type>
       <DirectoryOwner>Довідники.Користувачі</DirectoryOwner>
       <PointerFieldOwner>Користувач</PointerFieldOwner>
@@ -12782,7 +12782,7 @@ FROM
       <FullName>Замовлення постачальнику</FullName>
       <Table>tab_a25</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>1</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -13144,7 +13144,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a30</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -13847,7 +13847,7 @@ FROM
       <FullName>Поступлення товарів та послуг</FullName>
       <Table>tab_a32</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>1</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -14278,7 +14278,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a33</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -15277,7 +15277,7 @@ FROM
       <FullName>Замовлення клієнта</FullName>
       <Table>tab_a34</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>1</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -15682,7 +15682,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a35</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -16441,7 +16441,7 @@ FROM
       <FullName>Реалізація товарів та послуг</FullName>
       <Table>tab_a36</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>1</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -16859,7 +16859,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a37</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -17389,7 +17389,7 @@ FROM
       <Table>tab_a42</Table>
       <Desc>Встановлення цін для номенклатури</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -17551,7 +17551,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a43</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -17969,7 +17969,7 @@ FROM
       <FullName>Прихідний касовий ордер</FullName>
       <Table>tab_a44</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -18225,7 +18225,7 @@ FROM
           <Name>РозшифруванняПлатежу</Name>
           <FullName>Розшифрування платежу</FullName>
           <Table>tab_a47</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -18689,7 +18689,7 @@ FROM
       <FullName>Розхідний касовий ордер</FullName>
       <Table>tab_a48</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -18969,7 +18969,7 @@ FROM
           <Name>РозшифруванняПлатежу</Name>
           <FullName>Розшифрування платежу</FullName>
           <Table>tab_a49</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -19241,7 +19241,7 @@ FROM
       <Table>tab_a31</Table>
       <Desc>Переміщення товарів між складами</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -19533,7 +19533,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a50</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -20111,7 +20111,7 @@ FROM
       <FullName>Повернення товарів постачальнику</FullName>
       <Table>tab_a51</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -20427,7 +20427,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a52</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -21098,7 +21098,7 @@ FROM
       <FullName>Повернення товарів від клієнта</FullName>
       <Table>tab_a53</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -21368,7 +21368,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a54</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -22013,7 +22013,7 @@ FROM
       <FullName>Акт виконаних робіт</FullName>
       <Table>tab_a81</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>1</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -22270,7 +22270,7 @@ FROM
           <Name>Послуги</Name>
           <FullName>Послуги</FullName>
           <Table>tab_a82</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -22796,7 +22796,7 @@ FROM
       <FullName>Введення залишків</FullName>
       <Table>tab_a83</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -23006,7 +23006,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a84</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -23235,7 +23235,7 @@ FROM
           <Name>Каси</Name>
           <FullName>Каси</FullName>
           <Table>tab_a85</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -23339,7 +23339,7 @@ FROM
           <Name>БанківськіРахунки</Name>
           <FullName>Банківські рахунки</FullName>
           <Table>tab_a86</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -23443,7 +23443,7 @@ FROM
           <Name>РозрахункиЗКонтрагентами</Name>
           <FullName>Розрахунки з контрагентами</FullName>
           <Table>tab_a87</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -23923,7 +23923,7 @@ FROM
       <FullName>Надлишки товарів</FullName>
       <Table>tab_a88</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -24085,7 +24085,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a89</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -24277,7 +24277,7 @@ FROM
       <FullName>Пересортиця товарів</FullName>
       <Table>tab_a90</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -24439,7 +24439,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a91</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -24632,7 +24632,7 @@ FROM
       <FullName>Перерахунок товарів</FullName>
       <Table>tab_a92</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -24806,7 +24806,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a93</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -25291,7 +25291,7 @@ FROM
       <FullName>Псування товарів</FullName>
       <Table>tab_a94</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -25476,7 +25476,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a95</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -25994,7 +25994,7 @@ FROM
       <FullName>Внутрішнє споживання товарів</FullName>
       <Table>tab_b07</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -26191,7 +26191,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b08</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -26733,7 +26733,7 @@ FROM
       <Table>tab_b10</Table>
       <Desc>Рахунок фактура</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>1</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -27026,7 +27026,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b11</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -27696,7 +27696,7 @@ FROM
       <Table>tab_a64</Table>
       <Desc>Розміщення товарів по комірках на складі</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -27874,7 +27874,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_a68</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -28339,7 +28339,7 @@ FROM
       <Table>tab_b09</Table>
       <Desc>Розміщення товарів по комірках на складі</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -28505,7 +28505,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b26</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -28981,7 +28981,7 @@ FROM
       <Table>tab_b27</Table>
       <Desc>Збірка товарів по комірках на складі</Desc>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -29159,7 +29159,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b28</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -29623,7 +29623,7 @@ FROM
       <FullName>Розміщення номенклатури по коміркам</FullName>
       <Table>tab_b29</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -29785,7 +29785,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b32</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -30151,7 +30151,7 @@ FROM
       <FullName>Корегування боргу контрагентів</FullName>
       <Table>tab_a65</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -30301,7 +30301,7 @@ FROM
           <Name>РозрахункиЗКонтрагентами</Name>
           <FullName>Розрахунки з контрагентами</FullName>
           <Table>tab_b12</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -30665,7 +30665,7 @@ FROM
       <FullName>Закриття замовлення клієнта</FullName>
       <Table>tab_a96</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -30913,7 +30913,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b39</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -31501,7 +31501,7 @@ FROM
       <FullName>Закриття рахунку фактури</FullName>
       <Table>tab_b41</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -31749,7 +31749,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b42</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
@@ -32305,7 +32305,7 @@ FROM
       <FullName>Закриття замовлення постачальнику</FullName>
       <Table>tab_b44</Table>
       <AutoNum>1</AutoNum>
-      <VersionsHistory>0</VersionsHistory>
+      <VersionsHistory>1</VersionsHistory>
       <ExportXml>0</ExportXml>
       <PredefinedFields>
         <PredefinedField>
@@ -32553,7 +32553,7 @@ FROM
           <Name>Товари</Name>
           <FullName>Товари</FullName>
           <Table>tab_b47</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>

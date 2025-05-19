@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 17.05.2025 19:19:08
+ * Дата конфігурації: 19.05.2025 16:58:23
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -1870,7 +1870,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Організації_Objest() : base(Config.Kernel, "tab_a01", Організації_Const.TYPE,
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ], true)
         {
             
                 //Табличні частини
@@ -2102,7 +2102,7 @@ namespace GeneratedCode.Довідники
     public class Організації_Контакти_TablePart : DirectoryTablePart
     {
         public Організації_Контакти_TablePart(Організації_Objest owner) : base(Config.Kernel, "tab_a02",
-             ["col_a9", "col_a4", "col_a5", "col_a1", "col_a6", "col_a2", "col_a3", "col_a8", ])
+             ["col_a9", "col_a4", "col_a5", "col_a1", "col_a6", "col_a2", "col_a3", "col_a8", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -2170,8 +2170,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a01"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
                 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -2256,7 +2261,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Номенклатура_Objest() : base(Config.Kernel, "tab_a03", Номенклатура_Const.TYPE,
-             ["col_b1", "col_b2", "col_b4", "col_a1", "col_b3", "col_b5", "col_a2", "col_a3", "col_a4", "col_a5", "col_a7", ])
+             ["col_b1", "col_b2", "col_b4", "col_a1", "col_b3", "col_b5", "col_a2", "col_a3", "col_a4", "col_a5", "col_a7", ], true)
         {
             
                 //Табличні частини
@@ -2498,7 +2503,7 @@ namespace GeneratedCode.Довідники
     public class Номенклатура_Файли_TablePart : DirectoryTablePart
     {
         public Номенклатура_Файли_TablePart(Номенклатура_Objest owner) : base(Config.Kernel, "tab_b19",
-             ["col_a1", "col_a3", ])
+             ["col_a1", "col_a3", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -2562,8 +2567,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a03"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
                 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -2627,7 +2637,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Виробники_Objest() : base(Config.Kernel, "tab_a04", Виробники_Const.TYPE,
-             ["col_b6", "col_b7", ])
+             ["col_b6", "col_b7", ], true)
         {
             
         }
@@ -2828,7 +2838,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ВидиНоменклатури_Objest() : base(Config.Kernel, "tab_a05", ВидиНоменклатури_Const.TYPE,
-             ["col_b8", "col_b9", "col_a2", "col_a1", "col_a4", ])
+             ["col_b8", "col_b9", "col_a2", "col_a1", "col_a4", ], true)
         {
             
         }
@@ -3040,7 +3050,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ПакуванняОдиниціВиміру_Objest() : base(Config.Kernel, "tab_a06", ПакуванняОдиниціВиміру_Const.TYPE,
-             ["col_c1", "col_c2", "col_c3", "col_c4", ])
+             ["col_c1", "col_c2", "col_c3", "col_c4", ], true)
         {
             
         }
@@ -3251,7 +3261,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Валюти_Objest() : base(Config.Kernel, "tab_a07", Валюти_Const.TYPE,
-             ["col_c5", "col_a2", "col_c6", "col_a1", "col_a3", ])
+             ["col_c5", "col_a2", "col_c6", "col_a1", "col_a3", ], true)
         {
             
         }
@@ -3474,7 +3484,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Контрагенти_Objest() : base(Config.Kernel, "tab_a08", Контрагенти_Const.TYPE,
-             ["col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ])
+             ["col_c7", "col_c8", "col_c9", "col_d1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ], true)
         {
             
                 //Табличні частини
@@ -3715,7 +3725,7 @@ namespace GeneratedCode.Довідники
     public class Контрагенти_Контакти_TablePart : DirectoryTablePart
     {
         public Контрагенти_Контакти_TablePart(Контрагенти_Objest owner) : base(Config.Kernel, "tab_a09",
-             ["col_d2", "col_d8", "col_d7", "col_d3", "col_d5", "col_d4", "col_d6", "col_a1", ])
+             ["col_d2", "col_d8", "col_d7", "col_d3", "col_d5", "col_d4", "col_d6", "col_a1", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -3783,8 +3793,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
                 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -3841,7 +3856,7 @@ namespace GeneratedCode.Довідники
     public class Контрагенти_Файли_TablePart : DirectoryTablePart
     {
         public Контрагенти_Файли_TablePart(Контрагенти_Objest owner) : base(Config.Kernel, "tab_b20",
-             ["col_a1", ])
+             ["col_a1", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -3903,8 +3918,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
                 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -3973,7 +3993,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Склади_Objest() : base(Config.Kernel, "tab_a10", Склади_Const.TYPE,
-             ["col_d9", "col_e1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ])
+             ["col_d9", "col_e1", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ], true)
         {
             
                 //Табличні частини
@@ -4201,7 +4221,7 @@ namespace GeneratedCode.Довідники
     public class Склади_Контакти_TablePart : DirectoryTablePart
     {
         public Склади_Контакти_TablePart(Склади_Objest owner) : base(Config.Kernel, "tab_a11",
-             ["col_e2", "col_e8", "col_e7", "col_e3", "col_e5", "col_e4", "col_e6", "col_a1", ])
+             ["col_e2", "col_e8", "col_e7", "col_e3", "col_e5", "col_e4", "col_e6", "col_a1", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -4269,8 +4289,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a10"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
                 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -4347,7 +4372,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ВидиЦін_Objest() : base(Config.Kernel, "tab_a12", ВидиЦін_Const.TYPE,
-             ["col_e9", "col_f1", "col_f2", ])
+             ["col_e9", "col_f1", "col_f2", ], true)
         {
             
         }
@@ -4550,7 +4575,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ВидиЦінПостачальників_Objest() : base(Config.Kernel, "tab_a13", ВидиЦінПостачальників_Const.TYPE,
-             ["col_f3", "col_f4", "col_f5", ])
+             ["col_f3", "col_f4", "col_f5", ], true)
         {
             
         }
@@ -4755,7 +4780,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Користувачі_Objest() : base(Config.Kernel, "tab_a14", Користувачі_Const.TYPE,
-             ["col_f6", "col_f7", "col_a1", "col_g6", "col_a2", ])
+             ["col_f6", "col_f7", "col_a1", "col_g6", "col_a2", ], true)
         {
             
                 //Табличні частини
@@ -5111,7 +5136,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ФізичніОсоби_Objest() : base(Config.Kernel, "tab_a16", ФізичніОсоби_Const.TYPE,
-             ["col_g7", "col_g8", "col_g9", "col_a1", "col_a2", ])
+             ["col_g7", "col_g8", "col_g9", "col_a1", "col_a2", ], true)
         {
             
                 //Табличні частини
@@ -5323,7 +5348,7 @@ namespace GeneratedCode.Довідники
     public class ФізичніОсоби_Контакти_TablePart : DirectoryTablePart
     {
         public ФізичніОсоби_Контакти_TablePart(ФізичніОсоби_Objest owner) : base(Config.Kernel, "tab_a17",
-             ["col_h1", "col_h7", "col_h6", "col_h2", "col_h3", "col_h4", "col_h5", "col_a1", ])
+             ["col_h1", "col_h7", "col_h6", "col_h2", "col_h3", "col_h4", "col_h5", "col_a1", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -5391,8 +5416,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a16"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
                 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -5469,7 +5499,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public СтруктураПідприємства_Objest() : base(Config.Kernel, "tab_a18", СтруктураПідприємства_Const.TYPE,
-             ["col_h8", "col_h9", "col_i1", ])
+             ["col_h8", "col_h9", "col_i1", ], true)
         {
             
         }
@@ -5671,7 +5701,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public КраїниСвіту_Objest() : base(Config.Kernel, "tab_a19", КраїниСвіту_Const.TYPE,
-             ["col_i2", "col_i3", ])
+             ["col_i2", "col_i3", ], true)
         {
             
         }
@@ -5873,7 +5903,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Файли_Objest() : base(Config.Kernel, "tab_a20", Файли_Const.TYPE,
-             ["col_i6", "col_i5", "col_a2", "col_a1", "col_a3", "col_a4", ])
+             ["col_i6", "col_i5", "col_a2", "col_a1", "col_a3", "col_a4", ], true)
         {
             
         }
@@ -6089,7 +6119,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ХарактеристикиНоменклатури_Objest() : base(Config.Kernel, "tab_a21", ХарактеристикиНоменклатури_Const.TYPE,
-             ["col_i7", "col_i8", "col_i9", "col_a1", ])
+             ["col_i7", "col_i8", "col_i9", "col_a1", ], true)
         {
             
         }
@@ -6296,7 +6326,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Номенклатура_Папки_Objest() : base(Config.Kernel, "tab_a22", Номенклатура_Папки_Const.TYPE,
-             ["col_j1", "col_j2", "col_j3", ])
+             ["col_j1", "col_j2", "col_j3", ], true)
         {
             
         }
@@ -6519,7 +6549,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Контрагенти_Папки_Objest() : base(Config.Kernel, "tab_a23", Контрагенти_Папки_Const.TYPE,
-             ["col_j4", "col_j5", "col_j6", ])
+             ["col_j4", "col_j5", "col_j6", ], true)
         {
             
         }
@@ -6742,7 +6772,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Склади_Папки_Objest() : base(Config.Kernel, "tab_a24", Склади_Папки_Const.TYPE,
-             ["col_j7", "col_j8", "col_a1", ])
+             ["col_j7", "col_j8", "col_a1", ], true)
         {
             
         }
@@ -6966,7 +6996,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Каси_Objest() : base(Config.Kernel, "tab_a26", Каси_Const.TYPE,
-             ["col_k8", "col_k9", "col_a2", "col_a1", ])
+             ["col_k8", "col_k9", "col_a2", "col_a1", ], true)
         {
             
         }
@@ -7177,7 +7207,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public БанківськіРахункиОрганізацій_Objest() : base(Config.Kernel, "tab_a27", БанківськіРахункиОрганізацій_Const.TYPE,
-             ["col_l1", "col_l2", "col_l3", "col_l4", "col_l5", "col_l7", "col_a1", ])
+             ["col_l1", "col_l2", "col_l3", "col_l4", "col_l5", "col_l7", "col_a1", ], true)
         {
             
         }
@@ -7413,7 +7443,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ДоговориКонтрагентів_Objest() : base(Config.Kernel, "tab_a28", ДоговориКонтрагентів_Const.TYPE,
-             ["col_n4", "col_n5", "col_n6", "col_a1", "col_a2", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b8", "col_b6", "col_b7", "col_a3", ])
+             ["col_n4", "col_n5", "col_n6", "col_a1", "col_a2", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b8", "col_b6", "col_b7", "col_a3", ], true)
         {
             
         }
@@ -7689,7 +7719,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public БанківськіРахункиКонтрагентів_Objest() : base(Config.Kernel, "tab_a29", БанківськіРахункиКонтрагентів_Const.TYPE,
-             ["col_n7", "col_n8", "col_n9", "col_m1", "col_m5", "col_o3", ])
+             ["col_n7", "col_n8", "col_n9", "col_m1", "col_m5", "col_o3", ], true)
         {
             
         }
@@ -7906,7 +7936,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public СтаттяРухуКоштів_Objest() : base(Config.Kernel, "tab_a45", СтаттяРухуКоштів_Const.TYPE,
-             ["col_i7", "col_i8", "col_i9", "col_j2", "col_j1", ])
+             ["col_i7", "col_i8", "col_i9", "col_j2", "col_j1", ], true)
         {
             
                 //Табличні частини
@@ -8236,7 +8266,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public СеріїНоменклатури_Objest() : base(Config.Kernel, "tab_b02", СеріїНоменклатури_Const.TYPE,
-             ["col_a3", "col_a1", "col_a2", ])
+             ["col_a3", "col_a1", "col_a2", ], true)
         {
             
         }
@@ -8444,7 +8474,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ПартіяТоварівКомпозит_Objest() : base(Config.Kernel, "tab_b06", ПартіяТоварівКомпозит_Const.TYPE,
-             ["col_a1", "col_a2", "col_a3", "col_a6", "col_a4", "col_a5", ])
+             ["col_a1", "col_a2", "col_a3", "col_a6", "col_a4", "col_a5", ], true)
         {
             
         }
@@ -8661,7 +8691,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ВидиЗапасів_Objest() : base(Config.Kernel, "tab_b13", ВидиЗапасів_Const.TYPE,
-             ["col_a5", "col_b3", "col_a7", "col_a9", "col_b1", "col_b2", "col_a1", ])
+             ["col_a5", "col_b3", "col_a7", "col_a9", "col_b1", "col_b2", "col_a1", ], true)
         {
             
         }
@@ -8905,7 +8935,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Банки_Objest() : base(Config.Kernel, "tab_a39", Банки_Const.TYPE,
-             ["col_a1", "col_a2", "col_b4", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", ])
+             ["col_a1", "col_a2", "col_b4", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", ], true)
         {
             
         }
@@ -9208,7 +9238,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public СкладськіПриміщення_Objest() : base(Config.Kernel, "tab_a71", СкладськіПриміщення_Const.TYPE,
-             ["col_a2", "col_a3", "col_a1", ])
+             ["col_a2", "col_a3", "col_a1", ], true)
         {
             
         }
@@ -9418,7 +9448,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public СкладськіКомірки_Objest() : base(Config.Kernel, "tab_a72", СкладськіКомірки_Const.TYPE,
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ], true)
         {
             
         }
@@ -9649,7 +9679,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ОбластьЗберігання_Objest() : base(Config.Kernel, "tab_a73", ОбластьЗберігання_Const.TYPE,
-             ["col_a2", "col_a3", "col_a4", ])
+             ["col_a2", "col_a3", "col_a4", ], true)
         {
             
         }
@@ -9853,7 +9883,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ТипорозміриКомірок_Objest() : base(Config.Kernel, "tab_a75", ТипорозміриКомірок_Const.TYPE,
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ], true)
         {
             
         }
@@ -10069,7 +10099,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public СкладськіКомірки_Папки_Objest() : base(Config.Kernel, "tab_a76", СкладськіКомірки_Папки_Const.TYPE,
-             ["col_j1", "col_j2", "col_j3", "col_a1", ])
+             ["col_j1", "col_j2", "col_j3", "col_a1", ], true)
         {
             
         }
@@ -10298,7 +10328,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public Блокнот_Objest() : base(Config.Kernel, "tab_a41", Блокнот_Const.TYPE,
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ], true)
         {
             
         }
@@ -10512,7 +10542,7 @@ namespace GeneratedCode.Довідники
         public event EventHandler<string>? CaptionChanged;
 
         public ЗбереженіЗвіти_Objest() : base(Config.Kernel, "tab_b04", ЗбереженіЗвіти_Const.TYPE,
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", ], true)
         {
             
                 //Табличні частини
@@ -12139,7 +12169,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_a25", ЗамовленняПостачальнику_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_k4", "col_k5", "col_k6", "col_k7", "col_a1", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_a6", "col_b5", "col_b6", "col_b7", "col_b8", "col_a2", "col_b9", ])
+             ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_k4", "col_k5", "col_k6", "col_k7", "col_a1", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_a6", "col_b5", "col_b6", "col_b7", "col_b8", "col_a2", "col_b9", ], true)
         {
             
                 //Табличні частини
@@ -12522,7 +12552,7 @@ namespace GeneratedCode.Документи
     public class ЗамовленняПостачальнику_Товари_TablePart : DocumentTablePart
     {
         public ЗамовленняПостачальнику_Товари_TablePart(ЗамовленняПостачальнику_Objest owner) : base(Config.Kernel, "tab_a30",
-             ["col_b2", "col_o4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ])
+             ["col_b2", "col_o4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -12622,8 +12652,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a25"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -12901,7 +12936,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПоступленняТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a32", ПоступленняТоварівТаПослуг_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_a1", "col_b1", "col_a2", ])
+             ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_a1", "col_b1", "col_a2", ], true)
         {
             
                 //Табличні частини
@@ -13330,7 +13365,7 @@ namespace GeneratedCode.Документи
     public class ПоступленняТоварівТаПослуг_Товари_TablePart : DocumentTablePart
     {
         public ПоступленняТоварівТаПослуг_Товари_TablePart(ПоступленняТоварівТаПослуг_Objest owner) : base(Config.Kernel, "tab_a33",
-             ["col_b3", "col_a9", "col_b1", "col_b4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b2", "col_b5", ])
+             ["col_b3", "col_a9", "col_b1", "col_b4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b2", "col_b5", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -13440,8 +13475,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a32"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -13729,7 +13769,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a34", ЗамовленняКлієнта_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_a9", "col_b9", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_c1", "col_b2", "col_b3", "col_d1", ])
+             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_b1", "col_a9", "col_b9", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_c1", "col_b2", "col_b3", "col_d1", ], true)
         {
             
                 //Табличні частини
@@ -14132,7 +14172,7 @@ namespace GeneratedCode.Документи
     public class ЗамовленняКлієнта_Товари_TablePart : DocumentTablePart
     {
         public ЗамовленняКлієнта_Товари_TablePart(ЗамовленняКлієнта_Objest owner) : base(Config.Kernel, "tab_a35",
-             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_a1", ])
+             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_a1", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -14230,8 +14270,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a34"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -14506,7 +14551,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public РеалізаціяТоварівТаПослуг_Objest() : base(Config.Kernel, "tab_a36", РеалізаціяТоварівТаПослуг_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9", "col_d1", ])
+             ["docname", "docnomer", "docdate", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_d2", "col_b2", "col_c9", "col_d1", ], true)
         {
             
                 //Табличні частини
@@ -14929,7 +14974,7 @@ namespace GeneratedCode.Документи
     public class РеалізаціяТоварівТаПослуг_Товари_TablePart : DocumentTablePart
     {
         public РеалізаціяТоварівТаПослуг_Товари_TablePart(РеалізаціяТоварівТаПослуг_Objest owner) : base(Config.Kernel, "tab_a37",
-             ["col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_a3", "col_e3", "col_a4", ])
+             ["col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_a3", "col_e3", "col_a4", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -15043,8 +15088,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a36"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -15313,7 +15363,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ВстановленняЦінНоменклатури_Objest() : base(Config.Kernel, "tab_a42", ВстановленняЦінНоменклатури_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_a3", "col_g9", "col_a4", "col_a5", "col_a6", ])
+             ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_a3", "col_g9", "col_a4", "col_a5", "col_a6", ], true)
         {
             
                 //Табличні частини
@@ -15614,7 +15664,7 @@ namespace GeneratedCode.Документи
     public class ВстановленняЦінНоменклатури_Товари_TablePart : DocumentTablePart
     {
         public ВстановленняЦінНоменклатури_Товари_TablePart(ВстановленняЦінНоменклатури_Objest owner) : base(Config.Kernel, "tab_a43",
-             ["col_a1", "col_h1", "col_h2", "col_h3", "col_h4", "col_h5", ])
+             ["col_a1", "col_h1", "col_h2", "col_h3", "col_h4", "col_h5", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -15700,8 +15750,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a42"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -15804,7 +15859,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a44", ПрихіднийКасовийОрдер_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_h8", "col_h9", "col_i1", "col_i2", "col_i3", "col_i4", "col_a6", "col_i5", "col_i6", "col_a1", "col_a2", "col_a4", "col_a3", "col_a5", "col_a7", ])
+             ["docname", "docnomer", "docdate", "col_h8", "col_h9", "col_i1", "col_i2", "col_i3", "col_i4", "col_a6", "col_i5", "col_i6", "col_a1", "col_a2", "col_a4", "col_a3", "col_a5", "col_a7", ], true)
         {
             
                 //Табличні частини
@@ -16159,7 +16214,7 @@ namespace GeneratedCode.Документи
     public class ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart : DocumentTablePart
     {
         public ПрихіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(ПрихіднийКасовийОрдер_Objest owner) : base(Config.Kernel, "tab_a47",
-             ["col_a1", "col_j4", "col_j5", "col_j6", "col_j7", "col_j8", ])
+             ["col_a1", "col_j4", "col_j5", "col_j6", "col_j7", "col_j8", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -16243,8 +16298,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a44"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -16349,7 +16409,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a48", РозхіднийКасовийОрдер_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_a3", "col_a5", "col_k5", "col_k4", "col_k7", "col_a4", "col_k8", "col_k9", "col_l2", "col_k6", "col_a2", "col_a1", "col_l1", "col_a6", "col_a7", ])
+             ["docname", "docnomer", "docdate", "col_k2", "col_k3", "col_a3", "col_a5", "col_k5", "col_k4", "col_k7", "col_a4", "col_k8", "col_k9", "col_l2", "col_k6", "col_a2", "col_a1", "col_l1", "col_a6", "col_a7", ], true)
         {
             
                 //Табличні частини
@@ -16712,7 +16772,7 @@ namespace GeneratedCode.Документи
     public class РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart : DocumentTablePart
     {
         public РозхіднийКасовийОрдер_РозшифруванняПлатежу_TablePart(РозхіднийКасовийОрдер_Objest owner) : base(Config.Kernel, "tab_a49",
-             ["col_a1", "col_l4", "col_l5", "col_l6", "col_l7", "col_l8", "col_l9", ])
+             ["col_a1", "col_l4", "col_l5", "col_l6", "col_l7", "col_l8", "col_l9", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -16798,8 +16858,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a48"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -16907,7 +16972,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПереміщенняТоварів_Objest() : base(Config.Kernel, "tab_a31", ПереміщенняТоварів_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2", "col_b9", ])
+             ["docname", "docnomer", "docdate", "col_a3", "col_a4", "col_a5", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a6", "col_a1", "col_a2", "col_b9", ], true)
         {
             
                 //Табличні частини
@@ -17274,7 +17339,7 @@ namespace GeneratedCode.Документи
     public class ПереміщенняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПереміщенняТоварів_Товари_TablePart(ПереміщенняТоварів_Objest owner) : base(Config.Kernel, "tab_a50",
-             ["col_b8", "col_b3", "col_b4", "col_a1", "col_b5", "col_b6", "col_b7", "col_a2", ])
+             ["col_b8", "col_b3", "col_b4", "col_a1", "col_b5", "col_b6", "col_b7", "col_a2", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -17366,8 +17431,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a31"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -17479,7 +17549,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПоверненняТоварівПостачальнику_Objest() : base(Config.Kernel, "tab_a51", ПоверненняТоварівПостачальнику_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4", "col_a5", ])
+             ["docname", "docnomer", "docdate", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_a1", "col_a2", "col_c8", "col_a3", "col_a4", "col_a5", ], true)
         {
             
                 //Табличні частини
@@ -17862,7 +17932,7 @@ namespace GeneratedCode.Документи
     public class ПоверненняТоварівПостачальнику_Товари_TablePart : DocumentTablePart
     {
         public ПоверненняТоварівПостачальнику_Товари_TablePart(ПоверненняТоварівПостачальнику_Objest owner) : base(Config.Kernel, "tab_a52",
-             ["col_a1", "col_d8", "col_d9", "col_a3", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_a2", ])
+             ["col_a1", "col_d8", "col_d9", "col_a3", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_a2", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -17958,8 +18028,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a51"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -18071,7 +18146,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПоверненняТоварівВідКлієнта_Objest() : base(Config.Kernel, "tab_a53", ПоверненняТоварівВідКлієнта_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f5", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_a1", "col_a2", "col_f6", "col_a3", "col_a4", ])
+             ["docname", "docnomer", "docdate", "col_e8", "col_e9", "col_f1", "col_f2", "col_f3", "col_f5", "col_f7", "col_f8", "col_f9", "col_g1", "col_g2", "col_a1", "col_a2", "col_f6", "col_a3", "col_a4", ], true)
         {
             
                 //Табличні частини
@@ -18438,7 +18513,7 @@ namespace GeneratedCode.Документи
     public class ПоверненняТоварівВідКлієнта_Товари_TablePart : DocumentTablePart
     {
         public ПоверненняТоварівВідКлієнта_Товари_TablePart(ПоверненняТоварівВідКлієнта_Objest owner) : base(Config.Kernel, "tab_a54",
-             ["col_h2", "col_g3", "col_g4", "col_a1", "col_g5", "col_g6", "col_g7", "col_g8", "col_g9", "col_h1", "col_a2", ])
+             ["col_h2", "col_g3", "col_g4", "col_a1", "col_g5", "col_g6", "col_g7", "col_g8", "col_g9", "col_h1", "col_a2", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -18536,8 +18611,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a53"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -18650,7 +18730,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public АктВиконанихРобіт_Objest() : base(Config.Kernel, "tab_a81", АктВиконанихРобіт_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8", "col_a9", "col_b1", ])
+             ["docname", "docnomer", "docdate", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_a5", "col_a2", "col_a3", "col_a4", "col_a6", "col_a1", "col_a7", "col_a8", "col_a9", "col_b1", ], true)
         {
             
                 //Табличні частини
@@ -19001,7 +19081,7 @@ namespace GeneratedCode.Документи
     public class АктВиконанихРобіт_Послуги_TablePart : DocumentTablePart
     {
         public АктВиконанихРобіт_Послуги_TablePart(АктВиконанихРобіт_Objest owner) : base(Config.Kernel, "tab_a82",
-             ["col_c4", "col_b8", "col_b9", "col_c1", "col_c3", "col_c2", ])
+             ["col_c4", "col_b8", "col_b9", "col_c1", "col_c3", "col_c2", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -19083,8 +19163,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a81"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -19309,7 +19394,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ВведенняЗалишків_Objest() : base(Config.Kernel, "tab_a83", ВведенняЗалишків_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3", "col_a2", "col_a4", ])
+             ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_c9", "col_d2", "col_d3", "col_d4", "col_a1", "col_d1", "col_a3", "col_a2", "col_a4", ], true)
         {
             
                 //Табличні частини
@@ -19683,7 +19768,7 @@ namespace GeneratedCode.Документи
     public class ВведенняЗалишків_Товари_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_Товари_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel, "tab_a84",
-             ["col_e4", "col_d6", "col_d7", "col_a1", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", ])
+             ["col_e4", "col_d6", "col_d7", "col_a1", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -19775,8 +19860,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -19839,7 +19929,7 @@ namespace GeneratedCode.Документи
     public class ВведенняЗалишків_Каси_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_Каси_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel, "tab_a85",
-             ["col_a1", "col_e5", "col_e6", ])
+             ["col_a1", "col_e5", "col_e6", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -19913,8 +20003,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -19965,7 +20060,7 @@ namespace GeneratedCode.Документи
     public class ВведенняЗалишків_БанківськіРахунки_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_БанківськіРахунки_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel, "tab_a86",
-             ["col_a1", "col_e7", "col_e8", ])
+             ["col_a1", "col_e7", "col_e8", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -20039,8 +20134,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -20091,7 +20191,7 @@ namespace GeneratedCode.Документи
     public class ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart : DocumentTablePart
     {
         public ВведенняЗалишків_РозрахункиЗКонтрагентами_TablePart(ВведенняЗалишків_Objest owner) : base(Config.Kernel, "tab_a87",
-             ["col_a1", "col_e9", "col_f1", "col_f2", "col_a2", ])
+             ["col_a1", "col_e9", "col_f1", "col_f2", "col_a2", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -20171,8 +20271,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -20265,7 +20370,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public НадлишкиТоварів_Objest() : base(Config.Kernel, "tab_a88", НадлишкиТоварів_Const.TYPE,
-             ["col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "docnomer", "docdate", "docname", "col_a1", "col_a2", ])
+             ["col_f6", "col_f7", "col_f8", "col_f9", "col_g1", "docnomer", "docdate", "docname", "col_a1", "col_a2", ], true)
         {
             
                 //Табличні частини
@@ -20558,7 +20663,7 @@ namespace GeneratedCode.Документи
     public class НадлишкиТоварів_Товари_TablePart : DocumentTablePart
     {
         public НадлишкиТоварів_Товари_TablePart(НадлишкиТоварів_Objest owner) : base(Config.Kernel, "tab_a89",
-             ["col_g2", "col_g3", "col_g4", "col_g5", "col_g6", ])
+             ["col_g2", "col_g3", "col_g4", "col_g5", "col_g6", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -20630,8 +20735,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a88"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -20720,7 +20830,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПересортицяТоварів_Objest() : base(Config.Kernel, "tab_a90", ПересортицяТоварів_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_h2", "col_h3", "col_h4", "col_h5", "col_h6", "col_a1", "col_a2", ])
+             ["docname", "docnomer", "docdate", "col_h2", "col_h3", "col_h4", "col_h5", "col_h6", "col_a1", "col_a2", ], true)
         {
             
                 //Табличні частини
@@ -21013,7 +21123,7 @@ namespace GeneratedCode.Документи
     public class ПересортицяТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПересортицяТоварів_Товари_TablePart(ПересортицяТоварів_Objest owner) : base(Config.Kernel, "tab_a91",
-             ["col_a1", "col_h7", "col_h8", "col_i1", "col_h9", ])
+             ["col_a1", "col_h7", "col_h8", "col_i1", "col_h9", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -21093,8 +21203,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a90"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -21188,7 +21303,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПерерахунокТоварів_Objest() : base(Config.Kernel, "tab_a92", ПерерахунокТоварів_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ])
+             ["docname", "docnomer", "docdate", "col_i6", "col_i7", "col_i5", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", ], true)
         {
             
                 //Табличні частини
@@ -21493,7 +21608,7 @@ namespace GeneratedCode.Документи
     public class ПерерахунокТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПерерахунокТоварів_Товари_TablePart(ПерерахунокТоварів_Objest owner) : base(Config.Kernel, "tab_a93",
-             ["col_i8", "col_i9", "col_j1", "col_j3", "col_j4", "col_j5", "col_j6", "col_a1", "col_a2", ])
+             ["col_i8", "col_i9", "col_j1", "col_j3", "col_j4", "col_j5", "col_j6", "col_a1", "col_a2", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -21583,8 +21698,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a92"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -21687,7 +21807,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПсуванняТоварів_Objest() : base(Config.Kernel, "tab_a94", ПсуванняТоварів_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_a1", "col_a5", "col_a2", "col_a3", "col_b2", ])
+             ["docname", "docnomer", "docdate", "col_a6", "col_a7", "col_a4", "col_a8", "col_a1", "col_a5", "col_a2", "col_a3", "col_b2", ], true)
         {
             
                 //Табличні частини
@@ -22018,7 +22138,7 @@ namespace GeneratedCode.Документи
     public class ПсуванняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ПсуванняТоварів_Товари_TablePart(ПсуванняТоварів_Objest owner) : base(Config.Kernel, "tab_a95",
-             ["col_a3", "col_b2", "col_b3", "col_a1", "col_a4", "col_a5", "col_b4", "col_b5", "col_a2", "col_a6", ])
+             ["col_a3", "col_b2", "col_b3", "col_a1", "col_a4", "col_a5", "col_b4", "col_b5", "col_a2", "col_a6", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -22114,8 +22234,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a94"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -22221,7 +22346,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ВнутрішнєСпоживанняТоварів_Objest() : base(Config.Kernel, "tab_b07", ВнутрішнєСпоживанняТоварів_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_a1", "col_b1", "col_a2", "col_a9", "col_a8", "col_b7", "col_b9", "col_b4", "col_b2", "col_a3", ])
+             ["docname", "docnomer", "docdate", "col_a1", "col_b1", "col_a2", "col_a9", "col_a8", "col_b7", "col_b9", "col_b4", "col_b2", "col_a3", ], true)
         {
             
                 //Табличні частини
@@ -22556,7 +22681,7 @@ namespace GeneratedCode.Документи
     public class ВнутрішнєСпоживанняТоварів_Товари_TablePart : DocumentTablePart
     {
         public ВнутрішнєСпоживанняТоварів_Товари_TablePart(ВнутрішнєСпоживанняТоварів_Objest owner) : base(Config.Kernel, "tab_b08",
-             ["col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d8", "col_d9", "col_a3", ])
+             ["col_a1", "col_d2", "col_d3", "col_a2", "col_d4", "col_d5", "col_d6", "col_d8", "col_d9", "col_a3", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -22652,8 +22777,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b07"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -22767,7 +22897,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public РахунокФактура_Objest() : base(Config.Kernel, "tab_b10", РахунокФактура_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a3", "col_a4", "col_a5", "col_a6", "col_b9", "col_c2", "col_c3", "col_c4", "col_c1", "col_a2", "col_a7", "col_a8", ])
+             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_a1", "col_a3", "col_a4", "col_a5", "col_a6", "col_b9", "col_c2", "col_c3", "col_c4", "col_c1", "col_a2", "col_a7", "col_a8", ], true)
         {
             
                 //Табличні частини
@@ -23126,7 +23256,7 @@ namespace GeneratedCode.Документи
     public class РахунокФактура_Товари_TablePart : DocumentTablePart
     {
         public РахунокФактура_Товари_TablePart(РахунокФактура_Objest owner) : base(Config.Kernel, "tab_b11",
-             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_a1", ])
+             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_a1", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -23224,8 +23354,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b10"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -23479,7 +23614,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public РозміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_a64", РозміщенняТоварівНаСкладі_Const.TYPE,
-             ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
+             ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ], true)
         {
             
                 //Табличні частини
@@ -23798,7 +23933,7 @@ namespace GeneratedCode.Документи
     public class РозміщенняТоварівНаСкладі_Товари_TablePart : DocumentTablePart
     {
         public РозміщенняТоварівНаСкладі_Товари_TablePart(РозміщенняТоварівНаСкладі_Objest owner) : base(Config.Kernel, "tab_a68",
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -23890,8 +24025,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a64"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -23990,7 +24130,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ПереміщенняТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b09", ПереміщенняТоварівНаСкладі_Const.TYPE,
-             ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ])
+             ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", ], true)
         {
             
                 //Табличні частини
@@ -24305,7 +24445,7 @@ namespace GeneratedCode.Документи
     public class ПереміщенняТоварівНаСкладі_Товари_TablePart : DocumentTablePart
     {
         public ПереміщенняТоварівНаСкладі_Товари_TablePart(ПереміщенняТоварівНаСкладі_Objest owner) : base(Config.Kernel, "tab_b26",
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -24401,8 +24541,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b09"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -24504,7 +24649,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ЗбіркаТоварівНаСкладі_Objest() : base(Config.Kernel, "tab_b27", ЗбіркаТоварівНаСкладі_Const.TYPE,
-             ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
+             ["docname", "docdate", "docnomer", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ], true)
         {
             
                 //Табличні частини
@@ -24823,7 +24968,7 @@ namespace GeneratedCode.Документи
     public class ЗбіркаТоварівНаСкладі_Товари_TablePart : DocumentTablePart
     {
         public ЗбіркаТоварівНаСкладі_Товари_TablePart(ЗбіркаТоварівНаСкладі_Objest owner) : base(Config.Kernel, "tab_b28",
-             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ])
+             ["col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -24915,8 +25060,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b27"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -25015,7 +25165,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public РозміщенняНоменклатуриПоКоміркам_Objest() : base(Config.Kernel, "tab_b29", РозміщенняНоменклатуриПоКоміркам_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5", "col_a6", ])
+             ["docname", "docnomer", "docdate", "col_a2", "col_a1", "col_g9", "col_a4", "col_a3", "col_a5", "col_a6", ], true)
         {
             
                 //Табличні частини
@@ -25316,7 +25466,7 @@ namespace GeneratedCode.Документи
     public class РозміщенняНоменклатуриПоКоміркам_Товари_TablePart : DocumentTablePart
     {
         public РозміщенняНоменклатуриПоКоміркам_Товари_TablePart(РозміщенняНоменклатуриПоКоміркам_Objest owner) : base(Config.Kernel, "tab_b32",
-             ["col_a1", "col_h1", "col_a2", "col_h3", ])
+             ["col_a1", "col_h1", "col_a2", "col_h3", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -25396,8 +25546,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b29"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -25487,7 +25642,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public КорегуванняБоргу_Objest() : base(Config.Kernel, "tab_a65", КорегуванняБоргу_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_d1", "col_a3", "col_a2", "col_a1", ])
+             ["docname", "docnomer", "docdate", "col_c8", "col_d5", "col_d1", "col_a3", "col_a2", "col_a1", ], true)
         {
             
                 //Табличні частини
@@ -25802,7 +25957,7 @@ namespace GeneratedCode.Документи
     public class КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart : DocumentTablePart
     {
         public КорегуванняБоргу_РозрахункиЗКонтрагентами_TablePart(КорегуванняБоргу_Objest owner) : base(Config.Kernel, "tab_b12",
-             ["col_a1", "col_e9", "col_f1", "col_f2", "col_a2", ])
+             ["col_a1", "col_e9", "col_f1", "col_f2", "col_a2", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -25882,8 +26037,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a65"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -25983,7 +26143,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ЗакриттяЗамовленняКлієнта_Objest() : base(Config.Kernel, "tab_a96", ЗакриттяЗамовленняКлієнта_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ])
+             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ], true)
         {
             
                 //Табличні частини
@@ -26330,7 +26490,7 @@ namespace GeneratedCode.Документи
     public class ЗакриттяЗамовленняКлієнта_Товари_TablePart : DocumentTablePart
     {
         public ЗакриттяЗамовленняКлієнта_Товари_TablePart(ЗакриттяЗамовленняКлієнта_Objest owner) : base(Config.Kernel, "tab_b39",
-             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_a1", "col_a3", "col_a4", ])
+             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_a1", "col_a3", "col_a4", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -26422,8 +26582,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a96"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -26531,7 +26696,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ЗакриттяРахункуФактури_Objest() : base(Config.Kernel, "tab_b41", ЗакриттяРахункуФактури_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ])
+             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ], true)
         {
             
                 //Табличні частини
@@ -26874,7 +27039,7 @@ namespace GeneratedCode.Документи
     public class ЗакриттяРахункуФактури_Товари_TablePart : DocumentTablePart
     {
         public ЗакриттяРахункуФактури_Товари_TablePart(ЗакриттяРахункуФактури_Objest owner) : base(Config.Kernel, "tab_b42",
-             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_a1", "col_a3", "col_a4", ])
+             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_a1", "col_a3", "col_a4", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -26966,8 +27131,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b41"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
@@ -27075,7 +27245,7 @@ namespace GeneratedCode.Документи
         public event EventHandler<string>? CaptionChanged;
 
         public ЗакриттяЗамовленняПостачальнику_Objest() : base(Config.Kernel, "tab_b44", ЗакриттяЗамовленняПостачальнику_Const.TYPE,
-             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ])
+             ["docname", "docnomer", "docdate", "col_b4", "col_b5", "col_b6", "col_a2", "col_b8", "col_a1", "col_a6", "col_c2", "col_c4", "col_c1", "col_b2", "col_b3", "col_a3", "col_a4", ], true)
         {
             
                 //Табличні частини
@@ -27418,7 +27588,7 @@ namespace GeneratedCode.Документи
     public class ЗакриттяЗамовленняПостачальнику_Товари_TablePart : DocumentTablePart
     {
         public ЗакриттяЗамовленняПостачальнику_Товари_TablePart(ЗакриттяЗамовленняПостачальнику_Objest owner) : base(Config.Kernel, "tab_b47",
-             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_a1", "col_a3", "col_a4", ])
+             ["col_a2", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_a1", "col_a3", "col_a4", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -27510,8 +27680,13 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b44"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
