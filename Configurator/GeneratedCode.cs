@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 19.05.2025 16:58:23
+ * Дата конфігурації: 19.05.2025 18:25:59
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -10756,7 +10756,7 @@ namespace GeneratedCode.Довідники
     public class ЗбереженіЗвіти_ЗвітСторінка_TablePart : DirectoryTablePart
     {
         public ЗбереженіЗвіти_ЗвітСторінка_TablePart(ЗбереженіЗвіти_Objest owner) : base(Config.Kernel, "tab_b15",
-             ["col_a2", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", ])
+             ["col_a2", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", ], true)
         {
             if (owner == null) throw new Exception("owner null");
             Owner = owner;
@@ -10874,8 +10874,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b04"))
                 throw new Exception("Owner not exist");
             
+            OwnerVersionID = Owner.VersionID;
+            OwnerBasis = Owner.GetBasis();
+            
                 
             await base.BaseBeginTransaction();
+            
+            await BeforeSaveOwnerVersion();
             
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);

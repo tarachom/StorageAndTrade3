@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>19.05.2025 16:58:23</DateTimeSave>
+  <DateTimeSave>19.05.2025 18:25:59</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -11940,7 +11940,7 @@ FROM
           <Name>ЗвітСторінка</Name>
           <FullName>Звіт сторінка</FullName>
           <Table>tab_b15</Table>
-          <VersionsHistory>0</VersionsHistory>
+          <VersionsHistory>1</VersionsHistory>
           <PredefinedFields>
             <PredefinedField>
               <Name>uid</Name>
