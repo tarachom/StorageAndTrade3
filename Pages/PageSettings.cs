@@ -20,7 +20,7 @@ namespace StorageAndTrade
         #region Const
 
         //
-        //Значення за замовчуванням
+        //Стандартне налаштування
         //
 
         Організації_PointerControl ОсновнаОрганізація = new Організації_PointerControl();
@@ -177,7 +177,7 @@ namespace StorageAndTrade
                 //Info
                 Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBoxDownloadCursNBU.PackStart(hBoxInfo, false, false, 15);
-                hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange") { Selectable = true, Wrap = true }, false, false, 5);
+                hBoxInfo.PackStart(new Label("Стандартне налаштування: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange") { Selectable = true, Wrap = true }, false, false, 5);
 
                 //Controls
                 AddCaptionAndControl(vBoxDownloadCursNBU, new Label("Лінк:"), ЗавантаженняДанихІзСайтів);
@@ -195,7 +195,7 @@ namespace StorageAndTrade
                 //Info
                 Box hBoxInfo = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
                 vBoxDownloadListBank.PackStart(hBoxInfo, false, false, 15);
-                hBoxInfo.PackStart(new Label("За замовчуванням: https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank") { Selectable = true, Wrap = true }, false, false, 5);
+                hBoxInfo.PackStart(new Label("Стандартне налаштування: https://bank.gov.ua/NBU_BankInfo/get_data_branch_glbank") { Selectable = true, Wrap = true }, false, false, 5);
 
                 //Controls
                 AddCaptionAndControl(vBoxDownloadListBank, new Label("Лінк:"), ЗавантаженняСпискуБанківІзСайтів);
@@ -209,7 +209,7 @@ namespace StorageAndTrade
         {
             Box vBox = new Box(Orientation.Vertical, 0);
 
-            Expander expanderConstDefault = new Expander("Значення за замовчуванням") { Expanded = true };
+            Expander expanderConstDefault = new Expander("Стандартне налаштування") { Expanded = true };
             expanderConstDefault.Add(vBox);
 
             //Info
@@ -284,7 +284,7 @@ namespace StorageAndTrade
         public void SetValue()
         {
             //
-            //Значення за замовчуванням
+            //Значення Стандартне налаштування
             //
 
             ОсновнаОрганізація.Pointer = Константи.ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const;
@@ -341,7 +341,7 @@ namespace StorageAndTrade
             NotebookFunction.SensitiveNotebookPageToCode(Program.GeneralNotebook, this.Name, false);
 
             //
-            //Значення за замовчуванням
+            //Значення Стандартне налаштування
             //
 
             Константи.ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const = ОсновнаОрганізація.Pointer;
