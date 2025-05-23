@@ -3014,7 +3014,8 @@ ORDER BY ПартіяТоварівКомпозит_Дата ASC
 
         public static async ValueTask ClearSpend(ВстановленняЦінНоменклатури_Objest ДокументОбєкт)
         {
-            await ValueTask.FromResult(true);
+            //Очистка
+            await new ЦіниНоменклатури_RecordsSet().Delete(ДокументОбєкт.UnigueID.UGuid);
         }
     }
 

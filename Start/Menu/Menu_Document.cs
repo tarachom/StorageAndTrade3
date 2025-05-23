@@ -145,6 +145,22 @@ namespace StorageAndTrade
                 });
             }
 
+            {
+                CreateCaptionLink(vLeft, "Роздріб", async () =>
+                {
+                    Журнал_Роздріб page = new Журнал_Роздріб();
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Роздріб", () => page);
+                    await page.SetValue();
+                });
+
+                CreateLink(vLeft, ЧекККМ_Const.FULLNAME, async () =>
+                {
+                    ЧекККМ page = new ЧекККМ();
+                    NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЧекККМ_Const.FULLNAME, () => page);
+                    await page.SetValue();
+                });
+            }
+
             CreateSeparator(hBoxList);
 
             Box vRight = new Box(Orientation.Vertical, 0);

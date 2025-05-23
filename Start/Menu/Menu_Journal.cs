@@ -55,6 +55,13 @@ namespace StorageAndTrade
                 await page.SetValue();
             });
 
+            CreateLink(vLeft, "Роздріб", async () =>
+            {
+                Журнал_Роздріб page = new Журнал_Роздріб();
+                NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, "Роздріб", () => page);
+                await page.SetValue();
+            });
+
             CreateLink(vLeft, "Адресне зберігання на складах", async () =>
             {
                 Журнал_АдреснеЗберігання page = new Журнал_АдреснеЗберігання();

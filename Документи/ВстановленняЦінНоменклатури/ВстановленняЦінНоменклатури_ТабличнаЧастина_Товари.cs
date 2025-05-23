@@ -13,6 +13,7 @@ using GeneratedCode.Документи;
 using GeneratedCode.Перелічення;
 using GeneratedCode.РегістриВідомостей;
 using GeneratedCode.Константи;
+using System.Threading.Tasks;
 
 namespace StorageAndTrade
 {
@@ -79,6 +80,11 @@ namespace StorageAndTrade
                     ВидЦіни = запис.ВидЦіни.Copy(),
                     Ціна = запис.Ціна,
                 };
+            }
+
+            public static async ValueTask ПісляДодаванняНового(Запис запис)
+            {
+                await ПісляЗміни_ВидЦіни(запис);
             }
 
             public static async ValueTask ПісляЗміни_Номенклатура(Запис запис)
@@ -261,7 +267,7 @@ namespace StorageAndTrade
         #endregion
 
         #region Func
-        
+
         protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
         {
             Запис запис = Записи[rowNumber];
@@ -282,7 +288,7 @@ namespace StorageAndTrade
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
-                                    (Запис запис, TreeIter iter) = НовийЗапис();
+                                    (Запис запис, TreeIter iter) = await НовийЗапис();
 
                                     запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
                                     await Запис.ПісляЗміни_Номенклатура(запис);
@@ -307,7 +313,7 @@ namespace StorageAndTrade
                             {
                                 foreach (var selectPointer in selectPointers)
                                 {
-                                    (Запис запис, TreeIter iter) = НовийЗапис();
+                                    (Запис запис, TreeIter iter) = await НовийЗапис();
 
                                     запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
                                     await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
@@ -415,10 +421,18 @@ namespace StorageAndTrade
 
         #region ToolBar
 
-        (Запис запис, TreeIter iter) НовийЗапис()
+        async ValueTask<(Запис запис, TreeIter iter)> НовийЗапис()
         {
             Запис запис = new Запис();
             Записи.Add(запис);
+
+            if (ЕлементВласник != null)
+            {
+                ОбновитиЗначенняДокумента?.Invoke();
+                запис.ВидЦіни = ЕлементВласник.ВидЦіни;
+            }
+
+            await Запис.ПісляДодаванняНового(запис);
 
             TreeIter iter = Store.AppendValues(запис.ToArray());
             TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
@@ -426,9 +440,9 @@ namespace StorageAndTrade
             return (запис, iter);
         }
 
-        protected override void AddRecord()
+        protected override async void AddRecord()
         {
-            НовийЗапис();
+            await НовийЗапис();
         }
 
         protected override void CopyRecord(int rowNumber)

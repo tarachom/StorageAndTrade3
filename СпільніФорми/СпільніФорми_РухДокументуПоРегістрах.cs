@@ -117,6 +117,16 @@ namespace StorageAndTrade
 
                             break;
                         }
+                    case "РухКоштівККМ":
+                        {
+                            ДодатиБлокНаФорму("Рух коштів ККМ", treeView);
+
+                            ТабличніСписки.РухКоштівККМ_Записи.AddColumns(treeView, ["period", "owner"]);
+                            ТабличніСписки.РухКоштівККМ_Записи.ДодатиВідбірПоДокументу(treeView, ДокументВказівник.UnigueID.UGuid);
+                            await ТабличніСписки.РухКоштівККМ_Записи.LoadRecords(treeView, null, false, false);
+
+                            break;
+                        }
                     case "Закупівлі":
                         {
                             ДодатиБлокНаФорму("Закупівлі", treeView);

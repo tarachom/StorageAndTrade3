@@ -90,7 +90,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Код_R030 = currentNode?.SelectSingleNode("Код")?.Value ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string Коротко = currentNode?.SelectSingleNode("Коротко")?.Value ?? "";
@@ -109,8 +109,8 @@ namespace StorageAndTrade
                                 await валюти_Objest.New();
                                 await валюти_Objest.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнаВалюта_Const = валюти_Objest.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнаВалюта_Const = валюти_Objest.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}, код {Код_R030}", LogMessage.TypeMessage.Ok);
                             }
@@ -134,7 +134,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
                             Організації_Pointer організації_Pointer = await організації_Select.FindByField(Організації_Const.Назва, Назва);
@@ -144,8 +144,8 @@ namespace StorageAndTrade
                                 await організації_Objest.New();
                                 await організації_Objest.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнаОрганізація_Const = організації_Objest.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнаОрганізація_Const = організації_Objest.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
@@ -169,7 +169,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string Валюта = currentNode?.SelectSingleNode("Валюта")?.Value ?? "";
 
@@ -185,8 +185,8 @@ namespace StorageAndTrade
                                 await обєкт.New();
                                 await обєкт.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнаКаса_Const = обєкт.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнаКаса_Const = обєкт.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
@@ -210,7 +210,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string НазваПовна = currentNode?.SelectSingleNode("НазваПовна")?.Value ?? "";
 
@@ -226,8 +226,8 @@ namespace StorageAndTrade
                                 await обєкт.New();
                                 await обєкт.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнаОдиницяПакування_Const = обєкт.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнаОдиницяПакування_Const = обєкт.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
@@ -251,7 +251,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string ТипНоменклатуриТекст = currentNode?.SelectSingleNode("ТипНоменклатури")?.Value ?? "";
 
@@ -270,8 +270,8 @@ namespace StorageAndTrade
                                 await обєкт.New();
                                 await обєкт.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидНоменклатури_Const = обєкт.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнийВидНоменклатури_Const = обєкт.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
@@ -295,7 +295,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
                             string Валюта = currentNode?.SelectSingleNode("Валюта")?.Value ?? "";
 
@@ -310,11 +310,11 @@ namespace StorageAndTrade
                                 await обєкт.New();
                                 await обєкт.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіни_Const = обєкт.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнийВидЦіни_Const = обєкт.GetDirectoryPointer();
 
-                                if (ЗначенняЗаЗамовчуванням == "2")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнийВидЦіниЗакупівлі_Const = обєкт.GetDirectoryPointer();
+                                if (ЗначенняТипові == "2")
+                                    Константи.ЗначенняТипові.ОсновнийВидЦіниЗакупівлі_Const = обєкт.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
@@ -338,7 +338,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
                             Склади_Pointer склади_Pointer = await склади_Select.FindByField(Склади_Const.Назва, Назва);
@@ -348,8 +348,8 @@ namespace StorageAndTrade
                                 await склади_Objest.New();
                                 await склади_Objest.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнийСклад_Const = склади_Objest.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнийСклад_Const = склади_Objest.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }
@@ -373,7 +373,7 @@ namespace StorageAndTrade
                         {
                             XPathNavigator? currentNode = ДовідникЗаписи.Current;
 
-                            string ЗначенняЗаЗамовчуванням = currentNode?.GetAttribute("ЗначенняЗаЗамовчуванням", "") ?? "";
+                            string ЗначенняТипові = currentNode?.GetAttribute("ЗначенняТипові", "") ?? "";
                             string Назва = currentNode?.SelectSingleNode("Назва")?.Value ?? "";
 
                             Контрагенти_Pointer контрагенти_Pointer = await контрагенти_Select.FindByField(Контрагенти_Const.Назва, Назва);
@@ -383,11 +383,11 @@ namespace StorageAndTrade
                                 await контрагенти_Objest.New();
                                 await контрагенти_Objest.Save();
 
-                                if (ЗначенняЗаЗамовчуванням == "1")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнийПокупець_Const = контрагенти_Objest.GetDirectoryPointer();
+                                if (ЗначенняТипові == "1")
+                                    Константи.ЗначенняТипові.ОсновнийПокупець_Const = контрагенти_Objest.GetDirectoryPointer();
 
-                                if (ЗначенняЗаЗамовчуванням == "2")
-                                    Константи.ЗначенняЗаЗамовчуванням.ОсновнийПостачальник_Const = контрагенти_Objest.GetDirectoryPointer();
+                                if (ЗначенняТипові == "2")
+                                    Константи.ЗначенняТипові.ОсновнийПостачальник_Const = контрагенти_Objest.GetDirectoryPointer();
 
                                 Лог.CreateMessage($"Додано новий елемент довідника {name}: {Назва}", LogMessage.TypeMessage.Ok);
                             }

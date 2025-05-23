@@ -558,9 +558,9 @@ namespace <xsl:value-of select="$NameSpace"/>
         <xsl:if test="count($FieldsTL[Type = 'pointer']) != 0 or count($TabularPartsTL) != 0">
         /*string КлючовіСловаДляПошуку()
         {
-            return "\n<xsl:for-each select="$FieldsTL[Type = 'pointer']">
+            return $"\n<xsl:for-each select="$FieldsTL[Type = 'pointer']">
                 <xsl:choose>
-                    <xsl:when test="Type = 'pointer'"> {<xsl:value-of select="Name"/>.Назва}</xsl:when>
+                    <xsl:when test="Type = 'pointer'"> {<xsl:value-of select="Name"/>.Pointer.Назва}</xsl:when>
                 </xsl:choose>
             </xsl:for-each>"
             <xsl:for-each select="$TabularPartsTL"> + <xsl:value-of select="Name"/>.КлючовіСловаДляПошуку()</xsl:for-each>;

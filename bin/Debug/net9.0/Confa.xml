@@ -7,11 +7,11 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>19.05.2025 18:25:59</DateTimeSave>
+  <DateTimeSave>23.05.2025 19:03:57</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
-      <Name>ЗначенняЗаЗамовчуванням</Name>
+      <Name>ЗначенняТипові</Name>
       <Constants>
         <Constant>
           <Name>ОсновнаОрганізація</Name>
@@ -95,6 +95,13 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
           <NameInTable>col_c3</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.ВидиЦін</Pointer>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>ОсновнаКасаККМ</Name>
+          <NameInTable>col_j2</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.КасиККМ</Pointer>
           <TabularParts />
         </Constant>
       </Constants>
@@ -820,6 +827,12 @@ https://accounting.org.ua/storage_and_trade.html</Desc>
         <Constant>
           <Name>ЗакриттяЗамовленняПостачальнику</Name>
           <NameInTable>col_j1</NameInTable>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>ЧекККМ</Name>
+          <NameInTable>col_h6</NameInTable>
           <Type>integer</Type>
           <TabularParts />
         </Constant>
@@ -12775,6 +12788,693 @@ FROM
         </Form>
       </Forms>
     </Directory>
+    <Directory>
+      <Name>КасиККМ</Name>
+      <FullName>Каси ККМ</FullName>
+      <Table>tab_b52</Table>
+      <Desc>Каси контрольно-касової машини</Desc>
+      <AutoNum>0</AutoNum>
+      <VersionsHistory>1</VersionsHistory>
+      <Type>Normal</Type>
+      <PredefinedFields>
+        <PredefinedField>
+          <Name>uid</Name>
+          <NameInTable>uid</NameInTable>
+          <Type>any_pointer</Type>
+          <IsPrimaryKey>1</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>deletion_label</Name>
+          <NameInTable>deletion_label</NameInTable>
+          <Type>boolean</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>1</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+      </PredefinedFields>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <FullName>Назва</FullName>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Склад</Name>
+          <FullName>Склад</FullName>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Склади</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>Тип</Name>
+          <FullName>Тип</FullName>
+          <NameInTable>col_a4</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.ТипККМ</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>Валюта</Name>
+          <FullName>Валюта</FullName>
+          <NameInTable>col_a1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Валюти</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>Тип</Name>
+              <Caption>Тип</Caption>
+              <Size>0</Size>
+              <SortNum>99</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипККМ</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>100</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <TriggerFunctions>
+        <New Action="1">New</New>
+        <Copying Action="1">Copying</Copying>
+        <BeforeSave Action="0">BeforeSave</BeforeSave>
+        <AfterSave Action="0">AfterSave</AfterSave>
+        <SetDeletionLabel Action="0">SetDeletionLabel</SetDeletionLabel>
+        <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
+      </TriggerFunctions>
+      <Forms>
+        <Form Modified="0">
+          <Name>Тригери</Name>
+          <Desc>Тригери</Desc>
+          <Type>Triggers</Type>
+          <GeneratedCode><![CDATA[
+
+/*
+        КасиККМ_Triggers.cs
+        Тригери
+*/
+
+using GeneratedCode.Константи;
+using AccountingSoftware;
+
+namespace GeneratedCode.Довідники
+{
+    static class КасиККМ_Triggers
+    {
+        public static async ValueTask New(КасиККМ_Objest ДовідникОбєкт)
+        {
+            
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask Copying(КасиККМ_Objest ДовідникОбєкт, КасиККМ_Objest Основа)
+        {
+            
+            ДовідникОбєкт.Назва += " - Копія";
+            
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask BeforeSave(КасиККМ_Objest ДовідникОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask AfterSave(КасиККМ_Objest ДовідникОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask SetDeletionLabel(КасиККМ_Objest ДовідникОбєкт, bool label)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask BeforeDelete(КасиККМ_Objest ДовідникОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+        </Form>
+        <Form Modified="0">
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+          <GeneratedCode><![CDATA[
+/*
+        КасиККМ_Функції.cs
+        Функції
+*/
+
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+
+namespace StorageAndTrade
+{
+    static class КасиККМ_Функції
+    {
+        public static List<Where> Відбори(string searchText)
+        {
+            return
+            [
+                
+                //Назва
+                new Where(КасиККМ_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "TO_CHAR", FuncToField_Param1 = "''" },
+                        
+            ];
+        }
+
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
+            Action<UnigueID?>? сallBack_LoadRecords = null, 
+            Action<UnigueID>? сallBack_OnSelectPointer = null)
+        {
+            КасиККМ_Елемент page = new КасиККМ_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_LoadRecords = сallBack_LoadRecords,
+                CallBack_OnSelectPointer = сallBack_OnSelectPointer
+            };
+
+            if (IsNew)
+            {
+                await page.Елемент.New();
+                
+            }
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+            await NotebookFunction.AddLockObjectFunc(Program.GeneralNotebook, page.Name, page.Елемент);
+            await page.LockInfo(page.Елемент);
+            page.SetValue();
+        }
+
+        public static async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            КасиККМ_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
+        }
+
+        public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        {
+            КасиККМ_Objest Обєкт = new КасиККМ_Objest();
+            if (await Обєкт.Read(unigueID))
+            {
+                КасиККМ_Objest Новий = await Обєкт.Copy(true);
+                await Новий.Save();
+                
+                return Новий.UnigueID;
+            }
+            else
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
+            }
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+        </Form>
+        <Form Modified="0">
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <GeneratedCode><![CDATA[
+/*
+        КасиККМ_Елемент.cs
+        Елемент
+*/
+
+using Gtk;
+using InterfaceGtk;
+
+using GeneratedCode.Довідники;
+using GeneratedCode.Документи;
+using GeneratedCode.Перелічення;
+
+namespace StorageAndTrade
+{
+    class КасиККМ_Елемент : ДовідникЕлемент
+    {
+        public КасиККМ_Objest Елемент { get; init; } = new КасиККМ_Objest();
+        
+        #region Fields
+        Entry Назва = new Entry() { WidthRequest = 500 };
+                        Склади_PointerControl Склад = new Склади_PointerControl() { Caption = "Склад", WidthPresentation = 500 };
+                ComboBoxText Тип = new ComboBoxText();
+                Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта", WidthPresentation = 500 };
+                
+        #endregion
+
+        #region TabularParts
+        
+        #endregion
+
+        public КасиККМ_Елемент() : base() 
+        { 
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
+
+            
+                foreach (var field in ПсевдонімиПерелічення.ТипККМ_List())
+                    Тип.Append(field.Value.ToString(), field.Name);
+            
+        }
+
+        protected override void CreatePack1(Box vBox)
+        {
+            
+                // Назва
+                CreateField(vBox, "Назва:", Назва);
+                            
+                // Склад
+                CreateField(vBox, null, Склад);
+                    
+                // Тип
+                CreateField(vBox, "Тип:", Тип);
+                    
+                // Валюта
+                CreateField(vBox, null, Валюта);
+                    
+        }
+
+        protected override void CreatePack2(Box vBox)
+        {
+            
+        }
+
+        #region Присвоєння / зчитування значень
+
+        public override  void SetValue()
+        {
+            Назва.Text = Елемент.Назва;
+                            Склад.Pointer = Елемент.Склад;
+                    Тип.ActiveId = Елемент.Тип.ToString(); //if (Тип.Active == -1) Тип.Active = 0;
+                    Валюта.Pointer = Елемент.Валюта;
+                    
+        }
+
+        protected override void GetValue()
+        {
+            Елемент.Назва = Назва.Text;
+                            Елемент.Склад = Склад.Pointer;
+                    Елемент.Тип = ПсевдонімиПерелічення.ТипККМ_FindByName(Тип.ActiveId);
+                    Елемент.Валюта = Валюта.Pointer;
+                    
+        }
+
+        #endregion
+
+        protected override async ValueTask<bool> Save()
+        {
+            bool isSaved = false;
+            try
+            {
+                if (await Елемент.Save())
+                {
+                    
+                    isSaved = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+            }
+            return isSaved;
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Тип</Name>
+              <Caption>Тип</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ТипККМ</Pointer>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+          </ElementFields>
+          <ElementTableParts />
+        </Form>
+        <Form Modified="0">
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <GeneratedCode><![CDATA[
+/*     
+        КасиККМ.cs
+        Список
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+
+using GeneratedCode;
+using GeneratedCode.Довідники;
+using ТабличніСписки = GeneratedCode.Довідники.ТабличніСписки;
+
+namespace StorageAndTrade
+{
+    public class КасиККМ : ДовідникЖурнал
+    {
+        
+
+        public КасиККМ() : base()
+        {
+            ТабличніСписки.КасиККМ_Записи.AddColumns(TreeViewGrid);
+            
+        }
+
+        #region Override
+
+        public override async ValueTask LoadRecords()
+        {
+            ТабличніСписки.КасиККМ_Записи.ОчиститиВідбір(TreeViewGrid);
+            
+            await ТабличніСписки.КасиККМ_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+        }
+
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            ТабличніСписки.КасиККМ_Записи.ОчиститиВідбір(TreeViewGrid);
+            
+            //Відбори
+            ТабличніСписки.КасиККМ_Записи.ДодатиВідбір(TreeViewGrid, КасиККМ_Функції.Відбори(searchText));
+
+            await ТабличніСписки.КасиККМ_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+        }
+        
+        public async override ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.КасиККМ_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.КасиККМ_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
+        protected override void FillFilterList(ListFilterControl filterControl)
+        {
+            ТабличніСписки.КасиККМ_Записи.CreateFilter(TreeViewGrid, filterControl);
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            await КасиККМ_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords, null);
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            await КасиККМ_Функції.SetDeletionLabel(unigueID);
+        }
+
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        {
+            return await КасиККМ_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new КасиККМ_Pointer(unigueID).GetBasis());
+        }
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, КасиККМ_Const.POINTER);
+             await BeforeLoadRecords();
+        }
+
+        #endregion
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form Modified="0">
+          <Name>Швидкий вибір</Name>
+          <Desc>Швидкий вибір</Desc>
+          <Type>ListSmallSelect</Type>
+          <GeneratedCode><![CDATA[
+/*     
+        КасиККМ_ШвидкийВибір.cs
+        ШвидкийВибір
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+using ТабличніСписки = GeneratedCode.Довідники.ТабличніСписки;
+
+namespace StorageAndTrade
+{
+    class КасиККМ_ШвидкийВибір : ДовідникШвидкийВибір
+    {
+        
+        
+        public КасиККМ_ШвидкийВибір() : base()
+        {
+            ТабличніСписки.КасиККМ_Записи.AddColumns(TreeViewGrid);
+            
+        }
+
+        public override async ValueTask LoadRecords()
+        {
+            ТабличніСписки.КасиККМ_Записи.ОчиститиВідбір(TreeViewGrid);
+            
+            await ТабличніСписки.КасиККМ_Записи.LoadRecords(TreeViewGrid, OpenFolder, SelectPointerItem, DirectoryPointerItem);
+        }
+
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            ТабличніСписки.КасиККМ_Записи.ОчиститиВідбір(TreeViewGrid);
+                        
+            //Відбори
+            ТабличніСписки.КасиККМ_Записи.ДодатиВідбір(TreeViewGrid, КасиККМ_Функції.Відбори(searchText));
+
+            await ТабличніСписки.КасиККМ_Записи.LoadRecords(TreeViewGrid, OpenFolder);
+        }
+
+        protected override async ValueTask OpenPageList(UnigueID? unigueID = null)
+        {
+            КасиККМ page = new КасиККМ()
+            {
+                DirectoryPointerItem = DirectoryPointerItem,
+                CallBack_OnSelectPointer = CallBack_OnSelectPointer,
+                CallBack_OnMultipleSelectPointer = CallBack_OnMultipleSelectPointer,
+                OpenFolder = OpenFolder
+            };
+            
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, КасиККМ_Const.FULLNAME, () => page);
+            await page.SetValue();
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            await  КасиККМ_Функції.OpenPageElement(IsNew, unigueID, null, CallBack_OnSelectPointer);
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            await КасиККМ_Функції.SetDeletionLabel(unigueID);
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form Modified="0">
+          <Name>PointerControl</Name>
+          <Desc>PointerControl</Desc>
+          <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[
+/*     
+        КасиККМ_PointerControl.cs
+        PointerControl
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+
+namespace StorageAndTrade
+{
+    public class КасиККМ_PointerControl : PointerControl
+    {
+        event EventHandler<КасиККМ_Pointer> PointerChanged;
+
+        public КасиККМ_PointerControl()
+        {
+            pointer = new КасиККМ_Pointer();
+            WidthPresentation = 300;
+            Caption = $"{КасиККМ_Const.FULLNAME}:";
+            PointerChanged += async (_, pointer) => Presentation = pointer != null ? await pointer.GetPresentation() : "";
+        }
+
+        КасиККМ_Pointer pointer;
+        public КасиККМ_Pointer Pointer
+        {
+            get
+            {
+                return pointer;
+            }
+            set
+            {
+                pointer = value;
+                PointerChanged?.Invoke(null, pointer);
+            }
+        }
+
+        
+
+        protected override async void OpenSelect(object? sender, EventArgs args)
+        {
+            Popover popover = new Popover((Button)sender!) { Position = PositionType.Bottom, BorderWidth = 2 };
+            BeforeClickOpenFunc?.Invoke();
+            КасиККМ_ШвидкийВибір page = new КасиККМ_ШвидкийВибір() 
+            { 
+                PopoverParent = popover, 
+                DirectoryPointerItem = Pointer.UnigueID,
+                OpenFolder = OpenFolder,
+                CallBack_OnSelectPointer = selectPointer =>
+                {
+                    Pointer = new КасиККМ_Pointer(selectPointer);
+                    AfterSelectFunc?.Invoke();
+                }
+            };
+            
+            popover.Add(page);
+            popover.ShowAll();
+
+            await page.SetValue();
+        }
+
+        protected override void OnClear(object? sender, EventArgs args)
+        {
+            Pointer = new КасиККМ_Pointer();
+            AfterSelectFunc?.Invoke();
+            AfterClearFunc?.Invoke();
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+        </Form>
+      </Forms>
+    </Directory>
   </Directories>
   <Documents>
     <Document>
@@ -17826,7 +18526,7 @@ FROM
       </TriggerFunctions>
       <SpendFunctions>
         <Spend Action="1">Spend</Spend>
-        <ClearSpend Action="0">ClearSpend</ClearSpend>
+        <ClearSpend Action="1">ClearSpend</ClearSpend>
       </SpendFunctions>
       <Forms>
         <Form Modified="0">
@@ -33124,6 +33824,1975 @@ FROM
         </Form>
       </Forms>
     </Document>
+    <Document>
+      <Name>ЧекККМ</Name>
+      <FullName>Чек ККМ</FullName>
+      <Table>tab_b51</Table>
+      <Desc>Документ "Чек  контрольно-касової машини" призначений для оформлення масового продажу товарів населенню в роздріб</Desc>
+      <AutoNum>1</AutoNum>
+      <VersionsHistory>1</VersionsHistory>
+      <ExportXml>0</ExportXml>
+      <PredefinedFields>
+        <PredefinedField>
+          <Name>uid</Name>
+          <NameInTable>uid</NameInTable>
+          <Type>any_pointer</Type>
+          <IsPrimaryKey>1</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>deletion_label</Name>
+          <NameInTable>deletion_label</NameInTable>
+          <Type>boolean</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>1</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>spend</Name>
+          <NameInTable>spend</NameInTable>
+          <Type>boolean</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>1</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>spend_date</Name>
+          <NameInTable>spend_date</NameInTable>
+          <Type>timestamp without time zone</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+      </PredefinedFields>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <FullName>Назва</FullName>
+          <NameInTable>docname</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+          <IsPresentation>1</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <FullName>Номер</FullName>
+          <NameInTable>docnomer</NameInTable>
+          <Type>string</Type>
+          <Desc>Номер документу</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>ДатаДок</Name>
+          <FullName>Дата</FullName>
+          <NameInTable>docdate</NameInTable>
+          <Type>datetime</Type>
+          <Desc>Дата документу</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>1</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
+          <FullName>Коментар</FullName>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Коментар</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Основа</Name>
+          <FullName>Основа</FullName>
+          <NameInTable>col_a2</NameInTable>
+          <Type>composite_pointer</Type>
+          <Desc>Основа</Desc>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>Організація</Name>
+          <FullName>Організація</FullName>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Організації</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>Валюта</Name>
+          <FullName>Валюта</FullName>
+          <NameInTable>col_a4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Валюти</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>СумаДокументу</Name>
+          <FullName>Сума документу</FullName>
+          <NameInTable>col_a5</NameInTable>
+          <Type>numeric</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>Склад</Name>
+          <FullName>Склад</FullName>
+          <NameInTable>col_a7</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Склади</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>КасаККМ</Name>
+          <FullName>Каса ККМ</FullName>
+          <NameInTable>col_a8</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.КасиККМ</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>Автор</Name>
+          <FullName>Автор</FullName>
+          <NameInTable>col_a9</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Користувачі</Pointer>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>КлючовіСловаДляПошуку</Name>
+          <FullName>Ключові слова для пошуку</FullName>
+          <NameInTable>col_b1</NameInTable>
+          <Type>string</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>1</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+          <Multiline>0</Multiline>
+        </Field>
+        <Field>
+          <Name>Знижка</Name>
+          <FullName>Знижка</FullName>
+          <NameInTable>col_a6</NameInTable>
+          <Type>numeric</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+        <Field>
+          <Name>СумаБезЗнижки</Name>
+          <FullName>Сума без знижки</FullName>
+          <NameInTable>col_b2</NameInTable>
+          <Type>numeric</Type>
+          <IsPresentation>0</IsPresentation>
+          <IsIndex>0</IsIndex>
+          <IsFullTextSearch>0</IsFullTextSearch>
+          <IsSearch>0</IsSearch>
+          <IsExport>0</IsExport>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>Товари</Name>
+          <FullName>Товари</FullName>
+          <Table>tab_b50</Table>
+          <VersionsHistory>1</VersionsHistory>
+          <PredefinedFields>
+            <PredefinedField>
+              <Name>uid</Name>
+              <NameInTable>uid</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>1</IsPrimaryKey>
+              <IsIndex>0</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+            <PredefinedField>
+              <Name>owner</Name>
+              <NameInTable>owner</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>0</IsPrimaryKey>
+              <IsIndex>1</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+          </PredefinedFields>
+          <Fields>
+            <Field>
+              <Name>НомерРядка</Name>
+              <FullName>НомерРядка</FullName>
+              <NameInTable>col_a1</NameInTable>
+              <Type>integer</Type>
+              <Desc>НомерРядка</Desc>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+              <AutomaticNumbering>1</AutomaticNumbering>
+            </Field>
+            <Field>
+              <Name>Номенклатура</Name>
+              <FullName>Номенклатура</FullName>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>ХарактеристикаНоменклатури</Name>
+              <FullName>Характеристика номенклатури</FullName>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Серія</Name>
+              <FullName>Серія</FullName>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.СеріїНоменклатури</Pointer>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Пакування</Name>
+              <FullName>Пакування</FullName>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>КількістьУпаковок</Name>
+              <FullName>Кількість упаковок</FullName>
+              <NameInTable>col_a6</NameInTable>
+              <Type>integer</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+              <AutomaticNumbering>0</AutomaticNumbering>
+            </Field>
+            <Field>
+              <Name>Кількість</Name>
+              <FullName>Кількість</FullName>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <FullName>Ціна</FullName>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <FullName>Сума</FullName>
+              <NameInTable>col_a9</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Знижка</Name>
+              <FullName>Знижка</FullName>
+              <NameInTable>col_b1</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>ВидЦіни</Name>
+              <FullName>Вид ціни</FullName>
+              <NameInTable>col_b2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.ВидиЦін</Pointer>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>СумаБезЗнижки</Name>
+              <FullName>Сума без знижки</FullName>
+              <NameInTable>col_b3</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+          </Fields>
+          <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
+          <Forms>
+            <Form Modified="1">
+              <Name>Таблична частина Товари</Name>
+              <Desc>Таблична частина Товари</Desc>
+              <Type>TablePart</Type>
+              <GeneratedCode><![CDATA[
+/*
+        ЧекККМ_ТабличнаЧастина_Товари.cs
+        Таблична Частина
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Довідники;
+using GeneratedCode.Документи;
+using GeneratedCode.Перелічення;
+
+
+namespace StorageAndTrade
+{
+    class ЧекККМ_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
+    {
+        
+        public ЧекККМ_Objest? ЕлементВласник { get; set; }
+            
+        
+        #region Записи
+
+        enum Columns
+        {
+            НомерРядка,
+            Номенклатура,
+            ХарактеристикаНоменклатури,
+            Серія,
+            КількістьУпаковок,
+            Пакування,
+            Кількість,
+            ВидЦіни,
+            Ціна,
+            СумаБезЗнижки,
+            Сума,
+            Знижка,
+            
+        }
+
+        ListStore Store = new ListStore([
+            
+            typeof(int), //НомерРядка
+            typeof(string), //Номенклатура
+            typeof(string), //ХарактеристикаНоменклатури
+            typeof(string), //Серія
+            typeof(int), //КількістьУпаковок
+            typeof(string), //Пакування
+            typeof(float), //Кількість
+            typeof(string), //ВидЦіни
+            typeof(float), //Ціна
+            typeof(float), //СумаБезЗнижки
+            typeof(float), //Сума
+            typeof(float), //Знижка
+        ]);
+
+        List<Запис> Записи = [];
+
+        private class Запис
+        {
+            public Guid ID { get; set; } = Guid.Empty;
+            public int НомерРядка { get; set; } = 0;
+            public Номенклатура_Pointer Номенклатура { get; set; } = new Номенклатура_Pointer();
+            public ХарактеристикиНоменклатури_Pointer ХарактеристикаНоменклатури { get; set; } = new ХарактеристикиНоменклатури_Pointer();
+            public СеріїНоменклатури_Pointer Серія { get; set; } = new СеріїНоменклатури_Pointer();
+            public int КількістьУпаковок { get; set; } = 0;
+            public ПакуванняОдиниціВиміру_Pointer Пакування { get; set; } = new ПакуванняОдиниціВиміру_Pointer();
+            public decimal Кількість { get; set; } = 0;
+            public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
+            public decimal Ціна { get; set; } = 0;
+            public decimal СумаБезЗнижки { get; set; } = 0;
+            public decimal Сума { get; set; } = 0;
+            public decimal Знижка { get; set; } = 0;
+            
+
+            public object[] ToArray()
+            {
+                return
+                [   
+                    НомерРядка,
+                    Номенклатура.Назва,
+                    ХарактеристикаНоменклатури.Назва,
+                    Серія.Назва,
+                    КількістьУпаковок,
+                    Пакування.Назва,
+                    (float)Кількість,
+                    ВидЦіни.Назва,
+                    (float)Ціна,
+                    (float)СумаБезЗнижки,
+                    (float)Сума,
+                    (float)Знижка,
+                    
+                ];
+            }
+
+            public static Запис Clone(Запис запис)
+            {
+                return new Запис
+                {
+                    ID = Guid.Empty,
+                    НомерРядка = запис.НомерРядка,
+                    Номенклатура = запис.Номенклатура.Copy(),
+                    ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури.Copy(),
+                    Серія = запис.Серія.Copy(),
+                    КількістьУпаковок = запис.КількістьУпаковок,
+                    Пакування = запис.Пакування.Copy(),
+                    Кількість = запис.Кількість,
+                    ВидЦіни = запис.ВидЦіни.Copy(),
+                    Ціна = запис.Ціна,
+                    СумаБезЗнижки = запис.СумаБезЗнижки,
+                    Сума = запис.Сума,
+                    Знижка = запис.Знижка,
+                    
+                };
+            }
+            
+            public static async ValueTask ПісляЗміни_Номенклатура(Запис запис)
+            {
+                await запис.Номенклатура.GetPresentation();
+            }
+                    
+            public static async ValueTask ПісляЗміни_ХарактеристикаНоменклатури(Запис запис)
+            {
+                await запис.ХарактеристикаНоменклатури.GetPresentation();
+            }
+                    
+            public static async ValueTask ПісляЗміни_Серія(Запис запис)
+            {
+                await запис.Серія.GetPresentation();
+            }
+                    
+            public static async ValueTask ПісляЗміни_Пакування(Запис запис)
+            {
+                await запис.Пакування.GetPresentation();
+            }
+                    
+            public static async ValueTask ПісляЗміни_ВидЦіни(Запис запис)
+            {
+                await запис.ВидЦіни.GetPresentation();
+            }
+                    
+        }
+
+        #endregion
+
+        public ЧекККМ_ТабличнаЧастина_Товари()
+        {
+            TreeViewGrid.Model = Store;
+            AddColumn();
+        }
+
+        void AddColumn()
+        {
+            
+            //НомерРядка
+            {
+                
+                TreeViewColumn column = new TreeViewColumn("№", new CellRendererText() { Xalign = 1 }, "text", (int)Columns.НомерРядка) { Alignment = 1, MinWidth = 30 };
+                            
+                SetColIndex(column, Columns.НомерРядка);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Номенклатура
+            {
+                
+                TreeViewColumn column = new TreeViewColumn("Номенклатура", new CellRendererText(), "text", (int)Columns.Номенклатура) { Resizable = true, MinWidth = 200 };
+                    
+                SetColIndex(column, Columns.Номенклатура);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //ХарактеристикаНоменклатури
+            {
+                
+                TreeViewColumn column = new TreeViewColumn("Характеристика", new CellRendererText(), "text", (int)Columns.ХарактеристикаНоменклатури) { Resizable = true, MinWidth = 200 };
+                    
+                SetColIndex(column, Columns.ХарактеристикаНоменклатури);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Серія
+            {
+                
+                TreeViewColumn column = new TreeViewColumn("Серія", new CellRendererText(), "text", (int)Columns.Серія) { Resizable = true, MinWidth = 200 };
+                    
+                SetColIndex(column, Columns.Серія);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //КількістьУпаковок
+            {
+                
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Коєфіціент", cellNumber, "text", (int)Columns.КількістьУпаковок) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+                            
+                SetColIndex(column, Columns.КількістьУпаковок);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Пакування
+            {
+                
+                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 200 };
+                    
+                SetColIndex(column, Columns.Пакування);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Кількість
+            {
+                
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Кількість", cellNumber, "text", (int)Columns.Кількість) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+                            
+                SetColIndex(column, Columns.Кількість);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //ВидЦіни
+            {
+                
+                TreeViewColumn column = new TreeViewColumn("Вид ціни", new CellRendererText(), "text", (int)Columns.ВидЦіни) { Resizable = true, MinWidth = 200 };
+                    
+                SetColIndex(column, Columns.ВидЦіни);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Ціна
+            {
+                
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Ціна", cellNumber, "text", (int)Columns.Ціна) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+                            
+                SetColIndex(column, Columns.Ціна);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //СумаБезЗнижки
+            {
+                
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Сума без знижки", cellNumber, "text", (int)Columns.СумаБезЗнижки) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+                            
+                SetColIndex(column, Columns.СумаБезЗнижки);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Сума
+            {
+                
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Сума", cellNumber, "text", (int)Columns.Сума) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+                            
+                SetColIndex(column, Columns.Сума);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Знижка
+            {
+                
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Знижка", cellNumber, "text", (int)Columns.Знижка) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+                            
+                SetColIndex(column, Columns.Знижка);
+                TreeViewGrid.AppendColumn(column);
+            }
+            
+            //Колонка пустишка для заповнення вільного простору
+            TreeViewGrid.AppendColumn(new TreeViewColumn());            
+        }
+        #region Load and Save
+
+        public override async ValueTask LoadRecords()
+        {
+            
+            if (ЕлементВласник != null) 
+            {
+                
+                ЕлементВласник.Товари_TablePart.FillJoin([ЧекККМ_Товари_TablePart.НомерРядка,]);
+                await ЕлементВласник.Товари_TablePart.Read();
+                
+
+            Записи.Clear();
+            Store.Clear();
+
+            
+            foreach (ЧекККМ_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
+            {
+                Запис запис = new Запис
+                {
+                    ID = record.UID,
+                    НомерРядка = record.НомерРядка,
+                    Номенклатура = record.Номенклатура,
+                    ХарактеристикаНоменклатури = record.ХарактеристикаНоменклатури,
+                    Серія = record.Серія,
+                    КількістьУпаковок = record.КількістьУпаковок,
+                    Пакування = record.Пакування,
+                    Кількість = record.Кількість,
+                    ВидЦіни = record.ВидЦіни,
+                    Ціна = record.Ціна,
+                    СумаБезЗнижки = record.СумаБезЗнижки,
+                    Сума = record.Сума,
+                    Знижка = record.Знижка,
+                    
+                };
+
+                Записи.Add(запис);
+                Store.AppendValues(запис.ToArray());
+            }
+            }
+            SelectRowActivated();
+        }
+
+        public override async ValueTask SaveRecords()
+        {
+            
+            if (ЕлементВласник != null)
+            {
+            ЕлементВласник.Товари_TablePart.Records.Clear();
+            foreach (Запис запис in Записи)
+            {
+                ЕлементВласник.Товари_TablePart.Records.Add(new ЧекККМ_Товари_TablePart.Record()
+                {
+                    UID = запис.ID,
+                    НомерРядка = запис.НомерРядка,
+                    Номенклатура = запис.Номенклатура,
+                    ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури,
+                    Серія = запис.Серія,
+                    КількістьУпаковок = запис.КількістьУпаковок,
+                    Пакування = запис.Пакування,
+                    Кількість = запис.Кількість,
+                    ВидЦіни = запис.ВидЦіни,
+                    Ціна = запис.Ціна,
+                    СумаБезЗнижки = запис.СумаБезЗнижки,
+                    Сума = запис.Сума,
+                    Знижка = запис.Знижка,
+                    
+                });
+            }
+            await ЕлементВласник.Товари_TablePart.Save(true);
+            await LoadRecords();
+            }
+        }
+
+        /*public string КлючовіСловаДляПошуку()
+        {
+            
+            string keyWords = "";
+            foreach (Запис запис in Записи)
+                keyWords += $"\n {запис.Номенклатура.Назва} {запис.ХарактеристикаНоменклатури.Назва} {запис.Серія.Назва} {запис.Пакування.Назва} {запис.ВидЦіни.Назва}";
+            
+            return keyWords;
+        }*/
+
+        #endregion
+
+        #region Func
+
+        
+        protected override ФормаЖурнал? OpenSelect(TreeIter iter, int rowNumber, int colNumber)
+        {
+            Запис запис = Записи[rowNumber];
+            switch ((Columns)colNumber)
+            {
+                case Columns.Номенклатура:
+                {
+                    Номенклатура_ШвидкийВибір page = new()
+                    {
+                        DirectoryPointerItem = запис.Номенклатура.UnigueID,
+                        CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                        {
+                            запис.Номенклатура = new Номенклатура_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_Номенклатура(запис);
+                            Store.SetValues(iter, запис.ToArray());
+                        }
+                    };
+                    return page;
+                }
+                case Columns.ХарактеристикаНоменклатури:
+                {
+                    ХарактеристикиНоменклатури_ШвидкийВибір page = new()
+                    {
+                        DirectoryPointerItem = запис.ХарактеристикаНоменклатури.UnigueID,
+                        CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                        {
+                            запис.ХарактеристикаНоменклатури = new ХарактеристикиНоменклатури_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_ХарактеристикаНоменклатури(запис);
+                            Store.SetValues(iter, запис.ToArray());
+                        }
+                    };
+                    return page;
+                }
+                case Columns.Серія:
+                {
+                    СеріїНоменклатури_ШвидкийВибір page = new()
+                    {
+                        DirectoryPointerItem = запис.Серія.UnigueID,
+                        CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                        {
+                            запис.Серія = new СеріїНоменклатури_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_Серія(запис);
+                            Store.SetValues(iter, запис.ToArray());
+                        }
+                    };
+                    return page;
+                }
+                case Columns.Пакування:
+                {
+                    ПакуванняОдиниціВиміру_ШвидкийВибір page = new()
+                    {
+                        DirectoryPointerItem = запис.Пакування.UnigueID,
+                        CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                        {
+                            запис.Пакування = new ПакуванняОдиниціВиміру_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_Пакування(запис);
+                            Store.SetValues(iter, запис.ToArray());
+                        }
+                    };
+                    return page;
+                }
+                case Columns.ВидЦіни:
+                {
+                    ВидиЦін_ШвидкийВибір page = new()
+                    {
+                        DirectoryPointerItem = запис.ВидЦіни.UnigueID,
+                        CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
+                        {
+                            запис.ВидЦіни = new ВидиЦін_Pointer(selectPointer);
+                            await Запис.ПісляЗміни_ВидЦіни(запис);
+                            Store.SetValues(iter, запис.ToArray());
+                        }
+                    };
+                    return page;
+                }
+                
+                default: return null;
+            }
+        }
+
+        protected override void ClearCell(TreeIter iter, int rowNumber, int colNumber)
+        {
+            Запис запис = Записи[rowNumber];
+            switch ((Columns)colNumber)
+            {
+                case Columns.Номенклатура: { запис.Номенклатура.Clear(); break; }
+                case Columns.ХарактеристикаНоменклатури: { запис.ХарактеристикаНоменклатури.Clear(); break; }
+                case Columns.Серія: { запис.Серія.Clear(); break; }
+                case Columns.Пакування: { запис.Пакування.Clear(); break; }
+                case Columns.ВидЦіни: { запис.ВидЦіни.Clear(); break; }
+                
+                default: break;             
+            }
+            Store.SetValues(iter, запис.ToArray());
+        }
+        
+        protected override void ChangeCell(TreeIter iter, int rowNumber, int colNumber, string newText)
+        {
+            Запис запис = Записи[rowNumber];
+            switch ((Columns)colNumber)
+            {
+                case Columns.КількістьУпаковок: { var (check, value) = Validate.IsInt(newText); if (check) запис.КількістьУпаковок = value; break; }
+                case Columns.Кількість: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Кількість = value; break; }
+                case Columns.Ціна: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Ціна = value; break; }
+                case Columns.СумаБезЗнижки: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.СумаБезЗнижки = value; break; }
+                case Columns.Сума: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Сума = value; break; }
+                case Columns.Знижка: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Знижка = value; break; }
+                
+                default: break;
+            }
+            Store.SetValues(iter, запис.ToArray());
+        }
+        
+        void NumericCellDataFunc(TreeViewColumn column, CellRenderer cell, ITreeModel model, TreeIter iter)
+        {
+            if (GetColIndex(column, out int colNumber))
+            {
+                int rowNumber = int.Parse(Store.GetPath(iter).ToString());
+                if (rowNumber >= 0 && rowNumber < Записи.Count)
+                {
+                    Запис запис = Записи[rowNumber];
+
+                    CellRendererText cellText = (CellRendererText)cell;
+                    cellText.Foreground = "green";
+
+                    switch ((Columns)colNumber)
+                    {
+                        
+                        case Columns.КількістьУпаковок:
+                        {
+                            cellText.Text = запис.КількістьУпаковок.ToString();
+                            break;
+                        }
+                        
+                        case Columns.Кількість:
+                        {
+                            cellText.Text = запис.Кількість.ToString();
+                            break;
+                        }
+                        
+                        case Columns.Ціна:
+                        {
+                            cellText.Text = запис.Ціна.ToString();
+                            break;
+                        }
+                        
+                        case Columns.СумаБезЗнижки:
+                        {
+                            cellText.Text = запис.СумаБезЗнижки.ToString();
+                            break;
+                        }
+                        
+                        case Columns.Сума:
+                        {
+                            cellText.Text = запис.Сума.ToString();
+                            break;
+                        }
+                        
+                        case Columns.Знижка:
+                        {
+                            cellText.Text = запис.Знижка.ToString();
+                            break;
+                        }
+                        
+                        default: break;
+                    }
+                }
+            }
+        }
+        
+
+        #endregion
+
+        #region ToolBar
+
+        (Запис запис, TreeIter iter) НовийЗапис()
+        {
+            Запис запис = new Запис();
+            Записи.Add(запис);
+
+            TreeIter iter = Store.AppendValues(запис.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+
+            return (запис, iter);
+        }
+
+        protected override void AddRecord()
+        {
+            НовийЗапис();
+        }
+
+        protected override void CopyRecord(int rowNumber)
+        {
+            Запис запис = Записи[rowNumber];
+            Запис записНовий = Запис.Clone(запис);
+            Записи.Add(записНовий);
+
+            TreeIter iter = Store.AppendValues(записНовий.ToArray());
+            TreeViewGrid.SetCursor(Store.GetPath(iter), TreeViewGrid.Columns[0], false);
+        }
+
+        protected override void DeleteRecord(TreeIter iter, int rowNumber)
+        {
+            Запис запис = Записи[rowNumber];
+            Записи.Remove(запис);
+            Store.Remove(ref iter);
+        }
+
+        #endregion
+    }
+}
+    ]]></GeneratedCode>
+              <NotSaveToFile>0</NotSaveToFile>
+              <ElementFields>
+                <Field>
+                  <Name>НомерРядка</Name>
+                  <Caption>№</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>1</SortNum>
+                  <Type>integer</Type>
+                  <AutomaticNumbering>1</AutomaticNumbering>
+                </Field>
+                <Field>
+                  <Name>Номенклатура</Name>
+                  <Caption>Номенклатура</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>2</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Номенклатура</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
+                </Field>
+                <Field>
+                  <Name>ХарактеристикаНоменклатури</Name>
+                  <Caption>Характеристика</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>3</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ХарактеристикиНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
+                </Field>
+                <Field>
+                  <Name>Серія</Name>
+                  <Caption>Серія</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>4</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.СеріїНоменклатури</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Номер</Field>
+                  </PresetntationFields>
+                </Field>
+                <Field>
+                  <Name>КількістьУпаковок</Name>
+                  <Caption>Коєфіціент</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>5</SortNum>
+                  <Type>integer</Type>
+                  <AutomaticNumbering>0</AutomaticNumbering>
+                </Field>
+                <Field>
+                  <Name>Пакування</Name>
+                  <Caption>Пакування</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>6</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ПакуванняОдиниціВиміру</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
+                </Field>
+                <Field>
+                  <Name>Кількість</Name>
+                  <Caption>Кількість</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>7</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>ВидЦіни</Name>
+                  <Caption>Вид ціни</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>8</SortNum>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.ВидиЦін</Pointer>
+                  <PresetntationFields Count="1">
+                    <Field>Назва</Field>
+                  </PresetntationFields>
+                </Field>
+                <Field>
+                  <Name>Ціна</Name>
+                  <Caption>Ціна</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>9</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>СумаБезЗнижки</Name>
+                  <Caption>Сума без знижки</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>99</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>Сума</Name>
+                  <Caption>Сума</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>100</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+                <Field>
+                  <Name>Знижка</Name>
+                  <Caption>Знижка</Caption>
+                  <Size>0</Size>
+                  <Height>0</Height>
+                  <SortNum>100</SortNum>
+                  <Type>numeric</Type>
+                </Field>
+              </ElementFields>
+              <IncludeIconColumn>0</IncludeIconColumn>
+            </Form>
+          </Forms>
+        </TablePart>
+      </TabularParts>
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>Номер</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>Дата</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>5</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <SortNum>7</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>СумаБезЗнижки</Name>
+              <Caption>Сума без знижки</Caption>
+              <Size>0</Size>
+              <SortNum>8</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Знижка</Name>
+              <Caption>Знижка</Caption>
+              <Size>0</Size>
+              <SortNum>95</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>96</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <SortNum>97</SortNum>
+              <SortField>True</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+            </Field>
+            <Field>
+              <Name>КасаККМ</Name>
+              <Caption>КасаККМ</Caption>
+              <Size>0</Size>
+              <SortNum>98</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КасиККМ</Pointer>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <SortNum>99</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <AllowRegisterAccumulation>
+        <Name>ТовариНаСкладах</Name>
+        <Name>ВільніЗалишки</Name>
+        <Name>РухКоштівККМ</Name>
+      </AllowRegisterAccumulation>
+      <TriggerFunctions>
+        <New Action="1">New</New>
+        <Copying Action="1">Copying</Copying>
+        <BeforeSave Action="1">BeforeSave</BeforeSave>
+        <AfterSave Action="0">AfterSave</AfterSave>
+        <SetDeletionLabel Action="0">SetDeletionLabel</SetDeletionLabel>
+        <BeforeDelete Action="0">BeforeDelete</BeforeDelete>
+      </TriggerFunctions>
+      <SpendFunctions>
+        <Spend Action="1">Spend</Spend>
+        <ClearSpend Action="0">Clear</ClearSpend>
+      </SpendFunctions>
+      <Forms>
+        <Form Modified="0">
+          <Name>Проведення документу</Name>
+          <Desc>Проведення документу</Desc>
+          <Type>SpendTheDocument</Type>
+          <GeneratedCode><![CDATA[
+
+/*
+        ЧекККМ_SpendTheDocument.cs
+        Модуль проведення документу
+*/
+
+using AccountingSoftware;
+using GeneratedCode;
+
+using GeneratedCode.Довідники;
+using GeneratedCode.РегістриНакопичення;
+using GeneratedCode.РегістриВідомостей;
+
+namespace GeneratedCode.Документи
+{
+    static class ЧекККМ_SpendTheDocument
+    {
+        public static async ValueTask<bool> Spend(ЧекККМ_Objest ДокументОбєкт)
+        {
+            try
+            {
+                // Проведення документу
+                // ...
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await СпільніФункції.ДокументНеПроводиться(ДокументОбєкт, ДокументОбєкт.Назва, ex.Message);
+                return false;
+            }
+        }
+
+        public static async ValueTask Clear(ЧекККМ_Objest ДокументОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+        </Form>
+        <Form Modified="0">
+          <Name>Тригери</Name>
+          <Desc>Тригери</Desc>
+          <Type>Triggers</Type>
+          <GeneratedCode><![CDATA[
+
+/*
+        ЧекККМ_Triggers.cs
+        Тригери
+*/
+
+using GeneratedCode.Константи;
+using AccountingSoftware;
+
+namespace GeneratedCode.Документи
+{
+    static class ЧекККМ_Triggers
+    {
+        public static async ValueTask New(ЧекККМ_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.НомерДок = (++НумераціяДокументів.ЧекККМ_Const).ToString("D8");
+            ДокументОбєкт.ДатаДок = DateTime.Now;
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask Copying(ЧекККМ_Objest ДокументОбєкт, ЧекККМ_Objest Основа)
+        {
+            
+            ДокументОбєкт.Назва += " - Копія";
+            
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask BeforeSave(ЧекККМ_Objest ДокументОбєкт)
+        {
+            ДокументОбєкт.Назва = $"{ЧекККМ_Const.FULLNAME} №{ДокументОбєкт.НомерДок} від {ДокументОбєкт.ДатаДок.ToString("dd.MM.yyyy")}";
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask AfterSave(ЧекККМ_Objest ДокументОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask SetDeletionLabel(ЧекККМ_Objest ДокументОбєкт, bool label)
+        {
+            await ValueTask.FromResult(true);
+        }
+
+        public static async ValueTask BeforeDelete(ЧекККМ_Objest ДокументОбєкт)
+        {
+            await ValueTask.FromResult(true);
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+        </Form>
+        <Form Modified="0">
+          <Name>Функції</Name>
+          <Desc>Функції</Desc>
+          <Type>Function</Type>
+          <GeneratedCode><![CDATA[
+
+/*
+        ЧекККМ_Функції.cs
+        Функції
+*/
+
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Документи;
+
+namespace StorageAndTrade
+{
+    static class ЧекККМ_Функції
+    {
+        public static List<Where> Відбори(string searchText)
+        {
+            return
+            [
+                
+                //Назва
+                new Where(ЧекККМ_Const.Назва, Comparison.LIKE, searchText) { FuncToField = "TO_CHAR", FuncToField_Param1 = "''" },
+                        
+            ];
+        }
+
+        public static async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null, 
+            Action<UnigueID?>? сallBack_LoadRecords = null)
+        {
+            ЧекККМ_Елемент page = new ЧекККМ_Елемент
+            {
+                IsNew = IsNew,
+                CallBack_LoadRecords = сallBack_LoadRecords
+            };
+
+            if (IsNew)
+                await page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return;
+            }
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, page.Caption, () => page);
+            await NotebookFunction.AddLockObjectFunc(Program.GeneralNotebook, page.Name, page.Елемент);
+            await page.LockInfo(page.Елемент);
+            page.SetValue();
+        }
+
+        public static async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            ЧекККМ_Pointer Вказівник = new(unigueID);
+            bool? label = await Вказівник.GetDeletionLabel();
+            if (label.HasValue) await Вказівник.SetDeletionLabel(!label.Value);
+        }
+
+        public static async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        {
+            ЧекККМ_Objest Обєкт = new ЧекККМ_Objest();
+            if (await Обєкт.Read(unigueID))
+            {
+                ЧекККМ_Objest Новий = await Обєкт.Copy(true);
+                await Новий.Save();
+                
+                    await Новий.Товари_TablePart.Save(false); // Таблична частина "Товари"
+                
+                return Новий.UnigueID;
+            }
+            else
+            {
+                Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
+                return null;
+            }
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+        </Form>
+        <Form Modified="0">
+          <Name>Елемент</Name>
+          <Desc>Елемент</Desc>
+          <Type>Element</Type>
+          <GeneratedCode><![CDATA[
+/*
+        ЧекККМ_Елемент.cs
+        Елемент
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+
+using GeneratedCode;
+using GeneratedCode.Константи;
+using GeneratedCode.Довідники;
+using GeneratedCode.Документи;
+using GeneratedCode.Перелічення;
+
+namespace StorageAndTrade
+{
+    class ЧекККМ_Елемент : ДокументЕлемент
+    {
+        public ЧекККМ_Objest Елемент { get; init; } = new ЧекККМ_Objest();
+
+        #region Fields
+        Entry НомерДок = new Entry() { WidthRequest = 500 };
+                        DateTimeControl ДатаДок = new DateTimeControl();
+                Entry Коментар = new Entry() { WidthRequest = 500 };
+                        CompositePointerControl Основа = new CompositePointerControl() { BoundConfType = "Документи.ЧекККМ.Основа" };
+                Організації_PointerControl Організація = new Організації_PointerControl() { Caption = "Організація", WidthPresentation = 500 };
+                Валюти_PointerControl Валюта = new Валюти_PointerControl() { Caption = "Валюта", WidthPresentation = 500 };
+                NumericControl СумаДокументу = new NumericControl();
+                Склади_PointerControl Склад = new Склади_PointerControl() { Caption = "Склад", WidthPresentation = 500 };
+                Користувачі_PointerControl Автор = new Користувачі_PointerControl() { Caption = "Автор", WidthPresentation = 500 };
+                КасиККМ_PointerControl КасаККМ = new КасиККМ_PointerControl() { Caption = "КасаККМ", WidthPresentation = 500 };
+                
+        #endregion
+
+        #region TabularParts
+        
+            // Таблична частина "Товари" 
+            ЧекККМ_ТабличнаЧастина_Товари Товари = new ЧекККМ_ТабличнаЧастина_Товари() { WidthRequest = 500, HeightRequest = 300 };
+        
+        #endregion
+
+        public ЧекККМ_Елемент()
+        {
+            Елемент.UnigueIDChanged += UnigueIDChanged;
+            Елемент.CaptionChanged += CaptionChanged;
+
+            CreateDocName(ЧекККМ_Const.FULLNAME, НомерДок, ДатаДок);
+            
+            CreateField(HBoxComment, "Коментар:", Коментар);
+            
+                // Таблична частина "Товари" 
+                NotebookTablePart.InsertPage(Товари, new Label("Товари"), 0);
+                
+                NotebookTablePart.CurrentPage = 0;
+            
+        }
+
+        protected override void CreateContainer1(Box vBox)
+        {
+            
+        }
+
+        protected override void CreateContainer2(Box vBox)
+        {
+           
+        }
+
+        protected override void CreateContainer3(Box vBox)
+        {
+            
+                // Основа
+                CreateField(vBox, null, Основа);
+                    
+                // Організація
+                CreateField(vBox, null, Організація);
+                    
+                // Валюта
+                CreateField(vBox, null, Валюта);
+                    
+                // СумаДокументу
+                CreateField(vBox, "СумаДокументу:", СумаДокументу);
+                            
+                // Склад
+                CreateField(vBox, null, Склад);
+                    
+                // Автор
+                CreateField(vBox, null, Автор);
+                    
+                // КасаККМ
+                CreateField(vBox, null, КасаККМ);
+                    
+        }
+
+        protected override void CreateContainer4(Box vBox)
+        {
+            
+        }
+
+        #region Присвоєння / зчитування значень
+
+        public override async void SetValue()
+        {
+            НомерДок.Text = Елемент.НомерДок;
+                            ДатаДок.Value = Елемент.ДатаДок;
+                    Коментар.Text = Елемент.Коментар;
+                            Основа.Pointer = Елемент.Основа;
+                    Організація.Pointer = Елемент.Організація;
+                    Валюта.Pointer = Елемент.Валюта;
+                    СумаДокументу.Value = Елемент.СумаДокументу;
+                    Склад.Pointer = Елемент.Склад;
+                    Автор.Pointer = Елемент.Автор;
+                    КасаККМ.Pointer = Елемент.КасаККМ;
+                    
+                // Таблична частина "Товари" 
+                Товари.ЕлементВласник = Елемент; 
+                await Товари.LoadRecords();
+            
+        }
+
+        protected override void GetValue()
+        {
+            Елемент.НомерДок = НомерДок.Text;
+                            Елемент.ДатаДок = ДатаДок.Value;
+                    Елемент.Коментар = Коментар.Text;
+                            Елемент.Основа = Основа.Pointer;
+                    Елемент.Організація = Організація.Pointer;
+                    Елемент.Валюта = Валюта.Pointer;
+                    Елемент.СумаДокументу = СумаДокументу.Value;
+                    Елемент.Склад = Склад.Pointer;
+                    Елемент.Автор = Автор.Pointer;
+                    Елемент.КасаККМ = КасаККМ.Pointer;
+                    
+        }
+
+        
+        /*string КлючовіСловаДляПошуку()
+        {
+            return "\n {Організація.Назва} {Валюта.Назва} {Склад.Назва} {Автор.Назва} {КасаККМ.Назва}"
+             + Товари.КлючовіСловаДляПошуку();
+        }*/
+        
+
+        #endregion
+        
+        protected override async ValueTask<bool> Save()
+        {
+            bool isSaved = false;
+            try
+            {
+                if(await Елемент.Save())
+                {
+                    await Товари.SaveRecords(); // Таблична частина "Товари"
+                    
+                    isSaved = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ФункціїДляПовідомлень.ДодатиПовідомлення(Елемент.GetBasis(), Caption, ex);
+            }
+            return isSaved;
+        }
+
+        protected override async ValueTask<bool> SpendTheDocument(bool spendDoc)
+        {
+            if (spendDoc)
+            {
+                bool isSpend = await Елемент.SpendTheDocument(Елемент.ДатаДок);
+                if (!isSpend) ФункціїДляПовідомлень.ПоказатиПовідомлення(Елемент.UnigueID);
+                return isSpend;
+            }
+            else
+            {
+                await Елемент.ClearSpendTheDocument();
+                return true;
+            }
+        }
+
+        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        {
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЧекККМ_Pointer(unigueID));
+        }
+
+        protected override async ValueTask InJournal(UnigueID unigueID)
+        {
+            ЧекККМ page = new ЧекККМ() { SelectPointerItem = unigueID };
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, ЧекККМ_Const.FULLNAME, () => page);
+            await page.SetValue();
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+          <ElementFields>
+            <Field>
+              <Name>Назва</Name>
+              <Caption>Назва</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>НомерДок</Name>
+              <Caption>НомерДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>2</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>ДатаДок</Name>
+              <Caption>ДатаДок</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>3</SortNum>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <Caption>Коментар</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>4</SortNum>
+              <Type>string</Type>
+              <Multiline>0</Multiline>
+            </Field>
+            <Field>
+              <Name>Основа</Name>
+              <Caption>Основа</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>5</SortNum>
+              <Type>composite_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>6</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>7</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>СумаДокументу</Name>
+              <Caption>СумаДокументу</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>8</SortNum>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <Caption>Склад</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>9</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <Caption>Автор</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>11</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+            <Field>
+              <Name>КасаККМ</Name>
+              <Caption>КасаККМ</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>100</SortNum>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КасиККМ</Pointer>
+              <PresetntationFields Count="1">
+                <Field>Назва</Field>
+              </PresetntationFields>
+            </Field>
+          </ElementFields>
+          <ElementTableParts>
+            <TablePart>
+              <Name>Товари</Name>
+              <Caption>Товари</Caption>
+              <Size>0</Size>
+              <Height>0</Height>
+              <SortNum>1</SortNum>
+            </TablePart>
+          </ElementTableParts>
+        </Form>
+        <Form Modified="0">
+          <Name>Список</Name>
+          <Desc>Список</Desc>
+          <Type>List</Type>
+          <GeneratedCode><![CDATA[
+
+/*     
+        ЧекККМ.cs
+        Список
+*/
+
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+
+using GeneratedCode;
+using ТабличніСписки = GeneratedCode.Документи.ТабличніСписки;
+using GeneratedCode.Документи;
+
+namespace StorageAndTrade
+{
+    public class ЧекККМ : ДокументЖурнал
+    {
+        public ЧекККМ() : base()
+        {
+            ТабличніСписки.ЧекККМ_Записи.AddColumns(TreeViewGrid);
+        }
+
+        #region Override
+
+        public override async ValueTask LoadRecords()
+        {
+            ТабличніСписки.ЧекККМ_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
+
+            await ТабличніСписки.ЧекККМ_Записи.LoadRecords(TreeViewGrid, SelectPointerItem, DocumentPointerItem);
+        }
+
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            ТабличніСписки.ЧекККМ_Записи.ОчиститиВідбір(TreeViewGrid);
+            
+            //Відбори
+            ТабличніСписки.ЧекККМ_Записи.ДодатиВідбір(TreeViewGrid, ЧекККМ_Функції.Відбори(searchText));
+
+            await ТабличніСписки.ЧекККМ_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        public async override ValueTask LoadRecords_OnFilter()
+        {
+            await ТабличніСписки.ЧекККМ_Записи.LoadRecords(TreeViewGrid);
+        }
+
+        public async ValueTask UpdateRecords(List<ObjectChanged> recordsChanged)
+        {
+            await ТабличніСписки.ЧекККМ_Записи.UpdateRecords(TreeViewGrid, recordsChanged);
+        }
+
+        protected override void FillFilterList(ListFilterControl filterControl)
+        {
+            ТабличніСписки.ЧекККМ_Записи.CreateFilter(TreeViewGrid, filterControl);
+        }
+
+        protected override async ValueTask OpenPageElement(bool IsNew, UnigueID? unigueID = null)
+        {
+            await ЧекККМ_Функції.OpenPageElement(IsNew, unigueID, CallBack_LoadRecords);
+        }
+
+        protected override async ValueTask SetDeletionLabel(UnigueID unigueID)
+        {
+            await ЧекККМ_Функції.SetDeletionLabel(unigueID);
+        }
+
+        protected override async ValueTask<UnigueID?> Copy(UnigueID unigueID)
+        {
+            return await ЧекККМ_Функції.Copy(unigueID);
+        }
+
+        protected override async ValueTask VersionsHistory(UnigueID unigueID)
+        {
+            await СпільніФорми_ІсторіяЗміниДаних_Список.Сформувати(new ЧекККМ_Pointer(unigueID).GetBasis());
+        }
+
+        const string КлючНалаштуванняКористувача = "Документи.ЧекККМ";
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період);
+            NotebookFunction.AddChangeFunc(Program.GeneralNotebook, Name, UpdateRecords, ЧекККМ_Const.POINTER);
+        }
+
+        protected override async void PeriodChanged()
+        {
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача + KeyForSetting, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            await BeforeLoadRecords();
+        }
+
+        protected override async ValueTask SpendTheDocument(UnigueID unigueID, bool spendDoc)
+        {
+            ЧекККМ_Objest? Обєкт = await new ЧекККМ_Pointer(unigueID).GetDocumentObject(true);
+            if (Обєкт == null) return;
+
+            if (spendDoc)
+            {
+                if (!await Обєкт.SpendTheDocument(Обєкт.ДатаДок))
+                    ФункціїДляПовідомлень.ПоказатиПовідомлення(Обєкт.UnigueID);
+            }
+            else
+                await Обєкт.ClearSpendTheDocument();
+        }
+
+        protected override void ReportSpendTheDocument(UnigueID unigueID)
+        {
+            СпільніФорми_РухДокументуПоРегістрах.СформуватиЗвіт(new ЧекККМ_Pointer(unigueID));
+        }
+        
+        protected override bool IsExportXML() { return false; } //Дозволити експорт документу
+        protected override async ValueTask ExportXML(UnigueID unigueID, string pathToFolder)
+        {
+            ЧекККМ_Pointer Вказівник = new ЧекККМ_Pointer(unigueID);
+            await Вказівник.GetPresentation();
+            string path = System.IO.Path.Combine(pathToFolder, $"{Вказівник.Назва}.xml");
+
+            await ЧекККМ_Export.ToXmlFile(Вказівник, path);
+            ФункціїДляПовідомлень.ДодатиІнформаційнеПовідомлення(Вказівник.GetBasis(), Вказівник.Назва, $"Вигружено у файл: {path}");
+        }
+
+        /*
+        protected override async ValueTask PrintingDoc(UnigueID unigueID)
+        {
+            await ЧекККМ_Друк.PDF(unigueID);
+        }
+        */
+
+        #endregion
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+          <TabularList>Записи</TabularList>
+        </Form>
+        <Form Modified="0">
+          <Name>PointerControl</Name>
+          <Desc>PointerControl</Desc>
+          <Type>PointerControl</Type>
+          <GeneratedCode><![CDATA[
+
+/*     
+        ЧекККМ_PointerControl.cs
+        PointerControl
+*/
+using Gtk;
+using InterfaceGtk;
+using AccountingSoftware;
+using GeneratedCode.Документи;
+
+namespace StorageAndTrade
+{
+    public class ЧекККМ_PointerControl : PointerControl
+    {
+        event EventHandler<ЧекККМ_Pointer> PointerChanged;
+
+        public ЧекККМ_PointerControl()
+        {
+            pointer = new ЧекККМ_Pointer();
+            WidthPresentation = 300;
+            Caption = $"{ЧекККМ_Const.FULLNAME}:";
+            PointerChanged += async (_, pointer) => Presentation = pointer != null ? await pointer.GetPresentation() : "";
+        }
+
+        ЧекККМ_Pointer pointer;
+        public ЧекККМ_Pointer Pointer
+        {
+            get
+            {
+                return pointer;
+            }
+            set
+            {
+                pointer = value;
+                PointerChanged?.Invoke(null, pointer);
+            }
+        }
+
+        protected override void OpenSelect(object? sender, EventArgs args)
+        {
+            BeforeClickOpenFunc?.Invoke();
+            ЧекККМ page = new ЧекККМ
+            {
+                DocumentPointerItem = Pointer.UnigueID,
+                CallBack_OnSelectPointer = selectPointer =>
+                {
+                    Pointer = new ЧекККМ_Pointer(selectPointer);
+                    AfterSelectFunc?.Invoke();
+                }
+            };
+
+            NotebookFunction.CreateNotebookPage(Program.GeneralNotebook, $"Вибір - {ЧекККМ_Const.FULLNAME}", () => page);
+            page.SetValue();
+        }
+
+        protected override void OnClear(object? sender, EventArgs args)
+        {
+            Pointer = new ЧекККМ_Pointer();
+            AfterSelectFunc?.Invoke();
+            AfterClearFunc?.Invoke();
+        }
+    }
+}
+    ]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+        </Form>
+      </Forms>
+    </Document>
   </Documents>
   <Enums>
     <Enum>
@@ -33748,6 +36417,18 @@ FROM
           <Value>2</Value>
           <Desc>
           </Desc>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>ТипККМ</Name>
+      <Desc>Тип ККМ</Desc>
+      <SerialNumber>1</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>Фіскальний</Name>
+          <Value>1</Value>
+          <Desc>Фіскальний</Desc>
         </Field>
       </Fields>
     </Enum>
@@ -38957,6 +41638,202 @@ SQL тип  непотрібно вказувати
         </TabularList>
       </TabularLists>
     </Journal>
+    <Journal>
+      <Name>Роздріб</Name>
+      <Desc>Роздрібна торгівля</Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Дата</Name>
+          <Desc>timestamp</Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Номер</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Організація</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Склад</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Каса</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Валюта</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Сума</Name>
+          <Desc>Так як всі документи які входять в журнал мають поле Сума
+SQL тип  непотрібно вказувати
+
+</Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Автор</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
+          <Desc>
+          </Desc>
+          <Type>
+          </Type>
+          <SortField>0</SortField>
+          <WherePeriod>0</WherePeriod>
+        </Field>
+      </Fields>
+      <AllowDocument>
+        <Item>
+          <Name>ЧекККМ</Name>
+          <FullName>Чек ККМ</FullName>
+        </Item>
+      </AllowDocument>
+      <TabularLists>
+        <TabularList>
+          <Name>ЧекККМ</Name>
+          <Table>tab_b51</Table>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <DocField>Назва</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Дата</Name>
+              <DocField>ДатаДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Номер</Name>
+              <DocField>НомерДок</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <DocField>Організація</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
+              <Name>Склад</Name>
+              <DocField>Склад</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Склади</Pointer>
+            </Field>
+            <Field>
+              <Name>Каса</Name>
+              <DocField>КасаККМ</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КасиККМ</Pointer>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <DocField>Валюта</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <DocField>СумаДокументу</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Автор</Name>
+              <DocField>Автор</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Користувачі</Pointer>
+            </Field>
+            <Field>
+              <Name>Коментар</Name>
+              <DocField>Коментар</DocField>
+              <SqlType>
+              </SqlType>
+              <WherePeriod>0</WherePeriod>
+              <Type>string</Type>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+    </Journal>
   </Journals>
   <RegistersInformation>
     <RegisterInformation>
@@ -39939,6 +42816,7 @@ SQL тип  непотрібно вказувати
         <Name>ВведенняЗалишків</Name>
         <Name>ПсуванняТоварів</Name>
         <Name>ВнутрішнєСпоживанняТоварів</Name>
+        <Name>ЧекККМ</Name>
       </AllowDocumentSpend>
       <TabularParts>
         <TablePart>
@@ -42091,6 +44969,7 @@ HAVING
         <Name>РахунокФактура</Name>
         <Name>ЗакриттяЗамовленняКлієнта</Name>
         <Name>ЗакриттяРахункуФактури</Name>
+        <Name>ЧекККМ</Name>
       </AllowDocumentSpend>
       <TabularParts>
         <TablePart>
@@ -46045,6 +48924,655 @@ HAVING
           <Name>Список</Name>
           <Type>List</Type>
           <GeneratedCode><![CDATA[]]></GeneratedCode>
+          <NotSaveToFile>0</NotSaveToFile>
+          <TabularList>Записи</TabularList>
+        </Form>
+      </Forms>
+    </RegisterAccumulation>
+    <RegisterAccumulation>
+      <Name>РухКоштівККМ</Name>
+      <FullName>РухКоштів ККМ</FullName>
+      <Table>tab_b53</Table>
+      <Type>Residues</Type>
+      <Desc>Рух коштів для кас ККМ</Desc>
+      <NoSummary>0</NoSummary>
+      <PredefinedFields>
+        <PredefinedField>
+          <Name>uid</Name>
+          <NameInTable>uid</NameInTable>
+          <Type>any_pointer</Type>
+          <IsPrimaryKey>1</IsPrimaryKey>
+          <IsIndex>0</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>period</Name>
+          <NameInTable>period</NameInTable>
+          <Type>timestamp without time zone</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>1</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>income</Name>
+          <NameInTable>income</NameInTable>
+          <Type>boolean</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>1</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>owner</Name>
+          <NameInTable>owner</NameInTable>
+          <Type>any_pointer</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>1</IsIndex>
+          <IsNotNull>1</IsNotNull>
+        </PredefinedField>
+        <PredefinedField>
+          <Name>ownertype</Name>
+          <NameInTable>ownertype</NameInTable>
+          <Type>composite_text</Type>
+          <IsPrimaryKey>0</IsPrimaryKey>
+          <IsIndex>1</IsIndex>
+          <IsNotNull>0</IsNotNull>
+        </PredefinedField>
+      </PredefinedFields>
+      <DimensionFields>
+        <Fields>
+          <Field>
+            <Name>Організація</Name>
+            <FullName>Організація</FullName>
+            <NameInTable>col_a1</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Організації</Pointer>
+            <IsIndex>1</IsIndex>
+            <IsFullTextSearch>0</IsFullTextSearch>
+            <IsSearch>0</IsSearch>
+            <IsExport>0</IsExport>
+          </Field>
+          <Field>
+            <Name>КасаККМ</Name>
+            <FullName>Каса ККМ</FullName>
+            <NameInTable>col_a2</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.КасиККМ</Pointer>
+            <IsIndex>1</IsIndex>
+            <IsFullTextSearch>0</IsFullTextSearch>
+            <IsSearch>0</IsSearch>
+            <IsExport>0</IsExport>
+          </Field>
+          <Field>
+            <Name>Валюта</Name>
+            <FullName>Валюта</FullName>
+            <NameInTable>col_a3</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Валюти</Pointer>
+            <IsIndex>1</IsIndex>
+            <IsFullTextSearch>0</IsFullTextSearch>
+            <IsSearch>0</IsSearch>
+            <IsExport>0</IsExport>
+          </Field>
+        </Fields>
+      </DimensionFields>
+      <ResourcesFields>
+        <Fields>
+          <Field>
+            <Name>Сума</Name>
+            <FullName>Сума</FullName>
+            <NameInTable>col_a4</NameInTable>
+            <Type>numeric</Type>
+            <IsIndex>0</IsIndex>
+            <IsFullTextSearch>0</IsFullTextSearch>
+            <IsSearch>0</IsSearch>
+            <IsExport>0</IsExport>
+          </Field>
+        </Fields>
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields />
+      </PropertyFields>
+      <AllowDocumentSpend>
+        <Name>ЧекККМ</Name>
+      </AllowDocumentSpend>
+      <TabularParts>
+        <TablePart>
+          <Name>Підсумки</Name>
+          <FullName>Підсумки</FullName>
+          <Table>tab_b56</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <VersionsHistory>0</VersionsHistory>
+          <PredefinedFields>
+            <PredefinedField>
+              <Name>uid</Name>
+              <NameInTable>uid</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>1</IsPrimaryKey>
+              <IsIndex>0</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+            <PredefinedField>
+              <Name>owner</Name>
+              <NameInTable>owner</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>0</IsPrimaryKey>
+              <IsIndex>1</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+          </PredefinedFields>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <FullName>Організація</FullName>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>КасаККМ</Name>
+              <FullName>КасаККМ</FullName>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КасиККМ</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <FullName>Валюта</FullName>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <FullName>Сума</FullName>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+          </Fields>
+          <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
+          <Forms />
+        </TablePart>
+        <TablePart>
+          <Name>ЗалишкиТаОбороти</Name>
+          <FullName>ЗалишкиТаОбороти</FullName>
+          <Table>tab_b55</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <VersionsHistory>0</VersionsHistory>
+          <PredefinedFields>
+            <PredefinedField>
+              <Name>uid</Name>
+              <NameInTable>uid</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>1</IsPrimaryKey>
+              <IsIndex>0</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+            <PredefinedField>
+              <Name>owner</Name>
+              <NameInTable>owner</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>0</IsPrimaryKey>
+              <IsIndex>1</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+          </PredefinedFields>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <FullName>Період</FullName>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <FullName>Організація</FullName>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>КасаККМ</Name>
+              <FullName>КасаККМ</FullName>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КасиККМ</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <FullName>Валюта</FullName>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>СумаПрихід</Name>
+              <FullName>СумаПрихід</FullName>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>СумаРозхід</Name>
+              <FullName>СумаРозхід</FullName>
+              <NameInTable>col_a6</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>СумаЗалишок</Name>
+              <FullName>СумаЗалишок</FullName>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+          </Fields>
+          <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
+          <Forms />
+        </TablePart>
+        <TablePart>
+          <Name>Залишки</Name>
+          <FullName>Залишки</FullName>
+          <Table>tab_b54</Table>
+          <Desc>Віртуальна таблиця</Desc>
+          <VersionsHistory>0</VersionsHistory>
+          <PredefinedFields>
+            <PredefinedField>
+              <Name>uid</Name>
+              <NameInTable>uid</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>1</IsPrimaryKey>
+              <IsIndex>0</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+            <PredefinedField>
+              <Name>owner</Name>
+              <NameInTable>owner</NameInTable>
+              <Type>any_pointer</Type>
+              <IsPrimaryKey>0</IsPrimaryKey>
+              <IsIndex>1</IsIndex>
+              <IsNotNull>1</IsNotNull>
+            </PredefinedField>
+          </PredefinedFields>
+          <Fields>
+            <Field>
+              <Name>Період</Name>
+              <FullName>Період</FullName>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Організація</Name>
+              <FullName>Організація</FullName>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>КасаККМ</Name>
+              <FullName>КасаККМ</FullName>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КасиККМ</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <FullName>Валюта</FullName>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+              <IsIndex>1</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <FullName>Сума</FullName>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <IsIndex>0</IsIndex>
+              <IsFullTextSearch>0</IsFullTextSearch>
+              <IsSearch>0</IsSearch>
+              <IsExport>0</IsExport>
+            </Field>
+          </Fields>
+          <TabularLists />
+          <TriggerFunctions>
+            <BeforeSave Action="0">BeforeSave</BeforeSave>
+            <AfterSave Action="0">AfterSave</AfterSave>
+          </TriggerFunctions>
+          <Forms />
+        </TablePart>
+      </TabularParts>
+      <QueryBlockList>
+        <QueryBlock>
+          <Name>Підсумки</Name>
+          <FinalCalculation>1</FinalCalculation>
+          <Query position="0" key="DELETE"><![CDATA[
+DELETE FROM {РухКоштівККМ_Підсумки_TablePart.TABLE}
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
+INSERT INTO {РухКоштівККМ_Підсумки_TablePart.TABLE} 
+(
+    uid,
+    {РухКоштівККМ_Підсумки_TablePart.Організація},
+    {РухКоштівККМ_Підсумки_TablePart.КасаККМ},
+    {РухКоштівККМ_Підсумки_TablePart.Валюта},
+    {РухКоштівККМ_Підсумки_TablePart.Сума}
+)
+SELECT
+    uuid_generate_v4(),
+    РухКоштівККМ.{РухКоштівККМ_Залишки_TablePart.Організація} AS Організація,
+    РухКоштівККМ.{РухКоштівККМ_Залишки_TablePart.КасаККМ} AS КасаККМ,
+    РухКоштівККМ.{РухКоштівККМ_Залишки_TablePart.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(РухКоштівККМ.{РухКоштівККМ_Залишки_TablePart.Сума}) AS Сума
+
+FROM
+    {РухКоштівККМ_Залишки_TablePart.TABLE} AS РухКоштівККМ
+
+GROUP BY
+Організація, КасаККМ, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(РухКоштівККМ.{РухКоштівККМ_Залишки_TablePart.Сума}) != 0 
+
+
+
+
+]]></Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>ЗалишкиТаОбороти</Name>
+          <FinalCalculation>0</FinalCalculation>
+          <Query position="0" key="DELETE"><![CDATA[
+DELETE FROM 
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.TABLE}
+WHERE 
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.TABLE}.{РухКоштівККМ_ЗалишкиТаОбороти_TablePart.Період} = @ПеріодДеньВідбір
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
+INSERT INTO {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.TABLE} 
+(
+    uid,
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.Період},
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.Організація},
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.КасаККМ},
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.Валюта},
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.СумаПрихід},
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.СумаРозхід},
+    {РухКоштівККМ_ЗалишкиТаОбороти_TablePart.СумаЗалишок}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', РухКоштівККМ.period::timestamp) AS Період,
+    РухКоштівККМ.{РухКоштівККМ_Const.Організація} AS Організація,
+    РухКоштівККМ.{РухКоштівККМ_Const.КасаККМ} AS КасаККМ,
+    РухКоштівККМ.{РухКоштівККМ_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN РухКоштівККМ.income = true THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 0 END) AS СумаПрихід,
+    SUM(CASE WHEN РухКоштівККМ.income = false THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 0 END) AS СумаРозхід,
+    SUM(CASE WHEN РухКоштівККМ.income = true THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 
+        -РухКоштівККМ.{РухКоштівККМ_Const.Сума} END) AS СумаЗалишок
+
+FROM
+    {РухКоштівККМ_Const.TABLE} AS РухКоштівККМ
+
+WHERE
+    date_trunc('day', РухКоштівККМ.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, КасаККМ, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN РухКоштівККМ.income = true THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 0 END) != 0 OR 
+    SUM(CASE WHEN РухКоштівККМ.income = false THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 0 END) != 0 OR
+    SUM(CASE WHEN РухКоштівККМ.income = true THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 
+        -РухКоштівККМ.{РухКоштівККМ_Const.Сума} END) != 0 
+
+
+
+
+]]></Query>
+        </QueryBlock>
+        <QueryBlock>
+          <Name>Залишки</Name>
+          <FinalCalculation>0</FinalCalculation>
+          <Query position="0" key="DELETE"><![CDATA[
+DELETE FROM 
+    {РухКоштівККМ_Залишки_TablePart.TABLE}
+WHERE 
+    {РухКоштівККМ_Залишки_TablePart.TABLE}.{РухКоштівККМ_Залишки_TablePart.Період} = @ПеріодДеньВідбір
+]]></Query>
+          <Query position="1" key="SELECT"><![CDATA[
+INSERT INTO {РухКоштівККМ_Залишки_TablePart.TABLE} 
+(
+    uid,
+    {РухКоштівККМ_Залишки_TablePart.Період},
+    {РухКоштівККМ_Залишки_TablePart.Організація},
+    {РухКоштівККМ_Залишки_TablePart.КасаККМ},
+    {РухКоштівККМ_Залишки_TablePart.Валюта},
+    {РухКоштівККМ_Залишки_TablePart.Сума}
+)
+SELECT
+    uuid_generate_v4(),
+    date_trunc('day', РухКоштівККМ.period::timestamp) AS Період,
+    РухКоштівККМ.{РухКоштівККМ_Const.Організація} AS Організація,
+    РухКоштівККМ.{РухКоштівККМ_Const.КасаККМ} AS КасаККМ,
+    РухКоштівККМ.{РухКоштівККМ_Const.Валюта} AS Валюта,
+
+    /* Сума */
+    SUM(CASE WHEN РухКоштівККМ.income = true THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 
+        -РухКоштівККМ.{РухКоштівККМ_Const.Сума} END) AS Сума
+
+FROM
+    {РухКоштівККМ_Const.TABLE} AS РухКоштівККМ
+
+WHERE
+    date_trunc('day', РухКоштівККМ.period::timestamp) = @ПеріодДеньВідбір
+
+GROUP BY
+    Період, Організація, КасаККМ, Валюта
+
+HAVING
+
+    /* Сума */
+    SUM(CASE WHEN РухКоштівККМ.income = true THEN 
+        РухКоштівККМ.{РухКоштівККМ_Const.Сума} ELSE 
+        -РухКоштівККМ.{РухКоштівККМ_Const.Сума} END) != 0 
+
+
+
+
+]]></Query>
+        </QueryBlock>
+      </QueryBlockList>
+      <TabularLists>
+        <TabularList>
+          <Name>Записи</Name>
+          <Fields>
+            <Field>
+              <Name>Організація</Name>
+              <Caption>Організація</Caption>
+              <Size>0</Size>
+              <SortNum>1</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Організації</Pointer>
+            </Field>
+            <Field>
+              <Name>КасаККМ</Name>
+              <Caption>Каса ККМ</Caption>
+              <Size>0</Size>
+              <SortNum>2</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КасиККМ</Pointer>
+            </Field>
+            <Field>
+              <Name>Валюта</Name>
+              <Caption>Валюта</Caption>
+              <Size>0</Size>
+              <SortNum>3</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <Caption>Сума</Caption>
+              <Size>0</Size>
+              <SortNum>4</SortNum>
+              <SortField>False</SortField>
+              <SortDirection>False</SortDirection>
+              <FilterField>False</FilterField>
+              <Type>numeric</Type>
+            </Field>
+          </Fields>
+        </TabularList>
+      </TabularLists>
+      <Forms>
+        <Form Modified="0">
+          <Name>Список</Name>
+          <Type>List</Type>
+          <GeneratedCode><![CDATA[
+
+/*     
+        РухКоштівККМ.cs
+        Список
+
+        Табличний список - Записи
+*/
+
+using InterfaceGtk;
+using AccountingSoftware;
+using ТабличніСписки = GeneratedCode.РегістриНакопичення.ТабличніСписки;
+
+namespace StorageAndTrade.РегістриНакопичення
+{
+    public class РухКоштівККМ : РегістриНакопиченняЖурнал
+    {
+        public РухКоштівККМ() : base()
+        {
+            ТабличніСписки.РухКоштівККМ_Записи.AddColumns(TreeViewGrid);
+        }
+
+        #region Override
+
+        public override async ValueTask LoadRecords()
+        {
+            ТабличніСписки.РухКоштівККМ_Записи.ДодатиВідбірПоПеріоду(TreeViewGrid, Період.Period, Період.DateStart, Період.DateStop);
+            await ТабличніСписки.РухКоштівККМ_Записи.LoadRecords(TreeViewGrid, SelectPointerItem);
+        }
+
+        public override async ValueTask LoadRecords_OnSearch(string searchText)
+        {
+            ТабличніСписки.РухКоштівККМ_Записи.ОчиститиВідбір(TreeViewGrid);
+
+            //period
+            ТабличніСписки.РухКоштівККМ_Записи.ДодатиВідбір(TreeViewGrid,
+                new Where("period", Comparison.LIKE, searchText) { FuncToField = "to_char", FuncToField_Param1 = "'DD.MM.YYYY'" });
+
+            await ТабличніСписки.РухКоштівККМ_Записи.LoadRecords(TreeViewGrid);
+        }
+        
+        const string КлючНалаштуванняКористувача = "РегістриНакопичення.РухКоштівККМ";
+
+        protected override async ValueTask BeforeSetValue()
+        {
+            await ФункціїНалаштуванняКористувача.ОтриматиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період);
+        }
+
+        protected override async void PeriodChanged()
+        {
+            ФункціїНалаштуванняКористувача.ЗаписатиПеріодДляЖурналу(КлючНалаштуванняКористувача, Період.Period.ToString(), Період.DateStart, Період.DateStop);
+            await BeforeLoadRecords();
+        }
+
+        #endregion
+    }
+}
+    ]]></GeneratedCode>
           <NotSaveToFile>0</NotSaveToFile>
           <TabularList>Записи</TabularList>
         </Form>

@@ -1,24 +1,23 @@
 
 /*
-        РеалізаціяТоварівТаПослуг_ТабличнаЧастина_Товари.cs
+        ЧекККМ_ТабличнаЧастина_Товари.cs
         Таблична Частина
 */
 
 using Gtk;
-using InterfaceGtk;
 using AccountingSoftware;
+using InterfaceGtk;
 using GeneratedCode;
 using GeneratedCode.Довідники;
 using GeneratedCode.Документи;
-using GeneratedCode.Перелічення;
 using GeneratedCode.Константи;
 using GeneratedCode.РегістриВідомостей;
 
 namespace StorageAndTrade
 {
-    class РеалізаціяТоварівТаПослуг_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
+    class ЧекККМ_ТабличнаЧастина_Товари : ДокументТабличнаЧастина
     {
-        public РеалізаціяТоварівТаПослуг_Objest? ЕлементВласник { get; set; }
+        public ЧекККМ_Objest? ЕлементВласник { get; set; }
 
         #region Записи
 
@@ -34,15 +33,13 @@ namespace StorageAndTrade
             КількістьФакт,
             ВидЦіни,
             Ціна,
+            СумаБезЗнижки,
+            Знижка,
             Сума,
-            Скидка,
-            ЗамовленняКлієнта,
-            РахунокФактура,
-            Склад,
-            Партія,
         }
 
         ListStore Store = new ListStore([
+
             typeof(int), //НомерРядка
             typeof(string), //Номенклатура
             typeof(string), //ХарактеристикаНоменклатури
@@ -53,12 +50,9 @@ namespace StorageAndTrade
             typeof(float),   //КількістьФакт
             typeof(string), //ВидЦіни
             typeof(float), //Ціна
+            typeof(float), //СумаБезЗнижки
+            typeof(float), //Знижка
             typeof(float), //Сума
-            typeof(float), //Скидка
-            typeof(string), //ЗамовленняКлієнта
-            typeof(string), //РахунокФактура
-            typeof(string), //Склад
-            typeof(string), //Партія
         ]);
 
         List<Запис> Записи = [];
@@ -76,12 +70,9 @@ namespace StorageAndTrade
             public decimal КількістьФакт { get; set; } = 1;
             public ВидиЦін_Pointer ВидЦіни { get; set; } = new ВидиЦін_Pointer();
             public decimal Ціна { get; set; } = 0;
+            public decimal СумаБезЗнижки { get; set; } = 0;
+            public decimal Знижка { get; set; } = 0;
             public decimal Сума { get; set; } = 0;
-            public decimal Скидка { get; set; } = 0;
-            public ЗамовленняКлієнта_Pointer ЗамовленняКлієнта { get; set; } = new ЗамовленняКлієнта_Pointer();
-            public РахунокФактура_Pointer РахунокФактура { get; set; } = new РахунокФактура_Pointer();
-            public Склади_Pointer Склад { get; set; } = new Склади_Pointer();
-            public ПартіяТоварівКомпозит_Pointer Партія { get; set; } = new ПартіяТоварівКомпозит_Pointer();
 
             public object[] ToArray()
             {
@@ -97,12 +88,9 @@ namespace StorageAndTrade
                     (float)КількістьФакт,
                     ВидЦіни.Назва,
                     (float)Ціна,
+                    (float)СумаБезЗнижки,
+                    (float)Знижка,
                     (float)Сума,
-                    (float)Скидка,
-                    ЗамовленняКлієнта.Назва,
-                    РахунокФактура.Назва,
-                    Склад.Назва,
-                    Партія.Назва,
                 ];
             }
 
@@ -121,12 +109,9 @@ namespace StorageAndTrade
                     КількістьФакт = запис.КількістьФакт,
                     ВидЦіни = запис.ВидЦіни.Copy(),
                     Ціна = запис.Ціна,
+                    СумаБезЗнижки = запис.СумаБезЗнижки,
+                    Знижка = запис.Знижка,
                     Сума = запис.Сума,
-                    Скидка = запис.Скидка,
-                    ЗамовленняКлієнта = запис.ЗамовленняКлієнта.Copy(),
-                    РахунокФактура = запис.РахунокФактура.Copy(),
-                    Склад = запис.Склад.Copy(),
-                    Партія = запис.Партія.Copy(),
                 };
             }
 
@@ -183,35 +168,22 @@ namespace StorageAndTrade
                 await запис.ВидЦіни.GetPresentation();
             }
 
-            public static async ValueTask ПісляЗміни_ЗамовленняКлієнта(Запис запис)
-            {
-                await запис.ЗамовленняКлієнта.GetPresentation();
-            }
-
-            public static async ValueTask ПісляЗміни_РахунокФактура(Запис запис)
-            {
-                await запис.РахунокФактура.GetPresentation();
-            }
-
-            public static async ValueTask ПісляЗміни_Склад(Запис запис)
-            {
-                await запис.Склад.GetPresentation();
-            }
-
-            public static async ValueTask ПісляЗміни_Партія(Запис запис)
-            {
-                await запис.Партія.GetPresentation();
-            }
-
             public static void ПісляЗміни_КількістьАбоЦіна(Запис запис)
             {
                 запис.КількістьФакт = запис.Кількість * запис.КількістьУпаковок;
-                запис.Сума = запис.Кількість * запис.Ціна;
+                запис.СумаБезЗнижки = запис.Кількість * запис.Ціна;
+
+                ПісляЗміни_СумаБезЗнижки(запис);
+            }
+
+            public static void ПісляЗміни_СумаБезЗнижки(Запис запис)
+            {
+                запис.Сума = запис.СумаБезЗнижки - запис.Знижка;
             }
 
             public static async ValueTask ОтриматиЦіну(Запис запис)
             {
-                if (запис.Сума != 0)
+                if (запис.СумаБезЗнижки != 0)
                     return;
 
                 if (запис.Номенклатура.IsEmpty())
@@ -238,17 +210,18 @@ LIMIT 1
                     foreach (Dictionary<string, object> row in recordResult.ListRow)
                     {
                         запис.Ціна = (decimal)row["Ціна"];
-                        запис.Сума = запис.Кількість * запис.Ціна;
+                        ПісляЗміни_КількістьАбоЦіна(запис);
                     }
             }
         }
 
         #endregion
 
+        Label ПідсумокСумаБезЗнижки = new Label() { Selectable = true };
+        Label ПідсумокЗнижка = new Label() { Selectable = true };
         Label ПідсумокСума = new Label() { Selectable = true };
-        Label ПідсумокСкидка = new Label() { Selectable = true };
-
-        public РеалізаціяТоварівТаПослуг_ТабличнаЧастина_Товари()
+        
+        public ЧекККМ_ТабличнаЧастина_Товари()
         {
             TreeViewGrid.Model = Store;
             AddColumn();
@@ -265,28 +238,34 @@ LIMIT 1
         {
             Box hBox = new Box(Orientation.Horizontal, 0) { Halign = Align.Start };
             hBox.PackStart(new Label("<b>Підсумки</b> ") { UseMarkup = true }, false, false, 2);
+            hBox.PackStart(ПідсумокСумаБезЗнижки, false, false, 2);
+            hBox.PackStart(ПідсумокЗнижка, false, false, 2);
             hBox.PackStart(ПідсумокСума, false, false, 2);
-            hBox.PackStart(ПідсумокСкидка, false, false, 2);
 
             PackStart(hBox, false, false, 2);
         }
 
         void ОбчислитиПідсумки()
         {
+            decimal СумаБезЗнижки = 0;
+            decimal Знижка = 0;
             decimal Сума = 0;
-            decimal Скидка = 0;
 
             foreach (Запис запис in Записи)
             {
+                СумаБезЗнижки += запис.СумаБезЗнижки;
+                Знижка += запис.Знижка;
                 Сума += запис.Сума;
-                Скидка += запис.Скидка;
             }
+
+            ПідсумокСумаБезЗнижки.Text = $"Сума без знижки: <b>{СумаБезЗнижки}</b>";
+            ПідсумокСумаБезЗнижки.UseMarkup = true;
+
+            ПідсумокЗнижка.Text = $"Знижка: <b>{Знижка}</b>";
+            ПідсумокЗнижка.UseMarkup = true;
 
             ПідсумокСума.Text = $"Сума: <b>{Сума}</b>";
             ПідсумокСума.UseMarkup = true;
-
-            ПідсумокСкидка.Text = $"Скидка: <b>{Скидка}</b>";
-            ПідсумокСкидка.UseMarkup = true;
         }
 
         #endregion
@@ -295,8 +274,9 @@ LIMIT 1
         {
             //НомерРядка
             {
-                CellRendererText cellNumber = new CellRendererText() { Xalign = 1 };
-                TreeViewColumn column = new TreeViewColumn("№", cellNumber, "text", (int)Columns.НомерРядка) { Resizable = true, MinWidth = 30 };
+                TreeViewColumn column = new TreeViewColumn("№", new CellRendererText() { Xalign = 1 }, "text", (int)Columns.НомерРядка) { Alignment = 1, MinWidth = 30 };
+
+                SetColIndex(column, Columns.НомерРядка);
                 TreeViewGrid.AppendColumn(column);
             }
 
@@ -338,7 +318,7 @@ LIMIT 1
 
             //Пакування
             {
-                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 100 };
+                TreeViewColumn column = new TreeViewColumn("Пакування", new CellRendererText(), "text", (int)Columns.Пакування) { Resizable = true, MinWidth = 200 };
 
                 SetColIndex(column, Columns.Пакування);
                 TreeViewGrid.AppendColumn(column);
@@ -387,8 +367,35 @@ LIMIT 1
                 TreeViewGrid.AppendColumn(column);
             }
 
+            //СумаБезЗнижки
+            {
+
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Сума без знижки", cellNumber, "text", (int)Columns.СумаБезЗнижки) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+
+                SetColIndex(column, Columns.СумаБезЗнижки);
+                TreeViewGrid.AppendColumn(column);
+            }
+
+            //Знижка
+            {
+
+                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
+                cellNumber.Edited += EditCell;
+                cellNumber.EditingStarted += EditingStarted;
+                TreeViewColumn column = new TreeViewColumn("Знижка", cellNumber, "text", (int)Columns.Знижка) { Resizable = true, Alignment = 1, MinWidth = 100 };
+                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
+
+                SetColIndex(column, Columns.Знижка);
+                TreeViewGrid.AppendColumn(column);
+            }
+
             //Сума
             {
+
                 CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
                 cellNumber.Edited += EditCell;
                 cellNumber.EditingStarted += EditingStarted;
@@ -399,67 +406,22 @@ LIMIT 1
                 TreeViewGrid.AppendColumn(column);
             }
 
-            //Скидка
-            {
-                CellRendererText cellNumber = new CellRendererText() { Editable = true, Xalign = 1 };
-                cellNumber.Edited += EditCell;
-                cellNumber.EditingStarted += EditingStarted;
-                TreeViewColumn column = new TreeViewColumn("Скидка", cellNumber, "text", (int)Columns.Скидка) { Resizable = true, Alignment = 1, MinWidth = 100 };
-                column.SetCellDataFunc(cellNumber, new TreeCellDataFunc(NumericCellDataFunc));
-
-                SetColIndex(column, Columns.Скидка);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //ЗамовленняКлієнта
-            {
-                TreeViewColumn column = new TreeViewColumn("Замовлення клієнта", new CellRendererText(), "text", (int)Columns.ЗамовленняКлієнта) { Resizable = true, MinWidth = 200 };
-
-                SetColIndex(column, Columns.ЗамовленняКлієнта);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //РахунокФактура
-            {
-                TreeViewColumn column = new TreeViewColumn("Рахунок фактура", new CellRendererText(), "text", (int)Columns.РахунокФактура) { Resizable = true, MinWidth = 200 };
-
-                SetColIndex(column, Columns.РахунокФактура);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Склад
-            {
-                TreeViewColumn column = new TreeViewColumn("Склад", new CellRendererText(), "text", (int)Columns.Склад) { Resizable = true, MinWidth = 100 };
-
-                SetColIndex(column, Columns.Склад);
-                TreeViewGrid.AppendColumn(column);
-            }
-
-            //Партія
-            {
-                TreeViewColumn column = new TreeViewColumn("Партія", new CellRendererText(), "text", (int)Columns.Партія) { Resizable = true, MinWidth = 200 };
-
-                SetColIndex(column, Columns.Партія);
-                TreeViewGrid.AppendColumn(column);
-            }
-
             //Колонка пустишка для заповнення вільного простору
             TreeViewGrid.AppendColumn(new TreeViewColumn());
         }
-
         #region Load and Save
 
         public override async ValueTask LoadRecords()
         {
             if (ЕлементВласник != null)
             {
-                ЕлементВласник.Товари_TablePart.FillJoin([РеалізаціяТоварівТаПослуг_Товари_TablePart.НомерРядка]);
+                ЕлементВласник.Товари_TablePart.FillJoin([ЧекККМ_Товари_TablePart.НомерРядка,]);
                 await ЕлементВласник.Товари_TablePart.Read();
 
                 Записи.Clear();
                 Store.Clear();
 
-                foreach (РеалізаціяТоварівТаПослуг_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
+                foreach (ЧекККМ_Товари_TablePart.Record record in ЕлементВласник.Товари_TablePart.Records)
                 {
                     Запис запис = new Запис
                     {
@@ -474,20 +436,16 @@ LIMIT 1
                         КількістьФакт = record.Кількість * record.КількістьУпаковок,
                         ВидЦіни = record.ВидЦіни,
                         Ціна = record.Ціна,
+                        СумаБезЗнижки = record.СумаБезЗнижки,
+                        Знижка = record.Знижка,
                         Сума = record.Сума,
-                        Скидка = record.Скидка,
-                        ЗамовленняКлієнта = record.ЗамовленняКлієнта,
-                        РахунокФактура = record.РахунокФактура,
-                        Склад = record.Склад,
-                        Партія = record.Партія,
                     };
 
                     Записи.Add(запис);
                     Store.AppendValues(запис.ToArray());
                 }
-
-                SelectRowActivated();
             }
+            SelectRowActivated();
         }
 
         public override async ValueTask SaveRecords()
@@ -497,9 +455,10 @@ LIMIT 1
                 ЕлементВласник.Товари_TablePart.Records.Clear();
                 foreach (Запис запис in Записи)
                 {
-                    ЕлементВласник.Товари_TablePart.Records.Add(new РеалізаціяТоварівТаПослуг_Товари_TablePart.Record()
+                    ЕлементВласник.Товари_TablePart.Records.Add(new ЧекККМ_Товари_TablePart.Record()
                     {
                         UID = запис.ID,
+                        НомерРядка = запис.НомерРядка,
                         Номенклатура = запис.Номенклатура,
                         ХарактеристикаНоменклатури = запис.ХарактеристикаНоменклатури,
                         Серія = запис.Серія,
@@ -508,15 +467,11 @@ LIMIT 1
                         Кількість = запис.Кількість,
                         ВидЦіни = запис.ВидЦіни,
                         Ціна = запис.Ціна,
+                        СумаБезЗнижки = запис.СумаБезЗнижки,
+                        Знижка = запис.Знижка,
                         Сума = запис.Сума,
-                        Скидка = запис.Скидка,
-                        ЗамовленняКлієнта = запис.ЗамовленняКлієнта,
-                        РахунокФактура = запис.РахунокФактура,
-                        Склад = запис.Склад,
-                        Партія = запис.Партія,
                     });
                 }
-
                 await ЕлементВласник.Товари_TablePart.Save(true);
                 await LoadRecords();
             }
@@ -524,16 +479,31 @@ LIMIT 1
 
         public string КлючовіСловаДляПошуку()
         {
-            string ключовіСлова = "";
+            string keyWords = "";
+            foreach (Запис запис in Записи)
+                keyWords += $"\n {запис.Номенклатура.Назва} {запис.ХарактеристикаНоменклатури.Назва} {запис.Серія.Назва} {запис.Пакування.Назва}";
 
-            if (ЕлементВласник != null)
-            {
-                int sequenceNumber = 0;
-                foreach (Запис запис in Записи)
-                    ключовіСлова += $"\n{++sequenceNumber}. {запис.Номенклатура.Назва} {запис.ХарактеристикаНоменклатури.Назва} {запис.Серія.Назва}";
-            }
+            return keyWords;
+        }
 
-            return ключовіСлова;
+        public decimal СумаБезЗнижки()
+        {
+            decimal СумаБезЗнижки = 0;
+
+            foreach (Запис запис in Записи)
+                СумаБезЗнижки += запис.СумаБезЗнижки;
+
+            return Math.Round(СумаБезЗнижки, 2);
+        }
+
+        public decimal СумаЗнижки()
+        {
+            decimal Знижка = 0;
+
+            foreach (Запис запис in Записи)
+                Знижка += запис.Знижка;
+
+            return Math.Round(Знижка, 2);
         }
 
         public decimal СумаДокументу()
@@ -668,63 +638,6 @@ LIMIT 1
                         };
                         return page;
                     }
-                case Columns.ЗамовленняКлієнта:
-                    {
-                        ЗамовленняКлієнта page = new()
-                        {
-                            DocumentPointerItem = запис.ЗамовленняКлієнта.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.ЗамовленняКлієнта = new ЗамовленняКлієнта_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_ЗамовленняКлієнта(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
-                        };
-                        return page;
-                    }
-                case Columns.РахунокФактура:
-                    {
-                        РахунокФактура page = new()
-                        {
-                            DocumentPointerItem = запис.РахунокФактура.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.РахунокФактура = new РахунокФактура_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_РахунокФактура(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
-                        };
-                        return page;
-                    }
-                case Columns.Склад:
-                    {
-                        Склади_ШвидкийВибір page = new()
-                        {
-                            DirectoryPointerItem = запис.Склад.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.Склад = new Склади_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_Склад(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
-                        };
-                        return page;
-                    }
-                case Columns.Партія:
-                    {
-                        ПартіяТоварівКомпозит_ШвидкийВибір page = new()
-                        {
-                            DirectoryPointerItem = запис.Партія.UnigueID,
-                            CallBack_OnSelectPointer = async (UnigueID selectPointer) =>
-                            {
-                                запис.Партія = new ПартіяТоварівКомпозит_Pointer(selectPointer);
-                                await Запис.ПісляЗміни_Партія(запис);
-                                Store.SetValues(iter, запис.ToArray());
-                            }
-                        };
-                        page.НоменклатураВідбір.Pointer = запис.Номенклатура;
-                        return page;
-                    }
 
                 default: return null;
             }
@@ -740,10 +653,6 @@ LIMIT 1
                 case Columns.Серія: { запис.Серія.Clear(); break; }
                 case Columns.Пакування: { запис.Пакування.Clear(); break; }
                 case Columns.ВидЦіни: { запис.ВидЦіни.Clear(); break; }
-                case Columns.ЗамовленняКлієнта: { запис.ЗамовленняКлієнта.Clear(); break; }
-                case Columns.РахунокФактура: { запис.РахунокФактура.Clear(); break; }
-                case Columns.Склад: { запис.Склад.Clear(); break; }
-                case Columns.Партія: { запис.Партія.Clear(); break; }
 
                 default: break;
             }
@@ -787,9 +696,36 @@ LIMIT 1
                         }
                         break;
                     }
-                case Columns.Сума: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Сума = value; break; }
-                case Columns.Скидка: { var (check, value) = Validate.IsDecimal(newText); if (check) запис.Скидка = value; break; }
-
+                case Columns.СумаБезЗнижки:
+                    {
+                        var (check, value) = Validate.IsDecimal(newText);
+                        if (check)
+                        {
+                            запис.СумаБезЗнижки = value;
+                            Запис.ПісляЗміни_СумаБезЗнижки(запис);
+                        }
+                        break;
+                    }
+                case Columns.Знижка:
+                    {
+                        var (check, value) = Validate.IsDecimal(newText);
+                        if (check)
+                        {
+                            запис.Знижка = value;
+                            Запис.ПісляЗміни_КількістьАбоЦіна(запис);
+                        }
+                        break;
+                    }
+                case Columns.Сума:
+                    {
+                        var (check, value) = Validate.IsDecimal(newText);
+                        if (check)
+                        {
+                            запис.Сума = value;
+                        }
+                        break;
+                    }
+                
                 default: break;
             }
             Store.SetValues(iter, запис.ToArray());
@@ -829,16 +765,24 @@ LIMIT 1
                                 cellText.Text = запис.Ціна.ToString();
                                 break;
                             }
+                        case Columns.СумаБезЗнижки:
+                            {
+                                cellText.Text = запис.СумаБезЗнижки.ToString();
+                                break;
+                            }
+
                         case Columns.Сума:
                             {
                                 cellText.Text = запис.Сума.ToString();
                                 break;
                             }
-                        case Columns.Скидка:
+
+                        case Columns.Знижка:
                             {
-                                cellText.Text = запис.Скидка.ToString();
+                                cellText.Text = запис.Знижка.ToString();
                                 break;
                             }
+
                         default: break;
                     }
                 }
@@ -850,7 +794,7 @@ LIMIT 1
 
         #region ToolBar
 
-        async ValueTask<(Запис запис, TreeIter iter)> НовийЗапис()
+        async Task<(Запис запис, TreeIter iter)> НовийЗапис()
         {
             Запис запис = new Запис();
             Записи.Add(запис);

@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 19.05.2025 18:25:59
+ * Дата конфігурації: 23.05.2025 19:03:57
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -10092,6 +10092,214 @@ FROM
 	    
     #endregion
     
+    #region DIRECTORY "КасиККМ"
+      
+    public class КасиККМ_Записи : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        string ID = "";
+        
+        string Назва = "";
+        
+        string Валюта = "";
+        
+        string Тип = "";
+        
+        string Склад = "";
+        
+
+        object[] ToArray()
+        {
+            return
+            [
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
+                ID,
+                /*Назва*/ Назва,
+                /*Валюта*/ Валюта,
+                /*Тип*/ Тип,
+                /*Склад*/ Склад,
+                
+            ];
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string),
+                /*Назва*/ typeof(string),  
+                /*Валюта*/ typeof(string),  
+                /*Тип*/ typeof(string),  
+                /*Склад*/ typeof(string),  
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 4 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+
+            /* Поля */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 2) { MinWidth = 20, Resizable = true, SortColumnId = 2 } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true, SortColumnId = 3 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Тип", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true, SortColumnId = 4 } ); /*Тип*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Склад*/
+            
+
+            /* Додаткові поля */
+            
+
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
+        {
+          
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            void findIter(TreeIter iter)
+            {
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                    
+                }
+                while (Store.IterNext(ref iter));
+            }
+            if (Store.GetIterFirst(out TreeIter iter)) findIter(iter);
+
+            if (records.Count > 0)
+            {
+                Довідники.КасиККМ_Select КасиККМ_Select = new Довідники.КасиККМ_Select();
+                КасиККМ_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Назва*/ Довідники.КасиККМ_Const.Назва,
+                    /*Тип*/ Довідники.КасиККМ_Const.Тип,
+                    
+                ]);
+
+                КасиККМ_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Валюти_Pointer.GetJoin(КасиККМ_Select.QuerySelect, Довідники.КасиККМ_Const.Валюта,
+                    КасиККМ_Select.QuerySelect.Table, "join_tab_1", "Валюта");
+                Довідники.Склади_Pointer.GetJoin(КасиККМ_Select.QuerySelect, Довідники.КасиККМ_Const.Склад,
+                    КасиККМ_Select.QuerySelect.Table, "join_tab_2", "Склад");
+                
+
+                /* SELECT */
+                await КасиККМ_Select.Select();
+
+                while (КасиККМ_Select.MoveNext())
+                {
+                    Довідники.КасиККМ_Pointer? current = КасиККМ_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        КасиККМ_Записи Record = new КасиККМ_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[КасиККМ_Const.Назва].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Тип = Перелічення.ПсевдонімиПерелічення.ТипККМ_Alias((
+                                (Перелічення.ТипККМ)(Fields[КасиККМ_Const.Тип] != DBNull.Value ? Fields[КасиККМ_Const.Тип] : 0)) ),
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
+          UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
+        {
+            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
+            ListStore Store = (ListStore)treeView.Model;
+            
+            Довідники.КасиККМ_Select КасиККМ_Select = new Довідники.КасиККМ_Select();
+            КасиККМ_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Назва*/ Довідники.КасиККМ_Const.Назва,
+                /*Тип*/ Довідники.КасиККМ_Const.Тип,
+                
+            ]);
+
+            
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) КасиККМ_Select.QuerySelect.Where = (List<Where>)where;
+
+            КасиККМ_Select.QuerySelect.Order.Add(
+               Довідники.КасиККМ_Const.Назва, SelectOrder.ASC);
+            Довідники.Валюти_Pointer.GetJoin(КасиККМ_Select.QuerySelect, Довідники.КасиККМ_Const.Валюта,
+                КасиККМ_Select.QuerySelect.Table, "join_tab_1", "Валюта");
+            Довідники.Склади_Pointer.GetJoin(КасиККМ_Select.QuerySelect, Довідники.КасиККМ_Const.Склад,
+                КасиККМ_Select.QuerySelect.Table, "join_tab_2", "Склад");
+            
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+                await ЗаповнитиСторінки(КасиККМ_Select.SplitSelectToPages, settingsPages, КасиККМ_Select.QuerySelect, unigueIDSelect);
+            
+
+            /* SELECT */
+            await КасиККМ_Select.Select();
+            Store.Clear();
+
+            
+
+            string? uidSelect = unigueIDSelect?.ToString();
+            while (КасиККМ_Select.MoveNext())
+            {
+                Довідники.КасиККМ_Pointer? current = КасиККМ_Select.Current;
+                
+                if (current != null)
+                {
+                    Dictionary<string, object> Fields = current.Fields;
+                    КасиККМ_Записи Record = new КасиККМ_Записи
+                    {
+                        ID = current.UnigueID.ToString(),
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[КасиККМ_Const.Назва].ToString() ?? "",
+                            Валюта = Fields["Валюта"].ToString() ?? "",
+                            Тип = Перелічення.ПсевдонімиПерелічення.ТипККМ_Alias((
+                              (Перелічення.ТипККМ)(Fields[КасиККМ_Const.Тип] != DBNull.Value ? Fields[КасиККМ_Const.Тип] : 0)) ),
+                            Склад = Fields["Склад"].ToString() ?? "",
+                            
+                    };
+                    
+                        TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                      
+
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+                    if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
+                }
+            }
+            
+            if (SelectPath != null) treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            
+        }
+    }
+	    
+    #endregion
+    
 }
 
 namespace GeneratedCode.Документи.ТабличніСписки
@@ -18421,6 +18629,283 @@ namespace GeneratedCode.Документи.ТабличніСписки
 	    
     #endregion
     
+    #region DOCUMENT "ЧекККМ"
+    
+      
+    public class ЧекККМ_Записи : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        bool Spend = false;
+        string ID = "";
+        
+        string Назва = "";
+        string НомерДок = "";
+        string ДатаДок = "";
+        string Організація = "";
+        string Валюта = "";
+        string Склад = "";
+        string СумаБезЗнижки = "";
+        string Знижка = "";
+        string СумаДокументу = "";
+        string Автор = "";
+        string КасаККМ = "";
+        string Коментар = "";
+
+        object[] ToArray()
+        {
+            return
+            [ 
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
+                ID, 
+                /*Проведений документ*/ Spend, 
+                /*Назва*/ Назва,
+                /*НомерДок*/ НомерДок,
+                /*ДатаДок*/ ДатаДок,
+                /*Організація*/ Організація,
+                /*Валюта*/ Валюта,
+                /*Склад*/ Склад,
+                /*СумаБезЗнижки*/ СумаБезЗнижки,
+                /*Знижка*/ Знижка,
+                /*СумаДокументу*/ СумаДокументу,
+                /*Автор*/ Автор,
+                /*КасаККМ*/ КасаККМ,
+                /*Коментар*/ Коментар,
+                
+            ];
+        }
+
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Spend Проведений документ*/ typeof(bool),
+                /*Назва*/ typeof(string),  
+                /*НомерДок*/ typeof(string),  
+                /*ДатаДок*/ typeof(string),  
+                /*Організація*/ typeof(string),  
+                /*Валюта*/ typeof(string),  
+                /*Склад*/ typeof(string),  
+                /*СумаБезЗнижки*/ typeof(string),  
+                /*Знижка*/ typeof(string),  
+                /*СумаДокументу*/ typeof(string),  
+                /*Автор*/ typeof(string),  
+                /*КасаККМ*/ typeof(string),  
+                /*Коментар*/ typeof(string),  
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 2)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 3) { MinWidth = 20, Resizable = true } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*НомерДок*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*ДатаДок*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Сума без знижки", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true } ); /*СумаБезЗнижки*/
+            treeView.AppendColumn(new TreeViewColumn("Знижка", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true } ); /*Знижка*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true } ); /*СумаДокументу*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true } ); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("КасаККМ", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true } ); /*КасаККМ*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 14) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду(Документи.ЧекККМ_Const.ДатаДок, типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);
+        }
+
+        public static void CreateFilter(TreeView treeView, ListFilterControl filterControl)
+        {
+          
+        }
+
+        public static async ValueTask UpdateRecords(TreeView treeView, List<ObjectChanged> recordsChanged)
+        {
+            ListStore Store = (ListStore)treeView.Model;
+            Dictionary<Guid, (TreeIter Iter, TypeObjectChanged Type)> records = [];
+
+            //Update
+            List<ObjectChanged> recordsChangedUpdate = [.. recordsChanged.Where(x => x.Type == TypeObjectChanged.Update)];
+            if (Store.GetIterFirst(out TreeIter iter)) 
+                do
+                {
+                    Guid uid = Guid.Parse((string)Store.GetValue(iter, 1));
+                    if (recordsChangedUpdate.Any(x => x.Uid == uid)) records.Add(uid, (iter, TypeObjectChanged.Update));
+                }
+                while (Store.IterNext(ref iter));
+
+            if (records.Count > 0)
+            {
+                Документи.ЧекККМ_Select ЧекККМ_Select = new Документи.ЧекККМ_Select();
+                ЧекККМ_Select.QuerySelect.Field.AddRange(
+                [
+                    /*Помітка на видалення*/ "deletion_label",
+                    /*Проведений документ*/ "spend",
+                    /*Назва*/ Документи.ЧекККМ_Const.Назва,
+                    /*НомерДок*/ Документи.ЧекККМ_Const.НомерДок,
+                    /*ДатаДок*/ Документи.ЧекККМ_Const.ДатаДок,
+                    /*СумаБезЗнижки*/ Документи.ЧекККМ_Const.СумаБезЗнижки,
+                    /*Знижка*/ Документи.ЧекККМ_Const.Знижка,
+                    /*СумаДокументу*/ Документи.ЧекККМ_Const.СумаДокументу,
+                    /*Коментар*/ Документи.ЧекККМ_Const.Коментар,
+                    
+                ]);
+
+                ЧекККМ_Select.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "'" + string.Join("', '", records.Select(x => x.Key)) + "'", true));
+
+                Довідники.Організації_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Організація,
+                    ЧекККМ_Select.QuerySelect.Table, "join_tab_1", "Організація");
+                Довідники.Валюти_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Валюта,
+                    ЧекККМ_Select.QuerySelect.Table, "join_tab_2", "Валюта");
+                Довідники.Склади_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Склад,
+                    ЧекККМ_Select.QuerySelect.Table, "join_tab_3", "Склад");
+                Довідники.Користувачі_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Автор,
+                    ЧекККМ_Select.QuerySelect.Table, "join_tab_4", "Автор");
+                Довідники.КасиККМ_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.КасаККМ,
+                    ЧекККМ_Select.QuerySelect.Table, "join_tab_5", "КасаККМ");
+                
+
+                /* SELECT */
+                await ЧекККМ_Select.Select();
+                
+                while (ЧекККМ_Select.MoveNext())
+                {
+                    Документи.ЧекККМ_Pointer? current = ЧекККМ_Select.Current;
+                    if (current != null)
+                    {
+                        Dictionary<string, object> Fields = current.Fields;
+                        ЧекККМ_Записи Record = new ЧекККМ_Записи
+                        {
+                            ID = current.UnigueID.ToString(),
+                            Spend = (bool)Fields["spend"], /*Проведений документ*/
+                            DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                            Назва = Fields[ЧекККМ_Const.Назва].ToString() ?? "",
+                                НомерДок = Fields[ЧекККМ_Const.НомерДок].ToString() ?? "",
+                                ДатаДок = Fields[ЧекККМ_Const.ДатаДок].ToString() ?? "",
+                                Організація = Fields["Організація"].ToString() ?? "",
+                                Валюта = Fields["Валюта"].ToString() ?? "",
+                                Склад = Fields["Склад"].ToString() ?? "",
+                                СумаБезЗнижки = Fields[ЧекККМ_Const.СумаБезЗнижки].ToString() ?? "",
+                                Знижка = Fields[ЧекККМ_Const.Знижка].ToString() ?? "",
+                                СумаДокументу = Fields[ЧекККМ_Const.СумаДокументу].ToString() ?? "",
+                                Автор = Fields["Автор"].ToString() ?? "",
+                                КасаККМ = Fields["КасаККМ"].ToString() ?? "",
+                                Коментар = Fields[ЧекККМ_Const.Коментар].ToString() ?? "",
+                                
+                        };
+                        (TreeIter Iter, TypeObjectChanged Type) = records[current.UnigueID.UGuid];
+                        Store.SetValues(Iter, Record.ToArray());
+                    }
+                }
+            }
+        }
+
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
+        {
+            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
+            ListStore Store = (ListStore)treeView.Model;
+
+            Документи.ЧекККМ_Select ЧекККМ_Select = new Документи.ЧекККМ_Select();
+            ЧекККМ_Select.QuerySelect.Field.AddRange(
+            [
+                /*Помітка на видалення*/ "deletion_label",
+                /*Проведений документ*/ "spend",
+                /*Назва*/ Документи.ЧекККМ_Const.Назва,
+                /*НомерДок*/ Документи.ЧекККМ_Const.НомерДок,
+                /*ДатаДок*/ Документи.ЧекККМ_Const.ДатаДок,
+                /*СумаБезЗнижки*/ Документи.ЧекККМ_Const.СумаБезЗнижки,
+                /*Знижка*/ Документи.ЧекККМ_Const.Знижка,
+                /*СумаДокументу*/ Документи.ЧекККМ_Const.СумаДокументу,
+                /*Коментар*/ Документи.ЧекККМ_Const.Коментар,
+                
+            ]);
+
+            
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) ЧекККМ_Select.QuerySelect.Where = (List<Where>)where;
+
+            ЧекККМ_Select.QuerySelect.Order.Add(
+               Документи.ЧекККМ_Const.ДатаДок, SelectOrder.ASC);
+            ЧекККМ_Select.QuerySelect.Order.Add(
+              "Автор", SelectOrder.ASC);
+            Довідники.Організації_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Організація,
+                ЧекККМ_Select.QuerySelect.Table, "join_tab_1", "Організація");
+            Довідники.Валюти_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Валюта,
+                ЧекККМ_Select.QuerySelect.Table, "join_tab_2", "Валюта");
+            Довідники.Склади_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Склад,
+                ЧекККМ_Select.QuerySelect.Table, "join_tab_3", "Склад");
+            Довідники.Користувачі_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.Автор,
+                ЧекККМ_Select.QuerySelect.Table, "join_tab_4", "Автор");
+            Довідники.КасиККМ_Pointer.GetJoin(ЧекККМ_Select.QuerySelect, Документи.ЧекККМ_Const.КасаККМ,
+                ЧекККМ_Select.QuerySelect.Table, "join_tab_5", "КасаККМ");
+            
+
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+                await ЗаповнитиСторінки(ЧекККМ_Select.SplitSelectToPages, settingsPages, ЧекККМ_Select.QuerySelect, unigueIDSelect);
+
+            /* SELECT */
+            await ЧекККМ_Select.Select();
+            Store.Clear();
+
+            string? uidSelect = unigueIDSelect?.ToString();
+            while (ЧекККМ_Select.MoveNext())
+            {
+                Документи.ЧекККМ_Pointer? current = ЧекККМ_Select.Current;
+
+                if (current != null)
+                {
+                    Dictionary<string, object> Fields = current.Fields;
+                    ЧекККМ_Записи Record = new ЧекККМ_Записи
+                    {
+                        ID = current.UnigueID.ToString(),
+                        Spend = (bool)Fields["spend"], /*Проведений документ*/
+                        DeletionLabel = (bool)Fields["deletion_label"], /*Помітка на видалення*/
+                        Назва = Fields[ЧекККМ_Const.Назва].ToString() ?? "",
+                            НомерДок = Fields[ЧекККМ_Const.НомерДок].ToString() ?? "",
+                            ДатаДок = Fields[ЧекККМ_Const.ДатаДок].ToString() ?? "",
+                            Організація = Fields["Організація"].ToString() ?? "",
+                            Валюта = Fields["Валюта"].ToString() ?? "",
+                            Склад = Fields["Склад"].ToString() ?? "",
+                            СумаБезЗнижки = Fields[ЧекККМ_Const.СумаБезЗнижки].ToString() ?? "",
+                            Знижка = Fields[ЧекККМ_Const.Знижка].ToString() ?? "",
+                            СумаДокументу = Fields[ЧекККМ_Const.СумаДокументу].ToString() ?? "",
+                            Автор = Fields["Автор"].ToString() ?? "",
+                            КасаККМ = Fields["КасаККМ"].ToString() ?? "",
+                            Коментар = Fields[ЧекККМ_Const.Коментар].ToString() ?? "",
+                            
+                    };
+
+                    TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
+                    CurrentPath = Store.GetPath(CurrentIter);
+                    FirstPath ??= CurrentPath;
+                    if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
+                }
+            }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null && settingsPages != null && settingsPages.CurrentPage == settingsPages.Record.Pages) //Для останньої сторінки
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
+        }
+    }
+	    
+    #endregion
+    
 
     //
     // Журнали
@@ -21514,6 +21999,209 @@ namespace GeneratedCode.Документи.ТабличніСписки
     }
     #endregion
     
+    #region JOURNAL "Роздріб"
+    
+    public class Журнали_Роздріб : ТабличнийСписок
+    {
+        bool DeletionLabel = false;
+        bool Spend = false;
+        string ID = "";
+        string Type = ""; //Тип документу
+        
+        string Назва = "";
+        string Дата = "";
+        string Номер = "";
+        string Організація = "";
+        string Склад = "";
+        string Каса = "";
+        string Валюта = "";
+        string Сума = "";
+        string Автор = "";
+        string Коментар = "";
+
+        // Масив для запису стрічки в Store
+        object[] ToArray()
+        {
+            return 
+            [
+                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
+                ID, 
+                Type, 
+                /*Проведений документ*/ Spend,
+                /*Назва*/ Назва,
+                /*Дата*/ Дата,
+                /*Номер*/ Номер,
+                /*Організація*/ Організація,
+                /*Склад*/ Склад,
+                /*Каса*/ Каса,
+                /*Валюта*/ Валюта,
+                /*Сума*/ Сума,
+                /*Автор*/ Автор,
+                /*Коментар*/ Коментар,
+                 
+            ];
+        }
+
+        // Добавлення колонок в список
+        public static void AddColumns(TreeView treeView)
+        {
+            treeView.Model = new ListStore(
+            [
+                typeof(Gdk.Pixbuf), /* Image */
+                typeof(string), /* ID */
+                typeof(string), /* Type */
+                typeof(bool), /* Spend Проведений документ */
+                typeof(string), /*Назва*/
+                typeof(string), /*Дата*/
+                typeof(string), /*Номер*/
+                typeof(string), /*Організація*/
+                typeof(string), /*Склад*/
+                typeof(string), /*Каса*/
+                typeof(string), /*Валюта*/
+                typeof(string), /*Сума*/
+                typeof(string), /*Автор*/
+                typeof(string), /*Коментар*/
+                
+            ]);
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /*Image*/ /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false }); /*UID*/
+            treeView.AppendColumn(new TreeViewColumn("Type", new CellRendererText(), "text", 2) { Visible = false }); /*Type*/
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererToggle(), "active", 3)); /*Проведений документ*/
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Назва", new CellRendererText() { Xpad = 4 }, "text", 4) { MinWidth = 20, Resizable = true } ); /*Назва*/
+            treeView.AppendColumn(new TreeViewColumn("Дата", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true } ); /*Дата*/
+            treeView.AppendColumn(new TreeViewColumn("Номер", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true } ); /*Номер*/
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Склад", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true } ); /*Склад*/
+            treeView.AppendColumn(new TreeViewColumn("Каса", new CellRendererText() { Xpad = 4 }, "text", 9) { MinWidth = 20, Resizable = true } ); /*Каса*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 10) { MinWidth = 20, Resizable = true } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 11) { MinWidth = 20, Resizable = true } ); /*Сума*/
+            treeView.AppendColumn(new TreeViewColumn("Автор", new CellRendererText() { Xpad = 4 }, "text", 12) { MinWidth = 20, Resizable = true } ); /*Автор*/
+            treeView.AppendColumn(new TreeViewColumn("Коментар", new CellRendererText() { Xpad = 4 }, "text", 13) { MinWidth = 20, Resizable = true } ); /*Коментар*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            Dictionary<string, List<Where>> WhereDict = [];
+            if (!treeView.Data.ContainsKey("Where"))
+                treeView.Data.Add("Where", WhereDict);
+            else
+                treeView.Data["Where"] = WhereDict;
+            
+        }
+
+        // Список документів які входять в журнал
+        public static Dictionary<string, string> AllowDocument()
+        {
+            return new Dictionary<string, string>()
+            {
+                {"ЧекККМ", "Чек ККМ"},
+                
+            };
+        }
+
+        // Завантаження даних
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null) 
+        {
+            TreePath? SelectPath = null, CurrentPath = null;
+            ListStore Store = (ListStore)treeView.Model;
+
+            List<string> allQuery = [];
+            Dictionary<string, object> paramQuery = [];
+
+          
+              //Документ: ЧекККМ
+              {
+                  Query query = new Query(Документи.ЧекККМ_Const.TABLE);
+
+                  // Встановлення відбору
+                  var dataWhere = treeView.Data["Where"];
+                  if (dataWhere != null)
+                  {
+                      var dictWhere = (Dictionary<string, List<Where>>)dataWhere;
+                      if (dictWhere.TryGetValue("ЧекККМ", out List<Where>? listWhere))
+                      {
+                          query.Where = listWhere;
+                          foreach(Where where in listWhere)
+                              paramQuery.Add(where.Alias, where.Value);
+                      }
+                  }
+                  
+                  query.FieldAndAlias.Add(new ValueName<string>("'ЧекККМ'", "type"));
+                  query.Field.Add("deletion_label");
+                  query.Field.Add("spend");
+                  
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЧекККМ_Const.TABLE + "." + Документи.ЧекККМ_Const.Назва, "Назва"));
+                            
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЧекККМ_Const.TABLE + "." + Документи.ЧекККМ_Const.ДатаДок, "Дата"));
+                            
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЧекККМ_Const.TABLE + "." + Документи.ЧекККМ_Const.НомерДок, "Номер"));
+                            Довідники.Організації_Pointer.GetJoin(query, Документи.ЧекККМ_Const.Організація, query.Table, "join_tab_4", "Організація");
+                            Довідники.Склади_Pointer.GetJoin(query, Документи.ЧекККМ_Const.Склад, query.Table, "join_tab_5", "Склад");
+                            Довідники.КасиККМ_Pointer.GetJoin(query, Документи.ЧекККМ_Const.КасаККМ, query.Table, "join_tab_6", "Каса");
+                            Довідники.Валюти_Pointer.GetJoin(query, Документи.ЧекККМ_Const.Валюта, query.Table, "join_tab_7", "Валюта");
+                            
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЧекККМ_Const.TABLE + "." + Документи.ЧекККМ_Const.СумаДокументу, "Сума"));
+                            Довідники.Користувачі_Pointer.GetJoin(query, Документи.ЧекККМ_Const.Автор, query.Table, "join_tab_9", "Автор");
+                            
+                              query.FieldAndAlias.Add(new ValueName<string>(Документи.ЧекККМ_Const.TABLE + "." + Документи.ЧекККМ_Const.Коментар, "Коментар"));
+                            
+                  allQuery.Add(query.Construct());
+              }
+              
+
+            string unionAllQuery = string.Join("\nUNION\n", allQuery);
+
+            
+
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+               unionAllQuery = await ЗаповнитиСторінки(Config.Kernel.DataBase.SplitSelectToPagesForJournal, settingsPages, unionAllQuery, paramQuery);
+
+            var recordResult = await Config.Kernel.DataBase.SelectRequest(unionAllQuery, paramQuery);
+            Store.Clear();
+
+            string? uidSelect = selectPointerItem?.ToString();
+            foreach (Dictionary<string, object> row in recordResult.ListRow)
+            {
+                Журнали_Роздріб record = new Журнали_Роздріб
+                {
+                    ID = row["uid"].ToString() ?? "",
+                    Type = row["type"].ToString() ?? "",
+                    DeletionLabel = (bool)row["deletion_label"],
+                    Spend = (bool)row["spend"],
+                    Назва = row["Назва"] != DBNull.Value ? (row["Назва"].ToString() ?? "") : "",
+                    Дата = row["Дата"] != DBNull.Value ? (row["Дата"].ToString() ?? "") : "",
+                    Номер = row["Номер"] != DBNull.Value ? (row["Номер"].ToString() ?? "") : "",
+                    Організація = row["Організація"] != DBNull.Value ? (row["Організація"].ToString() ?? "") : "",
+                    Склад = row["Склад"] != DBNull.Value ? (row["Склад"].ToString() ?? "") : "",
+                    Каса = row["Каса"] != DBNull.Value ? (row["Каса"].ToString() ?? "") : "",
+                    Валюта = row["Валюта"] != DBNull.Value ? (row["Валюта"].ToString() ?? "") : "",
+                    Сума = row["Сума"] != DBNull.Value ? (row["Сума"].ToString() ?? "") : "",
+                    Автор = row["Автор"] != DBNull.Value ? (row["Автор"].ToString() ?? "") : "",
+                    Коментар = row["Коментар"] != DBNull.Value ? (row["Коментар"].ToString() ?? "") : "",
+                    
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(record.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+                if (uidSelect != null && record.ID == uidSelect) SelectPath = CurrentPath;
+            }
+            if (SelectPath != null)
+                treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+            else if (CurrentPath != null && settingsPages != null && settingsPages.CurrentPage == settingsPages.Record.Pages) //Для останньої сторінки
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);
+          
+        }
+    }
+    #endregion
+    
 }
 
 namespace GeneratedCode.РегістриВідомостей.ТабличніСписки
@@ -23623,6 +24311,139 @@ namespace GeneratedCode.РегістриНакопичення.Табличні�
                         Комірка = record.Комірка.Назва,
                         Серія = record.Серія.Назва,
                         ВНаявності = record.ВНаявності.ToString() ?? "",
+                        
+                };
+
+                TreeIter CurrentIter = Store.AppendValues(row.ToArray());
+                CurrentPath = Store.GetPath(CurrentIter);
+                if (uidSelect != null && row.ID == uidSelect) SelectPath = CurrentPath;
+            }
+            if (position_last)
+            {
+                if (SelectPath != null)
+                    treeView.SetCursor(SelectPath, treeView.Columns[0], false);
+                /*else if (CurrentPath != null && settingsPages != null && settingsPages.CurrentPage == settingsPages.Record.Pages) //Для останньої сторінки
+                treeView.SetCursor(CurrentPath, treeView.Columns[0], false);*/
+            }
+        }
+    }
+	    
+    #endregion
+    
+    #region REGISTER "РухКоштівККМ"
+    
+      
+    public class РухКоштівККМ_Записи : ТабличнийСписок
+    {
+        string ID = "";
+        bool Income = false;
+        string Period = "";
+        string OwnerName = "";
+        
+        string Організація = "";
+        string КасаККМ = "";
+        string Валюта = "";
+        string Сума = "";
+
+        object[] ToArray()
+        {
+            return
+            [
+                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
+                ID, 
+                Income ? "+" : "-", 
+                Period, 
+                OwnerName,
+                /*Організація*/ Організація,
+                /*КасаККМ*/ КасаККМ,
+                /*Валюта*/ Валюта,
+                /*Сума*/ Сума,
+                 
+            ];
+        }
+
+        public static void AddColumns(TreeView treeView, string[]? hiddenColumn = null)
+        {
+            treeView.Model = new ListStore(
+            [
+                /*Image*/ typeof(Gdk.Pixbuf), 
+                /*ID*/ typeof(string), 
+                /*Income*/ typeof(string), 
+                /*Period*/ typeof(string),
+                /*OwnerName*/ typeof(string),
+                /*Організація*/ typeof(string),
+                /*КасаККМ*/ typeof(string),
+                /*Валюта*/ typeof(string),
+                /*Сума*/ typeof(string),
+                
+            ]);
+
+            bool IsHiddenColumn(string column){ return hiddenColumn != null ? !hiddenColumn.Contains(column) : true; }
+
+            treeView.AppendColumn(new TreeViewColumn("", new CellRendererPixbuf(), "pixbuf", 0)); /* { Ypad = 0 } */
+            treeView.AppendColumn(new TreeViewColumn("ID", new CellRendererText(), "text", 1) { Visible = false });
+            treeView.AppendColumn(new TreeViewColumn("Рух", new CellRendererText() { Xalign = 0.5f }, "text", 2) { Visible = IsHiddenColumn("income") });
+            treeView.AppendColumn(new TreeViewColumn("Період", new CellRendererText(), "text", 3) { Visible = IsHiddenColumn("period") });
+            treeView.AppendColumn(new TreeViewColumn("Регістратор", new CellRendererText(), "text", 4) { Visible = IsHiddenColumn("owner") });
+            /* */
+            treeView.AppendColumn(new TreeViewColumn("Організація", new CellRendererText() { Xpad = 4 }, "text", 5) { MinWidth = 20, Resizable = true, SortColumnId = 5 } ); /*Організація*/
+            treeView.AppendColumn(new TreeViewColumn("Каса ККМ", new CellRendererText() { Xpad = 4 }, "text", 6) { MinWidth = 20, Resizable = true, SortColumnId = 6 } ); /*КасаККМ*/
+            treeView.AppendColumn(new TreeViewColumn("Валюта", new CellRendererText() { Xpad = 4 }, "text", 7) { MinWidth = 20, Resizable = true, SortColumnId = 7 } ); /*Валюта*/
+            treeView.AppendColumn(new TreeViewColumn("Сума", new CellRendererText() { Xpad = 4 }, "text", 8) { MinWidth = 20, Resizable = true, SortColumnId = 8 } ); /*Сума*/
+            
+            //Пустишка
+            treeView.AppendColumn(new TreeViewColumn());
+        }
+
+        public static void ДодатиВідбірПоПеріоду(TreeView treeView, ПеріодДляЖурналу.ТипПеріоду типПеріоду, DateTime? start = null, DateTime? stop = null)
+        {
+            ОчиститиВідбір(treeView);
+            Where? where = ПеріодДляЖурналу.ВідбірПоПеріоду("period", типПеріоду, start, stop);
+            if (where != null) ДодатиВідбір(treeView, where);               
+        }
+
+        public static void ДодатиВідбірПоДокументу(TreeView treeView, Guid owner)
+        {
+            ДодатиВідбір(treeView, new Where("owner", Comparison.EQ, owner), true);
+        }
+
+        public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, bool docname_required = true, bool position_last = true)
+        {
+            TreePath? SelectPath = null, CurrentPath = null;
+            ListStore Store = (ListStore)treeView.Model;
+
+            РегістриНакопичення.РухКоштівККМ_RecordsSet РухКоштівККМ_RecordsSet = new РегістриНакопичення.РухКоштівККМ_RecordsSet();
+            РухКоштівККМ_RecordsSet.FillJoin(["period"], docname_required);
+
+            /* Where */
+            var where = treeView.Data["Where"];
+            if (where != null) РухКоштівККМ_RecordsSet.QuerySelect.Where = (List<Where>)where;
+
+            
+
+            /* Pages */
+            var pages = treeView.Data["Pages"];
+            Сторінки.Налаштування? settingsPages = pages != null ? (Сторінки.Налаштування)pages : null;
+            if (settingsPages != null)
+                await ЗаповнитиСторінки(РухКоштівККМ_RecordsSet.SplitSelectToPages, settingsPages, РухКоштівККМ_RecordsSet.QuerySelect, selectPointerItem);
+                
+            /* Read */
+            await РухКоштівККМ_RecordsSet.Read();
+            Store.Clear();
+
+            string? uidSelect = selectPointerItem?.ToString();
+            foreach (РухКоштівККМ_RecordsSet.Record record in РухКоштівККМ_RecordsSet.Records)
+            {
+                РухКоштівККМ_Записи row = new РухКоштівККМ_Записи
+                {
+                    ID = record.UID.ToString(),
+                    Period = record.Period.ToString(),
+                    Income = record.Income,
+                    OwnerName = record.OwnerName,
+                    Організація = record.Організація.Назва,
+                        КасаККМ = record.КасаККМ.Назва,
+                        Валюта = record.Валюта.Назва,
+                        Сума = record.Сума.ToString() ?? "",
                         
                 };
 
