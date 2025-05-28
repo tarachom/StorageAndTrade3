@@ -5,6 +5,7 @@
 
 */
 
+using AccountingSoftware;
 using GeneratedCode;
 
 namespace StorageAndTrade
@@ -12,6 +13,9 @@ namespace StorageAndTrade
     class PageService : InterfaceGtk.PageService
     {
         public PageService() : base(Config.Kernel, Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
+
+        protected override CompositePointerControl CreateCompositeControl(string caption, UuidAndText uuidAndText) =>
+            new CompositePointerControl() { Caption = caption, Pointer = uuidAndText, ClearSensetive = false, TypeSelectSensetive = false };
 
         const string КлючНалаштуванняКористувача = "PageService";
 
