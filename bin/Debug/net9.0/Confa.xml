@@ -7,7 +7,7 @@
   <Author>Тарахомин Юрій Іванович, accounting.org.ua</Author>
   <Desc>Конфігурація "Зберігання та Торгівля"
 https://accounting.org.ua/storage_and_trade.html</Desc>
-  <DateTimeSave>23.05.2025 19:03:57</DateTimeSave>
+  <DateTimeSave>30.06.2025 20:14:28</DateTimeSave>
   <DictTSearch>simple</DictTSearch>
   <ConstantsBlocks>
     <ConstantsBlock>
@@ -34196,7 +34196,7 @@ namespace StorageAndTrade
             <AfterSave Action="0">AfterSave</AfterSave>
           </TriggerFunctions>
           <Forms>
-            <Form Modified="1">
+            <Form Modified="0">
               <Name>Таблична частина Товари</Name>
               <Desc>Таблична частина Товари</Desc>
               <Type>TablePart</Type>

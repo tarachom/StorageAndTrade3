@@ -28,6 +28,14 @@
           }
         }
       },
+      "BCrypt.Net-Next/4.0.3": {
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.0.3.0"
+          }
+        }
+      },
       "CairoSharp/3.24.24.117-develop": {
         "runtime": {
           "lib/net8.0/CairoSharp.dll": {
@@ -140,6 +148,7 @@
       },
       "AccountingSoftware/3.1.0.7": {
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
           "Npgsql": "9.0.3"
         },
         "runtime": {
@@ -175,6 +184,13 @@
       "sha512": "sha512-LqhUEqLkNC4Uybx/IKQenGDSvDFrjGE6w9uQ1zZwyHuGyDSZhiqeg6PyzU1FaQ3NF+uGwbFxDcDYJCVM2JoTpw==",
       "path": "atksharp/3.24.24.117-develop",
       "hashPath": "atksharp.3.24.24.117-develop.nupkg.sha512"
+    },
+    "BCrypt.Net-Next/4.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
+      "path": "bcrypt.net-next/4.0.3",
+      "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
     },
     "CairoSharp/3.24.24.117-develop": {
       "type": "package",

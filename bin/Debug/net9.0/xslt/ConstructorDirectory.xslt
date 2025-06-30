@@ -896,7 +896,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public async override ValueTask LoadRecords_OnFilter()
         {
-            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.<xsl:value-of select="$DirectoryName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, SelectPointerItem, DirectoryPointerItem);
         }
 
         protected override void FillFilterList(ListFilterControl filterControl)
@@ -1133,7 +1133,9 @@ namespace <xsl:value-of select="$NameSpace"/>
                 Box hBox = new Box(Orientation.Horizontal, 0);
                 ListBoxRow listBoxRow = [hBox];
 
-                LinkButton linkName = new LinkButton("", await item.GetPresentation()) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
+                string presentation = await item.GetPresentation();
+
+                LinkButton linkName = new LinkButton("", SubstringName(presentation)) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true, TooltipText = presentation };
                 linkName.Clicked += (sender, args) =&gt;
                 {
                     if (Pointer.UnigueID.ToString() != item.UnigueID.ToString())

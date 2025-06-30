@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 23.05.2025 19:03:57
+ * Дата конфігурації: 30.06.2025 20:14:28
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон GeneratedCode.xslt
@@ -2108,9 +2108,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Організації_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Організації_Pointer? Current { get; private set; }
         
-        public async ValueTask<Організації_Pointer> FindByField(string name, object value)
+        public async ValueTask<Організації_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Організації_Pointer(pointer) : new Організації_Pointer();
         }
         
@@ -2196,14 +2196,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a01"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
                 
             await base.BaseBeginTransaction();
-            
-            await BeforeSaveOwnerVersion();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -2224,14 +2223,18 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -2509,9 +2512,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Номенклатура_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Номенклатура_Pointer? Current { get; private set; }
         
-        public async ValueTask<Номенклатура_Pointer> FindByField(string name, object value)
+        public async ValueTask<Номенклатура_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Номенклатура_Pointer(pointer) : new Номенклатура_Pointer();
         }
         
@@ -2593,14 +2596,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a03"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
                 
             await base.BaseBeginTransaction();
-            
-            await BeforeSaveOwnerVersion();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -2615,14 +2617,18 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -2822,9 +2828,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Виробники_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Виробники_Pointer? Current { get; private set; }
         
-        public async ValueTask<Виробники_Pointer> FindByField(string name, object value)
+        public async ValueTask<Виробники_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Виробники_Pointer(pointer) : new Виробники_Pointer();
         }
         
@@ -3035,9 +3041,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВидиНоменклатури_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиНоменклатури_Pointer? Current { get; private set; }
         
-        public async ValueTask<ВидиНоменклатури_Pointer> FindByField(string name, object value)
+        public async ValueTask<ВидиНоменклатури_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ВидиНоменклатури_Pointer(pointer) : new ВидиНоменклатури_Pointer();
         }
         
@@ -3245,9 +3251,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПакуванняОдиниціВиміру_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПакуванняОдиниціВиміру_Pointer? Current { get; private set; }
         
-        public async ValueTask<ПакуванняОдиниціВиміру_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПакуванняОдиниціВиміру_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПакуванняОдиниціВиміру_Pointer(pointer) : new ПакуванняОдиниціВиміру_Pointer();
         }
         
@@ -3464,9 +3470,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Валюти_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Валюти_Pointer? Current { get; private set; }
         
-        public async ValueTask<Валюти_Pointer> FindByField(string name, object value)
+        public async ValueTask<Валюти_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Валюти_Pointer(pointer) : new Валюти_Pointer();
         }
         
@@ -3731,9 +3737,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Контрагенти_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Контрагенти_Pointer? Current { get; private set; }
         
-        public async ValueTask<Контрагенти_Pointer> FindByField(string name, object value)
+        public async ValueTask<Контрагенти_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Контрагенти_Pointer(pointer) : new Контрагенти_Pointer();
         }
         
@@ -3819,14 +3825,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
                 
             await base.BaseBeginTransaction();
-            
-            await BeforeSaveOwnerVersion();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -3847,14 +3852,18 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -3944,14 +3953,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a08"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
                 
             await base.BaseBeginTransaction();
-            
-            await BeforeSaveOwnerVersion();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -3965,14 +3973,18 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -4227,9 +4239,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Склади_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Склади_Pointer? Current { get; private set; }
         
-        public async ValueTask<Склади_Pointer> FindByField(string name, object value)
+        public async ValueTask<Склади_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Склади_Pointer(pointer) : new Склади_Pointer();
         }
         
@@ -4315,14 +4327,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a10"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
                 
             await base.BaseBeginTransaction();
-            
-            await BeforeSaveOwnerVersion();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -4343,14 +4354,18 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -4561,9 +4576,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВидиЦін_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиЦін_Pointer? Current { get; private set; }
         
-        public async ValueTask<ВидиЦін_Pointer> FindByField(string name, object value)
+        public async ValueTask<ВидиЦін_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ВидиЦін_Pointer(pointer) : new ВидиЦін_Pointer();
         }
         
@@ -4764,9 +4779,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВидиЦінПостачальників_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиЦінПостачальників_Pointer? Current { get; private set; }
         
-        public async ValueTask<ВидиЦінПостачальників_Pointer> FindByField(string name, object value)
+        public async ValueTask<ВидиЦінПостачальників_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ВидиЦінПостачальників_Pointer(pointer) : new ВидиЦінПостачальників_Pointer();
         }
         
@@ -4998,9 +5013,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Користувачі_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Користувачі_Pointer? Current { get; private set; }
         
-        public async ValueTask<Користувачі_Pointer> FindByField(string name, object value)
+        public async ValueTask<Користувачі_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Користувачі_Pointer(pointer) : new Користувачі_Pointer();
         }
         
@@ -5086,7 +5101,7 @@ namespace GeneratedCode.Довідники
             
                 
             await base.BaseBeginTransaction();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -5106,14 +5121,14 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -5354,9 +5369,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ФізичніОсоби_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ФізичніОсоби_Pointer? Current { get; private set; }
         
-        public async ValueTask<ФізичніОсоби_Pointer> FindByField(string name, object value)
+        public async ValueTask<ФізичніОсоби_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ФізичніОсоби_Pointer(pointer) : new ФізичніОсоби_Pointer();
         }
         
@@ -5442,14 +5457,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a16"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
                 
             await base.BaseBeginTransaction();
-            
-            await BeforeSaveOwnerVersion();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -5470,14 +5484,18 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -5688,9 +5706,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new СтруктураПідприємства_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СтруктураПідприємства_Pointer? Current { get; private set; }
         
-        public async ValueTask<СтруктураПідприємства_Pointer> FindByField(string name, object value)
+        public async ValueTask<СтруктураПідприємства_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new СтруктураПідприємства_Pointer(pointer) : new СтруктураПідприємства_Pointer();
         }
         
@@ -5886,9 +5904,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new КраїниСвіту_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public КраїниСвіту_Pointer? Current { get; private set; }
         
-        public async ValueTask<КраїниСвіту_Pointer> FindByField(string name, object value)
+        public async ValueTask<КраїниСвіту_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new КраїниСвіту_Pointer(pointer) : new КраїниСвіту_Pointer();
         }
         
@@ -6104,9 +6122,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Файли_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Файли_Pointer? Current { get; private set; }
         
-        public async ValueTask<Файли_Pointer> FindByField(string name, object value)
+        public async ValueTask<Файли_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Файли_Pointer(pointer) : new Файли_Pointer();
         }
         
@@ -6312,9 +6330,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ХарактеристикиНоменклатури_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ХарактеристикиНоменклатури_Pointer? Current { get; private set; }
         
-        public async ValueTask<ХарактеристикиНоменклатури_Pointer> FindByField(string name, object value)
+        public async ValueTask<ХарактеристикиНоменклатури_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ХарактеристикиНоменклатури_Pointer(pointer) : new ХарактеристикиНоменклатури_Pointer();
         }
         
@@ -6521,9 +6539,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Номенклатура_Папки_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Номенклатура_Папки_Pointer? Current { get; private set; }
         
-        public async ValueTask<Номенклатура_Папки_Pointer> FindByField(string name, object value)
+        public async ValueTask<Номенклатура_Папки_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Номенклатура_Папки_Pointer(pointer) : new Номенклатура_Папки_Pointer();
         }
         
@@ -6744,9 +6762,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Контрагенти_Папки_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Контрагенти_Папки_Pointer? Current { get; private set; }
         
-        public async ValueTask<Контрагенти_Папки_Pointer> FindByField(string name, object value)
+        public async ValueTask<Контрагенти_Папки_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Контрагенти_Папки_Pointer(pointer) : new Контрагенти_Папки_Pointer();
         }
         
@@ -6967,9 +6985,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Склади_Папки_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Склади_Папки_Pointer? Current { get; private set; }
         
-        public async ValueTask<Склади_Папки_Pointer> FindByField(string name, object value)
+        public async ValueTask<Склади_Папки_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Склади_Папки_Pointer(pointer) : new Склади_Папки_Pointer();
         }
         
@@ -7189,9 +7207,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Каси_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Каси_Pointer? Current { get; private set; }
         
-        public async ValueTask<Каси_Pointer> FindByField(string name, object value)
+        public async ValueTask<Каси_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Каси_Pointer(pointer) : new Каси_Pointer();
         }
         
@@ -7412,9 +7430,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new БанківськіРахункиОрганізацій_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public БанківськіРахункиОрганізацій_Pointer? Current { get; private set; }
         
-        public async ValueTask<БанківськіРахункиОрганізацій_Pointer> FindByField(string name, object value)
+        public async ValueTask<БанківськіРахункиОрганізацій_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new БанківськіРахункиОрганізацій_Pointer(pointer) : new БанківськіРахункиОрганізацій_Pointer();
         }
         
@@ -7702,9 +7720,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ДоговориКонтрагентів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ДоговориКонтрагентів_Pointer? Current { get; private set; }
         
-        public async ValueTask<ДоговориКонтрагентів_Pointer> FindByField(string name, object value)
+        public async ValueTask<ДоговориКонтрагентів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ДоговориКонтрагентів_Pointer(pointer) : new ДоговориКонтрагентів_Pointer();
         }
         
@@ -7920,9 +7938,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new БанківськіРахункиКонтрагентів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public БанківськіРахункиКонтрагентів_Pointer? Current { get; private set; }
         
-        public async ValueTask<БанківськіРахункиКонтрагентів_Pointer> FindByField(string name, object value)
+        public async ValueTask<БанківськіРахункиКонтрагентів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new БанківськіРахункиКонтрагентів_Pointer(pointer) : new БанківськіРахункиКонтрагентів_Pointer();
         }
         
@@ -8154,9 +8172,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new СтаттяРухуКоштів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СтаттяРухуКоштів_Pointer? Current { get; private set; }
         
-        public async ValueTask<СтаттяРухуКоштів_Pointer> FindByField(string name, object value)
+        public async ValueTask<СтаттяРухуКоштів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new СтаттяРухуКоштів_Pointer(pointer) : new СтаттяРухуКоштів_Pointer();
         }
         
@@ -8230,7 +8248,7 @@ namespace GeneratedCode.Довідники
             
                 
             await base.BaseBeginTransaction();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -8244,14 +8262,14 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -8457,9 +8475,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new СеріїНоменклатури_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СеріїНоменклатури_Pointer? Current { get; private set; }
         
-        public async ValueTask<СеріїНоменклатури_Pointer> FindByField(string name, object value)
+        public async ValueTask<СеріїНоменклатури_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new СеріїНоменклатури_Pointer(pointer) : new СеріїНоменклатури_Pointer();
         }
         
@@ -8673,9 +8691,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПартіяТоварівКомпозит_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПартіяТоварівКомпозит_Pointer? Current { get; private set; }
         
-        public async ValueTask<ПартіяТоварівКомпозит_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПартіяТоварівКомпозит_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПартіяТоварівКомпозит_Pointer(pointer) : new ПартіяТоварівКомпозит_Pointer();
         }
         
@@ -8896,9 +8914,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВидиЗапасів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВидиЗапасів_Pointer? Current { get; private set; }
         
-        public async ValueTask<ВидиЗапасів_Pointer> FindByField(string name, object value)
+        public async ValueTask<ВидиЗапасів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ВидиЗапасів_Pointer(pointer) : new ВидиЗапасів_Pointer();
         }
         
@@ -9224,9 +9242,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Банки_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Банки_Pointer? Current { get; private set; }
         
-        public async ValueTask<Банки_Pointer> FindByField(string name, object value)
+        public async ValueTask<Банки_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Банки_Pointer(pointer) : new Банки_Pointer();
         }
         
@@ -9427,9 +9445,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new СкладськіПриміщення_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СкладськіПриміщення_Pointer? Current { get; private set; }
         
-        public async ValueTask<СкладськіПриміщення_Pointer> FindByField(string name, object value)
+        public async ValueTask<СкладськіПриміщення_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new СкладськіПриміщення_Pointer(pointer) : new СкладськіПриміщення_Pointer();
         }
         
@@ -9665,9 +9683,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new СкладськіКомірки_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СкладськіКомірки_Pointer? Current { get; private set; }
         
-        public async ValueTask<СкладськіКомірки_Pointer> FindByField(string name, object value)
+        public async ValueTask<СкладськіКомірки_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new СкладськіКомірки_Pointer(pointer) : new СкладськіКомірки_Pointer();
         }
         
@@ -9866,9 +9884,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ОбластьЗберігання_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ОбластьЗберігання_Pointer? Current { get; private set; }
         
-        public async ValueTask<ОбластьЗберігання_Pointer> FindByField(string name, object value)
+        public async ValueTask<ОбластьЗберігання_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ОбластьЗберігання_Pointer(pointer) : new ОбластьЗберігання_Pointer();
         }
         
@@ -10084,9 +10102,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ТипорозміриКомірок_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ТипорозміриКомірок_Pointer? Current { get; private set; }
         
-        public async ValueTask<ТипорозміриКомірок_Pointer> FindByField(string name, object value)
+        public async ValueTask<ТипорозміриКомірок_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ТипорозміриКомірок_Pointer(pointer) : new ТипорозміриКомірок_Pointer();
         }
         
@@ -10298,9 +10316,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new СкладськіКомірки_Папки_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public СкладськіКомірки_Папки_Pointer? Current { get; private set; }
         
-        public async ValueTask<СкладськіКомірки_Папки_Pointer> FindByField(string name, object value)
+        public async ValueTask<СкладськіКомірки_Папки_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new СкладськіКомірки_Папки_Pointer(pointer) : new СкладськіКомірки_Папки_Pointer();
         }
         
@@ -10525,9 +10543,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new Блокнот_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public Блокнот_Pointer? Current { get; private set; }
         
-        public async ValueTask<Блокнот_Pointer> FindByField(string name, object value)
+        public async ValueTask<Блокнот_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new Блокнот_Pointer(pointer) : new Блокнот_Pointer();
         }
         
@@ -10762,9 +10780,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗбереженіЗвіти_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗбереженіЗвіти_Pointer? Current { get; private set; }
         
-        public async ValueTask<ЗбереженіЗвіти_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЗбереженіЗвіти_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЗбереженіЗвіти_Pointer(pointer) : new ЗбереженіЗвіти_Pointer();
         }
         
@@ -10900,14 +10918,13 @@ namespace GeneratedCode.Довідники
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b04"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
                 
             await base.BaseBeginTransaction();
-            
-            await BeforeSaveOwnerVersion();
-            
+
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
             
@@ -10953,14 +10970,18 @@ namespace GeneratedCode.Довідники
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
                 
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -11199,9 +11220,9 @@ namespace GeneratedCode.Довідники
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new КасиККМ_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public КасиККМ_Pointer? Current { get; private set; }
         
-        public async ValueTask<КасиККМ_Pointer> FindByField(string name, object value)
+        public async ValueTask<КасиККМ_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new КасиККМ_Pointer(pointer) : new КасиККМ_Pointer();
         }
         
@@ -12803,9 +12824,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗамовленняПостачальнику_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗамовленняПостачальнику_Pointer? Current { get; private set; }
 
-        public async ValueTask<ЗамовленняПостачальнику_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЗамовленняПостачальнику_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЗамовленняПостачальнику_Pointer(pointer) : new ЗамовленняПостачальнику_Pointer();
         }
         
@@ -12923,26 +12944,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a25"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_b2", record.НомерРядка},
                     {"col_o4", record.Номенклатура.UnigueID.UGuid},
@@ -12959,14 +12979,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -13616,9 +13640,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПоступленняТоварівТаПослуг_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоступленняТоварівТаПослуг_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПоступленняТоварівТаПослуг_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПоступленняТоварівТаПослуг_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПоступленняТоварівТаПослуг_Pointer(pointer) : new ПоступленняТоварівТаПослуг_Pointer();
         }
         
@@ -13746,26 +13770,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a32"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_b3", record.НомерРядка},
                     {"col_a9", record.Номенклатура.UnigueID.UGuid},
@@ -13784,14 +13807,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -14423,9 +14450,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗамовленняКлієнта_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗамовленняКлієнта_Pointer? Current { get; private set; }
 
-        public async ValueTask<ЗамовленняКлієнта_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЗамовленняКлієнта_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЗамовленняКлієнта_Pointer(pointer) : new ЗамовленняКлієнта_Pointer();
         }
         
@@ -14541,26 +14568,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a34"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
@@ -14576,14 +14602,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -15225,9 +15255,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РеалізаціяТоварівТаПослуг_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РеалізаціяТоварівТаПослуг_Pointer? Current { get; private set; }
 
-        public async ValueTask<РеалізаціяТоварівТаПослуг_Pointer> FindByField(string name, object value)
+        public async ValueTask<РеалізаціяТоварівТаПослуг_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new РеалізаціяТоварівТаПослуг_Pointer(pointer) : new РеалізаціяТоварівТаПослуг_Pointer();
         }
         
@@ -15359,26 +15389,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a36"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_d2", record.Номенклатура.UnigueID.UGuid},
@@ -15398,14 +15427,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -15914,9 +15947,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВстановленняЦінНоменклатури_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВстановленняЦінНоменклатури_Pointer? Current { get; private set; }
 
-        public async ValueTask<ВстановленняЦінНоменклатури_Pointer> FindByField(string name, object value)
+        public async ValueTask<ВстановленняЦінНоменклатури_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ВстановленняЦінНоменклатури_Pointer(pointer) : new ВстановленняЦінНоменклатури_Pointer();
         }
         
@@ -16020,26 +16053,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a42"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_h1", record.Номенклатура.UnigueID.UGuid},
@@ -16050,14 +16082,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -16464,9 +16500,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПрихіднийКасовийОрдер_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПрихіднийКасовийОрдер_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПрихіднийКасовийОрдер_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПрихіднийКасовийОрдер_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПрихіднийКасовийОрдер_Pointer(pointer) : new ПрихіднийКасовийОрдер_Pointer();
         }
         
@@ -16568,26 +16604,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a44"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_j4", record.Замовлення},
@@ -16598,14 +16633,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -17022,9 +17061,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РозхіднийКасовийОрдер_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозхіднийКасовийОрдер_Pointer? Current { get; private set; }
 
-        public async ValueTask<РозхіднийКасовийОрдер_Pointer> FindByField(string name, object value)
+        public async ValueTask<РозхіднийКасовийОрдер_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new РозхіднийКасовийОрдер_Pointer(pointer) : new РозхіднийКасовийОрдер_Pointer();
         }
         
@@ -17128,26 +17167,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a48"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_l4", record.Замовлення},
@@ -17159,14 +17197,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -17589,9 +17631,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПереміщенняТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварів_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПереміщенняТоварів_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПереміщенняТоварів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПереміщенняТоварів_Pointer(pointer) : new ПереміщенняТоварів_Pointer();
         }
         
@@ -17701,26 +17743,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a31"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_b8", record.НомерРядка},
                     {"col_b3", record.Номенклатура.UnigueID.UGuid},
@@ -17733,14 +17774,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -18182,9 +18227,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПоверненняТоварівПостачальнику_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівПостачальнику_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПоверненняТоварівПостачальнику_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПоверненняТоварівПостачальнику_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПоверненняТоварівПостачальнику_Pointer(pointer) : new ПоверненняТоварівПостачальнику_Pointer();
         }
         
@@ -18298,26 +18343,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a51"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_d8", record.Номенклатура.UnigueID.UGuid},
@@ -18332,14 +18376,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -18763,9 +18811,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПоверненняТоварівВідКлієнта_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПоверненняТоварівВідКлієнта_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПоверненняТоварівВідКлієнта_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПоверненняТоварівВідКлієнта_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПоверненняТоварівВідКлієнта_Pointer(pointer) : new ПоверненняТоварівВідКлієнта_Pointer();
         }
         
@@ -18881,26 +18929,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a53"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_h2", record.НомерРядка},
                     {"col_g3", record.Номенклатура.UnigueID.UGuid},
@@ -18916,14 +18963,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -19331,9 +19382,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new АктВиконанихРобіт_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public АктВиконанихРобіт_Pointer? Current { get; private set; }
 
-        public async ValueTask<АктВиконанихРобіт_Pointer> FindByField(string name, object value)
+        public async ValueTask<АктВиконанихРобіт_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new АктВиконанихРобіт_Pointer(pointer) : new АктВиконанихРобіт_Pointer();
         }
         
@@ -19433,26 +19484,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a81"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_c4", record.НомерРядка},
                     {"col_b8", record.Номенклатура.UnigueID.UGuid},
@@ -19463,14 +19513,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -20018,9 +20072,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВведенняЗалишків_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВведенняЗалишків_Pointer? Current { get; private set; }
 
-        public async ValueTask<ВведенняЗалишків_Pointer> FindByField(string name, object value)
+        public async ValueTask<ВведенняЗалишків_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ВведенняЗалишків_Pointer(pointer) : new ВведенняЗалишків_Pointer();
         }
         
@@ -20130,26 +20184,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_e4", record.НомерРядка},
                     {"col_d6", record.Номенклатура.UnigueID.UGuid},
@@ -20163,14 +20216,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -20273,26 +20330,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_e5", record.Каса.UnigueID.UGuid},
@@ -20300,14 +20356,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -20404,26 +20464,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_e7", record.БанківськийРахунок.UnigueID.UGuid},
@@ -20431,14 +20490,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -20541,26 +20604,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a83"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_e9", record.Контрагент.UnigueID.UGuid},
@@ -20570,14 +20632,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -20913,9 +20979,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new НадлишкиТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public НадлишкиТоварів_Pointer? Current { get; private set; }
 
-        public async ValueTask<НадлишкиТоварів_Pointer> FindByField(string name, object value)
+        public async ValueTask<НадлишкиТоварів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new НадлишкиТоварів_Pointer(pointer) : new НадлишкиТоварів_Pointer();
         }
         
@@ -21005,22 +21071,21 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a88"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
-            
 
+            
             foreach (Record record in Records)
             {
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_g2", record.Номенклатура.UnigueID.UGuid},
                     {"col_g3", record.ХарактеристикаНоменклатури.UnigueID.UGuid},
@@ -21030,14 +21095,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -21373,9 +21442,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПересортицяТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПересортицяТоварів_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПересортицяТоварів_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПересортицяТоварів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПересортицяТоварів_Pointer(pointer) : new ПересортицяТоварів_Pointer();
         }
         
@@ -21473,26 +21542,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a90"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_h7", record.Номенклатура.UnigueID.UGuid},
@@ -21502,14 +21570,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -21858,9 +21930,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПерерахунокТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПерерахунокТоварів_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПерерахунокТоварів_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПерерахунокТоварів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПерерахунокТоварів_Pointer(pointer) : new ПерерахунокТоварів_Pointer();
         }
         
@@ -21968,26 +22040,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a92"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_i8", record.Кількість},
                     {"col_i9", record.КількістьФакт},
@@ -22001,14 +22072,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -22388,9 +22463,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПсуванняТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПсуванняТоварів_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПсуванняТоварів_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПсуванняТоварів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПсуванняТоварів_Pointer(pointer) : new ПсуванняТоварів_Pointer();
         }
         
@@ -22504,26 +22579,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a94"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a3", record.НомерРядка},
                     {"col_b2", record.Номенклатура.UnigueID.UGuid},
@@ -22538,14 +22612,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -22931,9 +23009,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ВнутрішнєСпоживанняТоварів_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ВнутрішнєСпоживанняТоварів_Pointer? Current { get; private set; }
 
-        public async ValueTask<ВнутрішнєСпоживанняТоварів_Pointer> FindByField(string name, object value)
+        public async ValueTask<ВнутрішнєСпоживанняТоварів_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ВнутрішнєСпоживанняТоварів_Pointer(pointer) : new ВнутрішнєСпоживанняТоварів_Pointer();
         }
         
@@ -23047,26 +23125,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b07"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_d2", record.Номенклатура.UnigueID.UGuid},
@@ -23081,14 +23158,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -23506,9 +23587,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РахунокФактура_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РахунокФактура_Pointer? Current { get; private set; }
 
-        public async ValueTask<РахунокФактура_Pointer> FindByField(string name, object value)
+        public async ValueTask<РахунокФактура_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new РахунокФактура_Pointer(pointer) : new РахунокФактура_Pointer();
         }
         
@@ -23624,26 +23705,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b10"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
@@ -23659,14 +23739,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -24183,9 +24267,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РозміщенняТоварівНаСкладі_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
 
-        public async ValueTask<РозміщенняТоварівНаСкладі_Pointer> FindByField(string name, object value)
+        public async ValueTask<РозміщенняТоварівНаСкладі_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new РозміщенняТоварівНаСкладі_Pointer(pointer) : new РозміщенняТоварівНаСкладі_Pointer();
         }
         
@@ -24295,26 +24379,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a64"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
@@ -24327,14 +24410,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -24695,9 +24782,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ПереміщенняТоварівНаСкладі_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ПереміщенняТоварівНаСкладі_Pointer? Current { get; private set; }
 
-        public async ValueTask<ПереміщенняТоварівНаСкладі_Pointer> FindByField(string name, object value)
+        public async ValueTask<ПереміщенняТоварівНаСкладі_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ПереміщенняТоварівНаСкладі_Pointer(pointer) : new ПереміщенняТоварівНаСкладі_Pointer();
         }
         
@@ -24811,26 +24898,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b09"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
@@ -24844,14 +24930,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -25218,9 +25308,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗбіркаТоварівНаСкладі_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗбіркаТоварівНаСкладі_Pointer? Current { get; private set; }
 
-        public async ValueTask<ЗбіркаТоварівНаСкладі_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЗбіркаТоварівНаСкладі_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЗбіркаТоварівНаСкладі_Pointer(pointer) : new ЗбіркаТоварівНаСкладі_Pointer();
         }
         
@@ -25330,26 +25420,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b27"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
@@ -25362,14 +25451,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -25716,9 +25809,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new РозміщенняНоменклатуриПоКоміркам_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public РозміщенняНоменклатуриПоКоміркам_Pointer? Current { get; private set; }
 
-        public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Pointer> FindByField(string name, object value)
+        public async ValueTask<РозміщенняНоменклатуриПоКоміркам_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new РозміщенняНоменклатуриПоКоміркам_Pointer(pointer) : new РозміщенняНоменклатуриПоКоміркам_Pointer();
         }
         
@@ -25816,26 +25909,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b29"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_h1", record.Номенклатура.UnigueID.UGuid},
@@ -25844,14 +25936,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -26207,9 +26303,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new КорегуванняБоргу_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public КорегуванняБоргу_Pointer? Current { get; private set; }
 
-        public async ValueTask<КорегуванняБоргу_Pointer> FindByField(string name, object value)
+        public async ValueTask<КорегуванняБоргу_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new КорегуванняБоргу_Pointer(pointer) : new КорегуванняБоргу_Pointer();
         }
         
@@ -26307,26 +26403,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a65"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_e9", record.Контрагент.UnigueID.UGuid},
@@ -26336,14 +26431,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -26740,9 +26839,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗакриттяЗамовленняКлієнта_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗакриттяЗамовленняКлієнта_Pointer? Current { get; private set; }
 
-        public async ValueTask<ЗакриттяЗамовленняКлієнта_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЗакриттяЗамовленняКлієнта_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЗакриттяЗамовленняКлієнта_Pointer(pointer) : new ЗакриттяЗамовленняКлієнта_Pointer();
         }
         
@@ -26852,26 +26951,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_a96"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
@@ -26885,14 +26983,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -27289,9 +27391,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗакриттяРахункуФактури_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗакриттяРахункуФактури_Pointer? Current { get; private set; }
 
-        public async ValueTask<ЗакриттяРахункуФактури_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЗакриттяРахункуФактури_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЗакриттяРахункуФактури_Pointer(pointer) : new ЗакриттяРахункуФактури_Pointer();
         }
         
@@ -27401,26 +27503,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b41"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
@@ -27434,14 +27535,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -27838,9 +27943,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЗакриттяЗамовленняПостачальнику_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЗакриттяЗамовленняПостачальнику_Pointer? Current { get; private set; }
 
-        public async ValueTask<ЗакриттяЗамовленняПостачальнику_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЗакриттяЗамовленняПостачальнику_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЗакриттяЗамовленняПостачальнику_Pointer(pointer) : new ЗакриттяЗамовленняПостачальнику_Pointer();
         }
         
@@ -27950,26 +28055,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b44"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a2", record.НомерРядка},
                     {"col_b9", record.Номенклатура.UnigueID.UGuid},
@@ -27983,14 +28087,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);
@@ -28380,9 +28488,9 @@ namespace GeneratedCode.Документи
         public bool MoveNext() { if (base.MoveToPosition() && base.CurrentPointerPosition.HasValue) { Current = new ЧекККМ_Pointer(base.CurrentPointerPosition.Value.UnigueID, base.CurrentPointerPosition.Value.Fields); return true; } else { Current = null; return false; } }
         public ЧекККМ_Pointer? Current { get; private set; }
 
-        public async ValueTask<ЧекККМ_Pointer> FindByField(string name, object value)
+        public async ValueTask<ЧекККМ_Pointer> FindByField(string name, object value, string funcToField = "", string funcToField_Param1 = "")
         {
-            UnigueID? pointer = await base.BaseFindByField(name, value);
+            UnigueID? pointer = await base.BaseFindByField(name, value, funcToField, funcToField_Param1);
             return pointer != null ? new ЧекККМ_Pointer(pointer) : new ЧекККМ_Pointer();
         }
         
@@ -28500,26 +28608,25 @@ namespace GeneratedCode.Документи
             if (!await base.IsExistOwner(Owner.UnigueID, "tab_b51"))
                 throw new Exception("Owner not exist");
             
-            OwnerVersionID = Owner.VersionID;
-            OwnerBasis = Owner.GetBasis();
+            base.OwnerVersionID = Owner.VersionID;
+            base.OwnerBasis = Owner.GetBasis();
+            Dictionary<Guid, Dictionary<string, object>> listFieldValue = [];
             
 
             await base.BaseBeginTransaction();
             
-            await BeforeSaveOwnerVersion();
-            
             if (clear_all_before_save)
                 await base.BaseDelete(Owner.UnigueID);
+
             
             int sequenceNumber_НомерРядка = 0;
             
-
             foreach (Record record in Records)
             {
                 
                 record.НомерРядка = ++sequenceNumber_НомерРядка;
                 
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>()
+                Dictionary<string, object> fieldValue = new()
                 {
                     {"col_a1", record.НомерРядка},
                     {"col_a2", record.Номенклатура.UnigueID.UGuid},
@@ -28536,14 +28643,18 @@ namespace GeneratedCode.Документи
                     
                 };
                 record.UID = await base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                
+                listFieldValue.Add(record.UID, fieldValue);
+                
             }
             
             await base.BaseCommitTransaction();
-
+            
+            await base.BaseSaveVersion(listFieldValue);
             
             Saved?.Invoke(this, new EventArgs());
         }
-        
+
         public List<Record> Copy()
         {
             List<Record> copyRecords = new(Records);

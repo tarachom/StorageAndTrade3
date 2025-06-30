@@ -677,7 +677,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public async override ValueTask LoadRecords_OnFilter()
         {
-            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid);
+            await ТабличніСписки.<xsl:value-of select="$DocumentName"/>_<xsl:value-of select="$TabularList"/>.LoadRecords(TreeViewGrid, SelectPointerItem, DocumentPointerItem);
         }
 
         public async ValueTask UpdateRecords(List&lt;ObjectChanged&gt; recordsChanged)
