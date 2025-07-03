@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.117-develop" />
-    <PackageReference Include="QuestPDF" Version="2025.4.4" />
-    <PackageReference Include="NPOI" Version="2.7.3" />
+    <PackageReference Include="QuestPDF" Version="2025.5.1" />
+    <PackageReference Include="NPOI" Version="2.7.4" />
   </ItemGroup>
 
   <ItemGroup>
