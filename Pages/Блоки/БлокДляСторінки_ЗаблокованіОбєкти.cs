@@ -9,7 +9,7 @@ using GeneratedCode;
 
 namespace StorageAndTrade
 {
-    class БлокДляСторінки_ЗаблокованіОбєкти : InterfaceGtk.БлокДляСторінки_ЗаблокованіОбєкти
+    class БлокДляСторінки_ЗаблокованіОбєкти : InterfaceGtk3.БлокДляСторінки_ЗаблокованіОбєкти
     {
         public БлокДляСторінки_ЗаблокованіОбєкти() : base(Config.Kernel) { }
 

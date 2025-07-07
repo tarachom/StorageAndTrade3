@@ -40,7 +40,7 @@ limitations under the License.
  */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Перелічення;
 using <xsl:value-of select="Configuration/NameSpace"/>;
@@ -87,7 +87,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         {
             return
             [
-                DeletionLabel ? InterfaceGtk.Іконки.<xsl:value-of select="$IconTree"/>.Delete : InterfaceGtk.Іконки.<xsl:value-of select="$IconTree"/>.Normal,
+                DeletionLabel ? InterfaceGtk3.Іконки.<xsl:value-of select="$IconTree"/>.Delete : InterfaceGtk3.Іконки.<xsl:value-of select="$IconTree"/>.Normal,
                 ID,
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>/*</xsl:text><xsl:value-of select="Name"/>*/ <xsl:value-of select="Name"/>,
@@ -465,7 +465,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         {
             return
             [ 
-                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal,
+                DeletionLabel ? InterfaceGtk3.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal,
                 ID, 
                 /*Проведений документ*/ Spend, 
                 <xsl:for-each select="Fields/Field">
@@ -792,7 +792,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         {
             return 
             [
-                DeletionLabel ? InterfaceGtk.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
+                DeletionLabel ? InterfaceGtk3.Іконки.ДляТабличногоСписку.Delete : InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Type, 
                 /*Проведений документ*/ Spend,
@@ -998,7 +998,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
         {
             return
             [
-                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
+                InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Період,
                 <xsl:for-each select="Fields/Field">
@@ -1130,7 +1130,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
         {
             return
             [
-                InterfaceGtk.Іконки.ДляТабличногоСписку.Normal, 
+                InterfaceGtk3.Іконки.ДляТабличногоСписку.Normal, 
                 ID, 
                 Income ? "+" : "-", 
                 Period, 

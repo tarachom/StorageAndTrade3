@@ -6,14 +6,14 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using GeneratedCode;
 using ТабличніСписки = GeneratedCode.РегістриНакопичення.ТабличніСписки;
 
 namespace StorageAndTrade
 {
-    public class СпільніФорми_РухДокументуПоРегістрах : InterfaceGtk.СпільніФорми_РухДокументуПоРегістрах
+    public class СпільніФорми_РухДокументуПоРегістрах : InterfaceGtk3.СпільніФорми_РухДокументуПоРегістрах
     {
         public static async void СформуватиЗвіт(DocumentPointer ДокументВказівник)
         {

@@ -6,7 +6,7 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using GeneratedCode.Довідники;
 
@@ -96,7 +96,7 @@ namespace StorageAndTrade
                 Box hBox = new Box(Orientation.Horizontal, 0);
                 ListBoxRow listBoxRow = [hBox];
 
-                LinkButton linkName = new LinkButton("", await item.GetPresentation()) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
+                LinkButton linkName = new LinkButton("", await item.GetPresentation()) { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
                 linkName.Clicked += (object? sender, EventArgs args) =>
                 {
                     if (Pointer.UnigueID.ToString() != item.UnigueID.ToString())
@@ -106,7 +106,7 @@ namespace StorageAndTrade
                 hBox.PackStart(linkName, true, true, 0);
 
                 //Remove
-                LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
+                LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
                 linkRemove.Clicked += (object? sender, EventArgs args) =>
                 {
                     pointers.Remove(item);

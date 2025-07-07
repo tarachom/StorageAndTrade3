@@ -5,12 +5,12 @@
 */
 
 using AccountingSoftware;
-using InterfaceGtk;
+using InterfaceGtk3;
 using GeneratedCode;
 
 namespace StorageAndTrade
 {
-    class СпільніФорми_ІсторіяЗміниДаних_Елемент : InterfaceGtk.СпільніФорми_ІсторіяЗміниДаних_Елемент
+    class СпільніФорми_ІсторіяЗміниДаних_Елемент : InterfaceGtk3.СпільніФорми_ІсторіяЗміниДаних_Елемент
     {
         public static async ValueTask Сформувати(Guid versionID, UuidAndText obj)
         {

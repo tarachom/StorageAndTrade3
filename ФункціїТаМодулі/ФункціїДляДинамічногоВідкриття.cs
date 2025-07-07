@@ -5,12 +5,12 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using GeneratedCode;
 
 namespace StorageAndTrade
 {
-    class ФункціїДляДинамічногоВідкриття : InterfaceGtk.ФункціїДляДинамічногоВідкриття
+    class ФункціїДляДинамічногоВідкриття : InterfaceGtk3.ФункціїДляДинамічногоВідкриття
     {
         public ФункціїДляДинамічногоВідкриття() : base(Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
 

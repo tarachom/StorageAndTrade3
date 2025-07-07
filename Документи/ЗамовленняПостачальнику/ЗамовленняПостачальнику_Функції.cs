@@ -5,7 +5,7 @@
         Функції
 */
 
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using GeneratedCode.Документи;
 

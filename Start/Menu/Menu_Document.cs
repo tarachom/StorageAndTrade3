@@ -5,7 +5,7 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using GeneratedCode.Документи;
 
 namespace StorageAndTrade

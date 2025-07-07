@@ -10,7 +10,7 @@ using GeneratedCode;
 
 namespace StorageAndTrade
 {
-    class PageService : InterfaceGtk.PageService
+    class PageService : InterfaceGtk3.PageService
     {
         public PageService() : base(Config.Kernel, Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
 

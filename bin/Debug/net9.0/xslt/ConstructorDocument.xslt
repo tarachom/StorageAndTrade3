@@ -187,7 +187,7 @@ namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи
         Функції
 */
 
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;
 
@@ -285,7 +285,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>;
@@ -640,7 +640,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>;
@@ -781,7 +781,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         PointerControl
 */
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;
 
@@ -857,7 +857,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;

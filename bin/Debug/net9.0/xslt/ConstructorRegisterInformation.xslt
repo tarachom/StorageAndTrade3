@@ -43,7 +43,7 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриВідомостей;
 
@@ -301,7 +301,7 @@ namespace <xsl:value-of select="$NameSpace"/>
         Табличний список - <xsl:value-of select="$TabularList"/>
 */
 
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриВідомостей;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGeneratedCode"/>.РегістриВідомостей.ТабличніСписки;
@@ -415,7 +415,7 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриВідомосте
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;

@@ -6,7 +6,7 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using GeneratedCode.Довідники;
 using GeneratedCode.РегістриВідомостей;

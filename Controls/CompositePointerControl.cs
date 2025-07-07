@@ -7,13 +7,13 @@ CompositePointerControl - контрол тип якого оприділяєт�
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using GeneratedCode;
 
 namespace StorageAndTrade
 {
-    class CompositePointerControl : InterfaceGtk.CompositePointerControl
+    class CompositePointerControl : InterfaceGtk3.CompositePointerControl
     {
         public CompositePointerControl() : base(Config.Kernel, Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
 

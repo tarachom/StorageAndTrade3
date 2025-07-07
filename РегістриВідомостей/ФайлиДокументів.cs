@@ -7,7 +7,7 @@
         Табличний список - Записи
 */
 
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using GeneratedCode.РегістриВідомостей;
 using ТабличніСписки = GeneratedCode.РегістриВідомостей.ТабличніСписки;

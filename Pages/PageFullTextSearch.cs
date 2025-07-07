@@ -9,7 +9,7 @@ using GeneratedCode;
 
 namespace StorageAndTrade
 {
-    class PageFullTextSearch : InterfaceGtk.PageFullTextSearch
+    class PageFullTextSearch : InterfaceGtk3.PageFullTextSearch
     {
         public PageFullTextSearch() : base(Config.Kernel) { }
 

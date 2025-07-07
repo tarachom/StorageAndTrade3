@@ -5,7 +5,7 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 
 using AccountingSoftware;
 using GeneratedCode;
@@ -276,7 +276,7 @@ namespace StorageAndTrade
 
         void AddLink(Box vbox, string uri, EventHandler? clickAction = null)
         {
-            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
+            LinkButton lb = new LinkButton(uri, " " + uri) { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Doc), AlwaysShowImage = true };
             vbox.PackStart(lb, false, false, 0);
 
             if (clickAction != null)

@@ -141,7 +141,7 @@ namespace <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники
         Функції
 */
 
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 
@@ -265,7 +265,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;
@@ -574,7 +574,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>;
@@ -696,7 +696,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 using ТабличніСписки = <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники.ТабличніСписки;
@@ -806,7 +806,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
@@ -949,7 +949,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 
@@ -1040,7 +1040,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 
@@ -1135,7 +1135,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
                 string presentation = await item.GetPresentation();
 
-                LinkButton linkName = new LinkButton("", SubstringName(presentation)) { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Doc), AlwaysShowImage = true, TooltipText = presentation };
+                LinkButton linkName = new LinkButton("", SubstringName(presentation)) { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Doc), AlwaysShowImage = true, TooltipText = presentation };
                 linkName.Clicked += (sender, args) =&gt;
                 {
                     if (Pointer.UnigueID.ToString() != item.UnigueID.ToString())
@@ -1145,7 +1145,7 @@ namespace <xsl:value-of select="$NameSpace"/>
                 hBox.PackStart(linkName, true, true, 0);
 
                 //Remove
-                LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
+                LinkButton linkRemove = new LinkButton("") { Halign = Align.Start, Image = new Image(InterfaceGtk3.Іконки.ДляКнопок.Clean), AlwaysShowImage = true };
                 linkRemove.Clicked += (sender, args) =&gt;
                 {
                     pointers.Remove(item);
@@ -1192,7 +1192,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Довідники;
 using <xsl:value-of select="$NameSpaceGeneratedCode"/>.Документи;

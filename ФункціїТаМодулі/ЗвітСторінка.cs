@@ -5,7 +5,7 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using GeneratedCode;
 using AccountingSoftware;
 using GeneratedCode.Довідники;
@@ -19,7 +19,7 @@ using NPOI.XSSF.UserModel;
 
 namespace StorageAndTrade
 {
-    class ЗвітСторінка : InterfaceGtk.ЗвітСторінка
+    class ЗвітСторінка : InterfaceGtk3.ЗвітСторінка
     {
         public ЗвітСторінка() : base(Config.Kernel) { }
 
@@ -33,7 +33,7 @@ namespace StorageAndTrade
             new ФункціїДляДинамічногоВідкриття().ВідкритиДовідникВідповідноДоВиду(name, unigueID, typeForm);
         }
 
-        protected override async ValueTask ВигрузитиВФайл_PDF(InterfaceGtk.ЗвітСторінка звіт, (Dictionary<string, PDFColumnsSettings> Settings, List<string[]> Rows) settingsAndRows)
+        protected override async ValueTask ВигрузитиВФайл_PDF(InterfaceGtk3.ЗвітСторінка звіт, (Dictionary<string, PDFColumnsSettings> Settings, List<string[]> Rows) settingsAndRows)
         {
             string Назва = "Звіт: " + звіт.ReportName + " / " + звіт.Caption;
             string ДодатковаІнформація = звіт.GetInfo != null ? await звіт.GetInfo() : "";
@@ -106,7 +106,7 @@ namespace StorageAndTrade
             doc.GeneratePdfAndShow();
         }
 
-        protected override async ValueTask ВигрузитиВФайл_Excel(InterfaceGtk.ЗвітСторінка звіт, (Dictionary<string, ExcelColumnsSettings> Settings, List<string[]> Rows) settingsAndRows)
+        protected override async ValueTask ВигрузитиВФайл_Excel(InterfaceGtk3.ЗвітСторінка звіт, (Dictionary<string, ExcelColumnsSettings> Settings, List<string[]> Rows) settingsAndRows)
         {
             string currentFolder = "";
 
@@ -151,7 +151,7 @@ namespace StorageAndTrade
             }
         }
 
-        async ValueTask ВигрузкаВЕксель(InterfaceGtk.ЗвітСторінка звіт, (Dictionary<string, ExcelColumnsSettings> Settings, List<string[]> Rows) settingsAndRows, string fullPath)
+        async ValueTask ВигрузкаВЕксель(InterfaceGtk3.ЗвітСторінка звіт, (Dictionary<string, ExcelColumnsSettings> Settings, List<string[]> Rows) settingsAndRows, string fullPath)
         {
             static void CreateCell(IRow CurrentRow, int CellIndex, string Value, XSSFCellStyle Style)
             {
@@ -358,7 +358,7 @@ namespace StorageAndTrade
             await page.SetValue();
         }
 
-        protected async ValueTask ЗберегтиЗвіт(InterfaceGtk.ЗвітСторінка звіт, List<string[]> rows)
+        protected async ValueTask ЗберегтиЗвіт(InterfaceGtk3.ЗвітСторінка звіт, List<string[]> rows)
         {
             ЗбереженіЗвіти_Objest Новий = new ЗбереженіЗвіти_Objest();
             await Новий.New();

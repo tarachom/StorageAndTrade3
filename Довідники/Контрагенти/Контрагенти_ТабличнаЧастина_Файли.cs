@@ -5,7 +5,7 @@
 */
 
 using Gtk;
-using InterfaceGtk;
+using InterfaceGtk3;
 using AccountingSoftware;
 using GeneratedCode.Довідники;
 using GeneratedCode.Документи;
@@ -34,7 +34,7 @@ namespace StorageAndTrade
 
         private class Запис
         {
-            public Gdk.Pixbuf Image { get; set; } = InterfaceGtk.Іконки.ДляКнопок.Doc;
+            public Gdk.Pixbuf Image { get; set; } = InterfaceGtk3.Іконки.ДляКнопок.Doc;
             public Guid ID { get; set; } = Guid.Empty;
             public Файли_Pointer Файл { get; set; } = new Файли_Pointer();
 
