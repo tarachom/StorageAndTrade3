@@ -161,12 +161,21 @@
       "InterfaceGtk3/3.1.0.8": {
         "dependencies": {
           "AccountingSoftware": "3.1.0.7",
-          "GtkSharp": "3.24.24.117-develop"
+          "GtkSharp": "3.24.24.117-develop",
+          "InterfaceGtkLib": "1.0.0"
         },
         "runtime": {
           "InterfaceGtk3.dll": {
             "assemblyVersion": "3.1.0.8",
             "fileVersion": "3.1.0.8"
+          }
+        }
+      },
+      "InterfaceGtkLib/1.0.0": {
+        "runtime": {
+          "InterfaceGtkLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -268,6 +277,11 @@
       "sha512": ""
     },
     "InterfaceGtk3/3.1.0.8": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InterfaceGtkLib/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
