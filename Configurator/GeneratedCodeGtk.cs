@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 06.07.2025 19:21:20
+ * Дата конфігурації: 14.07.2025 13:50:07
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -135,7 +135,7 @@ namespace GeneratedCode.Довідники.ТабличніСписки
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -191,7 +191,7 @@ namespace GeneratedCode.Довідники.ТабличніСписки
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -406,7 +406,7 @@ namespace GeneratedCode.Довідники.ТабличніСписки
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -582,7 +582,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -741,7 +741,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -885,7 +885,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -1013,7 +1013,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -1069,7 +1069,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -1197,7 +1197,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -1253,7 +1253,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -1395,7 +1395,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -1455,7 +1455,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -1638,7 +1638,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -1700,7 +1700,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -1831,7 +1831,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -1889,7 +1889,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -2074,7 +2074,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -2137,7 +2137,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -2261,7 +2261,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -2317,7 +2317,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -2500,7 +2500,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -2562,7 +2562,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -2686,7 +2686,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -2742,7 +2742,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -2900,7 +2900,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -2959,7 +2959,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -3076,7 +3076,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -3130,7 +3130,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -3258,7 +3258,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -3314,7 +3314,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -3442,7 +3442,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -3498,7 +3498,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -3626,7 +3626,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -3682,7 +3682,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -3810,7 +3810,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -3866,7 +3866,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -3994,7 +3994,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -4050,7 +4050,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -4199,7 +4199,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -4261,7 +4261,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -4378,7 +4378,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -4432,7 +4432,7 @@ END
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -4595,7 +4595,7 @@ END
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -4735,7 +4735,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -4865,7 +4865,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             TreeStore Store = (TreeStore)treeView.Model;
             
@@ -4926,7 +4926,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -5058,7 +5058,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             TreeStore Store = (TreeStore)treeView.Model;
             
@@ -5119,7 +5119,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -5255,7 +5255,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             TreeStore Store = (TreeStore)treeView.Model;
             
@@ -5316,7 +5316,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -5452,7 +5452,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             TreeStore Store = (TreeStore)treeView.Model;
             
@@ -5513,7 +5513,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -5686,7 +5686,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -5758,7 +5758,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -5890,7 +5890,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -5949,7 +5949,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -6107,7 +6107,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -6166,7 +6166,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -6345,7 +6345,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -6407,7 +6407,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -6540,7 +6540,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -6600,7 +6600,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -6758,7 +6758,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -6817,7 +6817,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -6986,7 +6986,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -7047,7 +7047,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -7168,7 +7168,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -7222,7 +7222,7 @@ WHERE
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -7409,7 +7409,7 @@ WHERE
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -7497,7 +7497,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -7621,7 +7621,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -7677,7 +7677,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -7805,7 +7805,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -7861,7 +7861,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -8108,7 +8108,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -8198,7 +8198,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -8322,7 +8322,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -8378,7 +8378,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -8550,7 +8550,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -8610,7 +8610,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -8813,7 +8813,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -8887,7 +8887,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -9012,7 +9012,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -9069,7 +9069,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -9198,7 +9198,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -9255,7 +9255,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -9411,7 +9411,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -9475,7 +9475,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -9613,7 +9613,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             TreeStore Store = (TreeStore)treeView.Model;
             
@@ -9677,7 +9677,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -9818,7 +9818,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -9876,7 +9876,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -10019,7 +10019,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -10080,7 +10080,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -10225,7 +10225,7 @@ FROM
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
             
@@ -10288,7 +10288,7 @@ FROM
                       
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -10551,7 +10551,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -10626,7 +10626,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -10901,7 +10901,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -10979,7 +10979,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -11254,7 +11254,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -11332,7 +11332,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -11607,7 +11607,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -11685,7 +11685,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -11912,7 +11912,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -11982,7 +11982,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -12248,7 +12248,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -12326,7 +12326,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -12592,7 +12592,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -12670,7 +12670,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -12897,7 +12897,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -12967,7 +12967,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -13242,7 +13242,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -13320,7 +13320,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -13595,7 +13595,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -13673,7 +13673,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -13932,7 +13932,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -14007,7 +14007,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -14250,7 +14250,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -14323,7 +14323,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -14534,7 +14534,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -14601,7 +14601,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -14812,7 +14812,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -14879,7 +14879,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -15106,7 +15106,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -15176,7 +15176,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -15403,7 +15403,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -15472,7 +15472,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -15715,7 +15715,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -15787,7 +15787,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -16062,7 +16062,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -16140,7 +16140,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -16351,7 +16351,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -16418,7 +16418,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -16629,7 +16629,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -16696,7 +16696,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -16907,7 +16907,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -16974,7 +16974,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -17185,7 +17185,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -17252,7 +17252,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -17447,7 +17447,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -17511,7 +17511,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -17806,7 +17806,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -17887,7 +17887,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -18162,7 +18162,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -18240,7 +18240,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -18535,7 +18535,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -18616,7 +18616,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -18812,7 +18812,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -18893,7 +18893,7 @@ namespace GeneratedCode.Документи.ТабличніСписки
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null && Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }

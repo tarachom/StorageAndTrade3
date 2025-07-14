@@ -300,7 +300,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? openFolder = null, 
           UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             <xsl:value-of select="$StoreType"/> Store = (<xsl:value-of select="$StoreType"/>)treeView.Model;
             
@@ -425,7 +425,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                     </xsl:choose>
 
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null &amp;&amp; Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
@@ -664,7 +664,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
 
         public static async ValueTask LoadRecords(TreeView treeView, UnigueID? selectPointerItem = null, UnigueID? directoryPointerItem = null)
         {
-            TreePath? FirstPath = null, SelectPath = null, CurrentPath = null;
+            TreePath? /*FirstPath = null,*/ SelectPath = null, CurrentPath = null;
             UnigueID? unigueIDSelect = selectPointerItem ?? directoryPointerItem;
             ListStore Store = (ListStore)treeView.Model;
 
@@ -755,7 +755,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
 
                     TreeIter CurrentIter = Store.AppendValues(Record.ToArray());
                     CurrentPath = Store.GetPath(CurrentIter);
-                    FirstPath ??= CurrentPath;
+                    /*FirstPath ??= CurrentPath;*/
                     if (uidSelect != null &amp;&amp; Record.ID == uidSelect) SelectPath = CurrentPath;
                 }
             }
