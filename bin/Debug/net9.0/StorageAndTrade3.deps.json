@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "StorageAndTrade3/3.1.0.7": {
+      "StorageAndTrade3/3.1.0.8": {
         "dependencies": {
           "AccountingSoftware": "3.1.0.7",
           "Configurator3": "3.1.0.8",
           "GtkSharp": "3.24.24.117-develop",
-          "NPOI": "2.7.4",
-          "QuestPDF": "2025.5.1"
+          "NPOI": "2.7.5",
+          "QuestPDF": "2025.7.2"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -176,35 +176,44 @@
           }
         }
       },
-      "NPOI/2.7.4": {
+      "NPOI/2.7.5": {
         "dependencies": {
           "BouncyCastle.Cryptography": "2.4.0",
           "Enums.NET": "5.0.0",
           "ExtendedNumerics.BigDecimal": "2025.1001.2.129",
           "MathNet.Numerics.Signed": "5.0.0",
           "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
+          "NSax": "1.0.2",
           "SharpZipLib": "1.4.2",
           "SixLabors.Fonts": "1.0.1",
-          "SixLabors.ImageSharp": "2.1.10",
+          "SixLabors.ImageSharp": "2.1.11",
           "System.Security.Cryptography.Xml": "8.0.2",
           "ZString": "2.6.0"
         },
         "runtime": {
           "lib/net8.0/NPOI.Core.dll": {
-            "assemblyVersion": "2.7.4.0",
-            "fileVersion": "2.7.4.0"
+            "assemblyVersion": "2.7.5.0",
+            "fileVersion": "2.7.5.0"
           },
           "lib/net8.0/NPOI.OOXML.dll": {
-            "assemblyVersion": "2.7.4.0",
-            "fileVersion": "2.7.4.0"
+            "assemblyVersion": "2.7.5.0",
+            "fileVersion": "2.7.5.0"
           },
           "lib/net8.0/NPOI.OpenXml4Net.dll": {
-            "assemblyVersion": "2.7.4.0",
-            "fileVersion": "2.7.4.0"
+            "assemblyVersion": "2.7.5.0",
+            "fileVersion": "2.7.5.0"
           },
           "lib/net8.0/NPOI.OpenXmlFormats.dll": {
-            "assemblyVersion": "2.7.4.0",
-            "fileVersion": "2.7.4.0"
+            "assemblyVersion": "2.7.5.0",
+            "fileVersion": "2.7.5.0"
+          }
+        }
+      },
+      "NSax/1.0.2": {
+        "runtime": {
+          "lib/net6.0/NSax.dll": {
+            "assemblyVersion": "1.0.2.0",
+            "fileVersion": "1.0.2.0"
           }
         }
       },
@@ -220,25 +229,15 @@
           }
         }
       },
-      "QuestPDF/2025.5.1": {
+      "QuestPDF/2025.7.2": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2025.5.1.0",
-            "fileVersion": "2025.5.1.0"
+            "assemblyVersion": "2025.7.2.0",
+            "fileVersion": "2025.7.2.0"
           }
         },
         "runtimeTargets": {
           "runtimes/linux-arm64/native/libQuestPdfSkia.so": {
-            "rid": "linux-arm64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/linux-arm64/native/libcrypto.so": {
-            "rid": "linux-arm64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/linux-arm64/native/libjpeg.so.8": {
             "rid": "linux-arm64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
@@ -253,32 +252,12 @@
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
-          "runtimes/linux-musl-x64/native/libcrypto.so": {
-            "rid": "linux-musl-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/linux-musl-x64/native/libjpeg.so.8": {
-            "rid": "linux-musl-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
           "runtimes/linux-musl-x64/native/libqpdf.so": {
             "rid": "linux-musl-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
           "runtimes/linux-x64/native/libQuestPdfSkia.so": {
-            "rid": "linux-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/linux-x64/native/libcrypto.so": {
-            "rid": "linux-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/linux-x64/native/libjpeg.so.8": {
             "rid": "linux-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
@@ -293,32 +272,12 @@
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
-          "runtimes/osx-arm64/native/libcrypto.dylib": {
-            "rid": "osx-arm64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/osx-arm64/native/libjpeg.dylib": {
-            "rid": "osx-arm64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
           "runtimes/osx-arm64/native/libqpdf.dylib": {
             "rid": "osx-arm64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
           "runtimes/osx-x64/native/libQuestPdfSkia.dylib": {
-            "rid": "osx-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/osx-x64/native/libcrypto.dylib": {
-            "rid": "osx-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-          "runtimes/osx-x64/native/libjpeg.dylib": {
             "rid": "osx-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
@@ -353,6 +312,11 @@
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
+          "runtimes/win-x64/native/zlib1.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
           "runtimes/win-x86/native/QuestPdfSkia.dll": {
             "rid": "win-x86",
             "assetType": "native",
@@ -377,6 +341,11 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/zlib1.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -396,7 +365,7 @@
           }
         }
       },
-      "SixLabors.ImageSharp/2.1.10": {
+      "SixLabors.ImageSharp/2.1.11": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0",
           "System.Text.Encoding.CodePages": "5.0.0"
@@ -404,7 +373,7 @@
         "runtime": {
           "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.1.10.0"
+            "fileVersion": "2.1.11.0"
           }
         }
       },
@@ -499,7 +468,7 @@
     }
   },
   "libraries": {
-    "StorageAndTrade3/3.1.0.7": {
+    "StorageAndTrade3/3.1.0.8": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -623,12 +592,19 @@
       "path": "npgsql/9.0.3",
       "hashPath": "npgsql.9.0.3.nupkg.sha512"
     },
-    "NPOI/2.7.4": {
+    "NPOI/2.7.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1tCebTkr9qAfwiEa2ErXco2IT+D8MNmT9d4KFz9nWn3owkc5fAOsvxV8kq6y4531B4Z3gnInrvEdonwFyoRqPQ==",
-      "path": "npoi/2.7.4",
-      "hashPath": "npoi.2.7.4.nupkg.sha512"
+      "sha512": "sha512-KmEHqThmfAdq/Q3LLTahpvFKHQMQJrzJNAFIoSZCGIZWUmYBtvxDArmpLF+Zyw1tzCem/rZsefCqJgqfIz2l4w==",
+      "path": "npoi/2.7.5",
+      "hashPath": "npoi.2.7.5.nupkg.sha512"
+    },
+    "NSax/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7txlId2RJTQBL3YdSGO7x70+r3HUOCw725lu0OoBgThRl/e3RhAZ2QKYxW2y9dPRtqbFZYHVa8siIeB8+L//Cg==",
+      "path": "nsax/1.0.2",
+      "hashPath": "nsax.1.0.2.nupkg.sha512"
     },
     "PangoSharp/3.24.24.117-develop": {
       "type": "package",
@@ -637,12 +613,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2025.5.1": {
+    "QuestPDF/2025.7.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oRjdICOO28qkO9zTw3mFzFG1w51YAG6dWgC2g7JjzlsQF4HbY0iTa0uluwyPNZckPTv8v9+krSUyjjtspKhi7g==",
-      "path": "questpdf/2025.5.1",
-      "hashPath": "questpdf.2025.5.1.nupkg.sha512"
+      "sha512": "sha512-yMzsSEyg4upFA5/qDKPf5cJdO9uSUnDUunFo70YJrQSmwoqo21bRqWv4iBLkwyfFLGvPsS/prKTENyxq7X8T4w==",
+      "path": "questpdf/2025.7.2",
+      "hashPath": "questpdf.2025.7.2.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
@@ -658,12 +634,12 @@
       "path": "sixlabors.fonts/1.0.1",
       "hashPath": "sixlabors.fonts.1.0.1.nupkg.sha512"
     },
-    "SixLabors.ImageSharp/2.1.10": {
+    "SixLabors.ImageSharp/2.1.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hk1E7U3RSlxrBVo6Gb6OjeM52fChpFYH+SZvyT/M2vzSGlzAaKE33hc3V/Pvnjcnn1opT8/Z+0QfqdM5HsIaeA==",
-      "path": "sixlabors.imagesharp/2.1.10",
-      "hashPath": "sixlabors.imagesharp.2.1.10.nupkg.sha512"
+      "sha512": "sha512-tUvsejgzUmEbES114yLseRxmFiYlQbH5RyaYXUQsEL7ksDo1/kW+ZL1EfD6iSUfxj7LHU8p110oFvSrRfsaWSQ==",
+      "path": "sixlabors.imagesharp/2.1.11",
+      "hashPath": "sixlabors.imagesharp.2.1.11.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/5.0.0": {
       "type": "package",
