@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "StorageAndTrade3/3.1.0.8": {
+      "StorageAndTrade3/3.1.0.9": {
         "dependencies": {
           "AccountingSoftware": "3.1.0.8",
           "Configurator3": "3.1.0.8",
@@ -457,7 +457,7 @@
     }
   },
   "libraries": {
-    "StorageAndTrade3/3.1.0.8": {
+    "StorageAndTrade3/3.1.0.9": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
