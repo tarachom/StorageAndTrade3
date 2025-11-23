@@ -12,7 +12,7 @@
           "Configurator3": "3.1.0.8",
           "GtkSharp": "3.24.24.117-develop",
           "NPOI": "2.7.5",
-          "QuestPDF": "2025.7.2"
+          "QuestPDF": "2025.7.4"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -228,11 +228,11 @@
           }
         }
       },
-      "QuestPDF/2025.7.2": {
+      "QuestPDF/2025.7.4": {
         "runtime": {
           "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2025.7.2.0",
-            "fileVersion": "2025.7.2.0"
+            "assemblyVersion": "2025.7.4.0",
+            "fileVersion": "2025.7.4.0"
           }
         },
         "runtimeTargets": {
@@ -304,7 +304,7 @@
           "runtimes/win-x64/native/libwinpthread-1.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "1.0.0.0"
           },
           "runtimes/win-x64/native/qpdf.dll": {
             "rid": "win-x64",
@@ -334,7 +334,7 @@
           "runtimes/win-x86/native/libwinpthread-1.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "1.0.0.0"
           },
           "runtimes/win-x86/native/qpdf.dll": {
             "rid": "win-x86",
@@ -595,12 +595,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2025.7.2": {
+    "QuestPDF/2025.7.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-yMzsSEyg4upFA5/qDKPf5cJdO9uSUnDUunFo70YJrQSmwoqo21bRqWv4iBLkwyfFLGvPsS/prKTENyxq7X8T4w==",
-      "path": "questpdf/2025.7.2",
-      "hashPath": "questpdf.2025.7.2.nupkg.sha512"
+      "sha512": "sha512-XeiWilwLnqP2BIvDG+vh1+fjUoNWczPee5qifw8VppVOH7+vmxgoxG/KANcKftgqAfXiRQ++sXOSLPZRvXxD2g==",
+      "path": "questpdf/2025.7.4",
+      "hashPath": "questpdf.2025.7.4.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
