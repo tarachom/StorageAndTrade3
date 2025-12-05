@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v10.0": {
       "Configurator3/3.1.0.8": {
         "dependencies": {
-          "AccountingSoftware": "3.1.2",
+          "AccountingSoftware": "3.1.2.1",
           "GtkSharp": "3.24.24.117-develop",
           "GtkSourceSharp": "3.24.24.117-develop",
           "InterfaceGtk3": "3.1.0.8"
@@ -146,21 +146,21 @@
           }
         }
       },
-      "AccountingSoftware/3.1.2": {
+      "AccountingSoftware/3.1.2.1": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
           "Npgsql": "10.0.0"
         },
         "runtime": {
           "AccountingSoftware.dll": {
-            "assemblyVersion": "3.1.2.0",
-            "fileVersion": "3.1.2.0"
+            "assemblyVersion": "3.1.2.1",
+            "fileVersion": "3.1.2.1"
           }
         }
       },
       "InterfaceGtk3/3.1.0.8": {
         "dependencies": {
-          "AccountingSoftware": "3.1.2",
+          "AccountingSoftware": "3.1.2.1",
           "GtkSharp": "3.24.24.117-develop",
           "InterfaceGtkLib": "1.0.0"
         },
@@ -271,7 +271,7 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "AccountingSoftware/3.1.2": {
+    "AccountingSoftware/3.1.2.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
