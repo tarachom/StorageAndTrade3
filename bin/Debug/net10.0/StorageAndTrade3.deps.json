@@ -12,7 +12,7 @@
           "Configurator3": "3.1.0.8",
           "GtkSharp": "3.24.24.117-develop",
           "NPOI": "2.7.5",
-          "QuestPDF": "2025.7.4"
+          "QuestPDF": "2025.12.0"
         },
         "runtime": {
           "StorageAndTrade3.dll": {}
@@ -164,14 +164,14 @@
           }
         }
       },
-      "Npgsql/10.0.0": {
+      "Npgsql/10.0.1": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "10.0.0"
         },
         "runtime": {
           "lib/net10.0/Npgsql.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.0.0"
+            "assemblyVersion": "10.0.1.0",
+            "fileVersion": "10.0.1.0"
           }
         }
       },
@@ -228,11 +228,11 @@
           }
         }
       },
-      "QuestPDF/2025.7.4": {
+      "QuestPDF/2025.12.0": {
         "runtime": {
-          "lib/net8.0/QuestPDF.dll": {
-            "assemblyVersion": "2025.7.4.0",
-            "fileVersion": "2025.7.4.0"
+          "lib/net10.0/QuestPDF.dll": {
+            "assemblyVersion": "2025.12.0.0",
+            "fileVersion": "2025.12.0.0"
           }
         },
         "runtimeTargets": {
@@ -410,7 +410,7 @@
       "AccountingSoftware/3.1.2.1": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
-          "Npgsql": "10.0.0"
+          "Npgsql": "10.0.1"
         },
         "runtime": {
           "AccountingSoftware.dll": {
@@ -567,12 +567,12 @@
       "path": "microsoft.io.recyclablememorystream/3.0.1",
       "hashPath": "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512"
     },
-    "Npgsql/10.0.0": {
+    "Npgsql/10.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xZAYhPOU2rUIFpV48xsqhCx9vXs6Y+0jX2LCoSEfDFYMw9jtAOUk3iQsCnDLrFIv9NT3JGMihn7nnuZsPKqJmA==",
-      "path": "npgsql/10.0.0",
-      "hashPath": "npgsql.10.0.0.nupkg.sha512"
+      "sha512": "sha512-XyUcxEfqlFomhNTG/ZdGlec+uSOQArKz0Mzz8jYKP/Jj9GM2YabU5CVZtp0yiC4f9hRp+tRZTnHMatJeJ3rwgw==",
+      "path": "npgsql/10.0.1",
+      "hashPath": "npgsql.10.0.1.nupkg.sha512"
     },
     "NPOI/2.7.5": {
       "type": "package",
@@ -595,12 +595,12 @@
       "path": "pangosharp/3.24.24.117-develop",
       "hashPath": "pangosharp.3.24.24.117-develop.nupkg.sha512"
     },
-    "QuestPDF/2025.7.4": {
+    "QuestPDF/2025.12.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XeiWilwLnqP2BIvDG+vh1+fjUoNWczPee5qifw8VppVOH7+vmxgoxG/KANcKftgqAfXiRQ++sXOSLPZRvXxD2g==",
-      "path": "questpdf/2025.7.4",
-      "hashPath": "questpdf.2025.7.4.nupkg.sha512"
+      "sha512": "sha512-INaUIKE3z9+X8alPcriqjkctT+S/xVWfkUW8Xrmu4k38t9yijGjWGWxrJkopO0YiXjVxSJ+HDAZ6P/Nyd2tB5Q==",
+      "path": "questpdf/2025.12.0",
+      "hashPath": "questpdf.2025.12.0.nupkg.sha512"
     },
     "SharpZipLib/1.4.2": {
       "type": "package",
