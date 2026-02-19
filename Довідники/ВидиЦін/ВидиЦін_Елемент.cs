@@ -20,8 +20,7 @@ namespace StorageAndTrade
 
         public ВидиЦін_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+             Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)

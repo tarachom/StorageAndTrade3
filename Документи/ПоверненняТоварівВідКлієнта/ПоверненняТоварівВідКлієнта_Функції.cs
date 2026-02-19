@@ -32,7 +32,6 @@ namespace StorageAndTrade
         {
             ПоверненняТоварівВідКлієнта_Елемент page = new ПоверненняТоварівВідКлієнта_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

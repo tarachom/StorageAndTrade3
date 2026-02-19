@@ -31,9 +31,7 @@ namespace StorageAndTrade
 
         public КасиККМ_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
-
+            Element = Елемент;
 
             foreach (var field in ПсевдонімиПерелічення.ТипККМ_List())
                 Тип.Append(field.Value.ToString(), field.Name);

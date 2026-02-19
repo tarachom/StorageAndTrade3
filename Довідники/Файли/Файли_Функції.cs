@@ -30,7 +30,6 @@ namespace StorageAndTrade
         {
             Файли_Елемент page = new Файли_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

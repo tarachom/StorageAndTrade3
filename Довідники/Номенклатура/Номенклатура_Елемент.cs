@@ -42,8 +42,7 @@ namespace StorageAndTrade
 
         public Номенклатура_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             ОсновнаКартинкаФайл.AfterSelectFunc = async () =>
             {

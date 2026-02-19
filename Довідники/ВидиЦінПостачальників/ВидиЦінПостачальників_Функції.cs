@@ -30,7 +30,6 @@ namespace StorageAndTrade
         {
             ВидиЦінПостачальників_Елемент page = new ВидиЦінПостачальників_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

@@ -38,7 +38,6 @@ namespace StorageAndTrade
         {
             ЗакриттяРахункуФактури_Елемент page = new ЗакриттяРахункуФактури_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

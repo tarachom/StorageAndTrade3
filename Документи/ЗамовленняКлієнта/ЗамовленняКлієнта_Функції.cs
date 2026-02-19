@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             ЗамовленняКлієнта_Елемент page = new ЗамовленняКлієнта_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

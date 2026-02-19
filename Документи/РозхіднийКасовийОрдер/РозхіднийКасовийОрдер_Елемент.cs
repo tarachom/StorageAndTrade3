@@ -44,8 +44,7 @@ namespace StorageAndTrade
 
         public РозхіднийКасовийОрдер_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             CreateDocName(РозхіднийКасовийОрдер_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);

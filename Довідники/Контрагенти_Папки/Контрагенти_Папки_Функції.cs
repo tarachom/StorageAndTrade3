@@ -29,7 +29,6 @@ namespace StorageAndTrade
         {
             Контрагенти_Папки_Елемент page = new Контрагенти_Папки_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

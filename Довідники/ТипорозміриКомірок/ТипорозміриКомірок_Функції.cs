@@ -29,7 +29,6 @@ namespace StorageAndTrade
         {
             ТипорозміриКомірок_Елемент page = new ТипорозміриКомірок_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

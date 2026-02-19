@@ -38,7 +38,6 @@ namespace StorageAndTrade
         {
             ЗакриттяЗамовленняКлієнта_Елемент page = new ЗакриттяЗамовленняКлієнта_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

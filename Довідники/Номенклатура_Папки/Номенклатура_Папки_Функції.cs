@@ -30,7 +30,6 @@ namespace StorageAndTrade
         {
             Номенклатура_Папки_Елемент page = new Номенклатура_Папки_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

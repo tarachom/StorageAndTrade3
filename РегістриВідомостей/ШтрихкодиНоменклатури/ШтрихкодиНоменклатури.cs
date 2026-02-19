@@ -87,14 +87,13 @@ namespace StorageAndTrade.РегістриВідомостей
             ШтрихкодиНоменклатури_Елемент page = new ШтрихкодиНоменклатури_Елемент
             {
                 CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew,
                 НоменклатураДляНового = НоменклатураВласник.Pointer,
                 ХарактеристикаДляНового = ХарактеристикиНоменклатуриВласник.Pointer
             };
 
             if (IsNew)
-                page.ШтрихкодиНоменклатури_Objest.New();
-            else if (unigueID == null || !await page.ШтрихкодиНоменклатури_Objest.Read(unigueID))
+                page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;

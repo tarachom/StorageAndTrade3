@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             ВведенняЗалишків_Елемент page = new ВведенняЗалишків_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

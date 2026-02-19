@@ -14,7 +14,7 @@ namespace StorageAndTrade
 {
     class Журнал_АдреснеЗберігання : Журнал
     {
-        public Журнал_АдреснеЗберігання() : base(Config.NameSpageCodeGeneration)
+        public Журнал_АдреснеЗберігання() : base(Config.NamespaceCodeGeneration)
         {
             ТабличніСписки.Журнали_АдреснеЗберігання.AddColumns(TreeViewGrid);
         }

@@ -29,7 +29,6 @@ namespace StorageAndTrade
         {
             ЧекККМ_Елемент page = new ЧекККМ_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

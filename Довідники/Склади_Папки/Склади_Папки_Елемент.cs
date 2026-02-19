@@ -29,8 +29,7 @@ namespace StorageAndTrade
 
         public Склади_Папки_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)

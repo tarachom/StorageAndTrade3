@@ -32,8 +32,7 @@ namespace StorageAndTrade
 
         public ВидиНоменклатури_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
 
             foreach (var field in ПсевдонімиПерелічення.ТипиНоменклатури_List())

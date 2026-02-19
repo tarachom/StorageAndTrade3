@@ -12,7 +12,7 @@ namespace StorageAndTrade
 {
     class PageService : InterfaceGtk3.PageService
     {
-        public PageService() : base(Config.Kernel, Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
+        public PageService() : base(Config.Kernel, Config.NamespaceProgram, Config.NamespaceCodeGeneration) { }
 
         protected override CompositePointerControl CreateCompositeControl(string caption, UuidAndText uuidAndText) =>
             new CompositePointerControl() { Caption = caption, Pointer = uuidAndText, ClearSensetive = false, TypeSelectSensetive = false };

@@ -77,7 +77,6 @@ namespace StorageAndTrade
         {
             ДоговориКонтрагентів_Елемент page = new ДоговориКонтрагентів_Елемент
             {
-                IsNew = IsNew,
                 CallBack_OnSelectPointer = CallBack_OnSelectPointer
             };
 

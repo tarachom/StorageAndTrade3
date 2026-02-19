@@ -21,6 +21,7 @@ namespace StorageAndTrade
         public ПоступленняТоварівТаПослуг()
         {
             ТабличніСписки.ПоступленняТоварівТаПослуг_Записи.AddColumns(TreeViewGrid);
+            
         }
 
         #region Override

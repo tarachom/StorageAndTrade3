@@ -77,7 +77,6 @@ namespace StorageAndTrade
         {
             СкладськіПриміщення_Елемент page = new СкладськіПриміщення_Елемент
             {
-                IsNew = IsNew,
                 CallBack_OnSelectPointer = CallBack_OnSelectPointer
             };
 

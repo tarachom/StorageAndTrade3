@@ -30,7 +30,6 @@ namespace StorageAndTrade
         {
             Каси_Елемент page = new Каси_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

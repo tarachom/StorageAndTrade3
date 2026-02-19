@@ -34,8 +34,7 @@ namespace StorageAndTrade
 
         public ВидиЗапасів_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+             Element = Елемент;
 
             foreach (var field in ПсевдонімиПерелічення.ТипЗапасів_List())
                 ТипЗапасів.Append(field.Value.ToString(), field.Name);

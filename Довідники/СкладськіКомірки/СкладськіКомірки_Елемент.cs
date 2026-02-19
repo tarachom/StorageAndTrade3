@@ -38,9 +38,7 @@ namespace StorageAndTrade
 
         public СкладськіКомірки_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
-
+            Element = Елемент;
 
             foreach (var field in ПсевдонімиПерелічення.ТипиСкладськихКомірок_List())
                 ТипСкладськоїКомірки.Append(field.Value.ToString(), field.Name);

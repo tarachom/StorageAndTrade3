@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             РахунокФактура_Елемент page = new РахунокФактура_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

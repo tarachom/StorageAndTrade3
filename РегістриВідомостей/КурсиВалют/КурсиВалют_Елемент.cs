@@ -15,7 +15,7 @@ namespace StorageAndTrade
 {
     class КурсиВалют_Елемент : РегістриВідомостейЕлемент
     {
-        public КурсиВалют_Objest КурсиВалют_Objest { get; set; } = new КурсиВалют_Objest();
+        public КурсиВалют_Objest Елемент { get; set; } = new КурсиВалют_Objest();
 
         public Валюти_Pointer ВалютаДляНового { get; set; } = new Валюти_Pointer();
 
@@ -26,8 +26,7 @@ namespace StorageAndTrade
 
         public КурсиВалют_Елемент() 
         {
-            КурсиВалют_Objest.UnigueIDChanged += UnigueIDChanged;
-            КурсиВалют_Objest.CaptionChanged += CaptionChanged;
+            Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -51,22 +50,22 @@ namespace StorageAndTrade
         {
             if (IsNew)
             {
-                КурсиВалют_Objest.Валюта = ВалютаДляНового;
-                КурсиВалют_Objest.Кратність = 1;
+                Елемент.Валюта = ВалютаДляНового;
+                Елемент.Кратність = 1;
             }
 
-            ДатаКурсу.Value = КурсиВалют_Objest.Period;
-            Валюта.Pointer = КурсиВалют_Objest.Валюта;
-            Курс.Value = КурсиВалют_Objest.Курс;
-            Кратність.Value = КурсиВалют_Objest.Кратність;
+            ДатаКурсу.Value = Елемент.Period;
+            Валюта.Pointer = Елемент.Валюта;
+            Курс.Value = Елемент.Курс;
+            Кратність.Value = Елемент.Кратність;
         }
 
         protected override void GetValue()
         {
-            КурсиВалют_Objest.Period = ДатаКурсу.Value;
-            КурсиВалют_Objest.Валюта = Валюта.Pointer;
-            КурсиВалют_Objest.Курс = Курс.Value;
-            КурсиВалют_Objest.Кратність = Кратність.Value;
+            Елемент.Period = ДатаКурсу.Value;
+            Елемент.Валюта = Валюта.Pointer;
+            Елемент.Курс = Курс.Value;
+            Елемент.Кратність = Кратність.Value;
         }
 
         #endregion
@@ -75,12 +74,12 @@ namespace StorageAndTrade
         {
             try
             {
-                await КурсиВалют_Objest.Save();
+                await Елемент.Save();
                 return true;
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(КурсиВалют_Objest.UnigueID.UGuid), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(Елемент.UnigueID.UGuid), Caption, ex);
                 return false;
             }
         }

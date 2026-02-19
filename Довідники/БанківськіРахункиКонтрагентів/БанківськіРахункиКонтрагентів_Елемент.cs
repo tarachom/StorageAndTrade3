@@ -33,8 +33,7 @@ namespace StorageAndTrade
 
         public БанківськіРахункиКонтрагентів_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
 
         }

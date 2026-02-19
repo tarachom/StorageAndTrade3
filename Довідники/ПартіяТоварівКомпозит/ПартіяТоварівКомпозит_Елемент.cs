@@ -21,10 +21,9 @@ namespace StorageAndTrade
         ПоступленняТоварівТаПослуг_PointerControl ПоступленняТоварівТаПослуг = new ПоступленняТоварівТаПослуг_PointerControl();
         ВведенняЗалишків_PointerControl ВведенняЗалишків = new ВведенняЗалишків_PointerControl();
 
-        public ПартіяТоварівКомпозит_Елемент() 
+        public ПартіяТоварівКомпозит_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             FillComboBoxes();
         }

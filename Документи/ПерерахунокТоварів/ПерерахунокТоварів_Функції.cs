@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             ПерерахунокТоварів_Елемент page = new ПерерахунокТоварів_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

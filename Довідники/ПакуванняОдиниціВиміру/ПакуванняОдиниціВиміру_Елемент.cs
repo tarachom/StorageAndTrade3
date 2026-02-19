@@ -21,10 +21,9 @@ namespace StorageAndTrade
         Entry НазваПовна = new Entry() { WidthRequest = 500 };
         IntegerControl КількістьУпаковок = new IntegerControl();
 
-        public ПакуванняОдиниціВиміру_Елемент() 
+        public ПакуванняОдиниціВиміру_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)

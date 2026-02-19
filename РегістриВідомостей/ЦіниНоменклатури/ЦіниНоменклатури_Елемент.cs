@@ -14,7 +14,7 @@ namespace StorageAndTrade
 {
     class ЦіниНоменклатури_Елемент : РегістриВідомостейЕлемент
     {
-        public ЦіниНоменклатури_Objest ЦіниНоменклатури_Objest { get; set; } = new ЦіниНоменклатури_Objest();
+        public ЦіниНоменклатури_Objest Елемент { get; set; } = new ЦіниНоменклатури_Objest();
         DateTimeControl Період = new DateTimeControl();
 
         #region Fields
@@ -32,8 +32,7 @@ namespace StorageAndTrade
 
         public ЦіниНоменклатури_Елемент() 
         {
-            ЦіниНоменклатури_Objest.UnigueIDChanged += UnigueIDChanged;
-            ЦіниНоменклатури_Objest.CaptionChanged += CaptionChanged;
+            Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)
@@ -75,27 +74,27 @@ namespace StorageAndTrade
 
         public override void SetValue()
         {
-            Період.Value = ЦіниНоменклатури_Objest.Period;
+            Період.Value = Елемент.Period;
 
-            Номенклатура.Pointer = ЦіниНоменклатури_Objest.Номенклатура;
-            ХарактеристикаНоменклатури.Pointer = ЦіниНоменклатури_Objest.ХарактеристикаНоменклатури;
-            ВидЦіни.Pointer = ЦіниНоменклатури_Objest.ВидЦіни;
-            Ціна.Value = ЦіниНоменклатури_Objest.Ціна;
-            Пакування.Pointer = ЦіниНоменклатури_Objest.Пакування;
-            Валюта.Pointer = ЦіниНоменклатури_Objest.Валюта;
+            Номенклатура.Pointer = Елемент.Номенклатура;
+            ХарактеристикаНоменклатури.Pointer = Елемент.ХарактеристикаНоменклатури;
+            ВидЦіни.Pointer = Елемент.ВидЦіни;
+            Ціна.Value = Елемент.Ціна;
+            Пакування.Pointer = Елемент.Пакування;
+            Валюта.Pointer = Елемент.Валюта;
 
         }
 
         protected override void GetValue()
         {
-            ЦіниНоменклатури_Objest.Period = Період.Value;
+            Елемент.Period = Період.Value;
 
-            ЦіниНоменклатури_Objest.Номенклатура = Номенклатура.Pointer;
-            ЦіниНоменклатури_Objest.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури.Pointer;
-            ЦіниНоменклатури_Objest.ВидЦіни = ВидЦіни.Pointer;
-            ЦіниНоменклатури_Objest.Ціна = Ціна.Value;
-            ЦіниНоменклатури_Objest.Пакування = Пакування.Pointer;
-            ЦіниНоменклатури_Objest.Валюта = Валюта.Pointer;
+            Елемент.Номенклатура = Номенклатура.Pointer;
+            Елемент.ХарактеристикаНоменклатури = ХарактеристикаНоменклатури.Pointer;
+            Елемент.ВидЦіни = ВидЦіни.Pointer;
+            Елемент.Ціна = Ціна.Value;
+            Елемент.Пакування = Пакування.Pointer;
+            Елемент.Валюта = Валюта.Pointer;
 
         }
 
@@ -105,12 +104,12 @@ namespace StorageAndTrade
         {
             try
             {
-                await ЦіниНоменклатури_Objest.Save();
+                await Елемент.Save();
                 return true;
             }
             catch (Exception ex)
             {
-                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(ЦіниНоменклатури_Objest.UnigueID.UGuid), Caption, ex);
+                ФункціїДляПовідомлень.ДодатиПовідомлення(new UuidAndText(Елемент.UnigueID.UGuid), Caption, ex);
                 return false;
             }
         }

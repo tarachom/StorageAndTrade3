@@ -12,7 +12,7 @@ namespace StorageAndTrade
 {
     class ФункціїДляДинамічногоВідкриття : InterfaceGtk3.ФункціїДляДинамічногоВідкриття
     {
-        public ФункціїДляДинамічногоВідкриття() : base(Config.NameSpageProgram, Config.NameSpageCodeGeneration) { }
+        public ФункціїДляДинамічногоВідкриття() : base(Config.NamespaceProgram, Config.NamespaceCodeGeneration) { }
 
         protected override void CreateNotebookPage(string tabName, Func<Widget>? pageWidget)
         {

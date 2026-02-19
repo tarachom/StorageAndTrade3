@@ -28,8 +28,7 @@ namespace StorageAndTrade
 
         public СтаттяРухуКоштів_Елемент() 
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)

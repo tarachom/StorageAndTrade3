@@ -14,7 +14,7 @@ namespace StorageAndTrade
 {
     class Журнал_Повний : Журнал
     {
-        public Журнал_Повний() : base(Config.NameSpageCodeGeneration)
+        public Журнал_Повний() : base(Config.NamespaceCodeGeneration)
         {
             ТабличніСписки.Журнали_Повний.AddColumns(TreeViewGrid);
         }

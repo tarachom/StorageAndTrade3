@@ -34,8 +34,7 @@ namespace StorageAndTrade
 
         public ХарактеристикиНоменклатури_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)

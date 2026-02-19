@@ -35,13 +35,10 @@ namespace StorageAndTrade
 
         public ФізичніОсоби_Елемент() : base()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
-
+            Element = Елемент;
 
             foreach (var field in ПсевдонімиПерелічення.СтатьФізичноїОсоби_List())
                 Стать.Append(field.Value.ToString(), field.Name);
-
         }
 
         protected override void CreatePack1(Box vBox)

@@ -30,7 +30,6 @@ namespace StorageAndTrade
         {
             ФізичніОсоби_Елемент page = new ФізичніОсоби_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

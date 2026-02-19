@@ -23,8 +23,7 @@ namespace StorageAndTrade
 
         public СкладськіПриміщення_Елемент() 
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
         }
 
         protected override void CreatePack1(Box vBox)

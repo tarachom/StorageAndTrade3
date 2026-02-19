@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             ВстановленняЦінНоменклатури_Елемент page = new ВстановленняЦінНоменклатури_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

@@ -68,13 +68,12 @@ namespace StorageAndTrade.РегістриВідомостей
         {
             КурсиВалют_Елемент page = new КурсиВалют_Елемент
             {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
+                CallBack_LoadRecords = CallBack_LoadRecords
             };
 
             if (IsNew)
-                page.КурсиВалют_Objest.New();
-            else if (unigueID == null || !await page.КурсиВалют_Objest.Read(unigueID))
+                page.Елемент.New();
+            else if (unigueID == null || !await page.Елемент.Read(unigueID))
             {
                 Message.Error(Program.GeneralForm, "Не вдалось прочитати!");
                 return;

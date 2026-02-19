@@ -32,7 +32,6 @@ namespace StorageAndTrade
         {
             Валюти_Елемент page = new Валюти_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

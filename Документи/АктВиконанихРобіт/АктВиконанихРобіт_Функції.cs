@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             АктВиконанихРобіт_Елемент page = new АктВиконанихРобіт_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

@@ -38,7 +38,6 @@ namespace StorageAndTrade
         {
             Контрагенти_Елемент page = new Контрагенти_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

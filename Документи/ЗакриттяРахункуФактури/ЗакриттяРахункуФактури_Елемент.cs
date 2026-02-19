@@ -45,8 +45,7 @@ namespace StorageAndTrade
 
         public ЗакриттяРахункуФактури_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             CreateDocName(ЗакриттяРахункуФактури_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);

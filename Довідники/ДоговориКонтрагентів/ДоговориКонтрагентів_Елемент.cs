@@ -17,7 +17,7 @@ namespace StorageAndTrade
     {
         public ДоговориКонтрагентів_Objest Елемент { get; set; } = new ДоговориКонтрагентів_Objest();
         public Контрагенти_Pointer КонтрагентиДляНового { get; set; } = new Контрагенти_Pointer();
-        
+
         #region Fields
 
         Entry Код = new Entry() { WidthRequest = 100 };
@@ -44,8 +44,7 @@ namespace StorageAndTrade
 
         public ДоговориКонтрагентів_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             FillComboBoxes();
         }

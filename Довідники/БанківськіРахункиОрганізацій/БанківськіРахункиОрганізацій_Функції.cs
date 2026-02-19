@@ -32,7 +32,6 @@ namespace StorageAndTrade
         {
             БанківськіРахункиОрганізацій_Елемент page = new БанківськіРахункиОрганізацій_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

@@ -34,7 +34,6 @@ namespace StorageAndTrade
         {
             СкладськіКомірки_Папки_Елемент page = new СкладськіКомірки_Папки_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

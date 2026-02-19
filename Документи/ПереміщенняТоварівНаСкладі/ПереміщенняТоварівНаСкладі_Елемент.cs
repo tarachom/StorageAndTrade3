@@ -36,8 +36,7 @@ namespace StorageAndTrade
 
         public ПереміщенняТоварівНаСкладі_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             CreateDocName(ПереміщенняТоварівНаСкладі_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);

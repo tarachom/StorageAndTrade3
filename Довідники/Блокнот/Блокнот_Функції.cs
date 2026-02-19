@@ -38,7 +38,6 @@ namespace StorageAndTrade
         {
             Блокнот_Елемент page = new Блокнот_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

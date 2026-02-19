@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             КорегуванняБоргу_Елемент page = new КорегуванняБоргу_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

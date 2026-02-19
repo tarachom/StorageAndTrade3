@@ -44,7 +44,6 @@ namespace StorageAndTrade
         {
             Організації_Елемент page = new Організації_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

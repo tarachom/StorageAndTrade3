@@ -36,8 +36,7 @@ namespace StorageAndTrade
 
         public ПсуванняТоварів_Елемент() 
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             CreateDocName(ПсуванняТоварів_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);

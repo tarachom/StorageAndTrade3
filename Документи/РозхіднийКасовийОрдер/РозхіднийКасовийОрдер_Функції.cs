@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             РозхіднийКасовийОрдер_Елемент page = new РозхіднийКасовийОрдер_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

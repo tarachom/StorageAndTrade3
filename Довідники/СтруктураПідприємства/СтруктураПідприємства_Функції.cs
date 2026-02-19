@@ -30,7 +30,6 @@ namespace StorageAndTrade
         {
             СтруктураПідприємства_Елемент page = new СтруктураПідприємства_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

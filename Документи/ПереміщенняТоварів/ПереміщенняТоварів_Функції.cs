@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             ПереміщенняТоварів_Елемент page = new ПереміщенняТоварів_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 

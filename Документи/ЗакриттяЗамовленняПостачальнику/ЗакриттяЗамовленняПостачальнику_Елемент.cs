@@ -45,8 +45,7 @@ namespace StorageAndTrade
 
         public ЗакриттяЗамовленняПостачальнику_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             CreateDocName(ЗакриттяЗамовленняПостачальнику_Const.FULLNAME, НомерДок, ДатаДок);
             CreateField(HBoxComment, "Коментар:", Коментар);

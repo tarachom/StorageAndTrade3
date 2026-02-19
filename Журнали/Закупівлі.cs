@@ -14,7 +14,7 @@ namespace StorageAndTrade
 {
     class Журнал_Закупівлі : Журнал
     {
-        public Журнал_Закупівлі() : base(Config.NameSpageCodeGeneration)
+        public Журнал_Закупівлі() : base(Config.NamespaceCodeGeneration)
         {
             ТабличніСписки.Журнали_Закупівлі.AddColumns(TreeViewGrid);
         }

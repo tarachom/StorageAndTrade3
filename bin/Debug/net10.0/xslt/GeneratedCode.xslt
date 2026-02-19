@@ -440,10 +440,12 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>
         #region Const
 
         //Простір імен згенерованого коду
-        public const string NameSpageCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>";
+        public const string NameSpageCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>"; //Видалити
+        public const string NamespaceCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>";
 
         //Простір імен програми
-        public const string NameSpageProgram = "<xsl:value-of select="Configuration/NameSpace"/>";
+        public const string NameSpageProgram = "<xsl:value-of select="Configuration/NameSpace"/>"; //Видалити
+        public const string NamespaceProgram = "<xsl:value-of select="Configuration/NameSpace"/>";
 
         #endregion
         
@@ -728,9 +730,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
 
     public class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
-        public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
-        public event EventHandler&lt;string&gt;? CaptionChanged;
-
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", <xsl:value-of select="$DirectoryName"/>_Const.TYPE,
              <xsl:text>[</xsl:text>
              <xsl:for-each select="Fields/Field">
@@ -750,8 +749,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
         public async ValueTask New()
         {
             BaseNew();
-            UnigueIDChanged?.Invoke(this, base.UnigueID);
-            CaptionChanged?.Invoke(this, <xsl:value-of select="$DirectoryName"/>_Const.FULLNAME + " *");
+            Caption = <xsl:value-of select="$DirectoryName"/>_Const.FULLNAME + " *";
             <xsl:choose>
               <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="$DirectoryName"/>_Triggers.<xsl:value-of select="TriggerFunctions/New"/>(this);
@@ -781,8 +779,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                     await <xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
                 }
                 </xsl:if>
-                UnigueIDChanged?.Invoke(this, base.UnigueID);
-                CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
+                Caption = string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]);
                 return true;
             }
             else
@@ -816,7 +813,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
                 await BaseWriteFullTextSearch(GetBasis(), [<xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']"><xsl:value-of select="Name"/>, </xsl:for-each>]);
                 </xsl:if>
             }
-            CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
+            Caption = string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]);
             return result;
         }
 
@@ -977,19 +974,32 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Дові
     }
 
     <xsl:variable name="ParentField" select="ParentField"/>
+    <xsl:variable name="AllowedContent" select="AllowedContent"/>
+    <xsl:variable name="IsFolderField_NameInTable">
+        <xsl:variable name="IsFolderField" select="IsFolderField"/>
+        <xsl:if test="$AllowedContent = 'FoldersAndElements' and normalize-space($IsFolderField) != ''">
+            <xsl:value-of select="Fields/Field[Name = $IsFolderField]/NameInTable"/>
+        </xsl:if>
+    </xsl:variable>
     <xsl:if test="Type = 'Hierarchical' and count(Fields/Field[Name = $ParentField]) != 0">
     public class <xsl:value-of select="$DirectoryName"/>_SelectHierarchical : DirectorySelectHierarchical
     {
-        public <xsl:value-of select="$DirectoryName"/>_SelectHierarchical() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="Fields/Field[Name = $ParentField]/NameInTable"/>") { }        
+        public <xsl:value-of select="$DirectoryName"/>_SelectHierarchical() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="Fields/Field[Name = $ParentField]/NameInTable"/>", "<xsl:value-of select="$IsFolderField_NameInTable"/>") { }        
         public async ValueTask&lt;bool&gt; Select() { return await base.BaseSelect(); }
-        public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; return false; } }
+        public async ValueTask&lt;bool&gt; SelectSingle() { if (await base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = Parent = null; Level = 0; IsFolder = false; return false; } }
         public bool MoveNext() { if (base.MoveToPosition() &amp;&amp; base.CurrentPointerPositionHierarchical.HasValue) { 
           Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.CurrentPointerPositionHierarchical.Value.UnigueID, base.CurrentPointerPositionHierarchical.Value.Fields); 
           Parent = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.CurrentPointerPositionHierarchical.Value.Parent); 
-          Level = base.CurrentPointerPositionHierarchical.Value.Level; return true; } else { Current = Parent = null; Level = 0; return false; } }
+          IsFolder = <xsl:choose>
+              <xsl:when test="$AllowedContent = 'Folders'">true</xsl:when>
+              <xsl:when test="$AllowedContent = 'Elements'">false</xsl:when>
+              <xsl:when test="$AllowedContent = 'FoldersAndElements'">base.CurrentPointerPositionHierarchical.Value.IsFolder</xsl:when>
+            </xsl:choose>;
+          Level = base.CurrentPointerPositionHierarchical.Value.Level; return true; } else { Current = Parent = null; Level = 0; IsFolder = false; return false; } }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Current { get; private set; }
         public <xsl:value-of select="$DirectoryName"/>_Pointer? Parent { get; private set; }
         public int Level { get; private set; } = 0;
+        public bool IsFolder { get; private set; }
     }
     </xsl:if>
 
@@ -1215,7 +1225,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Пере
             };
         }
 
-        public static <xsl:value-of select="$EnumName"/><xsl:text> </xsl:text><xsl:value-of select="$EnumName"/>_FindByName(string name)
+        public static <xsl:value-of select="$EnumName"/><xsl:text> </xsl:text><xsl:value-of select="$EnumName"/>_FindByName(string? name)
         {
             return name switch
             {
@@ -1277,9 +1287,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
 
     public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
-        public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
-        public event EventHandler&lt;string&gt;? CaptionChanged;
-
         public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", <xsl:value-of select="$DocumentName"/>_Const.TYPE,
              <xsl:text>[</xsl:text>
              <xsl:for-each select="Fields/Field">
@@ -1299,8 +1306,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
         public async ValueTask New()
         {
             BaseNew();
-            UnigueIDChanged?.Invoke(this, base.UnigueID);
-            CaptionChanged?.Invoke(this, <xsl:value-of select="$DocumentName"/>_Const.FULLNAME + " *");
+            Caption = <xsl:value-of select="$DocumentName"/>_Const.FULLNAME + " *";
             <xsl:choose>
               <xsl:when test="normalize-space(TriggerFunctions/New) != '' and TriggerFunctions/New[@Action = '1']">
                 await <xsl:value-of select="$DocumentName"/>_Triggers.<xsl:value-of select="TriggerFunctions/New"/>(this);
@@ -1330,8 +1336,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                     await <xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
                 }
                 </xsl:if>
-                UnigueIDChanged?.Invoke(this, base.UnigueID);
-                CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
+                Caption = string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]);
                 return true;
             }
             else
@@ -1365,7 +1370,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Доку
                 await BaseWriteFullTextSearch(GetBasis(), [<xsl:for-each select="Fields/Field[IsFullTextSearch = '1' and Type = 'string']"><xsl:value-of select="Name"/>, </xsl:for-each>]);
                 </xsl:if>
             }
-            CaptionChanged?.Invoke(this, string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
+            Caption = string.Join(", ", [<xsl:for-each select="Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]);
             return result;
         }
 
@@ -1996,6 +2001,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 <xsl:if test="count((DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[Type = 'pointer']) != 0">
                   if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                   {
+                    record.JoinItemValue = ItemValue;
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                         <xsl:if test="Type = 'pointer'">
                           <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>.Name = ItemValue["<xsl:value-of select="Name"/>"];
@@ -2077,9 +2083,6 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
 
     public class <xsl:value-of select="$RegisterName"/>_Objest : RegisterInformationObject
     {
-        public event EventHandler&lt;UnigueID&gt;? UnigueIDChanged;
-        public event EventHandler&lt;string&gt;? CaptionChanged;
-
 		    public <xsl:value-of select="$RegisterName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>[</xsl:text>
              <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
@@ -2089,8 +2092,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
         public void New()
         {
             BaseNew();
-            UnigueIDChanged?.Invoke(this, base.UnigueID);
-            CaptionChanged?.Invoke(this, <xsl:value-of select="$RegisterName"/>_Const.FULLNAME + " *");
+            Caption = <xsl:value-of select="$RegisterName"/>_Const.FULLNAME + " *";
         }
 
         public async ValueTask&lt;bool&gt; Read(UnigueID uid)
@@ -2105,8 +2107,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                   </xsl:call-template>;
                 </xsl:for-each>
                 BaseClear();
-                UnigueIDChanged?.Invoke(this, base.UnigueID);
-                CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
+                Caption = string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]);
                 return true;
             }
             else
@@ -2128,7 +2129,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
               </xsl:choose>;
             </xsl:for-each>
             bool result = await BaseSave();
-            CaptionChanged?.Invoke(this, string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]));
+            Caption = string.Join(", ", [Period.ToString(), <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[IsPresentation=1]"><xsl:value-of select="Name"/>, </xsl:for-each>]);
             return result;
         }
 
@@ -2253,6 +2254,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
+        public const string TYPENAME = "РегістриНакопичення.<xsl:value-of select="$RegisterName"/>";
         public const string FULLNAME = "<xsl:value-of select="normalize-space(FullName)"/>";
         public const string TABLE = "<xsl:value-of select="Table"/>";
 		    public static readonly string[] AllowDocumentSpendTable = [<xsl:for-each select="AllowDocumentSpend/Name">
@@ -2331,7 +2333,7 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>.Регі
                 <xsl:if test="count((DimensionFields|ResourcesFields|PropertyFields)/Fields/Field[Type = 'pointer']) != 0">
                 if (JoinValue.TryGetValue(record.UID.ToString(), out var ItemValue))
                 {
-                    //record.JoinItemValue = ItemValue;
+                    record.JoinItemValue = ItemValue;
                     if (ItemValue.TryGetValue("docname", out var ownerName)) record.OwnerName = ownerName;
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                         <xsl:if test="Type = 'pointer'">

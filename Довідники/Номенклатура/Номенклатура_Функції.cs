@@ -42,7 +42,6 @@ namespace StorageAndTrade
         {
             Номенклатура_Елемент page = new Номенклатура_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

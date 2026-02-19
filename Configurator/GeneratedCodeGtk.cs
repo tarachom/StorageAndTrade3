@@ -3,7 +3,7 @@
  *
  * Конфігурації ""Зберігання та Торгівля" для України"
  * Автор Тарахомин Юрій Іванович, accounting.org.ua
- * Дата конфігурації: 14.07.2025 13:50:07
+ * Дата конфігурації: 16.02.2026 20:44:43
  *
  *
  * Цей код згенерований в Конфігураторі 3. Шаблон Gtk.xslt
@@ -427,7 +427,7 @@ namespace GeneratedCode.Довідники.ТабличніСписки
             if (where != null) Номенклатура_Select.QuerySelect.Where = (List<Where>)where;
 
             Номенклатура_Select.QuerySelect.Order.Add(
-               Довідники.Номенклатура_Const.Назва, SelectOrder.ASC);
+               Довідники.Номенклатура_Const.Код, SelectOrder.ASC);
             Довідники.ПакуванняОдиниціВиміру_Pointer.GetJoin(Номенклатура_Select.QuerySelect, Довідники.Номенклатура_Const.ОдиницяВиміру,
                 Номенклатура_Select.QuerySelect.Table, "join_tab_1", "ОдиницяВиміру");
             

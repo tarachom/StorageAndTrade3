@@ -30,7 +30,6 @@ namespace StorageAndTrade
         {
             ПакуванняОдиниціВиміру_Елемент page = new ПакуванняОдиниціВиміру_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords,
                 CallBack_OnSelectPointer = сallBack_OnSelectPointer
             };

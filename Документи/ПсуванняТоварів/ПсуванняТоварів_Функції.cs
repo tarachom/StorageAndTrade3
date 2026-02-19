@@ -35,7 +35,6 @@ namespace StorageAndTrade
         {
             ПсуванняТоварів_Елемент page = new ПсуванняТоварів_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 
