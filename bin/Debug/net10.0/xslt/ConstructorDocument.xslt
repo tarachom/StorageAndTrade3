@@ -221,7 +221,6 @@ namespace <xsl:value-of select="$NameSpace"/>
         {
             <xsl:value-of select="$DocumentName"/>_Елемент page = new <xsl:value-of select="$DocumentName"/>_Елемент
             {
-                IsNew = IsNew,
                 CallBack_LoadRecords = сallBack_LoadRecords
             };
 
@@ -391,8 +390,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public <xsl:value-of select="$DocumentName"/>_Елемент()
         {
-            Елемент.UnigueIDChanged += UnigueIDChanged;
-            Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             CreateDocName(<xsl:value-of select="$DocumentName"/>_Const.FULLNAME, НомерДок, ДатаДок);
             <xsl:if test="$FieldsTL[Name = 'Коментар']">

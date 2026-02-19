@@ -126,8 +126,7 @@ namespace <xsl:value-of select="$NameSpace"/>
 
         public <xsl:value-of select="$RegisterInformationName"/>_Елемент() : base() 
         { 
-            //Елемент.UnigueIDChanged += UnigueIDChanged;
-            //Елемент.CaptionChanged += CaptionChanged;
+            Element = Елемент;
 
             <xsl:for-each select="$FieldsTL[Type = 'enum']">
                 foreach (var field in ПсевдонімиПерелічення.<xsl:value-of select="substring-after(Pointer, '.')"/>_List())
@@ -340,8 +339,7 @@ namespace <xsl:value-of select="$NameSpace"/>.РегістриВідомосте
         {
             <xsl:value-of select="$RegisterInformationName"/>_Елемент page = new <xsl:value-of select="$RegisterInformationName"/>_Елемент
             {
-                CallBack_LoadRecords = CallBack_LoadRecords,
-                IsNew = IsNew
+                CallBack_LoadRecords = CallBack_LoadRecords
             };
 
             if (IsNew)
