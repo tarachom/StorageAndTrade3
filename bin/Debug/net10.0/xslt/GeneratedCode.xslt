@@ -440,11 +440,9 @@ namespace <xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>
         #region Const
 
         //Простір імен згенерованого коду
-        public const string NameSpageCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>"; //Видалити
         public const string NamespaceCodeGeneration = "<xsl:value-of select="Configuration/NameSpaceGeneratedCode"/>";
 
         //Простір імен програми
-        public const string NameSpageProgram = "<xsl:value-of select="Configuration/NameSpace"/>"; //Видалити
         public const string NamespaceProgram = "<xsl:value-of select="Configuration/NameSpace"/>";
 
         #endregion
